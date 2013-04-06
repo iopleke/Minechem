@@ -1,0 +1,19 @@
+[
+{
+  "modid": "minechem",
+  "name": "MineChem",
+  "description": "Add chemistry to Minecraft.",
+  "version": "7.4",
+  "credits": "Thanks to powercrystals for some textures",
+  "logoFile": "/mods/Minechem/logo.png",
+  "mcversion": "Build 7.x for MC 1.5",
+  "url": "https://github.com/MFernflower/Minechem3/",
+  "updateUrl": "Please go to the #Minechem irc channel on Espernet",
+  "authors": [ "Ljdp", "Ian", "Rushmead", "Adelayde", "Mandrake", "Yogpstop", "Powercrystals", "Vitzli", "DMillerW" ],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
+}
+]
