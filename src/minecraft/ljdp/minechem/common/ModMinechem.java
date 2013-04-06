@@ -81,7 +81,7 @@ public class ModMinechem {
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
         proxy.registerRenderers();
         System.out.println("[MineChem] INIT PASSED");
-        LanguageRegistry.instance().addStringLocalization("itemGroup.Minechem", "en_US", "MineChem");
+        LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
     }
 
     @PostInit
