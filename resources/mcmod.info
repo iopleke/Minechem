@@ -3,7 +3,7 @@
   "modid": "minechem",
   "name": "MineChem",
   "description": "Add chemistry to Minecraft.",
-  "version": "7.4",
+  "version": "3.0",
   "credits": "Thanks to powercrystals for some textures",
   "logoFile": "/mods/Minechem/logo.png",
   "mcversion": "Build 7.x for MC 1.5",
