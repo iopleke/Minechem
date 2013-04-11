@@ -1,9 +1,5 @@
 package ljdp.minechem.common;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
-import net.minecraftforge.oredict.OreDictionary;
 import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.common.items.ItemArmorRadiationShield;
 import ljdp.minechem.common.items.ItemAtomicManipulator;
@@ -11,6 +7,7 @@ import ljdp.minechem.common.items.ItemBlueprint;
 import ljdp.minechem.common.items.ItemChemistJournal;
 import ljdp.minechem.common.items.ItemElement;
 import ljdp.minechem.common.items.ItemFusionStar;
+import ljdp.minechem.common.items.ItemHangableTableOfElements;
 import ljdp.minechem.common.items.ItemLens;
 import ljdp.minechem.common.items.ItemMolecule;
 import ljdp.minechem.common.items.ItemTestTube;
@@ -18,6 +15,10 @@ import ljdp.minechem.common.items.PhotonicInduction;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public class MinechemItems {
     public static ItemElement element;
@@ -32,7 +33,7 @@ public class MinechemItems {
     public static ItemArmorRadiationShield hazmatLegs;
     public static ItemArmorRadiationShield hazmatTorso;
     public static ItemArmorRadiationShield hazmatHead;
-
+    public static ItemHangableTableOfElements tableelements;
     public static ItemStack convexLens;
     public static ItemStack concaveLens;
     public static ItemStack projectorLens;
@@ -52,6 +53,8 @@ public class MinechemItems {
     private static int hazmatTorsoID;
     private static int hazmatHeadID;
     private static int photonID;
+    public static int hangableTableOfElementsID;
+    
 
     public static void loadConfig(Configuration config) {
         int baseID = 4736;
@@ -68,6 +71,7 @@ public class MinechemItems {
         hazmatTorsoID = getItemConfig(config, "HazmatTorso", baseID++);
         hazmatHeadID = getItemConfig(config, "HazmatHead", baseID++);
         photonID = getItemConfig(config, "Hammer", baseID++);
+        hangableTableOfElementsID = getItemConfig(config, "TableOfElements", baseID++);
     }
 
     private static int getItemConfig(Configuration config, String key, int defaultID) {
@@ -88,6 +92,7 @@ public class MinechemItems {
         hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
         hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
+        tableelements = new ItemHangableTableOfElements(hangableTableOfElementsID);
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
@@ -97,7 +102,7 @@ public class MinechemItems {
         LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
         LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
         LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
-
+        LanguageRegistry.addName(tableelements, "Table Of Elements!");
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
