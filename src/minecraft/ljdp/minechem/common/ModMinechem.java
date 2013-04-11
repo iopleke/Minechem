@@ -5,6 +5,7 @@ import ljdp.minechem.client.gui.tabs.TabHelp;
 import ljdp.minechem.client.gui.tabs.TabStateControl;
 import ljdp.minechem.client.gui.tabs.TabStateControlSynthesis;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
+import ljdp.minechem.common.entity.EntityTableOfElements;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.MinechemRecipes;
@@ -28,6 +29,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -49,7 +51,7 @@ public class ModMinechem {
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
-
+    	 EntityRegistry.registerModEntity(EntityTableOfElements.class, "Table of Elements!", 1, this, 80, 3, true);
         Localization.loadLanguages(CommonProxy.LANG_DIR, LANGUAGES_SUPPORTED);
 
         loadConfig(event);
