@@ -242,13 +242,13 @@ public class EntityTableOfElements extends EntityHanging {
 	@Override
 	public int func_82329_d() {
 		// TODO Auto-generated method stub
-		return 0;
+		return tableSizeX;
 	}
 
 	@Override
 	public int func_82330_g() {
 		// TODO Auto-generated method stub
-		return 0;
+		return tableSizeY;
 	}
 
 	@Override
