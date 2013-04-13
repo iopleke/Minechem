@@ -1,6 +1,7 @@
 package ljdp.minechem.common;
 
 import ljdp.minechem.api.core.EnumElement;
+import ljdp.minechem.common.entity.EntityTableOfElements;
 import ljdp.minechem.common.items.ItemArmorRadiationShield;
 import ljdp.minechem.common.items.ItemAtomicManipulator;
 import ljdp.minechem.common.items.ItemBlueprint;
@@ -92,7 +93,7 @@ public class MinechemItems {
         hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
         hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
-        tableelements = new ItemHangableTableOfElements(hangableTableOfElementsID);
+        tableelements = new ItemHangableTableOfElements(hangableTableOfElementsID, EntityTableOfElements.class);
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
