@@ -3,8 +3,9 @@ package ljdp.minechem.common.entity;
 import java.util.List;
 
 import ljdp.minechem.common.MinechemItems;
+
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityHanging;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,7 +13,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityTableOfElements extends EntityHanging {
+public class EntityTableOfElements extends Entity {
 	
 	private int tickCounter1;
     public int direction;
@@ -221,7 +222,7 @@ public class EntityTableOfElements extends EntityHanging {
 	}
 
 	@Override
-	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		direction = nbttagcompound.getByte("Dir");
         xPosition = nbttagcompound.getInteger("TileX");
         yPosition = nbttagcompound.getInteger("TileY");
@@ -230,29 +231,11 @@ public class EntityTableOfElements extends EntityHanging {
 	}
 
 	@Override
-	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 		nbttagcompound.setByte("Dir", (byte)direction);
         nbttagcompound.setInteger("TileX", xPosition);
         nbttagcompound.setInteger("TileY", yPosition);
         nbttagcompound.setInteger("TileZ", zPosition);
-	}
-
-	@Override
-	public int func_82329_d() {
-		
-		return 0;
-	}
-
-	@Override
-	public int func_82330_g() {
-		
-		return 0;
-	}
-
-	@Override
-	public void dropItemStack() {
-		
-		
 	}
 
 }
