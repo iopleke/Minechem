@@ -6,6 +6,7 @@ import ljdp.minechem.common.MinechemItems;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -13,7 +14,7 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityTableOfElements extends Entity {
+public class EntityTableOfElements extends EntityHanging {
 	
 	private int tickCounter1;
     public int direction;
@@ -222,7 +223,7 @@ public class EntityTableOfElements extends Entity {
 	}
 
 	@Override
-	protected void readEntityFromNBT(NBTTagCompound nbttagcompound) {
+	public void readEntityFromNBT(NBTTagCompound nbttagcompound) {
 		direction = nbttagcompound.getByte("Dir");
         xPosition = nbttagcompound.getInteger("TileX");
         yPosition = nbttagcompound.getInteger("TileY");
@@ -231,11 +232,29 @@ public class EntityTableOfElements extends Entity {
 	}
 
 	@Override
-	protected void writeEntityToNBT(NBTTagCompound nbttagcompound) {
+	public void writeEntityToNBT(NBTTagCompound nbttagcompound) {
 		nbttagcompound.setByte("Dir", (byte)direction);
         nbttagcompound.setInteger("TileX", xPosition);
         nbttagcompound.setInteger("TileY", yPosition);
         nbttagcompound.setInteger("TileZ", zPosition);
+	}
+
+	@Override
+	public int func_82329_d() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int func_82330_g() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public void dropItemStack() {
+		// TODO Auto-generated method stub
+		
 	}
 
 }
