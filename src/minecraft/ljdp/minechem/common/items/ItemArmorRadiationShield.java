@@ -12,6 +12,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Icon;
 import net.minecraftforge.common.IArmorTextureProvider;
 
 public class ItemArmorRadiationShield extends ItemArmor implements IRadiationShield, IArmorTextureProvider {
@@ -29,8 +30,8 @@ public class ItemArmorRadiationShield extends ItemArmor implements IRadiationShi
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(textureFile);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(textureFile);
     }
 
     @Override

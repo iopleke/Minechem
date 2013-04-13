@@ -57,7 +57,7 @@ public class BlockFusion extends BlockMinechemContainer {
     }
 
     @Override
-    public Icon getBlockTextureFromSideAndMetadata(int par1, int metadata) {
+    public Icon getIcon(int par1, int metadata) {
         switch (metadata) {
         case 0:
             return icon1;

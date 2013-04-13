@@ -17,8 +17,8 @@ public class ItemTestTube extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.TESTTUBE_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.TESTTUBE_TEX);
     }
 
 }

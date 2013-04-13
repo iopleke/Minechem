@@ -19,8 +19,8 @@ public class ItemChemistryUpgrade extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.CHEMISTRY_UPGRADE_TEX);
-        icon = iconIndex;
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.CHEMISTRY_UPGRADE_TEX);
+        icon = itemIcon;
     }
 }

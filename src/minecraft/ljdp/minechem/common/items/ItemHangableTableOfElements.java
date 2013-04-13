@@ -62,8 +62,8 @@ public class ItemHangableTableOfElements extends Item{
     }
 	@Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.table_HEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.table_HEX);
     }
 
 }

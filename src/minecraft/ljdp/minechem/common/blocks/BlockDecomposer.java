@@ -57,12 +57,6 @@ public class BlockDecomposer extends BlockMinechemContainer {
         return;
     }
 
-    @Override
-    public Icon getBlockTextureFromSideAndMetadata(int side, int meta) {
-        if (side == 1)
-            return front;
-        return blockIcon;
-    }
 
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir) {

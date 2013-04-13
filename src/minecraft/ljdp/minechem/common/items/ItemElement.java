@@ -88,8 +88,8 @@ public class ItemElement extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
         gas[0] = ir.registerIcon(ConstantValue.ELEMENT_GAS1_TEX);
         gas[1] = ir.registerIcon(ConstantValue.ELEMENT_GAS2_TEX);
         gas[2] = ir.registerIcon(ConstantValue.ELEMENT_GAS3_TEX);

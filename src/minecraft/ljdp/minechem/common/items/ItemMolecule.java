@@ -36,8 +36,8 @@ public class ItemMolecule extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
         render_pass1 = ir.registerIcon(ConstantValue.MOLECULE_PASS1_TEX);
         render_pass2 = ir.registerIcon(ConstantValue.MOLECULE_PASS2_TEX);
         filledMolecule = ir.registerIcon(ConstantValue.FILLED_MOLECULE_TEX);

@@ -57,7 +57,7 @@ public class MinechemRecipes {
       ItemStack var13 = new ItemStack(Block.oreRedstone);
       ItemStack var14 = new ItemStack(Block.oreLapis);
       ItemStack ingotIron = new ItemStack(Item.ingotIron);
-      ItemStack blockIron = new ItemStack(Block.blockSteel);
+      ItemStack blockIron = new ItemStack(Block.blockIron);
       ItemStack var17 = new ItemStack(MinechemItems.atomicManipulator);
       ItemStack var18 = new ItemStack(Item.redstone);
       ItemStack var19 = new ItemStack(MinechemItems.testTube, 16);
@@ -114,7 +114,7 @@ public class MinechemRecipes {
       SynthesisRecipe.add(new SynthesisRecipe(var23, true, '\uea60', new Chemical[]{null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null}));
       SynthesisRecipe.add(new SynthesisRecipe(var24, true, 80000, new Chemical[]{null, this.element(EnumElement.Cr), null, this.element(EnumElement.V), this.molecule(EnumMolecule.beryl, 2), this.element(EnumElement.V), null, this.element(EnumElement.Cr), null}));
       //DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Block.blockSteel), new Chemical[]{this.element(EnumElement.Fe, 18)}));
-      DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Block.blockSteel), new Chemical[]{this.element(EnumElement.Fe, 144)}));
+      DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Block.blockIron), new Chemical[]{this.element(EnumElement.Fe, 144)}));
       //DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Block.blockGold), new Chemical[]{this.element(EnumElement.Au, 18)}));
       DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Block.blockGold), new Chemical[]{this.element(EnumElement.Au, 144)}));
       DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Block.blockDiamond), new Chemical[]{this.molecule(EnumMolecule.fullrene, 36)}));

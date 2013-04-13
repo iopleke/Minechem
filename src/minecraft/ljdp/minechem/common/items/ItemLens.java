@@ -47,7 +47,7 @@ public class ItemLens extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir) {
         icons[0] = ir.registerIcon(ConstantValue.LENS1_TEX);
         icons[1] = ir.registerIcon(ConstantValue.LENS2_TEX);
         icons[2] = ir.registerIcon(ConstantValue.LENS3_TEX);

@@ -17,8 +17,8 @@ public class ItemAtomicManipulator extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.ATOMIC_MANIPULATOR_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.ATOMIC_MANIPULATOR_TEX);
     }
 
 }

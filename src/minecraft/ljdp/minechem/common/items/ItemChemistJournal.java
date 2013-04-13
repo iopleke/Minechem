@@ -115,8 +115,8 @@ public class ItemChemistJournal extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.CHEMIST_JOURNAL_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.CHEMIST_JOURNAL_TEX);
     }
 
 }

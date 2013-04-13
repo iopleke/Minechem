@@ -209,13 +209,12 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         Icon liquidImg = null;
 
         if (liquidId < Block.blocksList.length && Block.blocksList[liquidId] != null) {
-            liquidImg = Block.blocksList[liquidId].getBlockTextureFromSideAndMetadata(0, liquidMeta);
+            liquidImg = Block.blocksList[liquidId].getBlockTextureFromSide(0);
         } else if (Item.itemsList[liquidId] != null) {
             liquidImg = Item.itemsList[liquidId].getIconFromDamage(liquidMeta);
         }
         if (liquidImg == null)
             return;
-
         int x = 0;
         int y = 0;
 

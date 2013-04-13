@@ -24,8 +24,8 @@ public class PhotonicInduction extends ItemPickaxe {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.PHOTONIC_INDUCTION_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.PHOTONIC_INDUCTION_TEX);
     }
 
     @Override

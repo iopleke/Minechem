@@ -28,8 +28,8 @@ public class ItemBlueprint extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateIcons(IconRegister ir) {
-        iconIndex = ir.registerIcon(ConstantValue.BLUEPRINT_TEX);
+    public void registerIcons(IconRegister ir) {
+        itemIcon = ir.registerIcon(ConstantValue.BLUEPRINT_TEX);
     }
 
     public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint) {
