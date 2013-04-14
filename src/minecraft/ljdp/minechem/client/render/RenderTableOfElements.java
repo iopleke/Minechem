@@ -17,46 +17,19 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderTableOfElements extends Render
 {
-	private void calculateBrightness(EntityTableOfElements entityTable, float f, float f1)
-    {
-        int i = MathHelper.floor_double(entityTable.posX);
-        int j = MathHelper.floor_double(entityTable.posY + (double)(f1 / 16F));
-        int k = MathHelper.floor_double(entityTable.posZ);
-        if (entityTable.direction == 0)
-        {
-            i = MathHelper.floor_double(entityTable.posX + (double)(f / 16F));
-        }
-        if (entityTable.direction == 1)
-        {
-            k = MathHelper.floor_double(entityTable.posZ - (double)(f / 16F));
-        }
-        if (entityTable.direction == 2)
-        {
-            i = MathHelper.floor_double(entityTable.posX - (double)(f / 16F));
-        }
-        if (entityTable.direction == 3)
-        {
-            k = MathHelper.floor_double(entityTable.posZ + (double)(f / 16F));
-        }
-        int l = renderManager.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
-        int i1 = l % 0x10000;
-        int j1 = l / 0x10000;
-        GL11.glColor3f(1.0F, 1.0F, 1.0F);
-    }
 
-    public void renderThePainting(EntityTableOfElements entityTable, double d, double d1, double d2, float f, float f1)
+    public void renderThePainting(EntityTableOfElements entityTable, double par2, double par4, double par6, float par8, float par9)
     {
-        //rand.setSeed(187L);
-        GL11.glPushMatrix();
-        GL11.glTranslatef((float)d, (float)d1, (float)d2);
-        GL11.glRotatef(f, 0.0F, 1.0F, 0.0F);
-        GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
-        loadTexture(ConstantValue.table_HEX);
-        float f2 = 0.0625F;
-        GL11.glScalef(f2, f2, f2);
-        this.func_77010_a(entityTable, entityTable.tableSizeX, entityTable.tableSizeY, 0, 0);
-        GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
-        GL11.glPopMatrix();
+    	 GL11.glPushMatrix();
+         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
+         GL11.glRotatef(par8, 0.0F, 1.0F, 0.0F);
+         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+         this.loadTexture(ConstantValue.table_HEX);
+         float f2 = 0.0625F;
+         GL11.glScalef(f2, f2, f2);
+         this.func_77010_a(entityTable, entityTable.tableSizeX, entityTable.tableSizeY, 0, 0);
+         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+         GL11.glPopMatrix();
     }
 
     private void func_77010_a(EntityTableOfElements par1EntityPainting, int par2, int par3, int par4, int par5)
@@ -166,7 +139,6 @@ public class RenderTableOfElements extends Render
      * (Render<T extends Entity) and this method has signature public void doRender(T entity, double d, double d1,
      * double d2, float f, float f1). But JAD is pre 1.5 so doesn't do that.
      */
-    @Override
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
         this.renderThePainting((EntityTableOfElements)par1Entity, par2, par4, par6, par8, par9);
