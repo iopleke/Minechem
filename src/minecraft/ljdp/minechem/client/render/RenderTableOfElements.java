@@ -1,5 +1,6 @@
 package ljdp.minechem.client.render;
 
+import ljdp.minechem.common.entity.EntityTableOfElements;
 import ljdp.minechem.common.utils.ConstantValue;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -16,7 +17,7 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderTableOfElements extends Render
 {
-    public void renderThePainting(EntityPainting par1EntityPainting, double par2, double par4, double par6, float par8, float par9)
+    public void renderThePainting(EntityTableOfElements par1EntityPainting, double par2, double par4, double par6, float par8, float par9)
     {
         GL11.glPushMatrix();
         GL11.glTranslatef((float)par2, (float)par4, (float)par6);
@@ -31,7 +32,7 @@ public class RenderTableOfElements extends Render
         GL11.glPopMatrix();
     }
 
-    private void func_77010_a(EntityPainting par1EntityPainting, int par2, int par3, int par4, int par5)
+    private void func_77010_a(EntityTableOfElements par1EntityPainting, int par2, int par3, int par4, int par5)
     {
         float f = (float)(-par2) / 2.0F;
         float f1 = (float)(-par3) / 2.0F;
@@ -99,7 +100,7 @@ public class RenderTableOfElements extends Render
         }
     }
 
-    private void func_77008_a(EntityPainting par1EntityPainting, float par2, float par3)
+    private void func_77008_a(EntityTableOfElements par1EntityPainting, float par2, float par3)
     {
         int i = MathHelper.floor_double(par1EntityPainting.posX);
         int j = MathHelper.floor_double(par1EntityPainting.posY + (double)(par3 / 16.0F));
@@ -140,6 +141,6 @@ public class RenderTableOfElements extends Render
      */
     public void doRender(Entity par1Entity, double par2, double par4, double par6, float par8, float par9)
     {
-        this.renderThePainting((EntityPainting)par1Entity, par2, par4, par6, par8, par9);
+        this.renderThePainting((EntityTableOfElements)par1Entity, par2, par4, par6, par8, par9);
     }
 }
