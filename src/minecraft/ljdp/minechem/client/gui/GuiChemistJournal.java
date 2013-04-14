@@ -3,6 +3,7 @@ package ljdp.minechem.client.gui;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import ljdp.minechem.api.core.Chemical;
@@ -11,7 +12,11 @@ import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Constants;
+import ljdp.minechem.client.gui.tabs.Tab;
+import ljdp.minechem.client.gui.tabs.TabEnergy;
+import ljdp.minechem.client.gui.tabs.TabTable;
 import ljdp.minechem.common.MinechemItems;
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.containers.ContainerChemistJournal;
 import ljdp.minechem.common.network.PacketActiveJournalItem;
 import ljdp.minechem.common.network.PacketHandler;
@@ -60,6 +65,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         if (itemList != null) {
             populateItemList(itemList, entityPlayer);
         }
+        addTab(new TabTable(this));
     }
 
     public void populateItemList(List<ItemStack> items, EntityPlayer player) {
@@ -95,6 +101,28 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         }
         if (clickedSlot != null) {
             onSlotClick(clickedSlot);
+        }
+
+        super.mouseClicked(x, y, mouseButton);
+
+        Tab tab = getTabAtPosition(mouseX, mouseY);
+
+        if (tab != null && !tab.handleMouseClicked(mouseX, mouseY, mouseButton)) {
+
+            if (tab.leftSide) {
+                for (Tab other : tabListLeft) {
+                    if (other != tab && other.isOpen()) {
+                    	
+                    }
+                }
+            } else {
+                for (Tab other : tabListRight) {
+                    if (other != tab && other.isOpen()) {
+                    	
+                    }
+                }
+            }
+            mc.thePlayer.openGui(ModMinechem.instance, 2, mc.theWorld, x, y, 0);
         }
     }
 
@@ -324,7 +352,10 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     @Override
     public void handleMouseInput() {
         super.handleMouseInput();
-        scrollBar.handleMouseInput();
+        int i = Mouse.getEventX() * this.width / this.mc.displayWidth;
+        int j = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
+        mouseX = i - (width - xSize) / 2;
+        mouseY = j - (height - ySize) / 2;
     }
 
     @Override

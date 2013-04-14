@@ -2,10 +2,11 @@ package ljdp.minechem.common;
 
 import ljdp.minechem.client.gui.tabs.TabEnergy;
 import ljdp.minechem.client.gui.tabs.TabHelp;
+import ljdp.minechem.client.gui.tabs.TabJournel;
 import ljdp.minechem.client.gui.tabs.TabStateControl;
 import ljdp.minechem.client.gui.tabs.TabStateControlSynthesis;
+import ljdp.minechem.client.gui.tabs.TabTable;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
-import ljdp.minechem.common.entity.EntityTableOfElements;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.MinechemRecipes;
@@ -29,7 +30,6 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
@@ -47,11 +47,11 @@ public class ModMinechem {
     public static CreativeTabs minechemTab = new CreativeTabMinechem("MineChem");
     private Configuration config;
     private static final String[] LANGUAGES_SUPPORTED = new String[] { "en_GB", "zh_CN", "de_DE" };
-
+    public static String GUITABLEID = "2";
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
 
-    	 EntityRegistry.registerModEntity(EntityTableOfElements.class, "Table of Elements!", 1, this, 80, 3, true);
+
         Localization.loadLanguages(CommonProxy.LANG_DIR, LANGUAGES_SUPPORTED);
 
         loadConfig(event);
@@ -120,6 +120,8 @@ public class ModMinechem {
                 TabStateControlSynthesis.noRecipeIcon = event.map.registerIcon(ConstantValue.NO_RECIPE_ICON);
                 TabEnergy.powerIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
                 TabHelp.helpIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
+                TabTable.tableIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
+                TabJournel.tableIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
                 MinechemTriggers.fullEnergy.icon = event.map.registerIcon(ConstantValue.FULL_ENERGY_ICON);
             }
 

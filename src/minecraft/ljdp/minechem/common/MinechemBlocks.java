@@ -93,8 +93,8 @@ public class MinechemBlocks {
         GameRegistry.registerBlock(chemicalStorage, "minechem.blockChemicalStorage");
         LanguageRegistry.addName(chemicalStorage, MinechemHelper.getLocalString("block.name.chemicalStorage"));
 
-        GameRegistry.registerBlock(chemicalVat, "minechem.blockChemicalVat");
-        LanguageRegistry.addName(chemicalVat, MinechemHelper.getLocalString("block.name.chemicalVat"));
+        //GameRegistry.registerBlock(chemicalVat, "minechem.blockChemicalVat");
+        //LanguageRegistry.addName(chemicalVat, MinechemHelper.getLocalString("block.name.chemicalVat"));
 
         GameRegistry.registerTileEntity(TileEntityMicroscope.class, "minechem.tileEntityMicroscope");
         GameRegistry.registerTileEntity(TileEntitySynthesis.class, "minechem.tileEntitySynthesis");

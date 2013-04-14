@@ -1,7 +1,6 @@
 package ljdp.minechem.client;
 
 import ljdp.minechem.client.render.RenderBlockGhostBlock;
-import ljdp.minechem.client.render.RenderTableOfElements;
 import ljdp.minechem.client.render.item.ItemBlueprintProjectorRenderer;
 import ljdp.minechem.client.render.item.ItemChemicalStorageRenderer;
 import ljdp.minechem.client.render.item.ItemDecomposerRenderer;
@@ -19,7 +18,6 @@ import ljdp.minechem.client.sound.MinechemSoundEvent;
 import ljdp.minechem.common.CommonProxy;
 import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemItems;
-import ljdp.minechem.common.entity.EntityTableOfElements;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
@@ -73,7 +71,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
-        RenderingRegistry.registerEntityRenderingHandler(EntityTableOfElements.class, new RenderTableOfElements());  
+       
     }
 
     @Override

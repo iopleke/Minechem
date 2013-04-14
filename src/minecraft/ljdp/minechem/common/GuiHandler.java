@@ -8,6 +8,7 @@ import ljdp.minechem.client.gui.GuiFusion;
 import ljdp.minechem.client.gui.GuiMicroscope;
 import ljdp.minechem.client.gui.GuiProjector;
 import ljdp.minechem.client.gui.GuiSynthesis;
+import ljdp.minechem.client.gui.GuiTableOfElements;
 import ljdp.minechem.common.containers.ContainerChemicalStorage;
 import ljdp.minechem.common.containers.ContainerChemistJournal;
 import ljdp.minechem.common.containers.ContainerDecomposer;
@@ -16,6 +17,7 @@ import ljdp.minechem.common.containers.ContainerMicroscope;
 import ljdp.minechem.common.containers.ContainerProjector;
 import ljdp.minechem.common.containers.ContainerSynthesis;
 import ljdp.minechem.common.containers.ContainerVat;
+import ljdp.minechem.common.containers.CotainerTable;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
@@ -33,10 +35,11 @@ public class GuiHandler implements IGuiHandler {
 
     public static final int GUI_ID_TILEENTITY = 0;
     public static final int GUI_ID_JOURNAL = 1;
-
+    public static final int GUI_TABLE = 2;
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == GUI_ID_JOURNAL) { return getServerGuiElementForJournal(player, world); }
+        if (ID == GUI_TABLE){ return new CotainerTable(); }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityDecomposer)
             return new ContainerDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
@@ -72,6 +75,8 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == GUI_ID_JOURNAL)
             return getClientGuiElementForJournal(player, world);
+        if (ID == GUI_TABLE)
+        	return getClientGuiForJournal(player, world);
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityDecomposer)
             return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
@@ -102,4 +107,8 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElementForJournal(EntityPlayer player, World world) {
         return new GuiChemistJournal(player);
     }
+    public Object getClientGuiForJournal(EntityPlayer player, World world) {
+        return new GuiTableOfElements(player);
+    }
+
 }
