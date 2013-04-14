@@ -17,19 +17,6 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderTableOfElements extends Render
 {
-	private void blitTexture(EntityTableOfElements entityTable, int i, int j, int k, int l)
-    {
-		Double d1 = 64.0D;
-		Double d2 = 32.0D;
-		calculateBrightness(entityTable, 64.0F, 32.0F);
-		Tessellator tessellator = Tessellator.instance;
-		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(d1, -d2, 1.0D, 0.0D, 1.0D);
-	    tessellator.addVertexWithUV(-d1, -d2, 0.9D, 1.0D, 1.0D);
-	    tessellator.addVertexWithUV(-d1, d2, 0.9D, 1.0D, 0.0D);
-	    tessellator.addVertexWithUV(d1, d2, 0.9D, 0.0D, 0.0D);
-	    tessellator.draw();
-    }
 	private void calculateBrightness(EntityTableOfElements entityTable, float f, float f1)
     {
         int i = MathHelper.floor_double(entityTable.posX);
@@ -67,7 +54,7 @@ public class RenderTableOfElements extends Render
         loadTexture(ConstantValue.table_HEX);
         float f2 = 0.0625F;
         GL11.glScalef(f2, f2, f2);
-        blitTexture(entityTable, entityTable.tableSizeX, entityTable.tableSizeY, 0, 0);
+        this.func_77010_a(entityTable, entityTable.tableSizeX, entityTable.tableSizeY, 0, 0);
         GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
         GL11.glPopMatrix();
     }
