@@ -3,6 +3,7 @@ package ljdp.minechem.common.entity;
 import java.util.List;
 
 import ljdp.minechem.common.MinechemItems;
+import ljdp.minechem.common.utils.ConstantValue;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -111,7 +112,11 @@ public class EntityTableOfElements extends EntityPainting {
         }
         return i != 64 ? 0.0F : 0.0F;
     }
-	
+	@Override
+	public String getTexture()
+    {
+        return ConstantValue.table_HEX;
+    }
 	public boolean canBeCollidedWith()
     {
         return true;
