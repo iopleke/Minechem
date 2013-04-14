@@ -30,7 +30,7 @@ public class ItemHangableTableOfElements extends Item {
             return false;
         else
         {
-            int orientation = Direction.directionToFacing[side];
+            int orientation = Direction.facingToDirection[side];
             EntityHanging hangingEntity = this.createHangingEntity(world, x, y, z, orientation);
 
             if (!entityPlayer.canPlayerEdit(x, y, z, side, itemstack))
