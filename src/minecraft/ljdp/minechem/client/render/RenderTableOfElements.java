@@ -17,23 +17,59 @@ import org.lwjgl.opengl.GL12;
 @SideOnly(Side.CLIENT)
 public class RenderTableOfElements extends Render
 {
-    public void renderThePainting(EntityTableOfElements par1EntityPainting, double par2, double par4, double par6, float par8, float par9)
+	private void blitTexture(EntityTableOfElements entityTable, int i, int j, int k, int l)
     {
-    	if(par1EntityPainting != null){
+		Double d1 = 64.0D;
+		Double d2 = 32.0D;
+		calculateBrightness(entityTable, 64.0F, 32.0F);
+		Tessellator tessellator = Tessellator.instance;
+		tessellator.startDrawingQuads();
+		tessellator.addVertexWithUV(d1, -d2, 1.0D, 0.0D, 1.0D);
+	    tessellator.addVertexWithUV(-d1, -d2, 0.9D, 1.0D, 1.0D);
+	    tessellator.addVertexWithUV(-d1, d2, 0.9D, 1.0D, 0.0D);
+	    tessellator.addVertexWithUV(d1, d2, 0.9D, 0.0D, 0.0D);
+	    tessellator.draw();
+    }
+	private void calculateBrightness(EntityTableOfElements entityTable, float f, float f1)
+    {
+        int i = MathHelper.floor_double(entityTable.posX);
+        int j = MathHelper.floor_double(entityTable.posY + (double)(f1 / 16F));
+        int k = MathHelper.floor_double(entityTable.posZ);
+        if (entityTable.direction == 0)
+        {
+            i = MathHelper.floor_double(entityTable.posX + (double)(f / 16F));
+        }
+        if (entityTable.direction == 1)
+        {
+            k = MathHelper.floor_double(entityTable.posZ - (double)(f / 16F));
+        }
+        if (entityTable.direction == 2)
+        {
+            i = MathHelper.floor_double(entityTable.posX - (double)(f / 16F));
+        }
+        if (entityTable.direction == 3)
+        {
+            k = MathHelper.floor_double(entityTable.posZ + (double)(f / 16F));
+        }
+        int l = renderManager.worldObj.getLightBrightnessForSkyBlocks(i, j, k, 0);
+        int i1 = l % 0x10000;
+        int j1 = l / 0x10000;
+        GL11.glColor3f(1.0F, 1.0F, 1.0F);
+    }
+
+    public void renderThePainting(EntityTableOfElements entityTable, double d, double d1, double d2, float f, float f1)
+    {
+        //rand.setSeed(187L);
         GL11.glPushMatrix();
-        GL11.glTranslatef((float)par2, (float)par4, (float)par6);
-        GL11.glRotatef(par8, 0.0F, 1.0F, 0.0F);
-        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        this.loadTexture(ConstantValue.table_HEX);
-        EnumArt enumart = par1EntityPainting.art;
+        GL11.glTranslatef((float)d, (float)d1, (float)d2);
+        GL11.glRotatef(f, 0.0F, 1.0F, 0.0F);
+        GL11.glEnable(32826 /*GL_RESCALE_NORMAL_EXT*/);
+        loadTexture(ConstantValue.table_HEX);
         float f2 = 0.0625F;
         GL11.glScalef(f2, f2, f2);
-        this.func_77010_a(par1EntityPainting, enumart.sizeX, enumart.sizeY, enumart.offsetX, enumart.offsetY);
-        GL11.glDisable(GL12.GL_RESCALE_NORMAL);
+        blitTexture(entityTable, entityTable.tableSizeX, entityTable.tableSizeY, 0, 0);
+        GL11.glDisable(32826 /*GL_RESCALE_NORMAL_EXT*/);
         GL11.glPopMatrix();
-    	}else{
-    		System.out.print("Its Damn Null!");
-    	}
     }
 
     private void func_77010_a(EntityTableOfElements par1EntityPainting, int par2, int par3, int par4, int par5)
