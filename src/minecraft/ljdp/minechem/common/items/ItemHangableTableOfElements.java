@@ -4,80 +4,59 @@ import java.util.List;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
 import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.entity.EntityTableOfElements;
-import ljdp.minechem.common.utils.ConstantValue;
-
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityHanging;
-import net.minecraft.entity.item.EntityItemFrame;
-import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemHangingEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Direction;
 import net.minecraft.world.World;
 
-public class ItemHangableTableOfElements extends Item{
-
-	private final Class hangingEntityClass;
+public class ItemHangableTableOfElements extends Item {
 	
-	public ItemHangableTableOfElements(int par1, Class par2) {
-		super(par1);
-		this.hangingEntityClass = par2;
+	public ItemHangableTableOfElements(int id) {
+		super(id);
+		this.setUnlocalizedName("minechem.itemPeriodicTable");
 		setCreativeTab(ModMinechem.minechemTab);
-		setUnlocalizedName("minechem.itemBlueprint");
 	}
+	
 	@Override
-	public boolean onItemUse(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, World par3World, int par4, int par5, int par6, int par7, float par8, float par9, float par10)
+	public boolean onItemUse(ItemStack itemstack, EntityPlayer entityPlayer, World world, int x, int y, int z, int side, float par8, float par9, float par10)
     {
-        if (par7 == 0)
-        {
+        if (side == 0)
             return false;
-        }
-        else if (par7 == 1)
-        {
+        else if (side == 1)
             return false;
-        }
         else
         {
-            int i1 = Direction.facingToDirection[par7];
-            EntityHanging entityhanging = this.createHangingEntity(par3World, par4, par5, par6, i1);
+            int orientation = Direction.directionToFacing[side];
+            EntityHanging hangingEntity = this.createHangingEntity(world, x, y, z, orientation);
 
-            if (!par2EntityPlayer.canPlayerEdit(par4, par5, par6, par7, par1ItemStack))
-            {
+            if (!entityPlayer.canPlayerEdit(x, y, z, side, itemstack))
                 return false;
-            }
             else
             {
-                if (entityhanging != null && entityhanging.onValidSurface())
+                if (hangingEntity != null && hangingEntity.onValidSurface())
                 {
-                    if (!par3World.isRemote)
-                    {
-                        par3World.spawnEntityInWorld(entityhanging);
-                    }
-
-                    --par1ItemStack.stackSize;
+                    if (!world.isRemote)
+                        world.spawnEntityInWorld(hangingEntity);
+                    --itemstack.stackSize;
                 }
-
                 return true;
             }
         }
     }
+	
+	private EntityHanging createHangingEntity(World world, int x, int y, int z, int orientation) {
+		return new EntityTableOfElements(world, x, y, z, orientation);
+	}
 
-    /**
-     * Create the hanging entity associated to this item.
-     */
-    private EntityHanging createHangingEntity(World par1World, int par2, int par3, int par4, int par5)
-    {
-        return (EntityHanging)(this.hangingEntityClass == EntityTableOfElements.class ? new EntityTableOfElements(par1World, par2, par3, par4, par5) : (this.hangingEntityClass == EntityItemFrame.class ? new EntityItemFrame(par1World, par2, par3, par4, par5) : null));
-    }
 	@Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir) {
-        itemIcon = ir.registerIcon(ConstantValue.table_HEX);
-    }
+	@SideOnly(Side.CLIENT)
+	public void addInformation(ItemStack itemstack, EntityPlayer entityPlayer, List list, boolean par4) {
+		list.add("Dimensions: 9 x 5");
+	}
+
 
 }
