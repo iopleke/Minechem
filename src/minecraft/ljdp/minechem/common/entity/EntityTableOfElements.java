@@ -8,13 +8,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityHanging;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.item.EntityPainting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class EntityTableOfElements extends EntityHanging {
+public class EntityTableOfElements extends EntityPainting {
 	
 	private int tickCounter1;
     public int direction;
