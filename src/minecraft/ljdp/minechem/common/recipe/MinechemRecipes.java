@@ -244,6 +244,10 @@ public class MinechemRecipes {
       SynthesisRecipe.add(new SynthesisRecipe(var69, true, 600, new Chemical[]{this.molecule(EnumMolecule.potassiumNitrate), this.element(EnumElement.C), null, this.element(EnumElement.S, 2), null, null, null, null, null}));
       ItemStack var71 = new ItemStack(Block.wood, 1, -1);
       ItemStack var72 = new ItemStack(Block.planks, 1, -1);
+      ItemStack var140 = new ItemStack(Block.planks, 1, 0);
+      ItemStack var141 = new ItemStack(Block.planks, 1, 1);
+      ItemStack var142 = new ItemStack(Block.planks, 1, 2);
+      ItemStack var143 = new ItemStack(Block.planks, 1, 3);
       ItemStack var73 = new ItemStack(Item.stick);
       ItemStack var74 = new ItemStack(Block.wood, 1, 0);
       ItemStack var75 = new ItemStack(Block.wood, 1, 1);
@@ -253,6 +257,10 @@ public class MinechemRecipes {
       ItemStack var79 = new ItemStack(Block.pressurePlatePlanks, 1, -1);
       DecomposerRecipe.add(new DecomposerRecipeChance(var71, 0.5F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 8)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var72, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var140, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var141, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var142, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var143, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var73, 0.3F, new Chemical[]{this.molecule(EnumMolecule.cellulose)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var78, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 12)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var79, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 4)}));

@@ -120,8 +120,8 @@ public class ModMinechem {
                 TabStateControlSynthesis.noRecipeIcon = event.map.registerIcon(ConstantValue.NO_RECIPE_ICON);
                 TabEnergy.powerIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
                 TabHelp.helpIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
-                TabTable.tableIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
-                TabJournel.tableIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
+                TabTable.helpIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
+                TabJournel.helpIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
                 MinechemTriggers.fullEnergy.icon = event.map.registerIcon(ConstantValue.FULL_ENERGY_ICON);
             }
 
