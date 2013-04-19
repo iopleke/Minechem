@@ -13,3 +13,6 @@ Under the following conditions:
 attribution - you must attribute my name, ljdp. (Forking the repo in github counts).
 share alike - you must license any modification under the same or similar as this one.
 For more information on this license see here: http://creativecommons.org/licenses/by-sa/3.0/
+
+
+https://dl.dropboxusercontent.com/u/21358129/MineChem3-Mid-Def.jpg
