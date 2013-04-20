@@ -1,5 +1,5 @@
 package ljdp.minechem.common.recipe;
-
+// SOME OF THE CODE LOOKS FAULTY. PLEASE CHECK OVER IT - MANDRAKE
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
