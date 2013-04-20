@@ -16,3 +16,5 @@ For more information on this license see here: http://creativecommons.org/licens
 
 
 https://dl.dropboxusercontent.com/u/21358129/MineChem3-Mid-Def.jpg
+
+This mod bought to you by the letter K and the Conspicuous Sea Cucumber.
