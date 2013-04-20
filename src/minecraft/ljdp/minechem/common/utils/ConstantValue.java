@@ -76,4 +76,5 @@ public interface ConstantValue {
     public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "ChemicalStorageModel.png";
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
-}   public static final String FERMENTER_SOUND = SOUNDS_DIR + "photobioreactor.ogg";
+    public static final String FERMENTER_SOUND = SOUNDS_DIR + "photobioreactor.ogg";
+}   
