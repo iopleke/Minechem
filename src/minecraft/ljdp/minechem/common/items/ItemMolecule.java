@@ -3,7 +3,9 @@ package ljdp.minechem.common.items;
 import java.util.ArrayList;
 import java.util.List;
 
+import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.api.core.EnumMolecule;
+import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
@@ -108,7 +110,7 @@ public class ItemMolecule extends Item {
     public static EnumMolecule getMolecule(ItemStack itemstack) {
         return EnumMolecule.getById(itemstack.getItemDamage());
     }
-
+ 
     /**
      * returns the action that specifies what animation to play when the items is being used
      */

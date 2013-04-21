@@ -15,6 +15,7 @@ import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -29,7 +30,6 @@ public class ItemElement extends Item {
 
     private final static EnumElement[] elements = EnumElement.values();
     private final EnumMap<EnumClassification, Integer> classificationIndexes = new EnumMap<EnumClassification, Integer>(EnumClassification.class);
-
     public final Icon liquid[] = new Icon[7], gas[] = new Icon[7];
     public Icon solid;
 
@@ -233,5 +233,4 @@ public class ItemElement extends Item {
         element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
     }
-
 }
