@@ -16,7 +16,6 @@ import ljdp.minechem.common.containers.ContainerFusion;
 import ljdp.minechem.common.containers.ContainerMicroscope;
 import ljdp.minechem.common.containers.ContainerProjector;
 import ljdp.minechem.common.containers.ContainerSynthesis;
-import ljdp.minechem.common.containers.ContainerVat;
 import ljdp.minechem.common.containers.CotainerTable;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
@@ -25,7 +24,6 @@ import ljdp.minechem.common.tileentity.TileEntityFusion;
 import ljdp.minechem.common.tileentity.TileEntityMicroscope;
 import ljdp.minechem.common.tileentity.TileEntityProxy;
 import ljdp.minechem.common.tileentity.TileEntitySynthesis;
-import ljdp.minechem.common.tileentity.TileEntityVat;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -55,8 +53,6 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new ContainerChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
-        if (tileEntity instanceof TileEntityVat)
-            return new ContainerVat(player.inventory, (TileEntityVat) tileEntity);
         return null;
     }
 
@@ -92,8 +88,6 @@ public class GuiHandler implements IGuiHandler {
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
-        if (tileEntity instanceof TileEntityVat)
-            return new GuiChemicalVat(player.inventory, (TileEntityVat) tileEntity);
         return null;
     }
 
