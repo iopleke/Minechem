@@ -1,7 +1,6 @@
 package ljdp.minechem.common;
 
 import ljdp.minechem.client.gui.GuiChemicalStorage;
-import ljdp.minechem.client.gui.GuiChemicalVat;
 import ljdp.minechem.client.gui.GuiChemistJournal;
 import ljdp.minechem.client.gui.GuiDecomposer;
 import ljdp.minechem.client.gui.GuiFusion;
