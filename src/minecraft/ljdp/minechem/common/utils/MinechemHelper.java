@@ -186,7 +186,7 @@ public class MinechemHelper {
         case water:
             entityPlayer.getFoodStats().addStats(1, .1F);
             break;
-        case starch:
+        case starch || stevenk:
             entityPlayer.getFoodStats().addStats(2, .2F);
             break;
         case sucrose:
@@ -203,9 +203,6 @@ public class MinechemHelper {
             break;
         case methamphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
-            break;
-        case muscarine:
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             break;
         case poison:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
@@ -258,7 +255,7 @@ public class MinechemHelper {
         case aalc:
             entityPlayer.attackEntityFrom(DamageSource.generic, 5);
             break;
-        case ttx:
+        case ttx || muscarine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 1));
             break;
@@ -304,9 +301,10 @@ public class MinechemHelper {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
-        case stevenk:
-            entityPlayer.getFoodStats().addStats(2, .2F);
-            break;
+		case glycine || alinine || serine || arginine:
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		break; 
         default:
             entityPlayer.attackEntityFrom(DamageSource.generic, 5);
             break;
