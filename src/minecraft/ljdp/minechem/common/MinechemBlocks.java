@@ -95,7 +95,6 @@ public class MinechemBlocks {
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
         GameRegistry.registerTileEntity(TileEntityGhostBlock.class, "minechem.tileEntityGhostBock");
         GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
-        GameRegistry.registerTileEntity(TileEntityVat.class, "minechem.tileEntityVat");
     }
 
 }
