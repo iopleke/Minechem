@@ -111,7 +111,9 @@ public enum EnumMolecule {
     pal2(100, "Batrachotoxin", new Element(C, 31), new Element(H, 42), new Element(N, 2), new Element(O, 6)),
     ret(101, "Retinol", new Element(C, 20), new Element(H, 30), new Element(O)),
     stevenk(102, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
-    GaAs(103, "Gallium Arsenide", new Element(Ga), new Element(As));
+    GaAs(103, "Gallium Arsenide", new Element(Ga), new Element(As)),
+	weedex(104, "Aminocyclopyrachlor", new Element(C,8), new Element(H,8), new Element(Cl), new Element(N,3), new Element(O,2));
+
 
     public static EnumMolecule[] molecules = values();
     private final String descriptiveName;
