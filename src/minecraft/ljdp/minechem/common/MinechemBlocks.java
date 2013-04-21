@@ -7,7 +7,6 @@ import ljdp.minechem.common.blocks.BlockFusion;
 import ljdp.minechem.common.blocks.BlockGhostBlock;
 import ljdp.minechem.common.blocks.BlockMicroscope;
 import ljdp.minechem.common.blocks.BlockSynthesis;
-import ljdp.minechem.common.blocks.BlockVat;
 import ljdp.minechem.common.blocks.MaterialGas;
 import ljdp.minechem.common.items.ItemBlockFusion;
 import ljdp.minechem.common.items.ItemGhostBlock;
