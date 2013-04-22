@@ -186,7 +186,7 @@ public class MinechemHelper {
         case water:
             entityPlayer.getFoodStats().addStats(1, .1F);
             break;
-        case starch || stevenk:
+        case starch: stevenk:
             entityPlayer.getFoodStats().addStats(2, .2F);
             break;
         case sucrose:
@@ -255,7 +255,7 @@ public class MinechemHelper {
         case aalc:
             entityPlayer.attackEntityFrom(DamageSource.generic, 5);
             break;
-        case ttx || muscarine:
+        case ttx: muscarine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 1));
             break;
@@ -301,7 +301,7 @@ public class MinechemHelper {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
-		case glycine || alinine || serine || arginine:
+		case glycine: alinine: serine: arginine:
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
 		break; 
