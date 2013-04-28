@@ -11,6 +11,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 import org.lwjgl.opengl.GL11;
 
+
 public class GuiDecomposer extends GuiContainerTabbed {
 
     TileEntityDecomposer decomposer;
@@ -44,6 +45,7 @@ public class GuiDecomposer extends GuiContainerTabbed {
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
+        
     }
 
 }

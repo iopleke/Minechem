@@ -617,24 +617,24 @@ public class MinechemRecipes {
 			}
 		}	   
 	   
-		if(var1.Name.contains("oreCopper")) {
+		if(var1.Name.contains("copperOre")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 2)}));
 		}
-		else if(var1.Name.contains("Copper")) {
+		else if(var1.Name.contains("copperIngot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 2)}));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Cu, 2)}));
 		}
-		else if(var1.Name.contains("oreSilver")) {
+		else if(var1.Name.contains("silverOre")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ag, 4)}));
 		}
-		else if(var1.Name.contains("Silver")) {
+		else if(var1.Name.contains("silverIngot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ag, 2)}));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ag, 2)}));
 		}
-		else if(var1.Name.contains("oreTin")) {
+		else if(var1.Name.contains("tinOre")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Sn, 4)}));
 		}
-		else if(var1.Name.contains("Tin")) {
+		else if(var1.Name.contains("tinIngot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Sn, 2)}));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Sn, 2)}));
 		}
@@ -645,13 +645,13 @@ public class MinechemRecipes {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Pb, 2)}));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Pb, 2)}));
 		}
-		else if(var1.Name.contains("Bronze")) {
+		else if(var1.Name.contains("bronzeIngot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, this.element(EnumElement.Sn),this.element(EnumElement.Cu, 9)));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, this.element(EnumElement.Cu, 9), this.element(EnumElement.Cu, 9)));
 		}
-      if(var1.Name.contains("oreUranium")) {
+      if(var1.Name.contains("uraniumOre")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 4)}));
-      } else if(var1.Name.contains("Uranium")) {
+      } else if(var1.Name.contains("uraniumIngot")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 2)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
       } else if(var1.Name.contains("itemDropUranium")) {
