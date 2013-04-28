@@ -127,10 +127,9 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
                 return;
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, blueprintBlock.block.blockID, blueprintBlock.metadata, 3);
             if (blueprintBlock.type == Type.PROXY) {
-                TileEntityProxy proxy = (TileEntityProxy) worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
-                if(proxy instanceof TileEntityProxy){
-                	 if (proxy != null)
-                         proxy.setManager(managerTileEntity);
+                TileEntity te =  worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
+                if(te instanceof TileEntityProxy){
+                	TileEntityProxy proxy = (TileEntityProxy) te;
                  }	
                 }
                 	
