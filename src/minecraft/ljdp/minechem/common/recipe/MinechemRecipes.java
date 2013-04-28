@@ -617,21 +617,21 @@ public class MinechemRecipes {
 			}
 		}	   
 	   
-		if(var1.Name.contains("copperOre")) {
+		if(var1.Name.contains("oreCopper")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 2)}));
 		}
 		else if(var1.Name.contains("copperIngot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 2)}));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Cu, 2)}));
 		}
-		else if(var1.Name.contains("silverOre")) {
+		else if(var1.Name.contains("oreSilver")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ag, 4)}));
 		}
 		else if(var1.Name.contains("silverIngot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ag, 2)}));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ag, 2)}));
 		}
-		else if(var1.Name.contains("tinOre")) {
+		else if(var1.Name.contains("oreTin")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Sn, 4)}));
 		}
 		else if(var1.Name.contains("tinIngot")) {
