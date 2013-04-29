@@ -42,12 +42,12 @@ public class ContainerFusion extends Container implements IRadiationShield {
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
-		return fusion.isUseableByPlayer(var1);
+		return true;
 	}
 	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot) {
-		/*
+		
 		Slot slotObject = (Slot) inventorySlots.get(slot);
 		if(slotObject != null && slotObject.getHasStack()) {
 			ItemStack stackInSlot = slotObject.getStack();
@@ -66,7 +66,7 @@ public class ContainerFusion extends Container implements IRadiationShield {
 				slotObject.onSlotChanged();
 			
 			return stack;
-		}*/
+		}
 		return null;
 	}
 

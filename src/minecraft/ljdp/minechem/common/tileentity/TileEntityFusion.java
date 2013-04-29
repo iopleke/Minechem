@@ -9,6 +9,7 @@ import ljdp.minechem.common.inventory.Transactor;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import buildcraft.api.core.SafeTimeTracker;
+import buildcraft.api.inventory.ISpecialInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
@@ -44,6 +45,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     boolean shouldSendUpdatePacket;
 
     public TileEntityFusion() {
+    	inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);
         outputInventory = new BoundedInventory(this, kOutput);
         starInventory = new BoundedInventory(this, kFusionStar);
@@ -84,7 +86,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
         if (shouldSendUpdatePacket && !worldObj.isRemote)
             sendUpdatePacket();
     }
-
     private void addToOutput(ItemStack fusionResult) {
         if (inventory[kOutput[0]] == null) {
             ItemStack output = fusionResult.copy();
@@ -321,13 +322,13 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     @Override
     public boolean func_102007_a(int i, ItemStack itemstack, int j) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
     @Override
     public boolean func_102008_b(int i, ItemStack itemstack, int j) {
         // TODO Auto-generated method stub
-        return false;
+        return true;
     }
 
 	@Override
@@ -335,5 +336,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 		// TODO Auto-generated method stub
 		
 	}
+
+
 
 }
