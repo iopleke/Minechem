@@ -1,5 +1,8 @@
 package ljdp.minechem.common.containers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
@@ -14,6 +17,23 @@ public class ContainerWithFakeSlots extends Container {
         return false;
     }
 
+    /**
+     * returns a list if itemStacks, for each non-fake slot.
+     */
+    @Override
+    public List getInventory()
+    {
+        ArrayList arraylist = new ArrayList();
+
+        for (int i = 0; i < this.inventorySlots.size(); ++i)
+        {
+        	Slot slot = ((Slot)this.inventorySlots.get(i));
+            arraylist.add((slot instanceof SlotFake) ? null : slot.getStack());
+        }
+
+        return arraylist;
+    }
+    
     @Override
     public ItemStack slotClick(int slotNum, int mouseButton, int isShiftPressed, EntityPlayer entityPlayer) {
         Slot slot = null;
