@@ -762,7 +762,12 @@ public class MinechemRecipes {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Zn, 1), new Element(EnumElement.W, 1), new Element(EnumElement.O, 4)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 610, new Chemical[]{new Element(EnumElement.Zn, 1), new Element(EnumElement.W, 1), new Element(EnumElement.O, 4)}));
       }
-
+	 
+	  else if(var1.Name.contains("SlimeCrystal")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Molecule(EnumMolecule.polyprop)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 500, Chemical[]{new Molecule(EnumMolecule.polyprop)}));
+      }
+     
    }
 
    private Element element(EnumElement var1, int var2) {
