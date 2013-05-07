@@ -57,35 +57,37 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if (!completeStructure)
-            return;
+	public void updateEntity() {
+		super.updateEntity();
+		if(!completeStructure)
+			return;
 
-        shouldSendUpdatePacket = false;
-        if (!worldObj.isRemote && inventory[kFusionStar[0]] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2)) {
-            if (!isRecharging)
-                targetEnergy = takeEnergyFromStar(inventory[kFusionStar[0]], true);
-            if (targetEnergy > 0)
-                isRecharging = true;
-            if (isRecharging) {
-                recharge();
-            } else {
-                ItemStack fusionResult = getFusionOutput();
-                while (fusionResult != null && canFuse(fusionResult)) {
-                    if (!worldObj.isRemote) {
-                        addToOutput(fusionResult);
-                        removeInputs();
-                    }
-                    energyStored -= getEnergyCost(fusionResult);
-                    fusionResult = getFusionOutput();
-                    shouldSendUpdatePacket = true;
-                }
-            }
-        }
-        if (shouldSendUpdatePacket && !worldObj.isRemote)
-            sendUpdatePacket();
-    }
+		shouldSendUpdatePacket = false;
+		if(!worldObj.isRemote && inventory[kStartFusionStar] != null 
+				&& energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
+		{
+			if(!isRecharging)
+				targetEnergy = takeEnergyFromStar(inventory[kStartFusionStar], true);
+			if(targetEnergy > 0)
+				isRecharging = true;
+			if(isRecharging) {
+				recharge();
+			} else {
+				ItemStack fusionResult = getFusionOutput();
+				while(fusionResult != null && canFuse(fusionResult)) {
+					if(!worldObj.isRemote) {
+						addToOutput(fusionResult);
+						removeInputs();
+					}
+					energyStored -= getEnergyCost(fusionResult);
+					fusionResult = getFusionOutput();
+					shouldSendUpdatePacket = true;
+				}
+			}
+		}
+		if(shouldSendUpdatePacket && !worldObj.isRemote)
+			sendUpdatePacket();
+	}
     private void addToOutput(ItemStack fusionResult) {
         if (inventory[kOutput[0]] == null) {
             ItemStack output = fusionResult.copy();
