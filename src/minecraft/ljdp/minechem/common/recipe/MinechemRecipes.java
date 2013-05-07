@@ -1,5 +1,4 @@
 package ljdp.minechem.common.recipe;
-// SOME OF THE CODE LOOKS FAULTY. PLEASE CHECK OVER IT - MANDRAKE
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -654,117 +653,24 @@ public class MinechemRecipes {
       } else if(var1.Name.contains("xychoriumLight")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
-      } else if(var1.Name.contains("TropicraftCoral3")) {
-         DecomposerRecipe.add(new DecomposerRecipeChance(var1.Ore, 0.1F, new Chemical[]{new Molecule(EnumMolecule.pal2)}));
-      } else if(var1.Name.contains("ingotAdamantine")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Molecule(EnumMolecule.water, 6), new Element(EnumElement.Cn, 1), new Element(EnumElement.Co, 1), new Element(EnumElement.Br, 2), new Element(EnumElement.O, 6)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 780, new Chemical[]{new Molecule(EnumMolecule.water, 6), new Element(EnumElement.Cn, 1), new Element(EnumElement.Co, 1), new Element(EnumElement.Br, 2), new Element(EnumElement.O, 6)}));
-      } else if(var1.Name.contains("ingotAdluorite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Zr, 1), new Element(EnumElement.O, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 720, new Chemical[]{new Element(EnumElement.Zr, 1), new Element(EnumElement.O, 2)}));
-      } else if(var1.Name.contains("ingotAmordrine")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Pt, 1), new Element(EnumElement.B, 1), new Element(EnumElement.N, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Pt, 1), new Element(EnumElement.B, 1), new Element(EnumElement.N, 1)}));
-      } else if(var1.Name.contains("ingotAngmallen")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Fe, 2), new Element(EnumElement.Au, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Fe, 2), new Element(EnumElement.Au, 2)}));
-      } else if(var1.Name.contains("ingotAredrite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.C, 1), new Element(EnumElement.Ce, 1), new Element(EnumElement.Ru, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 720, new Chemical[]{new Element(EnumElement.C, 1), new Element(EnumElement.Ce, 1), new Element(EnumElement.Ru, 1)}));
-      } else if(var1.Name.contains("ingotAstral Silver")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Ag, 1), new Element(EnumElement.Ni, 1), new Element(EnumElement.Pd, 1), new Element(EnumElement.Te, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 740, new Chemical[]{new Element(EnumElement.Ag, 1), new Element(EnumElement.Ni, 1), new Element(EnumElement.Pd, 1), new Element(EnumElement.Te, 1)}));
-      } else if(var1.Name.contains("ingotAtlarus")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.W, 3), new Element(EnumElement.C, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 780, new Chemical[]{new Element(EnumElement.W, 3), new Element(EnumElement.C, 1)}));
-      } else if(var1.Name.contains("ingotBlack Steel")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Fe, 4), new Element(EnumElement.C, 1), new Element(EnumElement.Mn, 1), new Element(EnumElement.Zn, 1), new Element(EnumElement.Th, 1), new Element(EnumElement.O, 3)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Fe, 4), new Element(EnumElement.C, 1), new Element(EnumElement.Mn, 1), new Element(EnumElement.Zn, 1), new Element(EnumElement.Th, 1), new Element(EnumElement.O, 3)}));
-      } else if(var1.Name.contains("ingotCarmot")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Ni, 1), new Element(EnumElement.Re, 1), new Element(EnumElement.Cl, 3)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 740, new Chemical[]{new Element(EnumElement.Ni, 1), new Element(EnumElement.Re, 1), new Element(EnumElement.Cl, 3)}));
-      } else if(var1.Name.contains("ingotCelenegil")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Pt, 1), new Element(EnumElement.Re, 1), new Element(EnumElement.B, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Pt, 1), new Element(EnumElement.Re, 1), new Element(EnumElement.B, 2)}));
-      } else if(var1.Name.contains("ingotCeruclase")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Os, 3), new Element(EnumElement.C, 12), new Element(EnumElement.O, 12)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 690, new Chemical[]{new Element(EnumElement.Os, 3), new Element(EnumElement.C, 12), new Element(EnumElement.O, 12)}));
-      } else if(var1.Name.contains("ingotDamascus Steel")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Cu, 3), new Element(EnumElement.Fe, 2), new Element(EnumElement.Sn, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Cu, 3), new Element(EnumElement.Fe, 2), new Element(EnumElement.Sn, 1)}));
-      } else if(var1.Name.contains("ingotDeep Iron")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Mn, 1), new Element(EnumElement.Fe, 1), new Element(EnumElement.Zn, 1), new Element(EnumElement.C, 1), new Element(EnumElement.O, 3)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 660, new Chemical[]{new Element(EnumElement.Mn, 1), new Element(EnumElement.Fe, 1), new Element(EnumElement.Zn, 1), new Element(EnumElement.C, 1), new Element(EnumElement.O, 3)}));
-      } else if(var1.Name.contains("ingotDesichalkos")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Pd, 3), new Element(EnumElement.Ti, 1), new Element(EnumElement.U, 1), new Element(EnumElement.O, 8), new Element(EnumElement.N, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Pd, 3), new Element(EnumElement.Ti, 1), new Element(EnumElement.U, 1), new Element(EnumElement.O, 8), new Element(EnumElement.N, 2)}));
-      } else if(var1.Name.contains("ingotEximite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Pd, 3), new Element(EnumElement.Ti, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 640, new Chemical[]{new Element(EnumElement.Pd, 3), new Element(EnumElement.Ti, 1)}));
-      } else if(var1.Name.contains("ingotHaderoth")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Pd, 1), new Element(EnumElement.Nb, 1), new Element(EnumElement.C, 1), new Element(EnumElement.Ru, 1), new Element(EnumElement.Te, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Pd, 1), new Element(EnumElement.Nb, 1), new Element(EnumElement.C, 1), new Element(EnumElement.Ru, 1), new Element(EnumElement.Te, 2)}));
-      } else if(var1.Name.contains("ingotHepatizon")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Au, 2), new Element(EnumElement.Cu, 3), new Element(EnumElement.Sn, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Au, 2), new Element(EnumElement.Cu, 3), new Element(EnumElement.Sn, 1)}));
-      } else if(var1.Name.contains("ingotIgnatius")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.O, 3), new Element(EnumElement.Pd, 1), new Element(EnumElement.Si, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 470, new Chemical[]{new Element(EnumElement.O, 3), new Element(EnumElement.Pd, 1), new Element(EnumElement.Si, 1)}));
-      } else if(var1.Name.contains("ingotInfuscolium")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Fe, 3), new Element(EnumElement.Th, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 700, new Chemical[]{new Element(EnumElement.Fe, 3), new Element(EnumElement.Th, 1)}));
-      } else if(var1.Name.contains("ingotInolashite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Os, 3), new Element(EnumElement.C, 12), new Element(EnumElement.O, 14), new Element(EnumElement.Zr, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Os, 3), new Element(EnumElement.C, 12), new Element(EnumElement.O, 14), new Element(EnumElement.Zr, 1)}));
-      } else if(var1.Name.contains("ingotKalendrite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.B, 1), new Element(EnumElement.N, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 720, new Chemical[]{new Element(EnumElement.B, 1), new Element(EnumElement.N, 1)}));
-      } else if(var1.Name.contains("ingotLemurite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Li, 1), new Element(EnumElement.C, 2), new Element(EnumElement.H, 5), new Element(EnumElement.O, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 570, new Chemical[]{new Element(EnumElement.Li, 1), new Element(EnumElement.C, 2), new Element(EnumElement.H, 5), new Element(EnumElement.O, 1)}));
-      } else if(var1.Name.contains("ingotMeutoite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Es, 1), new Element(EnumElement.N, 3), new Element(EnumElement.O, 9)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 740, new Chemical[]{new Element(EnumElement.Es, 1), new Element(EnumElement.N, 3), new Element(EnumElement.O, 9)}));
-      } else if(var1.Name.contains("ingotMidasium")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Au, 3), new Element(EnumElement.Cn, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 600, new Chemical[]{new Element(EnumElement.Au, 3), new Element(EnumElement.Cn, 1)}));
-      } else if(var1.Name.contains("ingotMithril")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Pd, 1), new Element(EnumElement.Nb, 1), new Element(EnumElement.C, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 740, new Chemical[]{new Element(EnumElement.Pd, 1), new Element(EnumElement.Nb, 1), new Element(EnumElement.C, 1)}));
-      } else if(var1.Name.contains("ingotOrichalcum")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Re, 1), new Element(EnumElement.B, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 750, new Chemical[]{new Element(EnumElement.Re, 1), new Element(EnumElement.B, 2)}));
-      } else if(var1.Name.contains("ingotOureclase")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Hg, 1), new Element(EnumElement.Te, 1), new Element(EnumElement.O, 3)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 720, new Chemical[]{new Element(EnumElement.Hg, 1), new Element(EnumElement.Te, 1), new Element(EnumElement.O, 3)}));
-      } else if(var1.Name.contains("ingotPrometheum")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Ce, 1), new Element(EnumElement.Fe, 1), new Element(EnumElement.Zn, 1)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 600, new Chemical[]{new Element(EnumElement.Ce, 1), new Element(EnumElement.Fe, 1), new Element(EnumElement.Zn, 1)}));
-      } else if(var1.Name.contains("ingotRubracium")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Ru, 1), new Element(EnumElement.Te, 2)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 760, new Chemical[]{new Element(EnumElement.Ru, 1), new Element(EnumElement.Te, 2)}));
-      } else if(var1.Name.contains("ingotSanguinite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Ti, 1), new Element(EnumElement.V, 1), new Element(EnumElement.Fe, 1), new Element(EnumElement.C, 1), new Element(EnumElement.Co, 1), new Element(EnumElement.N, 2), new Element(EnumElement.O, 6)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 760, new Chemical[]{new Element(EnumElement.Ti, 1), new Element(EnumElement.V, 1), new Element(EnumElement.Fe, 1), new Element(EnumElement.C, 1), new Element(EnumElement.Co, 1), new Element(EnumElement.N, 2), new Element(EnumElement.O, 6)}));
-      } else if(var1.Name.contains("ingotShadow Iron")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Fe, 4), new Element(EnumElement.Ni, 1), new Element(EnumElement.S, 4)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 530, new Chemical[]{new Element(EnumElement.Fe, 4), new Element(EnumElement.Ni, 1), new Element(EnumElement.S, 4)}));
-      } else if(var1.Name.contains("ingotShadow Steel")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Li, 1), new Element(EnumElement.C, 2), new Element(EnumElement.H, 5), new Element(EnumElement.O, 1), new Element(EnumElement.Fe, 4), new Element(EnumElement.Ni, 1), new Element(EnumElement.S, 4)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Element(EnumElement.Li, 1), new Element(EnumElement.C, 2), new Element(EnumElement.H, 5), new Element(EnumElement.O, 1), new Element(EnumElement.Fe, 4), new Element(EnumElement.Ni, 1), new Element(EnumElement.S, 4)}));
-      } else if(var1.Name.contains("ingotTartarite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Molecule(EnumMolecule.water, 6), new Element(EnumElement.W, 3), new Element(EnumElement.C, 1), new Element(EnumElement.Cn, 1), new Element(EnumElement.Co, 1), new Element(EnumElement.Br, 2), new Element(EnumElement.O, 6)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 400, new Chemical[]{new Molecule(EnumMolecule.water, 6), new Element(EnumElement.W, 3), new Element(EnumElement.C, 1), new Element(EnumElement.Cn, 1), new Element(EnumElement.Co, 1), new Element(EnumElement.Br, 2), new Element(EnumElement.O, 6)}));
-      } else if(var1.Name.contains("ingotVulcanite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Al, 1), new Element(EnumElement.Cr, 2), new Element(EnumElement.O, 3)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 760, new Chemical[]{new Element(EnumElement.Al, 1), new Element(EnumElement.Cr, 2), new Element(EnumElement.O, 3)}));
-      } else if(var1.Name.contains("ingotVyroxeres")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Element(EnumElement.Zn, 1), new Element(EnumElement.W, 1), new Element(EnumElement.O, 4)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 610, new Chemical[]{new Element(EnumElement.Zn, 1), new Element(EnumElement.W, 1), new Element(EnumElement.O, 4)}));
-      }
+		 
+	// { else if(var1.Name.contains("SlimeCrystal")) {
+    // DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Molecule(EnumMolecule.polyprop)}));
+    // SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 500, Chemical[]{new Molecule(EnumMolecule.polyprop)}));
 
+     } else if(var1.Name.contains("ingotCobalt")) { // Tungsten - Cobalt Alloy
+     DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2)}));
+     SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2)}));
+	
+	} else if(var1.Name.contains("ingotArdite")) { // Tungsten - Iron - Silicon Alloy
+     DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2)}));
+     SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2)}));
+	
+	} else if(var1.Name.contains("ingotManyullyn")) { // Tungsten - Iron - Silicon - Cobalt Alloy
+     DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2)}));
+     SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 7000, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2)}));
+   } 
    }
-
    private Element element(EnumElement var1, int var2) {
       return new Element(var1, var2);
    }
@@ -782,3 +688,5 @@ public class MinechemRecipes {
    }
 
 }
+
+// octocat sucks shit

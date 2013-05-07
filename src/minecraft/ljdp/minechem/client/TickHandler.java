@@ -4,8 +4,10 @@ import java.util.EnumSet;
 import java.util.List;
 
 import ljdp.minechem.api.core.EnumMolecule;
+import ljdp.minechem.client.gui.GuiFusion;
 import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemItems;
+import ljdp.minechem.common.tileentity.TileEntityFusion;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -22,7 +24,6 @@ import cpw.mods.fml.common.ITickHandler;
 import cpw.mods.fml.common.TickType;
 
 public class TickHandler implements ITickHandler {
-
 	public void transmuteWaterToPortal(World world, int dx, int dy, int dz)
 	  {
 	    int px = dx;
@@ -48,6 +49,8 @@ public class TickHandler implements ITickHandler {
       World world = mc.theWorld;
       if(player != null){
     	  if(world != null){
+    			  
+    		  }
     		  double rangeToCheck = 32.0D;
 
     	        List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
@@ -64,7 +67,7 @@ public class TickHandler implements ITickHandler {
     	  }}
       }
     	  }
-        }
+        
       
     
 

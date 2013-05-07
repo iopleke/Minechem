@@ -53,9 +53,15 @@ public class GuiFusion extends GuiContainerTabbed {
         drawTexturedModalRect(x + 8, y + 38, 0, 192, energyBarWidth, 3);
 
         // DRAW ENERGY BAR OVERLAY
-        drawTexturedModalRect(x + 7, y + 37, 0, 187, 162, 5);
+        drawEnergyBarOverlay();
     }
-
+    public void drawEnergyBarOverlay(){
+    	
+    	int x = (width - guiWidth) / 2;
+        int y = (height - guiHeight) / 2;
+        drawTexturedModalRect(x + 7, y + 37, 0, 187, 162, 5);
+        
+    }
     private void updateEnergy() {
         targetEnergy = fusion.getEnergyStored();
         if (energy < (targetEnergy)) {

@@ -21,7 +21,7 @@ import ljdp.minechem.common.recipe.DecomposerRecipeHandler;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import net.minecraft.block.Block;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraftforge.common.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -427,8 +427,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                     return true;
         return false;
     }
-
-    @Override
     public int[] getSizeInventorySide(int side) {
         switch (side) {
         case 0:
@@ -462,15 +460,18 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         }
     }
 
-    @Override
-    public boolean func_102007_a(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return false;
-    }
 
-    @Override
-    public boolean func_102008_b(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return false;
-    }
+	@Override
+	
+	public int getStartInventorySide(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	
+	public int getSizeInventorySide(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }

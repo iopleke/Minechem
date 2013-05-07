@@ -11,7 +11,7 @@ import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import buildcraft.api.core.SafeTimeTracker;
 import buildcraft.api.inventory.ISpecialInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraftforge.common.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -57,35 +57,37 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     }
 
     @Override
-    public void updateEntity() {
-        super.updateEntity();
-        if (!completeStructure)
-            return;
+	public void updateEntity() {
+		super.updateEntity();
+		if(!completeStructure)
+			return;
 
-        shouldSendUpdatePacket = false;
-        if (!worldObj.isRemote && inventory[kFusionStar[0]] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2)) {
-            if (!isRecharging)
-                targetEnergy = takeEnergyFromStar(inventory[kFusionStar[0]], true);
-            if (targetEnergy > 0)
-                isRecharging = true;
-            if (isRecharging) {
-                recharge();
-            } else {
-                ItemStack fusionResult = getFusionOutput();
-                while (fusionResult != null && canFuse(fusionResult)) {
-                    if (!worldObj.isRemote) {
-                        addToOutput(fusionResult);
-                        removeInputs();
-                    }
-                    energyStored -= getEnergyCost(fusionResult);
-                    fusionResult = getFusionOutput();
-                    shouldSendUpdatePacket = true;
-                }
-            }
-        }
-        if (shouldSendUpdatePacket && !worldObj.isRemote)
-            sendUpdatePacket();
-    }
+		shouldSendUpdatePacket = false;
+		if(!worldObj.isRemote && inventory[kStartFusionStar] != null 
+				&& energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
+		{
+			if(!isRecharging)
+				targetEnergy = takeEnergyFromStar(inventory[kStartFusionStar], true);
+			if(targetEnergy > 0)
+				isRecharging = true;
+			if(isRecharging) {
+				recharge();
+			} else {
+				ItemStack fusionResult = getFusionOutput();
+				while(fusionResult != null && canFuse(fusionResult)) {
+					if(!worldObj.isRemote) {
+						addToOutput(fusionResult);
+						removeInputs();
+					}
+					energyStored -= getEnergyCost(fusionResult);
+					fusionResult = getFusionOutput();
+					shouldSendUpdatePacket = true;
+				}
+			}
+		}
+		if(shouldSendUpdatePacket && !worldObj.isRemote)
+			sendUpdatePacket();
+	}
     private void addToOutput(ItemStack fusionResult) {
         if (inventory[kOutput[0]] == null) {
             ItemStack output = fusionResult.copy();
@@ -303,7 +305,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
         return false;
     }
 
-    @Override
     public int[] getSizeInventorySide(int side) {
         switch (side) {
         case 0:
@@ -319,22 +320,35 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
         return false;
     }
 
-    @Override
-    public boolean func_102007_a(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean func_102008_b(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return true;
-    }
 
 	@Override
 	void sendUpdatePacket() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean func_102007_a(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	
+	public boolean func_102008_b(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public
+	int getStartInventorySide(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public
+	int getSizeInventorySide(ForgeDirection side) {
+		 return 0;
 	}
 
 
