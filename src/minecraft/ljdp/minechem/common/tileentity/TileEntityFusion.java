@@ -11,7 +11,7 @@ import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import buildcraft.api.core.SafeTimeTracker;
 import buildcraft.api.inventory.ISpecialInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
+import net.minecraftforge.common.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -327,16 +327,28 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 		
 	}
 
-	@Override
 	public boolean func_102007_a(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
+	
 	public boolean func_102008_b(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public
+	int getStartInventorySide(ForgeDirection side) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public
+	int getSizeInventorySide(ForgeDirection side) {
+		 return 0;
 	}
 
 
