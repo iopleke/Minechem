@@ -321,22 +321,23 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
         return false;
     }
 
-    @Override
-    public boolean func_102007_a(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return true;
-    }
-
-    @Override
-    public boolean func_102008_b(int i, ItemStack itemstack, int j) {
-        // TODO Auto-generated method stub
-        return true;
-    }
 
 	@Override
 	void sendUpdatePacket() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	@Override
+	public boolean func_102007_a(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean func_102008_b(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
