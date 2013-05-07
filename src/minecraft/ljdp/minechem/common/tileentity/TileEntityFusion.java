@@ -305,7 +305,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
         return false;
     }
 
-    @Override
     public int[] getSizeInventorySide(int side) {
         switch (side) {
         case 0:

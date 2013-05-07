@@ -428,7 +428,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         return false;
     }
 
-    @Override
     public int[] getSizeInventorySide(int side) {
         switch (side) {
         case 0:
