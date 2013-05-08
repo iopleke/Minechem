@@ -18,15 +18,16 @@ public class UniversalElectricity
 	/**
 	 * The version of the Universal Electricity API.
 	 */
-	public static final int MAJOR_VERSION = 1;
-	public static final int MINOR_VERSION = 3;
-	public static final int REVISION_VERSION = 1;
+	public static final String MAJOR_VERSION = "@MAJOR@";
+	public static final String MINOR_VERSION = "@MINOR@";
+	public static final String REVISION_VERSION = "@REVIS@";
+	public static final String BUILD_VERSION = "@BUILD@";
 	public static final String VERSION = MAJOR_VERSION + "." + MINOR_VERSION + "." + REVISION_VERSION;
 
 	/**
 	 * The Universal Electricity configuration file.
 	 */
-	public static final Configuration CONFIGURATION = new Configuration(new File(Loader.instance().getConfigDir(), "UniversalElectricity/UniversalElectricity.cfg"));
+	public static final Configuration CONFIGURATION = new Configuration(new File(Loader.instance().getConfigDir(), "UniversalElectricity.cfg"));
 
 	/**
 	 * Multiply this to convert foreign energy into UE Joules.
@@ -70,6 +71,7 @@ public class UniversalElectricity
 		TO_BC_RATIO = 1 / BC3_RATIO;
 
 		isVoltageSensitive = CONFIGURATION.get("Compatiblity", "Is Voltage Sensitive", isVoltageSensitive).getBoolean(isVoltageSensitive);
+		isNetworkActive = CONFIGURATION.get("Compatiblity", "Is Network Active", isNetworkActive).getBoolean(isNetworkActive);
 		CONFIGURATION.save();
 	}
 }
