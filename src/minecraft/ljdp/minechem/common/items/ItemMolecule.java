@@ -136,7 +136,7 @@ public class ItemMolecule extends Item {
 
         EnumMolecule molecule = getMolecule(itemStack);
         MinechemHelper.triggerPlayerEffect(molecule, entityPlayer);
-
+        world.playSoundAtEntity(player, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F); // Thanks mDiyo! 
         return itemStack;
     }
 
