@@ -31,12 +31,6 @@ public abstract class MinechemTrigger implements ITrigger {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public Icon getTextureIcon() {
-        return icon;
-    }
-
-    @Override
-    @SideOnly(Side.CLIENT)
     public IIconProvider getIconProvider() {
     
 		return provider;

@@ -1,5 +1,6 @@
 package ljdp.minechem.computercraft;
 
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.utils.ConstantValue;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -13,7 +14,7 @@ public class ItemChemistryUpgrade extends Item {
 
     public ItemChemistryUpgrade(int id) {
         super(id);
-        setCreativeTab(ComputerCraftAPI.getCreativeTab());
+        setCreativeTab(ModMinechem.minechemTab);
         setUnlocalizedName("name.chemistryUpgrade");
     }
 

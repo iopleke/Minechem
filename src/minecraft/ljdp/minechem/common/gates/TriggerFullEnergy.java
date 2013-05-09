@@ -25,4 +25,9 @@ public class TriggerFullEnergy extends MinechemTrigger {
 		return provider;
         
     }
+
+	@Override
+	public int getIconIndex() {
+		return 0;
+	}
 }
