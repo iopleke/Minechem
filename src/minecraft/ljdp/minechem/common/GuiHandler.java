@@ -44,10 +44,15 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
         if (tileEntity instanceof TileEntitySynthesis)
             return new ContainerSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof TileEntityFusion){
+        	player.sendChatToPlayer("Bob");
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
-        if (tileEntity instanceof TileEntityProxy)
-            return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        }
+        if (tileEntity instanceof TileEntityProxy){
+        	player.sendChatToPlayer("Bob");
+        	return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        }
+            
         if (tileEntity instanceof TileEntityBlueprintProjector)
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)

@@ -13,6 +13,8 @@ public class ItemMinechemRenderer implements IItemRenderer {
             return true;
         if (type == ItemRenderType.ENTITY)
             return true;
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+        	return true;
         return false;
     }
 

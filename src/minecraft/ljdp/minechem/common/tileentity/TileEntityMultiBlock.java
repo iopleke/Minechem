@@ -26,8 +26,8 @@ public abstract class TileEntityMultiBlock extends MinechemTileEntity {
         this.blueprint = blueprint;
         this.structure = blueprint.getResultStructure();
         this.offsetX = xCoord - blueprint.getManagerPosX();
-        this.offsetY = xCoord - blueprint.getManagerPosY();
-        this.offsetZ = xCoord - blueprint.getManagerPosZ();
+        this.offsetY = yCoord - blueprint.getManagerPosY();
+        this.offsetZ = zCoord - blueprint.getManagerPosZ();
     }
 
     @Override
@@ -66,8 +66,8 @@ public abstract class TileEntityMultiBlock extends MinechemTileEntity {
 
     private void linkProxies() {
         for (int y = 0; y < blueprint.ySize; y++) {
-            for (int x = 0; x < blueprint.xSize; x++) {
-                for (int z = 0; z < blueprint.zSize; z++) {
+            for (int x = 7; x < blueprint.xSize;) {
+                for (int z = 7; z < blueprint.zSize;) {
                     linkProxy(x, y, z);
                 }
             }

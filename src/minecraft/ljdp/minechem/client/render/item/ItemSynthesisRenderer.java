@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 public class ItemSynthesisRenderer extends ItemMinechemRenderer {
 
@@ -27,7 +28,11 @@ public class ItemSynthesisRenderer extends ItemMinechemRenderer {
         } else if (type == ItemRenderType.EQUIPPED) {
             GL11.glTranslatef(0.5F, 1.6F, 0.0F);
             GL11.glRotatef(180f, 0.1f, 0.0f, 1f);
-        } else {
+        } 
+        else if (type == ItemRenderType.EQUIPPED_FIRST_PERSON){
+        	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
+            GL11.glRotatef(180f, -1f, 0f, 1f);
+        }else {
             GL11.glTranslatef(0.0F, 1.0F, 0.0F);
             GL11.glRotatef(180f, 0f, 0f, 1f);
         }
