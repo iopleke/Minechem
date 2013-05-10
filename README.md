@@ -15,6 +15,6 @@ share alike - you must license any modification under the same or similar as thi
 For more information on this license see here: http://creativecommons.org/licenses/by-sa/3.0/
 
 
-https://dl.dropboxusercontent.com/u/21358129/MineChem3-Mid-Def.jpg
+http://universalelectricity.com/minechem
 
 This mod bought to you by the letter K and the Conspicuous Sea Cucumber.
