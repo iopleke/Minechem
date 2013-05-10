@@ -2,6 +2,7 @@ package ljdp.minechem.client.render.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 public class ItemMinechemRenderer implements IItemRenderer {
 

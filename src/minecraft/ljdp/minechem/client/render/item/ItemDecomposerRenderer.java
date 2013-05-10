@@ -21,21 +21,24 @@ public class ItemDecomposerRenderer extends ItemMinechemRenderer {
         String texture = ConstantValue.DECOMPOSER_MODEL_ON;
         GL11.glPushMatrix();
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.getTexture(texture));
-        if (type == ItemRenderType.ENTITY) {
-            GL11.glTranslatef(0.0F, 0.7f, 0.0F);
-            GL11.glRotatef(180f, 0f, 0f, 1f);
-            GL11.glScalef(0.5f, 0.5f, 0.5f);
-        } else if (type == ItemRenderType.EQUIPPED) {
-            GL11.glTranslatef(0.5F, 1.6F, 0.0F);
-            GL11.glRotatef(180f, -1f, 0f, 1f);
-        } 
-        else {
-            GL11.glTranslatef(0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(180f, 0f, 0f, 1f);
-        }
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON){
+        switch(type){
+        case EQUIPPED:
         	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
             GL11.glRotatef(180f, -1f, 0f, 1f);
+            break;
+        case EQUIPPED_FIRST_PERSON:
+        	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
+            GL11.glRotatef(180f, -1f, 0f, 1f);
+            break;
+        case INVENTORY:
+        	GL11.glTranslatef(0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(180f, 0f, 0f, 1f);
+            break;
+        case ENTITY:
+        	GL11.glTranslatef(0.0F, 0.7f, 0.0F);
+            GL11.glRotatef(180f, 0f, 0f, 1f);
+            GL11.glScalef(0.5f, 0.5f, 0.5f);
+            break;
         }
         
         model.render(0.0625F);
