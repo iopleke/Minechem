@@ -26,7 +26,7 @@ public class ItemSynthesisRenderer extends ItemMinechemRenderer {
         	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
             GL11.glRotatef(180f, -1f, 0f, 1f);
             break;
-        case EQUIPPED_FIRST_PERSON:
+        case EQUIPPED_FIRST_PERSON: stevenk:
         	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
             GL11.glRotatef(180f, -1f, 0f, 1f);
             break;
