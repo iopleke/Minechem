@@ -2,12 +2,11 @@ package ljdp.minechem.client.render.item;
 
 import ljdp.minechem.client.ModelSynthesizer;
 import ljdp.minechem.common.utils.ConstantValue;
+import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 public class ItemSynthesisRenderer extends ItemMinechemRenderer {
 
