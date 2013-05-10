@@ -9,12 +9,13 @@ public class ItemMinechemRenderer implements IItemRenderer {
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         if (type == ItemRenderType.EQUIPPED)
             return true;
+        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
+        	return true;
         if (type == ItemRenderType.INVENTORY)
             return true;
         if (type == ItemRenderType.ENTITY)
             return true;
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
-        	return true;
+        
         return false;
     }
 
