@@ -18,14 +18,16 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        if (type == ItemRenderType.INVENTORY)
+    	switch(type){
+        case EQUIPPED:
+        return true;
+        case EQUIPPED_FIRST_PERSON:
             return true;
-        if (type == ItemRenderType.EQUIPPED)
+        case INVENTORY:
             return true;
-        if (type == ItemRenderType.ENTITY)
+        case ENTITY:
             return true;
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
-        	return true;
+        }
         return false;
     }
 

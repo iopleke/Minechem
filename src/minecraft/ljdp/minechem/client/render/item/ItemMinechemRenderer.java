@@ -7,15 +7,16 @@ public class ItemMinechemRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        if (type == ItemRenderType.EQUIPPED)
+        switch(type){
+        case EQUIPPED:
+        return true;
+        case EQUIPPED_FIRST_PERSON:
             return true;
-        if (type == ItemRenderType.EQUIPPED_FIRST_PERSON)
-        	return true;
-        if (type == ItemRenderType.INVENTORY)
+        case INVENTORY:
             return true;
-        if (type == ItemRenderType.ENTITY)
+        case ENTITY:
             return true;
-        
+        }
         return false;
     }
 
