@@ -9,19 +9,21 @@ public class ItemMinechemRenderer implements IItemRenderer {
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         switch(type){
-        case EQUIPPED:
-            return true;
+        case EQUIPPED: {
+        return true;
         }
-        switch(type){
-        case EQUIPPED_FIRST_PERSON:
-            return true;
+        case EQUIPPED_FIRST_PERSON:{
+        	return true;
         }
-        switch(type){
-        case INVENTORY:
-            return true;
-        }switch(type){
-        case ENTITY:
-            return true;
+            
+        case INVENTORY:{
+        	return true;
+        }
+            
+        case ENTITY: {
+        	return true;
+        }
+            
         }
         return false;
     }
