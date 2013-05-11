@@ -74,7 +74,10 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
             GL11.glScalef(0.5f, 0.5f, 0.5f);
             return;
         }
-            
+        case EQUIPPED_FIRST_PERSON:{
+        	GL11.glTranslatef(0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(180f, 0f, 0f, 1f);
+        }
         }
         modelMicroscope.render(0.0625F);
         GL11.glPopMatrix();
