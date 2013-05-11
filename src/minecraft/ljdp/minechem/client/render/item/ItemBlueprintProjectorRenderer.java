@@ -25,21 +25,25 @@ public class ItemBlueprintProjectorRenderer extends ItemMinechemRenderer {
         case EQUIPPED: {
         	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
             GL11.glRotatef(180f, -1f, 0f, 1f);
+            return;
         }
         case EQUIPPED_FIRST_PERSON:{
         	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
             GL11.glRotatef(180f, -1f, 0f, 1f);
+            return;
         }
             
         case INVENTORY:{
         	GL11.glTranslatef(0.0F, 1.0F, 0.0F);
             GL11.glRotatef(180f, 0f, 0f, 1f);
+            return;
         }
             
         case ENTITY: {
         	GL11.glTranslatef(0.0F, 0.7f, 0.0F);
             GL11.glRotatef(180f, 0f, 0f, 1f);
             GL11.glScalef(0.5f, 0.5f, 0.5f);
+            return;
         }
             
         }
