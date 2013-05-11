@@ -11,7 +11,7 @@ public class ItemMinechemRenderer implements IItemRenderer {
         switch(type){
         case EQUIPPED:
         return true;
-        case EQUIPPED_FIRST_PERSON: stevenk:
+        case EQUIPPED_FIRST_PERSON:
             return true;
         case INVENTORY:
             return true;
