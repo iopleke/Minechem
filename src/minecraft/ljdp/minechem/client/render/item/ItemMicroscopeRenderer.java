@@ -22,9 +22,7 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
         case EQUIPPED: {
         return true;
         }
-        case EQUIPPED_FIRST_PERSON:{
-        	return true;
-        }
+        
             
         case INVENTORY:{
         	return true;
@@ -33,7 +31,9 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
         case ENTITY: {
         	return true;
         }
-            
+        case EQUIPPED_FIRST_PERSON:{
+        	return true;
+        }
         }
         return false;
     }
