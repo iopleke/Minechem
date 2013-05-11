@@ -10,11 +10,16 @@ public class ItemMinechemRenderer implements IItemRenderer {
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
         switch(type){
         case EQUIPPED:
-        return true;
+            return true;
+        }
+        switch(type){
         case EQUIPPED_FIRST_PERSON:
             return true;
+        }
+        switch(type){
         case INVENTORY:
             return true;
+        }switch(type){
         case ENTITY:
             return true;
         }
