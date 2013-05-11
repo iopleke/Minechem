@@ -27,11 +27,6 @@ public class ItemDecomposerRenderer extends ItemMinechemRenderer {
             GL11.glRotatef(180f, -1f, 0f, 1f);
             return;
         }
-        case EQUIPPED_FIRST_PERSON:{
-        	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
-            GL11.glRotatef(180f, -1f, 0f, 1f);
-            return;
-        }
             
         case INVENTORY:{
         	GL11.glTranslatef(0.0F, 1.0F, 0.0F);
