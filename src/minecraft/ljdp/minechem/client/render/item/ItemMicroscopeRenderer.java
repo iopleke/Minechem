@@ -55,28 +55,29 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
         GL11.glPushMatrix();
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.getTexture(texture));
         switch(type.ordinal()){
-        case 0: {
-        	GL11.glTranslatef(0.5F, 1.6F, 0.0F);
-            GL11.glRotatef(180f, -1f, 0f, 1f);
-            return;
+case 0: {
+        	
+        	
         }
-        case 1:{
-        	GL11.glTranslatef(0.0F, 1.0F, 0.0F);
-            GL11.glRotatef(180f, 0f, 0f, 1f);
-            return;
+        case 1: {
+        	
+        	GL11.glRotatef(2.0F, 0F, 0.0F, 0.0F);
+        	GL11.glTranslatef(0F, -0.5F, 0.5F);
         }
-            
         case 2: {
-        	GL11.glTranslatef(0.0F, 0.7f, 0.0F);
-            GL11.glRotatef(180f, 0f, 0f, 1f);
-            GL11.glScalef(0.5f, 0.5f, 0.5f);
-            return;
-        }
+        	GL11.glTranslatef(0.0F, 0.5F, 0.0F);
+        	GL11.glRotatef(-4.0F, 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef(2.0F, 1.0F, 0.0F, 0.0F);
+            GL11.glScalef(1F, 1F, 1F);
+        	        }
         case 3: {
         	GL11.glTranslatef(0.0F, 1.0F, 0.0F);
             GL11.glRotatef(180f, 0f, 0f, 1f);
         }
+        
         }
+        
+        
         modelMicroscope.render(0.0625F);
         GL11.glPopMatrix();
     }
