@@ -653,10 +653,6 @@ public class MinechemRecipes {
       } else if(var1.Name.contains("xychoriumLight")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
-		 
-	// { else if(var1.Name.contains("SlimeCrystal")) {
-    // DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Molecule(EnumMolecule.polyprop)}));
-    // SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 500, Chemical[]{new Molecule(EnumMolecule.polyprop)}));
 
      } else if(var1.Name.contains("ingotCobalt")) { // Tungsten - Cobalt Alloy
      DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2)}));
