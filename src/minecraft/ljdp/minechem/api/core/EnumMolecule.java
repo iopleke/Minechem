@@ -108,6 +108,8 @@ public enum EnumMolecule {
     stevenk(96, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
     weedex(97, "Aminocyclopyrachlor", new Element(C,8), new Element(H,8), new Element(Cl), new Element(N,3), new Element(O,2)),
     biocide(98, "Ptaquiloside", new Element(C, 20), new Element(H, 30), new Element(O, 8)),
+    xanax(99, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4)),
+
     public static EnumMolecule[] molecules = values();
     private final String descriptiveName;
     private final ArrayList<Chemical> components;
