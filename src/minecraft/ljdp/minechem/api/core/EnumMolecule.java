@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 // Na2OLi2O(SiO2)2(B2O3)3H2O
+
 // MOLECULE IDS MUST BE CONTINIOUS OTHERWISE THE ARRAY WILL BE MISALIGNED.
 public enum EnumMolecule {
     cellulose(0, "Cellulose", new Element(C, 6), new Element(H, 10), new Element(O, 5)),
