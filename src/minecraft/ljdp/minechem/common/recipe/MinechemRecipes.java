@@ -429,7 +429,7 @@ public class MinechemRecipes {
       ItemStack var137 = new ItemStack(Item.rottenFlesh);
       DecomposerRecipe.add(new DecomposerRecipeChance(var137, 0.05F, new Chemical[]{new Molecule(EnumMolecule.nod, 1)}));
       ItemStack var138 = new ItemStack(Block.tallGrass, 1, 2);
-      DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[]{new Molecule(EnumMolecule.pkone, 2)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[]{new Molecule(EnumMolecule.biocide, 2)}));
       ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
       DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[]{new Molecule(EnumMolecule.afroman, 2)}));
       this.addDecomposerRecipesFromMolecules();
