@@ -125,7 +125,7 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 5));
             break;
-        case theobromine: // Speed boost from coffie :D
+        case theobromine: // Speed boost
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 5, 1));
             break;
         case ret:
