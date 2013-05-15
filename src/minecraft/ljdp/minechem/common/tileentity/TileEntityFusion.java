@@ -61,7 +61,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 		super.updateEntity();
 		if(!completeStructure)
 			return;
-
 		shouldSendUpdatePacket = false;
 		if(!worldObj.isRemote && inventory[kStartFusionStar] != null 
 				&& energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
@@ -192,6 +191,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
         if (!completeStructure)
             return false;
+        
         return true;
     }
 

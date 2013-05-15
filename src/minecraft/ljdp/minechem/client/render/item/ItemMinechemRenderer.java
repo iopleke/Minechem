@@ -2,17 +2,28 @@ package ljdp.minechem.client.render.item;
 
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import net.minecraftforge.client.IItemRenderer.ItemRenderType;
 
 public class ItemMinechemRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        if (type == ItemRenderType.EQUIPPED)
-            return true;
-        if (type == ItemRenderType.INVENTORY)
-            return true;
-        if (type == ItemRenderType.ENTITY)
-            return true;
+        switch(type.ordinal()){
+        case 0: {
+        return true;
+        }
+            
+        case 1:{
+        	return true;
+        }
+            
+        case 2: {
+        	return true;
+        }
+        case 3: {
+        	return true;
+        }
+        }
         return false;
     }
 

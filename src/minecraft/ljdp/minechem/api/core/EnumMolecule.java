@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 // Na2OLi2O(SiO2)2(B2O3)3H2O
+
 // MOLECULE IDS MUST BE CONTINIOUS OTHERWISE THE ARRAY WILL BE MISALIGNED.
 public enum EnumMolecule {
     cellulose(0, "Cellulose", new Element(C, 6), new Element(H, 10), new Element(O, 5)),
@@ -77,7 +78,7 @@ public enum EnumMolecule {
     sucrose(66, "Sucrose", new Element(C, 12), new Element(H, 22), new Element(O, 11)),
     muscarine(67, "Muscarine", new Element(C, 9), new Element(H, 20), new Element(N), new Element(O, 2)),
     aluminiumOxide(68, "Aluminium Oxide", new Element(Al, 2), new Element(O, 3)),
-    fullrene(69, "Fullrene", new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
+    fullrene(69, "Carbon Nanotubes", new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
     keratin(70, "Keratin", new Element(C, 2), new Molecule(water), new Element(N)),
     penicillin(71, "Penicillin", new Element(C, 16), new Element(H, 18), new Element(N, 2), new Element(O, 4), new Element(S)),
     testosterone(72, "Testosterone", new Element(C, 19), new Element(H, 28), new Element(O, 2)),
@@ -91,31 +92,25 @@ public enum EnumMolecule {
     ddt(80, "DDT", new Element(C, 14), new Element(H, 9), new Element(Cl, 5)),
     dota(81, "DOTA", new Element(C, 16), new Element(H, 28), new Element(N, 4), new Element(O, 8)),
     poison(82, "T-2 Mycotoxin", new Element(C, 24), new Element(H, 34), new Element(O, 9)),
-    xanax(83, "Alprazolam", new Element(C, 17), new Element(H, 13), new Element(Cl), new Element(N, 4)),
-    pkone(84, "Minecraftolide A", new Element(C, 13), new Element(H, 23), new Element(O, 2), new Element(N, 2)),
-    pktwo(85, "Minecraftolide B", new Element(C, 14), new Element(H, 25), new Element(O, 2), new Element(N, 2)),
-    pkthree(86, "Minecraftolide A1", new Element(C, 13), new Element(H, 23), new Element(O, 2), new Element(N, 2), new Element(Cl, 1)),
-    pkfour(87, "Minecraftolide B1", new Element(C, 21), new Element(H, 30), new Element(O, 7), new Element(N, 2)),
-    salt(88, "Salt", new Element(Na, 1), new Element(Cl, 1)),
-    nhthree(89, "Ammonia", new Element(N, 1), new Element(H, 3)),
-    nod(90, "Nodularin", new Element(C, 41), new Element(H, 60), new Element(N, 8), new Element(O, 10)),
-    potato(91, "Digoxin", new Element(C, 41), new Element(H, 64), new Element(O, 14)),
-    ttx(92, "TTX (Tetrodotoxin)", new Element(C, 11), new Element(H, 11), new Element(N, 3), new Element(O, 8)),
-    afroman(93, "THC", new Element(C, 21), new Element(H, 30), new Element(O, 2)),
-    mt(94, "Methylcyclopentadienyl Manganese Tricarbonyl", new Element(C, 9), new Element(H, 7), new Element(Mn, 1), new Element(O, 3)), // Level 1
-    buli(95, "Tert-Butyllithium", new Element(Li, 1), new Element(C, 4), new Element(H, 9)), // Level 2
-    plat(96, "Chloroplatinic acid", new Element(H, 2), new Element(Pt, 1), new Element(Cl, 6)), // Level 3
-    phosgene(97, "Phosgene", new Element(C, 1), new Element(O, 1), new Element(Cl, 2)),
-    aalc(98, "Allyl alcohol", new Element(C, 3), new Element(H, 6), new Element(O, 1)),
-    hist(99, "Diphenhydramine", new Element(C, 17), new Element(H, 21), new Element(N), new Element(O)),
-    pal2(100, "Batrachotoxin", new Element(C, 31), new Element(H, 42), new Element(N, 2), new Element(O, 6)),
-    ret(101, "Retinol", new Element(C, 20), new Element(H, 30), new Element(O)),
-    stevenk(102, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
-    GaAs(103, "Gallium Arsenide", new Element(Ga), new Element(As)),
-	weedex(104, "Aminocyclopyrachlor", new Element(C,8), new Element(H,8), new Element(Cl), new Element(N,3), new Element(O,2)),
-    propy(105, "Propylene Monomer", new Element(C,3), new Element(H,8)),
-	polyprop(106, "Polypropylene", new Molecule(propy,10));
-	
+    salt(83, "Salt", new Element(Na, 1), new Element(Cl, 1)),
+    nhthree(84, "Ammonia", new Element(N, 1), new Element(H, 3)),
+    nod(85, "Nodularin", new Element(C, 41), new Element(H, 60), new Element(N, 8), new Element(O, 10)),
+    ttx(86, "TTX (Tetrodotoxin)", new Element(C, 11), new Element(H, 11), new Element(N, 3), new Element(O, 8)),
+    afroman(87, "THC", new Element(C, 21), new Element(H, 30), new Element(O, 2)),
+    mt(88, "Methylcyclopentadienyl Manganese Tricarbonyl", new Element(C, 9), new Element(H, 7), new Element(Mn, 1), new Element(O, 3)), // Level 1
+    buli(89, "Tert-Butyllithium", new Element(Li, 1), new Element(C, 4), new Element(H, 9)), // Level 2
+    plat(90, "Chloroplatinic acid", new Element(H, 2), new Element(Pt, 1), new Element(Cl, 6)), // Level 3
+    phosgene(91, "Phosgene", new Element(C, 1), new Element(O, 1), new Element(Cl, 2)),
+    aalc(92, "Allyl alcohol", new Element(C, 3), new Element(H, 6), new Element(O, 1)),
+    hist(93, "Diphenhydramine", new Element(C, 17), new Element(H, 21), new Element(N), new Element(O)),
+    pal2(94, "Batrachotoxin", new Element(C, 31), new Element(H, 42), new Element(N, 2), new Element(O, 6)),
+    ret(95, "Retinol", new Element(C, 20), new Element(H, 30), new Element(O)),
+    stevenk(96, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
+    weedex(97, "Aminocyclopyrachlor", new Element(C,8), new Element(H,8), new Element(Cl), new Element(N,3), new Element(O,2)),
+    biocide(98, "Ptaquiloside", new Element(C, 20), new Element(H, 30), new Element(O, 8)),
+    xanax(99, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4))
+    ;
+
     public static EnumMolecule[] molecules = values();
     private final String descriptiveName;
     private final ArrayList<Chemical> components;

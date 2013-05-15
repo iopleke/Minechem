@@ -50,7 +50,7 @@ public class ScheduledTickHandler implements IScheduledTickHandler {
             int effectType = stackTag.getInteger("minechem.effectType");
             EnumMolecule molecule = EnumMolecule.getById(effectType);
             if (isPoisoned) {
-                MinechemHelper.triggerPlayerEffect(molecule, entityPlayer);
+                Pharm.triggerPlayerEffect(molecule, entityPlayer);
                 entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
             }
         }

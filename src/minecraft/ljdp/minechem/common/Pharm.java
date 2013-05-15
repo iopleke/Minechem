@@ -1,12 +1,14 @@
 package ljdp.minechem.common;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
+
 import ljdp.minechem.api.core.EnumMolecule;
-import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
-import net.minecraft.entity.item.EntityItem;
+import ljdp.minechem.api.util.Constants;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
+import net.minecraft.util.DamageSource;
+import net.minecraft.world.World;
 public class Pharm {
  public static void triggerPlayerEffect(EnumMolecule molecule, EntityPlayer entityPlayer) {
         World world = entityPlayer.worldObj;
@@ -33,7 +35,7 @@ public class Pharm {
         case methamphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
             break;
-        case poison:
+        case poison: biocide: 
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             break;
         case ethanol:
@@ -88,16 +90,6 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 1));
             break;
-        case pkone: // Polyketides have many roles in medicine
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 4, 2));
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 4, 0));
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 4, 1));
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_SECOND * 30, 1));
-            break;
-        case pkthree:
-            break;
-        case pkfour:
-            break;
         case fingolimod:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
@@ -123,7 +115,7 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 5));
             break;
-        case theobromine: // Speed boost from coffie :D
+        case theobromine: // Speed boost
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 5, 1));
             break;
         case ret:

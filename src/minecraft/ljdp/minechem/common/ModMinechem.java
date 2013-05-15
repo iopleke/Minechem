@@ -19,6 +19,10 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
+
+import org.modstats.ModstatInfo;
+import org.modstats.Modstats;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -37,6 +41,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
+@ModstatInfo(prefix="minechem")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.MINECHEM_PACKET_CHANNEL }, packetHandler = PacketHandler.class)
 public class ModMinechem {
     @Instance("minechem")
@@ -84,6 +89,7 @@ public class ModMinechem {
         proxy.registerRenderers();
         System.out.println("[MineChem] INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
+        Modstats.instance().getReporter().registerMod(this);
     }
 
     @PostInit

@@ -429,7 +429,7 @@ public class MinechemRecipes {
       ItemStack var137 = new ItemStack(Item.rottenFlesh);
       DecomposerRecipe.add(new DecomposerRecipeChance(var137, 0.05F, new Chemical[]{new Molecule(EnumMolecule.nod, 1)}));
       ItemStack var138 = new ItemStack(Block.tallGrass, 1, 2);
-      DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[]{new Molecule(EnumMolecule.pkone, 2)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[]{new Molecule(EnumMolecule.biocide, 2)}));
       ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
       DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[]{new Molecule(EnumMolecule.afroman, 2)}));
       this.addDecomposerRecipesFromMolecules();
@@ -624,8 +624,8 @@ public class MinechemRecipes {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 2)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
       } else if(var1.Name.contains("gemApatite")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.F)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.F)}));
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl)}));
 //      } else if(var1.Name.contains("Iridium")) {
 //         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ir, 2)}));
 //         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ir, 2)}));
@@ -653,10 +653,6 @@ public class MinechemRecipes {
       } else if(var1.Name.contains("xychoriumLight")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
-		 
-	// { else if(var1.Name.contains("SlimeCrystal")) {
-    // DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{new Molecule(EnumMolecule.polyprop)}));
-    // SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 500, Chemical[]{new Molecule(EnumMolecule.polyprop)}));
 
      } else if(var1.Name.contains("ingotCobalt")) { // Tungsten - Cobalt Alloy
      DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2)}));
