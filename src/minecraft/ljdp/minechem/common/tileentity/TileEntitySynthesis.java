@@ -72,7 +72,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     private static final int MIN_ENERGY_RECIEVED = 30;
     private static final int MAX_ENERGY_RECIEVED = 200;
     private static final int MIN_ACTIVATION_ENERGY = 100;
-    private static final int MAX_ENERGY_STORED = 10000;
+    private static final int MAX_ENERGY_STORED = 900000;
 
     private boolean hasFullEnergy;
 
