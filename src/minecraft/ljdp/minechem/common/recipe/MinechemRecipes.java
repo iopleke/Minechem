@@ -80,6 +80,7 @@ public class MinechemRecipes {
       GameRegistry.addRecipe(new ItemStack(MinechemBlocks.chemicalStorage), new Object[]{"LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest)});
       GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{"ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick)});
       GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[]{new ItemStack(Item.book), new ItemStack(MinechemItems.testTube)});
+      GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.testTube), new Object[]{new ItemStack(MinechemItems.element)});
       GameRegistry.addRecipe(new RecipeJournalCloning());
       Element var21 = this.element(EnumElement.C, 64);
       //DecomposerRecipe.add(new DecomposerRecipe(var8, new Chemical[]{this.element(EnumElement.Fe, 4)}));
@@ -155,6 +156,9 @@ public class MinechemRecipes {
       DecomposerRecipe.add(new DecomposerRecipeChance(var37, 0.09F, new Chemical[]{this.molecule(EnumMolecule.fingolimod)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var33, 0.5F, new Chemical[]{this.molecule(EnumMolecule.arginine), this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.keratin)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var38, 0.25F, new Chemical[]{this.molecule(EnumMolecule.cellulose)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(new ItemStack(Block.sapling, 1, 1), 0.25F, new Chemical[]{this.molecule(EnumMolecule.cellulose)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(new ItemStack(Block.sapling, 1, 2), 0.25F, new Chemical[]{this.molecule(EnumMolecule.cellulose)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(new ItemStack(Block.sapling, 1, 3), 0.25F, new Chemical[]{this.molecule(EnumMolecule.cellulose)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var32, 0.25F, new Chemical[]{this.molecule(EnumMolecule.cellulose)}));
       SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.clay, 12), false, 100, new Chemical[]{this.molecule(EnumMolecule.kaolinite)}));
       SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.brick, 8), true, 400, new Chemical[]{this.molecule(EnumMolecule.kaolinite), this.molecule(EnumMolecule.kaolinite), null, this.molecule(EnumMolecule.kaolinite), this.molecule(EnumMolecule.kaolinite), null}));
@@ -255,6 +259,10 @@ public class MinechemRecipes {
       ItemStack var78 = new ItemStack(Item.doorWood);
       ItemStack var79 = new ItemStack(Block.pressurePlatePlanks, 1, -1);
       DecomposerRecipe.add(new DecomposerRecipeChance(var71, 0.5F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 8)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var74, 0.5F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 8)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var75, 0.5F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 8)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var76, 0.5F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 8)}));
+      DecomposerRecipe.add(new DecomposerRecipeChance(var77, 0.5F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 8)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var72, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var140, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
       DecomposerRecipe.add(new DecomposerRecipeChance(var141, 0.4F, new Chemical[]{this.molecule(EnumMolecule.cellulose, 2)}));
@@ -685,4 +693,3 @@ public class MinechemRecipes {
 
 }
 
-// octocat sucks shit
