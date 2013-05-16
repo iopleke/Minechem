@@ -3,7 +3,7 @@
   "modid": "minechem",
   "name": "MineChem",
   "description": "Chemical industry in Minecraft!",
-  "version": "3.x for MC 1.5.1",
+  "version": "@VERSION@",
   "credits": "Thanks to powercrystals for some textures",
   "logoFile": "/mods/minechem/logo.png",
   "mcversion": "1.5.2",
