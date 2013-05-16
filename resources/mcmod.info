@@ -4,14 +4,16 @@
   "name": "MineChem",
   "description": "Chemical industry in Minecraft!",
   "version": "3.x for MC 1.5.1",
-  "credits": "Thanks to powercrystals for some textures",
+  "credits": "",
   "logoFile": "/mods/Minechem/logo.png",
-  "mcversion": "",
+  "mcversion": "Thanks to powercrystals for some textures",
   "url": "http://universalelectricity.com/minechem",
   "updateUrl": "Please go to the #Minechem irc channel on Espernet",
-  "authors": ["See: http://universalelectricity.com/minechem/downloads"],
+  "authors": "See: http://universalelectricity.com/minechem/downloads",
   "parent":"",
   "screenshots": [],
-  "dependencies": ["mod_MinecraftForge"]
+  "dependencies": [
+     "mod_MinecraftForge"
+  ]
 }
 ]
