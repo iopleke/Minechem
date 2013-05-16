@@ -12,6 +12,8 @@ import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.RadiationInfo;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
+import mekanism.api.EnumGas;
+import mekanism.api.IStorageTank;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -26,7 +28,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemElement extends Item {
+public class ItemElement extends Item implements IStorageTank {
 
     private final static EnumElement[] elements = EnumElement.values();
     private final EnumMap<EnumClassification, Integer> classificationIndexes = new EnumMap<EnumClassification, Integer>(EnumClassification.class);
@@ -233,4 +235,82 @@ public class ItemElement extends Item {
         element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
     }
+
+    @Override
+    public int getGas(EnumGas type, Object... data) {
+        if (type == EnumGas.HYDROGEN || type == EnumGas.OXYGEN)
+            return Constants.GAS_PER_VIAL;
+        else return 0;
+    }
+
+    @Override
+    public void setGas(EnumGas type, int amount, Object... data) {
+        // Can't store gas here.
+    }
+
+    @Override
+    public int getMaxGas(EnumGas type, Object... data) {
+        if (type == EnumGas.HYDROGEN || type == EnumGas.OXYGEN)
+            return Constants.GAS_PER_VIAL;
+        else return 0;
+    }
+
+    @Override
+    public int getRate() {
+        return Constants.GAS_PER_VIAL;
+    }
+
+    @Override
+    public int addGas(ItemStack itemstack, EnumGas type, int amount) {
+        return amount;
+    }
+
+    @Override
+    public int removeGas(ItemStack itemstack, EnumGas type, int amount) {
+        if (!canProvideGas(itemstack, type))
+            return 0;
+        int usedItems = Math.min(amount / Constants.GAS_PER_VIAL, itemstack.stackSize);
+        itemstack.stackSize -= usedItems;
+        if (itemstack.stackSize < 0)
+        {
+            itemstack.stackSize = 0;
+            itemstack.itemID = 0;
+        }
+        
+        return usedItems * Constants.GAS_PER_VIAL;
+    }
+
+    @Override
+    public boolean canReceiveGas(ItemStack itemstack, EnumGas type) {
+        return false;
+    }
+
+    @Override
+    public boolean canProvideGas(ItemStack itemstack, EnumGas type) {
+        EnumElement element = ItemElement.getElement(itemstack);
+        if (element == EnumElement.H && type == EnumGas.HYDROGEN)
+            return true;
+        if (element == EnumElement.O && type == EnumGas.OXYGEN)
+            return true;
+        return false;
+    }
+
+    @Override
+    public EnumGas getGasType(ItemStack itemstack) {
+        EnumElement element = ItemElement.getElement(itemstack);
+        if (element == EnumElement.H)
+            return EnumGas.HYDROGEN;
+
+        if (element == EnumElement.O)
+            return EnumGas.OXYGEN;
+        
+        return null;
+    }
+
+    @Override
+    public void setGasType(ItemStack itemstack, EnumGas type) {
+        // Can't set gas type.
+    }
+
+
 }
