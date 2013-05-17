@@ -272,10 +272,7 @@ public class ItemElement extends Item implements IStorageTank {
         int usedItems = Math.min(amount / Constants.GAS_PER_VIAL, itemstack.stackSize);
         itemstack.stackSize -= usedItems;
         if (itemstack.stackSize < 0)
-        {
             itemstack.stackSize = 0;
-            itemstack.itemID = 0;
-        }
         
         return usedItems * Constants.GAS_PER_VIAL;
     }
