@@ -126,6 +126,12 @@ public class Pharm {
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
 		break; 
+		case redrocks:
+	        entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
+                entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+                entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 30, 5));
+            
+	        break; 
         default:
             entityPlayer.attackEntityFrom(DamageSource.generic, 5);
             break;
