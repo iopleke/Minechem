@@ -110,7 +110,7 @@ public enum EnumMolecule {
     biocide(98, "Ptaquiloside", new Element(C, 20), new Element(H, 30), new Element(O, 8)),
     xanax(99, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4)),
     hcl(100, "Hydrogen Chloride", new Element(H), new Element(Cl)),
-    redrocks(101, "Cocaine - Freebase", new Element(C,17), new Element(H,21), new element(N), new Element(O,4)),
+    redrocks(101, "Cocaine - Freebase", new Element(C,17), new Element(H,21), new Element(N), new Element(O,4)),
     coke(102, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl))
     ;
 
