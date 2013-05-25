@@ -5,6 +5,7 @@ import java.util.LinkedList;
 
 import universalelectricity.core.electricity.ElectricityPack;
 
+import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.util.Constants;
 import ljdp.minechem.api.util.Util;
@@ -150,8 +151,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     private void decomposeActiveStack() {
         ItemStack inputStack = getActiveStack();
         DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
-        if (recipe != null && recipe.getOutput() != null) {
-            ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutput());
+        ArrayList<Chemical> output = recipe.getOutput();
+        if (recipe != null && output != null) {
+            ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
             placeStacksInBuffer(stacks);
         }
     }
