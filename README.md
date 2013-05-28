@@ -18,3 +18,5 @@ For more information on this license see here: http://creativecommons.org/licens
 http://universalelectricity.com/minechem
 
 This mod bought to you by the letter K and the Conspicuous Sea Cucumber.
+
+WTF IS A DETACHED HEAD!!!!!
