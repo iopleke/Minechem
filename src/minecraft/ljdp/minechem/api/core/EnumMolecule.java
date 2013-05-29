@@ -4,6 +4,8 @@ import static ljdp.minechem.api.core.EnumElement.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+import ljdp.minechem.api.recipe.DecomposerRecipe;
+import ljdp.minechem.api.recipe.SynthesisRecipe;
 
 // Na2OLi2O(SiO2)2(B2O3)3H2O
 
@@ -112,6 +114,9 @@ public enum EnumMolecule {
     hcl(100, "Hydrogen Chloride", new Element(H), new Element(Cl)),
     redrocks(101, "Cocaine - Freebase", new Element(C,17), new Element(H,21), new Element(N), new Element(O,4)),
     coke(102, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl))
+    blueorgodye(103, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
+    redorgodye(104, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
+    purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7))
     ;
 
     public static EnumMolecule[] molecules = values();

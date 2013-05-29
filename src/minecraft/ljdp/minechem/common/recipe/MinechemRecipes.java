@@ -666,7 +666,39 @@ public class MinechemRecipes {
      DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2)}));
      SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 7000, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2)}));
    } 
+   else if(var1.Name.contains("cropMaloberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.stevenk), this.molecule(EnumMolecule.sucrose)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.stevenk), this.molecule(EnumMolecule.sucrose)}));
    }
+   else if(var1.Name.contains("cropDuskberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.psilocybin), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.psilocybin), this.element(EnumElement.S, 2)}));
+   }
+   
+   else if(var1.Name.contains("cropSkyberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.theobromine), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.theobromine), this.element(EnumElement.S, 2)}));
+   }
+   
+   else if(var1.Name.contains("cropBlightberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.quinine), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.quinine), this.element(EnumElement.S, 2)}));
+   }
+      
+   else if(var1.Name.contains("cropBlueberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.blueorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.blueorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+   }   
+   else if(var1.Name.contains("cropRaspberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.redorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.redorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+   }   
+   else if(var1.Name.contains("cropBlackberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+   }   
+   // cropStingberry   
+   } 
    private Element element(EnumElement var1, int var2) {
       return new Element(var1, var2);
    }
