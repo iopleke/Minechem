@@ -6,7 +6,7 @@ public enum EnumClassification {
     halogen("Halogen"),
     alkaliMetal("Alkali metal"),
     alkalineEarthMetal("Alkaline earth metal"),
-    semimetallic("Semimetallic"),
+    semimetallic("Metalloid"), // Yes this is the proper name!
     otherMetal("Other metal"),
     transitionMetal("Transition metal"),
     lanthanide("Lanthanide"),

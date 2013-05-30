@@ -1,7 +1,9 @@
-MineChem Offical!
+MINECHEM MAIN REPO 
+
+THIS IS THE MOST UPDATED VERSION OF MINECHEM! 
 
 
-License
+License:
 
 Minechem v3.x is licensed under Creative Commons Attribution-ShareAlike 3.0 Unported. You are free:
 

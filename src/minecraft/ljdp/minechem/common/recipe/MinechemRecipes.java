@@ -545,161 +545,207 @@ public class MinechemRecipes {
                 }
             }
         }
+   }
 
-    }
+   private ItemStack createPoisonedItemStack(Item var1, int var2, EnumMolecule var3) {
+      ItemStack var4 = new ItemStack(MinechemItems.molecule, 1, var3.id());
+      ItemStack var5 = new ItemStack(var1, 1, var2);
+      ItemStack var6 = new ItemStack(var1, 1, var2);
+      NBTTagCompound var7 = new NBTTagCompound();
+      var7.setBoolean("minechem.isPoisoned", true);
+      var7.setInteger("minechem.effectType", var3.id());
+      var6.setTagCompound(var7);
+      GameRegistry.addShapelessRecipe(var6, new Object[]{var4, var5});
+      return var6;
+   }
 
-    private ItemStack createPoisonedItemStack(Item var1, int var2, EnumMolecule var3) {
-        ItemStack var4 = new ItemStack(MinechemItems.molecule, 1, var3.id());
-        ItemStack var5 = new ItemStack(var1, 1, var2);
-        ItemStack var6 = new ItemStack(var1, 1, var2);
-        NBTTagCompound var7 = new NBTTagCompound();
-        var7.setBoolean("minechem.isPoisoned", true);
-        var7.setInteger("minechem.effectType", var3.id());
-        var6.setTagCompound(var7);
-        GameRegistry.addShapelessRecipe(var6, new Object[] { var4, var5 });
-        return var6;
-    }
+   private void registerPoisonRecipes(EnumMolecule var1) {
+      this.createPoisonedItemStack(Item.appleRed, 0, var1);
+      this.createPoisonedItemStack(Item.porkCooked, 0, var1);
+      this.createPoisonedItemStack(Item.beefCooked, 0, var1);
+      this.createPoisonedItemStack(Item.carrot, 0, var1);
+      this.createPoisonedItemStack(Item.bakedPotato, 0, var1);
+      this.createPoisonedItemStack(Item.bread, 0, var1);
+      this.createPoisonedItemStack(Item.potato, 0, var1);
+      this.createPoisonedItemStack(Item.bucketMilk, 0, var1);
+      this.createPoisonedItemStack(Item.fishCooked, 0, var1);
+      this.createPoisonedItemStack(Item.cookie, 0, var1);
+      this.createPoisonedItemStack(Item.pumpkinPie, 0, var1);
+   }
 
-    private void registerPoisonRecipes(EnumMolecule var1) {
-        this.createPoisonedItemStack(Item.appleRed, 0, var1);
-        this.createPoisonedItemStack(Item.porkCooked, 0, var1);
-        this.createPoisonedItemStack(Item.beefCooked, 0, var1);
-        this.createPoisonedItemStack(Item.carrot, 0, var1);
-        this.createPoisonedItemStack(Item.bakedPotato, 0, var1);
-        this.createPoisonedItemStack(Item.bread, 0, var1);
-        this.createPoisonedItemStack(Item.potato, 0, var1);
-        this.createPoisonedItemStack(Item.bucketMilk, 0, var1);
-        this.createPoisonedItemStack(Item.fishCooked, 0, var1);
-        this.createPoisonedItemStack(Item.cookie, 0, var1);
-        this.createPoisonedItemStack(Item.pumpkinPie, 0, var1);
-    }
+   @ForgeSubscribe
+   public void oreEvent(OreDictionary.OreRegisterEvent var1) {
+	   String[] compounds = {"Aluminium","Titanium","Chrome",   
+		               "Tungsten", "Lead",    "Zinc",
+		               "Platinum", "Nickel",  "Osmium",
+		               "Iron",     "Gold",    "Coal",
+		               "Copper",   "Tin",     "Silver",
+		               "RefinedIron",
+		               "Steel",
+		               "Bronze",   "Brass",   "Electrum",
+		               "Invar"};//,"Iridium"};
+		
+		EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr}, 
+		 					   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn}, 
+		 					   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os}, 
+		 					   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C}, 
+		 					   {EnumElement.Cu}, {EnumElement.Sn}, {EnumElement.Ag},
+		 					   {EnumElement.Fe},
+		 					   {EnumElement.Fe, EnumElement.C},		//Steel
+		 					   {EnumElement.Sn, EnumElement.Cu},
+		 					   {EnumElement.Cu},//Bronze
+					               {EnumElement.Zn, EnumElement.Cu},	//Brass
+					               {EnumElement.Ag, EnumElement.Au},	//Electrum
+					               {EnumElement.Fe, EnumElement.Ni}		//Invar
+					               };//, EnumElement.Ir
+		
+		int[][] proportions      = {{4},{4},{4},
+		 					   {4},{4},{4},
+		 					   {4},{4},{4},
+		 					   {4},{4},{4},
+		 					   {4},{4},{4},
+		 					   {4},
+		 					   {4,4},
+		 					   {1,3},{1,3},{2,2},{2,1}};
+		
+		String[]  itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate"
+		boolean[] craftable = {true, true, false, false, false, false, false};
+		int[] 	 sizeCoeff = {1, 4, 8, 4, 36, 16, 4};
+		
+		for (int i=0; i<compounds.length; i++){
+		for (int j=0; j<itemTypes.length; j++){
+			if(var1.Name.equals(itemTypes[j]+compounds[i])){
+				System.out.print("Adding recipe for " + itemTypes[j] + compounds[i]);
+				List<Chemical> _elems = new ArrayList<Chemical>();
+				
+				for (int k=0; k<elements[i].length; k++){
+					_elems.add(this.element(elements[i][k], proportions[i][k]*sizeCoeff[j]));
+				}
+				
+				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, _elems.toArray(new Chemical[_elems.size()])));
+				
+				if(compounds[i].equals("Iron") && itemTypes[j].equals("dust")){
+				      SynthesisRecipe.recipes.remove(recipeIron);
+				}
+				if(compounds[i].equals("Gold") && itemTypes[j].equals("dust")){
+				      SynthesisRecipe.recipes.remove(recipeGold);
+				}
+				
+				if(compounds[i].equals("Coal") && itemTypes[j].equals("dust")){
+					SynthesisRecipe.remove(new ItemStack(Item.coal));
+					SynthesisRecipe.remove(new ItemStack(Block.oreCoal));
+					
+					SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.coal), true, 2000, new Chemical[]{this.element(EnumElement.C,4), null, this.element(EnumElement.C,4), 
+						                                                                                         null, null, null, 
+						                                                                                         this.element(EnumElement.C,4), null, this.element(EnumElement.C,4)}));
+					
+				}					
+				
+				if (craftable[j]){
+					SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000*sizeCoeff[j], _elems.toArray(new Chemical[_elems.size()])));
+				}
+				return;					
+				
+				}
+			}
+		}	  
+      if(var1.Name.contains("uraniumOre")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 4)}));
+      } else if(var1.Name.contains("uraniumIngot")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 2)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
+      } else if(var1.Name.contains("itemDropUranium")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 2)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
+      } else if(var1.Name.contains("gemApatite")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl)}));
+//      } else if(var1.Name.contains("Iridium")) {
+//         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ir, 2)}));
+//         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Ir, 2)}));
+      } else if(var1.Name.contains("Ruby")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr)}));
+      } else if(var1.Name.contains("Sapphire")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide, 2)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide, 2)}));
+      } else if(var1.Name.contains("plateSilicon")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Si, 2)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Si, 2)}));
+      } else if(var1.Name.contains("xychoriumBlue")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Cu, 1)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Cu, 1)}));
+      } else if(var1.Name.contains("xychoriumRed")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Fe, 1)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Fe, 1)}));
+      } else if(var1.Name.contains("xychoriumGreen")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.V, 1)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.V, 1)}));
+      } else if(var1.Name.contains("xychoriumDark")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Si, 1)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Si, 1)}));
+      } else if(var1.Name.contains("xychoriumLight")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[]{this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1)}));
 
-    @ForgeSubscribe
-    public void oreEvent(OreDictionary.OreRegisterEvent var1) {
-        String[] compounds = { "Aluminium", "Titanium", "Chrome", "Tungsten", "Lead", "Zinc", "Platinum", "Nickel", "Osmium", "Iron", "Gold", "Coal", "Copper", "Tin", "Silver", "RefinedIron", "Steel", "Bronze", "Brass", "Electrum", "Invar" };// ,"Iridium"};
+     } else if(var1.Name.contains("ingotCobalt")) { // Tungsten - Cobalt Alloy
+     DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2)}));
+     SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2)}));
+	
+	} else if(var1.Name.contains("ingotArdite")) { // Tungsten - Iron - Silicon Alloy
+     DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2)}));
+     SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2)}));
+	
+	} else if(var1.Name.contains("ingotManyullyn")) { // Tungsten - Iron - Silicon - Cobalt Alloy
+     DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2)}));
+     SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 7000, new Chemical[]{this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2)}));
+   } 
+   else if(var1.Name.contains("cropMaloberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.stevenk), this.molecule(EnumMolecule.sucrose)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.stevenk), this.molecule(EnumMolecule.sucrose)}));
+   }
+   else if(var1.Name.contains("cropDuskberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.psilocybin), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.psilocybin), this.element(EnumElement.S, 2)}));
+   }
+   
+   else if(var1.Name.contains("cropSkyberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.theobromine), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.theobromine), this.element(EnumElement.S, 2)}));
+   }
+   
+   else if(var1.Name.contains("cropBlightberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.quinine), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.quinine), this.element(EnumElement.S, 2)}));
+   }
+      
+   else if(var1.Name.contains("cropBlueberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.blueorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.blueorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+   }   
+   else if(var1.Name.contains("cropRaspberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.redorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.redorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+   }   
+   else if(var1.Name.contains("cropBlackberry")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
+   }   
+   // cropStingberry   
+   } 
+   private Element element(EnumElement var1, int var2) {
+      return new Element(var1, var2);
+   }
 
-        EnumElement[][] elements = { { EnumElement.Al }, { EnumElement.Ti }, { EnumElement.Cr }, { EnumElement.W }, { EnumElement.Pb }, { EnumElement.Zn }, { EnumElement.Pt }, { EnumElement.Ni }, { EnumElement.Os }, { EnumElement.Fe }, { EnumElement.Au }, { EnumElement.C }, { EnumElement.Cu }, { EnumElement.Sn }, { EnumElement.Ag }, { EnumElement.Fe }, { EnumElement.Fe, EnumElement.C }, // Steel
-                { EnumElement.Sn, EnumElement.Cu }, { EnumElement.Cu },// Bronze
-                { EnumElement.Zn, EnumElement.Cu }, // Brass
-                { EnumElement.Ag, EnumElement.Au }, // Electrum
-                { EnumElement.Fe, EnumElement.Ni } // Invar
-        };// , EnumElement.Ir
+   private Element element(EnumElement var1) {
+      return new Element(var1, 1);
+   }
 
-        int[][] proportions = { { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4 }, { 4, 4 }, { 1, 3 }, { 1, 3 }, { 2, 2 }, { 2, 1 } };
+   private Molecule molecule(EnumMolecule var1, int var2) {
+      return new Molecule(var1, var2);
+   }
 
-        String[] itemTypes = { "dustSmall", "dust", "ore", "ingot", "block", "gear", "plate" }; // "nugget",
-                                                                                                // "plate"
-        boolean[] craftable = { true, true, false, false, false, false, false };
-        int[] sizeCoeff = { 1, 4, 8, 4, 36, 16, 4 };
-
-        for (int i = 0; i < compounds.length; i++) {
-            for (int j = 0; j < itemTypes.length; j++) {
-                if (var1.Name.equals(itemTypes[j] + compounds[i])) {
-                    System.out.print("Adding recipe for " + itemTypes[j] + compounds[i]);
-                    List<Chemical> _elems = new ArrayList<Chemical>();
-
-                    for (int k = 0; k < elements[i].length; k++) {
-                        _elems.add(this.element(elements[i][k], proportions[i][k] * sizeCoeff[j]));
-                    }
-
-                    DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, _elems.toArray(new Chemical[_elems.size()])));
-
-                    if (compounds[i].equals("Iron") && itemTypes[j].equals("dust")) {
-                        SynthesisRecipe.recipes.remove(recipeIron);
-                    }
-                    if (compounds[i].equals("Gold") && itemTypes[j].equals("dust")) {
-                        SynthesisRecipe.recipes.remove(recipeGold);
-                    }
-
-                    if (compounds[i].equals("Coal") && itemTypes[j].equals("dust")) {
-                        SynthesisRecipe.remove(new ItemStack(Item.coal));
-                        SynthesisRecipe.remove(new ItemStack(Block.oreCoal));
-
-                        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.coal), true, 2000, new Chemical[] { this.element(EnumElement.C, 4), null, this.element(EnumElement.C, 4), null, null, null, this.element(EnumElement.C, 4), null, this.element(EnumElement.C, 4) }));
-
-                    }
-
-                    if (craftable[j]) {
-                        SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000 * sizeCoeff[j], _elems.toArray(new Chemical[_elems.size()])));
-                    }
-                    return;
-
-                }
-            }
-        }
-        if (var1.Name.contains("uraniumOre")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.U, 4) }));
-        } else if (var1.Name.contains("uraniumIngot")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.U, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[] { this.element(EnumElement.U, 2) }));
-        } else if (var1.Name.contains("itemDropUranium")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.U, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[] { this.element(EnumElement.U, 2) }));
-        } else if (var1.Name.contains("gemApatite")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[] { this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl) }));
-            // } else if(var1.Name.contains("Iridium")) {
-            // DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new
-            // Chemical[]{this.element(EnumElement.Ir, 2)}));
-            // SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
-            // new Chemical[]{this.element(EnumElement.Ir, 2)}));
-        } else if (var1.Name.contains("Ruby")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr) }));
-        } else if (var1.Name.contains("Sapphire")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide, 2) }));
-        } else if (var1.Name.contains("plateSilicon")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Si, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[] { this.element(EnumElement.Si, 2) }));
-        } else if (var1.Name.contains("xychoriumBlue")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Cu, 1) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Cu, 1) }));
-        } else if (var1.Name.contains("xychoriumRed")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Fe, 1) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Fe, 1) }));
-        } else if (var1.Name.contains("xychoriumGreen")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.V, 1) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.V, 1) }));
-        } else if (var1.Name.contains("xychoriumDark")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Si, 1) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Si, 1) }));
-        } else if (var1.Name.contains("xychoriumLight")) {
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new Chemical[] { this.element(EnumElement.Zr, 2), this.element(EnumElement.Ti, 1) }));
-
-        } else if (var1.Name.contains("ingotCobalt")) { // Tungsten - Cobalt
-                                                        // Alloy
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[] { this.element(EnumElement.Co, 2), this.element(EnumElement.W, 2) }));
-
-        } else if (var1.Name.contains("ingotArdite")) { // Tungsten - Iron -
-                                                        // Silicon Alloy
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[] { this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2) }));
-
-        } else if (var1.Name.contains("ingotManyullyn")) { // Tungsten - Iron -
-                                                           // Silicon - Cobalt
-                                                           // Alloy
-            DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2) }));
-            SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 7000, new Chemical[] { this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2), this.element(EnumElement.Co, 2) }));
-        }
-    }
-
-    private Element element(EnumElement var1, int var2) {
-        return new Element(var1, var2);
-    }
-
-    private Element element(EnumElement var1) {
-        return new Element(var1, 1);
-    }
-
-    private Molecule molecule(EnumMolecule var1, int var2) {
-        return new Molecule(var1, var2);
-    }
-
-    private Molecule molecule(EnumMolecule var1) {
-        return new Molecule(var1, 1);
-    }
-
+   private Molecule molecule(EnumMolecule var1) {
+      return new Molecule(var1, 1);
+   }
 }
