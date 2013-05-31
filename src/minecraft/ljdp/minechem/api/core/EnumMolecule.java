@@ -113,7 +113,7 @@ public enum EnumMolecule {
     xanax(99, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4)),
     hcl(100, "Hydrogen Chloride", new Element(H), new Element(Cl)),
     redrocks(101, "Cocaine - Freebase", new Element(C,17), new Element(H,21), new Element(N), new Element(O,4)),
-    coke(102, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl))
+    coke(102, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl)),
     blueorgodye(103, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
     redorgodye(104, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
     purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7))
