@@ -370,8 +370,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     /* INEIGuiHandler */
     @Override
     public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility) {
-        currentVisibility.showItemPanel = false;
-        currentVisibility.showItemSection = false;
+        currentVisibility.showItemPanel = true;
+        currentVisibility.showItemSection = true;
         /*
          * UNCOMMENT ME WHEN TUTORIAL TABS ARE COMPLETED!
          */

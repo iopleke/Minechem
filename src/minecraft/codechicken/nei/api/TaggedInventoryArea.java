@@ -37,13 +37,8 @@ public class TaggedInventoryArea
     public ItemStack getStackInSlot(int i)
     {
         if(inventory != null)
-        {
             return inventory.getStackInSlot(i);
-        }
-        else
-        {
-            return container.getSlot(i).getStack();
-        }
+        return container.getSlot(i).getStack();
     }
     
     public boolean isContainer()
