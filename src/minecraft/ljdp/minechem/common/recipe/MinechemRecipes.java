@@ -313,7 +313,7 @@ public class MinechemRecipes {
         ItemStack var89 = new ItemStack(Item.dyePowder, 1, 8);
         ItemStack var90 = new ItemStack(Item.dyePowder, 1, 9);
         ItemStack var91 = new ItemStack(Item.dyePowder, 1, 10);
-        ItemStack var92 = new ItemStack(Item.dyePowder, 1, 11);
+        ItemStack var92 = new ItemStack(Item.dyePowder, 1, 11); 
         ItemStack var93 = new ItemStack(Item.dyePowder, 1, 12);
         ItemStack var94 = new ItemStack(Item.dyePowder, 1, 13);
         ItemStack var95 = new ItemStack(Item.dyePowder, 1, 14);
@@ -426,7 +426,7 @@ public class MinechemRecipes {
         ItemStack var124 = new ItemStack(Block.mushroomRed);
         ItemStack var125 = new ItemStack(Block.cactus);
         DecomposerRecipe.add(new DecomposerRecipe(var123, new Chemical[] { this.molecule(EnumMolecule.psilocybin), this.molecule(EnumMolecule.water, 2) }));
-        DecomposerRecipe.add(new DecomposerRecipe(var124, new Chemical[] { this.molecule(EnumMolecule.muscarine), this.molecule(EnumMolecule.water, 2) }));
+        DecomposerRecipe.add(new DecomposerRecipe(var124, new Chemical[] { this.molecule(EnumMolecule.pantherine), this.molecule(EnumMolecule.water, 2) }));
         DecomposerRecipe.add(new DecomposerRecipe(var125, new Chemical[] { this.molecule(EnumMolecule.mescaline), this.molecule(EnumMolecule.water, 20) }));
         SynthesisRecipe.add(new SynthesisRecipe(var125, true, 200, new Chemical[] { this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.mescaline), null, this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.water, 5) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var13, 0.8F, new Chemical[] { this.molecule(EnumMolecule.iron3oxide, 6), this.molecule(EnumMolecule.strontiumNitrate, 6) }));
@@ -475,7 +475,7 @@ public class MinechemRecipes {
         this.registerPoisonRecipes(EnumMolecule.psilocybin);
         this.registerPoisonRecipes(EnumMolecule.methamphetamine);
         this.registerPoisonRecipes(EnumMolecule.amphetamine);
-        this.registerPoisonRecipes(EnumMolecule.muscarine);
+        this.registerPoisonRecipes(EnumMolecule.pantherine);
         this.registerPoisonRecipes(EnumMolecule.ethanol);
         this.registerPoisonRecipes(EnumMolecule.penicillin);
         this.registerPoisonRecipes(EnumMolecule.testosterone);
