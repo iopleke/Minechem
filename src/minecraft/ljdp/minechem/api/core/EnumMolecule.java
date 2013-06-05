@@ -78,7 +78,7 @@ public enum EnumMolecule {
     theobromine(64, "Theobromine", new Element(C, 7), new Element(H, 8), new Element(N, 4), new Element(O, 2)),
     starch(65, "Starch", new Molecule(cellulose, 2), new Molecule(cellulose, 1)),
     sucrose(66, "Sucrose", new Element(C, 12), new Element(H, 22), new Element(O, 11)),
-    pantherine(67, "Muscarine", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)), //LJDP you fail! There is not enought muscarine in a shroom to cause harm! The main active chemical is Muscimol (Pantherine). This chemical is similar to benzodiazapines! 
+    pantherine(67, "Pantherine (Muscimol) ", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)), //LJDP you fail! There is not enought muscarine in a shroom to cause harm! The main active chemical is Muscimol (Pantherine). This chemical is similar to benzodiazapines! 
     aluminiumOxide(68, "Aluminium Oxide", new Element(Al, 2), new Element(O, 3)),
     fullrene(69, "Carbon Nanotubes", new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
     keratin(70, "Keratin", new Element(C, 2), new Molecule(water), new Element(N)),
