@@ -2,7 +2,7 @@ package biomesoplenty.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import biomesoplenty.api.Blocks;
+// import biomesoplenty.api.Blocks;
 import com.google.common.base.Optional;
 
 public class BlockReferences {
