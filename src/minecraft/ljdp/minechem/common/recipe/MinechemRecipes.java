@@ -40,7 +40,7 @@ public class MinechemRecipes {
     public static MinechemRecipes getInstance() {
         return instance;
     }
-
+	
     public void RegisterRecipes() {
         ItemStack var1 = new ItemStack(Block.stone);
         new ItemStack(Block.cobblestone);
@@ -649,6 +649,8 @@ public class MinechemRecipes {
 				}
 			}
 		}	  
+		
+	 // BEGIN ORE DICTONARY BULLSHIT
       if(var1.Name.contains("uraniumOre")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 4)}));
       } else if(var1.Name.contains("uraniumIngot")) {
@@ -734,6 +736,8 @@ public class MinechemRecipes {
    // cropStingberry   
    // Need to add support for BOP
    } 
+   // END 
+   // BEGIN MISC FUNCTIONS
    private Element element(EnumElement var1, int var2) {
       return new Element(var1, var2);
    }
@@ -749,4 +753,5 @@ public class MinechemRecipes {
    private Molecule molecule(EnumMolecule var1) {
       return new Molecule(var1, 1);
    }
-}
+   // END
+} // EOF
