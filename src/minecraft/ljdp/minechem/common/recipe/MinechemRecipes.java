@@ -26,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary; 
+import biomesoplenty.api.BlockReferences; 
 public class MinechemRecipes {
 
     private static final MinechemRecipes instance = new MinechemRecipes();
