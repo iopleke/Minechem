@@ -25,8 +25,9 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.oredict.OreDictionary;
-
+import net.minecraftforge.oredict.OreDictionary; 
+import biomesoplenty.api.BlockReference; // BOP Inferface Layer 
+import biomesoplenty.api.Items; // BOP Inferface Layer 
 public class MinechemRecipes {
 
     private static final MinechemRecipes instance = new MinechemRecipes();
@@ -467,6 +468,10 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[] { new Molecule(EnumMolecule.biocide, 2) }));
         ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
+        //
+        // BOP CHEMICAL PROCESSING SECTION
+        
+        // END 
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
