@@ -470,17 +470,17 @@ public class MinechemRecipes {
         //
         // BOP CHEMICAL PROCESSING SECTION
         // BlockReferences.getBlockItemStack("darkLog")
-		ItemStack A = new ItemStack(BlockReferences.getBlockItemStack("algae"))
+		ItemStack A = new ItemStack(BlockReferences.getBlockItemStack("algae"));
 		DecomposerRecipe.add(new DecomposerRecipeChance(A, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
-		ItemStack B = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")) // THE BLUE ONES FUCK YOU UP BAD!
+		ItemStack B = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")); // THE BLUE ONES FUCK YOU UP BAD!
 		DecomposerRecipe.add(new DecomposerRecipe(B, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
-        ItemStack C = new ItemStack(BlockReferences.getBlockItemStack("toadstool"))
+        ItemStack C = new ItemStack(BlockReferences.getBlockItemStack("toadstool"));
 		DecomposerRecipe.add(new DecomposerRecipeChance(C, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
-		ItemStack D = new ItemStack(BlockReferences.getBlockItemStack("willowLog"))
+		ItemStack D = new ItemStack(BlockReferences.getBlockItemStack("willowLog"));
 		DecomposerRecipe.add(new DecomposerRecipeChance(D, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
-		ItemStack E = new ItemStack(BlockReferences.getBlockItemStack("glowshroom"))
+		ItemStack E = new ItemStack(BlockReferences.getBlockItemStack("glowshroom"));
 		DecomposerRecipe.add(new DecomposerRecipeChance(E, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
-	    ItemStack F = new ItemStack(BlockReferences.getBlockItemStack("daisy"))
+	    ItemStack F = new ItemStack(BlockReferences.getBlockItemStack("daisy"));
         DecomposerRecipe.add(new DecomposerRecipeChance(F, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
 		// END 
         this.addDecomposerRecipesFromMolecules();
