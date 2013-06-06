@@ -732,6 +732,7 @@ public class MinechemRecipes {
        SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
    }   
    // cropStingberry   
+   // Need to add support for BOP
    } 
    private Element element(EnumElement var1, int var2) {
       return new Element(var1, var2);
