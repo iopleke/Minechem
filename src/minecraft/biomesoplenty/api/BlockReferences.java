@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 
 import com.google.common.base.Optional;
 
-public class BopBlocks {
+public class BlockReferences {
 
 	public static enum EnumBlocks
 	{

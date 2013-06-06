@@ -4,7 +4,7 @@ import net.minecraft.item.Item;
 
 import com.google.common.base.Optional;
 
-public class BopItems
+public class Items
 {
 	public static Optional<? extends Item> bopDisc              = Optional.absent();
 	public static Optional<? extends Item> bopDiscMud           = Optional.absent();
