@@ -469,8 +469,20 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
         //
         // BOP CHEMICAL PROCESSING SECTION
-        
-        // END 
+        // BlockReferences.getBlockItemStack("darkLog")
+		ItemStack A = new ItemStack(BlockReferences.getBlockItemStack("algae"))
+		DecomposerRecipe.add(new DecomposerRecipeChance(A, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod, 1) }));
+		ItemStack B = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")) // THE BLUE ONES FUCK YOU UP BAD!
+		DecomposerRecipe.add(new DecomposerRecipe(B, new Chemical[] { this.molecule(EnumMolecule.pantherine), this.molecule(EnumMolecule.psilocybin), this.molecule(EnumMolecule.blueorgodye);}));
+        ItemStack C = new ItemStack(BlockReferences.getBlockItemStack("toadstool"))
+		DecomposerRecipe.add(new DecomposerRecipeChance(C, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 1) }));
+		ItemStack D = new ItemStack(BlockReferences.getBlockItemStack("willowLog"))
+		DecomposerRecipe.add(new DecomposerRecipeChance(D, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
+		ItemStack E = new ItemStack(BlockReferences.getBlockItemStack("glowshroom"))
+		DecomposerRecipe.add(new DecomposerRecipeChance(E, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
+	    ItemStack F = new ItemStack(BlockReferences.getBlockItemStack("daisy"))
+        DecomposerRecipe.add(new DecomposerRecipeChance(F, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
+		// END 
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
@@ -738,7 +750,6 @@ public class MinechemRecipes {
        SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
    }   
    // cropStingberry   
-   // Need to add support for BOP
    } 
    // END 
    // BEGIN MISC FUNCTIONS
