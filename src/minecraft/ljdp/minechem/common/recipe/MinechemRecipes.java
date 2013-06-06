@@ -473,7 +473,7 @@ public class MinechemRecipes {
 		ItemStack A = new ItemStack(BlockReferences.getBlockItemStack("algae"))
 		DecomposerRecipe.add(new DecomposerRecipeChance(A, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
 		ItemStack B = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")) // THE BLUE ONES FUCK YOU UP BAD!
-		DecomposerRecipe.add(new DecomposerRecipe(B, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye);}));
+		DecomposerRecipe.add(new DecomposerRecipe(B, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
         ItemStack C = new ItemStack(BlockReferences.getBlockItemStack("toadstool"))
 		DecomposerRecipe.add(new DecomposerRecipeChance(C, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
 		ItemStack D = new ItemStack(BlockReferences.getBlockItemStack("willowLog"))
