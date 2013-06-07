@@ -470,18 +470,18 @@ public class MinechemRecipes {
         //
         // BOP CHEMICAL PROCESSING SECTION
         // BlockReferences.getBlockItemStack("darkLog")
-		ItemStack A = new ItemStack(BlockReferences.getBlockItemStack("algae"));
-		DecomposerRecipe.add(new DecomposerRecipeChance(A, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
-		ItemStack B = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")); // THE BLUE ONES FUCK YOU UP BAD!
-		DecomposerRecipe.add(new DecomposerRecipe(B, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
-        ItemStack C = new ItemStack(BlockReferences.getBlockItemStack("toadstool"));
-		DecomposerRecipe.add(new DecomposerRecipeChance(C, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
-		ItemStack D = new ItemStack(BlockReferences.getBlockItemStack("willowLog"));
-		DecomposerRecipe.add(new DecomposerRecipeChance(D, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
-		ItemStack E = new ItemStack(BlockReferences.getBlockItemStack("glowshroom"));
-		DecomposerRecipe.add(new DecomposerRecipeChance(E, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
-	    ItemStack F = new ItemStack(BlockReferences.getBlockItemStack("daisy"));
-        DecomposerRecipe.add(new DecomposerRecipeChance(F, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
+		ItemStack Algae = new ItemStack(BlockReferences.getBlockItemStack("algae"));
+		DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
+		ItemStack IndigoCap = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")); // THE BLUE ONES FUCK YOU UP BAD!
+		DecomposerRecipe.add(new DecomposerRecipe(Indigocap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
+                ItemStack MagicShroom = new ItemStack(BlockReferences.getBlockItemStack("toadstool"));
+		DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
+		ItemStack Willowasprin = new ItemStack(BlockReferences.getBlockItemStack("willowLog"));
+		DecomposerRecipe.add(new DecomposerRecipeChance(Willowasprin, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
+		ItemStack FoxFire = new ItemStack(BlockReferences.getBlockItemStack("glowshroom"));
+		DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
+	        ItemStack Daisy1 = new ItemStack(BlockReferences.getBlockItemStack("daisy"));
+                DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
 		// END 
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
