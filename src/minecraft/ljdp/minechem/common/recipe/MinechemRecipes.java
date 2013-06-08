@@ -480,7 +480,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipeChance(Willowasprin, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
 		ItemStack FoxFire = new BlockReferences.getBlockItemStack("glowshroom");
 		DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
-	    ItemStack Daisy1 = new IBlockReferences.getBlockItemStack("daisy");
+	    ItemStack Daisy1 = new BlockReferences.getBlockItemStack("daisy");
         DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
 		// END 
         this.addDecomposerRecipesFromMolecules();
