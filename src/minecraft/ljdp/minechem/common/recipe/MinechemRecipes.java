@@ -753,6 +753,15 @@ public class MinechemRecipes {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr)}));
 	} 
+	   else if(var1.Name.contains("gemSapphire")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide)}));
+	} 
+	else if(var1.Name.contains("gemPeridot")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.olivine)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.olivine)}));
+	} 
+	
    // cropStingberry   
    } 
    // END 

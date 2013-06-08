@@ -116,7 +116,8 @@ public enum EnumMolecule {
     coke(102, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl)),
     blueorgodye(103, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
     redorgodye(104, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
-    purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7))
+    purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
+	olivine(106, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4))
     ;
 
     public static EnumMolecule[] molecules = values();
