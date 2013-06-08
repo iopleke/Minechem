@@ -5,7 +5,7 @@ import net.minecraft.item.ItemStack;
 import biomesoplenty.api.Blocks;
 import com.google.common.base.Optional;
 
-public class BlockReferences {
+public class BlockReference {
 
 	public static enum EnumBlocks
 	{
