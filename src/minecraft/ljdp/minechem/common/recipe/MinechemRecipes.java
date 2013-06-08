@@ -498,7 +498,7 @@ public class MinechemRecipes {
         this.registerPoisonRecipes(EnumMolecule.testosterone);
         this.registerPoisonRecipes(EnumMolecule.xanax);
         this.registerPoisonRecipes(EnumMolecule.mescaline);
-        this.registerPoisonRecipes(EnumMolecule.quinine);
+        this.registerPoisonRecipes(EnumMolecule.asprin);
         this.registerPoisonRecipes(EnumMolecule.sulfuricAcid);
         this.registerPoisonRecipes(EnumMolecule.ttx);
         this.registerPoisonRecipes(EnumMolecule.pal2);
