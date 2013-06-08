@@ -360,7 +360,7 @@ public class MinechemRecipes {
         ItemStack var106 = new ItemStack(Block.cloth, 1, 9);
         ItemStack var107 = new ItemStack(Block.cloth, 1, 10);
         ItemStack var108 = new ItemStack(Block.cloth, 1, 11);
-        new ItemStack(Block.cloth, 1, 12);
+        ItemStack var109 = new ItemStack(Block.cloth, 1, 12);
         ItemStack var110 = new ItemStack(Block.cloth, 1, 13);
         ItemStack var111 = new ItemStack(Block.cloth, 1, 14);
         ItemStack var112 = new ItemStack(Block.cloth, 1, 15);
@@ -474,7 +474,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
 		ItemStack IndigoCap = new ItemStack(BlockReferences.getBlockItemStack("bluemilk")); // THE BLUE ONES FUCK YOU UP BAD!
 		DecomposerRecipe.add(new DecomposerRecipe(Indigocap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
-                ItemStack MagicShroom = new ItemStack(BlockReferences.getBlockItemStack("toadstool"));
+        ItemStack MagicShroom = new ItemStack(BlockReferences.getBlockItemStack("toadstool"));
 		DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
 		ItemStack Willowasprin = new ItemStack(BlockReferences.getBlockItemStack("willowLog"));
 		DecomposerRecipe.add(new DecomposerRecipeChance(Willowasprin, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
@@ -733,8 +733,8 @@ public class MinechemRecipes {
    }
    
    else if(var1.Name.contains("cropBlightberry")) {
-       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.quinine), this.element(EnumElement.S, 2)}));
-       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.quinine), this.element(EnumElement.S, 2)}));
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.asprin), this.element(EnumElement.S, 2)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.asprin), this.element(EnumElement.S, 2)}));
    }
       
    else if(var1.Name.contains("cropBlueberry")) {
