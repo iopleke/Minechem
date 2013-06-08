@@ -26,7 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary; 
-import biomesoplenty.api.*; 
+
 public class MinechemRecipes {
 
     private static final MinechemRecipes instance = new MinechemRecipes();
@@ -482,7 +482,6 @@ public class MinechemRecipes {
 		// DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
 	    // Daisy1 = new BlockReferences.getBlockItemStack("daisy");
         // DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
-		DecomposerRecipe.add(new DecomposerRecipe(BlockReference.getBlockItemStack("bluemilk"), new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
 		// END 
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
@@ -750,6 +749,10 @@ public class MinechemRecipes {
        DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
        SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.purpleorgodye), this.molecule(EnumMolecule.sucrose, 2)}));
    }   
+   else if(var1.Name.contains("gemRuby")) {
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide), this.element(EnumElement.Cr)}));
+	} 
    // cropStingberry   
    } 
    // END 
