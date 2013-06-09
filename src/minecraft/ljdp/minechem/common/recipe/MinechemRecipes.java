@@ -440,8 +440,8 @@ public class MinechemRecipes {
         SynthesisRecipe.add(new SynthesisRecipe(var127, true, 1000, new Chemical[] { this.molecule(EnumMolecule.siliconDioxide, 4), this.molecule(EnumMolecule.siliconDioxide, 4), this.molecule(EnumMolecule.siliconDioxide, 4), this.molecule(EnumMolecule.magnesiumOxide, 2), null, this.molecule(EnumMolecule.siliconDioxide, 4), this.molecule(EnumMolecule.magnesiumOxide, 2), this.molecule(EnumMolecule.magnesiumOxide, 2), this.molecule(EnumMolecule.magnesiumOxide, 2) }));
         ItemStack var128 = new ItemStack(Item.bone);
         ItemStack var129 = new ItemStack(Item.silk);
-        new ItemStack(Block.cloth, 1, -1);
-        new ItemStack(Block.cloth, 1, 0);
+       // new ItemStack(Block.cloth, 1, -1);
+       // new ItemStack(Block.cloth, 1, 0);
         DecomposerRecipe.add(new DecomposerRecipe(var128, new Chemical[] { this.molecule(EnumMolecule.hydroxylapatite) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var129, 0.45F, new Chemical[] { this.molecule(EnumMolecule.serine), this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.alinine) }));
         SynthesisRecipe.add(new SynthesisRecipe(var128, false, 100, new Chemical[] { this.molecule(EnumMolecule.hydroxylapatite) }));
