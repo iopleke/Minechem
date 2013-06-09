@@ -5,9 +5,11 @@ import ljdp.minechem.client.gui.GuiChemistJournal;
 import ljdp.minechem.client.gui.GuiDecomposer;
 import ljdp.minechem.client.gui.GuiFusion;
 import ljdp.minechem.client.gui.GuiMicroscope;
+import ljdp.minechem.client.gui.GuiPrinter;
 import ljdp.minechem.client.gui.GuiProjector;
 import ljdp.minechem.client.gui.GuiSynthesis;
 import ljdp.minechem.client.gui.GuiTableOfElements;
+import ljdp.minechem.common.containers.ContainerBluePrintPrinter;
 import ljdp.minechem.common.containers.ContainerChemicalStorage;
 import ljdp.minechem.common.containers.ContainerChemistJournal;
 import ljdp.minechem.common.containers.ContainerDecomposer;
@@ -16,6 +18,7 @@ import ljdp.minechem.common.containers.ContainerMicroscope;
 import ljdp.minechem.common.containers.ContainerProjector;
 import ljdp.minechem.common.containers.ContainerSynthesis;
 import ljdp.minechem.common.containers.CotainerTable;
+import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
@@ -55,6 +58,8 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new ContainerChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
+        if (tileEntity instanceof TileEntityBluePrintPrinter)
+            return new ContainerBluePrintPrinter(player.inventory, (TileEntityBluePrintPrinter) tileEntity);
         return null;
     }
 
@@ -90,6 +95,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
+        if (tileEntity instanceof TileEntityBluePrintPrinter)
+        	return new GuiPrinter(player.inventory, (TileEntityBluePrintPrinter) tileEntity);
         return null;
     }
 

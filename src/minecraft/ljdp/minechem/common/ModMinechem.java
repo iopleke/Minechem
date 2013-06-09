@@ -23,6 +23,8 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
+import basiccomponents.common.BasicComponents;
+
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -64,7 +66,7 @@ public class ModMinechem {
         MinechemItems.registerItems();
 
         MinechemBlocks.registerBlocks();
-
+        MinechemBlueprint.registerBlueprints();
         MinechemRecipes.getInstance().RegisterRecipes();
 
         MinechemItems.registerToOreDictionary();
@@ -74,7 +76,7 @@ public class ModMinechem {
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
         MinecraftForge.EVENT_BUS.register(this);
         
-        MinechemBlueprint.registerBlueprints();
+        
 
         System.out.println("[MineChem] PREINT PASSED");
 
@@ -90,6 +92,8 @@ public class ModMinechem {
         System.out.println("[MineChem] INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
         Modstats.instance().getReporter().registerMod(this);
+        BasicComponents.requestAll();
+        BasicComponents.registerTileEntities();
     }
 
     @PostInit

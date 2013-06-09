@@ -1,6 +1,5 @@
 package ljdp.minechem.common.recipe;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -10,6 +9,7 @@ import ljdp.minechem.api.core.Element;
 import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.core.Molecule;
+import ljdp.minechem.api.recipe.BluePrinterRecipe;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
@@ -17,15 +17,16 @@ import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemItems;
-import ljdp.minechem.common.ModMinechem;
+import ljdp.minechem.common.blueprint.MinechemBlueprint;
+import ljdp.minechem.common.items.ItemBlueprint;
 import ljdp.minechem.common.items.ItemElement;
-import ljdp.minechem.common.recipe.RecipeJournalCloning;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
-import net.minecraftforge.oredict.OreDictionary; 
+import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.registry.GameRegistry;
 // import ljdp.minechem.common.BOPExporter;
 public class MinechemRecipes {
 
@@ -101,8 +102,12 @@ public class MinechemRecipes {
         ItemStack var23 = new ItemStack(Item.diamond);
         ItemStack var24 = new ItemStack(Item.emerald);
         ItemStack chunkCoal = new ItemStack(Item.coal);
+
+        ItemStack fusionblue = new ItemStack(MinechemItems.blueprint, 1, MinechemBlueprint.fusion.id);
+        ItemStack fusionBlock1 = new ItemStack(MinechemBlocks.fusion, 0);
+        ItemStack fusionBlock2 = new ItemStack(MinechemBlocks.fusion, 1);
         // DecomposerRecipe.add(new DecomposerRecipe(var15, new
-        // Chemical[]{this.element(EnumElement.Fe, 2)}));
+        // Chemical[]{this.element(EnumElement.Fe, 2)})); 
         DecomposerRecipe.add(new DecomposerRecipe(ingotIron, new Chemical[] { this.element(EnumElement.Fe, 16) }));
         // DecomposerRecipe.add(new DecomposerRecipe(var22, new
         // Chemical[]{this.element(EnumElement.Au, 2)}));
@@ -121,7 +126,7 @@ public class MinechemRecipes {
         this.recipeGold = new SynthesisRecipe(ingotGold, false, 1000, new Chemical[] { this.element(EnumElement.Au, 16) });
         SynthesisRecipe.add(recipeIron);
         SynthesisRecipe.add(recipeGold);
-
+        BluePrinterRecipe.add(new BluePrinterRecipe(fusionblue, true, 80000, new Object[] { "III", "DLD", "III", Character.valueOf('I'), fusionBlock2, Character.valueOf('L'), var23,Character.valueOf('D'), fusionBlock1}));
         SynthesisRecipe.add(new SynthesisRecipe(var23, true, '\uea60', new Chemical[] { null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null }));
         SynthesisRecipe.add(new SynthesisRecipe(var24, true, 80000, new Chemical[] { null, this.element(EnumElement.Cr), null, this.element(EnumElement.V), this.molecule(EnumMolecule.beryl, 2), this.element(EnumElement.V), null, this.element(EnumElement.Cr), null }));
         // DecomposerRecipe.add(new DecomposerRecipe(new

@@ -19,6 +19,7 @@ public class PacketHandler implements IPacketHandler {
 
     private EasyPacketDispatcher dispatcher;
     public EasyPacketHandler decomposerUpdateHandler;
+    public EasyPacketHandler printerUpdateHandler;
     public EasyPacketHandler ghostBlockUpdateHandler;
     public EasyPacketHandler synthesisUpdateHandler;
     public EasyPacketHandler activeJournalItemHandler;
@@ -27,6 +28,7 @@ public class PacketHandler implements IPacketHandler {
         instance = this;
         dispatcher = new EasyPacketDispatcher(MINECHEM_PACKET_CHANNEL);
         decomposerUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketDecomposerUpdate.class, dispatcher);
+        printerUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketPrinterUpdate.class, dispatcher);
         ghostBlockUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketGhostBlock.class, dispatcher);
         synthesisUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketSynthesisUpdate.class, dispatcher);
         activeJournalItemHandler = EasyPacketHandler.registerEasyPacket(PacketActiveJournalItem.class, dispatcher);

@@ -7,6 +7,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 import ljdp.minechem.common.CommonProxy;
 import ljdp.minechem.common.ModMinechem;
+import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 import ljdp.minechem.common.utils.ConstantValue;
 

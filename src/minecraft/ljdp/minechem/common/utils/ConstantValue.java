@@ -70,6 +70,7 @@ public interface ConstantValue {
     public static final String DECOMPOSER_MODEL_ON = TEXTURE_MODEL_DIR + "DecomposerModelOn.png";
     public static final String DECOMPOSER_MODEL_OFF = TEXTURE_MODEL_DIR + "DecomposerModelOff.png";
     public static final String SYNTHESIS_MODEL = TEXTURE_MODEL_DIR + "SynthesiserModel.png";
+    public static final String PRINTER_MODEL = TEXTURE_MODEL_DIR + "RushmeadPrinter.png";
     public static final String PROJECTOR_MODEL_ON = TEXTURE_MODEL_DIR + "ProjectorModelOn.png";
     public static final String PROJECTOR_MODEL_OFF = TEXTURE_MODEL_DIR + "ProjectorModelOff.png";
     public static final String HAZMAT_TEX = TEXTURE_MODEL_DIR + "hazmatArmor.png";
