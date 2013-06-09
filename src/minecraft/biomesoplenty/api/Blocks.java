@@ -96,9 +96,4 @@ public class Blocks
 	public static Optional<? extends Block> promisedPortal              = Optional.absent();
 	public static Optional<? extends Block> glass                       = Optional.absent();
 	public static Optional<? extends Block> altar                       = Optional.absent();
-
-	/**
-	 * Populated by Biomes O Plenty with default Biomes O Plenty leaves. Add additional leaves here (E.g. "Blocks.shearBlockIds.put(acaciaLeaves.blockID, 15.0F);")
-	 */
-	public static Map shearBlockIds = new HashMap();
 }
