@@ -117,7 +117,8 @@ public enum EnumMolecule {
     blueorgodye(103, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
     redorgodye(104, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
     purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
-	olivine(106, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4))
+    olivine(106, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
+    metblue(107, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl))	
     ;
 
     public static EnumMolecule[] molecules = values();
