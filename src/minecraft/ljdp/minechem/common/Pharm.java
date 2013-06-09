@@ -127,6 +127,11 @@ public class Pharm {
                 entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 60, 5));
                 entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 60, 10));
 	        break; 
+	        case metblue:
+	        cureAllPotions(world, entityPlayer);
+	        entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_SECOND * 30, 2));
+                entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
+	        break;
         default:
             entityPlayer.attackEntityFrom(DamageSource.generic, 5);
             break;
