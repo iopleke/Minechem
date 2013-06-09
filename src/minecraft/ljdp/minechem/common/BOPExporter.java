@@ -1,4 +1,5 @@
 package ljdp.minechem.common;
+import biomesoplenty.api.*; 
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.core.Element;
 import ljdp.minechem.api.core.EnumElement;
@@ -9,7 +10,6 @@ import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import net.minecraft.item.ItemStack;
-import biomesoplenty.api.*; 
 public class BOPExporter {
 public void Init() {
 ItemStack Algae = BlockReferences.getBlockItemStack("algae");

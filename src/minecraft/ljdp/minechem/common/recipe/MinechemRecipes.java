@@ -26,7 +26,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary; 
-import biomesoplenty.api.BlockReferences; 
 import ljdp.minechem.common.BOPExporter;
 public class MinechemRecipes {
 
