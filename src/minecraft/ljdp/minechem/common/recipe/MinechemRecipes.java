@@ -26,7 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary; 
-
+import ljdp.minechem.common.BOPExporter;
 public class MinechemRecipes {
 
     private static final MinechemRecipes instance = new MinechemRecipes();
@@ -486,6 +486,7 @@ public class MinechemRecipes {
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
+		Exporter.Init(); 
         this.registerPoisonRecipes(EnumMolecule.poison);
         this.registerPoisonRecipes(EnumMolecule.sucrose);
         this.registerPoisonRecipes(EnumMolecule.psilocybin);
