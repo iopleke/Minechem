@@ -471,7 +471,6 @@ public class MinechemRecipes {
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
-		BOPExporter.Init(); 
         this.registerPoisonRecipes(EnumMolecule.poison);
         this.registerPoisonRecipes(EnumMolecule.sucrose);
         this.registerPoisonRecipes(EnumMolecule.psilocybin);
