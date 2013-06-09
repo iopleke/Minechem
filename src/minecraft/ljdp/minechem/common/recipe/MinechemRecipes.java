@@ -26,8 +26,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary; 
-import ljdp.minechem.common.BOPExporter;
 import biomesoplenty.api.BlockReferences; 
+import ljdp.minechem.common.BOPExporter;
 public class MinechemRecipes {
 
     private static final MinechemRecipes instance = new MinechemRecipes();
@@ -245,7 +245,7 @@ public class MinechemRecipes {
         ItemStack var64 = new ItemStack(Item.bread);
         ItemStack var65 = new ItemStack(Item.appleRed);
         ItemStack var66 = new ItemStack(Item.appleGold, 1, 0);
-        new ItemStack(Item.appleGold, 1, 1);
+       //  new ItemStack(Item.appleGold, 1, 1);
         ItemStack var68 = new ItemStack(Item.chickenCooked);
         DecomposerRecipe.add(new DecomposerRecipeChance(var54, 0.75F, new Chemical[] { this.molecule(EnumMolecule.sucrose) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var55, 0.65F, new Chemical[] { this.molecule(EnumMolecule.sucrose), this.element(EnumElement.H, 2), this.element(EnumElement.O) }));
@@ -472,7 +472,7 @@ public class MinechemRecipes {
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
-		Exporter.Init(); 
+		BOPExporter.Init(); 
         this.registerPoisonRecipes(EnumMolecule.poison);
         this.registerPoisonRecipes(EnumMolecule.sucrose);
         this.registerPoisonRecipes(EnumMolecule.psilocybin);

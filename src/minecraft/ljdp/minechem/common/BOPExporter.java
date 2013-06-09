@@ -9,8 +9,8 @@ import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import net.minecraft.item.ItemStack;
-import biomesoplenty.api.BlockReferences; 
-public class Exporter {
+import biomesoplenty.api.*; 
+public class BOPExporter {
 public void Init() {
 ItemStack Algae = BlockReferences.getBlockItemStack("algae");
 DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
