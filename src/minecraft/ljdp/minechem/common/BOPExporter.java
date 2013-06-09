@@ -8,15 +8,14 @@ import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import biomesoplenty.api.*; 
+import biomesoplenty.api.BlockReferences; 
 public class Exporter {
 public void Init() {
 ItemStack Algae = new BlockReferences.getBlockItemStack("algae");
 DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
 ItemStack IndigoCap = new BlockReferences.getBlockItemStack("bluemilk"); // THE BLUE ONES FUCK YOU UP BAD!
-DecomposerRecipe.add(new DecomposerRecipe(BlockReferences.getBlockItemStack("bluemilk"), new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
+DecomposerRecipe.add(new DecomposerRecipe(IndigoCap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye)}));
 ItemStack MagicShroom = new BlockReferences.getBlockItemStack("toadstool");
 DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
 ItemStack Willowasprin = new BlockReferences.getBlockItemStack("willowLog");
