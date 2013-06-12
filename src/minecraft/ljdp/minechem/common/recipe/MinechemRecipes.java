@@ -27,6 +27,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
+import biomesoplenty.api.*;
 // import ljdp.minechem.common.BOPExporter;
 public class MinechemRecipes {
 
@@ -472,7 +473,10 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[] { new Molecule(EnumMolecule.biocide, 2) }));
         ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
-     
+        
+		ItemStack Algae = BlockReferences.getBlockItemStack("algae");
+        DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
+
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
