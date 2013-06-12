@@ -26,7 +26,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary;
 import biomesoplenty.api.BlockReferences;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common;
+import cpw.mods.fml.common.Loader;
 // import ljdp.minechem.common.BOPExporter;
 public class MinechemRecipes {
 
