@@ -17,7 +17,10 @@ public class Pharm {
         case water:
             entityPlayer.getFoodStats().addStats(1, .1F);
             break;
-        case starch: stevenk:
+        case starch:
+            entityPlayer.getFoodStats().addStats(2, .2F);
+            break;
+            case stevenk:
             entityPlayer.getFoodStats().addStats(2, .2F);
             break;
         case sucrose:
@@ -38,6 +41,9 @@ public class Pharm {
         case poison: biocide: 
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             break;
+            case biocide: 
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
+            break;
         case ethanol:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 10, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
@@ -54,8 +60,12 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 5, 0));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             break;
-        case xanax: pantherine: 
-            // cureAllPotions(world, entityPlayer);
+        case xanax:  
+            // cureAllPotions(world, entityPlayer); pantherine:
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 2));
+            break;
+            case pantherine: 
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
@@ -111,7 +121,19 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
-		case glycine: alinine: serine: arginine:
+		case glycine:
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		break; 
+		case alinine:
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		break; 
+		case serine: 
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+		break; 
+		case arginine:
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
 		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
 		break; 
