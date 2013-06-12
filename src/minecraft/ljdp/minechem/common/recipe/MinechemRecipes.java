@@ -484,8 +484,8 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[] { new Molecule(EnumMolecule.biocide, 2) }));
         ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
-        if  Loader.isModLoaded("BiomesOPlenty"){BOPExport() System.out.println("Minechem: BOP support loaded") }
-		else {System.out.println("This is just a debug message! Move along!")}
+        if (Loader.isModLoaded("BiomesOPlenty")) {BOPExport(); System.out.println("Minechem: BOP support loaded");}
+		else{System.out.println("This is just a debug message! Move along!");}
 		this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
