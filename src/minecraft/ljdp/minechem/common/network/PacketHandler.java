@@ -23,7 +23,7 @@ public class PacketHandler implements IPacketHandler {
     public EasyPacketHandler ghostBlockUpdateHandler;
     public EasyPacketHandler synthesisUpdateHandler;
     public EasyPacketHandler activeJournalItemHandler;
-
+    public EasyPacketHandler swapItemHandler;
     public PacketHandler() {
         instance = this;
         dispatcher = new EasyPacketDispatcher(MINECHEM_PACKET_CHANNEL);
@@ -32,6 +32,7 @@ public class PacketHandler implements IPacketHandler {
         ghostBlockUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketGhostBlock.class, dispatcher);
         synthesisUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketSynthesisUpdate.class, dispatcher);
         activeJournalItemHandler = EasyPacketHandler.registerEasyPacket(PacketActiveJournalItem.class, dispatcher);
+        swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
     }
 
     @Override

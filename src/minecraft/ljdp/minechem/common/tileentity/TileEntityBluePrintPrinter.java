@@ -1,27 +1,24 @@
 package ljdp.minechem.common.tileentity;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
-import ljdp.minechem.api.recipe.BluePrinterRecipe;
-import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Constants;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelPrinter;
+import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemPowerProvider;
 import ljdp.minechem.common.gates.IMinechemTriggerProvider;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.inventory.BoundedInventory;
 import ljdp.minechem.common.inventory.Transactor;
-import ljdp.minechem.common.network.PacketDecomposerUpdate;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.network.PacketPrinterUpdate;
-import ljdp.minechem.common.recipe.BluePrinterrecipeHandler;
-import ljdp.minechem.common.tileentity.TileEntityDecomposer.State;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
+import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -43,7 +40,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
     public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public static final int[] kStorage = { 14, 15, 16, 17, 18, 19, 20, 21, 22 };
 
-    private BluePrinterRecipe currentRecipe;
     MinechemPowerProvider powerProvider;
     public ModelPrinter model;
 	public static final int kSizeOutput = 1;
@@ -53,13 +49,14 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
 	public static final int kStartRecipe = 1;
 	public static final int kStartStorage = 14;
 	public static final int kStartJournal = 23;
+	private int progress;
+	private boolean isWorking;
     private final BoundedInventory recipeMatrix = new BoundedInventory(this, kRecipe);
     private final BoundedInventory storageInventory = new BoundedInventory(this, kStorage);
     private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
     private final Transactor storageTransactor = new Transactor(storageInventory);
     private final Transactor outputTransactor = new Transactor(outputInventory);
     private final Transactor recipeMatrixTransactor = new Transactor(recipeMatrix);
-
     private static final int MIN_ENERGY_RECIEVED = 30;
     private static final int MAX_ENERGY_RECIEVED = 200;
     private static final int MIN_ACTIVATION_ENERGY = 100;
@@ -80,15 +77,8 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return storageTransactor.add(stack, doAdd);
     }
 
-    public boolean canTakeOutputStack() {
-        return inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(false);
-    }
 
-    public void clearRecipeMatrix() {
-        for (int slot : kRecipe) {
-            inventory[slot] = null;
-        }
-    }
+
 
     @Override
     public void closeChest() {}
@@ -99,7 +89,7 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
             ItemStack itemstack;
             if (slot == kOutput[0]) {
                 if (takeInputStacks())
-                    takeEnergy(currentRecipe);
+                    System.out.print("La");
                 else
                     return null;
             }
@@ -129,7 +119,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         case EAST:
         case WEST:
         case UNKNOWN:
-            return extractOutput(doRemove, maxItemCount);
         case UP:
         case DOWN:
 
@@ -137,22 +126,9 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return new ItemStack[0];
     }
 
-    public ItemStack[] extractOutput(boolean doRemove, int maxItemCount) {
-        if (currentRecipe == null || !takeStacksFromStorage(false) || !canAffordRecipe(currentRecipe))
-            return null;
-        ItemStack outputStack = currentRecipe.getOutput().copy();
-        ItemStack[] output = new ItemStack[] { outputStack };
-        if (doRemove) {
-            takeEnergy(currentRecipe);
-            takeStacksFromStorage(true);
-        }
-        return output;
-    }
+    
 
 
-    public BluePrinterRecipe getCurrentRecipe() {
-        return currentRecipe;
-    }
 
     public int getFacing() {
         return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
@@ -194,16 +170,20 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return 24;
     }
 
-    public boolean hasEnoughPowerForCurrentRecipe() {
-        return currentRecipe != null && powerProvider.getEnergyStored() >= currentRecipe.energyCost();
-    }
+
 
     @Override
     public boolean hasFullEnergy() {
         return hasFullEnergy;
     }
 
-   
+    private static class BluePrintContainer extends Container
+    {
+      public boolean canInteractWith(EntityPlayer entityplayer)
+      {
+        return true;
+      }
+    }
 
 
     @Override
@@ -212,15 +192,10 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
     }
 
-    @Override
-    public void onInventoryChanged() {
-        super.onInventoryChanged();
-        getRecipeResult();
-    }
+
 
     public void onOuputPickupFromSlot() {
-        if (takeInputStacks())
-            takeEnergy(currentRecipe);
+
     }
 
     @Override
@@ -231,7 +206,7 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         powerProvider.readFromNBT(nbtTagCompound);
     }
 
-   
+
 
 
     @Override
@@ -240,7 +215,8 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
     }
 
     public boolean takeStacksFromStorage(boolean doTake) {
-        List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
+    	ItemStack[] ing = { new ItemStack(MinechemBlocks.fusion, 0), new ItemStack(MinechemBlocks.fusion, 1), new ItemStack(Item.diamond)};
+        ItemStack[] ingredients = ing;
         ItemStack[] storage = storageInventory.copyInventoryToArray();
         for (ItemStack ingredient : ingredients) {
             if (!takeStackFromStorage(ingredient, storage))
@@ -257,6 +233,7 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
     @Override
     public void updateEntity() {
     	super.updateEntity();
+
         powerProvider.receiveEnergy((float) wattsReceived / 437.5F, ForgeDirection.UP);// FIXME
         powerProvider.update(this);
         if (!worldObj.isRemote && (powerProvider.didEnergyStoredChange() || powerProvider.didEnergyUsageChange()))
@@ -273,15 +250,13 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         if (hasFullEnergy && powerProvider.getEnergyStored() < powerProvider.getMaxEnergyStored() / 2)
             hasFullEnergy = false;
 
-        if (currentRecipe != null && inventory[kOutput[0]] == null) {
-            inventory[kOutput[0]] = currentRecipe.getOutput().copy();
-        }
+       
     }
-
+    
     @Override
     public void validate() {
         super.validate();
-        getRecipeResult();
+
     }
 
     @Override
@@ -294,30 +269,11 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
 
     
 
-    private boolean canAffordRecipe(BluePrinterRecipe currentRecipe2) {
-        int energyCost = currentRecipe2.energyCost();
-        return powerProvider.getEnergyStored() >= energyCost;
-    }
 
-    private boolean getRecipeResult() {
-        ItemStack[] recipeMatrixItems = getRecipeMatrixItems();
-        BluePrinterRecipe recipe = BluePrinterrecipeHandler.instance.getRecipeFromInput(recipeMatrixItems);
-        if (recipe != null) {
-            inventory[kOutput[0]] = recipe.getOutput().copy();
-            currentRecipe = recipe;
-            return true;
-        } else {
-            inventory[kOutput[0]] = null;
-            currentRecipe = null;
-            return false;
-        }
-    }
+    
 
 
-    private void takeEnergy(BluePrinterRecipe currentRecipe2) {
-        int energyCost = currentRecipe2.energyCost();
-        powerProvider.useEnergy(energyCost, energyCost, true);
-    }
+
 
     private boolean takeStackFromStorage(ItemStack ingredient, ItemStack[] storage) {
         int ingredientAmountLeft = ingredient.stackSize;
@@ -344,9 +300,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return false;
     }
 
-    public List<ItemStack> getMaximumOutput() {
-        return getOutput(0, true);
-    }
 
     public ItemStack getOutputTemplate() {
         ItemStack template = null;
@@ -359,44 +312,7 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return template;
     }
 
-    public List<ItemStack> getOutput(int amount, boolean all) {
-        if (currentRecipe == null)
-            return null;
-        ItemStack template = getOutputTemplate();
-        List<ItemStack> outputs = new ArrayList<ItemStack>();
-        ItemStack initialStack = template.copy();
-        initialStack.stackSize = 0;
-        outputs.add(initialStack);
-        while (canTakeOutputStack() && (amount > 0 || all) && takeInputStacks()) {
-            takeEnergy(currentRecipe);
-            ItemStack output = outputs.get(outputs.size() - 1);
-            if (output.stackSize + template.stackSize > output.getMaxStackSize()) {
-                int leftOverStackSize = template.stackSize - (output.getMaxStackSize() - output.stackSize);
-                output.stackSize = output.getMaxStackSize();
-                if (leftOverStackSize > 0) {
-                    ItemStack newOutput = template.copy();
-                    newOutput.stackSize = leftOverStackSize;
-                    outputs.add(newOutput);
-                }
-            } else {
-                output.stackSize += template.stackSize;
-            }
-            onInventoryChanged();
-            amount--;
-        }
-        return outputs;
-    }
-
-    public void setRecipe(SynthesisRecipe recipe) {
-        clearRecipeMatrix();
-        if (recipe != null) {
-            ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
-            for (int i = 0; i < Math.min(kRecipe.length, ingredients.length); i++) {
-                inventory[kRecipe[i]] = ingredients[i];
-            }
-            onInventoryChanged();
-        }
-    }
+    
 
 
    

@@ -2,49 +2,27 @@ package ljdp.minechem.common.containers;
 
 import java.util.List;
 
-import ljdp.minechem.api.recipe.BluePrinterRecipe;
 import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.InventoryCraftResult;
+import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
 public class ContainerBluePrintPrinter extends ContainerWithFakeSlots {
 
 	private TileEntityBluePrintPrinter synthesis;
-	
+	private InventoryCrafting craftMatrix;
+	private IInventory craftResult;
 	public ContainerBluePrintPrinter(InventoryPlayer inventoryPlayer, TileEntityBluePrintPrinter synthesis) {
 		this.synthesis = synthesis;
-		addSlotToContainer(new SlotOutput(synthesis, synthesis.kStartOutput, 134, 18));
-		bindRecipeMatrixSlots();
-		bindStorageSlots();
 		bindPlayerInventory(inventoryPlayer);
 		addSlotToContainer(new SlotBlueprint(synthesis, synthesis.kStartJournal, 26, 36));
+		
 	}
-
-	private void bindRecipeMatrixSlots() {
-		int slot = 0;
-		for(int row = 0; row < 3; row++) {
-			for(int col = 0; col < 3; col++) {
-				addSlotToContainer(new SlotFake(synthesis, synthesis.kStartRecipe + slot, 62 + (col * 18), 18 + (row * 18)));
-
-				slot++;
-			}
-		}
-	}
-	
-	private void bindStorageSlots() {
-		int slot = 0;
-		for(int col = 0; col < 9; col++) {
-			addSlotToContainer(new SlotChemical(synthesis, synthesis.kStartStorage + slot, 8 + (col * 18), 84));
-			slot++;
-		}
-	}
-	
-	
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 9; j++) {
@@ -72,9 +50,7 @@ public class ContainerBluePrintPrinter extends ContainerWithFakeSlots {
 			ItemStack stack = stackInSlot.copy();
 
 if(slot == synthesis.kStartOutput) {
-				if(!craftMaxmimum())
-					return null;
-			}else if(slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() 
+				if(slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() 
 					&& (stackInSlot.itemID == MinechemItems.element.itemID 
 					|| stackInSlot.itemID == MinechemItems.molecule.itemID))
 			{
@@ -94,20 +70,11 @@ if(slot == synthesis.kStartOutput) {
 			
 			return stack;
 		}
+		
+	}
 		return null;
-	}
+	}	
 	
-	public boolean craftMaxmimum() {
-		List<ItemStack> outputs = synthesis.getMaximumOutput();
-		if(outputs == null)
-			return false;
-		for(ItemStack output : outputs) {
-			if(!mergeItemStack(output, synthesis.getSizeInventory(), inventorySlots.size(), true))
-				return false;
-		}
-		return true;
-	}
-
 	
 
 }
