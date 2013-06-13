@@ -38,7 +38,7 @@ public class Pharm {
         case methamphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
             break;
-        case poison: biocide: 
+        case poison:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             break;
             case biocide: 
@@ -49,7 +49,7 @@ public class Pharm {
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
         case cyanide:
-            entityPlayer.attackEntityFrom(DamageSource.generic, 20);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 5));
             break;
         case penicillin:
             cureAllPotions(world, entityPlayer);
@@ -61,7 +61,7 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             break;
         case xanax:  
-            // cureAllPotions(world, entityPlayer); pantherine:
+            cureAllPotions(world, entityPlayer);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
@@ -71,7 +71,7 @@ public class Pharm {
             break;
         case mescaline:
             entityPlayer.attackEntityFrom(DamageSource.generic, 2);
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 2));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
             case asprin:
@@ -82,6 +82,7 @@ public class Pharm {
             // No effect.
             break;
             case phosgene: aalc: sulfuricAcid: buli: // all of these cause tons of damage to human flesh!!!!!!!!
+			entityPlayer.attackEntityFrom(DamageSource.generic, 2);
             entityPlayer.setFire(100);
             break;
             // 
@@ -89,16 +90,20 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 1));
             break;
+			case nicotine: 
+			entityPlayer.attackEntityFrom(DamageSource.generic, 4);
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
+			break; 
         case fingolimod:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_SECOND * 80, 1));
             break;
-        case afroman:
+        case afroman: // CANNBINOID PAINKLLERS WOO!
             cureAllPotions(world, entityPlayer);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 5));
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 1));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 4));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_SECOND * 120, 5));
             break;
         case nod:
@@ -152,9 +157,13 @@ public class Pharm {
 	        case metblue:
 	        cureAllPotions(world, entityPlayer);
 	        entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_SECOND * 30, 2));
-                entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
 	        break;
-        default:
+			case meoh:
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 60, 10));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 4));
+			break; 
+			case default:
             entityPlayer.attackEntityFrom(DamageSource.generic, 5);
             break;
         }
