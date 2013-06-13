@@ -63,9 +63,13 @@ public class GuiPrinter extends GuiContainerTabbed {
 	{
 	switch(button.id)
 	{
-	case 1:  PacketSwapItem packet = new PacketSwapItem(synthesis.xCoord, synthesis.yCoord, synthesis.zCoord);
+	case 1:  PacketSwapItem packet = new PacketSwapItem(synthesis.xCoord, synthesis.yCoord, synthesis.zCoord, 0);
     PacketHandler.getInstance().swapItemHandler.sendToServer(packet);
 	break;
+	case 2:PacketSwapItem packet1 = new PacketSwapItem(synthesis.xCoord, synthesis.yCoord, synthesis.zCoord, 1);
+    PacketHandler.getInstance().swapItemHandler.sendToServer(packet1);
+		
+    break;
 	default:
 	}
 	}
