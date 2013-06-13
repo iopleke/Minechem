@@ -21,11 +21,13 @@ public class PacketSwapItem extends EasyPacket {
     private int y;
     @EasyPacketData
     private int z;
- 
-    public PacketSwapItem(int x, int y, int z) {
+    @EasyPacketData
+    private int itemID;
+    public PacketSwapItem(int x, int y, int z, int itemID) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.itemID = itemID;
     }
  
     public PacketSwapItem() {
@@ -52,6 +54,6 @@ public class PacketSwapItem extends EasyPacket {
     	 if(power.getEnergyStored() >= 400){
     	 power.useEnergy(400, 400, true);
             ((TileEntityBluePrintPrinter) te).setInventorySlotContents(23,
-                    new ItemStack(MinechemItems.blueprint, 1 , 0));
+                    new ItemStack(MinechemItems.blueprint, 1 , itemID));
         }}}
     }}
