@@ -17,7 +17,7 @@ import net.minecraft.item.ItemStack;
 
 public class ItemBlueprint extends Item {
 
-    public static final String[] names = { "item.name.blueprintFusion", "item.name.blueprintFission", "item.name.blueprintVat", "item.name.blueprintDirewolf" };
+    public static final String[] names = { "item.name.blueprintFusion", "item.name.blueprintFission", "item.name.blueprintDirewolf" };
 
     public ItemBlueprint(int id) {
         super(id);
