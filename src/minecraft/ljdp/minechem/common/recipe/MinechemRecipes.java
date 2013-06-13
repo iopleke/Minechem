@@ -444,7 +444,7 @@ public class MinechemRecipes {
         ItemStack var124 = new ItemStack(Block.mushroomRed);
         ItemStack var125 = new ItemStack(Block.cactus);
         DecomposerRecipe.add(new DecomposerRecipe(var123, new Chemical[] { this.molecule(EnumMolecule.psilocybin), this.molecule(EnumMolecule.water, 2) }));
-        DecomposerRecipe.add(new DecomposerRecipe(var124, new Chemical[] { this.molecule(EnumMolecule.pantherine), this.molecule(EnumMolecule.water, 2) }));
+        DecomposerRecipe.add(new DecomposerRecipe(var124, new Chemical[] { this.molecule(EnumMolecule.pantherine), this.molecule(EnumMolecule.water, 2), this.molecule(EnumMolecule.nictoine)}));
         DecomposerRecipe.add(new DecomposerRecipe(var125, new Chemical[] { this.molecule(EnumMolecule.mescaline), this.molecule(EnumMolecule.water, 20) }));
         SynthesisRecipe.add(new SynthesisRecipe(var125, true, 200, new Chemical[] { this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.mescaline), null, this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.water, 5) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var13, 0.8F, new Chemical[] { this.molecule(EnumMolecule.iron3oxide, 6), this.molecule(EnumMolecule.strontiumNitrate, 6) }));
