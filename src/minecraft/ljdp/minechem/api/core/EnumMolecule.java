@@ -78,7 +78,7 @@ public enum EnumMolecule {
     theobromine(64, "Theobromine", new Element(C, 7), new Element(H, 8), new Element(N, 4), new Element(O, 2)),
     starch(65, "Starch", new Molecule(cellulose, 2), new Molecule(cellulose, 1)),
     sucrose(66, "Sucrose", new Element(C, 12), new Element(H, 22), new Element(O, 11)),
-    pantherine(67, "Pantherine (Muscimol) ", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)), //LJDP you fail! There is not enought muscarine in a shroom to cause harm! The main active chemical is Muscimol (Pantherine). This chemical is similar to benzodiazapines! 
+    pantherine(67, "Pantherine", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)), //LJDP you fail! There is not enought muscarine in a shroom to cause harm! The main active chemical is Muscimol (Pantherine). This chemical is similar to benzodiazapines! 
     aluminiumOxide(68, "Aluminium Oxide", new Element(Al, 2), new Element(O, 3)),
     fullrene(69, "Carbon Nanotubes", new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
     keratin(70, "Keratin", new Element(C, 2), new Molecule(water), new Element(N)),
@@ -119,7 +119,8 @@ public enum EnumMolecule {
     purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
     olivine(106, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
     metblue(107, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl)),
-	meoh(108, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide))
+	meoh(108, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
+	nicotine(109, "Nicotine", new Element(C,10), new Element(H,14), new Element(N,2))
     ;
 
     public static EnumMolecule[] molecules = values();
@@ -140,7 +141,7 @@ public enum EnumMolecule {
         for (Chemical chemical : chemicals) {
             this.components.add(chemical);
         }
-        Random random = new Random(id);
+        Random random = new Random(id); // TODO: Default to random color if molecule is not in color lookup table 
         this.red = random.nextFloat();
         this.green = random.nextFloat();
         this.blue = random.nextFloat();
