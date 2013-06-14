@@ -53,12 +53,13 @@ public class BlockMicroscope extends BlockMinechemContainer {
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {
-        ItemStack inputStack = ((TileEntityMicroscope) tileEntity).getStackInSlot(0);
-        ItemStack journal = ((TileEntityMicroscope) tileEntity).getStackInSlot(1);
-        if (inputStack != null)
-            itemStacks.add(inputStack);
-        if (journal != null)
-           itemStacks.add(journal);
+        TileEntityMicroscope decomposer = (TileEntityMicroscope) tileEntity;
+        for (int slot = 0; slot < decomposer.getSizeInventory(); slot++) {
+            ItemStack itemstack = decomposer.getStackInSlot(slot);
+            if (itemstack != null) {
+                itemStacks.add(itemstack);
+            }
+        }
         return;
     }
 
