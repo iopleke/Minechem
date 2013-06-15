@@ -1,7 +1,7 @@
 package ljdp.minechem.client.render.item;
 
+import ljdp.minechem.client.ModelDecomposer;
 import ljdp.minechem.client.ModelPrinter;
-import ljdp.minechem.client.ModelSynthesizer;
 import ljdp.minechem.common.utils.ConstantValue;
 import net.minecraft.item.ItemStack;
 
@@ -19,7 +19,7 @@ public class ItemBlueprintPrinterRenderer extends ItemMinechemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        String texture = ConstantValue.SYNTHESIS_MODEL;
+        String texture = ConstantValue.PRINTER_MODEL;
         GL11.glPushMatrix();
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.getTexture(texture));
         switch(type.ordinal()){

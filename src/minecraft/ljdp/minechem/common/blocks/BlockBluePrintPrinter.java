@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import ljdp.minechem.common.CommonProxy;
 import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
+import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,10 +21,16 @@ public class BlockBluePrintPrinter extends BlockMinechemContainer{
 	}
 
 	@Override
-	public void addStacksDroppedOnBlockBreak(TileEntity tileEntity,
-			ArrayList<ItemStack> itemStacks) {
-		
-	}
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {
+        TileEntityBluePrintPrinter decomposer = (TileEntityBluePrintPrinter) tileEntity;
+        for (int slot = 0; slot < decomposer.getSizeInventory(); slot++) {
+            ItemStack itemstack = decomposer.getStackInSlot(slot);
+            if (itemstack != null) {
+                itemStacks.add(itemstack);
+            }
+        }
+        return;
+    }
 	@Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
@@ -37,7 +44,7 @@ public class BlockBluePrintPrinter extends BlockMinechemContainer{
 	        return new TileEntityBluePrintPrinter();
 	    }
 	 @Override
-	    public boolean renderAsNormalBlock() {
+	    public boolean isOpaqueCube() {
 	        return false;
 	    }
 
@@ -47,7 +54,7 @@ public class BlockBluePrintPrinter extends BlockMinechemContainer{
 	    }
 
 	    @Override
-	    public boolean isOpaqueCube() {
+	    public boolean renderAsNormalBlock() {
 	        return false;
 	    }
 }

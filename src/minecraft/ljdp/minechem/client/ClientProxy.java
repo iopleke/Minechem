@@ -1,6 +1,7 @@
 package ljdp.minechem.client;
 
 import ljdp.minechem.client.render.RenderBlockGhostBlock;
+import ljdp.minechem.client.render.item.ItemBlueprintPrinterRenderer;
 import ljdp.minechem.client.render.item.ItemBlueprintProjectorRenderer;
 import ljdp.minechem.client.render.item.ItemChemicalStorageRenderer;
 import ljdp.minechem.client.render.item.ItemDecomposerRenderer;
@@ -64,6 +65,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.synthesis.blockID].itemID, new ItemSynthesisRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.printer.blockID].itemID, new ItemBlueprintPrinterRenderer());
         RenderingRegistry.registerBlockHandler(new RenderBlockGhostBlock());
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());

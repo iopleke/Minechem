@@ -55,7 +55,7 @@ public interface ConstantValue {
     public static final String FUSION1_TEX = TEXTURE_MOD_ID + "fusion1";
     public static final String FUSION2_TEX = TEXTURE_MOD_ID + "fusion2";
     public static final String DEFAULT_TEX = TEXTURE_MOD_ID + "default";
-    public static final String table_HEX = TEXTURE_DIR + "table.png";
+    public static final String table_HEX = TEXTURE_GUI_DIR + "TableGUI.png";
     public static final String TAB_LEFT = TEXTURE_GUI_DIR + "tab_left.png";
     public static final String TAB_RIGHT = TEXTURE_GUI_DIR + "tab_right.png";
     public static final String DECOMPOSER_GUI = TEXTURE_GUI_DIR + "ChemicalDecomposerGUI.png";

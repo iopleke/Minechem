@@ -18,7 +18,7 @@ public class ItemSynthesisRenderer extends ItemMinechemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        String texture = ConstantValue.PRINTER_MODEL;
+        String texture = ConstantValue.SYNTHESIS_MODEL;
         GL11.glPushMatrix();
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.getTexture(texture));
         switch(type.ordinal()){
