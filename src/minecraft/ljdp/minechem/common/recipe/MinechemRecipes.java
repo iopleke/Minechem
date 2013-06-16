@@ -27,7 +27,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import biomesoplenty.api.BlockReferences;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.Loader;
-// import ljdp.minechem.common.BOPExporter;
+
 public class MinechemRecipes {
 
     private static final MinechemRecipes instance = new MinechemRecipes();
@@ -54,6 +54,8 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
         ItemStack Daisy1 = BlockReferences.getBlockItemStack("daisy");
         DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
+		ItemStack WitherFlower = BlockReferences.getBlockItemStack("deathbloom");
+        DecomposerRecipe.add(new DecomposerRecipe(WitherFlower, new Chemical[] { new Molecule(EnumMolecule.poison, 4), new Molecule(EnumMolecule.water, 2) }));
 	} 
     public void RegisterRecipes() {
         ItemStack var1 = new ItemStack(Block.stone);
