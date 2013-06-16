@@ -41,23 +41,8 @@ public class MinechemRecipes {
     public static MinechemRecipes getInstance() {
         return instance;
     }
-	public void BOPExport() {
-	    ItemStack Algae = BlockReferences.getBlockItemStack("algae");
-        DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
-        ItemStack IndigoCap = BlockReferences.getBlockItemStack("bluemilk"); // THE BLUE ONES FUCK YOU UP BAD!
-        DecomposerRecipe.add(new DecomposerRecipe(IndigoCap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye) }));
-        ItemStack MagicShroom = BlockReferences.getBlockItemStack("toadstool");
-        DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
-        ItemStack Willowasprin = BlockReferences.getBlockItemStack("willowLog");
-        DecomposerRecipe.add(new DecomposerRecipeChance(Willowasprin, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
-        ItemStack FoxFire = BlockReferences.getBlockItemStack("glowshroom");
-        DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
-        ItemStack Daisy1 = BlockReferences.getBlockItemStack("daisy");
-        DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
-		ItemStack WitherFlower = BlockReferences.getBlockItemStack("deathbloom");
-        DecomposerRecipe.add(new DecomposerRecipe(WitherFlower, new Chemical[] { new Molecule(EnumMolecule.poison, 4), new Molecule(EnumMolecule.water, 2) }));
-	} 
     public void RegisterRecipes() {
+	    boolean isbop = Loader.isModLoaded("BiomesOPlenty");
         ItemStack var1 = new ItemStack(Block.stone);
         new ItemStack(Block.cobblestone);
         ItemStack var3 = new ItemStack(Block.dirt);
@@ -487,8 +472,27 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[] { new Molecule(EnumMolecule.biocide, 2) }));
         ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
-        if (Loader.isModLoaded("BiomesOPlenty")) {BOPExport(); System.out.println("Minechem: BOP support loaded");}
-		else{System.out.println("This is just a debug message! Move along!");}
+        if ( !isbop ) {
+        System.out.println("This is just a debug message! Move along!");
+        }
+        else {
+		System.out.println("Minechem: BOP support loaded");
+	    ItemStack Algae = BlockReferences.getBlockItemStack("algae");
+        DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
+        ItemStack IndigoCap = BlockReferences.getBlockItemStack("bluemilk"); // THE BLUE ONES FUCK YOU UP BAD!
+        DecomposerRecipe.add(new DecomposerRecipe(IndigoCap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye) }));
+        ItemStack MagicShroom = BlockReferences.getBlockItemStack("toadstool");
+        DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
+        ItemStack Willowasprin = BlockReferences.getBlockItemStack("willowLog");
+        DecomposerRecipe.add(new DecomposerRecipeChance(Willowasprin, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
+        ItemStack FoxFire = BlockReferences.getBlockItemStack("glowshroom");
+        DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2), new Element(EnumElement.P, 4) }));
+        ItemStack Daisy1 = BlockReferences.getBlockItemStack("daisy");
+        DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
+		ItemStack WitherFlower = BlockReferences.getBlockItemStack("deathbloom");
+        DecomposerRecipe.add(new DecomposerRecipe(WitherFlower, new Chemical[] { new Molecule(EnumMolecule.poison, 4), new Molecule(EnumMolecule.water, 2) }));
+        }
+		
 		this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
