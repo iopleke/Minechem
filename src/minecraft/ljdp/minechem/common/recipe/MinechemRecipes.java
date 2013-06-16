@@ -478,7 +478,7 @@ public class MinechemRecipes {
         else {
 		System.out.println("Minechem: BOP support loaded");
 	    ItemStack Algae = BlockReferences.getBlockItemStack("algae");
-        DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.1F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.08F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
         ItemStack IndigoCap = BlockReferences.getBlockItemStack("bluemilk"); // THE BLUE ONES FUCK YOU UP BAD!
         DecomposerRecipe.add(new DecomposerRecipe(IndigoCap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye) }));
         ItemStack MagicShroom = BlockReferences.getBlockItemStack("toadstool");
