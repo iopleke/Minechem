@@ -42,7 +42,6 @@ public class MinechemRecipes {
         return instance;
     }
     public void RegisterRecipes() {
-	    boolean isbop = Loader.isModLoaded("BiomesOPlenty");
         ItemStack var1 = new ItemStack(Block.stone);
         new ItemStack(Block.cobblestone);
         ItemStack var3 = new ItemStack(Block.dirt);
@@ -472,7 +471,7 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var138, 0.07F, new Chemical[] { new Molecule(EnumMolecule.biocide, 2) }));
         ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
-        if ( !isbop ) {
+        if ( !Loader.isModLoaded("BiomesOPlenty")) {
         System.out.println("This is just a debug message! Move along!");
         }
         else {
