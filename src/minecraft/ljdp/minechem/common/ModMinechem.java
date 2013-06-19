@@ -13,6 +13,7 @@ import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
+import ljdp.minechem.common.ToxoExport;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -99,10 +100,11 @@ public class ModMinechem {
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
         initComputerCraftAddon(event);
+		initBOP(event);
         System.out.println("[MineChem] POSTINIT PASSED");
     }
 
-    private void initComputerCraftAddon(FMLPostInitializationEvent event) {
+      private void initComputerCraftAddon(FMLPostInitializationEvent event) {
         Object ccMain = event.buildSoftDependProxy("CCTurtle", "ljdp.minechem.computercraft.CCMain");
         if (ccMain != null) {
             ICCMain iCCMain = (ICCMain) ccMain;
@@ -110,7 +112,12 @@ public class ModMinechem {
             iCCMain.init();
             System.out.println("[MineChem] Computercraft interface layer loaded");
         }
-    }
+		}
+		
+		private void initBOP (FMLPostInitializationEvent event){
+		Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.ToxoExport");
+        if (BindBOP != null) {ToxoExport.DoBopExport(); System.out.println("Minechem: BOP support loaded");}
+		}
 
     private void loadConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
