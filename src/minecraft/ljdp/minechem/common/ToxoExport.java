@@ -10,7 +10,7 @@ import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import biomesoplenty.api.BlockReferences;
 // import ljdp.minechem.api.recipe.SynthesisRecipe;
 public class ToxoExport {
-public void DoBopExport() {
+public static void DoBopExport() {
 ItemStack Algae = BlockReferences.getBlockItemStack("algae");
 DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.08F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
 ItemStack IndigoCap = BlockReferences.getBlockItemStack("bluemilk"); // THE BLUE ONES FUCK YOU UP BAD!
