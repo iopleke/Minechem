@@ -7,6 +7,7 @@ import ljdp.minechem.api.core.Molecule;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
+import biomesoplenty.api.BlockReferences;
 // import ljdp.minechem.api.recipe.SynthesisRecipe;
 public class ToxoExport {
 public void DoBopExport() {
