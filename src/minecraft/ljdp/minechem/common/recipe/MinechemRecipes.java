@@ -24,7 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.oredict.OreDictionary;
-import biomesoplenty.api.BlockReferences;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.Loader;
 
