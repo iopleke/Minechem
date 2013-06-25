@@ -1,0 +1,198 @@
+<project name="MineChem" basedir="" default="main">
+  <property environment="env"/>
+
+  <!-- Properties -->
+	<property name="build.dir"            value="build"/>
+	<property name="src.dir"              value="src"/>
+	<property name="test.dir"             value="test"/>
+
+	<property name="download.dir"         value="download"/>
+	<property name="files.minecraft.dir"  value="jars"/>
+
+	<property name="classes.dir"          value="${build.dir}/classes"/>
+	<property name="jar.dir"              value="${build.dir}/dist"/>
+	<property name="lib.dir"              value="${build.dir}/lib"/>
+
+	<property name="forge.dir"            value="${build.dir}/forge"/>
+	<property name="mcp.dir"              value="${forge.dir}/mcp"/>
+
+	<property name="clientsrc.dir"        value="${mcp.dir}/src/minecraft"/>
+	<property name="commonsrc.dir"        value="${clientsrc.dir}"/>
+
+	<property file="${clientsrc.dir}/fmlversion.properties" />
+
+	<property name="mc.version"           value="1.5.2"/>
+	<property name="forge.version"        value="7.8.1.737"/>
+	<property name="mod.version" value="0"/>
+  
+	<!-- Let's make ant make work with git ;) -->
+	<macrodef name = "git">
+		<attribute name = "command" />
+		<attribute name = "dir" default = "" />
+		<element name = "args" optional = "true" />
+		<sequential>
+			<echo message = "git @{command}" />
+			<exec executable = "git" dir = "@{dir}">
+				<arg value = "@{command}" />
+				<args/>
+			</exec>
+		</sequential>
+	</macrodef>
+	<macrodef name = "git-clone-pull">
+		<attribute name = "repository" />
+		<attribute name = "dest" />
+		<sequential>
+			<git command = "clone">
+				<args>
+					<arg value = "@{repository}" />
+					<arg value = "@{dest}" />
+				</args>
+			</git>
+			<git command = "pull" dir = "@{dest}" />
+		</sequential>
+	</macrodef>
+  
+	<!-- Targets -->
+	<target name="init-msg">
+		<echo message="Starting build for ${mod.version.full}"/>
+	</target>
+
+	<target name="clean">
+		<delete dir="${build.dir}"/>
+	</target>
+
+	<target name="setup">
+		<mkdir dir="${download.dir}"/>
+		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
+
+		<echo message="Download finished"/>
+
+		<unzip dest="${build.dir}" failOnEmptyArchive="true">
+			<fileset dir="${download.dir}">
+				<include name="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
+			</fileset>
+		</unzip>
+
+		<echo message="Unpacking finished"/>
+
+		<!-- Install forge -->
+		<exec dir="${forge.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c install.cmd"/>
+		</exec>
+
+		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg value="install.sh"/>
+		</exec>
+
+		<chmod file="${mcp.dir}/updatemd5.sh" perm="+x"/>
+		<chmod file="${mcp.dir}/updatemcp.sh" perm="+x"/>
+		<chmod file="${mcp.dir}/recompile.sh" perm="+x"/>
+		<chmod file="${mcp.dir}/reobfuscate_srg.sh" perm="+x"/>
+		<chmod file="${forge.dir}/install.sh" perm="+x"/>
+
+		<!-- if your building on OSX these 2 should be executable -->
+		<chmod file="${mcp.dir}/runtime/bin/astyle-osx" perm="+x"/>
+		<chmod file="${mcp.dir}/runtime/bin/jad-osx" perm="+x"/>
+
+		<echo message="Decompile finished"/>
+
+		<echo message="Copied BuildCraft API files"/>
+
+		<!-- Refresh MD5 -->
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c updatemd5.bat -f --client"/>
+		</exec>
+
+		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg line="updatemd5.sh -f --client"/>
+		</exec>
+
+		<echo message="Regenerated MD5s"/>
+
+	</target>
+
+
+	<target name="copySRC" >
+		<!-- Delete source in build space -->
+		<delete dir="${commonsrc.dir}/k2b6s9j/engines"/>
+
+		<!-- Copy source -->
+		<copy todir="${commonsrc.dir}">
+			<fileset dir="${src.dir}"/>
+		</copy>
+	</target>
+
+
+	<target name="compile" depends="copySRC">
+
+		<echo message="Compiling version ${mod.version.full}"/>
+
+		<!-- Recompile -->
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c recompile.bat --client"/>
+		</exec>
+
+		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg value="recompile.sh"/>
+		</exec>
+
+		<!-- Reobf -->
+		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
+			<arg line="/c reobfuscate_srg.bat --client"/>
+		</exec>
+
+		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
+			<arg value="reobfuscate_srg.sh"/>
+		</exec>
+
+		<!-- Copy classes -->
+		<copy todir="${classes.dir}/client">
+			<fileset dir="${mcp.dir}/reobf/minecraft"/>
+		</copy>
+
+		<!-- Copy resoucres -->
+		<copy todir="${classes.dir}/client">
+			<fileset dir="resources"></fileset>
+		</copy>
+
+		<replace file="${classes.dir}/client/mcmod.info" token="%VERSION%" value="${mod.version.full}"/>
+		<replace file="${classes.dir}/client/mcmod.info" token="%MCVERSION%" value="${mc.version}"/>
+
+		<echo message="Compiling finished"/>
+
+	</target>
+
+	<target name="package" depends="compile">
+		<echo message="Packing version ${mod.version.full}"/>
+
+		<jar destfile="dist/KeplersEngines-${mod.version.full}" basedir="${classes.dir}/client"/>
+
+		<echo message="Packing finished"/>
+	</target>
+
+	<target name="vars">
+		<property name="mod.version.full"      value="${mod.version}"/>
+	</target>
+
+	<target name="vars-dev">
+		<property name="mod.version.full"      value="${mod.version}.dev"/>
+	</target>
+
+	<target name="vars-test">
+		<property name="mod.version.full" value="test"/>
+		<property name="DEBUG"           value="true"/>
+	</target>
+
+	<target name="dev">
+		<property name="src.dir"              value="src_dev"/>
+	</target>
+
+	<target name="main" depends="vars, init-msg, clean, setup, package"/>
+
+	<target name="ci-dev" depends="vars-dev, init-msg, clean, setup, package"/>
+
+	<target name="ci" depends="vars, init-msg, clean, setup, package"/>
+
+	<target name="test" depends="vars-test, init-msg, clean, setup, compile"/>
+
+</project>
