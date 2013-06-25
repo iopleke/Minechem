@@ -24,7 +24,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
-import basiccomponents.common.BasicComponents;
+// import basiccomponents.common.BasicComponents;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -93,8 +93,8 @@ public class ModMinechem {
         System.out.println("[MineChem] INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
         Modstats.instance().getReporter().registerMod(this);
-        BasicComponents.requestAll();
-        BasicComponents.registerTileEntities();
+        // BasicComponents.requestAll();
+        //  BasicComponents.registerTileEntities();
     }
 
     @PostInit
