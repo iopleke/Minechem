@@ -1,22 +1,11 @@
-MINECHEM MAIN REPO 
+Minechem III
+=========
 
-THIS IS THE MOST UPDATED VERSION OF MINECHEM! 
+Minechem III is a mod about science. Originally maintained by ljdp, Minechem III is maintained by Rushmead and open source contributors, and is based off the work of the previous iteration Minechem II. Split apart materials into their most basic components, then mesh them all together into something new. The possibilities are endless!
 
+Minechem can be found at: http://universalelectricity.com/minechem
 
-License:
+## License:
 
-Minechem v3.x is licensed under Creative Commons Attribution-ShareAlike 3.0 Unported. You are free:
-
-to share - to copy, distribute and transmit the work
-to remix - to adapt the work
-to profit - to make commercial use of the work.
-Under the following conditions:
-
-attribution - you must attribute my name, ljdp. (Forking the repo in github counts).
-share alike - you must license any modification under the same or similar as this one.
-For more information on this license see here: http://creativecommons.org/licenses/by-sa/3.0/
-
-
-http://universalelectricity.com/minechem
-
-This mod bought to you by the letter K and the Conspicuous Sea Cucumber.
+> Minechem v3.x is licensed under Creative Commons Attribution-ShareAlike 3.0 Unported. <br />
+The details of the licence can be found at: http://creativecommons.org/licenses/by-sa/3.0/us/
