@@ -20,6 +20,7 @@ import ljdp.minechem.common.blueprint.MinechemBlueprint;
 import ljdp.minechem.common.items.ItemElement;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemDye;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -60,6 +61,8 @@ public class MinechemRecipes {
         ItemStack var17 = new ItemStack(MinechemItems.atomicManipulator);
         ItemStack var18 = new ItemStack(Item.redstone);
         ItemStack var19 = new ItemStack(MinechemItems.testTube, 16);
+        ItemStack paper = new ItemStack(Item.paper);
+        ItemStack bdye = new ItemStack(Item.dyePowder, 1, 6);
         GameRegistry.addRecipe(var19, new Object[] { " G ", " G ", " G ", Character.valueOf('G'), var6 });
         GameRegistry.addRecipe(MinechemItems.concaveLens, new Object[] { "G G", "GGG", "G G", Character.valueOf('G'), var6 });
         GameRegistry.addRecipe(MinechemItems.convexLens, new Object[] { " G ", "GGG", " G ", Character.valueOf('G'), var6 });
@@ -79,6 +82,7 @@ public class MinechemRecipes {
         GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[] { "PPP", "P P", "   ", Character.valueOf('P'), var20 });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocks.chemicalStorage), new Object[] { "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
         GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[] { "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
+        GameRegistry.addRecipe(new ItemStack(MinechemItems.blueprint, 1, 1), new Object[] { "ZZZ", "SSS", "ZZZ", Character.valueOf('Z'), paper, Character.valueOf('S'), bdye });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[] { new ItemStack(Item.book), new ItemStack(MinechemItems.testTube) });
         for (EnumElement element : EnumElement.values()) {
             GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.testTube), new Object[] { new ItemStack(MinechemItems.element, element.ordinal()) });
