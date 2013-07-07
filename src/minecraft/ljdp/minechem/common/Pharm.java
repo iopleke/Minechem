@@ -163,7 +163,7 @@ public class Pharm {
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 60, 10));
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 4));
 			break; 
-			case default:
+			default:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 5);
 			break;
         }
