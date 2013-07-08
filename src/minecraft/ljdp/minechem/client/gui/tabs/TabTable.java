@@ -8,7 +8,7 @@ public class TabTable extends Tab{
 	public TabTable(Gui gui) {
 		super(gui);
 	
-		this.overlayColor = 0x88BBBB;// TODO Auto-generated constructor stub
+		this.overlayColor = 0x2F7DAA;// TODO Auto-generated constructor stub
 	}
 
 	@Override
