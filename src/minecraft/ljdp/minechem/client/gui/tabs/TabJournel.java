@@ -9,10 +9,9 @@ public class TabJournel extends Tab{
 	public TabJournel(Gui gui) {
 		super(gui);
 		
-		this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;
+	this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;
         this.currentShiftY = GuiTableOfElements.GUI_HEIGHT - 411;
-        
-		this.overlayColor = 0x88BBBB;// TODO Auto-generated constructor stub
+        this.overlayColor = 0x2F7DAA 
 	}
 
 	@Override
