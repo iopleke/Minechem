@@ -11,7 +11,7 @@ public class TabJournel extends Tab{
 		
 	this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;
         this.currentShiftY = GuiTableOfElements.GUI_HEIGHT - 411;
-        this.overlayColor = 0x2F7DAA 
+        this.overlayColor = 0x2F7DAA;
 	}
 
 	@Override
