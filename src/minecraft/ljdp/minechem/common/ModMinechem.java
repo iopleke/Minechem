@@ -24,7 +24,6 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
-// import basiccomponents.common.BasicComponents;
 
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
@@ -93,14 +92,12 @@ public class ModMinechem {
         System.out.println("[MineChem] INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
         Modstats.instance().getReporter().registerMod(this);
-        // BasicComponents.requestAll();
-        //  BasicComponents.registerTileEntities();
     }
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
         initComputerCraftAddon(event);
-		initBOP(event);
+	initBOP(event);
         System.out.println("[MineChem] POSTINIT PASSED");
     }
 
@@ -114,10 +111,14 @@ public class ModMinechem {
         }
 		}
 		
-		private void initBOP (FMLPostInitializationEvent event){
-		Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.ToxoExport");
-        if (BindBOP != null) {ToxoExport.DoBopExport(); System.out.println("Minechem: BOP support loaded");}
-		}
+	private void initBOP (FMLPostInitializationEvent event){
+	Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.ToxoExport");
+        if (BindBOP != null) {
+        ToxoExport.DoBopExport(); 
+        System.out.println("[MineChem] BOP support loaded");
+        }
+         
+         }
 
     private void loadConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
