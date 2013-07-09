@@ -17,7 +17,7 @@ public class BlockBluePrintPrinter extends BlockMinechemContainer{
 	public BlockBluePrintPrinter(int par1) {
 		super(par1, Material.iron);
 		this.setCreativeTab(ModMinechem.minechemTab);
-		this.setUnlocalizedName("Printer");
+		this.setUnlocalizedName("Blueprint Printer (WIP)");
 	}
 
 	@Override
