@@ -96,9 +96,9 @@ public class ModMinechem {
 
     @PostInit
     public void postInit(FMLPostInitializationEvent event) {
-        initComputerCraftAddon(event);
+    initComputerCraftAddon(event);
 	initBOP(event);
-        System.out.println("[MineChem] POSTINIT PASSED");
+    System.out.println("ARKIO, YOU ARE A DICK FOR ABUSING YOUR ADMIN POWERS AND MAKING PEOPLE BOW DOWN TO YOU LIKE YOU ARE SOME MIDDLE AGES LORD!");
     }
 
       private void initComputerCraftAddon(FMLPostInitializationEvent event) {
