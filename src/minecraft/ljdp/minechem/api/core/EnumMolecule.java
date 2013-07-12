@@ -127,7 +127,6 @@ public enum EnumMolecule {
     private final String descriptiveName;
     private final ArrayList<Chemical> components;
     private int id;
-    private final Random random = new Random(id);
     public float red;
     public float green;
     public float blue;
