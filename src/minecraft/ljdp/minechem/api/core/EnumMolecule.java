@@ -17,7 +17,7 @@ public enum EnumMolecule {
     nitrogenDioxide(3, "Nitrogen Dioxide", 1, 0.65F, 0, 0.5F, 0.1412F, 0.1843F, new Element(N), new Element(O, 2)),
     toluene(4, "Toluene", 1, 1, 1, 0.8F, 0.8F, 0.8F, new Element(C, 7), new Element(H, 8)),
     potassiumNitrate(5, "Potassium Nitrate", 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F, new Element(K), new Element(N), new Element(O, 3)),
-    tnt(6, "Trinitrotoluene", new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
+    tnt(6, "Trinitrotoluene", 1, 1, 0, 1, 0.65F, 0, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
     siliconDioxide(7, "Silicon Dioxide", new Element(Si), new Element(O, 2)),
     calcite(8, "Calcite", new Element(Ca), new Element(C), new Element(O, 3)),
     pyrite(9, "Pyrite", new Element(Fe), new Element(S, 2)),
