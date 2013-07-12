@@ -14,7 +14,7 @@ public enum EnumMolecule {
     cellulose(0, "Cellulose", 0, 1, 0, 0, 0.25F, 0, new Element(C, 6), new Element(H, 10), new Element(O, 5)),
     water(1, "Water", 0, 0, 1, 0, 0, 1, new Element(H, 2), new Element(O)),
     carbonDioxide(2, "Carbon Dioxide", 0.5F, 0.5F, 0.5F, 0.25F, 0.25F, 0.25F, new Element(C), new Element(O, 2)),
-    nitrogenDioxide(3, "Nitrogen Dioxide", new Element(N), new Element(O, 2)),
+    nitrogenDioxide(3, "Nitrogen Dioxide", 1, 0.65F, 0, 0.5F, 0.1412F, 0.1843F, new Element(N), new Element(O, 2)),
     toluene(4, "Toluene", new Element(C, 7), new Element(H, 8)),
     potassiumNitrate(5, "Potassium Nitrate", new Element(K), new Element(N), new Element(O, 3)),
     tnt(6, "Trinitrotoluene", new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
