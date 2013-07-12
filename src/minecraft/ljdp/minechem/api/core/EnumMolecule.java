@@ -12,7 +12,7 @@ import java.util.Random;
 // MOLECULE IDS MUST BE CONTINIOUS OTHERWISE THE ARRAY WILL BE MISALIGNED.
 public enum EnumMolecule {
     cellulose(0, "Cellulose", new Element(C, 6), new Element(H, 10), new Element(O, 5)),
-    water(1, "Water", new Element(H, 2), new Element(O)),
+    water(1, "Water", 0, 0, 1, 0, 0, 1, new Element(H, 2), new Element(O)),
     carbonDioxide(2, "Carbon Dioxide", new Element(C), new Element(O, 2)),
     nitrogenDioxide(3, "Nitrogen Dioxide", new Element(N), new Element(O, 2)),
     toluene(4, "Toluene", new Element(C, 7), new Element(H, 8)),
@@ -127,6 +127,7 @@ public enum EnumMolecule {
     private final String descriptiveName;
     private final ArrayList<Chemical> components;
     private int id;
+    private final Random random = new Random(id);
     public float red;
     public float green;
     public float blue;
@@ -134,23 +135,29 @@ public enum EnumMolecule {
     public float green2;
     public float blue2;
 
-    EnumMolecule(int id, String descriptiveName, Chemical... chemicals) {
+    EnumMolecule(int id, String descriptiveName, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, Chemical... chemicals) {
         this.id = id;
         this.components = new ArrayList<Chemical>();
         this.descriptiveName = descriptiveName;
         for (Chemical chemical : chemicals) {
             this.components.add(chemical);
         }
-        Random random = new Random(id); // TODO: Default to random color if molecule is not in color lookup table 
-        this.red = random.nextFloat();
-        this.green = random.nextFloat();
-        this.blue = random.nextFloat();
-        this.red2 = random.nextFloat();
-        this.green2 = random.nextFloat();
-        this.blue2 = random.nextFloat();
+        Random random = new Random(id);
+        this.red = colorRed;
+        this.green = colorGreen;
+        this.blue = colorBlue;
+        this.red2 = colorRed2;
+        this.green2 = colorGreen2;
+        this.blue2 = colorBlue2;
+    }
+    
+    @Deprecated
+    EnumMolecule(int id, String descriptiveName, Chemical... chemicals) {
+        this(id, descriptiveName, 0.545f, 0.2705f, 0.0745f, 0, 0, 0, chemicals);
+        // Your molecule will literally look like shit until you give it a proper color code.
     }
 
-    public static EnumMolecule getById(int id) {
+	public static EnumMolecule getById(int id) {
         for (EnumMolecule molecule : molecules) {
             if (molecule.id == id)
                 return molecule;
