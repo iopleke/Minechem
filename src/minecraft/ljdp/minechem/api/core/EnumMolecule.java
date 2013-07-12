@@ -18,7 +18,7 @@ public enum EnumMolecule {
     toluene(4, "Toluene", 1, 1, 1, 0.8F, 0.8F, 0.8F, new Element(C, 7), new Element(H, 8)),
     potassiumNitrate(5, "Potassium Nitrate", 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F, new Element(K), new Element(N), new Element(O, 3)),
     tnt(6, "Trinitrotoluene", 1, 1, 0, 1, 0.65F, 0, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
-    siliconDioxide(7, "Silicon Dioxide", new Element(Si), new Element(O, 2)),
+    siliconDioxide(7, "Silicon Dioxide", 1, 1, 1, 1, 1, 1, new Element(Si), new Element(O, 2)),
     calcite(8, "Calcite", new Element(Ca), new Element(C), new Element(O, 3)),
     pyrite(9, "Pyrite", new Element(Fe), new Element(S, 2)),
     nepheline(10, "Nepheline", new Element(Al), new Element(Si), new Element(O, 4)),
@@ -152,8 +152,14 @@ public enum EnumMolecule {
     
     @Deprecated
     EnumMolecule(int id, String descriptiveName, Chemical... chemicals) {
-        this(id, descriptiveName, 0.545f, 0.2705f, 0.0745f, 0, 0, 0, chemicals);
-        // Your molecule will literally look like shit until you give it a proper color code.
+        this(id, descriptiveName, getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), chemicals);
+        // Your molecule will have random colors until you give it a proper color code.
+    }
+    
+    private static float getRandomColor()
+    {
+    	Random random = new Random();
+    	return random.nextFloat();
     }
 
 	public static EnumMolecule getById(int id) {
