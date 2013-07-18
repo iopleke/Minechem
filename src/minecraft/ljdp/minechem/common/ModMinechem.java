@@ -41,7 +41,9 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-
+import java.util.logging.Logger;
+import cpw.mods.fml.common.FMLLog;
+public static Logger logger;
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
 @ModstatInfo(prefix="minechem")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.MINECHEM_PACKET_CHANNEL }, packetHandler = PacketHandler.class)
@@ -57,7 +59,9 @@ public class ModMinechem {
     public static String GUITABLEID = "2";
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
-
+        logger = Logger.getLogger(MOD_ID);
+		 
+        logger.setParent(FMLLog.getLogger());
 
         Localization.loadLanguages(CommonProxy.LANG_DIR, LANGUAGES_SUPPORTED);
 
@@ -78,7 +82,7 @@ public class ModMinechem {
         
         
 
-        System.out.println("[MineChem] PREINT PASSED");
+        logger.info("[MineChem] PREINT PASSED");
 
         for (int i = 0; i < 5; i++)
             VillagerRegistry.instance().registerVillageTradeHandler(i, new VillageTradeHandler());
@@ -89,7 +93,7 @@ public class ModMinechem {
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
         proxy.registerRenderers();
-        System.out.println("[MineChem] INIT PASSED");
+        logger.info("[MineChem] INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
         Modstats.instance().getReporter().registerMod(this);
     }
@@ -98,7 +102,7 @@ public class ModMinechem {
     public void postInit(FMLPostInitializationEvent event) {
     initComputerCraftAddon(event);
 	initBOP(event);
-    System.out.println("[MineChem] POSTINIT PASSED");
+    logger.info("[MineChem] POSTINIT PASSED");
     }
 
       private void initComputerCraftAddon(FMLPostInitializationEvent event) {
@@ -107,7 +111,7 @@ public class ModMinechem {
             ICCMain iCCMain = (ICCMain) ccMain;
             iCCMain.loadConfig(config);
             iCCMain.init();
-            System.out.println("[MineChem] Computercraft interface layer loaded");
+            logger.info("[MineChem] Computercraft interface layer loaded");
         }
 		}
 		
@@ -115,7 +119,7 @@ public class ModMinechem {
 	Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.ToxoExport");
         if (BindBOP != null) {
         ToxoExport.DoBopExport(); 
-        System.out.println("[MineChem] BOP support loaded");
+        logger.info("[MineChem] BOP support loaded");
         }
          
          }

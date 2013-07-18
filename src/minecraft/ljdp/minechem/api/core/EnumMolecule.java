@@ -80,7 +80,7 @@ public enum EnumMolecule {
     sucrose(66, "Sucrose", new Element(C, 12), new Element(H, 22), new Element(O, 11)),
     pantherine(67, "Pantherine", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)), //LJDP you fail! There is not enought muscarine in a shroom to cause harm! The main active chemical is Muscimol (Pantherine). This chemical is similar to benzodiazapines! 
     aluminiumOxide(68, "Aluminium Oxide", new Element(Al, 2), new Element(O, 3)),
-    fullrene(69, "Carbon Nanotubes", new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
+    fullrene(69, "Carbon Nanotubes", 0.47F, 0.47F, 0.47F, 0.47F, 0.47F, 0.47F, new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
     keratin(70, "Keratin", new Element(C, 2), new Molecule(water), new Element(N)),
     penicillin(71, "Penicillin", new Element(C, 16), new Element(H, 18), new Element(N, 2), new Element(O, 4), new Element(S)),
     testosterone(72, "Testosterone", new Element(C, 19), new Element(H, 28), new Element(O, 2)),
@@ -93,7 +93,7 @@ public enum EnumMolecule {
     asprin(79, "Aspirin", new Element(C, 9), new Element(H, 8), new Element(O, 4)),
     ddt(80, "DDT", new Element(C, 14), new Element(H, 9), new Element(Cl, 5)),
     dota(81, "DOTA", new Element(C, 16), new Element(H, 28), new Element(N, 4), new Element(O, 8)),
-    poison(82, "T-2 Mycotoxin", new Element(C, 24), new Element(H, 34), new Element(O, 9)),
+    poison(82, "T-2 Mycotoxin", 0.89F, 0.83F, 0.07, 0.89F, 0.83F, 0.07, new Element(C, 24), new Element(H, 34), new Element(O, 9)),
     salt(83, "Salt", new Element(Na, 1), new Element(Cl, 1)),
     nhthree(84, "Ammonia", new Element(N, 1), new Element(H, 3)),
     nod(85, "Nodularin", new Element(C, 41), new Element(H, 60), new Element(N, 8), new Element(O, 10)),
