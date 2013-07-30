@@ -15,6 +15,7 @@ import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
+import ljdp.minechem.common.ToxoExport;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -85,7 +86,7 @@ public class ModMinechem {
         
         
 
-        logger.info("[MineChem] PREINT PASSED");
+        logger.info("PREINT PASSED");
 
         for (int i = 0; i < 5; i++)
             VillagerRegistry.instance().registerVillageTradeHandler(i, new VillageTradeHandler());
@@ -96,7 +97,7 @@ public class ModMinechem {
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
         proxy.registerRenderers();
-        logger.info("[MineChem] INIT PASSED");
+        logger.info("INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
         Modstats.instance().getReporter().registerMod(this);
     }
@@ -105,7 +106,7 @@ public class ModMinechem {
     public void postInit(FMLPostInitializationEvent event) {
     initComputerCraftAddon(event);
 	initBOP(event);
-    logger.info("[MineChem] POSTINIT PASSED");
+    logger.info("POSTINIT PASSED");
     }
 
       private void initComputerCraftAddon(FMLPostInitializationEvent event) {
@@ -114,7 +115,7 @@ public class ModMinechem {
             ICCMain iCCMain = (ICCMain) ccMain;
             iCCMain.loadConfig(config);
             iCCMain.init();
-            logger.info("[MineChem] Computercraft interface layer loaded");
+            logger.info("Computercraft interface layer loaded");
         }
 		}
 		
@@ -122,7 +123,7 @@ public class ModMinechem {
 	Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.ToxoExport");
         if (BindBOP != null) {
         ToxoExport.DoBopExport(); 
-        logger.info("[MineChem] BOP support loaded");
+        logger.info("BOP support loaded");
         }
          
          }
