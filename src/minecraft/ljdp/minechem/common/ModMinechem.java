@@ -1,5 +1,7 @@
 package ljdp.minechem.common;
 
+import java.util.logging.Logger;
+
 import ljdp.minechem.client.gui.tabs.TabEnergy;
 import ljdp.minechem.client.gui.tabs.TabHelp;
 import ljdp.minechem.client.gui.tabs.TabJournel;
@@ -13,7 +15,6 @@ import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
-import ljdp.minechem.common.ToxoExport;
 import net.minecraft.client.Minecraft;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraftforge.client.event.TextureStitchEvent;
@@ -24,7 +25,7 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
-
+import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.Init;
 import cpw.mods.fml.common.Mod.Instance;
@@ -41,15 +42,17 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.logging.Logger;
-import cpw.mods.fml.common.FMLLog;
-public static Logger logger;
+
+
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
 @ModstatInfo(prefix="minechem")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.MINECHEM_PACKET_CHANNEL }, packetHandler = PacketHandler.class)
+
 public class ModMinechem {
     @Instance("minechem")
     public static ModMinechem instance;
+    
+    public static Logger logger;
 
     @SidedProxy(clientSide = "ljdp.minechem.client.ClientProxy", serverSide = "ljdp.minechem.common.CommonProxy")
     public static CommonProxy proxy;
@@ -59,7 +62,7 @@ public class ModMinechem {
     public static String GUITABLEID = "2";
     @PreInit
     public void preInit(FMLPreInitializationEvent event) {
-        logger = Logger.getLogger(MOD_ID);
+        logger = Logger.getLogger("minechem");
 		 
         logger.setParent(FMLLog.getLogger());
 

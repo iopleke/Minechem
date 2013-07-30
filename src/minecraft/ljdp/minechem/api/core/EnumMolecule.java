@@ -93,7 +93,7 @@ public enum EnumMolecule {
     asprin(79, "Aspirin", new Element(C, 9), new Element(H, 8), new Element(O, 4)),
     ddt(80, "DDT", new Element(C, 14), new Element(H, 9), new Element(Cl, 5)),
     dota(81, "DOTA", new Element(C, 16), new Element(H, 28), new Element(N, 4), new Element(O, 8)),
-    poison(82, "T-2 Mycotoxin", 0.89F, 0.83F, 0.07, 0.89F, 0.83F, 0.07, new Element(C, 24), new Element(H, 34), new Element(O, 9)),
+    poison(82, "T-2 Mycotoxin", 0.89F, 0.83F, 0.07F, 0.89F, 0.83F, 0.07F, new Element(C, 24), new Element(H, 34), new Element(O, 9)),
     salt(83, "Salt", new Element(Na, 1), new Element(Cl, 1)),
     nhthree(84, "Ammonia", new Element(N, 1), new Element(H, 3)),
     nod(85, "Nodularin", new Element(C, 41), new Element(H, 60), new Element(N, 8), new Element(O, 10)),
