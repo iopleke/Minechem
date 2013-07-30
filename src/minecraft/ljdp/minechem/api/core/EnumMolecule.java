@@ -109,18 +109,17 @@ public enum EnumMolecule {
     ret(95, "Retinol", new Element(C, 20), new Element(H, 30), new Element(O)),
     stevenk(96, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
     weedex(97, "Aminocyclopyrachlor", new Element(C,8), new Element(H,8), new Element(Cl), new Element(N,3), new Element(O,2)),
-    biocide(98, "Ptaquiloside", new Element(C, 20), new Element(H, 30), new Element(O, 8)),
-    xanax(99, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4)),
-    hcl(100, "Hydrogen Chloride", new Element(H), new Element(Cl)),
-    redrocks(101, "Cocaine", new Element(C,17), new Element(H,21), new Element(N), new Element(O,4)),
-    coke(102, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl)),
-    blueorgodye(103, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
-    redorgodye(104, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
-    purpleorgodye(105, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
-    olivine(106, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
-    metblue(107, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl)),
-	meoh(108, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
-	nicotine(109, "Nicotine", new Element(C,10), new Element(H,14), new Element(N,2))
+    xanax(98, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4)),
+    hcl(99, "Hydrogen Chloride", new Element(H), new Element(Cl)),
+    redrocks(10, "Cocaine", new Element(C,17), new Element(H,21), new Element(N), new Element(O,4)),
+    coke(101, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl)),
+    blueorgodye(102, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
+    redorgodye(103, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
+    purpleorgodye(104, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
+    olivine(105, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
+    metblue(106, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl)),
+	meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
+	nicotine(108, "Nicotine", new Element(C,10), new Element(H,14), new Element(N,2))
     ;
 
     public static EnumMolecule[] molecules = values();

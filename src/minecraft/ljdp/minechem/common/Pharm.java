@@ -35,16 +35,13 @@ public class Pharm {
         case amphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 20, 7));
             break;
-        case methamphetamine:
+            case methamphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
             break;
-        case poison:
+            case poison:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             break;
-            case biocide: 
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
-            break;
-        case ethanol:
+            case ethanol:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 10, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
@@ -78,7 +75,8 @@ public class Pharm {
             cureAllPotions(world, entityPlayer);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 1, 1));
             break;
-            case shikimicAcid: salt:
+            case shikimicAcid:
+			case salt:
             // No effect.
             break;
             case phosgene: aalc: sulfuricAcid: buli: // all of these cause tons of damage to human flesh!!!!!!!!
