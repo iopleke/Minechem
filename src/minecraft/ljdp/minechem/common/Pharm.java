@@ -20,7 +20,7 @@ public class Pharm {
         case starch:
             entityPlayer.getFoodStats().addStats(2, .2F);
             break;
-            case stevenk:
+        case stevenk:
             entityPlayer.getFoodStats().addStats(2, .2F);
             break;
         case sucrose:
@@ -35,13 +35,13 @@ public class Pharm {
         case amphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 20, 7));
             break;
-            case methamphetamine:
+        case methamphetamine:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
             break;
-            case poison:
+        case poison:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             break;
-            case ethanol:
+        case ethanol:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 10, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
@@ -62,7 +62,7 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
-            case pantherine: 
+        case pantherine: 
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
@@ -71,24 +71,27 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
-            case asprin:
+        case asprin:
             cureAllPotions(world, entityPlayer);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 1, 1));
             break;
-            case shikimicAcid:
-			case salt:
+        case shikimicAcid:
+				case salt:
             // No effect.
             break;
-            case phosgene: aalc: sulfuricAcid: buli: // all of these cause tons of damage to human flesh!!!!!!!!
+       case phosgene:// all of these cause tons of damage to human flesh!!!!!
+            case aalc:
+            case sulfuricAcid:
+            case buli:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 2);
             entityPlayer.setFire(100);
             break;
             // 
-            case ttx: 
+       case ttx: 
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 1));
             break;
-			case nicotine: 
+       case nicotine: 
 			entityPlayer.attackEntityFrom(DamageSource.generic, 4);
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
 			break; 
@@ -124,44 +127,35 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 1));
             entityPlayer.getFoodStats().addStats(3, .1F);
             break;
-		case glycine:
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		break; 
-		case alinine:
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		break; 
-		case serine: 
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		break; 
-		case arginine:
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-		break; 
+        case glycine:
+			case alinine:
+			case serine: 
+			case arginine:
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 1));
+			break; 
 		case redrocks:
 	        entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 120, 5));
-                entityPlayer.attackEntityFrom(DamageSource.generic, 2);
-                entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 5));
-                entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 7));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 5));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 7));
 	        break; 
 		case coke:
 	        entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 5));
-                entityPlayer.attackEntityFrom(DamageSource.generic, 2);
-                entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 60, 5));
-                entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 60, 10));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 60, 5));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 60, 10));
 	        break; 
-	        case metblue:
+	    case metblue:
 	        cureAllPotions(world, entityPlayer);
 	        entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
 	        break;
-			case meoh:
+		case meoh:
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 60, 4));
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 4));
 			break; 
-			default:
+		default:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 5);
 			break;
         }
