@@ -24,12 +24,9 @@ public class VillageTradeHandler implements IVillageTradeHandler {
         if (profession == librarian) {
             recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald), new ItemStack(Item.diamond), new ItemStack(MinechemItems.blueprint, 1, 0)));
             if (random.nextFloat() < .5F) {
-                recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald), new ItemStack(Item.diamond), new ItemStack(MinechemItems.blueprint, 1, 3)));
+                recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald), new ItemStack(Item.diamond), new ItemStack(MinechemItems.blueprint, 1, 2))); // Lithorn, HOW IN THE NAME OF FUCK DID YOU MANAGE TO CRASH ON THIS!!!!!!!
             }
-            /*
-             * recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald), new ItemStack(Item.diamond), new ItemStack(MinechemItems.blueprint, 1, 1)) );
-             * recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald), new ItemStack(Item.diamond), new ItemStack(MinechemItems.blueprint, 1, 2)) );
-             */
+			
         } else if (profession == blacksmith) {
             recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), new ItemStack(MinechemBlocks.decomposer)));
             recipeList.add(new MerchantRecipe(new ItemStack(Item.emerald, 3), new ItemStack(MinechemBlocks.microscope)));
