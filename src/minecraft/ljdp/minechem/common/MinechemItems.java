@@ -18,6 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import ljdp.minechem.common.items.pillz;
 
 public class MinechemItems {
     public static ItemElement element;
@@ -37,7 +38,7 @@ public class MinechemItems {
     public static ItemStack projectorLens;
     public static ItemStack microscopeLens;
     public static PhotonicInduction IAintAvinit;
-
+    public static ItemStack pillz;
     private static int elementID;
     private static int moleculeID;
     private static int atomicManipulatorID;
@@ -51,7 +52,7 @@ public class MinechemItems {
     private static int hazmatTorsoID;
     private static int hazmatHeadID;
     private static int photonID;
-    
+    private static int pillzID;
 
     public static void loadConfig(Configuration config) {
         int baseID = 4736;
@@ -68,6 +69,7 @@ public class MinechemItems {
         hazmatTorsoID = getItemConfig(config, "HazmatTorso", baseID++);
         hazmatHeadID = getItemConfig(config, "HazmatHead", baseID++);
         photonID = getItemConfig(config, "Hammer", baseID++);
+		pillzID = getItemConfig(config, "EmptyPills", baseID++);
     }
 
     private static int getItemConfig(Configuration config, String key, int defaultID) {
@@ -97,10 +99,12 @@ public class MinechemItems {
         LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
         LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
         LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
+		LanguageRegistry.addName(pillz, "Pills");
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
+		EmptyPills = new ItemStack(pillz, 1, 0);
     }
 
     public static void registerToOreDictionary() {

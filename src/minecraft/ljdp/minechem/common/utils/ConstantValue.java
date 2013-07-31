@@ -32,6 +32,7 @@ public interface ConstantValue {
     public static final String ELEMENT_LIQUID7_TEX = TEXTURE_MOD_ID + "liquid7";
     public static final String ELEMENT_SOLID_TEX = TEXTURE_MOD_ID + "solid";
     public static final String TESTTUBE_TEX = TEXTURE_MOD_ID + "TestTube";
+    public static final String PILL_TEX = TEXTURE_MOD_ID + "pill";
     public static final String PHOTONIC_INDUCTION_TEX = TEXTURE_MOD_ID + "PhotonicInduction";
     public static final String HAZMAT_FEET_TEX = TEXTURE_MOD_ID + "hazmatFeet";
     public static final String HAZMAT_HEAD_TEX = TEXTURE_MOD_ID + "hazmatHead";
