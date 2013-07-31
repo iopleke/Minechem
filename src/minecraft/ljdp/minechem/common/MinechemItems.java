@@ -104,7 +104,7 @@ public class MinechemItems {
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
-		EmptyPills = new ItemStack(pillz, 1, 0);
+		EmptyPillz = new ItemStack(pillz, 1, 0);
     }
 
     public static void registerToOreDictionary() {
