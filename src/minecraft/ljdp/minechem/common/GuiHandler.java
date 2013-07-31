@@ -17,6 +17,7 @@ import ljdp.minechem.common.containers.ContainerFusion;
 import ljdp.minechem.common.containers.ContainerMicroscope;
 import ljdp.minechem.common.containers.ContainerProjector;
 import ljdp.minechem.common.containers.ContainerSynthesis;
+import ljdp.minechem.common.containers.CotainerTable;
 import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
@@ -38,6 +39,7 @@ public class GuiHandler implements IGuiHandler {
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
         if (ID == GUI_ID_JOURNAL) { return getServerGuiElementForJournal(player, world); }
+        if (ID == GUI_TABLE){ return new CotainerTable(player.inventory); }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityDecomposer)
             return new ContainerDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
