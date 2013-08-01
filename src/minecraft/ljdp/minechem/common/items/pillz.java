@@ -15,14 +15,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class pillz extends ItemFood
+public class Pillz extends ItemFood
 {
-    
-    public pillz(int id, int heal)
+    // PILLZ HERE!!!!!!!!!!
+    public Pillz(int id, int heal)
     {
         super(id, heal, 0.4F, false);
         setMaxDamage(0);
-        setMaxStackSize(16);
+        setMaxStackSize(32);
         this.setUnlocalizedName("minechem.itempill");
         this.setCreativeTab(ModMinechem.minechemTab);
         this.setAlwaysEdible();
@@ -30,7 +30,7 @@ public class pillz extends ItemFood
 
     public ItemStack onItemRightClick (ItemStack par1ItemStack, World par2World, EntityPlayer player)
     {
-        if (player.canEat(true) && player.getFoodStats().getSaturationLevel() < 18F)
+        if (player.canEat(true))
         {
             player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }
@@ -41,7 +41,7 @@ public class pillz extends ItemFood
     @Override
     public int getMaxItemUseDuration (ItemStack itemstack)
     {
-        return 10;
+        return 15;
     }
 
 

@@ -18,7 +18,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import ljdp.minechem.common.items.pillz;
+import ljdp.minechem.common.items.Pillz;
 
 public class MinechemItems {
     public static ItemElement element;
@@ -38,7 +38,8 @@ public class MinechemItems {
     public static ItemStack projectorLens;
     public static ItemStack microscopeLens;
     public static PhotonicInduction IAintAvinit;
-    public static ItemStack pillz;
+    public static Pillz EmptyPillz;
+    public static ItemStack minechempills; 
     private static int elementID;
     private static int moleculeID;
     private static int atomicManipulatorID;
@@ -90,6 +91,7 @@ public class MinechemItems {
         hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
         hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
+		EmptyPillz = new Pillz( pillzID,0);
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
@@ -99,12 +101,12 @@ public class MinechemItems {
         LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
         LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
         LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
-		LanguageRegistry.addName(pillz, "Pills");
+		LanguageRegistry.addName(EmptyPillz, "Pills");
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
-		EmptyPillz = new ItemStack(pillz, 1, 0);
+		minechempills = new ItemStack(EmptyPillz, 1, 0);
     }
 
     public static void registerToOreDictionary() {

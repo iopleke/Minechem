@@ -84,7 +84,7 @@ public class MinechemRecipes {
         GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[] { "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
         GameRegistry.addRecipe(new ItemStack(MinechemItems.blueprint, 1, 1), new Object[] { "ZZZ", "SSS", "ZZZ", Character.valueOf('Z'), paper, Character.valueOf('S'), bdye });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[] { new ItemStack(Item.book), new ItemStack(MinechemItems.testTube) });
-        GameRegistry.addRecipe(new ItemStack(MinechemItems.EmptyPillz), new Object[] { "CZC", Character.valueOf('C'), new ItemStack(Item.slimeball), Character.valueOf('Z'), new ItemStack(Item.sugar) });
+        GameRegistry.addRecipe(new ItemStack(MinechemItems.EmptyPillz,4), new Object[] { "CZC", Character.valueOf('C'), new ItemStack(Item.slimeBall), Character.valueOf('Z'), new ItemStack(Item.sugar) });
 		for (EnumElement element : EnumElement.values()) {
             GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.testTube), new Object[] { new ItemStack(MinechemItems.element, element.ordinal()) });
         }
@@ -578,6 +578,7 @@ public class MinechemRecipes {
       this.createPoisonedItemStack(Item.fishCooked, 0, var1);
       this.createPoisonedItemStack(Item.cookie, 0, var1);
       this.createPoisonedItemStack(Item.pumpkinPie, 0, var1);
+      this.createPoisonedItemStack(MinechemItems.EmptyPillz, 0, var1);
    }
 
    @ForgeSubscribe
