@@ -89,7 +89,7 @@ public class ModMinechem {
 
         logger.info("PREINT PASSED");
 
-
+    }
     @Init
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
