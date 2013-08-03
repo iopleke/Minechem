@@ -44,6 +44,7 @@ import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+// Some help from DrZed
 
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
 @ModstatInfo(prefix="minechem")
