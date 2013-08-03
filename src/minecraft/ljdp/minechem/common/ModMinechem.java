@@ -89,9 +89,6 @@ public class ModMinechem {
 
         logger.info("PREINT PASSED");
 
-        for (int i = 0; i < 5; i++)
-            VillagerRegistry.instance().registerVillageTradeHandler(i, new VillageTradeHandler());
-    }
 
     @Init
     public void init(FMLInitializationEvent event) {
