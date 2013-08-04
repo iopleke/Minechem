@@ -17,10 +17,13 @@ import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
 import ljdp.minechem.common.ToxoExport;
 import net.minecraft.client.Minecraft;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.Configuration;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import org.modstats.ModstatInfo;
@@ -104,10 +107,20 @@ public class ModMinechem {
     public void postInit(FMLPostInitializationEvent event) {
     initComputerCraftAddon(event);
 	initBOP(event);
+	DoDungeon();
     logger.info("POSTINIT PASSED");
     }
 
-      private void initComputerCraftAddon(FMLPostInitializationEvent event) {
+    private void DoDungeon() {
+    ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+    ItemStack A = new ItemStack(MinechemItems.blueprint,1,0);
+    ItemStack B = new ItemStack(MinechemItems.blueprint,1,1);
+    ItemStack C = new ItemStack(MinechemItems.blueprint,1,2);
+    info.addItem(new WeightedRandomChestContent(A, 1, 8, 1 ));
+    info.addItem(new WeightedRandomChestContent(B, 1, 8, 1 ));
+    info.addItem(new WeightedRandomChestContent(C, 1, 8, 1 ));
+	}
+	private void initComputerCraftAddon(FMLPostInitializationEvent event) {
         Object ccMain = event.buildSoftDependProxy("CCTurtle", "ljdp.minechem.computercraft.CCMain");
         if (ccMain != null) {
             ICCMain iCCMain = (ICCMain) ccMain;
