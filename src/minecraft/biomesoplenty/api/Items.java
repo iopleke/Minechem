@@ -28,17 +28,24 @@ public class Items
 	public static Optional<? extends Item> chestplateAmethyst   = Optional.absent();
 	public static Optional<? extends Item> leggingsAmethyst     = Optional.absent();
 	public static Optional<? extends Item> bootsAmethyst        = Optional.absent();
+	
+	public static Optional<? extends Item> scytheWood           = Optional.absent();
+	public static Optional<? extends Item> scytheStone          = Optional.absent();
+	public static Optional<? extends Item> scytheIron           = Optional.absent();
+	public static Optional<? extends Item> scytheGold           = Optional.absent();
+	public static Optional<? extends Item> scytheDiamond        = Optional.absent();
+	public static Optional<? extends Item> scytheMud            = Optional.absent();
+	public static Optional<? extends Item> scytheAmethyst       = Optional.absent();
 
 	public static Optional<? extends Item> ancientStaff         = Optional.absent();
 	public static Optional<? extends Item> enderporter          = Optional.absent();
-	public static Optional<? extends Item> shroomPowder         = Optional.absent();
-	public static Optional<? extends Item> sunflowerSeeds       = Optional.absent();
-	public static Optional<? extends Item> berries			    = Optional.absent();
+	public static Optional<? extends Item> food			    = Optional.absent();
 	public static Optional<? extends Item> miscItems            = Optional.absent();
 	public static Optional<? extends Item> mudball              = Optional.absent();
 	public static Optional<? extends Item> poison         		= Optional.absent();
 	public static Optional<? extends Item> dartBlower         	= Optional.absent();
 	public static Optional<? extends Item> dart         		= Optional.absent();
+	public static Optional<? extends Item> soulManipulator      = Optional.absent();
 
 	public static Optional<? extends Item> flowerBand           = Optional.absent();
 }

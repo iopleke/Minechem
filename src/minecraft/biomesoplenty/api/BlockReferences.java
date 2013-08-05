@@ -2,7 +2,7 @@ package biomesoplenty.api;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-// import biomesoplenty.api.Blocks;
+
 import com.google.common.base.Optional;
 
 public class BlockReferences {
@@ -104,6 +104,7 @@ public class BlockReferences {
 		ashStone (Blocks.ashStone, 0),
 		hardIce (Blocks.hardIce, 0),
 		originGrass (Blocks.originGrass, 0),
+		longGrass (Blocks.longGrass, 0),
 		hardSand (Blocks.hardSand, 0),
 		hardDirt (Blocks.hardDirt, 0),
 		holyGrass (Blocks.holyGrass, 0),
@@ -154,6 +155,7 @@ public class BlockReferences {
 		barley (Blocks.plants, 6),
 		cattail (Blocks.plants, 7),
 		reed (Blocks.plants, 8),
+		tinyCactus (Blocks.plants, 12),
 
 		treeMoss (Blocks.treeMoss, 0),
 		moss (Blocks.moss, 0),
@@ -171,7 +173,7 @@ public class BlockReferences {
 		violet (Blocks.flowers, 8),
 		anenome (Blocks.flowers, 9),
 		lilyflower (Blocks.flowers, 10),
-		tinyCactus (Blocks.flowers, 11),
+		rainbowflower (Blocks.flowers, 11),
 		aloe (Blocks.flowers, 12),
 		sunflower (Blocks.flowers, 13),
 		dandelion (Blocks.flowers, 15),
@@ -200,9 +202,11 @@ public class BlockReferences {
 		int stackmeta = EnumBlocks.valueOf(string).meta;
 
 		if (stackmeta != 0)
+		{
 			return new ItemStack(stackblock.get(), 1, stackmeta);
-		else
-			return new ItemStack(stackblock.get(), 1);
+		}
+		
+		return new ItemStack(stackblock.get(), 1);
 	}
 
 	public static int getBlockID(String string)

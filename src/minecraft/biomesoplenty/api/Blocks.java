@@ -23,6 +23,7 @@ public class Blocks
 	public static Optional<? extends Block> holyStone                   = Optional.absent();
 	public static Optional<? extends Block> mud                         = Optional.absent();
 	public static Optional<? extends Block> originGrass                 = Optional.absent();
+	public static Optional<? extends Block> longGrass                 = Optional.absent();
 	public static Optional<? extends Block> redRock                     = Optional.absent();
 	public static Optional<? extends Block> crystal                     = Optional.absent();
 
@@ -85,15 +86,15 @@ public class Blocks
 	//Nether
 	public static Optional<? extends Block> bones                       = Optional.absent();
 
-	//    public static Optional<? extends Block> amethystBlock               = Optional.absent();
 	public static Optional<? extends Block> amethystOre                 = Optional.absent();
-	//    public static Optional<? extends Block> bambooThatching             = Optional.absent();
+
 	public static Optional<? extends Block> mudBrick                    = Optional.absent();
-	//    public static Optional<? extends Block> smolderingGrass             = Optional.absent();
-	//    public static Optional<? extends Block> quicksand                   = Optional.absent();
-	//    public static Optional<? extends Block> grass                       = Optional.absent();
 
 	public static Optional<? extends Block> promisedPortal              = Optional.absent();
+	public static Optional<? extends Block> glass                       = Optional.absent();
+	public static Optional<? extends Block> altar                       = Optional.absent();
+	public static Optional<? extends Block> puddle                      = Optional.absent();
+	public static Optional<? extends Block> grave                       = Optional.absent();
 
 	/**
 	 * Populated by Biomes O Plenty with default Biomes O Plenty leaves. Add additional leaves here (E.g. "Blocks.shearBlockIds.put(acaciaLeaves.blockID, 15.0F);")
