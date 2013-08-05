@@ -114,10 +114,10 @@ public class ModMinechem {
     private void DoDungeon() {
     ChestGenHooks info = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
     ItemStack A = new ItemStack(MinechemItems.blueprint,1,0);
-    ItemStack B = new ItemStack(MinechemItems.blueprint,1,1);
+    // ItemStack B = new ItemStack(MinechemItems.blueprint,1,1);
     ItemStack C = new ItemStack(MinechemItems.blueprint,1,2);
     info.addItem(new WeightedRandomChestContent(A, 1, 8, 1 ));
-    info.addItem(new WeightedRandomChestContent(B, 1, 8, 1 ));
+    // info.addItem(new WeightedRandomChestContent(B, 1, 8, 1 ));
     info.addItem(new WeightedRandomChestContent(C, 1, 8, 1 ));
 	}
 	private void initComputerCraftAddon(FMLPostInitializationEvent event) {
