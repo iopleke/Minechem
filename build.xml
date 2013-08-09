@@ -165,7 +165,7 @@
 	<target name="package" depends="compile">
 		<echo message="Packing version ${mod.version.full}"/>
 
-		<jar destfile="dist/KeplersEngines-${mod.version.full}" basedir="${classes.dir}/client"/>
+		<jar destfile="dist/Minechem-${mod.version.full}" basedir="${classes.dir}/client"/>
 
 		<echo message="Packing finished"/>
 	</target>
