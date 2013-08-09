@@ -15,10 +15,10 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class Pillz extends ItemFood
+public class ItemPills extends ItemFood
 {
     // PILLZ HERE!!!!!!!!!!
-    public Pillz(int id, int heal)
+    public ItemPills(int id, int heal)
     {
         super(id, heal, 0.4F, false);
         setMaxDamage(0);

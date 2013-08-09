@@ -9,6 +9,7 @@ import ljdp.minechem.common.items.ItemElement;
 import ljdp.minechem.common.items.ItemFusionStar;
 import ljdp.minechem.common.items.ItemLens;
 import ljdp.minechem.common.items.ItemMolecule;
+import ljdp.minechem.common.items.ItemPills;
 import ljdp.minechem.common.items.ItemTestTube;
 import ljdp.minechem.common.items.PhotonicInduction;
 import ljdp.minechem.common.utils.ConstantValue;
@@ -18,7 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import ljdp.minechem.common.items.Pillz;
 
 public class MinechemItems {
     public static ItemElement element;
@@ -38,7 +38,7 @@ public class MinechemItems {
     public static ItemStack projectorLens;
     public static ItemStack microscopeLens;
     public static PhotonicInduction IAintAvinit;
-    public static Pillz EmptyPillz;
+    public static ItemPills EmptyPillz;
     public static ItemStack minechempills; 
     private static int elementID;
     private static int moleculeID;
@@ -91,7 +91,7 @@ public class MinechemItems {
         hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
         hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
-		EmptyPillz = new Pillz( pillzID,0);
+		EmptyPillz = new ItemPills( pillzID,0);
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
