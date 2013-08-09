@@ -10,7 +10,6 @@ import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import biomesoplenty.api.BlockReferences;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-// import ljdp.minechem.api.recipe.SynthesisRecipe;
 public class ToxoExport {
 public static void DoBopExport() {
 ItemStack Algae = BlockReferences.getBlockItemStack("algae");
