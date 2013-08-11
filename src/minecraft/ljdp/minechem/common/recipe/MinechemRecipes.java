@@ -228,7 +228,7 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipe(var44, new Chemical[] { this.element(EnumElement.Cn, 16), var52, var52, var52, var53, var53, var53, var21, var21 }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var45, 0.2F, new Chemical[] { this.molecule(EnumMolecule.ttx) }));
         DecomposerRecipe.add(new DecomposerRecipe(var46, new Chemical[] { this.element(EnumElement.Po), this.molecule(EnumMolecule.ethanol) }));
-        DecomposerRecipe.add(new DecomposerRecipeChance(var47, 0.5F, new Chemical[] { this.molecule(EnumMolecule.amphetamine) }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(var47, 0.5F, new Chemical[] { this.molecule(EnumMolecule.coke) }));
         DecomposerRecipe.add(new DecomposerRecipe(var48, new Chemical[] { this.element(EnumElement.P, 4) }));
         DecomposerRecipe.add(new DecomposerRecipe(var49, new Chemical[] { this.element(EnumElement.P) }));
         DecomposerRecipe.add(new DecomposerRecipe(var50, new Chemical[] { this.molecule(EnumMolecule.water, 8) }));
