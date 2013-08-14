@@ -13,7 +13,7 @@ public class ItemFusionStar extends Item {
 
     public ItemFusionStar(int id) {
         super(id);
-        this.maxStackSize = 1;
+        setMaxStackSize(1);
         this.setMaxDamage(2000);
         this.setNoRepair();
         this.setUnlocalizedName("name.fusionStar");
@@ -24,8 +24,8 @@ public class ItemFusionStar extends Item {
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean par4) {
 	    int damage = itemStack.getItemDamage();
         int usesLeft = damage - 2000;
-		int percentfinal = usesLeft / 2000;
-        list.add(percentfinal + " % Remaining ");
+		int percentFinal = usesLeft / 2000;
+        list.add(percentFinal + " % Remaining ");
     }
 
     @Override
