@@ -24,7 +24,7 @@ public class ItemFusionStar extends Item {
     public void addInformation(ItemStack itemStack, EntityPlayer entityPlayer, List list, boolean par4) {
         int damage = itemStack.getItemDamage();
         int usesLeft = itemStack.getMaxDamage() - damage;
-		int percentuse = itemStack.getMaxDamage() - usesleft;
+		int percentuse = itemStack.getMaxDamage() - usesLeft;
 		int percentfinal = percentuse / itemStack.getMaxDamage();
         list.add(percentfinal + " % Remaining ");
     }
