@@ -13,7 +13,7 @@ public class ItemFusionStar extends Item {
 
     public ItemFusionStar(int id) {
         super(id);
-        setMaxStackSize(1);
+        this.setMaxStackSize(1);
         this.setMaxDamage(2000);
         this.setNoRepair();
         this.setUnlocalizedName("name.fusionStar");
