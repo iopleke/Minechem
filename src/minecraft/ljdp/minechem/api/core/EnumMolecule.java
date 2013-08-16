@@ -119,7 +119,7 @@ public enum EnumMolecule {
     olivine(105, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
     metblue(106, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl)),
 	meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
-	nicotine(108, "Nicotine", new Element(C,10), new Element(H,14), new Element(N,2))
+	lcd(108, "Cholesteryl benzoate", new Element(C,34), new Element(H,50), new Element(O,2))
     ;
 
     public static EnumMolecule[] molecules = values();

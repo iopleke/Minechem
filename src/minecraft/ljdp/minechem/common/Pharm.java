@@ -33,9 +33,13 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 30, 5));
             break;
         case amphetamine:
+		    entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 4);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 20, 7));
             break;
         case methamphetamine:
+		    entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 40, 5));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 4);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
             break;
         case poison:
@@ -43,7 +47,7 @@ public class Pharm {
             break;
         case ethanol:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 10, 1));
-            entityPlayer.getFoodStats().addStats(3, .1F);
+            entityPlayer.getFoodStats().addStats(1, .1F);
             break;
         case cyanide:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 5));
@@ -91,10 +95,10 @@ public class Pharm {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 1));
             break;
-       case nicotine: 
-			entityPlayer.attackEntityFrom(DamageSource.generic, 4);
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
-			break; 
+       // case nicotine: 
+			// entityPlayer.attackEntityFrom(DamageSource.generic, 4);
+			// entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 10));
+			// break; 
         case fingolimod:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
