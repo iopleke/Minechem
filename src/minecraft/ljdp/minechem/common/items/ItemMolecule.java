@@ -7,6 +7,7 @@ import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.ModMinechem;
+import ljdp.minechem.common.industrial.PharmacologyEffect;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -19,7 +20,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import ljdp.minechem.common.Pharm;
 public class ItemMolecule extends Item {
     public Icon render_pass1, render_pass2, filledMolecule;
 
@@ -135,7 +135,7 @@ public class ItemMolecule extends Item {
             return itemStack;
 
         EnumMolecule molecule = getMolecule(itemStack);
-        Pharm.triggerPlayerEffect(molecule, entityPlayer);
+        PharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
         world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F); // Thanks mDiyo! 
         return itemStack;
     }

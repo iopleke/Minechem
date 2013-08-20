@@ -4,12 +4,11 @@ import java.util.EnumSet;
 
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.util.Constants;
+import ljdp.minechem.common.industrial.PharmacologyEffect;
 import ljdp.minechem.common.utils.MinechemHelper;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
 import cpw.mods.fml.common.IScheduledTickHandler;
 import cpw.mods.fml.common.TickType;
 
@@ -50,7 +49,7 @@ public class ScheduledTickHandler implements IScheduledTickHandler {
             int effectType = stackTag.getInteger("minechem.effectType");
             EnumMolecule molecule = EnumMolecule.getById(effectType);
             if (isPoisoned) {
-                Pharm.triggerPlayerEffect(molecule, entityPlayer);
+                PharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
                 entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
             }
         }

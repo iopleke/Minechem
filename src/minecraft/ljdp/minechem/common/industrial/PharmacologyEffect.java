@@ -1,4 +1,4 @@
-package ljdp.minechem.common;
+package ljdp.minechem.common.industrial;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,7 +9,7 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-public class Pharm {
+public class PharmacologyEffect {
  public static void triggerPlayerEffect(EnumMolecule molecule, EntityPlayer entityPlayer) {
         World world = entityPlayer.worldObj;
         // Mandrake's Realm 

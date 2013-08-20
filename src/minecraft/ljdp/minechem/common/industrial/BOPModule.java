@@ -1,4 +1,4 @@
-package ljdp.minechem.common;
+package ljdp.minechem.common.industrial;
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.core.Element;
 import ljdp.minechem.api.core.EnumElement;
@@ -11,7 +11,7 @@ import biomesoplenty.api.BlockReferences;
 import biomesoplenty.api.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-public class ToxoExport {
+public class BOPModule {
 public static void DoBopExport() {
 ItemStack Algae = BlockReferences.getBlockItemStack("algae");
 DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.08F, new Chemical[] { new Molecule(EnumMolecule.nod) }));

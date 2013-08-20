@@ -10,12 +10,12 @@ import ljdp.minechem.client.gui.tabs.TabStateControlSynthesis;
 import ljdp.minechem.client.gui.tabs.TabTable;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
 import ljdp.minechem.common.gates.MinechemTriggers;
+import ljdp.minechem.common.industrial.BOPModule;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
-import ljdp.minechem.common.ToxoExport;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraft.creativetab.CreativeTabs;
@@ -133,7 +133,7 @@ public class ModMinechem {
 	private void initBOP (FMLPostInitializationEvent event){
 	Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.ToxoExport");
         if (BindBOP != null) {
-        ToxoExport.DoBopExport(); 
+        BOPModule.DoBopExport(); 
         logger.info("BOP support loaded");
         }
          
