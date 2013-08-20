@@ -8,6 +8,7 @@ import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.recipe.DecomposerRecipeChance;
 import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import biomesoplenty.api.BlockReferences;
+import biomesoplenty.api.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 public class ToxoExport {
@@ -25,6 +26,8 @@ DecomposerRecipe.add(new DecomposerRecipeChance(FoxFire, 0.6F, new Chemical[] { 
 ItemStack Daisy1 = BlockReferences.getBlockItemStack("daisy");
 DecomposerRecipe.add(new DecomposerRecipeChance(Daisy1, 0.3F, new Chemical[] { new Molecule(EnumMolecule.shikimicAcid, 2), new Molecule(EnumMolecule.water, 2) }));
 ItemStack WitherFlower = BlockReferences.getBlockItemStack("deathbloom");
-DecomposerRecipe.add(new DecomposerRecipe(WitherFlower, new Chemical[] { new Molecule(EnumMolecule.poison, 4), new Molecule(EnumMolecule.water, 2) }));
+DecomposerRecipe.add(new DecomposerRecipe(WitherFlower, new Chemical[] { new Molecule(EnumMolecule.poison, 2), new Molecule(EnumMolecule.water, 2) }));
+ItemStack Sprout = BlockReferences.getBlockItemStack("sproutItem");
+DecomposerRecipe.add(new DecomposerRecipeSelect(Sprout, 0.9F, new DecomposerRecipe[] { new DecomposerRecipe(new Chemical[] { new Molecule(EnumMolecule.asprin) }), new DecomposerRecipe(new Chemical[] { new Molecule(EnumMolecule.sucrose, 2) }) }));
 }
 }
