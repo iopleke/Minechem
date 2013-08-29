@@ -79,10 +79,10 @@ public class MinechemBlocks {
         LanguageRegistry.addName(microscope, MinechemHelper.getLocalString("block.name.microscope"));
         GameRegistry.registerBlock(synthesis, "minechem.blockSynthesis");
         LanguageRegistry.addName(synthesis, MinechemHelper.getLocalString("block.name.synthesis"));
-        GameRegistry.registerBlock(printer, "Printer");
-        LanguageRegistry.addName(printer, "Printer!");
+        GameRegistry.registerBlock(printer, "minechem.blockBlueprintPrinter");
+        LanguageRegistry.addName(printer, "Blueprint Printer (WIP)");
         GameRegistry.registerBlock(ghostBlock, ItemGhostBlock.class, "minechem.blockGhostBlock");
-        LanguageRegistry.addName(ghostBlock, "Unnamed");
+        LanguageRegistry.addName(ghostBlock, "minechem.blockGhostBlock");
 
         GameRegistry.registerBlock(fusion, ItemBlockFusion.class, "minechem.blockFusion");
         LanguageRegistry.addName(fusion, MinechemHelper.getLocalString("block.name.fusion"));
@@ -101,7 +101,7 @@ public class MinechemBlocks {
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
         GameRegistry.registerTileEntity(TileEntityGhostBlock.class, "minechem.tileEntityGhostBock");
         GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
-        GameRegistry.registerTileEntity(TileEntityBluePrintPrinter.class, "Printer");
+        GameRegistry.registerTileEntity(TileEntityBluePrintPrinter.class, "minechem.tileEntityBluePrinter");
     }
 
 }
