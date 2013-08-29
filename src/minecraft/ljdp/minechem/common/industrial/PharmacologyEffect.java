@@ -160,10 +160,9 @@ public class PharmacologyEffect {
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 60, 4));
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 4));
 			break; 
-			case radchlor: // This is going to need some tweaking. 
-			entityPlayer.attackEntityFrom(DamageSource.generic, 6);
-		    entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.poison.getId(), Constants.TICKS_PER_SECOND * 30, 2));
+			case radchlor: 
+		    entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 4));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.poison.getId(), Constants.TICKS_PER_SECOND * 30, 4));
 			break;
 		default:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 5);
