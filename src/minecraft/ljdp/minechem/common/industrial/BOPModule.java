@@ -29,5 +29,7 @@ ItemStack WitherFlower = BlockReferences.getBlockItemStack("deathbloom");
 DecomposerRecipe.add(new DecomposerRecipe(WitherFlower, new Chemical[] { new Molecule(EnumMolecule.poison, 2), new Molecule(EnumMolecule.water, 2) }));
 ItemStack Sprout = BlockReferences.getBlockItemStack("sproutItem");
 DecomposerRecipe.add(new DecomposerRecipeSelect(Sprout, 0.9F, new DecomposerRecipe[] { new DecomposerRecipe(new Chemical[] { new Molecule(EnumMolecule.asprin) }), new DecomposerRecipe(new Chemical[] { new Molecule(EnumMolecule.sucrose, 2) }) }));
+ItemStack BlueXtal = BlockReferences.getBlockItemStack("crystal");
+DecomposerRecipe.add(new DecomposerRecipe(BlueXtal, new Chemical[] {new Molecule(EnumMolecule.radchlor, 4){));  
 }
 }
