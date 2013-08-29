@@ -1,6 +1,7 @@
 package universalelectricity.prefab.network;
 
 import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
@@ -15,6 +16,7 @@ import net.minecraft.world.World;
 import universalelectricity.core.vector.Vector3;
 
 import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -65,9 +67,39 @@ public class PacketManager implements IPacketHandler, IPacketReceiver
 		}
 	}
 
+	public static void writeNBTTagCompound(NBTTagCompound tag, ByteArrayDataOutput dataStream) throws IOException
+	{
+		if (tag == null)
+		{
+			dataStream.writeShort(-1);
+		}
+		else
+		{
+			byte[] var2 = CompressedStreamTools.compress(tag);
+			dataStream.writeShort((short) var2.length);
+			dataStream.write(var2);
+		}
+	}
+
 	/**
 	 * Reads a compressed NBTTagCompount in a ByteStream.
 	 */
+	public static NBTTagCompound readNBTTagCompound(DataInputStream dataStream) throws IOException
+	{
+		short var1 = dataStream.readShort();
+
+		if (var1 < 0)
+		{
+			return null;
+		}
+		else
+		{
+			byte[] var2 = new byte[var1];
+			dataStream.readFully(var2);
+			return CompressedStreamTools.decompress(var2);
+		}
+	}
+
 	public static NBTTagCompound readNBTTagCompound(ByteArrayDataInput dataStream) throws IOException
 	{
 		short var1 = dataStream.readShort();

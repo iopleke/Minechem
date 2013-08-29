@@ -15,6 +15,7 @@ public class CustomDamageSource extends DamageSource
 		super(damageType);
 	}
 
+	@Deprecated
 	public CustomDamageSource setDeathMessage(String deathMessage)
 	{
 		LanguageRegistry.instance().addStringLocalization("death.attack." + this.damageType, deathMessage);

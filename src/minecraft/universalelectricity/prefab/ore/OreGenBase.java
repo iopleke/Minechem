@@ -13,8 +13,7 @@ import cpw.mods.fml.common.FMLLog;
 
 /**
  * This class is used for storing ore generation data. If you are too lazy to generate your own
- * ores, you can do {@link #OreGenerator.ORES_TO_GENERATE.add()} to add your ore to the list of ores
- * to generate.
+ * ores, you can do {@link #OreGenerator.addOre()} to add your ore to the list of ores to generate.
  * 
  * @author Calclavia
  * 

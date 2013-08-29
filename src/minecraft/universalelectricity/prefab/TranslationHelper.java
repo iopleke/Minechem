@@ -1,7 +1,9 @@
 package universalelectricity.prefab;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 /**
  * A class to help you out with translations.
@@ -69,7 +71,12 @@ public class TranslationHelper
 	 */
 	public static String getLocal(String key)
 	{
-		String text = LanguageRegistry.instance().getStringLocalization(key);
+		String text = null;
+
+		if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+		{
+			text = LanguageRegistry.instance().getStringLocalization(key);
+		}
 
 		if (text == null || text == "")
 		{
