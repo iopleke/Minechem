@@ -497,7 +497,7 @@ public class MinechemRecipes {
 		this.registerPoisonRecipes(EnumMolecule.radchlor); // "Whoa, oh, oh, oh, oh, whoa, oh, oh, oh, I'm radioactive, radioactive" - "Radioactive" By Imagine Dragons. 
         this.registerPoisonRecipes(EnumMolecule.redrocks);
 		this.registerPoisonRecipes(EnumMolecule.coke);
-		this.registerPosionRecipes(EnumMolecule.theobromine); 
+		this.registerPoisonRecipes(EnumMolecule.theobromine); 
 	}
 
     private void addDecomposerRecipesFromMolecules() {
