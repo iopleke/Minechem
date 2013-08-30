@@ -476,4 +476,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	public float getMinEnergyNeeded() {
+		// TODO Auto-generated method stub
+		return 100;
+	}
 }

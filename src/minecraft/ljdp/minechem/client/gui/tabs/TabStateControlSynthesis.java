@@ -42,12 +42,11 @@ public class TabStateControlSynthesis extends TabStateControl {
     public void update() {
         super.update();
         SynthesisRecipe recipe = synthesis.getCurrentRecipe();
-        MinechemPowerProvider provider = (MinechemPowerProvider) synthesis.getPowerProvider();
         if (recipe == null) {
             state = TabState.norecipe;
         } else {
             int energyCost = recipe.energyCost();
-            if (provider.getEnergyStored() >= energyCost)
+            if (synthesis.getEnergyStored() >= energyCost)
                 state = TabState.powered;
             else
                 state = TabState.unpowered;

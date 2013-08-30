@@ -1,28 +1,35 @@
 package ljdp.minechem.client.gui.tabs;
 
+import universalelectricity.prefab.tile.TileEntityElectrical;
 import ljdp.minechem.common.MinechemPowerProvider;
+import ljdp.minechem.common.tileentity.MinechemTileEntity;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.common.utils.RollingAverage;
 import buildcraft.api.power.IPowerReceptor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TabEnergy extends Tab {
+	
+	
+	
     public static Icon powerIcon;
     // I'm copying the layout for the buildcraft
     // engine tab, because users will be familiar.
     int headerColour = 0xe1c92f;
     int subheaderColour = 0xaaafb8;
     int textColour = 0x000000;
-    IPowerReceptor powerReceptor;
+    //Switched from refrence to MinechemPowerProvider for 1.6 move to UE
+    MinechemTileEntity energy;
     float lastEnergy = 0;
     RollingAverage energyUsageRolling = new RollingAverage(100);
 
-    public TabEnergy(Gui gui, IPowerReceptor powerReceptor) {
+    public TabEnergy(Gui gui, MinechemTileEntity energy) {
         super(gui);
         this.maxWidth = 120;
         this.maxHeight = 100;
-        this.powerReceptor = powerReceptor;
+        this.energy=energy;
         this.overlayColor = 0xFF8800;
     }
 
@@ -32,23 +39,23 @@ public class TabEnergy extends Tab {
         drawIcon(powerIcon, x + 2, y + 2);
         if (!isFullyOpened())
             return;
-
-        MinechemPowerProvider provider = (MinechemPowerProvider) powerReceptor.getPowerProvider();
-        energyUsageRolling.add(provider.getCurrentEnergyUsage());
+        //TODO Convert Power Values
+        energyUsageRolling.add(energy.getEnergyUsage());
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.energy"), x + 22, y + 8, headerColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.usage") + ":", x + 22, y + 20, subheaderColour);
         fontRenderer.drawString(String.format("%.1f", energyUsageRolling.getAverage()) + " MJ/t", x + 22, y + 32, textColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.maxUsage") + ":", x + 22, y + 44, subheaderColour);
-        fontRenderer.drawString(provider.getMaxEnergyReceived() + " MJ/t", x + 22, y + 56, textColour);
+        //Arbitrary direction
+        //Shouldn't matter for any machine
+        fontRenderer.drawString(energy.getRequest(ForgeDirection.UP) + " MJ/t", x + 22, y + 56, textColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.stored") + ":", x + 22, y + 68, subheaderColour);
-        fontRenderer.drawString(String.format("%.1f", provider.getEnergyStored()) + " MJ", x + 22, y + 80, textColour);
+        fontRenderer.drawString(String.format("%.1f", energy.getEnergyStored()) + " MJ", x + 22, y + 80, textColour);
     }
 
     @Override
     public String getTooltip() {
         if (!isOpen()) {
-            MinechemPowerProvider provider = (MinechemPowerProvider) powerReceptor.getPowerProvider();
-            return String.format("%.1f", provider.getCurrentEnergyUsage()) + " MJ/t";
+            return String.format("%.1f", energy.getEnergyUsage()) + " MJ/t";
         } else
             return null;
     }

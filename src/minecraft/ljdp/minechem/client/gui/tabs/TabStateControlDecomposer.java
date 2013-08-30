@@ -42,13 +42,12 @@ public class TabStateControlDecomposer extends TabStateControl {
     @Override
     public void update() {
         super.update();
-        MinechemPowerProvider provider = (MinechemPowerProvider) decomposer.getPowerProvider();
         State state = decomposer.getState();
         if (state == State.kProcessJammed)
             this.state = TabState.jammed;
         else if (decomposer.getState() == State.kProcessNoBottles)
             this.state = TabState.noBottles;
-        else if (provider.getEnergyStored() > provider.getMinEnergyReceived() || provider.getCurrentEnergyUsage() > 0)
+        else if (decomposer.getEnergyStored() > decomposer.getMinEnergyNeeded() || decomposer.getEnergyUsage() > 0)
             this.state = TabState.powered;
         else
             this.state = TabState.unpowered;

@@ -12,7 +12,7 @@ import universalelectricity.prefab.tile.TileEntityElectrical;
 public abstract class MinechemTileEntity extends TileEntityElectrical implements IInventory {
 	
 	public ItemStack[] inventory;
-	
+	public float lastEnergyUsed;
 	@Override
 	public Packet getDescriptionPacket() {
 		NBTTagCompound tagCompound = new NBTTagCompound();
@@ -31,7 +31,9 @@ public abstract class MinechemTileEntity extends TileEntityElectrical implements
 	public ItemStack getStackInSlot(int var1) {
 		return this.inventory[var1];
 	}
-
+	public float getEnergyUsage(){
+		return this.lastEnergyUsed*20;
+	}
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
 		if(this.inventory[slot] != null) {
@@ -89,5 +91,6 @@ public abstract class MinechemTileEntity extends TileEntityElectrical implements
 	@Override
 	public void closeChest() {
 	}
+	
 
 }
