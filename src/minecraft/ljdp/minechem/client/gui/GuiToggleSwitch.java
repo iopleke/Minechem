@@ -2,13 +2,12 @@ package ljdp.minechem.client.gui;
 
 import java.util.HashMap;
 
-import cpw.mods.fml.client.FMLClientHandler;
-
 import ljdp.minechem.common.utils.MinechemHelper;
-
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.util.ResourceLocation;
+import cpw.mods.fml.client.FMLClientHandler;
 
 public abstract class GuiToggleSwitch {
     class ToggleButton {
@@ -28,15 +27,15 @@ public abstract class GuiToggleSwitch {
     int mouseY;
     Minecraft mc;
     GuiContainerTabbed container;
-    String texture;
+    ResourceLocation texture;
     HashMap<Integer, ToggleButton> buttons = new HashMap<Integer, ToggleButton>();
 
     public GuiToggleSwitch() {
         this.mc = FMLClientHandler.instance().getClient();
     }
 
-    public void draw(RenderEngine renderEngine) {
-        renderEngine.bindTexture(texture);
+    public void draw(TextureManager renderEngine) {
+        renderEngine.func_110581_b(texture);
         ToggleButton button = buttons.get(state);
         drawTexturedModalRect(x, y, button.u, button.v, width, height);
         String tooltip = MinechemHelper.getLocalString(button.tooltip);

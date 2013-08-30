@@ -306,7 +306,7 @@ public abstract class GuiMinechemContainer extends GuiScreen {
 
             if (var6 != null) {
                 GL11.glDisable(GL11.GL_LIGHTING);
-                this.mc.renderEngine.bindTexture(par1Slot.getBackgroundIconTexture());
+                this.mc.renderEngine.func_110581_b(par1Slot.getBackgroundIconTexture());
                 this.drawTexturedModalRect(var2, var3, 0, 0, 16, 16);
                 GL11.glEnable(GL11.GL_LIGHTING);
                 var5 = true;
@@ -531,7 +531,7 @@ public abstract class GuiMinechemContainer extends GuiScreen {
      */
     public void onGuiClosed() {
         if (this.mc.thePlayer != null) {
-            this.inventorySlots.onCraftGuiClosed(this.mc.thePlayer);
+            this.inventorySlots.onContainerClosed(this.mc.thePlayer);
         }
     }
 

@@ -4,9 +4,9 @@ import ljdp.minechem.common.containers.ContainerMicroscope;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
-import net.minecraft.client.renderer.RenderEngine;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -53,7 +53,7 @@ public class RenderGUIItemMicroscope extends RenderItem {
     }
 
     @Override
-    public void renderItemAndEffectIntoGUI(FontRenderer par1FontRenderer, RenderEngine par2RenderEngine, ItemStack itemstack, int x, int y) {
+    public void renderItemAndEffectIntoGUI(FontRenderer par1FontRenderer, TextureManager par2RenderEngine, ItemStack itemstack, int x, int y) {
         if (itemstack == null)
             return;
         Slot slot = microscopeContainer.getSlot(0);
@@ -100,7 +100,7 @@ public class RenderGUIItemMicroscope extends RenderItem {
     }
 
     @Override
-    public void renderItemOverlayIntoGUI(FontRenderer par1FontRenderer, RenderEngine par2RenderEngine, ItemStack itemstack, int par4, int par5) {
+    public void renderItemOverlayIntoGUI(FontRenderer par1FontRenderer, TextureManager par2RenderEngine, ItemStack itemstack, int par4, int par5) {
         if (itemstack == null)
             return;
         if (itemstack == microscopeContainer.getSlot(0).getStack() || (itemstack == inventoryPlayer.getItemStack() && guiMicroscope.isMouseInMicroscope())) {

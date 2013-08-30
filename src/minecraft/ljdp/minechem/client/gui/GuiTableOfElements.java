@@ -6,6 +6,7 @@ import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.containers.ContainerChemistJournal;
 import ljdp.minechem.common.utils.ConstantValue;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -29,7 +30,8 @@ public class GuiTableOfElements extends GuiContainerTabbed{
 
         GL11.glPushMatrix();
         GL11.glScalef(2.1F, 1.5F, 2.0F);
-        mc.renderEngine.bindTexture(ConstantValue.table_HEX);
+
+        this.mc.renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.table_HEX));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

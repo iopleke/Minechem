@@ -1,12 +1,15 @@
 package ljdp.minechem.common.utils;
 
 public interface ConstantValue {
-    public static final String TEXTURE_DIR = "/mods/minechem/textures/";
+    public static final String TEXTURE_DIR = "/assets/minechem/textures/";
     public static final String TEXTURE_GUI_DIR = TEXTURE_DIR + "gui/";
     public static final String TEXTURE_MODEL_DIR = TEXTURE_DIR + "model/";
-    public static final String SOUNDS_DIR = "/sounds/minechem/";
-    public static final String LANG_DIR = "/lang/minechem/";
-    public static final String TEXTURE_MOD_ID = "minechem:";
+    public static final String SOUNDS_DIR = "/assets/minechem/sounds/minechem/";
+    public static final String LANG_DIR = "/assets/minechem/lang/minechem/";
+
+    //Used for resourceLocations in 1.6
+    public static final String MOD_ID = "minechem";
+    public static final String TEXTURE_MOD_ID = MOD_ID+":";
 
     public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";
     public static final String BLUEPRINT_TEX = TEXTURE_MOD_ID + "Blueprint";

@@ -4,10 +4,9 @@ import java.util.EnumSet;
 import java.util.List;
 
 import ljdp.minechem.api.core.EnumMolecule;
-import ljdp.minechem.client.gui.GuiFusion;
 import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemItems;
-import ljdp.minechem.common.tileentity.TileEntityFusion;
+import ljdp.minechem.common.utils.ConstantValue;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
@@ -15,6 +14,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
@@ -92,7 +92,7 @@ public class TickHandler implements ITickHandler {
         Minecraft mc = FMLClientHandler.instance().getClient();
         if (mc.renderViewEntity != null && mc.gameSettings.thirdPersonView == 0 && !mc.renderViewEntity.isPlayerSleeping()
                 && mc.thePlayer.isInsideOfMaterial(MinechemBlocks.materialGas)) {
-            renderWarpedTextureOverlay(mc, "/misc/water.png");
+            renderWarpedTextureOverlay(mc, new ResourceLocation(ConstantValue.MOD_ID,"/misc/water.png"));
         }
     }
 
@@ -100,8 +100,8 @@ public class TickHandler implements ITickHandler {
      * Renders a texture that warps around based on the direction the player is looking. Texture needs to be bound before being called. Used for the water
      * overlay. Args: parialTickTime
      */
-    private void renderWarpedTextureOverlay(Minecraft mc, String texture) {
-        int overlayTexture = mc.renderEngine.getTexture(texture);
+    private void renderWarpedTextureOverlay(Minecraft mc, ResourceLocation texture) {
+        int overlayTexture = mc.renderEngine.func_110581_b(texture).func_110552_b();
         double tile = 4.0F;
         double yaw = -mc.thePlayer.rotationYaw / 64.0F;
         double pitch = mc.thePlayer.rotationPitch / 64.0F;

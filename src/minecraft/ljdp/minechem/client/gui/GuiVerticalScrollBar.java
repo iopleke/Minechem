@@ -1,5 +1,7 @@
 package ljdp.minechem.client.gui;
 
+import ljdp.minechem.common.utils.ConstantValue;
+
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
@@ -7,6 +9,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.util.ResourceLocation;
 
 public class GuiVerticalScrollBar extends Gui {
 
@@ -111,7 +114,8 @@ public class GuiVerticalScrollBar extends Gui {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture("/gui/allitems.png");
+
+        this.mc.renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,"gui/allitems.png"));
         if (this.container.isScrollBarActive()) {
             drawTexturedModalRect(xpos, ypos, activeU, activeV, width, height);
         } else {

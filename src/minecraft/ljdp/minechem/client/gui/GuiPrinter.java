@@ -12,6 +12,7 @@ import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -52,7 +53,8 @@ public class GuiPrinter extends GuiContainerTabbed {
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2,
 			int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.renderEngine.bindTexture(ConstantValue.PRINT_GUI);
+
+        this.mc.renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINT_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
