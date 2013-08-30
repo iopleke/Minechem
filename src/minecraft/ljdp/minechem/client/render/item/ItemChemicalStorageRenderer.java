@@ -3,6 +3,7 @@ package ljdp.minechem.client.render.item;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.WorldProvider;
 
 public class ItemChemicalStorageRenderer extends ItemMinechemRenderer {
 

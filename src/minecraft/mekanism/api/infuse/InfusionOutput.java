@@ -1,4 +1,4 @@
-package mekanism.api;
+package mekanism.api.infuse;
 
 import net.minecraft.item.ItemStack;
 
@@ -28,7 +28,7 @@ public class InfusionOutput
 	
 	public int getInfuseRequired()
 	{
-		return infusionInput.infuseStored;
+		return infusionInput.infuseAmount;
 	}
 	
 	public InfusionOutput copy()

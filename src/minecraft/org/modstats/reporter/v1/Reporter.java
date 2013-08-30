@@ -24,7 +24,7 @@
  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
-
+/*
 package org.modstats.reporter.v1;
 
 import java.util.Map;
@@ -53,6 +53,7 @@ public class Reporter implements IModstatsReporter
     /**
      * At least one auto check was completed successfully
      */
+/*
     private boolean checkedAuto;
 
     public Reporter()
@@ -143,3 +144,4 @@ public class Reporter implements IModstatsReporter
     }
 
 }
+*/

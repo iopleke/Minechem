@@ -65,7 +65,7 @@ public class GuiFusion extends GuiContainerTabbed {
         
     }
     private void updateEnergy() {
-        targetEnergy = fusion.getEnergyStored();
+        targetEnergy = fusion.getFusionEnergyStored();
         if (energy < (targetEnergy)) {
             energy += increaseRate;
             if (energy > targetEnergy)

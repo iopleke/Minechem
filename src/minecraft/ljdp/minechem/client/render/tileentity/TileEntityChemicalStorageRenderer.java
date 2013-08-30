@@ -30,7 +30,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
     public void renderTileEntityChestAt(TileEntityChemicalStorage chemicalStorage, double par2, double par4, double par6, float par8) {
         int var9;
 
-        if ((chemicalStorage.hasWorldObj())) {
+        if ((chemicalStorage.worldObj==null)) {
             var9 = 0;
         } else {
             Block var10 = chemicalStorage.getBlockType();

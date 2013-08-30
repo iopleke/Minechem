@@ -365,6 +365,10 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 		return false;
 	}
 
+	public int getFusionEnergyStored() {
+		return this.energyStored;
+	}
+
 
 
 }

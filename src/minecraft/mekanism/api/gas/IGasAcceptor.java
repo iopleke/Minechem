@@ -1,4 +1,4 @@
-package mekanism.api;
+package mekanism.api.gas;
 
 import net.minecraftforge.common.ForgeDirection;
 

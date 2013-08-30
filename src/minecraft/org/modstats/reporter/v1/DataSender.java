@@ -25,6 +25,8 @@
  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
+//Need 1.6 update
+/*
 package org.modstats.reporter.v1;
 
 import java.io.BufferedReader;
@@ -86,7 +88,7 @@ class DataSender extends Thread
     
     private String getPlayerId() throws IOException
     {
-        File statDir =  new File(Minecraft.getMinecraftDir(), "stats");
+        File statDir =  new File(Minecraft.getMinecraft()., "stats");
         if(!statDir.exists())
         {
             statDir.mkdirs();
@@ -286,3 +288,4 @@ class DataSender extends Thread
         }
     }
 }
+*/

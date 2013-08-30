@@ -3,7 +3,7 @@ package ljdp.minechem.common.utils;
 public interface ConstantValue {
     public static final String TEXTURE_DIR = "/assets/minechem/textures/";
     public static final String TEXTURE_GUI_DIR = TEXTURE_DIR + "gui/";
-    public static final String TEXTURE_MODEL_DIR = TEXTURE_DIR + "model/";
+    public static final String TEXTURE_MODEL_DIR = "textures/model/";
     public static final String SOUNDS_DIR = "/assets/minechem/sounds/minechem/";
     public static final String LANG_DIR = "/assets/minechem/lang/minechem/";
 
@@ -76,10 +76,10 @@ public interface ConstantValue {
     public static final String DECOMPOSER_MODEL_OFF = TEXTURE_MODEL_DIR + "DecomposerModelOff.png";
     public static final String SYNTHESIS_MODEL = TEXTURE_MODEL_DIR + "SynthesiserModel.png";
     public static final String PRINTER_MODEL = TEXTURE_MODEL_DIR + "RushmeadPrinter.png";
-    public static final String PROJECTOR_MODEL_ON = TEXTURE_MODEL_DIR + "ProjectorModelOn.png";
-    public static final String PROJECTOR_MODEL_OFF = TEXTURE_MODEL_DIR + "ProjectorModelOff.png";
+    public static final String PROJECTOR_MODEL_ON = TEXTURE_MODEL_DIR + "projectormodelon.png";
+    public static final String PROJECTOR_MODEL_OFF = TEXTURE_MODEL_DIR + "projectormodeloff.png";
     public static final String HAZMAT_TEX = TEXTURE_MODEL_DIR + "hazmatArmor.png";
-    public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "ChemicalStorageModel.png";
+    public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "chemicalstoragemodel.png";
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
 }

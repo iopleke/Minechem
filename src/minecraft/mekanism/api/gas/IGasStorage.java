@@ -1,4 +1,4 @@
-package mekanism.api;
+package mekanism.api.gas;
 
 /**
  * Implement this if your tile entity can store some form of gas.  If you want your item to store gas, implement IStorageTank

@@ -1,4 +1,4 @@
-package mekanism.api;
+package mekanism.api.energy;
 
 /**
  * Mekanism-specific energy storage for TileEntities, already implemented in IStrictEnergyAcceptor.

@@ -54,7 +54,7 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.MICROSCOPE_MODEL);
         GL11.glPushMatrix();
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.func_110581_b(texture).func_110552_b());
+        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
         switch(type.ordinal()){
 case 0: {
         	
