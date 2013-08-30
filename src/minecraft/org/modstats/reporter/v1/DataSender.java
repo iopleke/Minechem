@@ -49,12 +49,6 @@ import net.minecraftforge.common.MinecraftForge;
 import org.modstats.ModVersionData;
 import org.modstats.ModsUpdateEvent;
 
-import argo.jdom.JdomParser;
-import argo.jdom.JsonNode;
-import argo.jdom.JsonRootNode;
-import argo.jdom.JsonStringNode;
-import argo.saj.InvalidSyntaxException;
-
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;

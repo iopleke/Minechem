@@ -44,7 +44,7 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
     @Override
     public void sendUpdatePacket() {
         PacketGhostBlock packet = new PacketGhostBlock(this);
-        int dimensionID = worldObj.getWorldInfo().getDimension();
+        int dimensionID = worldObj.provider.dimensionId;
         PacketHandler.getInstance().ghostBlockUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
     }
 
@@ -78,14 +78,28 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
         return false;
     }
 
-    @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        return false;
-    }
 
     @Override
     public boolean canConnect(ForgeDirection direction) {
         return false;
     }
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public float getProvide(ForgeDirection direction) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getMaxEnergyStored() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 
 }

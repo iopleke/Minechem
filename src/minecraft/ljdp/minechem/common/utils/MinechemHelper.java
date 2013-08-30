@@ -223,7 +223,7 @@ public class MinechemHelper {
     public static WorldServer getDimension(int dimensionID) {
         WorldServer[] worlds = FMLServerHandler.instance().getServer().worldServers;
         for (WorldServer world : worlds) {
-            if (world.getWorldInfo().getDimension() == dimensionID)
+            if (world.provider.dimensionId == dimensionID)
                 return world;
         }
         return null;

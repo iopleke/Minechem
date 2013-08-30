@@ -4,14 +4,11 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import universalelectricity.core.electricity.ElectricityPack;
-
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Constants;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelSynthesizer;
 import ljdp.minechem.common.MinechemItems;
-import ljdp.minechem.common.MinechemPowerProvider;
 import ljdp.minechem.common.gates.IMinechemTriggerProvider;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.inventory.BoundedInventory;
@@ -23,21 +20,20 @@ import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.ISidedInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import universalelectricity.core.electricity.ElectricityPack;
 import buildcraft.api.gates.ActionManager;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerProvider;
 import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.power.IPowerProvider;
-import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.transport.IPipe;
 
-public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory, IPowerReceptor, ITriggerProvider, IMinechemTriggerProvider,
+public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory,  ITriggerProvider, IMinechemTriggerProvider,
         ISpecialInventory, IMinechemMachinePeripheral {
     public static final int[] kOutput = { 0 };
     public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -46,7 +42,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public static final int[] kJournal = { 23 };
 
     private SynthesisRecipe currentRecipe;
-    MinechemPowerProvider powerProvider;
     public ModelSynthesizer model;
 	public static final int kSizeOutput = 1;
 	public static final int kSizeRecipe  = 9;
@@ -78,8 +73,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     public TileEntitySynthesis() {
         inventory = new ItemStack[getSizeInventory()];
-        powerProvider = new MinechemPowerProvider(MIN_ENERGY_RECIEVED, MAX_ENERGY_RECIEVED, MIN_ACTIVATION_ENERGY, MAX_ENERGY_STORED);
-        powerProvider.configurePowerPerdition(1, Constants.TICKS_PER_SECOND * 2);
         model = new ModelSynthesizer();
         ActionManager.registerTriggerProvider(this);
     }
@@ -129,8 +122,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    @Override
-    public void doWork() {}
 
     @Override
     public ItemStack[] extractItem(boolean doRemove, ForgeDirection direction, int maxItemCount) {
@@ -195,11 +186,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         return null;
     }
 
-    @Override
-    public IPowerProvider getPowerProvider() {
-        return this.powerProvider;
-    }
-
     public ItemStack[] getRecipeMatrixItems() {
         return recipeMatrix.copyInventoryToArray();
     }
@@ -210,7 +196,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     }
 
     public boolean hasEnoughPowerForCurrentRecipe() {
-        return currentRecipe != null && powerProvider.getEnergyStored() >= currentRecipe.energyCost();
+        return currentRecipe != null && this.getEnergyStored() >= currentRecipe.energyCost();
     }
 
     @Override
@@ -263,12 +249,12 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         super.readFromNBT(nbtTagCompound);
         NBTTagList inventoryTagList = nbtTagCompound.getTagList("inventory");
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
-        powerProvider.readFromNBT(nbtTagCompound);
+        
     }
 
     public void sendUpdatePacket() {
         PacketSynthesisUpdate packet = new PacketSynthesisUpdate(this);
-        int dimensionID = worldObj.getWorldInfo().getDimension();
+        int dimensionID = worldObj.provider.dimensionId;
         PacketHandler.getInstance().synthesisUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
     }
 
@@ -277,11 +263,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         super.setInventorySlotContents(slot, itemstack);
         if (slot == kJournal[0] && itemstack != null)
             onPutJournal(itemstack);
-    }
-
-    @Override
-    public void setPowerProvider(IPowerProvider provider) {
-        this.powerProvider = (MinechemPowerProvider) provider;
     }
 
     public boolean takeStacksFromStorage(boolean doTake) {
@@ -301,20 +282,18 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     @Override
     public void updateEntity() {
     	super.updateEntity();
-        powerProvider.receiveEnergy((float) wattsReceived / 437.5F, ForgeDirection.UP);// FIXME
-        powerProvider.update(this);
-        if (!worldObj.isRemote && (powerProvider.didEnergyStoredChange() || powerProvider.didEnergyUsageChange()))
+        if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
 
-        float energyStored = powerProvider.getEnergyStored();
-        if (energyStored >= powerProvider.getMaxEnergyStored())
+        float energyStored = this.getEnergyStored();
+        if (energyStored >= this.getMaxEnergyStored())
             hasFullEnergy = true;
-        if (hasFullEnergy && energyStored < powerProvider.getMaxEnergyStored() / 2)
+        if (hasFullEnergy && energyStored < this.getMaxEnergyStored() / 2)
             hasFullEnergy = false;
 
-        if (powerProvider.getEnergyStored() >= powerProvider.getMaxEnergyStored())
+        if (this.getEnergyStored() >= this.getMaxEnergyStored())
             hasFullEnergy = true;
-        if (hasFullEnergy && powerProvider.getEnergyStored() < powerProvider.getMaxEnergyStored() / 2)
+        if (hasFullEnergy && this.getEnergyStored() < this.getMaxEnergyStored() / 2)
             hasFullEnergy = false;
 
         if (currentRecipe != null && inventory[kOutput[0]] == null) {
@@ -333,7 +312,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         super.writeToNBT(nbtTagCompound);
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         nbtTagCompound.setTag("inventory", inventoryTagList);
-        powerProvider.writeToNBT(nbtTagCompound);
     }
 
     private void addEmptyBottles(int amount) {
@@ -360,7 +338,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     private boolean canAffordRecipe(SynthesisRecipe recipe) {
         int energyCost = recipe.energyCost();
-        return powerProvider.getEnergyStored() >= energyCost;
+        return this.getEnergyStored() >= energyCost;
     }
 
     private boolean getRecipeResult() {
@@ -387,7 +365,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     private void takeEnergy(SynthesisRecipe recipe) {
         int energyCost = recipe.energyCost();
-        powerProvider.useEnergy(energyCost, energyCost, true);
+        this.energyStored-=energyCost;
     }
 
     private boolean takeStackFromStorage(ItemStack ingredient, ItemStack[] storage) {
@@ -525,7 +503,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             return "norecipe";
         } else {
             int energyCost = currentRecipe.energyCost();
-            if (this.powerProvider.getEnergyStored() >= energyCost)
+            if (this.getEnergyStored() >= energyCost)
                 return "powered";
             else
                 return "unpowered";
@@ -537,10 +515,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         return false;
     }
 
-    @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        return false;
-    }
 
     public int[] getSizeInventorySide(int side) {
         switch (side) {
@@ -559,33 +533,39 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public boolean canConnect(ForgeDirection direction) {
         return true;
     }
-
-    @Override
-    public ElectricityPack getRequest() {
-        return new ElectricityPack(Math.min((powerProvider.getMaxEnergyStored() - powerProvider.getEnergyStored()), powerProvider.getMaxEnergyReceived())
-                * 437.5D / this.getVoltage(), this.getVoltage());
-    }
-
-    @Override
-    public int powerRequest(ForgeDirection from) {
-        if (powerProvider.getEnergyStored() < powerProvider.getMaxEnergyStored())
-            return powerProvider.getMaxEnergyReceived();
-        else
-            return 0;
-    }
-
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 	@Override
-	public
-	int getStartInventorySide(ForgeDirection side) {
+	public float getProvide(ForgeDirection direction) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public
-	int getSizeInventorySide(ForgeDirection side) {
+	public float getMaxEnergyStored() {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

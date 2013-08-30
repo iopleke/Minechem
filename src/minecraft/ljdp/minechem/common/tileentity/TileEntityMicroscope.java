@@ -187,7 +187,7 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if (i == kInput[0])
             return true;
         if (i == kJournal[0] && itemstack.itemID == MinechemItems.journal.itemID)
@@ -205,4 +205,17 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
 		// TODO Auto-generated method stub
 		
 	}
+
+	@Override
+	public float getProvide(ForgeDirection direction) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getMaxEnergyStored() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
 }

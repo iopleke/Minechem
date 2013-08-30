@@ -8,15 +8,14 @@ import ljdp.minechem.common.inventory.BoundedInventory;
 import ljdp.minechem.common.inventory.Transactor;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
-import buildcraft.api.core.SafeTimeTracker;
-import buildcraft.api.inventory.ISpecialInventory;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.ISidedInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
+import buildcraft.api.core.SafeTimeTracker;
 
 public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInventory, IMinechemMachinePeripheral {
 
@@ -215,9 +214,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
         MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory"), inventory);
     }
 
-    public int getEnergyStored() {
-        return this.energyStored;
-    }
 
     public void setEnergyStored(int amount) {
         this.energyStored = amount;
@@ -294,7 +290,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         if (i == kFusionStar[0])
             if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItems.fusionStar.itemID)
                 return true;
@@ -338,17 +334,35 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 		return false;
 	}
 
+
 	@Override
-	public
-	int getStartInventorySide(ForgeDirection side) {
+	public float getProvide(ForgeDirection direction) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public
-	int getSizeInventorySide(ForgeDirection side) {
-		 return 0;
+	public float getMaxEnergyStored() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return false;
 	}
 
 
