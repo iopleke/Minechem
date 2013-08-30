@@ -2,11 +2,9 @@ package ljdp.minechem.common.tileentity;
 
 import java.util.LinkedList;
 
-import ljdp.minechem.api.util.Constants;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelPrinter;
 import ljdp.minechem.common.MinechemBlocks;
-import ljdp.minechem.common.MinechemPowerProvider;
 import ljdp.minechem.common.gates.IMinechemTriggerProvider;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.inventory.BoundedInventory;
@@ -17,30 +15,29 @@ import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
-import net.minecraft.inventory.InventoryCrafting;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.common.ISidedInventory;
-import universalelectricity.core.electricity.ElectricityPack;
 import buildcraft.api.gates.ActionManager;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerProvider;
 import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.power.IPowerProvider;
 import buildcraft.api.power.IPowerReceptor;
+import buildcraft.api.power.PowerHandler;
+import buildcraft.api.power.PowerHandler.PowerReceiver;
 import buildcraft.api.transport.IPipe;
 
-public class TileEntityBluePrintPrinter extends MinechemTileEntity implements ISidedInventory, IPowerReceptor, ITriggerProvider, IMinechemTriggerProvider,
+public class TileEntityBluePrintPrinter extends MinechemTileEntity implements ISidedInventory,  ITriggerProvider, IMinechemTriggerProvider,
         ISpecialInventory{
     public static final int[] kOutput = { 0 };
     public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public static final int[] kStorage = { 14, 15, 16, 17, 18, 19, 20, 21, 22 };
 
-    MinechemPowerProvider powerProvider;
     public ModelPrinter model;
 	public static final int kSizeOutput = 1;
 	public static final int kSizeRecipe  = 9;
@@ -66,8 +63,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
 
     public TileEntityBluePrintPrinter() {
         inventory = new ItemStack[getSizeInventory()];
-        powerProvider = new MinechemPowerProvider(MIN_ENERGY_RECIEVED, MAX_ENERGY_RECIEVED, MIN_ACTIVATION_ENERGY, MAX_ENERGY_STORED);
-        powerProvider.configurePowerPerdition(1, Constants.TICKS_PER_SECOND * 2);
         model = new ModelPrinter();
         ActionManager.registerTriggerProvider(this);
     }
@@ -108,8 +103,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         }
     }
 
-    @Override
-    public void doWork() {}
 
     @Override
     public ItemStack[] extractItem(boolean doRemove, ForgeDirection direction, int maxItemCount) {
@@ -156,10 +149,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return null;
     }
 
-    @Override
-    public IPowerProvider getPowerProvider() {
-        return this.powerProvider;
-    }
 
     public ItemStack[] getRecipeMatrixItems() {
         return recipeMatrix.copyInventoryToArray();
@@ -203,16 +192,11 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         super.readFromNBT(nbtTagCompound);
         NBTTagList inventoryTagList = nbtTagCompound.getTagList("inventory");
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
-        powerProvider.readFromNBT(nbtTagCompound);
+        
     }
 
 
 
-
-    @Override
-    public void setPowerProvider(IPowerProvider provider) {
-        this.powerProvider = (MinechemPowerProvider) provider;
-    }
 
     public boolean takeStacksFromStorage(boolean doTake) {
     	ItemStack[] ing = { new ItemStack(MinechemBlocks.fusion, 0), new ItemStack(MinechemBlocks.fusion, 1), new ItemStack(Item.diamond)};
@@ -234,20 +218,13 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
     public void updateEntity() {
     	super.updateEntity();
 
-        powerProvider.receiveEnergy((float) wattsReceived / 437.5F, ForgeDirection.UP);// FIXME
-        powerProvider.update(this);
-        if (!worldObj.isRemote && (powerProvider.didEnergyStoredChange() || powerProvider.didEnergyUsageChange()))
+        if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
 
-        float energyStored = powerProvider.getEnergyStored();
-        if (energyStored >= powerProvider.getMaxEnergyStored())
+        float energyStored = this.getEnergyStored();
+        if (energyStored >= this.getMaxEnergyStored())
             hasFullEnergy = true;
-        if (hasFullEnergy && energyStored < powerProvider.getMaxEnergyStored() / 2)
-            hasFullEnergy = false;
-
-        if (powerProvider.getEnergyStored() >= powerProvider.getMaxEnergyStored())
-            hasFullEnergy = true;
-        if (hasFullEnergy && powerProvider.getEnergyStored() < powerProvider.getMaxEnergyStored() / 2)
+        if (hasFullEnergy && energyStored < this.getMaxEnergyStored() / 2)
             hasFullEnergy = false;
 
        
@@ -264,7 +241,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         super.writeToNBT(nbtTagCompound);
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         nbtTagCompound.setTag("inventory", inventoryTagList);
-        powerProvider.writeToNBT(nbtTagCompound);
     }
 
     
@@ -321,12 +297,6 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
     public boolean isInvNameLocalized() {
         return false;
     }
-
-    @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        return false;
-    }
-
     public int[] getSizeInventorySide(int side) {
         switch (side) {
         case 0:
@@ -344,34 +314,7 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
         return true;
     }
 
-    @Override
-    public ElectricityPack getRequest() {
-        return new ElectricityPack(Math.min((powerProvider.getMaxEnergyStored() - powerProvider.getEnergyStored()), powerProvider.getMaxEnergyReceived())
-                * 437.5D / this.getVoltage(), this.getVoltage());
-    }
 
-    @Override
-    public int powerRequest(ForgeDirection from) {
-        if (powerProvider.getEnergyStored() < powerProvider.getMaxEnergyStored())
-            return powerProvider.getMaxEnergyReceived();
-        else
-            return 0;
-    }
-
-
-	@Override
-	public
-	int getStartInventorySide(ForgeDirection side) {
-		
-		return 0;
-	}
-
-	@Override
-	public
-	int getSizeInventorySide(ForgeDirection side) {
-		
-		return 0;
-	}
 
 	@Override
 	public boolean hasNoTestTubes() {
@@ -391,8 +334,46 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
 		 if (worldObj.isRemote)
 	            return;
 	        PacketPrinterUpdate packetDecomposerUpdate = new PacketPrinterUpdate(this);
-	        int dimensionID = worldObj.getWorldInfo().getDimension();
+	        int dimensionID = worldObj.provider.dimensionId;
 	        PacketHandler.getInstance().printerUpdateHandler.sendToAllPlayersInDimension(packetDecomposerUpdate, dimensionID);
 		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+
+	@Override
+	public float getProvide(ForgeDirection direction) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getMaxEnergyStored() {
+		// TODO Auto-generated method stub
+		return this.MAX_ENERGY_STORED;
+	}
+
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		// TODO Auto-generated method stub
+		return true;
 	}
 }

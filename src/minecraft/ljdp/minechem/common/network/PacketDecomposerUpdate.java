@@ -3,6 +3,7 @@ package ljdp.minechem.common.network;
 import buildcraft.api.power.IPowerReceptor;
 import cpw.mods.fml.common.network.Player;
 import ljdp.easypacket.EasyPacketData;
+import ljdp.minechem.common.tileentity.MinechemTileEntity;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 
 public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate {
@@ -15,10 +16,10 @@ public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate {
     float energyUsage;
 
     public PacketDecomposerUpdate(TileEntityDecomposer decomposer) {
-        super((IPowerReceptor) decomposer);
+        super((MinechemTileEntity) decomposer);
         this.decomposer = decomposer;
         this.state = decomposer.getState().ordinal();
-        this.energyUsage = this.powerProvider.getCurrentEnergyUsage();
+        this.energyUsage = decomposer.getEnergyUsage();
     }
 
     public PacketDecomposerUpdate() {
@@ -36,7 +37,7 @@ public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate {
         if (this.tileEntity instanceof TileEntityDecomposer) {
             this.decomposer = (TileEntityDecomposer) this.tileEntity;
             this.decomposer.setState(this.state);
-            this.powerProvider.setCurrentEnergyUsage(this.energyUsage);
+            this.decomposer.setEnergyUsage(this.energyUsage);
         }
     }
 

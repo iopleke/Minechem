@@ -3,7 +3,7 @@ package ljdp.minechem.common.blocks;
 import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import net.minecraft.block.BlockChest;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -38,7 +38,7 @@ public class BlockChemicalStorage extends BlockChest {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving el, ItemStack is) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is) {
         byte facing = 0;
         int facingI = MathHelper.floor_double((double) (el.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
 

@@ -212,7 +212,7 @@ public class ItemElement extends Item implements IStorageTank {
 
     public static RadiationInfo initiateRadioactivity(ItemStack element, World world) {
         EnumRadioactivity radioactivity = getRadioactivity(element);
-        int dimensionID = world.getWorldInfo().getDimension();
+        int dimensionID = world.provider.dimensionId;
         long lastUpdate = world.getTotalWorldTime();
         long life = radioactivity.getLife();
         RadiationInfo info = new RadiationInfo(element, life, lastUpdate, dimensionID, radioactivity);

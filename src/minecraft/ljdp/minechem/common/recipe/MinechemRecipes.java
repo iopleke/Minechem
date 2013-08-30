@@ -215,7 +215,8 @@ public class MinechemRecipes {
         ItemStack var46 = new ItemStack(Item.fermentedSpiderEye);
         ItemStack var47 = new ItemStack(Item.netherStalkSeeds);
         ItemStack var48 = new ItemStack(Block.glowStone);
-        ItemStack var49 = new ItemStack(Item.lightStoneDust);
+        //Glowstone Dust
+        ItemStack var49 = new ItemStack(Item.itemsList[92]);
         ItemStack var50 = new ItemStack(Item.potion, 1, 0);
         ItemStack var51 = new ItemStack(Item.bucketWater);
         DecomposerRecipe.add(new DecomposerRecipeSelect(var39, 0.9F, new DecomposerRecipe[] { new DecomposerRecipe(new Chemical[] { this.molecule(EnumMolecule.polycyanoacrylate) }), new DecomposerRecipe(new Chemical[] { this.element(EnumElement.Hg) }), new DecomposerRecipe(new Chemical[] { this.molecule(EnumMolecule.water, 10) }) }));

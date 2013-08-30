@@ -290,7 +290,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
 
     // Is item valid.
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
         return itemstack.itemID == MinechemItems.blueprint.itemID;
     }
 
@@ -303,5 +303,18 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
 	void sendUpdatePacket() {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	@Override
+	public float getProvide(ForgeDirection direction) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public float getMaxEnergyStored() {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }

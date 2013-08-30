@@ -1,5 +1,6 @@
 package ljdp.minechem.common.gates;
 
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;
@@ -15,25 +16,26 @@ public abstract class MinechemTrigger implements ITrigger {
     @SideOnly(Side.CLIENT)
     public Icon icon;
     public IIconProvider provider = new MineChemIconProvider();
-    private String desc;
+    protected String desc;
     protected int id;
 
     public MinechemTrigger(int id, String dsc) {
         this.id = id;
-        ActionManager.triggers[id] = this;
+
         this.desc = dsc;
+        ActionManager.triggers.put(desc, this);
     }
 
     @Override
-    public int getId() {
+    public int getLegacyId() {
         return this.id;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public IIconProvider getIconProvider() {
+    public Icon getIcon() {
     
-		return provider;
+		return provider.getIcon(0);
         
     }
 
@@ -54,4 +56,16 @@ public abstract class MinechemTrigger implements ITrigger {
     public final ITriggerParameter createParameter() {
         return new TriggerParameter();
     }
+    
+    
+    @Override
+	public String getUniqueTag() {
+		return this.desc;
+	}
+
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void registerIcons(IconRegister iconRegister) {
+		
+	}
 }

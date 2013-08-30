@@ -1,24 +1,22 @@
 package ljdp.minechem.common.network;
 
+import ljdp.easypacket.EasyPacketData;
+import ljdp.minechem.common.tileentity.MinechemTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import buildcraft.api.power.IPowerReceptor;
 import cpw.mods.fml.common.network.Player;
-import ljdp.easypacket.EasyPacketData;
-import ljdp.minechem.common.MinechemPowerProvider;
 
 public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate {
 
-    IPowerReceptor powerReceptor;
-    MinechemPowerProvider powerProvider;
+    MinechemTileEntity powerReceptor;
 
     @EasyPacketData
     float energyStored;
 
-    public PacketPowerReceptorUpdate(IPowerReceptor powerReceptor) {
+    public PacketPowerReceptorUpdate(MinechemTileEntity powerReceptor) {
         super((TileEntity) powerReceptor);
         this.powerReceptor = powerReceptor;
-        this.powerProvider = (MinechemPowerProvider) powerReceptor.getPowerProvider();
-        this.energyStored = this.powerProvider.getEnergyStored();
+        this.energyStored = this.powerReceptor.getEnergyStored();
     }
 
     public PacketPowerReceptorUpdate() {
@@ -33,10 +31,9 @@ public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate {
     @Override
     public void onReceive(Player player) {
         super.onReceive(player);
-        if (this.tileEntity instanceof IPowerReceptor) {
-            this.powerReceptor = (IPowerReceptor) this.tileEntity;
-            this.powerProvider = (MinechemPowerProvider) this.powerReceptor.getPowerProvider();
-            this.powerProvider.setEnergyStored(this.energyStored);
+        if (this.tileEntity instanceof MinechemTileEntity) {
+            this.powerReceptor = (MinechemTileEntity) this.tileEntity;
+            this.powerReceptor.setEnergyStored(this.energyStored);
         }
     }
 

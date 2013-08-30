@@ -17,13 +17,14 @@ import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
 import net.minecraft.client.Minecraft;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.ForgeSubscribe;
 
 import org.modstats.ModstatInfo;
@@ -43,7 +44,6 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -149,7 +149,7 @@ public class ModMinechem {
     @ForgeSubscribe
     @SideOnly(Side.CLIENT)
     public void textureHook(TextureStitchEvent.Pre event){
-            if (event.map == Minecraft.getMinecraft().renderEngine.textureMapItems) {
+            if ((event.map.textureType==1)){
                 TabStateControl.unpoweredIcon = event.map.registerIcon(ConstantValue.UNPOWERED_ICON);
                 MinechemTriggers.outputJammed.icon = event.map.registerIcon(ConstantValue.JAMMED_ICON);
                 MinechemTriggers.noTestTubes.icon = event.map.registerIcon(ConstantValue.NO_BOTTLES_ICON);

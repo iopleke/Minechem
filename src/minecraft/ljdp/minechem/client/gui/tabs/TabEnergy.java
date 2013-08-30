@@ -1,11 +1,8 @@
 package ljdp.minechem.client.gui.tabs;
 
-import universalelectricity.prefab.tile.TileEntityElectrical;
-import ljdp.minechem.common.MinechemPowerProvider;
 import ljdp.minechem.common.tileentity.MinechemTileEntity;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.common.utils.RollingAverage;
-import buildcraft.api.power.IPowerReceptor;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraftforge.common.ForgeDirection;

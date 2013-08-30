@@ -1,8 +1,8 @@
 package ljdp.minechem.common.network;
 
 import ljdp.easypacket.EasyPacketData;
+import ljdp.minechem.common.tileentity.MinechemTileEntity;
 import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
-import buildcraft.api.power.IPowerReceptor;
 import cpw.mods.fml.common.network.Player;
 
 public class PacketPrinterUpdate extends PacketPowerReceptorUpdate {
@@ -15,9 +15,9 @@ public class PacketPrinterUpdate extends PacketPowerReceptorUpdate {
     float energyUsage;
 
     public PacketPrinterUpdate(TileEntityBluePrintPrinter decomposer) {
-        super((IPowerReceptor) decomposer);
+        super((MinechemTileEntity) decomposer);
         this.decomposer = decomposer;
-        this.energyUsage = this.powerProvider.getCurrentEnergyUsage();
+        this.energyUsage = decomposer.getEnergyUsage();
     }
 
     public PacketPrinterUpdate() {
@@ -34,7 +34,7 @@ public class PacketPrinterUpdate extends PacketPowerReceptorUpdate {
         super.onReceive(player);
         if (this.tileEntity instanceof TileEntityBluePrintPrinter) {
             this.decomposer = (TileEntityBluePrintPrinter) this.tileEntity;
-            this.powerProvider.setCurrentEnergyUsage(this.energyUsage);
+            this.decomposer.setEnergyUsage(this.energyUsage);
         }
     }
 

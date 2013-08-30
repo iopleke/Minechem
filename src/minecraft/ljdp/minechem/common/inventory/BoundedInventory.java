@@ -113,7 +113,8 @@ public class BoundedInventory implements IInventory {
     }
 
     @Override
-    public boolean isStackValidForSlot(int i, ItemStack itemstack) {
-        return _inv.isStackValidForSlot(_slots[i], itemstack);
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        return _inv.isItemValidForSlot(_slots[i], itemstack);
     }
+
 }

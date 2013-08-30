@@ -7,6 +7,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraftforge.common.ForgeDirection;
 import universalelectricity.prefab.tile.TileEntityElectrical;
 
 public abstract class MinechemTileEntity extends TileEntityElectrical implements IInventory {
@@ -20,6 +21,10 @@ public abstract class MinechemTileEntity extends TileEntityElectrical implements
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
 	}
 	
+
+	public void setEnergyUsage(float energyUsage) {
+		this.lastEnergyUsed=energyUsage/20;
+	}
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
 		this.readFromNBT(pkt.customParam1);
@@ -90,6 +95,23 @@ public abstract class MinechemTileEntity extends TileEntityElectrical implements
 
 	@Override
 	public void closeChest() {
+	}
+
+    @Override
+    public float getRequest(ForgeDirection direction) {
+        return (float) Math.min((this.getMaxEnergyStored() - this.getEnergyStored()), this.getMaxEnergyReceived()* 437.5D / this.getVoltage());
+    }
+	//TODO Implement this for packet efficiency
+	public boolean didEnergyStoredChange(){
+		return true;
+	}
+	public boolean didEnergyUsageChange(){
+		return true;
+	}
+	
+	//Should probably get *actual* values for this
+	public float getMaxEnergyReceived(){
+		return 1000;
 	}
 	
 

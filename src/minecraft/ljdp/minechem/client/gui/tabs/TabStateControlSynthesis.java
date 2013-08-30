@@ -1,11 +1,10 @@
 package ljdp.minechem.client.gui.tabs;
 
-import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
-import ljdp.minechem.common.MinechemPowerProvider;
 import ljdp.minechem.common.tileentity.TileEntitySynthesis;
 import ljdp.minechem.common.utils.MinechemHelper;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.util.Icon;
 
 public class TabStateControlSynthesis extends TabStateControl {
     public static Icon noRecipeIcon, unpoweredIcon;

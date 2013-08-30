@@ -2,17 +2,10 @@ package ljdp.minechem.common.blocks;
 
 import java.util.ArrayList;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import ljdp.minechem.common.CommonProxy;
 import ljdp.minechem.common.ModMinechem;
-import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 import ljdp.minechem.common.utils.ConstantValue;
-
-import buildcraft.api.power.IPowerProvider;
-
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,11 +13,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockDecomposer extends BlockMinechemContainer {
     private Icon front;
-
-    IPowerProvider powerProvider;
 
     public BlockDecomposer(int id) {
         super(id, Material.iron);

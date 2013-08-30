@@ -18,17 +18,4 @@ public class TriggerNoTestTubes extends MinechemTrigger {
             return false;
         return ((IMinechemTriggerProvider) tile).hasNoTestTubes();
     }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIconProvider getIconProvider() {
-    
-		return provider;
-        
-    }
-
-	@Override
-	public int getIconIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

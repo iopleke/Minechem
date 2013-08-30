@@ -18,17 +18,5 @@ public class TriggerOutputJammed extends MinechemTrigger {
             return false;
         return ((IMinechemTriggerProvider) tile).isJammed();
     }
-    @Override
-    @SideOnly(Side.CLIENT)
-    public IIconProvider getIconProvider() {
-    
-		return provider;
-        
-    }
-
-	@Override
-	public int getIconIndex() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
+ 
 }

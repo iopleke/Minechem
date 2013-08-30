@@ -7,9 +7,8 @@ import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
 import ljdp.minechem.common.items.ItemBlueprint;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
-
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -26,7 +25,7 @@ public class BlockBlueprintProjector extends BlockMinechemContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLiving el, ItemStack is) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is) {
         super.onBlockPlacedBy(world, x, y, z, el, is);
         int facing = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);

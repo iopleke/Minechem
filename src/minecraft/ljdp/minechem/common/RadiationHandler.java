@@ -120,7 +120,7 @@ public class RadiationHandler {
 
     private int updateRadiation(World world, ItemStack element) {
         RadiationInfo radiationInfo = ItemElement.getRadiationInfo(element, world);
-        int dimensionID = world.getWorldInfo().getDimension();
+        int dimensionID = world.provider.dimensionId;
         if (dimensionID != radiationInfo.dimensionID && radiationInfo.isRadioactive()) {
             radiationInfo.dimensionID = dimensionID;
             ItemElement.setRadiationInfo(radiationInfo, element);

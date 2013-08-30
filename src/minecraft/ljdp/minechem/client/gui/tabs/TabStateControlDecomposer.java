@@ -1,6 +1,5 @@
 package ljdp.minechem.client.gui.tabs;
 
-import ljdp.minechem.common.MinechemPowerProvider;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer.State;
