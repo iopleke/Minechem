@@ -8,6 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRenderer {
 
@@ -28,9 +29,11 @@ public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRende
             GL11.glRotatef((facing * 90.0F), 0.0F, 1.0F, 0.0F);
             GL11.glEnable(GL11.GL_LIGHTING);
             if (blueprintProjector.hasBlueprint()) {
-                bindTextureByName(ConstantValue.PROJECTOR_MODEL_ON);
+
+                func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_ON));
             } else {
-                bindTextureByName(ConstantValue.PROJECTOR_MODEL_OFF);
+
+                func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_OFF));
             }
             model.render(0.0625F);
             GL11.glDisable(GL11.GL_LIGHTING);

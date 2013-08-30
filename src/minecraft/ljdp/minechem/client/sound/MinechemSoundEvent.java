@@ -9,7 +9,7 @@ public class MinechemSoundEvent {
 
     @ForgeSubscribe
     public void onSound(SoundLoadEvent event) {
-        event.manager.soundPoolSounds.addSound("ljdp/minechem/projector.ogg", ModMinechem.class.getResource(ConstantValue.PROJECTOR_SOUND));
+        event.manager.soundPoolSounds.addSound(ConstantValue.TEXTURE_MOD_ID+"assets/minechem/sound/minechem/projector.ogg");
     }
 
 }

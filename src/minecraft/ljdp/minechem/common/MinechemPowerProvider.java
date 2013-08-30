@@ -1,4 +1,10 @@
-package ljdp.minechem.common;
+//1.5 Code
+//Switching to UE to get this information
+//Leaving this here 'Just in Case'
+
+/*
+  package ljdp.minechem.common;
+
 
 import net.minecraft.tileentity.TileEntity;
 import buildcraft.api.core.SafeTimeTracker;
@@ -68,3 +74,4 @@ public class MinechemPowerProvider extends PowerProvider {
     }
 
 }
+*/

@@ -10,6 +10,8 @@ import net.minecraft.block.BlockChest;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
@@ -28,7 +30,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
     public void renderTileEntityChestAt(TileEntityChemicalStorage chemicalStorage, double par2, double par4, double par6, float par8) {
         int var9;
 
-        if (!chemicalStorage.func_70309_m()) {
+        if ((chemicalStorage.hasWorldObj())) {
             var9 = 0;
         } else {
             Block var10 = chemicalStorage.getBlockType();
@@ -45,7 +47,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
         if (chemicalStorage.adjacentChestZNeg == null && chemicalStorage.adjacentChestXNeg == null) {
             ModelChest var14 = this.chestModel;
 
-            this.bindTextureByName(ConstantValue.CHEMICAL_STORAGE_MODEL);
+            func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.CHEMICAL_STORAGE_MODEL));
 
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);

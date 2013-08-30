@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ResourceLocation;
 
 public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer {
 
@@ -16,7 +17,7 @@ public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer {
             TileEntitySynthesis synthesis = (TileEntitySynthesis) tileEntity;
             int facing = synthesis.getFacing();
 
-            if (synthesis.getPowerProvider().getEnergyStored() > 100)
+            if (synthesis.getEnergyStored() > 100)
                 synthesis.model.updateArm();
 
             GL11.glPushMatrix();
@@ -26,7 +27,7 @@ public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            bindTextureByName(ConstantValue.SYNTHESIS_MODEL);
+            func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.SYNTHESIS_MODEL));
             synthesis.model.render(0.0625F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_LIGHTING);

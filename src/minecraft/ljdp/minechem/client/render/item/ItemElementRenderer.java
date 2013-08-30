@@ -93,10 +93,10 @@ public class ItemElementRenderer implements IItemRenderer {
         Tessellator tessellator = Tessellator.instance;
         setColorForElement(element);
         ItemRenderer.renderItemIn2D(tessellator, contents.getMaxU(), contents.getMinV(), contents.getMinU(), contents.getMaxV(),
-                contents.getSheetWidth(), contents.getSheetHeight(), 0.0625F);
+                contents.getOriginX(), contents.getOriginY(), 0.0625F);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         ItemRenderer.renderItemIn2D(tessellator, testtube.getMaxU(), testtube.getMinV(), testtube.getMinU(), testtube.getMaxV(),
-                testtube.getSheetWidth(), testtube.getSheetHeight(), 0.0625F);
+                testtube.getOriginX(), testtube.getOriginY(), 0.0625F);
     }
 
     private void renderItemAsEntity(ItemStack itemstack, EnumElement element, Icon testtube, Icon contents) {
@@ -114,7 +114,7 @@ public class ItemElementRenderer implements IItemRenderer {
         GL11.glPushMatrix();
         GL11.glScalef(scale, scale, scale);
         ItemRenderer.renderItemIn2D(tesselator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(),
-                texture.getSheetWidth(), texture.getSheetHeight(), .05F);
+                texture.getOriginX(), texture.getOriginY(), .05F);
         GL11.glPopMatrix();
     }
 

@@ -3,7 +3,8 @@ package ljdp.minechem.client.render.item;
 import ljdp.minechem.client.ModelMicroscope;
 import ljdp.minechem.common.utils.ConstantValue;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.client.IItemRenderer;
+import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
@@ -51,9 +52,9 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        String texture = ConstantValue.MICROSCOPE_MODEL;
+        ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.MICROSCOPE_MODEL);
         GL11.glPushMatrix();
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.getTexture(texture));
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, FMLClientHandler.instance().getClient().renderEngine.func_110581_b(texture).func_110552_b());
         switch(type.ordinal()){
 case 0: {
         	
