@@ -6,8 +6,9 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.RenderEngine;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
@@ -36,7 +37,7 @@ public abstract class Tab {
     protected int minHeight = 22;
     protected int currentHeight = minHeight;
     protected FontRenderer fontRenderer;
-    protected RenderEngine renderEngine;
+    protected TextureManager renderEngine;
 
     public Tab(Gui gui) {
         myGui = gui;
@@ -55,14 +56,16 @@ public abstract class Tab {
         GL11.glColor4f(colorR, colorG, colorB, 1.0F);
 
         if (leftSide) {
-            renderEngine.bindTexture(ConstantValue.TAB_LEFT);
+
+            Minecraft.getMinecraft().renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_LEFT));
 
             myGui.drawTexturedModalRect(x - currentWidth, y + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
             myGui.drawTexturedModalRect(x - currentWidth, y, 0, 0, 4, 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
         } else {
-            renderEngine.bindTexture(ConstantValue.TAB_RIGHT);
+
+        	 Minecraft.getMinecraft().renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_RIGHT));
 
             myGui.drawTexturedModalRect(x, y, 0, 256 - currentHeight, 4, currentHeight);
             myGui.drawTexturedModalRect(x + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -74,7 +77,7 @@ public abstract class Tab {
     }
 
     protected void drawIcon(Icon icon, int x, int y) {
-        Minecraft.getMinecraft().renderEngine.bindTexture("/gui/items.png");
+    	 Minecraft.getMinecraft().renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,"/gui/items.png"));
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
         myGui.drawTexturedModelRectFromIcon(x, y, icon, 16, 16);
     }

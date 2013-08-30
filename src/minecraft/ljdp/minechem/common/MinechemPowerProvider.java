@@ -3,7 +3,6 @@ package ljdp.minechem.common;
 import net.minecraft.tileentity.TileEntity;
 import buildcraft.api.core.SafeTimeTracker;
 import buildcraft.api.power.IPowerReceptor;
-import buildcraft.api.power.PowerProvider;
 
 public class MinechemPowerProvider extends PowerProvider {
 
