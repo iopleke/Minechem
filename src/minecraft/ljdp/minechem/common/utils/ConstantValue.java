@@ -2,10 +2,10 @@ package ljdp.minechem.common.utils;
 
 public interface ConstantValue {
     public static final String TEXTURE_DIR = "/assets/minechem/textures/";
-    public static final String TEXTURE_GUI_DIR = TEXTURE_DIR + "gui/";
+    public static final String TEXTURE_GUI_DIR = "textures/gui/";
     public static final String TEXTURE_MODEL_DIR = "textures/model/";
-    public static final String SOUNDS_DIR = "/assets/minechem/sounds/minechem/";
-    public static final String LANG_DIR = "/assets/minechem/lang/minechem/";
+    public static final String SOUNDS_DIR = "sounds/minechem/";
+    public static final String LANG_DIR = "lang/minechem/";
 
     //Used for resourceLocations in 1.6
     public static final String MOD_ID = "minechem";

@@ -21,11 +21,12 @@ public class ItemBlueprintPrinterRenderer extends ItemMinechemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINTER_MODEL);
         GL11.glPushMatrix();
+
         FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
         switch(type.ordinal()){
-case 0: {
-        	
-        	
+		case 0: {
+		        	
+		        	
         }
         case 1: {
         	
