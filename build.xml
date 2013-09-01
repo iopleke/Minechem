@@ -74,7 +74,7 @@
 			</fileset>
 		</unzip>
 
-		<echo message="Unpacking finished"/>
+		<echo message="Extracted Minecraft Forge Files To: ${download.dir}"/>
 
 		<!-- Install forge -->
 		<exec dir="${forge.dir}" executable="cmd" osfamily="windows" failonerror="true">
@@ -84,16 +84,16 @@
 		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
 			<arg value="install.sh"/>
 		</exec>
-
+                <echo message="Installing Minecraft Forge...."/>
 		<chmod file="${mcp.dir}/updatemd5.sh" perm="+x"/>
 		<chmod file="${mcp.dir}/updatemcp.sh" perm="+x"/>
 		<chmod file="${mcp.dir}/recompile.sh" perm="+x"/>
 		<chmod file="${mcp.dir}/reobfuscate_srg.sh" perm="+x"/>
 		<chmod file="${forge.dir}/install.sh" perm="+x"/>
 
-		<echo message="Decompile finished"/>
+		<echo message="Minecraft Forge Setup Has Finished"/>
 
-		<echo message="Copied BuildCraft API files"/>
+		<echo message="MineChem Copied To Build Directory"/>
 
 		<!-- Refresh MD5 -->
 		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
@@ -110,9 +110,6 @@
 
 
 	<target name="copySRC" >
-		<!-- Delete source in build space -->
-		<delete dir="${commonsrc.dir}/k2b6s9j/engines"/>
-
 		<!-- Copy source -->
 		<copy todir="${commonsrc.dir}">
 			<fileset dir="${src.dir}"/>
@@ -121,7 +118,7 @@
 
 
 	<target name="compile" depends="copySRC">
-
+                 <echo message="Running Build......"/>
 		<echo message="Compiling version ${mod.version.full}"/>
 
 		<!-- Recompile -->
@@ -155,16 +152,17 @@
 		<replace file="${classes.dir}/client/mcmod.info" token="%VERSION%" value="${mod.version.full}"/>
 		<replace file="${classes.dir}/client/mcmod.info" token="%MCVERSION%" value="${mc.version}"/>
 
-		<echo message="Compiling finished"/>
+		<echo message="Compile Stage Passed"/>
 
 	</target>
 
 	<target name="package" depends="compile">
-		<echo message="Packing version ${mod.version.full}"/>
+		<echo message="Packing Jar"/>
 
 		<jar destfile="dist/Minechem-${mod.version.full}.jar" basedir="${classes.dir}/client"/>
 
 		<echo message="Packing finished"/>
+		<echo message="Build Success"/>
 	</target>
 
 	<target name="vars">
