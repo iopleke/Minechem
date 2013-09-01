@@ -14,7 +14,6 @@ import ljdp.minechem.common.industrial.BOPModule;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
-import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,10 +29,8 @@ import org.modstats.Modstats;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.Init;
+import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.Mod.PostInit;
-import cpw.mods.fml.common.Mod.PreInit;
 import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -82,13 +79,13 @@ public class ModMinechem {
     private Configuration config;
     private static final String[] LANGUAGES_SUPPORTED = new String[] { "en_GB", "zh_CN", "de_DE" };
     public static String GUITABLEID = "2";
-    @PreInit
+    @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = Logger.getLogger("minechem");
 		 
         logger.setParent(FMLLog.getLogger());
 
-        Localization.loadLanguages(CommonProxy.LANG_DIR, LANGUAGES_SUPPORTED);
+       // Localization.loadLanguages(CommonProxy.LANG_DIR, LANGUAGES_SUPPORTED);
 
         loadConfig(event);
 
@@ -110,7 +107,7 @@ public class ModMinechem {
         logger.info("PREINT PASSED");
 
     }
-    @Init
+    @EventHandler
     public void init(FMLInitializationEvent event) {
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
@@ -119,8 +116,7 @@ public class ModMinechem {
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
         Modstats.instance().getReporter().registerMod(this);
     }
-
-    @PostInit
+    @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     initComputerCraftAddon(event);
 	initBOP(event);
