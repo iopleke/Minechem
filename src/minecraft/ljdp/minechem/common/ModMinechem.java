@@ -16,16 +16,14 @@ import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.Localization;
 import ljdp.minechem.computercraft.ICCMain;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.TextureMap;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.event.TextureStitchEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
 
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
@@ -58,6 +56,25 @@ public class ModMinechem {
     public static ModMinechem instance;
     
     public static Logger logger;
+    
+    
+    
+
+	public static final ResourceLocation ICON_ENERGY = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_power.png");
+
+	public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_fullEower.png");
+
+	public static final ResourceLocation ICON_HELP = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_help.png");
+
+	public static final ResourceLocation ICON_JAMMED = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_jammed.png");
+
+	public static final ResourceLocation ICON_NO_BOTTLES = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_noBottles.png");
+
+	public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_noRecipe.png");
+
+	public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_unpowered.png");
+    
+    
 
     @SidedProxy(clientSide = "ljdp.minechem.client.ClientProxy", serverSide = "ljdp.minechem.common.CommonProxy")
     public static CommonProxy proxy;
@@ -145,21 +162,19 @@ public class ModMinechem {
         config.save();
         this.config = config;
     }
-    
-    @ForgeSubscribe
+    //Changed this from TextureStitchEvent.pre
     @SideOnly(Side.CLIENT)
-    public void textureHook(TextureStitchEvent.Pre event){
-            if ((event.map.textureType==1)){
-                TabStateControl.unpoweredIcon = event.map.registerIcon(ConstantValue.UNPOWERED_ICON);
-                MinechemTriggers.outputJammed.icon = event.map.registerIcon(ConstantValue.JAMMED_ICON);
-                MinechemTriggers.noTestTubes.icon = event.map.registerIcon(ConstantValue.NO_BOTTLES_ICON);
-                TabStateControlSynthesis.noRecipeIcon = event.map.registerIcon(ConstantValue.NO_RECIPE_ICON);
-                TabEnergy.powerIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
-                TabHelp.helpIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
-                TabTable.helpIcon = event.map.registerIcon(ConstantValue.HELP_ICON);
-                TabJournel.helpIcon = event.map.registerIcon(ConstantValue.POWER_ICON);
-                MinechemTriggers.fullEnergy.icon = event.map.registerIcon(ConstantValue.FULL_ENERGY_ICON);
-            }
+    public void textureHook(IconRegister icon){
+                TabStateControl.unpoweredIcon = icon.registerIcon(ConstantValue.UNPOWERED_ICON);
+                MinechemTriggers.outputJammed.icon = icon.registerIcon(ConstantValue.JAMMED_ICON);
+                MinechemTriggers.noTestTubes.icon = icon.registerIcon(ConstantValue.NO_BOTTLES_ICON);
+                TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(ConstantValue.NO_RECIPE_ICON);
+                TabEnergy.powerIcon = icon.registerIcon(ConstantValue.POWER_ICON);
+                TabHelp.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
+                TabTable.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
+                TabJournel.helpIcon = icon.registerIcon(ConstantValue.POWER_ICON);
+                MinechemTriggers.fullEnergy.icon = icon.registerIcon(ConstantValue.FULL_ENERGY_ICON);
+           }
 
-    }
+    
 }

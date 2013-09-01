@@ -31,7 +31,7 @@ public class GuiTableOfElements extends GuiContainerTabbed{
         GL11.glPushMatrix();
         GL11.glScalef(2.1F, 1.5F, 2.0F);
 
-        this.mc.renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.table_HEX));
+        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.table_HEX));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

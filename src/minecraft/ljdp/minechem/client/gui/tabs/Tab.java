@@ -1,5 +1,6 @@
 package ljdp.minechem.client.gui.tabs;
 
+import ljdp.minechem.client.gui.GuiContainerTabbed;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.SessionVars;
 import net.minecraft.client.Minecraft;
@@ -7,7 +8,6 @@ import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -57,7 +57,7 @@ public abstract class Tab {
 
         if (leftSide) {
 
-            Minecraft.getMinecraft().renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_LEFT));
+            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_LEFT));
 
             myGui.drawTexturedModalRect(x - currentWidth, y + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -65,7 +65,7 @@ public abstract class Tab {
             myGui.drawTexturedModalRect(x - currentWidth + 4, y + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
         } else {
 
-        	 Minecraft.getMinecraft().renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_RIGHT));
+        	 Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_RIGHT));
 
             myGui.drawTexturedModalRect(x, y, 0, 256 - currentHeight, 4, currentHeight);
             myGui.drawTexturedModalRect(x + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -76,16 +76,24 @@ public abstract class Tab {
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
     }
 
-    protected void drawIcon(Icon icon, int x, int y) {
-    	 Minecraft.getMinecraft().renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,"/gui/items.png"));
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0F);
-        myGui.drawTexturedModelRectFromIcon(x, y, icon, 16, 16);
+    protected void drawIcon( int x, int y) {
+    	ResourceLocation resource=this.getIcon();
+    	 //Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
+    	 if(myGui instanceof GuiContainerTabbed){
+    		 ((GuiContainerTabbed)myGui).drawTexture(x, y, resource);
+    	 }else{
+    		 System.out.println("Failed to draw tab icons on a minechem gui that was not GuiContainerTabbed. This is a bug");
+    	 }
+        //myGui.drawTexturedModelRectFromIcon(x, y, Block.cobblestone.getIcon(0, 0), 16, 16);
+    
     }
 
     public int getHeight() {
 
         return currentHeight;
     }
+    
+    public abstract ResourceLocation getIcon();
 
     public abstract String getTooltip();
 

@@ -1,10 +1,13 @@
 package ljdp.minechem.client.gui.tabs;
 
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.tileentity.MinechemTileEntity;
+import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.common.utils.RollingAverage;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 
 public class TabEnergy extends Tab {
@@ -33,7 +36,7 @@ public class TabEnergy extends Tab {
     @Override
     public void draw(int x, int y) {
         drawBackground(x, y);
-        drawIcon(powerIcon, x + 2, y + 2);
+        drawIcon(x + 2, y + 2);
         if (!isFullyOpened())
             return;
         //TODO Convert Power Values
@@ -56,5 +59,11 @@ public class TabEnergy extends Tab {
         } else
             return null;
     }
+
+	@Override
+	public ResourceLocation getIcon() {
+		// TODO Auto-generated method stub
+		return ModMinechem.ICON_ENERGY;
+	}
 
 }

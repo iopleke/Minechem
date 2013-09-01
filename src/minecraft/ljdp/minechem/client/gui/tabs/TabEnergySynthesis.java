@@ -19,7 +19,7 @@ public class TabEnergySynthesis extends TabEnergy {
     @Override
     public void draw(int x, int y) {
         drawBackground(x, y);
-        drawIcon(powerIcon, x + 2, y + 2);
+        drawIcon(x + 2, y + 2);
         if (!isFullyOpened())
             return;
 

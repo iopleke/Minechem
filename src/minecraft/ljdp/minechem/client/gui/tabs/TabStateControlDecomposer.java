@@ -1,28 +1,31 @@
 package ljdp.minechem.client.gui.tabs;
 
-import ljdp.minechem.common.gates.MinechemTriggers;
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer.State;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 public class TabStateControlDecomposer extends TabStateControl {
     private TileEntityDecomposer decomposer;
 
     enum TabState {
-        jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, MinechemTriggers.outputJammed.icon),
-        noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, MinechemTriggers.noTestTubes.icon),
+
+        jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, ModMinechem.ICON_JAMMED),
+        noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, ModMinechem.ICON_NO_BOTTLES),
         powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, null),
-        unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, unpoweredIcon);
+        unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY);
         public String tooltip;
         public int color;
         public Icon icon;
+        public ResourceLocation resource;
 
-        private TabState(String tooltip, int color, Icon iconIndex) {
+        private TabState(String tooltip, int color, ResourceLocation resource) {
             this.tooltip = tooltip;
             this.color = color;
-            this.icon = iconIndex;
+            this.resource=resource;
         }
     }
 
@@ -58,7 +61,7 @@ public class TabStateControlDecomposer extends TabStateControl {
     public void draw(int x, int y) {
         drawBackground(x, y);
         if (this.state.icon != null)
-            drawIcon(this.state.icon, x + 3, y + 5);
+            drawIcon(x + 3, y + 5);
         if (!isFullyOpened())
             return;
     }
@@ -67,5 +70,11 @@ public class TabStateControlDecomposer extends TabStateControl {
     public String getTooltip() {
         return this.state.tooltip;
     }
+
+	@Override
+	public ResourceLocation getIcon() {
+		// TODO Auto-generated method stub
+		return this.state.resource;
+	}
 
 }

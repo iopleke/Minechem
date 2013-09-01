@@ -41,8 +41,8 @@ public class GuiPrinter extends GuiContainerTabbed {
     	String info = "BluePrint Printer";
         int infoWidth = fontRenderer.getStringWidth(info);
         fontRenderer.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
-        _settingSilkTouch = new GuiButton(1, guiWidth + 100, guiHeight - 110, 50, 20, "Fusion!");
-        _settingSmallShrooms = new GuiButton(2, guiWidth + 100, guiHeight - 80, 70, 20, "Direwolf20");
+        _settingSilkTouch = new GuiButton(1, guiWidth + 50, guiHeight - 110, 50, 20, "Fusion!");
+        _settingSmallShrooms = new GuiButton(2, guiWidth + 50, guiHeight - 80, 70, 20, "Direwolf20");
         buttonList.add(_settingSilkTouch);
     	buttonList.add(_settingSmallShrooms);
     	drawTabs(mouseX, mouseY);
@@ -54,7 +54,7 @@ public class GuiPrinter extends GuiContainerTabbed {
 			int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINT_GUI));
+        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINT_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

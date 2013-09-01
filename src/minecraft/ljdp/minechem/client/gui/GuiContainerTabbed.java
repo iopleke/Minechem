@@ -6,11 +6,14 @@ import java.util.List;
 import ljdp.minechem.client.gui.tabs.Tab;
 import ljdp.minechem.common.utils.SessionVars;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
@@ -55,6 +58,27 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
     public static boolean drawBorders;
 
+    public void drawTabIcon(){
+    }
+
+    public int zLevel=3;
+    public void drawTexture(int x, int y, ResourceLocation resource)
+    {
+    	int w=16;
+    	int h=16;
+    	this.mc.func_110434_K().func_110577_a(resource);
+        GL11.glColor4f(1F, 1F, 1F, 1F);
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x + 0, y + h, this.zLevel, 0D, 1D);
+        tessellator.addVertexWithUV(x + w, y + h, this.zLevel, 1D, 1D);
+        tessellator.addVertexWithUV(x + w, y + 0, this.zLevel, 1D, 0D);
+        tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0D, 0D);
+        tessellator.draw();
+    }
+    
+    
+    
     public GuiContainerTabbed(Container container) {
         super(container);
     }

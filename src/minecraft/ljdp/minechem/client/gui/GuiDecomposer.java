@@ -43,7 +43,7 @@ public class GuiDecomposer extends GuiContainerTabbed {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.func_110581_b(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_GUI));
+        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

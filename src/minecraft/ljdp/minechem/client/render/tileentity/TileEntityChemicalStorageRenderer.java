@@ -86,23 +86,6 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
             float var12 = chemicalStorage.prevLidAngle + (chemicalStorage.lidAngle - chemicalStorage.prevLidAngle) * par8;
             float var13;
 
-            if (chemicalStorage.adjacentChestZNeg != null) {
-                var13 = chemicalStorage.adjacentChestZNeg.prevLidAngle
-                        + (chemicalStorage.adjacentChestZNeg.lidAngle - chemicalStorage.adjacentChestZNeg.prevLidAngle) * par8;
-
-                if (var13 > var12) {
-                    var12 = var13;
-                }
-            }
-
-            if (chemicalStorage.adjacentChestXNeg != null) {
-                var13 = chemicalStorage.adjacentChestXNeg.prevLidAngle
-                        + (chemicalStorage.adjacentChestXNeg.lidAngle - chemicalStorage.adjacentChestXNeg.prevLidAngle) * par8;
-
-                if (var13 > var12) {
-                    var12 = var13;
-                }
-            }
 
             var12 = 1.0F - var12;
             var12 = 1.0F - var12 * var12 * var12;

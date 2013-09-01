@@ -1,8 +1,10 @@
 package ljdp.minechem.client.gui.tabs;
 
 import ljdp.minechem.client.gui.GuiTableOfElements;
+import ljdp.minechem.common.ModMinechem;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 public class TabJournel extends Tab{
 	public static Icon helpIcon;
@@ -18,7 +20,7 @@ public class TabJournel extends Tab{
 	public void draw(int x, int y) {
 		 drawBackground(x, y);
 	        if (!isFullyOpened()) {
-	        	drawIcon(helpIcon, x + 2, y + 3);
+	        	drawIcon(x + 2, y + 3);
 	            return;
 	        }
 	        
@@ -28,6 +30,12 @@ public class TabJournel extends Tab{
 	public String getTooltip() {
 		
 		return "Journal";
+	}
+
+	@Override
+	public ResourceLocation getIcon() {
+		// TODO Auto-generated method stub
+		return ModMinechem.ICON_HELP;
 	}
 
 }

@@ -1,27 +1,31 @@
 package ljdp.minechem.client.gui.tabs;
 
 import ljdp.minechem.api.recipe.SynthesisRecipe;
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.tileentity.TileEntitySynthesis;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 
 public class TabStateControlSynthesis extends TabStateControl {
     public static Icon noRecipeIcon, unpoweredIcon;
     TileEntitySynthesis synthesis;
 
     enum TabState {
-        norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"), 0xAA0000, noRecipeIcon),
+
+        unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY),
         powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, null),
-        unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, unpoweredIcon);
+        norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"), 0xAA0000, ModMinechem.ICON_NO_RECIPE);
         public String tooltip;
         public int color;
         public Icon icon;
+		private ResourceLocation resource;
 
-        private TabState(String tooltip, int color, Icon iconIndex) {
+        private TabState(String tooltip, int color, ResourceLocation resource) {
             this.tooltip = tooltip;
             this.color = color;
-            this.icon = iconIndex;
+            this.resource=resource;
         }
     }
 
@@ -58,7 +62,7 @@ public class TabStateControlSynthesis extends TabStateControl {
     public void draw(int x, int y) {
         drawBackground(x, y);
         if (this.state.icon != null)
-            drawIcon(this.state.icon, x + 3, y + 5);
+            drawIcon(x + 3, y + 5);
         if (!isFullyOpened())
             return;
     }
@@ -67,5 +71,11 @@ public class TabStateControlSynthesis extends TabStateControl {
     public String getTooltip() {
         return this.state.tooltip;
     }
+
+	@Override
+	public ResourceLocation getIcon() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }
