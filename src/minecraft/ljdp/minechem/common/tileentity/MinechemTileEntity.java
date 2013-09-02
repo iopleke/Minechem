@@ -23,7 +23,8 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 	}
 	@Override
 	public void updateEntity(){
-		
+		super.updateEntity();
+		System.out.println(this.getEnergyStored());
 	}
 	public void setEnergyUsage(float energyUsage) {
 		this.lastEnergyUsed=energyUsage/20;
