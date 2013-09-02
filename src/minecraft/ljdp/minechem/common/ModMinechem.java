@@ -27,6 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
+import universalelectricity.prefab.TranslationHelper;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -77,7 +78,7 @@ public class ModMinechem {
     public static CommonProxy proxy;
     public static CreativeTabs minechemTab = new CreativeTabMinechem("MineChem");
     private Configuration config;
-    private static final String[] LANGUAGES_SUPPORTED = new String[] { "en_GB", "zh_CN", "de_DE" };
+    private static final String[] LANGUAGES_SUPPORTED = new String[] { "en_US", "zh_CN", "de_DE" };
     public static String GUITABLEID = "2";
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
@@ -85,7 +86,7 @@ public class ModMinechem {
 		 
         logger.setParent(FMLLog.getLogger());
 
-       // Localization.loadLanguages(CommonProxy.LANG_DIR, LANGUAGES_SUPPORTED);
+        System.out.println(TranslationHelper.loadLanguages(ConstantValue.LANG_DIR, LANGUAGES_SUPPORTED));
 
         loadConfig(event);
 

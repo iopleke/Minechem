@@ -58,7 +58,7 @@ public class MinechemHelper {
         LanguageRegistry lr = LanguageRegistry.instance();
         String localString = lr.getStringLocalization(key);
         if (localString.equals("")) {
-            localString = lr.getStringLocalization(key, "en_GB");
+            localString = lr.getStringLocalization(key, "en_US");
         }
         return localString;
     }

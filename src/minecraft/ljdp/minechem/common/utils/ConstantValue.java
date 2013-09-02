@@ -7,7 +7,7 @@ public interface ConstantValue {
     public static final String TEXTURE_GUI_DIR = "textures/gui/";
     public static final String TEXTURE_MODEL_DIR = "textures/model/";
     public static final String SOUNDS_DIR = "sounds/minechem/";
-    public static final String LANG_DIR = "assets/minechem/lang/";
+    public static final String LANG_DIR = "/assets/minechem/languages/";
 
     //Used for resourceLocations in 1.6
     public static final String MOD_ID = "minechem";
