@@ -1,6 +1,6 @@
 <project name="MineChem" basedir="" default="main">
 <!-- Makefile by Rushmead And Kepler Sticka-Jones -->
-<!-- Reworking By Mandrake -->
+<!-- Reworking By Mandrake and gFreezer  -->
   <property environment="env"/>
 
   <!-- Properties -->
