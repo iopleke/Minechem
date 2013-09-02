@@ -1,11 +1,11 @@
 <project name="MineChem" basedir="" default="main">
 <!-- Makefile by Rushmead And Kepler Sticka-Jones -->
+<!-- Reworking By Mandrake -->
   <property environment="env"/>
 
   <!-- Properties -->
 	<property name="build.dir"            value="build"/>
 	<property name="src.dir"              value="src"/>
-	<property name="test.dir"             value="test"/>
 
 	<property name="download.dir"         value="download"/>
 	<property name="files.minecraft.dir"  value="jars"/>
@@ -77,9 +77,6 @@
 		<echo message="Extracted Minecraft Forge Files To: ${download.dir}"/>
 
 		<!-- Install forge -->
-		<exec dir="${forge.dir}" executable="cmd" osfamily="windows" failonerror="true">
-			<arg line="/c install.cmd"/>
-		</exec>
 
 		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
 			<arg value="install.sh"/>
@@ -122,19 +119,11 @@
 		<echo message="Compiling version ${mod.version.full}"/>
 
 		<!-- Recompile -->
-		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
-			<arg line="/c recompile.bat --client"/>
-		</exec>
-
 		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
 			<arg value="recompile.sh"/>
 		</exec>
 
 		<!-- Reobf -->
-		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
-			<arg line="/c reobfuscate_srg.bat --client"/>
-		</exec>
-
 		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
 			<arg value="reobfuscate_srg.sh"/>
 		</exec>
@@ -169,25 +158,5 @@
 		<property name="mod.version.full"      value="${mod.version}"/>
 	</target>
 
-	<target name="vars-dev">
-		<property name="mod.version.full"      value="${mod.version}.dev"/>
-	</target>
-
-	<target name="vars-test">
-		<property name="mod.version.full" value="test"/>
-		<property name="DEBUG"           value="true"/>
-	</target>
-
-	<target name="dev">
-		<property name="src.dir"              value="src_dev"/>
-	</target>
-
 	<target name="main" depends="vars, init-msg, clean, setup, package"/>
-
-	<target name="ci-dev" depends="vars-dev, init-msg, clean, setup, package"/>
-
-	<target name="ci" depends="vars, init-msg, clean, setup, package"/>
-
-	<target name="test" depends="vars-test, init-msg, clean, setup, compile"/>
-
 </project>
