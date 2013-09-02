@@ -118,9 +118,10 @@ public enum EnumMolecule {
     purpleorgodye(104, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
     olivine(105, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
     metblue(106, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl)),
-	meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
-	lcd(108, "Cholesteryl benzoate", new Element(C,34), new Element(H,50), new Element(O,2)),
-	radchlor(109, "Radium Chloride", new Element(Ra), new Element(Cl, 2))
+    meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
+    lcd(108, "Cholesteryl benzoate", new Element(C,34), new Element(H,50), new Element(O,2)), 
+    radchlor(109, "Radium Chloride", new Element(Ra), new Element(Cl, 2)),
+    ctaxifolia(110, "Caulerpenyne", new Element(C,21), new Element(H,26), new Element(O,6))
     ;
 
     public static EnumMolecule[] molecules = values();
