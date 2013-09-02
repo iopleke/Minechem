@@ -24,7 +24,8 @@
 
 	<property name="mc.version"           value="1.6.2"/>
 	<property name="forge.version"        value="9.10.0.845"/>
-	<property name="mod.version" value="${env.BUILD_NUMBER}"/>
+	<property name="mod.version"          value="4.X"/>
+	<property name="mod.version.full"     value="${mod.version}-${env.BUILD_NUMBER}"/>
   
 	<!-- Let's make ant make work with git ;) -->
 	<macrodef name = "git">
@@ -110,6 +111,10 @@
 		<!-- Copy source -->
 		<copy todir="${commonsrc.dir}">
 			<fileset dir="${src.dir}"/>
+			<filterset>
+				<filter token="VERSION" value="${mod.version.full}"/>
+				<filter token="MCVERSION" value="${mc.version}"/>
+			</filterset>
 		</copy>
 	</target>
 
@@ -136,10 +141,11 @@
 		<!-- Copy resoucres -->
 		<copy todir="${classes.dir}/client">
 			<fileset dir="resources"></fileset>
+			<filterset>
+				<filter token="VERSION" value="${mod.version.full}"/>
+				<filter token="MCVERSION" value="${mc.version}"/>
+			</filterset>
 		</copy>
-
-		<replace file="${classes.dir}/client/mcmod.info" token="%VERSION%" value="${mod.version.full}"/>
-		<replace file="${classes.dir}/client/mcmod.info" token="%MCVERSION%" value="${mc.version}"/>
 
 		<echo message="Compile Stage Passed"/>
 
@@ -154,9 +160,5 @@
 		<echo message="Build Success"/>
 	</target>
 
-	<target name="vars">
-		<property name="mod.version.full"      value="${mod.version}"/>
-	</target>
-
-	<target name="main" depends="vars, init-msg, clean, setup, package"/>
+	<target name="main" depends="init-msg, clean, setup, package"/>
 </project>
