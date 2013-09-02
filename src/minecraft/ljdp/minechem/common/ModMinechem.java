@@ -27,6 +27,7 @@ import net.minecraftforge.common.MinecraftForge;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
+import universalelectricity.compatibility.Compatibility;
 import universalelectricity.prefab.TranslationHelper;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
@@ -110,6 +111,7 @@ public class ModMinechem {
     }
     @EventHandler
     public void init(FMLInitializationEvent event) {
+    	Compatibility.initiate();
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
         proxy.registerRenderers();

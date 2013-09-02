@@ -8,9 +8,10 @@ import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
 import net.minecraftforge.common.ForgeDirection;
+import universalelectricity.compatibility.TileEntityUniversalElectrical;
 import universalelectricity.prefab.tile.TileEntityElectrical;
 
-public abstract class MinechemTileEntity extends TileEntityElectrical implements IInventory {
+public abstract class MinechemTileEntity extends TileEntityUniversalElectrical implements IInventory {
 	
 	public ItemStack[] inventory;
 	public float lastEnergyUsed;
@@ -20,8 +21,10 @@ public abstract class MinechemTileEntity extends TileEntityElectrical implements
         this.writeToNBT(tagCompound);
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
 	}
-	
-
+	@Override
+	public void updateEntity(){
+		
+	}
 	public void setEnergyUsage(float energyUsage) {
 		this.lastEnergyUsed=energyUsage/20;
 	}
@@ -111,7 +114,7 @@ public abstract class MinechemTileEntity extends TileEntityElectrical implements
 	
 	//Should probably get *actual* values for this
 	public float getMaxEnergyReceived(){
-		return 1000;
+		return 100000000;
 	}
 	
 
