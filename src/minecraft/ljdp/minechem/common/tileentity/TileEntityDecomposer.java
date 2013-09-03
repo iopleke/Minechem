@@ -87,10 +87,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     @Override
     public void updateEntity() {
         super.updateEntity();
+
+        this.doWork();
         if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
 
-        float energyStored = this.getEnergyStored();
         if (energyStored >= this.getMaxEnergyStored())
             hasFullEnergy = true;
         if (hasFullEnergy && energyStored < this.getMaxEnergyStored() / 2)
@@ -131,6 +132,31 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
             }
         }
         return activeStack;
+    }
+    //bad code is fun!
+    public void doWork() {
+        if (state != State.kProcessActive){
+        	this.lastEnergyUsed=0;
+            return;
+        }
+
+        State oldState = state;
+        float energyUsed = Math.min(this.energyStored, this.MAX_ENERGY_RECIEVED);
+        this.energyStored-=energyUsed;
+        this.lastEnergyUsed=energyUsed/20;
+        workToDo += MinechemHelper.translateValue(energyUsed, this.MIN_ENERGY_RECIEVED, this.MAX_ENERGY_RECIEVED, MIN_WORK_PER_SECOND / 20, MAX_WORK_PER_SECOND / 20);
+        if (!worldObj.isRemote) {
+            while (workToDo >= 1) {
+                workToDo--;
+                state = moveBufferItemToOutputSlot();
+                if (state != State.kProcessActive)
+                    break;
+            }
+            this.onInventoryChanged();
+            if (!state.equals(oldState)) {
+                sendUpdatePacket();
+            }
+        }
     }
 
     private boolean canDecomposeInput() {
@@ -415,10 +441,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		return 100;
 	}
 
-	public void setEnergyUsage(float energyUsage) {
-		// TODO Auto-generated method stub
-		
-	}
 
 	@Override
 	public float getProvide(ForgeDirection direction) {
@@ -429,7 +451,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	@Override
 	public float getMaxEnergyStored() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1000;
 	}
 
 	@Override

@@ -22,9 +22,22 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
         return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
 	}
 	@Override
+	public void writeToNBT(NBTTagCompound nbt){
+
+		nbt.setFloat("lastEnergyUsed", this.lastEnergyUsed);
+	}
+	@Override
+	public void readFromNBT(NBTTagCompound nbt){
+
+		this.lastEnergyUsed=nbt.getFloat("lastEnergyUsed");
+	}
+	public float oldPower=-1;
+	@Override
 	public void updateEntity(){
+
 		super.updateEntity();
-		System.out.println(this.getEnergyStored());
+		
+		
 	}
 	public void setEnergyUsage(float energyUsage) {
 		this.lastEnergyUsed=energyUsage/20;
@@ -101,10 +114,10 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 	public void closeChest() {
 	}
 
-    @Override
-    public float getRequest(ForgeDirection direction) {
-        return (float) Math.min((this.getMaxEnergyStored() - this.getEnergyStored()), this.getMaxEnergyReceived()* 437.5D / this.getVoltage());
-    }
+	@Override
+	public float getRequest(ForgeDirection direction) {
+		return (float) Math.min((this.getMaxEnergyStored() - this.getEnergyStored()), 200);
+	}
 	//TODO Implement this for packet efficiency
 	public boolean didEnergyStoredChange(){
 		return true;

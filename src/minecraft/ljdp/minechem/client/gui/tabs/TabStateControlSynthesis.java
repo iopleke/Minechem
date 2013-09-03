@@ -61,7 +61,7 @@ public class TabStateControlSynthesis extends TabStateControl {
     @Override
     public void draw(int x, int y) {
         drawBackground(x, y);
-        if (this.state.icon != null)
+        if (this.state.resource != null)
             drawIcon(x + 3, y + 5);
         if (!isFullyOpened())
             return;
@@ -75,7 +75,7 @@ public class TabStateControlSynthesis extends TabStateControl {
 	@Override
 	public ResourceLocation getIcon() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.state.resource;
 	}
 
 }

@@ -299,6 +299,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         if (currentRecipe != null && inventory[kOutput[0]] == null) {
             inventory[kOutput[0]] = currentRecipe.getOutput().copy();
         }
+        if(worldObj.getTotalWorldTime()-this.lastRecipeTick>5){
+        	this.lastEnergyUsed=0;
+        }
     }
 
     @Override
@@ -362,9 +365,11 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             setRecipe(recipe);
         }
     }
-
+    public long lastRecipeTick=0;
     private void takeEnergy(SynthesisRecipe recipe) {
         int energyCost = recipe.energyCost();
+        this.lastEnergyUsed=energyCost;
+        this.lastRecipeTick=worldObj.getTotalWorldTime();
         this.energyStored-=energyCost;
     }
 
@@ -548,7 +553,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	@Override
 	public float getMaxEnergyStored() {
 		// TODO Auto-generated method stub
-		return 0;
+		return 1000;
 	}
 
 	@Override
