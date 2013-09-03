@@ -56,7 +56,7 @@
   
 	<!-- Targets -->
 	<target name="init-msg">
-		<echo message="Starting build...."/>
+		<echo message="Starting build....."/>
 	</target>
 
 	<target name="clean">
@@ -71,7 +71,7 @@
 
 		<unzip dest="${build.dir}" failOnEmptyArchive="true">
 			<fileset dir="${download.dir}">
-				<include name="minecraftforge-src-${mc.version}-${forge.version}.jar"/>
+				<include name="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
 			</fileset>
 		</unzip>
 
