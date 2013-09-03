@@ -1,3 +1,6 @@
 *.class
 *.jar
+dist
+download
+build
 .DS_Store

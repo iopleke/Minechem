@@ -323,18 +323,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 		
 	}
 
-	@Override
-	public boolean func_102007_a(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean func_102008_b(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 	@Override
 	public float getProvide(ForgeDirection direction) {
