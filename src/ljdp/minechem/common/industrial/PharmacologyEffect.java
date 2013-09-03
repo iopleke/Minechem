@@ -161,9 +161,14 @@ public class PharmacologyEffect {
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 4));
 			break; 
 			case radchlor: 
-		    entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 4));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.poison.getId(), Constants.TICKS_PER_SECOND * 30, 4));
+		        entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 120, 4));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.poison.getId(), Constants.TICKS_PER_SECOND * 60, 4));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 10, 1));
 			break;
+			case ctaxifolia: // While not a very strong toxin. It has been known to cause weakness and headaches in people who have consumed it.
+		        entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 120, 4));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 120, 4));
+		        break;
 		default:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 5);
 			break;

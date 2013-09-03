@@ -25,7 +25,7 @@
 	<property name="mc.version"           value="1.6.2"/>
 	<property name="forge.version"        value="9.10.0.845"/>
 	<property name="mod.version"          value="4"/>
-	<property name="mod.version.full"     value="${mod.version}-${env.BUILD_NUMBER}"/>
+	<property name="build.number"     value="${env.BUILD_NUMBER}"/>
   
 	<!-- Let's make ant make work with git ;) -->
 	<macrodef name = "git">
@@ -121,7 +121,7 @@
 
 	<target name="compile" depends="copySRC">
                  <echo message="Running Build......"/>
-		<echo message="Compiling version ${mod.version.full}"/>
+		<echo message="Compiling build # ${build.number}"/>
 
 		<!-- Recompile -->
 		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
@@ -154,7 +154,7 @@
 	<target name="package" depends="compile">
 		<echo message="Packing Jar"/>
 
-		<jar destfile="dist/Minechem-${mod.version.full}.jar" basedir="${classes.dir}/client"/>
+		<jar destfile="dist/Minechem${mod.version}-${build.number}.jar" basedir="${classes.dir}/client"/>
 
 		<echo message="Packing finished"/>
 		<echo message="Build Success"/>
