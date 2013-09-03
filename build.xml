@@ -71,7 +71,7 @@
 
 		<unzip dest="${build.dir}" failOnEmptyArchive="true">
 			<fileset dir="${download.dir}">
-				<include name="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
+				<include name="minecraftforge-src-${mc.version}-${forge.version}.jar"/>
 			</fileset>
 		</unzip>
 
