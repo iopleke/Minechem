@@ -17,10 +17,10 @@
 
 	<target name="prep">
 		<copy todir="${build.dir.development}\mcp\src\minecraft/src">
-			<fileset dir="${build.dir.development}\src" />
+			<fileset dir="${build.dir.development}/src" />
 		</copy>
 		<copy todir="${build.dir.development}\mcp\src\minecraft/resources">
-			<fileset dir="${build.dir.development}\resources" />
+			<fileset dir="${build.dir.development}/resources" />
 		</copy>
 	</target>
 
