@@ -1,164 +1,95 @@
-<project name="MineChem" basedir="" default="main">
-<!-- Makefile by Rushmead And Kepler Sticka-Jones -->
-<!-- Reworking By Mandrake and gFreezer  -->
-  <property environment="env"/>
+<project name="Minechem" default="build">
 
-  <!-- Properties -->
-	<property name="build.dir"            value="build"/>
-	<property name="src.dir"              value="src"/>
-
-	<property name="download.dir"         value="download"/>
-	<property name="files.minecraft.dir"  value="jars"/>
-
-	<property name="classes.dir"          value="${build.dir}/classes"/>
-	<property name="jar.dir"              value="${build.dir}/dist"/>
-	<property name="lib.dir"              value="${build.dir}/lib"/>
-
-	<property name="forge.dir"            value="${build.dir}/forge"/>
-	<property name="mcp.dir"              value="${forge.dir}/mcp"/>
-
-	<property name="clientsrc.dir"        value="${mcp.dir}/src/minecraft"/>
-	<property name="commonsrc.dir"        value="${clientsrc.dir}"/>
-
-	<property file="${clientsrc.dir}/fmlversion.properties" />
-
-	<property name="mc.version"           value="1.6.2"/>
-	<property name="forge.version"        value="9.10.0.845"/>
-	<property name="mod.version"          value="4.X"/>
-	<property name="mod.version.full"     value="${mod.version}-${env.BUILD_NUMBER}"/>
-  
-	<!-- Let's make ant make work with git ;) -->
-	<macrodef name = "git">
-		<attribute name = "command" />
-		<attribute name = "dir" default = "" />
-		<element name = "args" optional = "true" />
-		<sequential>
-			<echo message = "git @{command}" />
-			<exec executable = "git" dir = "@{dir}">
-				<arg value = "@{command}" />
-				<args/>
-			</exec>
-		</sequential>
-	</macrodef>
-	<macrodef name = "git-clone-pull">
-		<attribute name = "repository" />
-		<attribute name = "dest" />
-		<sequential>
-			<git command = "clone">
-				<args>
-					<arg value = "@{repository}" />
-					<arg value = "@{dest}" />
-				</args>
-			</git>
-			<git command = "pull" dir = "@{dest}" />
-		</sequential>
-	</macrodef>
-  
-	<!-- Targets -->
-	<target name="init-msg">
-		<echo message="Starting build....."/>
-	</target>
+	<property file="build.properties" prefix="build"/>
+	<property file="build_number.properties" prefix="build_number"/>
 
 	<target name="clean">
-		<delete dir="${build.dir}"/>
+		<delete file="${build.dir.development}\mcp\src\minecraft\mcmod.info" />
+		<delete dir="${build.dir.development}\mcp\src\minecraft\com\pixlepix" />
+		<delete dir="${build.dir.development}\mcp\reobf\minecraft" />
 	</target>
 
-	<target name="setup">
-		<mkdir dir="${download.dir}"/>
-		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
-
-		<echo message="Download finished"/>
-
-		<unzip dest="${build.dir}" failOnEmptyArchive="true">
-			<fileset dir="${download.dir}">
-				<include name="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
-			</fileset>
-		</unzip>
-
-		<echo message="Extracted Minecraft Forge Files To: ${download.dir}"/>
-
-		<!-- Install forge -->
-
-		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
-			<arg value="install.sh"/>
-		</exec>
-                <echo message="Installing Minecraft Forge...."/>
-		<chmod file="${mcp.dir}/updatemd5.sh" perm="+x"/>
-		<chmod file="${mcp.dir}/updatemcp.sh" perm="+x"/>
-		<chmod file="${mcp.dir}/recompile.sh" perm="+x"/>
-		<chmod file="${mcp.dir}/reobfuscate_srg.sh" perm="+x"/>
-		<chmod file="${forge.dir}/install.sh" perm="+x"/>
-
-		<echo message="Minecraft Forge Setup Has Finished"/>
-
-		<echo message="MineChem Copied To Build Directory"/>
-
-		<!-- Refresh MD5 -->
-		<exec dir="${mcp.dir}" executable="cmd" osfamily="windows" failonerror="true">
-			<arg line="/c updatemd5.bat -f --client"/>
-		</exec>
-
-		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
-			<arg line="updatemd5.sh -f --client"/>
-		</exec>
-
-		<echo message="Regenerated MD5s"/>
-
+	<target name="increment_build_number">
+		<propertyfile file="build_number.properties">
+			<entry key="build_number" type="int" operation="+" default="1"/>
+		</propertyfile>
 	</target>
 
-
-	<target name="copySRC" >
-		<!-- Copy source -->
-		<copy todir="${commonsrc.dir}">
-			<fileset dir="${src.dir}"/>
-			<filterset>
-				<filter token="VERSION" value="${mod.version.full}"/>
-				<filter token="MCVERSION" value="${mc.version}"/>
-			</filterset>
+	<target name="prep">
+		<copy todir="${build.dir.development}\mcp\src\minecraft">
+			<fileset dir="${build.dir.development}\source\MineChem" />
 		</copy>
 	</target>
 
-
-	<target name="compile" depends="copySRC">
-                 <echo message="Running Build......"/>
-		<echo message="Compiling version ${mod.version.full}"/>
-
-		<!-- Recompile -->
-		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
-			<arg value="recompile.sh"/>
-		</exec>
-
-		<!-- Reobf -->
-		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
-			<arg value="reobfuscate_srg.sh"/>
-		</exec>
-
-		<!-- Copy classes -->
-		<copy todir="${classes.dir}/client">
-			<fileset dir="${mcp.dir}/reobf/minecraft"/>
-		</copy>
-
-		<!-- Copy resoucres -->
-		<copy todir="${classes.dir}/client">
-			<fileset dir="resources"></fileset>
-			<filterset>
-				<filter token="VERSION" value="${mod.version.full}"/>
-				<filter token="MCVERSION" value="${mc.version}"/>
-			</filterset>
-		</copy>
-
-		<echo message="Compile Stage Passed"/>
-
+	<target name="replace_tokens">
+		<replace dir="${build.dir.development}\mcp\src\minecraft" token="@VERSION@" value="${build.release.mod.version}" />
+		<replace dir="${build.dir.development}\mcp\src\minecraft" token="@FINGERPRINT@" value="${build.release.mod.fingerprint}" />
+		<replace dir="${build.dir.development}\mcp\src\minecraft" token="@BUILD_NUMBER@" value="${build_number.build_number}" />
 	</target>
 
-	<target name="package" depends="compile">
-		<echo message="Packing Jar"/>
-
-		<jar destfile="dist/Minechem-${mod.version.full}.jar" basedir="${classes.dir}/client"/>
-
-		<echo message="Packing finished"/>
-		<echo message="Build Success"/>
+	<target name="recompile">
+		<exec dir="${build.dir.development}\mcp" executable="cmd" osfamily="windows">
+			<arg line="/c recompile.bat" />
+		</exec>
+		<exec dir="${build.dir.development}\mcp" executable="bash" osfamily="unix">
+			<arg line="recompile.sh" />
+		</exec>
 	</target>
 
-	<target name="main" depends="init-msg, clean, setup, package"/>
+	<target name="reobfuscate">
+		<exec dir="${build.dir.development}\mcp" executable="cmd" osfamily="windows">
+			<arg line="/c reobfuscate_srg.bat" />
+		</exec>
+		<exec dir="${build.dir.development}\mcp" executable="bash" osfamily="unix">
+			<arg line="reobfuscate_srg.sh" />
+		</exec>
+	</target>
+
+	<target name="sign_jar">
+		<signjar jar="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\MineChem-${build.release.mod.version}-${build_number.build_number}.jar" keystore="${build.keystore.location}" alias="${build.keystore.alias}" storepass="${build.keystore.password}" />
+	</target>
+
+	<target name="build">
+		<!-- Prep for the build -->
+		<antcall target="clean" />
+		<antcall target="increment_build_number" />
+		<antcall target="prep" />
+		<antcall target="recompile" />		
+		<antcall target="reobfuscate" />
+
+		<!-- Build the jar -->
+		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
+		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\MineChem-${build.release.mod.version}-${build_number.build_number}.jar">
+			<fileset dir="${build.dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
+			<fileset dir="${build.dir.development}\mcp\reobf\minecraft" />
+			<fileset dir="${build.dir.development}\source\MineChem/minechem\resources" excludes="**/xcf/**" />
+		</jar>
+
+		<!-- Clean up the MCP source now that we are done -->
+		<antcall target="clean" />
+	</target>
+
+	<target name="release">
+		<!-- Prep for the build -->
+		<antcall target="clean" />
+		<antcall target="increment_build_number" />
+		<antcall target="prep" />
+		<antcall target="replace_tokens" />
+		<antcall target="recompile" />		
+		<antcall target="reobfuscate" />
+
+		<!-- Build the jar -->
+		<mkdir dir="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}" />
+		<jar destfile="${build.dir.release}\${build.release.minecraft.version}\${build.release.mod.version}\MineChem-${build.release.mod.version}-${build_number.build_number}.jar">
+			<fileset dir="${build.dir.development}\mcp\src\minecraft\" includes="mcmod.info" />
+			<fileset dir="${build.dir.development}\mcp\reobf\minecraft" />
+			<fileset dir="${build.dir.development}\source\MineChem\resources" excludes="**/xcf/**" />
+		</jar>
+
+		<!-- Sign the finished jar -->
+		<antcall target="sign_jar" />
+
+		<!-- Clean up the MCP source now that we are done -->
+		<antcall target="clean" />
+	</target>
 </project>
