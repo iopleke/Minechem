@@ -141,10 +141,7 @@
 		<!-- Copy resoucres -->
 		<copy todir="${classes.dir}/client">
 			<fileset dir="resources"></fileset>
-			<filterset>
-				<filter token="VERSION" value="${mod.version.full}"/>
-				<filter token="MCVERSION" value="${mc.version}"/>
-			</filterset>
+			
 		</copy>
 
 		<echo message="Compile Stage Passed"/>
