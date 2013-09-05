@@ -24,9 +24,6 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.modstats.ModstatInfo;
-import org.modstats.Modstats;
-
 import universalelectricity.compatibility.Compatibility;
 import universalelectricity.prefab.TranslationHelper;
 import cpw.mods.fml.common.FMLLog;
@@ -47,7 +44,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 // Some help from DrZed
 
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
-@ModstatInfo(prefix="minechem")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.MINECHEM_PACKET_CHANNEL }, packetHandler = PacketHandler.class)
 
 public class ModMinechem {
