@@ -81,7 +81,7 @@ public interface ConstantValue {
     public static final String PROJECTOR_MODEL_ON = TEXTURE_MODEL_DIR + "ProjectorModelOn.png";
     public static final String PROJECTOR_MODEL_OFF = TEXTURE_MODEL_DIR + "ProjectorModelOff.png";
     public static final String HAZMAT_TEX = TEXTURE_MODEL_DIR + "hazmatArmor.png";
-    public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "ChemicalStorage<odel.png";
+    public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "ChemicalStorageModel.png";
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
     public static final String ICON_BASE="textures/icons/";
