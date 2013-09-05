@@ -111,10 +111,6 @@
 		<!-- Copy source -->
 		<copy todir="${commonsrc.dir}">
 			<fileset dir="${src.dir}"/>
-			<filterset>
-				<filter token="VERSION" value="${mod.version.full}"/>
-				<filter token="MCVERSION" value="${mc.version}"/>
-			</filterset>
 		</copy>
 	</target>
 
