@@ -117,6 +117,7 @@ public class ModMinechem {
         proxy.registerRenderers();
         logger.info("INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
+		Modstats.instance().getReporter().registerMod(this);
     }
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
