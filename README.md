@@ -9,3 +9,5 @@ Minechem can be found at: http://universalelectricity.com/minechem
 
 > Minechem v4.x is licensed under Creative Commons Attribution-ShareAlike 3.0 Unported. <br />
 The details of the licence can be found at: http://creativecommons.org/licenses/by-sa/3.0/us/
+
+The list of contributors can be found here: http://pastebin.com/raw.php?i=XKTYat6e
