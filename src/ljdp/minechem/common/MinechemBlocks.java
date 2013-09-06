@@ -10,7 +10,6 @@ import ljdp.minechem.common.blocks.BlockMicroscope;
 import ljdp.minechem.common.blocks.BlockSynthesis;
 import ljdp.minechem.common.blocks.MaterialGas;
 import ljdp.minechem.common.items.ItemBlockFusion;
-import ljdp.minechem.common.items.ItemGhostBlock;
 import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
@@ -81,7 +80,6 @@ public class MinechemBlocks {
         LanguageRegistry.addName(synthesis, MinechemHelper.getLocalString("block.name.synthesis"));
         GameRegistry.registerBlock(printer, "minechem.blockBlueprintPrinter");
         LanguageRegistry.addName(printer, "Blueprint Printer (WIP)");
-        GameRegistry.registerBlock(ghostBlock, ItemGhostBlock.class, "minechem.blockGhostBlock");
         LanguageRegistry.addName(ghostBlock, "minechem.blockGhostBlock");
 
         GameRegistry.registerBlock(fusion, ItemBlockFusion.class, "minechem.blockFusion");
