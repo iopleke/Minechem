@@ -1,6 +1,6 @@
 <project name="MineChem" basedir="" default="main">
-<!-- Makefile by Rushmead And Kepler Sticka-Jones -->
-<!-- Reworking By Mandrake and gFreezer  -->
+<!-- Makefile (Jenkins-Only) by Rushmead And Kepler Sticka-Jones -->
+<!-- Reworking By Mandrake and PixlePix  -->
   <property environment="env"/>
 
   <!-- Properties -->
@@ -85,9 +85,7 @@
 
 
 	<target name="compile" depends="copySRC">
-                 <echo message="Running Build......"/>
-		<echo message="Compiling version ${mod.version.full}"/>
-
+         <echo message="BEGIN COMPILE."/>
 		<!-- Recompile -->
 		<exec dir="${mcp.dir}" executable="sh" osfamily="unix" failonerror="true">
 			<arg value="recompile.sh"/>
@@ -109,7 +107,7 @@
 			
 		</copy>
 
-		<echo message="Compile Stage Passed"/>
+		<echo message="COMPILE PASSED."/>
 
 	</target>
 
@@ -117,7 +115,6 @@
 		<echo message="Packing Jar"/>
         <jar destfile="dist/Minechem${mod.version}-${build.number}.jar" basedir="${classes.dir}/client"/> 
 		<echo message="Packing finished"/>
-		<echo message="Build Success"/>
 	</target>
 
 	<target name="main" depends="init-msg, setup, package"/>
