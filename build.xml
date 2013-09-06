@@ -24,43 +24,12 @@
 
 	<property name="mc.version"           value="1.6.2"/>
 	<property name="forge.version"        value="9.10.0.845"/>
-	<property name="mod.version"          value="4.X"/>
-	<property name="mod.version.full"     value="${mod.version}-${env.BUILD_NUMBER}"/>
-  
-	<!-- Let's make ant make work with git ;) -->
-	<macrodef name = "git">
-		<attribute name = "command" />
-		<attribute name = "dir" default = "" />
-		<element name = "args" optional = "true" />
-		<sequential>
-			<echo message = "git @{command}" />
-			<exec executable = "git" dir = "@{dir}">
-				<arg value = "@{command}" />
-				<args/>
-			</exec>
-		</sequential>
-	</macrodef>
-	<macrodef name = "git-clone-pull">
-		<attribute name = "repository" />
-		<attribute name = "dest" />
-		<sequential>
-			<git command = "clone">
-				<args>
-					<arg value = "@{repository}" />
-					<arg value = "@{dest}" />
-				</args>
-			</git>
-			<git command = "pull" dir = "@{dest}" />
-		</sequential>
-	</macrodef>
-  
+	<property name="mod.version"          value="4"/>
+	<property name="build.number"     value="${env.BUILD_NUMBER}"/> 
+   
 	<!-- Targets -->
 	<target name="init-msg">
-		<echo message="Starting build...."/>
-	</target>
-
-	<target name="clean">
-		<delete dir="${build.dir}"/>
+     <echo message="Running build # ${build.number}"/> 
 	</target>
 
 	<target name="setup">
@@ -146,12 +115,10 @@
 
 	<target name="package" depends="compile">
 		<echo message="Packing Jar"/>
-
-		<jar destfile="dist/Minechem-${mod.version.full}.jar" basedir="${classes.dir}/client"/>
-
+        <jar destfile="dist/Minechem${mod.version}-${build.number}.jar" basedir="${classes.dir}/client"/> 
 		<echo message="Packing finished"/>
 		<echo message="Build Success"/>
 	</target>
 
-	<target name="main" depends="init-msg, clean, setup, package"/>
+	<target name="main" depends="init-msg, setup, package"/>
 </project>
