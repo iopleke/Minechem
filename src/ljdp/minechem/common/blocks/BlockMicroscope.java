@@ -22,7 +22,7 @@ public class BlockMicroscope extends BlockMinechemContainer {
     private Icon front;
 
     public BlockMicroscope(int par1) {
-        super(par1, Material.wood);
+        super(par1, Material.iron);
         setCreativeTab(ModMinechem.minechemTab);
         setUnlocalizedName("minechem.blockMicroscope");
         setLightValue(0.5F);
