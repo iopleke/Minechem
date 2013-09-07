@@ -35,5 +35,8 @@ ItemStack CtaxStem = BlockReferences.getBlockItemStack("magicLog");
 DecomposerRecipe.add(new DecomposerRecipeChance(CtaxStem, 0.4F, new Chemical[] { new Molecule(EnumMolecule.ctaxifolia, 1), new Molecule(EnumMolecule.cellulose, 2) }));
 ItemStack CtaxLeaves = BlockReferences.getBlockItemStack("magicLeaves"); // Aritstic License here, C. Taxifolia is a algae, But this tree acts like C. Taxifolia as in it grows massive and spreads like fire.
 DecomposerRecipe.add(new DecomposerRecipeChance(CtaxLeaves, 0.5F, new Chemical[] { new Molecule(EnumMolecule.ctaxifolia, 2), new Molecule(EnumMolecule.cellulose, 1) }));
+ItemStack PyrophoricDirt = BlockReferences.getBlockItemStack("smolderingGrass");
+DecomposerRecipe.add(new DecomposerRecipeChance(PyrophoricDirt, 0.9F, new Chemical[] { new Molecule(EnumMolecule.buli) }));
+
 }
 }
