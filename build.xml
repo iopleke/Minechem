@@ -33,32 +33,17 @@
 	</target>
 
 	<target name="setup">
-		<mkdir dir="${download.dir}"/>
-		<get src="http://files.minecraftforge.net/minecraftforge/minecraftforge-src-${mc.version}-${forge.version}.zip" dest="${download.dir}" usetimestamp="True"/>
 
-		<echo message="Download finished"/>
-
-		<unzip dest="${build.dir}" failOnEmptyArchive="true">
-			<fileset dir="${download.dir}">
-				<include name="minecraftforge-src-${mc.version}-${forge.version}.zip"/>
-			</fileset>
-		</unzip>
-
-		<echo message="Extracted Minecraft Forge Files To: ${download.dir}"/>
-
-		<!-- Install forge -->
-
-		<exec dir="${forge.dir}" executable="sh" osfamily="unix" failonerror="true">
-			<arg value="install.sh"/>
-		</exec>
+		<copy todir="${dir.development}">
+			<fileset dir="../Minecraft Forge/"/>
+		</copy>
+		
                 <echo message="Installing Minecraft Forge...."/>
 		<chmod file="${mcp.dir}/updatemd5.sh" perm="+x"/>
 		<chmod file="${mcp.dir}/updatemcp.sh" perm="+x"/>
 		<chmod file="${mcp.dir}/recompile.sh" perm="+x"/>
 		<chmod file="${mcp.dir}/reobfuscate_srg.sh" perm="+x"/>
-		<chmod file="${forge.dir}/install.sh" perm="+x"/>
 
-		<echo message="Minecraft Forge Setup Has Finished"/>
 
 		<echo message="MineChem Copied To Build Directory"/>
 
