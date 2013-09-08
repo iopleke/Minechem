@@ -465,8 +465,15 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(var1==1){
+			return this.kInput;
+		}
+		if(var1==0){
+			return this.kOutput;
+		}
+		return this.kBottles;
+		
 	}
 
 	@Override

@@ -579,11 +579,20 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		return 1000;
 	}
 
+
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		if(var1==1){
+			return this.kStorage;
+		}
+		if(var1==0){
+			return this.kOutput;
+		}
+		return this.kBottles;
+		
 	}
+
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
