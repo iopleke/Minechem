@@ -564,7 +564,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

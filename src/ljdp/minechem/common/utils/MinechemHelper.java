@@ -16,6 +16,7 @@ import ljdp.minechem.common.items.ItemMolecule;
 
 import buildcraft.api.core.Position;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -53,14 +54,17 @@ public class MinechemHelper {
         List<?> stringRows = fontRenderer.listFormattedStringToWidth(string, width);
         return stringRows.size() * fontRenderer.FONT_HEIGHT;
     }
-
+    
     public static String getLocalString(String key) {
-        LanguageRegistry lr = LanguageRegistry.instance();
-        String localString = lr.getStringLocalization(key);
-        if (localString.equals("")) {
-            localString = lr.getStringLocalization(key, "en_US");
-        }
-        return localString;
+    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
+	        LanguageRegistry lr = LanguageRegistry.instance();
+	        String localString = lr.getStringLocalization(key);
+	        if (localString.equals("")) {
+	            localString = lr.getStringLocalization(key, "en_US");
+	        }
+	        return localString;
+    	}
+    	return key;
     }
 
     public static NBTTagList writeItemStackArrayToTagList(ItemStack[] itemstacks) {

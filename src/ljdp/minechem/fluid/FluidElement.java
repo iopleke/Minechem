@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -19,8 +20,11 @@ public class FluidElement extends Fluid implements IMinechemFluid {
 		setDensity(10); // How tick the fluid is, affects movement inside the liquid.
 		setViscosity(1000); // How fast the fluid flows.
 		FluidRegistry.registerFluid(this);
-		this.setFlowingIcon(Block.waterMoving.getIcon(0, 0));
-		this.setStillIcon(Block.waterMoving.getIcon(0, 0));
+
+	    if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT){
+			this.setFlowingIcon(Block.waterMoving.getIcon(0, 0));
+			this.setStillIcon(Block.waterMoving.getIcon(0, 0));
+    	}
 	}
 	@Override
 	public ItemStack getOutputStack() {
