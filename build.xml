@@ -98,7 +98,7 @@
 
 	<target name="package" depends="compile">
 		<echo message="Packing Jar"/>
-        <jar destfile="dist/Minechem${mod.version}-${build.number}.jar" basedir="${classes.dir}/client"/> 
+        <jar destfile="output/Minechem${mod.version}-${build.number}.jar" basedir="${classes.dir}/client"/> 
 		<echo message="Packing finished"/>
 	</target>
 
