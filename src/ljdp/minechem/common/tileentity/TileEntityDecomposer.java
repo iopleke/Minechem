@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.util.Util;
@@ -86,8 +89,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public TileEntityDecomposer() {
         inventory = new ItemStack[getSizeInventory()];
         outputBuffer = new ArrayList<ItemStack>();
-      
-        model = new ModelDecomposer();
+
+    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
+    		model = new ModelDecomposer();
+    	}
         ActionManager.registerTriggerProvider(this);
     }
 

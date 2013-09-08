@@ -2,6 +2,9 @@ package ljdp.minechem.common.tileentity;
 
 import java.util.LinkedList;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelPrinter;
 import ljdp.minechem.common.MinechemBlocks;
@@ -63,7 +66,10 @@ public class TileEntityBluePrintPrinter extends MinechemTileEntity implements IS
 
     public TileEntityBluePrintPrinter() {
         inventory = new ItemStack[getSizeInventory()];
-        model = new ModelPrinter();
+
+    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
+    		model = new ModelPrinter();
+    	}
         ActionManager.registerTriggerProvider(this);
     }
 

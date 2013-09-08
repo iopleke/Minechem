@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelSynthesizer;
@@ -83,7 +86,10 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     public TileEntitySynthesis() {
         inventory = new ItemStack[getSizeInventory()];
-        model = new ModelSynthesizer();
+
+    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
+    		model = new ModelSynthesizer();
+    	}
         ActionManager.registerTriggerProvider(this);
     }
 
