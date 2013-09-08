@@ -1,7 +1,13 @@
 package ljdp.minechem.fluid;
 
+import java.awt.Color;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.common.MinechemItems;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -15,6 +21,10 @@ public class FluidChemical extends Fluid implements IMinechemFluid{
 		setDensity(10); // How tick the fluid is, affects movement inside the liquid.
 		setViscosity(1000); // How fast the fluid flows.
 		FluidRegistry.registerFluid(this);
+		if(FMLCommonHandler.instance().getEffectiveSide()==Side.CLIENT){
+			this.setFlowingIcon(Block.waterMoving.getIcon(0, 0));
+			this.setStillIcon(Block.waterMoving.getIcon(0, 0));
+    	}
 	}
 	@Override
 	public ItemStack getOutputStack() {
@@ -23,7 +33,11 @@ public class FluidChemical extends Fluid implements IMinechemFluid{
 	@Override
 
     public int getColor(){
-		return (int) (0x100000*molecule.red+0x100*molecule.green+molecule.blue);
+		int red=(int) (molecule.red*256);
+
+		int green=(int) (molecule.green*256);
+		int blue=(int) (molecule.blue*256);
+		return red << 16|green<<8|blue;
 	}
 	
 

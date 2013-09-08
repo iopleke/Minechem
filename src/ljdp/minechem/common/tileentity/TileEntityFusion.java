@@ -291,13 +291,16 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        if (i == kFusionStar[0])
-            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItems.fusionStar.itemID)
+        if (i == kFusionStar[0]){
+            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItems.fusionStar.itemID){
                 return true;
+            }
+        }
         for (int slot : kInput) {
             if(i==slot)
                 return true;
         }
+        System.out.println("Invalid");
         return false;
     }
 
@@ -339,23 +342,29 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
 		// TODO Auto-generated method stub
-		return null;
+		if(var1==1){
+			return this.kInput;
+		}
+		if(var1==0){
+			return this.kOutput;
+		}
+		return this.kFusionStar;
 	}
 
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	public int getFusionEnergyStored() {
-		return this.energyStored;
+		return this.inventory[this.kFusionStar[0]].getMaxDamage()-this.inventory[this.kFusionStar[0]].getItemDamage();
 	}
 
 
