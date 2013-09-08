@@ -15,6 +15,7 @@ import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.computercraft.ICCMain;
+import ljdp.minechem.fluid.FluidHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -84,7 +85,6 @@ public class ModMinechem {
     @EventHandler
     public void preInit(FMLPreInitializationEvent event) {
         logger = Logger.getLogger("minechem");
-		 
         logger.setParent(FMLLog.getLogger());
 
         System.out.println(TranslationHelper.loadLanguages(ConstantValue.LANG_DIR, LANGUAGES_SUPPORTED));
@@ -112,6 +112,8 @@ public class ModMinechem {
     @EventHandler
     public void init(FMLInitializationEvent event) {
     	Compatibility.initiate();
+
+		 FluidHelper.registerFluids();
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
         proxy.registerRenderers();

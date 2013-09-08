@@ -1,11 +1,11 @@
 package ljdp.minechem.common.tileentity;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedList;
 
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
-import ljdp.minechem.api.util.Constants;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelDecomposer;
 import ljdp.minechem.common.MinechemItems;
@@ -13,33 +13,40 @@ import ljdp.minechem.common.gates.IMinechemTriggerProvider;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.inventory.BoundedInventory;
 import ljdp.minechem.common.inventory.Transactor;
+import ljdp.minechem.common.items.ItemElement;
+import ljdp.minechem.common.items.ItemMolecule;
 import ljdp.minechem.common.network.PacketDecomposerUpdate;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.DecomposerRecipeHandler;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
+import ljdp.minechem.fluid.FluidHelper;
+import ljdp.minechem.fluid.IMinechemFluid;
 import net.minecraft.block.Block;
 import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import universalelectricity.core.electricity.ElectricityPack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
 import buildcraft.api.gates.ActionManager;
 import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerProvider;
 import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.transport.IPipe;
 
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, ITriggerProvider, IMinechemTriggerProvider,
-        ISpecialInventory, IMinechemMachinePeripheral {
+        ISpecialInventory, IMinechemMachinePeripheral, IFluidHandler {
 
     public static final int[] kInput = { 0 };
     public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     public static final int[] kBottles = { 10, 11, 12, 13 };
-
     private static final float MIN_WORK_PER_SECOND = 1.0F;
     private static final float MAX_WORK_PER_SECOND = 10.0F;
     private ArrayList<ItemStack> outputBuffer;
@@ -144,7 +151,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         float energyUsed = Math.min(this.energyStored, this.MAX_ENERGY_RECIEVED);
         this.energyStored-=energyUsed;
         this.lastEnergyUsed=energyUsed/20;
+        
         workToDo += MinechemHelper.translateValue(energyUsed, this.MIN_ENERGY_RECIEVED, this.MAX_ENERGY_RECIEVED, MIN_WORK_PER_SECOND / 20, MAX_WORK_PER_SECOND / 20);
+        this.workToDo*=10;
         if (!worldObj.isRemote) {
             while (workToDo >= 1) {
                 workToDo--;
@@ -463,12 +472,145 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	@Override
 	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+
+    public HashMap<Fluid,Integer>  partialFluids=new HashMap();
+	
+	@Override
+	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+		Fluid fluid=FluidRegistry.getFluid(resource.fluidID);
+		
+		if(fluid instanceof IMinechemFluid&&this.inputInventory.getStackInSlot(0)==null){
+
+			IMinechemFluid minechemFluid=(IMinechemFluid) fluid;
+
+			int previousFluid=0;
+			int currentFluid=0;
+			if(resource.amount<FluidHelper.FLUID_CONSTANT){
+				if(!partialFluids.containsKey(fluid)){
+					partialFluids.put(fluid, 0);
+				}
+				previousFluid=partialFluids.get(fluid);
+				currentFluid= resource.amount+previousFluid;
+				if(currentFluid<FluidHelper.FLUID_CONSTANT){
+
+					partialFluids.put(fluid,currentFluid);
+					return resource.amount;
+				}
+				partialFluids.put(fluid, currentFluid-FluidHelper.FLUID_CONSTANT);
+				
+				
+				
+				
+			}
+			if(doFill){
+				this.inputInventory.setInventorySlotContents(0, minechemFluid.getOutputStack());
+			}
+			return resource.amount;
+		}
+		return 0;
+		
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, FluidStack resource,
+			boolean doDrain) {
+		return this.drain(from, resource.amount,doDrain);
+	}
+
+	@Override
+	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+		int toDrain=maxDrain;
+			for(int i=0;i<this.outputInventory.getSizeInventory();i++){
+				ItemStack stack=this.outputInventory.getStackInSlot(i);
+				if(stack==null){
+					continue;
+				}
+				Item item=stack.getItem();
+				if(item instanceof ItemElement){
+					ItemElement itemMolecule=(ItemElement) item;
+					Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
+						this.outputInventory.decrStackSize(i, 1);
+
+						return new FluidStack(fluid,FluidHelper.FLUID_CONSTANT);
+					
+				}
+				if(item instanceof ItemMolecule){
+					ItemMolecule itemMolecule=(ItemMolecule) item;
+					Fluid fluid=FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
+						this.outputInventory.decrStackSize(i, 1);
+						return new FluidStack(fluid,FluidHelper.FLUID_CONSTANT);
+					
+				}
+			
+		}
+		
+		return null;
+	}
+
+	@Override
+	public boolean canFill(ForgeDirection from, Fluid fluid) {
+		return fluid instanceof IMinechemFluid;
+	}
+
+	@Override
+	public boolean canDrain(ForgeDirection from, Fluid fluid) {
+		System.out.println("Checkng CanDrain");
+		return fluid instanceof IMinechemFluid;
+	}
+	public FluidTankInfo getTankInfo(int i){
+		
+		ItemStack stack=this.getStackInSlot(i);
+		if(stack==null){
+			return null;
+		}
+		Item item=stack.getItem();
+		if(item instanceof ItemElement){
+			ItemElement itemMolecule=(ItemElement) item;
+			Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
+			if(fluid==null){
+				return null;
+				//This should never happen.
+			}
+			return new FluidTankInfo(new FluidStack(fluid,stack.stackSize*FluidHelper.FLUID_CONSTANT),6400);
+			
+			
+		}
+		
+		if(item instanceof ItemMolecule){
+			ItemMolecule itemMolecule=(ItemMolecule) item;
+			Fluid fluid=FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
+			if(fluid==null){
+				return null;
+				//This should never happen.
+			}
+			return new FluidTankInfo(new FluidStack(fluid,stack.stackSize*FluidHelper.FLUID_CONSTANT),6400);
+			}
+		
+		return null;
+			
+	}
+	@Override
+	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+		FluidTankInfo[] fluids=new FluidTankInfo[10];
+		for(int i=0;i<this.kEmptyTestTubeSlotStart;i++){
+			fluids[i]=this.getTankInfo(i);
+		}
+		return fluids;
 	}
 }
