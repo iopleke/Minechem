@@ -6,6 +6,7 @@ import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.blueprint.BlueprintFusion;
 import ljdp.minechem.common.inventory.BoundedInventory;
 import ljdp.minechem.common.inventory.Transactor;
+import ljdp.minechem.common.items.ItemElement;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import net.minecraft.entity.player.EntityPlayer;
@@ -44,6 +45,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
     boolean shouldSendUpdatePacket;
 
     public TileEntityFusion() {
+    	super();
     	inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);
         outputInventory = new BoundedInventory(this, kOutput);
@@ -174,7 +176,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack) {
-        if (itemstack != null && itemstack.itemID == Item.netherStar.itemID) {
+        if (slot==0&&itemstack != null && itemstack.itemID == Item.netherStar.itemID) {
             this.inventory[slot] = new ItemStack(MinechemItems.fusionStar);
         } else {
             this.inventory[slot] = itemstack;
@@ -297,10 +299,10 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
             }
         }
         for (int slot : kInput) {
-            if(i==slot)
+            if(i==slot&&itemstack.getItem() instanceof ItemElement){
                 return true;
+            }
         }
-        System.out.println("Invalid");
         return false;
     }
 
@@ -364,7 +366,10 @@ public class TileEntityFusion extends TileEntityMultiBlock implements ISidedInve
 	}
 
 	public int getFusionEnergyStored() {
-		return this.inventory[this.kFusionStar[0]].getMaxDamage()-this.inventory[this.kFusionStar[0]].getItemDamage();
+		if(this.inventory[0]!=null){
+			return this.inventory[0].getMaxDamage()-this.inventory[0].getItemDamage();
+		}
+		return 0;
 	}
 
 
