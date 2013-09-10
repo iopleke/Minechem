@@ -20,7 +20,10 @@ public class ItemGhostBlock extends ItemBlock {
 
     @Override
     public String getUnlocalizedName(ItemStack itemstack) {
-        return getUnlocalizedName() + "." + subNames[itemstack.getItemDamage()];
+    	if(itemstack.getItemDamage()<this.subNames.length){
+    		return getUnlocalizedName() + "." + subNames[itemstack.getItemDamage()];
+    	}
+    	return "white";
     }
 
 }
