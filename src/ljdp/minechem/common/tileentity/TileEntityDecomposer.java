@@ -275,6 +275,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
+        System.out.println("Write");
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         NBTTagList buffer = MinechemHelper.writeItemStackListToTagList(outputBuffer);
         nbtTagCompound.setTag("inventory", inventoryTagList);

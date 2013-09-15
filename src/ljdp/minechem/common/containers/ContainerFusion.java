@@ -18,10 +18,10 @@ public class ContainerFusion extends Container implements IRadiationShield {
 		this.inventoryPlayer = inventoryPlayer;
 		this.fusion = fusion;
 		
-		addSlotToContainer(new SlotFusionStar(fusion, fusion.kStartFusionStar, 80, 18));
-		addSlotToContainer(new SlotElement(fusion, fusion.kStartInput1, 22, 62));
-		addSlotToContainer(new SlotElement(fusion, fusion.kStartInput2, 138, 62));
-		addSlotToContainer(new SlotOutput(fusion, fusion.kStartOutput, 80, 62));
+		addSlotToContainer(new Slot(fusion, fusion.kStartFusionStar, 80, 18));
+		addSlotToContainer(new Slot(fusion, fusion.kStartInput1, 22, 62));
+		addSlotToContainer(new Slot(fusion, fusion.kStartInput2, 138, 62));
+		addSlotToContainer(new Slot(fusion, fusion.kStartOutput, 80, 62));
 		
 		bindPlayerInventory(inventoryPlayer);
 	}
@@ -42,7 +42,7 @@ public class ContainerFusion extends Container implements IRadiationShield {
 	
 	@Override
 	public boolean canInteractWith(EntityPlayer var1) {
-		return fusion.isUseableByPlayer(var1);
+		return true;
 	}
 	
 	@Override
