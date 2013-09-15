@@ -275,7 +275,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-        System.out.println("Write");
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         NBTTagList buffer = MinechemHelper.writeItemStackListToTagList(outputBuffer);
         nbtTagCompound.setTag("inventory", inventoryTagList);
@@ -583,7 +582,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		System.out.println("Checkng CanDrain");
 		return fluid instanceof IMinechemFluid;
 	}
 	public FluidTankInfo getTankInfo(int i){

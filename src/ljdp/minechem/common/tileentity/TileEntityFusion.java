@@ -45,7 +45,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     boolean shouldSendUpdatePacket;
 
     public TileEntityFusion() {
-    	super();
     	inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);
         outputInventory = new BoundedInventory(this, kOutput);
@@ -59,6 +58,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
 
     @Override
 	public void updateEntity() {
+    	System.out.println("fusion tick"+worldObj.isRemote);
 		super.updateEntity();
 		if(!completeStructure)
 			return;

@@ -109,6 +109,15 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
         if (managerBlock != null) {
             Pos3 worldPos = position.getLocalPos(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ());
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, managerBlock.block.blockID, managerBlock.metadata, 3);
+            if(this.blueprint==MinechemBlueprint.fusion){
+            	TileEntityFusion fusion=new TileEntityFusion();
+            	fusion.worldObj=this.worldObj;
+            	fusion.xCoord=worldPos.x;
+            	fusion.yCoord=worldPos.y;
+            	fusion.zCoord=worldPos.z;
+            	fusion.blockType=MinechemBlocks.fusion;
+            	worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
+            }
             return worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
         } else {
             return null;

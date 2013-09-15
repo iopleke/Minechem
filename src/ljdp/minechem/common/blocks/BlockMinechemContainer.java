@@ -20,10 +20,6 @@ public abstract class BlockMinechemContainer extends BlockContainer {
         setResistance(50F);
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World var1) {
-        return null;
-    }
 
     public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
 
