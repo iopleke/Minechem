@@ -4,6 +4,7 @@ import java.util.List;
 
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.util.Constants;
+import ljdp.minechem.common.PotionInjector;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
@@ -43,7 +44,7 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 30, 7));
             break;
         case poison:
-            entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 2));
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 400));
             break;
         case ethanol:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 10, 1));
@@ -53,7 +54,6 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 60, 5));
             break;
         case penicillin:
-            cureAllPotions(world, entityPlayer);
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 2, 1));
             break;
         case testosterone:
@@ -168,6 +168,12 @@ public class PharmacologyEffect {
 			case ctaxifolia: // While not a very strong toxin. It has been known to cause weakness and headaches in people who have consumed it.
 		        entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 120, 4));
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 120, 4));
+		        break;
+			case latropine:
+			entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+		    entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 120, 2));
+			entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 2));
+			entityPlayer.addPotionEffect(new PotionEffect(PotionInjector.atropineHigh.id, Constants.TICKS_PER_SECOND * 120, 2));
 		        break;
 		default:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 5);
