@@ -171,8 +171,8 @@ public class PharmacologyEffect {
 		        break;
 			case latropine:
 			entityPlayer.attackEntityFrom(DamageSource.generic, 2);
-		    entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 120, 2));
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 2));
+		        entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 120, 2));
+		//	entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 2));
 			entityPlayer.addPotionEffect(new PotionEffect(PotionInjector.atropineHigh.id, Constants.TICKS_PER_SECOND * 120, 2));
 		        break;
 		default:
