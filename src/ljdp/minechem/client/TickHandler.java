@@ -155,7 +155,7 @@ public class TickHandler implements ITickHandler {
 		Gui gui = new Gui();
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		int color = (int) (220.0F * markiplier - 125) << 24 | 1052704;
+		int color = (int) (220.0F * markiplier - 150) << 24 | 1052704;
 		gui.drawRect(0, 0, width, height, color);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
