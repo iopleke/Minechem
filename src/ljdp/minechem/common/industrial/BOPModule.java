@@ -16,9 +16,9 @@ public static void DoBopExport() {
 ItemStack Algae = BlockReferences.getBlockItemStack("algae");
 DecomposerRecipe.add(new DecomposerRecipeChance(Algae, 0.08F, new Chemical[] { new Molecule(EnumMolecule.nod) }));
 ItemStack IndigoCap = BlockReferences.getBlockItemStack("bluemilk"); // THE BLUE ONES FUCK YOU UP BAD!
-DecomposerRecipe.add(new DecomposerRecipe(IndigoCap, new Chemical[] { new Molecule(EnumMolecule.pantherine), new Molecule(EnumMolecule.psilocybin), new Molecule(EnumMolecule.blueorgodye) }));
+DecomposerRecipe.add(new DecomposerRecipeSelect(IndigoCap, 0.9F, new DecomposerRecipe[] { new DecomposerRecipe(new Chemical[] { new Molecule(EnumMolecule.blueorgodye) }), new DecomposerRecipe(new Chemical[] { new Molecule(EnumMolecule.psilocybin, 2) }) }));
 ItemStack MagicShroom = BlockReferences.getBlockItemStack("toadstool");
-DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.4F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
+DecomposerRecipe.add(new DecomposerRecipeChance(MagicShroom, 0.8F, new Chemical[] { new Molecule(EnumMolecule.psilocybin) }));
 ItemStack Willowasprin = BlockReferences.getBlockItemStack("willowLog");
 DecomposerRecipe.add(new DecomposerRecipeChance(Willowasprin, 0.4F, new Chemical[] { new Molecule(EnumMolecule.asprin, 2) }));
 ItemStack FoxFire = BlockReferences.getBlockItemStack("glowshroom");
@@ -37,6 +37,7 @@ ItemStack CtaxLeaves = BlockReferences.getBlockItemStack("magicLeaves"); // Arit
 DecomposerRecipe.add(new DecomposerRecipeChance(CtaxLeaves, 0.5F, new Chemical[] { new Molecule(EnumMolecule.ctaxifolia, 2), new Molecule(EnumMolecule.cellulose, 1) }));
 ItemStack PyrophoricDirt = BlockReferences.getBlockItemStack("smolderingGrass");
 DecomposerRecipe.add(new DecomposerRecipeChance(PyrophoricDirt, 0.9F, new Chemical[] { new Molecule(EnumMolecule.buli) }));
-
+ItemStack LiquidCrystalFlower = BlockReferences.getBlockItemStack("rainbowflower");
+DecomposerRecipe.add(new DecomposerRecipeChance(LiquidCrystalFlower, 0.9F, new Chemical[] { new Molecule(EnumMolecule.lcd) }));
 }
 }
