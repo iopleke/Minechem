@@ -121,7 +121,8 @@ public enum EnumMolecule {
     meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
     lcd(108, "Cholesteryl benzoate", new Element(C,34), new Element(H,50), new Element(O,2)), 
     radchlor(109, "Radium Chloride", new Element(Ra), new Element(Cl, 2)),
-    ctaxifolia(110, "Caulerpenyne", new Element(C,21), new Element(H,26), new Element(O,6))
+    ctaxifolia(110, "Caulerpenyne", new Element(C,21), new Element(H,26), new Element(O,6)),
+    latropine(111,"L-hyoscyamine", new Element (C,17), new Element(H,23), new Element(N), new Element(O,4))
     ;
 
     public static EnumMolecule[] molecules = values();

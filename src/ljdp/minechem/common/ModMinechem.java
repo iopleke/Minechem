@@ -103,10 +103,10 @@ public class ModMinechem {
 
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
         MinecraftForge.EVENT_BUS.register(this);
+		
+        PotionInjector.inject();
         
-        
-
-        logger.info("PREINT PASSED");
+		logger.info("PREINT PASSED");
 
     }
     @EventHandler
