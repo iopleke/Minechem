@@ -2,6 +2,7 @@ package ljdp.minechem.common;
 
 import java.util.logging.Logger;
 
+import ljdp.minechem.client.TickHandler;
 import ljdp.minechem.client.gui.tabs.TabEnergy;
 import ljdp.minechem.client.gui.tabs.TabHelp;
 import ljdp.minechem.client.gui.tabs.TabJournel;
@@ -21,9 +22,11 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.ForgeSubscribe;
 
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
@@ -177,5 +180,8 @@ public class ModMinechem {
                 MinechemTriggers.fullEnergy.icon = icon.registerIcon(ConstantValue.FULL_ENERGY_ICON);
            }
 
-    
+    @ForgeSubscribe
+    public void onPreRender(RenderGameOverlayEvent.Pre e) {
+    	TickHandler.renderEffects();
+    }
 }
