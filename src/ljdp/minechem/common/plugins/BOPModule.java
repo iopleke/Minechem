@@ -1,4 +1,4 @@
-package ljdp.minechem.common.industrial;
+package ljdp.minechem.common.plugins;
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.core.Element;
 import ljdp.minechem.api.core.EnumElement;
