@@ -58,7 +58,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
 
     @Override
 	public void updateEntity() {
-    	System.out.println("fusion tick"+worldObj.isRemote);
 		super.updateEntity();
 		if(!completeStructure)
 			return;
