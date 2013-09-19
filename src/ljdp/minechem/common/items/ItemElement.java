@@ -12,8 +12,6 @@ import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.RadiationInfo;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
-import mekanism.api.IStorageTank;
-import mekanism.api.gas.EnumGas;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -27,7 +25,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemElement extends Item implements IStorageTank {
+public class ItemElement extends Item //implements IStorageTank 
+{
 
     private final static EnumElement[] elements = EnumElement.values();
     private final EnumMap<EnumClassification, Integer> classificationIndexes = new EnumMap<EnumClassification, Integer>(EnumClassification.class);
@@ -234,7 +233,7 @@ public class ItemElement extends Item implements IStorageTank {
         element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
     }
-
+    /*
     @Override
     public int getGas(EnumGas type, Object... data) {
         if (type == EnumGas.HYDROGEN || type == EnumGas.OXYGEN)
@@ -307,6 +306,7 @@ public class ItemElement extends Item implements IStorageTank {
     public void setGasType(ItemStack itemstack, EnumGas type) {
         // Can't set gas type.
     }
+    */
 
 
 }
