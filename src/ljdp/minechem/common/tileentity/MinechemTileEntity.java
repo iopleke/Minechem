@@ -23,12 +23,12 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 	}
 	@Override
 	public void writeToNBT(NBTTagCompound nbt){
-
+		super.writeToNBT(nbt);
 		nbt.setFloat("lastEnergyUsed", this.lastEnergyUsed);
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
-
+		super.readFromNBT(nbt);
 		this.lastEnergyUsed=nbt.getFloat("lastEnergyUsed");
 	}
 	public float oldPower=-1;
