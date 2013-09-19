@@ -151,6 +151,7 @@ public class TickHandler implements ITickHandler {
 	public static void RenderDelirium(int markiplier) { 
 		ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
 		int width = scale.getScaledWidth();
+		System.out.println("Walrus");
 		int height = scale.getScaledHeight();
 		Gui gui = new Gui();
 		GL11.glDisable(GL11.GL_DEPTH_TEST);

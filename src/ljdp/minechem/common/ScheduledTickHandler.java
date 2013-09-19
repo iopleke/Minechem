@@ -4,7 +4,6 @@ import java.util.EnumSet;
 
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.util.Constants;
-import ljdp.minechem.common.industrial.PharmacologyEffect;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
