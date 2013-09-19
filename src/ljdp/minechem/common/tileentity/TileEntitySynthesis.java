@@ -582,7 +582,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	@Override
 	public float getMaxEnergyStored() {
 		// TODO Auto-generated method stub
-		return 1000;
+		return this.MAX_ENERGY_STORED;
 	}
 
 

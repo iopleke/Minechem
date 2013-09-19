@@ -465,7 +465,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	@Override
 	public float getMaxEnergyStored() {
 		// TODO Auto-generated method stub
-		return 1000;
+		return MAX_ENERGY_STORED;
 	}
 
 	@Override
