@@ -7,7 +7,7 @@ import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.ModMinechem;
-import ljdp.minechem.common.industrial.PharmacologyEffect;
+import ljdp.minechem.common.PharmacologyEffect;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;

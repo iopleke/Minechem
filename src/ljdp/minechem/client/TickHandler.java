@@ -83,24 +83,10 @@ public class TickHandler implements ITickHandler {
 			if (player instanceof EntityPlayer && player.isPotionActive(PotionInjector.atropineHigh)) {
 				PotionEffect DHigh = player.getActivePotionEffect(PotionInjector.atropineHigh);
 				int Multiplier = DHigh.getAmplifier();
-				if (Multiplier == 1 ){ // II
-				RenderDelirium(10);} 
-				else if (Multiplier == 2 ){ // III
-					RenderDelirium(15);
-				}
-					else if (Multiplier == 3){ // IV
-						RenderDelirium(20);	
-					}
-					else if (Multiplier == 4){ // V
-						RenderDelirium(25);	
-					}
-					else { // preform a level V effect if effect is greater than level V 
-					RenderDelirium(25);
-					}
-					}
-				}
-				}	
-	
+				RenderDelirium(5 * Multiplier + 5);
+			}
+		}
+		}
 	@Override
 	public EnumSet<TickType> ticks() {
 		return EnumSet.of(TickType.RENDER, TickType.CLIENT);
