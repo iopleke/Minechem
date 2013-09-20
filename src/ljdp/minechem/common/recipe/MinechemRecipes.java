@@ -585,82 +585,83 @@ public class MinechemRecipes {
       this.createPoisonedItemStack(Item.pumpkinPie, 0, var1);
       this.createPoisonedItemStack(MinechemItems.EmptyPillz, 0, var1);
    }
+   String[] compounds = {"Aluminium","Titanium","Chrome",   
+	           "Tungsten", "Lead",    "Zinc",
+	           "Platinum", "Nickel",  "Osmium",
+	           "Iron",     "Gold",    "Coal",
+	           "Copper",   "Tin",     "Silver",
+	           "RefinedIron",
+	           "Steel",
+	           "Bronze",   "Brass",   "Electrum",
+	           "Invar"};//,"Iridium"};
+	
+	EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr}, 
+						   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn}, 
+						   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os}, 
+						   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C}, 
+						   {EnumElement.Cu}, {EnumElement.Sn}, {EnumElement.Ag},
+						   {EnumElement.Fe},
+						   {EnumElement.Fe, EnumElement.C},		//Steel
+						   {EnumElement.Sn, EnumElement.Cu},
+						   {EnumElement.Cu},//Bronze
+			               {EnumElement.Zn, EnumElement.Cu},	//Brass
+			               {EnumElement.Ag, EnumElement.Au},	//Electrum
+			               {EnumElement.Fe, EnumElement.Ni}		//Invar
+			               };//, EnumElement.Ir
+	
+	int[][] proportions      = {{4},{4},{4},
+						   {4},{4},{4},
+						   {4},{4},{4},
+						   {4},{4},{4},
+						   {4},{4},{4},
+						   {4},
+						   {4,4},
+						   {1,3},{1,3},{2,2},{2,1}};
+	
+	String[]  itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate"
+	boolean[] craftable = {true, true, false, false, false, false, false};
+	int[] 	 sizeCoeff = {1, 4, 8, 4, 36, 16, 4};
 
    @ForgeSubscribe
-   public void oreEvent(OreDictionary.OreRegisterEvent var1) { // THIS IS A FUCKING MESS BUT IT WILL WORK FOR NOW!!!!!!
-	   String[] compounds = {"Aluminium","Titanium","Chrome",   
-		               "Tungsten", "Lead",    "Zinc",
-		               "Platinum", "Nickel",  "Osmium",
-		               "Iron",     "Gold",    "Coal",
-		               "Copper",   "Tin",     "Silver",
-		               "RefinedIron",
-		               "Steel",
-		               "Bronze",   "Brass",   "Electrum",
-		               "Invar"};//,"Iridium"};
-		
-		EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr}, 
-		 					   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn}, 
-		 					   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os}, 
-		 					   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C}, 
-		 					   {EnumElement.Cu}, {EnumElement.Sn}, {EnumElement.Ag},
-		 					   {EnumElement.Fe},
-		 					   {EnumElement.Fe, EnumElement.C},		//Steel
-		 					   {EnumElement.Sn, EnumElement.Cu},
-		 					   {EnumElement.Cu},//Bronze
-					               {EnumElement.Zn, EnumElement.Cu},	//Brass
-					               {EnumElement.Ag, EnumElement.Au},	//Electrum
-					               {EnumElement.Fe, EnumElement.Ni}		//Invar
-					               };//, EnumElement.Ir
-		
-		int[][] proportions      = {{4},{4},{4},
-		 					   {4},{4},{4},
-		 					   {4},{4},{4},
-		 					   {4},{4},{4},
-		 					   {4},{4},{4},
-		 					   {4},
-		 					   {4,4},
-		 					   {1,3},{1,3},{2,2},{2,1}};
-		
-		String[]  itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate"
-		boolean[] craftable = {true, true, false, false, false, false, false};
-		int[] 	 sizeCoeff = {1, 4, 8, 4, 36, 16, 4};
-		
+   public void oreEvent(OreDictionary.OreRegisterEvent var1) { // THIS IS A FUCKING MESS BUT IT WILL WORK FOR NOW!!!!!! NO IT REALLU DOESNT
+	   //What the hell does this do? Seriously, what?
+	   System.out.println(var1.Ore.getDisplayName());
 		for (int i=0; i<compounds.length; i++){
-		for (int j=0; j<itemTypes.length; j++){
-			if(var1.Name.equals(itemTypes[j]+compounds[i])){
-				System.out.print("Adding recipe for " + itemTypes[j] + compounds[i]);
-				List<Chemical> _elems = new ArrayList<Chemical>();
-				
-				for (int k=0; k<elements[i].length; k++){
-					_elems.add(this.element(elements[i][k], proportions[i][k]*sizeCoeff[j]));
-				}
-				
-				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, _elems.toArray(new Chemical[_elems.size()])));
-				
-				if(compounds[i].equals("Iron") && itemTypes[j].equals("dust")){
-				      SynthesisRecipe.recipes.remove(recipeIron);
-				}
-				if(compounds[i].equals("Gold") && itemTypes[j].equals("dust")){
-				      SynthesisRecipe.recipes.remove(recipeGold);
-				}
-				
-				if(compounds[i].equals("Coal") && itemTypes[j].equals("dust")){
-					SynthesisRecipe.remove(new ItemStack(Item.coal));
-					SynthesisRecipe.remove(new ItemStack(Block.oreCoal));
+			for (int j=0; j<itemTypes.length; j++){
+				if(var1.Name.equals(itemTypes[j]+compounds[i])){
+					System.out.print("Adding recipe for " + itemTypes[j] + compounds[i]);
+					List<Chemical> _elems = new ArrayList<Chemical>();
 					
-					SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.coal), true, 2000, new Chemical[]{this.element(EnumElement.C,4), null, this.element(EnumElement.C,4), 
-						                                                                                         null, null, null, 
-						                                                                                         this.element(EnumElement.C,4), null, this.element(EnumElement.C,4)}));
+					for (int k=0; k<elements[i].length; k++){
+						_elems.add(this.element(elements[i][k], proportions[i][k]*sizeCoeff[j]));
+					}
 					
-				}					
-				
-				if (craftable[j]){
-					SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000*sizeCoeff[j], _elems.toArray(new Chemical[_elems.size()])));
+					DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, _elems.toArray(new Chemical[_elems.size()])));
+					
+					if(compounds[i].equals("Iron") && itemTypes[j].equals("dust")){
+					      SynthesisRecipe.recipes.remove(recipeIron);
+					}
+					if(compounds[i].equals("Gold") && itemTypes[j].equals("dust")){
+					      SynthesisRecipe.recipes.remove(recipeGold);
+					}
+					
+					if(compounds[i].equals("Coal") && itemTypes[j].equals("dust")){
+						SynthesisRecipe.remove(new ItemStack(Item.coal));
+						SynthesisRecipe.remove(new ItemStack(Block.oreCoal));
+						
+						SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.coal), true, 2000, new Chemical[]{this.element(EnumElement.C,4), null, this.element(EnumElement.C,4), 
+							                                                                                         null, null, null, 
+							                                                                                         this.element(EnumElement.C,4), null, this.element(EnumElement.C,4)}));
+						
+					}					
+					
+					if (craftable[j]){
+						SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000*sizeCoeff[j], _elems.toArray(new Chemical[_elems.size()])));
+					}
+					return;					
+					
+					}
 				}
-				return;					
-				
-				}
-			}
 		}	  
 		
 	 // BEGIN ORE DICTONARY BULLSHIT
@@ -684,7 +685,23 @@ public class MinechemRecipes {
       } else if(var1.Name.contains("Sapphire")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide, 2)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.molecule(EnumMolecule.aluminiumOxide, 2)}));
-      } else if(var1.Name.contains("plateSilicon")) {
+      }else if(var1.Name.contains("ingotCopper")) {
+       DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Fe, 16)}));
+       SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Fe, 16)}));
+       }
+      else if(var1.Name.contains("ingotTin")) {
+          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Sn, 16)}));
+          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Sn, 16)}));
+          }
+      else if(var1.Name.contains("ingotOsmium")) {
+          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Os, 16)}));
+          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Os, 16)}));
+      }
+      else if(var1.Name.contains("ingotBronze")) {
+          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 4)}));
+          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 4)}));
+      }
+      else if(var1.Name.contains("plateSilicon")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Si, 2)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Si, 2)}));
       } else if(var1.Name.contains("xychoriumBlue")) {
