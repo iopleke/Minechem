@@ -625,7 +625,6 @@ public class MinechemRecipes {
    @ForgeSubscribe
    public void oreEvent(OreDictionary.OreRegisterEvent var1) { // THIS IS A FUCKING MESS BUT IT WILL WORK FOR NOW!!!!!! NO IT REALLU DOESNT
 	   //What the hell does this do? Seriously, what?
-	   System.out.println(var1.Ore.getDisplayName());
 		for (int i=0; i<compounds.length; i++){
 			for (int j=0; j<itemTypes.length; j++){
 				if(var1.Name.equals(itemTypes[j]+compounds[i])){
