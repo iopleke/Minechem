@@ -186,6 +186,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
         ArrayList<Chemical> output = recipe.getOutput();
         if (recipe != null && output != null) {
+        	if(inputStack.getItem() instanceof ItemElement || inputStack.getItem() instanceof ItemMolecule){
+        		testTubeTransactor.add(new ItemStack(MinechemItems.testTube),true);
+        	}
             ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
             placeStacksInBuffer(stacks);
         }
