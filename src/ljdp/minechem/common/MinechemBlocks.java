@@ -93,8 +93,8 @@ public class MinechemBlocks {
         LanguageRegistry.addName(microscope, MinechemHelper.getLocalString("block.name.microscope"));
         GameRegistry.registerBlock(synthesis, "minechem.blockSynthesis");
         LanguageRegistry.addName(synthesis, MinechemHelper.getLocalString("block.name.synthesis"));
-        GameRegistry.registerBlock(printer, "minechem.blockBlueprintPrinter");
-        LanguageRegistry.addName(printer, "Blueprint Printer (WIP)");
+        //GameRegistry.registerBlock(printer, "minechem.blockBlueprintPrinter");
+        //LanguageRegistry.addName(printer, "Blueprint Printer (WIP)");
         GameRegistry.registerBlock(ghostBlock, ItemGhostBlock.class, "minechem.blockGhostBlock");
         LanguageRegistry.addName(ghostBlock, "minechem.blockGhostBlock");
 

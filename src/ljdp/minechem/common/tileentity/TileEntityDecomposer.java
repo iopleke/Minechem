@@ -633,7 +633,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	public void setInventorySlotContents(int slot, ItemStack itemstack) {
 		if(slot==this.kOutput[0]){
 			ItemStack oldStack=this.inventory[this.kOutput[0]];
-			if(oldStack.getItemDamage()==itemstack.getItemDamage()){
+			if(oldStack!=null&&itemstack!=null&&oldStack.getItemDamage()==itemstack.getItemDamage()){
 				if(oldStack.getItem()==itemstack.getItem()){
 					if(oldStack.stackSize>itemstack.stackSize){
 						this.decrStackSize(slot, oldStack.stackSize-itemstack.stackSize);
