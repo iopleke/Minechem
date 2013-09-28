@@ -141,7 +141,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         }
     }
 
-
+    
     @Override
     public ItemStack[] extractItem(boolean doRemove, ForgeDirection direction, int maxItemCount) {
         switch (direction) {

@@ -76,7 +76,7 @@ public class SynthesisRecipe {
    }
 
    public int energyCost() {
-      return this.energyCost;
+      return this.energyCost/30;
    }
 
    public Chemical[] getShapedRecipe() {
