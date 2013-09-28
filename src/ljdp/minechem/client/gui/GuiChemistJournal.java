@@ -364,7 +364,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
 
     @Override
     public boolean isScrollBarActive() {
-        return listHeight > 130;
+        return true;
     }
 
     @Override
