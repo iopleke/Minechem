@@ -85,4 +85,5 @@ public interface ConstantValue {
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
     public static final String ICON_BASE="textures/icons/";
+	public static final String URANIUM_TEX = TEXTURE_MOD_ID + "uraniumOre";
 }

@@ -665,12 +665,13 @@ public class MinechemRecipes {
 		
 	 // BEGIN ORE DICTONARY BULLSHIT
       if(var1.Name.contains("uraniumOre")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 4)}));
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 16)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 16)}));
       } else if(var1.Name.contains("uraniumIngot")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 2)}));
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 8)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
       } else if(var1.Name.contains("itemDropUranium")) {
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 2)}));
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 8)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
       } else if(var1.Name.contains("gemApatite")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Ca, 5), this.molecule(EnumMolecule.phosphate, 4), this.element(EnumElement.Cl)}));

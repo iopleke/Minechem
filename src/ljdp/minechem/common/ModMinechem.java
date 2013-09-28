@@ -43,6 +43,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
@@ -116,7 +117,8 @@ public class ModMinechem {
     public void init(FMLInitializationEvent event) {
     	Compatibility.initiate();
 
-		 FluidHelper.registerFluids();
+		FluidHelper.registerFluids();
+		GameRegistry.registerWorldGenerator(new MinechemGeneration());
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
         TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
         proxy.registerRenderers();
@@ -135,9 +137,9 @@ public class ModMinechem {
     private void DoDungeon() {
     ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
     ItemStack A = new ItemStack(MinechemItems.blueprint,1,0);
-    ItemStack C = new ItemStack(MinechemItems.blueprint,1,2);
-    ChestProvider.addItem(new WeightedRandomChestContent(A, 1, 8, 1 ));
-    ChestProvider.addItem(new WeightedRandomChestContent(C, 1, 8, 1 ));
+    ItemStack C = new ItemStack(MinechemItems.blueprint,1,1);
+    ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1 ));
+    ChestProvider.addItem(new WeightedRandomChestContent(C, 10, 80, 1 ));
     logger.info("Injected blueprints into loot chest generator");
 	}
 	private void initComputerCraftAddon(FMLPostInitializationEvent event) {

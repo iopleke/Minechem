@@ -49,6 +49,7 @@ public class BlockFusion extends BlockMinechemContainer {
         return;
     }
 
+
     @Override
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata == 2)

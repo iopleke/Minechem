@@ -9,6 +9,7 @@ import ljdp.minechem.common.blocks.BlockGhostBlock;
 import ljdp.minechem.common.blocks.BlockMicroscope;
 import ljdp.minechem.common.blocks.BlockSynthesis;
 import ljdp.minechem.common.blocks.MaterialGas;
+import ljdp.minechem.common.blocks.OreUranium;
 import ljdp.minechem.common.items.ItemBlockFusion;
 import ljdp.minechem.common.items.ItemGhostBlock;
 import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
@@ -25,7 +26,9 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
 import net.minecraft.block.material.MaterialTransparent;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
@@ -38,6 +41,8 @@ public class MinechemBlocks {
     public static Block fusion;
     public static Block chemicalStorage;
     public static Block printer;
+
+    public static Block uranium;
     public static Material materialGas = new MaterialGas();
     public static Material materialGhost = new MaterialTransparent(MapColor.airColor);
     private static int microscopeID;
@@ -48,6 +53,8 @@ public class MinechemBlocks {
     private static int fusionID;
     private static int chemicalStorageID;
     private static int printerID;
+
+    private static int uraniumID;
     public static void loadConfig(Configuration config) {
         int baseID = 4012;
         microscopeID = getBlockConfig(config, "Microscope", baseID++);
@@ -57,7 +64,9 @@ public class MinechemBlocks {
         ghostBlockID = getBlockConfig(config, "GhostBlock", baseID++);
         fusionID = getBlockConfig(config, "FusionChamber", baseID++);
         chemicalStorageID = getBlockConfig(config, "ChemicalStorage", baseID++);
+
         printerID = getBlockConfig(config, "BluePrintPrinter", baseID++);
+        uraniumID = getBlockConfig(config, "Uranium Ore", baseID++);
     }
 
     private static int getBlockConfig(Configuration config, String key, int defaultID) {
@@ -73,6 +82,11 @@ public class MinechemBlocks {
         blueprintProjector = new BlockBlueprintProjector(blueprintProjectorID);
         chemicalStorage = new BlockChemicalStorage(chemicalStorageID);
         printer = new BlockBluePrintPrinter(printerID);
+        uranium= new OreUranium(uraniumID);
+
+        GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
+        OreDictionary.registerOre("ingotCopper", new ItemStack(uranium));
+        LanguageRegistry.addName(uranium, MinechemHelper.getLocalString("block.name.uraniumOre"));
         GameRegistry.registerBlock(decomposer, "minechem.blockDecomposer");
         LanguageRegistry.addName(decomposer, MinechemHelper.getLocalString("block.name.decomposer"));
         GameRegistry.registerBlock(microscope, "minechem.blockMicroscope");
