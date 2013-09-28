@@ -53,6 +53,8 @@ public class BlockFusion extends BlockMinechemContainer {
     public TileEntity createTileEntity(World world, int metadata) {
         if (metadata == 2)
             return new TileEntityFusion();
+        if (metadata == 3)
+            return new TileEntityFission();
         else
             return new TileEntityProxy();
     }
