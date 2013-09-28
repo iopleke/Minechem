@@ -53,6 +53,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public static final int[] kBottles = { 10, 11, 12, 13 };
     public static final int[] kStorage = { 14, 15, 16, 17, 18, 19, 20, 21, 22 };
     public static final int[] kJournal = { 23 };
+    //Slots that contain *real* items
+    //For the purpose of dropping upon break
+    public static final int[] kRealSlots={10,11,12,1314, 15, 16, 17, 18, 19, 20, 21, 22 ,23};
 
     private SynthesisRecipe currentRecipe;
     public ModelSynthesizer model;

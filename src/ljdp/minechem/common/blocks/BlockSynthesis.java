@@ -95,7 +95,7 @@ public class BlockSynthesis extends BlockMinechemContainer {
     @Override
 	public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList itemStacks) {
 		TileEntitySynthesis decomposer = (TileEntitySynthesis)tileEntity;
-		for(int slot = 0; slot < decomposer.getSizeInventory(); slot++) {
+		for(int slot:decomposer.kRealSlots) {
 			if(slot >= decomposer.kStartRecipe && slot < decomposer.kStartRecipe + decomposer.kSizeRecipe)
 				continue;
 			ItemStack itemstack = decomposer.getStackInSlot(slot);
