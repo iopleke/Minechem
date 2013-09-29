@@ -215,8 +215,7 @@ public class MinechemRecipes {
         ItemStack var46 = new ItemStack(Item.fermentedSpiderEye);
         ItemStack var47 = new ItemStack(Item.netherStalkSeeds);
         ItemStack var48 = new ItemStack(Block.glowStone);
-        //Glowstone Dust
-        ItemStack var49 = new ItemStack(Item.itemsList[92]);
+        ItemStack var49 = new ItemStack(Item.glowstone);
         ItemStack var50 = new ItemStack(Item.potion, 1, 0);
         ItemStack var51 = new ItemStack(Item.bucketWater);
         DecomposerRecipe.add(new DecomposerRecipeSelect(var39, 0.9F, new DecomposerRecipe[] { new DecomposerRecipe(new Chemical[] { this.molecule(EnumMolecule.polycyanoacrylate) }), new DecomposerRecipe(new Chemical[] { this.element(EnumElement.Hg) }), new DecomposerRecipe(new Chemical[] { this.molecule(EnumMolecule.water, 10) }) }));
@@ -253,22 +252,22 @@ public class MinechemRecipes {
         ItemStack var64 = new ItemStack(Item.bread);
         ItemStack var65 = new ItemStack(Item.appleRed);
         ItemStack var66 = new ItemStack(Item.appleGold, 1, 0);
-       //  new ItemStack(Item.appleGold, 1, 1);
         ItemStack var68 = new ItemStack(Item.chickenCooked);
+        // Seriously what is with the obfuscated variable names? 
         DecomposerRecipe.add(new DecomposerRecipeChance(var54, 0.75F, new Chemical[] { this.molecule(EnumMolecule.sucrose) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var55, 0.65F, new Chemical[] { this.molecule(EnumMolecule.sucrose), this.element(EnumElement.H, 2), this.element(EnumElement.O) }));
-        DecomposerRecipe.add(new DecomposerRecipe(var62, new Chemical[] { this.molecule(EnumMolecule.theobromine) }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(var62, 0.4F, new Chemical[] { this.molecule(EnumMolecule.theobromine), this.molecule(EnumMolecule.tannicacid) }));
         DecomposerRecipe.add(new DecomposerRecipe(var56, new Chemical[] { this.molecule(EnumMolecule.cucurbitacin) }));
         DecomposerRecipe.add(new DecomposerRecipe(var57, new Chemical[] { this.molecule(EnumMolecule.cucurbitacin), this.molecule(EnumMolecule.asparticAcid), this.molecule(EnumMolecule.water, 16) }));
         DecomposerRecipe.add(new DecomposerRecipe(var58, new Chemical[] { this.molecule(EnumMolecule.water, 4), this.molecule(EnumMolecule.whitePigment), this.element(EnumElement.Au, 1) }));
         DecomposerRecipe.add(new DecomposerRecipe(var59, new Chemical[] { this.molecule(EnumMolecule.water) }));
-        DecomposerRecipe.add(new DecomposerRecipeChance(var60, 0.05F, new Chemical[] { this.molecule(EnumMolecule.ret) }));
-        DecomposerRecipe.add(new DecomposerRecipeChance(var61, 0.2F, new Chemical[] { this.molecule(EnumMolecule.ret), this.element(EnumElement.Au, 4) }));
+        DecomposerRecipe.add(new DecomposerRecipe(var60, new Chemical[] { this.molecule(EnumMolecule.ret) }));
+        DecomposerRecipe.add(new DecomposerRecipe(var61, new Chemical[] { this.molecule(EnumMolecule.ret), this.element(EnumElement.Au, 4) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var63, 0.4F, new Chemical[] { this.molecule(EnumMolecule.water, 8), this.element(EnumElement.K, 2), this.molecule(EnumMolecule.cellulose) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var64, 0.1F, new Chemical[] { this.molecule(EnumMolecule.starch), this.molecule(EnumMolecule.sucrose) }));
         DecomposerRecipe.add(new DecomposerRecipe(var65, new Chemical[] { this.molecule(EnumMolecule.malicAcid) }));
-        DecomposerRecipe.add(new DecomposerRecipe(var66, new Chemical[] { this.molecule(EnumMolecule.malicAcid), this.element(EnumElement.Au, 8) }));
-        DecomposerRecipe.add(new DecomposerRecipe(var66, new Chemical[] { this.molecule(EnumMolecule.malicAcid), this.element(EnumElement.Au, 64), this.element(EnumElement.Np) }));
+       //  DecomposerRecipe.add(new DecomposerRecipe(var66, new Chemical[] { this.molecule(EnumMolecule.malicAcid), this.element(EnumElement.Au, 8) }));
+        DecomposerRecipe.add(new DecomposerRecipe(var66, new Chemical[] { this.molecule(EnumMolecule.malicAcid), this.element(EnumElement.Au, 64)}));
         DecomposerRecipe.add(new DecomposerRecipe(var68, new Chemical[] { this.element(EnumElement.K), this.element(EnumElement.Na), this.element(EnumElement.C, 2) }));
         SynthesisRecipe.add(new SynthesisRecipe(var54, false, 400, new Chemical[] { this.molecule(EnumMolecule.sucrose) }));
         SynthesisRecipe.add(new SynthesisRecipe(var65, false, 400, new Chemical[] { this.molecule(EnumMolecule.malicAcid), this.molecule(EnumMolecule.water, 2) }));
@@ -375,6 +374,7 @@ public class MinechemRecipes {
         ItemStack var112 = new ItemStack(Block.cloth, 1, 15);
         DecomposerRecipe.add(new DecomposerRecipeChance(var111, 0.6F, new Chemical[] { this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.redPigment) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var110, 0.6F, new Chemical[] { this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.greenPigment) }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(var109, 0.6F, new Chemical[] { this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.tannicacid) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var108, 0.6F, new Chemical[] { this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.lazurite) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var107, 0.6F, new Chemical[] { this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.purplePigment) }));
         DecomposerRecipe.add(new DecomposerRecipeChance(var106, 0.6F, new Chemical[] { this.molecule(EnumMolecule.glycine), this.molecule(EnumMolecule.lightbluePigment), this.molecule(EnumMolecule.whitePigment) }));
@@ -438,9 +438,9 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipe(var124, new Chemical[] { this.molecule(EnumMolecule.pantherine), this.molecule(EnumMolecule.water, 2)}));
         DecomposerRecipe.add(new DecomposerRecipe(var125, new Chemical[] { this.molecule(EnumMolecule.mescaline), this.molecule(EnumMolecule.water, 20) }));
         SynthesisRecipe.add(new SynthesisRecipe(var125, true, 200, new Chemical[] { this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.mescaline), null, this.molecule(EnumMolecule.water, 5), null, this.molecule(EnumMolecule.water, 5) }));
-        DecomposerRecipe.add(new DecomposerRecipeChance(var13, 0.8F, new Chemical[] { this.molecule(EnumMolecule.iron3oxide, 6), this.molecule(EnumMolecule.strontiumNitrate, 6) }));
-        DecomposerRecipe.add(new DecomposerRecipeChance(var18, 0.42F, new Chemical[] { this.molecule(EnumMolecule.iron3oxide), this.molecule(EnumMolecule.strontiumNitrate) }));
-        SynthesisRecipe.add(new SynthesisRecipe(var18, true, 100, new Chemical[] { null, null, this.molecule(EnumMolecule.iron3oxide), null, this.molecule(EnumMolecule.strontiumNitrate), null, null, null, null }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(var13, 0.8F, new Chemical[] { this.molecule(EnumMolecule.iron3oxide, 6), this.element(EnumElement.Cu, 6) }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(var18, 0.42F, new Chemical[] { this.molecule(EnumMolecule.iron3oxide), this.element(EnumElement.Cu) }));
+        SynthesisRecipe.add(new SynthesisRecipe(var18, true, 100, new Chemical[] { null, null, this.molecule(EnumMolecule.iron3oxide), null, this.element(EnumElement.Cu), null, null, null, null }));
         ItemStack var126 = new ItemStack(Item.enderPearl);
         DecomposerRecipe.add(new DecomposerRecipe(var126, new Chemical[] { this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate, 8) }));
         SynthesisRecipe.add(new SynthesisRecipe(var126, true, 5000, new Chemical[] { this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) }));
@@ -474,7 +474,9 @@ public class MinechemRecipes {
         DecomposerRecipe.add(new DecomposerRecipeChance(var137, 0.05F, new Chemical[] { new Molecule(EnumMolecule.nod, 1) }));
         ItemStack var139 = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(var139, 0.1F, new Chemical[] { new Molecule(EnumMolecule.afroman, 2) }));
-        // 		
+        ItemStack netherQ = new ItemStack(Item.netherQuartz);
+        DecomposerRecipe.add(new DecomposerRecipe(netherQ, new Chemical[] { this.molecule(EnumMolecule.siliconDioxide, 4), this.molecule(EnumMolecule.galliumarsenide, 1) }));
+        // 
 		this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
