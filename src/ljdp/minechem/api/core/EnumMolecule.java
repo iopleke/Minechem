@@ -34,7 +34,7 @@ public enum EnumMolecule {
     hydroxide(20, "Hydroxide (ion)", new Element(O), new Element(H)),
     ammonium(21, "Ammonium (ion)", new Element(N), new Element(H, 4)),
     hydronium(22, "Hydronium (ion)", new Element(H, 3), new Element(O)),
-    peroxide(23, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
+    peroxide(23, "Peroxide (ion)", new Element(O, 2)),
     calciumOxide(24, "Calcium Oxide", new Element(Ca), new Element(O)),
     calciumCarbonate(25, "Calcium Carbonate", new Element(Ca), new Molecule(carbonate)),
     magnesiumCarbonate(26, "Magnesium Carbonate", new Element(Mg), new Molecule(carbonate)),
@@ -85,7 +85,7 @@ public enum EnumMolecule {
     penicillin(71, "Penicillin", new Element(C, 16), new Element(H, 18), new Element(N, 2), new Element(O, 4), new Element(S)),
     testosterone(72, "Testosterone", new Element(C, 19), new Element(H, 28), new Element(O, 2)),
     kaolinite(73, "Kaolinite", new Element(Al, 2), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4)),
-    fingolimod(74, "Fingolimod", new Element(C, 19), new Element(H, 33), new Molecule(nitrogenDioxide)), // LJDP, You ment to say fingolimod not myrocin.
+    fingolimod(74, "Fingolimod", new Element(C, 19), new Element(H, 33), new Molecule(nitrogenDioxide)),
     arginine(75, "Arginine (amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 4), new Element(O, 2)),
     shikimicAcid(76, "Shikimic Acid", new Element(C, 7), new Element(H, 10), new Element(O, 5)),
     sulfuricAcid(77, "Sulfuric Acid", new Element(H, 2), new Element(S), new Element(O, 4)),
@@ -122,7 +122,12 @@ public enum EnumMolecule {
     lcd(108, "Cholesteryl benzoate", new Element(C,34), new Element(H,50), new Element(O,2)), 
     radchlor(109, "Radium Chloride", new Element(Ra), new Element(Cl, 2)),
     ctaxifolia(110, "Caulerpenyne", new Element(C,21), new Element(H,26), new Element(O,6)),
-    latropine(111,"L-hyoscyamine", new Element (C,17), new Element(H,23), new Element(N), new Element(O,4))
+    latropine(111,"L-hyoscyamine", new Element (C,17), new Element(H,23), new Element(N), new Element(O,4)),
+    gallicacid(112, "Gallic Acid", new Element(C,7), new Element(H,17), new Element(O,5)),
+    glucose(113, "Glucose", new Element(C,6), new Element(H,12), new Element(O,6)),
+    tannicacid(114, "Tannic Acid", new Molecule(gallicacid, 10), new Molecule(glucose, 1)),
+    hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
+    galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As))
     ;
 
     public static EnumMolecule[] molecules = values();
