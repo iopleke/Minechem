@@ -21,7 +21,7 @@ public class ItemDecomposerRenderer extends ItemMinechemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_MODEL_ON);
         GL11.glPushMatrix();
-        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         switch(type.ordinal()){
 case 0: {
         	

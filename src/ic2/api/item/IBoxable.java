@@ -2,8 +2,8 @@ package ic2.api.item;
 
 import net.minecraft.item.ItemStack;
 
-public interface IBoxable
-{
+
+public interface IBoxable {
 	/**
 	 * Determine whether an item can be stored in a toolbox or not.
 	 * 

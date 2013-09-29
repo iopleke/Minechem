@@ -57,7 +57,7 @@ public abstract class Tab {
 
         if (leftSide) {
 
-            Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_LEFT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_LEFT));
 
             myGui.drawTexturedModalRect(x - currentWidth, y + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -65,7 +65,7 @@ public abstract class Tab {
             myGui.drawTexturedModalRect(x - currentWidth + 4, y + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
         } else {
 
-        	 Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_RIGHT));
+        	 Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.TAB_RIGHT));
 
             myGui.drawTexturedModalRect(x, y, 0, 256 - currentHeight, 4, currentHeight);
             myGui.drawTexturedModalRect(x + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -78,7 +78,7 @@ public abstract class Tab {
 
     protected void drawIcon( int x, int y) {
     	ResourceLocation resource=this.getIcon();
-    	 //Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
+    	 //Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
     	 if(myGui instanceof GuiContainerTabbed){
     		 ((GuiContainerTabbed)myGui).drawTexture(x, y, resource);
     	 }else{

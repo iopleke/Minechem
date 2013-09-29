@@ -66,7 +66,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     {
     	int w=16;
     	int h=16;
-    	this.mc.func_110434_K().func_110577_a(resource);
+    	this.mc.getTextureManager().bindTexture(resource);
         GL11.glColor4f(1F, 1F, 1F, 1F);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();

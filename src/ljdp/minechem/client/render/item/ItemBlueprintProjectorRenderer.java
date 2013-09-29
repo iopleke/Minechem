@@ -21,7 +21,7 @@ public class ItemBlueprintProjectorRenderer extends ItemMinechemRenderer {
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
         ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_OFF);
         GL11.glPushMatrix();
-        FMLClientHandler.instance().getClient().renderEngine.func_110577_a(texture);
+        FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         switch(type.ordinal()){
         case 0: {
         	

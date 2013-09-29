@@ -81,7 +81,7 @@ public class GuiMicroscope extends GuiContainerTabbed {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.MICROSCOPE_GUI));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.MICROSCOPE_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         zLevel = 0;

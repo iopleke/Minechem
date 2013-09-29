@@ -306,7 +306,7 @@ public abstract class GuiMinechemContainer extends GuiScreen {
 
             if (var6 != null) {
                 GL11.glDisable(GL11.GL_LIGHTING);
-                this.mc.renderEngine.func_110577_a(par1Slot.getBackgroundIconTexture());
+                this.mc.renderEngine.bindTexture(par1Slot.getBackgroundIconTexture());
                 this.drawTexturedModalRect(var2, var3, 0, 0, 16, 16);
                 GL11.glEnable(GL11.GL_LIGHTING);
                 var5 = true;

@@ -54,7 +54,7 @@ public class GuiPrinter extends GuiContainerTabbed {
 			int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINT_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINT_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

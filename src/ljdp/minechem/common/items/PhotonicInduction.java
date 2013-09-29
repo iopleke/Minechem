@@ -1,4 +1,3 @@
-// I learned this method from IC2. All credits to the IC2 Team!
 package ljdp.minechem.common.items;
 
 import cpw.mods.fml.relauncher.Side;

@@ -189,12 +189,15 @@ public class UniversalNetwork extends ElectricityNetwork
 					{
 						for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
 						{
-							ElectricityPack pack = ElectricityPack.getFromWatts(((IPowerReceptor) tileEntity).getPowerReceiver(direction).powerRequest() * Compatibility.BC3_RATIO, 120);
-
-							if (pack.getWatts() > 0)
+							if (((IPowerReceptor) tileEntity).getPowerReceiver(direction) != null)
 							{
-								requests.add(pack);
-								break;
+								ElectricityPack pack = ElectricityPack.getFromWatts(((IPowerReceptor) tileEntity).getPowerReceiver(direction).powerRequest() * Compatibility.BC3_RATIO, 120);
+
+								if (pack.getWatts() > 0)
+								{
+									requests.add(pack);
+									break;
+								}
 							}
 						}
 

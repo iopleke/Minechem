@@ -35,7 +35,7 @@ public abstract class GuiToggleSwitch {
     }
 
     public void draw(TextureManager renderEngine) {
-        renderEngine.func_110577_a(texture);
+        renderEngine.bindTexture(texture);
         ToggleButton button = buttons.get(state);
         drawTexturedModalRect(x, y, button.u, button.v, width, height);
         String tooltip = MinechemHelper.getLocalString(button.tooltip);

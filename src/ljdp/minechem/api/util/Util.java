@@ -11,19 +11,19 @@ public class Util {
     }
 
     public static boolean isStackAChemical(ItemStack itemstack) {
-        return itemstack.getItemName().contains("minechem.itemElement") || itemstack.getItemName().contains("minechem.itemMolecule");
+        return itemstack.toString().contains("minechem.itemElement") || itemstack.toString().contains("minechem.itemMolecule");
     }
 
     public static boolean isStackAnElement(ItemStack itemstack) {
-        return itemstack.getItemName().contains("minechem.itemElement");
+        return itemstack.toString().contains("minechem.itemElement");
     }
 
     public static boolean isStackAMolecule(ItemStack itemstack) {
-        return itemstack.getItemName().contains("minechem.itemMolecule");
+        return itemstack.toString().contains("minechem.itemMolecule");
     }
 
     public static boolean isStackAnEmptyTestTube(ItemStack itemstack) {
-        return itemstack.getItemName().contains("minechem.itemTestTube");
+        return itemstack.toString().contains("minechem.itemTestTube");
     }
 
 }

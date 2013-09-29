@@ -624,50 +624,14 @@ public class MinechemRecipes {
 
    @ForgeSubscribe
    public void oreEvent(OreDictionary.OreRegisterEvent var1) { // THIS IS A FUCKING MESS BUT IT WILL WORK FOR NOW!!!!!! NO IT REALLU DOESNT
-	   //What the hell does this do? Seriously, what?
-		for (int i=0; i<compounds.length; i++){
-			for (int j=0; j<itemTypes.length; j++){
-				if(var1.Name.equals(itemTypes[j]+compounds[i])){
-					System.out.print("Adding recipe for " + itemTypes[j] + compounds[i]);
-					List<Chemical> _elems = new ArrayList<Chemical>();
-					
-					for (int k=0; k<elements[i].length; k++){
-						_elems.add(this.element(elements[i][k], proportions[i][k]*sizeCoeff[j]));
-					}
-					
-					DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, _elems.toArray(new Chemical[_elems.size()])));
-					
-					if(compounds[i].equals("Iron") && itemTypes[j].equals("dust")){
-					      SynthesisRecipe.recipes.remove(recipeIron);
-					}
-					if(compounds[i].equals("Gold") && itemTypes[j].equals("dust")){
-					      SynthesisRecipe.recipes.remove(recipeGold);
-					}
-					
-					if(compounds[i].equals("Coal") && itemTypes[j].equals("dust")){
-						SynthesisRecipe.remove(new ItemStack(Item.coal));
-						SynthesisRecipe.remove(new ItemStack(Block.oreCoal));
-						
-						SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.coal), true, 2000, new Chemical[]{this.element(EnumElement.C,4), null, this.element(EnumElement.C,4), 
-							                                                                                         null, null, null, 
-							                                                                                         this.element(EnumElement.C,4), null, this.element(EnumElement.C,4)}));
-						
-					}					
-					
-					if (craftable[j]){
-						SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000*sizeCoeff[j], _elems.toArray(new Chemical[_elems.size()])));
-					}
-					return;					
-					
-					}
-				}
-		}	  
+	   System.out.println(var1.Name);
 		
 	 // BEGIN ORE DICTONARY BULLSHIT
-      if(var1.Name.contains("uraniumOre")) {
+      if(var1.Name.contains("oreUranium")) {
+    	  System.out.println("Uranium");
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 16)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 16)}));
-      } else if(var1.Name.contains("uraniumIngot")) {
+      } else if(var1.Name.contains("ingotUranium")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 8)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
       } else if(var1.Name.contains("itemDropUranium")) {

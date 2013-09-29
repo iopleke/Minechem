@@ -89,7 +89,10 @@ public abstract class TileEntityUniversalConductor extends TileEntityConductor i
 				}
 				else if (Compatibility.isBuildcraftLoaded() && tileEntity instanceof IPowerReceptor)
 				{
-					this.adjacentConnections[i] = tileEntity;
+					if (((IPowerReceptor) tileEntity).getPowerReceiver(side.getOpposite()) != null)
+					{
+						this.adjacentConnections[i] = tileEntity;
+					}
 				}
 			}
 		}

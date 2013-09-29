@@ -8,8 +8,7 @@ import net.minecraft.item.ItemStack;
  * 
  * Currently used for determining which boots can be used to slide up a magnetic pole.
  */
-public interface IMetalArmor
-{
+public interface IMetalArmor {
 	/**
 	 * Determine if the given armor piece is metal armor.
 	 * 

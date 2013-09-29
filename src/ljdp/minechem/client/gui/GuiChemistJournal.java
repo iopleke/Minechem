@@ -226,7 +226,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         GL11.glPushMatrix();
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
 
@@ -249,7 +249,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
         drawTexturedModalRect(8 / 2, 164 / 2, 161 / 2, 192 / 2, 20 / 2, 20 / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -267,7 +267,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
 
         GL11.glScalef(2.0F, 2.0F, 1.0F);
 
-        this.mc.renderEngine.func_110577_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
 
         drawTexturedModalRect(197 / 2, 41 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
         if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped()) {

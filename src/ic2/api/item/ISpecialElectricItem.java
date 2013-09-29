@@ -2,8 +2,7 @@ package ic2.api.item;
 
 import net.minecraft.item.ItemStack;
 
-public interface ISpecialElectricItem extends IElectricItem
-{
+public interface ISpecialElectricItem extends IElectricItem {
 	/**
 	 * Supply a custom IElectricItemManager.
 	 * 
