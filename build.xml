@@ -24,7 +24,7 @@
 	<property file="${clientsrc.dir}/fmlversion.properties" />
 
 	<property name="mc.version"           value="1.6.2"/>
-	<property name="forge.version"        value="9.10.0.845"/>
+	<property name="forge.version"        value="9.11.0.900"/>
 	<property name="mod.version"          value="4"/>
 	<property name="build.number"     value="${env.BUILD_NUMBER}"/> 
    
