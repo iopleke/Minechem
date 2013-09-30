@@ -30,7 +30,7 @@ public class BlockFusion extends BlockMinechemContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9) {
-    	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);;
+    	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if(tileEntity instanceof TileEntityProxy){
         	TileEntityProxy proxy=(TileEntityProxy) tileEntity;
         	if(proxy.manager!=null){
