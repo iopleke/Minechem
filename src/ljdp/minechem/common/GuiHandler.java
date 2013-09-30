@@ -3,6 +3,7 @@ package ljdp.minechem.common;
 import ljdp.minechem.client.gui.GuiChemicalStorage;
 import ljdp.minechem.client.gui.GuiChemistJournal;
 import ljdp.minechem.client.gui.GuiDecomposer;
+import ljdp.minechem.client.gui.GuiFission;
 import ljdp.minechem.client.gui.GuiFusion;
 import ljdp.minechem.client.gui.GuiMicroscope;
 import ljdp.minechem.client.gui.GuiPrinter;
@@ -13,6 +14,7 @@ import ljdp.minechem.common.containers.ContainerBluePrintPrinter;
 import ljdp.minechem.common.containers.ContainerChemicalStorage;
 import ljdp.minechem.common.containers.ContainerChemistJournal;
 import ljdp.minechem.common.containers.ContainerDecomposer;
+import ljdp.minechem.common.containers.ContainerFission;
 import ljdp.minechem.common.containers.ContainerFusion;
 import ljdp.minechem.common.containers.ContainerMicroscope;
 import ljdp.minechem.common.containers.ContainerProjector;
@@ -22,6 +24,7 @@ import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
+import ljdp.minechem.common.tileentity.TileEntityFission;
 import ljdp.minechem.common.tileentity.TileEntityFusion;
 import ljdp.minechem.common.tileentity.TileEntityMicroscope;
 import ljdp.minechem.common.tileentity.TileEntityProxy;
@@ -50,6 +53,10 @@ public class GuiHandler implements IGuiHandler {
         if (tileEntity instanceof TileEntityFusion){
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
         }
+        if (tileEntity instanceof TileEntityFission){
+            return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
+        }
+
         if (tileEntity instanceof TileEntityProxy){;
         	          return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         	       }
@@ -67,6 +74,9 @@ public class GuiHandler implements IGuiHandler {
         TileEntity tileEntity = proxy.getManager();
         if (tileEntity instanceof TileEntityFusion)
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
+
+        if (tileEntity instanceof TileEntityFission)
+            return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
         return null;
     }
 
@@ -97,6 +107,8 @@ public class GuiHandler implements IGuiHandler {
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         if (tileEntity instanceof TileEntityBluePrintPrinter)
         	return new GuiPrinter(player.inventory, (TileEntityBluePrintPrinter) tileEntity);
+        if (tileEntity instanceof TileEntityFission)
+        	return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
         return null;
     }
 
@@ -104,6 +116,9 @@ public class GuiHandler implements IGuiHandler {
         TileEntity tileEntity = proxy.getManager();
         if (tileEntity instanceof TileEntityFusion)
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
+
+        if (tileEntity instanceof TileEntityFission)
+            return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
         return null;
     }
 
