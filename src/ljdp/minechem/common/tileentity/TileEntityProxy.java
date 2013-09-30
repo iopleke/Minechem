@@ -35,11 +35,11 @@ public class TileEntityProxy extends TileEntity {
     }
 
     public TileEntity getManager() {
-    	if(this.manager!=null){
+    	if(this.manager!=null||this.manager instanceof TileEntityProxy){
     		return this.manager;
     	}
     	else{
-    		if(worldObj.getBlockTileEntity(managerX, managerY, managerZ)!=null){
+    		if(worldObj.getBlockTileEntity(managerX, managerY, managerZ)!=null&& !(worldObj.getBlockTileEntity(managerX, managerY, managerZ) instanceof TileEntityProxy)){
     			return worldObj.getBlockTileEntity(managerX, managerY, managerZ);
     		}
     		if(worldObj.getBlockId(managerX, managerY, managerZ)==MinechemBlocks.fusion.blockID){
@@ -50,7 +50,7 @@ public class TileEntityProxy extends TileEntity {
     }
     private TileEntity buildManagerBlock() {
             
-            if(this.worldObj.getBlockMetadata(managerX,managerY,managerZ)==3){
+            if(this.worldObj.getBlockMetadata(managerX,managerY,managerZ)==2){
             	TileEntityFusion fusion=new TileEntityFusion();
             	fusion.worldObj=this.worldObj;
             	fusion.xCoord=this.managerZ;
@@ -59,7 +59,7 @@ public class TileEntityProxy extends TileEntity {
             	fusion.blockType=MinechemBlocks.fusion;
             	worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
             }
-            if(this.worldObj.getBlockMetadata(managerX,managerY,managerZ)==4){
+            if(this.worldObj.getBlockMetadata(managerX,managerY,managerZ)==3){
             	TileEntityFission fusion=new TileEntityFission();
             	fusion.worldObj=this.worldObj;
             	fusion.xCoord=this.managerZ;

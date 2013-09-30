@@ -54,12 +54,14 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
         }
         if (tileEntity instanceof TileEntityFission){
+        	System.out.println(1);
             return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
         }
 
-        if (tileEntity instanceof TileEntityProxy){;
-        	          return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
-        	       }
+        if (tileEntity instanceof TileEntityProxy){
+        	System.out.println(2);
+        	return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        }
             
         if (tileEntity instanceof TileEntityBlueprintProjector)
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
@@ -99,16 +101,20 @@ public class GuiHandler implements IGuiHandler {
             return new GuiSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
         if (tileEntity instanceof TileEntityFusion)
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
-        if (tileEntity instanceof TileEntityProxy)
+        if (tileEntity instanceof TileEntityProxy){
+        	System.out.println(3);
             return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        }
         if (tileEntity instanceof TileEntityBlueprintProjector)
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         if (tileEntity instanceof TileEntityBluePrintPrinter)
         	return new GuiPrinter(player.inventory, (TileEntityBluePrintPrinter) tileEntity);
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof TileEntityFission){
+        	System.out.println(4);
         	return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
+        }
         return null;
     }
 

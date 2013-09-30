@@ -53,6 +53,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
 
     @Override
 	public void updateEntity() {
+    	System.out.println(worldObj.isRemote);
 		super.updateEntity();
 		if(!completeStructure)
 			return;
