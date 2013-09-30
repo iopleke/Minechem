@@ -1,4 +1,4 @@
-package ljdp.minechem.common.blocks;
+ package ljdp.minechem.common.blocks;
 
 import java.util.ArrayList;
 import java.util.List;
