@@ -578,6 +578,7 @@ public class MinechemRecipes {
       this.createPoisonedItemStack(Item.porkCooked, 0, var1);
       this.createPoisonedItemStack(Item.beefCooked, 0, var1);
       this.createPoisonedItemStack(Item.carrot, 0, var1);
+      this.createPoisonedItemStack(Item.poisonousPotato, 0, var1);
       this.createPoisonedItemStack(Item.bakedPotato, 0, var1);
       this.createPoisonedItemStack(Item.bread, 0, var1);
       this.createPoisonedItemStack(Item.potato, 0, var1);
@@ -585,6 +586,8 @@ public class MinechemRecipes {
       this.createPoisonedItemStack(Item.fishCooked, 0, var1);
       this.createPoisonedItemStack(Item.cookie, 0, var1);
       this.createPoisonedItemStack(Item.pumpkinPie, 0, var1);
+      this.createPoisonedItemStack(Item.fishRaw, 0, var1);
+      this.createPoisonedItemStack(Item.appleGold, 0, var1);
       this.createPoisonedItemStack(MinechemItems.EmptyPillz, 0, var1);
    }
    String[] compounds = {"Aluminium","Titanium","Chrome",   

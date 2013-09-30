@@ -64,9 +64,14 @@ public class BlockReferences {
 
 		appleLeaves (Blocks.leavesFruit, 3),
 		appleLeavesFruitless (Blocks.leavesFruit, 0),
+		persimmonLeaves (Blocks.leavesFruit2, 3),
+		persimmonLeavesFruitless (Blocks.leavesFruit2, 3),
 
 		bamboo (Blocks.bamboo, 0),
 
+		dryGrassItem (Blocks.foliage, 11),
+		wheatGrassItem (Blocks.foliage, 10),
+		shrubItem (Blocks.foliage, 9),
 		poisonIvyItem (Blocks.foliage, 7),
 		sproutItem (Blocks.foliage, 5),
 		bushItem (Blocks.foliage, 4),
@@ -96,6 +101,7 @@ public class BlockReferences {
 		originSapling (Blocks.saplings, 9),
 		yellowAutumnSapling (Blocks.saplings, 1),
 		bambooSapling (Blocks.saplings, 2),
+		persimmonSapling (Blocks.saplings, 15),
 
 		mud (Blocks.mud, 0),
 		driedDirt (Blocks.driedDirt, 0),
@@ -145,6 +151,7 @@ public class BlockReferences {
 		portobello (Blocks.mushrooms, 1),
 		bluemilk (Blocks.mushrooms, 2),
 		glowshroom (Blocks.mushrooms, 3),
+		flatmushroom (Blocks.mushrooms, 4),
 
 		deadGrass (Blocks.plants, 0),
 		desertGrass (Blocks.plants, 1),
@@ -154,8 +161,10 @@ public class BlockReferences {
 		thorn (Blocks.plants, 5),
 		barley (Blocks.plants, 6),
 		cattail (Blocks.plants, 7),
-		reed (Blocks.plants, 8),
+		rivercane (Blocks.plants, 8),
 		tinyCactus (Blocks.plants, 12),
+		witherwart (Blocks.plants, 13),
+		reed (Blocks.plants, 14),
 
 		treeMoss (Blocks.treeMoss, 0),
 		moss (Blocks.moss, 0),
@@ -167,16 +176,25 @@ public class BlockReferences {
 		deathbloom (Blocks.flowers, 2),
 		glowFlower (Blocks.flowers, 3),
 		hydrangea (Blocks.flowers, 4),
-		daisy (Blocks.flowers, 5),
-		tulip (Blocks.flowers, 6),
+		cosmos (Blocks.flowers, 5),
+		daffodil (Blocks.flowers, 6),
 		wildFlower (Blocks.flowers, 7),
 		violet (Blocks.flowers, 8),
 		anenome (Blocks.flowers, 9),
 		lilyflower (Blocks.flowers, 10),
 		rainbowflower (Blocks.flowers, 11),
-		aloe (Blocks.flowers, 12),
+		bromeliad (Blocks.flowers, 12),
 		sunflower (Blocks.flowers, 13),
 		dandelion (Blocks.flowers, 15),
+		
+		hibiscus (Blocks.flowers2, 0),
+		lilyofthevalley (Blocks.flowers2, 1),
+		burningblossom (Blocks.flowers2, 2),
+		lavender (Blocks.flowers2, 3),
+		goldenrod (Blocks.flowers2, 4),
+		bluebells (Blocks.flowers2, 5),
+		minersdelight (Blocks.flowers2, 6),
+		icyiris (Blocks.flowers2, 7),
 		;
 
 		public Optional<? extends Block> block;
