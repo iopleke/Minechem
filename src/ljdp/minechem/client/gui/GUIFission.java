@@ -10,13 +10,13 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GUIFission extends GuiMinechemContainer {
+public class GuiFission extends GuiMinechemContainer {
 
 	
-	 public GUIFission(Container par1Container) {
+	 public GuiFission(Container par1Container) {
 		super(par1Container);
 	}
-	public GUIFission(InventoryPlayer inventoryPlayer, TileEntityFission fission) {
+	public GuiFission(InventoryPlayer inventoryPlayer, TileEntityFission fission) {
 	        super(new ContainerFission(inventoryPlayer, fission));
 	    }
 	@Override

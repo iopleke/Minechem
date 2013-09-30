@@ -94,6 +94,8 @@ public class MinechemRecipes {
         // DecomposerRecipe.add(new DecomposerRecipe(var8, new
         // Chemical[]{this.element(EnumElement.Fe, 4)}));
         DecomposerRecipe.add(new DecomposerRecipe(oreIron, new Chemical[] { this.element(EnumElement.Fe, 32) }));
+
+        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { this.element(EnumElement.U, 32) }));
         // DecomposerRecipe.add(new DecomposerRecipe(var9, new
         // Chemical[]{this.element(EnumElement.Au, 4)}));
         DecomposerRecipe.add(new DecomposerRecipe(oreGold, new Chemical[] { this.element(EnumElement.Au, 32) }));
@@ -111,10 +113,11 @@ public class MinechemRecipes {
         ItemStack fusionBlock2 = new ItemStack(MinechemBlocks.fusion, 1);
         // DecomposerRecipe.add(new DecomposerRecipe(var15, new
         // Chemical[]{this.element(EnumElement.Fe, 2)})); 
-        DecomposerRecipe.add(new DecomposerRecipe(ingotIron, new Chemical[] { this.element(EnumElement.Fe, 16) }));
+        //SynthesisRecipe.add(new SynthesisRecipe(ingotIron, true, 200, new Chemical[] { this.element(EnumElement.Fe, 16) }));
+        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Item.ingotIron), new Chemical[] { this.element(EnumElement.Fe, 16) }));
         // DecomposerRecipe.add(new DecomposerRecipe(var22, new
         // Chemical[]{this.element(EnumElement.Au, 2)}));
-        DecomposerRecipe.add(new DecomposerRecipe(ingotGold, new Chemical[] { this.element(EnumElement.Au, 16) }));
+        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(Item.ingotGold), new Chemical[] { this.element(EnumElement.Au, 16) }));
         DecomposerRecipe.add(new DecomposerRecipe(var23, new Chemical[] { this.molecule(EnumMolecule.fullrene, 4) }));
         DecomposerRecipe.add(new DecomposerRecipe(var24, new Chemical[] { this.molecule(EnumMolecule.beryl, 2), this.element(EnumElement.Cr, 2), this.element(EnumElement.V, 2) }));
         // DecomposerRecipe.add(new DecomposerRecipe(var25, new
@@ -125,10 +128,9 @@ public class MinechemRecipes {
         // SynthesisRecipe.add(new SynthesisRecipe(var22, false, 1000, new
         // Chemical[]{this.element(EnumElement.Au, 2)}));
 
-        this.recipeIron = new SynthesisRecipe(ingotIron, false, 1000, new Chemical[] { this.element(EnumElement.Fe, 16) });
-        this.recipeGold = new SynthesisRecipe(ingotGold, false, 1000, new Chemical[] { this.element(EnumElement.Au, 16) });
-        SynthesisRecipe.add(recipeIron);
-        SynthesisRecipe.add(recipeGold);
+        SynthesisRecipe.add( new SynthesisRecipe(new ItemStack(Item.ingotIron), false, 1000, new Chemical[] { this.element(EnumElement.Fe, 16) }));
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.ingotGold), false, 1000, new Chemical[] { this.element(EnumElement.Au, 16) }));
+        
        
         SynthesisRecipe.add(new SynthesisRecipe(var23, true, '\uea60', new Chemical[] { null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null, this.molecule(EnumMolecule.fullrene), null }));
         SynthesisRecipe.add(new SynthesisRecipe(var24, true, 80000, new Chemical[] { null, this.element(EnumElement.Cr), null, this.element(EnumElement.V), this.molecule(EnumMolecule.beryl, 2), this.element(EnumElement.V), null, this.element(EnumElement.Cr), null }));
@@ -538,7 +540,8 @@ public class MinechemRecipes {
             if (var2.getInput().getItemDamage() != -1) {
                 boolean var3 = false;
                 Iterator var4 = SynthesisRecipe.recipes.iterator();
-
+                //What kind of crappy code is this?
+                //I've got to fix it.....If I can figure out what it does
                 while (true) {
                     if (var4.hasNext()) {
                         SynthesisRecipe var5 = (SynthesisRecipe) var4.next();
@@ -633,9 +636,8 @@ public class MinechemRecipes {
 		
 	 // BEGIN ORE DICTONARY BULLSHIT
       if(var1.Name.contains("oreUranium")) {
-    	  System.out.println("Uranium");
-         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 16)}));
-         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 16)}));
+         DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 32)}));
+         SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 32)}));
       } else if(var1.Name.contains("ingotUranium")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.U, 8)}));
          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000, new Chemical[]{this.element(EnumElement.U, 2)}));
@@ -667,8 +669,8 @@ public class MinechemRecipes {
           SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Os, 16)}));
       }
       else if(var1.Name.contains("ingotBronze")) {
-          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 4)}));
-          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 4)}));
+          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 2)}));
+          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 2)}));
       }
       else if(var1.Name.contains("plateSilicon")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Si, 2)}));

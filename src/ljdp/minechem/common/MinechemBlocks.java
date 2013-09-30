@@ -16,6 +16,7 @@ import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
+import ljdp.minechem.common.tileentity.TileEntityFission;
 import ljdp.minechem.common.tileentity.TileEntityFusion;
 import ljdp.minechem.common.tileentity.TileEntityGhostBlock;
 import ljdp.minechem.common.tileentity.TileEntityMicroscope;
@@ -106,7 +107,8 @@ public class MinechemBlocks {
 
         GameRegistry.registerBlock(chemicalStorage, "minechem.blockChemicalStorage");
         LanguageRegistry.addName(chemicalStorage, MinechemHelper.getLocalString("block.name.chemicalStorage"));
-  
+
+        GameRegistry.registerTileEntity(TileEntityFission.class, "minechem.tileEntityFission");
         GameRegistry.registerTileEntity(TileEntityMicroscope.class, "minechem.tileEntityMicroscope");
         GameRegistry.registerTileEntity(TileEntitySynthesis.class, "minechem.tileEntitySynthesis");
         GameRegistry.registerTileEntity(TileEntityDecomposer.class, "minechem.tileEntityDecomposer");
