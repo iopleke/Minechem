@@ -47,7 +47,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
         //if (chemicalStorage.adjacentChestZNeg == null && chemicalStorage.adjacentChestXNeg == null) {
             ModelChest var14 = this.chestModel;
 
-            func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.CHEMICAL_STORAGE_MODEL));
+            bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.CHEMICAL_STORAGE_MODEL));
 
             GL11.glPushMatrix();
             GL11.glEnable(GL12.GL_RESCALE_NORMAL);

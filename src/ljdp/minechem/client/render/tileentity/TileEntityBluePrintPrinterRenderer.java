@@ -27,7 +27,7 @@ public class TileEntityBluePrintPrinterRenderer extends TileEntitySpecialRendere
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             
-            func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINTER_MODEL));
+            bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PRINTER_MODEL));
             synthesis.model.render(0.0625F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_LIGHTING);

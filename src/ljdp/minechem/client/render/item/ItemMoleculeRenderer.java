@@ -78,14 +78,14 @@ public class ItemMoleculeRenderer implements IItemRenderer {
          */
         Tessellator tessellator = Tessellator.instance;
         GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
-        ItemRenderer.renderItemIn2D(tessellator, pass1.getMaxU(), pass1.getMinV(), pass1.getMinU(), pass1.getMaxV(), pass1.getOriginX(),
-                pass1.getOriginY(), 0.0625F);
+        ItemRenderer.renderItemIn2D(tessellator, pass1.getMaxU(), pass1.getMinV(), pass1.getMinU(), pass1.getMaxV(), pass1.getIconWidth(),
+                pass1.getIconHeight(), 0.0625F);
         GL11.glColor3f(molecule.red2, molecule.green2, molecule.blue2);
-        ItemRenderer.renderItemIn2D(tessellator, pass2.getMaxU(), pass2.getMinV(), pass2.getMinU(), pass2.getMaxV(), pass2.getOriginX(),
-                pass2.getOriginY(), 0.0625F);
+        ItemRenderer.renderItemIn2D(tessellator, pass2.getMaxU(), pass2.getMinV(), pass2.getMinU(), pass2.getMaxV(), pass2.getIconWidth(),
+                pass2.getIconHeight(), 0.0625F);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
         ItemRenderer.renderItemIn2D(tessellator, testtube.getMaxU(), testtube.getMinV(), testtube.getMinU(), testtube.getMaxV(),
-                testtube.getOriginX(), testtube.getOriginY(), 0.0625F);
+                testtube.getIconWidth(), testtube.getIconHeight(), 0.0625F);
     }
 
     private void renderItemAsEntity(ItemRenderType type, ItemStack itemstack, Icon testtube, Icon pass1, Icon pass2) {
@@ -106,7 +106,7 @@ public class ItemMoleculeRenderer implements IItemRenderer {
         GL11.glPushMatrix();
         GL11.glScalef(scale, scale, scale);
         ItemRenderer.renderItemIn2D(tesselator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(),
-                texture.getOriginX(), texture.getOriginY(), .0625F);
+                texture.getIconWidth(), texture.getIconHeight(), .0625F);
         GL11.glPopMatrix();
     }
 

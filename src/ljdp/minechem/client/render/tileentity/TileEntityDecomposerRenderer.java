@@ -20,10 +20,10 @@ public class TileEntityDecomposerRenderer extends TileEntitySpecialRenderer {
             GL11.glRotatef(180f, 0f, 0f, 1f);
             GL11.glEnable(GL11.GL_LIGHTING);
             if (decomposer.isPowered()) {
-            	func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_MODEL_ON));
+            	bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_MODEL_ON));
                 decomposer.model.updateWindillRotation(decomposer);
             } else {
-            	func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_MODEL_OFF));
+            	bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.DECOMPOSER_MODEL_OFF));
             }
             decomposer.model.render(0.0625F);
             GL11.glDisable(GL11.GL_LIGHTING);

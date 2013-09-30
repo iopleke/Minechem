@@ -30,10 +30,10 @@ public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRende
             GL11.glEnable(GL11.GL_LIGHTING);
             if (blueprintProjector.hasBlueprint()) {
 
-                func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_ON));
+                bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_ON));
             } else {
 
-                func_110628_a(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_OFF));
+                bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_OFF));
             }
             model.render(0.0625F);
             GL11.glDisable(GL11.GL_LIGHTING);
