@@ -157,6 +157,7 @@ public class ModMinechem {
         if (BindBOP != null) {
         BOPModule.DoBopExport(); 
         logger.info("BOP support loaded");
+		System.out.println("MineChem - If for any reason MineChem & Minecraft crashes. \n Try updating BOP \n");
         }
          
          }
