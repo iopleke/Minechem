@@ -101,13 +101,13 @@
 		<copy todir="${classes.dir}/client">
 			<fileset dir="${mcp.dir}/reobf/minecraft"/>
 		</copy>
-           <delete dir="${classes.dir}/client/biomesoplenty"/> <!--- Stop BOP api classes from getting into the jar ---!> 
+   
 		<!-- Copy resources -->
 		<copy todir="${classes.dir}/client">
 			<fileset dir="resources"></fileset>
 
 		</copy>
-
+            <delete dir="${classes.dir}/client/biomesoplenty"/> 
 		<echo message="COMPILE PASSED."/>
 
 	</target>
