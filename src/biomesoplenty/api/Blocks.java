@@ -64,12 +64,14 @@ public class Blocks
 
 	// Plants
 	public static Optional<? extends Block> flowers                     = Optional.absent();
+	public static Optional<? extends Block> flowers2                     = Optional.absent();
 	public static Optional<? extends Block> mushrooms                   = Optional.absent();
 	public static Optional<? extends Block> coral                       = Optional.absent();
 	public static Optional<? extends Block> leaves1                     = Optional.absent();
 	public static Optional<? extends Block> leaves2                     = Optional.absent();
 	public static Optional<? extends Block> leavesColorized             = Optional.absent();
 	public static Optional<? extends Block> leavesFruit                 = Optional.absent();
+	public static Optional<? extends Block> leavesFruit2                = Optional.absent();
 	public static Optional<? extends Block> foliage                     = Optional.absent();
 	public static Optional<? extends Block> plants                      = Optional.absent();
 	public static Optional<? extends Block> flatPlants                  = Optional.absent();

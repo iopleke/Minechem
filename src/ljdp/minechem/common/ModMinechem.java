@@ -153,10 +153,11 @@ public class ModMinechem {
 		}
 		
 	private void initBOP (FMLPostInitializationEvent event){
-	Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.industrial.BOPModule");
+	Object BindBOP = event.buildSoftDependProxy("BiomesOPlenty", "ljdp.minechem.common.plugins.BOPModule");
         if (BindBOP != null) {
         BOPModule.DoBopExport(); 
         logger.info("BOP support loaded");
+		System.out.println("MineChem - If for any reason MineChem & Minecraft crashes. \n Try updating BOP \n");
         }
          
          }
