@@ -12,7 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFission extends GuiMinechemContainer {
 
-	
+
 	 public GuiFission(Container par1Container) {
 		super(par1Container);
 	}
@@ -38,6 +38,6 @@ public class GuiFission extends GuiMinechemContainer {
         drawTexturedModalRect(x, y, 0, 0, width, height);
 
     }
-	
+
 
 }
