@@ -124,7 +124,7 @@ public class ModMinechem {
     @EventHandler
     public void postInit(FMLPostInitializationEvent event) {
     initComputerCraftAddon(event);
-	initBOP();
+	// initBOP();
 	DoDungeon();
     logger.info("POSTINIT PASSED");
     }
