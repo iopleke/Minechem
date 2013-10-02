@@ -12,7 +12,7 @@ import ljdp.minechem.client.gui.tabs.TabTable;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.network.PacketHandler;
-import ljdp.minechem.common.plugins.BOPModule;
+// import ljdp.minechem.common.plugins.BOPModule;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.computercraft.ICCMain;
@@ -34,7 +34,7 @@ import org.modstats.Modstats;
 import universalelectricity.compatibility.Compatibility;
 import universalelectricity.prefab.TranslationHelper;
 import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
+// import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -147,6 +147,7 @@ public class ModMinechem {
         }
 		}
 		
+  /*
   private void initBOP (){
     if (Loader.isModLoaded("BiomesOPlenty"))
     { 
@@ -155,6 +156,7 @@ public class ModMinechem {
 	BOPModule.DoBopExport();
     }
   }
+*/
     private void loadConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         MinechemBlocks.loadConfig(config);
