@@ -107,8 +107,8 @@
 			<fileset dir="resources"></fileset>
 
 		</copy>
-            <delete dir="${classes.dir}/client/biomesoplenty"/> 
-		<echo message="COMPILE PASSED."/>
+		
+		       <echo message="COMPILE PASSED."/>
 
 	</target>
 
