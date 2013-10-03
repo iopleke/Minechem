@@ -17,6 +17,7 @@ public class SerializerHandler {
         serializers.put(int.class, new IntegerSerializer());
         serializers.put(boolean.class, new BooleanSerializer());
         serializers.put(byte[].class, new ByteArraySerializer());
+        serializers.put(double.class, new DoubleSerializer());
         serializers.put(float.class, new FloatSerializer());
         serializers.put(ItemStack.class, new ItemStackSerializer());
     }
