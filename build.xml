@@ -101,14 +101,14 @@
 		<copy todir="${classes.dir}/client">
 			<fileset dir="${mcp.dir}/reobf/minecraft"/>
 		</copy>
-
-		<!-- Copy resoucres -->
+   
+		<!-- Copy resources -->
 		<copy todir="${classes.dir}/client">
 			<fileset dir="resources"></fileset>
 
 		</copy>
-
-		<echo message="COMPILE PASSED."/>
+		
+		       <echo message="COMPILE PASSED."/>
 
 	</target>
 
