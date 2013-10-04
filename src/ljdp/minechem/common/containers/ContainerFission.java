@@ -38,7 +38,7 @@ public class ContainerFission extends Container implements IRadiationShield {
 	}
 	
 	private void bindFuelSlot() {
-		addSlotToContainer(new Slot(fission, fission.kStartFuel, 125, 15));
+		addSlotToContainer(new Slot(fission, fission.kStartFuel, 125, 33));
 	}
 	
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {

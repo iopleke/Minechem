@@ -41,6 +41,8 @@ public class BlockGhostBlock extends BlockContainer {
             TileEntityGhostBlock ghostBlock = (TileEntityGhostBlock) tileEntity;
             ItemStack blockAsStack = ghostBlock.getBlockAsItemStack();
             if (playerIsHoldingItem(entityPlayer, blockAsStack)) {
+
+                world.setBlock(x, y, z, blockAsStack.getItem().itemID, 0, 0);
                 world.setBlock(x, y, z, blockAsStack.getItem().itemID, blockAsStack.getItemDamage(), 3);
                 if (!entityPlayer.capabilities.isCreativeMode)
                     entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);

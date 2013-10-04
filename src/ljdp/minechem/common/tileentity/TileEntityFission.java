@@ -1,17 +1,14 @@
 package ljdp.minechem.common.tileentity;
 
-import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.api.util.Constants;
 import ljdp.minechem.common.MinechemItems;
-import ljdp.minechem.common.blueprint.BlueprintFusion;
+import ljdp.minechem.common.blueprint.BlueprintFission;
 import ljdp.minechem.common.inventory.BoundedInventory;
 import ljdp.minechem.common.inventory.Transactor;
 import ljdp.minechem.common.items.ItemElement;
 import ljdp.minechem.common.utils.MinechemHelper;
 import ljdp.minechem.computercraft.IMinechemMachinePeripheral;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -48,12 +45,11 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
         outputTransactor = new Transactor(outputInventory);
         fuelTransactor = new Transactor(fuelInventory, 1);
         this.inventory = new ItemStack[this.getSizeInventory()];
-        setBlueprint(new BlueprintFusion());
+        setBlueprint(new BlueprintFission());
     }
 
     @Override
 	public void updateEntity() {
-    	System.out.println(worldObj.isRemote);
 		super.updateEntity();
 		if(!completeStructure)
 			return;
@@ -61,31 +57,38 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
 		if(!worldObj.isRemote && worldObj.getTotalWorldTime()%50==0 && inventory[kStartFuel] != null 
 				&& energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
 		{
-		
-				ItemStack fissionResult = getFissionOutput();
-					if(!worldObj.isRemote) {
-						addToOutput(fissionResult);
-						removeInputs();
-					}
-					fissionResult = getFissionOutput();
-					shouldSendUpdatePacket = true;
-				
+				if(inventory[kStartInput]!=null&&inventory[kStartFuel]!=null&&inventory[kStartFuel].getItemDamage()==91&&inventory[kStartFuel].getItem()instanceof ItemElement){
+					ItemStack fissionResult = getFissionOutput();
+						if(!worldObj.isRemote) {
+							addToOutput(fissionResult);
+							removeInputs();
+							
+						}
+						fissionResult = getFissionOutput();
+						shouldSendUpdatePacket = true;
+				}
 			}
 		
 		if(shouldSendUpdatePacket && !worldObj.isRemote)
 			sendUpdatePacket();
 	}
     private void addToOutput(ItemStack fusionResult) {
+    	if (fusionResult==null){
+    		return;
+    	}
+    	
         if (inventory[kOutput[0]] == null) {
             ItemStack output = fusionResult.copy();
             inventory[kOutput[0]] = output;
         } else {
-            inventory[kOutput[0]].stackSize++;
+            inventory[kOutput[0]].stackSize+=2;
         }
     }
 
     private void removeInputs() {
         decrStackSize(kInput[0], 1);
+
+        decrStackSize(kFuel[0], 1);
     }
 
     private boolean canFuse(ItemStack fusionResult) {
@@ -100,7 +103,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
             int mass = inventory[kInput[0]].getItemDamage() + 1;
             int newMass=mass/2;
             if (newMass >1) {
-                return new ItemStack(MinechemItems.element, 1, newMass - 1);
+                return new ItemStack(MinechemItems.element, 2, newMass - 1);
             } else {
                 return null;
             }
@@ -111,7 +114,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
 
 
     private boolean hasInputs() {
-        return inventory[kInput[0]] != null && inventory[kInput[1]] != null;
+        return inventory[kInput[0]] != null;
     }
 
     @Override

@@ -13,6 +13,8 @@ import org.lwjgl.opengl.GL11;
 public class GuiFission extends GuiMinechemContainer {
 
 
+    int guiWidth = 176;
+    int guiHeight = 166;
 	 public GuiFission(Container par1Container) {
 		super(par1Container);
 	}
@@ -32,10 +34,10 @@ public class GuiFission extends GuiMinechemContainer {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.FISSION_GUI));
-        int x = (width - width) / 2;
-        int y = (height - height) / 2;
+        int x = (width - guiWidth) / 2;
+        int y = (height - guiHeight) / 2;
         // DRAW GUI
-        drawTexturedModalRect(x, y, 0, 0, width, height);
+        drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 
     }
 

@@ -31,16 +31,19 @@ public class BlockFusion extends BlockMinechemContainer {
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9) {
     	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if(tileEntity instanceof TileEntityProxy){
-        	TileEntityProxy proxy=(TileEntityProxy) tileEntity;
-        	if(proxy.manager!=null){
-	        	this.onBlockActivated(world, proxy.manager.xCoord,proxy.manager.yCoord,proxy.manager.zCoord, entityPlayer, side, par7, par8, par9);
-        	}
-        	return true;
-        }
+    	
+        //if(tileEntity instanceof TileEntityProxy){
+        //	TileEntityProxy proxy=(TileEntityProxy) tileEntity;
+        	//if(proxy.manager!=null){
+	        //	this.onBlockActivated(world, proxy.manager.xCoord,proxy.manager.yCoord,proxy.manager.zCoord, entityPlayer, side, par7, par8, par9);
+        	//}
+        //	return true;
+        //}
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
-        entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+        if(!world.isRemote){
+        	entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+        }
         return true;
     }
 

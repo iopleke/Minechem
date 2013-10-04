@@ -31,11 +31,17 @@ public class TileEntityProxy extends TileEntity {
     }
     
     public void setManager(TileEntity managerTileEntity) {
+    	
         this.manager = managerTileEntity;
+	    if(managerTileEntity != null){
+	        this.managerX=managerTileEntity.xCoord;
+	        this.managerY=managerTileEntity.yCoord;
+	        this.managerZ=managerTileEntity.zCoord;
+        }
     }
 
     public TileEntity getManager() {
-    	if(this.manager!=null||this.manager instanceof TileEntityProxy){
+    	if(this.manager!=null&&!(this.manager instanceof TileEntityProxy)){
     		return this.manager;
     	}
     	else{
@@ -44,6 +50,7 @@ public class TileEntityProxy extends TileEntity {
     		}
     		if(worldObj.getBlockId(managerX, managerY, managerZ)==MinechemBlocks.fusion.blockID){
     			this.manager=buildManagerBlock();
+    			return this.manager;
     		}
     	}
     	return null;

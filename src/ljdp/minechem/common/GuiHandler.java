@@ -44,6 +44,7 @@ public class GuiHandler implements IGuiHandler {
         if (ID == GUI_ID_JOURNAL) { return getServerGuiElementForJournal(player, world); }
         if (ID == GUI_TABLE){ return new CotainerTable(player.inventory); }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        System.out.println(tileEntity);
         if (tileEntity instanceof TileEntityDecomposer)
             return new ContainerDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
         if (tileEntity instanceof TileEntityMicroscope)
