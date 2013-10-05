@@ -1,10 +1,14 @@
 package ljdp.minechem.common.tileentity;
 
 import ljdp.minechem.common.MinechemBlocks;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityProxy extends TileEntity {
+public class TileEntityProxy extends TileEntity implements ISidedInventory {
 
     public TileEntity manager;
     int managerX;
@@ -78,5 +82,111 @@ public class TileEntityProxy extends TileEntity {
             return worldObj.getBlockTileEntity(managerX,managerY,managerZ);
        
     }
+
+	@Override
+	public int getSizeInventory() {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).getSizeInventory();
+		}
+		return 0;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int i) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).getStackInSlot(i);
+		}
+		return null;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int i, int j) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).decrStackSize(i, j);
+		}
+		return null;
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int i) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).getStackInSlotOnClosing(i);
+		}
+		return null;
+	}
+
+	@Override
+	public void setInventorySlotContents(int i, ItemStack itemstack) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			((ISidedInventory) this.getManager()).setInventorySlotContents(i,itemstack);
+		}
+	}
+
+	@Override
+	public String getInvName() {
+		// TODO Auto-generated method stub
+		return "Multiblock Minechem proxy";
+	}
+
+	@Override
+	public boolean isInvNameLocalized() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).getInventoryStackLimit();
+		}
+		return 0;
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer entityplayer) {
+		return true;
+	}
+
+	@Override
+	public void openChest() {
+		
+	}
+
+	@Override
+	public void closeChest() {
+		
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).isItemValidForSlot(i,itemstack);
+		}
+		return false;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).getAccessibleSlotsFromSide(var1);
+		}
+		return new int[0];
+	}
+
+	@Override
+	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).canInsertItem(i, itemstack, j);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+		if(this.getManager()!=null&&this.getManager() instanceof ISidedInventory){
+			return ((ISidedInventory) this.getManager()).canExtractItem(i, itemstack, j);
+		}
+		return false;
+	}
 
 }

@@ -90,13 +90,13 @@ public class ItemElementRenderer implements IItemRenderer {
          * 0.0F, 1.0F); GL11.glColor3f(1.0F, 1.0F, 1.0F); setColorForElement(element); drawTexturedRectUV(0, 0, 0, 16, 16, contents); GL11.glColor3f(1.0F, 1.0F,
          * 1.0F); for (float i = 0.0F; i < 1.0F; i += .1F) { drawTexturedRectUV(0, 0, i, 16, 16, testtube); } GL11.glPopMatrix();
          */
+
     	Tessellator tessellator = Tessellator.instance;
         setColorForElement(element);
         ItemRenderer.renderItemIn2D(tessellator, contents.getMaxU(), contents.getMinV(), contents.getMinU(), contents.getMaxV(),
                 contents.getIconWidth(), contents.getIconHeight(), 0.0625F);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        ItemRenderer.renderItemIn2D(tessellator, testtube.getMaxU(), testtube.getMinV(), testtube.getMinU(), testtube.getMaxV(),
-                testtube.getIconWidth(), testtube.getIconHeight(), 0.0625F);
+        
     }
 
     private void renderItemAsEntity(ItemStack itemstack, EnumElement element, Icon testtube, Icon contents) {
