@@ -17,6 +17,7 @@ import ljdp.minechem.api.util.Util;
 import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
+import ljdp.minechem.common.items.ItemBlueprint;
 import ljdp.minechem.common.items.ItemElement;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
@@ -85,6 +86,10 @@ public class MinechemRecipes {
         // GameRegistry.addRecipe(new ItemStack(MinechemItems.blueprint, 1, 1), new Object[] { "ZZZ", "SSS", "ZZZ", Character.valueOf('Z'), paper, Character.valueOf('S'), bdye });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[] { new ItemStack(Item.book), new ItemStack(MinechemItems.testTube) });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.EmptyPillz,4), new Object[] { new ItemStack(Item.sugar), new ItemStack(Item.slimeBall), new ItemStack(Item.slimeBall) });
+        //Fusion
+        GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fusion), new Object[] { new ItemStack(Item.paper), new ItemStack(Block.blockDiamond)});
+        //Fission
+        GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fission), new Object[] { new ItemStack(Item.paper), new ItemStack(Item.diamond)});
 		for (EnumElement element : EnumElement.values()) {
             GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.testTube), new Object[] { new ItemStack(MinechemItems.element, element.ordinal()) });
         }
