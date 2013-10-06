@@ -59,7 +59,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
 		{
 				if(inventory[kStartInput]!=null&&inventory[kStartFuel]!=null&&inventory[kStartFuel].getItemDamage()==91&&inventory[kStartFuel].getItem()instanceof ItemElement){
 					ItemStack fissionResult = getFissionOutput();
-						if(fissionResult !=null&&inventory[kOutput[0]]!=null&&fissionResult.itemID==inventory[kOutput[0]].itemID&&fissionResult.getItemDamage()==inventory[kOutput[0]].getItemDamage()&&!worldObj.isRemote) {
+						if(inventory[kOutput[0]]==null||(fissionResult !=null&&fissionResult.itemID==inventory[kOutput[0]].itemID&&fissionResult.getItemDamage()==inventory[kOutput[0]].getItemDamage()&&!worldObj.isRemote)) {
 							addToOutput(fissionResult);
 							removeInputs();
 							
