@@ -677,8 +677,13 @@ public class MinechemRecipes {
           SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Os, 16)}));
       }
       else if(var1.Name.contains("ingotBronze")) {
-          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 2)}));
-          SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[]{this.element(EnumElement.Cu, 16),this.element(EnumElement.Sn, 2)}));
+			if (Loader.isModLoaded("Mekanism")) {
+				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Cu, 16), this.element(EnumElement.Sn, 2) }));
+				SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[] { this.element(EnumElement.Cu, 16), this.element(EnumElement.Sn, 2) }));
+			} else {
+				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this.element(EnumElement.Cu, 24), this.element(EnumElement.Sn, 8) }));
+				SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new Chemical[] { this.element(EnumElement.Cu, 24), this.element(EnumElement.Sn, 8) }));
+			}
       }
       else if(var1.Name.contains("plateSilicon")) {
          DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{this.element(EnumElement.Si, 2)}));
