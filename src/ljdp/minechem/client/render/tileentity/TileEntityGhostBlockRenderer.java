@@ -30,7 +30,7 @@ public class TileEntityGhostBlockRenderer extends TileEntitySpecialRenderer {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_BLEND);
         // GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_COLOR);
-        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_DST_ALPHA);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, 1-GL11.GL_DST_ALPHA);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         renderBlocks.blockAccess = tileEntity.worldObj;
         renderBlocks.renderBlockAsItem(blueprintBlock.block, blueprintBlock.metadata, alpha);
@@ -39,7 +39,6 @@ public class TileEntityGhostBlockRenderer extends TileEntitySpecialRenderer {
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glPopMatrix();
     }
-
     private BlueprintBlock getBlueprintBlock(TileEntity tileEntity) {
         if (tileEntity instanceof TileEntityGhostBlock) {
             TileEntityGhostBlock ghostBlock = (TileEntityGhostBlock) tileEntity;

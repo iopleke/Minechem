@@ -90,8 +90,7 @@ public class BlockGhostBlock extends BlockContainer {
      */
     @Override
     public boolean shouldSideBeRendered(IBlockAccess par1IBlockAccess, int par2, int par3, int par4, int par5) {
-        int var6 = par1IBlockAccess.getBlockId(par2, par3, par4);
-        return var6 == this.blockID ? false : super.shouldSideBeRendered(par1IBlockAccess, par2, par3, par4, par5);
+        return true;
     }
 
     @Override
