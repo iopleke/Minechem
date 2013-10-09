@@ -12,6 +12,7 @@ import ljdp.minechem.client.gui.tabs.TabTable;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.network.PacketHandler;
+import ljdp.minechem.common.recipe.ConfigurableRecipies;
 // import ljdp.minechem.common.plugins.BOPModule;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
@@ -119,6 +120,7 @@ public class ModMinechem {
         proxy.registerRenderers();
         logger.info("INIT PASSED");
         LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
+        ConfigurableRecipies.loadConfigurableRecipies(this.config);
 		Modstats.instance().getReporter().registerMod(this);
     }
     @EventHandler
