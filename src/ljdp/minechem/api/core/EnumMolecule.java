@@ -129,7 +129,9 @@ public enum EnumMolecule {
     hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
     galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As)),
     fibroin(117, "Fibroin", new Molecule(glycine), new Molecule(serine), new Molecule(glycine), new Molecule(alinine), new Molecule(glycine), new Molecule(alinine)),
-    aluminiumPhosphate(118, "Aluminium Phosphate", new Element(Al), new Molecule(phosphate))
+    aluminiumPhosphate(118, "Aluminium Phosphate", new Element(Al), new Molecule(phosphate)),
+    potassiumOxide(119, "Potassium oxide", new Element(K, 2), new Element(O)),
+    sodiumOxide(120, "Sodium oxide", new Element(Na, 2), new Element(O))
     ;
 
     public static EnumMolecule[] molecules = values();
