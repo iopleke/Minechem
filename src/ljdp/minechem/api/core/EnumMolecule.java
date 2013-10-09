@@ -54,7 +54,7 @@ public enum EnumMolecule {
     cucurbitacin(40, "Cucurbitacin", new Element(C, 30), new Element(H, 42), new Element(O, 7)),
     asparticAcid(41, "Aspartic Acid", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
     hydroxylapatite(42, "Hydroxylapatite", new Element(Ca, 5), new Molecule(phosphate, 3), new Element(O), new Element(H)),
-    alinine(43, "Alinine (amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2)),
+    alinine(43, "Alanine (amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2)),
     glycine(44, "Glycine (amino acid)", new Element(C, 2), new Element(H, 5), new Element(N), new Element(O, 2)),
     serine(45, "Serine  (amino acid)", new Element(C, 3), new Element(H, 7), new Molecule(nitrate)),
     mescaline(46, "Mescaline", new Element(C, 11), new Element(H, 17), new Molecule(nitrate)),
@@ -127,7 +127,8 @@ public enum EnumMolecule {
     glucose(113, "Glucose", new Element(C,6), new Element(H,12), new Element(O,6)),
     tannicacid(114, "Tannic Acid", new Molecule(gallicacid, 10), new Molecule(glucose, 1)),
     hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
-    galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As))
+    galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As)),
+    fibroin(117, "Fibroin", new Molecule(glycine), new Molecule(serine), new Molecule(glycine), new Molecule(alinine), new Molecule(glycine), new Molecule(alinine))
     ;
 
     public static EnumMolecule[] molecules = values();

@@ -9,7 +9,7 @@
   "mcversion": "@MCVERSION@",
   "url": "http://universalelectricity.com/minechem",
   "updateUrl": "http://universalelectricity.com/minechem",
-  "authors": ["http://pastebin.com/raw.php?i=XKTYat6e"],
+  "authors": ["See GitHub page"],
   "parent":"",
   "screenshots": [],
   "dependencies": ["mod_MinecraftForge"]
