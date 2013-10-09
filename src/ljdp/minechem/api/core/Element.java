@@ -9,6 +9,11 @@ public class Element extends Chemical {
         this.element = element;
     }
 
+    @Override
+    public Chemical copy() {
+    	return new Element(element, amount);
+    };
+    
     public Element(EnumElement element) {
         super(1);
         this.element = element;

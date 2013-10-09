@@ -8,6 +8,10 @@ public class Chemical {
         this.amount = amount;
     }
 
+    public Chemical copy(){
+    	return new Chemical(amount);
+    }
+    
     public boolean sameAs(Chemical chemical) {
         return false;
     }

@@ -128,7 +128,8 @@ public enum EnumMolecule {
     tannicacid(114, "Tannic Acid", new Molecule(gallicacid, 10), new Molecule(glucose, 1)),
     hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
     galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As)),
-    fibroin(117, "Fibroin", new Molecule(glycine), new Molecule(serine), new Molecule(glycine), new Molecule(alinine), new Molecule(glycine), new Molecule(alinine))
+    fibroin(117, "Fibroin", new Molecule(glycine), new Molecule(serine), new Molecule(glycine), new Molecule(alinine), new Molecule(glycine), new Molecule(alinine)),
+    aluminiumPhosphate(118, "Aluminium Phosphate", new Element(Al), new Molecule(phosphate))
     ;
 
     public static EnumMolecule[] molecules = values();
@@ -149,7 +150,6 @@ public enum EnumMolecule {
         for (Chemical chemical : chemicals) {
             this.components.add(chemical);
         }
-        Random random = new Random(id);
         this.red = colorRed;
         this.green = colorGreen;
         this.blue = colorBlue;
