@@ -1,30 +1,31 @@
 package ljdp.minechem.common.recipe.handlers;
 
-import cpw.mods.fml.common.Loader;
 import ljdp.minechem.api.core.Chemical;
-import ljdp.minechem.api.core.EnumMineral;
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.core.Molecule;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.common.recipe.OreDictionaryHandler;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
+import cpw.mods.fml.common.Loader;
 
 public class AppliedEnergisticsOreDictionaryHandler implements
 		OreDictionaryHandler {
 
-	private Molecule certusQuartzMolecule = new Molecule(
-			EnumMolecule.aluminiumPhosphate, 4);
+	private EnumMolecule certusQuartzMolecule = EnumMolecule.aluminiumPhosphate;
 
-	private Chemical[] certusQuartzDecompositionFormula = EnumMineral.berlinite.getComposition();
+	private Chemical certusQuartzChemical = new Molecule(certusQuartzMolecule);
+
+	private Chemical[] certusQuartzDecompositionFormula = new Chemical[] { new Molecule(
+			certusQuartzMolecule, 4) };
 
 	private Chemical[] certusQuartzCrystalSynthesisFormula = new Chemical[] {
-			null, certusQuartzMolecule, null, certusQuartzMolecule, null,
-			certusQuartzMolecule, null, certusQuartzMolecule, null };
+			null, certusQuartzChemical, null, certusQuartzChemical, null,
+			certusQuartzChemical, null, certusQuartzChemical, null };
 
 	private Chemical[] certusQuartzDustSynthesisFormula = new Chemical[] {
-			null, certusQuartzMolecule, null, certusQuartzMolecule,
-			certusQuartzMolecule, certusQuartzMolecule, null, null, null };
+			null, certusQuartzChemical, null, certusQuartzChemical,
+			certusQuartzChemical, certusQuartzChemical, null, null, null };
 
 	@Override
 	public boolean canHandle(OreRegisterEvent oreEvent) {
@@ -39,7 +40,7 @@ public class AppliedEnergisticsOreDictionaryHandler implements
 					certusQuartzDecompositionFormula));
 			if (Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
-						20000, certusQuartzDustSynthesisFormula));
+						30000, certusQuartzDustSynthesisFormula));
 			}
 			break;
 		case "crystalCertusQuartz":
@@ -47,7 +48,7 @@ public class AppliedEnergisticsOreDictionaryHandler implements
 					certusQuartzDecompositionFormula));
 			if (!Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
-						20000, certusQuartzCrystalSynthesisFormula));
+						30000, certusQuartzCrystalSynthesisFormula));
 			}
 			break;
 		default:
