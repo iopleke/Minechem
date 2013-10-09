@@ -64,16 +64,17 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 		String type = tokens[0];
 		EnumOre ore = EnumOre.valueOf(tokens[1]);
 
-		switch (type) {
-		case "ore":
+		if(type.equals("ore")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 1.5d)));
-			break;
-		case "block":
+			
+		}
+		if(type.equals("ore")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 9d)));
-			break;
-		case "ingot":
+			
+		}
+		if(type.equals("ingot")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
 					.getComposition()));
 			if (!haveSeen(ore, "dust") && !haveSeen(ore, "dustSmall")) {
@@ -81,34 +82,36 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 						ore.getComposition()));
 				registeredIngots.put(ore, event.Ore);
 			}
-			break;
-		case "nugget":
+		}
+		if(type.equals("nugget")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 1d / 9d)));
-			break;
-		case "dust":
+		}
+		if(type.equals("dust")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
 					.getComposition()));
 			unregisterIngot(ore);
 			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore
 					.getComposition()));
-			break;
-		case "dustDirty":
+		}
+		if(type.equals("dustDirty")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
 					.getComposition()));
-			break;
-		case "dustSmall":
+		}
+		if(type.equals("dustSmall")){
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 0.25d)));
 			unregisterIngot(ore);
 			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000,
 					scaleCeil(ore.getComposition(), 0.25d)));
-			break;
-		default:
-			ModMinechem.logger.log(Level.WARNING,
-					DefaultOreDictionaryHandler.class.getSimpleName()
-							+ " : This cannot happen! (well... in theory)");
 		}
+		//This used to be string switch statement code
+		//Someone should clean this up
+		//This was an emergency java 6 patch
+		//	ModMinechem.logger.log(Level.WARNING,
+		//			DefaultOreDictionaryHandler.class.getSimpleName()
+		//					+ " : This cannot happen! (well... in theory)");
+		
 		seen(ore, type);
 	}
 

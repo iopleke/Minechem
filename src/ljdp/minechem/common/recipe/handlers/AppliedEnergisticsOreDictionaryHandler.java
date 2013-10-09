@@ -34,28 +34,27 @@ public class AppliedEnergisticsOreDictionaryHandler implements
 
 	@Override
 	public void handle(OreRegisterEvent oreEvent) {
-		switch (oreEvent.Name) {
-		case "dustCertusQuartz":
+	
+		if(oreEvent.Name.equals("dustCertusQuartz")){
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
 					certusQuartzDecompositionFormula));
 			if (Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzDustSynthesisFormula));
 			}
-			break;
-		case "crystalCertusQuartz":
+		}if(oreEvent.Name.equals("crystalCertusQuartz")){
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
 					certusQuartzDecompositionFormula));
 			if (!Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzCrystalSynthesisFormula));
 			}
-			break;
-		default:
-			System.err
-					.println("MineChem > Applied Energistics Support > Unknown type of Certus Quartz : "
-							+ oreEvent.Name);
-			break;
 		}
+		//default:
+		//	System.err
+		//			.println("MineChem > Applied Energistics Support > Unknown type of Certus Quartz : "
+		//					+ oreEvent.Name);
+		//	break;
+		//}
 	}
 }
