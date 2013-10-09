@@ -95,6 +95,7 @@ public class ModMinechem {
 
         MinechemBlocks.registerBlocks();
         MinechemBlueprint.registerBlueprints();
+        MinechemRecipes.getInstance().RegisterHandlers();
         MinechemRecipes.getInstance().RegisterRecipes();
 
         MinechemItems.registerToOreDictionary();

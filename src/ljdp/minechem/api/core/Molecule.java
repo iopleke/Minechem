@@ -9,6 +9,11 @@ public class Molecule extends Chemical {
         this.molecule = molecule;
     }
 
+    @Override
+    public Chemical copy() {
+    	return new Molecule(molecule, amount);
+    };
+    
     public Molecule(EnumMolecule molecule) {
         super(1);
         this.molecule = molecule;
