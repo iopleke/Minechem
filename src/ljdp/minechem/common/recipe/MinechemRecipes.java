@@ -1481,22 +1481,7 @@ public class MinechemRecipes {
 	
 	@ForgeSubscribe
 	public void oreEvent(OreDictionary.OreRegisterEvent var1) {
-		if (var1.Name.contains("oreUranium")) {
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
-					new Chemical[] { this.element(EnumElement.U, 32) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000,
-					new Chemical[] { this.element(EnumElement.U, 32) }));
-		} else if (var1.Name.contains("ingotUranium")) {
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
-					new Chemical[] { this.element(EnumElement.U, 8) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000,
-					new Chemical[] { this.element(EnumElement.U, 2) }));
-		} else if (var1.Name.contains("itemDropUranium")) {
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
-					new Chemical[] { this.element(EnumElement.U, 8) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000,
-					new Chemical[] { this.element(EnumElement.U, 2) }));
-		} else if (var1.Name.contains("gemApatite")) {
+		if (var1.Name.contains("gemApatite")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] {
 					this.element(EnumElement.Ca, 5),
 					this.molecule(EnumMolecule.phosphate, 4),
