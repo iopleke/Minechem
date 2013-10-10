@@ -52,8 +52,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 		switch (ore) {
 		case stoneGraniteBlack:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] {
-							new Molecule(EnumMolecule.quartz, 20),
+					new Chemical[] { new Molecule(EnumMolecule.quartz, 20),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 4),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 4),
 							new Molecule(EnumMolecule.orthoclase, 3),
@@ -61,8 +60,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			break;
 		case stoneGraniteRed:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] {
-							new Molecule(EnumMolecule.quartz, 20),
+					new Chemical[] { new Molecule(EnumMolecule.quartz, 20),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 3),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 3),
 							new Molecule(EnumMolecule.orthoclase, 4),
@@ -71,79 +69,105 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			break;
 		case stoneRhyolite:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] {
-							new Molecule(EnumMolecule.quartz, 18),
+					new Chemical[] { new Molecule(EnumMolecule.quartz, 18),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 5),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 5),
 							new Molecule(EnumMolecule.orthoclase, 2),
 							new Molecule(EnumMolecule.biotite, 1),
-							new Molecule(EnumMolecule.augite, 1)}));
+							new Molecule(EnumMolecule.augite, 1) }));
 			break;
 		case stoneAndesite:
-			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] {
-							new Molecule(EnumMolecule.plagioclaseAlbite, 12),
-							new Molecule(EnumMolecule.plagioclaseAnorthite, 12),
-							new Molecule(EnumMolecule.augite, 8) }));
+			DecomposerRecipe
+					.add(new DecomposerRecipe(
+							event.Ore,
+							new Chemical[] {
+									new Molecule(
+											EnumMolecule.plagioclaseAlbite, 12),
+									new Molecule(
+											EnumMolecule.plagioclaseAnorthite,
+											12),
+									new Molecule(EnumMolecule.augite, 8) }));
 			break;
 		case stoneGabbro:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] {
-					new Molecule(EnumMolecule.plagioclaseAlbite, 16),
-					new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
-					new Molecule(EnumMolecule.augite, 7),
-					new Molecule(EnumMolecule.olivine, 1) }));
+							new Molecule(EnumMolecule.plagioclaseAlbite, 16),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
+							new Molecule(EnumMolecule.augite, 7),
+							new Molecule(EnumMolecule.olivine, 1) }));
 			break;
 		case stoneBasalt:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] {
-					new Molecule(EnumMolecule.plagioclaseAlbite, 8),
-					new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
-					new Molecule(EnumMolecule.augite, 12),
-					new Molecule(EnumMolecule.olivine, 4) }));
+							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
+							new Molecule(EnumMolecule.augite, 12),
+							new Molecule(EnumMolecule.olivine, 4) }));
 			break;
 		case stoneKomatiite:
 			// TODO: find actual components (this is c/p from basalt)
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] {
-					new Molecule(EnumMolecule.plagioclaseAlbite, 8),
-					new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
-					new Molecule(EnumMolecule.augite, 12),
-					new Molecule(EnumMolecule.olivine, 4) }));
+							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
+							new Molecule(EnumMolecule.augite, 12),
+							new Molecule(EnumMolecule.olivine, 4) }));
 			break;
 		case stoneDacite:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] {
-					new Molecule(EnumMolecule.plagioclaseAlbite, 6),
-					new Molecule(EnumMolecule.plagioclaseAnorthite, 6),
-					new Molecule(EnumMolecule.biotite, 8),
-					new Molecule(EnumMolecule.quartz, 8),
-					new Molecule(EnumMolecule.augite, 4) }));
+							new Molecule(EnumMolecule.plagioclaseAlbite, 6),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 6),
+							new Molecule(EnumMolecule.biotite, 8),
+							new Molecule(EnumMolecule.quartz, 8),
+							new Molecule(EnumMolecule.augite, 4) }));
 			break;
 		case stoneGneiss:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] {
-					new Molecule(EnumMolecule.orthoclase, 8),
-					new Molecule(EnumMolecule.plagioclaseAlbite, 4),
-					new Molecule(EnumMolecule.plagioclaseAnorthite, 6),
-					new Molecule(EnumMolecule.biotite, 4),
-					new Molecule(EnumMolecule.quartz, 6),
-					new Molecule(EnumMolecule.augite, 4) }));
+					new Chemical[] { new Molecule(EnumMolecule.orthoclase, 8),
+							new Molecule(EnumMolecule.plagioclaseAlbite, 4),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 6),
+							new Molecule(EnumMolecule.biotite, 4),
+							new Molecule(EnumMolecule.quartz, 6),
+							new Molecule(EnumMolecule.augite, 4) }));
 			break;
 		case stoneEclogite:
 			// TODO: find actual components (this is c/p from basalt)
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] {
-					new Molecule(EnumMolecule.plagioclaseAlbite, 8),
-					new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
-					new Molecule(EnumMolecule.augite, 12),
-					new Molecule(EnumMolecule.olivine, 4) }));
+							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
+							new Molecule(EnumMolecule.augite, 12),
+							new Molecule(EnumMolecule.olivine, 4) }));
+			break;
+		case stoneMarble:
+			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
+					new Chemical[] { new Molecule(EnumMolecule.calcite, 32) }));
+			break;
+		case stoneQuartzite:
+			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
+					new Chemical[] { new Molecule(EnumMolecule.quartz, 32) }));
+			break;
+		case stoneGreenschist:
+		case stoneBlueschist:
+			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
+					new Chemical[] {
+							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
+							new Molecule(EnumMolecule.biotite, 4),
+							new Molecule(EnumMolecule.quartz, 8),
+							new Molecule(EnumMolecule.augite, 4) }));
+			break;
+		case stoneSoapstone:
+			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
+					new Chemical[] { new Molecule(EnumMolecule.talc, 32) }));
 			break;
 		default:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] {
-							new Molecule(EnumMolecule.siliconDioxide, 24),
-							new Molecule(EnumMolecule.aluminiumOxide, 8) }));
+					new Chemical[] { new Molecule(EnumMolecule.quartz, 8),
+							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
+							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
+							new Molecule(EnumMolecule.orthoclase, 8) }));
 			break;
 		}
 	}
