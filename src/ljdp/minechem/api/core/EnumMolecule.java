@@ -131,7 +131,15 @@ public enum EnumMolecule {
     fibroin(117, "Fibroin", new Molecule(glycine), new Molecule(serine), new Molecule(glycine), new Molecule(alinine), new Molecule(glycine), new Molecule(alinine)),
     aluminiumPhosphate(118, "Aluminium Phosphate", new Element(Al), new Molecule(phosphate)),
     potassiumOxide(119, "Potassium oxide", new Element(K, 2), new Element(O)),
-    sodiumOxide(120, "Sodium oxide", new Element(Na, 2), new Element(O))
+    sodiumOxide(120, "Sodium oxide", new Element(Na, 2), new Element(O)),
+    // For underground biomes support
+    // http://flexiblelearning.auckland.ac.nz/rocks_minerals/
+    plagioclaseAnorthite(121, "Anorthite", new Element(Ca), new Element(Al, 2), new Element(Si, 2), new Element(O, 8)),
+    plagioclaseAlbite(122, "Albite", new Element(Na), new Element(Al, 2), new Element(Si, 3), new Element(O, 8)),
+    orthoclase(123, "Orthoclase", new Element(K), new Element(Al), new Element(Si, 3), new Element(O, 8)),
+    quartz(124, "Quartz", new Element(Si), new Element(O, 2)),
+    biotite(125, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
+    augite(126, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
     ;
 
     public static EnumMolecule[] molecules = values();
