@@ -18,12 +18,9 @@ public class ConfigurableRecipies {
 	public static void loadConfigurableRecipies(Configuration config){
 		config.load();
 		ConfigurableRecipies.makeDummyRecipe(config);
-		System.out.println("Decomposerrecipe"+1);
-		System.out.println(config.hasCategory("Decomposerrecipe1"));
 		for(int i=1;config.hasCategory("decomposerrecipe"+i);i++){
 			ConfigCategory recipe=config.getCategory("decomposerrecipe"+i);
 			String result=recipe.get("Input").getString();
-			System.out.println("MINECHEM RECIPE REGISTRY"+result);
 			ConfigCategory outputs=config.getCategory("Output");
 			ArrayList<Chemical> chem=new ArrayList();
 
@@ -40,7 +37,6 @@ public class ConfigurableRecipies {
 				}else{
 					newChem=new Element(EnumElement.elements[chemicalID],amount);
 				}
-				System.out.println(newChem);
 				chem.add(newChem);
 			}
 			ItemStack inputStack=new ItemStack(parseId(result),1,parseMeta(result));
