@@ -17,12 +17,13 @@ import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 
-	private String[] supportedTypes = new String[] { "dust", "block", "ingot", "ore",
-			"dustSmall", "nugget", "dustDirty" };
+	private enum EnumOrePrefix {
+		dust, block, ingot, ore, dustSmall, nugget, dustDirty, plate
+	}
 
 	private String[] supportedOres;
 
-	private Map<EnumOre, ArrayList<String>> seenOres = new HashMap<EnumOre, ArrayList<String>>();
+	private Map<EnumOre, ArrayList<EnumOrePrefix>> seenOres = new HashMap<EnumOre, ArrayList<EnumOrePrefix>>();
 
 	private Map<EnumOre, ItemStack> registeredIngots = new HashMap<EnumOre, ItemStack>();
 
@@ -35,12 +36,12 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 	}
 
 	public String[] parseOreName(String oreName) {
-		for (String prefix : supportedTypes) {
-			if (oreName.startsWith(prefix)) {
-				String remainder = oreName.substring(prefix.length())
+		for (EnumOrePrefix prefix : EnumOrePrefix.values()) {
+			if (oreName.startsWith(prefix.name())) {
+				String remainder = oreName.substring(prefix.name().length())
 						.toLowerCase();
 				if (Arrays.asList(supportedOres).contains(remainder))
-					return new String[] { prefix, remainder };
+					return new String[] { prefix.name(), remainder };
 			}
 		}
 
@@ -61,58 +62,58 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 						+ " registered : " + event.Name);
 
 		String[] tokens = this.parseOreName(event.Name);
-		String type = tokens[0];
+		EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
 		EnumOre ore = EnumOre.valueOf(tokens[1]);
 
-		if(type.equals("ore")){
+		switch (prefix) {
+		case ore:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 1.5d)));
-			
-		}
-		if(type.equals("ore")){
-			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
-					ore.getComposition(), 9d)));
-			
-		}
-		if(type.equals("ingot")){
+			break;
+		case ingot:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
 					.getComposition()));
-			if (!haveSeen(ore, "dust") && !haveSeen(ore, "dustSmall")) {
+			if (!haveSeen(ore, EnumOrePrefix.dust)
+					&& !haveSeen(ore, EnumOrePrefix.dustSmall)) {
 				SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000,
 						ore.getComposition()));
 				registeredIngots.put(ore, event.Ore);
 			}
-		}
-		if(type.equals("nugget")){
+			break;
+		case nugget:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 1d / 9d)));
-		}
-		if(type.equals("dust")){
+			break;
+		case dust:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
 					.getComposition()));
 			unregisterIngot(ore);
 			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore
 					.getComposition()));
-		}
-		if(type.equals("dustDirty")){
+			break;
+		case dustDirty:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
 					.getComposition()));
-		}
-		if(type.equals("dustSmall")){
+			break;
+		case plate:
+			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
+					.getComposition()));
+			break;
+		case dustSmall:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 0.25d)));
 			unregisterIngot(ore);
 			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000,
 					scaleCeil(ore.getComposition(), 0.25d)));
+			break;
+		default:
+			ModMinechem.logger.log(Level.WARNING,
+					DefaultOreDictionaryHandler.class.getSimpleName()
+							+ " : This cannot happen! (well... in theory)");
+			break;
 		}
-		//This used to be string switch statement code
-		//Someone should clean this up
-		//This was an emergency java 6 patch
-		//	ModMinechem.logger.log(Level.WARNING,
-		//			DefaultOreDictionaryHandler.class.getSimpleName()
-		//					+ " : This cannot happen! (well... in theory)");
-		
-		seen(ore, type);
+
+		seen(ore, prefix);
 	}
 
 	private void unregisterIngot(EnumOre ore) {
@@ -146,17 +147,17 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 		return newComposition.toArray(new Chemical[newComposition.size()]);
 	}
 
-	private boolean haveSeen(EnumOre ore, String type) {
+	private boolean haveSeen(EnumOre ore, EnumOrePrefix prefix) {
 		if (this.seenOres.containsKey(ore)
-				&& this.seenOres.get(ore).contains(type))
+				&& this.seenOres.get(ore).contains(prefix))
 			return true;
 		return false;
 	}
 
-	private void seen(EnumOre ore, String type) {
+	private void seen(EnumOre ore, EnumOrePrefix prefix) {
 		if (!this.seenOres.containsKey(ore))
-			this.seenOres.put(ore, new ArrayList<String>());
-		if (!this.seenOres.get(ore).contains(type))
-			this.seenOres.get(ore).add(type);
+			this.seenOres.put(ore, new ArrayList<EnumOrePrefix>());
+		if (!this.seenOres.get(ore).contains(prefix))
+			this.seenOres.get(ore).add(prefix);
 	}
 }

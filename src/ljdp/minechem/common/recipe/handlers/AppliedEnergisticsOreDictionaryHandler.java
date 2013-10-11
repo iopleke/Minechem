@@ -5,6 +5,7 @@ import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.core.Molecule;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.recipe.OreDictionaryHandler;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 import cpw.mods.fml.common.Loader;
@@ -34,27 +35,23 @@ public class AppliedEnergisticsOreDictionaryHandler implements
 
 	@Override
 	public void handle(OreRegisterEvent oreEvent) {
-	
-		if(oreEvent.Name.equals("dustCertusQuartz")){
+		if (oreEvent.Name.equals("dustCertusQuartz")) {
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
 					certusQuartzDecompositionFormula));
 			if (Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzDustSynthesisFormula));
 			}
-		}if(oreEvent.Name.equals("crystalCertusQuartz")){
+		} else if (oreEvent.Name.equals("crystalCertusQuartz")) {
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
 					certusQuartzDecompositionFormula));
 			if (!Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzCrystalSynthesisFormula));
 			}
+		} else {
+			ModMinechem.logger.info("Unknown type of Certus Quartz : "
+					+ oreEvent.Name);
 		}
-		//default:
-		//	System.err
-		//			.println("MineChem > Applied Energistics Support > Unknown type of Certus Quartz : "
-		//					+ oreEvent.Name);
-		//	break;
-		//}
 	}
 }
