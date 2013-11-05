@@ -34,7 +34,7 @@
         </target>
 
         <target name="setup">
-           <copy todir="${dir.development}">
+           <copy todir="/forge">
                         <fileset dir="../Minecraft Forge Latest/" />
                 </copy>
 
