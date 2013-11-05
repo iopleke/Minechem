@@ -19,6 +19,7 @@ public class ConfigurableRecipies {
 		config.load();
 		ConfigurableRecipies.makeDummyRecipe(config);
 		for(int i=1;config.hasCategory("decomposerrecipe"+i);i++){
+
 			ConfigCategory recipe=config.getCategory("decomposerrecipe"+i);
 			String result=recipe.get("Input").getString();
 			ConfigCategory outputs=config.getCategory("Output");

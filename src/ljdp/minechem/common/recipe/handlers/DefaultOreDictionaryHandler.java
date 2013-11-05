@@ -63,6 +63,7 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 
 		String[] tokens = this.parseOreName(event.Name);
 		EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
+
 		EnumOre ore = EnumOre.valueOf(tokens[1]);
 
 		switch (prefix) {

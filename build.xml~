@@ -7,6 +7,7 @@
 	<property name="build.dir"            value="build"/>
 	<property name="src.dir"              value="src"/>
 
+
 	<property name="download.dir"         value="download"/>
 	<property name="files.minecraft.dir"  value="jars"/>
 
@@ -22,8 +23,8 @@
 
 	<property file="${clientsrc.dir}/fmlversion.properties" />
 
-	<property name="mc.version"           value="1.6.2"/>
-	<property name="forge.version"        value="9.10.0.845"/>
+	<property name="mc.version"           value="1.6.4"/>
+	<property name="forge.version"        value="9.11.0.900"/>
 	<property name="mod.version"          value="4"/>
 	<property name="build.number"     value="${env.BUILD_NUMBER}"/> 
    
@@ -100,14 +101,14 @@
 		<copy todir="${classes.dir}/client">
 			<fileset dir="${mcp.dir}/reobf/minecraft"/>
 		</copy>
-
-		<!-- Copy resoucres -->
+   
+		<!-- Copy resources -->
 		<copy todir="${classes.dir}/client">
 			<fileset dir="resources"></fileset>
 
 		</copy>
-
-		<echo message="COMPILE PASSED."/>
+		
+		       <echo message="COMPILE PASSED."/>
 
 	</target>
 
