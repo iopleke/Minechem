@@ -90,7 +90,7 @@ public class BlockFusion extends BlockMinechemContainer {
     @Override
     @SideOnly(Side.CLIENT)
     public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List) {
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < 3; i++)
             par3List.add(new ItemStack(this.blockID, 1, i));
     }
     @Override

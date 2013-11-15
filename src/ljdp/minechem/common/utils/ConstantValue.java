@@ -60,6 +60,9 @@ public interface ConstantValue {
     public static final String MICROSCOPE_TEX = TEXTURE_MOD_ID + "microscope";
     public static final String FUSION1_TEX = TEXTURE_MOD_ID + "fusion1";
     public static final String FUSION2_TEX = TEXTURE_MOD_ID + "fusion2";
+
+    public static final String BLUEPRINT1_TEX = TEXTURE_MOD_ID + "blueprint1";
+    public static final String BLUEPRINT2_TEX = TEXTURE_MOD_ID + "blueprint2";
     public static final String DEFAULT_TEX = TEXTURE_MOD_ID + "default";
     public static final String table_HEX = TEXTURE_GUI_DIR + "TableGUI.png";
     public static final String TAB_LEFT = TEXTURE_GUI_DIR + "tab_left.png";

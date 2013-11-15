@@ -16,6 +16,7 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
     public void setBlueprintAndID(MinechemBlueprint blueprint, int blockID) {
         setBlueprint(blueprint);
         setBlockID(blockID);
+        this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, blueprint.getBlockLookup().get(this.blockID).metadata, 3);
         if (worldObj != null && !worldObj.isRemote)
             sendUpdatePacket();
     }

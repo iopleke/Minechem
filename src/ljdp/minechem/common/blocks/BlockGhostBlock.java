@@ -4,13 +4,16 @@ import java.util.Random;
 
 import ljdp.minechem.common.CommonProxy;
 import ljdp.minechem.common.tileentity.TileEntityGhostBlock;
+import ljdp.minechem.common.utils.ConstantValue;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
+import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -25,7 +28,26 @@ public class BlockGhostBlock extends BlockContainer {
         setHardness(1000F);
         setResistance(1000F);
     }
+    public Icon icon1;
+    public Icon icon2;
+    @Override
+    public Icon getIcon(int par1, int metadata) {
+        switch (metadata) {
+        case 0:
+            return icon1;
+        case 1:
+            return icon2;
+        }
+        return blockIcon;
+    }
 
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister ir) {
+        blockIcon = ir.registerIcon(ConstantValue.DEFAULT_TEX);
+        icon1 = ir.registerIcon(ConstantValue.BLUEPRINT1_TEX);
+        icon2 = ir.registerIcon(ConstantValue.BLUEPRINT2_TEX);
+    }
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9) {
         super.onBlockActivated(world, x, y, z, entityPlayer, side, par7, par8, par9);
@@ -103,10 +125,7 @@ public class BlockGhostBlock extends BlockContainer {
         return false;
     }
 
-    @Override
-    public int getRenderType() {
-        return CommonProxy.CUSTOM_RENDER_ID;
-    }
+    
 
     /**
      * Returns which pass should this block be rendered on. 0 for solids and 1 for alpha

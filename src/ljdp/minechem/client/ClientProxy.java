@@ -1,6 +1,5 @@
 package ljdp.minechem.client;
 
-import ljdp.minechem.client.render.item.ItemBlueprintPrinterRenderer;
 import ljdp.minechem.client.render.item.ItemBlueprintProjectorRenderer;
 import ljdp.minechem.client.render.item.ItemChemicalStorageRenderer;
 import ljdp.minechem.client.render.item.ItemDecomposerRenderer;
@@ -12,7 +11,6 @@ import ljdp.minechem.client.render.tileentity.TileEntityBluePrintPrinterRenderer
 import ljdp.minechem.client.render.tileentity.TileEntityBlueprintProjectorRenderer;
 import ljdp.minechem.client.render.tileentity.TileEntityChemicalStorageRenderer;
 import ljdp.minechem.client.render.tileentity.TileEntityDecomposerRenderer;
-import ljdp.minechem.client.render.tileentity.TileEntityGhostBlockRenderer;
 import ljdp.minechem.client.render.tileentity.TileEntityMicroscopeRenderer;
 import ljdp.minechem.client.render.tileentity.TileEntitySynthesisRenderer;
 import ljdp.minechem.client.sound.MinechemSoundEvent;
@@ -23,7 +21,6 @@ import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
-import ljdp.minechem.common.tileentity.TileEntityGhostBlock;
 import ljdp.minechem.common.tileentity.TileEntityMicroscope;
 import ljdp.minechem.common.tileentity.TileEntitySynthesis;
 import net.minecraft.item.Item;
@@ -73,7 +70,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecomposer.class, new TileEntityDecomposerRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySynthesis.class, new TileEntitySynthesisRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
+        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBluePrintPrinter.class, new TileEntityBluePrintPrinterRenderer());
     }
