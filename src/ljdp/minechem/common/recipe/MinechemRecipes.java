@@ -1328,7 +1328,7 @@ public class MinechemRecipes {
 
 
         // 
-		this.addDecomposerRecipesFromMolecules();
+	this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
         this.registerPoisonRecipes(EnumMolecule.poison);
@@ -1348,10 +1348,10 @@ public class MinechemRecipes {
         this.registerPoisonRecipes(EnumMolecule.pal2);
         this.registerPoisonRecipes(EnumMolecule.nod);
         this.registerPoisonRecipes(EnumMolecule.afroman);
-		this.registerPoisonRecipes(EnumMolecule.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
+	this.registerPoisonRecipes(EnumMolecule.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
         this.registerPoisonRecipes(EnumMolecule.redrocks);
-		this.registerPoisonRecipes(EnumMolecule.coke);
-		this.registerPoisonRecipes(EnumMolecule.theobromine); 
+	this.registerPoisonRecipes(EnumMolecule.coke);
+	this.registerPoisonRecipes(EnumMolecule.theobromine); 
 	}
 
     private void addDecomposerRecipesFromMolecules() {
@@ -1427,7 +1427,7 @@ public class MinechemRecipes {
 
    private void registerPoisonRecipes(EnumMolecule molecule) {
 
-	     for(Item i: Item.itemsList) {
+	     for(Item i: Item.itemsList) { // Thanks Adrian!
 
 	       if(i != null && i instanceof ItemFood) { // Should allow for lacing of BOP and AquaCulture foodstuffs.
 
