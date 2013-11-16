@@ -770,8 +770,10 @@ public class MinechemRecipes {
 				new Chemical[] { this.element(EnumElement.C, 16) }));
 
 		// Charcoal
-		// TODO: Add charcoal support
-
+		// Does 16 charcoal to 1 coal seem balanced? 
+        ItemStack itemChar = new ItemStack(Item.charcoal);
+		DecomposerRecipe.add(new DecomposerRecipe(itemChar, new Chemical[] { this.element(EnumElement.C, 1) }));
+		
 		// Diamond
 		ItemStack itemDiamond = new ItemStack(Item.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond,
