@@ -199,7 +199,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-        nbtTagCompound.setInteger("energyStored", energyStored);
+        nbtTagCompound.setInteger("fusionenergyStored", energyStored);
         nbtTagCompound.setInteger("targetEnergy", targetEnergy);
         nbtTagCompound.setBoolean("isRecharging", isRecharging);
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
@@ -209,7 +209,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-        energyStored = nbtTagCompound.getInteger("energyStored");
+        energyStored = nbtTagCompound.getInteger("fusionenergyStored");
         targetEnergy = nbtTagCompound.getInteger("targetEnergy");
         isRecharging = nbtTagCompound.getBoolean("isRecharging");
         inventory = new ItemStack[getSizeInventory()];
