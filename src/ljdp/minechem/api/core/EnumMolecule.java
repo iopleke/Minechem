@@ -137,10 +137,9 @@ public enum EnumMolecule {
     plagioclaseAnorthite(121, "Anorthite", new Element(Ca), new Element(Al, 2), new Element(Si, 2), new Element(O, 8)),
     plagioclaseAlbite(122, "Albite", new Element(Na), new Element(Al, 2), new Element(Si, 3), new Element(O, 8)),
     orthoclase(123, "Orthoclase", new Element(K), new Element(Al), new Element(Si, 3), new Element(O, 8)),
-    quartz(124, "Quartz", new Element(Si), new Element(O, 2)),
-    biotite(125, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
-    augite(126, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
-    talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10)),
+    biotite(124, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
+    augite(125, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
+    talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10))
     ;
 
     public static EnumMolecule[] molecules = values();
@@ -169,7 +168,7 @@ public enum EnumMolecule {
         this.blue2 = colorBlue2;
     }
     
-    @Deprecated
+    @Deprecated // Why?
     EnumMolecule(int id, String descriptiveName, Chemical... chemicals) {
         this(id, descriptiveName, getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), chemicals);
         // Your molecule will have random colors until you give it a proper color code.

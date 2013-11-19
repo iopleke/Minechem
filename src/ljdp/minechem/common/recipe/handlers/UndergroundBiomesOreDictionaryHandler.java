@@ -26,7 +26,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 		stoneGneiss, 
 		stoneEclogite, 
 		stoneMarble, 
-		stoneQuartzite, 
+		stonesiliconDioxideite, 
 		stoneBlueschist, 
 		stoneGreenschist, 
 		stoneSoapstone, 
@@ -57,7 +57,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 		switch (ore) {
 		case stoneGraniteBlack:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] { new Molecule(EnumMolecule.quartz, 20),
+					new Chemical[] { new Molecule(EnumMolecule.siliconDioxide, 20),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 4),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 4),
 							new Molecule(EnumMolecule.orthoclase, 3),
@@ -65,7 +65,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			break;
 		case stoneGraniteRed:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] { new Molecule(EnumMolecule.quartz, 20),
+					new Chemical[] { new Molecule(EnumMolecule.siliconDioxide, 20),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 3),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 3),
 							new Molecule(EnumMolecule.orthoclase, 4),
@@ -74,7 +74,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			break;
 		case stoneRhyolite:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] { new Molecule(EnumMolecule.quartz, 18),
+					new Chemical[] { new Molecule(EnumMolecule.siliconDioxide, 18),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 5),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 5),
 							new Molecule(EnumMolecule.orthoclase, 2),
@@ -124,7 +124,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 							new Molecule(EnumMolecule.plagioclaseAlbite, 6),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 6),
 							new Molecule(EnumMolecule.biotite, 8),
-							new Molecule(EnumMolecule.quartz, 8),
+							new Molecule(EnumMolecule.siliconDioxide, 8),
 							new Molecule(EnumMolecule.augite, 4) }));
 			break;
 		case stoneGneiss:
@@ -133,7 +133,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 							new Molecule(EnumMolecule.plagioclaseAlbite, 4),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 6),
 							new Molecule(EnumMolecule.biotite, 4),
-							new Molecule(EnumMolecule.quartz, 6),
+							new Molecule(EnumMolecule.siliconDioxide, 6),
 							new Molecule(EnumMolecule.augite, 4) }));
 			break;
 		case stoneEclogite:
@@ -149,9 +149,9 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] { new Molecule(EnumMolecule.calcite, 32) }));
 			break;
-		case stoneQuartzite:
+		case stonesiliconDioxideite:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] { new Molecule(EnumMolecule.quartz, 32) }));
+					new Chemical[] { new Molecule(EnumMolecule.siliconDioxide, 32) }));
 			break;
 		case stoneGreenschist:
 		case stoneBlueschist:
@@ -160,7 +160,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
 							new Molecule(EnumMolecule.biotite, 4),
-							new Molecule(EnumMolecule.quartz, 8),
+							new Molecule(EnumMolecule.siliconDioxide, 8),
 							new Molecule(EnumMolecule.augite, 4) }));
 			break;
 		case stoneSoapstone:
@@ -169,7 +169,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			break;
 		default:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
-					new Chemical[] { new Molecule(EnumMolecule.quartz, 8),
+					new Chemical[] { new Molecule(EnumMolecule.siliconDioxide, 8),
 							new Molecule(EnumMolecule.plagioclaseAnorthite, 8),
 							new Molecule(EnumMolecule.plagioclaseAlbite, 8),
 							new Molecule(EnumMolecule.orthoclase, 8) }));
