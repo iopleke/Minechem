@@ -149,7 +149,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] { new Molecule(EnumMolecule.calcite, 32) }));
 			break;
-		case stonesiliconDioxideite:
+		case stoneQuartzite:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore,
 					new Chemical[] { new Molecule(EnumMolecule.siliconDioxide, 32) }));
 			break;
