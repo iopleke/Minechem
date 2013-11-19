@@ -26,7 +26,7 @@ public class UndergroundBiomesOreDictionaryHandler implements
 		stoneGneiss, 
 		stoneEclogite, 
 		stoneMarble, 
-		stonesiliconDioxideite, 
+		stoneQuartzite, 
 		stoneBlueschist, 
 		stoneGreenschist, 
 		stoneSoapstone, 
