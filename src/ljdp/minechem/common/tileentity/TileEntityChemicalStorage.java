@@ -1,5 +1,6 @@
 package ljdp.minechem.common.tileentity;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import ljdp.minechem.common.items.ItemElement;
@@ -180,11 +181,14 @@ public class TileEntityChemicalStorage extends TileEntityChest implements IFluid
 		}
 		@Override
 		public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-			FluidTankInfo[] fluids=new FluidTankInfo[this.getSizeInventory()+1];
+			ArrayList fluids=new ArrayList();
 			for(int i=0;i<this.getSizeInventory();i++){
-				fluids[i]=this.getTankInfo(i);
+				FluidTankInfo newFluid=this.getTankInfo(i);
+				if(newFluid!=null){
+					fluids.add(newFluid);
+				}
 			}
-			return fluids;
+			return (FluidTankInfo[]) fluids.toArray();
 		}
 	
 }

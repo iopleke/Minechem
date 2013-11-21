@@ -5,9 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Util;
 import ljdp.minechem.client.ModelSynthesizer;
@@ -45,6 +42,8 @@ import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerProvider;
 import buildcraft.api.inventory.ISpecialInventory;
 import buildcraft.api.transport.IPipe;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory,  ITriggerProvider, IMinechemTriggerProvider,
         ISpecialInventory, IMinechemMachinePeripheral, IFluidHandler {
@@ -743,6 +742,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 			ItemElement itemMolecule=(ItemElement) item;
 			Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
 			if(fluid==null){
+				System.out.println("Invalid fluid in minechem machine");
 				return null;
 				//This should never happen.
 			}
@@ -766,10 +766,13 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	}
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		FluidTankInfo[] fluids=new FluidTankInfo[this.storageInventory.getSizeInventory()+1];
+		ArrayList fluids=new ArrayList();
 		for(int i=0;i<this.storageInventory.getSizeInventory();i++){
-			fluids[i]=this.getTankInfo(i);
+			FluidTankInfo newFluid=this.getTankInfo(i);
+			if(newFluid!=null){
+				fluids.add(newFluid);
+			}
 		}
-		return fluids;
+		return (FluidTankInfo[]) fluids.toArray();
 	}
 }
