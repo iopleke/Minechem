@@ -27,6 +27,12 @@ public class TriggerFullEnergy extends MinechemTrigger {
         
     }
 
+	@Override
+	public boolean requiresParameter() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 	
 
 
