@@ -621,11 +621,15 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	}
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		FluidTankInfo[] fluids=new FluidTankInfo[10];
+		ArrayList fluids=new ArrayList();
+		//Uses both input and output slots
 		for(int i=0;i<this.kEmptyTestTubeSlotStart;i++){
-			fluids[i]=this.getTankInfo(i);
+			FluidTankInfo newFluid=this.getTankInfo(i);
+			if(newFluid!=null){
+				fluids.add(newFluid);
+			}
 		}
-		return fluids;
+		return (FluidTankInfo[]) fluids.toArray();
 	}
 	//Hacky code
 	//To fix a FZ glitch

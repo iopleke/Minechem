@@ -28,6 +28,7 @@ import universalelectricity.core.vector.VectorHelper;
 import buildcraft.api.power.IPowerReceptor;
 import buildcraft.api.power.PowerHandler.PowerReceiver;
 import buildcraft.api.power.PowerHandler.Type;
+import cofh.api.energy.IEnergyHandler;
 import cpw.mods.fml.common.FMLLog;
 
 /**
@@ -62,6 +63,8 @@ public class UniversalNetwork extends ElectricityNetwork
 
 				if (totalEnergyRequest > 0)
 				{
+					boolean markRefresh = false;
+
 					for (TileEntity tileEntity : avaliableEnergyTiles)
 					{
 						if (tileEntity != null && !tileEntity.isInvalid())
@@ -100,7 +103,7 @@ public class UniversalNetwork extends ElectricityNetwork
 
 											if (energyToSend > 0)
 											{
-												remainingUsableEnergy -= electricalTile.injectEnergyUnits(direction, energyToSend * Compatibility.TO_IC2_RATIO);
+												remainingUsableEnergy -= electricalTile.injectEnergyUnits(direction, energyToSend * Compatibility.TO_IC2_RATIO) * Compatibility.IC2_RATIO;
 											}
 										}
 									}
@@ -114,13 +117,38 @@ public class UniversalNetwork extends ElectricityNetwork
 										TileEntity conductor = VectorHelper.getConnectorFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction);
 										PowerReceiver receiver = electricalTile.getPowerReceiver(direction);
 
-										if (this.getConductors().contains(conductor))
+										if (receiver != null)
 										{
-											float energyToSend = totalUsableEnergy * ((receiver.powerRequest() * Compatibility.TO_BC_RATIO) / totalEnergyRequest);
-
-											if (energyToSend > 0)
+											if (this.getConductors().contains(conductor))
 											{
-												remainingUsableEnergy -= receiver.receiveEnergy(Type.PIPE, energyToSend * Compatibility.TO_BC_RATIO, direction);
+												float energyToSend = totalUsableEnergy * ((receiver.powerRequest() * Compatibility.BC3_RATIO) / totalEnergyRequest);
+
+												if (energyToSend > 0)
+												{
+													remainingUsableEnergy -= receiver.receiveEnergy(Type.PIPE, energyToSend * Compatibility.TO_BC_RATIO, direction) * Compatibility.BC3_RATIO;
+												}
+											}
+										}
+									}
+								}
+								else if (Compatibility.isThermalExpansionLoaded() && tileEntity instanceof IEnergyHandler)
+								{
+									IEnergyHandler receiver = (IEnergyHandler) tileEntity;
+
+									for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+									{
+										TileEntity conductor = VectorHelper.getConnectorFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction);
+
+										if (receiver.canInterface(direction))
+										{
+											if (this.getConductors().contains(conductor))
+											{
+												float energyToSend = totalUsableEnergy * ((receiver.receiveEnergy(direction, (int) (remainingUsableEnergy * Compatibility.TO_TE_RATIO), true) * Compatibility.TE_RATIO) / totalEnergyRequest);
+
+												if (energyToSend > 0)
+												{
+													remainingUsableEnergy -= receiver.receiveEnergy(direction, (int) (energyToSend * Compatibility.TO_TE_RATIO), false) * Compatibility.TE_RATIO;
+												}
 											}
 										}
 									}
@@ -129,9 +157,13 @@ public class UniversalNetwork extends ElectricityNetwork
 						}
 						else
 						{
-							this.refresh();
-							break;
+							markRefresh = true;
 						}
+					}
+
+					if (markRefresh)
+					{
+						this.refresh();
 					}
 				}
 			}
@@ -176,9 +208,14 @@ public class UniversalNetwork extends ElectricityNetwork
 					{
 						for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
 						{
-							if (((IEnergySink) tileEntity).acceptsEnergyFrom(VectorHelper.getTileEntityFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction), ForgeDirection.values()[(direction.ordinal() + 2) % 6]) && this.getConductors().contains(VectorHelper.getConnectorFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction)))
+							if (((IEnergySink) tileEntity).acceptsEnergyFrom(VectorHelper.getTileEntityFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction), direction) && this.getConductors().contains(VectorHelper.getConnectorFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction)))
 							{
-								requests.add(ElectricityPack.getFromWatts((float) (Math.min(((IEnergySink) tileEntity).demandedEnergyUnits(), ((IEnergySink) tileEntity).getMaxSafeInput()) * Compatibility.IC2_RATIO), 120));
+								ElectricityPack pack = ElectricityPack.getFromWatts((float) (((IEnergySink) tileEntity).demandedEnergyUnits() * Compatibility.IC2_RATIO), 1);
+
+								if (pack.getWatts() > 0)
+								{
+									requests.add(pack);
+								}
 							}
 						}
 
@@ -191,7 +228,7 @@ public class UniversalNetwork extends ElectricityNetwork
 						{
 							if (((IPowerReceptor) tileEntity).getPowerReceiver(direction) != null)
 							{
-								ElectricityPack pack = ElectricityPack.getFromWatts(((IPowerReceptor) tileEntity).getPowerReceiver(direction).powerRequest() * Compatibility.BC3_RATIO, 120);
+								ElectricityPack pack = ElectricityPack.getFromWatts(((IPowerReceptor) tileEntity).getPowerReceiver(direction).powerRequest() * Compatibility.BC3_RATIO, 1);
 
 								if (pack.getWatts() > 0)
 								{
@@ -202,7 +239,29 @@ public class UniversalNetwork extends ElectricityNetwork
 						}
 
 						continue;
+					}
 
+					if (Compatibility.isThermalExpansionLoaded() && tileEntity instanceof IEnergyHandler)
+					{
+						IEnergyHandler receiver = (IEnergyHandler) tileEntity;
+
+						for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
+						{
+							TileEntity conductor = VectorHelper.getConnectorFromSide(tileEntity.worldObj, new Vector3(tileEntity), direction);
+
+							if (receiver.canInterface(direction))
+							{
+								ElectricityPack pack = ElectricityPack.getFromWatts(receiver.receiveEnergy(direction, (int) Integer.MAX_VALUE, true) * Compatibility.TE_RATIO, 1);
+
+								if (pack.getWatts() > 0)
+								{
+									requests.add(pack);
+									break;
+								}
+							}
+						}
+
+						continue;
 					}
 				}
 			}
@@ -281,7 +340,7 @@ public class UniversalNetwork extends ElectricityNetwork
 								possibleDirections = new ArrayList<ForgeDirection>();
 							}
 
-							if (((IEnergyAcceptor) acceptor).acceptsEnergyFrom(VectorHelper.getTileEntityFromSide(acceptor.worldObj, new Vector3(acceptor), ForgeDirection.getOrientation(i)), ForgeDirection.values()[(i + 2) % 6]) && this.getConductors().contains(VectorHelper.getConnectorFromSide(acceptor.worldObj, new Vector3(acceptor), ForgeDirection.getOrientation(i))))
+							if (((IEnergyAcceptor) acceptor).acceptsEnergyFrom(VectorHelper.getTileEntityFromSide(acceptor.worldObj, new Vector3(acceptor), ForgeDirection.getOrientation(i)), ForgeDirection.getOrientation(i)) && this.getConductors().contains(VectorHelper.getConnectorFromSide(acceptor.worldObj, new Vector3(acceptor), ForgeDirection.getOrientation(i))))
 							{
 								possibleDirections.add(ForgeDirection.getOrientation(i));
 							}

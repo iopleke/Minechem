@@ -18,5 +18,11 @@ public class TriggerOutputJammed extends MinechemTrigger {
             return false;
         return ((IMinechemTriggerProvider) tile).isJammed();
     }
+
+	@Override
+	public boolean requiresParameter() {
+		// TODO Auto-generated method stub
+		return false;
+	}
  
 }

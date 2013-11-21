@@ -32,7 +32,7 @@ public class BlockGhostBlock extends BlockContainer {
     public Icon icon2;
     @Override
     public Icon getIcon(int par1, int metadata) {
-        switch (metadata) {
+    	switch (metadata) {
         case 0:
             return icon1;
         case 1:

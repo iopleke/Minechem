@@ -18,4 +18,10 @@ public class TriggerNoTestTubes extends MinechemTrigger {
             return false;
         return ((IMinechemTriggerProvider) tile).hasNoTestTubes();
     }
+
+	@Override
+	public boolean requiresParameter() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
