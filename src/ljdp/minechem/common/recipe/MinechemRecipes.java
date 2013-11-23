@@ -26,6 +26,7 @@ import ljdp.minechem.common.recipe.handlers.MekanismOreDictionaryHandler;
 import ljdp.minechem.common.recipe.handlers.UndergroundBiomesOreDictionaryHandler;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.ForgeSubscribe;
@@ -769,8 +770,10 @@ public class MinechemRecipes {
 				new Chemical[] { this.element(EnumElement.C, 16) }));
 
 		// Charcoal
-		// TODO: Add charcoal support
-
+		// Does 16 charcoal to 1 coal seem balanced? 
+        ItemStack itemChar = new ItemStack(Item.coal,1,1);
+		DecomposerRecipe.add(new DecomposerRecipe(itemChar, new Chemical[] { this.element(EnumElement.C, 30) }));
+		
 		// Diamond
 		ItemStack itemDiamond = new ItemStack(Item.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond,
@@ -1327,7 +1330,7 @@ public class MinechemRecipes {
 
 
         // 
-		this.addDecomposerRecipesFromMolecules();
+	this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
         this.registerPoisonRecipes(EnumMolecule.poison);
@@ -1347,10 +1350,12 @@ public class MinechemRecipes {
         this.registerPoisonRecipes(EnumMolecule.pal2);
         this.registerPoisonRecipes(EnumMolecule.nod);
         this.registerPoisonRecipes(EnumMolecule.afroman);
-		this.registerPoisonRecipes(EnumMolecule.radchlor); // "Whoa, oh, oh, oh, oh, whoa, oh, oh, oh, I'm radioactive, radioactive" - "Radioactive" By Imagine Dragons. 
+	this.registerPoisonRecipes(EnumMolecule.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
         this.registerPoisonRecipes(EnumMolecule.redrocks);
-		this.registerPoisonRecipes(EnumMolecule.coke);
-		this.registerPoisonRecipes(EnumMolecule.theobromine); 
+	this.registerPoisonRecipes(EnumMolecule.coke);
+	this.registerPoisonRecipes(EnumMolecule.theobromine); 
+	this.registerPoisonRecipes(EnumMolecule.ctaxifolia); 
+	this.registerPoisonRecipes(EnumMolecule.latropine);
 	}
 
     private void addDecomposerRecipesFromMolecules() {
@@ -1424,23 +1429,21 @@ public class MinechemRecipes {
       return var6;
    }
 
-   private void registerPoisonRecipes(EnumMolecule var1) {
-      this.createPoisonedItemStack(Item.appleRed, 0, var1);
-      this.createPoisonedItemStack(Item.porkCooked, 0, var1);
-      this.createPoisonedItemStack(Item.beefCooked, 0, var1);
-      this.createPoisonedItemStack(Item.carrot, 0, var1);
-      this.createPoisonedItemStack(Item.poisonousPotato, 0, var1);
-      this.createPoisonedItemStack(Item.bakedPotato, 0, var1);
-      this.createPoisonedItemStack(Item.bread, 0, var1);
-      this.createPoisonedItemStack(Item.potato, 0, var1);
-      this.createPoisonedItemStack(Item.bucketMilk, 0, var1);
-      this.createPoisonedItemStack(Item.fishCooked, 0, var1);
-      this.createPoisonedItemStack(Item.cookie, 0, var1);
-      this.createPoisonedItemStack(Item.pumpkinPie, 0, var1);
-      this.createPoisonedItemStack(Item.fishRaw, 0, var1);
-      this.createPoisonedItemStack(Item.appleGold, 0, var1);
-      this.createPoisonedItemStack(MinechemItems.EmptyPillz, 0, var1);
-   }
+   private void registerPoisonRecipes(EnumMolecule molecule) {
+
+	     for(Item i: Item.itemsList) { // Thanks Adrian!
+
+	       if(i != null && i instanceof ItemFood) { // Should allow for lacing of BOP and AquaCulture foodstuffs.
+
+	         this.createPoisonedItemStack(i, 0, molecule);
+
+	       }
+
+	     }
+
+	    }
+   /* 
+    * This stuff is unused and is replaced by ljdp.minechem.common.recipe.handlers.DefaultOreDictionaryHandler
    String[] compounds = {"Aluminium","Titanium","Chrome",   
 	           "Tungsten", "Lead",    "Zinc",
 	           "Platinum", "Nickel",  "Osmium",
@@ -1477,6 +1480,8 @@ public class MinechemRecipes {
 	String[]  itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate"
 	boolean[] craftable = {true, true, false, false, false, false, false};
 	int[] 	 sizeCoeff = {1, 4, 8, 4, 36, 16, 4};
+    */
+   
 	private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
 	
 	@ForgeSubscribe

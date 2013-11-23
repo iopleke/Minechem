@@ -12,3 +12,6 @@ The details of the licence can be found at: http://creativecommons.org/licenses/
 
 ## Contributors and permissions
 The list of contributors can be found here: http://pastebin.com/raw.php?i=LsumDirg
+
+## Disclaimer
+This mod contains many street drug jokes, If this offends you. Please do not use this mod.
