@@ -82,8 +82,21 @@ public class GuiVerticalScrollBar extends Gui {
     }
 
     private void onMouseClick() {
-        if (container.isScrollBarActive() && pointIntersects(mouseX, mouseY)) {
-            isDragging = true;
+        if (container.isScrollBarActive()) {
+            // Clicking on the slider starts dragging it.
+            if (pointIntersects(mouseX, mouseY)) {
+                isDragging = true;
+            } else {
+                // Move the slider one slider-height up or down.
+                int scrollAmount = height;
+                if (mouseY < ypos) {
+                    // Up.
+                    setYPos(ypos - scrollAmount);
+                } else if (mouseY > ypos + height) {
+                    // Down.
+                    setYPos(ypos + scrollAmount);
+                }
+            }
         }
     }
 
