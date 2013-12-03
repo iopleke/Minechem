@@ -360,6 +360,11 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         int j = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
         mouseX = i - (width - xSize) / 2;
         mouseY = j - (height - ySize) / 2;
+        if (isScrollBarActive() && scrollBar.pointInScrollBar(mouseX, mouseY)) {
+            scrollBar.handleMouseInput();
+        }
+
+
     }
 
     @Override

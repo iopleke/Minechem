@@ -6,7 +6,6 @@ import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
@@ -17,11 +16,14 @@ public class GuiVerticalScrollBar extends Gui {
     IVerticalScrollContainer container;
     int mouseX;
     int mouseY;
+    // Width, height of the scrollbar slider.
     int width = 12;
     int height = 15;
+    // Current X, Y position of the scrollbar slider.
     int xpos;
     int ypos;
     int startingYPos;
+    // Max Y Displacement of the scrollbar slider.
     int maxDisplacement;
     float scaleFactor;
     float scrollValue = 0.0F;
@@ -72,6 +74,17 @@ public class GuiVerticalScrollBar extends Gui {
         return x >= xpos && x <= xpos + width && y >= ypos && y <= ypos + height;
     }
 
+    /**
+     * Returns true iff the given GUI-relative point is within the scrollbar.
+     * @param x X coordinate relative to the parent container.
+     * @param y Y coordinate relative to the parent container.
+     * @return True iff the coordinates are within this scrollbar.
+     */
+    public boolean pointInScrollBar(int x, int y) {
+        return x >= xpos && x <= xpos + width && y >= startingYPos
+                && y <= startingYPos + maxDisplacement + height;
+    }
+
     public void setYPos(int y) {
         this.ypos = y;
         if (ypos < startingYPos)
@@ -82,8 +95,21 @@ public class GuiVerticalScrollBar extends Gui {
     }
 
     private void onMouseClick() {
-        if (container.isScrollBarActive() && pointIntersects(mouseX, mouseY)) {
-            isDragging = true;
+        if (container.isScrollBarActive()) {
+            // Clicking on the slider starts dragging it.
+            if (pointIntersects(mouseX, mouseY)) {
+                isDragging = true;
+            } else if (pointInScrollBar(mouseX, mouseY) ) {
+                // Move the slider one slider-height up or down.
+                int scrollAmount = height;
+                if (mouseY < ypos) {
+                    // Up.
+                    setYPos(ypos - scrollAmount);
+                } else if (mouseY > ypos + height) {
+                    // Down.
+                    setYPos(ypos + scrollAmount);
+                }
+            }
         }
     }
 
