@@ -2,6 +2,7 @@ package ljdp.minechem.api.core;
 
 import static ljdp.minechem.api.core.EnumClassification.*;
 import static ljdp.minechem.api.core.EnumRadioactivity.*;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum EnumElement {
     H("Hydrogen", nonmetal, gas, stable),
@@ -120,20 +121,36 @@ public enum EnumElement {
 
     public static EnumElement[] elements = EnumElement.values();
     public static int heaviestMass = 113;
+    // Descriptive name, in en_US. Should not be used; instead, use a
+    // localized string from a .properties file.
     private final String descriptiveName;
+    // Localization key.
+    private final String localizationKey;
     private final EnumClassification classification;
     private final EnumClassification roomState;
     private final EnumRadioactivity radioactivity;
 
     EnumElement(String descriptiveName, EnumClassification classification, EnumClassification roomState, EnumRadioactivity radioactivity) {
         this.descriptiveName = descriptiveName;
+        this.localizationKey = "minechem.element." + name();
         this.classification = classification;
         this.roomState = roomState;
         this.radioactivity = radioactivity;
     }
 
+    /**
+     * Returns the localized name of this element, or an en_US-based placeholder
+     * if no localization was found.
+     * @return Localized name of this element.
+     */
     public String descriptiveName() {
-        return descriptiveName;
+        String localizedName =
+                LanguageRegistry.instance().getStringLocalization(
+                        this.localizationKey);
+        if (localizedName.isEmpty()) {
+            return "en_US:" + descriptiveName;
+        }
+        return localizedName;
     }
 
     public EnumClassification classification() {
