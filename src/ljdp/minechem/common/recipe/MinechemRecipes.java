@@ -266,17 +266,17 @@ public class MinechemRecipes {
 		// Gold Ore
 		ItemStack oreGold = new ItemStack(Block.oreGold);
 		DecomposerRecipe.add(new DecomposerRecipe(oreGold,
-				new Chemical[] { this.element(EnumElement.Au, 32) }));
+				new Chemical[] { this.element(EnumElement.Au, 48) }));
 
 		// Iron Ore
 		ItemStack oreIron = new ItemStack(Block.oreIron);
 		DecomposerRecipe.add(new DecomposerRecipe(oreIron,
-				new Chemical[] { this.element(EnumElement.Fe, 32) }));
+				new Chemical[] { this.element(EnumElement.Fe, 48) }));
 
 		// Coal Ore
 		ItemStack oreCoal = new ItemStack(Block.oreCoal);
 		DecomposerRecipe.add(new DecomposerRecipe(oreCoal,
-				new Chemical[] { this.element(EnumElement.C, 32) }));
+				new Chemical[] { this.element(EnumElement.C, 48) }));
 
 		// Wood
 		ItemStack blockOakWood = new ItemStack(Block.wood, 1, 0);
@@ -325,7 +325,7 @@ public class MinechemRecipes {
 		// Lapis Lazuli Ore
 		ItemStack blockOreLapis = new ItemStack(Block.oreLapis);
 		DecomposerRecipe.add(new DecomposerRecipe(blockOreLapis,
-				new Chemical[] { this.molecule(EnumMolecule.lazurite, 4),
+				new Chemical[] { this.molecule(EnumMolecule.lazurite, 6),
 						this.molecule(EnumMolecule.sodalite),
 						this.molecule(EnumMolecule.noselite),
 						this.molecule(EnumMolecule.calcite),
@@ -577,8 +577,8 @@ public class MinechemRecipes {
 		// Redston Ore
 		ItemStack blockOreRedstone = new ItemStack(Block.oreRedstone);
 		DecomposerRecipe.add(new DecomposerRecipeChance(blockOreRedstone, 0.8F,
-				new Chemical[] { this.molecule(EnumMolecule.iron3oxide, 6),
-						this.element(EnumElement.Cu, 6) }));
+				new Chemical[] { this.molecule(EnumMolecule.iron3oxide, 9),
+						this.element(EnumElement.Cu, 9) }));
 		
 		// Cactus
 		ItemStack blockCactus = new ItemStack(Block.cactus);
@@ -727,9 +727,9 @@ public class MinechemRecipes {
 		// Emerald Ore
 		ItemStack blockOreEmerald = new ItemStack(Block.oreEmerald);
 		DecomposerRecipe.add(new DecomposerRecipe(blockOreEmerald,
-				new Chemical[] { this.molecule(EnumMolecule.beryl, 4),
-						this.element(EnumElement.Cr, 4),
-						this.element(EnumElement.V, 4) }));
+				new Chemical[] { this.molecule(EnumMolecule.beryl, 6),
+						this.element(EnumElement.Cr, 6),
+						this.element(EnumElement.V, 6) }));
 
 		// Emerald Block
 		ItemStack blockEmerald = new ItemStack(Block.blockEmerald);
