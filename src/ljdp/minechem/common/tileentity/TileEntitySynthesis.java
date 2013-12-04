@@ -53,8 +53,29 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public static final int[] kStorage = { 14, 15, 16, 17, 18, 19, 20, 21, 22 };
     public static final int[] kJournal = { 23 };
     //Slots that contain *real* items
-    //For the purpose of dropping upon break
-    public static final int[] kRealSlots={10,11,12,13,14, 15, 16, 17, 18, 19, 20, 21, 22 ,23};
+    //For the purpose of dropping upon break. These are bottles, storage, and 
+    // journal.
+    public static final int[] kRealSlots;
+    
+    // Ensure that the list of real slots stays in sync with the above defs.
+    static {
+        ArrayList l = new ArrayList();
+        for (int v : kBottles) {
+            l.add(v);
+        }
+        for (int v : kStorage) {
+            l.add(v);
+        }
+        for (int v : kJournal) {
+            l.add(v);
+        }
+        kRealSlots = new int[l.size()];
+        for (int idx = 0; idx < l.size(); idx++) {
+            // Jump through some autounboxing hoops due to primitive types not 
+            // being first-class types.
+            kRealSlots[idx] = (Integer) l.get(idx);
+        }
+    }
 
     private SynthesisRecipe currentRecipe;
     public ModelSynthesizer model;
@@ -112,6 +133,61 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     @Override
     public void closeChest() {}
+    
+    private boolean valueIn(int value, int[] arr) {
+        if (arr == null) {
+            return false;
+        }
+        for (int v : arr) {
+            if (value == v) {
+                return true;
+            }
+        }
+        return false;
+    }
+    /**
+     * Returns true iff the given inventory slot is a "ghost" slot used
+     * to show the output of the configured recipe. Ghost output items don't
+     * really exist and should never be dumped or extracted, except when the
+     * recipe is crafted.
+     * @param slotId Slot Id to check.
+     * @return true iff the slot is a "ghost" slot for the recipe output.
+     */
+    public boolean isGhostOutputSlot(int slotId) {
+        return valueIn(slotId, kOutput);
+    }
+
+    /**
+     * Returns true iff the given inventory slot is a "ghost" slot used to show
+     * the inputs of a crafting recipe. Items in these slots don't really exist
+     * and should never be dumped or extracted.
+     * 
+     * @param slotId Slot Id to check.
+     * @return true iff the slot is a "ghost" slot for the recipe.
+     */
+    public boolean isGhostCraftingRecipeSlot(int slotId) {
+        return valueIn(slotId, kRecipe);
+    }
+
+    /**
+     * Returns true iff the given inventory slot holds a "ghost" item
+     * that doesn't really exist.
+     * @param slotId Slot Id to check.
+     * @return true iff the slot holds a "ghost" item.
+     */
+    public boolean isGhostSlot(int slotId) {
+        return isGhostOutputSlot(slotId) || isGhostCraftingRecipeSlot(slotId);
+    }
+
+    /**
+     * Returns true iff the given inventory slot can hold a real (non-ghost)
+     * item, i.e., one that is really stored in the inventory.
+     * @param slotId Slot Id to check.
+     * @return true iff the slot can hold a real item.
+     */
+    public boolean isRealItemSlot(int slotId) {
+        return !isGhostSlot(slotId);
+    }
 
     @Override
     public ItemStack decrStackSize(int slot, int amount) {

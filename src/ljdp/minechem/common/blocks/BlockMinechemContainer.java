@@ -7,6 +7,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
@@ -24,7 +25,7 @@ public abstract class BlockMinechemContainer extends BlockContainer {
     public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
 
     @Override
-    public void breakBlock(World world, int x, int y, int z, int par5, int par6) {
+    public void breakBlock(World world, int x, int y, int z, int oldBlockId, int oldMetadata) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity != null) {
             ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
@@ -38,12 +39,24 @@ public abstract class BlockMinechemContainer extends BlockContainer {
                     if (randomN > itemstack.stackSize)
                         randomN = itemstack.stackSize;
                     itemstack.stackSize -= randomN;
-                    new EntityItem(world, (double) ((float) x + randomX), (double) ((float) y + randomY), (double) ((float) z + randomZ), new ItemStack(
-                            itemstack.itemID, randomN, itemstack.getItemDamage()));
+                    ItemStack droppedStack = new ItemStack(itemstack.itemID, randomN,
+                            itemstack.getItemDamage());
+                    // Copy NBT tag data, needed to preserve Chemist Journal
+                    // contents (for example).
+                    if (itemstack.hasTagCompound()) {
+                        droppedStack.setTagCompound(
+                                (NBTTagCompound) itemstack.getTagCompound().copy());
+                    }
 
+                    EntityItem droppedEntityItem = new EntityItem(world,
+                            (double) ((float) x + randomX),
+                            (double) ((float) y + randomY),
+                            (double) ((float) z + randomZ),
+                            droppedStack);
+                    world.spawnEntityInWorld(droppedEntityItem);
                 }
             }
-            super.breakBlock(world, x, y, z, par5, par6);
+            super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);
         }
 
     }
