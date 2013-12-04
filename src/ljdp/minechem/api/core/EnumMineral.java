@@ -27,7 +27,7 @@ public enum EnumMineral {
 	            LanguageRegistry.instance().getStringLocalization(
 	                    this.localizationKey);
 	    if (localizedName.isEmpty()) {
-	        return "en_US:" + descriptiveName;
+	        return localizationKey;
 	    }
 	    return localizedName;
 	}
