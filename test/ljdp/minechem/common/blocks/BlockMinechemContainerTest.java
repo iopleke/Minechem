@@ -72,9 +72,6 @@ public class BlockMinechemContainerTest {
         }
     }
 
-    
-
-
     private static final int DUMMY_BLOCKID = 4000;
     private static final int DUMMY_JOURNALID = 16000;
     private static final Material DUMMY_MATERIAL = Material.iron;
@@ -204,6 +201,10 @@ public class BlockMinechemContainerTest {
         EasyMock.expectLastCall();
 
         ArrayList<ItemStack> itemsToDrop = new ArrayList<ItemStack>();
+        
+        // Note that the size randomization logic in BlockMinechemContainer
+        // may make these tests fail, if the stack sizes are large enough
+        // to be split by the randomization.
         itemsToDrop.add(new ItemStack(Item.flint));
         itemsToDrop.add(new ItemStack(Item.coal, 4));
         itemsToDrop.add(new ItemStack(Block.sapling, 10, 2));
