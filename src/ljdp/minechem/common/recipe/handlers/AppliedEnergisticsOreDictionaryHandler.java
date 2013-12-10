@@ -8,7 +8,6 @@ import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.recipe.OreDictionaryHandler;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
-import cpw.mods.fml.common.Loader;
 
 public class AppliedEnergisticsOreDictionaryHandler implements
 		OreDictionaryHandler {
@@ -38,17 +37,15 @@ public class AppliedEnergisticsOreDictionaryHandler implements
 		if (oreEvent.Name.equals("dustCertusQuartz")) {
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
 					certusQuartzDecompositionFormula));
-			if (Loader.isModLoaded("IC2")) {
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzDustSynthesisFormula));
-			}
+			// }
 		} else if (oreEvent.Name.equals("crystalCertusQuartz")) {
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
-					certusQuartzDecompositionFormula));
-			if (!Loader.isModLoaded("IC2")) {
-				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
+			certusQuartzDecompositionFormula));
+			SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzCrystalSynthesisFormula));
-			}
+			// }
 		} else {
 			ModMinechem.logger.info("Unknown type of Certus Quartz : "
 					+ oreEvent.Name);
