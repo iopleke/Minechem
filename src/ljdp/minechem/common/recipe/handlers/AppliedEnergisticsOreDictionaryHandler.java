@@ -39,13 +39,13 @@ public class AppliedEnergisticsOreDictionaryHandler implements
 					certusQuartzDecompositionFormula));
 				SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzDustSynthesisFormula));
-			}
+			// }
 		} else if (oreEvent.Name.equals("crystalCertusQuartz")) {
 			DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore,
 			certusQuartzDecompositionFormula));
 			SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true,
 						30000, certusQuartzCrystalSynthesisFormula));
-			}
+			// }
 		} else {
 			ModMinechem.logger.info("Unknown type of Certus Quartz : "
 					+ oreEvent.Name);
