@@ -4,6 +4,8 @@ import static ljdp.minechem.api.core.EnumElement.*;
 
 import java.util.ArrayList;
 import java.util.Random;
+
+import cpw.mods.fml.common.registry.LanguageRegistry;
 // import ljdp.minechem.api.recipe.DecomposerRecipe;
 // import ljdp.minechem.api.recipe.SynthesisRecipe;
 
@@ -143,7 +145,11 @@ public enum EnumMolecule {
     ;
 
     public static EnumMolecule[] molecules = values();
+    // Descriptive name, in en_US. Should not be used; instead, use a
+    // localized string from a .properties file.
     private final String descriptiveName;
+    // Localization key.
+    private final String localizationKey;
     private final ArrayList<Chemical> components;
     private int id;
     public float red;
@@ -157,6 +163,7 @@ public enum EnumMolecule {
         this.id = id;
         this.components = new ArrayList<Chemical>();
         this.descriptiveName = descriptiveName;
+        this.localizationKey = "minechem.molecule." + name();
         for (Chemical chemical : chemicals) {
             this.components.add(chemical);
         }
@@ -192,8 +199,19 @@ public enum EnumMolecule {
         return this.id;
     }
 
+    /**
+     * Returns the localized name of this molecule, or an en_US-based 
+     * placeholder if no localization was found.
+     * @return Localized name of this molecule.
+     */
     public String descriptiveName() {
-        return this.descriptiveName;
+        String localizedName =
+                LanguageRegistry.instance().getStringLocalization(
+                        this.localizationKey);
+        if (localizedName.isEmpty()) {
+            return localizationKey;
+        }
+        return localizedName;
     }
 
     public ArrayList<Chemical> components() {
