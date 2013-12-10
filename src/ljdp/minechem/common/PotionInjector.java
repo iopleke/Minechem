@@ -9,7 +9,7 @@ public class PotionInjector {
 
 	public static void inject() {
 		int potionTotal = Potion.potionTypes.length;
-		Potion[] effectAray = new Potion[potionTotal + 2];
+		Potion[] effectAray = new Potion[potionTotal + 1];
 		System.arraycopy(Potion.potionTypes, 0, effectAray, 0, potionTotal);
 		Field field = null;
 		Field[] fields = Potion.class.getDeclaredFields();
@@ -32,6 +32,6 @@ public class PotionInjector {
 		} catch (Exception e) {
 			System.err.println("He's Dead Jim" + " " + e);
 		}
-		atropineHigh = new PotionProvider(potionTotal, true, 0x00FF6E).setPotionName("Delirium").setIconIndex(2, 1); // That icon is a refrence to alice in wonderland :P
+		atropineHigh = new PotionProvider(potionTotal, true, 0x00FF6E).setPotionName("Delirium").setIconIndex(2, 1);
 	}
 }
