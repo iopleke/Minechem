@@ -2,5 +2,18 @@
 *.jar
 dist
 download
-build
 .DS_Store
+
+## gradle
+/.gradle
+/build
+
+## ForgeGradle
+/run
+
+## eclipse
+/.settings
+/.metadata
+/.classpath
+/.project
+/bin
