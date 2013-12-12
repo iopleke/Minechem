@@ -1,0 +1,33 @@
+2013-12-11 20:07:54 [SERVER] [INFO] Starting integrated minecraft server version 1.6.4
+2013-12-11 20:07:54 [SERVER] [INFO] Generating keypair
+2013-12-11 20:07:55 [SERVER] [INFO] Converting map!
+2013-12-11 20:07:55 [SERVER] [INFO] Scanning folders...
+2013-12-11 20:07:55 [SERVER] [INFO] Total conversion count is 0
+2013-12-11 20:07:55 [SERVER] [INFO] Preparing start region for level 0
+2013-12-11 20:07:56 [SERVER] [INFO] Preparing spawn area: 6%
+2013-12-11 20:07:57 [SERVER] [INFO] Preparing spawn area: 16%
+2013-12-11 20:07:58 [SERVER] [INFO] Preparing spawn area: 28%
+2013-12-11 20:07:59 [SERVER] [INFO] Preparing spawn area: 40%
+2013-12-11 20:08:00 [SERVER] [INFO] Preparing spawn area: 54%
+2013-12-11 20:08:01 [SERVER] [INFO] Preparing spawn area: 63%
+2013-12-11 20:08:02 [SERVER] [INFO] Preparing spawn area: 80%
+2013-12-11 20:08:03 [SERVER] [INFO] Preparing spawn area: 94%
+2013-12-11 20:08:04 [SERVER] [INFO] Player817[/127.0.0.1:0] logged in with entity id 251 at (323.5, 68.0, 202.5)
+2013-12-11 20:08:04 [SERVER] [INFO] Player817 joined the game
+2013-12-11 20:08:08 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2013-12-11 20:08:12 [SERVER] [INFO] Saving and pausing game...
+2013-12-11 20:08:12 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2013-12-11 20:08:26 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2013-12-11 20:08:26 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2013-12-11 20:08:32 [SERVER] [WARNING] Can't keep up! Did the system time change, or is the server overloaded?
+2013-12-11 20:13:14 [SERVER] [INFO] Saving and pausing game...
+2013-12-11 20:13:14 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2013-12-11 20:13:14 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2013-12-11 20:13:14 [SERVER] [INFO] Saving chunks for level 'New World'/The End
+2013-12-11 20:14:22 [SERVER] [INFO] Stopping server
+2013-12-11 20:14:22 [SERVER] [INFO] Saving players
+2013-12-11 20:14:22 [SERVER] [INFO] Player817 left the game
+2013-12-11 20:14:22 [SERVER] [INFO] Saving worlds
+2013-12-11 20:14:22 [SERVER] [INFO] Saving chunks for level 'New World'/Overworld
+2013-12-11 20:14:22 [SERVER] [INFO] Saving chunks for level 'New World'/Nether
+2013-12-11 20:14:22 [SERVER] [INFO] Saving chunks for level 'New World'/The End
