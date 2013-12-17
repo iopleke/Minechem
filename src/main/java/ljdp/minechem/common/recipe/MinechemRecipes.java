@@ -871,7 +871,7 @@ public class MinechemRecipes {
 		// Water Bucket
 		ItemStack itemBucketWater = new ItemStack(Item.bucketWater);
 		DecomposerRecipe.add(new DecomposerRecipe(itemBucketWater,
-				new Chemical[] { this.molecule(EnumMolecule.water, 16) }));
+				new Chemical[] { this.molecule(EnumMolecule.water, 16),this.element(EnumElement.Fe, 48) }));
 
 		// Redstone
 		ItemStack itemRedstone = new ItemStack(Item.redstone);
