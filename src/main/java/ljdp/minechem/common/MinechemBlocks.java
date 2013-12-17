@@ -1,6 +1,5 @@
 package ljdp.minechem.common;
 
-import ljdp.minechem.common.blocks.BlockBluePrintPrinter;
 import ljdp.minechem.common.blocks.BlockBlueprintProjector;
 import ljdp.minechem.common.blocks.BlockChemicalStorage;
 import ljdp.minechem.common.blocks.BlockDecomposer;
@@ -12,7 +11,6 @@ import ljdp.minechem.common.blocks.MaterialGas;
 import ljdp.minechem.common.blocks.OreUranium;
 import ljdp.minechem.common.items.ItemBlockFusion;
 import ljdp.minechem.common.items.ItemGhostBlock;
-import ljdp.minechem.common.tileentity.TileEntityBluePrintPrinter;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
@@ -82,7 +80,6 @@ public class MinechemBlocks {
         ghostBlock = new BlockGhostBlock(ghostBlockID);
         blueprintProjector = new BlockBlueprintProjector(blueprintProjectorID);
         chemicalStorage = new BlockChemicalStorage(chemicalStorageID);
-        printer = new BlockBluePrintPrinter(printerID);
         uranium= new OreUranium(uraniumID);
 
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
@@ -117,7 +114,7 @@ public class MinechemBlocks {
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
         GameRegistry.registerTileEntity(TileEntityGhostBlock.class, "minechem.tileEntityGhostBock");
         GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
-        GameRegistry.registerTileEntity(TileEntityBluePrintPrinter.class, "minechem.tileEntityBluePrinter");
+        
     }
 
 }

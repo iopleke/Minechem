@@ -32,7 +32,6 @@ import net.minecraftforge.event.ForgeSubscribe;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
-import universalelectricity.compatibility.Compatibility;
 import universalelectricity.prefab.TranslationHelper;
 import cpw.mods.fml.common.FMLLog;
 // import cpw.mods.fml.common.Loader;
@@ -112,7 +111,6 @@ public class ModMinechem {
     }
     @EventHandler
     public void init(FMLInitializationEvent event) {
-    	Compatibility.initiate();
 
 		FluidHelper.registerFluids();
 		GameRegistry.registerWorldGenerator(new MinechemGeneration());

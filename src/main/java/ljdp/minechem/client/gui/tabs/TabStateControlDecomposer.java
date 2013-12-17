@@ -49,7 +49,7 @@ public class TabStateControlDecomposer extends TabStateControl {
             this.state = TabState.jammed;
         else if (decomposer.getState() == State.kProcessNoBottles)
             this.state = TabState.noBottles;
-        else if (decomposer.getEnergyStored() > decomposer.getMinEnergyNeeded() || decomposer.getEnergyUsage() > 0)
+        else if (decomposer.getEnergyStored() > decomposer.getMinEnergyNeeded() || decomposer.getRequest() > 0)
             this.state = TabState.powered;
         else
             this.state = TabState.unpowered;

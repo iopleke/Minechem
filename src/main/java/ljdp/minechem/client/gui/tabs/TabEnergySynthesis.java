@@ -37,13 +37,13 @@ public class TabEnergySynthesis extends TabEnergy {
         fontRenderer.drawString(energyCost + " MJ", x + 22, y + 32, textColour);
 
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.maxUsage") + ":", x + 22, y + 44, subheaderColour);
-        fontRenderer.drawString(energy.getRequest(ForgeDirection.UP) + " MJ/t", x + 22, y + 56, textColour);
+        fontRenderer.drawString(energy.getRequest() + " MJ/t", x + 22, y + 56, textColour);
     }
 
     @Override
     public String getTooltip() {
         if (!isOpen()) {
-            return String.format("%.1f", energy.getEnergyUsage()) + " MJ/t";
+            return String.format("%.1f", energy.getRequest()) + " MJ/t";
         } else
             return null;
     }

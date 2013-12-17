@@ -7,11 +7,11 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet;
 import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import universalelectricity.compatibility.TileEntityUniversalElectrical;
-import universalelectricity.prefab.tile.TileEntityElectrical;
+import cofh.api.energy.IEnergyHandler;
 
-public abstract class MinechemTileEntity extends TileEntityUniversalElectrical implements IInventory {
+public abstract class MinechemTileEntity extends TileEntity implements IInventory, IEnergyHandler {
 	
 	public ItemStack[] inventory;
 	public float lastEnergyUsed;
@@ -25,11 +25,13 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 	public void writeToNBT(NBTTagCompound nbt){
 		super.writeToNBT(nbt);
 		nbt.setFloat("lastEnergyUsed", this.lastEnergyUsed);
+		nbt.setInteger("energy", this.energyStored);
 	}
 	@Override
 	public void readFromNBT(NBTTagCompound nbt){
 		super.readFromNBT(nbt);
 		this.lastEnergyUsed=nbt.getFloat("lastEnergyUsed");
+		this.energyStored=nbt.getInteger("energy");
 	}
 	public float oldPower=-1;
 	@Override
@@ -39,8 +41,15 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 		
 		
 	}
+	
+	public boolean didEnergyStoredChange(){
+		return true;
+	}
+	public boolean didEnergyUsageChange(){
+		return true;
+	}
 	public void setEnergyUsage(float energyUsage) {
-		this.lastEnergyUsed=energyUsage/20;
+		this.lastEnergyUsed=energyUsage;
 	}
 	@Override
 	public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt) {
@@ -53,8 +62,8 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 	public ItemStack getStackInSlot(int var1) {
 		return this.inventory[var1];
 	}
-	public float getEnergyUsage(){
-		return this.lastEnergyUsed*20;
+	public float getRequest(){
+		return this.lastEnergyUsed;
 	}
 	@Override
 	public ItemStack decrStackSize(int slot, int amount) {
@@ -114,23 +123,36 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 	@Override
 	public void closeChest() {
 	}
-
-	@Override
-	public float getRequest(ForgeDirection direction) {
-		return (float) Math.min((this.getMaxEnergyStored() - this.getEnergyStored()), 200);
-	}
-	//TODO Implement this for packet efficiency
-	public boolean didEnergyStoredChange(){
-		return true;
-	}
-	public boolean didEnergyUsageChange(){
-		return true;
-	}
 	
-	//Should probably get *actual* values for this
-	public float getMaxEnergyReceived(){
-		return 100000000;
+	public int energyStored;
+	@Override
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate){
+		int receive=Math.min(maxReceive,getMaxEnergyStored(from)-energyStored);
+		if(!simulate){
+			this.setEnergyUsage(receive);
+			this.energyStored+=receive;
+		}
+		return receive;
 	}
+
+	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate){
+		return 0;
+	}
+	public int getEnergyStored(){
+		return this.energyStored;
+	}
+	public boolean canInterface(ForgeDirection from){
+		return true;
+	}
+
+	public int getEnergyStored(ForgeDirection from){
+		return this.energyStored;
+	}
+	@Override
+	public int getMaxEnergyStored(ForgeDirection from){
+		return 600000;
+	}
+
 	
 
 }

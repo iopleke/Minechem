@@ -235,11 +235,6 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
         }
     }
 
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return false;
-    }
-
 
 	@Override
 	void sendUpdatePacket() {
@@ -247,18 +242,6 @@ public class TileEntityFission extends TileEntityMultiBlock implements  IMineche
 		
 	}
 
-
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 	
 	//Horrible design here

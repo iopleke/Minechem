@@ -411,14 +411,14 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             sendUpdatePacket();
 
         float energyStored = this.getEnergyStored();
-        if (energyStored >= this.getMaxEnergyStored())
+        if (energyStored >= this.getMaxEnergyStored(ForgeDirection.UP))
             hasFullEnergy = true;
-        if (hasFullEnergy && energyStored < this.getMaxEnergyStored() / 2)
+        if (hasFullEnergy && energyStored < this.getMaxEnergyStored(ForgeDirection.UP) / 2)
             hasFullEnergy = false;
 
-        if (this.getEnergyStored() >= this.getMaxEnergyStored())
+        if (this.getEnergyStored() >= this.getMaxEnergyStored(ForgeDirection.UP))
             hasFullEnergy = true;
-        if (hasFullEnergy && this.getEnergyStored() < this.getMaxEnergyStored() / 2)
+        if (hasFullEnergy && this.getEnergyStored() < this.getMaxEnergyStored(ForgeDirection.UP) / 2)
             hasFullEnergy = false;
 
         if (currentRecipe != null && inventory[kOutput[0]] == null) {
@@ -672,27 +672,13 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return true;
-    }
+    
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		// TODO Auto-generated method stub
 		return true;
 	}
 
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return this.MAX_ENERGY_STORED;
-	}
 
 
 	@Override

@@ -79,11 +79,7 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
         return false;
     }
 
-
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return false;
-    }
+    
 
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
@@ -91,16 +87,5 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
 		return false;
 	}
 
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

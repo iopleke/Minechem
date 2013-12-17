@@ -19,7 +19,7 @@ public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate {
         super((MinechemTileEntity) decomposer);
         this.decomposer = decomposer;
         this.state = decomposer.getState().ordinal();
-        this.energyUsage = decomposer.getEnergyUsage();
+        this.energyUsage = decomposer.getRequest();
     }
 
     public PacketDecomposerUpdate() {

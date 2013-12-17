@@ -4,9 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.api.util.Util;
@@ -43,6 +40,8 @@ import buildcraft.api.gates.ITrigger;
 import buildcraft.api.gates.ITriggerProvider;
 import buildcraft.api.inventory.ISpecialInventory;
 import buildcraft.api.transport.IPipe;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, ITriggerProvider, IMinechemTriggerProvider,
         ISpecialInventory, IMinechemMachinePeripheral, IFluidHandler {
@@ -104,9 +103,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
 
-        if (energyStored >= this.getMaxEnergyStored())
+        if (energyStored >= this.getMaxEnergyStored(ForgeDirection.UP))
             hasFullEnergy = true;
-        if (hasFullEnergy && energyStored < this.getMaxEnergyStored() / 2)
+        if (hasFullEnergy && energyStored < this.getMaxEnergyStored(ForgeDirection.UP) / 2)
             hasFullEnergy = false;
 
         if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput()) {
@@ -444,11 +443,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         }
     }
 
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return true;
-    }
-
 
 
 
@@ -459,17 +453,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	}
 
 
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return MAX_ENERGY_STORED;
-	}
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {

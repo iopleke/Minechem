@@ -195,10 +195,6 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
         return false;
     }
 
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return false;
-    }
 
 	@Override
 	void sendUpdatePacket() {
@@ -206,16 +202,5 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
 		
 	}
 
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 }

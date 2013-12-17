@@ -33,7 +33,7 @@ public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate {
         super.onReceive(player);
         if (this.tileEntity instanceof MinechemTileEntity) {
             this.powerReceptor = (MinechemTileEntity) this.tileEntity;
-            this.powerReceptor.setEnergyStored(this.energyStored);
+            this.powerReceptor.energyStored=(int) this.energyStored;
         }
     }
 

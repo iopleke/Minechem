@@ -40,22 +40,22 @@ public class TabEnergy extends Tab {
         if (!isFullyOpened())
             return;
         //TODO Convert Power Values
-        energyUsageRolling.add(energy.getEnergyUsage());
+        energyUsageRolling.add(energy.getRequest());
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.energy"), x + 22, y + 8, headerColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.usage") + ":", x + 22, y + 20, subheaderColour);
         fontRenderer.drawString(String.format("%.1f", energyUsageRolling.getAverage()) + " MJ/t", x + 22, y + 32, textColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.maxUsage") + ":", x + 22, y + 44, subheaderColour);
         //Arbitrary direction
         //Shouldn't matter for any machine
-        fontRenderer.drawString(energy.getRequest(ForgeDirection.UP) + " KW", x + 22, y + 56, textColour);
+        fontRenderer.drawString(energy.getRequest() + " RF/t", x + 22, y + 56, textColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.stored") + ":", x + 22, y + 68, subheaderColour);
-        fontRenderer.drawString(String.format("%.1f", energy.getEnergyStored()) + " KW", x + 22, y + 80, textColour);
+        fontRenderer.drawString(String.format("%.1f", energy.getEnergyStored()) + " RF", x + 22, y + 80, textColour);
     }
 
     @Override
     public String getTooltip() {
         if (!isOpen()) {
-            return String.format("%.1f", energy.getEnergyUsage()) + " MJ/t";
+            return String.format("%.1f", energy.getRequest()) + " MJ/t";
         } else
             return null;
     }

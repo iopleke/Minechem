@@ -303,10 +303,6 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
         return itemstack.itemID == MinechemItems.blueprint.itemID;
     }
 
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return false;
-    }
 
 	@Override
 	void sendUpdatePacket() {
@@ -314,16 +310,4 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
 		
 	}
 
-
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 }

@@ -316,10 +316,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
         }
     }
 
-    @Override
-    public boolean canConnect(ForgeDirection direction) {
-        return false;
-    }
+   
 
 
 	@Override
@@ -329,17 +326,6 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
 	}
 
 
-	@Override
-	public float getProvide(ForgeDirection direction) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public float getMaxEnergyStored() {
-		// TODO Auto-generated method stub
-		return 0;
-	}
 
 
 	public int getFusionEnergyStored() {

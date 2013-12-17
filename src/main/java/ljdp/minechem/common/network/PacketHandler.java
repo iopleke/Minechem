@@ -28,11 +28,11 @@ public class PacketHandler implements IPacketHandler {
         instance = this;
         dispatcher = new EasyPacketDispatcher(MINECHEM_PACKET_CHANNEL);
         decomposerUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketDecomposerUpdate.class, dispatcher);
-        printerUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketPrinterUpdate.class, dispatcher);
+        
         ghostBlockUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketGhostBlock.class, dispatcher);
         synthesisUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketSynthesisUpdate.class, dispatcher);
         activeJournalItemHandler = EasyPacketHandler.registerEasyPacket(PacketActiveJournalItem.class, dispatcher);
-        swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
+        //swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
     }
 
     @Override
