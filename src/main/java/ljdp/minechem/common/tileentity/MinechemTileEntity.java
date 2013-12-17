@@ -61,6 +61,7 @@ public abstract class MinechemTileEntity extends TileEntityUniversalElectrical i
 		if(this.inventory[slot] != null) {
 			ItemStack itemstack;
 			if(this.inventory[slot].stackSize <= amount) {
+				
 				itemstack = this.inventory[slot];
 				this.inventory[slot] = null;
 				return itemstack;

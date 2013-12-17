@@ -196,10 +196,22 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         if (this.inventory[slot] != null) {
             ItemStack itemstack;
             if (slot == kOutput[0]) {
-                if (takeInputStacks())
-                    takeEnergy(currentRecipe);
-                else
-                    return null;
+            	int toRemove=amount;
+            	while(toRemove>0){
+	                if (takeInputStacks()){
+	                    takeEnergy(currentRecipe);
+	                	toRemove--;
+	                }
+	                else{
+	                	if(amount==toRemove){
+	                		return null;
+	                	}else{
+	                		ItemStack result=getStackInSlot(slot).copy();
+	                		result.stackSize=(amount-toRemove);
+	                		return result;
+	                	}
+	                }
+            	}
             }
             if (this.inventory[slot].stackSize <= amount) {
                 itemstack = this.inventory[slot];
@@ -352,14 +364,33 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         PacketHandler.getInstance().synthesisUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
     }
 
+    
+    
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack) {
+    	
+        if(slot == kOutput[0]&&getStackInSlot(slot)!=null){
+        	if(itemstack==null){
+        		this.decrStackSize(slot, getStackInSlot(slot).stackSize);
+        		return;
+        	}
+        	if(getStackInSlot(slot).getItem()==itemstack.getItem()){
+        		if(getStackInSlot(slot).stackSize>itemstack.stackSize){
+            		this.decrStackSize(slot, getStackInSlot(slot).stackSize-itemstack.stackSize);
+            		return;
+            	}
+        	}
+        }
+
         super.setInventorySlotContents(slot, itemstack);
         if (slot == kJournal[0] && itemstack != null)
             onPutJournal(itemstack);
     }
 
     public boolean takeStacksFromStorage(boolean doTake) {
+    	if(this.currentRecipe==null){
+    		return false;
+    	}
         List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
         ItemStack[] storage = storageInventory.copyInventoryToArray();
         for (ItemStack ingredient : ingredients) {
@@ -666,11 +697,12 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
-		
+		//This is so hacky
+		//I'm honestly ashamed
 		if(var1==1){
 			return this.kStorage;
 		}
-		if(var1==0){
+		if(var1==0&&takeStacksFromStorage(false)){
 			return this.kOutput;
 		}
 		return this.kBottles;
@@ -686,7 +718,12 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
 	@Override
 	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
+		if(i==kOutput[0]){
+			if(takeStacksFromStorage(false)){
+				return true;
+			}
+			return false;
+		}
 		return true;
 	}
 	

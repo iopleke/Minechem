@@ -10,19 +10,6 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
     }
 }
-task("incrementBuildNumber")
-{
-    // increment build number
-    doFirst {
-        // increment
-        config.build_number = (config.build_number.toString().toInteger()) + 1
-        
-        // write back to the file
-        configFile.withWriter {
-            config.toProperties().store(it, "")
-        }
-    }
-}
 apply plugin: 'forge'
 
 version = 4.2
@@ -38,7 +25,6 @@ configFile.withReader {
     // read config.  it shall from now on be referenced as simply config or as project.config
     def prop = new Properties()
     prop.load(it)
-    version = project.config.mod_version + "-" + project.config.build_number
     project.ext.config = new ConfigSlurper().parse prop
     version = project.config.mod_version + "-" + project.config.build_number
 }
