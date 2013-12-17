@@ -49,7 +49,7 @@ public class TabEnergy extends Tab {
         //Shouldn't matter for any machine
         fontRenderer.drawString(energy.getRequest() + " RF/t", x + 22, y + 56, textColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.stored") + ":", x + 22, y + 68, subheaderColour);
-        fontRenderer.drawString(String.format("%.1f", energy.getEnergyStored()) + " RF", x + 22, y + 80, textColour);
+        fontRenderer.drawString(String.format("%d", energy.getEnergyStored()) + " RF", x + 22, y + 80, textColour);
     }
 
     @Override

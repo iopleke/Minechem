@@ -31,7 +31,7 @@ public class TabEnergySynthesis extends TabEnergy {
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.energy"), x + 22, y + 8, headerColour);
 
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.stored") + ":", x + 22, y + 68, subheaderColour);
-        fontRenderer.drawString(String.format("%.1f", energy.getEnergyStored()) + " MJ", x + 22, y + 80, textColour);
+        fontRenderer.drawString(String.format("%d", energy.getEnergyStored()) + " MJ", x + 22, y + 80, textColour);
 
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.activationEnergy") + ":", x + 22, y + 20, subheaderColour);
         fontRenderer.drawString(energyCost + " MJ", x + 22, y + 32, textColour);
