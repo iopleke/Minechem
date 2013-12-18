@@ -1,6 +1,34 @@
 package ljdp.minechem.api.core;
 
-import static ljdp.minechem.api.core.EnumElement.*;
+import static ljdp.minechem.api.core.EnumElement.Al;
+import static ljdp.minechem.api.core.EnumElement.As;
+import static ljdp.minechem.api.core.EnumElement.Be;
+import static ljdp.minechem.api.core.EnumElement.C;
+import static ljdp.minechem.api.core.EnumElement.Ca;
+import static ljdp.minechem.api.core.EnumElement.Cl;
+import static ljdp.minechem.api.core.EnumElement.Co;
+import static ljdp.minechem.api.core.EnumElement.Cr;
+import static ljdp.minechem.api.core.EnumElement.Cu;
+import static ljdp.minechem.api.core.EnumElement.F;
+import static ljdp.minechem.api.core.EnumElement.Fe;
+import static ljdp.minechem.api.core.EnumElement.Ga;
+import static ljdp.minechem.api.core.EnumElement.H;
+import static ljdp.minechem.api.core.EnumElement.K;
+import static ljdp.minechem.api.core.EnumElement.Li;
+import static ljdp.minechem.api.core.EnumElement.Mg;
+import static ljdp.minechem.api.core.EnumElement.Mn;
+import static ljdp.minechem.api.core.EnumElement.N;
+import static ljdp.minechem.api.core.EnumElement.Na;
+import static ljdp.minechem.api.core.EnumElement.Ni;
+import static ljdp.minechem.api.core.EnumElement.O;
+import static ljdp.minechem.api.core.EnumElement.P;
+import static ljdp.minechem.api.core.EnumElement.Pt;
+import static ljdp.minechem.api.core.EnumElement.Ra;
+import static ljdp.minechem.api.core.EnumElement.S;
+import static ljdp.minechem.api.core.EnumElement.Si;
+import static ljdp.minechem.api.core.EnumElement.Sr;
+import static ljdp.minechem.api.core.EnumElement.Ti;
+import static ljdp.minechem.api.core.EnumElement.Zn;
 
 import java.util.ArrayList;
 import java.util.Random;

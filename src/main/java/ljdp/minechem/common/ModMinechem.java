@@ -10,10 +10,12 @@ import ljdp.minechem.client.gui.tabs.TabStateControl;
 import ljdp.minechem.client.gui.tabs.TabStateControlSynthesis;
 import ljdp.minechem.client.gui.tabs.TabTable;
 import ljdp.minechem.common.blueprint.MinechemBlueprint;
+import ljdp.minechem.common.coating.CoatingRecipe;
+import ljdp.minechem.common.coating.CoatingSubscribe;
+import ljdp.minechem.common.coating.EnchantmentCoated;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.network.PacketHandler;
 import ljdp.minechem.common.recipe.ConfigurableRecipies;
-// import ljdp.minechem.common.plugins.BOPModule;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.computercraft.ICCMain;
@@ -21,6 +23,7 @@ import ljdp.minechem.fluid.FluidHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -34,7 +37,6 @@ import org.modstats.Modstats;
 
 import universalelectricity.prefab.TranslationHelper;
 import cpw.mods.fml.common.FMLLog;
-// import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -49,6 +51,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+// import ljdp.minechem.common.plugins.BOPModule;
+// import cpw.mods.fml.common.Loader;
 
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
 @ModstatInfo(prefix="minechem")
@@ -111,7 +115,9 @@ public class ModMinechem {
     }
     @EventHandler
     public void init(FMLInitializationEvent event) {
-
+    	CraftingManager.getInstance().getRecipeList().add(new CoatingRecipe());
+    	EnchantmentCoated.registerCoatings();
+    	MinecraftForge.EVENT_BUS.register(new CoatingSubscribe());
 		FluidHelper.registerFluids();
 		GameRegistry.registerWorldGenerator(new MinechemGeneration());
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());

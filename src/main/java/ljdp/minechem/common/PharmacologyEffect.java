@@ -4,28 +4,48 @@ import java.util.List;
 
 import ljdp.minechem.api.core.EnumMolecule;
 import ljdp.minechem.api.util.Constants;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 public class PharmacologyEffect {
- public static void triggerPlayerEffect(EnumMolecule molecule, EntityPlayer entityPlayer) {
+	
+ public static boolean givesEffect(EnumMolecule toTest){
+	 EnumMolecule[] possibles={EnumMolecule.water,EnumMolecule.starch,EnumMolecule.stevenk,EnumMolecule.sucrose,EnumMolecule.psilocybin,EnumMolecule.amphetamine,EnumMolecule.methamphetamine,EnumMolecule.poison,EnumMolecule.ethanol,EnumMolecule.cyanide,EnumMolecule.penicillin,EnumMolecule.testosterone,EnumMolecule.xanax,EnumMolecule.mescaline,EnumMolecule.asprin,EnumMolecule.shikimicAcid,EnumMolecule.phosgene,EnumMolecule.ttx,EnumMolecule.fingolimod,EnumMolecule.afroman,EnumMolecule.nod,EnumMolecule.hist,EnumMolecule.pal2,EnumMolecule.theobromine,EnumMolecule.ret,EnumMolecule.glycine,EnumMolecule.alinine,EnumMolecule.serine,EnumMolecule.arginine,EnumMolecule.redrocks,EnumMolecule.coke,EnumMolecule.metblue,EnumMolecule.meoh,EnumMolecule.radchlor,EnumMolecule.ctaxifolia,EnumMolecule.latropine};
+	 
+	 for(EnumMolecule molecule:possibles){
+		 if(toTest==molecule){
+			 return true;
+		 }
+	 }
+	 return false;
+ }
+ public static void triggerPlayerEffect(EnumMolecule molecule, EntityLivingBase entityPlayer) {
         World world = entityPlayer.worldObj;
         // Mandrake's Realm 
         switch (molecule) {
         case water:
-            entityPlayer.getFoodStats().addStats(1, .1F);
+        	if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(1, .1F);
+        	}
             break;
         case starch:
-            entityPlayer.getFoodStats().addStats(2, .2F);
+        	if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(2, .2F);
+        	}
             break;
         case stevenk:
-            entityPlayer.getFoodStats().addStats(2, .2F);
+        	if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(2, .2F);
+        	}
             break;
         case sucrose:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 5, 0));
-            entityPlayer.getFoodStats().addStats(1, .1F);
+            if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(1, .1F);
+            }
             break;
         case psilocybin:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
@@ -47,7 +67,9 @@ public class PharmacologyEffect {
             break;
         case ethanol:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 2));
-            entityPlayer.getFoodStats().addStats(1, .1F);
+            if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(1, .1F);
+            }
             break;
         case cyanide:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 120, 4));
@@ -61,7 +83,9 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             break;
         case xanax:  
-            cureAllPotions(world, entityPlayer);
+        	if(entityPlayer instanceof EntityPlayer){
+        		cureAllPotions(world, (EntityPlayer)entityPlayer);
+        	}
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 30, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
@@ -75,7 +99,9 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.blindness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             break;
         case asprin:
-            cureAllPotions(world, entityPlayer);
+        	if(entityPlayer instanceof EntityPlayer){
+        		cureAllPotions(world, (EntityPlayer)entityPlayer);
+        	}
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 1, 1));
             break;
         case shikimicAcid:
@@ -86,7 +112,7 @@ public class PharmacologyEffect {
             case aalc:
             case sulfuricAcid:
             case buli:
-			entityPlayer.attackEntityFrom(DamageSource.inFire, 2);
+			//entityPlayer.attackEntityFrom(DamageSource.inFire, 2);
             entityPlayer.setFire(100);
             break;
             // 
@@ -104,8 +130,10 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 5, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_SECOND * 80, 1));
             break;
-        case afroman: // Let's goto the park after dark, Smoke that tub of weed. - Afroman
-            cureAllPotions(world, entityPlayer);
+        case afroman:
+        	if(entityPlayer instanceof EntityPlayer){
+        		cureAllPotions(world, (EntityPlayer)entityPlayer);
+        	}
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 60, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 4));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_SECOND * 120, 5));
@@ -115,9 +143,11 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_MINUTE * 8, 1));
             break;
         case hist:
-            cureAllPotions(world, entityPlayer);
+        	if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(2, .2F);
+        		cureAllPotions(world, (EntityPlayer)entityPlayer);
+        	}
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_SECOND * 20, 5));
-            entityPlayer.getFoodStats().addStats(2, .2F);
             break;
         case pal2: // this sh*t is real nasty
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 60, 20));
@@ -130,7 +160,9 @@ public class PharmacologyEffect {
             break;
         case ret:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision.getId(), Constants.TICKS_PER_SECOND * 120, 1));
-            entityPlayer.getFoodStats().addStats(3, .1F);
+            if(entityPlayer instanceof EntityPlayer){
+        		((EntityPlayer)entityPlayer).getFoodStats().addStats(3, .1F);
+            }
             break;
         case glycine:
 			case alinine:
@@ -152,7 +184,9 @@ public class PharmacologyEffect {
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSpeed.getId(), Constants.TICKS_PER_SECOND * 60, 10));
 	        break; 
 	    case metblue:
-	        cureAllPotions(world, entityPlayer);
+	    	if(entityPlayer instanceof EntityPlayer){
+        		cureAllPotions(world, (EntityPlayer)entityPlayer);
+	    	}
 	        entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_SECOND * 30, 2));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.weakness.getId(), Constants.TICKS_PER_SECOND * 30, 2));
 	        break;
