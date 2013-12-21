@@ -137,7 +137,8 @@ public class ModMinechem {
     initComputerCraftAddon(event);
 	// initBOP();
 	DoDungeon();
-	DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { new Element(EnumElement.U, 32) }));
+	//Moved to enum ore
+	//DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { new Element(EnumElement.U, 32) }));
 
     logger.info("POSTINIT PASSED");
     }
