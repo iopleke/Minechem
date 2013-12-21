@@ -2,6 +2,10 @@ package ljdp.minechem.common;
 
 import java.util.logging.Logger;
 
+import ljdp.minechem.api.core.Chemical;
+import ljdp.minechem.api.core.Element;
+import ljdp.minechem.api.core.EnumElement;
+import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.client.TickHandler;
 import ljdp.minechem.client.gui.tabs.TabEnergy;
 import ljdp.minechem.client.gui.tabs.TabHelp;
@@ -133,6 +137,8 @@ public class ModMinechem {
     initComputerCraftAddon(event);
 	// initBOP();
 	DoDungeon();
+	DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { new Element(EnumElement.U, 32) }));
+
     logger.info("POSTINIT PASSED");
     }
 

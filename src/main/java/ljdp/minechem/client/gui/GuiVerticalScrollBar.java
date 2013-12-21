@@ -141,7 +141,7 @@ public class GuiVerticalScrollBar extends Gui {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,"gui/allitems.png"));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.TEXTURE_GUI_DIR+"allitems.png"));
         if (this.container.isScrollBarActive()) {
             drawTexturedModalRect(xpos, ypos, activeU, activeV, width, height);
         } else {

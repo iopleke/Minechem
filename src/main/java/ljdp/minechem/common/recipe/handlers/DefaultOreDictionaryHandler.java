@@ -68,7 +68,8 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 		switch (prefix) {
 		case ore:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
-					ore.getComposition(), 1.5d)));
+					ore.getComposition(), 3d)));
+			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, scaleFloor(ore.getComposition(),3d)));
 			break;
 		case ingot:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
@@ -79,6 +80,8 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 						ore.getComposition()));
 				registeredIngots.put(ore, event.Ore);
 			}
+			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore
+					.getComposition()));
 			break;
 		case nugget:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(

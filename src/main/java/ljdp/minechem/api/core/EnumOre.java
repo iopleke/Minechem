@@ -21,6 +21,10 @@ public enum EnumOre {
 	uranium("Uranium", new Element(EnumElement.U, 16)),
 	plutonium("Plutonium", new Element(EnumElement.Pu, 16)),
 	manganese("Manganese", new Element(EnumElement.Mn, 16)),
+
+	cobalt("Cobalt", new Element(EnumElement.Co, 16)),
+
+	ardite("Ardite", new Element(EnumElement.Ar, 16)),
 	;
 
 	private String name;

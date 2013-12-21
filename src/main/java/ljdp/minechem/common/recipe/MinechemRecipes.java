@@ -1323,8 +1323,7 @@ public class MinechemRecipes {
         
         GameRegistry.addRecipe(new RecipeJournalCloning());
         
-        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { this.element(EnumElement.U, 32) }));
-
+       
         
 
 
