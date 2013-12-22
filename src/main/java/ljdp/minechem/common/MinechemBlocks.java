@@ -56,6 +56,7 @@ public class MinechemBlocks {
     private static int uraniumID;
     public static void loadConfig(Configuration config) {
         int baseID = 4012;
+        ModMinechem.enchantmentStartId = config.get("Misc", "EnchantmentId", 150).getInt(150);
         microscopeID = getBlockConfig(config, "Microscope", baseID++);
         decomposerID = getBlockConfig(config, "Decomposer", baseID++);
         synthesisID = getBlockConfig(config, "Synthesis", baseID++);

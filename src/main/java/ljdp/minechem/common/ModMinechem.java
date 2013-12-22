@@ -171,6 +171,9 @@ public class ModMinechem {
     }
   }
 */
+	
+	public static int enchantmentStartId;
+	
     private void loadConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());
         MinechemBlocks.loadConfig(config);

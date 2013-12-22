@@ -3,6 +3,7 @@ package ljdp.minechem.common.coating;
 import java.util.HashMap;
 
 import ljdp.minechem.api.core.EnumMolecule;
+import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.PharmacologyEffect;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
@@ -65,6 +66,7 @@ public class EnchantmentCoated extends Enchantment {
     }
 
 	public static void registerCoatings() {
+		enchantmentNextId=ModMinechem.enchantmentStartId;
 		for(EnumMolecule molecule:EnumMolecule.values()){
 			if(PharmacologyEffect.givesEffect(molecule)){
 				new EnchantmentCoated(molecule);
