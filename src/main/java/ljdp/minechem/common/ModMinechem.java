@@ -120,8 +120,6 @@ public class ModMinechem {
     @EventHandler
     public void init(FMLInitializationEvent event) {
     	CraftingManager.getInstance().getRecipeList().add(new CoatingRecipe());
-    	EnchantmentCoated.registerCoatings();
-    	MinecraftForge.EVENT_BUS.register(new CoatingSubscribe());
 		FluidHelper.registerFluids();
 		GameRegistry.registerWorldGenerator(new MinechemGeneration());
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
@@ -137,6 +135,9 @@ public class ModMinechem {
     initComputerCraftAddon(event);
 	// initBOP();
 	DoDungeon();
+	//Flexible enchantment location
+	EnchantmentCoated.registerCoatings();
+	MinecraftForge.EVENT_BUS.register(new CoatingSubscribe());
 	//Moved to enum ore
 	//DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { new Element(EnumElement.U, 32) }));
 
@@ -171,8 +172,6 @@ public class ModMinechem {
     }
   }
 */
-	
-	public static int enchantmentStartId;
 	
     private void loadConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(event.getSuggestedConfigurationFile());

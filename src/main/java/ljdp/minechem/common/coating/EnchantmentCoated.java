@@ -15,8 +15,8 @@ public class EnchantmentCoated extends Enchantment {
 
 	private EnumMolecule chemical;
 	public static HashMap<EnumMolecule,EnchantmentCoated> chemLookup=new HashMap();
-	protected EnchantmentCoated(EnumMolecule chem) {
-		super(enchantmentNextId++, 0, EnumEnchantmentType.weapon);
+	protected EnchantmentCoated(EnumMolecule chem, int id) {
+		super(id, 0, EnumEnchantmentType.weapon);
 		this.chemical=chem;
 		this.setName(chem.descriptiveName()+" Coated");
 		EnchantmentCoated.chemLookup.put(chem, this);
@@ -26,8 +26,6 @@ public class EnchantmentCoated extends Enchantment {
 	public void applyEffect(EntityLivingBase entity){
 		PharmacologyEffect.triggerPlayerEffect(this.chemical, entity);
 	}
-	//Config file if conflicts appear
-	public static int enchantmentNextId=150;
 	
 	
 	/**
@@ -66,10 +64,15 @@ public class EnchantmentCoated extends Enchantment {
     }
 
 	public static void registerCoatings() {
-		enchantmentNextId=ModMinechem.enchantmentStartId;
 		for(EnumMolecule molecule:EnumMolecule.values()){
 			if(PharmacologyEffect.givesEffect(molecule)){
-				new EnchantmentCoated(molecule);
+				for(int i=0;i<Enchantment.enchantmentsList.length;i++){
+					if(Enchantment.enchantmentsList[i]==null){
+
+						new EnchantmentCoated(molecule, i);
+						break;
+					}
+				}
 			}
 		}
 		
