@@ -7,6 +7,7 @@ import ljdp.minechem.common.containers.ContainerFusion;
 import ljdp.minechem.common.tileentity.TileEntityFusion;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -75,6 +76,13 @@ public class GuiFusion extends GuiContainerTabbed {
             if (energy < targetEnergy)
                 energy = targetEnergy;
         }
+    }
+
+    @Override
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
+            int h) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

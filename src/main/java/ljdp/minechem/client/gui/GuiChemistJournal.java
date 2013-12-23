@@ -24,6 +24,7 @@ import ljdp.minechem.common.recipe.DecomposerRecipeHandler;
 import ljdp.minechem.common.recipe.SynthesisRecipeHandler;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -395,6 +396,13 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     @Override
     public int getScrollAmount() {
         return 5;
+    }
+
+    @Override
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
+            int h) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }
