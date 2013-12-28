@@ -3,6 +3,7 @@ package ljdp.minechem.client.gui;
 import ljdp.minechem.client.gui.tabs.TabHelp;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
@@ -39,6 +40,13 @@ public class GuiChemicalStorage extends GuiContainerTabbed {
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.inventoryRows * 18 + 17);
         this.drawTexturedModalRect(var5, var6 + this.inventoryRows * 18 + 17, 0, 126, this.xSize, 96);
+    }
+
+    @Override
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
+            int h) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }

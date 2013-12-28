@@ -35,4 +35,14 @@ public interface INEIGuiHandler
      * @return True if the drag n drop was handled. False to resume processing through other routes. The held stack will be deleted if draggedStack.stackSize == 0
      */
     public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button);
+    
+    /**
+     * Used to prevent the item panel from drawing on top of other gui elements.
+     * @param x The x coordinate of the rectangle bounding the slot
+     * @param y The y coordinate of the rectangle bounding the slot
+     * @param w The w coordinate of the rectangle bounding the slot
+     * @param h The h coordinate of the rectangle bounding the slot
+     * @return true if the item panel slot within the specified rectangle should not be rendered.
+     */
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h);
 }
