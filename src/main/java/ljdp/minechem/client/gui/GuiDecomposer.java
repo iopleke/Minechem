@@ -7,6 +7,7 @@ import ljdp.minechem.common.containers.ContainerDecomposer;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
@@ -48,6 +49,13 @@ public class GuiDecomposer extends GuiContainerTabbed {
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
         
+    }
+
+    @Override
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
+            int h) {
+        // TODO Auto-generated method stub
+        return false;
     }
 
 }
