@@ -778,6 +778,12 @@ public class MinechemRecipes {
 		ItemStack itemDiamond = new ItemStack(Item.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond,
 				new Chemical[] { this.molecule(EnumMolecule.fullrene, 4) }));
+		//	Polytool
+		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItems.polytool), true, '\uea60',
+				new Chemical[] { null, this.molecule(EnumMolecule.fullrene,64),
+						null, this.molecule(EnumMolecule.fullrene,64), null,
+						this.molecule(EnumMolecule.fullrene,64), null,
+						this.molecule(EnumMolecule.fullrene,64), null }));
 		SynthesisRecipe.add(new SynthesisRecipe(itemDiamond, true, '\uea60',
 				new Chemical[] { null, this.molecule(EnumMolecule.fullrene),
 						null, this.molecule(EnumMolecule.fullrene), null,
@@ -1297,6 +1303,7 @@ public class MinechemRecipes {
         GameRegistry.addRecipe(MinechemItems.concaveLens, new Object[] { "G G", "GGG", "G G", Character.valueOf('G'), blockGlass });
         GameRegistry.addRecipe(MinechemItems.convexLens, new Object[] { " G ", "GGG", " G ", Character.valueOf('G'), blockGlass });
         GameRegistry.addRecipe(MinechemItems.microscopeLens, new Object[] { "A", "B", "A", Character.valueOf('A'), MinechemItems.convexLens, Character.valueOf('B'), MinechemItems.concaveLens });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocks.microscope), new Object[] { " LI", " PI", "III", Character.valueOf('L'), MinechemItems.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocks.microscope), new Object[] { " LI", " PI", "III", Character.valueOf('L'), MinechemItems.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron });
         GameRegistry.addRecipe(new ItemStack(MinechemItems.atomicManipulator), new Object[] { "PPP", "PIP", "PPP", Character.valueOf('P'), new ItemStack(Block.pistonBase), Character.valueOf('I'), blockIron });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocks.decomposer), new Object[] { "III", "IAI", "IRI", Character.valueOf('A'), minechemItemsAtomicManipulator, Character.valueOf('I'), itemIngotIron, Character.valueOf('R'), itemRedstone });

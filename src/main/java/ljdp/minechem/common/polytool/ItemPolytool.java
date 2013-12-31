@@ -113,7 +113,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyContainerItem {
 
 	}
 
-
+	@Override
 	public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
 	{
 		par2EntityLivingBase.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLivingBase), getSwordStr(par1ItemStack));
@@ -128,8 +128,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyContainerItem {
 
 	public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
 	{
-		super.onBlockDestroyed(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLivingBase);
-
+		
 		ArrayList upgrades=getUpgrades(par1ItemStack);
 		Iterator iter=upgrades.iterator();
 		while(iter.hasNext()){
