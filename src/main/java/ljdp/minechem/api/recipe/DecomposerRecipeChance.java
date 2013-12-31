@@ -21,8 +21,9 @@ public class DecomposerRecipeChance extends DecomposerRecipe {
     public ArrayList<Chemical> getOutput() {
         if (random.nextFloat() < this.chance)
             return super.getOutput();
-        else
+        else{
             return null;
+        }
     }
 
     public float getChance() {

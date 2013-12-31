@@ -11,7 +11,7 @@ public class DecomposerRecipe {
     public static ArrayList<DecomposerRecipe> recipes = new ArrayList<DecomposerRecipe>();
 
     ItemStack input;
-    ArrayList<Chemical> output = new ArrayList<Chemical>();
+    public ArrayList<Chemical> output = new ArrayList<Chemical>();
 
     public static DecomposerRecipe add(DecomposerRecipe recipe) {
         recipes.add(recipe);

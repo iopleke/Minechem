@@ -2,10 +2,6 @@ package ljdp.minechem.common;
 
 import java.util.logging.Logger;
 
-import ljdp.minechem.api.core.Chemical;
-import ljdp.minechem.api.core.Element;
-import ljdp.minechem.api.core.EnumElement;
-import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.client.TickHandler;
 import ljdp.minechem.client.gui.tabs.TabEnergy;
 import ljdp.minechem.client.gui.tabs.TabHelp;
@@ -19,6 +15,7 @@ import ljdp.minechem.common.coating.CoatingSubscribe;
 import ljdp.minechem.common.coating.EnchantmentCoated;
 import ljdp.minechem.common.gates.MinechemTriggers;
 import ljdp.minechem.common.network.PacketHandler;
+import ljdp.minechem.common.polytool.PolytoolEventHandler;
 import ljdp.minechem.common.recipe.ConfigurableRecipies;
 import ljdp.minechem.common.recipe.MinechemRecipes;
 import ljdp.minechem.common.utils.ConstantValue;
@@ -138,6 +135,8 @@ public class ModMinechem {
 	//Flexible enchantment location
 	EnchantmentCoated.registerCoatings();
 	MinecraftForge.EVENT_BUS.register(new CoatingSubscribe());
+
+	MinecraftForge.EVENT_BUS.register(new PolytoolEventHandler());
 	//Moved to enum ore
 	//DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(MinechemBlocks.uranium), new Chemical[] { new Element(EnumElement.U, 32) }));
 

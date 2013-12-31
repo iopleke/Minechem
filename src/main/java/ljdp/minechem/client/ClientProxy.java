@@ -16,6 +16,7 @@ import ljdp.minechem.client.sound.MinechemSoundEvent;
 import ljdp.minechem.common.CommonProxy;
 import ljdp.minechem.common.MinechemBlocks;
 import ljdp.minechem.common.MinechemItems;
+import ljdp.minechem.common.polytool.PolytoolInventoryRender;
 import ljdp.minechem.common.tileentity.TileEntityBlueprintProjector;
 import ljdp.minechem.common.tileentity.TileEntityChemicalStorage;
 import ljdp.minechem.common.tileentity.TileEntityDecomposer;
@@ -53,7 +54,8 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.preloadTexture(CHEMICAL_STORAGE_MODEL);
         */
         CUSTOM_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-
+        //Possible future feature
+        //MinecraftForgeClient.registerItemRenderer(MinechemItems.polytool.itemID, new PolytoolInventoryRender());
         MinecraftForgeClient.registerItemRenderer(MinechemItems.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItems.molecule.itemID, new ItemMoleculeRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.microscope.blockID].itemID, new ItemMicroscopeRenderer());

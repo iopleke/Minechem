@@ -26,6 +26,7 @@ public class DecomposerRecipeHandler {
         DecomposerRecipe recipe = getRecipe(input);
         if (recipe != null) {
             ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutput());
+            System.out.println(recipe.getOutput());
             return stacks;
         }
         return null;

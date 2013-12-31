@@ -5,61 +5,61 @@ import static ljdp.minechem.api.core.EnumRadioactivity.*;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum EnumElement {
-    H("Hydrogen", nonmetal, gas, stable),
-    He("Helium", inertGas, gas, stable),
-    Li("Lithium", alkaliMetal, solid, stable),
-    Be("Beryllium", alkalineEarthMetal, solid, stable),
-    B("Boron", semimetallic, solid, stable),
-    C("Carbon", nonmetal, solid, stable),
-    N("Nitrogen", nonmetal, gas, stable),
-    O("Oxygen", nonmetal, gas, stable),
-    F("Flourine", halogen, gas, stable),
-    Ne("Neon", inertGas, gas, stable),
-    Na("Sodium", alkaliMetal, solid, stable),
-    Mg("Magnesium", alkalineEarthMetal, solid, stable),
-    Al("Aluminium", otherMetal, solid, stable),
-    Si("Silicon", otherMetal, solid, stable),
-    P("Phosphorus", nonmetal, solid, stable),
-    S("Sulfur", nonmetal, solid, stable),
-    Cl("Chlorine", halogen, gas, stable),
-    Ar("Argon", inertGas, gas, stable),
+    H("Hydrogen", nonmetal, gas, stable),//Done
+    He("Helium", inertGas, gas, stable),//Done
+    Li("Lithium", alkaliMetal, solid, stable),//Done
+    Be("Beryllium", alkalineEarthMetal, solid, stable),//Done
+    B("Boron", semimetallic, solid, stable),//Done
+    C("Carbon", nonmetal, solid, stable),//Done
+    N("Nitrogen", nonmetal, gas, stable),//Done
+    O("Oxygen", nonmetal, gas, stable),//Done
+    F("Fluorine", halogen, gas, stable),//Done
+    Ne("Neon", inertGas, gas, stable),//Done
+    Na("Sodium", alkaliMetal, solid, stable),//Done
+    Mg("Magnesium", alkalineEarthMetal, solid, stable),//Done
+    Al("Aluminium", otherMetal, solid, stable),//Alloy
+    Si("Silicon", otherMetal, solid, stable),//Done
+    P("Phosphorus", nonmetal, solid, stable),//Done
+    S("Sulfur", nonmetal, solid, stable),//Done
+    Cl("Chlorine", halogen, gas, stable),//Done
+    Ar("Argon", inertGas, gas, stable),//Done
     K("Potassium", alkaliMetal, solid, stable),
-    Ca("Calcium", alkalineEarthMetal, solid, stable),
-    Sc("Scandium", transitionMetal, solid, stable),
-    Ti("Titanium", transitionMetal, solid, stable),
-    V("Vanadium", transitionMetal, solid, stable),
-    Cr("Chromium", transitionMetal, solid, stable),
-    Mn("Manganese", transitionMetal, solid, stable),
-    Fe("Iron", transitionMetal, solid, stable),
-    Co("Cobalt", transitionMetal, solid, stable),
-    Ni("Nickel", transitionMetal, solid, stable),
+    Ca("Calcium", alkalineEarthMetal, solid, stable),//Done
+    Sc("Scandium", transitionMetal, solid, stable),//Alloy
+    Ti("Titanium", transitionMetal, solid, stable),//Done
+    V("Vanadium", transitionMetal, solid, stable),//Alloy
+    Cr("Chromium", transitionMetal, solid, stable),//Done
+    Mn("Manganese", transitionMetal, solid, stable),//Alloy
+    Fe("Iron", transitionMetal, solid, stable),//Done
+    Co("Cobalt", transitionMetal, solid, stable),//Alloy
+    Ni("Nickel", transitionMetal, solid, stable),//Done
     Cu("Copper", transitionMetal, solid, stable),
     Zn("Zinc", transitionMetal, solid, stable),
-    Ga("Gallium", otherMetal, solid, stable),
+    Ga("Gallium", otherMetal, solid, stable),//Alloy
     Ge("Germanium", semimetallic, solid, stable),
     As("Arsenic", semimetallic, solid, stable),
-    Se("Selenium", nonmetal, solid, stable),
-    Br("Bromine", halogen, liquid, stable),
-    Kr("Krypton", inertGas, gas, stable),
-    Rb("Rubidium", alkaliMetal, solid, stable),
-    Sr("Strontium", alkalineEarthMetal, solid, stable),
-    Y("Yttrium", transitionMetal, solid, stable),
-    Zr("Zirconium", transitionMetal, solid, stable),
-    Nb("Niobium", transitionMetal, solid, stable),
-    Mo("Molybdenum", transitionMetal, solid, stable),
+    Se("Selenium", nonmetal, solid, stable),//Alloy
+    Br("Bromine", halogen, liquid, stable),//Done
+    Kr("Krypton", inertGas, gas, stable),//Done
+    Rb("Rubidium", alkaliMetal, solid, stable),//Done
+    Sr("Strontium", alkalineEarthMetal, solid, stable),//Alloy
+    Y("Yttrium", transitionMetal, solid, stable),//Alloy
+    Zr("Zirconium", transitionMetal, solid, stable),//Done
+    Nb("Niobium", transitionMetal, solid, stable),//Alloy
+    Mo("Molybdenum", transitionMetal, solid, stable),//Alloy
     Tc("Technetium", transitionMetal, solid, hardlyRadioactive),
-    Ru("Ruthenium", transitionMetal, solid, stable),
-    Rh("Rhodium", transitionMetal, solid, stable),
-    Pd("Palladium", transitionMetal, solid, stable),
-    Ag("Silver", transitionMetal, solid, stable),
-    Cd("Cadmium", transitionMetal, solid, stable),
+    Ru("Ruthenium", transitionMetal, solid, stable),//Alloy
+    Rh("Rhodium", transitionMetal, solid, stable),//Alloy
+    Pd("Palladium", transitionMetal, solid, stable),//Alloy
+    Ag("Silver", transitionMetal, solid, stable),//Done
+    Cd("Cadmium", transitionMetal, solid, stable),//Alloy
     In("Indium", otherMetal, solid, stable),
     Sn("Tin", otherMetal, solid, stable),
     Sb("Antimony", semimetallic, solid, stable),
     Te("Tellurium", semimetallic, solid, stable),
     I("Iodine", halogen, solid, stable),
     Xe("Xenon", inertGas, gas, stable),
-    Cs("Caesium", alkaliMetal, solid, stable),
+    Cs("Caesium", alkaliMetal, solid, stable),//Done
     Ba("Barium", alkalineEarthMetal, solid, stable),
     La("Lanthanum", lanthanide, solid, stable),
     Ce("Cerium", lanthanide, solid, stable),
@@ -82,21 +82,21 @@ public enum EnumElement {
     Re("Rhenium", transitionMetal, solid, stable),
     Os("Osmium", transitionMetal, solid, stable),
     Ir("Iridium", transitionMetal, solid, stable),
-    Pt("Platinum", transitionMetal, solid, stable),
-    Au("Gold", transitionMetal, solid, stable),
-    Hg("Mercury", transitionMetal, liquid, stable),
+    Pt("Platinum", transitionMetal, solid, stable),//Done
+    Au("Gold", transitionMetal, solid, stable),//Done
+    Hg("Mercury", transitionMetal, liquid, stable),//Done
     Tl("Thallium", otherMetal, solid, stable),
-    Pb("Lead", otherMetal, solid, stable),
+    Pb("Lead", otherMetal, solid, stable),//Done
     Bi("Bismuth", otherMetal, solid, hardlyRadioactive),
     Po("Polonium", semimetallic, solid, radioactive),
     At("Astantine", halogen, solid, highlyRadioactive),
     Rn("Radon", inertGas, gas, radioactive),
-    Fr("Francium", alkaliMetal, solid, highlyRadioactive),
+    Fr("Francium", alkaliMetal, solid, highlyRadioactive),//Done
     Ra("Radium", alkalineEarthMetal, solid, slightlyRadioactive),
     Ac("Actinium", actinide, solid, radioactive),
     Th("Thorium", actinide, solid, hardlyRadioactive),
     Pa("Protactinium", actinide, solid, slightlyRadioactive),
-    U("Uranium", actinide, solid, hardlyRadioactive),
+    U("Uranium", actinide, solid, hardlyRadioactive),//Done
     Np("Neptunium", actinide, solid, hardlyRadioactive),
     Pu("Plutonium", actinide, solid, hardlyRadioactive),
     Am("Americium", actinide, solid, slightlyRadioactive),

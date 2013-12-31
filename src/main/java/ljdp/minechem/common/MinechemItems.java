@@ -12,9 +12,11 @@ import ljdp.minechem.common.items.ItemMolecule;
 import ljdp.minechem.common.items.ItemPills;
 import ljdp.minechem.common.items.ItemTestTube;
 import ljdp.minechem.common.items.PhotonicInduction;
+import ljdp.minechem.common.polytool.ItemPolytool;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
@@ -40,6 +42,8 @@ public class MinechemItems {
     public static PhotonicInduction IAintAvinit;
     public static ItemPills EmptyPillz;
     public static ItemStack minechempills; 
+    public static Item polytool;
+    private static int polytoolID;
     private static int elementID;
     private static int moleculeID;
     private static int atomicManipulatorID;
@@ -71,6 +75,8 @@ public class MinechemItems {
         hazmatHeadID = getItemConfig(config, "HazmatHead", baseID++);
         photonID = getItemConfig(config, "Hammer", baseID++);
 		pillzID = getItemConfig(config, "EmptyPills", baseID++);
+
+		polytoolID = getItemConfig(config, "Polytool", baseID++);
     }
 
     private static int getItemConfig(Configuration config, String key, int defaultID) {
@@ -92,6 +98,7 @@ public class MinechemItems {
         hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
 		EmptyPillz = new ItemPills( pillzID,0);
+		polytool = new ItemPolytool(polytoolID);
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));

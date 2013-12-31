@@ -3,6 +3,8 @@ package ljdp.minechem.common.assembler;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import ljdp.minechem.common.CoordTuple;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
