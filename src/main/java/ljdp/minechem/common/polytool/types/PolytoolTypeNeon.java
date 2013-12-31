@@ -48,4 +48,10 @@ public class PolytoolTypeNeon extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Gives players night vision during combat";
+	}
+
 }

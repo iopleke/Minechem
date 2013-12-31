@@ -50,4 +50,10 @@ public class PolytoolTypeBromine extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Purifies gold ores";
+	}
+
 }

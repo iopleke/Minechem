@@ -45,4 +45,10 @@ public class PolytoolTypeRubidium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Creates explosion if in water";
+	}
+
 }

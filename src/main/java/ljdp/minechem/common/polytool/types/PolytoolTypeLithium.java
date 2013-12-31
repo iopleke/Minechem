@@ -47,4 +47,10 @@ public class PolytoolTypeLithium extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Can charge infinitley for logarithmic bonuses";
+	}
+
 }

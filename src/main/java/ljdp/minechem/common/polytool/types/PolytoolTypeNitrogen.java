@@ -39,4 +39,10 @@ public class PolytoolTypeNitrogen extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Preservation allows retrieving of fresh meat from rotten flesh";
+	}
+
 }

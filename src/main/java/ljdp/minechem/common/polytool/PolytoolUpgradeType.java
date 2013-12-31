@@ -28,6 +28,7 @@ public abstract class PolytoolUpgradeType {
 	public void onTickFull(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5){
 		this.onTick();
 	}
+	public abstract  String getDescription();
 
 
 }

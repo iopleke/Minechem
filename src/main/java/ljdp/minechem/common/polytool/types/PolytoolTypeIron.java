@@ -71,4 +71,10 @@ public class PolytoolTypeIron extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Mines deposits of ores";
+	}
+
 }

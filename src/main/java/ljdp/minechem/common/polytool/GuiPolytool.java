@@ -5,6 +5,8 @@ import java.util.Iterator;
 import java.util.Random;
 
 import ljdp.minechem.api.core.EnumElement;
+import ljdp.minechem.common.MinechemItems;
+import ljdp.minechem.common.items.ItemElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -72,6 +74,8 @@ public class GuiPolytool extends GuiContainer{
 			((GuiElementHelper)iter.next()).draw(this, renders);
 		}
 		
+
+		drawItemStack(new ItemStack(MinechemItems.polytool),80,42,"");
 		fontRenderer.drawString("Sword: "+ItemPolytool.instance.getSwordStr(polytool),guiLeft+10, guiTop+80,0x404040);
 		fontRenderer.drawString("Ores: "+ItemPolytool.instance.getPickaxeStr(polytool),guiLeft+10, guiTop+90,0x404040);
 		fontRenderer.drawString("Stone: "+ItemPolytool.instance.getStoneStr(polytool),guiLeft+10, guiTop+100,0x404040);
@@ -81,8 +85,6 @@ public class GuiPolytool extends GuiContainer{
 	}
 	public void addUpgrade(PolytoolUpgradeType upgrade) {
 		Random rand=new Random();
-		this.polytool=player.getCurrentItem();
-		drawItemStack(polytool,100,100,"");
 		for(int i=0;i<upgrade.power;i++){
 			elements.add(new GuiElementHelper(1+rand.nextInt(2), rand.nextDouble()*Math.PI*2, upgrade.getElement()));
 		}

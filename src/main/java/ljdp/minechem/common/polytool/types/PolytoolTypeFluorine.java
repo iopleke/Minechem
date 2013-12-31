@@ -45,4 +45,10 @@ public class PolytoolTypeFluorine extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Preserves teeth to give you bonus food when mining";
+	}
+
 }

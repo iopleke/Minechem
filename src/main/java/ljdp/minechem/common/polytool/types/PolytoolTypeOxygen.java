@@ -41,4 +41,10 @@ public class PolytoolTypeOxygen extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Gives extra air when mining underwater";
+	}
+
 }

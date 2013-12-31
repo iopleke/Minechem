@@ -55,5 +55,11 @@ public class PolytoolTypePlatnium extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Bonus XP";
+	}
+
 
 }

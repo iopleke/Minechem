@@ -61,4 +61,10 @@ public class PolytoolTypeGold extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Ocasionally creates lightning strikes which chage inventory";
+	}
+
 }

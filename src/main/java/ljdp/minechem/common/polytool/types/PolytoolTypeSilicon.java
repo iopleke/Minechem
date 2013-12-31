@@ -39,4 +39,10 @@ public class PolytoolTypeSilicon extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Advanced circuitry decomposes mob drops";
+	}
+
 }

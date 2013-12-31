@@ -52,4 +52,10 @@ public class PolytoolTypeCarbon extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "More drops from coal and diamond ores";
+	}
+
 }

@@ -54,4 +54,10 @@ public class PolytoolTypeHelium extends PolytoolUpgradeType {
         }
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Hit entities float away";
+	}
+
 }

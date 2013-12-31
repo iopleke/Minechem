@@ -45,4 +45,10 @@ public class PolytoolTypeFrancium extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Creates explosions when raining";
+	}
+
 }

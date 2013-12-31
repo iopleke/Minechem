@@ -39,4 +39,10 @@ public class PolytoolTypeTitanium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Better chance to collect tools from mob drops";
+	}
+
 }

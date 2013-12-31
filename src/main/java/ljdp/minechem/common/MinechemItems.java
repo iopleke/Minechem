@@ -99,6 +99,7 @@ public class MinechemItems {
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
 		EmptyPillz = new ItemPills( pillzID,0);
 		polytool = new ItemPolytool(polytoolID);
+		LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));

@@ -32,7 +32,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyContainerItem {
 		super(par1, EnumToolMaterial.IRON);
 		instance=this;
 		setCreativeTab(ModMinechem.minechemTab);
-		setUnlocalizedName("minechem.itemPolytool");
+		setUnlocalizedName("Polytool");
 	}
 
 

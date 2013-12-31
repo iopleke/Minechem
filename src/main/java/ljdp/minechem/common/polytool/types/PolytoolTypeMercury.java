@@ -50,4 +50,10 @@ public class PolytoolTypeMercury extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Warns of lava underneath";
+	}
+
 }

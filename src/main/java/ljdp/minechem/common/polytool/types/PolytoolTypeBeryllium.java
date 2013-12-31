@@ -41,4 +41,10 @@ public class PolytoolTypeBeryllium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Beheading";
+	}
+
 }

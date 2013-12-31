@@ -49,4 +49,10 @@ public class PolytoolTypeZirconium extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Makes fake diamonds when mining dirt";
+	}
+
 }

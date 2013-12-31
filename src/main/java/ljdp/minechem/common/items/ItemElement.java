@@ -6,9 +6,11 @@ import ljdp.minechem.api.core.EnumClassification;
 import ljdp.minechem.api.core.EnumElement;
 import ljdp.minechem.api.core.EnumRadioactivity;
 import ljdp.minechem.api.util.Constants;
+import ljdp.minechem.common.EnumColor;
 import ljdp.minechem.common.MinechemItems;
 import ljdp.minechem.common.ModMinechem;
 import ljdp.minechem.common.RadiationInfo;
+import ljdp.minechem.common.polytool.PolytoolHelper;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -21,6 +23,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+
+import org.lwjgl.input.Keyboard;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -155,6 +160,22 @@ import cpw.mods.fml.relauncher.SideOnly;
 	        par3List.add(radioactivityColor + radioactiveName + " " + timeLeft);
 	        par3List.add(getClassification(itemstack));
 	        par3List.add(getRoomState(itemstack));
+	        
+	        //Polytool Detail
+	        if(Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)||Keyboard.isKeyDown(Keyboard.KEY_RSHIFT)){
+	        	String polytoolDesc=PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack),1).getDescription();
+	        	//String localizedDesc=MinechemHelper.getLocalString("polytool.description."+polytoolDesc);
+	        	
+	        	//if(localizedDesc.equals("")){
+	        	String localizedDesc=polytoolDesc;
+	        	//}
+	        	
+	        	par3List.add(EnumColor.AQUA+localizedDesc);
+	        	
+	        }else{
+	        	par3List.add(EnumColor.DARK_GREEN+"SHIFT to show polytool information");
+	        }
+	        
 	    }
 
 	    private String getRadioactiveLife(ItemStack itemstack) {

@@ -51,4 +51,10 @@ public class PolytoolTypeUranium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Area of Effect wither";
+	}
+
 }

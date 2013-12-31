@@ -42,4 +42,10 @@ public class PolytoolTypeCaesium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Creates explosion when mining stone";
+	}
+
 }

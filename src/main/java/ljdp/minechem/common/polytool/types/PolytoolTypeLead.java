@@ -54,4 +54,10 @@ public class PolytoolTypeLead extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Sends nearby entities flying to the ground";
+	}
+
 }

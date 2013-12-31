@@ -42,4 +42,10 @@ public class PolytoolTypeSodium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Lights up area when mining";
+	}
+
 }

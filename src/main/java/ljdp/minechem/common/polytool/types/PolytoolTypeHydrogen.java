@@ -43,4 +43,10 @@ public class PolytoolTypeHydrogen extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Creates explosion if hit entity is on fire";
+	}
+
 }

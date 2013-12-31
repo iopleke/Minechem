@@ -53,5 +53,11 @@ public class PolytoolTypeChromium extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Chance to change color of wool when mined";
+	}
+
 
 }

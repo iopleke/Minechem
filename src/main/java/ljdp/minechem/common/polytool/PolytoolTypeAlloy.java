@@ -35,6 +35,9 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType {
 	public float getStrShovel(){
 		return this.alloy.shovel*this.power;
 	}
+	
+	
+	
 	@Override
 	public float getStrVsBlock(ItemStack itemStack, Block block) {
 		//There must be a better way to do this
@@ -78,6 +81,20 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType {
 
 	@Override
 	public void onTick() {
+	}
+
+	@Override
+	public String getDescription() {
+		
+		String result="";
+		
+		result += "Ore: "+this.getStrOre()+"\n";
+		result += "Stone: "+this.getStrStone()+"\n";
+		result += "Sword: "+this.getStrSword()+"\n";
+		result += "Axe: "+this.getStrAxe()+"\n";
+		result += "Shovel: "+this.getStrShovel()+"\n";
+		
+		return result;
 	}
 
 }

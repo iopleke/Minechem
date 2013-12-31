@@ -39,4 +39,10 @@ public class PolytoolTypeCalcium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Get extra bones";
+	}
+
 }

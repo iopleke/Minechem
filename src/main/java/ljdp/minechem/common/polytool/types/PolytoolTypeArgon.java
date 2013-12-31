@@ -44,4 +44,10 @@ public class PolytoolTypeArgon extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Does extra suffocation damage when in a cave";
+	}
+
 }

@@ -56,5 +56,11 @@ public class PolytoolTypeNickel extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Sucks up nearby items when another block is mined";
+	}
+
 
 }

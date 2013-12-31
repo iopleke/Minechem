@@ -51,4 +51,10 @@ public class PolytoolTypeMagnesium extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Blinds nearby entities with flashbangs";
+	}
+
 }

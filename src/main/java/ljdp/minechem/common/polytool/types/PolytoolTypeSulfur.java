@@ -40,4 +40,10 @@ public class PolytoolTypeSulfur extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Sets entities on fire";
+	}
+
 }

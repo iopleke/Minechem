@@ -39,4 +39,10 @@ public class PolytoolTypeBoron extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Kills spiders with pesticides";
+	}
+
 }

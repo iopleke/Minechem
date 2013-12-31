@@ -49,4 +49,10 @@ public class PolytoolTypeKrypton extends PolytoolUpgradeType {
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Does extra damage to heavily armored players";
+	}
+
 }

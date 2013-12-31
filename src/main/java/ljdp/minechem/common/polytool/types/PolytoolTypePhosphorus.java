@@ -59,4 +59,10 @@ public class PolytoolTypePhosphorus extends PolytoolUpgradeType{
 	public void onTick() {
 	}
 
+	@Override
+	public String getDescription() {
+		
+		return "Sets nearby blocks on fire";
+	}
+
 }
