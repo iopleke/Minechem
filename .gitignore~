@@ -7,7 +7,7 @@ download
 ## gradle
 /.gradle
 /build
-
+/eclipse
 ## ForgeGradle
 /run
 

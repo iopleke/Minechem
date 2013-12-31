@@ -1,5 +1,4 @@
 *.class
-*.jar
 dist
 download
 .DS_Store
