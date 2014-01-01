@@ -49,25 +49,25 @@ public class PolytoolEventHandler {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			ItemStack stack = player.getCurrentEquippedItem();
 
-		
-		if (event.entityLiving instanceof EntitySpider)
-		{
 
-			
+			if (event.entityLiving instanceof EntitySpider)
+			{
+
+
 				if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof ItemPolytool)
 				{
 					double damage = .8*ItemPolytool.getPowerOfType(stack, EnumElement.B);
-					
+
 					event.ammount+=damage;
 
 				}
 
-			
-		}
-		if (event.entityLiving instanceof EntityEnderman)
-		{
 
-			
+			}
+			if (event.entityLiving instanceof EntityEnderman)
+			{
+
+
 				if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof ItemPolytool)
 				{
 					double damage = .8*ItemPolytool.getPowerOfType(stack, EnumElement.Ag);
@@ -75,8 +75,8 @@ public class PolytoolEventHandler {
 
 				}
 
-			
-		}
+
+			}
 		}
 	}
 	@ForgeSubscribe
@@ -92,35 +92,38 @@ public class PolytoolEventHandler {
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			ItemStack stack = player.getCurrentEquippedItem();
 			Random random=new Random();
-			float powerSilicon = ItemPolytool.getPowerOfType(stack, EnumElement.Si);
-			if(powerSilicon>0){
-				int amount=(int) Math.ceil(random.nextDouble()*powerSilicon);
-				Iterator iter=event.drops.iterator();
-				if(random.nextInt(16)<1+powerSilicon){
-					ArrayList<EntityItem> trueResult=new ArrayList();
-					while(iter.hasNext()){
-						EntityItem entityItem=(EntityItem) iter.next();
-						ItemStack item=entityItem.getEntityItem();
-						while(item.stackSize>0){
-							//Always avoid chances
-							ArrayList items=MinechemHelper.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).output);
+			if (stack != null&&stack.getItem() instanceof ItemPolytool)
+			{
+				float powerSilicon = ItemPolytool.getPowerOfType(stack, EnumElement.Si);
+				if(powerSilicon>0){
+					int amount=(int) Math.ceil(random.nextDouble()*powerSilicon);
+					Iterator iter=event.drops.iterator();
+					if(random.nextInt(16)<1+powerSilicon){
+						ArrayList<EntityItem> trueResult=new ArrayList();
+						while(iter.hasNext()){
+							EntityItem entityItem=(EntityItem) iter.next();
+							ItemStack item=entityItem.getEntityItem();
+							while(item.stackSize>0){
+								//Always avoid chances
+								ArrayList items=MinechemHelper.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).output);
 
-							//ArrayList items=DecomposerRecipeHandler.instance.getRecipeOutputForInput(item);
-							if(items!=null){
+								//ArrayList items=DecomposerRecipeHandler.instance.getRecipeOutputForInput(item);
+								if(items!=null){
 
-								for(int i=0;i<items.size();i++){
-									trueResult.add(new EntityItem(entityItem.worldObj,entityItem.posX,entityItem.posY,entityItem.posZ,(ItemStack) items.get(i)));
+									for(int i=0;i<items.size();i++){
+										trueResult.add(new EntityItem(entityItem.worldObj,entityItem.posX,entityItem.posY,entityItem.posZ,(ItemStack) items.get(i)));
+									}
+								}else{
+									trueResult.add(entityItem);
+									break;
 								}
-							}else{
-								trueResult.add(entityItem);
-								break;
+								item.stackSize--;
 							}
-							item.stackSize--;
-						}
 
+						}
+						event.drops.clear();
+						event.drops.addAll(trueResult);
 					}
-					event.drops.clear();
-					event.drops.addAll(trueResult);
 				}
 			}
 			if (event.entityLiving instanceof EntitySkeleton || event.entityLiving instanceof EntityZombie || event.entityLiving instanceof EntityPlayer)
