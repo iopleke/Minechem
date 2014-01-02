@@ -1,3 +1,5 @@
+apply plugin: 'java'
+
 buildscript {
     repositories {
         mavenCentral()
@@ -10,6 +12,22 @@ buildscript {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
     }
 }
+
+
+// Load configs relating to third-party JAR locations.
+ext.thirdPartyJarsConfigFile = file 'thirdPartyJars.properties'
+thirdPartyJarsConfigFile.withReader {
+  def prop = new Properties()
+  prop.load(new FileReader(ext.thirdPartyJarsConfigFile))
+  ext.thirdPartyJars = new ConfigSlurper().parse prop
+}
+
+// This mod has NEI support, so NEI is needed to build it (but not required
+// to use it).
+dependencies {
+  compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI)
+}
+
 task("incrementBuildNumber")
 {
     // increment build number
@@ -38,8 +56,8 @@ configFile.withReader {
     // read config.  it shall from now on be referenced as simply config or as project.config
     def prop = new Properties()
     prop.load(it)
-    version = project.config.mod_version + "-" + project.config.build_number
     project.ext.config = new ConfigSlurper().parse prop
+    version = project.config.mod_version + "-" + project.config.build_number
 }
 
 processResources
