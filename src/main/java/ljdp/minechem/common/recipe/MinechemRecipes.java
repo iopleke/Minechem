@@ -1503,19 +1503,19 @@ public class MinechemRecipes {
 							this.element(EnumElement.Cl) }));
 		} else if (var1.Name.contains("Ruby")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] {
-					this.molecule(EnumMolecule.aluminiumOxide),
-					this.element(EnumElement.Cr) }));
+					this.molecule(EnumMolecule.aluminiumOxide,3),
+					this.element(EnumElement.Cr,3) }));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
 					new Chemical[] {
-							this.molecule(EnumMolecule.aluminiumOxide),
-							this.element(EnumElement.Cr) }));
+							this.molecule(EnumMolecule.aluminiumOxide,3),
+							this.element(EnumElement.Cr,3) }));
 		} else if (var1.Name.contains("Sapphire")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
 					new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide,
-							2) }));
+							3) }));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
 					new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide,
-							2) }));
+							3) }));
 		} else if (var1.Name.contains("ingotBronze")) {
 			if (Loader.isModLoaded("Mekanism")) {
 				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,

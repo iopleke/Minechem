@@ -2,6 +2,9 @@
 dist
 download
 .DS_Store
+push.sh
+remotebuild.py
+
 
 ## gradle
 /.gradle
@@ -9,6 +12,7 @@ download
 /eclipse
 ## ForgeGradle
 /run
+
 
 ## eclipse
 /.settings

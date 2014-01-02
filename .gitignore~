@@ -1,8 +1,9 @@
 *.class
-*.jar
 dist
 download
 .DS_Store
+push.py
+
 
 ## gradle
 /.gradle
@@ -10,6 +11,7 @@ download
 /eclipse
 ## ForgeGradle
 /run
+
 
 ## eclipse
 /.settings
