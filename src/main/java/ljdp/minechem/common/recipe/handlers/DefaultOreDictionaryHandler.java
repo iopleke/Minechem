@@ -18,7 +18,7 @@ import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 
 	private enum EnumOrePrefix {
-		dust, block, ingot, ore, dustSmall, nugget, dustDirty, plate
+		dust, block, ingot, ore, dustSmall, nugget, dustDirty, plate, gem
 	}
 
 	private String[] supportedOres;
@@ -80,6 +80,12 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 						ore.getComposition()));
 				registeredIngots.put(ore, event.Ore);
 			}
+			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore
+					.getComposition()));
+			break;
+		case gem:
+			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
+					.getComposition()));
 			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore
 					.getComposition()));
 			break;
