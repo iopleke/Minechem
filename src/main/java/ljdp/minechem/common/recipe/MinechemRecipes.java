@@ -1501,7 +1501,7 @@ public class MinechemRecipes {
 					new Chemical[] { this.element(EnumElement.Ca, 5),
 							this.molecule(EnumMolecule.phosphate, 4),
 							this.element(EnumElement.Cl) }));
-		} else if (var1.Name.contains("Ruby")) {
+		} else if (var1.Name.contains("oreRuby")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] {
 					this.molecule(EnumMolecule.aluminiumOxide,3),
 					this.element(EnumElement.Cr,3) }));
@@ -1509,7 +1509,7 @@ public class MinechemRecipes {
 					new Chemical[] {
 							this.molecule(EnumMolecule.aluminiumOxide,3),
 							this.element(EnumElement.Cr,3) }));
-		} else if (var1.Name.contains("Sapphire")) {
+		} else if (var1.Name.contains("oreSapphire")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
 					new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide,
 							3) }));
