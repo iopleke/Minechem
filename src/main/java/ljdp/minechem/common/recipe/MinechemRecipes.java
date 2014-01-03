@@ -1501,21 +1501,6 @@ public class MinechemRecipes {
 					new Chemical[] { this.element(EnumElement.Ca, 5),
 							this.molecule(EnumMolecule.phosphate, 4),
 							this.element(EnumElement.Cl) }));
-		} else if (var1.Name.contains("oreRuby")) {
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] {
-					this.molecule(EnumMolecule.aluminiumOxide,3),
-					this.element(EnumElement.Cr,3) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
-					new Chemical[] {
-							this.molecule(EnumMolecule.aluminiumOxide,3),
-							this.element(EnumElement.Cr,3) }));
-		} else if (var1.Name.contains("oreSapphire")) {
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
-					new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide,
-							3) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
-					new Chemical[] { this.molecule(EnumMolecule.aluminiumOxide,
-							3) }));
 		} else if (var1.Name.contains("ingotBronze")) {
 			if (Loader.isModLoaded("Mekanism")) {
 				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
@@ -1606,22 +1591,6 @@ public class MinechemRecipes {
 							this.element(EnumElement.W, 2),
 							this.element(EnumElement.Si, 2),
 							this.element(EnumElement.Co, 2) }));
-		} else if (var1.Name.contains("gemRuby")) {
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[] {
-					this.molecule(EnumMolecule.aluminiumOxide),
-					this.element(EnumElement.Cr) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
-					new Chemical[] {
-							this.molecule(EnumMolecule.aluminiumOxide),
-							this.element(EnumElement.Cr) }));
-		} else if (var1.Name.contains("gemSapphire")) {
-			DecomposerRecipe
-					.add(new DecomposerRecipe(var1.Ore, new Chemical[] { this
-							.molecule(EnumMolecule.aluminiumOxide) }));
-			SynthesisRecipe
-					.add(new SynthesisRecipe(var1.Ore, false, 1000,
-							new Chemical[] { this
-									.molecule(EnumMolecule.aluminiumOxide) }));
 		} else if (var1.Name.contains("gemPeridot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
 					new Chemical[] { this.molecule(EnumMolecule.olivine) }));

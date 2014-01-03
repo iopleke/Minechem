@@ -21,6 +21,8 @@ public enum EnumOre {
 	uranium("Uranium", new Element(EnumElement.U, 16)),
 	plutonium("Plutonium", new Element(EnumElement.Pu, 16)),
 	manganese("Manganese", new Element(EnumElement.Mn, 16)),
+	saphire("Saphire", new Molecule(EnumMolecule.aluminiumOxide,1)),
+	ruby("Ruby", new Molecule(EnumMolecule.aluminiumOxide, 1) ,new Element(EnumElement.Cr, 1)),
 
 	cobalt("Cobalt", new Element(EnumElement.Co, 16)),
 
