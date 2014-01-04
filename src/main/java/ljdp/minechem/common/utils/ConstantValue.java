@@ -13,7 +13,7 @@ public interface ConstantValue {
     public static final String MOD_ID = "minechem";
     public static final String TEXTURE_MOD_ID = MOD_ID+":";
 
-	public static final String POLYTOOL_TEX = TEXTURE_MOD_ID+"Polytool";
+	public static final String POLYTOOL_TEX = TEXTURE_MOD_ID+"polytool";
     public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";
     public static final String BLUEPRINT_TEX = TEXTURE_MOD_ID + "Blueprint";
     public static final String CHEMIST_JOURNAL_TEX = TEXTURE_MOD_ID + "ChemistJournal";
