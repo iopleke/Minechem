@@ -29,7 +29,7 @@ The Chemical Synthesis table takes a recipe of elements and molecules and synthe
 The Chemical Storage will safely store radioactive chemicals and prevent them from decaying.
 </entry>
 
-<entry key="item.name.polytool”>Polytool</entry>
+<entry key="item.name.polytool">Polytool</entry>
 <entry key="item.name.testtube">Empty Vial</entry>
 <entry key="block.name.microscope">Microscope</entry>
 <entry key="item.name.concavelens">Concave Lens</entry>
