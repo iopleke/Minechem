@@ -82,8 +82,12 @@ public class MinechemBlocks {
         chemicalStorage = new BlockChemicalStorage(chemicalStorageID);
         uranium= new OreUranium(uraniumID);
 
+
+
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
         OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
+
+
         LanguageRegistry.addName(uranium, MinechemHelper.getLocalString("block.name.uraniumOre"));
         GameRegistry.registerBlock(decomposer, "minechem.blockDecomposer");
         LanguageRegistry.addName(decomposer, MinechemHelper.getLocalString("block.name.decomposer"));

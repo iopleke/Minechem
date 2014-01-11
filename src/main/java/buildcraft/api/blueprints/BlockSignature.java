@@ -17,7 +17,6 @@ public class BlockSignature {
 	public String mod;
 	public String modVersion;
 	public String customField;
-
 	public BlockSignature(String str) {
 		String[] values = str.split("/");
 
@@ -26,7 +25,6 @@ public class BlockSignature {
 		if (values[0].equals("#B")) {
 			i++;
 		}
-
 		blockClassName = values[i];
 		tileClassName = values[i + 1];
 		blockName = values[i + 2];

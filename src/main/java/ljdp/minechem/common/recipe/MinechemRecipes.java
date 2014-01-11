@@ -273,6 +273,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipe(oreIron,
 				new Chemical[] { this.element(EnumElement.Fe, 48) }));
 
+
 		// Coal Ore
 		ItemStack oreCoal = new ItemStack(Block.oreCoal);
 		DecomposerRecipe.add(new DecomposerRecipe(oreCoal,
@@ -1414,6 +1415,7 @@ public class MinechemRecipes {
                     if (!var3) {
                         ArrayList var6 = var2.getOutputRaw();
                         if (var6 != null) {
+
                             SynthesisRecipe.add(new SynthesisRecipe(var2.getInput(), false, 100, var6));
                         }
                     }
@@ -1422,6 +1424,21 @@ public class MinechemRecipes {
             }
         }
    }
+
+   public boolean shouldCreateSynthesis(int id){
+       switch(id){
+           //Vanilla ores should not be synthesized
+           //To prevent exploits
+           case 14:
+           case 15:
+           case 16:
+           case 56:
+           case 73:
+           case 153:
+       }
+       return true;
+   }
+
 
    private ItemStack createPoisonedItemStack(Item var1, int var2, EnumMolecule var3) {
       ItemStack var4 = new ItemStack(MinechemItems.molecule, 1, var3.id());

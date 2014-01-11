@@ -69,7 +69,8 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 		case ore:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(
 					ore.getComposition(), 3d)));
-			SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, scaleFloor(ore.getComposition(),3d)));
+            //Removed to prevent dupes with RC
+			//SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, scaleFloor(ore.getComposition(),3d)));
 			break;
 		case ingot:
 			DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore
