@@ -1415,8 +1415,9 @@ public class MinechemRecipes {
                     if (!var3) {
                         ArrayList var6 = var2.getOutputRaw();
                         if (var6 != null) {
-
-                            SynthesisRecipe.add(new SynthesisRecipe(var2.getInput(), false, 100, var6));
+                            if(shouldCreateSynthesis(var2.getInput().itemID)){
+                                SynthesisRecipe.add(new SynthesisRecipe(var2.getInput(), false, 100, var6));
+                            }
                         }
                     }
                     break;
@@ -1435,6 +1436,7 @@ public class MinechemRecipes {
            case 56:
            case 73:
            case 153:
+               return false;
        }
        return true;
    }
