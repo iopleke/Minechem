@@ -1,5 +1,9 @@
 package ljdp.minechem.common;
 
+import ljdp.minechem.api.core.Chemical;
+import ljdp.minechem.api.core.Element;
+import ljdp.minechem.api.core.EnumElement;
+import ljdp.minechem.api.recipe.DecomposerRecipe;
 import ljdp.minechem.common.blocks.BlockBlueprintProjector;
 import ljdp.minechem.common.blocks.BlockChemicalStorage;
 import ljdp.minechem.common.blocks.BlockDecomposer;
@@ -87,6 +91,7 @@ public class MinechemBlocks {
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
         OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
 
+        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(EnumElement.U, 48)));
 
         LanguageRegistry.addName(uranium, MinechemHelper.getLocalString("block.name.uraniumOre"));
         GameRegistry.registerBlock(decomposer, "minechem.blockDecomposer");
