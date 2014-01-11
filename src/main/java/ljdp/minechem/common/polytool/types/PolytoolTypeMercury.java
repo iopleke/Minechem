@@ -43,7 +43,7 @@ public class PolytoolTypeMercury extends PolytoolUpgradeType {
 	@Override
 	public EnumElement getElement() {
 		
-		return EnumElement.Zn;
+		return EnumElement.Hg;
 	}
 
 	@Override
