@@ -22,10 +22,11 @@ thirdPartyJarsConfigFile.withReader {
   ext.thirdPartyJars = new ConfigSlurper().parse prop
 }
 
-// This mod has NEI support, so NEI is needed to build it (but not required
-// to use it).
+// This mod has NEI support, so NEI+CodeChickenCore are needed to build
+// it (but not required to use it).
 dependencies {
-  compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI)
+  compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI,
+    thirdPartyJars.path + '/' + thirdPartyJars.CodeChickenCore)
 }
 
 

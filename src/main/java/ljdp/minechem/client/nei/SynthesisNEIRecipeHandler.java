@@ -1,11 +1,13 @@
 package ljdp.minechem.client.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.recipe.SynthesisRecipe;
 import ljdp.minechem.api.util.Util;
+import ljdp.minechem.client.gui.GuiSynthesis;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
@@ -33,14 +35,27 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
 
     @Override
     public String getRecipeName() {
-        return "Chemical Synthesis";
+        return MinechemHelper.getLocalString("gui.title.synthesis");
     }
 
     @Override
     public String getGuiTexture() {
         return texture.toString();
     }
-    
+
+    @Override
+    public void loadTransferRects() {
+        // Use the right-arrow pointing at the output.
+        transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(
+            new Rectangle(OUTPUT_X_OFS - 16, OUTPUT_Y_OFS, 14, 16),
+            MINECHEM_SYNTHESIS_RECIPES_ID, new Object[0]));
+    }
+
+    @Override
+    public Class getGuiClass() {
+        return GuiSynthesis.class;
+    }
+
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(MINECHEM_SYNTHESIS_RECIPES_ID)) {
