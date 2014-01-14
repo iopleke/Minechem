@@ -1,7 +1,7 @@
-package pixlepix.particlephysics.common.entity;
+package pixlepix.minechem.particlephysics.entity;
 
 import net.minecraft.world.World;
-import pixlepix.particlephysics.common.api.BaseParticle;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
 
 public class GlassParticle extends BaseParticle {
 

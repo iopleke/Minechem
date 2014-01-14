@@ -1,9 +1,9 @@
-package pixlepix.particlephysics.common.gui;
+package pixlepix.minechem.particlephysics.gui;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
-import pixlepix.particlephysics.common.ParticlePhysics;
-import pixlepix.particlephysics.common.tile.EmitterTileEntity;
+import pixlepix.minechem.particlephysics.ParticlePhysics;
+import pixlepix.minechem.particlephysics.tile.EmitterTileEntity;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 

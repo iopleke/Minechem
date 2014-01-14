@@ -1,10 +1,10 @@
-package pixlepix.particlephysics.common.render;
+package pixlepix.minechem.particlephysics.render;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.Icon;
 import net.minecraft.world.IBlockAccess;
-import pixlepix.particlephysics.common.helper.Vector3;
+import pixlepix.minechem.particlephysics.helper.Vector3;
 
 /** Used to store info on a block mainly used for rendering */
 public class BlockRenderInfo

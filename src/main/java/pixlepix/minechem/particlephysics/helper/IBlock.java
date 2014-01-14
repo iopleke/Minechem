@@ -1,6 +1,5 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
-import net.minecraft.item.ItemBlock;
 import net.minecraft.tileentity.TileEntity;
 
 public interface IBlock {

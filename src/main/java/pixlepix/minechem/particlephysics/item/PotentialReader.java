@@ -1,12 +1,12 @@
-package pixlepix.particlephysics.common.item;
+package pixlepix.minechem.particlephysics.item;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.helper.ParticlePhysicsTab;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.helper.ParticlePhysicsTab;
 
 public class PotentialReader extends Item {
 

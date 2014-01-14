@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.render;
+package pixlepix.minechem.particlephysics.render;
 
 import org.lwjgl.opengl.GL11;
 

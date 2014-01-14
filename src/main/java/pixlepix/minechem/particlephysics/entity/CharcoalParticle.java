@@ -1,10 +1,6 @@
-package pixlepix.particlephysics.common.entity;
+package pixlepix.minechem.particlephysics.entity;
 
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.helper.ClientProxy;
-import pixlepix.particlephysics.common.render.BlockRenderInfo;
-import net.minecraft.block.Block;
-import net.minecraft.util.Icon;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
 import net.minecraft.world.World;
 
 public class CharcoalParticle extends BaseParticle {

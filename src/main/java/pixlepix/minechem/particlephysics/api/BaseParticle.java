@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.api;
+package pixlepix.minechem.particlephysics.api;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -17,8 +17,8 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import pixlepix.particlephysics.common.helper.ParticleRegistry;
-import pixlepix.particlephysics.common.render.BlockRenderInfo;
+import pixlepix.minechem.particlephysics.helper.ParticleRegistry;
+import pixlepix.minechem.particlephysics.render.BlockRenderInfo;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
 public abstract class BaseParticle extends EntityLiving {

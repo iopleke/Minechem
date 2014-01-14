@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.render;
+package pixlepix.minechem.particlephysics.render;
 import java.util.Random;
 
 import net.minecraft.block.Block;
@@ -12,10 +12,10 @@ import net.minecraft.world.World;
 
 import org.lwjgl.opengl.GL11;
 
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.entity.LeafParticle;
-import pixlepix.particlephysics.common.helper.ParticleRegistry;
-import pixlepix.particlephysics.common.helper.Vector3;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.entity.LeafParticle;
+import pixlepix.minechem.particlephysics.helper.ParticleRegistry;
+import pixlepix.minechem.particlephysics.helper.Vector3;
 
 public class RenderParticle extends Render
 {

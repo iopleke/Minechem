@@ -1,9 +1,9 @@
-package pixlepix.particlephysics.common.tile;
+package pixlepix.minechem.particlephysics.tile;
 
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.api.IParticleReceptor;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.api.IParticleReceptor;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.TileEnergyHandler;
 

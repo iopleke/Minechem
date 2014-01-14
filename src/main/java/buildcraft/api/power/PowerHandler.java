@@ -181,7 +181,7 @@ public final class PowerHandler {
 	 * the doWork() callback is called (once per tick).
 	 * @param maxStoredEnergy The maximum amount of power this PowerHandler can
 	 * store. Values tend to range between 100 and 5000. With 1000 and 1500
-	 * being common.
+	 * being particlephysics.
 	 */
 	public void configure(float minEnergyReceived, float maxEnergyReceived, float activationEnergy, float maxStoredEnergy) {
 		if (minEnergyReceived > maxEnergyReceived) {

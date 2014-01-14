@@ -1,9 +1,9 @@
-package pixlepix.particlephysics.common.blocks;
+package pixlepix.minechem.particlephysics.blocks;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import pixlepix.particlephysics.common.helper.BasicComplexBlock;
-import pixlepix.particlephysics.common.tile.SeriesReceptorTileEntity;
+import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
+import pixlepix.minechem.particlephysics.tile.SeriesReceptorTileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class SeriesReceptor extends BasicComplexBlock {

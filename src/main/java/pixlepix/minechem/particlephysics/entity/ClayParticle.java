@@ -1,12 +1,8 @@
-package pixlepix.particlephysics.common.entity;
+package pixlepix.minechem.particlephysics.entity;
 
-import net.minecraft.block.Block;
-import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.helper.ClientProxy;
-import pixlepix.particlephysics.common.render.BlockRenderInfo;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
 
 public class ClayParticle extends BaseParticle {
 	

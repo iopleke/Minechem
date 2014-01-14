@@ -1,10 +1,9 @@
-package pixlepix.particlephysics.common.gui;
+package pixlepix.minechem.particlephysics.gui;
 
-import net.minecraft.block.Block;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import pixlepix.particlephysics.common.tile.EmitterTileEntity;
+import pixlepix.minechem.particlephysics.tile.EmitterTileEntity;
 
 public class SlotEmitterFuel extends Slot {
 	EmitterTileEntity emitter;

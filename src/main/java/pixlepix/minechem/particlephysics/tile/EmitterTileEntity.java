@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.tile;
+package pixlepix.minechem.particlephysics.tile;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,18 +9,18 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.blocks.InfiniteEmitter;
-import pixlepix.particlephysics.common.entity.BlazepowderParticle;
-import pixlepix.particlephysics.common.entity.CharcoalParticle;
-import pixlepix.particlephysics.common.entity.ClayParticle;
-import pixlepix.particlephysics.common.entity.CoalParticle;
-import pixlepix.particlephysics.common.entity.GlassParticle;
-import pixlepix.particlephysics.common.entity.GunpowderParticle;
-import pixlepix.particlephysics.common.entity.LeafParticle;
-import pixlepix.particlephysics.common.entity.PaperParticle;
-import pixlepix.particlephysics.common.entity.SandParticle;
-import pixlepix.particlephysics.common.entity.SeedParticle;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.blocks.InfiniteEmitter;
+import pixlepix.minechem.particlephysics.entity.BlazepowderParticle;
+import pixlepix.minechem.particlephysics.entity.CharcoalParticle;
+import pixlepix.minechem.particlephysics.entity.ClayParticle;
+import pixlepix.minechem.particlephysics.entity.CoalParticle;
+import pixlepix.minechem.particlephysics.entity.GlassParticle;
+import pixlepix.minechem.particlephysics.entity.GunpowderParticle;
+import pixlepix.minechem.particlephysics.entity.LeafParticle;
+import pixlepix.minechem.particlephysics.entity.PaperParticle;
+import pixlepix.minechem.particlephysics.entity.SandParticle;
+import pixlepix.minechem.particlephysics.entity.SeedParticle;
 
 public class EmitterTileEntity extends TileEntity implements IInventory {
 

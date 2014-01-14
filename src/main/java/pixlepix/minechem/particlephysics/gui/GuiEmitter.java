@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.gui;
+package pixlepix.minechem.particlephysics.gui;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.helper.PacketHandler;
-import pixlepix.particlephysics.common.helper.ParticleRegistry;
-import pixlepix.particlephysics.common.tile.EmitterTileEntity;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.helper.PacketHandler;
+import pixlepix.minechem.particlephysics.helper.ParticleRegistry;
+import pixlepix.minechem.particlephysics.tile.EmitterTileEntity;
 
 //Thanks to VSWE for assorted bits of the code
 public class GuiEmitter extends GuiContainer {

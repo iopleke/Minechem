@@ -3,7 +3,7 @@
 //Leaving this here 'Just in Case'
 
 /*
-  package pixlepix.minechem.common;
+  package pixlepix.minechem.particlephysics;
 
 
 import net.minecraft.tileentity.TileEntity;

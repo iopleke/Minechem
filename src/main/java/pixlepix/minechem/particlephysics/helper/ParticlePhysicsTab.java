@@ -1,8 +1,8 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
-import pixlepix.particlephysics.common.blocks.Emitter;
+import pixlepix.minechem.particlephysics.blocks.Emitter;
 
 public class ParticlePhysicsTab extends CreativeTabs {
 	public static ParticlePhysicsTab instance;

@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.gui;
+package pixlepix.minechem.particlephysics.gui;
 
 import java.util.Arrays;
 

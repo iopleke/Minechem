@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -12,8 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.gui.ContainerEmitter;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.gui.ContainerEmitter;
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;

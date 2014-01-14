@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.blocks;
+package pixlepix.minechem.particlephysics.blocks;
 
 import java.util.List;
 
@@ -7,10 +7,9 @@ import net.minecraft.entity.Entity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.helper.BasicComplexBlock;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class PolarizedGlass extends BasicComplexBlock {

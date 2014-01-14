@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.api;
+package pixlepix.minechem.particlephysics.api;
 
 import net.minecraft.world.World;
 

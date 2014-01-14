@@ -52,8 +52,8 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-// import pixlepix.minechem.common.plugins.BOPModule;
-// import cpw.mods.fml.common.Loader;
+// import pixlepix.minechem.particlephysics.plugins.BOPModule;
+// import cpw.mods.fml.particlephysics.Loader;
 
 @Mod(modid = "minechem", name = "MineChem", version = "@VERSION@")
 @ModstatInfo(prefix="minechem")
@@ -79,7 +79,7 @@ public class ModMinechem {
 
 	public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.ICON_BASE+"i_unpowered.png");
     
-    @SidedProxy(clientSide = "pixlepix.minechem.client.ClientProxy", serverSide = "pixlepix.minechem.common.CommonProxy")
+    @SidedProxy(clientSide = "pixlepix.minechem.client.ClientProxy", serverSide = "pixlepix.minechem.particlephysics.CommonProxy")
     public static CommonProxy proxy;
     public static CreativeTabs minechemTab = new CreativeTabMinechem("MineChem");
     private Configuration config;

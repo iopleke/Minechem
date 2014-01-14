@@ -65,7 +65,17 @@
     <favorites_list name="Minechem" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="ParticlePhysics.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="20" column="73" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.1421801" vertical-offset="0" max-vertical-offset="1095">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -356,6 +366,8 @@
         <option value="$PROJECT_DIR$/src/main/java/ljdp/minechem/common/recipe/MinechemRecipes.java" />
         <option value="$PROJECT_DIR$/src/main/java/ljdp/minechem/common/polytool/types/PolytoolTypeTitanium.java" />
         <option value="$PROJECT_DIR$/src/main/java/ljdp/minechem/common/polytool/types/PolytoolTypeMercury.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/particlephysics/particlephysics/ParticlePhysics.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java" />
       </list>
     </option>
   </component>
@@ -481,7 +493,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="minechem" />
+              <option name="myItemId" value="pixlepix" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -507,11 +519,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="pixlepix" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="minechem" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="particlephysics" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -537,15 +553,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="pixlepix" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="assembler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -571,8 +583,9 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="pixlepix" />
       <recent name="pixlepix.minechem" />
+      <recent name="pixlepix.particlephysics.common" />
+      <recent name="pixlepix" />
     </key>
   </component>
   <component name="RunManager" selected="Application.Minecraft Client">
@@ -895,8 +908,8 @@
       <provider selected="true" editor-type-id="text-editor">
         <state line="1429" column="18" selection-start="69998" selection-end="69998" vertical-scroll-proportion="0.93939394" vertical-offset="21063" max-vertical-offset="25725">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1679#1680#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1679#1680#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1140,6 +1153,20 @@
           <folding>
             <element signature="imports" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/render/BlockRenderInfo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="31" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="73" selection-start="1017" selection-end="1017" vertical-scroll-proportion="0.1421801" vertical-offset="0" max-vertical-offset="1095">
+          <folding />
         </state>
       </provider>
     </entry>

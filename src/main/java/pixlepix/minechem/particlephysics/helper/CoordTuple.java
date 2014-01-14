@@ -1,4 +1,4 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
 public class CoordTuple {
 

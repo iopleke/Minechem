@@ -1,25 +1,25 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
 import java.util.ArrayList;
 import java.util.Hashtable;
 
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.util.Icon;
-import pixlepix.particlephysics.common.ParticlePhysics;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.entity.BlankParticle;
-import pixlepix.particlephysics.common.entity.BlazepowderParticle;
-import pixlepix.particlephysics.common.entity.CharcoalParticle;
-import pixlepix.particlephysics.common.entity.ClayParticle;
-import pixlepix.particlephysics.common.entity.CoalParticle;
-import pixlepix.particlephysics.common.entity.ConcentratedParticle;
-import pixlepix.particlephysics.common.entity.GlassParticle;
-import pixlepix.particlephysics.common.entity.GunpowderParticle;
-import pixlepix.particlephysics.common.entity.LeafParticle;
-import pixlepix.particlephysics.common.entity.PaperParticle;
-import pixlepix.particlephysics.common.entity.SandParticle;
-import pixlepix.particlephysics.common.entity.SeedParticle;
-import pixlepix.particlephysics.common.entity.SplitParticle;
+import pixlepix.minechem.particlephysics.ParticlePhysics;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.entity.BlankParticle;
+import pixlepix.minechem.particlephysics.entity.BlazepowderParticle;
+import pixlepix.minechem.particlephysics.entity.CharcoalParticle;
+import pixlepix.minechem.particlephysics.entity.ClayParticle;
+import pixlepix.minechem.particlephysics.entity.CoalParticle;
+import pixlepix.minechem.particlephysics.entity.ConcentratedParticle;
+import pixlepix.minechem.particlephysics.entity.GlassParticle;
+import pixlepix.minechem.particlephysics.entity.GunpowderParticle;
+import pixlepix.minechem.particlephysics.entity.LeafParticle;
+import pixlepix.minechem.particlephysics.entity.PaperParticle;
+import pixlepix.minechem.particlephysics.entity.SandParticle;
+import pixlepix.minechem.particlephysics.entity.SeedParticle;
+import pixlepix.minechem.particlephysics.entity.SplitParticle;
 import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class ParticleRegistry {
@@ -49,7 +49,7 @@ public class ParticleRegistry {
 	public static void populateIcons(IconRegister register){
 		
 		for(int i=0;i<particles.size();i++){
-				icons.put(particles.get(i),register.registerIcon("particlephysics:"+particles.get(i).getName().substring("pixlepix.particlephysics.common.entity.".length())));
+				icons.put(particles.get(i),register.registerIcon("particlephysics:"+particles.get(i).getName().substring("pixlepix.minechem.particlephysics.entity.".length())));
 		}	
 		
 		

@@ -1,14 +1,8 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
 import net.minecraft.util.Icon;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.entity.ClayParticle;
-import pixlepix.particlephysics.common.entity.CoalParticle;
-import pixlepix.particlephysics.common.entity.ConcentratedParticle;
-import pixlepix.particlephysics.common.entity.SandParticle;
-import pixlepix.particlephysics.common.entity.SeedParticle;
-import pixlepix.particlephysics.common.entity.SplitParticle;
-import pixlepix.particlephysics.common.render.RenderParticle;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.render.RenderParticle;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

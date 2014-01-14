@@ -1468,7 +1468,7 @@ public class MinechemRecipes {
 
 	    }
    /* 
-    * This stuff is unused and is replaced by pixlepix.minechem.common.recipe.handlers.DefaultOreDictionaryHandler
+    * This stuff is unused and is replaced by pixlepix.minechem.particlephysics.recipe.handlers.DefaultOreDictionaryHandler
    String[] compounds = {"Aluminium","Titanium","Chrome",   
 	           "Tungsten", "Lead",    "Zinc",
 	           "Platinum", "Nickel",  "Osmium",

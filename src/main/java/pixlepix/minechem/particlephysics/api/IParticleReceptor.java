@@ -1,6 +1,4 @@
-package pixlepix.particlephysics.common.api;
-
-import net.minecraft.world.World;
+package pixlepix.minechem.particlephysics.api;
 
 public interface IParticleReceptor {
 

@@ -1,13 +1,13 @@
-package pixlepix.particlephysics.common;
+package pixlepix.minechem.particlephysics;
 
 import net.minecraft.item.Item;
-import pixlepix.particlephysics.common.gui.GuiHandler;
-import pixlepix.particlephysics.common.helper.BetterLoader;
-import pixlepix.particlephysics.common.helper.CommonProxy;
-import pixlepix.particlephysics.common.helper.PacketHandler;
-import pixlepix.particlephysics.common.helper.ParticlePhysicsTab;
-import pixlepix.particlephysics.common.helper.ParticleRegistry;
-import pixlepix.particlephysics.common.item.PotentialReader;
+import pixlepix.minechem.particlephysics.gui.GuiHandler;
+import pixlepix.minechem.particlephysics.helper.BetterLoader;
+import pixlepix.minechem.particlephysics.helper.CommonProxy;
+import pixlepix.minechem.particlephysics.helper.PacketHandler;
+import pixlepix.minechem.particlephysics.helper.ParticlePhysicsTab;
+import pixlepix.minechem.particlephysics.helper.ParticleRegistry;
+import pixlepix.minechem.particlephysics.item.PotentialReader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -18,7 +18,7 @@ import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
-@Mod(modid = "particlephysics", name = "Particle Physics", version = "0.1.1")
+@Mod(modid = "particlephysics", name = "Particle Physics", version = "5.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false,  channels={"Particle"}, packetHandler = PacketHandler.class)
 public class ParticlePhysics {
 
@@ -39,7 +39,7 @@ public class ParticlePhysics {
 	@Instance("particlephysics")
 	public static ParticlePhysics instance;
 	// Says where the client and server 'proxy' code is loaded.
-	@SidedProxy(clientSide = "pixlepix.particlephysics.common.helper.ClientProxy", serverSide = "pixlepix.particlephysics.common.helper.CommonProxy")
+	@SidedProxy(clientSide = "pixlepix.minechem.particlephysics.helper.ClientProxy", serverSide = "pixlepix.minechem.particlephysics.helper.CommonProxy")
 	public static CommonProxy proxy;
 
 

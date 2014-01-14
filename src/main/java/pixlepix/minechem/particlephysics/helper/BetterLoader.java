@@ -1,15 +1,15 @@
-package pixlepix.particlephysics.common.helper;
+package pixlepix.minechem.particlephysics.helper;
 
 import java.util.ArrayList;
 
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
-import pixlepix.particlephysics.common.ParticlePhysics;
-import pixlepix.particlephysics.common.blocks.ControlGlass;
-import pixlepix.particlephysics.common.blocks.Emitter;
-import pixlepix.particlephysics.common.blocks.InfiniteEmitter;
-import pixlepix.particlephysics.common.blocks.PolarizedGlass;
-import pixlepix.particlephysics.common.blocks.SeriesReceptor;
+import pixlepix.minechem.particlephysics.ParticlePhysics;
+import pixlepix.minechem.particlephysics.blocks.ControlGlass;
+import pixlepix.minechem.particlephysics.blocks.Emitter;
+import pixlepix.minechem.particlephysics.blocks.InfiniteEmitter;
+import pixlepix.minechem.particlephysics.blocks.PolarizedGlass;
+import pixlepix.minechem.particlephysics.blocks.SeriesReceptor;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 

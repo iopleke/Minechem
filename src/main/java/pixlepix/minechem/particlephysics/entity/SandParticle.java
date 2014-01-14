@@ -1,14 +1,9 @@
-package pixlepix.particlephysics.common.entity;
-
-import java.util.ArrayList;
-import java.util.List;
+package pixlepix.minechem.particlephysics.entity;
 
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import pixlepix.particlephysics.common.api.BaseParticle;
-import pixlepix.particlephysics.common.helper.ClientProxy;
-import pixlepix.particlephysics.common.helper.CoordTuple;
-import pixlepix.particlephysics.common.render.BlockRenderInfo;
+import pixlepix.minechem.particlephysics.api.BaseParticle;
+import pixlepix.minechem.particlephysics.helper.CoordTuple;
 
 public class SandParticle extends BaseParticle {
 

@@ -1,18 +1,15 @@
-package pixlepix.particlephysics.common.blocks;
+package pixlepix.minechem.particlephysics.blocks;
 
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import pixlepix.particlephysics.common.ParticlePhysics;
-import pixlepix.particlephysics.common.helper.BasicComplexBlock;
-import pixlepix.particlephysics.common.helper.BetterLoader;
-import pixlepix.particlephysics.common.helper.ParticleRegistry;
-import pixlepix.particlephysics.common.tile.EmitterTileEntity;
+import pixlepix.minechem.particlephysics.ParticlePhysics;
+import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
+import pixlepix.minechem.particlephysics.helper.BetterLoader;
+import pixlepix.minechem.particlephysics.tile.EmitterTileEntity;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 public class InfiniteEmitter extends BasicComplexBlock {
