@@ -1,12 +1,12 @@
-package ljdp.minechem.common.blocks;
+package pixlepix.minechem.minechem.common.blocks;
 
 import static org.junit.Assert.fail;
-import ljdp.minechem.api.core.EnumElement;
-import ljdp.minechem.common.items.ItemChemistJournal;
-import ljdp.minechem.common.items.ItemElement;
-import ljdp.minechem.common.items.ItemTestTube;
-import ljdp.minechem.common.tileentity.TileEntitySynthesis;
-import ljdp.minechem.utils.test.EntityItemMatcher;
+import pixlepix.minechem.minechem.api.core.EnumElement;
+import pixlepix.minechem.minechem.common.items.ItemChemistJournal;
+import pixlepix.minechem.minechem.common.items.ItemElement;
+import pixlepix.minechem.minechem.common.items.ItemTestTube;
+import pixlepix.minechem.minechem.common.tileentity.TileEntitySynthesis;
+import pixlepix.minechem.minechem.utils.test.EntityItemMatcher;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.logging.ILogAgent;

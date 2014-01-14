@@ -1,9 +1,9 @@
-package ljdp.minechem.common.blocks;
+package pixlepix.minechem.minechem.common.blocks;
 
 import java.util.ArrayList;
 
-import ljdp.minechem.common.items.ItemChemistJournal;
-import ljdp.minechem.common.utils.EntityItemMatcher;
+import pixlepix.minechem.minechem.common.items.ItemChemistJournal;
+import pixlepix.minechem.minechem.common.utils.EntityItemMatcher;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.item.Item;
