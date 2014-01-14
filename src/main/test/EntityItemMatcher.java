@@ -1,4 +1,4 @@
-package pixlepix.minechem.minechem.common.utils;
+package pixlepix.minechem.common.utils;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;

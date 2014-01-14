@@ -545,79 +545,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="polytool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="polytool" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="types" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="blocks" />
+              <option name="myItemId" value="assembler" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -643,6 +571,7 @@
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="pixlepix" />
       <recent name="pixlepix.minechem" />
     </key>
   </component>
@@ -845,7 +774,7 @@
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3299566" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -889,14 +818,14 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/blocks/BlockBlueprintProjector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockBlueprintProjector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="9" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.0" vertical-offset="900" max-vertical-offset="1065">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/blocks/BlockBlueprintProjector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockBlueprintProjector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="31" selection-start="1111" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1095">
           <folding />
@@ -908,35 +837,35 @@
         <state line="18" column="28" selection-start="854" selection-end="854" vertical-scroll-proportion="0.40723982" vertical-offset="0" max-vertical-offset="663" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/blocks/BlockBlueprintProjector.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockBlueprintProjector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="60" column="9" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.46615386" vertical-offset="402" max-vertical-offset="1065">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/blocks/OreUranium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/OreUranium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="13" selection-start="825" selection-end="825" vertical-scroll-proportion="0.09049774" vertical-offset="0" max-vertical-offset="663">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/api/core/EnumOre.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumOre.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="35" selection-start="924" selection-end="924" vertical-scroll-proportion="0.6551724" vertical-offset="0" max-vertical-offset="750">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/recipe/handlers/DefaultOreDictionaryHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/handlers/DefaultOreDictionaryHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="71" column="46" selection-start="2239" selection-end="2239" vertical-scroll-proportion="0.0" vertical-offset="600" max-vertical-offset="2490">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/api/recipe/SynthesisRecipe.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/recipe/SynthesisRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="7" column="13" selection-start="181" selection-end="181" vertical-scroll-proportion="-1.8965517" vertical-offset="885" max-vertical-offset="1440">
           <folding />
@@ -948,260 +877,269 @@
         <state line="101" column="53" selection-start="6152" selection-end="6155" vertical-scroll-proportion="-2.4117646" vertical-offset="1377" max-vertical-offset="8880" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/api/recipe/DecomposerRecipe.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/recipe/DecomposerRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="17" column="28" selection-start="485" selection-end="485" vertical-scroll-proportion="0.41379312" vertical-offset="0" max-vertical-offset="570">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/api/core/Molecule.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/Molecule.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="13" selection-start="46" selection-end="46" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="495">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/recipe/MinechemRecipes.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1429" column="18" selection-start="69998" selection-end="69998" vertical-scroll-proportion="0.93939394" vertical-offset="21063" max-vertical-offset="25725">
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1877#1878#0" expanded="true" />
+            <element signature="e#1679#1680#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeZirconium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeZirconium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="415" selection-end="415" vertical-scroll-proportion="-0.6042654" vertical-offset="315" max-vertical-offset="780">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeUranium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeUranium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="13" selection-start="446" selection-end="446" vertical-scroll-proportion="0.1421801" vertical-offset="0" max-vertical-offset="795">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/MinechemBlocks.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/MinechemBlocks.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="105" column="57" selection-start="5268" selection-end="5268" vertical-scroll-proportion="0.0" vertical-offset="1250" max-vertical-offset="2025">
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="imports" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/api/core/EnumElement.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumElement.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="5" selection-start="2346" selection-end="2346" vertical-scroll-proportion="0.26777253" vertical-offset="562" max-vertical-offset="2625">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeTitanium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeTitanium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="23" column="38" selection-start="613" selection-end="613" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeSulfur.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeSulfur.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="705">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeSodium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeSodium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="313" max-vertical-offset="735">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeSilver.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeSilver.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="705">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeSilicon.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeSilicon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="278" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeRubidium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeRubidium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="368" max-vertical-offset="780">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypePlatnium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypePlatnium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="13" selection-start="408" selection-end="408" vertical-scroll-proportion="0.0" vertical-offset="516" max-vertical-offset="915">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypePhosphorus.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypePhosphorus.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="489" selection-end="489" vertical-scroll-proportion="0.0" vertical-offset="518" max-vertical-offset="930">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeOxygen.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeOxygen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="13" selection-start="358" selection-end="358" vertical-scroll-proportion="0.0" vertical-offset="316" max-vertical-offset="705">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeNitrogen.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeNitrogen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="301" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeNickel.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeNickel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="13" selection-start="449" selection-end="449" vertical-scroll-proportion="0.0" vertical-offset="509" max-vertical-offset="885">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeNeon.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeNeon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="15" column="13" selection-start="481" selection-end="481" vertical-scroll-proportion="0.0" vertical-offset="346" max-vertical-offset="735">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeMercury.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeMercury.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="47" column="0" selection-start="1252" selection-end="1252" vertical-scroll-proportion="0.0" vertical-offset="316" max-vertical-offset="825">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeMagnesium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeMagnesium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="13" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" vertical-offset="419" max-vertical-offset="795">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeLithium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeLithium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="13" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" vertical-offset="389" max-vertical-offset="765">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeLead.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeLead.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="14" column="13" selection-start="446" selection-end="446" vertical-scroll-proportion="0.0" vertical-offset="419" max-vertical-offset="840">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeKrypton.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeKrypton.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="13" selection-start="401" selection-end="401" vertical-scroll-proportion="0.0" vertical-offset="421" max-vertical-offset="810">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeHydrogen.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeHydrogen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="13" selection-start="354" selection-end="354" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeGold.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeGold.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="498" selection-end="498" vertical-scroll-proportion="0.0" vertical-offset="269" max-vertical-offset="960">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeFrancium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeFrancium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.0" vertical-offset="368" max-vertical-offset="780">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeChromium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeChromium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="415" selection-end="415" vertical-scroll-proportion="0.0" vertical-offset="479" max-vertical-offset="855">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeArgon.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeArgon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="13" selection-start="390" selection-end="390" vertical-scroll-proportion="-0.79521275" vertical-offset="359" max-vertical-offset="735">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeBeryllium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeBeryllium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="-0.6966581" vertical-offset="331" max-vertical-offset="720">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeBoron.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeBoron.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.015625" vertical-offset="50" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeBromine.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeBromine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="415" selection-end="415" vertical-scroll-proportion="-0.17224881" vertical-offset="168" max-vertical-offset="795">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeCaesium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeCaesium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="-0.018099548" vertical-offset="72" max-vertical-offset="735">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeCalcium.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeCalcium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="13" selection-start="312" selection-end="312" vertical-scroll-proportion="0.049773756" vertical-offset="27" max-vertical-offset="690">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeCarbon.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeCarbon.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="13" column="13" selection-start="415" selection-end="415" vertical-scroll-proportion="-0.17692308" vertical-offset="175" max-vertical-offset="825">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/minechem/common/polytool/types/PolytoolTypeFluorine.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeFluorine.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="13" selection-start="429" selection-end="429" vertical-scroll-proportion="-0.018099548" vertical-offset="72" max-vertical-offset="735">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/assembler/IShapeType.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="17" selection-start="136" selection-end="136" vertical-scroll-proportion="0.13793103" vertical-offset="0" max-vertical-offset="435">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
