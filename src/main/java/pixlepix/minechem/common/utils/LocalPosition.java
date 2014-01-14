@@ -1,7 +1,7 @@
 package pixlepix.minechem.common.utils;
 
-import net.minecraftforge.common.ForgeDirection;
 import buildcraft.api.core.Position;
+import net.minecraftforge.common.ForgeDirection;
 
 public class LocalPosition extends Position {
 

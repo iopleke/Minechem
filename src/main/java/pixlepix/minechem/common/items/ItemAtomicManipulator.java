@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.items;
 
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.utils.ConstantValue;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.item.Item;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.utils.ConstantValue;
 
 public class ItemAtomicManipulator extends Item {
 

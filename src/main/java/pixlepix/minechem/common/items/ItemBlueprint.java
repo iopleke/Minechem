@@ -1,23 +1,23 @@
 package pixlepix.minechem.common.items;
 
-import java.util.List;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import pixlepix.minechem.common.MinechemItems;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.blueprint.MinechemBlueprint;
-import pixlepix.minechem.common.utils.ConstantValue;
-import pixlepix.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import pixlepix.minechem.common.MinechemItems;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.blueprint.MinechemBlueprint;
+import pixlepix.minechem.common.utils.ConstantValue;
+import pixlepix.minechem.common.utils.MinechemHelper;
+
+import java.util.List;
 
 public class ItemBlueprint extends Item {
 
-    public static final String[] names = { "item.name.blueprintFusion", "item.name.blueprintFission"};
+    public static final String[] names = {"item.name.blueprintFusion", "item.name.blueprintFission"};
 
     public ItemBlueprint(int id) {
         super(id);

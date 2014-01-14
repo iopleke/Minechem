@@ -13,27 +13,27 @@ import net.minecraftforge.fluids.IFluidHandler;
 
 public interface IPipeTile extends ISolidSideTile, IFluidHandler {
 
-	public enum PipeType {
+    public enum PipeType {
 
-		ITEM, FLUID, POWER, STRUCTURE;
-	}
+        ITEM, FLUID, POWER, STRUCTURE;
+    }
 
-	@Deprecated
-	IPipe getPipe();
+    @Deprecated
+    IPipe getPipe();
 
-	PipeType getPipeType();
+    PipeType getPipeType();
 
-	/**
-	 * Offers an ItemStack for addition to the pipe. Will be rejected if the
-	 * pipe doesn't accept items from that side.
-	 *
-	 * @param stack ItemStack offered for addition. Do not manipulate this!
-	 * @param doAdd If false no actual addition should take place. Implementors
-	 * should simulate.
-	 * @param from Orientation the ItemStack is offered from.
-	 * @return Amount of items used from the passed stack.
-	 */
-	int injectItem(ItemStack stack, boolean doAdd, ForgeDirection from);
-	
-	boolean isPipeConnected(ForgeDirection with);
+    /**
+     * Offers an ItemStack for addition to the pipe. Will be rejected if the
+     * pipe doesn't accept items from that side.
+     *
+     * @param stack ItemStack offered for addition. Do not manipulate this!
+     * @param doAdd If false no actual addition should take place. Implementors
+     *              should simulate.
+     * @param from  Orientation the ItemStack is offered from.
+     * @return Amount of items used from the passed stack.
+     */
+    int injectItem(ItemStack stack, boolean doAdd, ForgeDirection from);
+
+    boolean isPipeConnected(ForgeDirection with);
 }

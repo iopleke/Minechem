@@ -1,11 +1,7 @@
 package pixlepix.minechem.common.blocks;
 
-import java.util.ArrayList;
-
-import pixlepix.minechem.common.CommonProxy;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
-import pixlepix.minechem.common.utils.ConstantValue;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,8 +11,12 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import pixlepix.minechem.common.CommonProxy;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
+import pixlepix.minechem.common.utils.ConstantValue;
+
+import java.util.ArrayList;
 
 public class BlockMicroscope extends BlockMinechemContainer {
     private Icon front;

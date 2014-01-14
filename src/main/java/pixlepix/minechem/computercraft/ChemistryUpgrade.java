@@ -1,13 +1,9 @@
 package pixlepix.minechem.computercraft;
 
+import dan200.computer.api.IHostedPeripheral;
+import dan200.turtle.api.*;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import dan200.computer.api.IHostedPeripheral;
-import dan200.turtle.api.ITurtleAccess;
-import dan200.turtle.api.ITurtleUpgrade;
-import dan200.turtle.api.TurtleSide;
-import dan200.turtle.api.TurtleUpgradeType;
-import dan200.turtle.api.TurtleVerb;
 
 public class ChemistryUpgrade implements ITurtleUpgrade {
 

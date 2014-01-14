@@ -1,11 +1,11 @@
 package pixlepix.minechem.computercraft.method;
 
+import dan200.computer.api.IComputerAccess;
+import dan200.turtle.api.ITurtleAccess;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.RadiationHandler;
 import pixlepix.minechem.computercraft.ICCMethod;
-import net.minecraft.item.ItemStack;
-import dan200.computer.api.IComputerAccess;
-import dan200.turtle.api.ITurtleAccess;
 
 public class GetTicksUntilDecay implements ICCMethod {
 
@@ -22,7 +22,7 @@ public class GetTicksUntilDecay implements ICCMethod {
         if (selectedStack != null && Util.isStackAnElement(selectedStack)) {
             result = RadiationHandler.getInstance().getTicksUntilDecay(selectedStack, turtle.getWorld());
         }
-        return new Object[] { result };
+        return new Object[]{result};
     }
 
 }

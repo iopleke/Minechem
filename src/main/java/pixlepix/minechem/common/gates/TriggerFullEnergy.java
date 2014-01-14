@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.gates;
 
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
 import buildcraft.api.gates.ITriggerParameter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 
 public class TriggerFullEnergy extends MinechemTrigger {
     public TriggerFullEnergy(int id) {
@@ -18,22 +18,20 @@ public class TriggerFullEnergy extends MinechemTrigger {
             return false;
         return ((IMinechemTriggerProvider) tile).hasFullEnergy();
     }
+
     @Override
     @SideOnly(Side.CLIENT)
     public Icon getIcon() {
-    
-		return provider.getIcon(0);
-        
+
+        return provider.getIcon(0);
+
     }
 
-	@Override
-	public boolean requiresParameter() {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	
+    @Override
+    public boolean requiresParameter() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 
-	
 }

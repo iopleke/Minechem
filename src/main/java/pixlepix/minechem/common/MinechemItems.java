@@ -1,26 +1,16 @@
 package pixlepix.minechem.common;
 
-import pixlepix.minechem.api.core.EnumElement;
-import pixlepix.minechem.common.items.ItemArmorRadiationShield;
-import pixlepix.minechem.common.items.ItemAtomicManipulator;
-import pixlepix.minechem.common.items.ItemBlueprint;
-import pixlepix.minechem.common.items.ItemChemistJournal;
-import pixlepix.minechem.common.items.ItemElement;
-import pixlepix.minechem.common.items.ItemFusionStar;
-import pixlepix.minechem.common.items.ItemLens;
-import pixlepix.minechem.common.items.ItemMolecule;
-import pixlepix.minechem.common.items.ItemPills;
-import pixlepix.minechem.common.items.ItemTestTube;
-import pixlepix.minechem.common.items.PhotonicInduction;
-import pixlepix.minechem.common.polytool.ItemPolytool;
-import pixlepix.minechem.common.utils.ConstantValue;
-import pixlepix.minechem.common.utils.MinechemHelper;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.common.items.*;
+import pixlepix.minechem.common.polytool.ItemPolytool;
+import pixlepix.minechem.common.utils.ConstantValue;
+import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class MinechemItems {
     public static ItemElement element;
@@ -41,7 +31,7 @@ public class MinechemItems {
     public static ItemStack microscopeLens;
     public static PhotonicInduction IAintAvinit;
     public static ItemPills EmptyPillz;
-    public static ItemStack minechempills; 
+    public static ItemStack minechempills;
     public static Item polytool;
     private static int polytoolID;
     private static int elementID;
@@ -74,9 +64,9 @@ public class MinechemItems {
         hazmatTorsoID = getItemConfig(config, "HazmatTorso", baseID++);
         hazmatHeadID = getItemConfig(config, "HazmatHead", baseID++);
         photonID = getItemConfig(config, "Hammer", baseID++);
-		pillzID = getItemConfig(config, "EmptyPills", baseID++);
+        pillzID = getItemConfig(config, "EmptyPills", baseID++);
 
-		polytoolID = getItemConfig(config, "Polytool", baseID++);
+        polytoolID = getItemConfig(config, "Polytool", baseID++);
     }
 
     private static int getItemConfig(Configuration config, String key, int defaultID) {
@@ -97,9 +87,9 @@ public class MinechemItems {
         hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
         hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
         IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
-		EmptyPillz = new ItemPills( pillzID,0);
-		polytool = new ItemPolytool(polytoolID);
-		LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
+        EmptyPillz = new ItemPills(pillzID, 0);
+        polytool = new ItemPolytool(polytoolID);
+        LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
         LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
@@ -109,12 +99,12 @@ public class MinechemItems {
         LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
         LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
         LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
-		LanguageRegistry.addName(EmptyPillz, "Pills");
+        LanguageRegistry.addName(EmptyPillz, "Pills");
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
-		minechempills = new ItemStack(EmptyPillz, 1, 0);
+        minechempills = new ItemStack(EmptyPillz, 1, 0);
     }
 
     public static void registerToOreDictionary() {

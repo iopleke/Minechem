@@ -1,9 +1,21 @@
 package pixlepix.minechem.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-
+import buildcraft.api.gates.ActionManager;
+import buildcraft.api.gates.ITrigger;
+import buildcraft.api.gates.ITriggerProvider;
+import buildcraft.api.inventory.ISpecialInventory;
+import buildcraft.api.transport.IPipe;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.*;
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.util.Util;
@@ -22,43 +34,27 @@ import pixlepix.minechem.common.utils.MinechemHelper;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
 import pixlepix.minechem.fluid.FluidHelper;
 import pixlepix.minechem.fluid.IMinechemFluid;
-import net.minecraft.block.Block;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-import buildcraft.api.gates.ActionManager;
-import buildcraft.api.gates.ITrigger;
-import buildcraft.api.gates.ITriggerProvider;
-import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.transport.IPipe;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
 
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, ITriggerProvider, IMinechemTriggerProvider,
         ISpecialInventory, IMinechemMachinePeripheral, IFluidHandler {
 
-    public static final int[] kInput = { 0 };
-    public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    public static final int[] kBottles = { 10, 11, 12, 13 };
+    public static final int[] kInput = {0};
+    public static final int[] kOutput = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    public static final int[] kBottles = {10, 11, 12, 13};
     private static final float MIN_WORK_PER_SECOND = 1.0F;
     private static final float MAX_WORK_PER_SECOND = 10.0F;
     private ArrayList<ItemStack> outputBuffer;
-	public final int kInputSlot = 0;
-	public final int kOutputSlotStart    = 1;
-	public final int kOutputSlotEnd		= 9;
-	public final int kEmptyTestTubeSlotStart = 10;
-	public final int kEmptyTestTubeSlotEnd   = 13;
-	public final int kEmptyBottleSlotsSize = 4;
-	public final int kOutputSlotsSize		= 9;
+    public final int kInputSlot = 0;
+    public final int kOutputSlotStart = 1;
+    public final int kOutputSlotEnd = 9;
+    public final int kEmptyTestTubeSlotStart = 10;
+    public final int kEmptyTestTubeSlotEnd = 13;
+    public final int kEmptyBottleSlotsSize = 4;
+    public final int kOutputSlotsSize = 9;
     public State state = State.kProcessIdle;
     private ItemStack activeStack;
     private float workToDo = 0;
@@ -89,9 +85,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         inventory = new ItemStack[getSizeInventory()];
         outputBuffer = new ArrayList<ItemStack>();
 
-    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
-    		model = new ModelDecomposer();
-    	}
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            model = new ModelDecomposer();
+        }
         ActionManager.registerTriggerProvider(this);
     }
 
@@ -144,20 +140,21 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         }
         return activeStack;
     }
+
     //bad code is fun!
     public void doWork() {
-        if (state != State.kProcessActive){
-        	this.lastEnergyUsed=0;
+        if (state != State.kProcessActive) {
+            this.lastEnergyUsed = 0;
             return;
         }
 
         State oldState = state;
         float energyUsed = Math.min(this.energyStored, this.MAX_ENERGY_RECIEVED);
-        this.energyStored-=energyUsed;
-        this.lastEnergyUsed=energyUsed/20;
-        
+        this.energyStored -= energyUsed;
+        this.lastEnergyUsed = energyUsed / 20;
+
         workToDo += MinechemHelper.translateValue(energyUsed, this.MIN_ENERGY_RECIEVED, this.MAX_ENERGY_RECIEVED, MIN_WORK_PER_SECOND / 20, MAX_WORK_PER_SECOND / 20);
-        this.workToDo*=10;
+        this.workToDo *= 10;
         if (!worldObj.isRemote) {
             while (workToDo >= 1) {
                 workToDo--;
@@ -185,9 +182,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
         ArrayList<Chemical> output = recipe.getOutput();
         if (recipe != null && output != null) {
-        	if(inputStack.getItem() instanceof ItemElement || inputStack.getItem() instanceof ItemMolecule){
-        		testTubeTransactor.add(new ItemStack(MinechemItems.testTube),true);
-        	}
+            if (inputStack.getItem() instanceof ItemElement || inputStack.getItem() instanceof ItemMolecule) {
+                testTubeTransactor.add(new ItemStack(MinechemItems.testTube), true);
+            }
             ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
             placeStacksInBuffer(stacks);
         }
@@ -313,7 +310,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     }
 
 
-
     public boolean isPowered() {
         return (state != State.kProcessJammed && state != State.kProcessNoBottles && (this.getEnergyStored() > this.getMinEnergyNeeded()));
     }
@@ -430,207 +426,197 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                     return true;
         return false;
     }
+
     public int[] getSizeInventorySide(int side) {
         switch (side) {
-        case 0:
-        case 1:
-            return kBottles;
-        case 2:
-        case 3:
-            return kInput;
-        default:
-            return kOutput;
+            case 0:
+            case 1:
+                return kBottles;
+            case 2:
+            case 3:
+                return kInput;
+            default:
+                return kOutput;
         }
     }
 
 
+    public float getMinEnergyNeeded() {
+        // TODO Auto-generated method stub
+        return 100;
+    }
 
 
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
 
-	public float getMinEnergyNeeded() {
-		// TODO Auto-generated method stub
-		return 100;
-	}
+        if (var1 == 1) {
+            return this.kInput;
+        }
+        if (var1 == 0) {
+            return this.kOutput;
+        }
+        return this.kBottles;
+
+    }
+
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+        // TODO Auto-generated method stub
+        return true;
+    }
 
 
+    public HashMap<Fluid, Integer> partialFluids = new HashMap();
+
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        Fluid fluid = FluidRegistry.getFluid(resource.fluidID);
+
+        if (fluid instanceof IMinechemFluid && this.inputInventory.getStackInSlot(0) == null) {
+
+            IMinechemFluid minechemFluid = (IMinechemFluid) fluid;
+
+            int previousFluid = 0;
+            int currentFluid = 0;
+            if (resource.amount < FluidHelper.FLUID_CONSTANT) {
+                if (!partialFluids.containsKey(fluid)) {
+                    partialFluids.put(fluid, 0);
+                }
+                previousFluid = partialFluids.get(fluid);
+                currentFluid = resource.amount + previousFluid;
+                if (currentFluid < FluidHelper.FLUID_CONSTANT) {
+
+                    partialFluids.put(fluid, currentFluid);
+                    return resource.amount;
+                }
+                partialFluids.put(fluid, currentFluid - FluidHelper.FLUID_CONSTANT);
 
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		
-		if(var1==1){
-			return this.kInput;
-		}
-		if(var1==0){
-			return this.kOutput;
-		}
-		return this.kBottles;
-		
-	}
+            }
+            if (doFill) {
+                this.inputInventory.setInventorySlotContents(0, minechemFluid.getOutputStack());
+            }
+            return resource.amount;
+        }
+        return 0;
 
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    }
 
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource,
+                            boolean doDrain) {
+        return this.drain(from, resource.amount, doDrain);
+    }
 
-	
-	
-	
-	
-	
-	
-	
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        int toDrain = maxDrain;
+        for (int i = 0; i < this.outputInventory.getSizeInventory(); i++) {
+            ItemStack stack = this.outputInventory.getStackInSlot(i);
+            if (stack == null) {
+                continue;
+            }
+            Item item = stack.getItem();
+            if (item instanceof ItemElement) {
+                ItemElement itemMolecule = (ItemElement) item;
+                Fluid fluid = FluidHelper.elements.get(ItemElement.getElement(stack));
+                this.outputInventory.decrStackSize(i, 1);
 
-    public HashMap<Fluid,Integer>  partialFluids=new HashMap();
-	
-	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		Fluid fluid=FluidRegistry.getFluid(resource.fluidID);
-		
-		if(fluid instanceof IMinechemFluid&&this.inputInventory.getStackInSlot(0)==null){
+                return new FluidStack(fluid, FluidHelper.FLUID_CONSTANT);
 
-			IMinechemFluid minechemFluid=(IMinechemFluid) fluid;
+            }
+            if (item instanceof ItemMolecule) {
+                ItemMolecule itemMolecule = (ItemMolecule) item;
+                Fluid fluid = FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
+                this.outputInventory.decrStackSize(i, 1);
+                return new FluidStack(fluid, FluidHelper.FLUID_CONSTANT);
 
-			int previousFluid=0;
-			int currentFluid=0;
-			if(resource.amount<FluidHelper.FLUID_CONSTANT){
-				if(!partialFluids.containsKey(fluid)){
-					partialFluids.put(fluid, 0);
-				}
-				previousFluid=partialFluids.get(fluid);
-				currentFluid= resource.amount+previousFluid;
-				if(currentFluid<FluidHelper.FLUID_CONSTANT){
+            }
 
-					partialFluids.put(fluid,currentFluid);
-					return resource.amount;
-				}
-				partialFluids.put(fluid, currentFluid-FluidHelper.FLUID_CONSTANT);
-				
-				
-				
-				
-			}
-			if(doFill){
-				this.inputInventory.setInventorySlotContents(0, minechemFluid.getOutputStack());
-			}
-			return resource.amount;
-		}
-		return 0;
-		
-	}
+        }
 
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource,
-			boolean doDrain) {
-		return this.drain(from, resource.amount,doDrain);
-	}
+        return null;
+    }
 
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		int toDrain=maxDrain;
-			for(int i=0;i<this.outputInventory.getSizeInventory();i++){
-				ItemStack stack=this.outputInventory.getStackInSlot(i);
-				if(stack==null){
-					continue;
-				}
-				Item item=stack.getItem();
-				if(item instanceof ItemElement){
-					ItemElement itemMolecule=(ItemElement) item;
-					Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
-						this.outputInventory.decrStackSize(i, 1);
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        return fluid instanceof IMinechemFluid;
+    }
 
-						return new FluidStack(fluid,FluidHelper.FLUID_CONSTANT);
-					
-				}
-				if(item instanceof ItemMolecule){
-					ItemMolecule itemMolecule=(ItemMolecule) item;
-					Fluid fluid=FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
-						this.outputInventory.decrStackSize(i, 1);
-						return new FluidStack(fluid,FluidHelper.FLUID_CONSTANT);
-					
-				}
-			
-		}
-		
-		return null;
-	}
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        return fluid instanceof IMinechemFluid;
+    }
 
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return fluid instanceof IMinechemFluid;
-	}
+    public FluidTankInfo getTankInfo(int i) {
 
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return fluid instanceof IMinechemFluid;
-	}
-	public FluidTankInfo getTankInfo(int i){
-		
-		ItemStack stack=this.getStackInSlot(i);
-		if(stack==null){
-			return null;
-		}
-		Item item=stack.getItem();
-		if(item instanceof ItemElement){
-			ItemElement itemMolecule=(ItemElement) item;
-			Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
-			if(fluid==null){
-				return null;
-				//This should never happen.
-			}
-			return new FluidTankInfo(new FluidStack(fluid,stack.stackSize*FluidHelper.FLUID_CONSTANT),6400);
-			
-			
-		}
-		
-		if(item instanceof ItemMolecule){
-			ItemMolecule itemMolecule=(ItemMolecule) item;
-			Fluid fluid=FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
-			if(fluid==null){
-				return null;
-				//This should never happen.
-			}
-			return new FluidTankInfo(new FluidStack(fluid,stack.stackSize*FluidHelper.FLUID_CONSTANT),6400);
-			}
-		
-		return null;
-			
-	}
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		ArrayList fluids=new ArrayList();
-		//Uses both input and output slots
-		for(int i=0;i<this.kEmptyTestTubeSlotStart;i++){
-			FluidTankInfo newFluid=this.getTankInfo(i);
-			if(newFluid!=null){
-				fluids.add(newFluid);
-			}
-		}
-		return (FluidTankInfo[]) fluids.toArray();
-	}
-	//Hacky code
-	//To fix a FZ glitch
-	@Override
-	public void setInventorySlotContents(int slot, ItemStack itemstack) {
-		if(slot==this.kOutput[0]){
-			ItemStack oldStack=this.inventory[this.kOutput[0]];
-			if(oldStack!=null&&itemstack!=null&&oldStack.getItemDamage()==itemstack.getItemDamage()){
-				if(oldStack.getItem()==itemstack.getItem()){
-					if(oldStack.stackSize>itemstack.stackSize){
-						this.decrStackSize(slot, oldStack.stackSize-itemstack.stackSize);
-					}
-				}
-			}
-		}
-		if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
-			itemstack.stackSize = this.getInventoryStackLimit();
-		this.inventory[slot] = itemstack;
-	}
+        ItemStack stack = this.getStackInSlot(i);
+        if (stack == null) {
+            return null;
+        }
+        Item item = stack.getItem();
+        if (item instanceof ItemElement) {
+            ItemElement itemMolecule = (ItemElement) item;
+            Fluid fluid = FluidHelper.elements.get(ItemElement.getElement(stack));
+            if (fluid == null) {
+                return null;
+                //This should never happen.
+            }
+            return new FluidTankInfo(new FluidStack(fluid, stack.stackSize * FluidHelper.FLUID_CONSTANT), 6400);
+
+
+        }
+
+        if (item instanceof ItemMolecule) {
+            ItemMolecule itemMolecule = (ItemMolecule) item;
+            Fluid fluid = FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
+            if (fluid == null) {
+                return null;
+                //This should never happen.
+            }
+            return new FluidTankInfo(new FluidStack(fluid, stack.stackSize * FluidHelper.FLUID_CONSTANT), 6400);
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        ArrayList fluids = new ArrayList();
+        //Uses both input and output slots
+        for (int i = 0; i < this.kEmptyTestTubeSlotStart; i++) {
+            FluidTankInfo newFluid = this.getTankInfo(i);
+            if (newFluid != null) {
+                fluids.add(newFluid);
+            }
+        }
+        return (FluidTankInfo[]) fluids.toArray();
+    }
+
+    //Hacky code
+    //To fix a FZ glitch
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack itemstack) {
+        if (slot == this.kOutput[0]) {
+            ItemStack oldStack = this.inventory[this.kOutput[0]];
+            if (oldStack != null && itemstack != null && oldStack.getItemDamage() == itemstack.getItemDamage()) {
+                if (oldStack.getItem() == itemstack.getItem()) {
+                    if (oldStack.stackSize > itemstack.stackSize) {
+                        this.decrStackSize(slot, oldStack.stackSize - itemstack.stackSize);
+                    }
+                }
+            }
+        }
+        if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
+            itemstack.stackSize = this.getInventoryStackLimit();
+        this.inventory[slot] = itemstack;
+    }
 }

@@ -1,14 +1,7 @@
 package pixlepix.minechem.common.items;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import pixlepix.minechem.common.GuiHandler;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.utils.ConstantValue;
-import pixlepix.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,6 +9,13 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.GuiHandler;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.utils.ConstantValue;
+import pixlepix.minechem.common.utils.MinechemHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ItemChemistJournal extends Item {
 

@@ -1,20 +1,20 @@
 package pixlepix.minechem.common.items;
 
-import java.util.List;
-
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.utils.ConstantValue;
-import pixlepix.minechem.common.utils.MinechemHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.utils.ConstantValue;
+import pixlepix.minechem.common.utils.MinechemHelper;
+
+import java.util.List;
 
 public class ItemLens extends Item {
-    static final String[] descriptiveNames = { "item.name.concavelens", "item.name.convexlens", "item.name.microscopelens", "item.name.projectorlens" };
+    static final String[] descriptiveNames = {"item.name.concavelens", "item.name.convexlens", "item.name.microscopelens", "item.name.projectorlens"};
     private final Icon[] icons = new Icon[4];
 
     public ItemLens(int id) {

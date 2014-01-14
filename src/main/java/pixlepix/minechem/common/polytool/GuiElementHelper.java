@@ -5,22 +5,23 @@ import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.common.items.ItemElement;
 
 public class GuiElementHelper {
-	int dist;
-	double radians;
-	EnumElement element;
-	public GuiElementHelper(int notch, double radians, EnumElement element) {
-		this.dist=notch*20;
-		this.radians=radians;
-		this.element=element;
-	}
+    int dist;
+    double radians;
+    EnumElement element;
 
-	public void draw(GuiPolytool gui, long ticks){
-		//Calculate displacement
-		radians+=.01;
-		double rad=radians;
-		//if(ticks>120){
-			gui.drawItemStack((ItemStack) ItemElement.createStackOf(element,1), (int) (80+Math.sin(rad)*dist), (int) (42+Math.cos(rad)*dist), "");
-		/*}else{
+    public GuiElementHelper(int notch, double radians, EnumElement element) {
+        this.dist = notch * 20;
+        this.radians = radians;
+        this.element = element;
+    }
+
+    public void draw(GuiPolytool gui, long ticks) {
+        //Calculate displacement
+        radians += .01;
+        double rad = radians;
+        //if(ticks>120){
+        gui.drawItemStack((ItemStack) ItemElement.createStackOf(element, 1), (int) (80 + Math.sin(rad) * dist), (int) (42 + Math.cos(rad) * dist), "");
+        /*}else{
 			radians+=.04;
 			int originX=88;
 			int originY=50;
@@ -32,7 +33,7 @@ public class GuiElementHelper {
 			gui.drawItemStack((ItemStack) ItemElement.createStackOf(element,1), progressX, progressX, "");
 		}
 		*/
-	}
+    }
 
 
 }

@@ -1,8 +1,8 @@
 package pixlepix.minechem.common.gates;
 
+import buildcraft.api.gates.ITriggerParameter;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import buildcraft.api.gates.ITriggerParameter;
 
 public class TriggerOutputJammed extends MinechemTrigger {
     public TriggerOutputJammed(int id) {
@@ -16,10 +16,10 @@ public class TriggerOutputJammed extends MinechemTrigger {
         return ((IMinechemTriggerProvider) tile).isJammed();
     }
 
-	@Override
-	public boolean requiresParameter() {
-		// TODO Auto-generated method stub
-		return false;
-	}
- 
+    @Override
+    public boolean requiresParameter() {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
 }

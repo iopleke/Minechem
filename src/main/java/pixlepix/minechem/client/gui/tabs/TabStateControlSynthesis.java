@@ -1,12 +1,12 @@
 package pixlepix.minechem.client.gui.tabs;
 
+import net.minecraft.client.gui.Gui;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
 
 public class TabStateControlSynthesis extends TabStateControl {
     public static Icon noRecipeIcon, unpoweredIcon;
@@ -20,12 +20,12 @@ public class TabStateControlSynthesis extends TabStateControl {
         public String tooltip;
         public int color;
         public Icon icon;
-		private ResourceLocation resource;
+        private ResourceLocation resource;
 
         private TabState(String tooltip, int color, ResourceLocation resource) {
             this.tooltip = tooltip;
             this.color = color;
-            this.resource=resource;
+            this.resource = resource;
         }
     }
 
@@ -72,10 +72,10 @@ public class TabStateControlSynthesis extends TabStateControl {
         return this.state.tooltip;
     }
 
-	@Override
-	public ResourceLocation getIcon() {
-		// TODO Auto-generated method stub
-		return this.state.resource;
-	}
+    @Override
+    public ResourceLocation getIcon() {
+        // TODO Auto-generated method stub
+        return this.state.resource;
+    }
 
 }

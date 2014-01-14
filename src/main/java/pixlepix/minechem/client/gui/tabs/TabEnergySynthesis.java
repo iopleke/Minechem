@@ -1,10 +1,10 @@
 package pixlepix.minechem.client.gui.tabs;
 
+import net.minecraft.client.gui.Gui;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.common.tileentity.MinechemTileEntity;
 import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.gui.Gui;
 
 public class TabEnergySynthesis extends TabEnergy {
 

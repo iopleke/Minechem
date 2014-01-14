@@ -1,6 +1,5 @@
 package pixlepix.minechem.client.gui;
 
-import pixlepix.minechem.common.containers.ContainerMicroscope;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
@@ -10,8 +9,8 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
 import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.common.containers.ContainerMicroscope;
 
 public class RenderGUIItemMicroscope extends RenderItem {
     public ContainerMicroscope microscopeContainer;

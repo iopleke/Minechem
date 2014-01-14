@@ -1,11 +1,11 @@
 package pixlepix.minechem.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.recipe.DecomposerRecipeChance;
@@ -23,10 +23,9 @@ import pixlepix.minechem.common.recipe.DecomposerRecipeHandler;
 import pixlepix.minechem.common.recipe.SynthesisRecipeHandler;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalScrollContainer {
 
@@ -113,13 +112,13 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
             if (tab.leftSide) {
                 for (Tab other : tabListLeft) {
                     if (other != tab && other.isOpen()) {
-                    	
+
                     }
                 }
             } else {
                 for (Tab other : tabListRight) {
                     if (other != tab && other.isOpen()) {
-                    	
+
                     }
                 }
             }
@@ -226,7 +225,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         GL11.glPushMatrix();
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.JOURNAL_GUI));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
 
@@ -249,7 +248,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.JOURNAL_GUI));
         drawTexturedModalRect(8 / 2, 164 / 2, 161 / 2, 192 / 2, 20 / 2, 20 / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -267,7 +266,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
 
         GL11.glScalef(2.0F, 2.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.JOURNAL_GUI));
 
         drawTexturedModalRect(197 / 2, 41 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
         if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped()) {
@@ -399,7 +398,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
 
     @Override
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-            int h) {
+                                     int h) {
         // TODO Auto-generated method stub
         return false;
     }

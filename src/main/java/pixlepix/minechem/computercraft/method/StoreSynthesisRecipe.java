@@ -1,8 +1,8 @@
 package pixlepix.minechem.computercraft.method;
 
-import net.minecraft.item.ItemStack;
 import dan200.computer.api.IComputerAccess;
 import dan200.turtle.api.ITurtleAccess;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.common.recipe.SynthesisRecipeHandler;
 import pixlepix.minechem.computercraft.ChemistryTurtleUpgradePeripherial;
@@ -26,7 +26,7 @@ public class StoreSynthesisRecipe implements ICCMethod {
             recipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(selectedStack);
             peripheral.setSynthesisRecipe(recipe);
         }
-        return new Object[] { recipe != null };
+        return new Object[]{recipe != null};
     }
 
 }

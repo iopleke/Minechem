@@ -4,12 +4,12 @@ import net.minecraft.inventory.IInventory;
 
 public interface IFillerRegistry {
 
-	public void addRecipe(IFillerPattern pattern, Object aobj[]);
+    public void addRecipe(IFillerPattern pattern, Object aobj[]);
 
-	public IFillerPattern findMatchingRecipe(IInventory inventorycrafting);
+    public IFillerPattern findMatchingRecipe(IInventory inventorycrafting);
 
-	public int getPatternNumber(IFillerPattern pattern);
+    public int getPatternNumber(IFillerPattern pattern);
 
-	public IFillerPattern getPattern(int n);
+    public IFillerPattern getPattern(int n);
 
 }

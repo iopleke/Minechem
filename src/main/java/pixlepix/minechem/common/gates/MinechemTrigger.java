@@ -1,9 +1,5 @@
 package pixlepix.minechem.common.gates;
 
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
-import net.minecraftforge.common.ForgeDirection;
 import buildcraft.api.core.IIconProvider;
 import buildcraft.api.gates.ActionManager;
 import buildcraft.api.gates.ITrigger;
@@ -11,6 +7,10 @@ import buildcraft.api.gates.ITriggerParameter;
 import buildcraft.api.gates.TriggerParameter;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.Icon;
+import net.minecraftforge.common.ForgeDirection;
 
 public abstract class MinechemTrigger implements ITrigger {
     @SideOnly(Side.CLIENT)
@@ -34,9 +34,9 @@ public abstract class MinechemTrigger implements ITrigger {
     @Override
     @SideOnly(Side.CLIENT)
     public Icon getIcon() {
-    
-		return provider.getIcon(0);
-        
+
+        return provider.getIcon(0);
+
     }
 
     @Override
@@ -56,16 +56,16 @@ public abstract class MinechemTrigger implements ITrigger {
     public final ITriggerParameter createParameter() {
         return new TriggerParameter();
     }
-    
-    
-    @Override
-	public String getUniqueTag() {
-		return this.desc;
-	}
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IconRegister iconRegister) {
-		
-	}
+
+    @Override
+    public String getUniqueTag() {
+        return this.desc;
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister iconRegister) {
+
+    }
 }

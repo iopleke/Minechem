@@ -1,14 +1,14 @@
 package pixlepix.minechem.computercraft.method;
 
+import dan200.computer.api.IComputerAccess;
+import dan200.turtle.api.ITurtleAccess;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.api.core.EnumRadioactivity;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.items.ItemElement;
 import pixlepix.minechem.common.utils.MinechemHelper;
 import pixlepix.minechem.computercraft.ICCMethod;
-import net.minecraft.item.ItemStack;
-import dan200.computer.api.IComputerAccess;
-import dan200.turtle.api.ITurtleAccess;
 
 public class GetRadioactivity implements ICCMethod {
 
@@ -50,7 +50,7 @@ public class GetRadioactivity implements ICCMethod {
     private Object[] getRadioactiveName(EnumElement element) {
         EnumRadioactivity radioactivity = element.radioactivity();
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        return new Object[] { radioactiveName };
+        return new Object[]{radioactiveName};
     }
 
 }

@@ -1,12 +1,10 @@
 package pixlepix.minechem.client.gui;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
 import pixlepix.minechem.client.gui.tabs.TabHelp;
 import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.blueprint.BlueprintBlock;
@@ -15,10 +13,11 @@ import pixlepix.minechem.common.containers.ContainerProjector;
 import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class GuiProjector extends GuiContainerTabbed {
 
@@ -33,8 +32,9 @@ public class GuiProjector extends GuiContainerTabbed {
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_GUI));;
+
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.PROJECTOR_GUI));
+        ;
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
@@ -93,7 +93,7 @@ public class GuiProjector extends GuiContainerTabbed {
 
     @Override
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-            int h) {
+                                     int h) {
         // TODO Auto-generated method stub
         return false;
     }

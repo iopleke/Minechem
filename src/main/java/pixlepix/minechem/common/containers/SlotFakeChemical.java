@@ -1,8 +1,8 @@
 package pixlepix.minechem.common.containers;
 
-import pixlepix.minechem.common.MinechemItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import pixlepix.minechem.common.MinechemItems;
 
 public class SlotFakeChemical extends SlotFake {
 

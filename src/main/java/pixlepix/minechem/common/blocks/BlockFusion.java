@@ -1,13 +1,7 @@
- package pixlepix.minechem.common.blocks;
+package pixlepix.minechem.common.blocks;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.tileentity.TileEntityFission;
-import pixlepix.minechem.common.tileentity.TileEntityFusion;
-import pixlepix.minechem.common.tileentity.TileEntityProxy;
-import pixlepix.minechem.common.utils.ConstantValue;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -16,8 +10,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.tileentity.TileEntityFission;
+import pixlepix.minechem.common.tileentity.TileEntityFusion;
+import pixlepix.minechem.common.tileentity.TileEntityProxy;
+import pixlepix.minechem.common.utils.ConstantValue;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class BlockFusion extends BlockMinechemContainer {
     private Icon icon1, icon2;
@@ -30,19 +30,19 @@ public class BlockFusion extends BlockMinechemContainer {
 
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9) {
-    	TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-    	
+        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+
         //if(tileEntity instanceof TileEntityProxy){
         //	TileEntityProxy proxy=(TileEntityProxy) tileEntity;
-        	//if(proxy.manager!=null){
-	        //	this.onBlockActivated(world, proxy.manager.xCoord,proxy.manager.yCoord,proxy.manager.zCoord, entityPlayer, side, par7, par8, par9);
-        	//}
+        //if(proxy.manager!=null){
+        //	this.onBlockActivated(world, proxy.manager.xCoord,proxy.manager.yCoord,proxy.manager.zCoord, entityPlayer, side, par7, par8, par9);
+        //}
         //	return true;
         //}
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
-        if(!world.isRemote){
-        	entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+        if (!world.isRemote) {
+            entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
         }
         return true;
     }
@@ -71,10 +71,10 @@ public class BlockFusion extends BlockMinechemContainer {
     @Override
     public Icon getIcon(int par1, int metadata) {
         switch (metadata) {
-        case 0:
-            return icon1;
-        case 1:
-            return icon2;
+            case 0:
+                return icon1;
+            case 1:
+                return icon2;
         }
         return blockIcon;
     }
@@ -93,14 +93,15 @@ public class BlockFusion extends BlockMinechemContainer {
         for (int i = 0; i < 3; i++)
             par3List.add(new ItemStack(this.blockID, 1, i));
     }
+
     @Override
-    public boolean hasTileEntity(){
-    	return true;
+    public boolean hasTileEntity() {
+        return true;
     }
-    
-	@Override
-	public TileEntity createNewTileEntity(World world) {
-		return new TileEntityProxy();
-	}
+
+    @Override
+    public TileEntity createNewTileEntity(World world) {
+        return new TileEntityProxy();
+    }
 
 }

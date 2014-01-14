@@ -1,12 +1,12 @@
 package pixlepix.minechem.client.gui.tabs;
 
+import net.minecraft.client.gui.Gui;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
 import pixlepix.minechem.common.tileentity.TileEntityDecomposer.State;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
 
 public class TabStateControlDecomposer extends TabStateControl {
     private TileEntityDecomposer decomposer;
@@ -25,7 +25,7 @@ public class TabStateControlDecomposer extends TabStateControl {
         private TabState(String tooltip, int color, ResourceLocation resource) {
             this.tooltip = tooltip;
             this.color = color;
-            this.resource=resource;
+            this.resource = resource;
         }
     }
 
@@ -71,10 +71,10 @@ public class TabStateControlDecomposer extends TabStateControl {
         return this.state.tooltip;
     }
 
-	@Override
-	public ResourceLocation getIcon() {
-		// TODO Auto-generated method stub
-		return this.state.resource;
-	}
+    @Override
+    public ResourceLocation getIcon() {
+        // TODO Auto-generated method stub
+        return this.state.resource;
+    }
 
 }

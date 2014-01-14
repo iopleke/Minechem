@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.tileentity;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.minechem.common.blueprint.BlueprintBlock;
 import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.network.PacketGhostBlock;
 import pixlepix.minechem.common.network.PacketHandler;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityGhostBlock extends MinechemTileEntity {
 
@@ -78,13 +78,12 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
         return false;
     }
 
-    
 
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
 
 }

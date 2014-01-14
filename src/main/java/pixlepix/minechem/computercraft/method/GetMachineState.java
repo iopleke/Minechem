@@ -19,7 +19,7 @@ public class GetMachineState extends InteractMachine implements ICCMethod {
         if (machine != null) {
             result = machine.getMachineState();
         }
-        return new Object[] { result };
+        return new Object[]{result};
     }
 
 }

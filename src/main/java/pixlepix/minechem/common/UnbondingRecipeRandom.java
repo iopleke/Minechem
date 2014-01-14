@@ -1,9 +1,9 @@
 package pixlepix.minechem.common;
 
+import net.minecraft.item.ItemStack;
+
 import java.util.ArrayList;
 import java.util.Random;
-
-import net.minecraft.item.ItemStack;
 
 public class UnbondingRecipeRandom extends UnbondingRecipe {
 

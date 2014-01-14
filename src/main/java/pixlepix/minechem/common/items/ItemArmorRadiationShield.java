@@ -1,18 +1,18 @@
 package pixlepix.minechem.common.items;
 
-import java.util.List;
-
-import pixlepix.minechem.api.core.IRadiationShield;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.utils.ConstantValue;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import pixlepix.minechem.api.core.IRadiationShield;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.utils.ConstantValue;
+
+import java.util.List;
 
 public class ItemArmorRadiationShield extends ItemArmor implements IRadiationShield {
 
@@ -49,7 +49,7 @@ public class ItemArmorRadiationShield extends ItemArmor implements IRadiationShi
 
     @Override
 
-    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type){
+    public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type) {
         return ConstantValue.HAZMAT_TEX;
     }
 

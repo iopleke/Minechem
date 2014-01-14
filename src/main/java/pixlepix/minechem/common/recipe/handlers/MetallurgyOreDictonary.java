@@ -5,16 +5,16 @@ import pixlepix.minechem.common.recipe.OreDictionaryHandler;
 
 public class MetallurgyOreDictonary implements OreDictionaryHandler {
 
-	@Override
-	public boolean canHandle(OreRegisterEvent event) {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean canHandle(OreRegisterEvent event) {
+        // TODO Auto-generated method stub
+        return false;
+    }
 
-	@Override
-	public void handle(OreRegisterEvent event) {
-		// TODO Auto-generated method stub
+    @Override
+    public void handle(OreRegisterEvent event) {
+        // TODO Auto-generated method stub
 
-	}
+    }
 
 }

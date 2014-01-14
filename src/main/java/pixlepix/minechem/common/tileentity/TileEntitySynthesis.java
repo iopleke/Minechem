@@ -1,10 +1,23 @@
 package pixlepix.minechem.common.tileentity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-
+import buildcraft.api.gates.ActionManager;
+import buildcraft.api.gates.ITrigger;
+import buildcraft.api.gates.ITriggerProvider;
+import buildcraft.api.inventory.ISpecialInventory;
+import buildcraft.api.transport.IPipe;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import net.minecraft.block.Block;
+import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.fluids.*;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.client.ModelSynthesizer;
@@ -22,41 +35,24 @@ import pixlepix.minechem.common.utils.MinechemHelper;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
 import pixlepix.minechem.fluid.FluidHelper;
 import pixlepix.minechem.fluid.IMinechemFluid;
-import net.minecraft.block.Block;
-import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
-import net.minecraftforge.fluids.IFluidHandler;
-import buildcraft.api.gates.ActionManager;
-import buildcraft.api.gates.ITrigger;
-import buildcraft.api.gates.ITriggerProvider;
-import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.transport.IPipe;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 
-public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory,  ITriggerProvider, IMinechemTriggerProvider,
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+
+public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory, ITriggerProvider, IMinechemTriggerProvider,
         ISpecialInventory, IMinechemMachinePeripheral, IFluidHandler {
-    public static final int[] kOutput = { 0 };
-    public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    public static final int[] kBottles = { 10, 11, 12, 13 };
-    public static final int[] kStorage = { 14, 15, 16, 17, 18, 19, 20, 21, 22 };
-    public static final int[] kJournal = { 23 };
+    public static final int[] kOutput = {0};
+    public static final int[] kRecipe = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    public static final int[] kBottles = {10, 11, 12, 13};
+    public static final int[] kStorage = {14, 15, 16, 17, 18, 19, 20, 21, 22};
+    public static final int[] kJournal = {23};
     //Slots that contain *real* items
     //For the purpose of dropping upon break. These are bottles, storage, and 
     // journal.
     public static final int[] kRealSlots;
-    
+
     // Ensure that the list of real slots stays in sync with the above defs.
     static {
         ArrayList l = new ArrayList();
@@ -79,16 +75,16 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     private SynthesisRecipe currentRecipe;
     public ModelSynthesizer model;
-	public static final int kSizeOutput = 1;
-	public static final int kSizeRecipe  = 9;
-	public static final int kSizeBottles = 4;
-	public static final int kSizeStorage = 9;
-	public static final int kSizeJournal = 1;
-	public static final int kStartOutput = 0;
-	public static final int kStartRecipe = 1;
-	public static final int kStartBottles = 10;
-	public static final int kStartStorage = 14;
-	public static final int kStartJournal = 23;
+    public static final int kSizeOutput = 1;
+    public static final int kSizeRecipe = 9;
+    public static final int kSizeBottles = 4;
+    public static final int kSizeStorage = 9;
+    public static final int kSizeJournal = 1;
+    public static final int kStartOutput = 0;
+    public static final int kStartRecipe = 1;
+    public static final int kStartBottles = 10;
+    public static final int kStartStorage = 14;
+    public static final int kStartJournal = 23;
     private final BoundedInventory recipeMatrix = new BoundedInventory(this, kRecipe);
     private final BoundedInventory storageInventory = new BoundedInventory(this, kStorage);
     private final BoundedInventory tubeInventory = new BoundedInventory(this, kBottles);
@@ -110,9 +106,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public TileEntitySynthesis() {
         inventory = new ItemStack[getSizeInventory()];
 
-    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
-    		model = new ModelSynthesizer();
-    	}
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            model = new ModelSynthesizer();
+        }
         ActionManager.registerTriggerProvider(this);
     }
 
@@ -132,8 +128,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     }
 
     @Override
-    public void closeChest() {}
-    
+    public void closeChest() {
+    }
+
     private boolean valueIn(int value, int[] arr) {
         if (arr == null) {
             return false;
@@ -145,11 +142,13 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         }
         return false;
     }
+
     /**
      * Returns true iff the given inventory slot is a "ghost" slot used
      * to show the output of the configured recipe. Ghost output items don't
      * really exist and should never be dumped or extracted, except when the
      * recipe is crafted.
+     *
      * @param slotId Slot Id to check.
      * @return true iff the slot is a "ghost" slot for the recipe output.
      */
@@ -161,7 +160,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
      * Returns true iff the given inventory slot is a "ghost" slot used to show
      * the inputs of a crafting recipe. Items in these slots don't really exist
      * and should never be dumped or extracted.
-     * 
+     *
      * @param slotId Slot Id to check.
      * @return true iff the slot is a "ghost" slot for the recipe.
      */
@@ -172,6 +171,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     /**
      * Returns true iff the given inventory slot holds a "ghost" item
      * that doesn't really exist.
+     *
      * @param slotId Slot Id to check.
      * @return true iff the slot holds a "ghost" item.
      */
@@ -182,6 +182,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     /**
      * Returns true iff the given inventory slot can hold a real (non-ghost)
      * item, i.e., one that is really stored in the inventory.
+     *
      * @param slotId Slot Id to check.
      * @return true iff the slot can hold a real item.
      */
@@ -196,22 +197,21 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         if (this.inventory[slot] != null) {
             ItemStack itemstack;
             if (slot == kOutput[0]) {
-            	int toRemove=amount;
-            	while(toRemove>0){
-	                if (takeInputStacks()){
-	                    takeEnergy(currentRecipe);
-	                	toRemove--;
-	                }
-	                else{
-	                	if(amount==toRemove){
-	                		return null;
-	                	}else{
-	                		ItemStack result=getStackInSlot(slot).copy();
-	                		result.stackSize=(amount-toRemove);
-	                		return result;
-	                	}
-	                }
-            	}
+                int toRemove = amount;
+                while (toRemove > 0) {
+                    if (takeInputStacks()) {
+                        takeEnergy(currentRecipe);
+                        toRemove--;
+                    } else {
+                        if (amount == toRemove) {
+                            return null;
+                        } else {
+                            ItemStack result = getStackInSlot(slot).copy();
+                            result.stackSize = (amount - toRemove);
+                            return result;
+                        }
+                    }
+                }
             }
             if (this.inventory[slot].stackSize <= amount) {
                 itemstack = this.inventory[slot];
@@ -228,19 +228,19 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    
+
     @Override
     public ItemStack[] extractItem(boolean doRemove, ForgeDirection direction, int maxItemCount) {
         switch (direction) {
-        case NORTH:
-        case SOUTH:
-        case EAST:
-        case WEST:
-        case UNKNOWN:
-            return extractOutput(doRemove, maxItemCount);
-        case UP:
-        case DOWN:
-            return extractTestTubes(doRemove, maxItemCount);
+            case NORTH:
+            case SOUTH:
+            case EAST:
+            case WEST:
+            case UNKNOWN:
+                return extractOutput(doRemove, maxItemCount);
+            case UP:
+            case DOWN:
+                return extractTestTubes(doRemove, maxItemCount);
 
         }
         return new ItemStack[0];
@@ -250,7 +250,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         if (currentRecipe == null || !takeStacksFromStorage(false) || !canAffordRecipe(currentRecipe))
             return null;
         ItemStack outputStack = currentRecipe.getOutput().copy();
-        ItemStack[] output = new ItemStack[] { outputStack };
+        ItemStack[] output = new ItemStack[]{outputStack};
         if (doRemove) {
             takeEnergy(currentRecipe);
             takeStacksFromStorage(true);
@@ -355,7 +355,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         super.readFromNBT(nbtTagCompound);
         NBTTagList inventoryTagList = nbtTagCompound.getTagList("inventory");
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
-        
+
     }
 
     public void sendUpdatePacket() {
@@ -364,22 +364,21 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         PacketHandler.getInstance().synthesisUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
     }
 
-    
-    
+
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack) {
-    	
-        if(slot == kOutput[0]&&getStackInSlot(slot)!=null){
-        	if(itemstack==null){
-        		this.decrStackSize(slot, getStackInSlot(slot).stackSize);
-        		return;
-        	}
-        	if(getStackInSlot(slot).getItem()==itemstack.getItem()){
-        		if(getStackInSlot(slot).stackSize>itemstack.stackSize){
-            		this.decrStackSize(slot, getStackInSlot(slot).stackSize-itemstack.stackSize);
-            		return;
-            	}
-        	}
+
+        if (slot == kOutput[0] && getStackInSlot(slot) != null) {
+            if (itemstack == null) {
+                this.decrStackSize(slot, getStackInSlot(slot).stackSize);
+                return;
+            }
+            if (getStackInSlot(slot).getItem() == itemstack.getItem()) {
+                if (getStackInSlot(slot).stackSize > itemstack.stackSize) {
+                    this.decrStackSize(slot, getStackInSlot(slot).stackSize - itemstack.stackSize);
+                    return;
+                }
+            }
         }
 
         super.setInventorySlotContents(slot, itemstack);
@@ -388,9 +387,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     }
 
     public boolean takeStacksFromStorage(boolean doTake) {
-    	if(this.currentRecipe==null){
-    		return false;
-    	}
+        if (this.currentRecipe == null) {
+            return false;
+        }
         List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
         ItemStack[] storage = storageInventory.copyInventoryToArray();
         for (ItemStack ingredient : ingredients) {
@@ -406,7 +405,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     @Override
     public void updateEntity() {
-    	super.updateEntity();
+        super.updateEntity();
         if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
 
@@ -424,22 +423,22 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         if (currentRecipe != null && inventory[kOutput[0]] == null) {
             inventory[kOutput[0]] = currentRecipe.getOutput().copy();
         }
-        if(worldObj.getTotalWorldTime()-this.lastRecipeTick>5){
-        	this.lastEnergyUsed=0;
+        if (worldObj.getTotalWorldTime() - this.lastRecipeTick > 5) {
+            this.lastEnergyUsed = 0;
         }
-        for (Object obj:this.partialFluids.keySet().toArray()){
-			if(obj instanceof IMinechemFluid){
-				IMinechemFluid fluid=(IMinechemFluid) obj;
-				int currentFluid=this.partialFluids.get(fluid);
-				while(currentFluid>=FluidHelper.FLUID_CONSTANT){
-	
-					ItemStack output=fluid.getOutputStack();
-					this.addStackToInventory(output);
-					currentFluid-=FluidHelper.FLUID_CONSTANT;
-				}
-				partialFluids.put(((Fluid)obj), currentFluid);
-			}
-		}
+        for (Object obj : this.partialFluids.keySet().toArray()) {
+            if (obj instanceof IMinechemFluid) {
+                IMinechemFluid fluid = (IMinechemFluid) obj;
+                int currentFluid = this.partialFluids.get(fluid);
+                while (currentFluid >= FluidHelper.FLUID_CONSTANT) {
+
+                    ItemStack output = fluid.getOutputStack();
+                    this.addStackToInventory(output);
+                    currentFluid -= FluidHelper.FLUID_CONSTANT;
+                }
+                partialFluids.put(((Fluid) obj), currentFluid);
+            }
+        }
     }
 
     @Override
@@ -503,12 +502,14 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             setRecipe(recipe);
         }
     }
-    public long lastRecipeTick=0;
+
+    public long lastRecipeTick = 0;
+
     private void takeEnergy(SynthesisRecipe recipe) {
         int energyCost = recipe.energyCost();
-        this.lastEnergyUsed=energyCost;
-        this.lastRecipeTick=worldObj.getTotalWorldTime();
-        this.energyStored-=energyCost;
+        this.lastEnergyUsed = energyCost;
+        this.lastRecipeTick = worldObj.getTotalWorldTime();
+        this.energyStored -= energyCost;
     }
 
     private boolean takeStackFromStorage(ItemStack ingredient, ItemStack[] storage) {
@@ -661,217 +662,211 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     public int[] getSizeInventorySide(int side) {
         switch (side) {
-        case 0:
-        case 1:
-            return kBottles;
-        case 4:
-        case 5:
-            return kStorage;
-        default:
-            return kOutput;
+            case 0:
+            case 1:
+                return kBottles;
+            case 4:
+            case 5:
+                return kStorage;
+            default:
+                return kOutput;
         }
     }
 
-    
-	@Override
-	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-		// TODO Auto-generated method stub
-		return true;
-	}
+
+    @Override
+    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
+        // TODO Auto-generated method stub
+        return true;
+    }
 
 
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1) {
+        //This is so hacky
+        //I'm honestly ashamed
+        if (var1 == 1) {
+            return this.kStorage;
+        }
+        if (var1 == 0 && takeStacksFromStorage(false)) {
+            return this.kOutput;
+        }
+        return this.kBottles;
 
-	@Override
-	public int[] getAccessibleSlotsFromSide(int var1) {
-		//This is so hacky
-		//I'm honestly ashamed
-		if(var1==1){
-			return this.kStorage;
-		}
-		if(var1==0&&takeStacksFromStorage(false)){
-			return this.kOutput;
-		}
-		return this.kBottles;
-		
-	}
-
-
-	@Override
-	public boolean canInsertItem(int i, ItemStack itemstack, int j) {
-		// TODO Auto-generated method stub
-		return true;
-	}
-
-	@Override
-	public boolean canExtractItem(int i, ItemStack itemstack, int j) {
-		if(i==kOutput[0]){
-			if(takeStacksFromStorage(false)){
-				return true;
-			}
-			return false;
-		}
-		return true;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	public HashMap<Fluid,Integer>  partialFluids=new HashMap();
-	
-	@Override
-	public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
-		Fluid fluid=FluidRegistry.getFluid(resource.fluidID);
-		
-		if(fluid instanceof IMinechemFluid){
-
-			IMinechemFluid minechemFluid=(IMinechemFluid) fluid;
-			if(!doFill){
-				return resource.amount;
-			}
-			int previousFluid=0;
-			int currentFluid=0;
-				if(!partialFluids.containsKey(fluid)){
-					partialFluids.put(fluid, 0);
-				}
-				previousFluid=partialFluids.get(fluid);
-				currentFluid= (2*resource.amount)+previousFluid;
-
-				if(currentFluid<FluidHelper.FLUID_CONSTANT){
+    }
 
 
-					partialFluids.put(fluid,currentFluid);
-					return resource.amount;
-				}
-				
-				
-				while(currentFluid>=FluidHelper.FLUID_CONSTANT){
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j) {
+        // TODO Auto-generated method stub
+        return true;
+    }
 
-					ItemStack output=minechemFluid.getOutputStack();
-					this.addStackToInventory(output);
-					currentFluid-=FluidHelper.FLUID_CONSTANT;
-				}
-				partialFluids.put(fluid, currentFluid);
+    @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j) {
+        if (i == kOutput[0]) {
+            if (takeStacksFromStorage(false)) {
+                return true;
+            }
+            return false;
+        }
+        return true;
+    }
 
-				return resource.amount;
-			
-		}
-		return 0;
-		
-	}
-	public void addStackToInventory(ItemStack newStack){
-		for(int i=0;i<this.storageInventory.getSizeInventory();i++){
-			ItemStack stack=this.storageInventory.getStackInSlot(i);
-			if(stack==null){
-				this.storageInventory.setInventorySlotContents(i, newStack);
-				return;
-			}
-			if(stack.stackSize<64&&stack.getItem()==newStack.getItem()&&stack.getItemDamage()==newStack.getItemDamage()){
-				stack.stackSize++;
-				return;
-			}
-		}
-		worldObj.spawnEntityInWorld(new EntityItem(worldObj,xCoord,yCoord+2,zCoord, newStack));
-	}
-	@Override
-	public FluidStack drain(ForgeDirection from, FluidStack resource,
-			boolean doDrain) {
-		return this.drain(from, resource.amount,doDrain);
-	}
 
-	@Override
-	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
-		int toDrain=maxDrain;
-		FluidStack toReturn=null;
-			for(int i=0;i<this.outputInventory.getSizeInventory();i++){
-				ItemStack stack=this.outputInventory.decrStackSize(kStartOutput, 1);
-				if(stack==null){
-					continue;
-				}
-				Item item=stack.getItem();
-				if(item instanceof ItemElement){
-					ItemElement itemMolecule=(ItemElement) item;
-					Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
-					if(toReturn==null||fluid.getID()==toReturn.fluidID){
-						if(toReturn==null){
-							toReturn=new FluidStack(fluid,0);
-						}
-						toReturn.amount+=FluidHelper.FLUID_CONSTANT;
-					}
-				}
-				if(item instanceof ItemMolecule){
-					ItemMolecule itemMolecule=(ItemMolecule) item;
-					Fluid fluid=FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
-					if(toReturn==null||fluid.getID()==toReturn.fluidID){
-						if(toReturn==null){
-							toReturn=new FluidStack(fluid,0);
-						}
-						toReturn.amount+=FluidHelper.FLUID_CONSTANT;
-					}
-				}
-			
-		}
-		
-		return toReturn;
-	}
+    public HashMap<Fluid, Integer> partialFluids = new HashMap();
 
-	@Override
-	public boolean canFill(ForgeDirection from, Fluid fluid) {
-		return fluid instanceof IMinechemFluid;
-	}
+    @Override
+    public int fill(ForgeDirection from, FluidStack resource, boolean doFill) {
+        Fluid fluid = FluidRegistry.getFluid(resource.fluidID);
 
-	@Override
-	public boolean canDrain(ForgeDirection from, Fluid fluid) {
-		return fluid instanceof IMinechemFluid;
-	}
-	public FluidTankInfo getTankInfo(int i){
-		
-		ItemStack stack=this.storageInventory.getStackInSlot(i);
-		if(stack==null){
-			return null;
-		}
-		Item item=stack.getItem();
-		if(item instanceof ItemElement){
-			ItemElement itemMolecule=(ItemElement) item;
-			Fluid fluid=FluidHelper.elements.get(ItemElement.getElement(stack));
-			if(fluid==null){
-				System.out.println("Invalid fluid in minechem machine");
-				return null;
-				//This should never happen.
-			}
-			return new FluidTankInfo(new FluidStack(fluid,stack.stackSize*FluidHelper.FLUID_CONSTANT),6400);
-			
-			
-		}
-		
-		if(item instanceof ItemMolecule){
-			ItemMolecule itemMolecule=(ItemMolecule) item;
-			Fluid fluid=FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
-			if(fluid==null){
-				return null;
-				//This should never happen.
-			}
-			return new FluidTankInfo(new FluidStack(fluid,stack.stackSize*FluidHelper.FLUID_CONSTANT),6400);
-			}
-		
-		return null;
-			
-	}
-	@Override
-	public FluidTankInfo[] getTankInfo(ForgeDirection from) {
-		ArrayList fluids=new ArrayList();
-		for(int i=0;i<this.storageInventory.getSizeInventory();i++){
-			FluidTankInfo newFluid=this.getTankInfo(i);
-			if(newFluid!=null){
-				fluids.add(newFluid);
-			}
-		}
-		return (FluidTankInfo[]) fluids.toArray();
-	}
+        if (fluid instanceof IMinechemFluid) {
+
+            IMinechemFluid minechemFluid = (IMinechemFluid) fluid;
+            if (!doFill) {
+                return resource.amount;
+            }
+            int previousFluid = 0;
+            int currentFluid = 0;
+            if (!partialFluids.containsKey(fluid)) {
+                partialFluids.put(fluid, 0);
+            }
+            previousFluid = partialFluids.get(fluid);
+            currentFluid = (2 * resource.amount) + previousFluid;
+
+            if (currentFluid < FluidHelper.FLUID_CONSTANT) {
+
+
+                partialFluids.put(fluid, currentFluid);
+                return resource.amount;
+            }
+
+
+            while (currentFluid >= FluidHelper.FLUID_CONSTANT) {
+
+                ItemStack output = minechemFluid.getOutputStack();
+                this.addStackToInventory(output);
+                currentFluid -= FluidHelper.FLUID_CONSTANT;
+            }
+            partialFluids.put(fluid, currentFluid);
+
+            return resource.amount;
+
+        }
+        return 0;
+
+    }
+
+    public void addStackToInventory(ItemStack newStack) {
+        for (int i = 0; i < this.storageInventory.getSizeInventory(); i++) {
+            ItemStack stack = this.storageInventory.getStackInSlot(i);
+            if (stack == null) {
+                this.storageInventory.setInventorySlotContents(i, newStack);
+                return;
+            }
+            if (stack.stackSize < 64 && stack.getItem() == newStack.getItem() && stack.getItemDamage() == newStack.getItemDamage()) {
+                stack.stackSize++;
+                return;
+            }
+        }
+        worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord + 2, zCoord, newStack));
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, FluidStack resource,
+                            boolean doDrain) {
+        return this.drain(from, resource.amount, doDrain);
+    }
+
+    @Override
+    public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain) {
+        int toDrain = maxDrain;
+        FluidStack toReturn = null;
+        for (int i = 0; i < this.outputInventory.getSizeInventory(); i++) {
+            ItemStack stack = this.outputInventory.decrStackSize(kStartOutput, 1);
+            if (stack == null) {
+                continue;
+            }
+            Item item = stack.getItem();
+            if (item instanceof ItemElement) {
+                ItemElement itemMolecule = (ItemElement) item;
+                Fluid fluid = FluidHelper.elements.get(ItemElement.getElement(stack));
+                if (toReturn == null || fluid.getID() == toReturn.fluidID) {
+                    if (toReturn == null) {
+                        toReturn = new FluidStack(fluid, 0);
+                    }
+                    toReturn.amount += FluidHelper.FLUID_CONSTANT;
+                }
+            }
+            if (item instanceof ItemMolecule) {
+                ItemMolecule itemMolecule = (ItemMolecule) item;
+                Fluid fluid = FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
+                if (toReturn == null || fluid.getID() == toReturn.fluidID) {
+                    if (toReturn == null) {
+                        toReturn = new FluidStack(fluid, 0);
+                    }
+                    toReturn.amount += FluidHelper.FLUID_CONSTANT;
+                }
+            }
+
+        }
+
+        return toReturn;
+    }
+
+    @Override
+    public boolean canFill(ForgeDirection from, Fluid fluid) {
+        return fluid instanceof IMinechemFluid;
+    }
+
+    @Override
+    public boolean canDrain(ForgeDirection from, Fluid fluid) {
+        return fluid instanceof IMinechemFluid;
+    }
+
+    public FluidTankInfo getTankInfo(int i) {
+
+        ItemStack stack = this.storageInventory.getStackInSlot(i);
+        if (stack == null) {
+            return null;
+        }
+        Item item = stack.getItem();
+        if (item instanceof ItemElement) {
+            ItemElement itemMolecule = (ItemElement) item;
+            Fluid fluid = FluidHelper.elements.get(ItemElement.getElement(stack));
+            if (fluid == null) {
+                System.out.println("Invalid fluid in minechem machine");
+                return null;
+                //This should never happen.
+            }
+            return new FluidTankInfo(new FluidStack(fluid, stack.stackSize * FluidHelper.FLUID_CONSTANT), 6400);
+
+
+        }
+
+        if (item instanceof ItemMolecule) {
+            ItemMolecule itemMolecule = (ItemMolecule) item;
+            Fluid fluid = FluidHelper.molecule.get(ItemMolecule.getMolecule(stack));
+            if (fluid == null) {
+                return null;
+                //This should never happen.
+            }
+            return new FluidTankInfo(new FluidStack(fluid, stack.stackSize * FluidHelper.FLUID_CONSTANT), 6400);
+        }
+
+        return null;
+
+    }
+
+    @Override
+    public FluidTankInfo[] getTankInfo(ForgeDirection from) {
+        ArrayList fluids = new ArrayList();
+        for (int i = 0; i < this.storageInventory.getSizeInventory(); i++) {
+            FluidTankInfo newFluid = this.getTankInfo(i);
+            if (newFluid != null) {
+                fluids.add(newFluid);
+            }
+        }
+        return (FluidTankInfo[]) fluids.toArray();
+    }
 }

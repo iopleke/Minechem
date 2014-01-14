@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.recipe;
 
-import pixlepix.minechem.common.MinechemItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.MinechemItems;
 
 public class RecipeJournalCloning implements IRecipe {
 

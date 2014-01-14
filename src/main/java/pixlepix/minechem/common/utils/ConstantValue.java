@@ -9,9 +9,9 @@ public interface ConstantValue {
 
     //Used for resourceLocations in 1.6
     public static final String MOD_ID = "minechem";
-    public static final String TEXTURE_MOD_ID = MOD_ID+":";
+    public static final String TEXTURE_MOD_ID = MOD_ID + ":";
 
-	public static final String POLYTOOL_TEX = TEXTURE_MOD_ID+"polytool";
+    public static final String POLYTOOL_TEX = TEXTURE_MOD_ID + "polytool";
     public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";
     public static final String BLUEPRINT_TEX = TEXTURE_MOD_ID + "Blueprint";
     public static final String CHEMIST_JOURNAL_TEX = TEXTURE_MOD_ID + "ChemistJournal";
@@ -74,7 +74,7 @@ public interface ConstantValue {
     public static final String JOURNAL_GUI = TEXTURE_GUI_DIR + "ChemistsJournalGUI.png";
     public static final String VAT_GUI = TEXTURE_GUI_DIR + "ChemicalVatGUI.png";
     public static final String PRINT_GUI = TEXTURE_GUI_DIR + "PrintGUI.png";
-    
+
     public static final String MICROSCOPE_MODEL = TEXTURE_MODEL_DIR + "MicroscopeModel.png";
     public static final String DECOMPOSER_MODEL_ON = TEXTURE_MODEL_DIR + "DecomposerModelOn.png";
     public static final String DECOMPOSER_MODEL_OFF = TEXTURE_MODEL_DIR + "DecomposerModelOff.png";
@@ -86,7 +86,7 @@ public interface ConstantValue {
     public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "ChemicalStorageModel.png";
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
-    public static final String ICON_BASE="textures/icons/";
-	public static final String URANIUM_TEX = TEXTURE_MOD_ID + "uraniumOre";
-	public static final String FISSION_GUI = TEXTURE_GUI_DIR+"FissionGUI.png";
+    public static final String ICON_BASE = "textures/icons/";
+    public static final String URANIUM_TEX = TEXTURE_MOD_ID + "uraniumOre";
+    public static final String FISSION_GUI = TEXTURE_GUI_DIR + "FissionGUI.png";
 }

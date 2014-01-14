@@ -1,8 +1,8 @@
 package ljdp.easypacket.serializer;
 
-import java.util.HashMap;
-
 import net.minecraft.item.ItemStack;
+
+import java.util.HashMap;
 
 public class SerializerHandler {
 
@@ -24,11 +24,9 @@ public class SerializerHandler {
 
     /**
      * Registers a serializer to serializer a type.
-     * 
-     * @param type
-     *            I.E. String.class, Long.class
-     * @param serializer
-     *            The serializer instance.
+     *
+     * @param type       I.E. String.class, Long.class
+     * @param serializer The serializer instance.
      */
     public void registerSerializer(Class<?> type, Serializer serializer) {
         serializers.put(type, serializer);
@@ -36,7 +34,7 @@ public class SerializerHandler {
 
     /**
      * Gets a serializer by type.
-     * 
+     *
      * @param type
      * @return
      */

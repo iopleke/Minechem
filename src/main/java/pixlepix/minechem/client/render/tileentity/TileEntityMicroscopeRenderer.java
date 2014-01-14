@@ -1,13 +1,12 @@
 package pixlepix.minechem.client.render.tileentity;
 
-import org.lwjgl.opengl.GL11;
-
-import pixlepix.minechem.client.ModelMicroscope;
-import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
-import pixlepix.minechem.common.utils.ConstantValue;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.client.ModelMicroscope;
+import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
+import pixlepix.minechem.common.utils.ConstantValue;
 
 public class TileEntityMicroscopeRenderer extends TileEntitySpecialRenderer {
 
@@ -28,7 +27,7 @@ public class TileEntityMicroscopeRenderer extends TileEntitySpecialRenderer {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.MICROSCOPE_MODEL));
+            bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.MICROSCOPE_MODEL));
             modelMicroscope.render(0.0625F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_LIGHTING);

@@ -1,15 +1,14 @@
 package pixlepix.minechem.client.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
 import pixlepix.minechem.client.gui.tabs.TabHelp;
 import pixlepix.minechem.common.containers.ContainerFusion;
 import pixlepix.minechem.common.tileentity.TileEntityFusion;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 
 public class GuiFusion extends GuiContainerTabbed {
 
@@ -43,7 +42,7 @@ public class GuiFusion extends GuiContainerTabbed {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.FUSION_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.FUSION_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         // DRAW GUI
@@ -58,13 +57,15 @@ public class GuiFusion extends GuiContainerTabbed {
         // DRAW ENERGY BAR OVERLAY
         drawEnergyBarOverlay();
     }
-    public void drawEnergyBarOverlay(){
-    	
-    	int x = (width - guiWidth) / 2;
+
+    public void drawEnergyBarOverlay() {
+
+        int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x + 7, y + 37, 0, 187, 162, 5);
-        
+
     }
+
     private void updateEnergy() {
         targetEnergy = fusion.getFusionEnergyStored();
         if (energy < (targetEnergy)) {
@@ -80,7 +81,7 @@ public class GuiFusion extends GuiContainerTabbed {
 
     @Override
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-            int h) {
+                                     int h) {
         // TODO Auto-generated method stub
         return false;
     }

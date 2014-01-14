@@ -1,17 +1,16 @@
 package pixlepix.minechem.common;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pixlepix.minechem.api.core.IRadiationShield;
-import pixlepix.minechem.common.containers.ContainerChemicalStorage;
-import pixlepix.minechem.common.items.ItemElement;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import pixlepix.minechem.api.core.IRadiationShield;
+import pixlepix.minechem.common.containers.ContainerChemicalStorage;
+import pixlepix.minechem.common.items.ItemElement;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadiationHandler {
 

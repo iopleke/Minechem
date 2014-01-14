@@ -9,40 +9,40 @@ import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
 
 public class PolytoolTypeBoron extends PolytoolUpgradeType {
 
-	public PolytoolTypeBoron() {
-		super();
-	}
+    public PolytoolTypeBoron() {
+        super();
+    }
 
-	@Override
-	public float getStrVsBlock(ItemStack itemStack, Block block) {
-		
-		return 0;
-	}
+    @Override
+    public float getStrVsBlock(ItemStack itemStack, Block block) {
 
-	@Override
-	public void hitEntity(ItemStack itemStack, EntityLivingBase target,
-			EntityLivingBase player) {
-	}
+        return 0;
+    }
 
-	@Override
-	public void onBlockDestroyed(ItemStack itemStack, World world, int id,
-			int x, int y, int z, EntityLivingBase entityLiving) {
-	}
+    @Override
+    public void hitEntity(ItemStack itemStack, EntityLivingBase target,
+                          EntityLivingBase player) {
+    }
 
-	@Override
-	public EnumElement getElement() {
-		
-		return EnumElement.B;
-	}
+    @Override
+    public void onBlockDestroyed(ItemStack itemStack, World world, int id,
+                                 int x, int y, int z, EntityLivingBase entityLiving) {
+    }
 
-	@Override
-	public void onTick() {
-	}
+    @Override
+    public EnumElement getElement() {
 
-	@Override
-	public String getDescription() {
-		
-		return "Kills spiders with pesticides";
-	}
+        return EnumElement.B;
+    }
+
+    @Override
+    public void onTick() {
+    }
+
+    @Override
+    public String getDescription() {
+
+        return "Kills spiders with pesticides";
+    }
 
 }

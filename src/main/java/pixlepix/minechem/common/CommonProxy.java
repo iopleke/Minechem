@@ -1,11 +1,11 @@
 package pixlepix.minechem.common;
 
-import pixlepix.minechem.common.utils.ConstantValue;
-import net.minecraft.world.World;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import pixlepix.minechem.common.utils.ConstantValue;
 
 public class CommonProxy implements ConstantValue {
     public static int CUSTOM_RENDER_ID;
@@ -18,7 +18,8 @@ public class CommonProxy implements ConstantValue {
         return null;
     }
 
-    public void registerHooks() {}
+    public void registerHooks() {
+    }
 
     public EntityPlayer findEntityPlayerByName(String name) {
         WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
@@ -35,9 +36,11 @@ public class CommonProxy implements ConstantValue {
         return null;
     }
 
-    public void addName(Object obj, String s) {}
+    public void addName(Object obj, String s) {
+    }
 
-    public void addLocalization(String s1, String string) {}
+    public void addLocalization(String s1, String string) {
+    }
 
     public String getItemDisplayName(ItemStack newStack) {
         return "";

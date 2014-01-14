@@ -1,18 +1,18 @@
 package pixlepix.minechem.computercraft.method;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-
+import dan200.computer.api.IComputerAccess;
+import dan200.turtle.api.ITurtleAccess;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.core.Element;
 import pixlepix.minechem.api.core.EnumMolecule;
 import pixlepix.minechem.api.core.Molecule;
 import pixlepix.minechem.common.items.ItemMolecule;
 import pixlepix.minechem.computercraft.ICCMethod;
-import net.minecraft.item.ItemStack;
-import dan200.computer.api.IComputerAccess;
-import dan200.turtle.api.ITurtleAccess;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class GetChemicals implements ICCMethod {
 
@@ -47,7 +47,7 @@ public class GetChemicals implements ICCMethod {
             }
         }
 
-        return new Object[] { result };
+        return new Object[]{result};
     }
 
     private void addChemicalToMap(Map<Integer, Map<String, Object>> result, int pos, Chemical chemical) {

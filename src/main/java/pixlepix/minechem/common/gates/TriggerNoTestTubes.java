@@ -1,8 +1,8 @@
 package pixlepix.minechem.common.gates;
 
+import buildcraft.api.gates.ITriggerParameter;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import buildcraft.api.gates.ITriggerParameter;
 
 public class TriggerNoTestTubes extends MinechemTrigger {
     public TriggerNoTestTubes(int id) {
@@ -16,9 +16,9 @@ public class TriggerNoTestTubes extends MinechemTrigger {
         return ((IMinechemTriggerProvider) tile).hasNoTestTubes();
     }
 
-	@Override
-	public boolean requiresParameter() {
-		// TODO Auto-generated method stub
-		return false;
-	}
+    @Override
+    public boolean requiresParameter() {
+        // TODO Auto-generated method stub
+        return false;
+    }
 }

@@ -1,11 +1,7 @@
 package pixlepix.minechem.common.blocks;
 
-import java.util.ArrayList;
-
-import pixlepix.minechem.common.CommonProxy;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
-import pixlepix.minechem.common.utils.ConstantValue;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import pixlepix.minechem.common.CommonProxy;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
+import pixlepix.minechem.common.utils.ConstantValue;
+
+import java.util.ArrayList;
 
 public class BlockDecomposer extends BlockMinechemContainer {
     private Icon front;
@@ -56,7 +56,7 @@ public class BlockDecomposer extends BlockMinechemContainer {
     public void registerIcons(IconRegister ir) {
         blockIcon = ir.registerIcon(ConstantValue.DECOMPOSER_TEX);
         front = ir.registerIcon(ConstantValue.DECOMPOSER_FRONT_TEX);
-        
+
         //Yes, this is hacky
         ModMinechem.instance.textureHook(ir);
     }

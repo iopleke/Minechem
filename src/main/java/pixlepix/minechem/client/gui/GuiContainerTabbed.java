@@ -1,10 +1,8 @@
 package pixlepix.minechem.client.gui;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pixlepix.minechem.client.gui.tabs.Tab;
-import pixlepix.minechem.common.utils.SessionVars;
+import codechicken.nei.VisiblityData;
+import codechicken.nei.api.INEIGuiHandler;
+import codechicken.nei.api.TaggedInventoryArea;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
@@ -13,13 +11,13 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.client.gui.tabs.Tab;
+import pixlepix.minechem.common.utils.SessionVars;
 
-import codechicken.nei.VisiblityData;
-import codechicken.nei.api.INEIGuiHandler;
-import codechicken.nei.api.TaggedInventoryArea;
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler {
 
@@ -57,15 +55,15 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
     public static boolean drawBorders;
 
-    public void drawTabIcon(){
+    public void drawTabIcon() {
     }
 
-    public int zLevel=3;
-    public void drawTexture(int x, int y, ResourceLocation resource)
-    {
-    	int w=16;
-    	int h=16;
-    	this.mc.getTextureManager().bindTexture(resource);
+    public int zLevel = 3;
+
+    public void drawTexture(int x, int y, ResourceLocation resource) {
+        int w = 16;
+        int h = 16;
+        this.mc.getTextureManager().bindTexture(resource);
         GL11.glColor4f(1F, 1F, 1F, 1F);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
@@ -75,9 +73,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0D, 0D);
         tessellator.draw();
     }
-    
-    
-    
+
+
     public GuiContainerTabbed(Container container) {
         super(container);
     }
@@ -112,37 +109,37 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         int offsetY = color.ordinal() % 3 * 32;
 
         switch (type) {
-        case SINGLE:
-            sizeX = 16;
-            sizeY = 16;
-            offsetX += 8;
-            offsetY += 8;
-            break;
-        case OUTPUT:
-            sizeX = 24;
-            sizeY = 24;
-            offsetX += 36;
-            offsetY += 4;
-            break;
-        case DOUBLEOUTPUT:
-            sizeX = 42;
-            sizeY = 24;
-            offsetX += 75;
-            offsetY += 4;
-            break;
+            case SINGLE:
+                sizeX = 16;
+                sizeY = 16;
+                offsetX += 8;
+                offsetY += 8;
+                break;
+            case OUTPUT:
+                sizeX = 24;
+                sizeY = 24;
+                offsetX += 36;
+                offsetY += 4;
+                break;
+            case DOUBLEOUTPUT:
+                sizeX = 42;
+                sizeY = 24;
+                offsetX += 75;
+                offsetY += 4;
+                break;
         }
 
         switch (render) {
-        case TOP:
-            sizeY /= 2;
-            break;
-        case BOTTOM:
-            sizeY /= 2;
-            y += sizeY;
-            offsetY += sizeY;
-            break;
-        case FULL:
-            break;
+            case TOP:
+                sizeY /= 2;
+                break;
+            case BOTTOM:
+                sizeY /= 2;
+                y += sizeY;
+                offsetY += sizeY;
+                break;
+            case FULL:
+                break;
         }
 
         drawTexturedModalRect(x, y, offsetX, offsetY, sizeX, sizeY);
@@ -162,31 +159,31 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         }
 
         switch (type) {
-        case SINGLE:
-            x -= 8;
-            y -= 8;
-            break;
-        case OUTPUT:
-            x -= 4;
-            y -= 4;
-            break;
-        case DOUBLEOUTPUT:
-            x -= 11;
-            y -= 4;
-            break;
+            case SINGLE:
+                x -= 8;
+                y -= 8;
+                break;
+            case OUTPUT:
+                x -= 4;
+                y -= 4;
+                break;
+            case DOUBLEOUTPUT:
+                x -= 11;
+                y -= 4;
+                break;
         }
 
         switch (render) {
-        case TOP:
-            sizeY /= 2;
-            break;
-        case BOTTOM:
-            sizeY /= 2;
-            y += sizeY;
-            offsetY += sizeY;
-            break;
-        case FULL:
-            break;
+            case TOP:
+                sizeY /= 2;
+                break;
+            case BOTTOM:
+                sizeY /= 2;
+                y += sizeY;
+                offsetY += sizeY;
+                break;
+            case FULL:
+                break;
         }
 
         drawTexturedModalRect(x, y, offsetX, offsetY, sizeX, sizeY);
@@ -360,7 +357,9 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
             tab.currentShiftX = xShift;
             tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift)) { return tab; }
+            if (tab.intersectsWith(mX, mY, xShift, yShift)) {
+                return tab;
+            }
             yShift += tab.getHeight();
         }
 
@@ -375,7 +374,9 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
             tab.currentShiftX = xShift;
             tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift)) { return tab; }
+            if (tab.intersectsWith(mX, mY, xShift, yShift)) {
+                return tab;
+            }
             yShift += tab.getHeight();
         }
 

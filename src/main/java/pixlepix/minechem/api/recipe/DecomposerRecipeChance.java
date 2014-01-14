@@ -1,11 +1,10 @@
 package pixlepix.minechem.api.recipe;
 
-import java.util.ArrayList;
-import java.util.Random;
-
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.core.Chemical;
 
-import net.minecraft.item.ItemStack;
+import java.util.ArrayList;
+import java.util.Random;
 
 public class DecomposerRecipeChance extends DecomposerRecipe {
 
@@ -21,7 +20,7 @@ public class DecomposerRecipeChance extends DecomposerRecipe {
     public ArrayList<Chemical> getOutput() {
         if (random.nextFloat() < this.chance)
             return super.getOutput();
-        else{
+        else {
             return null;
         }
     }

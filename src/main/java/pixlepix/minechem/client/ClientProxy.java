@@ -1,41 +1,27 @@
 package pixlepix.minechem.client;
 
-import pixlepix.minechem.client.render.item.ItemBlueprintProjectorRenderer;
-import pixlepix.minechem.client.render.item.ItemChemicalStorageRenderer;
-import pixlepix.minechem.client.render.item.ItemDecomposerRenderer;
-import pixlepix.minechem.client.render.item.ItemElementRenderer;
-import pixlepix.minechem.client.render.item.ItemMicroscopeRenderer;
-import pixlepix.minechem.client.render.item.ItemMoleculeRenderer;
-import pixlepix.minechem.client.render.item.ItemSynthesisRenderer;
-import pixlepix.minechem.client.render.tileentity.TileEntityBlueprintProjectorRenderer;
-import pixlepix.minechem.client.render.tileentity.TileEntityChemicalStorageRenderer;
-import pixlepix.minechem.client.render.tileentity.TileEntityDecomposerRenderer;
-import pixlepix.minechem.client.render.tileentity.TileEntityMicroscopeRenderer;
-import pixlepix.minechem.client.render.tileentity.TileEntitySynthesisRenderer;
-import pixlepix.minechem.client.sound.MinechemSoundEvent;
-import pixlepix.minechem.common.CommonProxy;
-import pixlepix.minechem.common.MinechemBlocks;
-import pixlepix.minechem.common.MinechemItems;
-import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
-import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
-import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
-import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
-import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
-import net.minecraft.item.Item;
-import net.minecraft.world.World;
-import net.minecraftforge.client.MinecraftForgeClient;
-import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.item.Item;
+import net.minecraft.world.World;
+import net.minecraftforge.client.MinecraftForgeClient;
+import net.minecraftforge.common.MinecraftForge;
+import pixlepix.minechem.client.render.item.*;
+import pixlepix.minechem.client.render.tileentity.*;
+import pixlepix.minechem.client.sound.MinechemSoundEvent;
+import pixlepix.minechem.common.CommonProxy;
+import pixlepix.minechem.common.MinechemBlocks;
+import pixlepix.minechem.common.MinechemItems;
+import pixlepix.minechem.common.tileentity.*;
 
 public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-    	//As far as I can tell, this isn't needed in 1.6
+        //As far as I can tell, this isn't needed in 1.6
         /*MinecraftForgeClient.preloadTexture(DECOMPOSER_GUI);
         MinecraftForgeClient.preloadTexture(MICROSCOPE_GUI);
         MinecraftForgeClient.preloadTexture(SYNTHESIS_GUI);
@@ -63,7 +49,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
         //MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.printer.blockID].itemID, new ItemBlueprintPrinterRenderer());
-        
+
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecomposer.class, new TileEntityDecomposerRenderer());

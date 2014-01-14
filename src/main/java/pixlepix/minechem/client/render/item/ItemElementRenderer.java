@@ -1,9 +1,5 @@
 package pixlepix.minechem.client.render.item;
 
-import pixlepix.minechem.api.core.EnumClassification;
-import pixlepix.minechem.api.core.EnumElement;
-import pixlepix.minechem.common.items.ItemElement;
-import pixlepix.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -12,8 +8,11 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.api.core.EnumClassification;
+import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.common.items.ItemElement;
+import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class ItemElementRenderer implements IItemRenderer {
 
@@ -91,12 +90,12 @@ public class ItemElementRenderer implements IItemRenderer {
          * 1.0F); for (float i = 0.0F; i < 1.0F; i += .1F) { drawTexturedRectUV(0, 0, i, 16, 16, testtube); } GL11.glPopMatrix();
          */
 
-    	Tessellator tessellator = Tessellator.instance;
+        Tessellator tessellator = Tessellator.instance;
         setColorForElement(element);
         ItemRenderer.renderItemIn2D(tessellator, contents.getMaxU(), contents.getMinV(), contents.getMinU(), contents.getMaxV(),
                 contents.getIconWidth(), contents.getIconHeight(), 0.0625F);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-        
+
     }
 
     private void renderItemAsEntity(ItemStack itemstack, EnumElement element, Icon testtube, Icon contents) {
@@ -130,38 +129,38 @@ public class ItemElementRenderer implements IItemRenderer {
 
     private void setColorForElement(EnumElement element) {
         switch (element.classification()) {
-        case actinide:
-            GL11.glColor3f(1.0F, 0.0F, 0.0F);
-            break;
-        case alkaliMetal:
-            GL11.glColor3f(0.0F, 1.0F, 0.0F);
-            break;
-        case alkalineEarthMetal:
-            GL11.glColor3f(0.0F, 0.0F, 1.0F);
-            break;
-        case halogen:
-            GL11.glColor3f(1.0F, 1.0F, 0.0F);
-            break;
-        case inertGas:
-            GL11.glColor3f(0.0F, 1.0F, 1.0F);
-            break;
-        case lanthanide:
-            GL11.glColor3f(1.0F, 0.0F, 1.0F);
-            break;
-        case nonmetal:
-            GL11.glColor3f(1.0F, 0.5F, 0.0F);
-            break;
-        case otherMetal:
-            GL11.glColor3f(0.5F, 1.0F, 0.0F);
-            break;
-        case semimetallic:
-            GL11.glColor3f(0.0F, 1.0F, 0.5F);
-            break;
-        case transitionMetal:
-            GL11.glColor3f(0.0F, 0.5F, 1.0F);
-            break;
-        default:
-            break;
+            case actinide:
+                GL11.glColor3f(1.0F, 0.0F, 0.0F);
+                break;
+            case alkaliMetal:
+                GL11.glColor3f(0.0F, 1.0F, 0.0F);
+                break;
+            case alkalineEarthMetal:
+                GL11.glColor3f(0.0F, 0.0F, 1.0F);
+                break;
+            case halogen:
+                GL11.glColor3f(1.0F, 1.0F, 0.0F);
+                break;
+            case inertGas:
+                GL11.glColor3f(0.0F, 1.0F, 1.0F);
+                break;
+            case lanthanide:
+                GL11.glColor3f(1.0F, 0.0F, 1.0F);
+                break;
+            case nonmetal:
+                GL11.glColor3f(1.0F, 0.5F, 0.0F);
+                break;
+            case otherMetal:
+                GL11.glColor3f(0.5F, 1.0F, 0.0F);
+                break;
+            case semimetallic:
+                GL11.glColor3f(0.0F, 1.0F, 0.5F);
+                break;
+            case transitionMetal:
+                GL11.glColor3f(0.0F, 0.5F, 1.0F);
+                break;
+            default:
+                break;
         }
     }
 }

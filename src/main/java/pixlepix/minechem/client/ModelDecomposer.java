@@ -5,9 +5,9 @@
 // - ZeuX
 package pixlepix.minechem.client;
 
-import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
 
 public class ModelDecomposer extends ModelBase {
     // fields

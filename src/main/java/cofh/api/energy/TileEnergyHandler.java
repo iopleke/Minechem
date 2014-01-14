@@ -6,57 +6,56 @@ import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Reference implementation of {@link IEnergyHandler}. Use/extend this or implement your own.
- * 
+ *
  * @author King Lemming
- * 
  */
 public class TileEnergyHandler extends TileEntity implements IEnergyHandler {
 
-	protected EnergyStorage storage = new EnergyStorage(32000);
+    protected EnergyStorage storage = new EnergyStorage(32000);
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
 
-		super.readFromNBT(nbt);
-		storage.readFromNBT(nbt);
-	}
+        super.readFromNBT(nbt);
+        storage.readFromNBT(nbt);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
 
-		super.writeToNBT(nbt);
-		storage.writeToNBT(nbt);
-	}
+        super.writeToNBT(nbt);
+        storage.writeToNBT(nbt);
+    }
 
-	/* IEnergyHandler */
-	@Override
-	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+    /* IEnergyHandler */
+    @Override
+    public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
 
-		return storage.receiveEnergy(maxReceive, simulate);
-	}
+        return storage.receiveEnergy(maxReceive, simulate);
+    }
 
-	@Override
-	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
+    @Override
+    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate) {
 
-		return storage.extractEnergy(maxExtract, simulate);
-	}
+        return storage.extractEnergy(maxExtract, simulate);
+    }
 
-	@Override
-	public boolean canInterface(ForgeDirection from) {
+    @Override
+    public boolean canInterface(ForgeDirection from) {
 
-		return true;
-	}
+        return true;
+    }
 
-	@Override
-	public int getEnergyStored(ForgeDirection from) {
+    @Override
+    public int getEnergyStored(ForgeDirection from) {
 
-		return storage.getEnergyStored();
-	}
+        return storage.getEnergyStored();
+    }
 
-	@Override
-	public int getMaxEnergyStored(ForgeDirection from) {
+    @Override
+    public int getMaxEnergyStored(ForgeDirection from) {
 
-		return storage.getMaxEnergyStored();
-	}
+        return storage.getMaxEnergyStored();
+    }
 
 }

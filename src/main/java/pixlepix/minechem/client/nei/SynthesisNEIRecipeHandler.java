@@ -1,18 +1,18 @@
 package pixlepix.minechem.client.nei;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import codechicken.nei.NEIServerUtils;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
 
@@ -40,31 +40,31 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
     public String getGuiTexture() {
         return texture.toString();
     }
-    
+
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(MINECHEM_SYNTHESIS_RECIPES_ID)) {
             // Add all synthesis recipes to local arecipes array.
-            for (SynthesisRecipe sr: SynthesisRecipe.recipes) {
+            for (SynthesisRecipe sr : SynthesisRecipe.recipes) {
                 registerSynthesisRecipe(sr);
             }
         } else {
             super.loadCraftingRecipes(outputId, results);
         }
     }
-    
+
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         // Add all synthesis recipes that can yield the result.
-        for (SynthesisRecipe sr: SynthesisRecipe.recipes) {
+        for (SynthesisRecipe sr : SynthesisRecipe.recipes) {
             ItemStack recipeOutput = sr.getOutput();
             if (NEIServerUtils.areStacksSameTypeCrafting(result, recipeOutput)) {
                 registerSynthesisRecipe(sr);
             }
         }
     }
-    
-    @Override 
+
+    @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         // If ingredient isn't a Minechem chemical, no synthesis recipe can
         // use it.
@@ -76,17 +76,17 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
             return;
         }
         // Add all synthesis recipes that take the ingredient as an input.
-        for (SynthesisRecipe sr: SynthesisRecipe.recipes) {
+        for (SynthesisRecipe sr : SynthesisRecipe.recipes) {
             if (sr.isShaped()) {
                 Chemical[] recipeInputs = sr.getShapedRecipe();
-                for (Chemical c: recipeInputs) {
+                for (Chemical c : recipeInputs) {
                     if (ingredientChemical.sameAs(c)) {
                         registerSynthesisRecipe(sr);
                         break;
                     }
                 }
             } else {
-                for (Object o: sr.getShapelessRecipe()) {
+                for (Object o : sr.getShapelessRecipe()) {
                     Chemical c = (Chemical) o;
                     if (ingredientChemical.sameAs(c)) {
                         registerSynthesisRecipe(sr);
@@ -96,7 +96,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
             }
         }
     }
-    
+
     /**
      * Registers a synthesis recipe with NEI. Anything that adds a new
      * synthesis recipe after startup should call this to have the recipe
@@ -127,7 +127,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
                 Chemical[] inputChemicals = sr.getShapedRecipe();
                 int xSlot = 0;
                 int ySlot = 0;
-                for (Chemical c: inputChemicals) {
+                for (Chemical c : inputChemicals) {
                     if (c != null) {
                         ItemStack inputItem = MinechemHelper.chemicalToItemStack(
                                 c, c.amount);
@@ -147,7 +147,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
                 ArrayList inputChemicals = sr.getShapelessRecipe();
                 int xSlot = 0;
                 int ySlot = 0;
-                for (Object o: inputChemicals) {
+                for (Object o : inputChemicals) {
                     Chemical c = (Chemical) o;
                     ItemStack inputItem = MinechemHelper.chemicalToItemStack(
                             c, c.amount);

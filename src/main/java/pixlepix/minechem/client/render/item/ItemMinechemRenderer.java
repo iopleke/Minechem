@@ -7,21 +7,21 @@ public class ItemMinechemRenderer implements IItemRenderer {
 
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch(type.ordinal()){
-        case 0: {
-        return true;
-        }
-            
-        case 1:{
-        	return true;
-        }
-            
-        case 2: {
-        	return true;
-        }
-        case 3: {
-        	return true;
-        }
+        switch (type.ordinal()) {
+            case 0: {
+                return true;
+            }
+
+            case 1: {
+                return true;
+            }
+
+            case 2: {
+                return true;
+            }
+            case 3: {
+                return true;
+            }
         }
         return false;
     }
@@ -38,6 +38,7 @@ public class ItemMinechemRenderer implements IItemRenderer {
     }
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {}
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    }
 
 }

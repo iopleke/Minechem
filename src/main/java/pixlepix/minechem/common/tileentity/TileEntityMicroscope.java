@@ -1,5 +1,9 @@
 package pixlepix.minechem.common.tileentity;
 
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.common.MinechemItems;
@@ -8,11 +12,6 @@ import pixlepix.minechem.common.inventory.Transactor;
 import pixlepix.minechem.common.recipe.DecomposerRecipeHandler;
 import pixlepix.minechem.common.recipe.SynthesisRecipeHandler;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
-
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityMicroscope extends MinechemTileEntity implements IInventory, IMinechemMachinePeripheral {
     public static int[] kInput = {0};
@@ -90,10 +89,12 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     }
 
     @Override
-    public void openChest() {}
+    public void openChest() {
+    }
 
     @Override
-    public void closeChest() {}
+    public void closeChest() {
+    }
 
     public int getFacing() {
         return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
@@ -195,11 +196,11 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     }
 
 
-	@Override
-	void sendUpdatePacket() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    void sendUpdatePacket() {
+        // TODO Auto-generated method stub
+
+    }
 
 
 }

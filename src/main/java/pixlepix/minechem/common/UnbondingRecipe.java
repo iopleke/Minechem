@@ -1,14 +1,15 @@
 package pixlepix.minechem.common;
 
-import java.util.ArrayList;
-
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class UnbondingRecipe {
     protected ArrayList<ItemStack> outputStacks;
     protected ItemStack inputStack;
 
-    public UnbondingRecipe() {}
+    public UnbondingRecipe() {
+    }
 
     public UnbondingRecipe(ItemStack inputStack, ArrayList<ItemStack> outputStacks) {
         this.inputStack = inputStack;

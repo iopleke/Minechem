@@ -1,9 +1,8 @@
 package pixlepix.minechem.client.gui;
 
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+import org.lwjgl.opengl.GL11;
 
 public class ScissorHelper {
 

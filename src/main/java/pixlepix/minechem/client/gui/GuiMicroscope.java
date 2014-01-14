@@ -1,7 +1,11 @@
 package pixlepix.minechem.client.gui;
 
-import java.util.ArrayList;
-
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.recipe.DecomposerRecipeChance;
 import pixlepix.minechem.api.recipe.DecomposerRecipeSelect;
@@ -14,13 +18,8 @@ import pixlepix.minechem.common.recipe.SynthesisRecipeHandler;
 import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
-import org.lwjgl.opengl.GL11;
+import java.util.ArrayList;
 
 public class GuiMicroscope extends GuiContainerTabbed {
 
@@ -82,7 +81,7 @@ public class GuiMicroscope extends GuiContainerTabbed {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.MICROSCOPE_GUI));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.MICROSCOPE_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         zLevel = 0;
@@ -191,7 +190,7 @@ public class GuiMicroscope extends GuiContainerTabbed {
 
     @Override
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-            int h) {
+                                     int h) {
         // TODO Auto-generated method stub
         return false;
     }

@@ -1,10 +1,10 @@
 package pixlepix.minechem.client.gui.tabs;
 
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class TabHelp extends Tab {
     public static Icon helpIcon;
@@ -39,10 +39,10 @@ public class TabHelp extends Tab {
             return null;
     }
 
-	@Override
-	public ResourceLocation getIcon() {
-		// TODO Auto-generated method stub
-		return ModMinechem.ICON_HELP;
-	}
+    @Override
+    public ResourceLocation getIcon() {
+        // TODO Auto-generated method stub
+        return ModMinechem.ICON_HELP;
+    }
 
 }

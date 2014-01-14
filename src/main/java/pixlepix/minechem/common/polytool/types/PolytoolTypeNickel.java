@@ -1,66 +1,66 @@
 package pixlepix.minechem.common.polytool.types;
 
-import java.util.Iterator;
-import java.util.List;
-
-import pixlepix.minechem.api.core.EnumElement;
-import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
 
-public class PolytoolTypeNickel extends PolytoolUpgradeType{
+import java.util.Iterator;
+import java.util.List;
 
-	public PolytoolTypeNickel() {
-		super();
-	}
+public class PolytoolTypeNickel extends PolytoolUpgradeType {
 
-	@Override
-	public float getStrVsBlock(ItemStack itemStack, Block block) {
+    public PolytoolTypeNickel() {
+        super();
+    }
 
-		return 0;
-	}
+    @Override
+    public float getStrVsBlock(ItemStack itemStack, Block block) {
 
-	@Override
-	public void hitEntity(ItemStack itemStack, EntityLivingBase target,
-			EntityLivingBase player) {
+        return 0;
+    }
 
-	}
+    @Override
+    public void hitEntity(ItemStack itemStack, EntityLivingBase target,
+                          EntityLivingBase player) {
 
-	@Override
-	public void onBlockDestroyed(ItemStack itemStack, World world, int id,
-			int x, int y, int z, EntityLivingBase player) {
-		List<EntityItem> items=player.worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(player.posX-power, player.posY-power, player.posZ-power, player.posX+power, player.posY+power, player.posZ+power));
+    }
 
-		Iterator iter=items.iterator();
-		while(iter.hasNext()){
-			EntityItem entity=(EntityItem) iter.next();
-			entity.motionX=-1*(entity.posX-player.posX);
+    @Override
+    public void onBlockDestroyed(ItemStack itemStack, World world, int id,
+                                 int x, int y, int z, EntityLivingBase player) {
+        List<EntityItem> items = player.worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(player.posX - power, player.posY - power, player.posZ - power, player.posX + power, player.posY + power, player.posZ + power));
 
-			entity.motionY=-1*(entity.posY-player.posY);
+        Iterator iter = items.iterator();
+        while (iter.hasNext()) {
+            EntityItem entity = (EntityItem) iter.next();
+            entity.motionX = -1 * (entity.posX - player.posX);
 
-			entity.motionZ=-1*(entity.posZ-player.posZ);
-		}
-	}
+            entity.motionY = -1 * (entity.posY - player.posY);
 
-	@Override
-	public EnumElement getElement() {
+            entity.motionZ = -1 * (entity.posZ - player.posZ);
+        }
+    }
 
-		return EnumElement.Ni;
-	}
+    @Override
+    public EnumElement getElement() {
 
-	@Override
-	public void onTick() {
-	}
+        return EnumElement.Ni;
+    }
 
-	@Override
-	public String getDescription() {
-		
-		return "Sucks up nearby items when another block is mined";
-	}
+    @Override
+    public void onTick() {
+    }
+
+    @Override
+    public String getDescription() {
+
+        return "Sucks up nearby items when another block is mined";
+    }
 
 
 }

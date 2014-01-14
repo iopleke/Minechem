@@ -1,9 +1,9 @@
 package pixlepix.minechem.common.blueprint;
 
-import java.util.HashMap;
-
 import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.common.blueprint.BlueprintBlock.Type;
+
+import java.util.HashMap;
 
 public class BlueprintFission extends MinechemBlueprint {
 
@@ -11,17 +11,17 @@ public class BlueprintFission extends MinechemBlueprint {
     private static int A = 1;
     private static int C = 2;
     private static Integer[][][] structure = {
-    	{{C,C,C,C,C},{C,C,C,C,C},{C,C,C,C,C},{C,C,C,C,C},{C,C,C,C,C}}
-    	
-    	,{{C,C,C,C,C},{C,w,w,w,C},{C,w,w,w,C},{C,w,w,w,C},{C,C,C,C,C}}
-    	,{{C,C,C,C,C},{C,w,w,w,C},{C,w,w,w,C},{C,w,w,w,C},{C,C,C,C,C}}
-    	,{{C,C,C,C,C},{C,w,w,w,C},{C,w,w,w,C},{C,w,w,w,C},{C,C,C,C,C}}
-    	,{{C,C,C,C,C},{C,C,C,C,C},{C,C,C,C,C},{C,C,C,C,C},{C,C,C,C,C}}
-    	
+            {{C, C, C, C, C}, {C, C, C, C, C}, {C, C, C, C, C}, {C, C, C, C, C}, {C, C, C, C, C}}
+
+            , {{C, C, C, C, C}, {C, w, w, w, C}, {C, w, w, w, C}, {C, w, w, w, C}, {C, C, C, C, C}}
+            , {{C, C, C, C, C}, {C, w, w, w, C}, {C, w, w, w, C}, {C, w, w, w, C}, {C, C, C, C, C}}
+            , {{C, C, C, C, C}, {C, w, w, w, C}, {C, w, w, w, C}, {C, w, w, w, C}, {C, C, C, C, C}}
+            , {{C, C, C, C, C}, {C, C, C, C, C}, {C, C, C, C, C}, {C, C, C, C, C}, {C, C, C, C, C}}
+
     };
 
     public BlueprintFission() {
-        super(5,5,5);
+        super(5, 5, 5);
         this.name = "blueprintFisssion";
     }
 

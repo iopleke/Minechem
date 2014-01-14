@@ -1,9 +1,9 @@
 package pixlepix.minechem.common.network;
 
+import cpw.mods.fml.common.network.Player;
 import ljdp.easypacket.EasyPacketData;
 import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.tileentity.TileEntityGhostBlock;
-import cpw.mods.fml.common.network.Player;
 
 public class PacketGhostBlock extends PacketTileEntityUpdate {
 

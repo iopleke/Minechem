@@ -1,8 +1,8 @@
 package pixlepix.minechem.client.render.item;
 
-import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
+import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
 
 public class ItemChemicalStorageRenderer extends ItemMinechemRenderer {
 

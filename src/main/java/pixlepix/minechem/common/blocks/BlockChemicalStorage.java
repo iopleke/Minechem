@@ -1,7 +1,5 @@
 package pixlepix.minechem.common.blocks;
 
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -9,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
 
 public class BlockChemicalStorage extends BlockChest {
 

@@ -1,7 +1,9 @@
 package pixlepix.minechem.common.tileentity;
 
-import java.util.HashMap;
-
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.blueprint.BlueprintBlock;
@@ -11,10 +13,8 @@ import pixlepix.minechem.common.sound.LoopingSound;
 import pixlepix.minechem.common.utils.LocalPosition;
 import pixlepix.minechem.common.utils.LocalPosition.Pos3;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+
+import java.util.HashMap;
 
 public class TileEntityBlueprintProjector extends MinechemTileEntity {
 
@@ -109,14 +109,14 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
         if (managerBlock != null) {
             Pos3 worldPos = position.getLocalPos(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ());
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, managerBlock.block.blockID, managerBlock.metadata, 3);
-            if(this.blueprint==MinechemBlueprint.fusion){
-            	TileEntityFusion fusion=new TileEntityFusion();
-            	fusion.worldObj=this.worldObj;
-            	fusion.xCoord=worldPos.x;
-            	fusion.yCoord=worldPos.y;
-            	fusion.zCoord=worldPos.z;
-            	fusion.blockType=MinechemBlocks.fusion;
-            	worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
+            if (this.blueprint == MinechemBlueprint.fusion) {
+                TileEntityFusion fusion = new TileEntityFusion();
+                fusion.worldObj = this.worldObj;
+                fusion.xCoord = worldPos.x;
+                fusion.yCoord = worldPos.y;
+                fusion.zCoord = worldPos.z;
+                fusion.blockType = MinechemBlocks.fusion;
+                worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
             }
             return worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
         } else {
@@ -125,9 +125,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
     }
 
     private void setBlock(int x, int y, int z, LocalPosition position, int structureId, HashMap<Integer, BlueprintBlock> blockLookup,
-            TileEntity managerTileEntity) {
+                          TileEntity managerTileEntity) {
         Pos3 worldPos = position.getLocalPos(x, y, z);
-        if (structureId == MinechemBlueprint.wildcard) { return; }
+        if (structureId == MinechemBlueprint.wildcard) {
+            return;
+        }
         if (structureId == air) {
             worldObj.setBlockToAir(worldPos.x, worldPos.y, worldPos.z);
         } else {
@@ -136,13 +138,13 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
                 return;
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, blueprintBlock.block.blockID, blueprintBlock.metadata, 3);
             if (blueprintBlock.type == Type.PROXY) {
-                TileEntity te =  worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
-                if(te instanceof TileEntityProxy){
-                	TileEntityProxy proxy = (TileEntityProxy) te;
-                 }	
+                TileEntity te = worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
+                if (te instanceof TileEntityProxy) {
+                    TileEntityProxy proxy = (TileEntityProxy) te;
                 }
-                	
-               
+            }
+
+
         }
     }
 
@@ -304,10 +306,10 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
     }
 
 
-	@Override
-	void sendUpdatePacket() {
-		// TODO Auto-generated method stub
-		
-	}
+    @Override
+    void sendUpdatePacket() {
+        // TODO Auto-generated method stub
+
+    }
 
 }

@@ -1,14 +1,12 @@
 package pixlepix.minechem.client.gui;
 
-import pixlepix.minechem.common.utils.ConstantValue;
-
-import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.GL11;
-
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.common.utils.ConstantValue;
 
 public class GuiVerticalScrollBar extends Gui {
 
@@ -76,6 +74,7 @@ public class GuiVerticalScrollBar extends Gui {
 
     /**
      * Returns true iff the given GUI-relative point is within the scrollbar.
+     *
      * @param x X coordinate relative to the parent container.
      * @param y Y coordinate relative to the parent container.
      * @return True iff the coordinates are within this scrollbar.
@@ -99,7 +98,7 @@ public class GuiVerticalScrollBar extends Gui {
             // Clicking on the slider starts dragging it.
             if (pointIntersects(mouseX, mouseY)) {
                 isDragging = true;
-            } else if (pointInScrollBar(mouseX, mouseY) ) {
+            } else if (pointInScrollBar(mouseX, mouseY)) {
                 // Move the slider one slider-height up or down.
                 int scrollAmount = height;
                 if (mouseY < ypos) {
@@ -141,7 +140,7 @@ public class GuiVerticalScrollBar extends Gui {
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.TEXTURE_GUI_DIR+"allitems.png"));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.TEXTURE_GUI_DIR + "allitems.png"));
         if (this.container.isScrollBarActive()) {
             drawTexturedModalRect(xpos, ypos, activeU, activeV, width, height);
         } else {

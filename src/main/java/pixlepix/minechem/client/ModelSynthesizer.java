@@ -6,9 +6,9 @@
 
 package pixlepix.minechem.client;
 
-import pixlepix.minechem.common.utils.MinechemHelper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
+import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class ModelSynthesizer extends ModelBase {
     // fields

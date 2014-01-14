@@ -1,13 +1,13 @@
 package pixlepix.minechem.client.gui;
 
-import java.util.HashMap;
-
-import pixlepix.minechem.common.utils.MinechemHelper;
+import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
-import cpw.mods.fml.client.FMLClientHandler;
+import pixlepix.minechem.common.utils.MinechemHelper;
+
+import java.util.HashMap;
 
 public abstract class GuiToggleSwitch {
     class ToggleButton {
@@ -61,7 +61,9 @@ public abstract class GuiToggleSwitch {
     public boolean isMoverOver() {
         mouseX = container.getMouseX();
         mouseY = container.getMouseY();
-        if (mouseX > this.x && mouseX < this.x + width && mouseY > this.y && mouseY < this.y + height) { return true; }
+        if (mouseX > this.x && mouseX < this.x + width && mouseY > this.y && mouseY < this.y + height) {
+            return true;
+        }
         return false;
     }
 

@@ -1,9 +1,9 @@
 package pixlepix.minechem.common.network;
 
-import ljdp.easypacket.EasyPacketData;
-import pixlepix.minechem.common.tileentity.MinechemTileEntity;
-import net.minecraft.tileentity.TileEntity;
 import cpw.mods.fml.common.network.Player;
+import ljdp.easypacket.EasyPacketData;
+import net.minecraft.tileentity.TileEntity;
+import pixlepix.minechem.common.tileentity.MinechemTileEntity;
 
 public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate {
 
@@ -32,7 +32,7 @@ public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate {
         super.onReceive(player);
         if (this.tileEntity instanceof MinechemTileEntity) {
             this.powerReceptor = (MinechemTileEntity) this.tileEntity;
-            this.powerReceptor.energyStored=(int) this.energyStored;
+            this.powerReceptor.energyStored = (int) this.energyStored;
         }
     }
 

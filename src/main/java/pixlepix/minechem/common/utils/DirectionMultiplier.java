@@ -1,8 +1,8 @@
 package pixlepix.minechem.common.utils;
 
-import java.util.HashMap;
-
 import net.minecraftforge.common.ForgeDirection;
+
+import java.util.HashMap;
 
 public enum DirectionMultiplier {
     NORTH(1, 1, 1),
@@ -10,10 +10,11 @@ public enum DirectionMultiplier {
     SOUTH(-1, 1, -1),
     WEST(1, 1, -1),
     UP(1, 1, 1),
-    DOWN(1, -1, 1), ;
+    DOWN(1, -1, 1),;
 
     public static HashMap<ForgeDirection, DirectionMultiplier> map = new HashMap<ForgeDirection, DirectionMultiplier>() {
         private static final long serialVersionUID = 1L;
+
         {
             put(ForgeDirection.NORTH, NORTH);
             put(ForgeDirection.EAST, EAST);

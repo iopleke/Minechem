@@ -7,21 +7,21 @@ import net.minecraft.util.Icon;
 
 public interface IAction {
 
-	/**
-	 * Return your ID from the old API here, this is only used to convert old
-	 * saves to the new format.
-	 */
-	int getLegacyId();
+    /**
+     * Return your ID from the old API here, this is only used to convert old
+     * saves to the new format.
+     */
+    int getLegacyId();
 
-	String getUniqueTag();
+    String getUniqueTag();
 
-	@SideOnly(Side.CLIENT)
-	Icon getIcon();
+    @SideOnly(Side.CLIENT)
+    Icon getIcon();
 
-	@SideOnly(Side.CLIENT)
-	void registerIcons(IconRegister iconRegister);
+    @SideOnly(Side.CLIENT)
+    void registerIcons(IconRegister iconRegister);
 
-	boolean hasParameter();
+    boolean hasParameter();
 
-	String getDescription();
+    String getDescription();
 }

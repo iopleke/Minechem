@@ -1,14 +1,12 @@
 package pixlepix.minechem.client.render.tileentity;
 
-import pixlepix.minechem.client.ModelProjector;
-import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
-import pixlepix.minechem.common.utils.ConstantValue;
-
-import org.lwjgl.opengl.GL11;
-
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.client.ModelProjector;
+import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
+import pixlepix.minechem.common.utils.ConstantValue;
 
 public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRenderer {
 
@@ -30,10 +28,10 @@ public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRende
             GL11.glEnable(GL11.GL_LIGHTING);
             if (blueprintProjector.hasBlueprint()) {
 
-                bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_ON));
+                bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.PROJECTOR_MODEL_ON));
             } else {
 
-                bindTexture(new ResourceLocation(ConstantValue.MOD_ID,ConstantValue.PROJECTOR_MODEL_OFF));
+                bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.PROJECTOR_MODEL_OFF));
             }
             model.render(0.0625F);
             GL11.glDisable(GL11.GL_LIGHTING);

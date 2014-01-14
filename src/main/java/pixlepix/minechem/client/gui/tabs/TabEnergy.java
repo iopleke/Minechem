@@ -1,17 +1,16 @@
 package pixlepix.minechem.client.gui.tabs;
 
+import net.minecraft.client.gui.Gui;
+import net.minecraft.util.Icon;
+import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.MinechemTileEntity;
 import pixlepix.minechem.common.utils.MinechemHelper;
 import pixlepix.minechem.common.utils.RollingAverage;
-import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
-import net.minecraft.util.ResourceLocation;
 
 public class TabEnergy extends Tab {
-	
-	
-	
+
+
     public static Icon powerIcon;
     // I'm copying the layout for the buildcraft
     // engine tab, because users will be familiar.
@@ -27,7 +26,7 @@ public class TabEnergy extends Tab {
         super(gui);
         this.maxWidth = 120;
         this.maxHeight = 100;
-        this.energy=energy;
+        this.energy = energy;
         this.overlayColor = 0xFF8800;
     }
 
@@ -58,10 +57,10 @@ public class TabEnergy extends Tab {
             return null;
     }
 
-	@Override
-	public ResourceLocation getIcon() {
-		// TODO Auto-generated method stub
-		return ModMinechem.ICON_ENERGY;
-	}
+    @Override
+    public ResourceLocation getIcon() {
+        // TODO Auto-generated method stub
+        return ModMinechem.ICON_ENERGY;
+    }
 
 }

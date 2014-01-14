@@ -1,39 +1,11 @@
 package pixlepix.minechem.api.core;
 
-import static pixlepix.minechem.api.core.EnumElement.Al;
-import static pixlepix.minechem.api.core.EnumElement.As;
-import static pixlepix.minechem.api.core.EnumElement.Be;
-import static pixlepix.minechem.api.core.EnumElement.C;
-import static pixlepix.minechem.api.core.EnumElement.Ca;
-import static pixlepix.minechem.api.core.EnumElement.Cl;
-import static pixlepix.minechem.api.core.EnumElement.Co;
-import static pixlepix.minechem.api.core.EnumElement.Cr;
-import static pixlepix.minechem.api.core.EnumElement.Cu;
-import static pixlepix.minechem.api.core.EnumElement.F;
-import static pixlepix.minechem.api.core.EnumElement.Fe;
-import static pixlepix.minechem.api.core.EnumElement.Ga;
-import static pixlepix.minechem.api.core.EnumElement.H;
-import static pixlepix.minechem.api.core.EnumElement.K;
-import static pixlepix.minechem.api.core.EnumElement.Li;
-import static pixlepix.minechem.api.core.EnumElement.Mg;
-import static pixlepix.minechem.api.core.EnumElement.Mn;
-import static pixlepix.minechem.api.core.EnumElement.N;
-import static pixlepix.minechem.api.core.EnumElement.Na;
-import static pixlepix.minechem.api.core.EnumElement.Ni;
-import static pixlepix.minechem.api.core.EnumElement.O;
-import static pixlepix.minechem.api.core.EnumElement.P;
-import static pixlepix.minechem.api.core.EnumElement.Pt;
-import static pixlepix.minechem.api.core.EnumElement.Ra;
-import static pixlepix.minechem.api.core.EnumElement.S;
-import static pixlepix.minechem.api.core.EnumElement.Si;
-import static pixlepix.minechem.api.core.EnumElement.Sr;
-import static pixlepix.minechem.api.core.EnumElement.Ti;
-import static pixlepix.minechem.api.core.EnumElement.Zn;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import java.util.ArrayList;
 import java.util.Random;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import static pixlepix.minechem.api.core.EnumElement.*;
 // import pixlepix.minechem.api.recipe.DecomposerRecipe;
 // import pixlepix.minechem.api.recipe.SynthesisRecipe;
 
@@ -138,23 +110,23 @@ public enum EnumMolecule {
     pal2(94, "Batrachotoxin", new Element(C, 31), new Element(H, 42), new Element(N, 2), new Element(O, 6)),
     ret(95, "Retinol", new Element(C, 20), new Element(H, 30), new Element(O)),
     stevenk(96, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
-    weedex(97, "Aminocyclopyrachlor", new Element(C,8), new Element(H,8), new Element(Cl), new Element(N,3), new Element(O,2)),
-    xanax(98, "Alprazolam", new Element(C,17), new Element(H,13), new Element(Cl), new Element(N,4)),
+    weedex(97, "Aminocyclopyrachlor", new Element(C, 8), new Element(H, 8), new Element(Cl), new Element(N, 3), new Element(O, 2)),
+    xanax(98, "Alprazolam", new Element(C, 17), new Element(H, 13), new Element(Cl), new Element(N, 4)),
     hcl(99, "Hydrogen Chloride", new Element(H), new Element(Cl)),
-    redrocks(100, "Cocaine", new Element(C,17), new Element(H,21), new Element(N), new Element(O,4)),
+    redrocks(100, "Cocaine", new Element(C, 17), new Element(H, 21), new Element(N), new Element(O, 4)),
     coke(101, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl)),
-    blueorgodye(102, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C,15), new Element(H,18)),
-    redorgodye(103, "Pelargonidin", new Element(C,15), new Element(H,11), new Element(O,11)),
-    purpleorgodye(104, "Delphinidin", new Element(C,15), new Element(H,11), new Element(O,7)),
-    olivine(105, "Olivine", new Element(Fe,2), new Element(Si), new Element(O,4)),
-    metblue(106, "Methylene Blue", new Element(C,16), new Element(H,18), new Element(N,3), new Element(S), new Element(Cl)),
+    blueorgodye(102, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C, 15), new Element(H, 18)),
+    redorgodye(103, "Pelargonidin", new Element(C, 15), new Element(H, 11), new Element(O, 11)),
+    purpleorgodye(104, "Delphinidin", new Element(C, 15), new Element(H, 11), new Element(O, 7)),
+    olivine(105, "Olivine", new Element(Fe, 2), new Element(Si), new Element(O, 4)),
+    metblue(106, "Methylene Blue", new Element(C, 16), new Element(H, 18), new Element(N, 3), new Element(S), new Element(Cl)),
     meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
-    lcd(108, "Cholesteryl benzoate", new Element(C,34), new Element(H,50), new Element(O,2)), 
+    lcd(108, "Cholesteryl benzoate", new Element(C, 34), new Element(H, 50), new Element(O, 2)),
     radchlor(109, "Radium Chloride", new Element(Ra), new Element(Cl, 2)),
-    ctaxifolia(110, "Caulerpenyne", new Element(C,21), new Element(H,26), new Element(O,6)),
-    latropine(111,"L-hyoscyamine", new Element (C,17), new Element(H,23), new Element(N), new Element(O,4)),
-    gallicacid(112, "Gallic Acid", new Element(C,7), new Element(H,17), new Element(O,5)),
-    glucose(113, "Glucose", new Element(C,6), new Element(H,12), new Element(O,6)),
+    ctaxifolia(110, "Caulerpenyne", new Element(C, 21), new Element(H, 26), new Element(O, 6)),
+    latropine(111, "L-hyoscyamine", new Element(C, 17), new Element(H, 23), new Element(N), new Element(O, 4)),
+    gallicacid(112, "Gallic Acid", new Element(C, 7), new Element(H, 17), new Element(O, 5)),
+    glucose(113, "Glucose", new Element(C, 6), new Element(H, 12), new Element(O, 6)),
     tannicacid(114, "Tannic Acid", new Molecule(gallicacid, 10), new Molecule(glucose, 1)),
     hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
     galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As)),
@@ -169,8 +141,7 @@ public enum EnumMolecule {
     orthoclase(123, "Orthoclase", new Element(K), new Element(Al), new Element(Si, 3), new Element(O, 8)),
     biotite(124, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
     augite(125, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
-    talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10))
-    ;
+    talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10));
 
     public static EnumMolecule[] molecules = values();
     // Descriptive name, in en_US. Should not be used; instead, use a
@@ -202,20 +173,20 @@ public enum EnumMolecule {
         this.green2 = colorGreen2;
         this.blue2 = colorBlue2;
     }
-    
-    @Deprecated // Why?
+
+    @Deprecated
+        // Why?
     EnumMolecule(int id, String descriptiveName, Chemical... chemicals) {
         this(id, descriptiveName, getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), chemicals);
         // Your molecule will have random colors until you give it a proper color code.
     }
-    
-    private static float getRandomColor()
-    {
-    	Random random = new Random();
-    	return random.nextFloat();
+
+    private static float getRandomColor() {
+        Random random = new Random();
+        return random.nextFloat();
     }
 
-	public static EnumMolecule getById(int id) {
+    public static EnumMolecule getById(int id) {
         for (EnumMolecule molecule : molecules) {
             if (molecule.id == id)
                 return molecule;
@@ -228,8 +199,9 @@ public enum EnumMolecule {
     }
 
     /**
-     * Returns the localized name of this molecule, or an en_US-based 
+     * Returns the localized name of this molecule, or an en_US-based
      * placeholder if no localization was found.
+     *
      * @return Localized name of this molecule.
      */
     public String descriptiveName() {

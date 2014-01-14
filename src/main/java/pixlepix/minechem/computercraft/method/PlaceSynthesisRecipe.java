@@ -1,12 +1,12 @@
 package pixlepix.minechem.computercraft.method;
 
 import buildcraft.api.core.Position;
+import dan200.computer.api.IComputerAccess;
+import dan200.turtle.api.ITurtleAccess;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
-import dan200.computer.api.IComputerAccess;
-import dan200.turtle.api.ITurtleAccess;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import pixlepix.minechem.computercraft.ChemistryTurtleUpgradePeripherial;
@@ -30,7 +30,7 @@ public class PlaceSynthesisRecipe implements ICCMethod {
             synthesis.setRecipe(recipe);
             didPlace = true;
         }
-        return new Object[] { didPlace };
+        return new Object[]{didPlace};
     }
 
     public TileEntitySynthesis getSynthesisMachineInFront(ITurtleAccess turtle) {

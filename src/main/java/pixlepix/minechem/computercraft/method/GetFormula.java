@@ -1,12 +1,12 @@
 package pixlepix.minechem.computercraft.method;
 
+import dan200.computer.api.IComputerAccess;
+import dan200.turtle.api.ITurtleAccess;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.items.ItemElement;
 import pixlepix.minechem.computercraft.ICCMethod;
-import net.minecraft.item.ItemStack;
-import dan200.computer.api.IComputerAccess;
-import dan200.turtle.api.ITurtleAccess;
 
 public class GetFormula implements ICCMethod {
 
@@ -26,7 +26,7 @@ public class GetFormula implements ICCMethod {
             if (Util.isStackAnElement(selectedStack))
                 result = ItemElement.getShortName(selectedStack);
         }
-        return new Object[] { result };
+        return new Object[]{result};
     }
 
 }

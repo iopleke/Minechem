@@ -1,7 +1,7 @@
 package pixlepix.minechem.common;
 
-import pixlepix.minechem.api.core.EnumRadioactivity;
 import net.minecraft.item.ItemStack;
+import pixlepix.minechem.api.core.EnumRadioactivity;
 
 public class RadiationInfo {
 

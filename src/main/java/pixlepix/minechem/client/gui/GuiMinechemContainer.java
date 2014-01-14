@@ -2,8 +2,6 @@ package pixlepix.minechem.client.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -19,20 +17,30 @@ import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
+import java.util.List;
+
 @SideOnly(Side.CLIENT)
 public abstract class GuiMinechemContainer extends GuiScreen {
-    /** Stacks renderer. Icons, stack size, health, etc... */
+    /**
+     * Stacks renderer. Icons, stack size, health, etc...
+     */
     protected static RenderItem vanillaItemRenderer = new RenderItem();
 
     public RenderItem itemRenderer = vanillaItemRenderer;
 
-    /** The X size of the inventory window in pixels. */
+    /**
+     * The X size of the inventory window in pixels.
+     */
     protected int xSize = 176;
 
-    /** The Y size of the inventory window in pixels. */
+    /**
+     * The Y size of the inventory window in pixels.
+     */
     protected int ySize = 166;
 
-    /** A list of the players inventory slots. */
+    /**
+     * A list of the players inventory slots.
+     */
     public Container inventorySlots;
 
     /**
@@ -46,18 +54,24 @@ public abstract class GuiMinechemContainer extends GuiScreen {
     protected int guiTop;
     private Slot theSlot;
 
-    /** Used when touchscreen is enabled */
+    /**
+     * Used when touchscreen is enabled
+     */
     private Slot clickedSlot = null;
     private boolean field_90018_r = false;
 
-    /** Used when touchscreen is enabled */
+    /**
+     * Used when touchscreen is enabled
+     */
     private ItemStack draggedStack = null;
     private int field_85049_r = 0;
     private int field_85048_s = 0;
     private Slot returningStackDestSlot = null;
     private long returningStackTime = 0L;
 
-    /** Used when touchscreen is enabled */
+    /**
+     * Used when touchscreen is enabled
+     */
     private ItemStack returningStack = null;
     private Slot field_92033_y = null;
     private long field_92032_z = 0L;
@@ -277,7 +291,8 @@ public abstract class GuiMinechemContainer extends GuiScreen {
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {}
+    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    }
 
     /**
      * Draw the background layer for the GuiContainer (everything behind the items)
@@ -330,7 +345,9 @@ public abstract class GuiMinechemContainer extends GuiScreen {
         for (int var3 = 0; var3 < this.inventorySlots.inventorySlots.size(); ++var3) {
             Slot var4 = (Slot) this.inventorySlots.inventorySlots.get(var3);
 
-            if (this.isMouseOverSlot(var4, par1, par2)) { return var4; }
+            if (this.isMouseOverSlot(var4, par1, par2)) {
+                return var4;
+            }
         }
 
         return null;

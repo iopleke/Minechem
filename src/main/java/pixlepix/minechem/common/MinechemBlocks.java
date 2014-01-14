@@ -1,29 +1,7 @@
 package pixlepix.minechem.common;
 
-import pixlepix.minechem.api.core.Element;
-import pixlepix.minechem.api.core.EnumElement;
-import pixlepix.minechem.api.recipe.DecomposerRecipe;
-import pixlepix.minechem.common.blocks.BlockBlueprintProjector;
-import pixlepix.minechem.common.blocks.BlockChemicalStorage;
-import pixlepix.minechem.common.blocks.BlockDecomposer;
-import pixlepix.minechem.common.blocks.BlockFusion;
-import pixlepix.minechem.common.blocks.BlockGhostBlock;
-import pixlepix.minechem.common.blocks.BlockMicroscope;
-import pixlepix.minechem.common.blocks.BlockSynthesis;
-import pixlepix.minechem.common.blocks.MaterialGas;
-import pixlepix.minechem.common.blocks.OreUranium;
-import pixlepix.minechem.common.items.ItemBlockFusion;
-import pixlepix.minechem.common.items.ItemGhostBlock;
-import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
-import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
-import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
-import pixlepix.minechem.common.tileentity.TileEntityFission;
-import pixlepix.minechem.common.tileentity.TileEntityFusion;
-import pixlepix.minechem.common.tileentity.TileEntityGhostBlock;
-import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
-import pixlepix.minechem.common.tileentity.TileEntityProxy;
-import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
-import pixlepix.minechem.common.utils.MinechemHelper;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -31,8 +9,14 @@ import net.minecraft.block.material.MaterialTransparent;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+import pixlepix.minechem.api.core.Element;
+import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.api.recipe.DecomposerRecipe;
+import pixlepix.minechem.common.blocks.*;
+import pixlepix.minechem.common.items.ItemBlockFusion;
+import pixlepix.minechem.common.items.ItemGhostBlock;
+import pixlepix.minechem.common.tileentity.*;
+import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class MinechemBlocks {
     public static Block decomposer;
@@ -57,6 +41,7 @@ public class MinechemBlocks {
     private static int printerID;
 
     private static int uraniumID;
+
     public static void loadConfig(Configuration config) {
         int baseID = 4012;
         microscopeID = getBlockConfig(config, "Microscope", baseID++);
@@ -83,8 +68,7 @@ public class MinechemBlocks {
         ghostBlock = new BlockGhostBlock(ghostBlockID);
         blueprintProjector = new BlockBlueprintProjector(blueprintProjectorID);
         chemicalStorage = new BlockChemicalStorage(chemicalStorageID);
-        uranium= new OreUranium(uraniumID);
-
+        uranium = new OreUranium(uraniumID);
 
 
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
@@ -122,7 +106,7 @@ public class MinechemBlocks {
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
         GameRegistry.registerTileEntity(TileEntityGhostBlock.class, "minechem.tileEntityGhostBock");
         GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
-        
+
     }
 
 }

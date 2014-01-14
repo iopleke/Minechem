@@ -13,52 +13,53 @@ import buildcraft.api.blueprints.BlockSignature;
 import buildcraft.api.blueprints.BptBlock;
 import buildcraft.api.blueprints.BptSlotInfo;
 import buildcraft.api.blueprints.IBptContext;
-import java.util.LinkedList;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
+import java.util.LinkedList;
+
 @Deprecated
 public class BptBlockSign extends BptBlock {
 
-	boolean isWall;
+    boolean isWall;
 
-	public BptBlockSign(int blockId, boolean isWall) {
-		super(blockId);
+    public BptBlockSign(int blockId, boolean isWall) {
+        super(blockId);
 
-		this.isWall = isWall;
-	}
+        this.isWall = isWall;
+    }
 
-	@Override
-	public void addRequirements(BptSlotInfo slot, IBptContext context, LinkedList<ItemStack> requirements) {
-		requirements.add(new ItemStack(Item.sign));
-	}
+    @Override
+    public void addRequirements(BptSlotInfo slot, IBptContext context, LinkedList<ItemStack> requirements) {
+        requirements.add(new ItemStack(Item.sign));
+    }
 
-	@Override
-	public void rotateLeft(BptSlotInfo slot, IBptContext context) {
-		if (!isWall) {
-			double angle = ((slot.meta) * 360.0) / 16.0;
-			angle += 90.0;
-			if (angle >= 360) {
-				angle -= 360;
-			}
-			slot.meta = (int) (angle / 360.0 * 16.0);
-		} else {
-			// slot.meta = ForgeDirection.values()[slot.meta].rotateLeft().ordinal();
-		}
-	}
+    @Override
+    public void rotateLeft(BptSlotInfo slot, IBptContext context) {
+        if (!isWall) {
+            double angle = ((slot.meta) * 360.0) / 16.0;
+            angle += 90.0;
+            if (angle >= 360) {
+                angle -= 360;
+            }
+            slot.meta = (int) (angle / 360.0 * 16.0);
+        } else {
+            // slot.meta = ForgeDirection.values()[slot.meta].rotateLeft().ordinal();
+        }
+    }
 
-	@Override
-	public BlockSignature getSignature(Block block) {
-		BlockSignature sig = super.getSignature(block);
+    @Override
+    public BlockSignature getSignature(Block block) {
+        BlockSignature sig = super.getSignature(block);
 
-		if (isWall) {
-			sig.customField = "wall";
-		} else {
-			sig.customField = "floor";
-		}
+        if (isWall) {
+            sig.customField = "wall";
+        } else {
+            sig.customField = "floor";
+        }
 
-		return sig;
-	}
+        return sig;
+    }
 
 }

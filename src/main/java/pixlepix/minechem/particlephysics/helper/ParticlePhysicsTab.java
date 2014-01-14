@@ -5,16 +5,17 @@ import net.minecraft.item.ItemStack;
 import pixlepix.minechem.particlephysics.blocks.Emitter;
 
 public class ParticlePhysicsTab extends CreativeTabs {
-	public static ParticlePhysicsTab instance;
-	public ParticlePhysicsTab() {
-		super("tabParticlePhysics");
+    public static ParticlePhysicsTab instance;
 
-		instance=this;
-	}
-	
-	@Override
-	public ItemStack getIconItemStack() {
-		return new ItemStack(BetterLoader.getBlock(Emitter.class));
-		
-	}
+    public ParticlePhysicsTab() {
+        super("tabParticlePhysics");
+
+        instance = this;
+    }
+
+    @Override
+    public ItemStack getIconItemStack() {
+        return new ItemStack(BetterLoader.getBlock(Emitter.class));
+
+    }
 }

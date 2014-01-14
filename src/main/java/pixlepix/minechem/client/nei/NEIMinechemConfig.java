@@ -17,12 +17,12 @@ public class NEIMinechemConfig implements IConfigureNEI {
 
     @Override
     public void loadConfig() {
-        DecomposerNEIRecipeHandler decomposerRecipeHandler = 
+        DecomposerNEIRecipeHandler decomposerRecipeHandler =
                 new DecomposerNEIRecipeHandler();
         API.registerRecipeHandler(decomposerRecipeHandler);
         API.registerUsageHandler(decomposerRecipeHandler);
-        
-        SynthesisNEIRecipeHandler synthesisRecipeHandler = 
+
+        SynthesisNEIRecipeHandler synthesisRecipeHandler =
                 new SynthesisNEIRecipeHandler();
         API.registerRecipeHandler(synthesisRecipeHandler);
         API.registerUsageHandler(synthesisRecipeHandler);

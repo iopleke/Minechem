@@ -1,11 +1,11 @@
 package pixlepix.minechem.computercraft;
 
-import pixlepix.minechem.common.MinechemItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 import dan200.turtle.api.TurtleAPI;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
+import pixlepix.minechem.common.MinechemItems;
 
 public class CCMain implements ICCMain {
 

@@ -1,45 +1,28 @@
 package pixlepix.minechem.computercraft;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pixlepix.minechem.api.recipe.SynthesisRecipe;
-import pixlepix.minechem.api.util.Constants;
-import pixlepix.minechem.common.RadiationHandler;
-import pixlepix.minechem.common.RadiationHandler.DecayEvent;
-import pixlepix.minechem.computercraft.method.ClearSynthesisRecipe;
-import pixlepix.minechem.computercraft.method.GetAtomicMass;
-import pixlepix.minechem.computercraft.method.GetChemicalName;
-import pixlepix.minechem.computercraft.method.GetChemicals;
-import pixlepix.minechem.computercraft.method.GetFormula;
-import pixlepix.minechem.computercraft.method.GetMachineState;
-import pixlepix.minechem.computercraft.method.GetRadioactivity;
-import pixlepix.minechem.computercraft.method.GetTicksUntilDecay;
-import pixlepix.minechem.computercraft.method.PlaceSynthesisRecipe;
-import pixlepix.minechem.computercraft.method.PutEmptyTestTube;
-import pixlepix.minechem.computercraft.method.PutFusionStar;
-import pixlepix.minechem.computercraft.method.PutInput;
-import pixlepix.minechem.computercraft.method.PutJournal;
-import pixlepix.minechem.computercraft.method.StoreSynthesisRecipe;
-import pixlepix.minechem.computercraft.method.TakeEmptyTestTube;
-import pixlepix.minechem.computercraft.method.TakeFusionStar;
-import pixlepix.minechem.computercraft.method.TakeJournal;
-import pixlepix.minechem.computercraft.method.TakeOuput;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import buildcraft.api.core.SafeTimeTracker;
 import dan200.computer.api.IComputerAccess;
 import dan200.computer.api.IHostedPeripheral;
 import dan200.turtle.api.ITurtleAccess;
 import dan200.turtle.api.TurtleSide;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import pixlepix.minechem.api.recipe.SynthesisRecipe;
+import pixlepix.minechem.api.util.Constants;
+import pixlepix.minechem.common.RadiationHandler;
+import pixlepix.minechem.common.RadiationHandler.DecayEvent;
+import pixlepix.minechem.computercraft.method.*;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMinechemTurtlePeripheral {
 
     private static String[] methodNames;
-    private static ICCMethod[] methods = { new GetChemicalName(), new GetFormula(), new GetChemicals(), new GetAtomicMass(), new GetRadioactivity(),
+    private static ICCMethod[] methods = {new GetChemicalName(), new GetFormula(), new GetChemicals(), new GetAtomicMass(), new GetRadioactivity(),
             new GetTicksUntilDecay(), new StoreSynthesisRecipe(), new PlaceSynthesisRecipe(), new ClearSynthesisRecipe(), new PutEmptyTestTube(),
             new TakeEmptyTestTube(), new TakeOuput(), new PutInput(), new TakeFusionStar(), new PutFusionStar(), new TakeJournal(), new PutJournal(),
-            new GetMachineState() };
+            new GetMachineState()};
 
     public ITurtleAccess turtle;
     public IComputerAccess computer;
@@ -108,15 +91,17 @@ public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMi
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound) {}
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
+    }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {}
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
+    }
 
     private void postDecayEvents(List<DecayEvent> decayEvents) {
         for (DecayEvent event : decayEvents) {
-            Object[] data = { event.before.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""),
-                    event.after.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""), event.damage };
+            Object[] data = {event.before.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""),
+                    event.after.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""), event.damage};
             this.computer.queueEvent("onDecay", data);
         }
     }

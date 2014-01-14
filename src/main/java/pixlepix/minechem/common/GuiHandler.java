@@ -1,37 +1,14 @@
 package pixlepix.minechem.common;
 
-import pixlepix.minechem.client.gui.GuiChemicalStorage;
-import pixlepix.minechem.client.gui.GuiChemistJournal;
-import pixlepix.minechem.client.gui.GuiDecomposer;
-import pixlepix.minechem.client.gui.GuiFission;
-import pixlepix.minechem.client.gui.GuiFusion;
-import pixlepix.minechem.client.gui.GuiMicroscope;
-import pixlepix.minechem.client.gui.GuiProjector;
-import pixlepix.minechem.client.gui.GuiSynthesis;
-import pixlepix.minechem.client.gui.GuiTableOfElements;
-import pixlepix.minechem.common.containers.ContainerChemicalStorage;
-import pixlepix.minechem.common.containers.ContainerChemistJournal;
-import pixlepix.minechem.common.containers.ContainerDecomposer;
-import pixlepix.minechem.common.containers.ContainerFission;
-import pixlepix.minechem.common.containers.ContainerFusion;
-import pixlepix.minechem.common.containers.ContainerMicroscope;
-import pixlepix.minechem.common.containers.ContainerProjector;
-import pixlepix.minechem.common.containers.ContainerSynthesis;
-import pixlepix.minechem.common.containers.CotainerTable;
-import pixlepix.minechem.common.polytool.ContainerPolytool;
-import pixlepix.minechem.common.polytool.GuiPolytool;
-import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
-import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
-import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
-import pixlepix.minechem.common.tileentity.TileEntityFission;
-import pixlepix.minechem.common.tileentity.TileEntityFusion;
-import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
-import pixlepix.minechem.common.tileentity.TileEntityProxy;
-import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
+import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
+import pixlepix.minechem.client.gui.*;
+import pixlepix.minechem.common.containers.*;
+import pixlepix.minechem.common.polytool.ContainerPolytool;
+import pixlepix.minechem.common.polytool.GuiPolytool;
+import pixlepix.minechem.common.tileentity.*;
 
 public class GuiHandler implements IGuiHandler {
 
@@ -40,11 +17,18 @@ public class GuiHandler implements IGuiHandler {
     public static final int GUI_TABLE = 2;
 
     public static final int GUI_ID_POLYTOOL = 3;
+
     @Override
     public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == GUI_ID_JOURNAL) { return getServerGuiElementForJournal(player, world); }
-        if (ID == GUI_ID_POLYTOOL){ return getServerGuiElementForPolytool(player,world);}
-        if (ID == GUI_TABLE){ return new CotainerTable(player.inventory); }
+        if (ID == GUI_ID_JOURNAL) {
+            return getServerGuiElementForJournal(player, world);
+        }
+        if (ID == GUI_ID_POLYTOOL) {
+            return getServerGuiElementForPolytool(player, world);
+        }
+        if (ID == GUI_TABLE) {
+            return new CotainerTable(player.inventory);
+        }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityDecomposer)
             return new ContainerDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
@@ -52,19 +36,19 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
         if (tileEntity instanceof TileEntitySynthesis)
             return new ContainerSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
-        if (tileEntity instanceof TileEntityFusion){
+        if (tileEntity instanceof TileEntityFusion) {
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
         }
-        if (tileEntity instanceof TileEntityFission){
-        	System.out.println(1);
+        if (tileEntity instanceof TileEntityFission) {
+            System.out.println(1);
             return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
         }
 
-        if (tileEntity instanceof TileEntityProxy){
-        	System.out.println(2);
-        	return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        if (tileEntity instanceof TileEntityProxy) {
+            System.out.println(2);
+            return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
-            
+
         if (tileEntity instanceof TileEntityBlueprintProjector)
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
@@ -73,12 +57,12 @@ public class GuiHandler implements IGuiHandler {
     }
 
     private Object getServerGuiElementForPolytool(EntityPlayer player,
-			World world) {
-		
-		return new ContainerPolytool(player);
-	}
+                                                  World world) {
 
-	public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player) {
+        return new ContainerPolytool(player);
+    }
+
+    public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player) {
         TileEntity tileEntity = proxy.getManager();
         if (tileEntity instanceof TileEntityFusion)
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
@@ -97,10 +81,10 @@ public class GuiHandler implements IGuiHandler {
         if (ID == GUI_ID_JOURNAL)
             return getClientGuiElementForJournal(player, world);
         if (ID == GUI_TABLE)
-        	return getClientGuiForJournal(player, world);
+            return getClientGuiForJournal(player, world);
 
         if (ID == GUI_ID_POLYTOOL)
-        	return getClientGuiForPolytool(player, world);
+            return getClientGuiForPolytool(player, world);
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityDecomposer)
             return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
@@ -110,27 +94,27 @@ public class GuiHandler implements IGuiHandler {
             return new GuiSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
         if (tileEntity instanceof TileEntityFusion)
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
-        if (tileEntity instanceof TileEntityProxy){
-        	System.out.println(3);
+        if (tileEntity instanceof TileEntityProxy) {
+            System.out.println(3);
             return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
         if (tileEntity instanceof TileEntityBlueprintProjector)
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
-        if (tileEntity instanceof TileEntityFission){
-        	System.out.println(4);
-        	return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
+        if (tileEntity instanceof TileEntityFission) {
+            System.out.println(4);
+            return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
         }
         return null;
     }
 
     private GuiPolytool getClientGuiForPolytool(EntityPlayer player, World world) {
-		
-		return new GuiPolytool(new ContainerPolytool(player));
-	}
 
-	public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player) {
+        return new GuiPolytool(new ContainerPolytool(player));
+    }
+
+    public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player) {
         TileEntity tileEntity = proxy.getManager();
         if (tileEntity instanceof TileEntityFusion)
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
@@ -143,6 +127,7 @@ public class GuiHandler implements IGuiHandler {
     public Object getClientGuiElementForJournal(EntityPlayer player, World world) {
         return new GuiChemistJournal(player);
     }
+
     public Object getClientGuiForJournal(EntityPlayer player, World world) {
         return new GuiTableOfElements(player);
     }

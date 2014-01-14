@@ -1,10 +1,5 @@
 package pixlepix.minechem.common.blocks;
 
-import java.util.ArrayList;
-
-import pixlepix.minechem.common.CommonProxy;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,6 +7,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.CommonProxy;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
+
+import java.util.ArrayList;
 
 /**
  * Chemical Synthesizer block. Its associated TileEntitySynthesis's inventory
@@ -52,7 +52,7 @@ public class BlockSynthesis extends BlockMinechemContainer {
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity,
-            ArrayList itemStacks) {
+                                             ArrayList itemStacks) {
         TileEntitySynthesis synthesizer = (TileEntitySynthesis) tileEntity;
         for (int slot : synthesizer.kRealSlots) {
             if (synthesizer.isRealItemSlot(slot)) {

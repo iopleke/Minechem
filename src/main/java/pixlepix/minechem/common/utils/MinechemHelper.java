@@ -1,25 +1,11 @@
 package pixlepix.minechem.common.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
-import pixlepix.minechem.api.core.Chemical;
-import pixlepix.minechem.api.core.Element;
-import pixlepix.minechem.api.core.Molecule;
-import pixlepix.minechem.api.util.Util;
-import pixlepix.minechem.common.MinechemItems;
-import pixlepix.minechem.common.items.ItemElement;
-import pixlepix.minechem.common.items.ItemMolecule;
-
 import buildcraft.api.core.Position;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.server.FMLServerHandler;
-
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -32,6 +18,17 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeDirection;
+import pixlepix.minechem.api.core.Chemical;
+import pixlepix.minechem.api.core.Element;
+import pixlepix.minechem.api.core.Molecule;
+import pixlepix.minechem.api.util.Util;
+import pixlepix.minechem.common.MinechemItems;
+import pixlepix.minechem.common.items.ItemElement;
+import pixlepix.minechem.common.items.ItemMolecule;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MinechemHelper {
 
@@ -48,17 +45,17 @@ public class MinechemHelper {
         List<?> stringRows = fontRenderer.listFormattedStringToWidth(string, width);
         return stringRows.size() * fontRenderer.FONT_HEIGHT;
     }
-    
+
     public static String getLocalString(String key) {
-    	if(FMLCommonHandler.instance().getSide()==Side.CLIENT){
-	        LanguageRegistry lr = LanguageRegistry.instance();
-	        String localString = lr.getStringLocalization(key);
-	        if (localString.equals("")) {
-	            localString = lr.getStringLocalization(key, "en_US");
-	        }
-	        return localString;
-    	}
-    	return key;
+        if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+            LanguageRegistry lr = LanguageRegistry.instance();
+            String localString = lr.getStringLocalization(key);
+            if (localString.equals("")) {
+                localString = lr.getStringLocalization(key, "en_US");
+            }
+            return localString;
+        }
+        return key;
     }
 
     public static NBTTagList writeItemStackArrayToTagList(ItemStack[] itemstacks) {
@@ -149,16 +146,16 @@ public class MinechemHelper {
 
     public static ForgeDirection getDirectionFromFacing(int facing) {
         switch (facing) {
-        case 0:
-            return ForgeDirection.SOUTH;
-        case 1:
-            return ForgeDirection.WEST;
-        case 2:
-            return ForgeDirection.NORTH;
-        case 3:
-            return ForgeDirection.EAST;
-        default:
-            return null;
+            case 0:
+                return ForgeDirection.SOUTH;
+            case 1:
+                return ForgeDirection.WEST;
+            case 2:
+                return ForgeDirection.NORTH;
+            case 3:
+                return ForgeDirection.EAST;
+            default:
+                return null;
         }
     }
 
@@ -177,11 +174,10 @@ public class MinechemHelper {
         }
     }
 
-   
 
     /**
      * Ensures that the given inventory is the full inventory, i.e. takes double chests into account.
-     * 
+     *
      * @param inv
      * @return Modified inventory if double chest, unmodified otherwise. Credit to Buildcraft.
      */
@@ -245,7 +241,9 @@ public class MinechemHelper {
     public static Chemical itemStackToChemical(ItemStack itemstack) {
         if (Util.isStackAnElement(itemstack)) {
             return new Element(ItemElement.getElement(itemstack), itemstack.stackSize);
-        } else if (Util.isStackAMolecule(itemstack)) { return new Molecule(ItemMolecule.getMolecule(itemstack), itemstack.stackSize); }
+        } else if (Util.isStackAMolecule(itemstack)) {
+            return new Molecule(ItemMolecule.getMolecule(itemstack), itemstack.stackSize);
+        }
         return null;
     }
 }

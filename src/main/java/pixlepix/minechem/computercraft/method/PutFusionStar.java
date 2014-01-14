@@ -1,9 +1,9 @@
 package pixlepix.minechem.computercraft.method;
 
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 import dan200.computer.api.IComputerAccess;
 import dan200.turtle.api.ITurtleAccess;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.computercraft.ICCMethod;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
@@ -26,7 +26,7 @@ public class PutFusionStar extends InteractMachine implements ICCMethod {
             int used = machine.putFusionStar(selectedStack);
             didPut = tryPut(before, used, turtle);
         }
-        return new Object[] { didPut };
+        return new Object[]{didPut};
     }
 
 }

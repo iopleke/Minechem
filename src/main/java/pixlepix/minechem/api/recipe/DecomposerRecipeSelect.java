@@ -1,10 +1,9 @@
 package pixlepix.minechem.api.recipe;
 
-import java.util.ArrayList;
-
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.core.Chemical;
 
-import net.minecraft.item.ItemStack;
+import java.util.ArrayList;
 
 public class DecomposerRecipeSelect extends DecomposerRecipeChance {
 

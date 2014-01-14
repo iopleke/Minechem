@@ -1,13 +1,7 @@
 package pixlepix.minechem.common.items;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import pixlepix.minechem.api.core.EnumMolecule;
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.PharmacologyEffect;
-import pixlepix.minechem.common.utils.ConstantValue;
-import pixlepix.minechem.common.utils.MinechemHelper;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,8 +10,15 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import pixlepix.minechem.api.core.EnumMolecule;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.PharmacologyEffect;
+import pixlepix.minechem.common.utils.ConstantValue;
+import pixlepix.minechem.common.utils.MinechemHelper;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class ItemMolecule extends Item {
     public Icon render_pass1, render_pass2, filledMolecule;
 
@@ -108,7 +109,7 @@ public class ItemMolecule extends Item {
     public static EnumMolecule getMolecule(ItemStack itemstack) {
         return EnumMolecule.getById(itemstack.getItemDamage());
     }
- 
+
     /**
      * returns the action that specifies what animation to play when the items is being used
      */

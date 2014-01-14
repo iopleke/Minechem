@@ -1,10 +1,10 @@
 package pixlepix.minechem.common.network;
 
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.network.Player;
 import ljdp.easypacket.EasyPacket;
 import ljdp.easypacket.EasyPacketData;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.common.MinechemItems;
 
 public class PacketActiveJournalItem extends EasyPacket {

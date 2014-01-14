@@ -1,14 +1,14 @@
 package ljdp.easypacket;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
-
 import cpw.mods.fml.common.network.IPacketHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.common.network.Player;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 public class EasyPacketDispatcher implements IPacketHandler {
 
@@ -16,9 +16,8 @@ public class EasyPacketDispatcher implements IPacketHandler {
 
     /**
      * The EasyPacketDispatcher is links your packet handlers with minecraft's packetDispatchers.
-     * 
-     * @param String
-     *            channel
+     *
+     * @param String channel
      */
     public EasyPacketDispatcher(String channel) {
         this.channel = channel;

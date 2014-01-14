@@ -1,5 +1,11 @@
 package pixlepix.minechem.common.tileentity;
 
+import buildcraft.api.core.SafeTimeTracker;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.api.util.Constants;
 import pixlepix.minechem.common.MinechemItems;
@@ -9,18 +15,12 @@ import pixlepix.minechem.common.inventory.Transactor;
 import pixlepix.minechem.common.items.ItemElement;
 import pixlepix.minechem.common.utils.MinechemHelper;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.nbt.NBTTagList;
-import buildcraft.api.core.SafeTimeTracker;
 
-public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechemMachinePeripheral {
+public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemMachinePeripheral {
 
-    public static int[] kFusionStar = { 0 };
-    public static int[] kInput = { 1, 2 };
-    public static int[] kOutput = { 3 };
+    public static int[] kFusionStar = {0};
+    public static int[] kInput = {1, 2};
+    public static int[] kOutput = {3};
 
     private final BoundedInventory inputInventory;
     private final BoundedInventory outputInventory;
@@ -28,13 +28,13 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     private Transactor inputTransactor;
     private Transactor outputTransactor;
     private Transactor starTransactor;
-	public static int kStartFusionStar = 0;
-	public static int kStartInput1 = 1;
-	public static int kStartInput2 = 2;
-	public static int kStartOutput = 3;
-	public static int kSizeInput = 2;
-	public static int kSizeOutput = 1;
-	public static int kSizeFusionStar = 1;
+    public static int kStartFusionStar = 0;
+    public static int kStartInput1 = 1;
+    public static int kStartInput2 = 2;
+    public static int kStartOutput = 3;
+    public static int kSizeInput = 2;
+    public static int kSizeOutput = 1;
+    public static int kSizeFusionStar = 1;
     int energyStored = 0;
     int maxEnergy = 9;
     int targetEnergy = 0;
@@ -43,7 +43,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     boolean shouldSendUpdatePacket;
 
     public TileEntityFusion() {
-    	inventory = new ItemStack[getSizeInventory()];
+        inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);
         outputInventory = new BoundedInventory(this, kOutput);
         starInventory = new BoundedInventory(this, kFusionStar);
@@ -55,36 +55,36 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     }
 
     @Override
-	public void updateEntity() {
-		super.updateEntity();
-		if(!completeStructure)
-			return;
-		shouldSendUpdatePacket = false;
-		if(!worldObj.isRemote && inventory[kStartFusionStar] != null 
-				&& energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
-		{
-			if(!isRecharging)
-				targetEnergy = takeEnergyFromStar(inventory[kStartFusionStar], true);
-			if(targetEnergy > 0)
-				isRecharging = true;
-			if(isRecharging) {
-				recharge();
-			} else {
-				ItemStack fusionResult = getFusionOutput();
-				while(fusionResult != null && canFuse(fusionResult)) {
-					if(!worldObj.isRemote) {
-						addToOutput(fusionResult);
-						removeInputs();
-					}
-					energyStored -= getEnergyCost(fusionResult);
-					fusionResult = getFusionOutput();
-					shouldSendUpdatePacket = true;
-				}
-			}
-		}
-		if(shouldSendUpdatePacket && !worldObj.isRemote)
-			sendUpdatePacket();
-	}
+    public void updateEntity() {
+        super.updateEntity();
+        if (!completeStructure)
+            return;
+        shouldSendUpdatePacket = false;
+        if (!worldObj.isRemote && inventory[kStartFusionStar] != null
+                && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2)) {
+            if (!isRecharging)
+                targetEnergy = takeEnergyFromStar(inventory[kStartFusionStar], true);
+            if (targetEnergy > 0)
+                isRecharging = true;
+            if (isRecharging) {
+                recharge();
+            } else {
+                ItemStack fusionResult = getFusionOutput();
+                while (fusionResult != null && canFuse(fusionResult)) {
+                    if (!worldObj.isRemote) {
+                        addToOutput(fusionResult);
+                        removeInputs();
+                    }
+                    energyStored -= getEnergyCost(fusionResult);
+                    fusionResult = getFusionOutput();
+                    shouldSendUpdatePacket = true;
+                }
+            }
+        }
+        if (shouldSendUpdatePacket && !worldObj.isRemote)
+            sendUpdatePacket();
+    }
+
     private void addToOutput(ItemStack fusionResult) {
         if (inventory[kOutput[0]] == null) {
             ItemStack output = fusionResult.copy();
@@ -173,8 +173,8 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack) {
-        if (slot==0&&itemstack != null && itemstack.itemID == Item.netherStar.itemID) {
-        	System.out.println("Turning nether star into fusion star");
+        if (slot == 0 && itemstack != null && itemstack.itemID == Item.netherStar.itemID) {
+            System.out.println("Turning nether star into fusion star");
             this.inventory[slot] = new ItemStack(MinechemItems.fusionStar);
         } else {
             this.inventory[slot] = itemstack;
@@ -190,7 +190,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
     public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
         if (!completeStructure)
             return false;
-        
+
         return true;
     }
 
@@ -291,13 +291,13 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        if (i == kFusionStar[0]){
-            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItems.fusionStar.itemID){
+        if (i == kFusionStar[0]) {
+            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItems.fusionStar.itemID) {
                 return true;
             }
         }
         for (int slot : kInput) {
-            if(i==slot&&itemstack.getItem() instanceof ItemElement){
+            if (i == slot && itemstack.getItem() instanceof ItemElement) {
                 return true;
             }
         }
@@ -306,33 +306,28 @@ public class TileEntityFusion extends TileEntityMultiBlock implements  IMinechem
 
     public int[] getSizeInventorySide(int side) {
         switch (side) {
-        case 0:
-        case 1:
-            return kInput;
-        default:
-            return kOutput;
+            case 0:
+            case 1:
+                return kInput;
+            default:
+                return kOutput;
         }
     }
 
-   
+
+    @Override
+    void sendUpdatePacket() {
+        // TODO Auto-generated method stub
+
+    }
 
 
-	@Override
-	void sendUpdatePacket() {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-
-	public int getFusionEnergyStored() {
-		if(this.inventory[0]!=null){
-			return this.inventory[0].getMaxDamage()-this.inventory[0].getItemDamage();
-		}
-		return 0;
-	}
-
+    public int getFusionEnergyStored() {
+        if (this.inventory[0] != null) {
+            return this.inventory[0].getMaxDamage() - this.inventory[0].getItemDamage();
+        }
+        return 0;
+    }
 
 
 }

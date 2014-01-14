@@ -1,8 +1,9 @@
 package pixlepix.minechem.api.core;
 
+import cpw.mods.fml.common.registry.LanguageRegistry;
+
 import static pixlepix.minechem.api.core.EnumClassification.*;
 import static pixlepix.minechem.api.core.EnumRadioactivity.*;
-import cpw.mods.fml.common.registry.LanguageRegistry;
 
 public enum EnumElement {
     H("Hydrogen", nonmetal, gas, stable),//Done
@@ -141,6 +142,7 @@ public enum EnumElement {
     /**
      * Returns the localized name of this element, or an en_US-based placeholder
      * if no localization was found.
+     *
      * @return Localized name of this element.
      */
     public String descriptiveName() {

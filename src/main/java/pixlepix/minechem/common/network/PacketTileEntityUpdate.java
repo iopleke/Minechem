@@ -1,7 +1,6 @@
 package pixlepix.minechem.common.network;
 
 import cpw.mods.fml.common.network.Player;
-
 import ljdp.easypacket.EasyPacket;
 import ljdp.easypacket.EasyPacketData;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,12 +1,12 @@
 package pixlepix.minechem.computercraft;
 
-import pixlepix.minechem.common.ModMinechem;
-import pixlepix.minechem.common.utils.ConstantValue;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
+import pixlepix.minechem.common.ModMinechem;
+import pixlepix.minechem.common.utils.ConstantValue;
 
 public class ItemChemistryUpgrade extends Item {
     public static Icon icon;

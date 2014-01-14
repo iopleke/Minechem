@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.recipe;
 
-import java.util.ArrayList;
-
 import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.utils.MinechemHelper;
+
+import java.util.ArrayList;
 
 public class DecomposerRecipeHandler {
     public static DecomposerRecipeHandler instance = new DecomposerRecipeHandler();

@@ -12,31 +12,32 @@ package buildcraft.api.bptblocks;
 import buildcraft.api.blueprints.BptBlock;
 import buildcraft.api.blueprints.BptSlotInfo;
 import buildcraft.api.blueprints.IBptContext;
-import java.util.LinkedList;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
+
+import java.util.LinkedList;
 
 @Deprecated
 public class BptBlockDirt extends BptBlock {
 
-	public BptBlockDirt(int blockId) {
-		super(blockId);
-	}
+    public BptBlockDirt(int blockId) {
+        super(blockId);
+    }
 
-	@Override
-	public void addRequirements(BptSlotInfo slot, IBptContext context, LinkedList<ItemStack> requirements) {
-		requirements.add(new ItemStack(Block.dirt));
-	}
+    @Override
+    public void addRequirements(BptSlotInfo slot, IBptContext context, LinkedList<ItemStack> requirements) {
+        requirements.add(new ItemStack(Block.dirt));
+    }
 
-	@Override
-	public void buildBlock(BptSlotInfo slot, IBptContext context) {
-		context.world().setBlock(slot.x, slot.y, slot.z, Block.dirt.blockID, slot.meta,1);
-	}
+    @Override
+    public void buildBlock(BptSlotInfo slot, IBptContext context) {
+        context.world().setBlock(slot.x, slot.y, slot.z, Block.dirt.blockID, slot.meta, 1);
+    }
 
-	@Override
-	public boolean isValid(BptSlotInfo slot, IBptContext context) {
-		int id = context.world().getBlockId(slot.x, slot.y, slot.z);
+    @Override
+    public boolean isValid(BptSlotInfo slot, IBptContext context) {
+        int id = context.world().getBlockId(slot.x, slot.y, slot.z);
 
-		return id == Block.dirt.blockID || id == Block.grass.blockID || id == Block.tilledField.blockID;
-	}
+        return id == Block.dirt.blockID || id == Block.grass.blockID || id == Block.tilledField.blockID;
+    }
 }

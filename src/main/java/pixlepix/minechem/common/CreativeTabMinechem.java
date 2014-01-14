@@ -1,8 +1,8 @@
 package pixlepix.minechem.common;
 
-import pixlepix.minechem.api.core.EnumElement;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
+import pixlepix.minechem.api.core.EnumElement;
 
 public class CreativeTabMinechem extends CreativeTabs {
 

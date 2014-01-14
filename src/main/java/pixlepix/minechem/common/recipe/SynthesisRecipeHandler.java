@@ -1,13 +1,13 @@
 package pixlepix.minechem.common.recipe;
 
-import java.util.ArrayList;
-
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.utils.MinechemHelper;
-import net.minecraft.inventory.IInventory;
-import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class SynthesisRecipeHandler {
 
