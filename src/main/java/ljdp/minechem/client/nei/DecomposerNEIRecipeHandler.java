@@ -1,11 +1,15 @@
 package ljdp.minechem.client.nei;
 
+import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
 import ljdp.minechem.api.core.Chemical;
 import ljdp.minechem.api.recipe.DecomposerRecipe;
+import ljdp.minechem.api.recipe.DecomposerRecipeChance;
+import ljdp.minechem.api.recipe.DecomposerRecipeSelect;
 import ljdp.minechem.api.util.Util;
+import ljdp.minechem.client.gui.GuiDecomposer;
 import ljdp.minechem.common.recipe.DecomposerRecipeHandler;
 import ljdp.minechem.common.utils.ConstantValue;
 import ljdp.minechem.common.utils.MinechemHelper;
@@ -13,9 +17,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import static codechicken.core.gui.GuiDraw.*;
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
-
+    
     private static final String MINECHEM_DECOMPOSER_RECIPES_ID =
             "minechem.decomposer";
     
@@ -29,17 +34,25 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
     private static final int OUTPUT_X_OFS = 2;
     private static final int OUTPUT_X_SCALE = 18;
     private static final int OUTPUT_Y_OFS = 51;
+    private static final int INPUT_ARROW_Y_OFS = 40;
 
     @Override
     public String getRecipeName() {
-        return "Chemical Decomposer";
+        return MinechemHelper.getLocalString("gui.title.decomposer");
     }
 
     @Override
     public String getGuiTexture() {
         return texture.toString();
     }
-    
+
+    @Override
+    public void loadTransferRects() {
+        transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(
+            new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 24),
+            MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
+    }
+
     @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(MINECHEM_DECOMPOSER_RECIPES_ID)) {
@@ -76,8 +89,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
             }
         }
     }
-    
-    @Override 
+
+    @Override
     public void loadUsageRecipes(ItemStack ingredient) {
         // Add all decomposer recipes that take the ingredient as an input.
         DecomposerRecipe dr = DecomposerRecipeHandler.instance.getRecipe(ingredient);
@@ -85,42 +98,103 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
             registerDecomposerRecipe(dr);
         }
     }
-    
+
+    @Override
+    public Class getGuiClass() {
+        return GuiDecomposer.class;
+    }
+
     /**
      * Registers a decomposer recipe with NEI. Anything that adds a new
      * decomposer recipe after startup should call this to have the recipe
      * reflected in NEI.
-     * 
+     *
      * @param dr Decomposer recipe to add.
      */
     public void registerDecomposerRecipe(DecomposerRecipe dr) {
         if (dr == null) {
             return;
         }
-        CachedDecomposerRecipe cdr = new CachedDecomposerRecipe(dr.getInput(), dr);
+        BaseCachedDecomposerRecipe cdr = buildCachedRecipe(dr);
+
         arecipes.add(cdr);
     }
-    
-    public class CachedDecomposerRecipe extends TemplateRecipeHandler.CachedRecipe {
-        
-        private PositionedStack input;
-        // The first item in the multi-output decomposer recipe.
-        private PositionedStack output1;
-        // Any other items in the multi-output decomposer recipe.
-        private List<PositionedStack> otherOutputs;
-        
-        public CachedDecomposerRecipe(ItemStack inputItem, ItemStack resultItem) {
-            super();
-            input = new PositionedStack(inputItem, INPUT_X_OFS, INPUT_Y_OFS);
-            output1 = new PositionedStack(resultItem, OUTPUT_X_OFS, OUTPUT_Y_OFS);
-            otherOutputs = null;
+
+    @Override
+    public void drawExtras(int recipeIdx) {
+        BaseCachedDecomposerRecipe cdr =
+            (BaseCachedDecomposerRecipe) arecipes.get(recipeIdx);
+        // Render the chance next to the down arrow in the GUI, as a percent.
+        float chance = cdr.getChance();
+        if (chance < 1.0f) {
+            String chanceStr = String.format("%2.0f%%", chance * 100.0);
+            int xPos = INPUT_X_OFS - getStringWidth(chanceStr);
+            drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS, 8, false);
+        }
+
+        // Potentially update the outputs that will be displayed on the next
+        // tick, for variable multi-output recipes. This is done here and not
+        // in onUpdate() to avoid cycling outputs of recipes that are not
+        // visible.
+        cdr.cycleOutput(cycleticks);
+    }
+
+    private BaseCachedDecomposerRecipe buildCachedRecipe(DecomposerRecipe dr) {
+        // As Java uses the static type for method dispatch, we have to check
+        // the runtime type information. It must be checked from most to least
+        // specific type, as well.
+        if (dr instanceof DecomposerRecipeSelect) {
+            return new CachedDecomposerRecipeSelect((DecomposerRecipeSelect) dr);
+        } else if (dr instanceof DecomposerRecipeChance) {
+            return new CachedDecomposerRecipeChance((DecomposerRecipeChance) dr);
+        } else {
+            return new CachedDecomposerRecipe(dr);
+        }
+    }
+
+    public abstract class BaseCachedDecomposerRecipe extends TemplateRecipeHandler.CachedRecipe {
+        // The recipe's input item.
+        protected PositionedStack input;
+        // The first item to be rendered from the multi-output decomposer recipe.
+        protected PositionedStack output1;
+        // Other items to be rendered from the multi-output decomposer recipe.
+        protected List<PositionedStack> otherOutputs;
+
+        protected BaseCachedDecomposerRecipe(ItemStack input) {
+            this.input = new PositionedStack(input, INPUT_X_OFS, INPUT_Y_OFS);
+        }
+
+        @Override
+        public PositionedStack getIngredient() {
+            return input;
+        }
+
+        @Override
+        public PositionedStack getResult() {
+            return output1;
+        }
+
+        @Override
+        public List<PositionedStack> getOtherStacks() {
+            return otherOutputs;
+        }
+
+        /**
+         * Returns the chance that this recipe yields any output. Chance is in
+         * [0, 1], with 1 (always return output) being the default.
+         */
+        public float getChance() {
+            return 1.0f;
+        }
+
+        /**
+         * Cycles the output that this recipe will display, based on the given
+         * tick number. Does nothing if this recipe has no variable output.
+         */
+        public void cycleOutput(long tick) {
         }
         
-        public CachedDecomposerRecipe(ItemStack input, DecomposerRecipe dr) {
-            super();
-            ArrayList<ItemStack> outputs = 
-                    MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutputRaw());
-            this.input = new PositionedStack(input, INPUT_X_OFS, INPUT_Y_OFS);
+        protected void setOutputs(List<ItemStack> outputs) {
             output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
             otherOutputs = new ArrayList<PositionedStack>();
             if (outputs.size() > 1) {
@@ -131,22 +205,78 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
                 }
             }
         }
-        
-        @Override
-        public PositionedStack getIngredient() {
-            return input;
+    }
+
+    public class CachedDecomposerRecipe extends BaseCachedDecomposerRecipe {
+        public CachedDecomposerRecipe(DecomposerRecipe dr) {
+            super(dr.getInput());
+            ArrayList<ItemStack> outputs =
+                    MinechemHelper.convertChemicalsIntoItemStacks(
+                        dr.getOutputRaw());
+            setOutputs(outputs);
+        }
+    }
+    
+    public class CachedDecomposerRecipeChance extends BaseCachedDecomposerRecipe {
+        // The fractional chance [0, 1] that this recipe will yield any output.
+        private float chance;
+        public CachedDecomposerRecipeChance(DecomposerRecipeChance dr) {
+            super(dr.getInput());
+            this.chance = dr.getChance();
+            ArrayList<ItemStack> outputs =
+                MinechemHelper.convertChemicalsIntoItemStacks(
+                    dr.getOutputRaw());
+            setOutputs(outputs);
         }
 
         @Override
-        public PositionedStack getResult() {
-            return output1;
+        public float getChance() {
+            return chance;
         }
-        
+    }
+
+    public class CachedDecomposerRecipeSelect
+        extends CachedDecomposerRecipeChance  {
+        // Number of possible output sets.
+        private int numOutputSets;
+        // Which set of output to be shown.
+        private int outputSetToShow;
+        // Which tick to cycle at. This is initialized lazily, so
+        // the first output set is shown for the normal duration.
+        private long cycleAtTick;
+
+        private DecomposerRecipeSelect decomposerRecipeSelect;
+
+        public CachedDecomposerRecipeSelect(DecomposerRecipeSelect dr) {
+            // This picks only the first potential output set to be displayed.
+            super(dr);
+            numOutputSets = dr.getAllPossibleRecipes().size();
+            outputSetToShow = -1;
+            decomposerRecipeSelect = dr;
+            cycleAtTick = 0;
+        }
+
         @Override
-        public List<PositionedStack> getOtherStacks() {
-            return otherOutputs;
+        public void cycleOutput(long tick) {
+            if (outputSetToShow == -1) {
+                cycleAtTick = tick + 20;
+                outputSetToShow = 0;
+                return;
+            }
+            if (tick >= cycleAtTick) {
+                cycleAtTick = tick + 20;
+                outputSetToShow++;
+                if (outputSetToShow >= numOutputSets) {
+                    outputSetToShow = 0;
+                }
+                ArrayList<DecomposerRecipe> possibleRecipes =
+                    decomposerRecipeSelect.getAllPossibleRecipes();
+                ArrayList<ItemStack> outputsToShow =
+                    MinechemHelper.convertChemicalsIntoItemStacks(
+                        possibleRecipes.get(outputSetToShow).getOutputRaw());
+                setOutputs(outputsToShow);
+            }
         }
-        
     }
 
 }

@@ -12,8 +12,6 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
-import com.sun.jmx.remote.internal.ArrayQueue;
-
 public class PolytoolTypeIron extends PolytoolUpgradeType{
 
 	public PolytoolTypeIron() {
