@@ -3,12 +3,15 @@ package pixlepix.minechem.particlephysics.tile;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.api.core.EnumMolecule;
+import pixlepix.minechem.common.MinechemItems;
+import pixlepix.minechem.common.items.ItemMolecule;
 import pixlepix.minechem.particlephysics.api.BaseParticle;
 import pixlepix.minechem.particlephysics.blocks.InfiniteEmitter;
 import pixlepix.minechem.particlephysics.entity.*;
@@ -17,7 +20,6 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
 
     public int interval = 40;
     public ItemStack[] inventory = new ItemStack[7];
-    //public static int[] validFuel={Item.coal.itemID,Item.paper.itemID,Item.clay.itemID, Item.seeds.itemID,Block.sand.blockID,Item.gunpowder.itemID,Block.glass.blockID, Item.blazePowder.itemID,Block.leaves.blockID};
 
     public int fuelType;
 
@@ -29,7 +31,11 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
             if (fuelStored < 1) {
                 if (this.inventory != null) {
                     if (this.inventory[0] != null && isValidFuel(this.inventory[0].itemID)) {
-                        this.fuelStored = 100;
+                        if(this.inventory[0].getItem() instanceof ItemMolecule){
+                            this.fuelStored = 100*ItemMolecule.getMolecule(this.inventory[0]).getSize();
+                        }else{
+                            this.fuelStored = 100;
+                        }
                         this.fuelType = this.inventory[0].itemID;
                         this.fuelMeta = this.inventory[0].getItemDamage();
                         this.decrStackSize(0, 1);
@@ -67,43 +73,54 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
     }
 
     public BaseParticle getParticleFromFuel(int fuel, int meta) {
-        if (fuel == Item.coal.itemID) {
-            if (meta == 1) {
+        if(fuel==MinechemItems.element.itemID){
+            if(meta == EnumElement.C.ordinal()){
+                return new CoalParticle(worldObj);
+            }
+
+            if(meta == EnumElement.H.ordinal()){
                 return new CharcoalParticle(worldObj);
             }
-            return new CoalParticle(worldObj);
+
+            if(meta==EnumElement.O.ordinal()){
+                return new LeafParticle(worldObj);
+            }
+
+            if(meta == EnumElement.Si.ordinal()){
+                return new GlassParticle(worldObj);
+            }
+
+            if(meta == EnumElement.Pu.ordinal()){
+                return new BlazepowderParticle(worldObj);
+            }
+
         }
 
-        if (fuel == Item.clay.itemID) {
-            return new ClayParticle(worldObj);
-        }
-        if (fuel == Item.paper.itemID) {
-            return new PaperParticle(worldObj);
-        }
-        if (fuel == Item.seeds.itemID) {
-            return new SeedParticle(worldObj);
-        }
-        if (fuel == Block.sand.blockID) {
-            return new SandParticle(worldObj);
-        }
-        if (fuel == Block.sand.blockID) {
-            return new SandParticle(worldObj);
-        }
-        if (fuel == Item.gunpowder.itemID) {
-            return new GunpowderParticle(worldObj);
-        }
-        if (fuel == Block.glass.blockID) {
-            return new GlassParticle(worldObj);
-        }
-        if (fuel == Item.blazePowder.itemID) {
-            return new BlazepowderParticle(worldObj);
-        }
-        if (fuel == Block.leaves.blockID) {
-            return new LeafParticle(worldObj);
+        if(fuel==MinechemItems.molecule.itemID){
+            if(meta == EnumMolecule.cellulose.ordinal()){
+                return new PaperParticle(worldObj);
+            }
+
+            if(meta == EnumMolecule.kaolinite.ordinal()){
+                return new ClayParticle(worldObj);
+            }
+
+            if(meta == EnumMolecule.nod.ordinal()){
+                return new SeedParticle(worldObj);
+            }
+
+            if(meta == EnumMolecule.siliconDioxide.ordinal()){
+                return new SandParticle(worldObj);
+            }
+
+            if(meta == EnumMolecule.potassiumNitrate.ordinal()){
+                return new GunpowderParticle(worldObj);
+            }
+
+
         }
         return null;
     }
-
     @Override
     public void readFromNBT(NBTTagCompound nbt) {
         super.readFromNBT(nbt);
@@ -144,13 +161,11 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
 
     @Override
     public int getSizeInventory() {
-        // TODO Auto-generated method stub
         return 7;
     }
 
     @Override
     public ItemStack getStackInSlot(int i) {
-        // TODO Auto-generated method stub
         return this.inventory[i];
     }
 
@@ -181,24 +196,20 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
     public void setInventorySlotContents(int i, ItemStack itemStack) {
         this.inventory[i] = itemStack;
         this.onInventoryChanged();
-
     }
 
     @Override
     public String getInvName() {
-        // TODO Auto-generated method stub
         return "Emitter";
     }
 
     @Override
     public boolean isInvNameLocalized() {
-        // TODO Auto-generated method stub
         return false;
     }
 
     @Override
     public int getInventoryStackLimit() {
-        // TODO Auto-generated method stub
         return 64;
     }
 
@@ -209,24 +220,21 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
 
     @Override
     public void openChest() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public void closeChest() {
-        // TODO Auto-generated method stub
 
     }
 
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-
         return isValidFuel(itemstack.itemID);
     }
 
     public boolean isValidFuel(int itemstack) {
-        return this.getParticleFromFuel(itemstack, 0) != null;
+        return (itemstack == MinechemItems.molecule.itemID || itemstack == MinechemItems.element.itemID);
     }
 
     public void receiveButton(byte type, byte value) {

@@ -66,43 +66,38 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="ParticlePhysics.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="5" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="840">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmitterTileEntity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="EmitterTileEntity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/tile/EmitterTileEntity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="234" column="32" selection-start="7926" selection-end="7926" vertical-scroll-proportion="0.0" vertical-offset="2935" max-vertical-offset="3585">
+            <state line="35" column="30" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.4846154" vertical-offset="0" max-vertical-offset="3660">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PolytoolTypeIron.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeIron.java">
+      <file leaf-file-name="EnumMolecule.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumMolecule.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="1" selection-start="2531" selection-end="2531" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1215">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1097#1109#0" expanded="true" />
-              </folding>
+            <state line="198" column="22" selection-start="14739" selection-end="14739" vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="3510">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SynthesisNEIRecipeHandler.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/SynthesisNEIRecipeHandler.java">
+      <file leaf-file-name="MinechemRecipes.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="88" column="13" selection-start="3045" selection-end="3045" vertical-scroll-proportion="1.9909502" vertical-offset="0" max-vertical-offset="3045">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="1106" column="16" selection-start="62714" selection-end="62719" vertical-scroll-proportion="-8.0" vertical-offset="16007" max-vertical-offset="25170">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ItemElement.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/items/ItemElement.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="83" column="40" selection-start="3577" selection-end="3587" vertical-scroll-proportion="-8.0" vertical-offset="647" max-vertical-offset="4695">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -400,10 +395,11 @@
         <option value="$PROJECT_DIR$/src/main/java/ljdp/minechem/common/polytool/types/PolytoolTypeMercury.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/particlephysics/particlephysics/ParticlePhysics.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/tile/EmitterTileEntity.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeIron.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/SynthesisNEIRecipeHandler.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumMolecule.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/tile/EmitterTileEntity.java" />
       </list>
     </option>
   </component>
@@ -557,7 +553,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pixlepix" />
+              <option name="myItemId" value="minechem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="particlephysics" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -583,11 +583,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pixlepix" />
+              <option name="myItemId" value="minechem" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="minechem" />
+              <option name="myItemId" value="particlephysics" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tile" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -613,87 +617,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="pixlepix" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pixlepix" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pixlepix" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="minechem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="client" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nei" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -711,7 +635,7 @@
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="options.lastSelected" value="MavenSettings" />
+    <property name="options.lastSelected" value="preferences.sourceCode.Java" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
@@ -936,6 +860,7 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -949,7 +874,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -975,21 +899,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockBlueprintProjector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="31" selection-start="1111" selection-end="1121" vertical-scroll-proportion="0.0" vertical-offset="435" max-vertical-offset="1095" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bin/ljdp/minechem/common/MinechemBlocks.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="28" selection-start="854" selection-end="854" vertical-scroll-proportion="0.40723982" vertical-offset="0" max-vertical-offset="663" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockBlueprintProjector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="9" selection-start="2491" selection-end="2491" vertical-scroll-proportion="0.46615386" vertical-offset="402" max-vertical-offset="1065" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/OreUranium.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="22" column="13" selection-start="825" selection-end="825" vertical-scroll-proportion="0.09049774" vertical-offset="0" max-vertical-offset="663" />
@@ -997,7 +906,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumOre.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="35" selection-start="924" selection-end="924" vertical-scroll-proportion="0.6551724" vertical-offset="0" max-vertical-offset="750" />
+        <state line="19" column="35" selection-start="924" selection-end="924" vertical-scroll-proportion="0.6551724" vertical-offset="0" max-vertical-offset="750">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/handlers/DefaultOreDictionaryHandler.java">
@@ -1024,12 +935,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/Molecule.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="13" selection-start="46" selection-end="46" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="495" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1429" column="18" selection-start="69998" selection-end="69998" vertical-scroll-proportion="0.93939394" vertical-offset="21063" max-vertical-offset="25725" />
+        <state line="2" column="13" selection-start="46" selection-end="46" vertical-scroll-proportion="0.06896552" vertical-offset="0" max-vertical-offset="495">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeZirconium.java">
@@ -1180,7 +1088,9 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeBromine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="13" selection-start="415" selection-end="415" vertical-scroll-proportion="-0.17224881" vertical-offset="168" max-vertical-offset="795" />
+        <state line="13" column="13" selection-start="415" selection-end="415" vertical-scroll-proportion="-0.17224881" vertical-offset="168" max-vertical-offset="795">
+          <folding />
+        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeCaesium.java">
@@ -1213,23 +1123,18 @@
         <state line="19" column="31" selection-start="744" selection-end="744" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="855" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="5" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.0" vertical-offset="190" max-vertical-offset="840">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/tile/EmitterTileEntity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="234" column="32" selection-start="7926" selection-end="7926" vertical-scroll-proportion="0.0" vertical-offset="2935" max-vertical-offset="3585">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="133" column="16" selection-start="4720" selection-end="4720" vertical-scroll-proportion="0.33936653" vertical-offset="1770" max-vertical-offset="4215">
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/SynthesisNEIRecipeHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="26" selection-start="1059" selection-end="1059" vertical-scroll-proportion="0.6334842" vertical-offset="0" max-vertical-offset="3045">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1238,20 +1143,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeIron.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="1" selection-start="2531" selection-end="2531" vertical-scroll-proportion="0.0" vertical-offset="510" max-vertical-offset="1215">
+        <state line="77" column="1" selection-start="2531" selection-end="2531" vertical-scroll-proportion="0.9230769" vertical-offset="510" max-vertical-offset="1215">
           <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1097#1109#0" expanded="true" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#1097#1109#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/SynthesisNEIRecipeHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="13" selection-start="3045" selection-end="3045" vertical-scroll-proportion="1.9909502" vertical-offset="0" max-vertical-offset="3045">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="60" column="5" selection-start="2235" selection-end="2235" vertical-scroll-proportion="0.8153846" vertical-offset="190" max-vertical-offset="840">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/items/ItemElement.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="83" column="40" selection-start="3577" selection-end="3587" vertical-scroll-proportion="-8.0" vertical-offset="647" max-vertical-offset="4695">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1106" column="16" selection-start="62714" selection-end="62719" vertical-scroll-proportion="-8.0" vertical-offset="16007" max-vertical-offset="25170">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/Chemical.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="28" selection-start="185" selection-end="185" vertical-scroll-proportion="0.22624435" vertical-offset="0" max-vertical-offset="663">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumMolecule.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="198" column="22" selection-start="14739" selection-end="14739" vertical-scroll-proportion="0.0" vertical-offset="2380" max-vertical-offset="3510">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/tile/EmitterTileEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="30" selection-start="1514" selection-end="1514" vertical-scroll-proportion="0.4846154" vertical-offset="0" max-vertical-offset="3660">
+          <folding />
         </state>
       </provider>
     </entry>

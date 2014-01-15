@@ -3,6 +3,7 @@ package pixlepix.minechem.api.core;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Random;
 
 import static pixlepix.minechem.api.core.EnumElement.*;
@@ -184,6 +185,18 @@ public enum EnumMolecule {
     private static float getRandomColor() {
         Random random = new Random();
         return random.nextFloat();
+    }
+
+    public int getSize(){
+        int result=0;
+
+        Iterator iter=this.components().iterator();
+
+        while(iter.hasNext()){
+            result += ((Chemical)iter.next()).amount;
+        }
+
+        return result;
     }
 
     public static EnumMolecule getById(int id) {
