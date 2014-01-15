@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AnalysisProjectProfileManager">
+    <option name="PROJECT_PROFILE" value="Project Default" />
+    <option name="USE_PROJECT_LEVEL_SETTINGS" value="false" />
+    <scopes />
+    <profiles>
+      <profile version="1.0" is_locked="false">
+        <option name="myName" value="Project Default" />
+        <option name="myLocal" value="false" />
+        <coding_rule class="AbstractClassNameCheck" level="MAJOR" enabled="false">
+          <param name="ignoreModifier" value="false" />
+          <param name="ignoreName" value="false" />
+        </coding_rule>
+        <coding_rule class="AnnotationUseStyleCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="AnonInnerLengthCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="ArrayTrailingCommaCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ArrayTypeStyleCheck" level="INFO" enabled="false" />
+        <coding_rule class="AvoidInlineConditionalsCheck" level="INFO" enabled="false" />
+        <coding_rule class="AvoidNestedBlocksCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="AvoidStarImportCheck" level="INFO" enabled="false">
+          <param name="allowClassImports" value="false" />
+          <param name="allowStaticMemberImports" value="false" />
+        </coding_rule>
+        <coding_rule class="AvoidStaticImportCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="BooleanExpressionComplexityCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="ClassDataAbstractionCouplingCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ClassFanOutComplexityCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ClassTypeParameterNameCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ConstantNameCheck" level="INFO" enabled="true" />
+        <coding_rule class="CovariantEqualsCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="CyclomaticComplexityCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="DeclarationOrderCheck" level="INFO" enabled="false">
+          <param name="ignoreConstructors" value="false" />
+          <param name="ignoreMethods" value="false" />
+          <param name="ignoreModifiers" value="false" />
+        </coding_rule>
+        <coding_rule class="DefaultComesLastCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="DescendantTokenCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="DesignForExtensionCheck" level="INFO" enabled="true" />
+        <coding_rule class="EmptyBlockCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="EmptyForInitializerPadCheck" level="INFO" enabled="false" />
+        <coding_rule class="EmptyForIteratorPadCheck" level="INFO" enabled="false" />
+        <coding_rule class="EmptyStatementCheck" level="INFO" enabled="true" />
+        <coding_rule class="EqualsAvoidNullCheck" level="MAJOR" enabled="false">
+          <param name="ignoreEqualsIgnoreCase" value="false" />
+        </coding_rule>
+        <coding_rule class="EqualsHashCodeCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="ExecutableStatementCountCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ExplicitInitializationCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="FallThroughCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="FileLengthCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="FileTabCharacterCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="FinalClassCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="FinalLocalVariableCheck" level="INFO" enabled="false" />
+        <coding_rule class="FinalParametersCheck" level="INFO" enabled="false" />
+        <coding_rule class="GenericWhitespaceCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="HeaderCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="HiddenFieldCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="HideUtilityClassConstructorCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="IllegalCatchCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="IllegalImportCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="IllegalInstantiationCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="IllegalThrowsCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="IllegalTokenCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="IllegalTokenTextCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="IllegalTypeCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ImportControlCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ImportOrderCheck" level="INFO" enabled="false" />
+        <coding_rule class="IndentationCheck" level="INFO" enabled="false" />
+        <coding_rule class="InnerAssignmentCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="InnerTypeLastCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="InterfaceIsTypeCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JUnitTestCaseCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JavaNCSSCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JavadocMethodCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JavadocPackageCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JavadocStyleCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JavadocTypeCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="JavadocVariableCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="LeftCurlyCheck" level="INFO" enabled="false" />
+        <coding_rule class="LineLengthCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="LocalFinalVariableNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="LocalVariableNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="MagicNumberCheck" level="INFO" enabled="true">
+          <param name="ignoreHashCodeMethod" value="false" />
+          <param name="ignoreAnnotation" value="false" />
+        </coding_rule>
+        <coding_rule class="MemberNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="MethodCountCheck" level="MAJOR" enabled="false">
+          <param name="maxTotal" value="100" />
+          <param name="maxPrivate" value="100" />
+          <param name="maxPackage" value="100" />
+          <param name="maxProtected" value="100" />
+          <param name="maxPublic" value="100" />
+        </coding_rule>
+        <coding_rule class="MethodLengthCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MethodNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="MethodParamPadCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MethodTypeParameterNameCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MissingCtorCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MissingDeprecatedCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MissingOverrideCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MissingSwitchDefaultCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ModifiedControlVariableCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ModifierOrderCheck" level="INFO" enabled="true" />
+        <coding_rule class="MultipleStringLiteralsCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MultipleVariableDeclarationsCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="MutableExceptionCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="NPathComplexityCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="NeedBracesCheck" level="INFO" enabled="false" />
+        <coding_rule class="NestedForDepthCheck" level="MAJOR" enabled="false">
+          <param name="max" value="1" />
+        </coding_rule>
+        <coding_rule class="NestedIfDepthCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="NestedTryDepthCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="NewlineAtEndOfFileCheck" level="INFO" enabled="false" />
+        <coding_rule class="NoCloneCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="NoFinalizerCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="NoWhitespaceAfterCheck" level="INFO" enabled="false" />
+        <coding_rule class="NoWhitespaceBeforeCheck" level="INFO" enabled="false" />
+        <coding_rule class="OneStatementPerLineCheck" level="INFO" enabled="false" />
+        <coding_rule class="OperatorWrapCheck" level="INFO" enabled="false" />
+        <coding_rule class="OuterTypeFilenameCheck" level="INFO" enabled="false" />
+        <coding_rule class="OuterTypeNumberCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="PackageAnnotationCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="PackageDeclarationCheck" level="MAJOR" enabled="false">
+          <param name="ignoreDirectoryName" value="false" />
+        </coding_rule>
+        <coding_rule class="PackageNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="ParameterAssignmentCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="ParameterNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="ParameterNumberCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ParenPadCheck" level="INFO" enabled="false" />
+        <coding_rule class="RedundantImportCheck" level="INFO" enabled="false" />
+        <coding_rule class="RedundantModifierCheck" level="INFO" enabled="true" />
+        <coding_rule class="RedundantThrowsCheck" level="INFO" enabled="true" />
+        <coding_rule class="RegexpCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="RegexpHeaderCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="RegexpMultilineCheck" level="MAJOR" enabled="false">
+          <param name="message" value="TODO item found" />
+          <param name="minimum" value="0" />
+          <param name="maximum" value="0" />
+          <param name="format" value="TODO" />
+          <param name="ignoreCase" value="true" />
+        </coding_rule>
+        <coding_rule class="RegexpSinglelineCheck" level="MAJOR" enabled="false">
+          <param name="message" value="TODO item found" />
+          <param name="minimum" value="0" />
+          <param name="maximum" value="0" />
+          <param name="format" value="TODO" />
+          <param name="ignoreCase" value="true" />
+        </coding_rule>
+        <coding_rule class="RegexpSinglelineJavaCheck" level="MAJOR" enabled="false">
+          <param name="message" value="TODO item found" />
+          <param name="minimum" value="0" />
+          <param name="maximum" value="0" />
+          <param name="ignoreComments" value="false" />
+          <param name="format" value="TODO" />
+          <param name="ignoreCase" value="true" />
+        </coding_rule>
+        <coding_rule class="RequireThisCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ReturnCountCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="RightCurlyCheck" level="INFO" enabled="false" />
+        <coding_rule class="SimplifyBooleanExpressionCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="SimplifyBooleanReturnCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="StaticVariableNameCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="StrictDuplicateCodeCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="StringLiteralEqualityCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="SuperCloneCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="SuperFinalizeCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="SuppressWarningsCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="ThrowsCountCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="TodoCommentCheck" level="INFO" enabled="false" />
+        <coding_rule class="TrailingCommentCheck" level="INFO" enabled="false" />
+        <coding_rule class="TranslationCheck" level="INFO" enabled="false" />
+        <coding_rule class="TypeNameCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="TypecastParenPadCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="UncommentedMainCheck" level="MAJOR" enabled="false" />
+        <coding_rule class="UnnecessaryParenthesesCheck" level="INFO" enabled="false" />
+        <coding_rule class="UnusedImportsCheck" level="INFO" enabled="true">
+          <param name="processJavadoc" value="false" />
+        </coding_rule>
+        <coding_rule class="UpperEllCheck" level="INFO" enabled="false" />
+        <coding_rule class="VisibilityModifierCheck" level="MAJOR" enabled="true" />
+        <coding_rule class="WhitespaceAfterCheck" level="INFO" enabled="false" />
+        <coding_rule class="WhitespaceAroundCheck" level="INFO" enabled="false" />
+        <coding_rule class="WriteTagCheck" level="INFO" enabled="false" />
+      </profile>
+    </profiles>
+    <list size="0" />
+  </component>
+  <component name="CheckstyleConfigurable">
+    <option name="suppFilterFilename" value="" />
+    <option name="suppCommentFilter" value="false" />
+    <option name="offComment" value="CHECKSTYLE\:OFF" />
+    <option name="onComment" value="CHECKSTYLE\:ON" />
+    <option name="checkFormat" value=".*" />
+    <option name="messageFormat" value="" />
+    <option name="checkCPP" value="true" />
+    <option name="checkC" value="true" />
+    <option name="suppNearbyCommentFilter" value="false" />
+    <option name="snCommentFormat" value="SUPPRESS CHECKSTYLE (\w+)" />
+    <option name="snCheckFormat" value="$1" />
+    <option name="snMessageFormat" value="" />
+    <option name="snInfluenceFormat" value="0" />
+    <option name="snCheckCPP" value="true" />
+    <option name="snCheckC" value="true" />
+    <option name="pathToUserRulesConfiguration" value="" />
+    <option name="pathToJarWithRules" value="" />
+  </component>
+  <component name="CompilerConfiguration">
+    <option name="DEFAULT_COMPILER" value="Javac" />
+    <resourceExtensions>
+      <entry name=".+\.(properties|xml|html|dtd|tld)" />
+      <entry name=".+\.(gif|png|jpeg|jpg)" />
+    </resourceExtensions>
+    <wildcardResourcePatterns>
+      <entry name="!?*.groovy" />
+      <entry name="!?*.java" />
+    </wildcardResourcePatterns>
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="false">
+        <processorPath useClasspath="true" />
+      </profile>
+    </annotationProcessing>
+  </component>
+  <component name="CopyrightManager" default="">
+    <module2copyright />
+  </component>
+  <component name="DependencyValidationManager">
+    <option name="SKIP_IMPORT_STATEMENTS" value="false" />
+  </component>
+  <component name="Encoding" useUTFGuessing="true" native2AsciiForPropertiesFiles="false" />
+  <component name="EntryPointsManager">
+    <entry_points version="2.0" />
+  </component>
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+    </option>
+  </component>
+  <component name="GradleUISettings">
+    <setting name="root" />
+  </component>
+  <component name="GradleUISettings2">
+    <setting name="root" />
+  </component>
+  <component name="IdProvider" IDEtalkID="11DA1DB66DD62DDA1ED602B7079FE97C" />
+  <component name="JavadocGenerationManager">
+    <option name="OUTPUT_DIRECTORY" />
+    <option name="OPTION_SCOPE" value="protected" />
+    <option name="OPTION_HIERARCHY" value="true" />
+    <option name="OPTION_NAVIGATOR" value="true" />
+    <option name="OPTION_INDEX" value="true" />
+    <option name="OPTION_SEPARATE_INDEX" value="true" />
+    <option name="OPTION_DOCUMENT_TAG_USE" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_AUTHOR" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_VERSION" value="false" />
+    <option name="OPTION_DOCUMENT_TAG_DEPRECATED" value="true" />
+    <option name="OPTION_DEPRECATED_LIST" value="true" />
+    <option name="OTHER_OPTIONS" value="" />
+    <option name="HEAP_SIZE" />
+    <option name="LOCALE" />
+    <option name="OPEN_IN_BROWSER" value="true" />
+  </component>
+  <component name="Palette2">
+    <group name="Swing">
+      <item class="com.intellij.uiDesigner.HSpacer" tooltip-text="Horizontal Spacer" icon="/com/intellij/uiDesigner/icons/hspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="1" hsize-policy="6" anchor="0" fill="1" />
+      </item>
+      <item class="com.intellij.uiDesigner.VSpacer" tooltip-text="Vertical Spacer" icon="/com/intellij/uiDesigner/icons/vspacer.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="1" anchor="0" fill="2" />
+      </item>
+      <item class="javax.swing.JPanel" icon="/com/intellij/uiDesigner/icons/panel.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JScrollPane" icon="/com/intellij/uiDesigner/icons/scrollPane.png" removable="false" auto-create-binding="false" can-attach-label="true">
+        <default-constraints vsize-policy="7" hsize-policy="7" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JButton" icon="/com/intellij/uiDesigner/icons/button.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="0" fill="1" />
+        <initial-values>
+          <property name="text" value="Button" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JRadioButton" icon="/com/intellij/uiDesigner/icons/radioButton.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="RadioButton" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JCheckBox" icon="/com/intellij/uiDesigner/icons/checkBox.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="3" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="CheckBox" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JLabel" icon="/com/intellij/uiDesigner/icons/label.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="0" anchor="8" fill="0" />
+        <initial-values>
+          <property name="text" value="Label" />
+        </initial-values>
+      </item>
+      <item class="javax.swing.JTextField" icon="/com/intellij/uiDesigner/icons/textField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JPasswordField" icon="/com/intellij/uiDesigner/icons/passwordField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JFormattedTextField" icon="/com/intellij/uiDesigner/icons/formattedTextField.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1">
+          <preferred-size width="150" height="-1" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTextArea" icon="/com/intellij/uiDesigner/icons/textArea.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTextPane" icon="/com/intellij/uiDesigner/icons/textPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JEditorPane" icon="/com/intellij/uiDesigner/icons/editorPane.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JComboBox" icon="/com/intellij/uiDesigner/icons/comboBox.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="2" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JTable" icon="/com/intellij/uiDesigner/icons/table.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JList" icon="/com/intellij/uiDesigner/icons/list.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="2" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTree" icon="/com/intellij/uiDesigner/icons/tree.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3">
+          <preferred-size width="150" height="50" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JTabbedPane" icon="/com/intellij/uiDesigner/icons/tabbedPane.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
+          <preferred-size width="200" height="200" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JSplitPane" icon="/com/intellij/uiDesigner/icons/splitPane.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="3" hsize-policy="3" anchor="0" fill="3">
+          <preferred-size width="200" height="200" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JSpinner" icon="/com/intellij/uiDesigner/icons/spinner.png" removable="false" auto-create-binding="true" can-attach-label="true">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JSlider" icon="/com/intellij/uiDesigner/icons/slider.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="8" fill="1" />
+      </item>
+      <item class="javax.swing.JSeparator" icon="/com/intellij/uiDesigner/icons/separator.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="6" anchor="0" fill="3" />
+      </item>
+      <item class="javax.swing.JProgressBar" icon="/com/intellij/uiDesigner/icons/progressbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1" />
+      </item>
+      <item class="javax.swing.JToolBar" icon="/com/intellij/uiDesigner/icons/toolbar.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="6" anchor="0" fill="1">
+          <preferred-size width="-1" height="20" />
+        </default-constraints>
+      </item>
+      <item class="javax.swing.JToolBar$Separator" icon="/com/intellij/uiDesigner/icons/toolbarSeparator.png" removable="false" auto-create-binding="false" can-attach-label="false">
+        <default-constraints vsize-policy="0" hsize-policy="0" anchor="0" fill="1" />
+      </item>
+      <item class="javax.swing.JScrollBar" icon="/com/intellij/uiDesigner/icons/scrollbar.png" removable="false" auto-create-binding="true" can-attach-label="false">
+        <default-constraints vsize-policy="6" hsize-policy="0" anchor="0" fill="2" />
+      </item>
+    </group>
+  </component>
+  <component name="ProjectCodeStyleSettingsManager">
+    <option name="PER_PROJECT_SETTINGS">
+      <value>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+      </value>
+    </option>
+    <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default (1)" />
+  </component>
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Minechem.iml" filepath="$PROJECT_DIR$/Minechem.iml" />
+    </modules>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IC-133.331" project-jdk-type="IDEA JDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+  <component name="SuppressionsComponent">
+    <option name="suppComments" value="[]" />
+  </component>
+  <component name="SvnBranchConfigurationManager">
+    <option name="mySupportsUserInfoFilter" value="true" />
+  </component>
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+  </component>
+  <component name="libraryTable">
+    <library name="CodeChickenCore 0.9.0.7">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.7.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: _Users_localmacaccount_forge_Minechem_jars_CodeChickenCore_0_9_0_6_jar">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.6.jar!/" />
+        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.6.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: argo-2.25">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/javadoc/854ffe9db771806fd499fe43deed8590425dfb4b/argo-2.25-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/source/f4d0f456c85ebe09b5bed661664953f83c4f70d1/argo-2.25-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: argo-2.25_fixed">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/argo/argo/2.25_fixed/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25_fixed.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: asm-debug-all-4.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/jar/dd6ba5c392d4102458494e29f54f70ac534ec2a2/asm-debug-all-4.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/javadoc/7fb1108a191ea7b62b03225ced300ca8832dbe7a/asm-debug-all-4.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.ow2.asm/asm-debug-all/4.1/source/1c218d5a0b8b932a1528b74069aa6973dcfcea74/asm-debug-all-4.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: bcprov-jdk15on-1.47">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/jar/b6f5d9926b0afbde9f4dbe3db88c5247be7794bb/bcprov-jdk15on-1.47.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/javadoc/3186a40570a7fb253a87815921cc263e4245ae84/bcprov-jdk15on-1.47-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/source/85e6e1ad449d5a3f09624bf4038fc8d2b02de81c/bcprov-jdk15on-1.47-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: codecjorbis-20101023">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/jar/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/source/4ca2436396bc14ebd78b7db1d4e11ca607c8705e/codecjorbis-20101023-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: codecwav-20101023">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/codecwav/20101023/jar/12f031cfe88fef5c1dd36c563c0a3a69bd7261da/codecwav-20101023.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/codecwav/20101023/source/71ec00b9b9c1a6a2c3a8a25f481a23ddb5b21ddb/codecwav-20101023-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-io-2.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/jar/b1b6ea3b7e4aa4f492509a4952029cd8e48019ad/commons-io-2.4.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/javadoc/3b5b0183c509963d5ffdf0d9d452a4a7521aeaa3/commons-io-2.4-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/commons-io/commons-io/2.4/source/f2d8698c46d1167ff24b06a840a87d91a02db891/commons-io-2.4-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: commons-lang3-3.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/jar/905075e6c80f206bbe6cf1e809d2caa69f420c76/commons-lang3-3.1.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/javadoc/47910ec28eeca75d4519095a676b6e1f2e89e337/commons-lang3-3.1-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/source/8d30b90ae8bda4fbac8363161c8a9b5a99e23baf/commons-lang3-3.1-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: forge-1.6.4-9.11.1.964-mcp">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: gson-2.2.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/jar/1f96456ca233dec780aa224bff076d8e8bca3908/gson-2.2.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/javadoc/c540b33224e07ff7c8e0e72b362b9d9d3edb3f3a/gson-2.2.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.code.gson/gson/2.2.2/source/2841612c7a99a9ff1f7f570a2ddaa8665928a1e6/gson-2.2.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: guava-14.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/bundle/67b7be4ee7ba48e4828a42d6d5069761186d4a53/guava-14.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/javadoc/fd32f7eb47870cf0bec1d013d9a2ad8ce9bb6851/guava-14.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.google.guava/guava/14.0/source/c4e65085e00a033348b5417106b13e2ad2987ffc/guava-14.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: jinput-2.0.5">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/jar/39c7796b469a600f72380316f6b1f11db6c2c7c4/jinput-2.0.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/javadoc/695a26a9a58e8495c1e3ce7b7f3bec23ecf2ef16/jinput-2.0.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput/2.0.5/source/82604cfeb87b9ab70ed70aa19a137de8ceb21504/jinput-2.0.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: jinput-platform-2.0.5-natives-linux">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/7ff832a6eb9ab6a767f1ade2b548092d0fa64795/jinput-platform-2.0.5-natives-linux.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: jinput-platform-2.0.5-natives-osx">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/53f9c919f34d2ca9de8c51fc4e1e8282029a9232/jinput-platform-2.0.5-natives-osx.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: jinput-platform-2.0.5-natives-windows">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jinput/jinput-platform/2.0.5/jar/385ee093e01f587f30ee1c8a2ee7d408fd732e16/jinput-platform-2.0.5-natives-windows.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: jopt-simple-4.5">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/jar/6065cc95c661255349c1d0756657be17c29a4fd3/jopt-simple-4.5.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/javadoc/cfddad09c47057a843170ef2ff70e057d90f935d/jopt-simple-4.5-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sf.jopt-simple/jopt-simple/4.5/source/3cf4c3c1a6f565419bfd53a0e564d6fb128deeea/jopt-simple-4.5-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: jutils-1.0.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/jar/e12fe1fda814bd348c1579329c86943d2cd3c6a6/jutils-1.0.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/javadoc/1ad2673c8dded38030ed77ba393b0253051bb768/jutils-1.0.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.java.jutils/jutils/1.0.0/source/d18678a00b216863206a1bb6190507e02a32971b/jutils-1.0.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: launchwrapper-1.8">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.minecraft/launchwrapper/1.8/jar/d4c0895977dd7f0b3f56281cee53a64d4c0c0322/launchwrapper-1.8.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.minecraft/launchwrapper/1.8/source/80761bb83b7a8fe0b20ced886f8864a613826e21/launchwrapper-1.8-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: libraryjavasound-20101123">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/libraryjavasound/20101123/jar/5c5e304366f75f9eaa2e8cca546a1fb6109348b3/libraryjavasound-20101123.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/libraryjavasound/20101123/source/945ff5711de27751cf699641d1ea316ba6cf7589/libraryjavasound-20101123-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: librarylwjglopenal-20100824">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/librarylwjglopenal/20100824/jar/73e80d0794c39665aec3f62eee88ca91676674ef/librarylwjglopenal-20100824.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/librarylwjglopenal/20100824/source/ecfc8dac1d41bef748997e4edf563d486923ee1e/librarylwjglopenal-20100824-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: lwjgl-2.9.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/jar/5654d06e61a1bba7ae1e7f5233e1106be64c91cd/lwjgl-2.9.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/javadoc/8831fc346adadcef83b54b42f1d83ed158e2a647/lwjgl-2.9.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl/2.9.0/source/c93326bd0f3a21f3b2c8c22b6f345ab6ca1dd683/lwjgl-2.9.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: lwjgl-platform-2.9.0-natives-linux">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/2ba5dcb11048147f1a74eff2deb192c001321f77/lwjgl-platform-2.9.0-natives-linux.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: lwjgl-platform-2.9.0-natives-osx">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/6621b382cb14cc409b041d8d72829156a87c31aa/lwjgl-platform-2.9.0-natives-osx.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: lwjgl-platform-2.9.0-natives-windows">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl-platform/2.9.0/jar/3f11873dc8e84c854ec7c5a8fd2e869f8aaef764/lwjgl-platform-2.9.0-natives-windows.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: lwjgl_util-2.9.0">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/jar/a778846b64008fc7f48ead2377f034e547991699/lwjgl_util-2.9.0.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/javadoc/fc71e9e1ccd22dadeba9a7f86d8ab857331e8348/lwjgl_util-2.9.0-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.lwjgl.lwjgl/lwjgl_util/2.9.0/source/a7449c197615515f4f9cbf03e6a185ca5bf946e3/lwjgl_util-2.9.0-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: lzma-0.0.1">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/lzma/lzma/0.0.1/jar/521616dc7487b42bef0e803bd2fa3faf668101d7/lzma-0.0.1.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: NotEnoughItems-dev 1.6.1.8">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
+    <library name="Gradle: scala-compiler-2.10.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/jar/64c8b1380cc53d6850823d6e4e7ae984aa44ef9c/scala-compiler-2.10.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/javadoc/ea15699624552fa1c5727b7cdd42c30992a06888/scala-compiler-2.10.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-compiler/2.10.2/source/f30599c78fc82b0b299d785b5e5210ab01c3e3f9/scala-compiler-2.10.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: scala-library-2.10.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/jar/6ba65d12cd09d441083262d6f73d2257fec7c663/scala-library-2.10.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/javadoc/6bcae4ac7f8f165926785b5faf957f69405b73ed/scala-library-2.10.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-library/2.10.2/source/755d154c5257d17ab9071ecdd1bfbee709ddc8e5/scala-library-2.10.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: scala-reflect-2.10.2">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/jar/444ff8e89a81697997ed8a98a4642ba283130249/scala-reflect-2.10.2.jar!/" />
+      </CLASSES>
+      <JAVADOC>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/javadoc/6bcae4ac7f8f165926785b5faf957f69405b73ed/scala-reflect-2.10.2-javadoc.jar!/" />
+      </JAVADOC>
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.scala-lang/scala-reflect/2.10.2/source/ffa6bfd77b52043f4ffc8d9c7f7de086e1e839e7/scala-reflect-2.10.2-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="Gradle: soundsystem-20120107">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/jar/419c05fe9be71f792b2d76cfc9b67f1ed0fec7f6/soundsystem-20120107.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/source/1b9f4eb11ef11fede7fd76a2e5e8203c2a8adcd/soundsystem-20120107-sources.jar!/" />
+      </SOURCES>
+    </library>
+  </component>
+</project>
+
