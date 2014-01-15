@@ -7,8 +7,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.minechem.api.core.EnumElement;
-import pixlepix.minechem.common.CoordTuple;
 import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
+import pixlepix.minechem.particlephysics.helper.CoordTuple;
 
 import java.util.ArrayList;
 
@@ -33,24 +33,24 @@ public class PolytoolTypeIron extends PolytoolUpgradeType {
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, int id,
                                  int x1, int y1, int z1, EntityLivingBase entityLiving) {
-        ArrayList<CoordTuple> queue = new ArrayList<CoordTuple>(100);
-        if (id == Block.oreCoal.blockID || id == Block.oreDiamond.blockID || id == Block.oreEmerald.blockID || id == Block.oreGold.blockID || id == Block.oreIron.blockID || id == Block.oreLapis.blockID || id == Block.oreNetherQuartz.blockID || id == Block.oreRedstone.blockID ||
-                OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(id, 1, 0))).contains("ore")) {
+        ArrayList<CoordTuple> queue=new ArrayList<CoordTuple>(100);
+        if(id==Block.oreCoal.blockID||id==Block.oreDiamond.blockID||id==Block.oreEmerald.blockID||id==Block.oreGold.blockID||id==Block.oreIron.blockID||id==Block.oreLapis.blockID||id==Block.oreNetherQuartz.blockID||id==Block.oreRedstone.blockID||
+                OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(id,1,0))).contains("ore")){
 
 
-            int toMine = (int) power;
-            queue.add(new CoordTuple(x1, y1, z1));
-            while (!queue.isEmpty()) {
-                CoordTuple coord = queue.remove(0);
-                int x = coord.x;
-                int y = coord.y;
-                int z = coord.z;
-                for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-                    if (world.getBlockId(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == id) {
-                        world.destroyBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, true);
-                        queue.add(new CoordTuple(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ));
+            int toMine=(int) power;
+            queue.add(new CoordTuple(x1,y1,z1));
+            while(!queue.isEmpty()){
+                CoordTuple coord=queue.remove(0);
+                int x=coord.x;
+                int y=coord.y;
+                int z=coord.z;
+                for(ForgeDirection dir:ForgeDirection.VALID_DIRECTIONS){
+                    if(world.getBlockId(x+dir.offsetX,y+dir.offsetY,z+dir.offsetZ)==id){
+                        world.destroyBlock(x+dir.offsetX,y+dir.offsetY,z+dir.offsetZ, true);
+                        queue.add(new CoordTuple(x+dir.offsetX,y+dir.offsetY,z+dir.offsetZ));
                         toMine--;
-                        if (toMine <= 0) {
+                        if(toMine<=0){
                             return;
                         }
                     }

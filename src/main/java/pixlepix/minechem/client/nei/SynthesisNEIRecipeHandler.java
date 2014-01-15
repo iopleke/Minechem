@@ -8,9 +8,11 @@ import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Util;
+import pixlepix.minechem.client.gui.GuiSynthesis;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
 
     @Override
     public String getRecipeName() {
-        return "Chemical Synthesis";
+        return MinechemHelper.getLocalString("gui.title.synthesis");
     }
 
     @Override
@@ -42,10 +44,23 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
     }
 
     @Override
+    public void loadTransferRects() {
+        // Use the right-arrow pointing at the output.
+        transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(
+                new Rectangle(OUTPUT_X_OFS - 16, OUTPUT_Y_OFS, 14, 16),
+                MINECHEM_SYNTHESIS_RECIPES_ID, new Object[0]));
+    }
+
+    @Override
+    public Class getGuiClass() {
+        return GuiSynthesis.class;
+    }
+
+    @Override
     public void loadCraftingRecipes(String outputId, Object... results) {
         if (outputId.equals(MINECHEM_SYNTHESIS_RECIPES_ID)) {
             // Add all synthesis recipes to local arecipes array.
-            for (SynthesisRecipe sr : SynthesisRecipe.recipes) {
+            for (SynthesisRecipe sr: SynthesisRecipe.recipes) {
                 registerSynthesisRecipe(sr);
             }
         } else {
@@ -56,7 +71,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
     @Override
     public void loadCraftingRecipes(ItemStack result) {
         // Add all synthesis recipes that can yield the result.
-        for (SynthesisRecipe sr : SynthesisRecipe.recipes) {
+        for (SynthesisRecipe sr: SynthesisRecipe.recipes) {
             ItemStack recipeOutput = sr.getOutput();
             if (NEIServerUtils.areStacksSameTypeCrafting(result, recipeOutput)) {
                 registerSynthesisRecipe(sr);
@@ -76,17 +91,17 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
             return;
         }
         // Add all synthesis recipes that take the ingredient as an input.
-        for (SynthesisRecipe sr : SynthesisRecipe.recipes) {
+        for (SynthesisRecipe sr: SynthesisRecipe.recipes) {
             if (sr.isShaped()) {
                 Chemical[] recipeInputs = sr.getShapedRecipe();
-                for (Chemical c : recipeInputs) {
+                for (Chemical c: recipeInputs) {
                     if (ingredientChemical.sameAs(c)) {
                         registerSynthesisRecipe(sr);
                         break;
                     }
                 }
             } else {
-                for (Object o : sr.getShapelessRecipe()) {
+                for (Object o: sr.getShapelessRecipe()) {
                     Chemical c = (Chemical) o;
                     if (ingredientChemical.sameAs(c)) {
                         registerSynthesisRecipe(sr);
@@ -127,7 +142,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
                 Chemical[] inputChemicals = sr.getShapedRecipe();
                 int xSlot = 0;
                 int ySlot = 0;
-                for (Chemical c : inputChemicals) {
+                for (Chemical c: inputChemicals) {
                     if (c != null) {
                         ItemStack inputItem = MinechemHelper.chemicalToItemStack(
                                 c, c.amount);
@@ -147,7 +162,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
                 ArrayList inputChemicals = sr.getShapelessRecipe();
                 int xSlot = 0;
                 int ySlot = 0;
-                for (Object o : inputChemicals) {
+                for (Object o: inputChemicals) {
                     Chemical c = (Chemical) o;
                     ItemStack inputItem = MinechemHelper.chemicalToItemStack(
                             c, c.amount);

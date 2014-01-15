@@ -414,6 +414,7 @@
     <library name="Gradle: argo-2.25">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar!/" />
+        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.7.jar!/" />
       </CLASSES>
       <JAVADOC>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/javadoc/854ffe9db771806fd499fe43deed8590425dfb4b/argo-2.25-javadoc.jar!/" />
