@@ -17,7 +17,7 @@ import java.util.List;
 //Thanks to VSWE for assorted bits of the code
 public class GuiEmitter extends GuiContainer {
     private static final ResourceLocation texture = new ResourceLocation(
-            "particlephysics", "textures/gui/emitter.png");
+            "minechem", "textures/gui/emitter.png");
     private EmitterTileEntity tile;
 
     public static final GuiRectangle bar = new GuiRectangle(50, 50, 86, 6);
@@ -39,7 +39,9 @@ public class GuiEmitter extends GuiContainer {
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
-        float filled = (float) (tile.fuelStored * .01);
+
+	    //Higher limit on the bar for molecules
+        float filled = (float) (tile.fuelStored / ((float)tile.getMaxFuelFromItems()));
         int barHeight = (int) (filled * 29);
         if (barHeight > 0) {
             int srcX = xSize;

@@ -26,16 +26,22 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
     public int fuelMeta;
     public int fuelStored = 0;
 
+	public int getMaxFuelFromItems(){
+		if(this.inventory[0]!=null && this.inventory[0].getItem() instanceof ItemMolecule){
+			return 100*ItemMolecule.getMolecule(this.inventory[0]).getSize();
+		}else{
+			return 100;
+		}
+	}
+
     public void updateEntity() {
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % ((20 * interval) + 20) == 0) {
             if (fuelStored < 1) {
                 if (this.inventory != null) {
                     if (this.inventory[0] != null && isValidFuel(this.inventory[0].itemID)) {
-                        if(this.inventory[0].getItem() instanceof ItemMolecule){
-                            this.fuelStored = 100*ItemMolecule.getMolecule(this.inventory[0]).getSize();
-                        }else{
-                            this.fuelStored = 100;
-                        }
+
+	                    this.fuelStored=this.getMaxFuelFromItems();
+
                         this.fuelType = this.inventory[0].itemID;
                         this.fuelMeta = this.inventory[0].getItemDamage();
                         this.decrStackSize(0, 1);

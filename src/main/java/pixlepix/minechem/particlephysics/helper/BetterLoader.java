@@ -74,17 +74,15 @@ public class BetterLoader {
             if (currentBlock instanceof IBlock) {
                 IBlock currentIBlock = (IBlock) currentBlock;
                 LanguageRegistry.addName(currentBlock, currentIBlock.getName());
-
                 MinecraftForge.setBlockHarvestLevel(currentBlock, "pickaxe", 0);
                 if (currentIBlock.getItemBlock() != null) {
-
                     GameRegistry.registerBlock(currentBlock, currentIBlock.getItemBlock(), currentIBlock.getName());
                 } else {
                     GameRegistry.registerBlock(currentBlock, currentIBlock.getName());
                 }
                 currentIBlock.addRecipe();
 
-                GameRegistry.registerTileEntity(currentIBlock.getTileEntityClass(), currentIBlock.getName() + "Particle Physics Tile Entity");
+                GameRegistry.registerTileEntity(currentIBlock.getTileEntityClass(), currentIBlock.getName() + "Minechem Tile Entity");
             }
 
         }

@@ -14,7 +14,7 @@ import pixlepix.minechem.particlephysics.gui.GuiHandler;
 import pixlepix.minechem.particlephysics.helper.*;
 import pixlepix.minechem.particlephysics.item.PotentialReader;
 
-@Mod(modid = "particlephysics", name = "Particle Physics", version = "5.0")
+@Mod(modid = "minechem-particlephysics", name = "Minechem-Particle Physics", version = "5.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {"Particle"}, packetHandler = PacketHandler.class)
 public class ParticlePhysics {
 
@@ -30,7 +30,7 @@ public class ParticlePhysics {
     }
 
     // The instance of your mod that Forge uses.
-    @Instance("particlephysics")
+    @Instance("minechem-particlephysics")
     public static ParticlePhysics instance;
     // Says where the client and server 'proxy' code is loaded.
     @SidedProxy(clientSide = "pixlepix.minechem.particlephysics.helper.ClientProxy", serverSide = "pixlepix.minechem.particlephysics.helper.CommonProxy")

@@ -39,7 +39,7 @@ public class ParticleRegistry {
     public static void populateIcons(IconRegister register) {
 
         for (int i = 0; i < particles.size(); i++) {
-            icons.put(particles.get(i), register.registerIcon("particlephysics:" + particles.get(i).getName().substring("pixlepix.minechem.particlephysics.entity.".length())));
+            icons.put(particles.get(i), register.registerIcon("minechem:" + particles.get(i).getName().substring("pixlepix.minechem.particlephysics.entity.".length())));
         }
 
 

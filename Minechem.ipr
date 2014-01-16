@@ -395,16 +395,20 @@
   </component>
   <component name="ProjectCodeStyleSettingsManager">
     <option name="PER_PROJECT_SETTINGS">
-      <value />
+      <value>
+        <XML>
+          <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
+        </XML>
+      </value>
     </option>
     <option name="PREFERRED_PROJECT_CODE_STYLE" value="Default (1)" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/Minechem.iml" filepath="$PROJECT_DIR$/Minechem.iml" />
+      <module fileurl="file://$PROJECT_DIR$/MineChem.iml" filepath="$PROJECT_DIR$/MineChem.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="IDEA IC-133.331" project-jdk-type="IDEA JDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.7" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/out" />
   </component>
   <component name="SuppressionsComponent">
@@ -417,10 +421,16 @@
     <mapping directory="" vcs="Git" />
   </component>
   <component name="libraryTable">
+    <library name="CodeChickenCore 0.9.0.7">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.7.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="Gradle: argo-2.25">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/jar/751761ce15a3e3aaf3fc75b9f013ff8f7b88a585/argo-2.25.jar!/" />
-        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.7.jar!/" />
       </CLASSES>
       <JAVADOC>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/net.sourceforge.argo/argo/2.25/javadoc/854ffe9db771806fd499fe43deed8590425dfb4b/argo-2.25-javadoc.jar!/" />
@@ -705,6 +715,13 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/source/1b9f4eb11ef11fede7fd76a2e5e8203c2a8adcd/soundsystem-20120107-sources.jar!/" />
+      </SOURCES>
+    </library>
+    <library name="src">
+      <CLASSES />
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/src" />
       </SOURCES>
     </library>
   </component>

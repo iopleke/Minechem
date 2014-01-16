@@ -12,7 +12,11 @@ remotebuild.py
 /eclipse
 ## ForgeGradle
 /run
+/out
 
+## idea
+*iml
+*ipr
 
 ## eclipse
 /.settings
