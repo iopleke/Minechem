@@ -717,8 +717,10 @@
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/source/1b9f4eb11ef11fede7fd76a2e5e8203c2a8adcd/soundsystem-20120107-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="src">
-      <CLASSES />
+    <library name="NotEnoughItems-dev 1.6.1.8">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/" />
+      </CLASSES>
       <JAVADOC />
       <SOURCES>
         <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/src" />

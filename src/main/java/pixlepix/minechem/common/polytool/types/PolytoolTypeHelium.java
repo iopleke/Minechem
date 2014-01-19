@@ -1,65 +1,70 @@
 package pixlepix.minechem.common.polytool.types;
 
 import net.minecraft.block.Block;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Random;
 
 public class PolytoolTypeHelium extends PolytoolUpgradeType {
 
-    public PolytoolTypeHelium() {
-        super();
-    }
+	public PolytoolTypeHelium() {
+		super();
+	}
 
-    public ArrayList targets = new ArrayList();
+	@Override
+	public float getStrVsBlock(ItemStack itemStack, Block block) {
 
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block) {
+		return 0;
+	}
 
-        return 0;
-    }
+	@Override
+	public void hitEntity(ItemStack itemStack, EntityLivingBase target,
+	                      EntityLivingBase player) {
 
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target,
-                          EntityLivingBase player) {
-        targets.add(target);
-    }
+		itemStack.stackTagCompound.setInteger("HeliumHitEntity", target.entityId);
+	}
 
+	@Override
+	public void onBlockDestroyed(ItemStack itemStack, World world, int id,
+	                             int x, int y, int z, EntityLivingBase entityLiving) {
+	}
 
-    @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id,
-                                 int x, int y, int z, EntityLivingBase entityLiving) {
-    }
+	@Override
+	public EnumElement getElement() {
 
-    @Override
-    public EnumElement getElement() {
+		return EnumElement.He;
+	}
 
-        return EnumElement.He;
-    }
+	@Override
+	public void onTick() {
 
-    @Override
-    public void onTick() {
-        Iterator iter = targets.iterator();
-        while (iter.hasNext()) {
-            EntityLivingBase target = (EntityLivingBase) iter.next();
-            target.motionY = Math.min(target.motionY + .03, 1);
-            Random rand = new Random();
-            if (rand.nextInt((int) (100 * power)) == 0) {
-                iter.remove();
-            }
-        }
-    }
+	}
 
-    @Override
-    public String getDescription() {
+	@Override
+	public void onTickFull(ItemStack itemStack, World world, Entity par3Entity, int par4, boolean par5) {
+		int targetId = itemStack.stackTagCompound.getInteger("HeliumHitEntity");
+		if (targetId != 0) {
+			Entity target = world.getEntityByID(targetId);
 
-        return "Hit entities float away";
-    }
+			if (target != null) {
+				target.motionY = Math.min(target.motionY + .1, 1);
+				Random rand = new Random();
+				if (rand.nextInt((int) (10 * power)) == 0) {
+					itemStack.stackTagCompound.setInteger("HeliumHitEntity", 0);
+				}
+			}
+		}
+	}
+
+	@Override
+	public String getDescription() {
+
+		return "Hit entities float away";
+	}
 
 }
