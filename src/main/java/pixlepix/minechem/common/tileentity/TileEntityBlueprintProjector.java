@@ -76,8 +76,8 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity {
                 shouldProjectGhostBlocks = false;
         }
 
-        if (totalIncorrectCount == 0 && !isComplete) {
-            isComplete = true;
+	    if (totalIncorrectCount == 0 && (!isComplete || !(worldObj.getBlockTileEntity(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ()) instanceof TileEntityMultiBlock))) {
+		    isComplete = true;
             buildStructure(position);
         }
     }

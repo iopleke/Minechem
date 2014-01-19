@@ -45,8 +45,7 @@
     <orderEntry type="library" exported="" name="Gradle: lwjgl-platform-2.9.0-natives-linux" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-linux" level="project" />
     <orderEntry type="library" exported="" name="Gradle: scala-reflect-2.10.2" level="project" />
-    <orderEntry type="library" name="NotEnoughItems-dev 1.6.1.8" level="project" />
-    <orderEntry type="library" name="CodeChickenCore 0.9.0.7" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: CodeChickenCore 0.9.0.7" level="project" />
   </component>
 </module>
 

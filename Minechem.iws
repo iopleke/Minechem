@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="70b8cda3-24f5-4795-8bab-8fc77abea077" name="Default" comment="Bug fixes and added fluid support">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Minechem.ipr" afterPath="$PROJECT_DIR$/Minechem.ipr" />
+    <list default="true" id="70b8cda3-24f5-4795-8bab-8fc77abea077" name="Default" comment="Fixes fluid support to account">
+      <change type="MOVED" beforePath="$PROJECT_DIR$/MineChem.iml" afterPath="$PROJECT_DIR$/MineChem.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockFusion.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockFusion.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Minechem.iws" afterPath="$PROJECT_DIR$/Minechem.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/thirdPartyJars.properties" afterPath="$PROJECT_DIR$/thirdPartyJars.properties" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityBlueprintProjector.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityBlueprintProjector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java" />
     </list>
     <ignored path="Minechem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -88,7 +88,16 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="2" column="27" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0" vertical-offset="585" max-vertical-offset="4185">
-              <folding />
+              <folding>
+                <element signature="e#5477#5478#0" expanded="false" />
+                <element signature="e#5498#5499#0" expanded="false" />
+                <element signature="e#5550#5551#0" expanded="false" />
+                <element signature="e#5573#5574#0" expanded="false" />
+                <element signature="e#5636#5637#0" expanded="false" />
+                <element signature="e#5664#5665#0" expanded="false" />
+                <element signature="e#7275#7276#0" expanded="false" />
+                <element signature="e#7297#7298#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -102,11 +111,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DecomposerFluidRecipe.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java">
+      <file leaf-file-name="TileEntityProxy.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="8" selection-start="1060" selection-end="1060" vertical-scroll-proportion="0.8578811" vertical-offset="88" max-vertical-offset="585">
+            <state line="176" column="88" selection-start="5910" selection-end="5910" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2940">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileEntityFission.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="259" column="13" selection-start="6595" selection-end="6595" vertical-scroll-proportion="0.0" vertical-offset="3871" max-vertical-offset="4305">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#4985#4986#0" expanded="true" />
+                <element signature="e#5018#5019#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileEntityBlueprintProjector.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityBlueprintProjector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="78" column="202" selection-start="3207" selection-end="3207" vertical-scroll-proportion="-8.769231" vertical-offset="732" max-vertical-offset="4575">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BlockFusion.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockFusion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="119" column="0" selection-start="3691" selection-end="3691" vertical-scroll-proportion="0.47008547" vertical-offset="1620" max-vertical-offset="2145">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -443,10 +487,13 @@
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerRecipeHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityDecomposer.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/ModMinechem.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityBlueprintProjector.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockFusion.java" />
       </list>
     </option>
   </component>
@@ -455,8 +502,8 @@
     <option name="LAST_EDITED_TAB_NAME" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="35" />
-    <option name="y" value="40" />
+    <option name="x" value="39" />
+    <option name="y" value="44" />
     <option name="width" value="1245" />
     <option name="height" value="760" />
   </component>
@@ -685,6 +732,40 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="recipe" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Minechem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="MineChem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="minechem" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="common" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="blocks" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -997,11 +1078,15 @@
       <created>1390145990376</created>
       <updated>1390145990376</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Fixes fluid support to account">
+      <created>1390159713850</created>
+      <updated>1390159713850</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="35" y="40" width="1245" height="760" extended-state="0" />
+    <frame x="39" y="44" width="1245" height="760" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1047,7 +1132,8 @@
     </option>
     <MESSAGE value="Bug fixes and added fluid support" />
     <MESSAGE value="Change reactors to offset system to allow it to be moved easier" />
-    <option name="LAST_COMMIT_MESSAGE" value="Change reactors to offset system to allow it to be moved easier" />
+    <MESSAGE value="Fixes fluid support to account" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixes fluid support to account" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1060,28 +1146,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="313" selection-end="313" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="570">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/recipe/DecomposerRecipe.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="66" selection-start="534" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="285" max-vertical-offset="705" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="24" selection-start="1237" selection-end="1237" vertical-scroll-proportion="0.5379147" vertical-offset="73" max-vertical-offset="840" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockChemicalStorage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="7" selection-start="1251" selection-end="1252" vertical-scroll-proportion="1.0227273" vertical-offset="0" max-vertical-offset="1140" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/helper/BetterLoader.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="68" column="26" selection-start="1851" selection-end="1851" vertical-scroll-proportion="0.0" vertical-offset="715" max-vertical-offset="1365" />
@@ -1301,17 +1365,19 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="0" selection-start="1330" selection-end="1330" vertical-scroll-proportion="0.0" vertical-offset="145" max-vertical-offset="2940">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="27" selection-start="66" selection-end="66" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="4185">
-          <folding />
+          <folding>
+            <element signature="e#5477#5478#0" expanded="false" />
+            <element signature="e#5498#5499#0" expanded="false" />
+            <element signature="e#5550#5551#0" expanded="false" />
+            <element signature="e#5573#5574#0" expanded="false" />
+            <element signature="e#5636#5637#0" expanded="false" />
+            <element signature="e#5664#5665#0" expanded="false" />
+            <element signature="e#7275#7276#0" expanded="false" />
+            <element signature="e#7297#7298#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1324,8 +1390,53 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="8" selection-start="1060" selection-end="1060" vertical-scroll-proportion="0.8578811" vertical-offset="88" max-vertical-offset="585">
+        <state line="23" column="0" selection-start="677" selection-end="677" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="585">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityMultiBlock.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="0" selection-start="479" selection-end="479" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2190">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="259" column="13" selection-start="6595" selection-end="6595" vertical-scroll-proportion="0.0" vertical-offset="3871" max-vertical-offset="4305">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#4985#4986#0" expanded="true" />
+            <element signature="e#5018#5019#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityBlueprintProjector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="78" column="202" selection-start="3207" selection-end="3207" vertical-scroll-proportion="-8.769231" vertical-offset="732" max-vertical-offset="4575">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="176" column="88" selection-start="5910" selection-end="5910" vertical-scroll-proportion="0.0" vertical-offset="2566" max-vertical-offset="2940">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockFusion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="119" column="0" selection-start="3691" selection-end="3691" vertical-scroll-proportion="0.47008547" vertical-offset="1620" max-vertical-offset="2145">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
