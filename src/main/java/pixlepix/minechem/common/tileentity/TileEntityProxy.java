@@ -10,37 +10,37 @@ import pixlepix.minechem.common.MinechemBlocks;
 public class TileEntityProxy extends TileEntity implements ISidedInventory {
 
     public TileEntity manager;
-    int managerX;
-    int managerY;
-    int managerZ;
+	int managerXOffset;
+	int managerYOffset;
+	int managerZOffset;
 
-    @Override
+	@Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
         if (manager != null) {
-            nbtTagCompound.setInteger("managerX", manager.xCoord);
-            nbtTagCompound.setInteger("managerY", manager.yCoord);
-            nbtTagCompound.setInteger("managerZ", manager.zCoord);
+	        nbtTagCompound.setInteger("managerXOffset", manager.xCoord);
+	        nbtTagCompound.setInteger("managerYOffset", manager.yCoord);
+	        nbtTagCompound.setInteger("managerZOffset", manager.zCoord);
         }
     }
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound) {
         super.readFromNBT(nbtTagCompound);
-        managerX = nbtTagCompound.getInteger("managerX");
-        managerY = nbtTagCompound.getInteger("managerY");
-        managerZ = nbtTagCompound.getInteger("managerZ");
-        if (worldObj != null)
-            manager = worldObj.getBlockTileEntity(managerX, managerY, managerZ);
+	    managerXOffset = nbtTagCompound.getInteger("managerXOffset");
+	    managerYOffset = nbtTagCompound.getInteger("managerYOffset");
+	    managerZOffset = nbtTagCompound.getInteger("managerZOffset");
+	    if (worldObj != null)
+		    manager = worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
     }
 
     public void setManager(TileEntity managerTileEntity) {
 
         this.manager = managerTileEntity;
         if (managerTileEntity != null) {
-            this.managerX = managerTileEntity.xCoord;
-            this.managerY = managerTileEntity.yCoord;
-            this.managerZ = managerTileEntity.zCoord;
+	        this.managerXOffset = managerTileEntity.xCoord - xCoord;
+	        this.managerYOffset = managerTileEntity.yCoord - yCoord;
+	        this.managerZOffset = managerTileEntity.zCoord - zCoord;
         }
     }
 
@@ -48,11 +48,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory {
         if (this.manager != null && !(this.manager instanceof TileEntityProxy)) {
             return this.manager;
         } else {
-            if (worldObj.getBlockTileEntity(managerX, managerY, managerZ) != null && !(worldObj.getBlockTileEntity(managerX, managerY, managerZ) instanceof TileEntityProxy)) {
-                return worldObj.getBlockTileEntity(managerX, managerY, managerZ);
-            }
-            if (worldObj.getBlockId(managerX, managerY, managerZ) == MinechemBlocks.fusion.blockID) {
-                this.manager = buildManagerBlock();
+	        if (worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) != null && !(worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) instanceof TileEntityProxy)) {
+		        return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+	        }
+	        if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocks.fusion.blockID) {
+		        this.manager = buildManagerBlock();
                 return this.manager;
             }
         }
@@ -61,25 +61,25 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory {
 
     private TileEntity buildManagerBlock() {
 
-        if (this.worldObj.getBlockMetadata(managerX, managerY, managerZ) == 2) {
-            TileEntityFusion fusion = new TileEntityFusion();
+	    if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 2) {
+		    TileEntityFusion fusion = new TileEntityFusion();
             fusion.worldObj = this.worldObj;
-            fusion.xCoord = this.managerZ;
-            fusion.yCoord = this.managerY;
-            fusion.zCoord = this.managerX;
-            fusion.blockType = MinechemBlocks.fusion;
-            worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
-        }
-        if (this.worldObj.getBlockMetadata(managerX, managerY, managerZ) == 3) {
-            TileEntityFission fusion = new TileEntityFission();
-            fusion.worldObj = this.worldObj;
-            fusion.xCoord = this.managerZ;
-            fusion.yCoord = this.managerY;
-            fusion.zCoord = this.managerX;
-            fusion.blockType = MinechemBlocks.fusion;
-            worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
-        }
-        return worldObj.getBlockTileEntity(managerX, managerY, managerZ);
+		    fusion.xCoord = this.managerZOffset + xCoord;
+		    fusion.yCoord = this.managerYOffset + yCoord;
+		    fusion.zCoord = this.managerXOffset + zCoord;
+		    fusion.blockType = MinechemBlocks.fusion;
+		    worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fusion);
+	    }
+	    if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 3) {
+		    TileEntityFission fission = new TileEntityFission();
+		    fission.worldObj = this.worldObj;
+		    fission.xCoord = this.managerZOffset + xCoord;
+		    fission.yCoord = this.managerYOffset + yCoord;
+		    fission.zCoord = this.managerXOffset + zCoord;
+		    fission.blockType = MinechemBlocks.fusion;
+		    worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fission);
+	    }
+	    return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
 
     }
 
@@ -124,13 +124,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory {
 
     @Override
     public String getInvName() {
-        // TODO Auto-generated method stub
         return "Multiblock Minechem proxy";
     }
 
     @Override
     public boolean isInvNameLocalized() {
-        // TODO Auto-generated method stub
         return false;
     }
 
