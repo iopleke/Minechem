@@ -41,26 +41,24 @@ public class MinechemRecipes {
 		//Fluids
 		int fluidPerIngot = 144;
 		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new Chemical[]{ this.element(EnumElement.H), this.element(EnumElement.O) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("gold.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Au, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("copper.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Cu, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("tin.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Sn, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("aluminum.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Al, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("cobalt.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Co, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("ardite.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("obsidian.molten", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.siliconDioxide, 16), this.molecule(EnumMolecule.magnesiumOxide, 8) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("glass.molten", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.siliconDioxide, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("emerald.molten", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.beryl, 6), this.element(EnumElement.Cr, 6), this.element(EnumElement.V, 6) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("nickel.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Ni, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("lead.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pb, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("silver.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Ag, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("platinum.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pt, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("ender", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) }));
-		DecomposerRecipe.add(new DecomposerFluidRecipe("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) }));
 
-		DecomposerRecipe.add(new DecomposerFluidRecipe("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) }));
+		//Mod fluids
+		//Checks if the fluid exists
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("gold.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Au, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("copper.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Cu, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("tin.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Sn, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("aluminum.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Al, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("cobalt.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Co, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("ardite.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 2), this.element(EnumElement.W, 2), this.element(EnumElement.Si, 2) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("obsidian.molten", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.siliconDioxide, 16), this.molecule(EnumMolecule.magnesiumOxide, 8) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("glass.molten", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.siliconDioxide, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("emerald.molten", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.beryl, 6), this.element(EnumElement.Cr, 6), this.element(EnumElement.V, 6) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("nickel.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Ni, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("lead.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pb, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("silver.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Ag, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("platinum.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pt, 16) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("ender", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) });
 
 	}
 

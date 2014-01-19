@@ -468,6 +468,13 @@
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.bouncycastle/bcprov-jdk15on/1.47/source/85e6e1ad449d5a3f09624bf4038fc8d2b02de81c/bcprov-jdk15on-1.47-sources.jar!/" />
       </SOURCES>
     </library>
+    <library name="Gradle: CodeChickenCore 0.9.0.7">
+      <CLASSES>
+        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.7.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES />
+    </library>
     <library name="Gradle: codecjorbis-20101023">
       <CLASSES>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/codecjorbis/20101023/jar/c73b5636faf089d9f00e8732a829577de25237ee/codecjorbis-20101023.jar!/" />

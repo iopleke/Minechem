@@ -17,8 +17,15 @@ public class DecomposerFluidRecipe extends DecomposerRecipe {
 		this.inputFluid = fluid;
 	}
 
-	public DecomposerFluidRecipe(String fluid, int amount, Chemical... chemicals) {
+	public DecomposerFluidRecipe(String fluid, int amount, Chemical[] chemicals) {
+
 		this(new FluidStack(FluidRegistry.getFluid(fluid), amount), chemicals);
+	}
+
+	public static void createAndAddFluidRecipeSafely(String fluid, int amount, Chemical... chemicals) {
+		if (FluidRegistry.isFluidRegistered(fluid)) {
+			DecomposerRecipe.add(new DecomposerFluidRecipe(fluid, amount, chemicals));
+		}
 	}
 
 	public ItemStack getInput() {

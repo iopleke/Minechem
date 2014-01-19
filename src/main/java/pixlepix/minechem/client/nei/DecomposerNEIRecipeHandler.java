@@ -24,7 +24,6 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
 	private static final String MINECHEM_DECOMPOSER_RECIPES_ID =
 			"minechem.decomposer";
 
-	// TODO: The Gui's class itself should really expose this.
 	private ResourceLocation texture = new ResourceLocation(
 			ConstantValue.MOD_ID, ConstantValue.DECOMPOSER_GUI);
 
