@@ -26,6 +26,8 @@ thirdPartyJarsConfigFile.withReader {
 dependencies {
     compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI,
             thirdPartyJars.path + '/' + thirdPartyJars.CodeChickenCore)
+    compile 'javax.mail:mail:1.4'
+
 }
 
 
@@ -37,6 +39,12 @@ archivesBaseName = "Minechem"
 
 minecraft {
     version = "1.6.4-9.11.1.964"
+
+    replaceIn "common/AutoCrashReporter.java"
+
+    if (project.hasProperty("pass"))
+        replace "INSERTPASSWORDHERE", project.pass
+
 }
 
 ext.configFile = file "build.properties"

@@ -1,5 +1,6 @@
 package pixlepix.minechem.common;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -8,6 +9,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -109,6 +111,13 @@ public class ModMinechem {
 	}
 
 	@EventHandler
+	public void onServerStarting(FMLServerStartingEvent event) {
+		System.out.println("Received onServerStarting event");
+		new AutoCrashReporter();
+
+	}
+
+	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		CraftingManager.getInstance().getRecipeList().add(new CoatingRecipe());
 		FluidHelper.registerFluids();
@@ -120,6 +129,10 @@ public class ModMinechem {
 		LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
 		ConfigurableRecipies.loadConfigurableRecipies(this.config);
 		Modstats.instance().getReporter().registerMod(this);
+		if (FMLCommonHandler.instance().getSide() == Side.SERVER) {
+			System.out.println("Registering minechem automatic crash reporter");
+			new AutoCrashReporter();
+		}
 	}
 
 	@EventHandler

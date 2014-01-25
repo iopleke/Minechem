@@ -421,12 +421,14 @@
     <mapping directory="" vcs="Git" />
   </component>
   <component name="libraryTable">
-    <library name="CodeChickenCore 0.9.0.7">
+    <library name="Gradle: activation-1.1">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/jars/CodeChickenCore 0.9.0.7.jar!/" />
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/javax.activation/activation/1.1/jar/e6cb541461c2834bdea3eb920f1884d1eb508b50/activation-1.1.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/javax.activation/activation/1.1/source/3697e9f67a2ed7ac5f589cff30f21173299440/activation-1.1-sources.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: argo-2.25">
       <CLASSES>
@@ -515,9 +517,9 @@
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/org.apache.commons/commons-lang3/3.1/source/8d30b90ae8bda4fbac8363161c8a9b5a99e23baf/commons-lang3-3.1-sources.jar!/" />
       </SOURCES>
     </library>
-    <library name="Gradle: forge-1.6.4-9.11.1.964-mcp">
+    <library name="Gradle: deobfuscated-bin">
       <CLASSES>
-        <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-mcp.jar!/" />
+        <root url="jar://$PROJECT_DIR$/build/deobfuscated-bin.jar!/" />
       </CLASSES>
       <JAVADOC />
       <SOURCES />
@@ -675,6 +677,15 @@
       <JAVADOC />
       <SOURCES />
     </library>
+    <library name="Gradle: mail-1.4">
+      <CLASSES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/javax.mail/mail/1.4/jar/1aa1579ae5ecd41920c4f355b0a9ef40b68315dd/mail-1.4.jar!/" />
+      </CLASSES>
+      <JAVADOC />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/javax.mail/mail/1.4/source/fdd508f19a5075196138c94b341120e917c10e8a/mail-1.4-sources.jar!/" />
+      </SOURCES>
+    </library>
     <library name="Gradle: NotEnoughItems-dev 1.6.1.8">
       <CLASSES>
         <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/" />
@@ -722,15 +733,6 @@
       <JAVADOC />
       <SOURCES>
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/source/1b9f4eb11ef11fede7fd76a2e5e8203c2a8adcd/soundsystem-20120107-sources.jar!/" />
-      </SOURCES>
-    </library>
-    <library name="NotEnoughItems-dev 1.6.1.8">
-      <CLASSES>
-        <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/" />
-      </CLASSES>
-      <JAVADOC />
-      <SOURCES>
-        <root url="jar://$PROJECT_DIR$/jars/NotEnoughItems-dev 1.6.1.8.jar!/src" />
       </SOURCES>
     </library>
   </component>
