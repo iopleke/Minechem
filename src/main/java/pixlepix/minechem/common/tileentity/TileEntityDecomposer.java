@@ -22,13 +22,10 @@ import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.client.ModelDecomposer;
-import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.gates.IMinechemTriggerProvider;
 import pixlepix.minechem.common.gates.MinechemTriggers;
 import pixlepix.minechem.common.inventory.BoundedInventory;
 import pixlepix.minechem.common.inventory.Transactor;
-import pixlepix.minechem.common.items.ItemElement;
-import pixlepix.minechem.common.items.ItemMolecule;
 import pixlepix.minechem.common.network.PacketDecomposerUpdate;
 import pixlepix.minechem.common.network.PacketHandler;
 import pixlepix.minechem.common.recipe.DecomposerFluidRecipe;
@@ -45,15 +42,12 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
 	public static final int[] kInput = { 0 };
 	public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	public static final int[] kBottles = { 10, 11, 12, 13 };
 	private static final float MIN_WORK_PER_SECOND = 1.0F;
 	private static final float MAX_WORK_PER_SECOND = 10.0F;
 	private ArrayList<ItemStack> outputBuffer;
 	public final int kInputSlot = 0;
 	public final int kOutputSlotStart = 1;
 	public final int kOutputSlotEnd = 9;
-	public final int kEmptyTestTubeSlotStart = 10;
-	public final int kEmptyTestTubeSlotEnd = 13;
 	public final int kEmptyBottleSlotsSize = 4;
 	public final int kOutputSlotsSize = 9;
 	public State state = State.kProcessIdle;
@@ -62,10 +56,8 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	public ModelDecomposer model;
 	private boolean hasFullEnergy;
 
-	private final BoundedInventory testTubeInventory = new BoundedInventory(this, kBottles);
 	private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
 	private final BoundedInventory inputInventory = new BoundedInventory(this, kInput);
-	private final Transactor testTubeTransactor = new Transactor(testTubeInventory);
 	private final Transactor outputTransactor = new Transactor(outputInventory);
 	private final Transactor inputTransactor = new Transactor(inputInventory);
 
@@ -155,8 +147,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		kProcessIdle,
 		kProcessActive,
 		kProcessFinished,
-		kProcessJammed,
-		kProcessNoBottles
+		kProcessJammed
 	}
 
 	public TileEntityDecomposer() {
@@ -202,14 +193,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 			decomposeActiveStack();
 			state = State.kProcessActive;
 			this.onInventoryChanged();
-		} else if (!canTakeEmptyTestTube()) {
-			state = State.kProcessNoBottles;
 		} else if (state == State.kProcessFinished) {
 			activeStack = null;
 			state = State.kProcessIdle;
 		} else if (state == State.kProcessJammed && canUnjam()) {
-			state = State.kProcessActive;
-		} else if (state == State.kProcessNoBottles && canTakeEmptyTestTube()) {
 			state = State.kProcessActive;
 		}
 	}
@@ -269,7 +256,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		}
 		DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
 
-		return (recipe != null) && canTakeEmptyTestTube();
+		return (recipe != null);
 	}
 
 	private void decomposeActiveStack() {
@@ -277,9 +264,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
 		ArrayList<Chemical> output = recipe.getOutput();
 		if (recipe != null && output != null) {
-			if (inputStack.getItem() instanceof ItemElement || inputStack.getItem() instanceof ItemMolecule) {
-				testTubeTransactor.add(new ItemStack(MinechemItems.testTube), true);
-			}
+
 			ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
 			placeStacksInBuffer(stacks);
 		}
@@ -304,13 +289,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
 	private State moveBufferItemToOutputSlot() {
 		for (ItemStack outputStack : outputBuffer) {
-			if (!canTakeEmptyTestTube())
-				return State.kProcessNoBottles;
-			else if (addStackToOutputSlots(outputStack.copy().splitStack(1))) {
+			if (addStackToOutputSlots(outputStack.copy().splitStack(1))) {
 				outputStack.splitStack(1);
 				if (outputStack.stackSize == 0)
 					outputBuffer.remove(outputStack);
-				takeEmptyTestTube();
 				return State.kProcessActive;
 			} else {
 				return State.kProcessJammed;
@@ -334,20 +316,13 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		return false;
 	}
 
-	private boolean canTakeEmptyTestTube() {
-		ItemStack testTube = testTubeTransactor.removeItem(false);
-		return testTube != null;
-	}
-
 	@Override
 	public int addItem(ItemStack incoming, boolean doAdd, ForgeDirection from) {
 
 		if (incoming != null) {
-			if (incoming.itemID == MinechemItems.testTube.itemID) {
-				return testTubeTransactor.add(incoming, doAdd);
-			} else {
-				return inputTransactor.add(incoming, doAdd);
-			}
+
+			return inputTransactor.add(incoming, doAdd);
+
 		}
 		return 0;
 	}
@@ -406,7 +381,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	}
 
 	public boolean isPowered() {
-		return (state != State.kProcessJammed && state != State.kProcessNoBottles && (this.getEnergyStored() > this.getMinEnergyNeeded()));
+		return (state != State.kProcessJammed && (this.getEnergyStored() > this.getMinEnergyNeeded()));
 	}
 
 	@Override
@@ -419,7 +394,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		if (tile instanceof TileEntityDecomposer) {
 			LinkedList<ITrigger> triggers = new LinkedList<ITrigger>();
 			triggers.add(MinechemTriggers.fullEnergy);
-			triggers.add(MinechemTriggers.noTestTubes);
 			triggers.add(MinechemTriggers.outputJammed);
 			return triggers;
 		}
@@ -432,23 +406,8 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	}
 
 	@Override
-	public boolean hasNoTestTubes() {
-		return this.state == State.kProcessNoBottles;
-	}
-
-	@Override
 	public boolean isJammed() {
 		return this.state == State.kProcessJammed;
-	}
-
-	@Override
-	public ItemStack takeEmptyTestTube() {
-		return testTubeTransactor.removeItem(true);
-	}
-
-	@Override
-	public int putEmptyTestTube(ItemStack testTube) {
-		return testTubeTransactor.add(testTube, true);
 	}
 
 	@Override
@@ -495,8 +454,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	public String getMachineState() {
 		if (this.state == State.kProcessJammed) {
 			return "outputjammed";
-		} else if (this.state == State.kProcessNoBottles) {
-			return "needtesttubes";
 		} else if (this.state == State.kProcessActive) {
 			return "decomposing";
 		} else if (this.getEnergyStored() > this.getMinEnergyNeeded()) {
@@ -515,10 +472,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	public boolean isItemValidForSlot(int i, ItemStack itemstack) {
 		if (i == kInput[0])
 			return true;
-		if (itemstack.itemID == MinechemItems.testTube.itemID)
-			for (int slot : kBottles)
-				if (i == slot)
-					return true;
 		return false;
 	}
 
@@ -526,7 +479,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		switch (side) {
 			case 0:
 			case 1:
-				return kBottles;
 			case 2:
 			case 3:
 				return kInput;
@@ -543,13 +495,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
 
-		if (var1 == 1) {
-			return this.kInput;
-		}
 		if (var1 == 0) {
 			return this.kOutput;
 		}
-		return this.kBottles;
+
+		return this.kInput;
 
 	}
 

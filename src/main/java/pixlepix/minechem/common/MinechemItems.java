@@ -19,8 +19,8 @@ public class MinechemItems {
     public static ItemAtomicManipulator atomicManipulator;
     public static ItemFusionStar fusionStar;
     public static ItemBlueprint blueprint;
-    public static ItemTestTube testTube;
-    public static ItemChemistJournal journal;
+	//public static ItemTestTube testTube;
+	public static ItemChemistJournal journal;
     public static ItemArmorRadiationShield hazmatFeet;
     public static ItemArmorRadiationShield hazmatLegs;
     public static ItemArmorRadiationShield hazmatTorso;
@@ -80,8 +80,9 @@ public class MinechemItems {
         atomicManipulator = new ItemAtomicManipulator(atomicManipulatorID);
         fusionStar = new ItemFusionStar(fusionStarID);
         blueprint = new ItemBlueprint(blueprintID);
-        testTube = new ItemTestTube(testTubeID);
-        journal = new ItemChemistJournal(journalID);
+	    //Test tube removed
+	    //testTube = new ItemTestTube(testTubeID);
+	    journal = new ItemChemistJournal(journalID);
         hazmatFeet = new ItemArmorRadiationShield(hazmatFeetID, 3, 0.1F, ConstantValue.HAZMAT_FEET_TEX);
         hazmatLegs = new ItemArmorRadiationShield(hazmatLegsID, 2, 0.1F, ConstantValue.HAZMAT_LEGS_TEX);
         hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
@@ -92,8 +93,8 @@ public class MinechemItems {
         LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
-        LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
-        LanguageRegistry.addName(journal, MinechemHelper.getLocalString("item.name.chemistJournal"));
+	    //LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
+	    LanguageRegistry.addName(journal, MinechemHelper.getLocalString("item.name.chemistJournal"));
         LanguageRegistry.addName(hazmatFeet, MinechemHelper.getLocalString("item.name.hazmatFeet"));
         LanguageRegistry.addName(hazmatLegs, MinechemHelper.getLocalString("item.name.hazmatLegs"));
         LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));

@@ -38,9 +38,8 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		ISpecialInventory, IMinechemMachinePeripheral {
 	public static final int[] kOutput = { 0 };
 	public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-	public static final int[] kBottles = { 10, 11, 12, 13 };
-	public static final int[] kStorage = { 14, 15, 16, 17, 18, 19, 20, 21, 22 };
-	public static final int[] kJournal = { 23 };
+	public static final int[] kStorage = { 10, 11, 12, 13, 14, 15, 16, 17, 18 };
+	public static final int[] kJournal = { 19 };
 	//Slots that contain *real* items
 	//For the purpose of dropping upon break. These are bottles, storage, and
 	// journal.
@@ -49,9 +48,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	// Ensure that the list of real slots stays in sync with the above defs.
 	static {
 		ArrayList l = new ArrayList();
-		for (int v : kBottles) {
-			l.add(v);
-		}
 		for (int v : kStorage) {
 			l.add(v);
 		}
@@ -70,20 +66,16 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	public ModelSynthesizer model;
 	public static final int kSizeOutput = 1;
 	public static final int kSizeRecipe = 9;
-	public static final int kSizeBottles = 4;
 	public static final int kSizeStorage = 9;
 	public static final int kSizeJournal = 1;
 	public static final int kStartOutput = 0;
 	public static final int kStartRecipe = 1;
-	public static final int kStartBottles = 10;
-	public static final int kStartStorage = 14;
-	public static final int kStartJournal = 23;
+	public static final int kStartStorage = 10;
+	public static final int kStartJournal = 19;
 	private final BoundedInventory recipeMatrix = new BoundedInventory(this, kRecipe);
 	private final BoundedInventory storageInventory = new BoundedInventory(this, kStorage);
-	private final BoundedInventory tubeInventory = new BoundedInventory(this, kBottles);
 	private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
 	private final BoundedInventory journalInventory = new BoundedInventory(this, kJournal);
-	private final Transactor testTubeTransactor = new Transactor(tubeInventory);
 	private final Transactor storageTransactor = new Transactor(storageInventory);
 	private final Transactor outputTransactor = new Transactor(outputInventory);
 	private final Transactor recipeMatrixTransactor = new Transactor(recipeMatrix);
@@ -223,19 +215,8 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
 	@Override
 	public ItemStack[] extractItem(boolean doRemove, ForgeDirection direction, int maxItemCount) {
-		switch (direction) {
-			case NORTH:
-			case SOUTH:
-			case EAST:
-			case WEST:
-			case UNKNOWN:
-				return extractOutput(doRemove, maxItemCount);
-			case UP:
-			case DOWN:
-				return extractTestTubes(doRemove, maxItemCount);
 
-		}
-		return new ItemStack[0];
+		return extractOutput(doRemove, maxItemCount);
 	}
 
 	public ItemStack[] extractOutput(boolean doRemove, int maxItemCount) {
@@ -250,9 +231,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		return output;
 	}
 
-	public ItemStack[] extractTestTubes(boolean doRemove, int maxItemCount) {
-		return testTubeTransactor.remove(maxItemCount, doRemove);
-	}
 
 	public SynthesisRecipe getCurrentRecipe() {
 		return currentRecipe;
@@ -272,7 +250,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		if (tile instanceof TileEntitySynthesis) {
 			LinkedList<ITrigger> triggers = new LinkedList<ITrigger>();
 			triggers.add(MinechemTriggers.fullEnergy);
-			triggers.add(MinechemTriggers.noTestTubes);
 			triggers.add(MinechemTriggers.outputJammed);
 			return triggers;
 		}
@@ -302,27 +279,10 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		return hasFullEnergy;
 	}
 
-	@Override
-	public boolean hasNoTestTubes() {
-		boolean hasNoTestTubes = true;
-		for (int slot : kBottles) {
-			if (this.inventory[slot] != null) {
-				hasNoTestTubes = false;
-				break;
-			}
-		}
-		return hasNoTestTubes;
-	}
 
 	@Override
 	public boolean isJammed() {
-		int count = 0;
-		for (int slot : kBottles) {
-			if (inventory[slot] != null) {
-				count += inventory[slot].stackSize;
-			}
-		}
-		return count >= (64 * 4);
+		return false;
 	}
 
 	@Override
@@ -388,7 +348,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 				return false;
 		}
 		if (doTake) {
-			addEmptyBottles(currentRecipe.getIngredientCount());
 			storageInventory.setInventoryStacks(storage);
 		}
 		return true;
@@ -432,27 +391,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		nbtTagCompound.setTag("inventory", inventoryTagList);
 	}
 
-	private void addEmptyBottles(int amount) {
-		for (int slot : kBottles) {
-			if (inventory[slot] == null) {
-				int stackSize = Math.min(amount, getInventoryStackLimit());
-				setInventorySlotContents(slot, new ItemStack(MinechemItems.testTube, stackSize));
-				amount -= stackSize;
-			} else if (inventory[slot].itemID == MinechemItems.testTube.itemID) {
-				int stackAddition = getInventoryStackLimit() - inventory[slot].stackSize;
-				stackAddition = Math.min(amount, stackAddition);
-				inventory[slot].stackSize += stackAddition;
-				amount -= stackAddition;
-			}
-			if (amount <= 0)
-				break;
-		}
-		// Drop the test tubes.
-		if (amount > 0) {
-			ItemStack tubes = new ItemStack(MinechemItems.testTube, amount);
-			MinechemHelper.ejectItemStackIntoWorld(tubes, worldObj, xCoord, yCoord, zCoord);
-		}
-	}
 
 	private boolean canAffordRecipe(SynthesisRecipe recipe) {
 		int energyCost = recipe.energyCost();
@@ -569,15 +507,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		}
 	}
 
-	@Override
-	public ItemStack takeEmptyTestTube() {
-		return testTubeTransactor.removeItem(true);
-	}
-
-	@Override
-	public int putEmptyTestTube(ItemStack testTube) {
-		return testTubeTransactor.add(testTube, true);
-	}
 
 	@Override
 	public ItemStack takeOutput() {
@@ -641,7 +570,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		switch (side) {
 			case 0:
 			case 1:
-				return kBottles;
 			case 4:
 			case 5:
 				return kStorage;
@@ -660,13 +588,11 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	public int[] getAccessibleSlotsFromSide(int var1) {
 		//This is so hacky
 		//I'm honestly ashamed
-		if (var1 == 1) {
-			return this.kStorage;
-		}
+
 		if (var1 == 0 && takeStacksFromStorage(false)) {
 			return this.kOutput;
 		}
-		return this.kBottles;
+		return this.kStorage;
 
 	}
 

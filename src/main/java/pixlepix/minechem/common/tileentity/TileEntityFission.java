@@ -160,16 +160,6 @@ public class TileEntityFission extends TileEntityMultiBlock implements IMinechem
 	}
 
 	@Override
-	public ItemStack takeEmptyTestTube() {
-		return null;
-	}
-
-	@Override
-	public int putEmptyTestTube(ItemStack testTube) {
-		return 0;
-	}
-
-	@Override
 	public ItemStack takeOutput() {
 		return outputTransactor.removeItem(true);
 	}
