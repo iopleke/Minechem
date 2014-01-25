@@ -1304,10 +1304,8 @@ public class MinechemRecipes {
 		ItemStack itemIngotIron = new ItemStack(Item.ingotIron);
 		ItemStack itemRedstone = new ItemStack(Item.redstone);
 		ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItems.atomicManipulator);
-		ItemStack mineChemItemsTestTube = new ItemStack(MinechemItems.testTube, 16);
 		ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItems.molecule, 1, EnumMolecule.polyvinylChloride.ordinal());
 
-		GameRegistry.addRecipe(mineChemItemsTestTube, new Object[]{ " G ", " G ", " G ", Character.valueOf('G'), blockGlass });
 		GameRegistry.addRecipe(MinechemItems.concaveLens, new Object[]{ "G G", "GGG", "G G", Character.valueOf('G'), blockGlass });
 		GameRegistry.addRecipe(MinechemItems.convexLens, new Object[]{ " G ", "GGG", " G ", Character.valueOf('G'), blockGlass });
 		GameRegistry.addRecipe(MinechemItems.microscopeLens, new Object[]{ "A", "B", "A", Character.valueOf('A'), MinechemItems.convexLens, Character.valueOf('B'), MinechemItems.concaveLens });
@@ -1326,15 +1324,12 @@ public class MinechemRecipes {
 		GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[]{ "PPP", "P P", "   ", Character.valueOf('P'), moleculePolyvinylChloride });
 		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.chemicalStorage), new Object[]{ "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
 		GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{ "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
-		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[]{ new ItemStack(Item.book), new ItemStack(MinechemItems.testTube) });
+		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[]{ new ItemStack(Item.book), new ItemStack(Block.glass) });
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.EmptyPillz, 4), new Object[]{ new ItemStack(Item.sugar), new ItemStack(Item.slimeBall), new ItemStack(Item.slimeBall) });
 		//Fusion
 		GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fusion), new Object[]{ new ItemStack(Item.paper), new ItemStack(Block.blockDiamond) });
 		//Fission
 		GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fission), new Object[]{ new ItemStack(Item.paper), new ItemStack(Item.diamond) });
-		for (EnumElement element : EnumElement.values()) {
-			GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.testTube), new Object[]{ new ItemStack(MinechemItems.element, element.ordinal()) });
-		}
 
 		GameRegistry.addRecipe(new RecipeJournalCloning());
 

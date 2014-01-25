@@ -20,9 +20,9 @@ public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMi
 
     private static String[] methodNames;
     private static ICCMethod[] methods = {new GetChemicalName(), new GetFormula(), new GetChemicals(), new GetAtomicMass(), new GetRadioactivity(),
-            new GetTicksUntilDecay(), new StoreSynthesisRecipe(), new PlaceSynthesisRecipe(), new ClearSynthesisRecipe(), new PutEmptyTestTube(),
-            new TakeEmptyTestTube(), new TakeOuput(), new PutInput(), new TakeFusionStar(), new PutFusionStar(), new TakeJournal(), new PutJournal(),
-            new GetMachineState()};
+		    new GetTicksUntilDecay(), new StoreSynthesisRecipe(), new PlaceSynthesisRecipe(), new ClearSynthesisRecipe(),
+		    new TakeOuput(), new PutInput(), new TakeFusionStar(), new PutFusionStar(), new TakeJournal(), new PutJournal(),
+		    new GetMachineState()};
 
     public ITurtleAccess turtle;
     public IComputerAccess computer;

@@ -1,19 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="70b8cda3-24f5-4795-8bab-8fc77abea077" name="Default" comment="Added Auto Crash Reporter!">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/assets/minechem/textures/gui/ChemicalDecomposerGUI.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/minechem/textures/gui/ChemicalDecomposerGUI.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/assets/minechem/textures/gui/SynthesisGUI.png" afterPath="$PROJECT_DIR$/src/main/resources/assets/minechem/textures/gui/SynthesisGUI.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerDecomposer.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerDecomposer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerSynthesis.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerSynthesis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/IMinechemMachinePeripheral.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/IMinechemMachinePeripheral.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/IMinechemTriggerProvider.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/IMinechemTriggerProvider.java" />
+    <list default="true" id="70b8cda3-24f5-4795-8bab-8fc77abea077" name="Default" comment="Removed test tubes">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/method/PutEmptyTestTube.java" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/method/TakeEmptyTestTube.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/ChemistryTurtleUpgradePeripherial.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/ChemistryTurtleUpgradePeripherial.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Minechem.iws" afterPath="$PROJECT_DIR$/Minechem.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/MinechemItems.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/MinechemItems.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/gui/tabs/TabStateControlDecomposer.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/gui/tabs/TabStateControlDecomposer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityDecomposer.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityDecomposer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntitySynthesis.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntitySynthesis.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFusion.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFusion.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityMicroscope.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityMicroscope.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/TriggerNoTestTubes.java" afterPath="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/TriggerNoTestTubes.java" />
     </list>
     <ignored path="Minechem.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -81,41 +77,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="TileEntityDecomposer.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityDecomposer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="169" column="53" selection-start="5502" selection-end="5502" vertical-scroll-proportion="0.0" vertical-offset="2363" max-vertical-offset="8160">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#11800#11801#0" expanded="true" />
-                <element signature="e#11819#11820#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="TileEntitySynthesis.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntitySynthesis.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="53" column="32" selection-start="2304" selection-end="2304" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="9045">
+            <state line="53" column="32" selection-start="2305" selection-end="2305" vertical-scroll-proportion="0.0" vertical-offset="795" max-vertical-offset="9540">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MinechemItems.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="MinechemItems.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/MinechemItems.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="94" column="83" selection-start="4704" selection-end="4704" vertical-scroll-proportion="0.5700713" vertical-offset="1020" max-vertical-offset="1665">
+            <state line="115" column="1" selection-start="5972" selection-end="5972" vertical-scroll-proportion="0.0" vertical-offset="1002" max-vertical-offset="1665">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ContainerSynthesis.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerSynthesis.java">
+      <file leaf-file-name="MinechemRecipes.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="59" column="10" selection-start="2107" selection-end="2107" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1725">
+            <state line="1307" column="0" selection-start="62422" selection-end="62422" vertical-scroll-proportion="0.0" vertical-offset="18864" max-vertical-offset="25275">
               <folding />
             </state>
           </provider>
@@ -124,7 +107,52 @@
       <file leaf-file-name="IMinechemTriggerProvider.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/IMinechemTriggerProvider.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="0" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
+            <state line="7" column="0" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileEntityFusion.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFusion.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="239" column="5" selection-start="8491" selection-end="8491" vertical-scroll-proportion="0.0" vertical-offset="2838" max-vertical-offset="4680">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TileEntityMicroscope.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityMicroscope.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="142" column="0" selection-start="4908" selection-end="4908" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="2865">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TriggerNoTestTubes.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/TriggerNoTestTubes.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="25" column="0" selection-start="738" selection-end="738" vertical-scroll-proportion="0.5390625" vertical-offset="0" max-vertical-offset="640">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ChemistryTurtleUpgradePeripherial.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/ChemistryTurtleUpgradePeripherial.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="23" column="12" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ContainerSynthesis.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerSynthesis.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="59" column="4" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1845">
               <folding />
             </state>
           </provider>
@@ -424,10 +452,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/ljdp/minechem/common/polytool/types/PolytoolTypeTitanium.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ljdp/minechem/common/polytool/types/PolytoolTypeMercury.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pixlepix/particlephysics/particlephysics/ParticlePhysics.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/polytool/types/PolytoolTypeIron.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/SynthesisNEIRecipeHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/core/EnumMolecule.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/particlephysics/ParticlePhysics.java" />
@@ -457,7 +481,6 @@
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityChemicalStorage.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerRecipeHandler.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/client/nei/DecomposerNEIRecipeHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityProxy.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/blocks/BlockFusion.java" />
@@ -475,6 +498,11 @@
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerSynthesis.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntitySynthesis.java" />
         <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/MinechemItems.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFusion.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityMicroscope.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/TriggerNoTestTubes.java" />
+        <option value="$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/ChemistryTurtleUpgradePeripherial.java" />
       </list>
     </option>
   </component>
@@ -663,7 +691,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="computercraft" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -693,11 +721,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="common" />
+              <option name="myItemId" value="computercraft" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="recipe" />
+              <option name="myItemId" value="method" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -886,6 +914,19 @@
       </ExternalSystemSettings>
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -911,19 +952,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -1063,24 +1091,28 @@
       <created>1390614394540</created>
       <updated>1390614394540</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Removed test tubes">
+      <created>1390616173499</created>
+      <updated>1390616173499</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="35" y="22" width="1245" height="760" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.49959838" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39942113" sideWeight="0.49959838" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33140376" sideWeight="0.5004016" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.49959838" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32931727" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Analysis" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
@@ -1089,12 +1121,12 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24979919" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33140376" sideWeight="0.49959838" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33140376" sideWeight="0.49959838" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.49959838" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette " active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299566" sideWeight="0.49959838" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -1116,7 +1148,8 @@
     <MESSAGE value="Fixes fluid support to account" />
     <MESSAGE value="Many multiblock fixes" />
     <MESSAGE value="Added Auto Crash Reporter!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Auto Crash Reporter!" />
+    <MESSAGE value="Removed test tubes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Removed test tubes" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="true" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
@@ -1129,41 +1162,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraftforge/fluids/IFluidHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="17" selection-start="365" selection-end="365" vertical-scroll-proportion="-0.07967033" vertical-offset="224" max-vertical-offset="1320" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/fluid/FluidChemical.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="13" selection-start="384" selection-end="384" vertical-scroll-proportion="0.16483517" vertical-offset="0" max-vertical-offset="645" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraftforge/fluids/FluidTankInfo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="19" selection-start="165" selection-end="165" vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="465" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerRecipeHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="8" selection-start="1238" selection-end="1470" vertical-scroll-proportion="0.0" vertical-offset="326" max-vertical-offset="750" />
-      </provider>
-    </entry>
-    <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraftforge/fluids/Fluid.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="310" column="5" selection-start="8852" selection-end="8852" vertical-scroll-proportion="-7.8846154" vertical-offset="3410" max-vertical-offset="3915" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/api/recipe/DecomposerRecipe.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="66" selection-start="534" selection-end="555" vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="570" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="36" selection-start="1747" selection-end="1747" vertical-scroll-proportion="0.08547009" vertical-offset="255" max-vertical-offset="25365">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/DecomposerFluidRecipe.java">
@@ -1279,44 +1280,32 @@
     </entry>
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.7.0_21.jdk/Contents/Home/src.zip!/java/util/logging/Logger.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="166" column="13" selection-start="7174" selection-end="7174" vertical-scroll-proportion="0.2859375" vertical-offset="1917" max-vertical-offset="23265">
-          <folding />
-        </state>
+        <state line="166" column="13" selection-start="7174" selection-end="7174" vertical-scroll-proportion="0.2859375" vertical-offset="1917" max-vertical-offset="23265" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/server/MinecraftServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="32" selection-start="2459" selection-end="2459" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19950">
-          <folding />
-        </state>
+        <state line="61" column="32" selection-start="2459" selection-end="2459" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="19950" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/cpw/mods/fml/common/event/FMLPreInitializationEvent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="103" column="26" selection-start="2835" selection-end="2835" vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="1485">
-          <folding />
-        </state>
+        <state line="103" column="26" selection-start="2835" selection-end="2835" vertical-scroll-proportion="0.0" vertical-offset="672" max-vertical-offset="1485" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/server/integrated/IntegratedServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="280" column="7" selection-start="9211" selection-end="9211" vertical-scroll-proportion="0.13316584" vertical-offset="3547" max-vertical-offset="3945">
-          <folding />
-        </state>
+        <state line="280" column="7" selection-start="9211" selection-end="9211" vertical-scroll-proportion="0.13316584" vertical-offset="3547" max-vertical-offset="3945" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/net/minecraft/logging/ILogAgent.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="409" selection-end="409" vertical-scroll-proportion="0.4890511" vertical-offset="39" max-vertical-offset="450">
-          <folding />
-        </state>
+        <state line="18" column="0" selection-start="409" selection-end="409" vertical-scroll-proportion="0.4890511" vertical-offset="39" max-vertical-offset="450" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/build/deobfuscated-bin.jar!/net/minecraft/server/MinecraftServer.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="281" column="52" selection-start="11455" selection-end="11455" vertical-scroll-proportion="0.034852546" vertical-offset="4202" max-vertical-offset="4575">
-          <folding />
-        </state>
+        <state line="281" column="52" selection-start="11455" selection-end="11455" vertical-scroll-proportion="0.034852546" vertical-offset="4202" max-vertical-offset="4575" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityBlueprintProjector.java">
@@ -1342,16 +1331,12 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/cpw/mods/fml/relauncher/FMLRelaunchLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="32" column="13" selection-start="955" selection-end="955" vertical-scroll-proportion="-0.8986175" vertical-offset="480" max-vertical-offset="4110">
-          <folding />
-        </state>
+        <state line="32" column="13" selection-start="955" selection-end="955" vertical-scroll-proportion="-0.8986175" vertical-offset="480" max-vertical-offset="4110" />
       </provider>
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/cpw/mods/fml/common/FMLLog.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="13" selection-start="513" selection-end="513" vertical-scroll-proportion="-0.38018432" vertical-offset="270" max-vertical-offset="1140">
-          <folding />
-        </state>
+        <state line="18" column="13" selection-start="513" selection-end="513" vertical-scroll-proportion="-0.38018432" vertical-offset="270" max-vertical-offset="1140" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/ModMinechem.java">
@@ -1368,29 +1353,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/IMinechemTriggerProvider.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="0" selection-start="121" selection-end="121" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="210">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityDecomposer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="169" column="53" selection-start="5502" selection-end="5502" vertical-scroll-proportion="0.0" vertical-offset="2363" max-vertical-offset="8160">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#11800#11801#0" expanded="true" />
-            <element signature="e#11819#11820#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerDecomposer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="26" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="148" max-vertical-offset="1335">
-          <folding />
-        </state>
+        <state line="24" column="26" selection-start="1108" selection-end="1108" vertical-scroll-proportion="0.0" vertical-offset="148" max-vertical-offset="1335" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFission.java">
@@ -1409,7 +1381,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/containers/ContainerSynthesis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="59" column="10" selection-start="2107" selection-end="2107" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1725">
+        <state line="59" column="4" selection-start="1840" selection-end="1840" vertical-scroll-proportion="0.0" vertical-offset="615" max-vertical-offset="1845">
           <folding />
         </state>
       </provider>
@@ -1423,21 +1395,61 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/inventory/BoundedInventory.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="30" selection-start="341" selection-end="347" vertical-scroll-proportion="-1.7307693" vertical-offset="60" max-vertical-offset="1785">
-          <folding />
-        </state>
+        <state line="12" column="30" selection-start="341" selection-end="347" vertical-scroll-proportion="-1.7307693" vertical-offset="60" max-vertical-offset="1785" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntitySynthesis.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="32" selection-start="2304" selection-end="2304" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="9045">
+        <state line="53" column="32" selection-start="2305" selection-end="2305" vertical-scroll-proportion="0.0" vertical-offset="60" max-vertical-offset="9030">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/MinechemItems.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="83" selection-start="4704" selection-end="4704" vertical-scroll-proportion="0.5700713" vertical-offset="1020" max-vertical-offset="1665">
+        <state line="115" column="1" selection-start="5972" selection-end="5972" vertical-scroll-proportion="0.0" vertical-offset="1002" max-vertical-offset="1665">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/recipe/MinechemRecipes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1307" column="0" selection-start="62422" selection-end="62422" vertical-scroll-proportion="0.0" vertical-offset="18864" max-vertical-offset="25275">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/IMinechemTriggerProvider.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="0" selection-start="149" selection-end="149" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="195">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityFusion.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="239" column="5" selection-start="8491" selection-end="8491" vertical-scroll-proportion="0.0" vertical-offset="2838" max-vertical-offset="4680">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/tileentity/TileEntityMicroscope.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="142" column="0" selection-start="4908" selection-end="4908" vertical-scroll-proportion="0.0" vertical-offset="1445" max-vertical-offset="2865">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/computercraft/ChemistryTurtleUpgradePeripherial.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="12" selection-start="1065" selection-end="1065" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1800">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/pixlepix/minechem/common/gates/TriggerNoTestTubes.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="0" selection-start="738" selection-end="738" vertical-scroll-proportion="0.5390625" vertical-offset="0" max-vertical-offset="640">
           <folding />
         </state>
       </provider>
