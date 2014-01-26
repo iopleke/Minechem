@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module relativePaths="true" type="JAVA_MODULE" version="4">
+<module external.linked.project.path="$MODULE_DIR$" external.root.project.path="$MODULE_DIR$" external.system.id="GRADLE" external.system.module.group="pixlepix.minechem" external.system.module.version="5.0-DEV" relativePaths="true" type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$">
@@ -15,17 +15,20 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" exported="" name="Gradle: NotEnoughItems-dev 1.6.1.8" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: forge-1.6.4-9.11.1.964-mcp" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: deobfuscated-bin" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: CodeChickenCore 0.9.0.7" level="project" />
     <orderEntry type="library" exported="" name="Gradle: scala-compiler-2.10.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: scala-library-2.10.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: bcprov-jdk15on-1.47" level="project" />
     <orderEntry type="library" exported="" name="Gradle: launchwrapper-1.8" level="project" />
     <orderEntry type="library" exported="" name="Gradle: argo-2.25_fixed" level="project" />
     <orderEntry type="library" exported="" name="Gradle: soundsystem-20120107" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: lwjgl-2.9.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: codecwav-20101023" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: lwjgl-2.9.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: lwjgl-platform-2.9.0-natives-osx" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-2.0.5" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: mail-1.4" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: activation-1.1" level="project" />
     <orderEntry type="library" exported="" name="Gradle: libraryjavasound-20101123" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-osx" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-windows" level="project" />
@@ -37,16 +40,14 @@
     <orderEntry type="library" exported="" name="Gradle: gson-2.2.2" level="project" />
     <orderEntry type="library" exported="" name="Gradle: librarylwjglopenal-20100824" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jutils-1.0.0" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: lwjgl_util-2.9.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: codecjorbis-20101023" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: guava-14.0" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: lwjgl_util-2.9.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: lwjgl-platform-2.9.0-natives-windows" level="project" />
+    <orderEntry type="library" exported="" name="Gradle: guava-14.0" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jopt-simple-4.5" level="project" />
     <orderEntry type="library" exported="" name="Gradle: lwjgl-platform-2.9.0-natives-linux" level="project" />
     <orderEntry type="library" exported="" name="Gradle: jinput-platform-2.0.5-natives-linux" level="project" />
     <orderEntry type="library" exported="" name="Gradle: scala-reflect-2.10.2" level="project" />
-    <orderEntry type="library" exported="" name="Gradle: _Users_localmacaccount_forge_Minechem_jars_CodeChickenCore_0_9_0_6_jar" level="project" />
-    <orderEntry type="library" name="CodeChickenCore 0.9.0.7" level="project" />
   </component>
 </module>
 

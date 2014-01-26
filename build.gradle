@@ -7,14 +7,15 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        ivy {
-            url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
+        maven {
+            name = "shadow-repo"
+            url = "http://dl.bintray.com/content/johnrengelman/gradle-plugins/"
         }
 
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
-        classpath 'org.gradle.plugins:shadow:0.7'
+        classpath 'org.gradle.plugins:shadow:0.7.4'
     }
 }
 
