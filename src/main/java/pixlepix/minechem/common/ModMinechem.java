@@ -112,9 +112,7 @@ public class ModMinechem {
 
 	@EventHandler
 	public void onServerStarting(FMLServerStartingEvent event) {
-		System.out.println("Received onServerStarting event");
 		new AutoCrashReporter();
-
 	}
 
 	@EventHandler

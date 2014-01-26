@@ -9,10 +9,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.item.Item;
 import pixlepix.minechem.particlephysics.gui.GuiHandler;
 import pixlepix.minechem.particlephysics.helper.*;
-import pixlepix.minechem.particlephysics.item.PotentialReader;
 
 @Mod(modid = "minechem-particlephysics", name = "Minechem-Particle Physics", version = "5.0")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {"Particle"}, packetHandler = PacketHandler.class)
@@ -23,9 +21,9 @@ public class ParticlePhysics {
 
     public static ParticlePhysicsTab creativeTab = new ParticlePhysicsTab();
 
-    public final static Item potentialReader = new PotentialReader(24567);
+	//public final static Item potentialReader = new PotentialReader(24567);
 
-    public void loadBlocks() {
+	public void loadBlocks() {
 
     }
 
@@ -54,8 +52,8 @@ public class ParticlePhysics {
         NetworkRegistry networkRegistry = NetworkRegistry.instance();
 
         LanguageRegistry.instance().addStringLocalization("itemGroup.tabParticlePhysics", "ParticlePhysics");
-        LanguageRegistry.addName(potentialReader, "Potential Reader");
-        ParticleRegistry.registerEntities();
+	    //LanguageRegistry.addName(potentialReader, "Potential Reader");
+	    ParticleRegistry.registerEntities();
 
         new GuiHandler();
     }

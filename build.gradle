@@ -7,11 +7,26 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+        ivy {
+            url 'http://dl.bintray.com/content/johnrengelman/gradle-plugins'
+        }
+
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+        classpath 'org.gradle.plugins:shadow:0.7'
     }
 }
+
+apply plugin: 'shadow'
+
+shadow
+        {
+            include 'javax/mail/**'
+            include 'com/sun/activation/**'
+            include 'javax/activation/**'
+            include 'com/sun/mail/**'
+        }
 
 // Load configs relating to third-party JAR locations.
 ext.thirdPartyJarsConfigFile = file 'thirdPartyJars.properties'
@@ -27,6 +42,7 @@ dependencies {
     compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI,
             thirdPartyJars.path + '/' + thirdPartyJars.CodeChickenCore)
     compile 'javax.mail:mail:1.4'
+    runtime 'javax.mail:mail:1.4'
 
 }
 

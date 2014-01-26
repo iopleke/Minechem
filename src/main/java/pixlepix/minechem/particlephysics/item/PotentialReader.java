@@ -12,9 +12,8 @@ public class PotentialReader extends Item {
 
     public PotentialReader(int par1) {
         super(par1);
-
-        setMaxStackSize(64);
-        setCreativeTab(ParticlePhysicsTab.instance);
+	    setMaxStackSize(1);
+	    setCreativeTab(ParticlePhysicsTab.instance);
         setUnlocalizedName("potentialReader");
     }
 

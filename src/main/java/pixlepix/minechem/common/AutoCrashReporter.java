@@ -16,12 +16,10 @@ public class AutoCrashReporter extends Handler {
 
 	public AutoCrashReporter() {
 		FMLLog.getLogger().addHandler(this);
-
 	}
 
 	public static String readFileToString(File f) throws FileNotFoundException, IOException {
 
-		System.out.println(3);
 		BufferedReader reader = new BufferedReader(new FileReader(f));
 		String ret = "";
 
@@ -37,9 +35,7 @@ public class AutoCrashReporter extends Handler {
 
 	@Override
 	public void publish(LogRecord record) {
-		if (record.getMessage().startsWith("Failed to handle packet for ")) {
-			call("Exception while handling packet from " + record.getMessage().substring(28).split("/")[0] + record.getThrown().getMessage());
-		} else if (record.getMessage().startsWith("This crash report has been saved to: ")) {
+		if (record.getMessage().startsWith("This crash report has been saved to: ")) {
 			String report;
 			try {
 				report = readFileToString(new File(record.getMessage().substring(37)));
