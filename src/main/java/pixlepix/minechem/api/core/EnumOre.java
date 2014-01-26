@@ -21,7 +21,23 @@ public enum EnumOre {
     uranium("Uranium", new Element(EnumElement.U, 16)),
     plutonium("Plutonium", new Element(EnumElement.Pu, 16)),
     manganese("Manganese", new Element(EnumElement.Mn, 16)),
-    saphire("Sapphire", new Molecule(EnumMolecule.aluminiumOxide, 1)),
+
+	phosphorus("Phosphorus", new Element(EnumElement.P, 16)),
+
+	bitumen("Bitumen", new Molecule(EnumMolecule.propane, 16)),
+
+	prometheum("Prometheum", new Element(EnumElement.Pm, 16)),
+
+	amethyst("Amethyst", new Molecule(EnumMolecule.siliconDioxide, 16)),
+
+	peridot("Peridot", new Molecule(EnumMolecule.peridot, 16)),
+
+	topaz("Topaz", new Molecule(EnumMolecule.topaz, 16)),
+
+	tanzanite("Tanzanite", new Molecule(EnumMolecule.zoisite, 16)),
+	potash("Potash", new Molecule(EnumMolecule.potassiumNitrate, 16)),
+	sulfur("Sulfur", new Element(EnumElement.S, 16)),
+	saphire("Sapphire", new Molecule(EnumMolecule.aluminiumOxide, 1)),
     ruby("Ruby", new Molecule(EnumMolecule.aluminiumOxide, 1), new Element(EnumElement.Cr, 1)),
 
     cobalt("Cobalt", new Element(EnumElement.Co, 16)),

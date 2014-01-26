@@ -142,9 +142,20 @@ public enum EnumMolecule {
     orthoclase(123, "Orthoclase", new Element(K), new Element(Al), new Element(Si, 3), new Element(O, 8)),
     biotite(124, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
     augite(125, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
-    talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10));
+	talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10)),
 
-    public static EnumMolecule[] molecules = values();
+	//Metallurgy
+	propane(127, "Propane", new Element(C, 3), new Element(H, 8)),
+
+	peridot(128, "Peridot", new Element(Mg, 2), new Element(O, 4), new Element(Si)),
+
+	fluorineHydroxide(129, "Fluorine Hydroxide", new Element(F), new Element(O), new Element(H)),
+
+	topaz(130, "Topaz", new Element(Al, 2), new Element(O, 4), new Molecule(fluorineHydroxide, 2)),
+
+	zoisite(131, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H));
+
+	public static EnumMolecule[] molecules = values();
     // Descriptive name, in en_US. Should not be used; instead, use a
     // localized string from a .properties file.
     private final String descriptiveName;
