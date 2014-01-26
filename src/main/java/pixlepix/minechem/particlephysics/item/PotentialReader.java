@@ -20,7 +20,7 @@ public class PotentialReader extends Item {
 
     @Override
     public void registerIcons(IconRegister register) {
-        this.itemIcon = register.registerIcon("particlephysics:potentialReader");
+	    this.itemIcon = register.registerIcon("minechem:potentialReader");
     }
 
     @Override

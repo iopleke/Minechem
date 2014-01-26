@@ -44,6 +44,8 @@ public class MinechemRecipes {
 
 		//Mod fluids
 		//Checks if the fluid exists
+
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("water", fluidPerIngot, new Chemical[]{ this.element(EnumElement.H), this.element(EnumElement.O) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("gold.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Au, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("copper.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Cu, 16) });

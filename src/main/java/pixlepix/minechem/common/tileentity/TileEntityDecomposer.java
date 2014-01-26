@@ -163,7 +163,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (!worldObj.isRemote && this.inputInventory.getStackInSlot(0) == null) {
+		if (!worldObj.isRemote && this.inputInventory.getStackInSlot(0) == null && state == State.kProcessIdle) {
 			for (int i = 0; i < fluids.size(); i++) {
 				FluidStack input = fluids.get(i);
 				for (DecomposerRecipe recipeToTest : DecomposerRecipe.recipes) {
