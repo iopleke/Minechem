@@ -125,7 +125,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemM
 	private int getEnergyCost(ItemStack itemstack) {
 		int mass = itemstack.getItemDamage();
 		int cost = (int) MinechemHelper.translateValue(mass + 1, 1, EnumElement.heaviestMass, 1, this.maxEnergy);
-		return cost;
+		return cost / 100;
 	}
 
 	private boolean hasInputs() {
