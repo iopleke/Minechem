@@ -19,7 +19,6 @@ public class TabEnergy extends Tab {
     int textColour = 0x000000;
     //Switched from refrence to MinechemPowerProvider for 1.6 move to UE
     MinechemTileEntity energy;
-    float lastEnergy = 0;
     RollingAverage energyUsageRolling = new RollingAverage(100);
 
     public TabEnergy(Gui gui, MinechemTileEntity energy) {
@@ -40,9 +39,9 @@ public class TabEnergy extends Tab {
         energyUsageRolling.add(energy.getRequest());
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.energy"), x + 22, y + 8, headerColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.usage") + ":", x + 22, y + 20, subheaderColour);
-        fontRenderer.drawString(String.format("%.1f", energyUsageRolling.getAverage()) + " MJ/t", x + 22, y + 32, textColour);
-        fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.maxUsage") + ":", x + 22, y + 44, subheaderColour);
-        //Arbitrary direction
+	    fontRenderer.drawString(String.format("%.1f", energyUsageRolling.getAverage()) + " RF/t", x + 22, y + 32, textColour);
+	    fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.maxUsage") + ":", x + 22, y + 44, subheaderColour);
+	    //Arbitrary direction
         //Shouldn't matter for any machine
         fontRenderer.drawString(energy.getRequest() + " RF/t", x + 22, y + 56, textColour);
         fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.stored") + ":", x + 22, y + 68, subheaderColour);
