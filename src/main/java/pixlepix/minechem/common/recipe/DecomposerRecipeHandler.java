@@ -62,10 +62,7 @@ public class DecomposerRecipeHandler {
 									inputs.add(OreDictionary.getOres((String) o).get(0));
 								} else if (o instanceof ArrayList) {
 									inputs.add((ItemStack) ((ArrayList) o).get(0));
-								} else if (o != null) {
-									System.out.println(o.getClass().getName());
 								}
-
 							}
 							components = inputs.toArray(new ItemStack[inputs.size()]);
 						}
@@ -88,14 +85,10 @@ public class DecomposerRecipeHandler {
 
 							}
 							if (!sum.isEmpty()) {
-
-								System.out.println(8);
 								Random rand = new Random();
 								if (sum.containsAll(output)) {
 									output = sum;
 								} else if (!output.containsAll(sum) && rand.nextInt(foundRecipies) == 0) {
-
-									System.out.println(9);
 									output = sum;
 									foundRecipies += 1;
 								}
@@ -107,7 +100,6 @@ public class DecomposerRecipeHandler {
 			}
 
 			if (!output.isEmpty()) {
-				System.out.println(output);
 				return new DecomposerRecipe(input, output.toArray(new Chemical[output.size()]));
 			}
 		}

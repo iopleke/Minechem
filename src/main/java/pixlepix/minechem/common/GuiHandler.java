@@ -40,12 +40,10 @@ public class GuiHandler implements IGuiHandler {
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
         }
         if (tileEntity instanceof TileEntityFission) {
-            System.out.println(1);
             return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
         }
 
         if (tileEntity instanceof TileEntityProxy) {
-            System.out.println(2);
             return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
 
@@ -95,7 +93,6 @@ public class GuiHandler implements IGuiHandler {
         if (tileEntity instanceof TileEntityFusion)
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
         if (tileEntity instanceof TileEntityProxy) {
-            System.out.println(3);
             return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
         if (tileEntity instanceof TileEntityBlueprintProjector)
@@ -103,7 +100,6 @@ public class GuiHandler implements IGuiHandler {
         if (tileEntity instanceof TileEntityChemicalStorage)
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         if (tileEntity instanceof TileEntityFission) {
-            System.out.println(4);
             return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
         }
         return null;

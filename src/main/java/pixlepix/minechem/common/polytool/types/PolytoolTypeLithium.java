@@ -31,7 +31,6 @@ public class PolytoolTypeLithium extends PolytoolUpgradeType {
         System.out.println(damageAmount);
         target.attackEntityFrom(damage, (float) damageAmount);
     }
-
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, int id,
                                  int x, int y, int z, EntityLivingBase entityLiving) {

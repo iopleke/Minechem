@@ -14,7 +14,6 @@ public class DecomposerFluidRecipe extends DecomposerRecipe {
 
 	public DecomposerFluidRecipe(FluidStack fluid, Chemical... chemicals) {
 		super(chemicals);
-		System.out.println(fluid);
 		this.inputFluid = fluid;
 	}
 

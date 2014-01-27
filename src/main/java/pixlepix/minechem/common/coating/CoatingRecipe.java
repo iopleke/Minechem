@@ -33,7 +33,6 @@ public class CoatingRecipe implements IRecipe {
 
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inv) {
-        System.out.println(6);
         for (int i = 0; i < inv.getSizeInventory(); i++) {
             ItemStack s = inv.getStackInSlot(i);
             if (s != null && s.getItem() instanceof ItemSword) {
@@ -47,7 +46,6 @@ public class CoatingRecipe implements IRecipe {
                                 NBTTagCompound tag = (NBTTagCompound) l.tagAt(k);
                                 if (tag.getShort("id") == EnchantmentCoated.chemLookup.get(EnumMolecule.getById(s2.getItemDamage())).effectId) {
                                     level = tag.getShort("lvl");
-
                                     ItemStack result = s.copy();
                                     ((NBTTagCompound) result.getEnchantmentTagList().tagAt(k)).setInteger("lvl", level + 1);
                                 }

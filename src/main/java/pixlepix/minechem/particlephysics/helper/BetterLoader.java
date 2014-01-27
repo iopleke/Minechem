@@ -11,82 +11,82 @@ import java.util.ArrayList;
 
 public class BetterLoader {
 
-    public static ArrayList<Block> blocks = new ArrayList<Block>();
-    public static ArrayList<Class> classes = new ArrayList<Class>();
+	public static ArrayList<Block> blocks = new ArrayList<Block>();
+	public static ArrayList<Class> classes = new ArrayList<Class>();
 
-    public void populateClasses() {
+	public void populateClasses() {
 
-        classes.add(Emitter.class);
+		classes.add(Emitter.class);
 
-        classes.add(InfiniteEmitter.class);
+		classes.add(InfiniteEmitter.class);
 
-        classes.add(PolarizedGlass.class);
+		classes.add(PolarizedGlass.class);
 
-        classes.add(SeriesReceptor.class);
+		classes.add(SeriesReceptor.class);
 
-        classes.add(ControlGlass.class);
-
-
-    }
+		classes.add(ControlGlass.class);
 
 
-    public void loadBlocks() {
-
-        populateClasses();
+	}
 
 
-        try {
-            for (int i = 0; i < classes.size(); i++) {
+	public void loadBlocks() {
 
-                Class currentClass = classes.get(i);
-                Class clazz = (Class<Block>) currentClass;
-                Block newBlock = ((Block) clazz.newInstance()).setHardness(0.5F).setStepSound(Block.soundAnvilFootstep);
-                if (((IBlock) newBlock).inCreativeTab()) {
-                    newBlock.setCreativeTab(ParticlePhysics.creativeTab);
-                }
-                blocks.add(newBlock);
+		populateClasses();
 
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
-    public static Block getBlock(Class clazz) {
+		try {
+			for (int i = 0; i < classes.size(); i++) {
 
-        for (int i = 0; i < blocks.size(); i++) {
+				Class currentClass = classes.get(i);
+				Class clazz = (Class<Block>) currentClass;
+				Block newBlock = ((Block) clazz.newInstance()).setHardness(0.5F).setStepSound(Block.soundAnvilFootstep);
+				if (((IBlock) newBlock).inCreativeTab()) {
+					newBlock.setCreativeTab(ParticlePhysics.creativeTab);
+				}
+				blocks.add(newBlock);
 
-            Block currentBlock = blocks.get(i);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
-            if (clazz.isInstance(currentBlock)) {
-                return currentBlock;
-            }
-        }
-        System.out.println("Failed to find block in BetterLoader. Crash incoming.");
-        return null;
-    }
+	public static Block getBlock(Class clazz) {
 
-    public void mainload() {
-        System.out.println(blocks);
-        for (int i = 0; i < blocks.size(); i++) {
+		for (int i = 0; i < blocks.size(); i++) {
 
-            Block currentBlock = blocks.get(i);
-            if (currentBlock instanceof IBlock) {
-                IBlock currentIBlock = (IBlock) currentBlock;
-                LanguageRegistry.addName(currentBlock, currentIBlock.getName());
-                MinecraftForge.setBlockHarvestLevel(currentBlock, "pickaxe", 0);
-                if (currentIBlock.getItemBlock() != null) {
-                    GameRegistry.registerBlock(currentBlock, currentIBlock.getItemBlock(), currentIBlock.getName());
-                } else {
-                    GameRegistry.registerBlock(currentBlock, currentIBlock.getName());
-                }
-                currentIBlock.addRecipe();
+			Block currentBlock = blocks.get(i);
 
-                GameRegistry.registerTileEntity(currentIBlock.getTileEntityClass(), currentIBlock.getName() + "Minechem Tile Entity");
-            }
+			if (clazz.isInstance(currentBlock)) {
+				return currentBlock;
+			}
+		}
+		System.out.println("Failed to find block in BetterLoader. Crash incoming.");
+		return null;
+	}
 
-        }
-    }
+	public void mainload() {
+		System.out.println(blocks);
+		for (int i = 0; i < blocks.size(); i++) {
+
+			Block currentBlock = blocks.get(i);
+			if (currentBlock instanceof IBlock) {
+				IBlock currentIBlock = (IBlock) currentBlock;
+				LanguageRegistry.addName(currentBlock, currentIBlock.getName());
+				MinecraftForge.setBlockHarvestLevel(currentBlock, "pickaxe", 0);
+				if (currentIBlock.getItemBlock() != null) {
+					GameRegistry.registerBlock(currentBlock, currentIBlock.getItemBlock(), currentIBlock.getName());
+				} else {
+					GameRegistry.registerBlock(currentBlock, currentIBlock.getName());
+				}
+				currentIBlock.addRecipe();
+
+				GameRegistry.registerTileEntity(currentIBlock.getTileEntityClass(), currentIBlock.getName() + "Minechem Tile Entity");
+			}
+
+		}
+	}
 
 
 }
