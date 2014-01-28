@@ -42,7 +42,14 @@ public class MinechemBlocks {
 
     private static int uraniumID;
 
-    public static void loadConfig(Configuration config) {
+	//Particle Physics Ids
+	public static int controlGlassID;
+	public static int emitterID;
+	public static int infiniteEmitterID;
+	public static int polarizedGlassID;
+	public static int seriesReceptorID;
+
+	public static void loadConfig(Configuration config) {
         int baseID = 4012;
         microscopeID = getBlockConfig(config, "Microscope", baseID++);
         decomposerID = getBlockConfig(config, "Decomposer", baseID++);
@@ -54,7 +61,19 @@ public class MinechemBlocks {
 
         printerID = getBlockConfig(config, "BluePrintPrinter", baseID++);
         uraniumID = getBlockConfig(config, "Uranium Ore", baseID++);
-    }
+
+		//Particle physics ids
+		//Do not use base ids for compat with existsing worlds
+		emitterID = getBlockConfig(config, "Emitter", 1178);
+
+		polarizedGlassID = getBlockConfig(config, "Polarized Glass", 1179);
+
+		seriesReceptorID = getBlockConfig(config, "Series Receptor", 1180);
+
+		controlGlassID = getBlockConfig(config, "Control Glass", 1181);
+
+		infiniteEmitterID = getBlockConfig(config, "Infinite Emitter", 1182);
+	}
 
     private static int getBlockConfig(Configuration config, String key, int defaultID) {
         return config.get(Configuration.CATEGORY_BLOCK, key, defaultID).getInt(defaultID);

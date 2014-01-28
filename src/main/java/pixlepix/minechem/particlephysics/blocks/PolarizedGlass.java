@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.particlephysics.api.BaseParticle;
 import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
 
@@ -17,7 +18,7 @@ import java.util.List;
 public class PolarizedGlass extends BasicComplexBlock {
 
 	public PolarizedGlass() {
-		super(1179);
+		super(MinechemBlocks.polarizedGlassID);
 	}
 
 	@Override

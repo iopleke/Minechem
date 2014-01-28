@@ -8,6 +8,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.particlephysics.ParticlePhysics;
 import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
 import pixlepix.minechem.particlephysics.helper.ParticleRegistry;
@@ -18,7 +19,7 @@ import java.util.ArrayList;
 public class Emitter extends BasicComplexBlock {
 
 	public Emitter() {
-		super(1178);
+		super(MinechemBlocks.emitterID);
 	}
 
 	public Emitter(int i) {

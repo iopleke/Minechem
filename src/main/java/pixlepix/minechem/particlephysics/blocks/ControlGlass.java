@@ -8,6 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.particlephysics.api.BaseParticle;
 import pixlepix.minechem.particlephysics.api.IParticleBouncer;
 import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
@@ -18,7 +19,7 @@ import java.util.List;
 public class ControlGlass extends BasicComplexBlock implements IParticleBouncer {
 
 	public ControlGlass() {
-		super(1181);
+		super(MinechemBlocks.controlGlassID);
 	}
 
 	public ControlGlass(int i) {

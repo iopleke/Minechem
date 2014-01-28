@@ -9,47 +9,45 @@ import pixlepix.minechem.particlephysics.api.IParticleReceptor;
 
 public class SeriesReceptorTileEntity extends TileEnergyHandler implements IParticleReceptor {
 
-    public int excitedTicks = 0;
+	public int excitedTicks = 0;
 
-    public float powerToDischarge = 0;
+	public float powerToDischarge = 0;
 
+	//28000 RF per coal
+	//280 RF per emission
+	//70 RF per coal particle
+	//Potential of 4000
 
-    //28000 RF per coal
-    //280 RF per emission
-    //70 RF per coal particle
-    //Potential of 4000
+	public static final float constant = .175F;
 
-    public static final float constant = .0175F;
+	@Override
+	public void onContact(BaseParticle particle) {
 
-    @Override
-    public void onContact(BaseParticle particle) {
+		if (this.excitedTicks > 0) {
+			this.storage.modifyEnergyStored(((int) (constant * particle.potential)));
+		} else {
 
-        if (this.excitedTicks > 0) {
-            this.storage.modifyEnergyStored(((int) (constant * particle.potential)));
-        } else {
+			this.storage.modifyEnergyStored(((int) (constant * particle.potential)));
+		}
+		this.excitedTicks = 20;
+		particle.setDead();
+	}
 
-            this.storage.modifyEnergyStored(((int) (constant * particle.potential)));
-        }
-        this.excitedTicks = 20;
-        particle.setDead();
-    }
+	@Override
+	public void updateEntity() {
+		super.updateEntity();
+		this.storage.setCapacity(320000000);
+		this.excitedTicks--;
+		for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
+			TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
+			if (te != null && te instanceof IEnergyHandler) {
+				IEnergyHandler energy = (IEnergyHandler) te;
+				if (energy.canInterface(dir.getOpposite())) {
 
-    @Override
-    public void updateEntity() {
-        super.updateEntity();
-        this.storage.setCapacity(320000000);
-        this.excitedTicks--;
-        for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS) {
-            TileEntity te = worldObj.getBlockTileEntity(xCoord + dir.offsetX, yCoord + dir.offsetY, zCoord + dir.offsetZ);
-            if (te != null && te instanceof IEnergyHandler) {
-                IEnergyHandler energy = (IEnergyHandler) te;
-                if (energy.canInterface(dir.getOpposite())) {
-
-                    this.storage.modifyEnergyStored(-1 * energy.receiveEnergy(dir.getOpposite(), this.getEnergyStored(null), false));
-                }
-            }
-        }
-    }
-
+					this.storage.modifyEnergyStored(-1 * energy.receiveEnergy(dir.getOpposite(), this.getEnergyStored(null), false));
+				}
+			}
+		}
+	}
 
 }

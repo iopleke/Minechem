@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.particlephysics.helper.BasicComplexBlock;
 import pixlepix.minechem.particlephysics.tile.SeriesReceptorTileEntity;
 
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 public class SeriesReceptor extends BasicComplexBlock {
 
 	public SeriesReceptor() {
-		super(1180);
+		super(MinechemBlocks.seriesReceptorID);
 	}
 
 	public SeriesReceptor(int i) {
