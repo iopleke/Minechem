@@ -15,9 +15,9 @@ remotebuild.py
 /out
 
 ## idea
-Minechem.ims
-Minechem.ipr
-
+*.iml
+*.ipr
+*.iws
 ## eclipse
 /.settings
 /.metadata
