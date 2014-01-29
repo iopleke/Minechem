@@ -66,10 +66,10 @@ public class DecomposerRecipeHandler {
 							}
 							components = inputs.toArray(new ItemStack[inputs.size()]);
 						}
-						if (recipe instanceof ShapelessRecipes) {
+						if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[]) {
 							components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
 						}
-						if (recipe instanceof ShapedRecipes) {
+						if (recipe instanceof ShapedRecipes && ((ShapedRecipes) recipe).recipeItems instanceof ItemStack[]) {
 							components = ((ShapedRecipes) recipe).recipeItems;
 						}
 
