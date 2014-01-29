@@ -61,7 +61,7 @@ public class AutoCrashReporter extends Handler {
 	}
 
 	public void call(String crash) {
-		if (crash.contains("minechem") && !crash.contains("occupied by")) {
+		if (crash.contains("minechem") && crash.indexOf("System Details") > crash.indexOf("minechem") && !crash.contains("occupied by")) {
 			String to = "adlytempleton@gmail.com";
 			String from = "minechemcrashes@gmail.com";
 			String host = "smtp.gmail.com";
