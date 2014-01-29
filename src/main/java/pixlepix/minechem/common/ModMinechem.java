@@ -74,7 +74,7 @@ public class ModMinechem {
 
 	public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_unpowered.png");
 
-	@SidedProxy(clientSide = "pixlepix.minechem.client.ClientProxy", serverSide = "pixlepix.minechem.particlephysics.CommonProxy")
+	@SidedProxy(clientSide = "pixlepix.minechem.client.ClientProxy", serverSide = "pixlepix.minechem.common.CommonProxy")
 	public static CommonProxy proxy;
 	public static CreativeTabs minechemTab = new CreativeTabMinechem("MineChem");
 	private Configuration config;
