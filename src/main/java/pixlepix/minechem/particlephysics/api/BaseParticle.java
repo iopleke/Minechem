@@ -69,7 +69,10 @@ public abstract class BaseParticle extends EntityLiving {
 			this.setPosition(x + 0.375, y + 0.375, z + 0.375);
 			this.potential *= 0.9;
 			double f = (this.potential / getStartingPotential());
-			this.setVelocity(targetDirection.offsetX * f, targetDirection.offsetY * f, targetDirection.offsetZ * f);
+
+			this.motionX = targetDirection.offsetX * f;
+			this.motionY = targetDirection.offsetY * f;
+			this.motionZ = targetDirection.offsetZ * f;
 			this.onBounceHook(x, y, z);
 
 		} else {

@@ -88,7 +88,7 @@ public class DecomposerRecipeHandler {
 								Random rand = new Random();
 								if (sum.containsAll(output)) {
 									output = sum;
-								} else if (!output.containsAll(sum) && rand.nextInt(foundRecipies) == 0) {
+								} else if (!output.containsAll(sum) && (foundRecipies < 1 || rand.nextInt(foundRecipies) == 0)) {
 									output = sum;
 									foundRecipies += 1;
 								}
