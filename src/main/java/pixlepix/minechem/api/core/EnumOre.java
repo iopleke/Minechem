@@ -42,9 +42,9 @@ public enum EnumOre {
 
     cobalt("Cobalt", new Element(EnumElement.Co, 16)),
 
-    ardite("Ardite", new Element(EnumElement.Ar, 16)),;
+	ardite("Ardite", new Element(EnumElement.Ar, 16));
 
-    private String name;
+	private String name;
     private Chemical[] composition;
 
     public String getName() {
