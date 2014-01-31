@@ -51,8 +51,10 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound) {
         super.writeToNBT(nbtTagCompound);
-        nbtTagCompound.setInteger("blueprintID", blueprint.id);
-        nbtTagCompound.setInteger("blockID", blockID);
+	    if (blueprint != null) {
+		    nbtTagCompound.setInteger("blueprintID", blueprint.id);
+	    }
+	    nbtTagCompound.setInteger("blockID", blockID);
     }
 
     @Override
