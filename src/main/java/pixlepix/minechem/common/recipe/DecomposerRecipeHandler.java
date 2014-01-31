@@ -60,7 +60,7 @@ public class DecomposerRecipeHandler {
 									inputs.add((ItemStack) o);
 								} else if (o instanceof String) {
 									inputs.add(OreDictionary.getOres((String) o).get(0));
-								} else if (o instanceof ArrayList) {
+								} else if (o instanceof ArrayList && !((ArrayList) o).isEmpty()) {
 									inputs.add((ItemStack) ((ArrayList) o).get(0));
 								}
 							}
