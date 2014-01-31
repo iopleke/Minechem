@@ -9,7 +9,6 @@ import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.common.items.*;
 import pixlepix.minechem.common.polytool.ItemPolytool;
-import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class MinechemItems {
@@ -21,11 +20,11 @@ public class MinechemItems {
     public static ItemBlueprint blueprint;
 	//public static ItemTestTube testTube;
 	public static ItemChemistJournal journal;
-    public static ItemArmorRadiationShield hazmatFeet;
-    public static ItemArmorRadiationShield hazmatLegs;
-    public static ItemArmorRadiationShield hazmatTorso;
-    public static ItemArmorRadiationShield hazmatHead;
-    public static ItemStack convexLens;
+	//public static ItemArmorRadiationShield hazmatFeet;
+	//public static ItemArmorRadiationShield hazmatLegs;
+	//public static ItemArmorRadiationShield hazmatTorso;
+	//public static ItemArmorRadiationShield hazmatHead;
+	public static ItemStack convexLens;
     public static ItemStack concaveLens;
     public static ItemStack projectorLens;
     public static ItemStack microscopeLens;
@@ -83,11 +82,11 @@ public class MinechemItems {
 	    //Test tube removed
 	    //testTube = new ItemTestTube(testTubeID);
 	    journal = new ItemChemistJournal(journalID);
-        hazmatFeet = new ItemArmorRadiationShield(hazmatFeetID, 3, 0.1F, ConstantValue.HAZMAT_FEET_TEX);
-        hazmatLegs = new ItemArmorRadiationShield(hazmatLegsID, 2, 0.1F, ConstantValue.HAZMAT_LEGS_TEX);
-        hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
-        hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
-        IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
+	    //hazmatFeet = new ItemArmorRadiationShield(hazmatFeetID, 3, 0.1F, ConstantValue.HAZMAT_FEET_TEX);
+	    //hazmatLegs = new ItemArmorRadiationShield(hazmatLegsID, 2, 0.1F, ConstantValue.HAZMAT_LEGS_TEX);
+	    //hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
+	    //hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
+	    IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
         EmptyPillz = new ItemPills(pillzID, 0);
         polytool = new ItemPolytool(polytoolID);
         LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
@@ -95,11 +94,11 @@ public class MinechemItems {
         LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
 	    //LanguageRegistry.addName(testTube, MinechemHelper.getLocalString("item.name.testtube"));
 	    LanguageRegistry.addName(journal, MinechemHelper.getLocalString("item.name.chemistJournal"));
-        LanguageRegistry.addName(hazmatFeet, MinechemHelper.getLocalString("item.name.hazmatFeet"));
-        LanguageRegistry.addName(hazmatLegs, MinechemHelper.getLocalString("item.name.hazmatLegs"));
-        LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
-        LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
-        LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
+	    //LanguageRegistry.addName(hazmatFeet, MinechemHelper.getLocalString("item.name.hazmatFeet"));
+	    //LanguageRegistry.addName(hazmatLegs, MinechemHelper.getLocalString("item.name.hazmatLegs"));
+	    //LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
+	    //LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
+	    LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
         LanguageRegistry.addName(EmptyPillz, "Pills");
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
