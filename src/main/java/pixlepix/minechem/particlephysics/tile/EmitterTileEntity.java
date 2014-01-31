@@ -59,8 +59,8 @@ public class EmitterTileEntity extends TileEntity implements IInventory {
                 }
             }
             if (fuelStored > 0) {
-                if (!(Block.blocksList[worldObj.getBlockId(xCoord, yCoord, zCoord)] instanceof InfiniteEmitter && getStackInSlot(0).stackSize >= 63)) {
-                    this.fuelStored--;
+	            if (!(Block.blocksList[worldObj.getBlockId(xCoord, yCoord, zCoord)] instanceof InfiniteEmitter && getStackInSlot(0) != null && getStackInSlot(0).stackSize >= 63)) {
+		            this.fuelStored--;
                 }
                 ForgeDirection[] outputDirections = {ForgeDirection.SOUTH, ForgeDirection.NORTH, ForgeDirection.WEST, ForgeDirection.EAST};
                 for (ForgeDirection dir : outputDirections) {
