@@ -18,7 +18,7 @@ public class SeriesReceptorTileEntity extends TileEnergyHandler implements IPart
 	//70 RF per coal particle
 	//Potential of 4000
 
-	public static final float constant = .175F;
+	public static final float constant = .12F;
 
 	@Override
 	public void onContact(BaseParticle particle) {
@@ -48,6 +48,12 @@ public class SeriesReceptorTileEntity extends TileEnergyHandler implements IPart
 				}
 			}
 		}
+	}
+
+	@Override
+	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate) {
+
+		return 0;
 	}
 
 }
