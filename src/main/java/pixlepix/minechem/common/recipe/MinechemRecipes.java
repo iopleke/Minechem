@@ -1320,10 +1320,10 @@ public class MinechemRecipes {
 		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.fusion, 16, 1), new Object[]{ "IWI", "IBI", "IWI", Character.valueOf('I'), itemIngotIron, Character.valueOf('W'), ItemElement.createStackOf(EnumElement.W, 1), Character.valueOf('B'), ItemElement.createStackOf(EnumElement.Be, 1) });
 		GameRegistry.addRecipe(MinechemItems.projectorLens, new Object[]{ "ABA", Character.valueOf('A'), MinechemItems.concaveLens, Character.valueOf('B'), MinechemItems.convexLens });
 		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.blueprintProjector), new Object[]{ " I ", "GPL", " I ", Character.valueOf('I'), itemIngotIron, Character.valueOf('P'), blockThinGlass, Character.valueOf('L'), MinechemItems.projectorLens, Character.valueOf('G'), new ItemStack(Block.redstoneLampIdle) });
-		GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatFeet), new Object[]{ "   ", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
-		GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatLegs), new Object[]{ "PPP", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
-		GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatTorso), new Object[]{ " P ", "PPP", "PPP", Character.valueOf('P'), moleculePolyvinylChloride });
-		GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[]{ "PPP", "P P", "   ", Character.valueOf('P'), moleculePolyvinylChloride });
+		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatFeet), new Object[]{ "   ", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
+		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatLegs), new Object[]{ "PPP", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
+		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatTorso), new Object[]{ " P ", "PPP", "PPP", Character.valueOf('P'), moleculePolyvinylChloride });
+		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[]{ "PPP", "P P", "   ", Character.valueOf('P'), moleculePolyvinylChloride });
 		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.chemicalStorage), new Object[]{ "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
 		GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{ "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[]{ new ItemStack(Item.book), new ItemStack(Block.glass) });

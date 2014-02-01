@@ -3,7 +3,8 @@ package pixlepix.minechem.particlephysics.api;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLiving;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import net.minecraft.tileentity.TileEntity;
@@ -21,7 +22,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public abstract class BaseParticle extends EntityLiving {
+public abstract class BaseParticle extends EntityLivingBase {
 
 	public int ticks = 0;
 
@@ -87,6 +88,21 @@ public abstract class BaseParticle extends EntityLiving {
 
 	public void onBounceHook(int x, int y, int z) {
 
+	}
+
+	@Override
+	public ItemStack[] getLastActiveItems() {
+		return new ItemStack[0];
+	}
+
+	@Override
+	public void setCurrentItemOrArmor(int i, ItemStack itemStack) {
+
+	}
+
+	@Override
+	public ItemStack getCurrentItemOrArmor(int i) {
+		return null;
 	}
 
 	public void sendCompletePositionUpdate() {
@@ -181,6 +197,11 @@ public abstract class BaseParticle extends EntityLiving {
 			}
 		}
 		this.checkForParticleCollision();
+	}
+
+	@Override
+	public ItemStack getHeldItem() {
+		return null;
 	}
 
 	public void checkForParticleCollision() {
