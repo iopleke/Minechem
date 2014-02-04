@@ -338,7 +338,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 	}
 
 	public boolean takeStacksFromStorage(boolean doTake) {
-		if (this.currentRecipe == null) {
+		if (this.currentRecipe == null || !this.hasEnoughPowerForCurrentRecipe()) {
 			return false;
 		}
 		List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
