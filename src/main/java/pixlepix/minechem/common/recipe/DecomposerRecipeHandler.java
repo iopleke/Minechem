@@ -79,7 +79,7 @@ public class DecomposerRecipeHandler {
 								if (item != null) {
 									DecomposerRecipe decompRecipe = this.getRecipe(item, level + 1);
 									if (decompRecipe != null) {
-										sum.addAll(decompRecipe.getOutputRaw());
+										sum.addAll(decompRecipe.getPartialOutputRaw(((IRecipe) recipe).getRecipeOutput().stackSize));
 									}
 								}
 
