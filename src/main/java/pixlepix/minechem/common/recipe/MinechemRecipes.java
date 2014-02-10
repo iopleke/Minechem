@@ -1325,7 +1325,7 @@ public class MinechemRecipes {
 		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatTorso), new Object[]{ " P ", "PPP", "PPP", Character.valueOf('P'), moleculePolyvinylChloride });
 		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[]{ "PPP", "P P", "   ", Character.valueOf('P'), moleculePolyvinylChloride });
 		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.chemicalStorage), new Object[]{ "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
-		GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{ "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
+		//GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{ "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[]{ new ItemStack(Item.book), new ItemStack(Block.glass) });
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.EmptyPillz, 4), new Object[]{ new ItemStack(Item.sugar), new ItemStack(Item.slimeBall), new ItemStack(Item.slimeBall) });
 		//Fusion
