@@ -150,4 +150,9 @@ public class BlockGhostBlock extends BlockContainer {
     public TileEntity createNewTileEntity(World var1) {
         return new TileEntityGhostBlock();
     }
+
+	@Override
+	public boolean isBlockReplaceable(World world, int x, int y, int z) {
+		return true;
+	}
 }

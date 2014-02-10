@@ -33,26 +33,28 @@ public abstract class BlockMinechemContainer extends BlockContainer {
 				float randomX = this.random.nextFloat() * 0.8F + 0.1F;
 				float randomY = this.random.nextFloat() * 0.8F + 0.1F;
 				float randomZ = this.random.nextFloat() * 0.8F + 0.1F;
-				while (itemstack.stackSize > 0) {
-					int randomN = this.random.nextInt(21) + 10;
-					if (randomN > itemstack.stackSize)
-						randomN = itemstack.stackSize;
-					itemstack.stackSize -= randomN;
-					ItemStack droppedStack = new ItemStack(itemstack.itemID, randomN,
-							itemstack.getItemDamage());
-					// Copy NBT tag data, needed to preserve Chemist Journal
-					// contents (for example).
-					if (itemstack.hasTagCompound()) {
-						droppedStack.setTagCompound(
-								(NBTTagCompound) itemstack.getTagCompound().copy());
-					}
+				if (itemstack != null) {
+					while (itemstack.stackSize > 0) {
+						int randomN = this.random.nextInt(21) + 10;
+						if (randomN > itemstack.stackSize)
+							randomN = itemstack.stackSize;
+						itemstack.stackSize -= randomN;
+						ItemStack droppedStack = new ItemStack(itemstack.itemID, randomN,
+								itemstack.getItemDamage());
+						// Copy NBT tag data, needed to preserve Chemist Journal
+						// contents (for example).
+						if (itemstack.hasTagCompound()) {
+							droppedStack.setTagCompound(
+									(NBTTagCompound) itemstack.getTagCompound().copy());
+						}
 
-					EntityItem droppedEntityItem = new EntityItem(world,
-							(double) ((float) x + randomX),
-							(double) ((float) y + randomY),
-							(double) ((float) z + randomZ),
-							droppedStack);
-					world.spawnEntityInWorld(droppedEntityItem);
+						EntityItem droppedEntityItem = new EntityItem(world,
+								(double) ((float) x + randomX),
+								(double) ((float) y + randomY),
+								(double) ((float) z + randomZ),
+								droppedStack);
+						world.spawnEntityInWorld(droppedEntityItem);
+					}
 				}
 			}
 			super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);

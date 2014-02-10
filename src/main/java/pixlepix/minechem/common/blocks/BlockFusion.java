@@ -108,10 +108,12 @@ public class BlockFusion extends BlockMinechemContainer {
 			par3List.add(new ItemStack(this.blockID, 1, i));
 	}
 
+	//
 	@Override
 	public void breakBlock(World world, int x, int y, int z, int oldBlockId, int oldMetadata) {
 		super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);
 
+		/*
 		if (oldMetadata < 2) {
 			if (world.getBlockTileEntity(x, y, z) instanceof TileEntityProxy) {
 				TileEntityProxy tileEntity = (TileEntityProxy) world.getBlockTileEntity(x, y, z);
@@ -119,6 +121,7 @@ public class BlockFusion extends BlockMinechemContainer {
 				world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true);
 			}
 		}
+		*/
 
 	}
 
