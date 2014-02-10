@@ -1,7 +1,6 @@
 package pixlepix.minechem.common;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
-import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -62,8 +61,8 @@ public class MinechemItems {
         hazmatLegsID = getItemConfig(config, "HazmatLegs", baseID++);
         hazmatTorsoID = getItemConfig(config, "HazmatTorso", baseID++);
         hazmatHeadID = getItemConfig(config, "HazmatHead", baseID++);
-        photonID = getItemConfig(config, "Hammer", baseID++);
-        pillzID = getItemConfig(config, "EmptyPills", baseID++);
+	    //photonID = getItemConfig(config, "Hammer", baseID++);
+	    pillzID = getItemConfig(config, "EmptyPills", baseID++);
 
         polytoolID = getItemConfig(config, "Polytool", baseID++);
     }
@@ -86,8 +85,8 @@ public class MinechemItems {
 	    //hazmatLegs = new ItemArmorRadiationShield(hazmatLegsID, 2, 0.1F, ConstantValue.HAZMAT_LEGS_TEX);
 	    //hazmatTorso = new ItemArmorRadiationShield(hazmatTorsoID, 1, 0.5F, ConstantValue.HAZMAT_TORSO_TEX);
 	    //hazmatHead = new ItemArmorRadiationShield(hazmatHeadID, 0, 0.2F, ConstantValue.HAZMAT_HEAD_TEX);
-	    IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
-        EmptyPillz = new ItemPills(pillzID, 0);
+	    //IAintAvinit = new PhotonicInduction(photonID, EnumToolMaterial.IRON, 5F);
+	    EmptyPillz = new ItemPills(pillzID, 0);
         polytool = new ItemPolytool(polytoolID);
         LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
         LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
