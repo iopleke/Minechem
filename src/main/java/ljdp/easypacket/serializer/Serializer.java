@@ -9,13 +9,10 @@ public abstract class Serializer {
 
     /**
      * writes the field value to the dataOutputStream.
-     * 
-     * @param obj
-     *            The EasyPacket instance containing the field.
-     * @param field
-     *            The field we wish to write from.
-     * @param out
-     *            the stream we wish to write to.
+     *
+     * @param obj   The EasyPacket instance containing the field.
+     * @param field The field we wish to write from.
+     * @param out   the stream we wish to write to.
      * @throws IOException
      * @throws IllegalArgumentException
      * @throws IllegalAccessException
@@ -24,13 +21,10 @@ public abstract class Serializer {
 
     /**
      * Reads from the dataInputStream and sets the field's value.
-     * 
-     * @param obj
-     *            The EasyPacket instance containing the field.
-     * @param field
-     *            The field we wish to set.
-     * @param in
-     *            The stream we wish to read from.
+     *
+     * @param obj   The EasyPacket instance containing the field.
+     * @param field The field we wish to set.
+     * @param in    The stream we wish to read from.
      * @throws IOException
      * @throws IllegalArgumentException
      * @throws IllegalAccessException

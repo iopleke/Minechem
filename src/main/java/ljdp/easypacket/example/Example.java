@@ -1,10 +1,10 @@
 package ljdp.easypacket.example;
 
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-
 import ljdp.easypacket.EasyPacketDispatcher;
 import ljdp.easypacket.EasyPacketHandler;
+
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
 
 public class Example {
 

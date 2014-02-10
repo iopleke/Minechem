@@ -2,7 +2,8 @@
 dist
 download
 .DS_Store
-push.py
+push.sh
+remotebuild.py
 
 
 ## gradle
@@ -11,7 +12,11 @@ push.py
 /eclipse
 ## ForgeGradle
 /run
+/out
 
+## idea
+Minechem.ims
+Minechem.ipr
 
 ## eclipse
 /.settings

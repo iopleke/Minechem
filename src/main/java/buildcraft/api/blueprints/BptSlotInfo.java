@@ -1,7 +1,7 @@
-/** 
+/**
  * Copyright (c) SpaceToad, 2011
  * http://www.mod-buildcraft.com
- * 
+ *
  * BuildCraft is distributed under the terms of the Minecraft Mod Public 
  * License 1.0, or MMPL. Please check the contents of the license located in
  * http://www.mod-buildcraft.com/MMPL-1.0.txt
@@ -9,9 +9,10 @@
 
 package buildcraft.api.blueprints;
 
-import java.util.LinkedList;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.LinkedList;
 
 /**
  * This class records a slot, either from a blueprint or from a block placed in the world.
@@ -20,35 +21,35 @@ import net.minecraft.nbt.NBTTagCompound;
 @Deprecated
 public class BptSlotInfo {
 
-	public int blockId = 0;
-	public int meta = 0;
-	public int x;
-	public int y;
-	public int z;
+    public int blockId = 0;
+    public int meta = 0;
+    public int x;
+    public int y;
+    public int z;
 
-	/**
-	 * This field contains requirements for a given block when stored in the blueprint. Modders can either rely on this list or compute their own int BptBlock.
-	 */
-	public LinkedList<ItemStack> storedRequirements = new LinkedList<ItemStack>();
+    /**
+     * This field contains requirements for a given block when stored in the blueprint. Modders can either rely on this list or compute their own int BptBlock.
+     */
+    public LinkedList<ItemStack> storedRequirements = new LinkedList<ItemStack>();
 
-	/**
-	 * This tree contains additional data to be stored in the blueprint. By default, it will be initialized from BptBlock.initializeFromWorld with the standard
-	 * readNBT function of the corresponding tile (if any) and will be loaded from BptBlock.buildBlock using the standard writeNBT function.
-	 */
-	public NBTTagCompound cpt = new NBTTagCompound();
+    /**
+     * This tree contains additional data to be stored in the blueprint. By default, it will be initialized from BptBlock.initializeFromWorld with the standard
+     * readNBT function of the corresponding tile (if any) and will be loaded from BptBlock.buildBlock using the standard writeNBT function.
+     */
+    public NBTTagCompound cpt = new NBTTagCompound();
 
-	@Override
-	public BptSlotInfo clone() {
-		BptSlotInfo obj = new BptSlotInfo();
+    @Override
+    public BptSlotInfo clone() {
+        BptSlotInfo obj = new BptSlotInfo();
 
-		obj.x = x;
-		obj.y = y;
-		obj.z = z;
-		obj.blockId = blockId;
-		obj.meta = meta;
-		obj.cpt = (NBTTagCompound) cpt.copy();
+        obj.x = x;
+        obj.y = y;
+        obj.z = z;
+        obj.blockId = blockId;
+        obj.meta = meta;
+        obj.cpt = (NBTTagCompound) cpt.copy();
 
-		return obj;
-	}
+        return obj;
+    }
 
 }

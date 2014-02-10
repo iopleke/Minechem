@@ -1,21 +1,19 @@
 package ljdp.easypacket;
 
+import cpw.mods.fml.common.network.Player;
+import ljdp.easypacket.serializer.Serializer;
+import ljdp.easypacket.serializer.SerializerHandler;
+import net.minecraft.network.INetworkManager;
+
 import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
-
-import ljdp.easypacket.serializer.Serializer;
-import ljdp.easypacket.serializer.SerializerHandler;
-
-import net.minecraft.network.INetworkManager;
-
-import cpw.mods.fml.common.network.Player;
 
 public class EasyPacketHandler {
 
@@ -29,11 +27,9 @@ public class EasyPacketHandler {
 
     /**
      * Registers an EasyPacket class and returns an EasyPacketHandler. Note: You can't register more than 256 EasyPackets.
-     * 
-     * @param clazz
-     *            the EasyPacket class to register
-     * @param dispatcher
-     *            The dispatcher to bind the handler to.
+     *
+     * @param clazz      the EasyPacket class to register
+     * @param dispatcher The dispatcher to bind the handler to.
      * @return
      */
     public static EasyPacketHandler registerEasyPacket(Class<? extends EasyPacket> clazz, EasyPacketDispatcher dispatcher) {
@@ -84,7 +80,7 @@ public class EasyPacketHandler {
 
     /**
      * Registers a class that implements IEasyPacketCallback. When a packet of the handler's type is received the callback methods will be invoked.
-     * 
+     *
      * @param callback
      */
     public void registerCallback(IEasyPacketCallback callback) {
@@ -93,7 +89,7 @@ public class EasyPacketHandler {
 
     /**
      * Unregisters an IEasyPacketCallback class.
-     * 
+     *
      * @param callback
      */
     public void unregisterCallback(IEasyPacketCallback callback) {
@@ -102,7 +98,7 @@ public class EasyPacketHandler {
 
     /**
      * Creates an empty packet.
-     * 
+     *
      * @return
      */
     public EasyPacket createPacket() {
@@ -129,7 +125,7 @@ public class EasyPacketHandler {
 
     /**
      * Writes the all fields annotated with @EasyPacketData to a byte array.
-     * 
+     *
      * @param easyPacket
      * @return byte[] data
      */
@@ -161,7 +157,7 @@ public class EasyPacketHandler {
 
     /**
      * Reads a byte array and inserts the values in the packet's fields annotated with @EasyPacketData
-     * 
+     *
      * @param easyPacket
      * @param data
      */

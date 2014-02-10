@@ -12,7 +12,7 @@ import net.minecraftforge.common.ForgeDirection;
 
 /**
  * Essentially only used for Wooden Power Pipe connection rules.
- *
+ * <p/>
  * This Tile Entity interface allows you to indicate that a block can emit power
  * from a specific side.
  *
@@ -20,5 +20,5 @@ import net.minecraftforge.common.ForgeDirection;
  */
 public interface IPowerEmitter {
 
-	public boolean canEmitPowerFrom(ForgeDirection side);
+    public boolean canEmitPowerFrom(ForgeDirection side);
 }

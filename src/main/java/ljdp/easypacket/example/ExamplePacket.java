@@ -25,7 +25,8 @@ public class ExamplePacket extends EasyPacket {
         this.someLong = 1827366;
     }
 
-    public ExamplePacket() {}
+    public ExamplePacket() {
+    }
 
     @Override
     public boolean isChunkDataPacket() {
@@ -33,5 +34,6 @@ public class ExamplePacket extends EasyPacket {
     }
 
     @Override
-    public void onReceive(Player player) {}
+    public void onReceive(Player player) {
+    }
 }

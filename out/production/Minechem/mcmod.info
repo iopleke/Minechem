@@ -1,0 +1,17 @@
+[
+{
+  "modid": "minechem",
+  "name": "MineChem",
+  "description": "Chemical industry in Minecraft!",
+  "version": "@VERSION@",
+  "credits": "",
+  "logoFile": "/mods/minechem/logo.png",
+  "mcversion": "@MCVERSION@",
+  "url": "http://universalelectricity.com/minechem",
+  "updateUrl": "http://universalelectricity.com/minechem",
+  "authors": ["See GitHub page"],
+  "parent":"",
+  "screenshots": [],
+  "dependencies": ["mod_MinecraftForge"]
+}
+]

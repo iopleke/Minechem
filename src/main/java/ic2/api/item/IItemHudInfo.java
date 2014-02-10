@@ -1,9 +1,8 @@
 package ic2.api.item;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public interface IItemHudInfo {
 
@@ -21,7 +20,7 @@ public interface IItemHudInfo {
     
     
     */
-    
+
     public List<String> getHudInfo(ItemStack itemStack);
-    
+
 }

@@ -1,12 +1,12 @@
 package ljdp.easypacket.serializer;
 
+import net.minecraft.item.ItemStack;
+import net.minecraft.network.packet.Packet;
+
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
-
-import net.minecraft.item.ItemStack;
-import net.minecraft.network.packet.Packet;
 
 public class ItemStackSerializer extends Serializer {
 

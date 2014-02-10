@@ -12,18 +12,20 @@ import net.minecraftforge.common.ForgeDirection;
 
 public interface IPipeConnection {
 
-	enum ConnectOverride {
+    enum ConnectOverride {
 
-		CONNECT, DISCONNECT, DEFAULT
-	};
+        CONNECT, DISCONNECT, DEFAULT
+    }
 
-	/**
-	 * Allows you to override pipe connection logic.
-	 *
-	 * @param type
-	 * @param with
-	 * @return CONNECT to force a connection, DISCONNECT to force no connection,
-	 * and DEFAULT to let the pipe decide.
-	 */
-	public ConnectOverride overridePipeConnection(PipeType type, ForgeDirection with);
+    ;
+
+    /**
+     * Allows you to override pipe connection logic.
+     *
+     * @param type
+     * @param with
+     * @return CONNECT to force a connection, DISCONNECT to force no connection,
+     * and DEFAULT to let the pipe decide.
+     */
+    public ConnectOverride overridePipeConnection(PipeType type, ForgeDirection with);
 }

@@ -9,15 +9,15 @@ import net.minecraft.util.Icon;
 
 public interface IFillerPattern {
 
-	public int getId();
+    public int getId();
 
-	public void setId(int id);
+    public void setId(int id);
 
-	public boolean iteratePattern(TileEntity tile, IBox box, ItemStack stackToPlace);
+    public boolean iteratePattern(TileEntity tile, IBox box, ItemStack stackToPlace);
 
-	@SideOnly(Side.CLIENT)
-	public Icon getTexture();
+    @SideOnly(Side.CLIENT)
+    public Icon getTexture();
 
-	public String getName();
+    public String getName();
 
 }

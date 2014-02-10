@@ -2,43 +2,43 @@ package cofh.api.tileentity;
 
 public interface ISecureTile {
 
-	public static enum AccessMode {
-		PUBLIC, RESTRICTED, PRIVATE;
+    public static enum AccessMode {
+        PUBLIC, RESTRICTED, PRIVATE;
 
-		public boolean isPublic() {
+        public boolean isPublic() {
 
-			return this == PUBLIC;
-		}
+            return this == PUBLIC;
+        }
 
-		public boolean isRestricted() {
+        public boolean isRestricted() {
 
-			return this == RESTRICTED;
-		}
+            return this == RESTRICTED;
+        }
 
-		public boolean isPrivate() {
+        public boolean isPrivate() {
 
-			return this == PRIVATE;
-		}
+            return this == PRIVATE;
+        }
 
-		public static AccessMode stepForward(AccessMode curAccess) {
+        public static AccessMode stepForward(AccessMode curAccess) {
 
-			return curAccess == AccessMode.PUBLIC ? AccessMode.RESTRICTED : curAccess == AccessMode.PRIVATE ? AccessMode.PUBLIC : AccessMode.PRIVATE;
-		}
+            return curAccess == AccessMode.PUBLIC ? AccessMode.RESTRICTED : curAccess == AccessMode.PRIVATE ? AccessMode.PUBLIC : AccessMode.PRIVATE;
+        }
 
-		public static AccessMode stepBackward(AccessMode curAccess) {
+        public static AccessMode stepBackward(AccessMode curAccess) {
 
-			return curAccess == AccessMode.PUBLIC ? AccessMode.PRIVATE : curAccess == AccessMode.PRIVATE ? AccessMode.RESTRICTED : AccessMode.PUBLIC;
-		}
-	}
+            return curAccess == AccessMode.PUBLIC ? AccessMode.PRIVATE : curAccess == AccessMode.PRIVATE ? AccessMode.RESTRICTED : AccessMode.PUBLIC;
+        }
+    }
 
-	public boolean setAccess(AccessMode access);
+    public boolean setAccess(AccessMode access);
 
-	public AccessMode getAccess();
+    public AccessMode getAccess();
 
-	public boolean setOwnerName(String name);
+    public boolean setOwnerName(String name);
 
-	public String getOwnerName();
+    public String getOwnerName();
 
-	public boolean canPlayerAccess(String name);
+    public boolean canPlayerAccess(String name);
 
 }

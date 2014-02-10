@@ -1,7 +1,7 @@
 /**
  * Copyright (c) <2012>, Oleg Romanovskiy <shedarhome@gmail.com> aka Shedar
  * All rights reserved.
- * 
+ *
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met:
  *     * Redistributions of source code must retain the above copyright
@@ -12,7 +12,7 @@
  *     * Neither the name of the author nor the
  *       names of its contributors may be used to endorse or promote products
  *       derived from this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
  * ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
  * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -30,24 +30,21 @@ package org.modstats;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ModVersionData
-{
+public class ModVersionData {
     public String prefix;
     public String name;
     public String version;
     public String downloadUrl;
     public String changeLogUrl;
-    
+
     public Map<String, String> extraFields;
-    
-    
-    public ModVersionData()
-    {
-        extraFields  = new  HashMap<String, String>();
+
+
+    public ModVersionData() {
+        extraFields = new HashMap<String, String>();
     }
-    
-    public ModVersionData(String prefix, String name, String version)
-    {
+
+    public ModVersionData(String prefix, String name, String version) {
         this.prefix = prefix;
         this.name = name;
         this.version = version;
@@ -55,8 +52,7 @@ public class ModVersionData
     }
 
     @Override
-    public int hashCode()
-    {
+    public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((changeLogUrl == null) ? 0 : changeLogUrl.hashCode());
@@ -68,8 +64,7 @@ public class ModVersionData
     }
 
     @Override
-    public boolean equals(Object obj)
-    {
+    public boolean equals(Object obj) {
         if (this == obj)
             return true;
         if (obj == null)
@@ -77,38 +72,33 @@ public class ModVersionData
         if (getClass() != obj.getClass())
             return false;
         ModVersionData other = (ModVersionData) obj;
-        if (changeLogUrl == null)
-        {
+        if (changeLogUrl == null) {
             if (other.changeLogUrl != null)
                 return false;
         } else if (!changeLogUrl.equals(other.changeLogUrl))
             return false;
-        if (downloadUrl == null)
-        {
+        if (downloadUrl == null) {
             if (other.downloadUrl != null)
                 return false;
         } else if (!downloadUrl.equals(other.downloadUrl))
             return false;
-        if (name == null)
-        {
+        if (name == null) {
             if (other.name != null)
                 return false;
         } else if (!name.equals(other.name))
             return false;
-        if (prefix == null)
-        {
+        if (prefix == null) {
             if (other.prefix != null)
                 return false;
         } else if (!prefix.equals(other.prefix))
             return false;
-        if (version == null)
-        {
+        if (version == null) {
             if (other.version != null)
                 return false;
         } else if (!version.equals(other.version))
             return false;
         return true;
     }
-    
-    
+
+
 }
