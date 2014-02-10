@@ -97,8 +97,8 @@ public class MinechemItems {
 	    //LanguageRegistry.addName(hazmatLegs, MinechemHelper.getLocalString("item.name.hazmatLegs"));
 	    //LanguageRegistry.addName(hazmatTorso, MinechemHelper.getLocalString("item.name.hazmatTorso"));
 	    //LanguageRegistry.addName(hazmatHead, MinechemHelper.getLocalString("item.name.hazmatHead"));
-	    LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
-        LanguageRegistry.addName(EmptyPillz, "Pills");
+	    //LanguageRegistry.addName(IAintAvinit, "PhotonicInduction's Hammer");
+	    LanguageRegistry.addName(EmptyPillz, "Pills");
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
