@@ -50,7 +50,7 @@ import java.util.logging.Logger;
 // import pixlepix.minechem.particlephysics.plugins.BOPModule;
 // import cpw.mods.fml.particlephysics.Loader;
 
-@Mod(modid = "minechem", name = "MineChem", version = "5.0.1")
+@Mod(modid = "minechem", name = "MineChem", version = "5.0.3")
 @ModstatInfo(prefix = "minechem")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = { PacketHandler.MINECHEM_PACKET_CHANNEL }, packetHandler = PacketHandler.class)
 

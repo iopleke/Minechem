@@ -12,7 +12,7 @@ import cpw.mods.fml.common.registry.LanguageRegistry;
 import pixlepix.minechem.particlephysics.gui.GuiHandler;
 import pixlepix.minechem.particlephysics.helper.*;
 
-@Mod(modid = "minechem-particlephysics", name = "Minechem-Particle Physics", version = "5.0.1")
+@Mod(modid = "minechem-particlephysics", name = "Minechem-Particle Physics", version = "5.0.3")
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {"Particle"}, packetHandler = PacketHandler.class)
 public class ParticlePhysics {
 
