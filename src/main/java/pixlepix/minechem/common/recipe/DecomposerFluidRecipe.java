@@ -29,7 +29,7 @@ public class DecomposerFluidRecipe extends DecomposerRecipe {
 	}
 
 	public ItemStack getInput() {
-		return new ItemStack(this.inputFluid.getFluid().getBlockID(), 1, 0);
+		return new ItemStack(this.inputFluid.getFluid() != null ? this.inputFluid.getFluid().getBlockID() : null, 1, 0);
 	}
 
 	public ArrayList<Chemical> getOutput() {
