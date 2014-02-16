@@ -15,7 +15,6 @@ import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public class DecomposerRecipeHandler {
 	public static DecomposerRecipeHandler instance = new DecomposerRecipeHandler();
@@ -85,12 +84,8 @@ public class DecomposerRecipeHandler {
 
 							}
 							if (!sum.isEmpty()) {
-								Random rand = new Random();
 								if (sum.containsAll(output)) {
 									output = sum;
-								} else if (!output.containsAll(sum) && (foundRecipies < 1 || rand.nextInt(foundRecipies) == 0)) {
-									output = sum;
-									foundRecipies += 1;
 								}
 							}
 						}
