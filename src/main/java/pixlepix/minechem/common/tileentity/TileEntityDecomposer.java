@@ -477,10 +477,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
 	public int[] getSizeInventorySide(int side) {
 		switch (side) {
-			case 0:
 			case 1:
-			case 2:
-			case 3:
 				return kInput;
 			default:
 				return kOutput;
@@ -495,11 +492,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1) {
 
-		if (var1 == 0) {
-			return this.kOutput;
+		if (var1 == 1) {
+			return this.kInput;
 		}
 
-		return this.kInput;
+		return this.kOutput;
 
 	}
 

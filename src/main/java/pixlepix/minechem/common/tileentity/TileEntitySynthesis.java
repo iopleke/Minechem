@@ -568,10 +568,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
 	public int[] getSizeInventorySide(int side) {
 		switch (side) {
-			case 0:
 			case 1:
-			case 4:
-			case 5:
 				return kStorage;
 			default:
 				return kOutput;
@@ -589,7 +586,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		//This is so hacky
 		//I'm honestly ashamed
 
-		if (var1 == 0 && takeStacksFromStorage(false)) {
+		if (var1 != 1 && takeStacksFromStorage(false)) {
 			return this.kOutput;
 		}
 		return this.kStorage;
