@@ -1196,7 +1196,7 @@ public class MinechemRecipes {
 				new Chemical[]{ this.molecule(EnumMolecule.beryl, 2),
 						this.element(EnumElement.Cr, 2),
 						this.element(EnumElement.V, 2) }));
-		SynthesisRecipe.add(new SynthesisRecipe(itemEmerald, true, 80000,
+		SynthesisRecipe.add(new SynthesisRecipe(itemEmerald, true, 5000,
 				new Chemical[]{ null, this.element(EnumElement.Cr), null,
 						this.element(EnumElement.V),
 						this.molecule(EnumMolecule.beryl, 2),
@@ -1228,7 +1228,7 @@ public class MinechemRecipes {
 						elementHydrogen, elementHydrogen, elementHydrogen,
 						elementHelium, elementHelium, elementHelium,
 						elementCarbon, elementCarbon }));
-		SynthesisRecipe.add(new SynthesisRecipe(itemNetherStar, true, 500000,
+		SynthesisRecipe.add(new SynthesisRecipe(itemNetherStar, true, 5000,
 				new Chemical[]{ elementHelium, elementHelium, elementHelium,
 						elementCarbon, this.element(EnumElement.Cn, 16),
 						elementHelium, elementHydrogen, elementHydrogen,
