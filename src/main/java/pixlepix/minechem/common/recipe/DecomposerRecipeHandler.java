@@ -11,6 +11,7 @@ import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
+import pixlepix.minechem.api.recipe.DecomposerRecipeSelect;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
@@ -77,7 +78,7 @@ public class DecomposerRecipeHandler {
 							for (ItemStack item : components) {
 								if (item != null) {
 									DecomposerRecipe decompRecipe = this.getRecipe(item, level + 1);
-									if (decompRecipe != null) {
+									if (decompRecipe != null && !(decompRecipe instanceof DecomposerRecipeSelect)) {
 										sum.addAll(decompRecipe.getPartialOutputRaw(((IRecipe) recipe).getRecipeOutput().stackSize));
 									}
 								}
