@@ -1,9 +1,9 @@
 Minechem IV
 =========
 
-Minechem IV is a mod about chemistry and chemical industry. Originally maintained by LJDP and Rushmead, Minechem IV is maintained by Pixlepix and Mandrake, With help from open source contributors, and is based off the work of the previous iterations Minechem II and Minechem III. Split apart materials into their most basic components, then mesh them all together into something new. The possibilities are immense!
+Minechem 5 is a mod about chemistry and chemical industry. Originally maintained by LJDP and Rushmead, Minechem 5 is maintained by Pixlepix and Mandrake, With help from open source contributors, and is based off the work of the previous iterations Minechem II, Minechem III and Minechem IV. Split apart materials into their most basic components, then mesh them all together into something new. The possibilities are immense!
 
-Minechem can be found at: http://universalelectricity.com/minechem
+Minechem can be found at: http://www.minechemmod.com/
 
 ## License:
 
