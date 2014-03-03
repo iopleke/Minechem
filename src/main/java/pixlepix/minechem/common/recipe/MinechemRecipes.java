@@ -1574,40 +1574,6 @@ public class MinechemRecipes {
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300,
 					new Chemical[]{ this.element(EnumElement.Zr, 2),
 							this.element(EnumElement.Ti, 1) }));
-
-		} else if (var1.Name.contains("ingotCobalt")) { // Tungsten - Cobalt
-			// Alloy
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{
-					this.element(EnumElement.Co, 2),
-					this.element(EnumElement.W, 2) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000,
-					new Chemical[]{ this.element(EnumElement.Co, 2),
-							this.element(EnumElement.W, 2) }));
-
-		} else if (var1.Name.contains("ingotArdite")) { // Tungsten - Iron -
-			// Silicon Alloy
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{
-					this.element(EnumElement.Fe, 2),
-					this.element(EnumElement.W, 2),
-					this.element(EnumElement.Si, 2) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 5000,
-					new Chemical[]{ this.element(EnumElement.Fe, 2),
-							this.element(EnumElement.W, 2),
-							this.element(EnumElement.Si, 2) }));
-
-		} else if (var1.Name.contains("ingotManyullyn")) { // Tungsten - Iron -
-			// Silicon - Cobalt
-			// Alloy
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{
-					this.element(EnumElement.Fe, 2),
-					this.element(EnumElement.W, 2),
-					this.element(EnumElement.Si, 2),
-					this.element(EnumElement.Co, 2) }));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 7000,
-					new Chemical[]{ this.element(EnumElement.Fe, 2),
-							this.element(EnumElement.W, 2),
-							this.element(EnumElement.Si, 2),
-							this.element(EnumElement.Co, 2) }));
 		} else if (var1.Name.contains("gemPeridot")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore,
 					new Chemical[]{ this.molecule(EnumMolecule.olivine) }));
