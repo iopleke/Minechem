@@ -40,7 +40,9 @@ public class ContainerProjector extends Container {
 
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot) {
-        Slot slotObject = (Slot) inventorySlots.get(slot);
+	    return null;
+	    /*
+	    Slot slotObject = (Slot) inventorySlots.get(slot);
         if (slotObject != null && slotObject.getHasStack()) {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
@@ -60,6 +62,7 @@ public class ContainerProjector extends Container {
             return stack;
         }
         return null;
+        */
     }
 
 }

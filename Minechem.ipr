@@ -391,7 +391,9 @@
         <root url="jar://$PROJECT_DIR$/build/deobfuscated-bin.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES />
+      <SOURCES>
+        <root url="jar://$USER_HOME$/.gradle/caches/minecraft/net/minecraftforge/forge/1.6.4-9.11.1.964/forge-1.6.4-9.11.1.964-src.jar!/" />
+      </SOURCES>
     </library>
     <library name="Gradle: gson-2.2.2">
       <CLASSES>
@@ -604,47 +606,6 @@
         <root url="jar://$USER_HOME$/.gradle/caches/artifacts-26/filestore/com.paulscode/soundsystem/20120107/source/1b9f4eb11ef11fede7fd76a2e5e8203c2a8adcd/soundsystem-20120107-sources.jar!/" />
       </SOURCES>
     </library>
-  </component>
-  <component name="masterDetails">
-    <states>
-      <state key="ArtifactsStructureConfigurable.UI">
-        <UIState>
-          <splitter-proportions>
-            <SplitterProportionsDataImpl />
-          </splitter-proportions>
-          <settings />
-        </UIState>
-      </state>
-      <state key="Copyright.UI">
-        <UIState>
-          <splitter-proportions>
-            <SplitterProportionsDataImpl />
-          </splitter-proportions>
-        </UIState>
-      </state>
-      <state key="ProjectJDKs.UI">
-        <UIState>
-          <splitter-proportions>
-            <SplitterProportionsDataImpl>
-              <option name="proportions">
-                <list>
-                  <option value="0.2" />
-                </list>
-              </option>
-            </SplitterProportionsDataImpl>
-          </splitter-proportions>
-          <last-edited>1.6</last-edited>
-        </UIState>
-      </state>
-      <state key="ScopeChooserConfigurable.UI">
-        <UIState>
-          <splitter-proportions>
-            <SplitterProportionsDataImpl />
-          </splitter-proportions>
-          <settings />
-        </UIState>
-      </state>
-    </states>
   </component>
 </project>
 
