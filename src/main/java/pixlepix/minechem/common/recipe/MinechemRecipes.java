@@ -1125,7 +1125,7 @@ public class MinechemRecipes {
 		// Blaze Rod
 		ItemStack itemBlazeRod = new ItemStack(Item.blazeRod);
 		DecomposerRecipe.add(new DecomposerRecipe(itemBlazeRod,
-				new Chemical[]{ this.element(EnumElement.Pu, 3) }));
+				new Chemical[]{ this.element(EnumElement.Pu, 7) }));
 		SynthesisRecipe.add(new SynthesisRecipe(itemBlazeRod, true, 15000,
 				new Chemical[]{ this.element(EnumElement.Pu), null, null,
 						this.element(EnumElement.Pu), null, null,
