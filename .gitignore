@@ -15,6 +15,7 @@ remotebuild.py
 /out
 
 ## idea
+/.idea
 *.iml
 *.ipr
 *.iws
