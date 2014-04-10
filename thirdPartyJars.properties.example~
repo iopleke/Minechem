@@ -1,5 +1,0 @@
-# Path (relative to this config file) where third party JARs can be found.
-path = ../../ThirdPartyJars
-
-# The dev jar name for Not Enough Items.
-NEI = NotEnoughItems-dev 1.6.1.7.jar
