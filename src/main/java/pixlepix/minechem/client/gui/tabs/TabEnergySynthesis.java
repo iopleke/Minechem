@@ -41,7 +41,7 @@ public class TabEnergySynthesis extends TabEnergy {
     @Override
     public String getTooltip() {
         if (!isOpen()) {
-            return String.format("%.1f", energy.getRequest()) + " MJ/t";
+            return String.format("%.1f", energy.getRequest()) + " RF/t";
         } else
             return null;
     }
