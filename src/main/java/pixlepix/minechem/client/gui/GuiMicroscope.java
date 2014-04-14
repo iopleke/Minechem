@@ -135,7 +135,7 @@ public class GuiMicroscope extends GuiContainerTabbed {
 
     private void drawSynthesisRecipeCost(SynthesisRecipe recipe, int x, int y) {
         if (!recipeSwitch.isMoverOver()) {
-            String cost = String.format("%d MJ", recipe.energyCost());
+            String cost = String.format("%d RF", recipe.energyCost());
             fontRenderer.drawString(cost, x + 108, y + 85, 0x000000);
         }
     }
