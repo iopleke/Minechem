@@ -14,7 +14,6 @@ public class MinechemGeneration implements IWorldGenerator {
 	public void generate(Random random, int chunkX, int chunkZ, World world,
 	                     IChunkProvider chunkGenerator, IChunkProvider chunkProvider) {
 		if (!Loader.isModLoaded("AtomicScience") && !Loader.isModLoaded("IC2")) {
-			System.out.println(ModMinechem.instance.worldGen);
 			if (ModMinechem.instance.worldGen) {
 				if (world.provider.isSurfaceWorld()) {
 					for (int k = 0; k < 2; k++) {
