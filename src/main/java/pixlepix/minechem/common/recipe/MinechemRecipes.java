@@ -1125,11 +1125,16 @@ public class MinechemRecipes {
 		// Blaze Rod
 		ItemStack itemBlazeRod = new ItemStack(Item.blazeRod);
 		DecomposerRecipe.add(new DecomposerRecipe(itemBlazeRod,
-				new Chemical[]{ this.element(EnumElement.Pu, 7) }));
+				new Chemical[]{ this.element(EnumElement.Pu, 6) }));
 		SynthesisRecipe.add(new SynthesisRecipe(itemBlazeRod, true, 15000,
-				new Chemical[]{ this.element(EnumElement.Pu), null, null,
-						this.element(EnumElement.Pu), null, null,
-						this.element(EnumElement.Pu), null, null }));
+				new Chemical[]{ this.element(EnumElement.Pu, 2), null, null,
+						this.element(EnumElement.Pu, 2), null, null,
+						this.element(EnumElement.Pu, 2), null, null }));
+
+		// Blaze Powder
+		ItemStack itemBlazePowder = new ItemStack(Item.blazePowder);
+		DecomposerRecipe.add(new DecomposerRecipe(itemBlazePowder,
+				new Chemical[]{ this.element(EnumElement.Pu) }));
 
 		// Ghast Tear
 		ItemStack itemGhastTear = new ItemStack(Item.ghastTear);
@@ -1164,11 +1169,6 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipe(itemFermentedSpiderEye,
 				new Chemical[]{ this.element(EnumElement.Po),
 						this.molecule(EnumMolecule.ethanol) }));
-
-		// Blaze Powder
-		ItemStack itemBlazePowder = new ItemStack(Item.blazePowder);
-		DecomposerRecipe.add(new DecomposerRecipe(itemBlazePowder,
-				new Chemical[]{ this.element(EnumElement.Pu) }));
 
 		// Magma Cream
 		ItemStack itemMagmaCream = new ItemStack(Item.magmaCream);
