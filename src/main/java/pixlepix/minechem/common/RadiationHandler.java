@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import pixlepix.minechem.api.core.IRadiationShield;
+import pixlepix.minechem.api.core.EnumRadioactivity;
 import pixlepix.minechem.common.containers.ContainerChemicalStorage;
 import pixlepix.minechem.common.items.ItemElement;
 
@@ -55,7 +56,8 @@ public class RadiationHandler {
         ContainerChemicalStorage chemicalStorage = (ContainerChemicalStorage) openContainer;
         List<ItemStack> itemstacks = chemicalStorage.getStorageInventory();
         for (ItemStack itemstack : itemstacks) {
-            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID) {
+            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID
+		&& ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
                 RadiationInfo radiationInfo = ItemElement.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
                 ItemElement.setRadiationInfo(radiationInfo, itemstack);
@@ -73,7 +75,8 @@ public class RadiationHandler {
     private List<DecayEvent> updateRadiationOnItems(World world, EntityPlayer player, Container container, List<ItemStack> itemstacks) {
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks) {
-            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID) {
+            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID
+		&& ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
                 DecayEvent decayEvent = new DecayEvent();
                 decayEvent.before = itemstack.copy();
                 decayEvent.damage = updateRadiation(world, itemstack);
