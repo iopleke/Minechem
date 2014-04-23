@@ -9,6 +9,9 @@ CREDITS-fml.txt
 options.txt
 MinecraftForge-Credits.txt
 MinecraftForge-License.txt
+lib/Mekanism*
+lib/Universal*
+lib/1.6.4/
 
 ## gradle
 /.gradle
