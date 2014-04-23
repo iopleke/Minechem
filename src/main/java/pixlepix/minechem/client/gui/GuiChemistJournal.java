@@ -65,7 +65,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         if (itemList != null) {
             populateItemList(itemList, entityPlayer);
         }
-        addTab(new TabTable(this));
+        //addTab(new TabTable(this));
     }
 
     public void populateItemList(List<ItemStack> items, EntityPlayer player) {
