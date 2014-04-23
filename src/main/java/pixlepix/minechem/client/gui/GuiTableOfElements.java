@@ -4,7 +4,7 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-import pixlepix.minechem.client.gui.tabs.TabJournel;
+import pixlepix.minechem.client.gui.tabs.TabJournal;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.containers.ContainerChemistJournal;
 import pixlepix.minechem.common.utils.ConstantValue;
@@ -15,7 +15,7 @@ public class GuiTableOfElements extends GuiContainerTabbed {
 
     public GuiTableOfElements(EntityPlayer entityPlayer) {
         super(new ContainerChemistJournal(entityPlayer.inventory));
-        addTab(new TabJournel(this));
+        addTab(new TabJournal(this));
         this.xSize = GUI_WIDTH;
         this.ySize = GUI_HEIGHT;
     }

@@ -6,10 +6,10 @@ import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.client.gui.GuiTableOfElements;
 import pixlepix.minechem.common.ModMinechem;
 
-public class TabJournel extends Tab {
+public class TabJournal extends Tab {
     public static Icon helpIcon;
 
-    public TabJournel(Gui gui) {
+    public TabJournal(Gui gui) {
         super(gui);
 
         this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;

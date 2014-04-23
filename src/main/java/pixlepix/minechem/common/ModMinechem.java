@@ -202,7 +202,7 @@ public class ModMinechem {
 		TabEnergy.powerIcon = icon.registerIcon(ConstantValue.POWER_ICON);
 		TabHelp.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
 		TabTable.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
-		TabJournel.helpIcon = icon.registerIcon(ConstantValue.POWER_ICON);
+		TabJournal.helpIcon = icon.registerIcon(ConstantValue.POWER_ICON);
 		MinechemTriggers.fullEnergy.icon = icon.registerIcon(ConstantValue.FULL_ENERGY_ICON);
 	}
 
