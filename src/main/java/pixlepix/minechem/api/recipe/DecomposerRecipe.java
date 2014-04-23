@@ -2,6 +2,7 @@ package pixlepix.minechem.api.recipe;
 
 import net.minecraft.item.ItemStack;
 import pixlepix.minechem.api.core.Chemical;
+import pixlepix.minechem.common.ModMinechem;
 
 import java.util.ArrayList;
 import java.util.Random;
@@ -45,15 +46,26 @@ public class DecomposerRecipe {
 		ArrayList<Chemical> result = new ArrayList<Chemical>();
 		if (raw != null) {
 			for (Chemical chem : raw) {
-				Chemical reduced = chem.copy();
-				reduced.amount = (int) Math.floor(chem.amount / f);
-				Random rand = new Random();
-				if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f)) {
-					reduced.amount = 1;
-				}
-				result.add(reduced);
+                try {
+                    Chemical reduced = chem.copy();
+                    reduced.amount = (int) Math.floor(chem.amount / f);
+                    Random rand = new Random();
+                    if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f)) {
+                        reduced.amount = 1;
+                    }
+                    result.add(reduced);
 
-				System.out.println(f + ":" + chem.amount + ":" + reduced.amount);
+                    if (ModMinechem.debug) {
+                        System.out.println(f + ":" + chem.amount + ":" + reduced.amount);
+                    }
+
+                } catch (Exception e){
+                    // something has gone wrong
+                    // but we do not know quite why
+                    // debug code goes here
+                }
+
+
 			}
 		}
 
