@@ -1,10 +1,5 @@
 package pixlepix.minechem.common.tileentity;
 
-import buildcraft.api.gates.ActionManager;
-import buildcraft.api.gates.ITrigger;
-import buildcraft.api.gates.ITriggerProvider;
-import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.transport.IPipe;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
@@ -20,8 +15,6 @@ import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.client.ModelSynthesizer;
 import pixlepix.minechem.common.MinechemItems;
-import pixlepix.minechem.common.gates.IMinechemTriggerProvider;
-import pixlepix.minechem.common.gates.MinechemTriggers;
 import pixlepix.minechem.common.inventory.BoundedInventory;
 import pixlepix.minechem.common.inventory.Transactor;
 import pixlepix.minechem.common.network.PacketHandler;
@@ -34,8 +27,7 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory, ITriggerProvider, IMinechemTriggerProvider,
-		ISpecialInventory, IMinechemMachinePeripheral {
+public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral {
 	public static final int[] kOutput = { 0 };
 	public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 	public static final int[] kStorage = { 10, 11, 12, 13, 14, 15, 16, 17, 18 };
@@ -94,12 +86,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			model = new ModelSynthesizer();
 		}
-		ActionManager.registerTriggerProvider(this);
-	}
-
-	@Override
-	public int addItem(ItemStack stack, boolean doAdd, ForgeDirection direction) {
-		return storageTransactor.add(stack, doAdd);
 	}
 
 	public boolean canTakeOutputStack() {
@@ -213,12 +199,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		}
 	}
 
-	@Override
-	public ItemStack[] extractItem(boolean doRemove, ForgeDirection direction, int maxItemCount) {
-
-		return extractOutput(doRemove, maxItemCount);
-	}
-
 	public ItemStack[] extractOutput(boolean doRemove, int maxItemCount) {
 		if (currentRecipe == null || !takeStacksFromStorage(false) || !canAffordRecipe(currentRecipe))
 			return null;
@@ -245,22 +225,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 		return "container.synthesis";
 	}
 
-	@Override
-	public LinkedList<ITrigger> getNeighborTriggers(Block block, TileEntity tile) {
-		if (tile instanceof TileEntitySynthesis) {
-			LinkedList<ITrigger> triggers = new LinkedList<ITrigger>();
-			triggers.add(MinechemTriggers.fullEnergy);
-			triggers.add(MinechemTriggers.outputJammed);
-			return triggers;
-		}
-		return null;
-	}
-
-	@Override
-	public LinkedList<ITrigger> getPipeTriggers(IPipe pipe) {
-		return null;
-	}
-
 	public ItemStack[] getRecipeMatrixItems() {
 		return recipeMatrix.copyInventoryToArray();
 	}
@@ -272,17 +236,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
 	public boolean hasEnoughPowerForCurrentRecipe() {
 		return currentRecipe != null && this.getEnergyStored() >= currentRecipe.energyCost();
-	}
-
-	@Override
-	public boolean hasFullEnergy() {
-		return hasFullEnergy;
-	}
-
-
-	@Override
-	public boolean isJammed() {
-		return false;
 	}
 
 	@Override

@@ -1,6 +1,5 @@
 package pixlepix.minechem.common.tileentity;
 
-import buildcraft.api.core.SafeTimeTracker;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -14,6 +13,7 @@ import pixlepix.minechem.common.inventory.BoundedInventory;
 import pixlepix.minechem.common.inventory.Transactor;
 import pixlepix.minechem.common.items.ItemElement;
 import pixlepix.minechem.common.utils.MinechemHelper;
+import pixlepix.minechem.common.utils.SafeTimeTracker;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
 
 public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemMachinePeripheral {
