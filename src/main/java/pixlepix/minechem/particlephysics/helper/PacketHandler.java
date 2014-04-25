@@ -17,7 +17,7 @@ import java.io.*;
 public class PacketHandler implements IPacketHandler {
     public static PacketHandler instance;
 
-    public void PacketHandler() {
+    public PacketHandler() {
         instance = this;
     }
 
