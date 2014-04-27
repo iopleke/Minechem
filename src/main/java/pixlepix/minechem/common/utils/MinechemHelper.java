@@ -1,6 +1,5 @@
 package pixlepix.minechem.common.utils;
 
-import buildcraft.api.core.Position;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.relauncher.Side;

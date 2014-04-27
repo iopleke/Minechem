@@ -46,13 +46,10 @@ public interface ConstantValue {
     public static final String LENS2_TEX = TEXTURE_MOD_ID + "lens2";
     public static final String LENS3_TEX = TEXTURE_MOD_ID + "lens3";
     public static final String LENS4_TEX = TEXTURE_MOD_ID + "lens4";
-    public static final String JAMMED_ICON = TEXTURE_MOD_ID + "i_jammed";
-    public static final String NO_BOTTLES_ICON = TEXTURE_MOD_ID + "i_noBottles";
     public static final String UNPOWERED_ICON = TEXTURE_MOD_ID + "i_unpowered";
     public static final String NO_RECIPE_ICON = TEXTURE_MOD_ID + "i_noRecipe";
     public static final String POWER_ICON = TEXTURE_MOD_ID + "i_power";
     public static final String HELP_ICON = TEXTURE_MOD_ID + "i_help";
-    public static final String FULL_ENERGY_ICON = TEXTURE_MOD_ID + "i_fullEnergy";
     public static final String DECOMPOSER_FRONT_TEX = TEXTURE_MOD_ID + "decomposerFront";
     public static final String DECOMPOSER_TEX = TEXTURE_MOD_ID + "decomposer";
     public static final String MICROSCOPE_FRONT_TEX = TEXTURE_MOD_ID + "microscopeFront";

@@ -1,10 +1,5 @@
 package pixlepix.minechem.common.tileentity;
 
-import buildcraft.api.gates.ActionManager;
-import buildcraft.api.gates.ITrigger;
-import buildcraft.api.gates.ITriggerProvider;
-import buildcraft.api.inventory.ISpecialInventory;
-import buildcraft.api.transport.IPipe;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.block.Block;
@@ -22,8 +17,6 @@ import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.DecomposerRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.client.ModelDecomposer;
-import pixlepix.minechem.common.gates.IMinechemTriggerProvider;
-import pixlepix.minechem.common.gates.MinechemTriggers;
 import pixlepix.minechem.common.inventory.BoundedInventory;
 import pixlepix.minechem.common.inventory.Transactor;
 import pixlepix.minechem.common.network.PacketDecomposerUpdate;
@@ -37,8 +30,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 
-public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, ITriggerProvider, IMinechemTriggerProvider,
-		ISpecialInventory, IMinechemMachinePeripheral, IFluidHandler {
+public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral, IFluidHandler {
 
 	public static final int[] kInput = { 0 };
 	public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
@@ -157,7 +149,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
 			model = new ModelDecomposer();
 		}
-		ActionManager.registerTriggerProvider(this);
 	}
 
 	@Override
@@ -323,22 +314,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 	}
 
 	@Override
-	public int addItem(ItemStack incoming, boolean doAdd, ForgeDirection from) {
-
-		if (incoming != null) {
-
-			return inputTransactor.add(incoming, doAdd);
-
-		}
-		return 0;
-	}
-
-	@Override
-	public ItemStack[] extractItem(boolean doRemove, ForgeDirection from, int maxItemCount) {
-		return outputTransactor.remove(maxItemCount, doRemove);
-	}
-
-	@Override
 	public int getSizeInventory() {
 		return 14;
 	}
@@ -388,32 +363,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
 	public boolean isPowered() {
 		return (state != State.kProcessJammed && (this.getEnergyStored() > this.getMinEnergyNeeded()));
-	}
-
-	@Override
-	public LinkedList<ITrigger> getPipeTriggers(IPipe pipe) {
-		return null;
-	}
-
-	@Override
-	public LinkedList<ITrigger> getNeighborTriggers(Block block, TileEntity tile) {
-		if (tile instanceof TileEntityDecomposer) {
-			LinkedList<ITrigger> triggers = new LinkedList<ITrigger>();
-			triggers.add(MinechemTriggers.fullEnergy);
-			triggers.add(MinechemTriggers.outputJammed);
-			return triggers;
-		}
-		return null;
-	}
-
-	@Override
-	public boolean hasFullEnergy() {
-		return this.hasFullEnergy;
-	}
-
-	@Override
-	public boolean isJammed() {
-		return this.state == State.kProcessJammed;
 	}
 
 	@Override

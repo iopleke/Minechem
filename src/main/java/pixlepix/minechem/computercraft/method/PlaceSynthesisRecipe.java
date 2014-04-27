@@ -1,6 +1,5 @@
 package pixlepix.minechem.computercraft.method;
 
-import buildcraft.api.core.Position;
 import dan200.computer.api.IComputerAccess;
 import dan200.turtle.api.ITurtleAccess;
 import net.minecraft.tileentity.TileEntity;
@@ -9,6 +8,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
+import pixlepix.minechem.common.utils.Position;
 import pixlepix.minechem.computercraft.ChemistryTurtleUpgradePeripherial;
 import pixlepix.minechem.computercraft.ICCMethod;
 import pixlepix.minechem.computercraft.IMinechemTurtlePeripheral;

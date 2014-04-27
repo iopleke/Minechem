@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.tileentity;
 
-import buildcraft.api.core.SafeTimeTracker;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import pixlepix.minechem.common.blueprint.BlueprintBlock;
 import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector.BlockStatus;
+import pixlepix.minechem.common.utils.SafeTimeTracker;
 
 import java.util.HashMap;
 
