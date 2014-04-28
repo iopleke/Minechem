@@ -7,27 +7,11 @@ buildscript {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-        maven {
-            name = "shadow-repo"
-            url = "http://dl.bintray.com/content/johnrengelman/gradle-plugins/"
-        }
-
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
-        classpath 'org.gradle.plugins:shadow:0.7.4'
     }
 }
-
-apply plugin: 'shadow'
-
-shadow
-        {
-            include 'javax/mail/**'
-            include 'com/sun/activation/**'
-            include 'javax/activation/**'
-            include 'com/sun/mail/**'
-        }
 
 // Load configs relating to third-party JAR locations.
 ext.thirdPartyJarsConfigFile = file 'thirdPartyJars.properties'
@@ -42,26 +26,14 @@ thirdPartyJarsConfigFile.withReader {
 dependencies {
     compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI,
             thirdPartyJars.path + '/' + thirdPartyJars.CodeChickenCore)
-    compile 'javax.mail:mail:1.4'
-    runtime 'javax.mail:mail:1.4'
-
 }
 
-
 apply plugin: 'forge'
-
 version = 4.3
-group = "pixlepix.minechem" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "Minechem"
 
 minecraft {
     version = "1.6.4-9.11.1.964"
-
-    replaceIn "common/AutoCrashReporter.java"
-
-    if (project.hasProperty("pass"))
-        replace "INSERTPASSWORDHERE", project.pass
-
 }
 
 ext.configFile = file "build.properties"

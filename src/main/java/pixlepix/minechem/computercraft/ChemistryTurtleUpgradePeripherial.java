@@ -1,6 +1,5 @@
 package pixlepix.minechem.computercraft;
 
-import buildcraft.api.core.SafeTimeTracker;
 import dan200.computer.api.IComputerAccess;
 import dan200.computer.api.IHostedPeripheral;
 import dan200.turtle.api.ITurtleAccess;
@@ -11,6 +10,7 @@ import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Constants;
 import pixlepix.minechem.common.RadiationHandler;
 import pixlepix.minechem.common.RadiationHandler.DecayEvent;
+import pixlepix.minechem.common.utils.SafeTimeTracker;
 import pixlepix.minechem.computercraft.method.*;
 
 import java.util.ArrayList;
