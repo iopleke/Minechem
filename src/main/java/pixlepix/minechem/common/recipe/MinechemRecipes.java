@@ -966,7 +966,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipeSelect(itemSlimeBall, 0.9F,
 				new DecomposerRecipe[]{
 						new DecomposerRecipe(new Chemical[]{ this
-								.molecule(EnumMolecule.polycyanoacrylate) }),
+								.molecule(EnumMolecule.pmma) }),
 						new DecomposerRecipe(new Chemical[]{ this
 								.element(EnumElement.Hg) }),
 						new DecomposerRecipe(new Chemical[]{ this.molecule(
@@ -1175,13 +1175,13 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipe(itemMagmaCream,
 				new Chemical[]{ this.element(EnumElement.Hg),
 						this.element(EnumElement.Pu),
-						this.molecule(EnumMolecule.polycyanoacrylate, 3) }));
+						this.molecule(EnumMolecule.pmma, 3) }));
 		SynthesisRecipe.add(new SynthesisRecipe(itemMagmaCream, true, 5000,
 				new Chemical[]{ null, this.element(EnumElement.Pu), null,
-						this.molecule(EnumMolecule.polycyanoacrylate),
+						this.molecule(EnumMolecule.pmma),
 						this.element(EnumElement.Hg),
-						this.molecule(EnumMolecule.polycyanoacrylate), null,
-						this.molecule(EnumMolecule.polycyanoacrylate), null }));
+						this.molecule(EnumMolecule.pmma), null,
+						this.molecule(EnumMolecule.pmma), null, }));
 
 		// Glistering Melon
 		ItemStack itemSpeckledMelon = new ItemStack(Item.speckledMelon);
