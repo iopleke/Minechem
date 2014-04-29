@@ -57,9 +57,9 @@ public enum EnumMolecule {
     cucurbitacin(40, "Cucurbitacin", new Element(C, 30), new Element(H, 42), new Element(O, 7)),
     asparticAcid(41, "Aspartic Acid", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
     hydroxylapatite(42, "Hydroxylapatite", new Element(Ca, 5), new Molecule(phosphate, 3), new Element(O), new Element(H)),
-    alinine(43, "Alanine (amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2)),
-    glycine(44, "Glycine (amino acid)", new Element(C, 2), new Element(H, 5), new Element(N), new Element(O, 2)),
-    serine(45, "Serine  (amino acid)", new Element(C, 3), new Element(H, 7), new Molecule(nitrate)),
+    alinine(43, "Alanine (Amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2)),
+    glycine(44, "Glycine (Amino acid)", new Element(C, 2), new Element(H, 5), new Element(N), new Element(O, 2)),
+    serine(45, "Serine  (Amino acid)", new Element(C, 3), new Element(H, 7), new Molecule(nitrate)),
     mescaline(46, "Mescaline", new Element(C, 11), new Element(H, 17), new Molecule(nitrate)),
     methyl(47, "Methyl (ion)", new Element(C), new Element(H, 3)),
     methylene(48, "Methylene (ion)", new Element(C), new Element(H, 2)),
@@ -84,12 +84,12 @@ public enum EnumMolecule {
     pantherine(67, "Pantherine", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)),  
     aluminiumOxide(68, "Aluminium Oxide", new Element(Al, 2), new Element(O, 3)),
     fullrene(69, "Carbon Nanotubes", 0.47F, 0.47F, 0.47F, 0.47F, 0.47F, 0.47F, new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
-    keratin(70, "Keratin", new Element(C, 2), new Molecule(water), new Element(N)), // Somewhere a biochemist is crying
+    valine(70, "Valine (Amino acid)", new Element(C, 5), new Element(H, 11), new Element(N), new Element(O, 2)), 
     penicillin(71, "Penicillin", new Element(C, 16), new Element(H, 18), new Element(N, 2), new Element(O, 4), new Element(S)),
     testosterone(72, "Testosterone", new Element(C, 19), new Element(H, 28), new Element(O, 2)),
     kaolinite(73, "Kaolinite", new Element(Al, 2), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4)),
     fingolimod(74, "Fingolimod", new Element(C, 19), new Element(H, 33), new Molecule(nitrogenDioxide)),
-    arginine(75, "Arginine (amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 4), new Element(O, 2)),
+    arginine(75, "Arginine (Amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 4), new Element(O, 2)),
     shikimicAcid(76, "Shikimic Acid", new Element(C, 7), new Element(H, 10), new Element(O, 5)),
     sulfuricAcid(77, "Sulfuric Acid", new Element(H, 2), new Element(S), new Element(O, 4)),
     glyphosate(78, "Glyphosate", new Element(C, 3), new Element(H, 8), new Element(N), new Element(O, 5), new Element(P)),
@@ -143,18 +143,30 @@ public enum EnumMolecule {
     biotite(124, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
     augite(125, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
 	talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10)),
-
 	//Metallurgy
 	propane(127, "Propane", new Element(C, 3), new Element(H, 8)),
-
 	peridot(128, "Peridot", new Element(Mg, 2), new Element(O, 4), new Element(Si)),
-
 	fluorineHydroxide(129, "Fluorine Hydroxide", new Element(F), new Element(O), new Element(H)), // This seems explosive..... 
-
 	topaz(130, "Topaz", new Element(Al, 2), new Element(O, 4), new Molecule(fluorineHydroxide, 2)),
-
-	zoisite(131, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H));
-
+	zoisite(131, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H)),
+    //
+	cysteine(132, "Cysteine (Amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2), new Element(S)),
+	threonine(133, "Threonine (Amino acid)", new Element(C, 4), new Element(H, 9), new Element(N), new Element(O, 3)),
+	lysine(134, "Lysine (Amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 2), new Element(O, 2)),
+	methionine(135, "Methionine (Amino acid)", new Element(C, 5), new Element(H, 11), new Element(N), new Element(O, 2), new Element(S)),
+	tyrosine(136, "Tyrosine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 3)),
+	histidine(137, "Histidine (Amino acid)", new Element(C, 6), new Element(H, 9), new Element(N, 3), new Element(O, 2)),
+	phenylalanine(138, "Phenylalanine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 2)),
+    glutamine(139, "Glutamine (Amino acid)", new Element(C, 5), new Element(H, 10), new Element(N, 2), new Element(O, 3)),
+	proline(140, "Proline (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 2)),
+	leucine(141, "Leucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
+	tryptophan(142, "Tryptophan (Amino acid)", new Element(C, 11), new Element(H, 12), new Element(N, 2), new Element(O, 2)),
+	aspartate(143, "Aspartic acid (Amino acid)", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
+	isoleucine(144, "Isoleucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
+	glutamates(145, "Glutamic acid (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
+	asparagine(143, "Asparagine(Amino acid)", new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
+	keratin(145, "Keratin (Peptide)", new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
+    //	
 	public static EnumMolecule[] molecules = values();
     // Descriptive name, in en_US. Should not be used; instead, use a
     // localized string from a .properties file.
