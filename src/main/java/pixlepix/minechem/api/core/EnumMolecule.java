@@ -157,15 +157,15 @@ public enum EnumMolecule {
 	tyrosine(136, "Tyrosine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 3)),
 	histidine(137, "Histidine (Amino acid)", new Element(C, 6), new Element(H, 9), new Element(N, 3), new Element(O, 2)),
 	phenylalanine(138, "Phenylalanine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 2)),
-    glutamine(139, "Glutamine (Amino acid)", new Element(C, 5), new Element(H, 10), new Element(N, 2), new Element(O, 3)),
+        glutamine(139, "Glutamine (Amino acid)", new Element(C, 5), new Element(H, 10), new Element(N, 2), new Element(O, 3)),
 	proline(140, "Proline (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 2)),
 	leucine(141, "Leucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
 	tryptophan(142, "Tryptophan (Amino acid)", new Element(C, 11), new Element(H, 12), new Element(N, 2), new Element(O, 2)),
 	aspartate(143, "Aspartic acid (Amino acid)", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
 	isoleucine(144, "Isoleucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
 	glutamates(145, "Glutamic acid (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
-	asparagine(143, "Asparagine(Amino acid)", new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
-	keratin(145, "Keratin (Peptide)", new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
+	asparagine(146, "Asparagine(Amino acid)", new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
+	keratin(147, "Keratin (Peptide)", new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
     //	
 	public static EnumMolecule[] molecules = values();
     // Descriptive name, in en_US. Should not be used; instead, use a
