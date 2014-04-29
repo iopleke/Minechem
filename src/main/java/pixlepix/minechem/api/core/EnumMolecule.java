@@ -7,12 +7,12 @@ import java.util.Iterator;
 import java.util.Random;
 
 import static pixlepix.minechem.api.core.EnumElement.*;
+
 // import pixlepix.minechem.api.recipe.DecomposerRecipe;
 // import pixlepix.minechem.api.recipe.SynthesisRecipe;
 
-// Na2OLi2O(SiO2)2(B2O3)3H2O
-
 // MOLECULE IDS MUST BE CONTINIOUS OTHERWISE THE ARRAY WILL BE MISALIGNED.
+
 public enum EnumMolecule {
     cellulose(0, "Cellulose", 0, 1, 0, 0, 0.25F, 0, new Element(C, 6), new Element(H, 10), new Element(O, 5)),
     water(1, "Water", 0, 0, 1, 0, 0, 1, new Element(H, 2), new Element(O)),
@@ -22,7 +22,7 @@ public enum EnumMolecule {
     potassiumNitrate(5, "Potassium Nitrate", 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F, new Element(K), new Element(N), new Element(O, 3)),
     tnt(6, "Trinitrotoluene", 1, 1, 0, 1, 0.65F, 0, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
     siliconDioxide(7, "Silicon Dioxide", 1, 1, 1, 1, 1, 1, new Element(Si), new Element(O, 2)),
-    calcite(8, "Calcite", new Element(Ca), new Element(C), new Element(O, 3)),
+    calcite(8, "Calcite", new Element(Ca), new Element(C), new Element(O, 3)), // TODO: Remove this as Calcium Carbonate is the exact same
     pyrite(9, "Pyrite", new Element(Fe), new Element(S, 2)),
     nepheline(10, "Nepheline", new Element(Al), new Element(Si), new Element(O, 4)),
     sulfate(11, "Sulfate (ion)", new Element(S), new Element(O, 4)),
@@ -57,14 +57,14 @@ public enum EnumMolecule {
     cucurbitacin(40, "Cucurbitacin", new Element(C, 30), new Element(H, 42), new Element(O, 7)),
     asparticAcid(41, "Aspartic Acid", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
     hydroxylapatite(42, "Hydroxylapatite", new Element(Ca, 5), new Molecule(phosphate, 3), new Element(O), new Element(H)),
-    alinine(43, "Alanine (amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2)),
-    glycine(44, "Glycine (amino acid)", new Element(C, 2), new Element(H, 5), new Element(N), new Element(O, 2)),
-    serine(45, "Serine  (amino acid)", new Element(C, 3), new Element(H, 7), new Molecule(nitrate)),
+    alinine(43, "Alanine (Amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2)),
+    glycine(44, "Glycine (Amino acid)", new Element(C, 2), new Element(H, 5), new Element(N), new Element(O, 2)),
+    serine(45, "Serine  (Amino acid)", new Element(C, 3), new Element(H, 7), new Molecule(nitrate)),
     mescaline(46, "Mescaline", new Element(C, 11), new Element(H, 17), new Molecule(nitrate)),
     methyl(47, "Methyl (ion)", new Element(C), new Element(H, 3)),
     methylene(48, "Methylene (ion)", new Element(C), new Element(H, 2)),
-    cyanoacrylate(49, "Cyanoacrylate", new Molecule(methyl), new Molecule(methylene), new Element(C, 3), new Element(N), new Element(H), new Element(O, 2)),
-    polycyanoacrylate(50, "Poly-cyanoacrylate", new Molecule(cyanoacrylate, 3)),
+    memethacrylate(49, "Methyl methacrylate", new Molecule(methyl, 3), new Element(C, 2), new Element(O, 2)),
+    pmma(50, "Poly(methyl methacrylate)", new Molecule(memethacrylate, 3)), // The amount of hydrogens is not 100% right for the polymerized form. But its no big deal.
     redPigment(51, "Cobalt(II) nitrate", new Element(Co), new Molecule(nitrate, 2)),
     orangePigment(52, "Potassium Dichromate", new Element(K, 2), new Element(Cr, 2), new Element(O, 7)),
     yellowPigment(53, "Potassium Chromate", new Element(Cr), new Element(K, 2), new Element(O, 4)),
@@ -76,20 +76,20 @@ public enum EnumMolecule {
     whitePigment(59, "Titanium Dioxide", new Element(Ti), new Element(O, 2)),
     metasilicate(60, "Metasilicate", new Element(Si), new Element(O, 3)),
     beryl(61, "Beryl", new Element(Be, 3), new Element(Al, 2), new Molecule(metasilicate, 6)),
-    ethanol(62, "Ethyl Alcohol", new Element(C, 2), new Element(H, 6), new Element(O)),
+    ethanol(62, "Ethanol", new Element(C, 2), new Element(H, 5), new Molecule(hydroxide)),
     amphetamine(63, "Amphetamine", new Element(C, 9), new Element(H, 13), new Element(N)),
     theobromine(64, "Theobromine", new Element(C, 7), new Element(H, 8), new Element(N, 4), new Element(O, 2)),
-    starch(65, "Starch", new Molecule(cellulose, 2), new Molecule(cellulose, 1)),
+    starch(65, "Starch", new Molecule(cellulose, 3)),
     sucrose(66, "Sucrose", new Element(C, 12), new Element(H, 22), new Element(O, 11)),
-    pantherine(67, "Pantherine", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)), //LJDP you fail! There is not enought muscarine in a shroom to cause harm! The main active chemical is Muscimol (Pantherine). This chemical is similar to benzodiazapines! 
+    pantherine(67, "Pantherine", new Element(C, 4), new Element(H, 6), new Element(N, 2), new Element(O, 2)),  
     aluminiumOxide(68, "Aluminium Oxide", new Element(Al, 2), new Element(O, 3)),
     fullrene(69, "Carbon Nanotubes", 0.47F, 0.47F, 0.47F, 0.47F, 0.47F, 0.47F, new Element(C, 64), new Element(C, 64), new Element(C, 64), new Element(C, 64)),
-    keratin(70, "Keratin", new Element(C, 2), new Molecule(water), new Element(N)),
+    valine(70, "Valine (Amino acid)", new Element(C, 5), new Element(H, 11), new Element(N), new Element(O, 2)), 
     penicillin(71, "Penicillin", new Element(C, 16), new Element(H, 18), new Element(N, 2), new Element(O, 4), new Element(S)),
     testosterone(72, "Testosterone", new Element(C, 19), new Element(H, 28), new Element(O, 2)),
     kaolinite(73, "Kaolinite", new Element(Al, 2), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4)),
     fingolimod(74, "Fingolimod", new Element(C, 19), new Element(H, 33), new Molecule(nitrogenDioxide)),
-    arginine(75, "Arginine (amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 4), new Element(O, 2)),
+    arginine(75, "Arginine (Amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 4), new Element(O, 2)),
     shikimicAcid(76, "Shikimic Acid", new Element(C, 7), new Element(H, 10), new Element(O, 5)),
     sulfuricAcid(77, "Sulfuric Acid", new Element(H, 2), new Element(S), new Element(O, 4)),
     glyphosate(78, "Glyphosate", new Element(C, 3), new Element(H, 8), new Element(N), new Element(O, 5), new Element(P)),
@@ -97,39 +97,39 @@ public enum EnumMolecule {
     ddt(80, "DDT", new Element(C, 14), new Element(H, 9), new Element(Cl, 5)),
     dota(81, "DOTA", new Element(C, 16), new Element(H, 28), new Element(N, 4), new Element(O, 8)),
     poison(82, "T-2 Mycotoxin", 0.89F, 0.83F, 0.07F, 0.89F, 0.83F, 0.07F, new Element(C, 24), new Element(H, 34), new Element(O, 9)),
-    salt(83, "Salt", new Element(Na, 1), new Element(Cl, 1)),
-    nhthree(84, "Ammonia", new Element(N, 1), new Element(H, 3)),
+    salt(83, "Salt", new Element(Na), new Element(Cl)),
+    nhthree(84, "Ammonia", new Element(N), new Element(H, 3)),
     nod(85, "Nodularin", new Element(C, 41), new Element(H, 60), new Element(N, 8), new Element(O, 10)),
     ttx(86, "TTX (Tetrodotoxin)", new Element(C, 11), new Element(H, 11), new Element(N, 3), new Element(O, 8)),
     afroman(87, "THC", new Element(C, 21), new Element(H, 30), new Element(O, 2)),
     mt(88, "Methylcyclopentadienyl Manganese Tricarbonyl", new Element(C, 9), new Element(H, 7), new Element(Mn, 1), new Element(O, 3)), // Level 1
-    buli(89, "Tert-Butyllithium", new Element(Li, 1), new Element(C, 4), new Element(H, 9)), // Level 2
+    buli(89, "Tert-Butyllithium", new Element(Li), new Element(C, 4), new Element(H, 9)), // Level 2
     plat(90, "Chloroplatinic acid", new Element(H, 2), new Element(Pt, 1), new Element(Cl, 6)), // Level 3
-    phosgene(91, "Phosgene", new Element(C, 1), new Element(O, 1), new Element(Cl, 2)),
-    aalc(92, "Allyl alcohol", new Element(C, 3), new Element(H, 6), new Element(O, 1)),
+    phosgene(91, "Phosgene", new Element(C), new Element(O), new Element(Cl, 2)),
+    aalc(92, "Allyl alcohol", new Element(C, 3), new Element(H, 5), new Molecule(hydroxide)),
     hist(93, "Diphenhydramine", new Element(C, 17), new Element(H, 21), new Element(N), new Element(O)),
     pal2(94, "Batrachotoxin", new Element(C, 31), new Element(H, 42), new Element(N, 2), new Element(O, 6)),
-    ret(95, "Retinol", new Element(C, 20), new Element(H, 30), new Element(O)),
+    ret(95, "Retinol", new Element(C, 20), new Element(H, 29), new Molecule(hydroxide)),
     stevenk(96, "Xylitol", new Element(C, 5), new Element(H, 12), new Element(O, 5)),
     weedex(97, "Aminocyclopyrachlor", new Element(C, 8), new Element(H, 8), new Element(Cl), new Element(N, 3), new Element(O, 2)),
     xanax(98, "Alprazolam", new Element(C, 17), new Element(H, 13), new Element(Cl), new Element(N, 4)),
     hcl(99, "Hydrogen Chloride", new Element(H), new Element(Cl)),
     redrocks(100, "Cocaine", new Element(C, 17), new Element(H, 21), new Element(N), new Element(O, 4)),
     coke(101, "Cocaine Hydrochloride", new Molecule(redrocks), new Molecule(hcl)),
-    blueorgodye(102, "1,4-dimethyl-7-isopropylazulene (Guaiazulene)", new Element(C, 15), new Element(H, 18)),
+    blueorgodye(102, "Guaiazulene", new Element(C, 15), new Element(H, 18)),
     redorgodye(103, "Pelargonidin", new Element(C, 15), new Element(H, 11), new Element(O, 11)),
     purpleorgodye(104, "Delphinidin", new Element(C, 15), new Element(H, 11), new Element(O, 7)),
     olivine(105, "Olivine", new Element(Fe, 2), new Element(Si), new Element(O, 4)),
     metblue(106, "Methylene Blue", new Element(C, 16), new Element(H, 18), new Element(N, 3), new Element(S), new Element(Cl)),
-    meoh(107, "Methyl Alcohol", new Molecule(methyl), new Molecule(hydroxide)),
+    meoh(107, "Methanol", new Molecule(methyl), new Molecule(hydroxide)),
     lcd(108, "Cholesteryl benzoate", new Element(C, 34), new Element(H, 50), new Element(O, 2)),
     radchlor(109, "Radium Chloride", new Element(Ra), new Element(Cl, 2)),
     ctaxifolia(110, "Caulerpenyne", new Element(C, 21), new Element(H, 26), new Element(O, 6)),
-    latropine(111, "L-hyoscyamine", new Element(C, 17), new Element(H, 23), new Element(N), new Element(O, 4)),
+    latropine(111, "Hyoscyamine", new Element(C, 17), new Element(H, 23), new Element(N), new Element(O, 4)),
     gallicacid(112, "Gallic Acid", new Element(C, 7), new Element(H, 17), new Element(O, 5)),
     glucose(113, "Glucose", new Element(C, 6), new Element(H, 12), new Element(O, 6)),
-    tannicacid(114, "Tannic Acid", new Molecule(gallicacid, 10), new Molecule(glucose, 1)),
-    hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Element(O, 2)),
+    tannicacid(114, "Tannic Acid", new Molecule(gallicacid, 10), new Molecule(glucose)),
+    hperox(115, "Hydrogen Peroxide", new Element(H, 2), new Molecule(peroxide)),
     galliumarsenide(116, "Gallium Arsenide", new Element(Ga), new Element(As)),
     fibroin(117, "Fibroin", new Molecule(glycine), new Molecule(serine), new Molecule(glycine), new Molecule(alinine), new Molecule(glycine), new Molecule(alinine)),
     aluminiumPhosphate(118, "Aluminium Phosphate", new Element(Al), new Molecule(phosphate)),
@@ -143,22 +143,34 @@ public enum EnumMolecule {
     biotite(124, "Biotite", new Element(K), new Element(Fe, 3), new Element(Al), new Element(Si, 3), new Element(O, 10), new Element(F, 2)),
     augite(125, "Augite", new Element(Na), new Element(Fe), new Element(Al, 2), new Element(O, 6)),
 	talc(126, "Talc", new Element(Mg, 3), new Element(Si, 4), new Element(O, 10)),
-
 	//Metallurgy
 	propane(127, "Propane", new Element(C, 3), new Element(H, 8)),
-
 	peridot(128, "Peridot", new Element(Mg, 2), new Element(O, 4), new Element(Si)),
-
-	fluorineHydroxide(129, "Fluorine Hydroxide", new Element(F), new Element(O), new Element(H)),
-
+	fluorineHydroxide(129, "Fluorine Hydroxide", new Element(F), new Element(O), new Element(H)), // This seems explosive..... 
 	topaz(130, "Topaz", new Element(Al, 2), new Element(O, 4), new Molecule(fluorineHydroxide, 2)),
-
-	zoisite(131, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H));
-
+	zoisite(131, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H)),
+    //
+	cysteine(132, "Cysteine (Amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2), new Element(S)),
+	threonine(133, "Threonine (Amino acid)", new Element(C, 4), new Element(H, 9), new Element(N), new Element(O, 3)),
+	lysine(134, "Lysine (Amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 2), new Element(O, 2)),
+	methionine(135, "Methionine (Amino acid)", new Element(C, 5), new Element(H, 11), new Element(N), new Element(O, 2), new Element(S)),
+	tyrosine(136, "Tyrosine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 3)),
+	histidine(137, "Histidine (Amino acid)", new Element(C, 6), new Element(H, 9), new Element(N, 3), new Element(O, 2)),
+	phenylalanine(138, "Phenylalanine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 2)),
+        glutamine(139, "Glutamine (Amino acid)", new Element(C, 5), new Element(H, 10), new Element(N, 2), new Element(O, 3)),
+	proline(140, "Proline (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 2)),
+	leucine(141, "Leucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
+	tryptophan(142, "Tryptophan (Amino acid)", new Element(C, 11), new Element(H, 12), new Element(N, 2), new Element(O, 2)),
+	aspartate(143, "Aspartic acid (Amino acid)", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
+	isoleucine(144, "Isoleucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
+	glutamates(145, "Glutamic acid (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
+	asparagine(146, "Asparagine(Amino acid)", new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
+	keratin(147, "Keratin (Peptide)", new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
+    //	
 	public static EnumMolecule[] molecules = values();
     // Descriptive name, in en_US. Should not be used; instead, use a
     // localized string from a .properties file.
-    private final String descriptiveName;
+    private final String descriptiveName; // TODO: Update all language files to reflect most recent changes. 
     // Localization key.
     private final String localizationKey;
     private final ArrayList<Chemical> components;
