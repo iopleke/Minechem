@@ -146,26 +146,25 @@ public enum EnumMolecule {
 	//Metallurgy
 	propane(127, "Propane", new Element(C, 3), new Element(H, 8)),
 	peridot(128, "Peridot", new Element(Mg, 2), new Element(O, 4), new Element(Si)),
-	fluorineHydroxide(129, "Fluorine Hydroxide", new Element(F), new Element(O), new Element(H)), // This seems explosive..... 
-	topaz(130, "Topaz", new Element(Al, 2), new Element(O, 4), new Molecule(fluorineHydroxide, 2)),
-	zoisite(131, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H)),
+	topaz(129, "Topaz", new Element(Al, 2), new Element(O, 4), new Element(F, 2)),
+	zoisite(130, "Zoisite", new Element(Ca, 2), new Element(Al, 3), new Element(Si, 3), new Element(O, 13), new Element(H)),
     //
-	cysteine(132, "Cysteine (Amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2), new Element(S)),
-	threonine(133, "Threonine (Amino acid)", new Element(C, 4), new Element(H, 9), new Element(N), new Element(O, 3)),
-	lysine(134, "Lysine (Amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 2), new Element(O, 2)),
-	methionine(135, "Methionine (Amino acid)", new Element(C, 5), new Element(H, 11), new Element(N), new Element(O, 2), new Element(S)),
-	tyrosine(136, "Tyrosine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 3)),
-	histidine(137, "Histidine (Amino acid)", new Element(C, 6), new Element(H, 9), new Element(N, 3), new Element(O, 2)),
-	phenylalanine(138, "Phenylalanine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 2)),
-        glutamine(139, "Glutamine (Amino acid)", new Element(C, 5), new Element(H, 10), new Element(N, 2), new Element(O, 3)),
-	proline(140, "Proline (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 2)),
-	leucine(141, "Leucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
-	tryptophan(142, "Tryptophan (Amino acid)", new Element(C, 11), new Element(H, 12), new Element(N, 2), new Element(O, 2)),
-	aspartate(143, "Aspartic acid (Amino acid)", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
-	isoleucine(144, "Isoleucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
-	glutamates(145, "Glutamic acid (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
-	asparagine(146, "Asparagine(Amino acid)", new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
-	keratin(147, "Keratin (Peptide)", new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
+	cysteine(131, "Cysteine (Amino acid)", new Element(C, 3), new Element(H, 7), new Element(N), new Element(O, 2), new Element(S)),
+	threonine(132, "Threonine (Amino acid)", new Element(C, 4), new Element(H, 9), new Element(N), new Element(O, 3)),
+	lysine(133, "Lysine (Amino acid)", new Element(C, 6), new Element(H, 14), new Element(N, 2), new Element(O, 2)),
+	methionine(134, "Methionine (Amino acid)", new Element(C, 5), new Element(H, 11), new Element(N), new Element(O, 2), new Element(S)),
+	tyrosine(135, "Tyrosine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 3)),
+	histidine(136, "Histidine (Amino acid)", new Element(C, 6), new Element(H, 9), new Element(N, 3), new Element(O, 2)),
+	phenylalanine(137, "Phenylalanine (Amino acid)", new Element(C, 9), new Element(H, 11), new Element(N), new Element(O, 2)),
+    glutamine(138, "Glutamine (Amino acid)", new Element(C, 5), new Element(H, 10), new Element(N, 2), new Element(O, 3)),
+	proline(139, "Proline (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 2)),
+	leucine(140, "Leucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
+	tryptophan(141, "Tryptophan (Amino acid)", new Element(C, 11), new Element(H, 12), new Element(N, 2), new Element(O, 2)),
+	aspartate(142, "Aspartic acid (Amino acid)", new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4)),
+	isoleucine(143, "Isoleucine (Amino acid)", new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
+	glutamates(144, "Glutamic acid (Amino acid)", new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
+	asparagine(145, "Asparagine(Amino acid)", new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
+	keratin(146, "Keratin (Peptide)", new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
     //	
 	public static EnumMolecule[] molecules = values();
     // Descriptive name, in en_US. Should not be used; instead, use a
