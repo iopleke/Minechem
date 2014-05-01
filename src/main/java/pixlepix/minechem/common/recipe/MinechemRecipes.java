@@ -40,6 +40,8 @@ public class MinechemRecipes {
 	public void registerFluidRecipies() {
 		//Fluids
 		int fluidPerIngot = 144;
+		// Quick and dirty fix for the Thermal Expansion Resonant Ender 6x bug
+		int threeQuarterFluidPerIngot = 108;
 		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new Chemical[]{ this.element(EnumElement.H), this.element(EnumElement.O) }));
 
 		//Mod fluids
