@@ -72,6 +72,7 @@ public class MinechemRecipes {
 		Molecule moleculeCellulose = this.molecule(EnumMolecule.cellulose, 1);
 		Molecule moleculePolyvinylChloride = this
 				.molecule(EnumMolecule.polyvinylChloride);
+		Molecule moleculeLazurite = this.molecule(EnumMolecule.lazurite, 9);
 
 		// Elements
 		Element elementHydrogen = this.element(EnumElement.H, 64);
@@ -342,7 +343,14 @@ public class MinechemRecipes {
 						this.molecule(EnumMolecule.pyrite) }));
 
 		// Lapis Lazuli Block
-		// TODO: Add support for Lapis Lazuli Block?
+		ItemStack blockLapis = new ItemStack(Block.blockLapis);
+		DecomposerRecipe.add(new DecomposerRecipe(blockLapis,
+				new Chemical[]{ this.molecule(EnumMolecule.lazurite, 9) }));
+		SynthesisRecipe
+		.add(new SynthesisRecipe(blockLapis, true, 450, new Chemical[]{
+				moleculeLazurite, null, null,
+				null, null, null, null, null,
+				null }));
 
 		// Cobweb
 		ItemStack blockCobweb = new ItemStack(Block.web);
@@ -1003,6 +1011,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemDyePowderBrown,
 				0.4F, new Chemical[]{ this.molecule(EnumMolecule.theobromine),
 				this.molecule(EnumMolecule.tannicacid) }));
+		// Lapis
 		DecomposerRecipe.add(new DecomposerRecipe(itemDyePowderBlue,
 				new Chemical[]{ this.molecule(EnumMolecule.lazurite) }));
 		DecomposerRecipe.add(new DecomposerRecipe(itemDyePowderPurple,
@@ -1465,9 +1474,9 @@ public class MinechemRecipes {
 		}
 
 	}
-   /* 
+   /*
     * This stuff is unused and is replaced by pixlepix.minechem.particlephysics.recipe.handlers.DefaultOreDictionaryHandler
-   String[] compounds = {"Aluminium","Titanium","Chrome",   
+   String[] compounds = {"Aluminium","Titanium","Chrome",
 	           "Tungsten", "Lead",    "Zinc",
 	           "Platinum", "Nickel",  "Osmium",
 	           "Iron",     "Gold",    "Coal",
@@ -1476,11 +1485,11 @@ public class MinechemRecipes {
 	           "Steel",
 	           "Bronze",   "Brass",   "Electrum",
 	           "Invar"};//,"Iridium"};
-	
-	EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr}, 
-						   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn}, 
-						   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os}, 
-						   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C}, 
+
+	EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr},
+						   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn},
+						   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os},
+						   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C},
 						   {EnumElement.Cu}, {EnumElement.Sn}, {EnumElement.Ag},
 						   {EnumElement.Fe},
 						   {EnumElement.Fe, EnumElement.C},		//Steel
@@ -1490,7 +1499,7 @@ public class MinechemRecipes {
 			               {EnumElement.Ag, EnumElement.Au},	//Electrum
 			               {EnumElement.Fe, EnumElement.Ni}		//Invar
 			               };//, EnumElement.Ir
-	
+
 	int[][] proportions      = {{4},{4},{4},
 						   {4},{4},{4},
 						   {4},{4},{4},
@@ -1499,7 +1508,7 @@ public class MinechemRecipes {
 						   {4},
 						   {4,4},
 						   {1,3},{1,3},{2,2},{2,1}};
-	
+
 	String[]  itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate"
 	boolean[] craftable = {true, true, false, false, false, false, false};
 	int[] 	 sizeCoeff = {1, 4, 8, 4, 36, 16, 4};
