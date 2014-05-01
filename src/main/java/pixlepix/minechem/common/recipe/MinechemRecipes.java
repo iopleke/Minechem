@@ -910,6 +910,17 @@ public class MinechemRecipes {
 								this.molecule(EnumMolecule.iron3oxide), null,
 								this.element(EnumElement.Cu), null, null, null,
 								null }));
+		// Redstone Block
+		ItemStack blockRedstone = new ItemStack(Block.blockRedstone);
+		DecomposerRecipe.add(new DecomposerRecipeChance(blockRedstone, 0.42F,
+				new Chemical[]{ this.molecule(EnumMolecule.iron3oxide, 9),
+						this.element(EnumElement.Cu, 9) }));
+		SynthesisRecipe
+				.add(new SynthesisRecipe(blockRedstone, true, 900,
+						new Chemical[]{ null, null,
+								this.molecule(EnumMolecule.iron3oxide, 9), null,
+								this.element(EnumElement.Cu, 9), null, null, null,
+								null }));
 
 		// Snowball
 		ItemStack itemSnowball = new ItemStack(Item.snowball);
