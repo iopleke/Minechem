@@ -645,6 +645,39 @@ public class MinechemRecipes {
 								this.element(EnumElement.Zn, 8),
 								this.element(EnumElement.Be, 4) }) }));
 
+		// Nether B
+		ItemStack itemNetherbrick = new ItemStack(Item.netherrackBrick);
+		DecomposerRecipe.add(new DecomposerRecipeSelect(itemNetherbrick, 0.15F,
+				new DecomposerRecipe[]{
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 2),
+								this.element(EnumElement.C),
+								this.element(EnumElement.Fe) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 2),
+								this.element(EnumElement.Ni),
+								this.element(EnumElement.Tc) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 3),
+								this.element(EnumElement.Ti),
+								this.element(EnumElement.Fe) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 1),
+								this.element(EnumElement.W, 4),
+								this.element(EnumElement.Cr, 2) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 10),
+								this.element(EnumElement.W, 1),
+								this.element(EnumElement.Zn, 8),
+								this.element(EnumElement.Be, 4) }) }));
+		SynthesisRecipe.add(new SynthesisRecipe(itemNetherbrick, true, 200,
+				new Chemical[]{ this.element(EnumElement.Si, 2),
+				this.element(EnumElement.Si, 2), null,
+				this.element(EnumElement.Zn, 2),
+				this.element(EnumElement.W, 1),
+				null, this.element(EnumElement.Be, 2),
+				this.element(EnumElement.Be, 2), null }));
+
 		// Water Bottle
 		ItemStack itemPotion = new ItemStack(Item.potion, 1, 0);
 		DecomposerRecipe.add(new DecomposerRecipe(itemPotion,
@@ -803,6 +836,7 @@ public class MinechemRecipes {
 		ItemStack itemDiamond = new ItemStack(Item.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond,
 				new Chemical[]{ this.molecule(EnumMolecule.fullrene, 4) }));
+
 		//	Polytool
 		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItems.polytool), true, '\uea60',
 				new Chemical[]{ null, this.molecule(EnumMolecule.fullrene, 64),
