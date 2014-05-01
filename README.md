@@ -5,7 +5,7 @@ Minechem 5 is a mod about chemistry and chemical industry. Originally maintained
 
 Minechem can be found at: http://www.minechemmod.com/
 
-Latest dev build not showing up on CurseForge? Try the [Github releases page](https://github.com/jakimfett/MineChem/releases)
+Latest dev build not showing up on CurseForge? Try jakimfett's [Github releases page](https://github.com/jakimfett/MineChemDev/releases)
 
 ## License:
 
