@@ -255,15 +255,17 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
             ItemStack inputStack = getActiveStack();
             DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
 
+            if(recipe != null){
             ArrayList<Chemical> output = recipe.getOutput();
-            if (recipe != null && output != null) {
-
-                ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
-                placeStacksInBuffer(stacks);
+		        if (output != null) {
+		            ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
+		            placeStacksInBuffer(stacks);
+		        }
             }
         } catch (Exception e) {
-            // A wrong value was returned from recipe.getOutput()
-            // at some point, I should refactor this
+            // softly falls the rain
+        	// but the forest does not see
+        	// silently this fails
         }
 
 	}
