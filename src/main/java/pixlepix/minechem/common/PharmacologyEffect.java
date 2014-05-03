@@ -171,6 +171,17 @@ public class PharmacologyEffect {
             case alinine:
             case serine:
             case arginine:
+			case proline:
+			case leucine:
+			case isoleucine:
+			case cysteine:
+			case valine:
+            case threonine:
+            case histidine:
+            case methionine:
+            case tyrosine:
+            case asparagine:
+            case asparticAcid:
                 entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed.getId(), Constants.TICKS_PER_SECOND * 120, 3));
                 entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(), Constants.TICKS_PER_SECOND * 120, 3));
                 break;
