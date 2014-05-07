@@ -1213,7 +1213,7 @@ public class MinechemRecipes {
 		// Nether Wart
 		ItemStack itemNetherStalkSeeds = new ItemStack(Item.netherStalkSeeds);
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemNetherStalkSeeds,
-				0.5F, new Chemical[]{ this.molecule(EnumMolecule.coke) }));
+				0.5F, new Chemical[]{ this.molecule(EnumMolecule.cocainehcl) }));
 
 		// Spider Eye
 		ItemStack itemSpiderEye = new ItemStack(Item.spiderEye);
@@ -1267,7 +1267,7 @@ public class MinechemRecipes {
 		// Carrot
 		ItemStack itemCarrot = new ItemStack(Item.carrot);
 		DecomposerRecipe.add(new DecomposerRecipe(itemCarrot,
-				new Chemical[]{ this.molecule(EnumMolecule.ret) }));
+				new Chemical[]{ this.molecule(EnumMolecule.retinol) }));
 
 		// Potato
 		ItemStack itemPotato = new ItemStack(Item.potato);
@@ -1279,7 +1279,7 @@ public class MinechemRecipes {
 		// Golden Carrot
 		ItemStack itemGoldenCarrot = new ItemStack(Item.goldenCarrot);
 		DecomposerRecipe.add(new DecomposerRecipe(itemGoldenCarrot,
-				new Chemical[]{ this.molecule(EnumMolecule.ret),
+				new Chemical[]{ this.molecule(EnumMolecule.retinol),
 						this.element(EnumElement.Au, 4) }));
 
 		// Nether Star
@@ -1400,7 +1400,7 @@ public class MinechemRecipes {
 		this.addDecomposerRecipesFromMolecules();
 		this.addSynthesisRecipesFromMolecules();
 		this.addUnusedSynthesisRecipes();
-		this.registerPoisonRecipes(EnumMolecule.poison);
+		this.registerPoisonRecipes(EnumMolecule.mycotoxin);
 		this.registerPoisonRecipes(EnumMolecule.sucrose);
 		this.registerPoisonRecipes(EnumMolecule.psilocybin);
 		this.registerPoisonRecipes(EnumMolecule.methamphetamine);
@@ -1418,10 +1418,10 @@ public class MinechemRecipes {
 		this.registerPoisonRecipes(EnumMolecule.nod);
 		this.registerPoisonRecipes(EnumMolecule.afroman);
 		this.registerPoisonRecipes(EnumMolecule.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
-		this.registerPoisonRecipes(EnumMolecule.redrocks);
-		this.registerPoisonRecipes(EnumMolecule.coke);
+		this.registerPoisonRecipes(EnumMolecule.cocaine);
+		this.registerPoisonRecipes(EnumMolecule.cocainehcl);
 		this.registerPoisonRecipes(EnumMolecule.theobromine);
-		this.registerPoisonRecipes(EnumMolecule.ctaxifolia);
+		this.registerPoisonRecipes(EnumMolecule.caulerpenyne);
 		this.registerPoisonRecipes(EnumMolecule.latropine);
 	}
 
@@ -1642,10 +1642,10 @@ public class MinechemRecipes {
 					new Chemical[]{ this.molecule(EnumMolecule.olivine) }));
 		} else if (var1.Name.contains("cropMaloberry")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{
-					this.molecule(EnumMolecule.stevenk),
+					this.molecule(EnumMolecule.xylitol),
 					this.molecule(EnumMolecule.sucrose) }));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
-					new Chemical[]{ this.molecule(EnumMolecule.stevenk),
+					new Chemical[]{ this.molecule(EnumMolecule.xylitol),
 							this.molecule(EnumMolecule.sucrose) }));
 		} else if (var1.Name.contains("cropDuskberry")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{
