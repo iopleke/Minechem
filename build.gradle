@@ -16,7 +16,7 @@ buildscript {
 // This mod has NEI support, so NEI+CodeChickenCore are needed to build
 // it (but not required to use it).
 dependencies {
-    // All libraries from the ./libs/ folder are used
+    // All libraries from the ./libs/ folder are added as dependencies
     compile fileTree(dir: 'lib', includes: ['*.jar'])
 }
 
