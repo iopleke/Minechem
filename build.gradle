@@ -13,19 +13,11 @@ buildscript {
     }
 }
 
-// Load configs relating to third-party JAR locations.
-ext.thirdPartyJarsConfigFile = file 'thirdPartyJars.properties'
-thirdPartyJarsConfigFile.withReader {
-    def prop = new Properties()
-    prop.load(new FileReader(ext.thirdPartyJarsConfigFile))
-    ext.thirdPartyJars = new ConfigSlurper().parse prop
-}
-
 // This mod has NEI support, so NEI+CodeChickenCore are needed to build
 // it (but not required to use it).
 dependencies {
-    compile files(thirdPartyJars.path + '/' + thirdPartyJars.NEI,
-            thirdPartyJars.path + '/' + thirdPartyJars.CodeChickenCore)
+    // All libraries from the ./libs/ folder are used
+    compile fileTree(dir: 'lib', includes: ['*.jar'])
 }
 
 apply plugin: 'forge'
