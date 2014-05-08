@@ -1,4 +1,16 @@
 apply plugin: 'java'
+apply plugin: 'download-task'
+apply plugin: 'forge'
+
+// Set a couple of variables
+archivesBaseName = mod_name
+group = "pixlepix." + mod_name
+libDir = new File(libDir)
+
+// Set minecraft version
+minecraft {
+    version = minecraft_version + "-" + forge_version
+}
 
 buildscript {
     repositories {
@@ -10,51 +22,61 @@ buildscript {
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
+        classpath 'de.undercouch:gradle-download-task:1.0'
     }
 }
 
-// This mod has NEI support, so NEI+CodeChickenCore are needed to build
-// it (but not required to use it).
+// Check for and download CodeChickenCore, CodeChickenLib, and NEI
+if ( !libDir.exists() ){
+    libDir.mkdirs()
+    ext.libFiles = [
+        'http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/NotEnoughItems-dev%201.6.1.9.jar',
+        'http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/CodeChickenCore-dev%200.9.0.9.jar',
+        'http://files.minecraftforge.net/CodeChickenLib/CodeChickenLib-dev-1.6.4-1.0.0.62.jar'
+    ]
+    download {
+        src libFiles
+        dest libDir
+    }
+}
+
+// All libraries from the ./libs/ folder are added as dependencies
 dependencies {
-    // All libraries from the ./libs/ folder are added as dependencies
-    compile fileTree(dir: 'lib', includes: ['*.jar'])
+    compile fileTree(dir: libDir, includes: ['*.jar'])
 }
 
-apply plugin: 'forge'
-version = 4.3
-archivesBaseName = "Minechem"
-
-minecraft {
-    version = "1.6.4-9.11.1.964"
+// Get the build number from the environment, otherwise get from gradle.properties
+if (System.getenv().BUILD_NUMBER != null) {
+    build_number = System.getenv().BUILD_NUMBER
 }
+version = mod_version + "-" + build_number
 
-ext.configFile = file "build.properties"
-configFile.withReader {
-    // read config.  it shall from now on be referenced as simply config or as project.config
-    def prop = new Properties()
-    prop.load(it)
-    project.ext.config = new ConfigSlurper().parse prop
-    if (System.getenv().BUILD_NUMBER != null) {
-        ext.buildNum = System.getenv().BUILD_NUMBER
-    } else {
-        ext.buildNum = "DEV"
+// @TODO - make this actually put the version/build number into the mcmod.info file
+processResources {
+    // replace stuff in mcmod.info, nothing else
+    from(sourceSets.main.resources.srcDirs) {
+        include 'mcmod/info'
+        include 'version.properties'
+        // replace version and mcversion
+        expand 'version': mod_version, 'mcversion': version, 'buildnumber': build_number
     }
-    version = project.config.mod_version + "-" + ext.buildNum
+
+    // copy everything else, thats not the mcmod.info
+    from(sourceSets.main.resources.srcDirs) {
+        exclude 'mcmod.info'
+        exclude 'version.properties'
+    }
 }
 
-processResources
-        {
-            // replace stuff in mcmod.info, nothing else
-            from(sourceSets.main.resources.srcDirs) {
-                include 'mcmod/info'
-                include 'version.properties'
-                // replace version and mcversion
-                expand 'version': project.config.mod_version, 'mcversion': project.minecraft.version, 'buildnumber': project.config.build_number
-            }
-
-            // copy everything else, thats not the mcmod.info
-            from(sourceSets.main.resources.srcDirs) {
-                exclude 'mcmod.info'
-                exclude 'version.properties'
-            }
-        }
+task showProperties {
+    doLast {
+        println "~~Versions~~"
+        println "Minecraft: " + minecraft.version
+        println "Forge: $forge_version"
+        println "Version $version"
+        println "Minechem: $mod_version"
+        println "~~Misc~~"
+        println "Build #$build_number"
+        println "Libraries: $libDir"
+    }
+}
