@@ -36,3 +36,5 @@ lib/1.6.4/
 
 ## netbeans
 .nb*
+/nbproject/private/
+/nbbuild/
