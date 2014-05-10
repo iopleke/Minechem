@@ -515,6 +515,80 @@ public class MinechemRecipes {
 				new Chemical[]{ this.molecule(EnumMolecule.glycine),
 						this.molecule(EnumMolecule.blackPigment) }));
 
+		// Wool carpet
+		ItemStack carpetBlockWool = new ItemStack(Block.carpet, 1, 0);
+		ItemStack carpetBlockOrangeWool = new ItemStack(Block.carpet, 1, 1);
+		ItemStack carpetBlockMagentaWool = new ItemStack(Block.carpet, 1, 2);
+		ItemStack carpetBlockLightBlueWool = new ItemStack(Block.carpet, 1, 3);
+		ItemStack carpetBlockYellowWool = new ItemStack(Block.carpet, 1, 4);
+		ItemStack carpetBlockLimeWool = new ItemStack(Block.carpet, 1, 5);
+		ItemStack carpetBlockPinkWool = new ItemStack(Block.carpet, 1, 6);
+		ItemStack carpetBlockGrayWool = new ItemStack(Block.carpet, 1, 7);
+		ItemStack carpetBlockLightGrayWool = new ItemStack(Block.carpet, 1, 8);
+		ItemStack carpetBlockCyanWool = new ItemStack(Block.carpet, 1, 9);
+		ItemStack carpetBlockPurpleWool = new ItemStack(Block.carpet, 1, 10);
+		ItemStack carpetBlockBlueWool = new ItemStack(Block.carpet, 1, 11);
+		ItemStack carpetBlockBrownWool = new ItemStack(Block.carpet, 1, 12);
+		ItemStack carpetBlockGreenWool = new ItemStack(Block.carpet, 1, 13);
+		ItemStack carpetBlockRedWool = new ItemStack(Block.carpet, 1, 14);
+		ItemStack carpetBlockBlackWool = new ItemStack(Block.carpet, 1, 15);
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.whitePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockOrangeWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.orangePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockMagentaWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.lightbluePigment),
+						this.molecule(EnumMolecule.redPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockLightBlueWool,
+				0.2F, new Chemical[]{ this.molecule(EnumMolecule.glycine),
+				this.molecule(EnumMolecule.lightbluePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockYellowWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.yellowPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockLimeWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.limePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockPinkWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.redPigment),
+						this.molecule(EnumMolecule.whitePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockGrayWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.whitePigment),
+						this.molecule(EnumMolecule.blackPigment, 2) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockLightGrayWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+				this.molecule(EnumMolecule.whitePigment),
+				this.molecule(EnumMolecule.blackPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockCyanWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.lightbluePigment),
+						this.molecule(EnumMolecule.whitePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockPurpleWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.purplePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockBlueWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.lazurite) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockBrownWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.tannicacid) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockGreenWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.greenPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockRedWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.redPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockBlackWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.blackPigment) }));
+		SynthesisRecipe.add(new SynthesisRecipe(carpetBlockWool, false, 50,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.whitePigment) }));
+
 		// Flowers
 		// TODO: Add support for Rose
 		ItemStack blockPlantYellow = new ItemStack(Block.plantYellow);
