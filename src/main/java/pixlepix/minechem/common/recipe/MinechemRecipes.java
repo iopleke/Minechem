@@ -41,7 +41,7 @@ public class MinechemRecipes {
 		//Fluids
 		int fluidPerIngot = 144;
 		// Quick and dirty fix for the Thermal Expansion Resonant Ender 6x bug
-		int threeQuarterFluidPerIngot = 108;
+		int threeQuarterFluidPerIngot = 180;
 		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new Chemical[]{ this.element(EnumElement.H, 2), this.element(EnumElement.O) }));
 
 		//Mod fluids
@@ -62,7 +62,7 @@ public class MinechemRecipes {
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("lead.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pb, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("silver.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Ag, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("platinum.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pt, 16) });
-		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("ender", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("ender", threeQuarterFluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) });
 
 	}
 
