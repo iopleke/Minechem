@@ -80,8 +80,7 @@ public class TileEntityLeadedChest extends TileEntity implements IInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return worldObj.getBlockTileEntity(xCoord, xCoord, xCoord) == this && player.getDistanceSq(xCoord, xCoord, xCoord) < 64;
-
+        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
     }
 
     @Override
