@@ -30,12 +30,18 @@ public class GuiHandler implements IGuiHandler {
             return new CotainerTable(player.inventory);
         }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityDecomposer)
+        if (tileEntity instanceof TileEntityDecomposer) {
             return new ContainerDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
-        if (tileEntity instanceof TileEntityMicroscope)
+        }
+        if (tileEntity instanceof TileEntityLeadedChest) {
+            return new ContainerLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
+        }
+        if (tileEntity instanceof TileEntityMicroscope) {
             return new ContainerMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
-        if (tileEntity instanceof TileEntitySynthesis)
+        }
+        if (tileEntity instanceof TileEntitySynthesis) {
             return new ContainerSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
+        }
         if (tileEntity instanceof TileEntityFusion) {
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
         }
@@ -47,26 +53,30 @@ public class GuiHandler implements IGuiHandler {
             return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
 
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof TileEntityBlueprintProjector) {
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
-        if (tileEntity instanceof TileEntityChemicalStorage)
+        }
+        if (tileEntity instanceof TileEntityChemicalStorage) {
             return new ContainerChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
+        }
         return null;
     }
 
     private Object getServerGuiElementForPolytool(EntityPlayer player,
-                                                  World world) {
+            World world) {
 
         return new ContainerPolytool(player);
     }
 
     public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player) {
         TileEntity tileEntity = proxy.getManager();
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof TileEntityFusion) {
             return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
+        }
 
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof TileEntityFission) {
             return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
+        }
         return null;
     }
 
@@ -76,29 +86,41 @@ public class GuiHandler implements IGuiHandler {
 
     @Override
     public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        if (ID == GUI_ID_JOURNAL)
+        if (ID == GUI_ID_JOURNAL) {
             return getClientGuiElementForJournal(player, world);
-        if (ID == GUI_TABLE)
+        }
+        if (ID == GUI_TABLE) {
             return getClientGuiForJournal(player, world);
+        }
 
-        if (ID == GUI_ID_POLYTOOL)
+        if (ID == GUI_ID_POLYTOOL) {
             return getClientGuiForPolytool(player, world);
+        }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityDecomposer)
+        if (tileEntity instanceof TileEntityDecomposer) {
             return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
-        if (tileEntity instanceof TileEntityMicroscope)
+        }
+        if (tileEntity instanceof TileEntityLeadedChest) {
+            return new GuiLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
+        }
+        if (tileEntity instanceof TileEntityMicroscope) {
             return new GuiMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
-        if (tileEntity instanceof TileEntitySynthesis)
+        }
+        if (tileEntity instanceof TileEntitySynthesis) {
             return new GuiSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
-        if (tileEntity instanceof TileEntityFusion)
+        }
+        if (tileEntity instanceof TileEntityFusion) {
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
+        }
         if (tileEntity instanceof TileEntityProxy) {
             return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof TileEntityBlueprintProjector) {
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
-        if (tileEntity instanceof TileEntityChemicalStorage)
+        }
+        if (tileEntity instanceof TileEntityChemicalStorage) {
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
+        }
         if (tileEntity instanceof TileEntityFission) {
             return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
         }
@@ -112,11 +134,13 @@ public class GuiHandler implements IGuiHandler {
 
     public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player) {
         TileEntity tileEntity = proxy.getManager();
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof TileEntityFusion) {
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
+        }
 
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof TileEntityFission) {
             return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
+        }
         return null;
     }
 

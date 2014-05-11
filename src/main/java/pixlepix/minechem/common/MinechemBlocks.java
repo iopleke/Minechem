@@ -19,6 +19,7 @@ import pixlepix.minechem.common.tileentity.*;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
 public class MinechemBlocks {
+
     public static Block decomposer;
     public static Block microscope;
     public static Block synthesis;
@@ -27,6 +28,7 @@ public class MinechemBlocks {
     public static Block fusion;
     public static Block chemicalStorage;
     public static Block printer;
+    public static Block leadedChest;
 
     public static Block uranium;
     public static Material materialGas = new MaterialGas();
@@ -39,17 +41,18 @@ public class MinechemBlocks {
     private static int fusionID;
     private static int chemicalStorageID;
     private static int printerID;
+    private static int leadedChestID;
 
     private static int uraniumID;
 
-	//Particle Physics Ids
-	public static int controlGlassID;
-	public static int emitterID;
-	public static int infiniteEmitterID;
-	public static int polarizedGlassID;
-	public static int seriesReceptorID;
+    //Particle Physics Ids
+    public static int controlGlassID;
+    public static int emitterID;
+    public static int infiniteEmitterID;
+    public static int polarizedGlassID;
+    public static int seriesReceptorID;
 
-	public static void loadConfig(Configuration config) {
+    public static void loadConfig(Configuration config) {
         int baseID = 4012;
         microscopeID = getBlockConfig(config, "Microscope", baseID++);
         decomposerID = getBlockConfig(config, "Decomposer", baseID++);
@@ -61,19 +64,20 @@ public class MinechemBlocks {
 
         printerID = getBlockConfig(config, "BluePrintPrinter", baseID++);
         uraniumID = getBlockConfig(config, "Uranium Ore", baseID++);
+        leadedChestID = getBlockConfig(config, "Leaded Chest", baseID++);
 
-		//Particle physics ids
-		//Do not use base ids for compat with existsing worlds
-		emitterID = getBlockConfig(config, "Emitter", 1178);
+	//Particle physics ids
+        //Do not use base ids for compat with existsing worlds
+        emitterID = getBlockConfig(config, "Emitter", 1178);
 
-		polarizedGlassID = getBlockConfig(config, "Polarized Glass", 1179);
+        polarizedGlassID = getBlockConfig(config, "Polarized Glass", 1179);
 
-		seriesReceptorID = getBlockConfig(config, "Series Receptor", 1180);
+        seriesReceptorID = getBlockConfig(config, "Series Receptor", 1180);
 
-		controlGlassID = getBlockConfig(config, "Control Glass", 1181);
+        controlGlassID = getBlockConfig(config, "Control Glass", 1181);
 
-		infiniteEmitterID = getBlockConfig(config, "Infinite Emitter", 1182);
-	}
+        infiniteEmitterID = getBlockConfig(config, "Infinite Emitter", 1182);
+    }
 
     private static int getBlockConfig(Configuration config, String key, int defaultID) {
         return config.get(Configuration.CATEGORY_BLOCK, key, defaultID).getInt(defaultID);
@@ -88,7 +92,7 @@ public class MinechemBlocks {
         blueprintProjector = new BlockBlueprintProjector(blueprintProjectorID);
         chemicalStorage = new BlockChemicalStorage(chemicalStorageID);
         uranium = new OreUranium(uraniumID);
-
+        leadedChest = new BlockLeadedChest(leadedChestID);
 
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
         OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
@@ -106,6 +110,8 @@ public class MinechemBlocks {
         //LanguageRegistry.addName(printer, "Blueprint Printer (WIP)");
         GameRegistry.registerBlock(ghostBlock, ItemGhostBlock.class, "minechem.blockGhostBlock");
         LanguageRegistry.addName(ghostBlock, "minechem.blockGhostBlock");
+        GameRegistry.registerBlock(leadedChest, "minechem.leadedChest");
+        LanguageRegistry.addName(leadedChest, MinechemHelper.getLocalString("block.name.leadedChest"));
 
         GameRegistry.registerBlock(fusion, ItemBlockFusion.class, "minechem.blockFusion");
         LanguageRegistry.addName(fusion, MinechemHelper.getLocalString("block.name.fusion"));
@@ -125,6 +131,7 @@ public class MinechemBlocks {
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
         GameRegistry.registerTileEntity(TileEntityGhostBlock.class, "minechem.tileEntityGhostBock");
         GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
+        GameRegistry.registerTileEntity(TileEntityLeadedChest.class, "minechem.tileEntityLeadedChest");
 
     }
 

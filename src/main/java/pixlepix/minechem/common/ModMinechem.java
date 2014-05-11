@@ -74,7 +74,7 @@ public class ModMinechem {
         public static boolean debug = false;
 	private static final String[] LANGUAGES_SUPPORTED = new String[]{ "en_US", "zh_CN", "de_DE" };
 	public static String GUITABLEID = "2";
-        public static int leadedChestSize = 6;
+        public static int leadedChestSize = 9;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
