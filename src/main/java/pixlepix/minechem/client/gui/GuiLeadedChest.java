@@ -1,6 +1,5 @@
 package pixlepix.minechem.client.gui;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -14,9 +13,11 @@ public class GuiLeadedChest extends GuiContainer {
 
     int guiWidth = 176;
     int guiHeight = 217;
+    TileEntityLeadedChest leadedchest;
 
-    public GuiLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest te) {
-        super(new ContainerLeadedChest(inventoryPlayer, te));
+    public GuiLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest leadedChest) {
+        super(new ContainerLeadedChest(inventoryPlayer, leadedChest));
+        this.leadedchest = leadedChest;
     }
 
     @Override
@@ -31,14 +32,15 @@ public class GuiLeadedChest extends GuiContainer {
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.MICROSCOPE_GUI));
-        int x = (width - guiWidth) / 2;
-        int y = (height - guiHeight) / 2;
-        zLevel = 0;
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.LEADED_CHEST_GUI));
+
+        int x = (width - xSize) / 2;
+        int y = (height - ySize) / 2;
+        drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
 
         GL11.glPushMatrix();
         GL11.glTranslatef(x, y, 0.0F);
-        drawTexturedModalRect(0, 0, 0, 0, guiWidth, guiHeight);
+        GL11.glPopMatrix();
     }
 
 }
