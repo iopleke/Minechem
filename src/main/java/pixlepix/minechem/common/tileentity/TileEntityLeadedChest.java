@@ -14,7 +14,7 @@ public class TileEntityLeadedChest extends TileEntity implements IInventory {
     private final int stackLimit = 64;
 
     public TileEntityLeadedChest() {
-        inventory = new ItemStack[ModMinechem.leadedChestSize];
+        inventory = new ItemStack[9];
     }
 
     @Override
