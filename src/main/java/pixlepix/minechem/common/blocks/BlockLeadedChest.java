@@ -31,7 +31,6 @@ public class BlockLeadedChest extends BlockContainer{
         if (te == null || player.isSneaking()){
             return false;
         }
-        System.out.println("Right click registered");
         player.openGui(ModMinechem.instance, 0, world, xCoord, yCoord, zCoord);
         return true;
     }
