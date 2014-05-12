@@ -74,7 +74,6 @@ public class ModMinechem {
         public static boolean debug = false;
 	private static final String[] LANGUAGES_SUPPORTED = new String[]{ "en_US", "zh_CN", "de_DE" };
 	public static String GUITABLEID = "2";
-        public static int leadedChestSize = 9;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
@@ -170,7 +169,6 @@ public class ModMinechem {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		MinechemBlocks.loadConfig(config);
 		MinechemItems.loadConfig(config);
-                this.leadedChestSize = config.get("limits", "leadedChestSize", 18).getInt(this.leadedChestSize);
                 this.worldGen = config.get("misc", "worldgen", true).getBoolean(true);
                 this.debug = config.get("misc", "debug", false).getBoolean(false);
 		config.save();
