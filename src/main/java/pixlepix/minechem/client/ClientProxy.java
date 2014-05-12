@@ -21,26 +21,8 @@ public class ClientProxy extends CommonProxy {
 
     @Override
     public void registerRenderers() {
-        //As far as I can tell, this isn't needed in 1.6
-        /*MinecraftForgeClient.preloadTexture(DECOMPOSER_GUI);
-        MinecraftForgeClient.preloadTexture(MICROSCOPE_GUI);
-        MinecraftForgeClient.preloadTexture(SYNTHESIS_GUI);
-        MinecraftForgeClient.preloadTexture(MICROSCOPE_MODEL);
-        MinecraftForgeClient.preloadTexture(DECOMPOSER_MODEL_ON);
-        MinecraftForgeClient.preloadTexture(DECOMPOSER_MODEL_OFF);
-        MinecraftForgeClient.preloadTexture(SYNTHESIS_MODEL);
-        MinecraftForgeClient.preloadTexture(PRINTER_MODEL);
-        MinecraftForgeClient.preloadTexture(PROJECTOR_MODEL_OFF);
-        MinecraftForgeClient.preloadTexture(PROJECTOR_MODEL_ON);
-        MinecraftForgeClient.preloadTexture(FUSION_GUI);
-        MinecraftForgeClient.preloadTexture(PROJECTOR_GUI);
-        MinecraftForgeClient.preloadTexture(JOURNAL_GUI);
-        MinecraftForgeClient.preloadTexture(HAZMAT_TEX);
-        MinecraftForgeClient.preloadTexture(CHEMICAL_STORAGE_MODEL);
-        */
         CUSTOM_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-        //Possible future feature
-        //MinecraftForgeClient.registerItemRenderer(MinechemItems.polytool.itemID, new PolytoolInventoryRender());
+
         MinecraftForgeClient.registerItemRenderer(MinechemItems.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItems.molecule.itemID, new ItemMoleculeRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.microscope.blockID].itemID, new ItemMicroscopeRenderer());
@@ -48,6 +30,7 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.synthesis.blockID].itemID, new ItemSynthesisRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
         //MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.printer.blockID].itemID, new ItemBlueprintPrinterRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
@@ -57,6 +40,7 @@ public class ClientProxy extends CommonProxy {
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLeadedChest.class, new TileEntityLeadedChestRenderer());
         //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBluePrintPrinter.class, new TileEntityBluePrintPrinterRenderer());
     }
 
