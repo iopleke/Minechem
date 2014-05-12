@@ -79,7 +79,7 @@ public class TileEntityLeadedChest extends TileEntity implements IInventory {
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player) {
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq((double)xCoord + 0.5D, (double)yCoord + 0.5D, (double)zCoord + 0.5D) <= 64D;
+        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D) <= 64D;
     }
 
     @Override
@@ -100,31 +100,25 @@ public class TileEntityLeadedChest extends TileEntity implements IInventory {
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound)
-    {
+    public void readFromNBT(NBTTagCompound nbttagcompound) {
         super.readFromNBT(nbttagcompound);
         NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
-        
-        for (int i = 0; i < nbttaglist.tagCount(); i++)
-        {
+
+        for (int i = 0; i < nbttaglist.tagCount(); i++) {
             NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
             int j = nbttagcompound1.getByte("Slot") & 0xff;
-            if (j >= 0 && j < inventory.length)
-            {
+            if (j >= 0 && j < inventory.length) {
                 inventory[j] = ItemStack.loadItemStackFromNBT(nbttagcompound1);
             }
         }
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound)
-    {
+    public void writeToNBT(NBTTagCompound nbttagcompound) {
         super.writeToNBT(nbttagcompound);
         NBTTagList nbttaglist = new NBTTagList();
-        for (int i = 0; i < inventory.length; i++)
-        {
-            if (inventory[i] != null)
-            {
+        for (int i = 0; i < inventory.length; i++) {
+            if (inventory[i] != null) {
                 NBTTagCompound nbttagcompound1 = new NBTTagCompound();
                 nbttagcompound1.setByte("Slot", (byte) i);
                 inventory[i].writeToNBT(nbttagcompound1);
