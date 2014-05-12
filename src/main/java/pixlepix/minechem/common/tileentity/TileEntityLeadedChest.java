@@ -6,7 +6,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
-import pixlepix.minechem.common.ModMinechem;
 
 public class TileEntityLeadedChest extends TileEntity implements IInventory {
 
@@ -24,7 +23,7 @@ public class TileEntityLeadedChest extends TileEntity implements IInventory {
 
     @Override
     public ItemStack getStackInSlot(int slot) {
-        if (slot < ModMinechem.leadedChestSize) {
+        if (slot < 9) {
             return inventory[slot];
         }
         return null;
