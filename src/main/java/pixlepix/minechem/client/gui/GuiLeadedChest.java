@@ -4,12 +4,13 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+import pixlepix.minechem.client.gui.tabs.TabHelp;
 import pixlepix.minechem.common.containers.ContainerLeadedChest;
 import pixlepix.minechem.common.tileentity.TileEntityLeadedChest;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
-public class GuiLeadedChest extends GuiContainer {
+public class GuiLeadedChest extends GuiContainerTabbed {
 
     int guiWidth = 176;
     int guiHeight = 217;
@@ -18,6 +19,7 @@ public class GuiLeadedChest extends GuiContainer {
     public GuiLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest leadedChest) {
         super(new ContainerLeadedChest(inventoryPlayer, leadedChest));
         this.leadedchest = leadedChest;
+        addTab(new TabHelp(this, MinechemHelper.getLocalString("help.leadedChest")));
     }
 
     @Override
@@ -41,6 +43,11 @@ public class GuiLeadedChest extends GuiContainer {
         GL11.glPushMatrix();
         GL11.glTranslatef(x, y, 0.0F);
         GL11.glPopMatrix();
+    }
+
+    @Override
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
+        return false;
     }
 
 }
