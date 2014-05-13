@@ -54,11 +54,11 @@ public class ContainerLeadedChest extends Container {
         ItemStack stack;
         stack = null;
         Slot slotObject = (Slot) inventorySlots.get(slot);
-        
+
         if (slotObject != null && slotObject.getHasStack()) {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
-            
+
             if (slot < 9) {
                 if (!mergeItemStack(stackInSlot, 9, inventorySlots.size(), true)) {
                     return null;
@@ -66,7 +66,7 @@ public class ContainerLeadedChest extends Container {
             } else if (!mergeItemStack(stackInSlot, 0, 9, false)) {
                 return null;
             }
-            
+
             if (stackInSlot.stackSize == 0) {
                 slotObject.putStack(null);
             } else {
@@ -80,8 +80,9 @@ public class ContainerLeadedChest extends Container {
         List<ItemStack> storageInventory = new ArrayList<ItemStack>();
         for (int slot = 0; slot < 27; slot++) {
             ItemStack stack = getSlot(slot).getStack();
-            if (stack != null)
+            if (stack != null) {
                 storageInventory.add(stack);
+            }
         }
         return storageInventory;
     }
@@ -90,8 +91,9 @@ public class ContainerLeadedChest extends Container {
         List<ItemStack> playerInventory = new ArrayList<ItemStack>();
         for (int slot = 27; slot < this.inventorySlots.size(); slot++) {
             ItemStack stack = getSlot(slot).getStack();
-            if (stack != null)
+            if (stack != null) {
                 playerInventory.add(stack);
+            }
         }
         return playerInventory;
     }
