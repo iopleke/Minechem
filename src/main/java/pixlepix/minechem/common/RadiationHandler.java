@@ -9,6 +9,7 @@ import pixlepix.minechem.api.core.IRadiationShield;
 import pixlepix.minechem.api.core.EnumRadioactivity;
 import pixlepix.minechem.common.containers.ContainerChemicalStorage;
 import pixlepix.minechem.common.items.ItemElement;
+import pixlepix.minechem.common.containers.ContainerLeadedChest;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +19,14 @@ public class RadiationHandler {
     private static RadiationHandler instance = new RadiationHandler();
 
     public static RadiationHandler getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new RadiationHandler();
+        }
         return instance;
     }
 
     public class DecayEvent {
+
         public ItemStack before;
         public ItemStack after;
         public int damage;
@@ -35,12 +38,15 @@ public class RadiationHandler {
 
     public void update(EntityPlayer player) {
         Container openContainer = player.openContainer;
-        if (openContainer != null && openContainer instanceof ContainerChemicalStorage)
+        if (openContainer != null && openContainer instanceof ContainerChemicalStorage) {
             updateChemicalStorageContainer(player, openContainer);
-        else if (openContainer != null)
+        } else if (openContainer != null && openContainer instanceof ContainerLeadedChest) {
+            updateContainerLeadedChest(player, openContainer);
+        } else if (openContainer != null) {
             updateContainer(player, openContainer);
-        else
+        } else {
             updateContainer(player, player.inventoryContainer);
+        }
     }
 
     public List<DecayEvent> updateRadiationOnItems(World world, List<ItemStack> itemstacks) {
@@ -52,12 +58,27 @@ public class RadiationHandler {
         return (int) (info.radiationLife);
     }
 
+    private void updateContainerLeadedChest(EntityPlayer player, Container openContainer) {
+        ContainerLeadedChest leadedChest = (ContainerLeadedChest) openContainer;
+        List<ItemStack> itemstacks = leadedChest.getStorageInventory();
+        for (ItemStack itemstack : itemstacks) {
+            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID
+                    && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
+                RadiationInfo radiationInfo = ItemElement.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ItemElement.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = leadedChest.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+    }
+
     private void updateChemicalStorageContainer(EntityPlayer player, Container openContainer) {
         ContainerChemicalStorage chemicalStorage = (ContainerChemicalStorage) openContainer;
         List<ItemStack> itemstacks = chemicalStorage.getStorageInventory();
         for (ItemStack itemstack : itemstacks) {
             if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID
-		&& ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
+                    && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
                 RadiationInfo radiationInfo = ItemElement.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
                 ItemElement.setRadiationInfo(radiationInfo, itemstack);
@@ -76,13 +97,14 @@ public class RadiationHandler {
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks) {
             if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID
-		&& ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
+                    && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable) {
                 DecayEvent decayEvent = new DecayEvent();
                 decayEvent.before = itemstack.copy();
                 decayEvent.damage = updateRadiation(world, itemstack);
                 decayEvent.after = itemstack.copy();
-                if (decayEvent.damage > 0)
+                if (decayEvent.damage > 0) {
                     events.add(decayEvent);
+                }
                 if (decayEvent.damage > 0 && container != null) {
                     applyRadiationDamage(player, container, decayEvent.damage);
                     printRadiationDamageToChat(player, decayEvent);
@@ -105,10 +127,12 @@ public class RadiationHandler {
             }
         }
         float totalReductionFactor = 1;
-        for (float reduction : reductions)
+        for (float reduction : reductions) {
             totalReductionFactor -= reduction;
-        if (totalReductionFactor < 0)
+        }
+        if (totalReductionFactor < 0) {
             totalReductionFactor = 0;
+        }
         damage = Math.round((float) damage * totalReductionFactor);
         player.attackEntityFrom(DamageSource.generic, damage);
     }

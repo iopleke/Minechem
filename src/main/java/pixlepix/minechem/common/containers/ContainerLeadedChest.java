@@ -1,5 +1,7 @@
 package pixlepix.minechem.common.containers;
 
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -72,5 +74,25 @@ public class ContainerLeadedChest extends Container {
             }
         }
         return stack;
+    }
+
+    public List<ItemStack> getStorageInventory() {
+        List<ItemStack> storageInventory = new ArrayList<ItemStack>();
+        for (int slot = 0; slot < 27; slot++) {
+            ItemStack stack = getSlot(slot).getStack();
+            if (stack != null)
+                storageInventory.add(stack);
+        }
+        return storageInventory;
+    }
+
+    public List<ItemStack> getPlayerInventory() {
+        List<ItemStack> playerInventory = new ArrayList<ItemStack>();
+        for (int slot = 27; slot < this.inventorySlots.size(); slot++) {
+            ItemStack stack = getSlot(slot).getStack();
+            if (stack != null)
+                playerInventory.add(stack);
+        }
+        return playerInventory;
     }
 }
