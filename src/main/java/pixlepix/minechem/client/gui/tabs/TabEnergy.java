@@ -11,13 +11,13 @@ import pixlepix.minechem.common.utils.RollingAverage;
 
 public class TabEnergy extends Tab
 {
+
     public static Icon powerIcon;
     // I'm copying the layout for the buildcraft
     // engine tab, because users will be familiar.
     int headerColour = 0xe1c92f;
     int subheaderColour = 0xaaafb8;
     int textColour = 0x000000;
-
     // Switched from refrence to MinechemPowerProvider for 1.6 move to UE
     MinechemTileEntity energy;
     RollingAverage energyUsageRolling = new RollingAverage(100);
@@ -65,7 +65,6 @@ public class TabEnergy extends Tab
     @Override
     public ResourceLocation getIcon()
     {
-        // TODO Auto-generated method stub
         return ModMinechem.ICON_ENERGY;
     }
 

@@ -19,27 +19,22 @@ import pixlepix.minechem.common.utils.SessionVars;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler {
+public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler
+{
 
-    protected static enum SlotColor {
-        BLUE,
-        RED,
-        YELLOW,
-        ORANGE,
-        GREEN,
-        PURPLE;
+    protected static enum SlotColor
+    {
+        BLUE, RED, YELLOW, ORANGE, GREEN, PURPLE;
     }
 
-    protected static enum SlotType {
-        SINGLE,
-        OUTPUT,
-        DOUBLEOUTPUT;
+    protected static enum SlotType
+    {
+        SINGLE, OUTPUT, DOUBLEOUTPUT;
     }
 
-    protected static enum SlotRender {
-        TOP,
-        BOTTOM,
-        FULL;
+    protected static enum SlotRender
+    {
+        TOP, BOTTOM, FULL;
     }
 
     protected static int SCALE_ENERGY = 42;
@@ -55,12 +50,14 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
     public static boolean drawBorders;
 
-    public void drawTabIcon() {
+    public void drawTabIcon()
+    {
     }
 
     public int zLevel = 3;
 
-    public void drawTexture(int x, int y, ResourceLocation resource) {
+    public void drawTexture(int x, int y, ResourceLocation resource)
+    {
         int w = 16;
         int h = 16;
         this.mc.getTextureManager().bindTexture(resource);
@@ -74,13 +71,14 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         tessellator.draw();
     }
 
-
-    public GuiContainerTabbed(Container container) {
+    public GuiContainerTabbed(Container container)
+    {
         super(container);
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int i, int j) {
+    protected void drawGuiContainerForegroundLayer(int i, int j)
+    {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
 
@@ -92,60 +90,68 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     /* DRAW FUNCTIONS */
-    protected void drawColoredSlot(int x, int y, SlotColor color, SlotType type, SlotRender render) {
+    protected void drawColoredSlot(int x, int y, SlotColor color, SlotType type, SlotRender render)
+    {
 
-        if (drawBorders) {
+        if (drawBorders)
+        {
             drawColoredSlotWithBorder(x, y, color, type, render);
-        } else {
+        }
+        else
+        {
             drawColoredSlotNoBorder(x, y, color, type, render);
         }
     }
 
-    protected void drawColoredSlotNoBorder(int x, int y, SlotColor color, SlotType type, SlotRender render) {
+    protected void drawColoredSlotNoBorder(int x, int y, SlotColor color, SlotType type, SlotRender render)
+    {
 
         int sizeX = 0;
         int sizeY = 0;
         int offsetX = color.ordinal() / 3 * 128;
         int offsetY = color.ordinal() % 3 * 32;
 
-        switch (type) {
-            case SINGLE:
-                sizeX = 16;
-                sizeY = 16;
-                offsetX += 8;
-                offsetY += 8;
-                break;
-            case OUTPUT:
-                sizeX = 24;
-                sizeY = 24;
-                offsetX += 36;
-                offsetY += 4;
-                break;
-            case DOUBLEOUTPUT:
-                sizeX = 42;
-                sizeY = 24;
-                offsetX += 75;
-                offsetY += 4;
-                break;
+        switch (type)
+        {
+        case SINGLE:
+            sizeX = 16;
+            sizeY = 16;
+            offsetX += 8;
+            offsetY += 8;
+            break;
+        case OUTPUT:
+            sizeX = 24;
+            sizeY = 24;
+            offsetX += 36;
+            offsetY += 4;
+            break;
+        case DOUBLEOUTPUT:
+            sizeX = 42;
+            sizeY = 24;
+            offsetX += 75;
+            offsetY += 4;
+            break;
         }
 
-        switch (render) {
-            case TOP:
-                sizeY /= 2;
-                break;
-            case BOTTOM:
-                sizeY /= 2;
-                y += sizeY;
-                offsetY += sizeY;
-                break;
-            case FULL:
-                break;
+        switch (render)
+        {
+        case TOP:
+            sizeY /= 2;
+            break;
+        case BOTTOM:
+            sizeY /= 2;
+            y += sizeY;
+            offsetY += sizeY;
+            break;
+        case FULL:
+            break;
         }
 
         drawTexturedModalRect(x, y, offsetX, offsetY, sizeX, sizeY);
     }
 
-    protected void drawColoredSlotWithBorder(int x, int y, SlotColor color, SlotType type, SlotRender render) {
+    protected void drawColoredSlotWithBorder(int x, int y, SlotColor color, SlotType type, SlotRender render)
+    {
 
         int sizeX = 32;
         int sizeY = 32;
@@ -154,51 +160,59 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         offsetX += type.ordinal() * 32;
 
-        if (type.ordinal() == 2) {
+        if (type.ordinal() == 2)
+        {
             sizeX = 64;
         }
 
-        switch (type) {
-            case SINGLE:
-                x -= 8;
-                y -= 8;
-                break;
-            case OUTPUT:
-                x -= 4;
-                y -= 4;
-                break;
-            case DOUBLEOUTPUT:
-                x -= 11;
-                y -= 4;
-                break;
+        switch (type)
+        {
+        case SINGLE:
+            x -= 8;
+            y -= 8;
+            break;
+        case OUTPUT:
+            x -= 4;
+            y -= 4;
+            break;
+        case DOUBLEOUTPUT:
+            x -= 11;
+            y -= 4;
+            break;
         }
 
-        switch (render) {
-            case TOP:
-                sizeY /= 2;
-                break;
-            case BOTTOM:
-                sizeY /= 2;
-                y += sizeY;
-                offsetY += sizeY;
-                break;
-            case FULL:
-                break;
+        switch (render)
+        {
+        case TOP:
+            sizeY /= 2;
+            break;
+        case BOTTOM:
+            sizeY /= 2;
+            y += sizeY;
+            offsetY += sizeY;
+            break;
+        case FULL:
+            break;
         }
 
         drawTexturedModalRect(x, y, offsetX, offsetY, sizeX, sizeY);
     }
 
-    protected void drawColoredLiquidSlot(int x, int y, SlotColor color) {
+    protected void drawColoredLiquidSlot(int x, int y, SlotColor color)
+    {
 
-        if (drawBorders) {
+        if (drawBorders)
+        {
             drawColoredLiquidSlotWithBorder(x, y, color);
-        } else {
+        }
+        else
+        {
             drawColoredLiquidSlotNoBorder(x, y, color);
         }
     }
 
-    protected void drawColoredLiquidSlotNoBorder(int x, int y, SlotColor color) {
+    protected void drawColoredLiquidSlotNoBorder(int x, int y, SlotColor color)
+    {
 
         int sizeX = 16;
         int sizeY = 60;
@@ -208,7 +222,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         drawTexturedModalRect(x, y, offsetX + 8, offsetY + 2, sizeX, sizeY);
     }
 
-    protected void drawColoredLiquidSlotWithBorder(int x, int y, SlotColor color) {
+    protected void drawColoredLiquidSlotWithBorder(int x, int y, SlotColor color)
+    {
 
         int sizeX = 32;
         int sizeY = 64;
@@ -218,19 +233,24 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         drawTexturedModalRect(x - 8, y - 2, offsetX, offsetY, sizeX, sizeY);
     }
 
-    protected void drawTooltip(String tooltip) {
+    protected void drawTooltip(String tooltip)
+    {
 
         drawCreativeTabHoveringText(tooltip, mouseX, mouseY);
 
     }
 
-    protected void drawLiquid(int j, int k, int liquidId, int liquidMeta, int width, int height) {
+    protected void drawLiquid(int j, int k, int liquidId, int liquidMeta, int width, int height)
+    {
 
         Icon liquidImg = null;
 
-        if (liquidId < Block.blocksList.length && Block.blocksList[liquidId] != null) {
+        if (liquidId < Block.blocksList.length && Block.blocksList[liquidId] != null)
+        {
             liquidImg = Block.blocksList[liquidId].getBlockTextureFromSide(0);
-        } else if (Item.itemsList[liquidId] != null) {
+        }
+        else if (Item.itemsList[liquidId] != null)
+        {
             liquidImg = Item.itemsList[liquidId].getIconFromDamage(liquidMeta);
         }
         if (liquidImg == null)
@@ -241,8 +261,10 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         int drawHeight = 0;
         int drawWidth = 0;
 
-        for (x = 0; x < width; x += 16) {
-            for (y = 0; y < height; y += 16) {
+        for (x = 0; x < width; x += 16)
+        {
+            for (y = 0; y < height; y += 16)
+            {
 
                 drawWidth = Math.min(width - x, 16);
                 drawHeight = Math.min(height - y, 16);
@@ -253,34 +275,45 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     /* UTILITY FUNCTIONS */
-    protected int getCenteredOffset(String string) {
+    protected int getCenteredOffset(String string)
+    {
 
         return this.getCenteredOffset(string, xSize);
     }
 
-    protected int getCenteredOffset(String string, int xWidth) {
+    protected int getCenteredOffset(String string, int xWidth)
+    {
 
         return (xWidth - fontRenderer.getStringWidth(string)) / 2;
     }
 
     @Override
-    protected void mouseClicked(int x, int y, int mouseButton) {
+    protected void mouseClicked(int x, int y, int mouseButton)
+    {
 
         super.mouseClicked(x, y, mouseButton);
 
         Tab tab = getTabAtPosition(mouseX, mouseY);
 
-        if (tab != null && !tab.handleMouseClicked(mouseX, mouseY, mouseButton)) {
+        if (tab != null && !tab.handleMouseClicked(mouseX, mouseY, mouseButton))
+        {
 
-            if (tab.leftSide) {
-                for (Tab other : tabListLeft) {
-                    if (other != tab && other.isOpen()) {
+            if (tab.leftSide)
+            {
+                for (Tab other : tabListLeft)
+                {
+                    if (other != tab && other.isOpen())
+                    {
                         other.toggleOpen();
                     }
                 }
-            } else {
-                for (Tab other : tabListRight) {
-                    if (other != tab && other.isOpen()) {
+            }
+            else
+            {
+                for (Tab other : tabListRight)
+                {
+                    if (other != tab && other.isOpen())
+                    {
                         other.toggleOpen();
                     }
                 }
@@ -290,7 +323,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     @Override
-    public void handleMouseInput() {
+    public void handleMouseInput()
+    {
         super.handleMouseInput();
         int i = Mouse.getEventX() * this.width / this.mc.displayWidth;
         int j = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
@@ -299,35 +333,45 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     /* TAB MANAGEMENT */
-    public void addTab(Tab tab) {
+    public void addTab(Tab tab)
+    {
 
-        if (tab.leftSide) {
+        if (tab.leftSide)
+        {
             tabListLeft.add(tab);
-        } else {
+        }
+        else
+        {
             tabListRight.add(tab);
         }
-        if (SessionVars.getOpenedTab() != null && tab.getClass().equals(SessionVars.getOpenedTab())) {
+        if (SessionVars.getOpenedTab() != null && tab.getClass().equals(SessionVars.getOpenedTab()))
+        {
             tab.setFullyOpen();
         }
     }
 
-    protected void drawTabs(int mX, int mY) {
+    protected void drawTabs(int mX, int mY)
+    {
 
         int yPosRight = 4;
 
-        for (Tab tab : tabListLeft) {
+        for (Tab tab : tabListLeft)
+        {
 
             tab.update();
-            if (!tab.isVisible()) {
+            if (!tab.isVisible())
+            {
                 continue;
             }
             tab.draw(0, yPosRight);
         }
 
-        for (Tab tab : tabListRight) {
+        for (Tab tab : tabListRight)
+        {
 
             tab.update();
-            if (!tab.isVisible()) {
+            if (!tab.isVisible())
+            {
                 continue;
             }
 
@@ -336,28 +380,34 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         }
 
         Tab tab = getTabAtPosition(mX, mY);
-        if (tab != null) {
+        if (tab != null)
+        {
             String tooltip = tab.getTooltip();
-            if (tooltip != null) {
+            if (tooltip != null)
+            {
                 drawTooltip(tooltip);
             }
         }
     }
 
-    protected Tab getTabAtPosition(int mX, int mY) {
+    protected Tab getTabAtPosition(int mX, int mY)
+    {
 
         int xShift = 0;
         int yShift = 4;
 
-        for (int i = 0; i < tabListLeft.size(); ++i) {
+        for (int i = 0; i < tabListLeft.size(); ++i)
+        {
             Tab tab = tabListLeft.get(i);
-            if (!tab.isVisible()) {
+            if (!tab.isVisible())
+            {
                 continue;
             }
 
             tab.currentShiftX = xShift;
             tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift)) {
+            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            {
                 return tab;
             }
             yShift += tab.getHeight();
@@ -366,15 +416,18 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         xShift = xSize;
         yShift = 4;
 
-        for (int i = 0; i < tabListRight.size(); ++i) {
+        for (int i = 0; i < tabListRight.size(); ++i)
+        {
             Tab tab = tabListRight.get(i);
-            if (!tab.isVisible()) {
+            if (!tab.isVisible())
+            {
                 continue;
             }
 
             tab.currentShiftX = xShift;
             tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift)) {
+            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            {
                 return tab;
             }
             yShift += tab.getHeight();
@@ -383,38 +436,42 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         return null;
     }
 
-    public int getMouseX() {
+    public int getMouseX()
+    {
         return (Mouse.getX() * this.width / this.mc.displayWidth);
     }
 
-    public int getMouseY() {
+    public int getMouseY()
+    {
         return this.height - (Mouse.getY() * this.height / this.mc.displayHeight - 1);
     }
 
     /* INEIGuiHandler */
     @Override
-    public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility) {
+    public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility)
+    {
         currentVisibility.showItemPanel = true;
         currentVisibility.showItemSection = true;
-        /*
-         * UNCOMMENT ME WHEN TUTORIAL TABS ARE COMPLETED!
-         */
+        /* UNCOMMENT ME WHEN TUTORIAL TABS ARE COMPLETED! */
         // currentVisibility.showStateButtons = false;
         return currentVisibility;
     }
 
     @Override
-    public int getItemSpawnSlot(GuiContainer gui, ItemStack item) {
+    public int getItemSpawnSlot(GuiContainer gui, ItemStack item)
+    {
         return -1;
     }
 
     @Override
-    public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui) {
+    public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui)
+    {
         return null;
     }
 
     @Override
-    public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button) {
+    public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button)
+    {
         return false;
     }
 }

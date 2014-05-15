@@ -14,7 +14,8 @@ import pixlepix.minechem.common.tileentity.TileEntityFusion;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
-public class GuiFusion extends GuiContainerTabbed {
+public class GuiFusion extends GuiContainerTabbed
+{
 
     static float increaseRate = .2F;
     static float decreaseRate = .4F;
@@ -25,7 +26,8 @@ public class GuiFusion extends GuiContainerTabbed {
     float energy = 0.0F;
     int targetEnergy = 0;
 
-    public GuiFusion(InventoryPlayer inventoryPlayer, TileEntityFusion fusion) {
+    public GuiFusion(InventoryPlayer inventoryPlayer, TileEntityFusion fusion)
+    {
         super(new ContainerFusion(inventoryPlayer, fusion));
         this.fusion = fusion;
         energy = fusion.getEnergy(ForgeDirection.UNKNOWN);
@@ -35,7 +37,8 @@ public class GuiFusion extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
+    {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("block.name.fusion");
         int infoWidth = fontRenderer.getStringWidth(info);
@@ -43,7 +46,8 @@ public class GuiFusion extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.FUSION_GUI));
@@ -62,7 +66,8 @@ public class GuiFusion extends GuiContainerTabbed {
         drawEnergyBarOverlay();
     }
 
-    public void drawEnergyBarOverlay() {
+    public void drawEnergyBarOverlay()
+    {
 
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
@@ -70,13 +75,17 @@ public class GuiFusion extends GuiContainerTabbed {
 
     }
 
-    private void updateEnergy() {
+    private void updateEnergy()
+    {
         targetEnergy = fusion.getFusionEnergyStored();
-        if (energy < (targetEnergy)) {
+        if (energy < (targetEnergy))
+        {
             energy += increaseRate;
             if (energy > targetEnergy)
                 energy = targetEnergy;
-        } else if (energy > (targetEnergy)) {
+        }
+        else if (energy > (targetEnergy))
+        {
             energy -= decreaseRate;
             if (energy < targetEnergy)
                 energy = targetEnergy;
@@ -84,9 +93,8 @@ public class GuiFusion extends GuiContainerTabbed {
     }
 
     @Override
-    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-                                     int h) {
-        // TODO Auto-generated method stub
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
+    {
         return false;
     }
 

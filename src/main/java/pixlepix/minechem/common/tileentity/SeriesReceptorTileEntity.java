@@ -1,11 +1,11 @@
 package pixlepix.minechem.common.tileentity;
 
+import pixlepix.minechem.api.BaseParticle;
+import pixlepix.minechem.api.IParticleReceptor;
 import cofh.api.energy.IEnergyHandler;
 import cofh.api.energy.TileEnergyHandler;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-import pixlepix.minechem.api.BaseParticle;
-import pixlepix.minechem.api.IParticleReceptor;
 
 public class SeriesReceptorTileEntity extends TileEnergyHandler implements IParticleReceptor {
 

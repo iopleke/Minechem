@@ -55,7 +55,7 @@ public class PacketHandler implements IPacketHandler
         activeJournalItemHandler = EasyPacketHandler.registerEasyPacket(PacketActiveJournalItem.class, dispatcher);
         // swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
     }
-    
+
     public static void sendInterfacePacket(byte type, byte val)
     {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
@@ -75,7 +75,7 @@ public class PacketHandler implements IPacketHandler
             System.err.append("Failed to send button click packet");
         }
     }
-    
+
     private void handleParticleUpdatePacket(DataInputStream inputStream)
     {
 

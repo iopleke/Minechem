@@ -7,49 +7,53 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.List;
+
 import pixlepix.minechem.api.BaseParticle;
 import pixlepix.minechem.common.ParticleRegistry;
 import pixlepix.minechem.common.network.PacketHandler;
 import pixlepix.minechem.common.tileentity.EmitterTileEntity;
 
-import java.util.List;
-
-//Thanks to VSWE for assorted bits of the code
-public class GuiEmitter extends GuiContainer {
-    private static final ResourceLocation texture = new ResourceLocation(
-            "minechem", "textures/gui/emitter.png");
+// Thanks to VSWE for assorted bits of the code
+public class GuiEmitter extends GuiContainer
+{
+    private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/emitter.png");
     private EmitterTileEntity tile;
 
     public static final GuiRectangle bar = new GuiRectangle(50, 50, 86, 6);
 
     public static final GuiRectangle slider = new GuiRectangle(75, 47, 6, 11);
 
-    public GuiEmitter(InventoryPlayer invPlayer, EmitterTileEntity tile) {
+    public GuiEmitter(InventoryPlayer invPlayer, EmitterTileEntity tile)
+    {
         super(new ContainerEmitter(invPlayer, tile));
         this.tile = tile;
 
         xSize = 176;
         ySize = 218;
 
-
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int x, int y) {
+    protected void drawGuiContainerBackgroundLayer(float f, int x, int y)
+    {
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 
-	    //Higher limit on the bar for molecules
-        float filled = (float) (tile.fuelStored / ((float)tile.getMaxFuelFromItems()));
+        // Higher limit on the bar for molecules
+        float filled = (float) (tile.fuelStored / ((float) tile.getMaxFuelFromItems()));
         int barHeight = (int) (filled * 29);
-        if (barHeight > 0) {
+        if (barHeight > 0)
+        {
             int srcX = xSize;
             int srcY = 29 - barHeight;
             drawTexturedModalRect(guiLeft + 4, guiTop + 46 + 29 - barHeight, srcX, srcY, 28, barHeight);
         }
 
-        if (!this.isDragging) {
+        if (!this.isDragging)
+        {
 
             this.tempHeightSetting = tile.interval;
         }
@@ -60,37 +64,42 @@ public class GuiEmitter extends GuiContainer {
 
         fontRenderer.drawString((this.tempHeightSetting + 1) + " Seconds", 190, 70, 0x404040);
 
-        //Render selected particle face
+        // Render selected particle face
         Minecraft.getMinecraft().getTextureManager().bindTexture(TextureMap.locationBlocksTexture);
-        if (tile.getStackInSlot(0) != null) {
+        if (tile.getStackInSlot(0) != null)
+        {
             BaseParticle particle = tile.getParticleFromFuel(tile.getStackInSlot(0).itemID, tile.getStackInSlot(0).getItemDamage());
 
-            if (particle != null) {
+            if (particle != null)
+            {
                 Icon icon = ParticleRegistry.getIconFromInstance(particle);
-                if (icon != null) {
+                if (icon != null)
+                {
                     this.drawTexturedModelRectFromIcon(guiLeft + 30, guiTop + 16, icon, 16, 16);
                 }
             }
         }
 
-
     }
 
-
-    public int getLeft() {
+    public int getLeft()
+    {
         return this.guiLeft;
     }
 
-    public int getTop() {
+    public int getTop()
+    {
         return this.guiTop;
     }
 
-    public void drawHoverString(List l, int w, int h) {
+    public void drawHoverString(List l, int w, int h)
+    {
         this.drawHoveringText(l, w, h, fontRenderer);
     }
 
     @Override
-    protected void actionPerformed(GuiButton button) {
+    protected void actionPerformed(GuiButton button)
+    {
         super.actionPerformed(button);
         PacketHandler.sendInterfacePacket((byte) 0, (byte) button.id);
 
@@ -100,7 +109,8 @@ public class GuiEmitter extends GuiContainer {
     private boolean isDragging;
 
     @Override
-    public void initGui() {
+    public void initGui()
+    {
         super.initGui();
         buttonList.clear();
         GuiButton clearButton = new GuiButton(0, guiLeft + 80, guiTop + 14, 80, 20, "Clear Fuel");
@@ -108,35 +118,41 @@ public class GuiEmitter extends GuiContainer {
 
     }
 
-
     @Override
-    public void mouseClicked(int x, int y, int button) {
+    public void mouseClicked(int x, int y, int button)
+    {
         super.mouseClicked(x, y, button);
-        if (slider.inRect(this, x, y)) {
+        if (slider.inRect(this, x, y))
+        {
             isDragging = true;
             tempHeightSetting = tile.interval;
         }
     }
 
     @Override
-    public void mouseClickMove(int x, int y, int button,
-                               long timeSinceClicked) {
+    public void mouseClickMove(int x, int y, int button, long timeSinceClicked)
+    {
         super.mouseClickMove(x, y, button, timeSinceClicked);
-        if (isDragging) {
+        if (isDragging)
+        {
             tempHeightSetting = (x - getLeft() - 50);
-            if (tempHeightSetting < 0) {
+            if (tempHeightSetting < 0)
+            {
                 tempHeightSetting = 00;
             }
-            if (tempHeightSetting > 85) {
+            if (tempHeightSetting > 85)
+            {
                 tempHeightSetting = 85;
             }
         }
     }
 
     @Override
-    public void mouseMovedOrUp(int x, int y, int button) {
+    public void mouseMovedOrUp(int x, int y, int button)
+    {
         super.mouseMovedOrUp(x, y, button);
-        if (isDragging) {
+        if (isDragging)
+        {
             PacketHandler.sendInterfacePacket((byte) 1, (byte) tempHeightSetting);
 
             tile.interval = tempHeightSetting;
@@ -144,7 +160,8 @@ public class GuiEmitter extends GuiContainer {
         }
     }
 
-    private void updateSliderPosition() {
+    private void updateSliderPosition()
+    {
 
         slider.setX(50 + (isDragging ? tempHeightSetting : tile.interval));
     }

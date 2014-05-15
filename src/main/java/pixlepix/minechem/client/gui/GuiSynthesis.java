@@ -15,12 +15,14 @@ import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
-public class GuiSynthesis extends GuiContainerTabbed {
+public class GuiSynthesis extends GuiContainerTabbed
+{
 
     int guiWidth = 176;
     int guiHeight = 187;
 
-    public GuiSynthesis(InventoryPlayer inventoryPlayer, TileEntitySynthesis synthesis) {
+    public GuiSynthesis(InventoryPlayer inventoryPlayer, TileEntitySynthesis synthesis)
+    {
         super(new ContainerSynthesis(inventoryPlayer, synthesis));
         this.xSize = guiWidth;
         this.ySize = guiHeight;
@@ -30,7 +32,8 @@ public class GuiSynthesis extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
+    {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("gui.title.synthesis");
         int infoWidth = fontRenderer.getStringWidth(info);
@@ -38,7 +41,8 @@ public class GuiSynthesis extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.SYNTHESIS_GUI));
@@ -48,9 +52,8 @@ public class GuiSynthesis extends GuiContainerTabbed {
     }
 
     @Override
-    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-                                     int h) {
-        // TODO Auto-generated method stub
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
+    {
         return false;
     }
 

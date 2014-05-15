@@ -12,22 +12,25 @@ import pixlepix.minechem.common.tileentity.TileEntityFission;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
-public class GuiFission extends GuiMinechemContainer {
-
+public class GuiFission extends GuiMinechemContainer
+{
 
     int guiWidth = 176;
     int guiHeight = 166;
 
-    public GuiFission(Container par1Container) {
+    public GuiFission(Container par1Container)
+    {
         super(par1Container);
     }
 
-    public GuiFission(InventoryPlayer inventoryPlayer, TileEntityFission fission) {
+    public GuiFission(InventoryPlayer inventoryPlayer, TileEntityFission fission)
+    {
         super(new ContainerFission(inventoryPlayer, fission));
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
+    {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("Fission");
         int infoWidth = fontRenderer.getStringWidth(info);
@@ -35,7 +38,8 @@ public class GuiFission extends GuiMinechemContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.FISSION_GUI));
@@ -45,6 +49,5 @@ public class GuiFission extends GuiMinechemContainer {
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 
     }
-
 
 }

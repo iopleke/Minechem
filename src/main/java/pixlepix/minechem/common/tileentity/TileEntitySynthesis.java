@@ -355,29 +355,33 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public void updateEntity()
     {
         super.updateEntity();
-        if (!worldObj.isRemote)
-        {
+        if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
-        }
 
         float energyStored = this.getEnergy(ForgeDirection.UNKNOWN);
         if (energyStored >= this.getEnergyCapacity(ForgeDirection.UP))
+        {
             hasFullEnergy = true;
+        }
+        
         if (hasFullEnergy && energyStored < this.getEnergyCapacity(ForgeDirection.UP) / 2)
+        {
             hasFullEnergy = false;
+        }
 
         if (this.getEnergy(ForgeDirection.UNKNOWN) >= this.getEnergyCapacity(ForgeDirection.UP))
+        {
             hasFullEnergy = true;
-        if (hasFullEnergy && this.getEnergy(ForgeDirection.UNKNOWN) < this.getEnergyCapacity(ForgeDirection.UP) / 2);
+        }
+        
+        if (hasFullEnergy && this.getEnergy(ForgeDirection.UNKNOWN) < this.getEnergyCapacity(ForgeDirection.UP) / 2)
+        {
             hasFullEnergy = false;
+        }
 
         if (currentRecipe != null && inventory[kOutput[0]] == null)
         {
             inventory[kOutput[0]] = currentRecipe.getOutput().copy();
-        }
-        if (worldObj.getTotalWorldTime() - this.lastRecipeTick > 5)
-        {
-            this.lastEnergyUsed = 0;
         }
     }
 
@@ -435,7 +439,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     private void takeEnergy(SynthesisRecipe recipe)
     {
         int energyCost = recipe.energyCost();
-        this.lastEnergyUsed = energyCost;
         this.lastRecipeTick = worldObj.getTotalWorldTime();
         this.consumeEnergy(energyCost);
     }
@@ -621,7 +624,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
-        // Item is always valid for slot.
         return true;
     }
 
@@ -642,7 +644,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     @Override
     public boolean canInsertItem(int i, ItemStack itemstack, int j)
     {
-        // Items can always be inserted.
         return true;
     }
 

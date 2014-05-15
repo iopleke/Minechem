@@ -108,7 +108,6 @@ public class GuiProjector extends GuiContainerTabbed
     @Override
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
     {
-        // TODO Auto-generated method stub
         return false;
     }
 

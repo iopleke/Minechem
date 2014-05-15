@@ -195,12 +195,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 }
             }
         }
-        
         this.doWork();
-        if (!worldObj.isRemote)
-        {
+        if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
             sendUpdatePacket();
-        }
 
         if (getEnergy(ForgeDirection.UNKNOWN) >= this.getEnergyCapacity(ForgeDirection.UP))
             hasFullEnergy = true;
@@ -256,14 +253,12 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     {
         if (state != State.kProcessActive)
         {
-            this.lastEnergyUsed = 0;
             return;
         }
 
         State oldState = state;
         long energyUsed = Math.min(this.getEnergy(ForgeDirection.UNKNOWN), this.MAX_ENERGY_RECIEVED);
         this.consumeEnergy(energyUsed);
-        this.lastEnergyUsed = energyUsed / 20;
 
         workToDo += MinechemHelper.translateValue(energyUsed, this.MIN_ENERGY_RECIEVED, this.MAX_ENERGY_RECIEVED, MIN_WORK_PER_SECOND / 20, MAX_WORK_PER_SECOND / 20);
         this.workToDo *= 10;
@@ -538,7 +533,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         }
     }
 
-    public float getMinEnergyNeeded()
+    public long getMinEnergyNeeded()
     {
         return 100;
     }
@@ -595,7 +590,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
-        // This machine can be used by the player.
         return true;
     }
 }

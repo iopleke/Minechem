@@ -1,5 +1,6 @@
 package pixlepix.minechem.client.gui;
 
+import pixlepix.minechem.common.tileentity.EmitterTileEntity;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.entity.player.EntityPlayer;
@@ -8,60 +9,77 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.ICrafting;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import pixlepix.minechem.common.tileentity.EmitterTileEntity;
 
-public class ContainerEmitter extends Container {
+public class ContainerEmitter extends Container
+{
 
     private EmitterTileEntity machine;
 
-    public ContainerEmitter(InventoryPlayer invPlayer, EmitterTileEntity machine) {
+    public ContainerEmitter(InventoryPlayer invPlayer, EmitterTileEntity machine)
+    {
         this.machine = machine;
 
-        for (int x = 0; x < 9; x++) {
+        for (int x = 0; x < 9; x++)
+        {
             addSlotToContainer(new Slot(invPlayer, x, 8 + 18 * x, 64 + 130));
         }
 
-        for (int y = 0; y < 3; y++) {
-            for (int x = 0; x < 9; x++) {
+        for (int y = 0; y < 3; y++)
+        {
+            for (int x = 0; x < 9; x++)
+            {
                 addSlotToContainer(new Slot(invPlayer, x + y * 9 + 9, 8 + 18 * x, 64 + 72 + y * 18));
             }
         }
         addSlotToContainer(new SlotEmitterFuel(machine, 0, 8, 17));
-        for (int x = 0; x < 3; x++) {
+        for (int x = 0; x < 3; x++)
+        {
             addSlotToContainer(new SlotEmitterFuel(machine, 1 + x, 8 + 18 * x, 111));
         }
-        for (int x = 0; x < 3; x++) {
+        for (int x = 0; x < 3; x++)
+        {
             addSlotToContainer(new SlotEmitterFuel(machine, 4 + x, 8 + 18 * x, 93));
         }
     }
 
-    public EmitterTileEntity getMachine() {
+    public EmitterTileEntity getMachine()
+    {
         return this.machine;
     }
 
     @Override
-    public boolean canInteractWith(EntityPlayer entityplayer) {
+    public boolean canInteractWith(EntityPlayer entityplayer)
+    {
         return machine.isUseableByPlayer(entityplayer);
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer player, int i) {
+    public ItemStack transferStackInSlot(EntityPlayer player, int i)
+    {
         Slot slot = getSlot(i);
 
-        if (slot != null && slot.getHasStack()) {
+        if (slot != null && slot.getHasStack())
+        {
             ItemStack stack = slot.getStack();
 
-            if (i >= 36) {
-                if (!mergeItemStack(stack, 0, 36, false)) {
+            if (i >= 36)
+            {
+                if (!mergeItemStack(stack, 0, 36, false))
+                {
                     return null;
                 }
-            } else if (machine.isValidFuel(stack.itemID) || !mergeItemStack(stack, 36, 36 + machine.getSizeInventory(), false)) {
+            }
+            else if (machine.isValidFuel(stack.itemID) || !mergeItemStack(stack, 36, 36 + machine.getSizeInventory(), false))
+            {
                 return null;
             }
 
-            if (stack.stackSize == 0) {
+            if (stack.stackSize == 0)
+            {
                 slot.putStack(null);
-            } else {
+            }
+            else
+            {
                 slot.onSlotChanged();
             }
 
@@ -72,7 +90,8 @@ public class ContainerEmitter extends Container {
     }
 
     @Override
-    public void addCraftingToCrafters(ICrafting player) {
+    public void addCraftingToCrafters(ICrafting player)
+    {
         super.addCraftingToCrafters(player);
 
         player.sendProgressBarUpdate(this, 0, machine.fuelStored);
@@ -83,17 +102,22 @@ public class ContainerEmitter extends Container {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void updateProgressBar(int id, int data) {
-        if (id == 0) {
+    public void updateProgressBar(int id, int data)
+    {
+        if (id == 0)
+        {
             machine.fuelStored = data;
         }
-        if (id == 1) {
+        if (id == 1)
+        {
             machine.fuelType = data;
         }
-        if (id == 2) {
+        if (id == 2)
+        {
             machine.fuelMeta = data;
         }
-        if (id == 3) {
+        if (id == 3)
+        {
             machine.interval = data;
         }
     }
@@ -103,17 +127,22 @@ public class ContainerEmitter extends Container {
     private int oldFuelMeta;
 
     @Override
-    public void detectAndSendChanges() {
+    public void detectAndSendChanges()
+    {
         super.detectAndSendChanges();
-        for (Object player : crafters) {
+        for (Object player : crafters)
+        {
 
-            if (oldFuelStored != machine.fuelStored) {
+            if (oldFuelStored != machine.fuelStored)
+            {
                 ((ICrafting) player).sendProgressBarUpdate(this, 0, machine.fuelStored);
             }
-            if (oldFuelType != machine.fuelType) {
+            if (oldFuelType != machine.fuelType)
+            {
                 ((ICrafting) player).sendProgressBarUpdate(this, 1, machine.fuelType);
             }
-            if (oldFuelMeta != machine.fuelMeta) {
+            if (oldFuelMeta != machine.fuelMeta)
+            {
                 ((ICrafting) player).sendProgressBarUpdate(this, 2, machine.fuelMeta);
             }
 

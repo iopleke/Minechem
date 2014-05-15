@@ -11,17 +11,21 @@ import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
 import pixlepix.minechem.common.utils.ConstantValue;
 
-public class TileEntityMicroscopeRenderer extends TileEntitySpecialRenderer {
+public class TileEntityMicroscopeRenderer extends TileEntitySpecialRenderer
+{
 
     ModelMicroscope modelMicroscope;
 
-    public TileEntityMicroscopeRenderer() {
+    public TileEntityMicroscopeRenderer()
+    {
         modelMicroscope = new ModelMicroscope();
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float var8) {
-        if (tileEntity instanceof TileEntityMicroscope) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float var8)
+    {
+        if (tileEntity instanceof TileEntityMicroscope)
+        {
             int facing = ((TileEntityMicroscope) tileEntity).getFacing();
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);

@@ -23,7 +23,9 @@ public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer
             int facing = synthesis.getFacing();
 
             if (synthesis.getEnergy(ForgeDirection.UNKNOWN) > 100)
+            {
                 synthesis.model.updateArm();
+            }
 
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);

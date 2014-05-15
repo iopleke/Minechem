@@ -22,7 +22,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
 {
     protected EnergyStorageHandler energy;
     public ItemStack[] inventory;
-    public float lastEnergyUsed;
 
     public MinechemTileEntity()
     {
@@ -123,6 +122,21 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
         return this.energy.getEnergy() > 0;
     }
 
+    public float getRequest()
+    {
+        return this.energy.getLastEnergy();
+    }
+
+    public boolean didEnergyStoredChange()
+    {
+        return this.energy.didEnergyStateChange();
+    }
+
+    public boolean didEnergyUsageChange()
+    {
+        return true;
+    }
+
     @Override
     public long onExtractEnergy(ForgeDirection from, long extract, boolean doExtract)
     {
@@ -171,17 +185,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
     {
         super.readFromNBT(nbt);
         this.energy.readFromNBT(nbt);
-        this.lastEnergyUsed = nbt.getFloat("lastEnergyUsed");
-    }
-
-    public void setEnergyUsage(float energyUsage)
-    {
-        this.lastEnergyUsed = energyUsage;
-    }
-
-    public float getRequest()
-    {
-        return this.lastEnergyUsed;
     }
 
     @Override
@@ -212,7 +215,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
     {
         super.writeToNBT(nbt);
         this.energy.writeToNBT(nbt);
-        nbt.setFloat("lastEnergyUsed", this.lastEnergyUsed);
     }
 
     @Override

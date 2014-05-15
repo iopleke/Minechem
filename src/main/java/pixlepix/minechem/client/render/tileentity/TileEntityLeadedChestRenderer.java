@@ -16,28 +16,36 @@ import pixlepix.minechem.common.tileentity.TileEntityLeadedChest;
 import pixlepix.minechem.common.utils.ConstantValue;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer {
+public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer
+{
 
     private final ModelChest leadedChestModel = new ModelChest();
 
-    public TileEntityLeadedChestRenderer() {
+    public TileEntityLeadedChestRenderer()
+    {
 
     }
 
-    public void renderTileEntityLeadedChestAt(TileEntityLeadedChest leadedChest, double xCoord, double yCoord, double zCoord, float partialTick) {
-        if (leadedChest == null) {
+    public void renderTileEntityLeadedChestAt(TileEntityLeadedChest leadedChest, double xCoord, double yCoord, double zCoord, float partialTick)
+    {
+        if (leadedChest == null)
+        {
             return;
         }
         int facing = 0;
 
-        if (leadedChest.hasWorldObj()) {
+        if (leadedChest.hasWorldObj())
+        {
             Block var10 = leadedChest.getBlockType();
             facing = leadedChest.getBlockMetadata();
 
-            if (var10 != null && facing == 0) {
+            if (var10 != null && facing == 0)
+            {
                 facing = leadedChest.getBlockMetadata();
             }
-        } else {
+        }
+        else
+        {
             facing = 0;
         }
 
@@ -53,19 +61,23 @@ public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer {
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short var11 = 0;
 
-        if (facing == 2) {
+        if (facing == 2)
+        {
             var11 = 180;
         }
 
-        if (facing == 3) {
+        if (facing == 3)
+        {
             var11 = 0;
         }
 
-        if (facing == 4) {
+        if (facing == 4)
+        {
             var11 = 90;
         }
 
-        if (facing == 5) {
+        if (facing == 5)
+        {
             var11 = -90;
         }
 
@@ -79,7 +91,8 @@ public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer {
     }
 
     @Override
-    public void renderTileEntityAt(TileEntity tileentity, double xCoord, double yCoord, double zCoord, float partialTick) {
+    public void renderTileEntityAt(TileEntity tileentity, double xCoord, double yCoord, double zCoord, float partialTick)
+    {
         this.renderTileEntityLeadedChestAt((TileEntityLeadedChest) tileentity, xCoord, yCoord, zCoord, partialTick);
     }
 }

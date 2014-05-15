@@ -4,9 +4,11 @@ import net.minecraft.util.ResourceLocation;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.utils.ConstantValue;
 
-public class GuiMicroscopeSwitch extends GuiToggleSwitch {
+public class GuiMicroscopeSwitch extends GuiToggleSwitch
+{
 
-    public GuiMicroscopeSwitch(GuiContainerTabbed container) {
+    public GuiMicroscopeSwitch(GuiContainerTabbed container)
+    {
         super();
         this.container = container;
         this.width = 13;
