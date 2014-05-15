@@ -1,3 +1,4 @@
+itemGroup.MineChem=MineChem
 language.name=German
 language.region=DE
 language.code=de_DE
@@ -16,16 +17,16 @@ gui.title.synthesis=Chemische Synthesemaschine
 gui.journal.decomposer=Zersetzer
 gui.journal.synthesis=Synthesemaschine
 
-block.name.decomposer=Chemischer Zersetzer
+tile.blockChemicalDecomposer.name=Chemischer Zersetzer
 
-block.name.uraniumOre=Uranerz
-block.name.microscope=Mikroskop
-block.name.synthesis=Chemische Synthesemaschine
-block.name.blueprintProjector=Bauplanprojektor
+tile.minechem.uraniumOre.name=Uranerz
+tile.minechem.blockMicroscope.name=Mikroskop
+tile.minechem.blockSynthesis.name=Chemische Synthesemaschine
+tile.minechem.blockBlueprintProjector.name=Bauplanprojektor
 block.name.fusion=Chemische Fusionskammer
 block.name.fission=Chemische Kernspaltungskammer
 block.name.atomicClock=Atomuhr
-block.name.chemicalStorage=Chemielager
+tile.minechem.blockChemicalStorage.name=Chemielager
 
 
 item.name.polytool=Polytool
@@ -33,7 +34,7 @@ item.name.concavelens=Konkavlinse
 item.name.convexlens=Konvexlinse
 item.name.microscopelens=Mikroskoplinse
 item.name.projectorlens=Projektorlinse
-item.name.atomicmanipulator=Atomarer Manipulator
+item.minechem.itemAtomicManipulator.name=Atomarer Manipulator
 item.name.fusionStar=Fusionsstern
 item.name.testtube=Leeres Reagenzglas
 item.name.periodicTable=Periodensystem der Elemente

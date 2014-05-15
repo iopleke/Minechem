@@ -1,3 +1,4 @@
+itemGroup.MineChem=MineChem
 language.name=English
 language.region=UK
 language.code=en_GB
@@ -18,25 +19,23 @@ gui.title.synthesis=Chemical Synthesis Machine
 gui.journal.decomposer=Decomposer
 gui.journal.synthesis=Synthesis
 
-block.name.decomposer=Chemical Decomposer
+tile.blockChemicalDecomposer.name=Chemical Decomposer
+tile.minechem.uraniumOre.name=Uranium Ore
+tile.minechem.blockMicroscope.name=Microscope
+tile.container.leadedchest.name=Leaded Chest
+tile.minechem.blockSynthesis.name=Chemical Synthesis Machine
+tile.minechem.blockBlueprintProjector.name=Blueprint Projector
+block.name.fusion.name=Chemical Fusion Chamber
+block.name.fission.name=Chemical Fission Chamber
+block.name.atomicClock.name=Atomic Clock (WIP)
+tile.minechem.blockChemicalStorage.name=Chemical Storage Chest
 
-block.name.uraniumOre=Uranium Ore
-block.name.microscope=Microscope
-block.name.leadedChest=Leaded Chest
-block.name.synthesis=Chemical Synthesis Machine
-block.name.blueprintProjector=Blueprint Projector
-block.name.fusion=Chemical Fusion Chamber
-block.name.fission=Chemical Fission Chamber
-block.name.atomicClock=Atomic Clock (WIP)
-block.name.chemicalStorage=Chemical Storage Chest
-
-
-item.name.polytool=Polytool
+item.Polytool.name=Polytool
 item.name.concavelens=Concave Lens
 item.name.convexlens=Convex Lens
 item.name.microscopelens=Microscope Lens
 item.name.projectorlens=Projector Lenssss
-item.name.atomicmanipulator=Atomic Manipulator
+item.minechem.itemAtomicManipulator.name=Atomic Manipulator
 item.name.fusionStar=Fusion Star
 item.name.testtube=Empty Test Tube
 item.name.periodicTable=Periodic Table of Elements
@@ -44,11 +43,8 @@ item.name.chemistJournal=Chemist's Journal
 item.name.blueprintFusion=Fusion Chamber Blueprint
 item.name.blueprintFission=Fission Chamber Blueprint
 item.name.blueprintDirewolf=Direwolf's 9x9
-item.name.hazmatFeet=Hazmat Suit, Part A.
-item.name.hazmatLegs=Hazmat Suit, Part B.
-item.name.hazmatTorso=Hazmat Suit, Part C.
-item.name.hazmatHead=Hazmat Suit, Part D.
-item.name.chemistryUpgrade=Chemistry Turtle Module 
+item.name.chemistryUpgrade=Chemistry Turtle Module
+item.minechem.itempill.name=Empty Pill Capsule
 
 element.property.solid=Solid
 element.property.gas=Gaseous

@@ -1,6 +1,6 @@
 package pixlepix.minechem.common;
 
-import cpw.mods.fml.common.registry.LanguageRegistry;
+
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.common.Configuration;
@@ -39,12 +39,6 @@ public class MinechemItems
         journal = new ItemChemistJournal(Settings.ChemistJournal);
         EmptyPillz = new ItemPills(Settings.EmptyPills, 0);
         polytool = new ItemPolytool(Settings.Polytool);
-        
-        LanguageRegistry.addName(polytool, MinechemHelper.getLocalString("item.name.polytool"));
-        LanguageRegistry.addName(atomicManipulator, MinechemHelper.getLocalString("item.name.atomicmanipulator"));
-        LanguageRegistry.addName(fusionStar, MinechemHelper.getLocalString("item.name.fusionStar"));
-        LanguageRegistry.addName(journal, MinechemHelper.getLocalString("item.name.chemistJournal"));
-        LanguageRegistry.addName(EmptyPillz, "Pills");
         
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);

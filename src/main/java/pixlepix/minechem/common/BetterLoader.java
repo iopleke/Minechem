@@ -1,7 +1,7 @@
 package pixlepix.minechem.common;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.LanguageRegistry;
+
 import net.minecraft.block.Block;
 import net.minecraftforge.common.MinecraftForge;
 import pixlepix.minechem.api.IBlock;
@@ -65,7 +65,7 @@ public class BetterLoader
                 return currentBlock;
             }
         }
-        
+
         System.out.println("Failed to find block in BetterLoader. Crash incoming.");
         return null;
     }
@@ -79,9 +79,8 @@ public class BetterLoader
             if (currentBlock instanceof IBlock)
             {
                 IBlock currentIBlock = (IBlock) currentBlock;
-                LanguageRegistry.addName(currentBlock, currentIBlock.getName());
                 MinecraftForge.setBlockHarvestLevel(currentBlock, "pickaxe", 0);
-                
+
                 if (currentIBlock.getItemBlock() != null)
                 {
                     GameRegistry.registerBlock(currentBlock, currentIBlock.getItemBlock(), currentIBlock.getName());
@@ -90,7 +89,7 @@ public class BetterLoader
                 {
                     GameRegistry.registerBlock(currentBlock, currentIBlock.getName());
                 }
-                
+
                 currentIBlock.addRecipe();
                 GameRegistry.registerTileEntity(currentIBlock.getTileEntityClass(), currentIBlock.getName() + "Minechem Tile Entity");
             }

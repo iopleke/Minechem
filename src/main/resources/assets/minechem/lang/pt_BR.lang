@@ -1,3 +1,4 @@
+itemGroup.MineChem=MineChem
 language.name=Português
 language.region=BR
 language.code=pt_BR
@@ -16,23 +17,21 @@ gui.title.synthesis=Sintetizador Químico
 gui.journal.decomposer=Decompositor
 gui.journal.synthesis=Síntese
 
-block.name.decomposer=Decompositor Químico
-
-block.name.uraniumOre=Minério de Urânio
-block.name.microscope=Microscópio
-block.name.synthesis=Sintetizador Químico
-block.name.blueprintProjector=Projetor de Diagramas
+tile.blockChemicalDecomposer.name=Decompositor Químico
+tile.minechem.uraniumOre.name=Minério de Urânio
+tile.minechem.blockMicroscope.name=Microscópio
+tile.minechem.blockSynthesis.name=Sintetizador Químico
+tile.minechem.blockBlueprintProjector.name=Projetor de Diagramas
 block.name.fusion=Câmara de Fusão Química
 block.name.fission=Câmara de Fissão Química
 block.name.atomicClock=Relógio Atômico (Em Desenvolvimento)
-block.name.chemicalStorage=Baú de Armazenamento Químico
-
+tile.minechem.blockChemicalStorage.name=Baú de Armazenamento Químico
 
 item.name.concavelens=Lente Côncava
 item.name.convexlens=Lente Convexa
 item.name.microscopelens=Lentes de Microscópio
 item.name.projectorlens=Lentes de Projetor
-item.name.atomicmanipulator=Manipulador Atômico
+item.minechem.itemAtomicManipulator.name=Manipulador Atômico
 item.name.fusionStar=Estrela de Fusão
 item.name.testtube=Tubo de Ensaio Vazio
 item.name.periodicTable=Tabela Periódica dos Elementos

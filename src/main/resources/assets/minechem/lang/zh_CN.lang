@@ -1,3 +1,4 @@
+itemGroup.MineChem=MineChem
 language.name=Chinese
 language.region=CN
 language.code=zh_CN
@@ -16,23 +17,23 @@ gui.title.synthesis=\u5316\u5408\u53cd\u5e94\u53f0
 gui.journal.decomposer=\u5206\u89e3\u53cd\u5e94\u53f0
 gui.journal.synthesis=\u5316\u5408\u53cd\u5e94\u53f0
 
-block.name.decomposer=\u5206\u89e3\u53cd\u5e94\u53f0
+tile.blockChemicalDecomposer.name=\u5206\u89e3\u53cd\u5e94\u53f0
 
-block.name.uraniumOre=\u94c0\u77ff\u77f3
-block.name.microscope=\u663e\u5fae\u955c
-block.name.synthesis=\u5316\u5408\u53cd\u5e94\u53f0
-block.name.blueprintProjector=\u84dd\u56fe\u6295\u5f71\u4eea
+tile.minechem.uraniumOre.name=\u94c0\u77ff\u77f3
+tile.minechem.blockMicroscope.name=\u663e\u5fae\u955c
+tile.minechem.blockSynthesis.name=\u5316\u5408\u53cd\u5e94\u53f0
+tile.minechem.blockBlueprintProjector.name=\u84dd\u56fe\u6295\u5f71\u4eea
 block.name.fusion=\u5316\u5b66\u805a\u53d8\u53cd\u5e94\u5806
 block.name.fission=\u5316\u5b66\u88c2\u53d8\u53cd\u5e94\u5806
 block.name.atomicClock=\u539f\u5b50\u949f
-block.name.chemicalStorage=\u6297\u8870\u53d8\u5316\u5b66\u50a8\u7269\u7bb1
+tile.minechem.blockChemicalStorage.name=\u6297\u8870\u53d8\u5316\u5b66\u50a8\u7269\u7bb1
 
 
 item.name.concavelens=\u51f9\u900f\u955c
 item.name.convexlens=\u51f8\u900f\u955c
 item.name.microscopelens=\u663e\u5fae\u955c\u5934
 item.name.projectorlens=\u6295\u5f71\u955c\u5934
-item.name.atomicmanipulator=\u539f\u5b50\u673a\u68b0\u81c2
+item.minechem.itemAtomicManipulator.name=\u539f\u5b50\u673a\u68b0\u81c2
 item.name.fusionStar=\u805a\u53d8\u4e4b\u661f
 item.name.testtube=\u8bd5\u7ba1
 item.name.periodicTable=\u5143\u7d20\u5468\u671f\u8868
