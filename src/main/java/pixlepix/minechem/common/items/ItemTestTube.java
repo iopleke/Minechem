@@ -12,7 +12,7 @@ public class ItemTestTube extends Item {
     public ItemTestTube(int id) {
         super(id);
         setUnlocalizedName("minechem.itemTestTube");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override

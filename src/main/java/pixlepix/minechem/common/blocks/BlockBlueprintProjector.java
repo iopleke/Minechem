@@ -20,7 +20,7 @@ public class BlockBlueprintProjector extends BlockMinechemContainer {
     public BlockBlueprintProjector(int id) {
         super(id, Material.iron);
         setUnlocalizedName("minechem.blockBlueprintProjector");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setLightValue(0.7F);
     }
 
@@ -69,7 +69,7 @@ public class BlockBlueprintProjector extends BlockMinechemContainer {
 
     @Override
     public int getRenderType() {
-        return CommonProxy.CUSTOM_RENDER_ID;
+        return CommonProxy.RENDER_ID;
     }
 
     @Override

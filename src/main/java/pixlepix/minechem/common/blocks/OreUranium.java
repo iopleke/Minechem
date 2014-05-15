@@ -14,7 +14,7 @@ public class OreUranium extends Block {
 
     public OreUranium(int id) {
         super(id, Material.iron);
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setUnlocalizedName("minechem.uraniumOre");
         this.setHardness(4F);
     }

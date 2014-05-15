@@ -13,7 +13,7 @@ public class ItemChemistryUpgrade extends Item {
 
     public ItemChemistryUpgrade(int id) {
         super(id);
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setUnlocalizedName("name.chemistryUpgrade");
     }
 

@@ -22,7 +22,7 @@ public class BlockDecomposer extends BlockMinechemContainer {
     public BlockDecomposer(int id) {
         super(id, Material.iron);
         setUnlocalizedName("blockChemicalDecomposer");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override
@@ -68,7 +68,7 @@ public class BlockDecomposer extends BlockMinechemContainer {
 
     @Override
     public int getRenderType() {
-        return CommonProxy.CUSTOM_RENDER_ID;
+        return CommonProxy.RENDER_ID;
     }
 
     @Override

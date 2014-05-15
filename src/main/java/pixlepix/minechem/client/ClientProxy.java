@@ -6,9 +6,12 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraft.item.Item;
+import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import pixlepix.minechem.api.BaseParticle;
+import pixlepix.minechem.client.render.RenderParticle;
 import pixlepix.minechem.client.render.item.*;
 import pixlepix.minechem.client.render.tileentity.*;
 import pixlepix.minechem.client.sound.MinechemSoundEvent;
@@ -17,11 +20,20 @@ import pixlepix.minechem.common.MinechemBlocks;
 import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.tileentity.*;
 
-public class ClientProxy extends CommonProxy {
+public class ClientProxy extends CommonProxy
+{
+    public static Icon clay;
+    public static Icon coal;
+    public static Icon concentrated;
+    public static Icon seed;
+    public static Icon split;
 
+    public static Icon sand;
+    
     @Override
-    public void registerRenderers() {
-        CUSTOM_RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+    public void registerRenderers()
+    {
+        RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(MinechemItems.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItems.molecule.itemID, new ItemMoleculeRenderer());
@@ -31,26 +43,30 @@ public class ClientProxy extends CommonProxy {
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
-        //MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.printer.blockID].itemID, new ItemBlueprintPrinterRenderer());
+        // MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.printer.blockID].itemID, new ItemBlueprintPrinterRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecomposer.class, new TileEntityDecomposerRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySynthesis.class, new TileEntitySynthesisRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
+        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLeadedChest.class, new TileEntityLeadedChestRenderer());
-        //ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBluePrintPrinter.class, new TileEntityBluePrintPrinterRenderer());
+        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBluePrintPrinter.class, new TileEntityBluePrintPrinterRenderer());
+        
+        RenderingRegistry.registerEntityRenderingHandler(BaseParticle.class, new RenderParticle());
     }
 
     @Override
-    public void registerHooks() {
+    public void registerHooks()
+    {
         MinecraftForge.EVENT_BUS.register(new MinechemSoundEvent());
     }
 
     @Override
-    public World getClientWorld() {
+    public World getClientWorld()
+    {
         return FMLClientHandler.instance().getClient().theWorld;
     }
 

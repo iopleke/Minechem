@@ -8,7 +8,7 @@ import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
-import pixlepix.minechem.particlephysics.helper.CoordTuple;
+import pixlepix.minechem.common.utils.CoordTuple;
 
 import java.util.ArrayList;
 

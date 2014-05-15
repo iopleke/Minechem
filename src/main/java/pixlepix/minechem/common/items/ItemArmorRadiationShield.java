@@ -23,7 +23,7 @@ public class ItemArmorRadiationShield extends ItemArmor implements IRadiationShi
         super(id, EnumArmorMaterial.CHAIN, 2, part);
         this.radiationShieldFactor = radiationShieldFactor;
         setUnlocalizedName("minechem.itemArmorRadiationShield");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         textureFile = texture;
     }
 

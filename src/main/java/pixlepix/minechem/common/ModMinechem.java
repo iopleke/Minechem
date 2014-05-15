@@ -14,6 +14,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.common.registry.LanguageRegistry;
 import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -33,6 +34,7 @@ import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
 import pixlepix.minechem.client.TickHandler;
+import pixlepix.minechem.client.gui.GuiHandler;
 import pixlepix.minechem.client.gui.tabs.*;
 import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.coating.CoatingRecipe;
@@ -75,10 +77,13 @@ public class ModMinechem
     public static CommonProxy PROXY;
     
     /** Creative mode tab that shows up in Minecraft. **/
-    public static CreativeTabs minechemTab = new CreativeTabMinechem(ModMinechem.NAME);
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME);
     
     /** Provides standardized configuration file offered by the Forge. **/
     private static Configuration CONFIG;
+    
+    /** Custom block and item loader from what once was Particle Physics mod. **/
+    public static BetterLoader particlePhysicsLoader;
     
     /** List of supported languages. **/
     private static final String[] LANGUAGES_SUPPORTED = new String[] { "en_US", "zh_CN", "de_DE" };
@@ -132,6 +137,17 @@ public class ModMinechem
         
         LOGGER.info("Registering Polytool Event Handler...");
         MinecraftForge.EVENT_BUS.register(new PolytoolEventHandler());
+        
+        LOGGER.info("Populating Particle List...");
+        ParticleRegistry.populateParticleList();
+        
+        LOGGER.info("Registering Particle Physics Entities...");
+        ParticleRegistry.registerEntities();
+        
+        LOGGER.info("Creating Particle Physics blocks and items...");
+        particlePhysicsLoader = new BetterLoader();
+        particlePhysicsLoader.loadBlocks();
+        particlePhysicsLoader.mainload();
 
         LOGGER.info("PREINT PASSED");
     }

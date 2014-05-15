@@ -22,7 +22,7 @@ public class BlockLeadedChest extends BlockContainer {
         this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setUnlocalizedName("container.leadedchest");
-        this.setCreativeTab(ModMinechem.minechemTab);
+        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override

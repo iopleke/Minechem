@@ -7,24 +7,30 @@ import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import pixlepix.minechem.common.utils.ConstantValue;
 
-public class CommonProxy implements ConstantValue {
-    public static int CUSTOM_RENDER_ID;
+public class CommonProxy implements ConstantValue
+{
+    public static int RENDER_ID;
 
-    public void registerRenderers() {
+    public void registerRenderers()
+    {
 
     }
 
-    public World getClientWorld() {
+    public World getClientWorld()
+    {
         return null;
     }
 
-    public void registerHooks() {
+    public void registerHooks()
+    {
     }
 
-    public EntityPlayer findEntityPlayerByName(String name) {
+    public EntityPlayer findEntityPlayerByName(String name)
+    {
         WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
         EntityPlayer player = null;
-        for (WorldServer server : servers) {
+        for (WorldServer server : servers)
+        {
             player = server.getPlayerEntityByName(name);
             if (player != null)
                 return player;
@@ -32,17 +38,21 @@ public class CommonProxy implements ConstantValue {
         return player;
     }
 
-    public String getCurrentLanguage() {
+    public String getCurrentLanguage()
+    {
         return null;
     }
 
-    public void addName(Object obj, String s) {
+    public void addName(Object obj, String s)
+    {
     }
 
-    public void addLocalization(String s1, String string) {
+    public void addLocalization(String s1, String string)
+    {
     }
 
-    public String getItemDisplayName(ItemStack newStack) {
+    public String getItemDisplayName(ItemStack newStack)
+    {
         return "";
     }
 }

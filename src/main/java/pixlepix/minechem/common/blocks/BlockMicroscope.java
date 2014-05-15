@@ -23,7 +23,7 @@ public class BlockMicroscope extends BlockMinechemContainer {
 
     public BlockMicroscope(int par1) {
         super(par1, Material.iron);
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setUnlocalizedName("minechem.blockMicroscope");
         setLightValue(0.5F);
     }
@@ -74,7 +74,7 @@ public class BlockMicroscope extends BlockMinechemContainer {
 
     @Override
     public int getRenderType() {
-        return CommonProxy.CUSTOM_RENDER_ID;
+        return CommonProxy.RENDER_ID;
     }
 
     @Override

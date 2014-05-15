@@ -20,7 +20,7 @@ public class ItemLens extends Item {
     public ItemLens(int id) {
         super(id);
         setUnlocalizedName("minechem.itemLens");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
     }
 

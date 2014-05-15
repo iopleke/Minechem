@@ -17,7 +17,7 @@ public class PhotonicInduction extends ItemPickaxe {
     public PhotonicInduction(int id, EnumToolMaterial enumtoolmaterial, float efficiency) {
         super(id, enumtoolmaterial);
         setUnlocalizedName("minechem.hammer");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         this.efficiencyOnProperMaterial = efficiency;
     }
 

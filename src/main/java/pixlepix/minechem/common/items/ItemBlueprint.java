@@ -22,7 +22,7 @@ public class ItemBlueprint extends Item {
     public ItemBlueprint(int id) {
         super(id);
         setUnlocalizedName("minechem.itemBlueprint");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
     }
 

@@ -26,7 +26,7 @@ public class BlockSynthesis extends BlockMinechemContainer {
     public BlockSynthesis(int par1) {
         super(par1, Material.iron);
         setUnlocalizedName("minechem.blockSynthesis");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override
@@ -71,7 +71,7 @@ public class BlockSynthesis extends BlockMinechemContainer {
 
     @Override
     public int getRenderType() {
-        return CommonProxy.CUSTOM_RENDER_ID;
+        return CommonProxy.RENDER_ID;
     }
 
     @Override

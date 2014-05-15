@@ -15,7 +15,7 @@ public class BlockChemicalStorage extends BlockChest {
     public BlockChemicalStorage(int id) {
         super(id, 0);
         setUnlocalizedName("minechem.blockChemicalStorage");
-        setCreativeTab(ModMinechem.minechemTab);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHardness(2.5F);
         setStepSound(soundWoodFootstep);
     }

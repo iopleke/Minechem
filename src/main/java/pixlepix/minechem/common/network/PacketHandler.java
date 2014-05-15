@@ -9,10 +9,14 @@ import java.io.IOException;
 import ljdp.easypacket.EasyPacketDispatcher;
 import ljdp.easypacket.EasyPacketHandler;
 import net.minecraft.client.Minecraft;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.Container;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
+import pixlepix.minechem.api.BaseParticle;
 import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.client.gui.ContainerEmitter;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.polytool.GuiPolytool;
 import pixlepix.minechem.common.polytool.PolytoolHelper;
@@ -51,6 +55,54 @@ public class PacketHandler implements IPacketHandler
         activeJournalItemHandler = EasyPacketHandler.registerEasyPacket(PacketActiveJournalItem.class, dispatcher);
         // swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
     }
+    
+    public static void sendInterfacePacket(byte type, byte val)
+    {
+        ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
+        DataOutputStream dataStream = new DataOutputStream(byteStream);
+
+        try
+        {
+            dataStream.writeByte((byte) 1);
+
+            dataStream.writeByte((byte) type);
+            dataStream.writeByte(val);
+
+            PacketDispatcher.sendPacketToServer(PacketDispatcher.getPacket("Particle", byteStream.toByteArray()));
+        }
+        catch (IOException ex)
+        {
+            System.err.append("Failed to send button click packet");
+        }
+    }
+    
+    private void handleParticleUpdatePacket(DataInputStream inputStream)
+    {
+
+        try
+        {
+
+            int entityId = inputStream.readInt();
+            Entity toMove = Minecraft.getMinecraft().theWorld.getEntityByID(entityId);
+            if (toMove != null)
+            {
+                toMove.setPosition(inputStream.readDouble(), inputStream.readDouble(), inputStream.readDouble());
+                toMove.setVelocity(inputStream.readDouble(), inputStream.readDouble(), inputStream.readDouble());
+
+                if (toMove instanceof BaseParticle)
+                {
+                    ((BaseParticle) toMove).effect = inputStream.readInt();
+
+                }
+            }
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            return;
+        }
+
+    }
 
     @SideOnly(Side.CLIENT)
     public void receivePolytoolUpdate(INetworkManager manager, Packet250CustomPayload packet, Player player)
@@ -76,10 +128,8 @@ public class PacketHandler implements IPacketHandler
     @Override
     public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
     {
-
         if (packet.data != null)
         {
-
             if (packet.data[0] == 42)
             {
                 // PolytoolUpdatePacket
@@ -89,6 +139,41 @@ public class PacketHandler implements IPacketHandler
             else
             {
                 dispatcher.onPacketData(manager, packet, player);
+
+                DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
+                int type = -1;
+                try
+                {
+                    type = inputStream.readByte();
+                }
+                catch (IOException e)
+                {
+
+                    e.printStackTrace();
+                }
+                switch (type)
+                {
+                case 0:
+                    this.handleParticleUpdatePacket(inputStream);
+                    break;
+                case 1:
+                    if (player instanceof EntityPlayer)
+                    {
+                        Container container = ((EntityPlayer) player).openContainer;
+                        if (container instanceof ContainerEmitter)
+                        {
+                            try
+                            {
+                                ((ContainerEmitter) container).getMachine().receiveButton(inputStream.readByte(), inputStream.readByte());
+                            }
+                            catch (IOException e)
+                            {
+
+                                e.printStackTrace();
+                            }
+                        }
+                    }
+                }
             }
         }
     }

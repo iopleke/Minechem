@@ -27,7 +27,7 @@ public class BlockFusion extends BlockMinechemContainer {
 
 	public BlockFusion(int id) {
 		super(id, Material.iron);
-		setCreativeTab(ModMinechem.minechemTab);
+		setCreativeTab(ModMinechem.CREATIVE_TAB);
 		setUnlocalizedName("minechem.blockFusion");
 	}
 
