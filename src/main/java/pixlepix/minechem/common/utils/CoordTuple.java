@@ -1,4 +1,4 @@
-package pixlepix.minechem.common;
+package pixlepix.minechem.common.utils;
 
 public class CoordTuple {
     public int x;
