@@ -1,3 +1,4 @@
+![](http://jakimfett.com/images/banner_final.jpg)
 Minechem 5
 =========
 
