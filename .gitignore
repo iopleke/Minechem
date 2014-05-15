@@ -26,9 +26,15 @@ lib/1.6.4/
 *.iml
 *.ipr
 *.iws
+
 ## eclipse
 /.settings
 /.metadata
 /.classpath
 /.project
 /bin
+
+## netbeans
+.nb*
+/nbproject/private/
+/nbbuild/

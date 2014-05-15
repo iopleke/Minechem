@@ -1,12 +1,12 @@
 package pixlepix.minechem.computercraft.method;
 
-import buildcraft.api.core.Position;
 import dan200.turtle.api.ITurtleAccess;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import pixlepix.minechem.common.utils.Position;
 import pixlepix.minechem.computercraft.IMinechemMachinePeripheral;
 
 public class InteractMachine {

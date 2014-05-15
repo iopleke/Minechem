@@ -1,30 +1,15 @@
+![](http://jakimfett.com/images/banner_final.jpg)
 Minechem 5
 =========
 
-Minechem 5 is a mod about chemistry and chemical industry. Originally maintained by LJDP and Rushmead and PixelPix. Minechem 5 is maintained by Jakimfett, With help from Mandrake and other open source contributors, and is based off the work of the previous iterations Minechem II, Minechem III and Minechem IV. Split apart materials into their most basic components, then mesh them all together into something new. The possibilities are immense!
+[Minechem](http://www.minechemmod.com/) is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements. From base elements like Fe and H, to complex chemical compounds like L-hyoscyamine, you can break down, combine, and recompose almost any material.
 
-Minechem can be found at: http://www.minechemmod.com/
 ## License:
 
-> Minechem is licensed under Creative Commons Attribution-ShareAlike 3.0 Unported. <br />
-The details of the licence can be found at: http://creativecommons.org/licenses/by-sa/3.0/us/
+> Minechem is licensed under [Creative Commons Attribution-ShareAlike 3.0 Unported](http://creativecommons.org/licenses/by-sa/3.0/us/)
 
 ## Contributors and permissions
-The list of contributors can be found here: http://pastebin.com/raw.php?i=LsumDirg
+The list of contributors can be found on the [website](http://www.minechemmod.com/index.php/docs/11-contributors)
 
 ## Disclaimer
-This mod contains many street drug jokes, If this offends you. Please do not use this mod.
-
-## Setup
-Currently, this only applies to linux operating systems, when you're using the Intellij IDEA. At some point in the future, I'll add more (like an actual setup script or something)
-
-Open a terminal to the folder where you've put the Minechem source code.
-Run the following commands, in order:
-```
-./gradlew cleancache --refresh-dependencies
-./gradlew setupDecompWorkspace
-./gradlew idea
-mkdir lib
-wget "http://www.chickenbones.craftsaddle.org/Files/goto.php?file=NotEnoughItems-dev&version=1.6.4" -O lib/NotEnoughItems.jar
-wget "http://www.chickenbones.craftsaddle.org/Files/goto.php?file=CodeChickenCore-dev&version=1.6.4" -O lib/CodeChickenCore.jar
-```
+This mod contains street drug jokes, if this offends you, do not use this mod.

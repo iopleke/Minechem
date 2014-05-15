@@ -40,12 +40,14 @@ public class MinechemRecipes {
 	public void registerFluidRecipies() {
 		//Fluids
 		int fluidPerIngot = 144;
-		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new Chemical[]{ this.element(EnumElement.H), this.element(EnumElement.O) }));
+		// Quick and dirty fix for the Thermal Expansion Resonant Ender 6x bug
+		int threeQuarterFluidPerIngot = 180;
+		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new Chemical[]{ this.element(EnumElement.H, 2), this.element(EnumElement.O) }));
 
 		//Mod fluids
 		//Checks if the fluid exists
 
-		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("water", fluidPerIngot, new Chemical[]{ this.element(EnumElement.H), this.element(EnumElement.O) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("water", fluidPerIngot, new Chemical[]{ this.element(EnumElement.H, 2), this.element(EnumElement.O) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("iron.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Fe, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("gold.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Au, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("copper.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Cu, 16) });
@@ -60,7 +62,7 @@ public class MinechemRecipes {
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("lead.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pb, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("silver.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Ag, 16) });
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("platinum.molten", fluidPerIngot, new Chemical[]{ this.element(EnumElement.Pt, 16) });
-		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("ender", fluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) });
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("ender", threeQuarterFluidPerIngot, new Chemical[]{ this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.element(EnumElement.Es), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate), this.molecule(EnumMolecule.calciumCarbonate) });
 
 	}
 
@@ -72,6 +74,7 @@ public class MinechemRecipes {
 		Molecule moleculeCellulose = this.molecule(EnumMolecule.cellulose, 1);
 		Molecule moleculePolyvinylChloride = this
 				.molecule(EnumMolecule.polyvinylChloride);
+		Molecule moleculeLazurite = this.molecule(EnumMolecule.lazurite, 9);
 
 		// Elements
 		Element elementHydrogen = this.element(EnumElement.H, 64);
@@ -342,7 +345,14 @@ public class MinechemRecipes {
 						this.molecule(EnumMolecule.pyrite) }));
 
 		// Lapis Lazuli Block
-		// TODO: Add support for Lapis Lazuli Block?
+		ItemStack blockLapis = new ItemStack(Block.blockLapis);
+		DecomposerRecipe.add(new DecomposerRecipe(blockLapis,
+				new Chemical[]{ this.molecule(EnumMolecule.lazurite, 9) }));
+		SynthesisRecipe
+		.add(new SynthesisRecipe(blockLapis, true, 450, new Chemical[]{
+				moleculeLazurite, null, null,
+				null, null, null, null, null,
+				null }));
 
 		// Cobweb
 		ItemStack blockCobweb = new ItemStack(Block.web);
@@ -505,6 +515,80 @@ public class MinechemRecipes {
 				new Chemical[]{ this.molecule(EnumMolecule.glycine),
 						this.molecule(EnumMolecule.blackPigment) }));
 
+		// Wool carpet
+		ItemStack carpetBlockWool = new ItemStack(Block.carpet, 1, 0);
+		ItemStack carpetBlockOrangeWool = new ItemStack(Block.carpet, 1, 1);
+		ItemStack carpetBlockMagentaWool = new ItemStack(Block.carpet, 1, 2);
+		ItemStack carpetBlockLightBlueWool = new ItemStack(Block.carpet, 1, 3);
+		ItemStack carpetBlockYellowWool = new ItemStack(Block.carpet, 1, 4);
+		ItemStack carpetBlockLimeWool = new ItemStack(Block.carpet, 1, 5);
+		ItemStack carpetBlockPinkWool = new ItemStack(Block.carpet, 1, 6);
+		ItemStack carpetBlockGrayWool = new ItemStack(Block.carpet, 1, 7);
+		ItemStack carpetBlockLightGrayWool = new ItemStack(Block.carpet, 1, 8);
+		ItemStack carpetBlockCyanWool = new ItemStack(Block.carpet, 1, 9);
+		ItemStack carpetBlockPurpleWool = new ItemStack(Block.carpet, 1, 10);
+		ItemStack carpetBlockBlueWool = new ItemStack(Block.carpet, 1, 11);
+		ItemStack carpetBlockBrownWool = new ItemStack(Block.carpet, 1, 12);
+		ItemStack carpetBlockGreenWool = new ItemStack(Block.carpet, 1, 13);
+		ItemStack carpetBlockRedWool = new ItemStack(Block.carpet, 1, 14);
+		ItemStack carpetBlockBlackWool = new ItemStack(Block.carpet, 1, 15);
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.whitePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockOrangeWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.orangePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockMagentaWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.lightbluePigment),
+						this.molecule(EnumMolecule.redPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockLightBlueWool,
+				0.2F, new Chemical[]{ this.molecule(EnumMolecule.glycine),
+				this.molecule(EnumMolecule.lightbluePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockYellowWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.yellowPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockLimeWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.limePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockPinkWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.redPigment),
+						this.molecule(EnumMolecule.whitePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockGrayWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.whitePigment),
+						this.molecule(EnumMolecule.blackPigment, 2) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockLightGrayWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+				this.molecule(EnumMolecule.whitePigment),
+				this.molecule(EnumMolecule.blackPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockCyanWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.lightbluePigment),
+						this.molecule(EnumMolecule.whitePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockPurpleWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.purplePigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockBlueWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.lazurite) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockBrownWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.tannicacid) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockGreenWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.greenPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockRedWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.redPigment) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(carpetBlockBlackWool, 0.4F,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.blackPigment) }));
+		SynthesisRecipe.add(new SynthesisRecipe(carpetBlockWool, false, 50,
+				new Chemical[]{ this.molecule(EnumMolecule.glycine),
+						this.molecule(EnumMolecule.whitePigment) }));
+
 		// Flowers
 		// TODO: Add support for Rose
 		ItemStack blockPlantYellow = new ItemStack(Block.plantYellow);
@@ -634,6 +718,39 @@ public class MinechemRecipes {
 								this.element(EnumElement.W, 1),
 								this.element(EnumElement.Zn, 8),
 								this.element(EnumElement.Be, 4) }) }));
+
+		// Nether B
+		ItemStack itemNetherbrick = new ItemStack(Item.netherrackBrick);
+		DecomposerRecipe.add(new DecomposerRecipeSelect(itemNetherbrick, 0.15F,
+				new DecomposerRecipe[]{
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 2),
+								this.element(EnumElement.C),
+								this.element(EnumElement.Fe) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 2),
+								this.element(EnumElement.Ni),
+								this.element(EnumElement.Tc) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 3),
+								this.element(EnumElement.Ti),
+								this.element(EnumElement.Fe) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 1),
+								this.element(EnumElement.W, 4),
+								this.element(EnumElement.Cr, 2) }),
+						new DecomposerRecipe(new Chemical[]{
+								this.element(EnumElement.Si, 10),
+								this.element(EnumElement.W, 1),
+								this.element(EnumElement.Zn, 8),
+								this.element(EnumElement.Be, 4) }) }));
+		SynthesisRecipe.add(new SynthesisRecipe(itemNetherbrick, true, 200,
+				new Chemical[]{ this.element(EnumElement.Si, 2),
+				this.element(EnumElement.Si, 2), null,
+				this.element(EnumElement.Zn, 2),
+				this.element(EnumElement.W, 1),
+				null, this.element(EnumElement.Be, 2),
+				this.element(EnumElement.Be, 2), null }));
 
 		// Water Bottle
 		ItemStack itemPotion = new ItemStack(Item.potion, 1, 0);
@@ -776,18 +893,24 @@ public class MinechemRecipes {
 
 		// Coal
 		ItemStack itemCoal = new ItemStack(Item.coal);
-		DecomposerRecipe.add(new DecomposerRecipe(itemCoal,
-				new Chemical[]{ this.element(EnumElement.C, 16) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(itemCoal, 0.92F,
+				new Chemical[]{ this.element(EnumElement.C, 8) }));
+
+		// Coal Block
+		ItemStack blockCoal = new ItemStack(Block.coalBlock);
+		DecomposerRecipe.add(new DecomposerRecipeChance(blockCoal, 0.82F,
+				new Chemical[]{ this.element(EnumElement.C, 72) }));
 
 		// Charcoal
-		// Does 16 charcoal to 1 coal seem balanced?
 		ItemStack itemChar = new ItemStack(Item.coal, 1, 1);
-		DecomposerRecipe.add(new DecomposerRecipe(itemChar, new Chemical[]{ this.element(EnumElement.C, 16) }));
+		DecomposerRecipe.add(new DecomposerRecipeChance(itemChar, 0.82F,
+				new Chemical[]{ this.element(EnumElement.C, 1) }));
 
 		// Diamond
 		ItemStack itemDiamond = new ItemStack(Item.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond,
 				new Chemical[]{ this.molecule(EnumMolecule.fullrene, 4) }));
+
 		//	Polytool
 		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItems.polytool), true, '\uea60',
 				new Chemical[]{ null, this.molecule(EnumMolecule.fullrene, 64),
@@ -900,6 +1023,17 @@ public class MinechemRecipes {
 								this.molecule(EnumMolecule.iron3oxide), null,
 								this.element(EnumElement.Cu), null, null, null,
 								null }));
+		// Redstone Block
+		ItemStack blockRedstone = new ItemStack(Block.blockRedstone);
+		DecomposerRecipe.add(new DecomposerRecipeChance(blockRedstone, 0.42F,
+				new Chemical[]{ this.molecule(EnumMolecule.iron3oxide, 9),
+						this.element(EnumElement.Cu, 9) }));
+		SynthesisRecipe
+				.add(new SynthesisRecipe(blockRedstone, true, 900,
+						new Chemical[]{ null, null,
+								this.molecule(EnumMolecule.iron3oxide, 9), null,
+								this.element(EnumElement.Cu, 9), null, null, null,
+								null }));
 
 		// Snowball
 		ItemStack itemSnowball = new ItemStack(Item.snowball);
@@ -966,7 +1100,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipeSelect(itemSlimeBall, 0.9F,
 				new DecomposerRecipe[]{
 						new DecomposerRecipe(new Chemical[]{ this
-								.molecule(EnumMolecule.polycyanoacrylate) }),
+								.molecule(EnumMolecule.pmma) }),
 						new DecomposerRecipe(new Chemical[]{ this
 								.element(EnumElement.Hg) }),
 						new DecomposerRecipe(new Chemical[]{ this.molecule(
@@ -1003,6 +1137,7 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemDyePowderBrown,
 				0.4F, new Chemical[]{ this.molecule(EnumMolecule.theobromine),
 				this.molecule(EnumMolecule.tannicacid) }));
+		// Lapis
 		DecomposerRecipe.add(new DecomposerRecipe(itemDyePowderBlue,
 				new Chemical[]{ this.molecule(EnumMolecule.lazurite) }));
 		DecomposerRecipe.add(new DecomposerRecipe(itemDyePowderPurple,
@@ -1152,7 +1287,7 @@ public class MinechemRecipes {
 		// Nether Wart
 		ItemStack itemNetherStalkSeeds = new ItemStack(Item.netherStalkSeeds);
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemNetherStalkSeeds,
-				0.5F, new Chemical[]{ this.molecule(EnumMolecule.coke) }));
+				0.5F, new Chemical[]{ this.molecule(EnumMolecule.cocainehcl) }));
 
 		// Spider Eye
 		ItemStack itemSpiderEye = new ItemStack(Item.spiderEye);
@@ -1175,13 +1310,13 @@ public class MinechemRecipes {
 		DecomposerRecipe.add(new DecomposerRecipe(itemMagmaCream,
 				new Chemical[]{ this.element(EnumElement.Hg),
 						this.element(EnumElement.Pu),
-						this.molecule(EnumMolecule.polycyanoacrylate, 3) }));
+						this.molecule(EnumMolecule.pmma, 3) }));
 		SynthesisRecipe.add(new SynthesisRecipe(itemMagmaCream, true, 5000,
 				new Chemical[]{ null, this.element(EnumElement.Pu), null,
-						this.molecule(EnumMolecule.polycyanoacrylate),
+						this.molecule(EnumMolecule.pmma),
 						this.element(EnumElement.Hg),
-						this.molecule(EnumMolecule.polycyanoacrylate), null,
-						this.molecule(EnumMolecule.polycyanoacrylate), null }));
+						this.molecule(EnumMolecule.pmma), null,
+						this.molecule(EnumMolecule.pmma), null, }));
 
 		// Glistering Melon
 		ItemStack itemSpeckledMelon = new ItemStack(Item.speckledMelon);
@@ -1206,7 +1341,7 @@ public class MinechemRecipes {
 		// Carrot
 		ItemStack itemCarrot = new ItemStack(Item.carrot);
 		DecomposerRecipe.add(new DecomposerRecipe(itemCarrot,
-				new Chemical[]{ this.molecule(EnumMolecule.ret) }));
+				new Chemical[]{ this.molecule(EnumMolecule.retinol) }));
 
 		// Potato
 		ItemStack itemPotato = new ItemStack(Item.potato);
@@ -1218,7 +1353,7 @@ public class MinechemRecipes {
 		// Golden Carrot
 		ItemStack itemGoldenCarrot = new ItemStack(Item.goldenCarrot);
 		DecomposerRecipe.add(new DecomposerRecipe(itemGoldenCarrot,
-				new Chemical[]{ this.molecule(EnumMolecule.ret),
+				new Chemical[]{ this.molecule(EnumMolecule.retinol),
 						this.element(EnumElement.Au, 4) }));
 
 		// Nether Star
@@ -1324,7 +1459,8 @@ public class MinechemRecipes {
 		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatLegs), new Object[]{ "PPP", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
 		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatTorso), new Object[]{ " P ", "PPP", "PPP", Character.valueOf('P'), moleculePolyvinylChloride });
 		//GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[]{ "PPP", "P P", "   ", Character.valueOf('P'), moleculePolyvinylChloride });
-		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.chemicalStorage), new Object[]{ "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
+		GameRegistry.addRecipe(new ItemStack(MinechemBlocks.leadedChest), new Object[]{ "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItems.element, 1, EnumElement.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
+		GameRegistry.addShapelessRecipe(new ItemStack(MinechemBlocks.leadedChest), new Object[]{ new ItemStack(MinechemBlocks.chemicalStorage) });
 		//GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{ "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.journal), new Object[]{ new ItemStack(Item.book), new ItemStack(Block.glass) });
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItems.EmptyPillz, 4), new Object[]{ new ItemStack(Item.sugar), new ItemStack(Item.slimeBall), new ItemStack(Item.slimeBall) });
@@ -1339,7 +1475,7 @@ public class MinechemRecipes {
 		this.addDecomposerRecipesFromMolecules();
 		this.addSynthesisRecipesFromMolecules();
 		this.addUnusedSynthesisRecipes();
-		this.registerPoisonRecipes(EnumMolecule.poison);
+		this.registerPoisonRecipes(EnumMolecule.mycotoxin);
 		this.registerPoisonRecipes(EnumMolecule.sucrose);
 		this.registerPoisonRecipes(EnumMolecule.psilocybin);
 		this.registerPoisonRecipes(EnumMolecule.methamphetamine);
@@ -1357,10 +1493,10 @@ public class MinechemRecipes {
 		this.registerPoisonRecipes(EnumMolecule.nod);
 		this.registerPoisonRecipes(EnumMolecule.afroman);
 		this.registerPoisonRecipes(EnumMolecule.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
-		this.registerPoisonRecipes(EnumMolecule.redrocks);
-		this.registerPoisonRecipes(EnumMolecule.coke);
+		this.registerPoisonRecipes(EnumMolecule.cocaine);
+		this.registerPoisonRecipes(EnumMolecule.cocainehcl);
 		this.registerPoisonRecipes(EnumMolecule.theobromine);
-		this.registerPoisonRecipes(EnumMolecule.ctaxifolia);
+		this.registerPoisonRecipes(EnumMolecule.caulerpenyne);
 		this.registerPoisonRecipes(EnumMolecule.latropine);
 	}
 
@@ -1465,9 +1601,9 @@ public class MinechemRecipes {
 		}
 
 	}
-   /* 
+   /*
     * This stuff is unused and is replaced by pixlepix.minechem.particlephysics.recipe.handlers.DefaultOreDictionaryHandler
-   String[] compounds = {"Aluminium","Titanium","Chrome",   
+   String[] compounds = {"Aluminium","Titanium","Chrome",
 	           "Tungsten", "Lead",    "Zinc",
 	           "Platinum", "Nickel",  "Osmium",
 	           "Iron",     "Gold",    "Coal",
@@ -1476,11 +1612,11 @@ public class MinechemRecipes {
 	           "Steel",
 	           "Bronze",   "Brass",   "Electrum",
 	           "Invar"};//,"Iridium"};
-	
-	EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr}, 
-						   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn}, 
-						   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os}, 
-						   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C}, 
+
+	EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr},
+						   {EnumElement.W},  {EnumElement.Pb}, {EnumElement.Zn},
+						   {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os},
+						   {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C},
 						   {EnumElement.Cu}, {EnumElement.Sn}, {EnumElement.Ag},
 						   {EnumElement.Fe},
 						   {EnumElement.Fe, EnumElement.C},		//Steel
@@ -1490,7 +1626,7 @@ public class MinechemRecipes {
 			               {EnumElement.Ag, EnumElement.Au},	//Electrum
 			               {EnumElement.Fe, EnumElement.Ni}		//Invar
 			               };//, EnumElement.Ir
-	
+
 	int[][] proportions      = {{4},{4},{4},
 						   {4},{4},{4},
 						   {4},{4},{4},
@@ -1499,7 +1635,7 @@ public class MinechemRecipes {
 						   {4},
 						   {4,4},
 						   {1,3},{1,3},{2,2},{2,1}};
-	
+
 	String[]  itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate"
 	boolean[] craftable = {true, true, false, false, false, false, false};
 	int[] 	 sizeCoeff = {1, 4, 8, 4, 36, 16, 4};
@@ -1581,10 +1717,10 @@ public class MinechemRecipes {
 					new Chemical[]{ this.molecule(EnumMolecule.olivine) }));
 		} else if (var1.Name.contains("cropMaloberry")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{
-					this.molecule(EnumMolecule.stevenk),
+					this.molecule(EnumMolecule.xylitol),
 					this.molecule(EnumMolecule.sucrose) }));
 			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000,
-					new Chemical[]{ this.molecule(EnumMolecule.stevenk),
+					new Chemical[]{ this.molecule(EnumMolecule.xylitol),
 							this.molecule(EnumMolecule.sucrose) }));
 		} else if (var1.Name.contains("cropDuskberry")) {
 			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new Chemical[]{

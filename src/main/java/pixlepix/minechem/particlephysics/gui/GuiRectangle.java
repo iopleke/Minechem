@@ -19,7 +19,7 @@ public class GuiRectangle {
         this.x = x;
     }
 
-    public void setY(int t) {
+    public void setY(int t, int y) {
         this.y = y;
     }
 

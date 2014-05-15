@@ -46,13 +46,10 @@ public interface ConstantValue {
     public static final String LENS2_TEX = TEXTURE_MOD_ID + "lens2";
     public static final String LENS3_TEX = TEXTURE_MOD_ID + "lens3";
     public static final String LENS4_TEX = TEXTURE_MOD_ID + "lens4";
-    public static final String JAMMED_ICON = TEXTURE_MOD_ID + "i_jammed";
-    public static final String NO_BOTTLES_ICON = TEXTURE_MOD_ID + "i_noBottles";
     public static final String UNPOWERED_ICON = TEXTURE_MOD_ID + "i_unpowered";
     public static final String NO_RECIPE_ICON = TEXTURE_MOD_ID + "i_noRecipe";
     public static final String POWER_ICON = TEXTURE_MOD_ID + "i_power";
     public static final String HELP_ICON = TEXTURE_MOD_ID + "i_help";
-    public static final String FULL_ENERGY_ICON = TEXTURE_MOD_ID + "i_fullEnergy";
     public static final String DECOMPOSER_FRONT_TEX = TEXTURE_MOD_ID + "decomposerFront";
     public static final String DECOMPOSER_TEX = TEXTURE_MOD_ID + "decomposer";
     public static final String MICROSCOPE_FRONT_TEX = TEXTURE_MOD_ID + "microscopeFront";
@@ -71,6 +68,7 @@ public interface ConstantValue {
     public static final String SYNTHESIS_GUI = TEXTURE_GUI_DIR + "SynthesisGUI.png";
     public static final String FUSION_GUI = TEXTURE_GUI_DIR + "FusionChamberGUI.png";
     public static final String PROJECTOR_GUI = TEXTURE_GUI_DIR + "ProjectorGUI.png";
+    public static final String LEADED_CHEST_GUI = TEXTURE_GUI_DIR + "LeadedChestGUI.png";
     public static final String JOURNAL_GUI = TEXTURE_GUI_DIR + "ChemistsJournalGUI.png";
     public static final String VAT_GUI = TEXTURE_GUI_DIR + "ChemicalVatGUI.png";
     public static final String PRINT_GUI = TEXTURE_GUI_DIR + "PrintGUI.png";
@@ -84,6 +82,7 @@ public interface ConstantValue {
     public static final String PROJECTOR_MODEL_OFF = TEXTURE_MODEL_DIR + "ProjectorModelOff.png";
     public static final String HAZMAT_TEX = TEXTURE_MODEL_DIR + "hazmatArmor.png";
     public static final String CHEMICAL_STORAGE_MODEL = TEXTURE_MODEL_DIR + "ChemicalStorageModel.png";
+    public static final String LEADED_CHEST_MODEL = TEXTURE_MODEL_DIR + "LeadedChestModel.png";
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
     public static final String ICON_BASE = "textures/icons/";

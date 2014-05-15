@@ -36,10 +36,8 @@ import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.coating.CoatingRecipe;
 import pixlepix.minechem.common.coating.CoatingSubscribe;
 import pixlepix.minechem.common.coating.EnchantmentCoated;
-import pixlepix.minechem.common.gates.MinechemTriggers;
 import pixlepix.minechem.common.network.PacketHandler;
 import pixlepix.minechem.common.polytool.PolytoolEventHandler;
-import pixlepix.minechem.common.recipe.ConfigurableRecipies;
 import pixlepix.minechem.common.recipe.MinechemRecipes;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.computercraft.ICCMain;
@@ -61,25 +59,19 @@ public class ModMinechem {
 	public static Logger logger;
 
 	public static final ResourceLocation ICON_ENERGY = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_power.png");
-
 	public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_fullEower.png");
-
 	public static final ResourceLocation ICON_HELP = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_help.png");
-
 	public static final ResourceLocation ICON_JAMMED = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_jammed.png");
-
 	public static final ResourceLocation ICON_NO_BOTTLES = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_noBottles.png");
-
 	public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_noRecipe.png");
-
 	public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.ICON_BASE + "i_unpowered.png");
 
 	@SidedProxy(clientSide = "pixlepix.minechem.client.ClientProxy", serverSide = "pixlepix.minechem.common.CommonProxy")
 	public static CommonProxy proxy;
 	public static CreativeTabs minechemTab = new CreativeTabMinechem("MineChem");
 	private Configuration config;
-    public boolean worldGen = true;
-    public static boolean debug = false;
+        public boolean worldGen = true;
+        public static boolean debug = false;
 	private static final String[] LANGUAGES_SUPPORTED = new String[]{ "en_US", "zh_CN", "de_DE" };
 	public static String GUITABLEID = "2";
 
@@ -112,11 +104,6 @@ public class ModMinechem {
 	}
 
 	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event) {
-		new AutoCrashReporter();
-	}
-
-	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		CraftingManager.getInstance().getRecipeList().add(new CoatingRecipe());
 		FluidHelper.registerFluids();
@@ -126,12 +113,7 @@ public class ModMinechem {
 		proxy.registerRenderers();
 		logger.info("INIT PASSED");
 		LanguageRegistry.instance().addStringLocalization("itemGroup.MineChem", "en_US", "MineChem");
-		ConfigurableRecipies.loadConfigurableRecipies(this.config);
 		Modstats.instance().getReporter().registerMod(this);
-		if (FMLCommonHandler.instance().getSide() == Side.SERVER) {
-			System.out.println("Registering minechem automatic crash reporter");
-			new AutoCrashReporter();
-		}
 	}
 
 	@EventHandler
@@ -139,6 +121,7 @@ public class ModMinechem {
 		initComputerCraftAddon(event);
 		// initBOP();
 		DoDungeon();
+		
 		//Flexible enchantment location
 		EnchantmentCoated.registerCoatings();
 		MinecraftForge.EVENT_BUS.register(new CoatingSubscribe());
@@ -186,8 +169,8 @@ public class ModMinechem {
 		Configuration config = new Configuration(event.getSuggestedConfigurationFile());
 		MinechemBlocks.loadConfig(config);
 		MinechemItems.loadConfig(config);
-        this.worldGen = config.get("misc", "worldgen", true).getBoolean(true);
-        this.debug = config.get("misc", "debug", false).getBoolean(false);
+                this.worldGen = config.get("misc", "worldgen", true).getBoolean(true);
+                this.debug = config.get("misc", "debug", false).getBoolean(false);
 		config.save();
 		this.config = config;
 	}
@@ -196,14 +179,11 @@ public class ModMinechem {
 	@SideOnly(Side.CLIENT)
 	public void textureHook(IconRegister icon) {
 		TabStateControl.unpoweredIcon = icon.registerIcon(ConstantValue.UNPOWERED_ICON);
-		MinechemTriggers.outputJammed.icon = icon.registerIcon(ConstantValue.JAMMED_ICON);
-		MinechemTriggers.noTestTubes.icon = icon.registerIcon(ConstantValue.NO_BOTTLES_ICON);
 		TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(ConstantValue.NO_RECIPE_ICON);
 		TabEnergy.powerIcon = icon.registerIcon(ConstantValue.POWER_ICON);
 		TabHelp.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
 		TabTable.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
 		TabJournal.helpIcon = icon.registerIcon(ConstantValue.POWER_ICON);
-		MinechemTriggers.fullEnergy.icon = icon.registerIcon(ConstantValue.FULL_ENERGY_ICON);
 	}
 
 	@ForgeSubscribe
