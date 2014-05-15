@@ -6,8 +6,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import pixlepix.minechem.api.core.EnumElement;
-import pixlepix.minechem.common.EnumColor;
 import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
+import pixlepix.minechem.common.utils.EnumColor;
 
 
 public class PolytoolTypeMercury extends PolytoolUpgradeType {

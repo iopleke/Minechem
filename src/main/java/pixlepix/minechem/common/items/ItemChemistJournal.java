@@ -31,7 +31,7 @@ public class ItemChemistJournal extends Item {
     @Override
     public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer entityPlayer) {
         if (!world.isRemote)
-            entityPlayer.openGui(ModMinechem.instance, GuiHandler.GUI_ID_JOURNAL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY,
+            entityPlayer.openGui(ModMinechem.INSTANCE, GuiHandler.GUI_ID_JOURNAL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY,
                     entityPlayer.chunkCoordY);
         return par1ItemStack;
     }

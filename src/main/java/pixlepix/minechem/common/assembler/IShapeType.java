@@ -1,6 +1,6 @@
 package pixlepix.minechem.common.assembler;
 
-import pixlepix.minechem.common.CoordTuple;
+import pixlepix.minechem.common.utils.CoordTuple;
 
 import java.util.ArrayList;
 

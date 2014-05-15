@@ -1,15 +1,17 @@
 package pixlepix.minechem.common.utils;
 
-public interface ConstantValue {
+import pixlepix.minechem.common.ModMinechem;
+
+public interface ConstantValue
+{
     public static final String TEXTURE_DIR = "assets/minechem/textures/";
     public static final String TEXTURE_GUI_DIR = "textures/gui/";
     public static final String TEXTURE_MODEL_DIR = "textures/model/";
     public static final String SOUNDS_DIR = "sounds/minechem/";
     public static final String LANG_DIR = "/assets/minechem/languages/";
 
-    //Used for resourceLocations in 1.6
-    public static final String MOD_ID = "minechem";
-    public static final String TEXTURE_MOD_ID = MOD_ID + ":";
+    // Used for resourceLocations in 1.6
+    public static final String TEXTURE_MOD_ID = ModMinechem.ID + ":";
 
     public static final String POLYTOOL_TEX = TEXTURE_MOD_ID + "polytool";
     public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";

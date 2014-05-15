@@ -9,6 +9,7 @@ import pixlepix.minechem.api.core.Chemical;
 import pixlepix.minechem.api.recipe.SynthesisRecipe;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.client.gui.GuiSynthesis;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
@@ -23,7 +24,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler {
 
     // TODO: The Gui's class itself should really expose this.
     private ResourceLocation texture = new ResourceLocation(
-            ConstantValue.MOD_ID, ConstantValue.SYNTHESIS_GUI);
+            ModMinechem.ID, ConstantValue.SYNTHESIS_GUI);
 
     // GUI slot offsets, in GUI-relative pixel values.
     private static final int INPUT_X_OFS = 57;

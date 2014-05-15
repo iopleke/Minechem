@@ -41,7 +41,7 @@ public class BlockSynthesis extends BlockMinechemContainer {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
-        entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+        entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
         return true;
     }
 

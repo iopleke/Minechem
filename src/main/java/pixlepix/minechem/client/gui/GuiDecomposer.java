@@ -3,10 +3,13 @@ package pixlepix.minechem.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.gui.tabs.TabEnergy;
 import pixlepix.minechem.client.gui.tabs.TabHelp;
 import pixlepix.minechem.client.gui.tabs.TabStateControlDecomposer;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.containers.ContainerDecomposer;
 import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
 import pixlepix.minechem.common.utils.ConstantValue;
@@ -20,7 +23,7 @@ public class GuiDecomposer extends GuiContainerTabbed {
 	int mouseY = 0;
 	int guiWidth = 176;
 	int guiHeight = 166;
-	public static ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.DECOMPOSER_GUI);
+	public static ResourceLocation texture = new ResourceLocation(ModMinechem.ID, ConstantValue.DECOMPOSER_GUI);
 
 	public GuiDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer) {
 		super(new ContainerDecomposer(inventoryPlayer, decomposer));

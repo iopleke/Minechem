@@ -100,7 +100,7 @@ public class TickHandler implements ITickHandler {
      * !mc.renderViewEntity.isPlayerSleeping() &&
      * mc.thePlayer.isInsideOfMaterial(MinechemBlocks.materialGas)) {
      * renderWarpedTextureOverlay(mc, new
-     * ResourceLocation(ConstantValue.MOD_ID,"/misc/water.png")); } }
+     * ResourceLocation(ModMinechem.ID,"/misc/water.png")); } }
      *
      *
      * // Renders a texture that warps around based on the direction the player

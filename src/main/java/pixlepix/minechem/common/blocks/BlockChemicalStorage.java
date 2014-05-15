@@ -26,7 +26,7 @@ public class BlockChemicalStorage extends BlockChest {
         if (world.isRemote)
             return true;
         if (tileEntity instanceof TileEntityChemicalStorage) {
-            entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+            entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
             return true;
         }
         return false;

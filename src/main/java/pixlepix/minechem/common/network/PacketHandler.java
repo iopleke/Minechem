@@ -1,10 +1,11 @@
 package pixlepix.minechem.common.network;
 
-import cpw.mods.fml.common.network.IPacketHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
-import cpw.mods.fml.common.network.Player;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
+
 import ljdp.easypacket.EasyPacketDispatcher;
 import ljdp.easypacket.EasyPacketHandler;
 import net.minecraft.client.Minecraft;
@@ -12,18 +13,22 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import pixlepix.minechem.api.core.EnumElement;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.polytool.GuiPolytool;
 import pixlepix.minechem.common.polytool.PolytoolHelper;
 import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
+import cpw.mods.fml.common.network.IPacketHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
+import cpw.mods.fml.common.network.Player;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-import java.io.*;
-
-public class PacketHandler implements IPacketHandler {
-
-    public static final String MINECHEM_PACKET_CHANNEL = "MineChem2";
+public class PacketHandler implements IPacketHandler
+{
     private static PacketHandler instance;
 
-    public static final PacketHandler getInstance() {
+    public static final PacketHandler getInstance()
+    {
         return instance;
     }
 
@@ -35,27 +40,33 @@ public class PacketHandler implements IPacketHandler {
     public EasyPacketHandler activeJournalItemHandler;
     public EasyPacketHandler swapItemHandler;
 
-    public PacketHandler() {
+    public PacketHandler()
+    {
         instance = this;
-        dispatcher = new EasyPacketDispatcher(MINECHEM_PACKET_CHANNEL);
+        dispatcher = new EasyPacketDispatcher(ModMinechem.CHANNEL_NAME);
         decomposerUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketDecomposerUpdate.class, dispatcher);
 
         ghostBlockUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketGhostBlock.class, dispatcher);
         synthesisUpdateHandler = EasyPacketHandler.registerEasyPacket(PacketSynthesisUpdate.class, dispatcher);
         activeJournalItemHandler = EasyPacketHandler.registerEasyPacket(PacketActiveJournalItem.class, dispatcher);
-        //swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
+        // swapItemHandler = EasyPacketHandler.registerEasyPacket(PacketSwapItem.class, dispatcher);
     }
 
     @SideOnly(Side.CLIENT)
-    public void receivePolytoolUpdate(INetworkManager manager, Packet250CustomPayload packet, Player player) {
-        if (Minecraft.getMinecraft().currentScreen instanceof GuiPolytool) {
+    public void receivePolytoolUpdate(INetworkManager manager, Packet250CustomPayload packet, Player player)
+    {
+        if (Minecraft.getMinecraft().currentScreen instanceof GuiPolytool)
+        {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(packet.data);
             DataInputStream inputStream = new DataInputStream(byteArrayInputStream);
-            try {
+            try
+            {
                 inputStream.readByte();
                 PolytoolUpgradeType upgrade = PolytoolHelper.getTypeFromElement(EnumElement.values()[inputStream.readByte()], inputStream.readByte());
                 ((GuiPolytool) Minecraft.getMinecraft().currentScreen).addUpgrade(upgrade);
-            } catch (IOException e) {
+            }
+            catch (IOException e)
+            {
 
                 e.printStackTrace();
             }
@@ -63,37 +74,44 @@ public class PacketHandler implements IPacketHandler {
     }
 
     @Override
-    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player) {
+    public void onPacketData(INetworkManager manager, Packet250CustomPayload packet, Player player)
+    {
 
+        if (packet.data != null)
+        {
 
-        if (packet.data != null) {
-
-            if (packet.data[0] == 42) {
-                //PolytoolUpdatePacket
+            if (packet.data[0] == 42)
+            {
+                // PolytoolUpdatePacket
                 this.receivePolytoolUpdate(manager, packet, player);
                 return;
-            } else {
+            }
+            else
+            {
                 dispatcher.onPacketData(manager, packet, player);
             }
         }
     }
 
-    public static void sendPolytoolUpdatePacket(PolytoolUpgradeType data, EntityPlayer player) {
+    public static void sendPolytoolUpdatePacket(PolytoolUpgradeType data, EntityPlayer player)
+    {
         ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
         DataOutputStream dataStream = new DataOutputStream(byteStream);
-        try {
+        try
+        {
             dataStream.writeByte((byte) 42);
 
             dataStream.writeByte(data.getElement().ordinal());
 
             dataStream.writeByte((int) data.power);
-        } catch (IOException e) {
+        }
+        catch (IOException e)
+        {
             System.out.println("Exception sending polytool update packet");
             e.printStackTrace();
         }
 
-
-        PacketDispatcher.sendPacketToPlayer(PacketDispatcher.getPacket(MINECHEM_PACKET_CHANNEL, byteStream.toByteArray()), (Player) player);
+        PacketDispatcher.sendPacketToPlayer(PacketDispatcher.getPacket(ModMinechem.CHANNEL_NAME, byteStream.toByteArray()), (Player) player);
 
     }
 

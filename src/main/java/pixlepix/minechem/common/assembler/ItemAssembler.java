@@ -6,7 +6,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
-import pixlepix.minechem.common.CoordTuple;
+import pixlepix.minechem.common.utils.CoordTuple;
 
 import java.util.ArrayList;
 import java.util.Iterator;

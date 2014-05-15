@@ -11,6 +11,7 @@ import pixlepix.minechem.api.recipe.DecomposerRecipeChance;
 import pixlepix.minechem.api.recipe.DecomposerRecipeSelect;
 import pixlepix.minechem.api.util.Util;
 import pixlepix.minechem.client.gui.GuiDecomposer;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.recipe.DecomposerRecipeHandler;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
@@ -25,7 +26,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler {
 			"minechem.decomposer";
 
 	private ResourceLocation texture = new ResourceLocation(
-			ConstantValue.MOD_ID, ConstantValue.DECOMPOSER_GUI);
+			ModMinechem.ID, ConstantValue.DECOMPOSER_GUI);
 
 	// GUI slot offsets, in GUI-relative pixel values.
 	private static final int INPUT_X_OFS = 75;

@@ -35,7 +35,7 @@ public class BlockBlueprintProjector extends BlockMinechemContainer {
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9) {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityBlueprintProjector) {
-            entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+            entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
             return true;
         }
         return false;

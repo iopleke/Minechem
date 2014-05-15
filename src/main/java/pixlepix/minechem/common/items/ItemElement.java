@@ -12,17 +12,19 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
+
 import org.lwjgl.input.Keyboard;
+
 import pixlepix.minechem.api.core.EnumClassification;
 import pixlepix.minechem.api.core.EnumElement;
 import pixlepix.minechem.api.core.EnumRadioactivity;
 import pixlepix.minechem.api.util.Constants;
-import pixlepix.minechem.common.EnumColor;
 import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.RadiationInfo;
 import pixlepix.minechem.common.polytool.PolytoolHelper;
 import pixlepix.minechem.common.utils.ConstantValue;
+import pixlepix.minechem.common.utils.EnumColor;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
 import java.util.EnumMap;

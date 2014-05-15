@@ -32,7 +32,7 @@ public class BlockLeadedChest extends BlockContainer {
             if (leadedchest == null || player.isSneaking()) {
                 return false;
             }
-            player.openGui(ModMinechem.instance, 0, world, xCoord, yCoord, zCoord);
+            player.openGui(ModMinechem.INSTANCE, 0, world, xCoord, yCoord, zCoord);
         }
         return true;
     }

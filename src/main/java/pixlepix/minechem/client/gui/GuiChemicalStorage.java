@@ -5,8 +5,11 @@ import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.gui.tabs.TabHelp;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.MinechemHelper;
 
@@ -34,7 +37,7 @@ public class GuiChemicalStorage extends GuiContainerTabbed {
     @Override
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, "textures/gui/container.png"));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, "textures/gui/container.png"));
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.inventoryRows * 18 + 17);

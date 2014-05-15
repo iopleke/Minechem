@@ -3,7 +3,10 @@ package pixlepix.minechem.client.render.tileentity;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import pixlepix.minechem.common.utils.ConstantValue;
 
@@ -25,7 +28,7 @@ public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer {
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.SYNTHESIS_MODEL));
+            bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.SYNTHESIS_MODEL));
             synthesis.model.render(0.0625F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_LIGHTING);

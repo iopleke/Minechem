@@ -57,7 +57,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyContainerItem {
 		//Copied from journal code
 		//I don't know why chunkCoordX is used
 		//But LJDP probably knows, and he is smarter than me
-		entityPlayer.openGui(ModMinechem.instance, GuiHandler.GUI_ID_POLYTOOL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY,
+		entityPlayer.openGui(ModMinechem.INSTANCE, GuiHandler.GUI_ID_POLYTOOL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY,
 				entityPlayer.chunkCoordY);
 		return par1ItemStack;
 	}

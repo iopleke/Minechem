@@ -7,27 +7,32 @@ import net.minecraft.world.World;
 import pixlepix.minechem.particlephysics.ParticlePhysics;
 import pixlepix.minechem.particlephysics.tile.EmitterTileEntity;
 
-public class GuiHandler implements IGuiHandler {
+public class GuiHandler implements IGuiHandler
+{
 
-    public GuiHandler() {
+    public GuiHandler()
+    {
         NetworkRegistry.instance().registerGuiHandler(ParticlePhysics.instance, this);
     }
 
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z) {
-        switch (ID) {
-            case 0:
-                return new ContainerEmitter(player.inventory, (EmitterTileEntity) world.getBlockTileEntity(x, y, z));
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
+        switch (ID)
+        {
+        case 0:
+            return new ContainerEmitter(player.inventory, (EmitterTileEntity) world.getBlockTileEntity(x, y, z));
         }
         return null;
     }
 
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world,
-                                      int x, int y, int z) {
-        switch (ID) {
-            case 0:
-                return new GuiEmitter(player.inventory, (EmitterTileEntity) world.getBlockTileEntity(x, y, z));
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
+        switch (ID)
+        {
+        case 0:
+            return new GuiEmitter(player.inventory, (EmitterTileEntity) world.getBlockTileEntity(x, y, z));
         }
         return null;
     }

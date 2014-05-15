@@ -3,7 +3,10 @@ package pixlepix.minechem.client.gui;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.containers.ContainerFission;
 import pixlepix.minechem.common.tileentity.TileEntityFission;
 import pixlepix.minechem.common.utils.ConstantValue;
@@ -35,7 +38,7 @@ public class GuiFission extends GuiMinechemContainer {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.FISSION_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.FISSION_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         // DRAW GUI

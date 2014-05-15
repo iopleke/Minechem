@@ -57,7 +57,7 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
 
     @Override
     public void handle(OreRegisterEvent event) {
-        ModMinechem.logger.log(Level.INFO,
+        ModMinechem.LOGGER.log(Level.INFO,
                 DefaultOreDictionaryHandler.class.getSimpleName()
                         + " registered : " + event.Name);
 
@@ -117,7 +117,7 @@ public class DefaultOreDictionaryHandler implements OreDictionaryHandler {
                 break;
 
             default:
-                ModMinechem.logger.log(Level.WARNING,
+                ModMinechem.LOGGER.log(Level.WARNING,
                         DefaultOreDictionaryHandler.class.getSimpleName()
                                 + " : Invalid ore dictionary type.");
                 break;

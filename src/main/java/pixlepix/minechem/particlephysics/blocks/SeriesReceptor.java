@@ -10,68 +10,76 @@ import pixlepix.minechem.particlephysics.tile.SeriesReceptorTileEntity;
 
 import java.util.ArrayList;
 
-public class SeriesReceptor extends BasicComplexBlock {
+public class SeriesReceptor extends BasicComplexBlock
+{
 
-	public SeriesReceptor() {
-		super(MinechemBlocks.seriesReceptorID);
-	}
+    public SeriesReceptor(int itemID)
+    {
+        super(itemID);
+    }
 
-	public SeriesReceptor(int i) {
-		super(i);
-	}
+    @Override
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
+    {
 
-	@Override
-	public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {
+    }
 
-	}
+    @Override
+    public String getFront()
+    {
+        // TODO Auto-generated method stub
+        return "SeriesReceptor";
+    }
 
-	@Override
-	public String getFront() {
-		// TODO Auto-generated method stub
-		return "SeriesReceptor";
-	}
+    @Override
+    public boolean hasModel()
+    {
+        return true;
+    }
 
-	@Override
-	public boolean hasModel() {
-		return true;
-	}
+    @Override
+    public String getTop()
+    {
+        // TODO Auto-generated method stub
+        return "SeriesReceptorTop";
+    }
 
-	@Override
-	public String getTop() {
-		// TODO Auto-generated method stub
-		return "SeriesReceptorTop";
-	}
+    @Override
+    public Class getTileEntityClass()
+    {
+        return SeriesReceptorTileEntity.class;
+    }
 
-	@Override
-	public Class getTileEntityClass() {
-		return SeriesReceptorTileEntity.class;
-	}
+    @Override
+    public void addRecipe()
+    {
+        GameRegistry.addRecipe(new ItemStack(this), "III", "D  ", "III", 'I', new ItemStack(Item.ingotIron), 'D', new ItemStack(Item.diamond));
 
-	@Override
-	public void addRecipe() {
-		GameRegistry.addRecipe(new ItemStack(this), "III", "D  ", "III", 'I', new ItemStack(Item.ingotIron), 'D', new ItemStack(Item.diamond));
+    }
 
-	}
+    @Override
+    public String getName()
+    {
+        return "Series Receptor";
+    }
 
-	@Override
-	public String getName() {
-		return "Series Receptor";
-	}
+    @Override
+    public boolean hasItemBlock()
+    {
+        return true;
+    }
 
-	@Override
-	public boolean hasItemBlock() {
-		return true;
-	}
+    @Override
+    public Class getItemBlock()
+    {
+        return null;
 
-	@Override
-	public Class getItemBlock() {
-		return null;
+    }
 
-	}
-
-	@Override
-	public boolean topSidedTextures() {
-		return true;
-	}
+    @Override
+    public boolean topSidedTextures()
+    {
+        return true;
+    }
 
 }

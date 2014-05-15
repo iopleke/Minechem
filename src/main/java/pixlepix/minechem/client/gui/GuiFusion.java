@@ -3,8 +3,11 @@ package pixlepix.minechem.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.gui.tabs.TabHelp;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.containers.ContainerFusion;
 import pixlepix.minechem.common.tileentity.TileEntityFusion;
 import pixlepix.minechem.common.utils.ConstantValue;
@@ -42,7 +45,7 @@ public class GuiFusion extends GuiContainerTabbed {
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.FUSION_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.FUSION_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         // DRAW GUI

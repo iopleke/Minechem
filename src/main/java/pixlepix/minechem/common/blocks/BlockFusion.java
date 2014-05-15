@@ -45,7 +45,7 @@ public class BlockFusion extends BlockMinechemContainer {
 		if (tileEntity == null || entityPlayer.isSneaking())
 			return false;
 		if (!world.isRemote) {
-			entityPlayer.openGui(ModMinechem.instance, 0, world, x, y, z);
+			entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
 		}
 		return true;
 	}

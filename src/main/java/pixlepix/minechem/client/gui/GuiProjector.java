@@ -4,9 +4,12 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.gui.tabs.TabHelp;
 import pixlepix.minechem.common.MinechemItems;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.blueprint.BlueprintBlock;
 import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.containers.ContainerProjector;
@@ -33,7 +36,7 @@ public class GuiProjector extends GuiContainerTabbed {
 	protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.PROJECTOR_GUI));
+		this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.PROJECTOR_GUI));
 		;
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

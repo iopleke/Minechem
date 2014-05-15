@@ -47,7 +47,7 @@ public class AppliedEnergisticsOreDictionaryHandler implements
                     30000, certusQuartzCrystalSynthesisFormula));
             // }
         } else {
-            ModMinechem.logger.info("Unknown type of Certus Quartz : "
+            ModMinechem.LOGGER.info("Unknown type of Certus Quartz : "
                     + oreEvent.Name);
         }
     }

@@ -3,8 +3,11 @@ package pixlepix.minechem.client.render.item;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.ModelDecomposer;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.utils.ConstantValue;
 
 public class ItemDecomposerRenderer extends ItemMinechemRenderer {
@@ -17,7 +20,7 @@ public class ItemDecomposerRenderer extends ItemMinechemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.DECOMPOSER_MODEL_ON);
+        ResourceLocation texture = new ResourceLocation(ModMinechem.ID, ConstantValue.DECOMPOSER_MODEL_ON);
         GL11.glPushMatrix();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         switch (type.ordinal()) {

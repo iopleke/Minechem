@@ -3,8 +3,11 @@ package pixlepix.minechem.client.render.item;
 import cpw.mods.fml.client.FMLClientHandler;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.ModelProjector;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.utils.ConstantValue;
 
 public class ItemBlueprintProjectorRenderer extends ItemMinechemRenderer {
@@ -17,7 +20,7 @@ public class ItemBlueprintProjectorRenderer extends ItemMinechemRenderer {
 
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-        ResourceLocation texture = new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.PROJECTOR_MODEL_OFF);
+        ResourceLocation texture = new ResourceLocation(ModMinechem.ID, ConstantValue.PROJECTOR_MODEL_OFF);
         GL11.glPushMatrix();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         switch (type.ordinal()) {

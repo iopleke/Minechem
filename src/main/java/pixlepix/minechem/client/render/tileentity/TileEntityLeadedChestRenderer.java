@@ -7,8 +7,11 @@ import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.TileEntityLeadedChest;
 import pixlepix.minechem.common.utils.ConstantValue;
 
@@ -40,7 +43,7 @@ public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer {
 
         ModelChest var14 = this.leadedChestModel;
 
-        bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.LEADED_CHEST_MODEL));
+        bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.LEADED_CHEST_MODEL));
 
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

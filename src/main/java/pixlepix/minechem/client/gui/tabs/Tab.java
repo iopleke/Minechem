@@ -7,8 +7,11 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.opengl.GL11;
+
 import pixlepix.minechem.client.gui.GuiContainerTabbed;
+import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.utils.ConstantValue;
 import pixlepix.minechem.common.utils.SessionVars;
 
@@ -55,7 +58,7 @@ public abstract class Tab {
 
         if (leftSide) {
 
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.TAB_LEFT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.TAB_LEFT));
 
             myGui.drawTexturedModalRect(x - currentWidth, y + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -63,7 +66,7 @@ public abstract class Tab {
             myGui.drawTexturedModalRect(x - currentWidth + 4, y + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
         } else {
 
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID, ConstantValue.TAB_RIGHT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.TAB_RIGHT));
 
             myGui.drawTexturedModalRect(x, y, 0, 256 - currentHeight, 4, currentHeight);
             myGui.drawTexturedModalRect(x + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -76,7 +79,7 @@ public abstract class Tab {
 
     protected void drawIcon(int x, int y) {
         ResourceLocation resource = this.getIcon();
-        //Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
+        //Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID,"textures/gui/allitems.png"));
         if (myGui instanceof GuiContainerTabbed) {
             ((GuiContainerTabbed) myGui).drawTexture(x, y, resource);
         } else {
