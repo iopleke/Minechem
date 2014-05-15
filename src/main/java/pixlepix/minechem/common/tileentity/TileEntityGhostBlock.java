@@ -1,5 +1,6 @@
 package pixlepix.minechem.common.tileentity;
 
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import pixlepix.minechem.common.blueprint.BlueprintBlock;
@@ -7,12 +8,14 @@ import pixlepix.minechem.common.blueprint.MinechemBlueprint;
 import pixlepix.minechem.common.network.PacketGhostBlock;
 import pixlepix.minechem.common.network.PacketHandler;
 
-public class TileEntityGhostBlock extends MinechemTileEntity {
+public class TileEntityGhostBlock extends MinechemTileEntity
+{
 
     private MinechemBlueprint blueprint;
     private int blockID;
 
-    public void setBlueprintAndID(MinechemBlueprint blueprint, int blockID) {
+    public void setBlueprintAndID(MinechemBlueprint blueprint, int blockID)
+    {
         setBlueprint(blueprint);
         setBlockID(blockID);
         this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, blueprint.getBlockLookup().get(this.blockID).metadata, 3);
@@ -20,45 +23,54 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
             sendUpdatePacket();
     }
 
-    public void setBlueprint(MinechemBlueprint blueprint) {
+    public void setBlueprint(MinechemBlueprint blueprint)
+    {
         this.blueprint = blueprint;
     }
 
-    public MinechemBlueprint getBlueprint() {
+    public MinechemBlueprint getBlueprint()
+    {
         return this.blueprint;
     }
 
-    public void setBlockID(int blockID) {
+    public void setBlockID(int blockID)
+    {
         this.blockID = blockID;
     }
 
-    public int getBlockID() {
+    public int getBlockID()
+    {
         return this.blockID;
     }
 
-    public ItemStack getBlockAsItemStack() {
+    public ItemStack getBlockAsItemStack()
+    {
         BlueprintBlock blueprintBlock = this.blueprint.getBlockLookup().get(this.blockID);
         return new ItemStack(blueprintBlock.block, 1, blueprintBlock.metadata);
     }
 
     @Override
-    public void sendUpdatePacket() {
+    public void sendUpdatePacket()
+    {
         PacketGhostBlock packet = new PacketGhostBlock(this);
         int dimensionID = worldObj.provider.dimensionId;
         PacketHandler.getInstance().ghostBlockUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbtTagCompound) {
+    public void writeToNBT(NBTTagCompound nbtTagCompound)
+    {
         super.writeToNBT(nbtTagCompound);
-	    if (blueprint != null) {
-		    nbtTagCompound.setInteger("blueprintID", blueprint.id);
-	    }
-	    nbtTagCompound.setInteger("blockID", blockID);
+        if (blueprint != null)
+        {
+            nbtTagCompound.setInteger("blueprintID", blueprint.id);
+        }
+        nbtTagCompound.setInteger("blockID", blockID);
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbtTagCompound) {
+    public void readFromNBT(NBTTagCompound nbtTagCompound)
+    {
         super.readFromNBT(nbtTagCompound);
         this.blockID = nbtTagCompound.getInteger("blockID");
         int blueprintID = nbtTagCompound.getInteger("blueprintID");
@@ -66,26 +78,33 @@ public class TileEntityGhostBlock extends MinechemTileEntity {
     }
 
     @Override
-    public int getSizeInventory() {
+    public int getSizeInventory()
+    {
         return 0;
     }
 
     @Override
-    public String getInvName() {
+    public String getInvName()
+    {
         return null;
     }
 
     @Override
-    public boolean isInvNameLocalized() {
+    public boolean isInvNameLocalized()
+    {
         return false;
     }
-
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack) {
-        // TODO Auto-generated method stub
+    public boolean isItemValidForSlot(int i, ItemStack itemstack)
+    {
         return false;
     }
 
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityplayer)
+    {
+        return false;
+    }
 
 }

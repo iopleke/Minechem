@@ -3,6 +3,7 @@ package pixlepix.minechem.client.render.tileentity;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -10,15 +11,18 @@ import pixlepix.minechem.common.ModMinechem;
 import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
 import pixlepix.minechem.common.utils.ConstantValue;
 
-public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer {
+public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer
+{
 
     @Override
-    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale) {
-        if (tileEntity instanceof TileEntitySynthesis) {
+    public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
+    {
+        if (tileEntity instanceof TileEntitySynthesis)
+        {
             TileEntitySynthesis synthesis = (TileEntitySynthesis) tileEntity;
             int facing = synthesis.getFacing();
 
-            if (synthesis.getEnergyStored() > 100)
+            if (synthesis.getEnergy(ForgeDirection.UNKNOWN) > 100)
                 synthesis.model.updateArm();
 
             GL11.glPushMatrix();

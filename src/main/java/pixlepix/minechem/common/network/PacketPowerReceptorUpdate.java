@@ -3,36 +3,43 @@ package pixlepix.minechem.common.network;
 import cpw.mods.fml.common.network.Player;
 import ljdp.easypacket.EasyPacketData;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.ForgeDirection;
 import pixlepix.minechem.common.tileentity.MinechemTileEntity;
 
-public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate {
+public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate
+{
 
     MinechemTileEntity powerReceptor;
 
     @EasyPacketData
-    float energyStored;
+    long energyStored;
 
-    public PacketPowerReceptorUpdate(MinechemTileEntity powerReceptor) {
+    public PacketPowerReceptorUpdate(MinechemTileEntity powerReceptor)
+    {
         super((TileEntity) powerReceptor);
         this.powerReceptor = powerReceptor;
-        this.energyStored = this.powerReceptor.getEnergyStored();
+        this.energyStored = this.powerReceptor.getEnergy(ForgeDirection.UNKNOWN);
     }
 
-    public PacketPowerReceptorUpdate() {
+    public PacketPowerReceptorUpdate()
+    {
         super();
     }
 
     @Override
-    public boolean isChunkDataPacket() {
+    public boolean isChunkDataPacket()
+    {
         return super.isChunkDataPacket();
     }
 
     @Override
-    public void onReceive(Player player) {
+    public void onReceive(Player player)
+    {
         super.onReceive(player);
-        if (this.tileEntity instanceof MinechemTileEntity) {
+        if (this.tileEntity instanceof MinechemTileEntity)
+        {
             this.powerReceptor = (MinechemTileEntity) this.tileEntity;
-            this.powerReceptor.energyStored = (int) this.energyStored;
+            this.powerReceptor.setEnergy(ForgeDirection.UNKNOWN, this.energyStored);
         }
     }
 

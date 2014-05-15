@@ -3,6 +3,7 @@ package pixlepix.minechem.client.gui;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
@@ -27,7 +28,7 @@ public class GuiFusion extends GuiContainerTabbed {
     public GuiFusion(InventoryPlayer inventoryPlayer, TileEntityFusion fusion) {
         super(new ContainerFusion(inventoryPlayer, fusion));
         this.fusion = fusion;
-        energy = fusion.getEnergyStored();
+        energy = fusion.getEnergy(ForgeDirection.UNKNOWN);
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new TabHelp(this, MinechemHelper.getLocalString("help.fusion")));
