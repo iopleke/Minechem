@@ -71,7 +71,7 @@ public class ModMinechem
     /** Provides standard logging from the Forge. **/
     public static Logger LOGGER;
 
-    @SidedProxy(clientSide = "pixlepix.minechem.client.ClientProxy", serverSide = "pixlepix.minechem.common.CommonProxy")
+    @SidedProxy(clientSide = "minechem.client.ClientProxy", serverSide = "minechem.common.CommonProxy")
     public static CommonProxy PROXY;
     
     /** Creative mode tab that shows up in Minecraft. **/

@@ -19,10 +19,12 @@ import net.minecraft.world.World;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ItemMolecule extends Item {
+public class ItemMolecule extends Item
+{
     public Icon render_pass1, render_pass2, filledMolecule;
 
-    public ItemMolecule(int par1) {
+    public ItemMolecule(int par1)
+    {
         super(par1);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
@@ -30,39 +32,48 @@ public class ItemMolecule extends Item {
     }
 
     @Override
-    public String getItemDisplayName(ItemStack par1ItemStack) {
+    public String getItemDisplayName(ItemStack par1ItemStack)
+    {
         int itemDamage = par1ItemStack.getItemDamage();
         return EnumMolecule.getById(itemDamage).descriptiveName();
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir)
+    {
         itemIcon = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
         render_pass1 = ir.registerIcon(ConstantValue.MOLECULE_PASS1_TEX);
         render_pass2 = ir.registerIcon(ConstantValue.MOLECULE_PASS2_TEX);
         filledMolecule = ir.registerIcon(ConstantValue.FILLED_MOLECULE_TEX);
     }
 
-    public ArrayList<ItemStack> getElements(ItemStack itemstack) {
+    public ArrayList<ItemStack> getElements(ItemStack itemstack)
+    {
         EnumMolecule molecule = EnumMolecule.getById(itemstack.getItemDamage());
         return MinechemHelper.convertChemicalsIntoItemStacks(molecule.components());
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack par1ItemStack) {
+    public String getUnlocalizedName(ItemStack par1ItemStack)
+    {
         return getUnlocalizedName() + "." + getMolecule(par1ItemStack).name();
     }
 
-    public String getFormula(ItemStack itemstack) {
+    public String getFormula(ItemStack itemstack)
+    {
         ArrayList<ItemStack> components = getElements(itemstack);
         String formula = "";
-        for (ItemStack component : components) {
-            if (component.getItem() instanceof ItemElement) {
+        for (ItemStack component : components)
+        {
+            if (component.getItem() instanceof ItemElement)
+            {
                 formula += ItemElement.getShortName(component);
                 if (component.stackSize > 1)
                     formula += component.stackSize;
-            } else if (component.getItem() instanceof ItemMolecule) {
+            }
+            else if (component.getItem() instanceof ItemMolecule)
+            {
                 if (component.stackSize > 1)
                     formula += "(";
                 formula += getFormula(component);
@@ -73,12 +84,14 @@ public class ItemMolecule extends Item {
         return formula;
     }
 
-    public String getFormulaWithSubscript(ItemStack itemstack) {
+    public String getFormulaWithSubscript(ItemStack itemstack)
+    {
         String formula = getFormula(itemstack);
         return subscriptNumbers(formula);
     }
 
-    private static String subscriptNumbers(String string) {
+    private static String subscriptNumbers(String string)
+    {
         string = string.replace('0', '\u2080');
         string = string.replace('1', '\u2081');
         string = string.replace('2', '\u2082');
@@ -94,38 +107,41 @@ public class ItemMolecule extends Item {
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4) {
+    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    {
         par3List.add("\u00A79" + getFormulaWithSubscript(par1ItemStack));
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int itemID, CreativeTabs par2CreativeTabs, List par3List) {
-        for (EnumMolecule molecule : EnumMolecule.molecules) {
+    public void getSubItems(int itemID, CreativeTabs par2CreativeTabs, List par3List)
+    {
+        for (EnumMolecule molecule : EnumMolecule.molecules)
+        {
             par3List.add(new ItemStack(itemID, 1, molecule.id()));
         }
     }
 
-    public static EnumMolecule getMolecule(ItemStack itemstack) {
+    public static EnumMolecule getMolecule(ItemStack itemstack)
+    {
         return EnumMolecule.getById(itemstack.getItemDamage());
     }
 
-    /**
-     * returns the action that specifies what animation to play when the items is being used
-     */
-    public EnumAction getItemUseAction(ItemStack par1ItemStack) {
+    /** returns the action that specifies what animation to play when the items is being used */
+    public EnumAction getItemUseAction(ItemStack par1ItemStack)
+    {
         return EnumAction.drink;
     }
 
-    /**
-     * How long it takes to use or consume an item
-     */
-    public int getMaxItemUseDuration(ItemStack par1ItemStack) {
+    /** How long it takes to use or consume an item */
+    public int getMaxItemUseDuration(ItemStack par1ItemStack)
+    {
         return 16;
     }
 
     @Override
-    public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer) {
+    public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
+    {
 
         --itemStack.stackSize;
 
@@ -135,20 +151,20 @@ public class ItemMolecule extends Item {
 
         EnumMolecule molecule = getMolecule(itemStack);
         PharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
-        world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F); // Thanks mDiyo! 
+        world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F); // Thanks mDiyo!
         return itemStack;
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer) {
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
+    {
         par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
         return par1ItemStack;
     }
 
-    /**
-     * Returns True is the item is renderer in full 3D when hold.
-     */
-    public boolean isFull3D() {
+    /** Returns True is the item is renderer in full 3D when hold. */
+    public boolean isFull3D()
+    {
         return true;
     }
 
