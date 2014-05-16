@@ -34,12 +34,8 @@ import java.util.LinkedList;
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral, IFluidHandler
 {
 
-    public static final int[] kInput =
-    { 0 };
-    public static final int[] kOutput =
-    { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    private static final float MIN_WORK_PER_SECOND = 1.0F;
-    private static final float MAX_WORK_PER_SECOND = 10.0F;
+    public static final int[] kInput = { 0 };
+    public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     private ArrayList<ItemStack> outputBuffer;
     public final int kInputSlot = 0;
     public final int kOutputSlotStart = 1;
@@ -48,19 +44,15 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public final int kOutputSlotsSize = 9;
     public State state = State.kProcessIdle;
     private ItemStack activeStack;
-    private float workToDo = 0;
     public ModelDecomposer model;
-    private boolean hasFullEnergy;
 
     private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
     private final BoundedInventory inputInventory = new BoundedInventory(this, kInput);
     private final Transactor outputTransactor = new Transactor(outputInventory);
     private final Transactor inputTransactor = new Transactor(inputInventory);
 
-    private static final int MIN_ENERGY_RECIEVED = 2;
-    private static final int MAX_ENERGY_RECIEVED = 20;
-    private static final int MIN_ACTIVATION_ENERGY = 0;
-    private static final int MAX_ENERGY_STORED = 10000;
+    private static final long MAX_ENERGY_RECIEVED = 20;
+    private static final long MAX_ENERGY_STORED = 10000;
 
     ArrayList<FluidStack> fluids = new ArrayList<FluidStack>();
 
@@ -80,7 +72,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
     {
         Iterator iter = fluids.iterator();
-
         int maxFill = resource.amount;
 
         if (!doFill)
@@ -98,16 +89,15 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
                 resource.amount -= amount;
                 fluid.amount += amount;
-
             }
         }
+        
         if (resource.amount > 0)
         {
             fluids.add(resource);
         }
 
         return maxFill;
-
     }
 
     public boolean isFluidValidForDecomposer(Fluid fluid)
@@ -132,7 +122,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public boolean canFill(ForgeDirection from, Fluid fluid)
     {
         return true;
-        // return isFluidValidForDecomposer(fluid);
     }
 
     @Override
@@ -161,6 +150,8 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
     public TileEntityDecomposer()
     {
+        super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
+        
         inventory = new ItemStack[getSizeInventory()];
         outputBuffer = new ArrayList<ItemStack>();
 
@@ -174,6 +165,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public void updateEntity()
     {
         super.updateEntity();
+        
         if (!worldObj.isRemote && this.inputInventory.getStackInSlot(0) == null && state == State.kProcessIdle)
         {
             for (int i = 0; i < fluids.size(); i++)
@@ -183,26 +175,22 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 {
                     if (recipeToTest instanceof DecomposerFluidRecipe && input.isFluidEqual(((DecomposerFluidRecipe) recipeToTest).inputFluid))
                     {
-
                         if (fluids.get(i).amount > ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount)
                         {
                             this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlockID(), 1, 0));
                             fluids.get(i).amount -= ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount;
                         }
-
                     }
 
                 }
             }
         }
+        
         this.doWork();
         if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
+        {
             sendUpdatePacket();
-
-        if (getEnergy(ForgeDirection.UNKNOWN) >= this.getEnergyCapacity(ForgeDirection.UP))
-            hasFullEnergy = true;
-        if (hasFullEnergy && getEnergy(ForgeDirection.UNKNOWN) < this.getEnergyCapacity(ForgeDirection.UP) / 2)
-            hasFullEnergy = false;
+        }
 
         if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput())
         {
@@ -226,7 +214,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public void sendUpdatePacket()
     {
         if (worldObj.isRemote)
+        {
             return;
+        }
+        
         PacketDecomposerUpdate packetDecomposerUpdate = new PacketDecomposerUpdate(this);
         int dimensionID = worldObj.provider.dimensionId;
         PacketHandler.getInstance().decomposerUpdateHandler.sendToAllPlayersInDimension(packetDecomposerUpdate, dimensionID);
@@ -256,26 +247,19 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
             return;
         }
 
-        State oldState = state;
-        long energyUsed = Math.min(this.getEnergy(ForgeDirection.UNKNOWN), this.MAX_ENERGY_RECIEVED);
-        this.consumeEnergy(energyUsed);
-
-        workToDo += MinechemHelper.translateValue(energyUsed, this.MIN_ENERGY_RECIEVED, this.MAX_ENERGY_RECIEVED, MIN_WORK_PER_SECOND / 20, MAX_WORK_PER_SECOND / 20);
-        this.workToDo *= 10;
         if (!worldObj.isRemote)
         {
-            while (workToDo >= 1)
+            while (!this.isEnergyEmpty())
             {
-                workToDo--;
                 state = moveBufferItemToOutputSlot();
                 if (state != State.kProcessActive)
+                {
                     break;
+                }
             }
+            
             this.onInventoryChanged();
-            if (!state.equals(oldState))
-            {
-                sendUpdatePacket();
-            }
+            sendUpdatePacket();
         }
     }
 
@@ -286,8 +270,8 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         {
             return false;
         }
+        
         DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
-
         return (recipe != null);
     }
 
@@ -334,8 +318,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         for (int slot : kOutput)
         {
             if (getStackInSlot(slot) == null)
+            {
                 return true;
+            }
         }
+        
         return false;
     }
 
@@ -347,7 +334,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
             {
                 outputStack.splitStack(1);
                 if (outputStack.stackSize == 0)
+                {
                     outputBuffer.remove(outputStack);
+                }
+                
                 return State.kProcessActive;
             }
             else
@@ -434,11 +424,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         this.state = State.values()[state];
     }
 
-    public boolean isPowered()
-    {
-        return (state != State.kProcessJammed && (this.getEnergy(ForgeDirection.UNKNOWN) > this.getMinEnergyNeeded()));
-    }
-
     @Override
     public ItemStack takeOutput()
     {
@@ -498,7 +483,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         {
             return "decomposing";
         }
-        else if (this.getEnergy(ForgeDirection.UNKNOWN) > this.getMinEnergyNeeded())
+        else if (!this.isEnergyEmpty())
         {
             return "powered";
         }
@@ -531,11 +516,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         default:
             return kOutput;
         }
-    }
-
-    public long getMinEnergyNeeded()
-    {
-        return 100;
     }
 
     @Override

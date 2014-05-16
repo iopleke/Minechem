@@ -10,8 +10,6 @@ import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
-import pixlepix.minechem.api.BaseParticle;
-import pixlepix.minechem.client.render.RenderParticle;
 import pixlepix.minechem.client.render.item.*;
 import pixlepix.minechem.client.render.tileentity.*;
 import pixlepix.minechem.client.sound.MinechemSoundEvent;
@@ -43,19 +41,14 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
-        // MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.printer.blockID].itemID, new ItemBlueprintPrinterRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecomposer.class, new TileEntityDecomposerRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySynthesis.class, new TileEntitySynthesisRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
-        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityGhostBlock.class, new TileEntityGhostBlockRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLeadedChest.class, new TileEntityLeadedChestRenderer());
-        // ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBluePrintPrinter.class, new TileEntityBluePrintPrinterRenderer());
-        
-        RenderingRegistry.registerEntityRenderingHandler(BaseParticle.class, new RenderParticle());
     }
 
     @Override

@@ -88,6 +88,16 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
     {
         return this.energy.getEnergy();
     }
+    
+    public boolean isEnergyEmpty()
+    {
+        return this.energy.isEmpty();
+    }
+    
+    public boolean isEnergyFull()
+    {
+        return this.energy.isFull();
+    }
 
     @Override
     public long getEnergyCapacity(ForgeDirection from)
@@ -134,7 +144,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
 
     public boolean didEnergyUsageChange()
     {
-        return true;
+        return this.energy.didEnergyStateChange();
     }
 
     @Override

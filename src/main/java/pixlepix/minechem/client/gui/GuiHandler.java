@@ -18,16 +18,7 @@ import pixlepix.minechem.common.containers.ContainerSynthesis;
 import pixlepix.minechem.common.containers.CotainerTable;
 import pixlepix.minechem.common.polytool.ContainerPolytool;
 import pixlepix.minechem.common.polytool.GuiPolytool;
-import pixlepix.minechem.common.tileentity.EmitterTileEntity;
-import pixlepix.minechem.common.tileentity.TileEntityBlueprintProjector;
-import pixlepix.minechem.common.tileentity.TileEntityChemicalStorage;
-import pixlepix.minechem.common.tileentity.TileEntityDecomposer;
-import pixlepix.minechem.common.tileentity.TileEntityFission;
-import pixlepix.minechem.common.tileentity.TileEntityFusion;
-import pixlepix.minechem.common.tileentity.TileEntityLeadedChest;
-import pixlepix.minechem.common.tileentity.TileEntityMicroscope;
-import pixlepix.minechem.common.tileentity.TileEntityProxy;
-import pixlepix.minechem.common.tileentity.TileEntitySynthesis;
+import pixlepix.minechem.common.tileentity.*;
 
 public class GuiHandler implements IGuiHandler
 {
@@ -106,11 +97,6 @@ public class GuiHandler implements IGuiHandler
             return new ContainerChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         }
 
-        if (tileEntity instanceof EmitterTileEntity)
-        {
-            return new ContainerEmitter(player.inventory, (EmitterTileEntity) world.getBlockTileEntity(x, y, z));
-        }
-
         return null;
     }
 
@@ -147,11 +133,6 @@ public class GuiHandler implements IGuiHandler
         }
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof EmitterTileEntity)
-        {
-            return new GuiEmitter(player.inventory, (EmitterTileEntity) world.getBlockTileEntity(x, y, z));
-        }
-        
         if (tileEntity instanceof TileEntityDecomposer)
         {
             return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);

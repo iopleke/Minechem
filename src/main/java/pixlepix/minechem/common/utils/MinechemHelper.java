@@ -31,8 +31,13 @@ import java.util.Random;
 
 public class MinechemHelper
 {
-
     public static Random random = new Random();
+
+    public static int getSplitStringHeight(FontRenderer fontRenderer, String string, int width)
+    {
+        List<?> stringRows = fontRenderer.listFormattedStringToWidth(string, width);
+        return stringRows.size() * fontRenderer.FONT_HEIGHT;
+    }
 
     public static float translateValue(float value, float leftMin, float leftMax, float rightMin, float rightMax)
     {
@@ -40,12 +45,6 @@ public class MinechemHelper
         float rightRange = rightMax - rightMin;
         float valueScaled = (value - leftMin) / leftRange;
         return rightMin + (valueScaled * rightRange);
-    }
-
-    public static int getSplitStringHeight(FontRenderer fontRenderer, String string, int width)
-    {
-        List<?> stringRows = fontRenderer.listFormattedStringToWidth(string, width);
-        return stringRows.size() * fontRenderer.FONT_HEIGHT;
     }
 
     public static String getLocalString(String key)

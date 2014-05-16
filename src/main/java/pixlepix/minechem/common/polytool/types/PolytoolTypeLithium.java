@@ -10,44 +10,51 @@ import pixlepix.minechem.common.MinechemItems;
 import pixlepix.minechem.common.polytool.ItemPolytool;
 import pixlepix.minechem.common.polytool.PolytoolUpgradeType;
 
-public class PolytoolTypeLithium extends PolytoolUpgradeType {
+public class PolytoolTypeLithium extends PolytoolUpgradeType
+{
 
-    public PolytoolTypeLithium() {
+    public PolytoolTypeLithium()
+    {
         super();
     }
 
     @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block) {
+    public float getStrVsBlock(ItemStack itemStack, Block block)
+    {
 
         return 0;
     }
 
     @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target,
-                          EntityLivingBase player) {
+    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+    {
         DamageSource damage = DamageSource.causeMobDamage(target);
-        //Never goes below 0
-        double damageAmount = Math.ceil(Math.max(0, Math.log10(((ItemPolytool) MinechemItems.polytool).getEnergyStored(itemStack)) - 7));
+        // Never goes below 0
+        double damageAmount = Math.ceil(Math.max(0, Math.log10(((ItemPolytool) MinechemItems.polytool).getEnergy(itemStack)) - 7));
         System.out.println(damageAmount);
         target.attackEntityFrom(damage, (float) damageAmount);
     }
+
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id,
-                                 int x, int y, int z, EntityLivingBase entityLiving) {
+    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving)
+    {
     }
 
     @Override
-    public EnumElement getElement() {
+    public EnumElement getElement()
+    {
 
         return EnumElement.Li;
     }
 
     @Override
-    public void onTick() {
+    public void onTick()
+    {
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
 
         return "Can charge infinitley for logarithmic bonuses";
     }

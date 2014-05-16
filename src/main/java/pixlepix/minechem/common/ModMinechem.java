@@ -82,12 +82,6 @@ public class ModMinechem
     /** Provides standardized configuration file offered by the Forge. **/
     private static Configuration CONFIG;
     
-    /** Custom block and item loader from what once was Particle Physics mod. **/
-    public static BetterLoader particlePhysicsLoader;
-    
-    /** List of supported languages. **/
-    private static final String[] LANGUAGES_SUPPORTED = new String[] { "en_US", "zh_CN", "de_DE" };
-    
     public static final ResourceLocation ICON_ENERGY = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_power.png");
     public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_fullEower.png");
     public static final ResourceLocation ICON_HELP = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_help.png");
@@ -137,18 +131,7 @@ public class ModMinechem
         
         LOGGER.info("Registering Polytool Event Handler...");
         MinecraftForge.EVENT_BUS.register(new PolytoolEventHandler());
-        
-        LOGGER.info("Populating Particle List...");
-        ParticleRegistry.populateParticleList();
-        
-        LOGGER.info("Registering Particle Physics Entities...");
-        ParticleRegistry.registerEntities();
-        
-        LOGGER.info("Creating Particle Physics blocks and items...");
-        particlePhysicsLoader = new BetterLoader();
-        particlePhysicsLoader.loadBlocks();
-        particlePhysicsLoader.mainload();
-
+       
         LOGGER.info("PREINT PASSED");
     }
 

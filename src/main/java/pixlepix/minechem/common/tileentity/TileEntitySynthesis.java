@@ -82,15 +82,15 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     private final Transactor recipeMatrixTransactor = new Transactor(recipeMatrix);
     private final Transactor journalTransactor = new Transactor(journalInventory, 1);
 
-    private static final int MIN_ENERGY_RECIEVED = 30;
     private static final int MAX_ENERGY_RECIEVED = 200;
-    private static final int MIN_ACTIVATION_ENERGY = 100;
     private static final int MAX_ENERGY_STORED = 1022220;
 
     private boolean hasFullEnergy;
 
     public TileEntitySynthesis()
     {
+        super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
+        
         inventory = new ItemStack[getSizeInventory()];
 
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
