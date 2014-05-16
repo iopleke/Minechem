@@ -14,9 +14,7 @@ import minechem.common.polytool.GuiPolytool;
 import minechem.common.polytool.PolytoolHelper;
 import minechem.common.polytool.PolytoolUpgradeType;
 import net.minecraft.client.Minecraft;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.network.INetworkManager;
 import net.minecraft.network.packet.Packet250CustomPayload;
 import cpw.mods.fml.common.network.IPacketHandler;
@@ -63,7 +61,7 @@ public class PacketHandler implements IPacketHandler
         {
             dataStream.writeByte((byte) 1);
 
-            dataStream.writeByte((byte) type);
+            dataStream.writeByte(type);
             dataStream.writeByte(val);
 
             PacketDispatcher.sendPacketToServer(PacketDispatcher.getPacket("Particle", byteStream.toByteArray()));

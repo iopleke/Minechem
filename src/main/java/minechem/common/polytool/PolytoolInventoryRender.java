@@ -1,5 +1,7 @@
 package minechem.common.polytool;
 
+import java.util.ArrayList;
+
 import minechem.api.core.EnumElement;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
@@ -8,77 +10,84 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-
-public class PolytoolInventoryRender implements IItemRenderer {
-    //Not used right now
-//Possible future feature
+public class PolytoolInventoryRender implements IItemRenderer
+{
+    // Not used right now
+    // Possible future feature
     @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch (type) {
-            case INVENTORY:
-                return true;
-            default:
-                return false;
+    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    {
+        switch (type)
+        {
+        case INVENTORY:
+            return true;
+        default:
+            return false;
         }
     }
 
     private static RenderItem renderItem = new RenderItem();
 
     @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-                                         ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    {
 
         return false;
     }
 
-    public float getRed(EnumElement element) {
-        switch (element.classification()) {
-            case actinide:
-            case halogen:
-            case lanthanide:
-            case nonmetal:
-                return 1.0F;
-            case otherMetal:
-                return 0.5F;
-            default:
-                return 0;
+    public float getRed(EnumElement element)
+    {
+        switch (element.classification())
+        {
+        case actinide:
+        case halogen:
+        case lanthanide:
+        case nonmetal:
+            return 1.0F;
+        case otherMetal:
+            return 0.5F;
+        default:
+            return 0;
         }
     }
 
-    public float getGreen(EnumElement element) {
-        switch (element.classification()) {
-            case alkaliMetal:
-            case halogen:
-            case inertGas:
-            case otherMetal:
-            case semimetallic:
-                return 1.0F;
-            case transitionMetal:
-            case nonmetal:
-                return 0.5F;
-            default:
-                return 0F;
+    public float getGreen(EnumElement element)
+    {
+        switch (element.classification())
+        {
+        case alkaliMetal:
+        case halogen:
+        case inertGas:
+        case otherMetal:
+        case semimetallic:
+            return 1.0F;
+        case transitionMetal:
+        case nonmetal:
+            return 0.5F;
+        default:
+            return 0F;
         }
     }
 
-    public float getBlue(EnumElement element) {
-        switch (element.classification()) {
-            case alkalineEarthMetal:
-            case inertGas:
-            case lanthanide:
-            case transitionMetal:
-                return 1.0F;
-            case semimetallic:
-                return 0.5F;
-            default:
-                return 0F;
+    public float getBlue(EnumElement element)
+    {
+        switch (element.classification())
+        {
+        case alkalineEarthMetal:
+        case inertGas:
+        case lanthanide:
+        case transitionMetal:
+            return 1.0F;
+        case semimetallic:
+            return 0.5F;
+        default:
+            return 0F;
         }
     }
-
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
         GL11.glPushMatrix();
         ArrayList upgrades = ItemPolytool.getUpgrades(item);
         int count = 1;
@@ -86,14 +95,17 @@ public class PolytoolInventoryRender implements IItemRenderer {
         float green = 0F;
         float blue = 0F;
 
-
-        for (int i = 0; i < upgrades.size(); i++) {
-            for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++) {
+        for (int i = 0; i < upgrades.size(); i++)
+        {
+            for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++)
+            {
                 count++;
             }
         }
-        for (int i = 0; i < upgrades.size(); i++) {
-            for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++) {
+        for (int i = 0; i < upgrades.size(); i++)
+        {
+            for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++)
+            {
                 EnumElement element = ((PolytoolUpgradeType) upgrades.get(i)).getElement();
                 red += (1 / count) * getRed(element);
                 green += (1 / count) * getGreen(element);
@@ -107,11 +119,8 @@ public class PolytoolInventoryRender implements IItemRenderer {
         // Use vanilla code to render the icon in a 16x16 square of inventory slot
         renderItem.renderIcon(0, 0, icon, 16, 16);
 
-
         GL11.glPopMatrix();
 
-
     }
-
 
 }

@@ -9,7 +9,8 @@ package minechem.client;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelMicroscope extends ModelBase {
+public class ModelMicroscope extends ModelBase
+{
     // fields
     ModelRenderer base;
     ModelRenderer neck_lower;
@@ -25,7 +26,8 @@ public class ModelMicroscope extends ModelBase {
     ModelRenderer focus_left;
     ModelRenderer axle;
 
-    public ModelMicroscope() {
+    public ModelMicroscope()
+    {
         textureWidth = 64;
         textureHeight = 32;
 
@@ -109,7 +111,8 @@ public class ModelMicroscope extends ModelBase {
         setRotation(axle, 0F, 0F, 0F);
     }
 
-    public void render(float scale) {
+    public void render(float scale)
+    {
         base.render(scale);
         neck_lower.render(scale);
         platter.render(scale);
@@ -127,7 +130,8 @@ public class ModelMicroscope extends ModelBase {
         axle.render(scale);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

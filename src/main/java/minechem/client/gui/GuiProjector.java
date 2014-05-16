@@ -1,5 +1,10 @@
 package minechem.client.gui;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import minechem.client.gui.tabs.TabHelp;
 import minechem.common.MinechemItems;
 import minechem.common.ModMinechem;
@@ -15,11 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
 
 public class GuiProjector extends GuiContainerTabbed
 {
@@ -67,7 +67,7 @@ public class GuiProjector extends GuiContainerTabbed
                     int structureID = blueprint.getStructure()[y][x][z];
                     int count = 0;
                     if (blockCount.get(structureID) != null)
-                        count = (int) blockCount.get(structureID);
+                        count = blockCount.get(structureID);
                     count++;
                     blockCount.put(structureID, count);
                 }

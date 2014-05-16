@@ -294,11 +294,11 @@ public class TileEntityFission extends TileEntityMultiBlock implements IMinechem
         switch (i)
         {
         case 0:
-            return this.kOutput;
+            return TileEntityFission.kOutput;
         case 1:
-            return this.kInput;
+            return TileEntityFission.kInput;
         default:
-            return this.kFuel;
+            return TileEntityFission.kFuel;
         }
     }
 

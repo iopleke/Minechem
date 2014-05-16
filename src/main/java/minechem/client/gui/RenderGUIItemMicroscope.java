@@ -13,7 +13,8 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderGUIItemMicroscope extends RenderItem {
+public class RenderGUIItemMicroscope extends RenderItem
+{
     public ContainerMicroscope microscopeContainer;
     public InventoryPlayer inventoryPlayer;
     public GuiMicroscope guiMicroscope;
@@ -23,14 +24,16 @@ public class RenderGUIItemMicroscope extends RenderItem {
     int depthRenderBufferID;
     boolean isFBOSupported;
 
-    public RenderGUIItemMicroscope(GuiMicroscope guiMicroscope) {
+    public RenderGUIItemMicroscope(GuiMicroscope guiMicroscope)
+    {
         super();
         this.guiMicroscope = guiMicroscope;
         microscopeContainer = (ContainerMicroscope) guiMicroscope.inventorySlots;
         inventoryPlayer = guiMicroscope.inventoryPlayer;
     }
 
-    private void setScissor(float x, float y, float w, float h) {
+    private void setScissor(float x, float y, float w, float h)
+    {
         Minecraft mc = Minecraft.getMinecraft();
         ScaledResolution scaledRes = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         int scale = scaledRes.getScaleFactor();
@@ -48,16 +51,19 @@ public class RenderGUIItemMicroscope extends RenderItem {
         GL11.glScissor(scissorX, scissorY, (int) w, (int) h);
     }
 
-    private void stopScissor() {
+    private void stopScissor()
+    {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 
     @Override
-    public void renderItemAndEffectIntoGUI(FontRenderer par1FontRenderer, TextureManager par2RenderEngine, ItemStack itemstack, int x, int y) {
+    public void renderItemAndEffectIntoGUI(FontRenderer par1FontRenderer, TextureManager par2RenderEngine, ItemStack itemstack, int x, int y)
+    {
         if (itemstack == null)
             return;
         Slot slot = microscopeContainer.getSlot(0);
-        if (itemstack == slot.getStack() || itemstack == inventoryPlayer.getItemStack()) {
+        if (itemstack == slot.getStack() || itemstack == inventoryPlayer.getItemStack())
+        {
             GL11.glPushMatrix();
             setScissor(guiMicroscope.eyepieceX, guiMicroscope.eyepieceY, 52, 52);
             GL11.glTranslatef(x, y, 0.0F);
@@ -68,7 +74,8 @@ public class RenderGUIItemMicroscope extends RenderItem {
             GL11.glPopMatrix();
         }
 
-        if (itemstack != microscopeContainer.getSlot(0).getStack()) {
+        if (itemstack != microscopeContainer.getSlot(0).getStack())
+        {
             if (itemstack == inventoryPlayer.getItemStack())
                 this.zLevel = 40.0F;
             else
@@ -77,7 +84,8 @@ public class RenderGUIItemMicroscope extends RenderItem {
             super.renderItemAndEffectIntoGUI(par1FontRenderer, par2RenderEngine, itemstack, x, y);
         }
 
-        if (inventoryPlayer.getItemStack() != null && itemstack == inventoryPlayer.getItemStack()) {
+        if (inventoryPlayer.getItemStack() != null && itemstack == inventoryPlayer.getItemStack())
+        {
             GL11.glPushMatrix();
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
             drawRect(guiMicroscope.eyepieceX, guiMicroscope.eyepieceY, 54, 54);
@@ -85,27 +93,32 @@ public class RenderGUIItemMicroscope extends RenderItem {
         }
     }
 
-    private void drawRect(int x, int y, int width, int height) {
+    private void drawRect(int x, int y, int width, int height)
+    {
         double z = 50D;
         GL11.glDisable(GL11.GL_LIGHTING);
         Tessellator t = Tessellator.instance;
         t.startDrawingQuads();
         t.setColorOpaque_I(0x121212);
-        t.addVertex((double) (x + 0), (double) (y + 0), z);
-        t.addVertex((double) (x + 0), (double) (y + height), z);
-        t.addVertex((double) (x + width), (double) (y + height), z);
-        t.addVertex((double) (x + width), (double) (y + 0), z);
+        t.addVertex(x + 0, y + 0, z);
+        t.addVertex(x + 0, y + height, z);
+        t.addVertex(x + width, y + height, z);
+        t.addVertex(x + width, y + 0, z);
         t.draw();
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     @Override
-    public void renderItemOverlayIntoGUI(FontRenderer par1FontRenderer, TextureManager par2RenderEngine, ItemStack itemstack, int par4, int par5) {
+    public void renderItemOverlayIntoGUI(FontRenderer par1FontRenderer, TextureManager par2RenderEngine, ItemStack itemstack, int par4, int par5)
+    {
         if (itemstack == null)
             return;
-        if (itemstack == microscopeContainer.getSlot(0).getStack() || (itemstack == inventoryPlayer.getItemStack() && guiMicroscope.isMouseInMicroscope())) {
+        if (itemstack == microscopeContainer.getSlot(0).getStack() || (itemstack == inventoryPlayer.getItemStack() && guiMicroscope.isMouseInMicroscope()))
+        {
             // do nothing.
-        } else {
+        }
+        else
+        {
             super.renderItemOverlayIntoGUI(par1FontRenderer, par2RenderEngine, itemstack, par4, par5);
         }
     }

@@ -1,12 +1,11 @@
 package minechem.api.recipe;
 
-import minechem.api.core.Chemical;
-import minechem.common.ModMinechem;
-import minechem.common.Settings;
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
 import java.util.Random;
+
+import minechem.api.core.Chemical;
+import minechem.common.Settings;
+import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipe
 {

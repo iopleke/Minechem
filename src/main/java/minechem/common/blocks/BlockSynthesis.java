@@ -1,5 +1,7 @@
 package minechem.common.blocks;
 
+import java.util.ArrayList;
+
 import minechem.common.CommonProxy;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntitySynthesis;
@@ -11,33 +13,29 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
+/** Chemical Synthesizer block. Its associated TileEntitySynthesis's inventory inventory has many specialized slots, including some "ghost" slots whose contents don't really exist and shouldn't be able to be extracted or dumped when the block is broken. See
+ * {@link minechem.common.tileentity.TileEntitySynthesis} for details of the inventory slots. */
+public class BlockSynthesis extends BlockMinechemContainer
+{
 
-/**
- * Chemical Synthesizer block. Its associated TileEntitySynthesis's inventory
- * inventory has many specialized slots, including some "ghost" slots whose
- * contents don't really exist and shouldn't be able to be extracted or dumped
- * when the block is broken.
- * See {@link minechem.common.tileentity.TileEntitySynthesis} for details
- * of the inventory slots.
- */
-public class BlockSynthesis extends BlockMinechemContainer {
-
-    public BlockSynthesis(int par1) {
+    public BlockSynthesis(int par1)
+    {
         super(par1, Material.iron);
         setUnlocalizedName("minechem.blockSynthesis");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is)
+    {
         super.onBlockPlacedBy(world, x, y, z, el, is);
-        int facing = MathHelper.floor_double((double) (el.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int facing = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
+    {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
@@ -46,18 +44,22 @@ public class BlockSynthesis extends BlockMinechemContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1) {
+    public TileEntity createNewTileEntity(World var1)
+    {
         return new TileEntitySynthesis();
     }
 
     @Override
-    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity,
-                                             ArrayList itemStacks) {
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList itemStacks)
+    {
         TileEntitySynthesis synthesizer = (TileEntitySynthesis) tileEntity;
-        for (int slot : synthesizer.kRealSlots) {
-            if (synthesizer.isRealItemSlot(slot)) {
+        for (int slot : TileEntitySynthesis.kRealSlots)
+        {
+            if (synthesizer.isRealItemSlot(slot))
+            {
                 ItemStack itemstack = synthesizer.getStackInSlot(slot);
-                if (itemstack != null) {
+                if (itemstack != null)
+                {
                     itemStacks.add(itemstack);
                 }
             }
@@ -65,17 +67,20 @@ public class BlockSynthesis extends BlockMinechemContainer {
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
     @Override
-    public int getRenderType() {
+    public int getRenderType()
+    {
         return CommonProxy.RENDER_ID;
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean renderAsNormalBlock()
+    {
         return false;
     }
 

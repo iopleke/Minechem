@@ -2,7 +2,6 @@ package minechem.client.gui;
 
 import minechem.client.gui.tabs.TabHelp;
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.ContainerChest;
@@ -12,12 +11,14 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiChemicalStorage extends GuiContainerTabbed {
+public class GuiChemicalStorage extends GuiContainerTabbed
+{
 
     private IInventory playerInventory;
     private int inventoryRows = 0;
 
-    public GuiChemicalStorage(IInventory playerInventory, IInventory blockInventory) {
+    public GuiChemicalStorage(IInventory playerInventory, IInventory blockInventory)
+    {
         super(new ContainerChest(playerInventory, blockInventory));
         this.playerInventory = playerInventory;
         this.inventoryRows = blockInventory.getSizeInventory() / 9;
@@ -25,7 +26,8 @@ public class GuiChemicalStorage extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
+    {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String chestName = MinechemHelper.getLocalString("block.name.chemicalStorage");
         String playerInventoryTitle = StatCollector.translateToLocal(this.playerInventory.getInvName());
@@ -34,7 +36,8 @@ public class GuiChemicalStorage extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3) {
+    protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, "textures/gui/container.png"));
         int var5 = (this.width - this.xSize) / 2;
@@ -44,8 +47,8 @@ public class GuiChemicalStorage extends GuiContainerTabbed {
     }
 
     @Override
-    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-                                     int h) {
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
+    {
         // TODO Auto-generated method stub
         return false;
     }

@@ -1,12 +1,13 @@
 package minechem.api.recipe;
 
-import minechem.api.core.Chemical;
-import net.minecraft.item.ItemStack;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-public class SynthesisRecipe {
+import minechem.api.core.Chemical;
+import net.minecraft.item.ItemStack;
+
+public class SynthesisRecipe
+{
 
     public static ArrayList<SynthesisRecipe> recipes = new ArrayList<SynthesisRecipe>();
     private ItemStack output;
@@ -15,25 +16,30 @@ public class SynthesisRecipe {
     private int energyCost;
     private boolean isShaped;
 
-
-    public static SynthesisRecipe add(SynthesisRecipe var0) {
+    public static SynthesisRecipe add(SynthesisRecipe var0)
+    {
         recipes.add(var0);
         return var0;
     }
 
-    public static void remove(ItemStack itemStack) {
+    public static void remove(ItemStack itemStack)
+    {
         ArrayList<SynthesisRecipe> recipes = SynthesisRecipe.search(itemStack);
 
-        for (SynthesisRecipe recipe : recipes) {
+        for (SynthesisRecipe recipe : recipes)
+        {
             SynthesisRecipe.recipes.remove(recipe);
         }
     }
 
-    public static ArrayList<SynthesisRecipe> search(ItemStack itemStack) {
+    public static ArrayList<SynthesisRecipe> search(ItemStack itemStack)
+    {
         ArrayList<SynthesisRecipe> results = new ArrayList<SynthesisRecipe>();
 
-        for (SynthesisRecipe recipe : SynthesisRecipe.recipes) {
-            if (itemStack.isItemEqual(recipe.output)) {
+        for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
+        {
+            if (itemStack.isItemEqual(recipe.output))
+            {
                 results.add(recipe);
             }
         }
@@ -42,7 +48,8 @@ public class SynthesisRecipe {
 
     }
 
-    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, Chemical... var4) {
+    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, Chemical... var4)
+    {
         this.output = var1;
         this.isShaped = var2;
         this.energyCost = var3;
@@ -51,16 +58,19 @@ public class SynthesisRecipe {
         Chemical[] var5 = var4;
         int var6 = var4.length;
 
-        for (int var7 = 0; var7 < var6; ++var7) {
+        for (int var7 = 0; var7 < var6; ++var7)
+        {
             Chemical var8 = var5[var7];
-            if (var8 != null) {
+            if (var8 != null)
+            {
                 this.unshapedRecipe.add(var8);
             }
         }
 
     }
 
-    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, ArrayList var4) {
+    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, ArrayList var4)
+    {
         this.output = var1;
         this.isShaped = var2;
         this.energyCost = var3;
@@ -68,31 +78,38 @@ public class SynthesisRecipe {
         this.unshapedRecipe = var4;
     }
 
-    public ItemStack getOutput() {
+    public ItemStack getOutput()
+    {
         return this.output;
     }
 
-    public boolean isShaped() {
+    public boolean isShaped()
+    {
         return this.isShaped;
     }
 
-    public int energyCost() {
+    public int energyCost()
+    {
         return this.energyCost * 10;
     }
 
-    public Chemical[] getShapedRecipe() {
+    public Chemical[] getShapedRecipe()
+    {
         return this.shapedRecipe;
     }
 
-    public ArrayList getShapelessRecipe() {
+    public ArrayList getShapelessRecipe()
+    {
         return this.unshapedRecipe;
     }
 
-    public int getIngredientCount() {
+    public int getIngredientCount()
+    {
         int var1 = 0;
 
         Chemical var3;
-        for (Iterator var2 = this.unshapedRecipe.iterator(); var2.hasNext(); var1 += var3.amount) {
+        for (Iterator var2 = this.unshapedRecipe.iterator(); var2.hasNext(); var1 += var3.amount)
+        {
             var3 = (Chemical) var2.next();
         }
 

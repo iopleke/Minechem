@@ -1,7 +1,9 @@
 package minechem.common.polytool;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import minechem.api.core.EnumElement;
 import minechem.common.GuiHandler;
 import minechem.common.ModMinechem;
@@ -20,10 +22,8 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import universalelectricity.api.item.IEnergyItem;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPolytool extends ItemPickaxe implements IEnergyItem
 {
@@ -141,6 +141,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyItem
         return true;
     }
 
+    @Override
     public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
     {
 
@@ -222,7 +223,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyItem
     {
 
         super.addInformation(par1ItemStack, par2EntityPlayer, list, par4);
-        if (this.getPowerOfType(par1ItemStack, EnumElement.Be) != 0)
+        if (ItemPolytool.getPowerOfType(par1ItemStack, EnumElement.Be) != 0)
         {
             list.add("Stored: " + this.getEnergy(par1ItemStack) + ", +" + Math.ceil(Math.max(0, Math.log10(this.getEnergy(par1ItemStack)) - 7)));
         }

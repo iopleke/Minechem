@@ -2,7 +2,8 @@ package minechem.common.blueprint;
 
 import java.util.HashMap;
 
-public abstract class MinechemBlueprint {
+public abstract class MinechemBlueprint
+{
 
     public static final int wildcard = -1;
     public static final int air = 0;
@@ -19,19 +20,22 @@ public abstract class MinechemBlueprint {
     public String name;
     public int id;
 
-    public static void registerBlueprint(int id, MinechemBlueprint blueprint) {
+    public static void registerBlueprint(int id, MinechemBlueprint blueprint)
+    {
         blueprint.id = id;
         blueprints.put(id, blueprint);
     }
 
-    public static void registerBlueprints() {
+    public static void registerBlueprints()
+    {
         fusion = new BlueprintFusion();
         registerBlueprint(0, fusion);
         fission = new BlueprintFission();
         registerBlueprint(1, fission);
     }
 
-    public MinechemBlueprint(int xSize, int ySize, int zSize) {
+    public MinechemBlueprint(int xSize, int ySize, int zSize)
+    {
         this.xSize = xSize;
         this.ySize = ySize;
         this.zSize = zSize;
@@ -40,37 +44,46 @@ public abstract class MinechemBlueprint {
         this.totalSize = this.horizontalSize * ySize;
     }
 
-    public Integer[][] getHorizontalSlice(int y) {
+    public Integer[][] getHorizontalSlice(int y)
+    {
         Integer[][][] structure = getStructure();
         Integer[][] slice = new Integer[xSize][zSize];
-        for (int x = 0; x < xSize; x++) {
-            for (int z = 0; z < zSize; z++) {
+        for (int x = 0; x < xSize; x++)
+        {
+            for (int z = 0; z < zSize; z++)
+            {
                 slice[x][z] = structure[y][x][z];
             }
         }
         return slice;
     }
 
-    public Integer[][] getVerticalSlice(int x) {
+    public Integer[][] getVerticalSlice(int x)
+    {
         Integer[][][] structure = getStructure();
         Integer[][] slice = new Integer[ySize][zSize];
-        for (int y = 0; y < ySize; y++) {
-            for (int z = 0; z < zSize; z++) {
+        for (int y = 0; y < ySize; y++)
+        {
+            for (int z = 0; z < zSize; z++)
+            {
                 slice[y][z] = structure[y][x][z];
             }
         }
         return slice;
     }
 
-    public int getHorizontalSliceSize() {
+    public int getHorizontalSliceSize()
+    {
         return this.horizontalSize;
     }
 
-    public int getVerticalSliceSize() {
+    public int getVerticalSliceSize()
+    {
         return this.verticalSize;
     }
 
-    public int getTotalSize() {
+    public int getTotalSize()
+    {
         return this.totalSize;
     }
 

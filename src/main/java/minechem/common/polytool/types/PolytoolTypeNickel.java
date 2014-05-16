@@ -1,5 +1,8 @@
 package minechem.common.polytool.types;
 
+import java.util.Iterator;
+import java.util.List;
+
 import minechem.api.core.EnumElement;
 import minechem.common.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -9,34 +12,35 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
 
-import java.util.Iterator;
-import java.util.List;
+public class PolytoolTypeNickel extends PolytoolUpgradeType
+{
 
-public class PolytoolTypeNickel extends PolytoolUpgradeType {
-
-    public PolytoolTypeNickel() {
+    public PolytoolTypeNickel()
+    {
         super();
     }
 
     @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block) {
+    public float getStrVsBlock(ItemStack itemStack, Block block)
+    {
 
         return 0;
     }
 
     @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target,
-                          EntityLivingBase player) {
+    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+    {
 
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id,
-                                 int x, int y, int z, EntityLivingBase player) {
+    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase player)
+    {
         List<EntityItem> items = player.worldObj.getEntitiesWithinAABB(EntityItem.class, AxisAlignedBB.getBoundingBox(player.posX - power, player.posY - power, player.posZ - power, player.posX + power, player.posY + power, player.posZ + power));
 
         Iterator iter = items.iterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             EntityItem entity = (EntityItem) iter.next();
             entity.motionX = -1 * (entity.posX - player.posX);
 
@@ -47,20 +51,22 @@ public class PolytoolTypeNickel extends PolytoolUpgradeType {
     }
 
     @Override
-    public EnumElement getElement() {
+    public EnumElement getElement()
+    {
 
         return EnumElement.Ni;
     }
 
     @Override
-    public void onTick() {
+    public void onTick()
+    {
     }
 
     @Override
-    public String getDescription() {
+    public String getDescription()
+    {
 
         return "Sucks up nearby items when another block is mined";
     }
-
 
 }

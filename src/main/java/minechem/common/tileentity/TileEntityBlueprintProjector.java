@@ -1,21 +1,21 @@
 package minechem.common.tileentity;
 
+import java.util.HashMap;
+
 import minechem.common.MinechemBlocks;
 import minechem.common.MinechemItems;
 import minechem.common.blueprint.BlueprintBlock;
-import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.blueprint.BlueprintBlock.Type;
+import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.sound.LoopingSound;
 import minechem.common.utils.LocalPosition;
-import minechem.common.utils.MinechemHelper;
 import minechem.common.utils.LocalPosition.Pos3;
+import minechem.common.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.HashMap;
 
 public class TileEntityBlueprintProjector extends MinechemTileEntity
 {

@@ -1,10 +1,10 @@
 package minechem.common.network;
 
+import ljdp.easypacket.EasyPacketData;
 import minechem.common.tileentity.MinechemTileEntity;
 import minechem.common.tileentity.TileEntityDecomposer;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.network.Player;
-import ljdp.easypacket.EasyPacketData;
 
 public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate
 {
@@ -12,13 +12,13 @@ public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate
 
     @EasyPacketData
     int state;
-    
+
     @EasyPacketData
     long energyUsage;
 
     public PacketDecomposerUpdate(TileEntityDecomposer decomposer)
     {
-        super((MinechemTileEntity) decomposer);
+        super(decomposer);
         this.decomposer = decomposer;
         this.state = decomposer.getState().ordinal();
         this.energyUsage = decomposer.getEnergy(ForgeDirection.UNKNOWN);

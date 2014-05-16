@@ -1,11 +1,40 @@
 package minechem.api.core;
 
+import static minechem.api.core.EnumElement.Al;
+import static minechem.api.core.EnumElement.As;
+import static minechem.api.core.EnumElement.Be;
+import static minechem.api.core.EnumElement.C;
+import static minechem.api.core.EnumElement.Ca;
+import static minechem.api.core.EnumElement.Cl;
+import static minechem.api.core.EnumElement.Co;
+import static minechem.api.core.EnumElement.Cr;
+import static minechem.api.core.EnumElement.Cu;
+import static minechem.api.core.EnumElement.F;
+import static minechem.api.core.EnumElement.Fe;
+import static minechem.api.core.EnumElement.Ga;
+import static minechem.api.core.EnumElement.H;
+import static minechem.api.core.EnumElement.K;
+import static minechem.api.core.EnumElement.Li;
+import static minechem.api.core.EnumElement.Mg;
+import static minechem.api.core.EnumElement.Mn;
+import static minechem.api.core.EnumElement.N;
+import static minechem.api.core.EnumElement.Na;
+import static minechem.api.core.EnumElement.Ni;
+import static minechem.api.core.EnumElement.O;
+import static minechem.api.core.EnumElement.P;
+import static minechem.api.core.EnumElement.Pt;
+import static minechem.api.core.EnumElement.Ra;
+import static minechem.api.core.EnumElement.S;
+import static minechem.api.core.EnumElement.Si;
+import static minechem.api.core.EnumElement.Sr;
+import static minechem.api.core.EnumElement.Ti;
+import static minechem.api.core.EnumElement.Zn;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
 import net.minecraft.util.StatCollector;
-import static minechem.api.core.EnumElement.*;
 
 // import pixlepix.minechem.api.recipe.DecomposerRecipe;
 // import pixlepix.minechem.api.recipe.SynthesisRecipe;

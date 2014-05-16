@@ -1,6 +1,5 @@
 package minechem.computercraft.method;
 
-import dan200.turtle.api.ITurtleAccess;
 import minechem.common.utils.Position;
 import minechem.computercraft.IMinechemMachinePeripheral;
 import net.minecraft.item.ItemStack;
@@ -8,10 +7,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Vec3;
 import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeDirection;
+import dan200.turtle.api.ITurtleAccess;
 
-public class InteractMachine {
+public class InteractMachine
+{
 
-    public IMinechemMachinePeripheral getMachineInFront(ITurtleAccess turtle) {
+    public IMinechemMachinePeripheral getMachineInFront(ITurtleAccess turtle)
+    {
         Vec3 vector = turtle.getPosition();
         ForgeDirection direction = ForgeDirection.getOrientation(turtle.getFacingDir());
         Position position = new Position(vector.xCoord, vector.yCoord, vector.zCoord, direction);
@@ -24,7 +26,8 @@ public class InteractMachine {
             return null;
     }
 
-    public boolean tryPut(ItemStack beforeStack, int used, ITurtleAccess turtle) {
+    public boolean tryPut(ItemStack beforeStack, int used, ITurtleAccess turtle)
+    {
         int selectedSlot = turtle.getSelectedSlot();
         beforeStack.stackSize -= used;
         if (beforeStack.stackSize <= 0)

@@ -1,8 +1,8 @@
 package minechem.client.gui;
 
-import codechicken.nei.VisiblityData;
-import codechicken.nei.api.INEIGuiHandler;
-import codechicken.nei.api.TaggedInventoryArea;
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.client.gui.tabs.Tab;
 import minechem.common.utils.SessionVars;
 import net.minecraft.block.Block;
@@ -17,8 +17,9 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
+import codechicken.nei.VisiblityData;
+import codechicken.nei.api.INEIGuiHandler;
+import codechicken.nei.api.TaggedInventoryArea;
 
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler
 {

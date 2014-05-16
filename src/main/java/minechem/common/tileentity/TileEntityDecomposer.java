@@ -1,7 +1,8 @@
 package minechem.common.tileentity;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import minechem.api.core.Chemical;
 import minechem.api.recipe.DecomposerRecipe;
 import minechem.api.util.Util;
@@ -14,28 +15,26 @@ import minechem.common.recipe.DecomposerFluidRecipe;
 import minechem.common.recipe.DecomposerRecipeHandler;
 import minechem.common.utils.MinechemHelper;
 import minechem.computercraft.IMinechemMachinePeripheral;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedList;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral, IFluidHandler
 {
 
-    public static final int[] kInput = { 0 };
-    public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public static final int[] kInput =
+    { 0 };
+    public static final int[] kOutput =
+    { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     private ArrayList<ItemStack> outputBuffer;
     public final int kInputSlot = 0;
     public final int kOutputSlotStart = 1;
@@ -91,7 +90,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 fluid.amount += amount;
             }
         }
-        
+
         if (resource.amount > 0)
         {
             fluids.add(resource);
@@ -151,7 +150,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public TileEntityDecomposer()
     {
         super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
-        
+
         inventory = new ItemStack[getSizeInventory()];
         outputBuffer = new ArrayList<ItemStack>();
 
@@ -165,7 +164,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public void updateEntity()
     {
         super.updateEntity();
-        
+
         if (!worldObj.isRemote && this.inputInventory.getStackInSlot(0) == null && state == State.kProcessIdle)
         {
             for (int i = 0; i < fluids.size(); i++)
@@ -185,7 +184,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 }
             }
         }
-        
+
         this.doWork();
         if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
         {
@@ -217,7 +216,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         {
             return;
         }
-        
+
         PacketDecomposerUpdate packetDecomposerUpdate = new PacketDecomposerUpdate(this);
         int dimensionID = worldObj.provider.dimensionId;
         PacketHandler.getInstance().decomposerUpdateHandler.sendToAllPlayersInDimension(packetDecomposerUpdate, dimensionID);
@@ -257,7 +256,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                     break;
                 }
             }
-            
+
             this.onInventoryChanged();
             sendUpdatePacket();
         }
@@ -270,7 +269,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         {
             return false;
         }
-        
+
         DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
         return (recipe != null);
     }
@@ -322,7 +321,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -337,7 +336,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 {
                     outputBuffer.remove(outputStack);
                 }
-                
+
                 return State.kProcessActive;
             }
             else
@@ -524,10 +523,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
         if (var1 == 1)
         {
-            return this.kInput;
+            return TileEntityDecomposer.kInput;
         }
 
-        return this.kOutput;
+        return TileEntityDecomposer.kOutput;
 
     }
 
@@ -548,9 +547,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
-        if (slot == this.kOutput[0])
+        if (slot == TileEntityDecomposer.kOutput[0])
         {
-            ItemStack oldStack = this.inventory[this.kOutput[0]];
+            ItemStack oldStack = this.inventory[TileEntityDecomposer.kOutput[0]];
             if (oldStack != null && itemstack != null && oldStack.getItemDamage() == itemstack.getItemDamage())
             {
                 if (oldStack.getItem() == itemstack.getItem())

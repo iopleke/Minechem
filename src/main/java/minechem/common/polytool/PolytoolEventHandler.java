@@ -1,5 +1,9 @@
 package minechem.common.polytool;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+
 import minechem.api.core.EnumElement;
 import minechem.common.recipe.DecomposerRecipeHandler;
 import minechem.common.utils.MinechemHelper;
@@ -17,10 +21,6 @@ import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 
 public class PolytoolEventHandler
 {

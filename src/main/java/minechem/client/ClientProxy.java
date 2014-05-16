@@ -1,22 +1,39 @@
 package minechem.client;
 
-import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.client.registry.ClientRegistry;
-import cpw.mods.fml.client.registry.RenderingRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
-import cpw.mods.fml.relauncher.Side;
-import minechem.client.render.item.*;
-import minechem.client.render.tileentity.*;
+import minechem.client.render.item.ItemBlueprintProjectorRenderer;
+import minechem.client.render.item.ItemChemicalStorageRenderer;
+import minechem.client.render.item.ItemDecomposerRenderer;
+import minechem.client.render.item.ItemElementRenderer;
+import minechem.client.render.item.ItemLeadedChestRenderer;
+import minechem.client.render.item.ItemMicroscopeRenderer;
+import minechem.client.render.item.ItemMoleculeRenderer;
+import minechem.client.render.item.ItemSynthesisRenderer;
+import minechem.client.render.tileentity.TileEntityBlueprintProjectorRenderer;
+import minechem.client.render.tileentity.TileEntityChemicalStorageRenderer;
+import minechem.client.render.tileentity.TileEntityDecomposerRenderer;
+import minechem.client.render.tileentity.TileEntityLeadedChestRenderer;
+import minechem.client.render.tileentity.TileEntityMicroscopeRenderer;
+import minechem.client.render.tileentity.TileEntitySynthesisRenderer;
 import minechem.client.sound.MinechemSoundEvent;
 import minechem.common.CommonProxy;
 import minechem.common.MinechemBlocks;
 import minechem.common.MinechemItems;
-import minechem.common.tileentity.*;
+import minechem.common.tileentity.TileEntityBlueprintProjector;
+import minechem.common.tileentity.TileEntityChemicalStorage;
+import minechem.common.tileentity.TileEntityDecomposer;
+import minechem.common.tileentity.TileEntityLeadedChest;
+import minechem.common.tileentity.TileEntityMicroscope;
+import minechem.common.tileentity.TileEntitySynthesis;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.client.registry.ClientRegistry;
+import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.registry.TickRegistry;
+import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy
 {
@@ -27,7 +44,7 @@ public class ClientProxy extends CommonProxy
     public static Icon split;
 
     public static Icon sand;
-    
+
     @Override
     public void registerRenderers()
     {

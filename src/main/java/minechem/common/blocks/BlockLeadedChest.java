@@ -16,9 +16,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockLeadedChest extends BlockContainer {
+public class BlockLeadedChest extends BlockContainer
+{
 
-    public BlockLeadedChest(int id) {
+    public BlockLeadedChest(int id)
+    {
         super(id, Material.wood);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
@@ -27,10 +29,13 @@ public class BlockLeadedChest extends BlockContainer {
     }
 
     @Override
-    public boolean onBlockActivated(World world, int xCoord, int yCoord, int zCoord, EntityPlayer player, int metadata, float par7, float par8, float par9) {
-        if (!world.isRemote) {
+    public boolean onBlockActivated(World world, int xCoord, int yCoord, int zCoord, EntityPlayer player, int metadata, float par7, float par8, float par9)
+    {
+        if (!world.isRemote)
+        {
             TileEntityLeadedChest leadedchest = (TileEntityLeadedChest) world.getBlockTileEntity(xCoord, yCoord, zCoord);
-            if (leadedchest == null || player.isSneaking()) {
+            if (leadedchest == null || player.isSneaking())
+            {
                 return false;
             }
             player.openGui(ModMinechem.INSTANCE, 0, world, xCoord, yCoord, zCoord);
@@ -39,30 +44,36 @@ public class BlockLeadedChest extends BlockContainer {
     }
 
     @Override
-    public void breakBlock(World world, int xCoord, int yCoord, int zCoord, int par5, int par6) {
+    public void breakBlock(World world, int xCoord, int yCoord, int zCoord, int par5, int par6)
+    {
         this.dropItems(world, xCoord, yCoord, zCoord);
         super.breakBlock(world, xCoord, yCoord, zCoord, par5, par6);
     }
 
-    private void dropItems(World world, int xCoord, int yCoord, int zCoord) {
+    private void dropItems(World world, int xCoord, int yCoord, int zCoord)
+    {
         Random rand = new Random();
 
         TileEntity te = world.getBlockTileEntity(xCoord, yCoord, zCoord);
-        if (te instanceof IInventory) {
+        if (te instanceof IInventory)
+        {
             IInventory inventory = (IInventory) te;
 
             int invSize = inventory.getSizeInventory();
-            for (int i = 0; i < invSize; i++) {
+            for (int i = 0; i < invSize; i++)
+            {
                 ItemStack item = inventory.getStackInSlot(i);
 
-                if (item != null && item.stackSize > 0) {
+                if (item != null && item.stackSize > 0)
+                {
                     float randomX = rand.nextFloat() * 0.8F + 0.1F;
                     float randomY = rand.nextFloat() * 0.8F + 0.1F;
                     float randomZ = rand.nextFloat() * 0.8F + 0.1F;
 
                     EntityItem entityItem = new EntityItem(world, xCoord, yCoord, zCoord, new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
 
-                    if (item.hasTagCompound()) {
+                    if (item.hasTagCompound())
+                    {
                         entityItem.getEntityItem().setTagCompound((NBTTagCompound) item.getTagCompound().copy());
                     }
 
@@ -80,43 +91,52 @@ public class BlockLeadedChest extends BlockContainer {
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world)
+    {
         return new TileEntityLeadedChest();
     }
-    
+
     @Override
-    public int getRenderType(){
+    public int getRenderType()
+    {
         return -1;
     }
-    
+
     @Override
-    public boolean isOpaqueCube(){
-        return false;
-    }
-    
-    @Override
-    public boolean renderAsNormalBlock(){
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is) {
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is)
+    {
         byte facing = 0;
-        int facingI = MathHelper.floor_double((double) (el.rotationYaw * 4.0F / 360.0F) + 0.5D) & 3;
+        int facingI = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-        if (facingI == 0) {
+        if (facingI == 0)
+        {
             facing = 2;
         }
 
-        if (facingI == 1) {
+        if (facingI == 1)
+        {
             facing = 5;
         }
 
-        if (facingI == 2) {
+        if (facingI == 2)
+        {
             facing = 3;
         }
 
-        if (facingI == 3) {
+        if (facingI == 3)
+        {
             facing = 4;
         }
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);

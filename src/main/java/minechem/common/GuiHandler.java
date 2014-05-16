@@ -1,14 +1,40 @@
 package minechem.common;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import minechem.client.gui.*;
-import minechem.common.containers.*;
+import minechem.client.gui.GuiChemicalStorage;
+import minechem.client.gui.GuiChemistJournal;
+import minechem.client.gui.GuiDecomposer;
+import minechem.client.gui.GuiFission;
+import minechem.client.gui.GuiFusion;
+import minechem.client.gui.GuiLeadedChest;
+import minechem.client.gui.GuiMicroscope;
+import minechem.client.gui.GuiProjector;
+import minechem.client.gui.GuiSynthesis;
+import minechem.client.gui.GuiTableOfElements;
+import minechem.common.containers.ContainerChemicalStorage;
+import minechem.common.containers.ContainerChemistJournal;
+import minechem.common.containers.ContainerDecomposer;
+import minechem.common.containers.ContainerFission;
+import minechem.common.containers.ContainerFusion;
+import minechem.common.containers.ContainerLeadedChest;
+import minechem.common.containers.ContainerMicroscope;
+import minechem.common.containers.ContainerProjector;
+import minechem.common.containers.ContainerSynthesis;
+import minechem.common.containers.CotainerTable;
 import minechem.common.polytool.ContainerPolytool;
 import minechem.common.polytool.GuiPolytool;
-import minechem.common.tileentity.*;
+import minechem.common.tileentity.TileEntityBlueprintProjector;
+import minechem.common.tileentity.TileEntityChemicalStorage;
+import minechem.common.tileentity.TileEntityDecomposer;
+import minechem.common.tileentity.TileEntityFission;
+import minechem.common.tileentity.TileEntityFusion;
+import minechem.common.tileentity.TileEntityLeadedChest;
+import minechem.common.tileentity.TileEntityMicroscope;
+import minechem.common.tileentity.TileEntityProxy;
+import minechem.common.tileentity.TileEntitySynthesis;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler
 {

@@ -1,7 +1,8 @@
 package minechem.common.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.api.core.EnumMolecule;
 import minechem.common.ModMinechem;
 import minechem.common.PharmacologyEffect;
@@ -15,9 +16,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemMolecule extends Item
 {
@@ -128,12 +128,14 @@ public class ItemMolecule extends Item
     }
 
     /** returns the action that specifies what animation to play when the items is being used */
+    @Override
     public EnumAction getItemUseAction(ItemStack par1ItemStack)
     {
         return EnumAction.drink;
     }
 
     /** How long it takes to use or consume an item */
+    @Override
     public int getMaxItemUseDuration(ItemStack par1ItemStack)
     {
         return 16;
@@ -163,6 +165,7 @@ public class ItemMolecule extends Item
     }
 
     /** Returns True is the item is renderer in full 3D when hold. */
+    @Override
     public boolean isFull3D()
     {
         return true;

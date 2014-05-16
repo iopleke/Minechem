@@ -1,7 +1,5 @@
 package minechem.client.render.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityLeadedChest;
 import minechem.common.utils.ConstantValue;
@@ -13,6 +11,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer
@@ -80,7 +81,7 @@ public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer
             var11 = -90;
         }
 
-        GL11.glRotatef((float) var11, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(var11, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         var14.chestLid.rotateAngleX = 0;
         var14.renderAll();

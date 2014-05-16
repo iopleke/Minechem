@@ -7,7 +7,8 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public abstract class PolytoolUpgradeType {
+public abstract class PolytoolUpgradeType
+{
 
     public float power = 0;
 
@@ -21,23 +22,24 @@ public abstract class PolytoolUpgradeType {
 
     public abstract void onTick();
 
-    public PolytoolUpgradeType() {
-        if (!PolytoolHelper.types.containsKey(getElement())) {
+    public PolytoolUpgradeType()
+    {
+        if (!PolytoolHelper.types.containsKey(getElement()))
+        {
             PolytoolHelper.types.put(this.getElement(), (Class<PolytoolUpgradeType>) this.getClass());
         }
     }
 
-    //To prevent NPE in alloys
-    public PolytoolUpgradeType(boolean b) {
+    // To prevent NPE in alloys
+    public PolytoolUpgradeType(boolean b)
+    {
     }
 
-    public void onTickFull(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5) {
+    public void onTickFull(ItemStack par1ItemStack, World par2World, Entity par3Entity, int par4, boolean par5)
+    {
         this.onTick();
     }
 
     public abstract String getDescription();
 
-
 }
-
-

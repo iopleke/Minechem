@@ -1,11 +1,11 @@
-
 package minechem.client;
 
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelPrinter extends ModelBase {
-    //fields
+public class ModelPrinter extends ModelBase
+{
+    // fields
     ModelRenderer Base;
     ModelRenderer RightWall;
     ModelRenderer LeftWall;
@@ -19,7 +19,8 @@ public class ModelPrinter extends ModelBase {
     ModelRenderer LeftLine;
     ModelRenderer RightLine;
 
-    public ModelPrinter() {
+    public ModelPrinter()
+    {
         textureWidth = 128;
         textureHeight = 128;
 
@@ -97,7 +98,8 @@ public class ModelPrinter extends ModelBase {
         setRotation(RightLine, 0F, 0F, 0F);
     }
 
-    public void render(float f5) {
+    public void render(float f5)
+    {
         Base.render(f5);
         RightWall.render(f5);
         LeftWall.render(f5);
@@ -112,11 +114,11 @@ public class ModelPrinter extends ModelBase {
         RightLine.render(f5);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;
     }
-
 
 }

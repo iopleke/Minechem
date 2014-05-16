@@ -2,11 +2,14 @@ package minechem.client.gui;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
+
 import org.lwjgl.opengl.GL11;
 
-public class ScissorHelper {
+public class ScissorHelper
+{
 
-    public static void startScissor(Minecraft mc, int x, int y, int w, int h) {
+    public static void startScissor(Minecraft mc, int x, int y, int w, int h)
+    {
         ScaledResolution scaledRes = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
         int scale = scaledRes.getScaleFactor();
 
@@ -19,7 +22,8 @@ public class ScissorHelper {
         GL11.glScissor(scissorX, scissorY, scissorWidth, scissorHeight);
     }
 
-    public static void endScissor() {
+    public static void endScissor()
+    {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 }

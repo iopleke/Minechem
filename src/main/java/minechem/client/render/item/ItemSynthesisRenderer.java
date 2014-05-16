@@ -1,6 +1,5 @@
 package minechem.client.render.item;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import minechem.client.ModelSynthesizer;
 import minechem.common.ModMinechem;
 import minechem.common.utils.ConstantValue;
@@ -8,6 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 public class ItemSynthesisRenderer extends ItemMinechemRenderer
 {

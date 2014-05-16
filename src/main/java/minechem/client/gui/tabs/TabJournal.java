@@ -6,10 +6,12 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
-public class TabJournal extends Tab {
+public class TabJournal extends Tab
+{
     public static Icon helpIcon;
 
-    public TabJournal(Gui gui) {
+    public TabJournal(Gui gui)
+    {
         super(gui);
 
         this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;
@@ -18,9 +20,11 @@ public class TabJournal extends Tab {
     }
 
     @Override
-    public void draw(int x, int y) {
+    public void draw(int x, int y)
+    {
         drawBackground(x, y);
-        if (!isFullyOpened()) {
+        if (!isFullyOpened())
+        {
             drawIcon(x + 2, y + 3);
             return;
         }
@@ -28,13 +32,15 @@ public class TabJournal extends Tab {
     }
 
     @Override
-    public String getTooltip() {
+    public String getTooltip()
+    {
 
         return "Journal";
     }
 
     @Override
-    public ResourceLocation getIcon() {
+    public ResourceLocation getIcon()
+    {
         // TODO Auto-generated method stub
         return ModMinechem.ICON_HELP;
     }

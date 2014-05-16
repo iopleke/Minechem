@@ -1,9 +1,9 @@
 package minechem.common.utils;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.server.FMLServerHandler;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import minechem.api.core.Chemical;
 import minechem.api.core.Element;
 import minechem.api.core.Molecule;
@@ -24,10 +24,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.server.FMLServerHandler;
 
 public class MinechemHelper
 {
@@ -198,7 +198,7 @@ public class MinechemHelper
             if (randomN > itemstack.stackSize)
                 randomN = itemstack.stackSize;
             itemstack.stackSize -= randomN;
-            new EntityItem(world, (double) ((float) x + randomX), (double) ((float) y + randomY), (double) ((float) z + randomZ), new ItemStack(itemstack.itemID, randomN, itemstack.getItemDamage()));
+            new EntityItem(world, x + randomX, y + randomY, z + randomZ, new ItemStack(itemstack.itemID, randomN, itemstack.getItemDamage()));
 
         }
     }

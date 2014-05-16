@@ -28,7 +28,7 @@ public class GuiDecomposer extends GuiContainerTabbed
     public GuiDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer)
     {
         super(new ContainerDecomposer(inventoryPlayer, decomposer));
-        this.decomposer = decomposer;
+        GuiDecomposer.decomposer = decomposer;
         this.inventoryPlayer = inventoryPlayer;
         addTab(new TabStateControlDecomposer(this, decomposer));
         addTab(new TabEnergy(this, decomposer));

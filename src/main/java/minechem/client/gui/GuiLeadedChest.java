@@ -12,20 +12,23 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiLeadedChest extends GuiContainerTabbed {
+public class GuiLeadedChest extends GuiContainerTabbed
+{
 
     int guiWidth = 176;
     int guiHeight = 217;
     TileEntityLeadedChest leadedchest;
 
-    public GuiLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest leadedChest) {
+    public GuiLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest leadedChest)
+    {
         super(new ContainerLeadedChest(inventoryPlayer, leadedChest));
         this.leadedchest = leadedChest;
         addTab(new TabHelp(this, MinechemHelper.getLocalString("help.leadedChest")));
     }
 
     @Override
-    protected void drawGuiContainerForegroundLayer(int par1, int par2) {
+    protected void drawGuiContainerForegroundLayer(int par1, int par2)
+    {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("gui.title.leadedchest");
         int infoWidth = fontRenderer.getStringWidth(info);
@@ -33,7 +36,8 @@ public class GuiLeadedChest extends GuiContainerTabbed {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+    protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.LEADED_CHEST_GUI));
@@ -48,7 +52,8 @@ public class GuiLeadedChest extends GuiContainerTabbed {
     }
 
     @Override
-    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) {
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
+    {
         return false;
     }
 

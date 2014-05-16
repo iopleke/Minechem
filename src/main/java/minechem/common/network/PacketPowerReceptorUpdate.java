@@ -1,10 +1,10 @@
 package minechem.common.network;
 
-import cpw.mods.fml.common.network.Player;
 import ljdp.easypacket.EasyPacketData;
 import minechem.common.tileentity.MinechemTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
+import cpw.mods.fml.common.network.Player;
 
 public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate
 {
@@ -16,7 +16,7 @@ public class PacketPowerReceptorUpdate extends PacketTileEntityUpdate
 
     public PacketPowerReceptorUpdate(MinechemTileEntity powerReceptor)
     {
-        super((TileEntity) powerReceptor);
+        super(powerReceptor);
         this.powerReceptor = powerReceptor;
         this.energyStored = this.powerReceptor.getEnergy(ForgeDirection.UNKNOWN);
     }

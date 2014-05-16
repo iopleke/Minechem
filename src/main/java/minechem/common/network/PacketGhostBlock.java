@@ -1,11 +1,12 @@
 package minechem.common.network;
 
-import cpw.mods.fml.common.network.Player;
 import ljdp.easypacket.EasyPacketData;
 import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.tileentity.TileEntityGhostBlock;
+import cpw.mods.fml.common.network.Player;
 
-public class PacketGhostBlock extends PacketTileEntityUpdate {
+public class PacketGhostBlock extends PacketTileEntityUpdate
+{
 
     TileEntityGhostBlock ghostBlock;
 
@@ -14,21 +15,25 @@ public class PacketGhostBlock extends PacketTileEntityUpdate {
     @EasyPacketData
     int ghostBlockID;
 
-    public PacketGhostBlock(TileEntityGhostBlock ghostBlock) {
+    public PacketGhostBlock(TileEntityGhostBlock ghostBlock)
+    {
         super(ghostBlock);
         this.ghostBlock = ghostBlock;
         this.blueprintID = ghostBlock.getBlueprint().id;
         this.ghostBlockID = ghostBlock.getBlockID();
     }
 
-    public PacketGhostBlock() {
+    public PacketGhostBlock()
+    {
         super();
     }
 
     @Override
-    public void onReceive(Player player) {
+    public void onReceive(Player player)
+    {
         super.onReceive(player);
-        if (this.tileEntity instanceof TileEntityGhostBlock) {
+        if (this.tileEntity instanceof TileEntityGhostBlock)
+        {
             this.ghostBlock = (TileEntityGhostBlock) this.tileEntity;
             MinechemBlueprint blueprint = MinechemBlueprint.blueprints.get(this.blueprintID);
             this.ghostBlock.setBlueprint(blueprint);

@@ -88,12 +88,12 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
     {
         return this.energy.getEnergy();
     }
-    
+
     public boolean isEnergyEmpty()
     {
         return this.energy.isEmpty();
     }
-    
+
     public boolean isEnergyFull()
     {
         return this.energy.isFull();

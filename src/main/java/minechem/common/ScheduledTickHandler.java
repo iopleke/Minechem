@@ -1,14 +1,14 @@
 package minechem.common;
 
-import cpw.mods.fml.common.IScheduledTickHandler;
-import cpw.mods.fml.common.TickType;
+import java.util.EnumSet;
+
 import minechem.api.core.EnumMolecule;
 import minechem.api.util.Constants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-
-import java.util.EnumSet;
+import cpw.mods.fml.common.IScheduledTickHandler;
+import cpw.mods.fml.common.TickType;
 
 public class ScheduledTickHandler implements IScheduledTickHandler
 {

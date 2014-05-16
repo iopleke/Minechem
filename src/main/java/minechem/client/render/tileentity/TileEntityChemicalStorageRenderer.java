@@ -1,7 +1,5 @@
 package minechem.client.render.tileentity;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityChemicalStorage;
 import minechem.common.utils.ConstantValue;
@@ -13,6 +11,9 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
 public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
@@ -91,7 +92,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
             GL11.glTranslatef(0.0F, 0.0F, -1.0F);
         }
 
-        GL11.glRotatef((float) var11, 0.0F, 1.0F, 0.0F);
+        GL11.glRotatef(var11, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
         float var12 = chemicalStorage.prevLidAngle + (chemicalStorage.lidAngle - chemicalStorage.prevLidAngle) * par8;
         float var13;
@@ -106,6 +107,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
         // }
     }
 
+    @Override
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
     {
         this.renderTileEntityChestAt((TileEntityChemicalStorage) par1TileEntity, par2, par4, par6, par8);

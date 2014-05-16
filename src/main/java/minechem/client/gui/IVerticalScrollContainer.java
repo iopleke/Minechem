@@ -1,6 +1,7 @@
 package minechem.client.gui;
 
-public interface IVerticalScrollContainer {
+public interface IVerticalScrollContainer
+{
 
     public boolean isScrollBarActive();
 

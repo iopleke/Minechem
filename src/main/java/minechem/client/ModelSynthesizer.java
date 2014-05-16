@@ -10,7 +10,8 @@ import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSynthesizer extends ModelBase {
+public class ModelSynthesizer extends ModelBase
+{
     // fields
     ModelRenderer base;
     ModelRenderer back;
@@ -31,7 +32,8 @@ public class ModelSynthesizer extends ModelBase {
 
     float animationTimer = 0;
 
-    public ModelSynthesizer() {
+    public ModelSynthesizer()
+    {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -133,7 +135,8 @@ public class ModelSynthesizer extends ModelBase {
         setRotation(paneljoint, -0.8551081F, 0F, 0F);
     }
 
-    public void render(float scale) {
+    public void render(float scale)
+    {
         base.render(scale);
         back.render(scale);
         topframeleft.render(scale);
@@ -152,8 +155,10 @@ public class ModelSynthesizer extends ModelBase {
         paneljoint.render(scale);
     }
 
-    private void armHorizontal(float timer, float start, float end, float xStart, float xEnd) {
-        if (timer > start && timer <= end) {
+    private void armHorizontal(float timer, float start, float end, float xStart, float xEnd)
+    {
+        if (timer > start && timer <= end)
+        {
             float time = end - start;
             float horizontalTimer = timer - start;
             float newX = MinechemHelper.translateValue(horizontalTimer, 0.0F, time, xStart, xEnd);
@@ -162,8 +167,10 @@ public class ModelSynthesizer extends ModelBase {
         }
     }
 
-    private void armVertical(float timer, float start, float end, float yStart, float yEnd) {
-        if (timer > start && timer <= end) {
+    private void armVertical(float timer, float start, float end, float yStart, float yEnd)
+    {
+        if (timer > start && timer <= end)
+        {
             float time = end - start;
             float verticalTimer = timer - start;
             float newY = MinechemHelper.translateValue(verticalTimer, 0.0F, time, yStart, yEnd);
@@ -171,7 +178,8 @@ public class ModelSynthesizer extends ModelBase {
         }
     }
 
-    public void updateArm() {
+    public void updateArm()
+    {
         animationTimer += 0.5F;
         // ARM UP
         armVertical(animationTimer, 0, 10, 13, 11.2F);
@@ -198,12 +206,14 @@ public class ModelSynthesizer extends ModelBase {
         // ARM DOWN
         armVertical(animationTimer, 190, 200, 11.2F, 13);
         // RESET TIMER
-        if (animationTimer > 200) {
+        if (animationTimer > 200)
+        {
             animationTimer = 0;
         }
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

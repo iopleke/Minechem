@@ -1,13 +1,13 @@
 package minechem.common.coating;
 
+import java.util.HashMap;
+
 import minechem.api.core.EnumMolecule;
 import minechem.common.PharmacologyEffect;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
-
-import java.util.HashMap;
 
 public class EnchantmentCoated extends Enchantment
 {
@@ -29,17 +29,20 @@ public class EnchantmentCoated extends Enchantment
     }
 
     /** Returns the minimum level that the enchantment can have. */
+    @Override
     public int getMinLevel()
     {
         return 1;
     }
 
     /** Returns the maximum level that the enchantment can have. */
+    @Override
     public int getMaxLevel()
     {
         return 10;
     }
 
+    @Override
     public boolean canApply(ItemStack par1ItemStack)
     {
         return false;
@@ -49,11 +52,13 @@ public class EnchantmentCoated extends Enchantment
      * 
      * @param stack
      * @return */
+    @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack)
     {
         return false;
     }
 
+    @Override
     public String getTranslatedName(int par1)
     {
         return this.chemical.descriptiveName() + " Coated";

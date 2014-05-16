@@ -9,7 +9,8 @@ package minechem.client;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelProjector extends ModelBase {
+public class ModelProjector extends ModelBase
+{
     // fields
     ModelRenderer base;
     ModelRenderer projectorstand;
@@ -27,7 +28,8 @@ public class ModelProjector extends ModelBase {
     ModelRenderer keypadstand;
     ModelRenderer lecternlip;
 
-    public ModelProjector() {
+    public ModelProjector()
+    {
         textureWidth = 128;
         textureHeight = 64;
 
@@ -123,7 +125,8 @@ public class ModelProjector extends ModelBase {
         setRotation(lecternlip, 0F, 0F, 0F);
     }
 
-    public void render(float scale) {
+    public void render(float scale)
+    {
         base.render(scale);
         projectorstand.render(scale);
         body.render(scale);
@@ -141,7 +144,8 @@ public class ModelProjector extends ModelBase {
         lecternlip.render(scale);
     }
 
-    private void setRotation(ModelRenderer model, float x, float y, float z) {
+    private void setRotation(ModelRenderer model, float x, float y, float z)
+    {
         model.rotateAngleX = x;
         model.rotateAngleY = y;
         model.rotateAngleZ = z;

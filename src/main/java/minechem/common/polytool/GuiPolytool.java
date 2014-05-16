@@ -1,5 +1,9 @@
 package minechem.common.polytool;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+
 import minechem.api.core.EnumElement;
 import minechem.common.MinechemItems;
 import net.minecraft.client.Minecraft;
@@ -11,33 +15,33 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
-
-public class GuiPolytool extends GuiContainer {
-    private static final ResourceLocation texture = new ResourceLocation(
-            "minechem", "textures/gui/polytool.png");
+public class GuiPolytool extends GuiContainer
+{
+    private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/polytool.png");
     public ArrayList<GuiElementHelper> elements = new ArrayList();
     long renders;
     ItemStack polytool;
     InventoryPlayer player;
 
-    public GuiPolytool(ContainerPolytool par1Container) {
+    public GuiPolytool(ContainerPolytool par1Container)
+    {
         super(par1Container);
         xSize = 176;
         ySize = 218;
-        this.polytool = ((ContainerPolytool) par1Container).player.getCurrentItem();
-        this.player = ((ContainerPolytool) par1Container).player;
+        this.polytool = par1Container.player.getCurrentItem();
+        this.player = par1Container.player;
         ItemStack stack = par1Container.player.getCurrentItem();
-        if (stack.getItem() instanceof ItemPolytool) {
-            ArrayList<PolytoolUpgradeType> upgrades = ((ItemPolytool) stack.getItem()).getUpgrades(stack);
+        if (stack.getItem() instanceof ItemPolytool)
+        {
+            ArrayList<PolytoolUpgradeType> upgrades = ItemPolytool.getUpgrades(stack);
             Iterator<PolytoolUpgradeType> iter = upgrades.iterator();
             Random rand = new Random();
-            while (iter.hasNext()) {
+            while (iter.hasNext())
+            {
                 PolytoolUpgradeType upgrade = iter.next();
                 EnumElement element = upgrade.getElement();
-                for (int i = 0; i < upgrade.power; i++) {
+                for (int i = 0; i < upgrade.power; i++)
+                {
 
                     elements.add(new GuiElementHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, element));
                 }
@@ -46,17 +50,20 @@ public class GuiPolytool extends GuiContainer {
         }
     }
 
-    public void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str) {
+    public void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str)
+    {
         par2 += guiLeft;
         par3 += guiTop;
 
-        //Copied from GuiContainer
+        // Copied from GuiContainer
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRenderer.zLevel = 200.0F;
         FontRenderer font = null;
-        if (par1ItemStack != null) font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
-        if (font == null) font = fontRenderer;
+        if (par1ItemStack != null)
+            font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
+        if (font == null)
+            font = fontRenderer;
         itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3);
         itemRenderer.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3 - (8), par4Str);
         this.zLevel = 0.0F;
@@ -64,17 +71,18 @@ public class GuiPolytool extends GuiContainer {
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int i, int j) {
+    protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+    {
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         renders++;
         Iterator iter = elements.iterator();
-        while (iter.hasNext()) {
+        while (iter.hasNext())
+        {
             ((GuiElementHelper) iter.next()).draw(this, renders);
         }
-
 
         drawItemStack(new ItemStack(MinechemItems.polytool), 80, 42, "");
         fontRenderer.drawString("Sword: " + ItemPolytool.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
@@ -85,9 +93,11 @@ public class GuiPolytool extends GuiContainer {
 
     }
 
-    public void addUpgrade(PolytoolUpgradeType upgrade) {
+    public void addUpgrade(PolytoolUpgradeType upgrade)
+    {
         Random rand = new Random();
-        for (int i = 0; i < upgrade.power; i++) {
+        for (int i = 0; i < upgrade.power; i++)
+        {
             elements.add(new GuiElementHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, upgrade.getElement()));
         }
     }

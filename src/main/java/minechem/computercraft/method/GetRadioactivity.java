@@ -1,7 +1,5 @@
 package minechem.computercraft.method;
 
-import dan200.computer.api.IComputerAccess;
-import dan200.turtle.api.ITurtleAccess;
 import minechem.api.core.EnumElement;
 import minechem.api.core.EnumRadioactivity;
 import minechem.api.util.Util;
@@ -9,48 +7,64 @@ import minechem.common.items.ItemElement;
 import minechem.common.utils.MinechemHelper;
 import minechem.computercraft.ICCMethod;
 import net.minecraft.item.ItemStack;
+import dan200.computer.api.IComputerAccess;
+import dan200.turtle.api.ITurtleAccess;
 
-public class GetRadioactivity implements ICCMethod {
+public class GetRadioactivity implements ICCMethod
+{
 
     @Override
-    public String getMethodName() {
+    public String getMethodName()
+    {
         return "getRadioactivity";
     }
 
     @Override
-    public Object[] call(IComputerAccess computer, ITurtleAccess turtle, Object[] arguments) throws Exception {
-        if (arguments.length == 1) {
+    public Object[] call(IComputerAccess computer, ITurtleAccess turtle, Object[] arguments) throws Exception
+    {
+        if (arguments.length == 1)
+        {
             return getRadioactivityFromString(arguments[0]);
-        } else {
+        }
+        else
+        {
             return getRadioactivityFromSlot(turtle.getSelectedSlot(), turtle);
         }
     }
 
-    private Object[] getRadioactivityFromSlot(int selectedSlot, ITurtleAccess turtle) {
+    private Object[] getRadioactivityFromSlot(int selectedSlot, ITurtleAccess turtle)
+    {
         ItemStack selectedStack = turtle.getSlotContents(selectedSlot);
-        if (selectedStack != null && Util.isStackAnElement(selectedStack)) {
+        if (selectedStack != null && Util.isStackAnElement(selectedStack))
+        {
             EnumElement element = ItemElement.getElement(selectedStack);
             return getRadioactiveName(element);
         }
         return null;
     }
 
-    private Object[] getRadioactivityFromString(Object object) throws Exception {
-        if (object instanceof String) {
+    private Object[] getRadioactivityFromString(Object object) throws Exception
+    {
+        if (object instanceof String)
+        {
             String query = (String) object;
             EnumElement element = EnumElement.valueOf(query);
             if (element != null)
                 return getRadioactiveName(element);
-        } else {
+        }
+        else
+        {
             throw new Exception("Argument must be type String");
         }
         return null;
     }
 
-    private Object[] getRadioactiveName(EnumElement element) {
+    private Object[] getRadioactiveName(EnumElement element)
+    {
         EnumRadioactivity radioactivity = element.radioactivity();
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        return new Object[]{radioactiveName};
+        return new Object[]
+        { radioactiveName };
     }
 
 }

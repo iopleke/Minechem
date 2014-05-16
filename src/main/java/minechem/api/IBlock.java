@@ -2,12 +2,12 @@ package minechem.api;
 
 import net.minecraft.tileentity.TileEntity;
 
-public interface IBlock {
+public interface IBlock
+{
 
     public Class<TileEntity> getTileEntityClass();
 
     public void addRecipe();
-
 
     public String getName();
 
@@ -16,6 +16,5 @@ public interface IBlock {
     public Class getItemBlock();
 
     public boolean inCreativeTab();
-
 
 }

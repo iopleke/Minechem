@@ -1,21 +1,25 @@
 package minechem.common.containers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
+public class ContainerChemicalStorage extends ContainerChest
+{
 
-public class ContainerChemicalStorage extends ContainerChest {
-
-    public ContainerChemicalStorage(IInventory playerInventory, IInventory blockInventory) {
+    public ContainerChemicalStorage(IInventory playerInventory, IInventory blockInventory)
+    {
         super(playerInventory, blockInventory);
     }
 
-    public List<ItemStack> getStorageInventory() {
+    public List<ItemStack> getStorageInventory()
+    {
         List<ItemStack> storageInventory = new ArrayList<ItemStack>();
-        for (int slot = 0; slot < 27; slot++) {
+        for (int slot = 0; slot < 27; slot++)
+        {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
                 storageInventory.add(stack);
@@ -23,9 +27,11 @@ public class ContainerChemicalStorage extends ContainerChest {
         return storageInventory;
     }
 
-    public List<ItemStack> getPlayerInventory() {
+    public List<ItemStack> getPlayerInventory()
+    {
         List<ItemStack> playerInventory = new ArrayList<ItemStack>();
-        for (int slot = 27; slot < this.inventorySlots.size(); slot++) {
+        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+        {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
                 playerInventory.add(stack);

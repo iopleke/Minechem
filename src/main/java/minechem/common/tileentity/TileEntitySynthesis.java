@@ -1,7 +1,8 @@
 package minechem.common.tileentity;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.api.recipe.SynthesisRecipe;
 import minechem.api.util.Util;
 import minechem.client.ModelSynthesizer;
@@ -13,19 +14,15 @@ import minechem.common.network.PacketSynthesisUpdate;
 import minechem.common.recipe.SynthesisRecipeHandler;
 import minechem.common.utils.MinechemHelper;
 import minechem.computercraft.IMinechemMachinePeripheral;
-import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
-
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 
 public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral
 {
@@ -90,7 +87,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public TileEntitySynthesis()
     {
         super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
-        
+
         inventory = new ItemStack[getSizeInventory()];
 
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
@@ -272,7 +269,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
-        double dist = entityPlayer.getDistanceSq((double) xCoord + 0.5D, (double) yCoord + 0.5D, (double) zCoord + 0.5D);
+        double dist = entityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D);
         return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
     }
 
@@ -298,6 +295,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     }
 
+    @Override
     public void sendUpdatePacket()
     {
         PacketSynthesisUpdate packet = new PacketSynthesisUpdate(this);
@@ -363,7 +361,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         {
             hasFullEnergy = true;
         }
-        
+
         if (hasFullEnergy && energyStored < this.getEnergyCapacity(ForgeDirection.UP) / 2)
         {
             hasFullEnergy = false;
@@ -373,7 +371,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         {
             hasFullEnergy = true;
         }
-        
+
         if (hasFullEnergy && this.getEnergy(ForgeDirection.UNKNOWN) < this.getEnergyCapacity(ForgeDirection.UP) / 2)
         {
             hasFullEnergy = false;
@@ -635,9 +633,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
         if (var1 != 1 && takeStacksFromStorage(false))
         {
-            return this.kOutput;
+            return TileEntitySynthesis.kOutput;
         }
-        return this.kStorage;
+        return TileEntitySynthesis.kStorage;
 
     }
 

@@ -1,11 +1,11 @@
 package minechem.common;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import minechem.common.utils.ConstantValue;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class CommonProxy implements ConstantValue
 {

@@ -1,5 +1,7 @@
 package minechem.common.recipe;
 
+import java.util.ArrayList;
+
 import minechem.api.core.Chemical;
 import minechem.api.recipe.SynthesisRecipe;
 import minechem.api.util.Util;
@@ -7,51 +9,60 @@ import minechem.common.utils.MinechemHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-import java.util.ArrayList;
-
-public class SynthesisRecipeHandler {
+public class SynthesisRecipeHandler
+{
 
     public static SynthesisRecipeHandler instance = new SynthesisRecipeHandler();
 
-    public SynthesisRecipeHandler() {
+    public SynthesisRecipeHandler()
+    {
 
     }
 
-    public SynthesisRecipe getRecipeFromOutput(ItemStack output) {
-        for (SynthesisRecipe recipe : SynthesisRecipe.recipes) {
+    public SynthesisRecipe getRecipeFromOutput(ItemStack output)
+    {
+        for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
+        {
             if (Util.stacksAreSameKind(output, recipe.getOutput()))
                 return recipe;
         }
         return null;
     }
 
-    public SynthesisRecipe getRecipeFromInput(ItemStack[] input) {
-        for (SynthesisRecipe recipe : SynthesisRecipe.recipes) {
+    public SynthesisRecipe getRecipeFromInput(ItemStack[] input)
+    {
+        for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
+        {
             if (itemStacksMatchesRecipe(input, recipe))
                 return recipe;
         }
         return null;
     }
 
-    public boolean itemStacksMatchesRecipe(ItemStack[] stacks, SynthesisRecipe recipe) {
+    public boolean itemStacksMatchesRecipe(ItemStack[] stacks, SynthesisRecipe recipe)
+    {
         return itemStacksMatchesRecipe(stacks, recipe, 1);
     }
 
-    public boolean itemStacksMatchesRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor) {
+    public boolean itemStacksMatchesRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor)
+    {
         if (recipe.isShaped())
             return itemStacksMatchesShapedRecipe(stacks, recipe, factor);
         else
             return itemStacksMatchesShapelessRecipe(stacks, recipe, factor);
     }
 
-    private boolean itemStacksMatchesShapelessRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor) {
+    private boolean itemStacksMatchesShapelessRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor)
+    {
         ArrayList<ItemStack> stacksList = new ArrayList<ItemStack>();
         ArrayList<ItemStack> shapelessRecipe = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getShapelessRecipe());
-        for (ItemStack itemstack : stacks) {
+        for (ItemStack itemstack : stacks)
+        {
             if (itemstack != null)
                 stacksList.add(itemstack.copy());
         }
-        for (ItemStack itemstack : stacksList) {
+        for (ItemStack itemstack : stacksList)
+        {
             int ingredientSlot = getIngredientSlotThatMatchesStack(shapelessRecipe, itemstack, 1);
             if (ingredientSlot != -1)
                 shapelessRecipe.remove(ingredientSlot);
@@ -61,9 +72,11 @@ public class SynthesisRecipeHandler {
         return shapelessRecipe.size() == 0;
     }
 
-    private boolean itemStacksMatchesShapedRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor) {
+    private boolean itemStacksMatchesShapedRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor)
+    {
         Chemical[] chemicals = recipe.getShapedRecipe();
-        for (int i = 0; i < chemicals.length; i++) {
+        for (int i = 0; i < chemicals.length; i++)
+        {
             if (stacks[i] == null && chemicals[i] != null)
                 return false;
             if (chemicals[i] == null && stacks[i] != null)
@@ -78,8 +91,10 @@ public class SynthesisRecipeHandler {
         return true;
     }
 
-    private int getIngredientSlotThatMatchesStack(ArrayList<ItemStack> ingredients, ItemStack itemstack, int factor) {
-        for (int slot = 0; slot < ingredients.size(); slot++) {
+    private int getIngredientSlotThatMatchesStack(ArrayList<ItemStack> ingredients, ItemStack itemstack, int factor)
+    {
+        for (int slot = 0; slot < ingredients.size(); slot++)
+        {
             ItemStack ingredientStack = ingredients.get(slot);
             if (ingredientStack != null && Util.stacksAreSameKind(itemstack, ingredientStack) && itemstack.stackSize == ingredientStack.stackSize)
                 return slot;
@@ -87,11 +102,11 @@ public class SynthesisRecipeHandler {
         return -1;
     }
 
-    /**
-     * Clears the crafting inventory.
-     */
-    public static boolean takeFromCraftingInventory(SynthesisRecipe recipe, final IInventory inv) {
-        for (int slot = 0; slot < inv.getSizeInventory(); slot++) {
+    /** Clears the crafting inventory. */
+    public static boolean takeFromCraftingInventory(SynthesisRecipe recipe, final IInventory inv)
+    {
+        for (int slot = 0; slot < inv.getSizeInventory(); slot++)
+        {
             inv.setInventorySlotContents(slot, null);
         }
         return true;

@@ -3,31 +3,39 @@ package minechem.client.render.item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
-public class ItemMinechemRenderer implements IItemRenderer {
+public class ItemMinechemRenderer implements IItemRenderer
+{
 
     @Override
-    public boolean handleRenderType(ItemStack item, ItemRenderType type) {
-        switch (type.ordinal()) {
-            case 0: {
-                return true;
-            }
+    public boolean handleRenderType(ItemStack item, ItemRenderType type)
+    {
+        switch (type.ordinal())
+        {
+        case 0:
+        {
+            return true;
+        }
 
-            case 1: {
-                return true;
-            }
+        case 1:
+        {
+            return true;
+        }
 
-            case 2: {
-                return true;
-            }
-            case 3: {
-                return true;
-            }
+        case 2:
+        {
+            return true;
+        }
+        case 3:
+        {
+            return true;
+        }
         }
         return false;
     }
 
     @Override
-    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper) {
+    public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
+    {
         if (helper == ItemRendererHelper.INVENTORY_BLOCK)
             return true;
         if (helper == ItemRendererHelper.ENTITY_BOBBING)
@@ -38,7 +46,8 @@ public class ItemMinechemRenderer implements IItemRenderer {
     }
 
     @Override
-    public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
     }
 
 }

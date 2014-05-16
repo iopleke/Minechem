@@ -1,6 +1,7 @@
 package minechem.client.gui;
 
-import cpw.mods.fml.client.FMLClientHandler;
+import java.util.List;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -8,11 +9,13 @@ import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 
-import java.util.List;
+import cpw.mods.fml.client.FMLClientHandler;
 
-public class GuiFakeSlot extends Gui {
+public class GuiFakeSlot extends Gui
+{
 
     private static RenderItem renderItem = new RenderItem();
 
@@ -29,7 +32,8 @@ public class GuiFakeSlot extends Gui {
     int height = 16;
     ItemStack itemstack;
 
-    public GuiFakeSlot(GuiContainerTabbed parentContainer, EntityPlayer player) {
+    public GuiFakeSlot(GuiContainerTabbed parentContainer, EntityPlayer player)
+    {
         this.parentContainer = parentContainer;
         this.parentWidth = parentContainer.xSize;
         this.parentHeight = parentContainer.ySize;
@@ -37,47 +41,58 @@ public class GuiFakeSlot extends Gui {
         this.mc = FMLClientHandler.instance().getClient();
     }
 
-    private int mouseX() {
+    private int mouseX()
+    {
         return parentContainer.mouseX;
     }
 
-    private int mouseY() {
+    private int mouseY()
+    {
         return parentContainer.mouseY;
     }
 
-    public void setItemStack(ItemStack itemstack) {
+    public void setItemStack(ItemStack itemstack)
+    {
         this.itemstack = itemstack;
     }
 
-    public ItemStack getItemStack() {
+    public ItemStack getItemStack()
+    {
         return this.itemstack;
     }
 
-    public void setXPos(int x) {
+    public void setXPos(int x)
+    {
         this.xPos = x;
     }
 
-    public void setYPos(int y) {
+    public void setYPos(int y)
+    {
         this.yPos = y;
     }
 
-    public void setXOffset(int x) {
+    public void setXOffset(int x)
+    {
         this.xOffset = x;
     }
 
-    public void setYOffset(int y) {
+    public void setYOffset(int y)
+    {
         this.yOffset = y;
     }
 
-    public int getXPos() {
+    public int getXPos()
+    {
         return this.xPos + this.xOffset;
     }
 
-    public int getYPos() {
+    public int getYPos()
+    {
         return this.yPos + this.yOffset;
     }
 
-    public boolean getMouseIsOver() {
+    public boolean getMouseIsOver()
+    {
         int mx = mouseX();
         int my = mouseY();
         int x = getXPos();
@@ -85,7 +100,8 @@ public class GuiFakeSlot extends Gui {
         return mx >= x && mx <= x + this.width && my >= y && my <= y + this.height;
     }
 
-    public void draw() {
+    public void draw()
+    {
         this.zLevel = 0.0F;
         GL11.glPushMatrix();
         GL11.glTranslatef(getXPos(), yPos, 0);
@@ -98,7 +114,8 @@ public class GuiFakeSlot extends Gui {
         GL11.glPopMatrix();
     }
 
-    public void drawTooltip(int x, int y) {
+    public void drawTooltip(int x, int y)
+    {
         GL11.glPushMatrix();
         GL11.glTranslatef(x, y, 0);
         if (itemstack != null && getMouseIsOver())
@@ -106,13 +123,14 @@ public class GuiFakeSlot extends Gui {
         GL11.glPopMatrix();
     }
 
-    private void drawItemStack(ItemStack itemstack) {
+    private void drawItemStack(ItemStack itemstack)
+    {
         this.zLevel = 100.0F;
         renderItem.zLevel = 100.0F;
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glDisable(GL11.GL_BLEND);
-        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, (float) 240 / 1.0F, (float) 240 / 1.0F);
+        OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240 / 1.0F, 240 / 1.0F);
         RenderHelper.disableStandardItemLighting();
         RenderHelper.enableGUIStandardItemLighting();
         renderItem.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, 0, 0);
@@ -122,7 +140,8 @@ public class GuiFakeSlot extends Gui {
         renderItem.zLevel = 0.0F;
     }
 
-    private void drawItemStackTooltip(ItemStack itemstack) {
+    private void drawItemStackTooltip(ItemStack itemstack)
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
@@ -131,7 +150,8 @@ public class GuiFakeSlot extends Gui {
         int y = 0;
         int lineSpacing = 10;
         int maxLineWidth = 0;
-        for (String line : lines) {
+        for (String line : lines)
+        {
             int lineWidth = mc.fontRenderer.getStringWidth(line);
             if (lineWidth > maxLineWidth)
                 maxLineWidth = lineWidth;
@@ -147,7 +167,8 @@ public class GuiFakeSlot extends Gui {
         backgroundColor = 0xCC000000;
         drawGradientRect(bkX, bkY, bkX + tooltipWidth, bkY + tooltipHeight, backgroundColor, backgroundColor);
 
-        for (int i = 0; i < lines.size(); i++) {
+        for (int i = 0; i < lines.size(); i++)
+        {
             int tx = x;
             int ty = y + (i * 10);
             String tooltip = lines.get(i);
@@ -157,7 +178,8 @@ public class GuiFakeSlot extends Gui {
         }
     }
 
-    private void drawBackgroundHighlight() {
+    private void drawBackgroundHighlight()
+    {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);

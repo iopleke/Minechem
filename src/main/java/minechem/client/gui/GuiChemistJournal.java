@@ -1,5 +1,8 @@
 package minechem.client.gui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.api.core.Chemical;
 import minechem.api.recipe.DecomposerRecipe;
 import minechem.api.recipe.DecomposerRecipeChance;
@@ -7,7 +10,6 @@ import minechem.api.recipe.DecomposerRecipeSelect;
 import minechem.api.recipe.SynthesisRecipe;
 import minechem.api.util.Constants;
 import minechem.client.gui.tabs.Tab;
-import minechem.client.gui.tabs.TabTable;
 import minechem.common.MinechemItems;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerChemistJournal;
@@ -24,9 +26,6 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalScrollContainer
 {

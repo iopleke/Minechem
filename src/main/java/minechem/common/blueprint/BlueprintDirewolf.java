@@ -1,39 +1,85 @@
 package minechem.common.blueprint;
 
+import java.util.HashMap;
+
 import minechem.common.blueprint.BlueprintBlock.Type;
 import net.minecraft.block.Block;
 
-import java.util.HashMap;
+public class BlueprintDirewolf extends MinechemBlueprint
+{
 
-public class BlueprintDirewolf extends MinechemBlueprint {
+    Integer[][][] structure =
+    {
+    {
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, },
+    {
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 1, 1, 1, 0, 1, 1, 1, 1 }, },
+    {
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 1, 1, 1, 0, 1, 1, 1, 1 }, },
+    {
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, },
+    {
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 0, 0, 0, 0, 0, 0, 0, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, },
+    {
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 2, 2, 1, 2, 2, 1, 1 },
+    { 1, 1, 2, 2, 1, 2, 2, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 2, 2, 1, 2, 2, 1, 1 },
+    { 1, 1, 2, 2, 1, 2, 2, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+    { 1, 1, 1, 1, 1, 1, 1, 1, 1 }, }, };
 
-    Integer[][][] structure = {
-            {{1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1},},
-            {{1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 1, 1, 1, 0, 1, 1, 1, 1},},
-            {{1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 1, 1, 1, 0, 1, 1, 1, 1},},
-            {{1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1},},
-            {{1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1}, {1, 0, 0, 0, 0, 0, 0, 0, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1},},
-            {{1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 2, 2, 1, 2, 2, 1, 1}, {1, 1, 2, 2, 1, 2, 2, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 2, 2, 1, 2, 2, 1, 1}, {1, 1, 2, 2, 1, 2, 2, 1, 1}, {1, 1, 1, 1, 1, 1, 1, 1, 1},
-                    {1, 1, 1, 1, 1, 1, 1, 1, 1},},};
-
-    public BlueprintDirewolf() {
+    public BlueprintDirewolf()
+    {
         super(9, 6, 9);
         this.name = "Direwolf's 9x9";
     }
 
     @Override
-    public HashMap<Integer, BlueprintBlock> getBlockLookup() {
+    public HashMap<Integer, BlueprintBlock> getBlockLookup()
+    {
         HashMap<Integer, BlueprintBlock> lookup = new HashMap<Integer, BlueprintBlock>();
         lookup.put(1, new BlueprintBlock(Block.stone, 0, Type.NORMAL));
         lookup.put(2, new BlueprintBlock(Block.glass, 0, Type.NORMAL));
@@ -41,32 +87,38 @@ public class BlueprintDirewolf extends MinechemBlueprint {
     }
 
     @Override
-    public Integer[][][] getStructure() {
+    public Integer[][][] getStructure()
+    {
         return structure;
     }
 
     @Override
-    public Integer[][][] getResultStructure() {
+    public Integer[][][] getResultStructure()
+    {
         return structure;
     }
 
     @Override
-    public int getManagerPosX() {
+    public int getManagerPosX()
+    {
         return -1;
     }
 
     @Override
-    public int getManagerPosY() {
+    public int getManagerPosY()
+    {
         return -1;
     }
 
     @Override
-    public int getManagerPosZ() {
+    public int getManagerPosZ()
+    {
         return -1;
     }
 
     @Override
-    public BlueprintBlock getManagerBlock() {
+    public BlueprintBlock getManagerBlock()
+    {
         return null;
     }
 

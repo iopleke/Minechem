@@ -1,35 +1,51 @@
 package minechem.computercraft;
 
-import dan200.computer.api.IComputerAccess;
-import dan200.computer.api.IHostedPeripheral;
-import dan200.turtle.api.ITurtleAccess;
-import dan200.turtle.api.TurtleSide;
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.api.recipe.SynthesisRecipe;
 import minechem.api.util.Constants;
 import minechem.common.RadiationHandler;
 import minechem.common.RadiationHandler.DecayEvent;
 import minechem.common.utils.SafeTimeTracker;
-import minechem.computercraft.method.*;
+import minechem.computercraft.method.ClearSynthesisRecipe;
+import minechem.computercraft.method.GetAtomicMass;
+import minechem.computercraft.method.GetChemicalName;
+import minechem.computercraft.method.GetChemicals;
+import minechem.computercraft.method.GetFormula;
+import minechem.computercraft.method.GetMachineState;
+import minechem.computercraft.method.GetRadioactivity;
+import minechem.computercraft.method.GetTicksUntilDecay;
+import minechem.computercraft.method.PlaceSynthesisRecipe;
+import minechem.computercraft.method.PutFusionStar;
+import minechem.computercraft.method.PutInput;
+import minechem.computercraft.method.PutJournal;
+import minechem.computercraft.method.StoreSynthesisRecipe;
+import minechem.computercraft.method.TakeFusionStar;
+import minechem.computercraft.method.TakeJournal;
+import minechem.computercraft.method.TakeOuput;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import dan200.computer.api.IComputerAccess;
+import dan200.computer.api.IHostedPeripheral;
+import dan200.turtle.api.ITurtleAccess;
+import dan200.turtle.api.TurtleSide;
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMinechemTurtlePeripheral {
+public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMinechemTurtlePeripheral
+{
 
     private static String[] methodNames;
-    private static ICCMethod[] methods = {new GetChemicalName(), new GetFormula(), new GetChemicals(), new GetAtomicMass(), new GetRadioactivity(),
-		    new GetTicksUntilDecay(), new StoreSynthesisRecipe(), new PlaceSynthesisRecipe(), new ClearSynthesisRecipe(),
-		    new TakeOuput(), new PutInput(), new TakeFusionStar(), new PutFusionStar(), new TakeJournal(), new PutJournal(),
-		    new GetMachineState()};
+    private static ICCMethod[] methods =
+    { new GetChemicalName(), new GetFormula(), new GetChemicals(), new GetAtomicMass(), new GetRadioactivity(), new GetTicksUntilDecay(), new StoreSynthesisRecipe(), new PlaceSynthesisRecipe(), new ClearSynthesisRecipe(), new TakeOuput(), new PutInput(),
+            new TakeFusionStar(), new PutFusionStar(), new TakeJournal(), new PutJournal(), new GetMachineState() };
 
     public ITurtleAccess turtle;
     public IComputerAccess computer;
     public SafeTimeTracker updateTracker = new SafeTimeTracker();
     private SynthesisRecipe synthesisRecipe;
 
-    public static IMinechemTurtlePeripheral getMinechemPeripheral(ITurtleAccess turtle) {
+    public static IMinechemTurtlePeripheral getMinechemPeripheral(ITurtleAccess turtle)
+    {
         IHostedPeripheral leftPeripheral = turtle.getPeripheral(TurtleSide.Left);
         IHostedPeripheral rightPeripheral = turtle.getPeripheral(TurtleSide.Right);
         if (leftPeripheral != null && leftPeripheral instanceof IMinechemTurtlePeripheral)
@@ -40,18 +56,22 @@ public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMi
             return null;
     }
 
-    public ChemistryTurtleUpgradePeripherial(ITurtleAccess turtle) {
+    public ChemistryTurtleUpgradePeripherial(ITurtleAccess turtle)
+    {
         this.turtle = turtle;
     }
 
     @Override
-    public String getType() {
+    public String getType()
+    {
         return "chemistryTurtle";
     }
 
     @Override
-    public String[] getMethodNames() {
-        if (methodNames == null) {
+    public String[] getMethodNames()
+    {
+        if (methodNames == null)
+        {
             methodNames = new String[methods.length];
             int pos = 0;
             for (ICCMethod method : methods)
@@ -61,28 +81,34 @@ public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMi
     }
 
     @Override
-    public Object[] callMethod(IComputerAccess computer, int method, Object[] arguments) throws Exception {
+    public Object[] callMethod(IComputerAccess computer, int method, Object[] arguments) throws Exception
+    {
         return methods[method].call(computer, turtle, arguments);
     }
 
     @Override
-    public boolean canAttachToSide(int side) {
+    public boolean canAttachToSide(int side)
+    {
         return true;
     }
 
     @Override
-    public void attach(IComputerAccess computer) {
+    public void attach(IComputerAccess computer)
+    {
         this.computer = computer;
     }
 
     @Override
-    public void detach(IComputerAccess computer) {
+    public void detach(IComputerAccess computer)
+    {
         this.computer = null;
     }
 
     @Override
-    public void update() {
-        if (updateTracker.markTimeIfDelay(turtle.getWorld(), Constants.TICKS_PER_SECOND)) {
+    public void update()
+    {
+        if (updateTracker.markTimeIfDelay(turtle.getWorld(), Constants.TICKS_PER_SECOND))
+        {
             List<ItemStack> inventory = getTurtleInventory();
             List<DecayEvent> decayEvents = RadiationHandler.getInstance().updateRadiationOnItems(turtle.getWorld(), inventory);
             if (this.computer != null)
@@ -91,24 +117,30 @@ public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMi
     }
 
     @Override
-    public void readFromNBT(NBTTagCompound nbttagcompound) {
+    public void readFromNBT(NBTTagCompound nbttagcompound)
+    {
     }
 
     @Override
-    public void writeToNBT(NBTTagCompound nbttagcompound) {
+    public void writeToNBT(NBTTagCompound nbttagcompound)
+    {
     }
 
-    private void postDecayEvents(List<DecayEvent> decayEvents) {
-        for (DecayEvent event : decayEvents) {
-            Object[] data = {event.before.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""),
-                    event.after.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""), event.damage};
+    private void postDecayEvents(List<DecayEvent> decayEvents)
+    {
+        for (DecayEvent event : decayEvents)
+        {
+            Object[] data =
+            { event.before.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""), event.after.getDisplayName().replaceAll(Constants.TEXT_MODIFIER_REGEX, ""), event.damage };
             this.computer.queueEvent("onDecay", data);
         }
     }
 
-    public List<ItemStack> getTurtleInventory() {
+    public List<ItemStack> getTurtleInventory()
+    {
         List<ItemStack> inventory = new ArrayList<ItemStack>();
-        for (int slot = 0; slot < turtle.getInventorySize(); slot++) {
+        for (int slot = 0; slot < turtle.getInventorySize(); slot++)
+        {
             ItemStack stack = turtle.getSlotContents(slot);
             if (stack != null)
                 inventory.add(stack);
@@ -117,17 +149,20 @@ public class ChemistryTurtleUpgradePeripherial implements IHostedPeripheral, IMi
     }
 
     @Override
-    public SynthesisRecipe getSynthesisRecipe() {
+    public SynthesisRecipe getSynthesisRecipe()
+    {
         return this.synthesisRecipe;
     }
 
     @Override
-    public void setSynthesisRecipe(SynthesisRecipe synthesisRecipe) {
+    public void setSynthesisRecipe(SynthesisRecipe synthesisRecipe)
+    {
         this.synthesisRecipe = synthesisRecipe;
     }
 
     @Override
-    public ICCMethod[] getMethods() {
+    public ICCMethod[] getMethods()
+    {
         return methods;
     }
 

@@ -1,7 +1,5 @@
 package minechem.client.gui;
 
-import cpw.mods.fml.common.network.IGuiHandler;
-import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerChemicalStorage;
 import minechem.common.containers.ContainerChemistJournal;
@@ -15,10 +13,20 @@ import minechem.common.containers.ContainerSynthesis;
 import minechem.common.containers.CotainerTable;
 import minechem.common.polytool.ContainerPolytool;
 import minechem.common.polytool.GuiPolytool;
-import minechem.common.tileentity.*;
+import minechem.common.tileentity.TileEntityBlueprintProjector;
+import minechem.common.tileentity.TileEntityChemicalStorage;
+import minechem.common.tileentity.TileEntityDecomposer;
+import minechem.common.tileentity.TileEntityFission;
+import minechem.common.tileentity.TileEntityFusion;
+import minechem.common.tileentity.TileEntityLeadedChest;
+import minechem.common.tileentity.TileEntityMicroscope;
+import minechem.common.tileentity.TileEntityProxy;
+import minechem.common.tileentity.TileEntitySynthesis;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.network.IGuiHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class GuiHandler implements IGuiHandler
 {
@@ -137,42 +145,42 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntityLeadedChest)
         {
             return new GuiLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntityMicroscope)
         {
             return new GuiMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntitySynthesis)
         {
             return new GuiSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntityFusion)
         {
             return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntityProxy)
         {
             return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
-        
+
         if (tileEntity instanceof TileEntityBlueprintProjector)
         {
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntityChemicalStorage)
         {
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         }
-        
+
         if (tileEntity instanceof TileEntityFission)
         {
             return new GuiFission(player.inventory, (TileEntityFission) tileEntity);

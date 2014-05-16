@@ -7,7 +7,6 @@ import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeDirection;
 
 public class TabStateControlDecomposer extends TabStateControl
 {

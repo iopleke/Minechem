@@ -1,6 +1,5 @@
 package minechem.client.gui.tabs;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import minechem.client.gui.GuiContainerTabbed;
 import minechem.common.ModMinechem;
 import minechem.common.utils.ConstantValue;
@@ -13,6 +12,8 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.client.FMLClientHandler;
 
 public abstract class Tab
 {

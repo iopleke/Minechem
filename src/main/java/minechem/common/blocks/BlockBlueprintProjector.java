@@ -1,5 +1,7 @@
 package minechem.common.blocks;
 
+import java.util.ArrayList;
+
 import minechem.common.CommonProxy;
 import minechem.common.ModMinechem;
 import minechem.common.blueprint.MinechemBlueprint;
@@ -13,11 +15,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.ArrayList;
+public class BlockBlueprintProjector extends BlockMinechemContainer
+{
 
-public class BlockBlueprintProjector extends BlockMinechemContainer {
-
-    public BlockBlueprintProjector(int id) {
+    public BlockBlueprintProjector(int id)
+    {
         super(id, Material.iron);
         setUnlocalizedName("minechem.blockBlueprintProjector");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
@@ -25,36 +27,43 @@ public class BlockBlueprintProjector extends BlockMinechemContainer {
     }
 
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is) {
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is)
+    {
         super.onBlockPlacedBy(world, x, y, z, el, is);
         int facing = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
     }
 
     @Override
-    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9) {
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
+    {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityBlueprintProjector) {
+        if (tileEntity instanceof TileEntityBlueprintProjector)
+        {
             entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
             return true;
         }
         return false;
     }
 
-    private ItemStack takeBlueprintFromProjector(TileEntityBlueprintProjector projector) {
+    private ItemStack takeBlueprintFromProjector(TileEntityBlueprintProjector projector)
+    {
         MinechemBlueprint blueprint = projector.takeBlueprint();
         ItemStack blueprintItem = ItemBlueprint.createItemStackFromBlueprint(blueprint);
         return blueprintItem;
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world) {
+    public TileEntity createNewTileEntity(World world)
+    {
         return new TileEntityBlueprintProjector();
     }
 
     @Override
-    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {
-        if (tileEntity instanceof TileEntityBlueprintProjector) {
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
+    {
+        if (tileEntity instanceof TileEntityBlueprintProjector)
+        {
             TileEntityBlueprintProjector projector = (TileEntityBlueprintProjector) tileEntity;
             if (projector.hasBlueprint())
                 itemStacks.add(takeBlueprintFromProjector(projector));
@@ -63,17 +72,20 @@ public class BlockBlueprintProjector extends BlockMinechemContainer {
     }
 
     @Override
-    public boolean renderAsNormalBlock() {
+    public boolean renderAsNormalBlock()
+    {
         return false;
     }
 
     @Override
-    public int getRenderType() {
+    public int getRenderType()
+    {
         return CommonProxy.RENDER_ID;
     }
 
     @Override
-    public boolean isOpaqueCube() {
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 

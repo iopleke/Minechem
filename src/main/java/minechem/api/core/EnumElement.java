@@ -1,7 +1,24 @@
 package minechem.api.core;
 
-import static minechem.api.core.EnumClassification.*;
-import static minechem.api.core.EnumRadioactivity.*;
+import static minechem.api.core.EnumClassification.actinide;
+import static minechem.api.core.EnumClassification.alkaliMetal;
+import static minechem.api.core.EnumClassification.alkalineEarthMetal;
+import static minechem.api.core.EnumClassification.gas;
+import static minechem.api.core.EnumClassification.halogen;
+import static minechem.api.core.EnumClassification.inertGas;
+import static minechem.api.core.EnumClassification.lanthanide;
+import static minechem.api.core.EnumClassification.liquid;
+import static minechem.api.core.EnumClassification.nonmetal;
+import static minechem.api.core.EnumClassification.otherMetal;
+import static minechem.api.core.EnumClassification.semimetallic;
+import static minechem.api.core.EnumClassification.solid;
+import static minechem.api.core.EnumClassification.transitionMetal;
+import static minechem.api.core.EnumRadioactivity.extremelyRadioactive;
+import static minechem.api.core.EnumRadioactivity.hardlyRadioactive;
+import static minechem.api.core.EnumRadioactivity.highlyRadioactive;
+import static minechem.api.core.EnumRadioactivity.radioactive;
+import static minechem.api.core.EnumRadioactivity.slightlyRadioactive;
+import static minechem.api.core.EnumRadioactivity.stable;
 import net.minecraft.util.StatCollector;
 
 public enum EnumElement

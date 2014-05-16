@@ -1,5 +1,7 @@
 package minechem.client.gui;
 
+import java.util.ArrayList;
+
 import minechem.api.recipe.DecomposerRecipe;
 import minechem.api.recipe.DecomposerRecipeChance;
 import minechem.api.recipe.DecomposerRecipeSelect;
@@ -20,8 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
 
 public class GuiMicroscope extends GuiContainerTabbed
 {

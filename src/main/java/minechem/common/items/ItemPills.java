@@ -1,7 +1,5 @@
 package minechem.common.items;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minechem.common.ModMinechem;
 import minechem.common.utils.ConstantValue;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -9,10 +7,14 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemPills extends ItemFood {
+public class ItemPills extends ItemFood
+{
     // PILLZ HERE!!!!!!!!!!
-    public ItemPills(int id, int heal) {
+    public ItemPills(int id, int heal)
+    {
         super(id, heal, 0.4F, false);
         setMaxDamage(0);
         setMaxStackSize(32);
@@ -21,8 +23,11 @@ public class ItemPills extends ItemFood {
         this.setAlwaysEdible();
     }
 
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player) {
-        if (player.canEat(true)) {
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
+    {
+        if (player.canEat(true))
+        {
             player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
         }
 
@@ -30,14 +35,15 @@ public class ItemPills extends ItemFood {
     }
 
     @Override
-    public int getMaxItemUseDuration(ItemStack itemstack) {
+    public int getMaxItemUseDuration(ItemStack itemstack)
+    {
         return 15;
     }
 
-
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir) {
+    public void registerIcons(IconRegister ir)
+    {
         itemIcon = ir.registerIcon(ConstantValue.PILL_TEX);
     }
 }

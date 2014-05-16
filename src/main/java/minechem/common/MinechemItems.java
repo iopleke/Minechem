@@ -1,13 +1,18 @@
 package minechem.common;
 
-
 import minechem.api.core.EnumElement;
-import minechem.common.items.*;
+import minechem.common.items.ItemAtomicManipulator;
+import minechem.common.items.ItemBlueprint;
+import minechem.common.items.ItemChemistJournal;
+import minechem.common.items.ItemElement;
+import minechem.common.items.ItemFusionStar;
+import minechem.common.items.ItemLens;
+import minechem.common.items.ItemMolecule;
+import minechem.common.items.ItemPills;
+import minechem.common.items.PhotonicInduction;
 import minechem.common.polytool.ItemPolytool;
-import minechem.common.utils.MinechemHelper;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MinechemItems
@@ -39,7 +44,7 @@ public class MinechemItems
         journal = new ItemChemistJournal(Settings.ChemistJournal);
         EmptyPillz = new ItemPills(Settings.EmptyPills, 0);
         polytool = new ItemPolytool(Settings.Polytool);
-        
+
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);

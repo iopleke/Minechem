@@ -1,8 +1,9 @@
 package minechem.client.nei;
 
-import codechicken.core.gui.GuiDraw;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.api.core.Chemical;
 import minechem.api.recipe.DecomposerRecipe;
 import minechem.api.recipe.DecomposerRecipeChance;
@@ -15,10 +16,9 @@ import minechem.common.utils.ConstantValue;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
+import codechicken.core.gui.GuiDraw;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 {

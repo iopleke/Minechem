@@ -3,7 +3,8 @@ package minechem.common;
 import minechem.api.core.EnumRadioactivity;
 import net.minecraft.item.ItemStack;
 
-public class RadiationInfo {
+public class RadiationInfo
+{
 
     public long radiationLife;
     public long lastRadiationUpdate;
@@ -12,7 +13,8 @@ public class RadiationInfo {
     public ItemStack itemstack;
     public EnumRadioactivity radioactivity;
 
-    public RadiationInfo(ItemStack itemstack, long radiationLife, long lastRadiationUpdate, int dimensionID, EnumRadioactivity radioactivity) {
+    public RadiationInfo(ItemStack itemstack, long radiationLife, long lastRadiationUpdate, int dimensionID, EnumRadioactivity radioactivity)
+    {
         this.itemstack = itemstack;
         this.radiationLife = radiationLife;
         this.dimensionID = dimensionID;
@@ -20,7 +22,8 @@ public class RadiationInfo {
         this.radioactivity = radioactivity;
     }
 
-    public RadiationInfo(ItemStack itemstack, EnumRadioactivity radioactivity) {
+    public RadiationInfo(ItemStack itemstack, EnumRadioactivity radioactivity)
+    {
         this.itemstack = itemstack;
         this.radioactivity = radioactivity;
         this.radiationLife = 0;
@@ -28,7 +31,8 @@ public class RadiationInfo {
         this.lastRadiationUpdate = 0;
     }
 
-    public boolean isRadioactive() {
+    public boolean isRadioactive()
+    {
         return this.radioactivity != EnumRadioactivity.stable;
     }
 }

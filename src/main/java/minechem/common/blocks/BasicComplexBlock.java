@@ -1,9 +1,11 @@
 package minechem.common.blocks;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+import java.util.Random;
+
 import minechem.api.IBlock;
 import minechem.client.ClientProxy;
+import minechem.common.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -16,9 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Icon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.Random;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public abstract class BasicComplexBlock extends Block implements IBlock
 {
@@ -65,6 +66,7 @@ public abstract class BasicComplexBlock extends Block implements IBlock
 
     }
 
+    @Override
     public boolean inCreativeTab()
     {
         return true;
@@ -100,7 +102,7 @@ public abstract class BasicComplexBlock extends Block implements IBlock
                         droppedStack.setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
                     }
 
-                    EntityItem droppedEntityItem = new EntityItem(world, (double) ((float) x + randomX), (double) ((float) y + randomY), (double) ((float) z + randomZ), droppedStack);
+                    EntityItem droppedEntityItem = new EntityItem(world, x + randomX, y + randomY, z + randomZ, droppedStack);
                     world.spawnEntityInWorld(droppedEntityItem);
                 }
             }
@@ -115,7 +117,7 @@ public abstract class BasicComplexBlock extends Block implements IBlock
     {
         if (this.hasModel())
         {
-            return ClientProxy.RENDER_ID;
+            return CommonProxy.RENDER_ID;
         }
         return 0;
     }
