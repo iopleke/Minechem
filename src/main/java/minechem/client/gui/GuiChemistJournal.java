@@ -14,7 +14,6 @@ import minechem.common.MinechemItems;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerChemistJournal;
 import minechem.common.network.PacketActiveJournalItem;
-import minechem.common.network.PacketHandler;
 import minechem.common.recipe.DecomposerRecipeHandler;
 import minechem.common.recipe.SynthesisRecipeHandler;
 import minechem.common.utils.ConstantValue;
@@ -26,6 +25,8 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalScrollContainer
 {
@@ -156,7 +157,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         currentItemStack = itemstack;
         MinechemItems.journal.setActiveStack(itemstack, journalStack);
         PacketActiveJournalItem packet = new PacketActiveJournalItem(itemstack, player);
-        PacketHandler.getInstance().activeJournalItemHandler.sendToServer(packet);
+        PacketDispatcher.sendPacketToServer(packet.makePacket());
 
         SynthesisRecipe synthesisRecipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(itemstack);
         DecomposerRecipe decomposerRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);

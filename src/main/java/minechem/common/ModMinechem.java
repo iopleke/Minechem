@@ -14,7 +14,7 @@ import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.coating.CoatingRecipe;
 import minechem.common.coating.CoatingSubscribe;
 import minechem.common.coating.EnchantmentCoated;
-import minechem.common.network.PacketHandler;
+import minechem.common.network.MinechemPacketHandler;
 import minechem.common.polytool.PolytoolEventHandler;
 import minechem.common.recipe.MinechemRecipes;
 import minechem.common.utils.ConstantValue;
@@ -54,7 +54,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = "5.0.3", useMetadata = false, acceptedMinecraftVersions = "[1.6.4,)", dependencies = "required-after:Forge@[9.11.1.953,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
 @ModstatInfo(prefix = ModMinechem.ID)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels =
-{ ModMinechem.CHANNEL_NAME }, packetHandler = PacketHandler.class)
+{ ModMinechem.CHANNEL_NAME }, packetHandler = MinechemPacketHandler.class)
 public class ModMinechem
 {
     /** Internal mod name used for reference purposes and resource gathering. **/

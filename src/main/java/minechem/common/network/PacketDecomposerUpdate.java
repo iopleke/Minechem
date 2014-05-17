@@ -1,50 +1,53 @@
 package minechem.common.network;
 
-import ljdp.easypacket.EasyPacketData;
-import minechem.common.tileentity.MinechemTileEntity;
 import minechem.common.tileentity.TileEntityDecomposer;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.ForgeDirection;
-import cpw.mods.fml.common.network.Player;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+
+import cpw.mods.fml.relauncher.Side;
 
 public class PacketDecomposerUpdate extends PacketPowerReceptorUpdate
 {
-    protected TileEntityDecomposer decomposer;
-
-    @EasyPacketData
+    protected TileEntityDecomposer tileEntity;
     int state;
-
-    @EasyPacketData
     long energyUsage;
 
     public PacketDecomposerUpdate(TileEntityDecomposer decomposer)
     {
         super(decomposer);
-        this.decomposer = decomposer;
+        this.tileEntity = decomposer;
         this.state = decomposer.getState().ordinal();
         this.energyUsage = decomposer.getEnergy(ForgeDirection.UNKNOWN);
     }
 
     public PacketDecomposerUpdate()
     {
-        super();
+        // Required for reflection.
     }
 
     @Override
-    public boolean isChunkDataPacket()
+    public void execute(EntityPlayer player, Side side) throws ProtocolException
     {
-        return super.isChunkDataPacket();
-    }
-
-    @Override
-    public void onReceive(Player player)
-    {
-        super.onReceive(player);
+        super.execute(player, side);
         if (this.tileEntity instanceof TileEntityDecomposer)
         {
-            this.decomposer = (TileEntityDecomposer) this.tileEntity;
-            this.decomposer.setState(this.state);
-            this.decomposer.setEnergy(ForgeDirection.UNKNOWN, this.energyUsage);
+            this.tileEntity.setState(this.state);
+            this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, this.energyUsage);
         }
     }
 
+    @Override
+    public void read(ByteArrayDataInput in) throws ProtocolException
+    {
+        super.read(in);
+    }
+
+    @Override
+    public void write(ByteArrayDataOutput out)
+    {
+        super.write(out);
+    }
 }

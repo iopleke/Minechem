@@ -132,7 +132,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
         return this.energy.getEnergy() > 0;
     }
 
-    public float getRequest()
+    public long getEnergyRequest()
     {
         return this.energy.getLastEnergy();
     }

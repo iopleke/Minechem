@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import minechem.api.IBlock;
-import minechem.client.ClientProxy;
 import minechem.common.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

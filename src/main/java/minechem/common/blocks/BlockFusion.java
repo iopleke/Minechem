@@ -128,7 +128,7 @@ public class BlockFusion extends BlockMinechemContainer
     {
         super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);
 
-        /*if (oldMetadata < 2) { if (world.getBlockTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getBlockTileEntity(x, y, z);
+        /* if (oldMetadata < 2) { if (world.getBlockTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getBlockTileEntity(x, y, z);
          * 
          * world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true); } } */
 

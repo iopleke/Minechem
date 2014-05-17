@@ -3,10 +3,10 @@ package minechem.common.tileentity;
 import minechem.common.blueprint.BlueprintBlock;
 import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.network.PacketGhostBlock;
-import minechem.common.network.PacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class TileEntityGhostBlock extends MinechemTileEntity
 {
@@ -20,7 +20,9 @@ public class TileEntityGhostBlock extends MinechemTileEntity
         setBlockID(blockID);
         this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, blueprint.getBlockLookup().get(this.blockID).metadata, 3);
         if (worldObj != null && !worldObj.isRemote)
+        {
             sendUpdatePacket();
+        }
     }
 
     public void setBlueprint(MinechemBlueprint blueprint)
@@ -54,7 +56,7 @@ public class TileEntityGhostBlock extends MinechemTileEntity
     {
         PacketGhostBlock packet = new PacketGhostBlock(this);
         int dimensionID = worldObj.provider.dimensionId;
-        PacketHandler.getInstance().ghostBlockUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
+        PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
     }
 
     @Override

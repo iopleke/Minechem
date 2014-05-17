@@ -1,7 +1,7 @@
 package minechem.common.polytool;
 
 import minechem.common.items.ItemElement;
-import minechem.common.network.PacketHandler;
+import minechem.common.network.MinechemPacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -69,7 +69,7 @@ public class PolytoolInventory implements IInventory
 
             if (!player.worldObj.isRemote)
             {
-                PacketHandler.sendPolytoolUpdatePacket(PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack), 1), player);
+                MinechemPacketHandler.sendPolytoolUpdatePacket(PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack), 1), player);
             }
         }
 

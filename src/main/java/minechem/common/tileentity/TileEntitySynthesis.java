@@ -9,7 +9,6 @@ import minechem.client.ModelSynthesizer;
 import minechem.common.MinechemItems;
 import minechem.common.inventory.BoundedInventory;
 import minechem.common.inventory.Transactor;
-import minechem.common.network.PacketHandler;
 import minechem.common.network.PacketSynthesisUpdate;
 import minechem.common.recipe.SynthesisRecipeHandler;
 import minechem.common.utils.MinechemHelper;
@@ -22,10 +21,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
 public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral
 {
+    private static final int POWER_INPUT = 200;
+    private static final int MAX_POWER = 1022220;
     public static final int[] kOutput =
     { 0 };
     public static final int[] kRecipe =
@@ -34,6 +36,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     { 10, 11, 12, 13, 14, 15, 16, 17, 18 };
     public static final int[] kJournal =
     { 19 };
+
     // Slots that contain *real* items
     // For the purpose of dropping upon break. These are bottles, storage, and
     // journal.
@@ -47,10 +50,12 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         {
             l.add(v);
         }
+
         for (int v : kJournal)
         {
             l.add(v);
         }
+
         kRealSlots = new int[l.size()];
         for (int idx = 0; idx < l.size(); idx++)
         {
@@ -79,14 +84,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     private final Transactor recipeMatrixTransactor = new Transactor(recipeMatrix);
     private final Transactor journalTransactor = new Transactor(journalInventory, 1);
 
-    private static final int MAX_ENERGY_RECIEVED = 200;
-    private static final int MAX_ENERGY_STORED = 1022220;
-
-    private boolean hasFullEnergy;
-
     public TileEntitySynthesis()
     {
-        super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
+        super(MAX_POWER, POWER_INPUT);
 
         inventory = new ItemStack[getSizeInventory()];
 
@@ -181,7 +181,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
                 {
                     if (takeInputStacks())
                     {
-                        takeEnergy(currentRecipe);
                         toRemove--;
                     }
                     else
@@ -222,15 +221,18 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public ItemStack[] extractOutput(boolean doRemove, int maxItemCount)
     {
         if (currentRecipe == null || !takeStacksFromStorage(false) || !canAffordRecipe(currentRecipe))
+        {
             return null;
+        }
+
         ItemStack outputStack = currentRecipe.getOutput().copy();
         ItemStack[] output = new ItemStack[]
         { outputStack };
         if (doRemove)
         {
-            takeEnergy(currentRecipe);
             takeStacksFromStorage(true);
         }
+
         return output;
     }
 
@@ -280,12 +282,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         getRecipeResult();
     }
 
-    public void onOuputPickupFromSlot()
-    {
-        if (takeInputStacks())
-            takeEnergy(currentRecipe);
-    }
-
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
@@ -300,7 +296,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     {
         PacketSynthesisUpdate packet = new PacketSynthesisUpdate(this);
         int dimensionID = worldObj.provider.dimensionId;
-        PacketHandler.getInstance().synthesisUpdateHandler.sendToAllPlayersInDimension(packet, dimensionID);
+        PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
     }
 
     @Override
@@ -326,7 +322,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
         super.setInventorySlotContents(slot, itemstack);
         if (slot == kJournal[0] && itemstack != null)
+        {
             onPutJournal(itemstack);
+        }
     }
 
     public boolean takeStacksFromStorage(boolean doTake)
@@ -335,6 +333,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         {
             return false;
         }
+
         List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
         ItemStack[] storage = storageInventory.copyInventoryToArray();
         for (ItemStack ingredient : ingredients)
@@ -342,6 +341,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             if (!takeStackFromStorage(ingredient, storage))
                 return false;
         }
+
         if (doTake)
         {
             storageInventory.setInventoryStacks(storage);
@@ -353,28 +353,10 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public void updateEntity()
     {
         super.updateEntity();
+
         if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
+        {
             sendUpdatePacket();
-
-        float energyStored = this.getEnergy(ForgeDirection.UNKNOWN);
-        if (energyStored >= this.getEnergyCapacity(ForgeDirection.UP))
-        {
-            hasFullEnergy = true;
-        }
-
-        if (hasFullEnergy && energyStored < this.getEnergyCapacity(ForgeDirection.UP) / 2)
-        {
-            hasFullEnergy = false;
-        }
-
-        if (this.getEnergy(ForgeDirection.UNKNOWN) >= this.getEnergyCapacity(ForgeDirection.UP))
-        {
-            hasFullEnergy = true;
-        }
-
-        if (hasFullEnergy && this.getEnergy(ForgeDirection.UNKNOWN) < this.getEnergyCapacity(ForgeDirection.UP) / 2)
-        {
-            hasFullEnergy = false;
         }
 
         if (currentRecipe != null && inventory[kOutput[0]] == null)
@@ -408,6 +390,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     {
         ItemStack[] recipeMatrixItems = getRecipeMatrixItems();
         SynthesisRecipe recipe = SynthesisRecipeHandler.instance.getRecipeFromInput(recipeMatrixItems);
+
         if (recipe != null)
         {
             inventory[kOutput[0]] = recipe.getOutput().copy();
@@ -432,15 +415,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    public long lastRecipeTick = 0;
-
-    private void takeEnergy(SynthesisRecipe recipe)
-    {
-        int energyCost = recipe.energyCost();
-        this.lastRecipeTick = worldObj.getTotalWorldTime();
-        this.consumeEnergy(energyCost);
-    }
-
     private boolean takeStackFromStorage(ItemStack ingredient, ItemStack[] storage)
     {
         int ingredientAmountLeft = ingredient.stackSize;
@@ -452,10 +426,16 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
                 int amountToTake = Math.min(storageItem.stackSize, ingredientAmountLeft);
                 ingredientAmountLeft -= amountToTake;
                 storageItem.stackSize -= amountToTake;
+
                 if (storageItem.stackSize <= 0)
+                {
                     storage[slot] = null;
+                }
+
                 if (ingredientAmountLeft <= 0)
+                {
                     break;
+                }
             }
         }
         return ingredientAmountLeft == 0;
@@ -468,6 +448,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             takeStacksFromStorage(true);
             return true;
         }
+
         return false;
     }
 
@@ -484,7 +465,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         {
             template = outputStack.copy();
             if (template.stackSize == 0)
+            {
                 template.stackSize = 1;
+            }
         }
         return template;
     }
@@ -492,15 +475,18 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     public List<ItemStack> getOutput(int amount, boolean all)
     {
         if (currentRecipe == null)
+        {
             return null;
+        }
+
         ItemStack template = getOutputTemplate();
         List<ItemStack> outputs = new ArrayList<ItemStack>();
         ItemStack initialStack = template.copy();
         initialStack.stackSize = 0;
         outputs.add(initialStack);
+
         while (canTakeOutputStack() && (amount > 0 || all) && takeInputStacks())
         {
-            takeEnergy(currentRecipe);
             ItemStack output = outputs.get(outputs.size() - 1);
             if (output.stackSize + template.stackSize > output.getMaxStackSize())
             {
@@ -517,9 +503,11 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
             {
                 output.stackSize += template.stackSize;
             }
+
             onInventoryChanged();
             amount--;
         }
+
         return outputs;
     }
 
@@ -675,6 +663,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
                 return;
             }
         }
+
         worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord + 2, zCoord, newStack));
     }
 }

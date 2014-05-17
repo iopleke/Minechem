@@ -10,7 +10,6 @@ import minechem.client.ModelDecomposer;
 import minechem.common.inventory.BoundedInventory;
 import minechem.common.inventory.Transactor;
 import minechem.common.network.PacketDecomposerUpdate;
-import minechem.common.network.PacketHandler;
 import minechem.common.recipe.DecomposerFluidRecipe;
 import minechem.common.recipe.DecomposerRecipeHandler;
 import minechem.common.utils.MinechemHelper;
@@ -26,11 +25,11 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral, IFluidHandler
 {
-
     public static final int[] kInput =
     { 0 };
     public static final int[] kOutput =
@@ -114,6 +113,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
             }
         }
+
         return false;
     }
 
@@ -138,6 +138,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         {
             result[i] = new FluidTankInfo(fluids.get(i), 100000);
         }
+
         result[result.length - 1] = new FluidTankInfo(null, 10000);
         return result;
     }
@@ -219,7 +220,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
         PacketDecomposerUpdate packetDecomposerUpdate = new PacketDecomposerUpdate(this);
         int dimensionID = worldObj.provider.dimensionId;
-        PacketHandler.getInstance().decomposerUpdateHandler.sendToAllPlayersInDimension(packetDecomposerUpdate, dimensionID);
+        PacketDispatcher.sendPacketToAllInDimension(packetDecomposerUpdate.makePacket(), dimensionID);
     }
 
     private ItemStack getActiveStack()

@@ -290,7 +290,7 @@ public class ItemElement extends Item // implements IStorageTank
         element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
     }
-    /*@Override public int getGas(EnumGas type, Object... data) { if (type == EnumGas.HYDROGEN || type == EnumGas.OXYGEN) return Constants.GAS_PER_VIAL; else return 0; }
+    /* @Override public int getGas(EnumGas type, Object... data) { if (type == EnumGas.HYDROGEN || type == EnumGas.OXYGEN) return Constants.GAS_PER_VIAL; else return 0; }
      * 
      * @Override public void setGas(EnumGas type, int amount, Object... data) { // Can't store gas here. }
      * 

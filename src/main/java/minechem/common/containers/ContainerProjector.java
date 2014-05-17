@@ -49,7 +49,7 @@ public class ContainerProjector extends Container
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
         return null;
-        /*Slot slotObject = (Slot) inventorySlots.get(slot); if (slotObject != null && slotObject.getHasStack()) { ItemStack stackInSlot = slotObject.getStack(); ItemStack stack = stackInSlot.copy(); if (slot == 0) { if (!mergeItemStack(stackInSlot, 1,
+        /* Slot slotObject = (Slot) inventorySlots.get(slot); if (slotObject != null && slotObject.getHasStack()) { ItemStack stackInSlot = slotObject.getStack(); ItemStack stack = stackInSlot.copy(); if (slot == 0) { if (!mergeItemStack(stackInSlot, 1,
          * inventorySlots.size(), true)) return null; } else { if (!mergeItemStack(stackInSlot, 0, 1, false)) return null; }
          * 
          * if (stackInSlot.stackSize == 0) slotObject.putStack(null); else slotObject.onSlotChanged();

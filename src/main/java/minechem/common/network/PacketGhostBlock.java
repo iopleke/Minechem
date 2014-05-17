@@ -1,18 +1,19 @@
 package minechem.common.network;
 
-import ljdp.easypacket.EasyPacketData;
 import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.tileentity.TileEntityGhostBlock;
-import cpw.mods.fml.common.network.Player;
+import net.minecraft.entity.player.EntityPlayer;
+
+import com.google.common.io.ByteArrayDataInput;
+import com.google.common.io.ByteArrayDataOutput;
+
+import cpw.mods.fml.relauncher.Side;
 
 public class PacketGhostBlock extends PacketTileEntityUpdate
 {
 
     TileEntityGhostBlock ghostBlock;
-
-    @EasyPacketData
     int blueprintID;
-    @EasyPacketData
     int ghostBlockID;
 
     public PacketGhostBlock(TileEntityGhostBlock ghostBlock)
@@ -29,9 +30,9 @@ public class PacketGhostBlock extends PacketTileEntityUpdate
     }
 
     @Override
-    public void onReceive(Player player)
+    public void execute(EntityPlayer player, Side side) throws ProtocolException
     {
-        super.onReceive(player);
+        super.execute(player, side);
         if (this.tileEntity instanceof TileEntityGhostBlock)
         {
             this.ghostBlock = (TileEntityGhostBlock) this.tileEntity;
@@ -39,5 +40,17 @@ public class PacketGhostBlock extends PacketTileEntityUpdate
             this.ghostBlock.setBlueprint(blueprint);
             this.ghostBlock.setBlockID(this.ghostBlockID);
         }
+    }
+
+    @Override
+    public void read(ByteArrayDataInput in) throws ProtocolException
+    {
+        super.read(in);
+    }
+
+    @Override
+    public void write(ByteArrayDataOutput out)
+    {
+        super.write(out);
     }
 }
