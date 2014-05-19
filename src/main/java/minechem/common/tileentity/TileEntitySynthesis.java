@@ -289,7 +289,6 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         super.readFromNBT(nbtTagCompound);
         NBTTagList inventoryTagList = nbtTagCompound.getTagList("inventory");
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
-
     }
 
     @Override
@@ -340,7 +339,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         for (ItemStack ingredient : ingredients)
         {
             if (!takeStackFromStorage(ingredient, storage))
+            {
                 return false;
+            }
         }
 
         if (doTake)

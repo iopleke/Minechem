@@ -27,7 +27,6 @@ block.name.fission=\u5316\u5b66\u88c2\u53d8\u53cd\u5e94\u5806
 block.name.atomicClock=\u539f\u5b50\u949f
 tile.minechem.blockChemicalStorage.name=\u6297\u8870\u53d8\u5316\u5b66\u50a8\u7269\u7bb1
 
-
 item.name.concavelens=\u51f9\u900f\u955c
 item.name.convexlens=\u51f8\u900f\u955c
 item.name.microscopelens=\u663e\u5fae\u955c\u5934

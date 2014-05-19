@@ -69,7 +69,7 @@ public class ModMinechem
     public static final String NAME = "MineChem";
     
     /** Main version information that will be displayed in mod listing and for other purposes. **/
-    public static final String VERSION = "@VERSION@";
+    public static final String VERSION = "5.0.4";
 
     /** Reference to how many ticks make up a second in Minecraft. **/
     public static final int SECOND_IN_TICKS = 20;
@@ -81,7 +81,7 @@ public class ModMinechem
     /** Provides standard logging from the Forge. **/
     public static Logger LOGGER;
     
-    // Public extra data about our mod that Forge uses in the mods listing page for more information.
+    /** Public extra data about our mod that Forge uses in the mods listing page for more information. **/
     @Mod.Metadata(ModMinechem.ID)
     public static ModMetadata metadata;
 
@@ -122,7 +122,7 @@ public class ModMinechem
         metadata.name = ModMinechem.NAME;
         metadata.description = ModMinechem.NAME + " is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements.";
         metadata.url = "http://www.minechemmod.com/";
-        metadata.logoFile = "assets/minechem/logo.png";
+        metadata.logoFile = "assets/" + ModMinechem.ID + "/logo.png";
         metadata.version = ModMinechem.VERSION;
         metadata.authorList = Arrays.asList(new String[]
         { "pixlepix", "jakimfett", "maxwolf" });

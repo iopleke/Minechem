@@ -1,6 +1,6 @@
 package minechem.client.gui;
 
-import minechem.client.gui.tabs.TabEnergySynthesis;
+import minechem.client.gui.tabs.TabEnergy;
 import minechem.client.gui.tabs.TabHelp;
 import minechem.client.gui.tabs.TabStateControlSynthesis;
 import minechem.common.ModMinechem;
@@ -26,7 +26,7 @@ public class GuiSynthesis extends GuiContainerTabbed
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new TabStateControlSynthesis(this, synthesis));
-        addTab(new TabEnergySynthesis(this, synthesis));
+        addTab(new TabEnergy(this, synthesis));
         addTab(new TabHelp(this, MinechemHelper.getLocalString("help.synthesis")));
     }
 

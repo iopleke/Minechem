@@ -13,13 +13,11 @@ import cpw.mods.fml.relauncher.Side;
 public class PacketSynthesisUpdate extends PacketPowerReceptorUpdate
 {
     protected TileEntitySynthesis tileEntity;
-    long energyUsage;
 
-    public PacketSynthesisUpdate(TileEntitySynthesis decomposer)
+    public PacketSynthesisUpdate(TileEntitySynthesis tileSynthesis)
     {
-        super(decomposer);
-        this.tileEntity = decomposer;
-        this.energyUsage = decomposer.getEnergy(ForgeDirection.UNKNOWN);
+        super(tileSynthesis);
+        this.tileEntity = tileSynthesis;
     }
 
     public PacketSynthesisUpdate()
@@ -31,10 +29,6 @@ public class PacketSynthesisUpdate extends PacketPowerReceptorUpdate
     public void execute(EntityPlayer player, Side side) throws ProtocolException
     {
         super.execute(player, side);
-        if (this.tileEntity instanceof TileEntitySynthesis)
-        {
-            this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, this.energyUsage);
-        }
     }
 
     @Override

@@ -64,9 +64,9 @@ tab.tooltip.powered=Powered
 tab.tooltip.unpowered=Unpowered
 tab.tooltip.norecipe=No Recipe
 tab.title.energy=Energy
-tab.title.usage=Usage
-tab.title.maxUsage=Max Usage
-tab.title.stored=Stored
+tab.title.usage=Stored
+tab.title.maxUsage=Max
+tab.title.stored=Percent Fill
 tab.title.activationEnergy=Energy per item
 
 minechem.element.H=Hydrogen

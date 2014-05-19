@@ -27,7 +27,6 @@ block.name.fission=Chemische Kernspaltungskammer
 block.name.atomicClock=Atomuhr
 tile.minechem.blockChemicalStorage.name=Chemielager
 
-
 item.name.polytool=Polytool
 item.name.concavelens=Konkavlinse
 item.name.convexlens=Konvexlinse
