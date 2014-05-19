@@ -18,7 +18,6 @@ gui.journal.decomposer=Zersetzer
 gui.journal.synthesis=Synthesemaschine
 
 tile.blockChemicalDecomposer.name=Chemischer Zersetzer
-
 tile.minechem.uraniumOre.name=Uranerz
 tile.minechem.blockMicroscope.name=Mikroskop
 tile.minechem.blockSynthesis.name=Chemische Synthesemaschine
@@ -35,10 +34,10 @@ item.name.convexlens=Konvexlinse
 item.name.microscopelens=Mikroskoplinse
 item.name.projectorlens=Projektorlinse
 item.minechem.itemAtomicManipulator.name=Atomarer Manipulator
-item.name.fusionStar=Fusionsstern
+item.minechem.itemFusionStar.name=Fusionsstern
 item.name.testtube=Leeres Reagenzglas
 item.name.periodicTable=Periodensystem der Elemente
-item.name.chemistJournal=Chemisches Nachschlagewerk
+item.minechem.itemChemistJournal.name=Chemisches Nachschlagewerk
 item.name.blueprintFusion=Fusionskammer-Bauplan
 item.name.blueprintFission=Kernspaltungskammer-Bauplan
 item.name.blueprintDirewolf=Direwolf's 9x9

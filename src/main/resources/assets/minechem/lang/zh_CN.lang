@@ -18,7 +18,6 @@ gui.journal.decomposer=\u5206\u89e3\u53cd\u5e94\u53f0
 gui.journal.synthesis=\u5316\u5408\u53cd\u5e94\u53f0
 
 tile.blockChemicalDecomposer.name=\u5206\u89e3\u53cd\u5e94\u53f0
-
 tile.minechem.uraniumOre.name=\u94c0\u77ff\u77f3
 tile.minechem.blockMicroscope.name=\u663e\u5fae\u955c
 tile.minechem.blockSynthesis.name=\u5316\u5408\u53cd\u5e94\u53f0
@@ -34,10 +33,10 @@ item.name.convexlens=\u51f8\u900f\u955c
 item.name.microscopelens=\u663e\u5fae\u955c\u5934
 item.name.projectorlens=\u6295\u5f71\u955c\u5934
 item.minechem.itemAtomicManipulator.name=\u539f\u5b50\u673a\u68b0\u81c2
-item.name.fusionStar=\u805a\u53d8\u4e4b\u661f
+item.minechem.itemFusionStar.name=\u805a\u53d8\u4e4b\u661f
 item.name.testtube=\u8bd5\u7ba1
 item.name.periodicTable=\u5143\u7d20\u5468\u671f\u8868
-item.name.chemistJournal=\u5316\u5b66\u5bb6\u624b\u8bb0
+item.minechem.itemChemistJournal.name=\u5316\u5b66\u5bb6\u624b\u8bb0
 item.name.blueprintFusion=\u805a\u53d8\u53cd\u5e94\u5806\u84dd\u56fe
 item.name.blueprintFission=\u88c2\u53d8\u53cd\u5e94\u5806\u84dd\u56fe
 item.name.blueprintDirewolf=Direwolf\u76849x9\u5c0f\u5c4b\u84dd\u56fe

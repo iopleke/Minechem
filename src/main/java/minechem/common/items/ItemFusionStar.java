@@ -18,7 +18,7 @@ public class ItemFusionStar extends Item
         this.maxStackSize = 1;
         this.setMaxDamage(2000);
         this.setNoRepair();
-        this.setUnlocalizedName("name.fusionStar");
+        this.setUnlocalizedName("minechem.itemFusionStar");
     }
 
     @Override
@@ -27,7 +27,7 @@ public class ItemFusionStar extends Item
     {
         int damage = itemStack.getItemDamage();
         int usesLeft = itemStack.getMaxDamage() - damage;
-        list.add(usesLeft + " Exajoules");
+        list.add(usesLeft + " Uses Left");
     }
 
     @Override
