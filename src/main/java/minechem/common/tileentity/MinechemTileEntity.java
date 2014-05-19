@@ -89,16 +89,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
         return this.energy.getEnergy();
     }
 
-    public boolean isEnergyEmpty()
-    {
-        return this.energy.isEmpty();
-    }
-
-    public boolean isEnergyFull()
-    {
-        return this.energy.isFull();
-    }
-
     @Override
     public long getEnergyCapacity(ForgeDirection from)
     {
@@ -130,21 +120,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
     public boolean isPowered()
     {
         return this.energy.getEnergy() > 0;
-    }
-
-    public long getEnergyRequest()
-    {
-        return this.energy.getLastEnergy();
-    }
-
-    public boolean didEnergyStoredChange()
-    {
-        return this.energy.didEnergyStateChange();
-    }
-
-    public boolean didEnergyUsageChange()
-    {
-        return this.energy.didEnergyStateChange();
     }
 
     @Override
@@ -249,8 +224,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
     {
     }
 
-    abstract void sendUpdatePacket();
-
     @Override
     public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
     {
@@ -306,4 +279,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
             itemstack.stackSize = this.getInventoryStackLimit();
         this.inventory[slot] = itemstack;
     }
+
+    public abstract void sendUpdatePacket();
 }

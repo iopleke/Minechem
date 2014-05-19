@@ -30,10 +30,8 @@ import cpw.mods.fml.relauncher.Side;
 
 public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, IMinechemMachinePeripheral, IFluidHandler
 {
-    public static final int[] kInput =
-    { 0 };
-    public static final int[] kOutput =
-    { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    public static final int[] kInput = { 0 };
+    public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     private ArrayList<ItemStack> outputBuffer;
     public final int kInputSlot = 0;
     public final int kOutputSlotStart = 1;
@@ -187,7 +185,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         }
 
         this.doWork();
-        if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
+        if (!worldObj.isRemote)
         {
             sendUpdatePacket();
         }
@@ -239,7 +237,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         return activeStack;
     }
 
-    // bad code is fun!
     public void doWork()
     {
         if (state != State.kProcessActive)
@@ -249,8 +246,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
         if (!worldObj.isRemote)
         {
-            while (!this.isEnergyEmpty())
+            while (this.isPowered())
             {
+                // Consume energy to create the needed base elements.
+                this.consume();
+                
                 state = moveBufferItemToOutputSlot();
                 if (state != State.kProcessActive)
                 {
@@ -483,7 +483,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         {
             return "decomposing";
         }
-        else if (!this.isEnergyEmpty())
+        else if (!this.isPowered())
         {
             return "powered";
         }

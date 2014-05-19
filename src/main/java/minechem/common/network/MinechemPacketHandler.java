@@ -65,7 +65,6 @@ public class MinechemPacketHandler implements IPacketHandler
             else
             {
                 // dispatcher.onPacketData(manager, packet, player);
-
                 DataInputStream inputStream = new DataInputStream(new ByteArrayInputStream(packet.data));
                 int type = -1;
                 try
@@ -74,7 +73,6 @@ public class MinechemPacketHandler implements IPacketHandler
                 }
                 catch (IOException e)
                 {
-
                     e.printStackTrace();
                 }
             }

@@ -264,15 +264,10 @@ public class TileEntityFission extends TileEntityMultiBlock implements IMinechem
     }
 
     @Override
-    void sendUpdatePacket()
+    public void sendUpdatePacket()
     {
-        // TODO Auto-generated method stub
-
+        
     }
-
-    // Horrible design here
-    // These are abstract methods
-    // Of TileEntityMultiBlock
 
     @Override
     public ItemStack takeFusionStar()

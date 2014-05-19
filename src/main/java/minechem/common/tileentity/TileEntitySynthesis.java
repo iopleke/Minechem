@@ -11,6 +11,7 @@ import minechem.common.inventory.BoundedInventory;
 import minechem.common.inventory.Transactor;
 import minechem.common.network.PacketSynthesisUpdate;
 import minechem.common.recipe.SynthesisRecipeHandler;
+import minechem.common.tileentity.TileEntityDecomposer.State;
 import minechem.common.utils.MinechemHelper;
 import minechem.computercraft.IMinechemMachinePeripheral;
 import net.minecraft.entity.item.EntityItem;
@@ -130,16 +131,16 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         return false;
     }
 
-    /** Returns true iff the given inventory slot is a "ghost" slot used to show the output of the configured recipe. Ghost output items don't really exist and should never be dumped or extracted, except when the recipe is crafted.
+    /** Returns true if the given inventory slot is a "ghost" slot used to show the output of the configured recipe. Ghost output items don't really exist and should never be dumped or extracted, except when the recipe is crafted.
      * 
      * @param slotId Slot Id to check.
-     * @return true iff the slot is a "ghost" slot for the recipe output. */
+     * @return true if the slot is a "ghost" slot for the recipe output. */
     public boolean isGhostOutputSlot(int slotId)
     {
         return valueIn(slotId, kOutput);
     }
 
-    /** Returns true iff the given inventory slot is a "ghost" slot used to show the inputs of a crafting recipe. Items in these slots don't really exist and should never be dumped or extracted.
+    /** Returns true if the given inventory slot is a "ghost" slot used to show the inputs of a crafting recipe. Items in these slots don't really exist and should never be dumped or extracted.
      * 
      * @param slotId Slot Id to check.
      * @return true iff the slot is a "ghost" slot for the recipe. */
@@ -148,7 +149,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         return valueIn(slotId, kRecipe);
     }
 
-    /** Returns true iff the given inventory slot holds a "ghost" item that doesn't really exist.
+    /** Returns true if the given inventory slot holds a "ghost" item that doesn't really exist.
      * 
      * @param slotId Slot Id to check.
      * @return true iff the slot holds a "ghost" item. */
@@ -157,7 +158,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         return isGhostOutputSlot(slotId) || isGhostCraftingRecipeSlot(slotId);
     }
 
-    /** Returns true iff the given inventory slot can hold a real (non-ghost) item, i.e., one that is really stored in the inventory.
+    /** Returns true if the given inventory slot can hold a real (non-ghost) item, i.e., one that is really stored in the inventory.
      * 
      * @param slotId Slot Id to check.
      * @return true iff the slot can hold a real item. */
@@ -294,9 +295,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     @Override
     public void sendUpdatePacket()
     {
-        PacketSynthesisUpdate packet = new PacketSynthesisUpdate(this);
+        PacketSynthesisUpdate packetSynthesisUpdate = new PacketSynthesisUpdate(this);
         int dimensionID = worldObj.provider.dimensionId;
-        PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
+        PacketDispatcher.sendPacketToAllInDimension(packetSynthesisUpdate.makePacket(), dimensionID);
     }
 
     @Override
@@ -354,7 +355,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     {
         super.updateEntity();
 
-        if (!worldObj.isRemote && (this.didEnergyStoredChange() || this.didEnergyUsageChange()))
+        if (!worldObj.isRemote)
         {
             sendUpdatePacket();
         }

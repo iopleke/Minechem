@@ -51,7 +51,7 @@ public class TabStateControlDecomposer extends TabStateControl
         {
             this.state = TabState.jammed;
         }
-        else if (!decomposer.isEnergyEmpty())
+        else if (decomposer.isPowered())
         {
             this.state = TabState.powered;
         }

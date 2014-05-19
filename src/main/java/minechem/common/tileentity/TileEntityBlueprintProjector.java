@@ -374,7 +374,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     }
 
     @Override
-    void sendUpdatePacket()
+    public void sendUpdatePacket()
     {
     }
 

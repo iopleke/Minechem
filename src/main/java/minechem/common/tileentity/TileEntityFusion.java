@@ -376,9 +376,8 @@ public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemM
     }
 
     @Override
-    void sendUpdatePacket()
+    public void sendUpdatePacket()
     {
-        // TODO Auto-generated method stub
 
     }
 

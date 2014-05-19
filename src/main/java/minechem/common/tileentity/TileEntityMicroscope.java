@@ -221,9 +221,8 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     }
 
     @Override
-    void sendUpdatePacket()
+    public void sendUpdatePacket()
     {
-        // TODO Auto-generated method stub
 
     }
 
