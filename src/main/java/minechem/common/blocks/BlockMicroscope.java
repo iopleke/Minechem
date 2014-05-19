@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import minechem.common.CommonProxy;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityMicroscope;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -73,8 +73,8 @@ public class BlockMicroscope extends BlockMinechemContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        blockIcon = ir.registerIcon(ConstantValue.MICROSCOPE_TEX);
-        front = ir.registerIcon(ConstantValue.MICROSCOPE_FRONT_TEX);
+        blockIcon = ir.registerIcon(Reference.MICROSCOPE_TEX);
+        front = ir.registerIcon(Reference.MICROSCOPE_FRONT_TEX);
     }
 
     @Override

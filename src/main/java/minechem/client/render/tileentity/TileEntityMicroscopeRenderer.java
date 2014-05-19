@@ -3,7 +3,7 @@ package minechem.client.render.tileentity;
 import minechem.client.ModelMicroscope;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityMicroscope;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -33,7 +33,7 @@ public class TileEntityMicroscopeRenderer extends TileEntitySpecialRenderer
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.MICROSCOPE_MODEL));
+            bindTexture(new ResourceLocation(ModMinechem.ID, Reference.MICROSCOPE_MODEL));
             modelMicroscope.render(0.0625F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_LIGHTING);

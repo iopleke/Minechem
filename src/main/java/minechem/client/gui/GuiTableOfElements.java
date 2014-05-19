@@ -3,7 +3,7 @@ package minechem.client.gui;
 import minechem.client.gui.tabs.TabJournal;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerChemistJournal;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ResourceLocation;
@@ -34,7 +34,7 @@ public class GuiTableOfElements extends GuiContainerTabbed
         GL11.glPushMatrix();
         GL11.glScalef(2.1F, 1.5F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.table_HEX));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.table_HEX));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

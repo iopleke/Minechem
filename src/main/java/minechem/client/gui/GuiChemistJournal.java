@@ -16,7 +16,7 @@ import minechem.common.containers.ContainerChemistJournal;
 import minechem.common.network.PacketActiveJournalItem;
 import minechem.common.recipe.DecomposerRecipeHandler;
 import minechem.common.recipe.SynthesisRecipeHandler;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -260,7 +260,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         GL11.glPushMatrix();
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.JOURNAL_GUI));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
 
@@ -286,7 +286,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.JOURNAL_GUI));
         drawTexturedModalRect(8 / 2, 164 / 2, 161 / 2, 192 / 2, 20 / 2, 20 / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -306,7 +306,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
 
         GL11.glScalef(2.0F, 2.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.JOURNAL_GUI));
 
         drawTexturedModalRect(197 / 2, 41 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
         if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped())

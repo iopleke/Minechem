@@ -11,7 +11,7 @@ import minechem.common.MinechemItems;
 import minechem.common.ModMinechem;
 import minechem.common.RadiationInfo;
 import minechem.common.polytool.PolytoolHelper;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.EnumColor;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -103,22 +103,22 @@ public class ItemElement extends Item // implements IStorageTank
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
-        gas[0] = ir.registerIcon(ConstantValue.ELEMENT_GAS1_TEX);
-        gas[1] = ir.registerIcon(ConstantValue.ELEMENT_GAS2_TEX);
-        gas[2] = ir.registerIcon(ConstantValue.ELEMENT_GAS3_TEX);
-        gas[3] = ir.registerIcon(ConstantValue.ELEMENT_GAS4_TEX);
-        gas[4] = ir.registerIcon(ConstantValue.ELEMENT_GAS5_TEX);
-        gas[5] = ir.registerIcon(ConstantValue.ELEMENT_GAS6_TEX);
-        gas[6] = ir.registerIcon(ConstantValue.ELEMENT_GAS7_TEX);
-        liquid[0] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID1_TEX);
-        liquid[1] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID2_TEX);
-        liquid[2] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID3_TEX);
-        liquid[3] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID4_TEX);
-        liquid[4] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID5_TEX);
-        liquid[5] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID6_TEX);
-        liquid[6] = ir.registerIcon(ConstantValue.ELEMENT_LIQUID7_TEX);
-        solid = ir.registerIcon(ConstantValue.ELEMENT_SOLID_TEX);
+        itemIcon = ir.registerIcon(Reference.FILLED_TESTTUBE_TEX);
+        gas[0] = ir.registerIcon(Reference.ELEMENT_GAS1_TEX);
+        gas[1] = ir.registerIcon(Reference.ELEMENT_GAS2_TEX);
+        gas[2] = ir.registerIcon(Reference.ELEMENT_GAS3_TEX);
+        gas[3] = ir.registerIcon(Reference.ELEMENT_GAS4_TEX);
+        gas[4] = ir.registerIcon(Reference.ELEMENT_GAS5_TEX);
+        gas[5] = ir.registerIcon(Reference.ELEMENT_GAS6_TEX);
+        gas[6] = ir.registerIcon(Reference.ELEMENT_GAS7_TEX);
+        liquid[0] = ir.registerIcon(Reference.ELEMENT_LIQUID1_TEX);
+        liquid[1] = ir.registerIcon(Reference.ELEMENT_LIQUID2_TEX);
+        liquid[2] = ir.registerIcon(Reference.ELEMENT_LIQUID3_TEX);
+        liquid[3] = ir.registerIcon(Reference.ELEMENT_LIQUID4_TEX);
+        liquid[4] = ir.registerIcon(Reference.ELEMENT_LIQUID5_TEX);
+        liquid[5] = ir.registerIcon(Reference.ELEMENT_LIQUID6_TEX);
+        liquid[6] = ir.registerIcon(Reference.ELEMENT_LIQUID7_TEX);
+        solid = ir.registerIcon(Reference.ELEMENT_SOLID_TEX);
     }
 
     @Override

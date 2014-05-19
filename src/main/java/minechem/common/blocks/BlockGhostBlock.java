@@ -3,7 +3,7 @@ package minechem.common.blocks;
 import java.util.Random;
 
 import minechem.common.tileentity.TileEntityGhostBlock;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -50,9 +50,9 @@ public class BlockGhostBlock extends BlockContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        blockIcon = ir.registerIcon(ConstantValue.DEFAULT_TEX);
-        icon1 = ir.registerIcon(ConstantValue.BLUEPRINT1_TEX);
-        icon2 = ir.registerIcon(ConstantValue.BLUEPRINT2_TEX);
+        blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
+        icon1 = ir.registerIcon(Reference.BLUEPRINT1_TEX);
+        icon2 = ir.registerIcon(Reference.BLUEPRINT2_TEX);
     }
 
     @Override

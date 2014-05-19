@@ -1,7 +1,7 @@
 package minechem.computercraft;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import net.minecraft.util.Icon;
@@ -23,7 +23,7 @@ public class ItemChemistryUpgrade extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.CHEMISTRY_UPGRADE_TEX);
+        itemIcon = ir.registerIcon(Reference.CHEMISTRY_UPGRADE_TEX);
         icon = itemIcon;
     }
 }

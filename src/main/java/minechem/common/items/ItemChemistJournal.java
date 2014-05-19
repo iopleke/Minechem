@@ -5,7 +5,7 @@ import java.util.List;
 
 import minechem.common.GuiHandler;
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -160,7 +160,7 @@ public class ItemChemistJournal extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.CHEMIST_JOURNAL_TEX);
+        itemIcon = ir.registerIcon(Reference.CHEMIST_JOURNAL_TEX);
     }
 
 }

@@ -2,13 +2,16 @@ package minechem.common.utils;
 
 import minechem.common.ModMinechem;
 
-public interface ConstantValue
+public interface Reference
 {
     public static final String TEXTURE_DIR = "assets/minechem/textures/";
     public static final String TEXTURE_GUI_DIR = "textures/gui/";
     public static final String TEXTURE_MODEL_DIR = "textures/model/";
     public static final String SOUNDS_DIR = "sounds/minechem/";
     public static final String LANG_DIR = "/assets/minechem/languages/";
+    
+    /** Reference to how many ticks make up a second in Minecraft. **/
+    public static final int SECOND_IN_TICKS = 20;
 
     // Used for resourceLocations in 1.6
     public static final String TEXTURE_MOD_ID = ModMinechem.ID + ":";

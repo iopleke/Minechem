@@ -13,7 +13,7 @@ import minechem.common.containers.ContainerMicroscope;
 import minechem.common.recipe.DecomposerRecipeHandler;
 import minechem.common.recipe.SynthesisRecipeHandler;
 import minechem.common.tileentity.TileEntityMicroscope;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -90,7 +90,7 @@ public class GuiMicroscope extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.MICROSCOPE_GUI));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.MICROSCOPE_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         zLevel = 0;

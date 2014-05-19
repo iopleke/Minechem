@@ -1,7 +1,7 @@
 package minechem.common.blocks;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -25,6 +25,6 @@ public class OreUranium extends Block
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        blockIcon = ir.registerIcon(ConstantValue.URANIUM_TEX);
+        blockIcon = ir.registerIcon(Reference.URANIUM_TEX);
     }
 }

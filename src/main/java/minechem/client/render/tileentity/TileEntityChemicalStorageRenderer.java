@@ -2,7 +2,7 @@ package minechem.client.render.tileentity;
 
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityChemicalStorage;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -52,7 +52,7 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
         // if (chemicalStorage.adjacentChestZNeg == null && chemicalStorage.adjacentChestXNeg == null) {
         ModelChest var14 = this.chestModel;
 
-        bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.CHEMICAL_STORAGE_MODEL));
+        bindTexture(new ResourceLocation(ModMinechem.ID, Reference.CHEMICAL_STORAGE_MODEL));
 
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

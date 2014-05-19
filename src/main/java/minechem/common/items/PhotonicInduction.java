@@ -1,7 +1,7 @@
 package minechem.common.items;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.EnumToolMaterial;
 import net.minecraft.item.Item;
@@ -27,7 +27,7 @@ public class PhotonicInduction extends ItemPickaxe
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.PHOTONIC_INDUCTION_TEX);
+        itemIcon = ir.registerIcon(Reference.PHOTONIC_INDUCTION_TEX);
     }
 
     @Override

@@ -9,7 +9,7 @@ import minechem.common.tileentity.TileEntityFission;
 import minechem.common.tileentity.TileEntityFusion;
 import minechem.common.tileentity.TileEntityMultiBlock;
 import minechem.common.tileentity.TileEntityProxy;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -109,9 +109,9 @@ public class BlockFusion extends BlockMinechemContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        blockIcon = ir.registerIcon(ConstantValue.DEFAULT_TEX);
-        icon1 = ir.registerIcon(ConstantValue.FUSION1_TEX);
-        icon2 = ir.registerIcon(ConstantValue.FUSION2_TEX);
+        blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
+        icon1 = ir.registerIcon(Reference.FUSION1_TEX);
+        icon2 = ir.registerIcon(Reference.FUSION2_TEX);
     }
 
     @Override

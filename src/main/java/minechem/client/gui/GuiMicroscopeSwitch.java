@@ -1,7 +1,7 @@
 package minechem.client.gui;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiMicroscopeSwitch extends GuiToggleSwitch
@@ -14,7 +14,7 @@ public class GuiMicroscopeSwitch extends GuiToggleSwitch
         this.width = 13;
         this.height = 13;
         this.numStates = 2;
-        this.texture = new ResourceLocation(ModMinechem.ID, ConstantValue.MICROSCOPE_GUI);
+        this.texture = new ResourceLocation(ModMinechem.ID, Reference.MICROSCOPE_GUI);
         ToggleButton buttonSynthesis = new ToggleButton();
         buttonSynthesis.u = 176;
         buttonSynthesis.v = 124;

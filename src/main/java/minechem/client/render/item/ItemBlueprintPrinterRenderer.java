@@ -2,7 +2,7 @@ package minechem.client.render.item;
 
 import minechem.client.ModelPrinter;
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
@@ -23,7 +23,7 @@ public class ItemBlueprintPrinterRenderer extends ItemMinechemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
-        ResourceLocation texture = new ResourceLocation(ModMinechem.ID, ConstantValue.PRINTER_MODEL);
+        ResourceLocation texture = new ResourceLocation(ModMinechem.ID, Reference.PRINTER_MODEL);
         GL11.glPushMatrix();
 
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import minechem.common.CommonProxy;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityDecomposer;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -62,8 +62,8 @@ public class BlockDecomposer extends BlockMinechemContainer
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        blockIcon = ir.registerIcon(ConstantValue.DECOMPOSER_TEX);
-        front = ir.registerIcon(ConstantValue.DECOMPOSER_FRONT_TEX);
+        blockIcon = ir.registerIcon(Reference.DECOMPOSER_TEX);
+        front = ir.registerIcon(Reference.DECOMPOSER_FRONT_TEX);
 
         // Yes, this is hacky
         ModMinechem.INSTANCE.textureHook(ir);

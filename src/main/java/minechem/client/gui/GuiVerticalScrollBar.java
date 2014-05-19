@@ -1,7 +1,7 @@
 package minechem.client.gui;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
@@ -166,7 +166,7 @@ public class GuiVerticalScrollBar extends Gui
         GL11.glEnable(GL11.GL_BLEND);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ConstantValue.TEXTURE_MOD_ID + ConstantValue.TEXTURE_GUI_DIR + "allitems.png"));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.TEXTURE_MOD_ID + Reference.TEXTURE_GUI_DIR + "allitems.png"));
         if (this.container.isScrollBarActive())
         {
             drawTexturedModalRect(xpos, ypos, activeU, activeV, width, height);

@@ -1,7 +1,7 @@
 package minechem.common.items;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.item.Item;
 import cpw.mods.fml.relauncher.Side;
@@ -21,7 +21,7 @@ public class ItemAtomicManipulator extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.ATOMIC_MANIPULATOR_TEX);
+        itemIcon = ir.registerIcon(Reference.ATOMIC_MANIPULATOR_TEX);
     }
 
 }

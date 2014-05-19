@@ -12,7 +12,7 @@ import minechem.common.blueprint.BlueprintBlock;
 import minechem.common.blueprint.MinechemBlueprint;
 import minechem.common.containers.ContainerProjector;
 import minechem.common.tileentity.TileEntityBlueprintProjector;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -38,7 +38,7 @@ public class GuiProjector extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.PROJECTOR_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.PROJECTOR_GUI));
         ;
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

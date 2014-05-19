@@ -4,7 +4,7 @@ import minechem.client.gui.tabs.TabHelp;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerLeadedChest;
 import minechem.common.tileentity.TileEntityLeadedChest;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -40,7 +40,7 @@ public class GuiLeadedChest extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.LEADED_CHEST_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.LEADED_CHEST_GUI));
 
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

@@ -3,7 +3,7 @@ package minechem.common.items;
 import java.util.List;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -55,10 +55,10 @@ public class ItemLens extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        icons[0] = ir.registerIcon(ConstantValue.LENS1_TEX);
-        icons[1] = ir.registerIcon(ConstantValue.LENS2_TEX);
-        icons[2] = ir.registerIcon(ConstantValue.LENS3_TEX);
-        icons[3] = ir.registerIcon(ConstantValue.LENS4_TEX);
+        icons[0] = ir.registerIcon(Reference.LENS1_TEX);
+        icons[1] = ir.registerIcon(Reference.LENS2_TEX);
+        icons[2] = ir.registerIcon(Reference.LENS3_TEX);
+        icons[3] = ir.registerIcon(Reference.LENS4_TEX);
     }
 
 }

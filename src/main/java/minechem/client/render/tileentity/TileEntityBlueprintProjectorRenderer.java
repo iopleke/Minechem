@@ -3,7 +3,7 @@ package minechem.client.render.tileentity;
 import minechem.client.ModelProjector;
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityBlueprintProjector;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -35,12 +35,12 @@ public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRende
             if (blueprintProjector.hasBlueprint())
             {
 
-                bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.PROJECTOR_MODEL_ON));
+                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.PROJECTOR_MODEL_ON));
             }
             else
             {
 
-                bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.PROJECTOR_MODEL_OFF));
+                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.PROJECTOR_MODEL_OFF));
             }
             model.render(0.0625F);
             GL11.glDisable(GL11.GL_LIGHTING);

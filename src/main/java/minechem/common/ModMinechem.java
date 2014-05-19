@@ -18,7 +18,7 @@ import minechem.common.coating.EnchantmentCoated;
 import minechem.common.network.MinechemPacketHandler;
 import minechem.common.polytool.PolytoolEventHandler;
 import minechem.common.recipe.MinechemRecipes;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.computercraft.ICCMain;
 import minechem.fluid.FluidHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -71,9 +71,6 @@ public class ModMinechem
     /** Main version information that will be displayed in mod listing and for other purposes. **/
     public static final String VERSION = "5.0.4";
 
-    /** Reference to how many ticks make up a second in Minecraft. **/
-    public static final int SECOND_IN_TICKS = 20;
-
     /** Provides logging **/
     @Instance(value = CHANNEL_NAME)
     public static ModMinechem INSTANCE;
@@ -94,13 +91,13 @@ public class ModMinechem
     /** Provides standardized configuration file offered by the Forge. **/
     private static Configuration CONFIG;
 
-    public static final ResourceLocation ICON_ENERGY = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_power.png");
-    public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_fullEower.png");
-    public static final ResourceLocation ICON_HELP = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_help.png");
-    public static final ResourceLocation ICON_JAMMED = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_jammed.png");
-    public static final ResourceLocation ICON_NO_BOTTLES = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_noBottles.png");
-    public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_noRecipe.png");
-    public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ModMinechem.ID, ConstantValue.ICON_BASE + "i_unpowered.png");
+    public static final ResourceLocation ICON_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_power.png");
+    public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_fullEower.png");
+    public static final ResourceLocation ICON_HELP = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_help.png");
+    public static final ResourceLocation ICON_JAMMED = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_jammed.png");
+    public static final ResourceLocation ICON_NO_BOTTLES = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_noBottles.png");
+    public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_noRecipe.png");
+    public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_unpowered.png");
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -238,12 +235,12 @@ public class ModMinechem
     @SideOnly(Side.CLIENT)
     public void textureHook(IconRegister icon)
     {
-        TabStateControl.unpoweredIcon = icon.registerIcon(ConstantValue.UNPOWERED_ICON);
-        TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(ConstantValue.NO_RECIPE_ICON);
-        TabEnergy.powerIcon = icon.registerIcon(ConstantValue.POWER_ICON);
-        TabHelp.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
-        TabTable.helpIcon = icon.registerIcon(ConstantValue.HELP_ICON);
-        TabJournal.helpIcon = icon.registerIcon(ConstantValue.POWER_ICON);
+        TabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
+        TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
+        TabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
+        TabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+        TabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+        TabJournal.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 
     @ForgeSubscribe

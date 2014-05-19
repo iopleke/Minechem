@@ -5,7 +5,7 @@ import java.util.List;
 import minechem.common.MinechemItems;
 import minechem.common.ModMinechem;
 import minechem.common.blueprint.MinechemBlueprint;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -33,7 +33,7 @@ public class ItemBlueprint extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.BLUEPRINT_TEX);
+        itemIcon = ir.registerIcon(Reference.BLUEPRINT_TEX);
     }
 
     public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint)

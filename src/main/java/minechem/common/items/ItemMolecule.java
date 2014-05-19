@@ -6,7 +6,7 @@ import java.util.List;
 import minechem.api.core.EnumMolecule;
 import minechem.common.ModMinechem;
 import minechem.common.PharmacologyEffect;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -42,10 +42,10 @@ public class ItemMolecule extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.FILLED_TESTTUBE_TEX);
-        render_pass1 = ir.registerIcon(ConstantValue.MOLECULE_PASS1_TEX);
-        render_pass2 = ir.registerIcon(ConstantValue.MOLECULE_PASS2_TEX);
-        filledMolecule = ir.registerIcon(ConstantValue.FILLED_MOLECULE_TEX);
+        itemIcon = ir.registerIcon(Reference.FILLED_TESTTUBE_TEX);
+        render_pass1 = ir.registerIcon(Reference.MOLECULE_PASS1_TEX);
+        render_pass2 = ir.registerIcon(Reference.MOLECULE_PASS2_TEX);
+        filledMolecule = ir.registerIcon(Reference.FILLED_MOLECULE_TEX);
     }
 
     public ArrayList<ItemStack> getElements(ItemStack itemstack)

@@ -1,7 +1,7 @@
 package minechem.common.items;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
@@ -44,6 +44,6 @@ public class ItemPills extends ItemFood
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.PILL_TEX);
+        itemIcon = ir.registerIcon(Reference.PILL_TEX);
     }
 }

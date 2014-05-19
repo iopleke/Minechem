@@ -4,7 +4,7 @@ import minechem.client.gui.tabs.TabHelp;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerFusion;
 import minechem.common.tileentity.TileEntityFusion;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -49,7 +49,7 @@ public class GuiFusion extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.FUSION_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.FUSION_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         // DRAW GUI

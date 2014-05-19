@@ -8,7 +8,7 @@ import minechem.api.core.EnumElement;
 import minechem.common.GuiHandler;
 import minechem.common.ModMinechem;
 import minechem.common.items.ItemElement;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
@@ -97,7 +97,7 @@ public class ItemPolytool extends ItemPickaxe implements IEnergyItem
     @SideOnly(Side.CLIENT)
     public void registerIcons(IconRegister ir)
     {
-        itemIcon = ir.registerIcon(ConstantValue.POLYTOOL_TEX);
+        itemIcon = ir.registerIcon(Reference.POLYTOOL_TEX);
     }
 
     @Override

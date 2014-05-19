@@ -4,7 +4,7 @@ import java.util.List;
 
 import minechem.api.core.IRadiationShield;
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,7 +55,7 @@ public class ItemArmorRadiationShield extends ItemArmor implements IRadiationShi
     @Override
     public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
     {
-        return ConstantValue.HAZMAT_TEX;
+        return Reference.HAZMAT_TEX;
     }
 
 }

@@ -6,7 +6,7 @@ import minechem.client.gui.tabs.TabStateControlDecomposer;
 import minechem.common.ModMinechem;
 import minechem.common.containers.ContainerDecomposer;
 import minechem.common.tileentity.TileEntityDecomposer;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,7 +23,7 @@ public class GuiDecomposer extends GuiContainerTabbed
     int mouseY = 0;
     int guiWidth = 176;
     int guiHeight = 166;
-    public static ResourceLocation texture = new ResourceLocation(ModMinechem.ID, ConstantValue.DECOMPOSER_GUI);
+    public static ResourceLocation texture = new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_GUI);
 
     public GuiDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer)
     {

@@ -2,7 +2,7 @@ package minechem.client.gui.tabs;
 
 import minechem.client.gui.GuiContainerTabbed;
 import minechem.common.ModMinechem;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.SessionVars;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundManager;
@@ -62,7 +62,7 @@ public abstract class Tab
         if (leftSide)
         {
 
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.TAB_LEFT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TAB_LEFT));
 
             myGui.drawTexturedModalRect(x - currentWidth, y + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -72,7 +72,7 @@ public abstract class Tab
         else
         {
 
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.TAB_RIGHT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TAB_RIGHT));
 
             myGui.drawTexturedModalRect(x, y, 0, 256 - currentHeight, 4, currentHeight);
             myGui.drawTexturedModalRect(x + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);

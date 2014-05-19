@@ -12,7 +12,7 @@ import minechem.api.util.Util;
 import minechem.client.gui.GuiDecomposer;
 import minechem.common.ModMinechem;
 import minechem.common.recipe.DecomposerRecipeHandler;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import minechem.common.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -25,7 +25,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 
     private static final String MINECHEM_DECOMPOSER_RECIPES_ID = "minechem.decomposer";
 
-    private ResourceLocation texture = new ResourceLocation(ModMinechem.ID, ConstantValue.DECOMPOSER_GUI);
+    private ResourceLocation texture = new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_GUI);
 
     // GUI slot offsets, in GUI-relative pixel values.
     private static final int INPUT_X_OFS = 75;

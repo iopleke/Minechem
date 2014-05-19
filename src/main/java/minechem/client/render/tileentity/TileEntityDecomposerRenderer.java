@@ -2,7 +2,7 @@ package minechem.client.render.tileentity;
 
 import minechem.common.ModMinechem;
 import minechem.common.tileentity.TileEntityDecomposer;
-import minechem.common.utils.ConstantValue;
+import minechem.common.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -24,12 +24,12 @@ public class TileEntityDecomposerRenderer extends TileEntitySpecialRenderer
             GL11.glEnable(GL11.GL_LIGHTING);
             if (decomposer.isPowered())
             {
-                bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.DECOMPOSER_MODEL_ON));
+                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_ON));
                 decomposer.model.updateWindillRotation(decomposer);
             }
             else
             {
-                bindTexture(new ResourceLocation(ModMinechem.ID, ConstantValue.DECOMPOSER_MODEL_OFF));
+                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_OFF));
             }
             decomposer.model.render(0.0625F);
             GL11.glDisable(GL11.GL_LIGHTING);
