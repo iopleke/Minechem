@@ -1,6 +1,6 @@
 package minechem.client.sound;
 
-import minechem.common.utils.Reference;
+import minechem.utils.Reference;
 import net.minecraftforge.client.event.sound.SoundLoadEvent;
 import net.minecraftforge.event.ForgeSubscribe;
 

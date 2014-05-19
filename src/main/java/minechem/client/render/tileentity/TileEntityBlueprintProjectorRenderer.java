@@ -1,9 +1,9 @@
 package minechem.client.render.tileentity;
 
-import minechem.client.ModelProjector;
 import minechem.common.ModMinechem;
-import minechem.common.tileentity.TileEntityBlueprintProjector;
-import minechem.common.utils.Reference;
+import minechem.tileentity.blueprintprojector.ModelProjector;
+import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
+import minechem.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

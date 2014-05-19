@@ -2,8 +2,8 @@ package minechem.client.gui.tabs;
 
 import minechem.client.gui.GuiContainerTabbed;
 import minechem.common.ModMinechem;
-import minechem.common.utils.Reference;
-import minechem.common.utils.SessionVars;
+import minechem.utils.Reference;
+import minechem.utils.SessionVars;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;

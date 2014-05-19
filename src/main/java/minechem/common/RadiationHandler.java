@@ -5,9 +5,9 @@ import java.util.List;
 
 import minechem.api.core.EnumRadioactivity;
 import minechem.api.core.IRadiationShield;
-import minechem.common.containers.ContainerChemicalStorage;
-import minechem.common.containers.ContainerLeadedChest;
-import minechem.common.items.ItemElement;
+import minechem.item.element.ItemElement;
+import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
+import minechem.tileentity.leadedchest.ContainerLeadedChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;

@@ -1,6 +1,6 @@
 package minechem.common;
 
-import minechem.common.utils.Reference;
+import minechem.utils.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.client.gui.tabs.Tab;
-import minechem.common.utils.SessionVars;
+import minechem.utils.SessionVars;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;

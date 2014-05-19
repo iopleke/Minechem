@@ -1,7 +1,7 @@
 package minechem.client.gui.tabs;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.MinechemHelper;
+import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;

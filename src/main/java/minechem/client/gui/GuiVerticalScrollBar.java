@@ -1,7 +1,7 @@
 package minechem.client.gui;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.Reference;
+import minechem.utils.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;

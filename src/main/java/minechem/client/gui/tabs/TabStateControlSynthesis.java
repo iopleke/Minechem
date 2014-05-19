@@ -2,8 +2,8 @@ package minechem.client.gui.tabs;
 
 import minechem.api.recipe.SynthesisRecipe;
 import minechem.common.ModMinechem;
-import minechem.common.tileentity.TileEntitySynthesis;
-import minechem.common.utils.MinechemHelper;
+import minechem.tileentity.synthesis.TileEntitySynthesis;
+import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;

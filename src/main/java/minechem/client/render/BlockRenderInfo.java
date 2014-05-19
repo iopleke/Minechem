@@ -1,6 +1,6 @@
 package minechem.client.render;
 
-import minechem.common.utils.Vector3;
+import minechem.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;

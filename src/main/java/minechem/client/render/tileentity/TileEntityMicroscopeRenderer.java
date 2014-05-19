@@ -1,9 +1,9 @@
 package minechem.client.render.tileentity;
 
-import minechem.client.ModelMicroscope;
 import minechem.common.ModMinechem;
-import minechem.common.tileentity.TileEntityMicroscope;
-import minechem.common.utils.Reference;
+import minechem.tileentity.microscope.ModelMicroscope;
+import minechem.tileentity.microscope.TileEntityMicroscope;
+import minechem.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

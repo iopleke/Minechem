@@ -1,8 +1,8 @@
 package minechem.client.render.tileentity;
 
 import minechem.common.ModMinechem;
-import minechem.common.tileentity.TileEntityLeadedChest;
-import minechem.common.utils.Reference;
+import minechem.tileentity.leadedchest.TileEntityLeadedChest;
+import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;

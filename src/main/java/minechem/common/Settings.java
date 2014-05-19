@@ -5,7 +5,7 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 
-import minechem.common.utils.IDManager;
+import minechem.utils.IDManager;
 import net.minecraft.launchwrapper.LogWrapper;
 import net.minecraftforge.common.Configuration;
 

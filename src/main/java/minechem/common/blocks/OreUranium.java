@@ -1,7 +1,7 @@
 package minechem.common.blocks;
 
 import minechem.common.ModMinechem;
-import minechem.common.utils.Reference;
+import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

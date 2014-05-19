@@ -1,8 +1,8 @@
 package minechem.client.render.tileentity;
 
 import minechem.common.ModMinechem;
-import minechem.common.tileentity.TileEntitySynthesis;
-import minechem.common.utils.Reference;
+import minechem.tileentity.synthesis.TileEntitySynthesis;
+import minechem.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

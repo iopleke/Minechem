@@ -2,7 +2,7 @@ package minechem.client.gui;
 
 import java.util.HashMap;
 
-import minechem.common.utils.MinechemHelper;
+import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -11,26 +11,26 @@ import cpw.mods.fml.client.FMLClientHandler;
 
 public abstract class GuiToggleSwitch
 {
-    class ToggleButton
+    public class ToggleButton
     {
-        int u;
-        int v;
-        String tooltip;
+        public int u;
+        public int v;
+        public String tooltip;
     }
 
-    int numStates;
-    int state = 0;
-    int zLevel = 100;
-    int width;
-    int height;
-    int x;
-    int y;
-    int mouseX;
-    int mouseY;
-    Minecraft mc;
-    GuiContainerTabbed container;
-    ResourceLocation texture;
-    HashMap<Integer, ToggleButton> buttons = new HashMap<Integer, ToggleButton>();
+    protected int numStates;
+    protected int state = 0;
+    protected int zLevel = 100;
+    protected int width;
+    protected int height;
+    protected int x;
+    protected int y;
+    protected int mouseX;
+    protected int mouseY;
+    protected Minecraft mc;
+    protected GuiContainerTabbed container;
+    protected ResourceLocation texture;
+    protected HashMap<Integer, ToggleButton> buttons = new HashMap<Integer, ToggleButton>();
 
     public GuiToggleSwitch()
     {

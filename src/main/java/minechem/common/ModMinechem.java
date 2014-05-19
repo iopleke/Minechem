@@ -4,23 +4,21 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 import minechem.client.TickHandler;
-import minechem.client.gui.GuiHandler;
 import minechem.client.gui.tabs.TabEnergy;
 import minechem.client.gui.tabs.TabHelp;
 import minechem.client.gui.tabs.TabJournal;
 import minechem.client.gui.tabs.TabStateControl;
 import minechem.client.gui.tabs.TabStateControlSynthesis;
 import minechem.client.gui.tabs.TabTable;
+import minechem.coating.CoatingRecipe;
+import minechem.coating.CoatingSubscribe;
+import minechem.coating.EnchantmentCoated;
 import minechem.common.blueprint.MinechemBlueprint;
-import minechem.common.coating.CoatingRecipe;
-import minechem.common.coating.CoatingSubscribe;
-import minechem.common.coating.EnchantmentCoated;
-import minechem.common.network.MinechemPacketHandler;
-import minechem.common.polytool.PolytoolEventHandler;
-import minechem.common.recipe.MinechemRecipes;
-import minechem.common.utils.Reference;
-import minechem.computercraft.ICCMain;
 import minechem.fluid.FluidHelper;
+import minechem.item.polytool.PolytoolEventHandler;
+import minechem.network.MinechemPacketHandler;
+import minechem.oredictionary.MinechemRecipes;
+import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -192,8 +190,7 @@ public class ModMinechem
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        // Activate mod plugins.
-        addonComputerCraft(event);
+        // Adds blueprints to dungeon loot.
         addonDungeonLoot();
 
         LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
@@ -210,26 +207,6 @@ public class ModMinechem
         ItemStack B = new ItemStack(MinechemItems.blueprint, 1, 1);
         ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
         ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
-    }
-
-    private void addonComputerCraft(FMLPostInitializationEvent event)
-    {
-        if (Loader.isModLoaded("ComputerCraft"))
-        {
-            LOGGER.info("Initilizing ComputerCraft Addon...");
-            Object ccMain = event.buildSoftDependProxy("CCTurtle", "pixlepix.minechem.computercraft.CCMain");
-            if (ccMain != null)
-            {
-                ICCMain iCCMain = (ICCMain) ccMain;
-                iCCMain.loadConfig(CONFIG);
-                iCCMain.init();
-                LOGGER.info("ComputerCraft interface loaded!");
-            }
-            else
-            {
-                LOGGER.warning("Unable to load ComputerCraft interface.");
-            }
-        }
     }
 
     @SideOnly(Side.CLIENT)
