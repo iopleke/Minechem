@@ -19,7 +19,6 @@ import net.minecraftforge.common.ForgeDirection;
 
 public class TileEntityBlueprintProjector extends MinechemTileEntity
 {
-
     private static int air;
     MinechemBlueprint blueprint;
 
@@ -190,9 +189,13 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
         else if (structureID == air)
         {
             if (blockID == air)
+            {
                 return BlockStatus.CORRECT;
+            }
             else
+            {
                 return BlockStatus.INCORRECT;
+            }
         }
         else
         {
@@ -371,11 +374,6 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         return itemstack.itemID == MinechemItems.blueprint.itemID;
-    }
-
-    @Override
-    public void sendUpdatePacket()
-    {
     }
 
     @Override

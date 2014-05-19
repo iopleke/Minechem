@@ -10,7 +10,6 @@ import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class TileEntityGhostBlock extends MinechemTileEntity
 {
-
     private MinechemBlueprint blueprint;
     private int blockID;
 
@@ -21,7 +20,9 @@ public class TileEntityGhostBlock extends MinechemTileEntity
         this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, blueprint.getBlockLookup().get(this.blockID).metadata, 3);
         if (worldObj != null && !worldObj.isRemote)
         {
-            sendUpdatePacket();
+            PacketGhostBlock packet = new PacketGhostBlock(this);
+            int dimensionID = worldObj.provider.dimensionId;
+            PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
         }
     }
 
@@ -52,14 +53,6 @@ public class TileEntityGhostBlock extends MinechemTileEntity
     }
 
     @Override
-    public void sendUpdatePacket()
-    {
-        PacketGhostBlock packet = new PacketGhostBlock(this);
-        int dimensionID = worldObj.provider.dimensionId;
-        PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
-    }
-
-    @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
@@ -67,6 +60,7 @@ public class TileEntityGhostBlock extends MinechemTileEntity
         {
             nbtTagCompound.setInteger("blueprintID", blueprint.id);
         }
+        
         nbtTagCompound.setInteger("blockID", blockID);
     }
 

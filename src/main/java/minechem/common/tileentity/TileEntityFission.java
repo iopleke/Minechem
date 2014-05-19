@@ -77,7 +77,9 @@ public class TileEntityFission extends TileEntityMultiBlock implements IMinechem
         }
 
         if (shouldSendUpdatePacket && !worldObj.isRemote)
-            sendUpdatePacket();
+        {
+            // TODO: Write update packet for energy information for client.
+        }
     }
 
     private void addToOutput(ItemStack fusionResult)
@@ -228,7 +230,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements IMinechem
     @Override
     public String getMachineState()
     {
-        // TODO Check for fuel
+        // TODO Check for fuel.
         return "powered";
 
     }
@@ -264,22 +266,14 @@ public class TileEntityFission extends TileEntityMultiBlock implements IMinechem
     }
 
     @Override
-    public void sendUpdatePacket()
-    {
-        
-    }
-
-    @Override
     public ItemStack takeFusionStar()
     {
-        // TODO Auto-generated method stub
         return null;
     }
 
     @Override
     public int putFusionStar(ItemStack fusionStar)
     {
-        // TODO Auto-generated method stub
         return 0;
     }
 

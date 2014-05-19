@@ -53,14 +53,8 @@ public abstract class MinechemPackets
         // Fusion Reactor Ghost Blocks
         builder.put(Integer.valueOf(2), PacketGhostBlock.class);
 
-        // Energy System Updates
-        builder.put(Integer.valueOf(3), PacketPowerReceptorUpdate.class);
-
         // Chemical Synthesis Machine
-        builder.put(Integer.valueOf(4), PacketSynthesisUpdate.class);
-
-        // Tile Entity Updates
-        builder.put(Integer.valueOf(5), PacketTileEntityUpdate.class);
+        builder.put(Integer.valueOf(3), PacketSynthesisUpdate.class);
 
         idMap = builder.build();
     }

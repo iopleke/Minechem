@@ -18,13 +18,9 @@ import net.minecraft.nbt.NBTTagList;
 
 public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemMachinePeripheral
 {
-
-    public static int[] kFusionStar =
-    { 0 };
-    public static int[] kInput =
-    { 1, 2 };
-    public static int[] kOutput =
-    { 3 };
+    public static int[] kFusionStar = { 0 };
+    public static int[] kInput = { 1, 2 };
+    public static int[] kOutput = { 3 };
 
     private final BoundedInventory inputInventory;
     private final BoundedInventory outputInventory;
@@ -64,14 +60,23 @@ public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemM
     {
         super.updateEntity();
         if (!completeStructure)
+        {
             return;
+        }
+        
         shouldSendUpdatePacket = false;
         if (!worldObj.isRemote && inventory[kStartFusionStar] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
         {
             if (!isRecharging)
+            {
                 targetEnergy = takeEnergyFromStar(inventory[kStartFusionStar], true);
+            }
+            
             if (targetEnergy > 0)
+            {
                 isRecharging = true;
+            }
+            
             if (isRecharging)
             {
                 recharge();
@@ -86,14 +91,18 @@ public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemM
                         addToOutput(fusionResult);
                         removeInputs();
                     }
+                    
                     energyStored -= getEnergyCost(fusionResult);
                     fusionResult = getFusionOutput();
                     shouldSendUpdatePacket = true;
                 }
             }
         }
+        
         if (shouldSendUpdatePacket && !worldObj.isRemote)
-            sendUpdatePacket();
+        {
+            // TODO Write update packet for fusion reactor.
+        }
     }
 
     private void addToOutput(ItemStack fusionResult)
@@ -374,13 +383,7 @@ public class TileEntityFusion extends TileEntityMultiBlock implements IMinechemM
             return kOutput;
         }
     }
-
-    @Override
-    public void sendUpdatePacket()
-    {
-
-    }
-
+    
     public int getFusionEnergyStored()
     {
         if (this.inventory[0] != null)

@@ -279,6 +279,4 @@ public abstract class MinechemTileEntity extends MinechemTileEntityRedstone impl
             itemstack.stackSize = this.getInventoryStackLimit();
         this.inventory[slot] = itemstack;
     }
-
-    public abstract void sendUpdatePacket();
 }

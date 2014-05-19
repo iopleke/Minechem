@@ -15,10 +15,8 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityMicroscope extends MinechemTileEntity implements IInventory, IMinechemMachinePeripheral
 {
-    public static int[] kInput =
-    { 0 };
-    public static int[] kJournal =
-    { 1 };
+    public static int[] kInput = { 0 };
+    public static int[] kJournal = { 1 };
 
     public boolean isShaped = true;
 
@@ -219,11 +217,4 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
             return true;
         return false;
     }
-
-    @Override
-    public void sendUpdatePacket()
-    {
-
-    }
-
 }
