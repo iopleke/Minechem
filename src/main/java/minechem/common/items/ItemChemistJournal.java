@@ -22,6 +22,7 @@ public class ItemChemistJournal extends Item
 
     public static final String ITEMS_TAG_NAME = "discoveredItems";
     private static final String ACTIVE_ITEMSTACK_TAG = "activeItemStack";
+    private static final String JOURNAL_OWNER_TAG = "owner";
 
     public ItemChemistJournal(int id)
     {
@@ -31,22 +32,26 @@ public class ItemChemistJournal extends Item
     }
 
     @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World world, EntityPlayer entityPlayer)
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
+        // Opens the GUI for the chemists journal.
         if (!world.isRemote)
+        {
             entityPlayer.openGui(ModMinechem.INSTANCE, GuiHandler.GUI_ID_JOURNAL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY, entityPlayer.chunkCoordY);
-        return par1ItemStack;
-    }
-
-    @Override
-    public void onCreated(ItemStack itemStack, World world, EntityPlayer entityPlayer)
-    {
-        super.onCreated(itemStack, world, entityPlayer);
-        NBTTagCompound tagCompound = itemStack.getTagCompound();
-        if (tagCompound == null)
-            tagCompound = new NBTTagCompound();
-        tagCompound.setString("owner", entityPlayer.getEntityName());
-        itemStack.setTagCompound(tagCompound);
+            
+            NBTTagCompound tagCompound = itemStack.getTagCompound();
+            if (tagCompound == null)
+            {
+                tagCompound = new NBTTagCompound();
+            }
+            
+            // Save the players username onto the book for owned by purposes.
+            tagCompound.setString(JOURNAL_OWNER_TAG, entityPlayer.username);
+            
+            itemStack.setTagCompound(tagCompound);
+        }
+        
+        return itemStack;
     }
 
     @Override
@@ -56,27 +61,35 @@ public class ItemChemistJournal extends Item
         NBTTagCompound stackTag = itemStack.getTagCompound();
         if (stackTag != null)
         {
+            // Load the active set recipe in the book.
             NBTTagCompound activeTag = (NBTTagCompound) stackTag.getTag(ACTIVE_ITEMSTACK_TAG);
-            String owner = stackTag.getString("owner");
             if (activeTag != null)
             {
                 ItemStack activeItemStack = ItemStack.loadItemStackFromNBT(activeTag);
-                list.add(activeItemStack.getDisplayName());
+                list.add("Active: " + activeItemStack.getDisplayName());
             }
-            list.add("Owned by " + owner);
+            
+            // Load owned by tag from the book which should be last user to use the book.
+            String owner = stackTag.getString(JOURNAL_OWNER_TAG);
+            list.add("Owner: " + owner);
         }
     }
 
+    // ** Sets the currently active stack in the chemist journal. Used by Synthesis machine to auto-load recipe. */
     public void setActiveStack(ItemStack itemstack, ItemStack journalStack)
     {
         NBTTagCompound journalTag = journalStack.getTagCompound();
         if (journalTag == null)
+        {
             journalTag = new NBTTagCompound();
+        }
+        
         NBTTagCompound stackTag = itemstack.writeToNBT(new NBTTagCompound());
         journalTag.setTag(ACTIVE_ITEMSTACK_TAG, stackTag);
         journalStack.setTagCompound(journalTag);
     }
 
+    // ** Returns last selected recipe in chemists journal. */
     public ItemStack getActiveStack(ItemStack journalStack)
     {
         NBTTagCompound journalTag = journalStack.getTagCompound();
@@ -84,11 +97,14 @@ public class ItemChemistJournal extends Item
         {
             NBTTagCompound stackTag = (NBTTagCompound) journalTag.getTag(ACTIVE_ITEMSTACK_TAG);
             if (stackTag != null)
+            {
                 return ItemStack.loadItemStackFromNBT(stackTag);
+            }
         }
         return null;
     }
 
+    // ** Returns a list of itemstacks that are the currently known recipes by the player. */
     public List<ItemStack> getItemList(ItemStack journal)
     {
         NBTTagCompound tag = journal.getTagCompound();
@@ -96,19 +112,28 @@ public class ItemChemistJournal extends Item
         {
             NBTTagList taglist = tag.getTagList(ITEMS_TAG_NAME);
             if (taglist != null)
+            {
                 return MinechemHelper.readTagListToItemStackList(taglist);
+            }
         }
         return null;
     }
 
+    // ** Adds newly discovered recipes into your chemist journal. */
     public void addItemStackToJournal(ItemStack itemstack, ItemStack journal, World world)
     {
         NBTTagCompound tagCompound = journal.getTagCompound();
         if (tagCompound == null)
+        {
             tagCompound = new NBTTagCompound();
+        }
+        
         NBTTagList taglist = tagCompound.getTagList(ITEMS_TAG_NAME);
         if (taglist == null)
+        {
             taglist = new NBTTagList();
+        }
+        
         ArrayList<ItemStack> itemArrayList = MinechemHelper.readTagListToItemStackList(taglist);
         if (!hasDiscovered(itemArrayList, itemstack))
         {
@@ -118,12 +143,15 @@ public class ItemChemistJournal extends Item
         }
     }
 
+    // ** Returns true if the player has already discovered this recipe. */
     private boolean hasDiscovered(ArrayList<ItemStack> list, ItemStack itemstack)
     {
         for (ItemStack itemstack2 : list)
         {
             if (itemstack.isItemEqual(itemstack2))
+            {
                 return true;
+            }
         }
         return false;
     }
