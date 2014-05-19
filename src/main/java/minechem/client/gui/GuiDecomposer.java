@@ -17,19 +17,19 @@ import org.lwjgl.opengl.GL11;
 public class GuiDecomposer extends GuiContainerTabbed
 {
 
-    public static TileEntityDecomposer decomposer;
-    InventoryPlayer inventoryPlayer;
+    public static TileEntityDecomposer ENTITY;
+    InventoryPlayer PLAYER_INVENTORY;
     int mouseX = 0;
     int mouseY = 0;
     int guiWidth = 176;
     int guiHeight = 166;
-    public static ResourceLocation texture = new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_GUI);
+    public static ResourceLocation TEXTURE = new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_GUI);
 
     public GuiDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer)
     {
         super(new ContainerDecomposer(inventoryPlayer, decomposer));
-        GuiDecomposer.decomposer = decomposer;
-        this.inventoryPlayer = inventoryPlayer;
+        GuiDecomposer.ENTITY = decomposer;
+        this.PLAYER_INVENTORY = inventoryPlayer;
         addTab(new TabStateControlDecomposer(this, decomposer));
         addTab(new TabEnergy(this, decomposer));
         addTab(new TabHelp(this, MinechemHelper.getLocalString("help.decomposer")));
@@ -50,7 +50,7 @@ public class GuiDecomposer extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(texture);
+        this.mc.renderEngine.bindTexture(TEXTURE);
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

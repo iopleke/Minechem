@@ -83,19 +83,14 @@ public class PacketDecomposerUpdate extends MinechemPackets
             // Cook time.
             this.tileEntity.currentItemCookingValue = lastItemCookTimeValue;
             this.tileEntity.currentItemCookingMaximum = lastItemCookTimeMaximum;
-
+            
             // Energy.
+            ModMinechem.LOGGER.info("[Decomposer] lastItemStoredEnergy: " + String.valueOf(lastItemStoredEnergy));
             this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
             this.tileEntity.setEnergyCapacity(lastItemStoredEnergyMaximum);
             
             // Machine state.
             this.tileEntity.setState(this.state);
-            
-            // Debugging info to be printed if energy levels change.
-            if (Settings.DebugMode && this.tileEntity.getEnergy(ForgeDirection.UNKNOWN) != lastItemStoredEnergy)
-            {
-                ModMinechem.LOGGER.info("[Chemical Decomposer Packet] Set Machine State: " + this.tileEntity.getState());
-            }
         }
         else
         {

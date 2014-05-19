@@ -232,15 +232,12 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                             fluids.get(i).amount -= ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount;
                         }
                     }
-
                 }
             }
         }
 
         // Sends a packet to clients in dimension of origin about the machines current state.
-        PacketDecomposerUpdate packetDecomposerUpdate = new PacketDecomposerUpdate(this);
-        int dimensionID = worldObj.provider.dimensionId;
-        PacketDispatcher.sendPacketToAllInDimension(packetDecomposerUpdate.makePacket(), dimensionID);
+        PacketDispatcher.sendPacketToAllInDimension(new PacketDecomposerUpdate(this).makePacket(), worldObj.provider.dimensionId);
 
         // If the machines state is currently not set to active then stop operation.
         if (state != State.kProcessActive)
@@ -292,7 +289,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         
         // Notify minecraft that the inventory items in this 
         this.onInventoryChanged();
-        
     }
 
     private ItemStack getActiveStack()
@@ -442,9 +438,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         super.writeToNBT(nbt);
         
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
+        
         NBTTagList buffer = MinechemHelper.writeItemStackListToTagList(outputBuffer);
         
         nbt.setTag("inventory", inventoryTagList);
+        
         nbt.setTag("buffer", buffer);
         
         if (activeStack != null)
@@ -464,8 +462,11 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
+        
         NBTTagList inventoryTagList = nbt.getTagList("inventory");
+        
         NBTTagList buffer = nbt.getTagList("buffer");
+        
         outputBuffer = MinechemHelper.readTagListToItemStackList(buffer);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
 
@@ -614,8 +615,6 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         return true;
     }
 
-    // Hacky code
-    // To fix a FZ glitch
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
@@ -633,8 +632,12 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 }
             }
         }
+        
         if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
+        {
             itemstack.stackSize = this.getInventoryStackLimit();
+        }
+        
         this.inventory[slot] = itemstack;
     }
 

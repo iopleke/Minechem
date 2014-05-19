@@ -135,6 +135,7 @@ public class GuiHandler implements IGuiHandler
         {
             return getClientGuiElementForJournal(player, world);
         }
+        
         if (ID == GUI_TABLE)
         {
             return getClientGuiForJournal(player, world);
@@ -144,7 +145,9 @@ public class GuiHandler implements IGuiHandler
         {
             return getClientGuiForPolytool(player, world);
         }
+        
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        
         if (tileEntity instanceof TileEntityDecomposer)
         {
             return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
