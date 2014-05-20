@@ -1,6 +1,6 @@
 package minechem.item.fusionstar;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;
@@ -17,7 +17,7 @@ public class SlotFusionStar extends Slot
     @Override
     public boolean isItemValid(ItemStack itemStack)
     {
-        return itemStack.itemID == Item.netherStar.itemID || itemStack.itemID == MinechemItems.fusionStar.itemID;
+        return itemStack.itemID == Item.netherStar.itemID || itemStack.itemID == MinechemItemGeneration.fusionStar.itemID;
     }
 
     @Override

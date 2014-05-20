@@ -1,8 +1,10 @@
-package minechem;
+package minechem.tick;
 
 import java.util.EnumSet;
 
 import minechem.item.molecule.EnumMolecule;
+import minechem.potion.PharmacologyEffect;
+import minechem.radiation.RadiationHandler;
 import minechem.utils.Constants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

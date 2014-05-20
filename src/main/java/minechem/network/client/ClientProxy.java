@@ -1,12 +1,12 @@
 package minechem.network.client;
 
-import minechem.MinechemBlocks;
-import minechem.MinechemItems;
-import minechem.TickHandler;
+import minechem.MinechemBlockGeneration;
+import minechem.MinechemItemGeneration;
 import minechem.item.element.ItemElementRenderer;
 import minechem.item.molecule.ItemMoleculeRenderer;
 import minechem.network.server.CommonProxy;
 import minechem.sound.MinechemSoundEvent;
+import minechem.tick.TickHandler;
 import minechem.tileentity.blueprintprojector.ItemBlueprintProjectorRenderer;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjectorRenderer;
@@ -40,13 +40,13 @@ public class ClientProxy extends CommonProxy
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.registerItemRenderer(MinechemItems.element.itemID, new ItemElementRenderer());
-        MinecraftForgeClient.registerItemRenderer(MinechemItems.molecule.itemID, new ItemMoleculeRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.microscope.blockID].itemID, new ItemMicroscopeRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.decomposer.blockID].itemID, new ItemDecomposerRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.synthesis.blockID].itemID, new ItemSynthesisRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocks.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemGeneration.element.itemID, new ItemElementRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemGeneration.molecule.itemID, new ItemMoleculeRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.microscope.blockID].itemID, new ItemMicroscopeRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.decomposer.blockID].itemID, new ItemDecomposerRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.synthesis.blockID].itemID, new ItemSynthesisRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());

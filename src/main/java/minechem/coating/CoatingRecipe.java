@@ -1,8 +1,8 @@
 package minechem.coating;
 
-import minechem.PharmacologyEffect;
 import minechem.item.molecule.EnumMolecule;
 import minechem.item.molecule.ItemMolecule;
+import minechem.potion.PharmacologyEffect;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemSword;

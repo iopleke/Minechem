@@ -1,4 +1,4 @@
-package minechem;
+package minechem.potion;
 
 import java.util.ArrayList;
 import java.util.List;

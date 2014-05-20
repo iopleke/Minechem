@@ -1,25 +1,27 @@
-package minechem.gui.tabs;
+package minechem.tileentity.synthesis;
 
 import minechem.ModMinechem;
-import minechem.tileentity.decomposer.TileEntityDecomposer;
-import minechem.tileentity.decomposer.TileEntityDecomposer.State;
+import minechem.gui.GuiTabStateControl;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.common.ForgeDirection;
 
-public class TabStateControlDecomposer extends TabStateControl
+public class TabStateControlSynthesis extends GuiTabStateControl
 {
-    private TileEntityDecomposer decomposer;
+    public static Icon noRecipeIcon, unpoweredIcon;
+    TileEntitySynthesis synthesis;
 
     enum TabState
     {
-        jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, ModMinechem.ICON_JAMMED), noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, ModMinechem.ICON_NO_BOTTLES), powered(MinechemHelper
-                .getLocalString("tab.tooltip.powered"), 0x00CC00, null), unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY);
+
+        unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY), powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, null), norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"),
+                0xAA0000, ModMinechem.ICON_NO_RECIPE);
         public String tooltip;
         public int color;
         public Icon icon;
-        public ResourceLocation resource;
+        private ResourceLocation resource;
 
         private TabState(String tooltip, int color, ResourceLocation resource)
         {
@@ -31,11 +33,11 @@ public class TabStateControlDecomposer extends TabStateControl
 
     TabState state;
 
-    public TabStateControlDecomposer(Gui gui, TileEntityDecomposer decomposer)
+    public TabStateControlSynthesis(Gui gui, TileEntitySynthesis synthesis)
     {
         super(gui);
-        this.decomposer = decomposer;
-        this.state = TabState.unpowered;
+        this.synthesis = synthesis;
+        this.state = TabState.norecipe;
         this.minWidth = 16 + 9;
         this.minHeight = 16 + 10;
         this.maxHeight = this.minHeight;
@@ -46,18 +48,18 @@ public class TabStateControlDecomposer extends TabStateControl
     public void update()
     {
         super.update();
-        State state = decomposer.getState();
-        if (state == State.kProcessJammed)
+        SynthesisRecipe recipe = synthesis.getCurrentRecipe();
+        if (recipe == null)
         {
-            this.state = TabState.jammed;
-        }
-        else if (decomposer.isPowered())
-        {
-            this.state = TabState.powered;
+            state = TabState.norecipe;
         }
         else
         {
-            this.state = TabState.unpowered;
+            int energyCost = recipe.energyCost();
+            if (synthesis.getEnergy(ForgeDirection.UNKNOWN) >= energyCost)
+                state = TabState.powered;
+            else
+                state = TabState.unpowered;
         }
 
         this.overlayColor = this.state.color;

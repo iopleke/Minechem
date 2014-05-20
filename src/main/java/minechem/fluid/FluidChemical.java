@@ -1,6 +1,6 @@
 package minechem.fluid;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import minechem.item.molecule.EnumMolecule;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -31,7 +31,7 @@ public class FluidChemical extends Fluid implements IMinechemFluid
     @Override
     public ItemStack getOutputStack()
     {
-        return new ItemStack(MinechemItems.molecule, 1, molecule.id());
+        return new ItemStack(MinechemItemGeneration.molecule, 1, molecule.id());
     }
 
     @Override

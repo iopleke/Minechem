@@ -1,4 +1,4 @@
-package minechem;
+package minechem.gui;
 
 import minechem.item.chemistjournal.ContainerChemistJournal;
 import minechem.item.chemistjournal.GuiChemistJournal;

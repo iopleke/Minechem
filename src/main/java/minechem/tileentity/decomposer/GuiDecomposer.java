@@ -2,9 +2,8 @@ package minechem.tileentity.decomposer;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.tabs.TabEnergy;
-import minechem.gui.tabs.TabHelp;
-import minechem.gui.tabs.TabStateControlDecomposer;
+import minechem.gui.GuiTabEnergy;
+import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -30,8 +29,8 @@ public class GuiDecomposer extends GuiContainerTabbed
         GuiDecomposer.ENTITY = decomposer;
         this.PLAYER_INVENTORY = inventoryPlayer;
         addTab(new TabStateControlDecomposer(this, decomposer));
-        addTab(new TabEnergy(this, decomposer));
-        addTab(new TabHelp(this, MinechemHelper.getLocalString("help.decomposer")));
+        addTab(new GuiTabEnergy(this, decomposer));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.decomposer")));
 
     }
 

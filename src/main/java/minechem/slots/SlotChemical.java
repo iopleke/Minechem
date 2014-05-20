@@ -1,6 +1,6 @@
 package minechem.slots;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ public class SlotChemical extends Slot
     @Override
     public boolean isItemValid(ItemStack itemStack)
     {
-        return itemStack.itemID == MinechemItems.element.itemID || itemStack.itemID == MinechemItems.molecule.itemID;
+        return itemStack.itemID == MinechemItemGeneration.element.itemID || itemStack.itemID == MinechemItemGeneration.molecule.itemID;
     }
 
 }

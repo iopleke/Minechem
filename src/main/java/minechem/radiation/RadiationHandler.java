@@ -1,9 +1,9 @@
-package minechem;
+package minechem.radiation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.item.IRadiationShield;
+import minechem.MinechemItemGeneration;
 import minechem.item.element.EnumRadioactivity;
 import minechem.item.element.ItemElement;
 import minechem.tileentity.leadedchest.ContainerLeadedChest;
@@ -74,7 +74,7 @@ public class RadiationHandler
         List<ItemStack> itemstacks = leadedChest.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
+            if (itemstack != null && itemstack.itemID == MinechemItemGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
             {
                 RadiationInfo radiationInfo = ItemElement.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
@@ -96,7 +96,7 @@ public class RadiationHandler
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
+            if (itemstack != null && itemstack.itemID == MinechemItemGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
             {
                 DecayEvent decayEvent = new DecayEvent();
                 decayEvent.before = itemstack.copy();

@@ -2,7 +2,7 @@ package minechem.item.blueprint;
 
 import java.util.HashMap;
 
-import minechem.MinechemBlocks;
+import minechem.MinechemBlockGeneration;
 import minechem.item.blueprint.BlueprintBlock.Type;
 
 public class BlueprintFusion extends MinechemBlueprint
@@ -94,8 +94,8 @@ public class BlueprintFusion extends MinechemBlueprint
     public HashMap<Integer, BlueprintBlock> getBlockLookup()
     {
         HashMap<Integer, BlueprintBlock> lookup = new HashMap<Integer, BlueprintBlock>();
-        lookup.put(A, new BlueprintBlock(MinechemBlocks.fusion, 0, Type.PROXY));
-        lookup.put(C, new BlueprintBlock(MinechemBlocks.fusion, 1, Type.NORMAL));
+        lookup.put(A, new BlueprintBlock(MinechemBlockGeneration.fusion, 0, Type.PROXY));
+        lookup.put(C, new BlueprintBlock(MinechemBlockGeneration.fusion, 1, Type.NORMAL));
         return lookup;
     }
 
@@ -132,7 +132,7 @@ public class BlueprintFusion extends MinechemBlueprint
     @Override
     public BlueprintBlock getManagerBlock()
     {
-        return new BlueprintBlock(MinechemBlocks.fusion, 2, Type.MANAGER);
+        return new BlueprintBlock(MinechemBlockGeneration.fusion, 2, Type.MANAGER);
     }
 
 }

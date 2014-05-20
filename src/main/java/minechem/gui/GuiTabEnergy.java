@@ -1,4 +1,4 @@
-package minechem.gui.tabs;
+package minechem.gui;
 
 import minechem.ModMinechem;
 import minechem.tileentity.prefab.MinechemTileEntity;
@@ -8,7 +8,7 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TabEnergy extends Tab
+public class GuiTabEnergy extends GuiTab
 {
     public static Icon powerIcon;
 
@@ -21,7 +21,7 @@ public class TabEnergy extends Tab
     // Switched from reference to MinechemPowerProvider for 1.6 move to UE
     MinechemTileEntity TILE_ENTITY;
 
-    public TabEnergy(Gui gui, MinechemTileEntity energy)
+    public GuiTabEnergy(Gui gui, MinechemTileEntity energy)
     {
         super(gui);
         this.maxWidth = 120;

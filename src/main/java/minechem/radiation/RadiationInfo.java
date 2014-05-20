@@ -1,4 +1,4 @@
-package minechem;
+package minechem.radiation;
 
 import minechem.item.element.EnumRadioactivity;
 import net.minecraft.item.ItemStack;

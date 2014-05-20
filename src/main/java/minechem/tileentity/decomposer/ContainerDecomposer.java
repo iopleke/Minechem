@@ -1,6 +1,6 @@
 package minechem.tileentity.decomposer;
 
-import minechem.item.IRadiationShield;
+import minechem.radiation.IRadiationShield;
 import minechem.slots.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

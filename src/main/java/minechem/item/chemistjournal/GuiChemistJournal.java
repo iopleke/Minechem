@@ -3,14 +3,14 @@ package minechem.item.chemistjournal;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiFakeSlot;
 import minechem.gui.GuiVerticalScrollBar;
 import minechem.gui.IVerticalScrollContainer;
 import minechem.gui.ScissorHelper;
-import minechem.gui.tabs.Tab;
+import minechem.gui.GuiTab;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
@@ -59,7 +59,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         super(new ContainerChemistJournal(entityPlayer.inventory));
         this.player = entityPlayer;
         this.journalStack = entityPlayer.inventory.getCurrentItem();
-        this.currentItemStack = MinechemItems.journal.getActiveStack(journalStack);
+        this.currentItemStack = MinechemItemGeneration.journal.getActiveStack(journalStack);
         if (this.currentItemStack != null)
         {
             showRecipesForStack(currentItemStack);
@@ -68,7 +68,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         this.ySize = GUI_HEIGHT;
         scrollBar = new GuiVerticalScrollBar(this, 128, 14, 157, this.xSize, this.ySize);
 
-        List<ItemStack> itemList = MinechemItems.journal.getItemList(this.journalStack);
+        List<ItemStack> itemList = MinechemItemGeneration.journal.getItemList(this.journalStack);
         if (itemList != null)
         {
             populateItemList(itemList, entityPlayer);
@@ -120,16 +120,16 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
 
         super.mouseClicked(x, y, mouseButton);
 
-        Tab tab = getTabAtPosition(mouseX, mouseY);
+        GuiTab guiTab = getTabAtPosition(mouseX, mouseY);
 
-        if (tab != null && !tab.handleMouseClicked(mouseX, mouseY, mouseButton))
+        if (guiTab != null && !guiTab.handleMouseClicked(mouseX, mouseY, mouseButton))
         {
 
-            if (tab.leftSide)
+            if (guiTab.leftSide)
             {
-                for (Tab other : tabListLeft)
+                for (GuiTab other : tabListLeft)
                 {
-                    if (other != tab && other.isOpen())
+                    if (other != guiTab && other.isOpen())
                     {
 
                     }
@@ -137,9 +137,9 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
             }
             else
             {
-                for (Tab other : tabListRight)
+                for (GuiTab other : tabListRight)
                 {
-                    if (other != tab && other.isOpen())
+                    if (other != guiTab && other.isOpen())
                     {
 
                     }
@@ -158,7 +158,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     public void showRecipesForStack(ItemStack itemstack)
     {
         currentItemStack = itemstack;
-        MinechemItems.journal.setActiveStack(itemstack, journalStack);
+        MinechemItemGeneration.journal.setActiveStack(itemstack, journalStack);
         PacketActiveJournalItem packet = new PacketActiveJournalItem(itemstack, player);
         PacketDispatcher.sendPacketToServer(packet.makePacket());
 

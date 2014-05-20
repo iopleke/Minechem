@@ -2,9 +2,8 @@ package minechem.tileentity.synthesis;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.tabs.TabEnergy;
-import minechem.gui.tabs.TabHelp;
-import minechem.gui.tabs.TabStateControlSynthesis;
+import minechem.gui.GuiTabEnergy;
+import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -25,8 +24,8 @@ public class GuiSynthesis extends GuiContainerTabbed
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new TabStateControlSynthesis(this, synthesis));
-        addTab(new TabEnergy(this, synthesis));
-        addTab(new TabHelp(this, MinechemHelper.getLocalString("help.synthesis")));
+        addTab(new GuiTabEnergy(this, synthesis));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.synthesis")));
     }
 
     @Override

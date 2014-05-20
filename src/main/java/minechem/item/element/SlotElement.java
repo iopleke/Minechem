@@ -1,6 +1,6 @@
 package minechem.item.element;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,6 +16,6 @@ public class SlotElement extends Slot
     @Override
     public boolean isItemValid(ItemStack itemStack)
     {
-        return itemStack.itemID == MinechemItems.element.itemID;
+        return itemStack.itemID == MinechemItemGeneration.element.itemID;
     }
 }

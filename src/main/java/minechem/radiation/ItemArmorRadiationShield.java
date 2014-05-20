@@ -1,4 +1,4 @@
-package minechem.item;
+package minechem.radiation;
 
 import java.util.List;
 

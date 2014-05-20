@@ -1,11 +1,12 @@
-package minechem.gui.tabs;
+package minechem.item.chemistjournal;
 
 import minechem.ModMinechem;
+import minechem.gui.GuiTab;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
-public class TabJournal extends Tab
+public class TabJournal extends GuiTab
 {
     public static Icon helpIcon;
 

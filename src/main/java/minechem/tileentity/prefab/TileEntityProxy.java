@@ -1,6 +1,6 @@
 package minechem.tileentity.prefab;
 
-import minechem.MinechemBlocks;
+import minechem.MinechemBlockGeneration;
 import minechem.tileentity.fission.TileEntityFission;
 import minechem.tileentity.fusion.TileEntityFusion;
 import net.minecraft.entity.player.EntityPlayer;
@@ -60,7 +60,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
 
             return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
-        if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocks.fusion.blockID)
+        if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlockGeneration.fusion.blockID)
         {
             this.manager = buildManagerBlock();
             return this.manager;
@@ -80,7 +80,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fusion.zCoord = this.managerZOffset + zCoord;
             fusion.yCoord = this.managerYOffset + yCoord;
             fusion.xCoord = this.managerXOffset + xCoord;
-            fusion.blockType = MinechemBlocks.fusion;
+            fusion.blockType = MinechemBlockGeneration.fusion;
             worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fusion);
         }
         if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 3)
@@ -90,7 +90,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fission.zCoord = this.managerZOffset + zCoord;
             fission.yCoord = this.managerYOffset + yCoord;
             fission.xCoord = this.managerXOffset + xCoord;
-            fission.blockType = MinechemBlocks.fusion;
+            fission.blockType = MinechemBlockGeneration.fusion;
             worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fission);
         }
         return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);

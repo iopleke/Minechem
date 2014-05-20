@@ -2,8 +2,8 @@ package minechem.coating;
 
 import java.util.HashMap;
 
-import minechem.PharmacologyEffect;
 import minechem.item.molecule.EnumMolecule;
+import minechem.potion.PharmacologyEffect;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;

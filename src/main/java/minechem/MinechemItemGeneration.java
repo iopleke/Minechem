@@ -14,7 +14,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class MinechemItems
+public class MinechemItemGeneration
 {
     public static ItemElement element;
     public static ItemMolecule molecule;
@@ -54,7 +54,7 @@ public class MinechemItems
     {
         for (EnumElement element : EnumElement.values())
         {
-            OreDictionary.registerOre("element" + element.descriptiveName(), new ItemStack(MinechemItems.element, 1, element.ordinal()));
+            OreDictionary.registerOre("element" + element.descriptiveName(), new ItemStack(MinechemItemGeneration.element, 1, element.ordinal()));
         }
     }
 }

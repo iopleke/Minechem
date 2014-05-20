@@ -7,17 +7,21 @@ import minechem.coating.CoatingRecipe;
 import minechem.coating.CoatingSubscribe;
 import minechem.coating.EnchantmentCoated;
 import minechem.fluid.FluidHelper;
-import minechem.gui.tabs.TabEnergy;
-import minechem.gui.tabs.TabHelp;
-import minechem.gui.tabs.TabJournal;
-import minechem.gui.tabs.TabStateControl;
-import minechem.gui.tabs.TabStateControlSynthesis;
-import minechem.gui.tabs.TabTable;
+import minechem.gui.CreativeTabMinechem;
+import minechem.gui.GuiHandler;
+import minechem.gui.GuiTabEnergy;
+import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabStateControl;
 import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.chemistjournal.TabJournal;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.MinechemPacketHandler;
 import minechem.network.server.CommonProxy;
 import minechem.oredictionary.MinechemRecipes;
+import minechem.potion.PotionInjector;
+import minechem.tick.ScheduledTickHandler;
+import minechem.tick.TickHandler;
+import minechem.tileentity.synthesis.TabStateControlSynthesis;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -126,10 +130,10 @@ public class ModMinechem
 
         // Register items and blocks.
         LOGGER.info("Registering Items...");
-        MinechemItems.registerItems();
+        MinechemItemGeneration.registerItems();
 
         LOGGER.info("Registering Blocks...");
-        MinechemBlocks.registerBlocks();
+        MinechemBlockGeneration.registerBlocks();
 
         LOGGER.info("Registering Blueprints...");
         MinechemBlueprint.registerBlueprints();
@@ -140,7 +144,7 @@ public class ModMinechem
         MinechemRecipes.getInstance().registerFluidRecipies();
 
         LOGGER.info("Registering OreDict Compatability...");
-        MinechemItems.registerToOreDictionary();
+        MinechemItemGeneration.registerToOreDictionary();
 
         LOGGER.info("Registering Minechem Recipes...");
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
@@ -170,7 +174,7 @@ public class ModMinechem
         FluidHelper.registerFluids();
 
         LOGGER.info("Registering Ore Generation...");
-        GameRegistry.registerWorldGenerator(new MinechemGeneration());
+        GameRegistry.registerWorldGenerator(new MinechemOreGeneration());
 
         LOGGER.info("Registering GUI and Container handlers...");
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
@@ -201,10 +205,10 @@ public class ModMinechem
 
     private void addonDungeonLoot()
     {
-        LOGGER.info("Adding rare chemicals to dungeon loot...");
+        LOGGER.info("Adding blueprints to dungeon loot...");
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-        ItemStack A = new ItemStack(MinechemItems.blueprint, 1, 0);
-        ItemStack B = new ItemStack(MinechemItems.blueprint, 1, 1);
+        ItemStack A = new ItemStack(MinechemItemGeneration.blueprint, 1, 0);
+        ItemStack B = new ItemStack(MinechemItemGeneration.blueprint, 1, 1);
         ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
         ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
     }
@@ -212,11 +216,10 @@ public class ModMinechem
     @SideOnly(Side.CLIENT)
     public void textureHook(IconRegister icon)
     {
-        TabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
+        GuiTabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
         TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
-        TabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
-        TabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
-        TabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+        GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
+        GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         TabJournal.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 

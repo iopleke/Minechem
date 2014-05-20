@@ -1,13 +1,13 @@
-package minechem.gui.tabs;
+package minechem.gui;
 
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 
-public abstract class TabStateControl extends Tab
+public abstract class GuiTabStateControl extends GuiTab
 {
     public static Icon unpoweredIcon;
 
-    public TabStateControl(Gui gui)
+    public GuiTabStateControl(Gui gui)
     {
         super(gui);
     }

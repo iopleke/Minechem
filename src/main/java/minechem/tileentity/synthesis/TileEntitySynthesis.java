@@ -3,7 +3,7 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import minechem.tileentity.decomposer.TileEntityDecomposer.State;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.BoundedInventory;
@@ -445,7 +445,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
     private void onPutJournal(ItemStack itemstack)
     {
-        ItemStack activeItem = MinechemItems.journal.getActiveStack(itemstack);
+        ItemStack activeItem = MinechemItemGeneration.journal.getActiveStack(itemstack);
         if (activeItem != null)
         {
             SynthesisRecipe recipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(activeItem);

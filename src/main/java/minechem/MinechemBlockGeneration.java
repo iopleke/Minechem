@@ -31,7 +31,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-public class MinechemBlocks
+public class MinechemBlockGeneration
 {
     public static Block decomposer;
     public static Block microscope;

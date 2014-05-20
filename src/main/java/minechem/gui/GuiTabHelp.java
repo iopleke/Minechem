@@ -1,4 +1,4 @@
-package minechem.gui.tabs;
+package minechem.gui;
 
 import minechem.ModMinechem;
 import minechem.utils.MinechemHelper;
@@ -6,14 +6,14 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
-public class TabHelp extends Tab
+public class GuiTabHelp extends GuiTab
 {
     public static Icon helpIcon;
 
     String helpString;
     int stringWidth;
 
-    public TabHelp(Gui gui, String helpString)
+    public GuiTabHelp(Gui gui, String helpString)
     {
         super(gui);
         this.helpString = helpString;

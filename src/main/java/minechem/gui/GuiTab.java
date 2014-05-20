@@ -1,7 +1,6 @@
-package minechem.gui.tabs;
+package minechem.gui;
 
 import minechem.ModMinechem;
-import minechem.gui.GuiContainerTabbed;
 import minechem.utils.Reference;
 import minechem.utils.SessionVars;
 import net.minecraft.client.Minecraft;
@@ -15,7 +14,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public abstract class Tab
+public abstract class GuiTab
 {
 
     public FontRenderer tabFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
@@ -41,7 +40,7 @@ public abstract class Tab
     protected FontRenderer fontRenderer;
     protected TextureManager renderEngine;
 
-    public Tab(Gui gui)
+    public GuiTab(Gui gui)
     {
         myGui = gui;
         fontRenderer = Minecraft.getMinecraft().fontRenderer;

@@ -1,6 +1,6 @@
 package minechem.item.blueprint;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ public class SlotBlueprint extends Slot
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.itemID == MinechemItems.blueprint.itemID;
+        return itemstack.itemID == MinechemItemGeneration.blueprint.itemID;
     }
 
 }

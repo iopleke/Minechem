@@ -1,6 +1,6 @@
 package minechem.item.chemistjournal;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import minechem.network.MinechemPackets;
 import minechem.network.MinechemPackets.ProtocolException;
 import net.minecraft.entity.player.EntityPlayer;
@@ -45,13 +45,13 @@ public class PacketActiveJournalItem extends MinechemPackets
             ItemStack journal = player.inventory.mainInventory[this.slot];
             
             // Check that it is indeed a journal and matches the ID we have internally for that item.
-            if (journal != null && journal.itemID == MinechemItems.journal.itemID)
+            if (journal != null && journal.itemID == MinechemItemGeneration.journal.itemID)
             {
                 // Set the active damage amount for the active item to ensure meta-data items show up properly.
                 ItemStack activeStack = new ItemStack(this.itemID, 1, this.itemDMG);
                 
                 // Sets the active stack in the server instance of the chemists journal.
-                MinechemItems.journal.setActiveStack(activeStack, journal);
+                MinechemItemGeneration.journal.setActiveStack(activeStack, journal);
             }
         }
     }

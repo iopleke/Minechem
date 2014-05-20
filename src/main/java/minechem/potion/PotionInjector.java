@@ -1,4 +1,4 @@
-package minechem;
+package minechem.potion;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;

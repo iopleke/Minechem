@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemGeneration;
 import minechem.item.element.Element;
 import minechem.item.element.ItemElement;
 import minechem.item.molecule.ItemMolecule;
@@ -120,11 +120,11 @@ public class MinechemHelper
         {
             if (chemical instanceof Element)
             {
-                stacks.add(new ItemStack(MinechemItems.element, chemical.amount, ((Element) chemical).element.ordinal()));
+                stacks.add(new ItemStack(MinechemItemGeneration.element, chemical.amount, ((Element) chemical).element.ordinal()));
             }
             else if (chemical instanceof Molecule)
             {
-                stacks.add(new ItemStack(MinechemItems.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal()));
+                stacks.add(new ItemStack(MinechemItemGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal()));
             }
         }
         return stacks;
@@ -138,11 +138,11 @@ public class MinechemHelper
             Chemical chemical = chemicals[i];
             if (chemical instanceof Element)
             {
-                stacks[i] = new ItemStack(MinechemItems.element, chemical.amount, ((Element) chemical).element.ordinal());
+                stacks[i] = new ItemStack(MinechemItemGeneration.element, chemical.amount, ((Element) chemical).element.ordinal());
             }
             else if (chemical instanceof Molecule)
             {
-                stacks[i] = new ItemStack(MinechemItems.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal());
+                stacks[i] = new ItemStack(MinechemItemGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal());
             }
         }
         return stacks;
@@ -155,12 +155,12 @@ public class MinechemHelper
 
     public static boolean itemStackMatchesChemical(ItemStack itemstack, Chemical chemical, int factor)
     {
-        if (chemical instanceof Element && itemstack.itemID == MinechemItems.element.itemID)
+        if (chemical instanceof Element && itemstack.itemID == MinechemItemGeneration.element.itemID)
         {
             Element element = (Element) chemical;
             return (itemstack.getItemDamage() == element.element.ordinal()) && (itemstack.stackSize >= element.amount * factor);
         }
-        if (chemical instanceof Molecule && itemstack.itemID == MinechemItems.molecule.itemID)
+        if (chemical instanceof Molecule && itemstack.itemID == MinechemItemGeneration.molecule.itemID)
         {
             Molecule molecule = (Molecule) chemical;
             return (itemstack.getItemDamage() == molecule.molecule.ordinal()) && (itemstack.stackSize >= molecule.amount * factor);
@@ -263,9 +263,9 @@ public class MinechemHelper
     public static ItemStack chemicalToItemStack(Chemical chemical, int amount)
     {
         if (chemical instanceof Element)
-            return new ItemStack(MinechemItems.element, amount, ((Element) chemical).element.ordinal());
+            return new ItemStack(MinechemItemGeneration.element, amount, ((Element) chemical).element.ordinal());
         else if (chemical instanceof Molecule)
-            return new ItemStack(MinechemItems.molecule, amount, ((Molecule) chemical).molecule.id());
+            return new ItemStack(MinechemItemGeneration.molecule, amount, ((Molecule) chemical).molecule.id());
         return null;
     }
 

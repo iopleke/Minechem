@@ -2,8 +2,8 @@ package minechem.tileentity.blueprintprojector;
 
 import java.util.HashMap;
 
-import minechem.MinechemBlocks;
-import minechem.MinechemItems;
+import minechem.MinechemBlockGeneration;
+import minechem.MinechemItemGeneration;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.blueprint.BlueprintBlock.Type;
@@ -137,7 +137,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
                 fusion.xCoord = worldPos.x;
                 fusion.yCoord = worldPos.y;
                 fusion.zCoord = worldPos.z;
-                fusion.blockType = MinechemBlocks.fusion;
+                fusion.blockType = MinechemBlockGeneration.fusion;
                 worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
             }
             return worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
@@ -220,7 +220,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
 
     private void createGhostBlock(int x, int y, int z, int blockID)
     {
-        worldObj.setBlock(x, y, z, MinechemBlocks.ghostBlock.blockID, 0, 3);
+        worldObj.setBlock(x, y, z, MinechemBlockGeneration.ghostBlock.blockID, 0, 3);
         TileEntity tileEntity = worldObj.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityGhostBlock)
         {
@@ -254,7 +254,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     {
         Pos3 worldPos = position.getLocalPos(x, y, z);
         int blockID = worldObj.getBlockId(worldPos.x, worldPos.y, worldPos.z);
-        if (blockID == MinechemBlocks.ghostBlock.blockID)
+        if (blockID == MinechemBlockGeneration.ghostBlock.blockID)
         {
             worldObj.setBlockToAir(worldPos.x, worldPos.y, worldPos.z);
         }
@@ -312,7 +312,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
         super.setInventorySlotContents(slot, itemstack);
         if (itemstack != null)
         {
-            MinechemBlueprint blueprint = MinechemItems.blueprint.getBlueprint(itemstack);
+            MinechemBlueprint blueprint = MinechemItemGeneration.blueprint.getBlueprint(itemstack);
             setBlueprint(blueprint);
         }
     }
@@ -352,7 +352,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
         if (blueprintNBT != null)
         {
             ItemStack blueprintStack = ItemStack.loadItemStackFromNBT(blueprintNBT);
-            MinechemBlueprint blueprint = MinechemItems.blueprint.getBlueprint(blueprintStack);
+            MinechemBlueprint blueprint = MinechemItemGeneration.blueprint.getBlueprint(blueprintStack);
             setBlueprint(blueprint);
             this.inventory[0] = blueprintStack;
         }
@@ -374,7 +374,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
-        return itemstack.itemID == MinechemItems.blueprint.itemID;
+        return itemstack.itemID == MinechemItemGeneration.blueprint.itemID;
     }
 
     @Override
