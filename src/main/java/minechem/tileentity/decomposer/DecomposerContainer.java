@@ -8,15 +8,15 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerDecomposer extends Container implements IRadiationShield
+public class DecomposerContainer extends Container implements IRadiationShield
 {
 
-    protected TileEntityDecomposer decomposer;
+    protected DecomposerTileEntity decomposer;
     protected final int kPlayerInventorySlotStart;
     protected final int kPlayerInventorySlotEnd;
     protected final int kDecomposerInventoryEnd;
 
-    public ContainerDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer)
+    public DecomposerContainer(InventoryPlayer inventoryPlayer, DecomposerTileEntity decomposer)
     {
         this.decomposer = decomposer;
         kPlayerInventorySlotStart = decomposer.getSizeInventory();

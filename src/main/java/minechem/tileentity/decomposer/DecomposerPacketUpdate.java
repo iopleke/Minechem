@@ -12,7 +12,7 @@ import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
 
-public class PacketDecomposerUpdate extends MinechemPackets
+public class DecomposerPacketUpdate extends MinechemPackets
 {
     /** X coordinates of tile entity source. */
     private int tilePosX;
@@ -39,9 +39,9 @@ public class PacketDecomposerUpdate extends MinechemPackets
     private int lastItemCookTimeMaximum;
     
     /** Reference object that will be hooked on client side only */
-    private TileEntityDecomposer tileEntity;
+    private DecomposerTileEntity tileEntity;
 
-    public PacketDecomposerUpdate(TileEntityDecomposer serverDecomposer)
+    public DecomposerPacketUpdate(DecomposerTileEntity serverDecomposer)
     {        
         // World position information.
         tilePosX = serverDecomposer.xCoord;
@@ -60,7 +60,7 @@ public class PacketDecomposerUpdate extends MinechemPackets
         this.state = serverDecomposer.getState().ordinal();
     }
 
-    public PacketDecomposerUpdate()
+    public DecomposerPacketUpdate()
     {
         // Required for reflection.
     }
@@ -75,7 +75,7 @@ public class PacketDecomposerUpdate extends MinechemPackets
         // Packet received by client, executing payload.
         if (side.isClient())
         {
-            tileEntity = (TileEntityDecomposer) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
+            tileEntity = (DecomposerTileEntity) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
             if (tileEntity == null)
             {
                 return;

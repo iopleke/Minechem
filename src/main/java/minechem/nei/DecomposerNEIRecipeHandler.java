@@ -10,7 +10,7 @@ import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
-import minechem.tileentity.decomposer.GuiDecomposer;
+import minechem.tileentity.decomposer.DecomposerGui;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import minechem.utils.Compare;
@@ -116,7 +116,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
     @Override
     public Class getGuiClass()
     {
-        return GuiDecomposer.class;
+        return DecomposerGui.class;
     }
 
     /** Registers a decomposer recipe with NEI. Anything that adds a new decomposer recipe after startup should call this to have the recipe reflected in NEI.

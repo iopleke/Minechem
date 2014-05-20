@@ -3,7 +3,7 @@ package minechem.tileentity.synthesis;
 import minechem.ModMinechem;
 import minechem.network.MinechemPackets;
 import minechem.network.MinechemPackets.ProtocolException;
-import minechem.tileentity.decomposer.TileEntityDecomposer;
+import minechem.tileentity.decomposer.DecomposerTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraftforge.common.ForgeDirection;
 

@@ -11,9 +11,9 @@ import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
 import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
 import minechem.tileentity.chemicalstorage.GuiChemicalStorage;
 import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
-import minechem.tileentity.decomposer.ContainerDecomposer;
-import minechem.tileentity.decomposer.GuiDecomposer;
-import minechem.tileentity.decomposer.TileEntityDecomposer;
+import minechem.tileentity.decomposer.DecomposerContainer;
+import minechem.tileentity.decomposer.DecomposerGui;
+import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.leadedchest.ContainerLeadedChest;
 import minechem.tileentity.leadedchest.GuiLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
@@ -60,9 +60,9 @@ public class GuiHandler implements IGuiHandler
             return new CotainerTable(player.inventory);
         }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityDecomposer)
+        if (tileEntity instanceof DecomposerTileEntity)
         {
-            return new ContainerDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
+            return new DecomposerContainer(player.inventory, (DecomposerTileEntity) tileEntity);
         }
         if (tileEntity instanceof TileEntityLeadedChest)
         {
@@ -147,9 +147,9 @@ public class GuiHandler implements IGuiHandler
         
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         
-        if (tileEntity instanceof TileEntityDecomposer)
+        if (tileEntity instanceof DecomposerTileEntity)
         {
-            return new GuiDecomposer(player.inventory, (TileEntityDecomposer) tileEntity);
+            return new DecomposerGui(player.inventory, (DecomposerTileEntity) tileEntity);
         }
         if (tileEntity instanceof TileEntityLeadedChest)
         {

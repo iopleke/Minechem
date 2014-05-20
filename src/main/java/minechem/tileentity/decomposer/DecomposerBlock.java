@@ -16,11 +16,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockDecomposer extends BlockMinechemContainer
+public class DecomposerBlock extends BlockMinechemContainer
 {
     private Icon front;
 
-    public BlockDecomposer(int id)
+    public DecomposerBlock(int id)
     {
         super(id, Material.iron);
         setUnlocalizedName("blockChemicalDecomposer");
@@ -40,13 +40,13 @@ public class BlockDecomposer extends BlockMinechemContainer
     @Override
     public TileEntity createNewTileEntity(World var1)
     {
-        return new TileEntityDecomposer();
+        return new DecomposerTileEntity();
     }
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
     {
-        TileEntityDecomposer decomposer = (TileEntityDecomposer) tileEntity;
+        DecomposerTileEntity decomposer = (DecomposerTileEntity) tileEntity;
         for (int slot = 0; slot < decomposer.getSizeInventory(); slot++)
         {
             ItemStack itemstack = decomposer.getStackInSlot(slot);

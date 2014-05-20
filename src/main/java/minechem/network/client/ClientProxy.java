@@ -13,9 +13,9 @@ import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjectorRender
 import minechem.tileentity.chemicalstorage.ItemChemicalStorageRenderer;
 import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
 import minechem.tileentity.chemicalstorage.TileEntityChemicalStorageRenderer;
-import minechem.tileentity.decomposer.ItemDecomposerRenderer;
-import minechem.tileentity.decomposer.TileEntityDecomposer;
-import minechem.tileentity.decomposer.TileEntityDecomposerRenderer;
+import minechem.tileentity.decomposer.DecomposerItemRenderer;
+import minechem.tileentity.decomposer.DecomposerTileEntity;
+import minechem.tileentity.decomposer.DecomposerTileEntityRenderer;
 import minechem.tileentity.leadedchest.ItemLeadedChestRenderer;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChestRenderer;
@@ -54,7 +54,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule.itemID, new ItemMoleculeRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.microscope.blockID].itemID, new ItemMicroscopeRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.decomposer.blockID].itemID, new ItemDecomposerRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.decomposer.blockID].itemID, new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.synthesis.blockID].itemID, new ItemSynthesisRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
@@ -62,7 +62,7 @@ public class ClientProxy extends CommonProxy
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDecomposer.class, new TileEntityDecomposerRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySynthesis.class, new TileEntitySynthesisRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());

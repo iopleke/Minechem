@@ -25,7 +25,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
-public class TileEntityDecomposer extends MinechemTileEntity implements ISidedInventory, IFluidHandler
+public class DecomposerTileEntity extends MinechemTileEntity implements ISidedInventory, IFluidHandler
 {
     /** Input Slots */
     public static final int[] kInput = { 0 };
@@ -59,7 +59,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     private ItemStack activeStack;
     
     /** Instance of our model for the decomposer. */
-    public ModelDecomposer model;
+    public DecomposerModel model;
 
     /** Wrapper for output inventory functions. */
     private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
@@ -179,7 +179,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         kProcessIdle, kProcessActive, kProcessFinished, kProcessJammed
     }
 
-    public TileEntityDecomposer()
+    public DecomposerTileEntity()
     {
         // Sets the total amount of energy that can be stored and the amount we can receive in a single network update.
         super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
@@ -192,7 +192,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
         {
             // TODO: Replace with model loader and move to client proxy.
-            model = new ModelDecomposer();
+            model = new DecomposerModel();
         }
     }
 
@@ -232,7 +232,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         }
 
         // Sends a packet to clients in dimension of origin about the machines current state.
-        PacketDispatcher.sendPacketToAllInDimension(new PacketDecomposerUpdate(this).makePacket(), worldObj.provider.dimensionId);
+        PacketDispatcher.sendPacketToAllInDimension(new DecomposerPacketUpdate(this).makePacket(), worldObj.provider.dimensionId);
 
         // If the machines state is currently not set to active then stop operation.
         if (state != State.kProcessActive)
@@ -522,10 +522,10 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
 
         if (var1 == 1)
         {
-            return TileEntityDecomposer.kInput;
+            return DecomposerTileEntity.kInput;
         }
 
-        return TileEntityDecomposer.kOutput;
+        return DecomposerTileEntity.kOutput;
 
     }
 
@@ -544,9 +544,9 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
-        if (slot == TileEntityDecomposer.kOutput[0])
+        if (slot == DecomposerTileEntity.kOutput[0])
         {
-            ItemStack oldStack = this.inventory[TileEntityDecomposer.kOutput[0]];
+            ItemStack oldStack = this.inventory[DecomposerTileEntity.kOutput[0]];
             if (oldStack != null && itemstack != null && oldStack.getItemDamage() == itemstack.getItemDamage())
             {
                 if (oldStack.getItem() == itemstack.getItem())

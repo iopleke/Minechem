@@ -2,15 +2,15 @@ package minechem.tileentity.decomposer;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiTabStateControl;
-import minechem.tileentity.decomposer.TileEntityDecomposer.State;
+import minechem.tileentity.decomposer.DecomposerTileEntity.State;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
-public class TabStateControlDecomposer extends GuiTabStateControl
+public class DecomposerTabStateControl extends GuiTabStateControl
 {
-    private TileEntityDecomposer decomposer;
+    private DecomposerTileEntity decomposer;
 
     enum TabState
     {
@@ -31,7 +31,7 @@ public class TabStateControlDecomposer extends GuiTabStateControl
 
     TabState state;
 
-    public TabStateControlDecomposer(Gui gui, TileEntityDecomposer decomposer)
+    public DecomposerTabStateControl(Gui gui, DecomposerTileEntity decomposer)
     {
         super(gui);
         this.decomposer = decomposer;

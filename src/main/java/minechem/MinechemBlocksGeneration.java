@@ -8,9 +8,9 @@ import minechem.tileentity.blueprintprojector.BlockBlueprintProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
 import minechem.tileentity.chemicalstorage.BlockChemicalStorage;
 import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
-import minechem.tileentity.decomposer.BlockDecomposer;
+import minechem.tileentity.decomposer.DecomposerBlock;
 import minechem.tileentity.decomposer.DecomposerRecipe;
-import minechem.tileentity.decomposer.TileEntityDecomposer;
+import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.leadedchest.BlockLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.microscope.BlockMicroscope;
@@ -52,9 +52,9 @@ public class MinechemBlocksGeneration
     public static void registerBlocks()
     {
         // Decomposer
-        decomposer = new BlockDecomposer(Settings.Decomposer);
+        decomposer = new DecomposerBlock(Settings.Decomposer);
         GameRegistry.registerBlock(decomposer, "minechem.blockDecomposer");
-        GameRegistry.registerTileEntity(TileEntityDecomposer.class, "minechem.tileEntityDecomposer");
+        GameRegistry.registerTileEntity(DecomposerTileEntity.class, "minechem.tileEntityDecomposer");
 
         // Microscope.
         microscope = new BlockMicroscope(Settings.Microscope);

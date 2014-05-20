@@ -10,14 +10,14 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemDecomposerRenderer extends ItemMinechemRenderer
+public class DecomposerItemRenderer extends ItemMinechemRenderer
 {
 
-    private ModelDecomposer model;
+    private DecomposerModel model;
 
-    public ItemDecomposerRenderer()
+    public DecomposerItemRenderer()
     {
-        model = new ModelDecomposer();
+        model = new DecomposerModel();
     }
 
     @Override

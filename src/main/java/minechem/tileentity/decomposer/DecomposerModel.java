@@ -8,7 +8,7 @@ package minechem.tileentity.decomposer;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelDecomposer extends ModelBase
+public class DecomposerModel extends ModelBase
 {
     // fields
     ModelRenderer backface;
@@ -38,7 +38,7 @@ public class ModelDecomposer extends ModelBase
 
     float windmillAngle = 0.0F;
 
-    public ModelDecomposer()
+    public DecomposerModel()
     {
         textureWidth = 128;
         textureHeight = 64;
@@ -224,7 +224,7 @@ public class ModelDecomposer extends ModelBase
         model.rotateAngleZ = z;
     }
 
-    public void updateWindillRotation(TileEntityDecomposer decomposer)
+    public void updateWindillRotation(DecomposerTileEntity decomposer)
     {
         windmillAngle += 0.2F;
         if (windmillAngle >= 360.0F)

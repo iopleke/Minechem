@@ -12,10 +12,10 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiDecomposer extends GuiContainerTabbed
+public class DecomposerGui extends GuiContainerTabbed
 {
 
-    public static TileEntityDecomposer ENTITY;
+    public static DecomposerTileEntity ENTITY;
     InventoryPlayer PLAYER_INVENTORY;
     int mouseX = 0;
     int mouseY = 0;
@@ -23,12 +23,12 @@ public class GuiDecomposer extends GuiContainerTabbed
     int guiHeight = 166;
     public static ResourceLocation TEXTURE = new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_GUI);
 
-    public GuiDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer)
+    public DecomposerGui(InventoryPlayer inventoryPlayer, DecomposerTileEntity decomposer)
     {
-        super(new ContainerDecomposer(inventoryPlayer, decomposer));
-        GuiDecomposer.ENTITY = decomposer;
+        super(new DecomposerContainer(inventoryPlayer, decomposer));
+        DecomposerGui.ENTITY = decomposer;
         this.PLAYER_INVENTORY = inventoryPlayer;
-        addTab(new TabStateControlDecomposer(this, decomposer));
+        addTab(new DecomposerTabStateControl(this, decomposer));
         addTab(new GuiTabEnergy(this, decomposer));
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.decomposer")));
 
