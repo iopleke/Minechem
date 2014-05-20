@@ -1,4 +1,4 @@
-package minechem.utils;
+package minechem.potion;
 
 public class Chemical
 {

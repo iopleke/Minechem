@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 import minechem.fluid.FluidHelper;
+import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
 import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;

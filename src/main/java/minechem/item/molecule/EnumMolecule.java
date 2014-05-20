@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Random;
 
 import minechem.item.element.Element;
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import net.minecraft.util.StatCollector;
 import static minechem.item.element.EnumElement.*;
 

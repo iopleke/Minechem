@@ -4,11 +4,10 @@ import java.util.List;
 
 import minechem.MinechemItemsGeneration;
 import minechem.container.ContainerWithFakeSlots;
-import minechem.item.IRadiationShield;
 import minechem.item.chemistjournal.SlotJournal;
+import minechem.radiation.IRadiationShield;
 import minechem.slot.SlotChemical;
 import minechem.slot.SlotFake;
-import minechem.slot.SlotSynthesisOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;

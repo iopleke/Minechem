@@ -2,7 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.ModMinechem;
+import minechem.potion.Chemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.decomposer.GuiDecomposer;
-import minechem.utils.Chemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import minechem.utils.Compare;

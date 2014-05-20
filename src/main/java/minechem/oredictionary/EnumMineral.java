@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import minechem.item.molecule.EnumMolecule;
 import minechem.item.molecule.Molecule;
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import net.minecraft.util.StatCollector;
 
 public enum EnumMineral

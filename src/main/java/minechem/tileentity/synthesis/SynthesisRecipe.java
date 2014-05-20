@@ -3,7 +3,7 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import net.minecraft.item.ItemStack;
 
 public class SynthesisRecipe

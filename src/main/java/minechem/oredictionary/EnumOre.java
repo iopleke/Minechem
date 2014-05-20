@@ -4,7 +4,7 @@ import minechem.item.element.Element;
 import minechem.item.element.EnumElement;
 import minechem.item.molecule.EnumMolecule;
 import minechem.item.molecule.Molecule;
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 
 public enum EnumOre {
     iron("Copper", new Element(EnumElement.Fe, 16)),

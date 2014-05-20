@@ -5,8 +5,8 @@ import java.util.List;
 
 import minechem.MinechemItemsGeneration;
 import minechem.tileentity.decomposer.TileEntityDecomposer.State;
+import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
-import minechem.utils.BoundedInventory;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
 import minechem.utils.Compare;

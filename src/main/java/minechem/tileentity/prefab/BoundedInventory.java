@@ -11,23 +11,22 @@ public class BoundedInventory implements IInventory
 {
 
     private final IInventory _inv;
-    private final int _start;
-    private final int _end;
+    private final int[] _slots;
 
-    public BoundedInventory(IInventory inv, int start, int end)
+    public BoundedInventory(IInventory inv, int[] slots)
     {
         if (inv == null)
             throw new IllegalArgumentException("inv: must not be null");
-        if (start < 0 || start >= inv.getSizeInventory())
-            throw new IllegalArgumentException("start: out of bounds");
-        if (end <= 0 || end > inv.getSizeInventory())
-            throw new IllegalArgumentException("end: out of bounds");
-        if (start >= end)
-            throw new IllegalArgumentException("start/end: overlap");
+        if (slots == null)
+            throw new IllegalArgumentException("slots: must not be null");
+        for (int i = 0; i < slots.length; i++)
+        {
+            if (i < 0 || i >= inv.getSizeInventory())
+                throw new IllegalArgumentException("slot: out of bounds");
+        }
 
         _inv = inv;
-        _start = start;
-        _end = end;
+        _slots = slots;
     }
 
     public ItemStack[] copyInventoryToArray()
@@ -46,7 +45,7 @@ public class BoundedInventory implements IInventory
 
     public List<ItemStack> copyInventoryToList()
     {
-        List<ItemStack> itemstacks = new ArrayList();
+        List<ItemStack> itemstacks = new ArrayList<ItemStack>();
         for (int slot = 0; slot < getSizeInventory(); slot++)
         {
             if (getStackInSlot(slot) != null)
@@ -64,31 +63,31 @@ public class BoundedInventory implements IInventory
     @Override
     public int getSizeInventory()
     {
-        return _end - _start;
+        return _slots.length;
     }
 
     @Override
     public ItemStack getStackInSlot(int slot)
     {
-        return _inv.getStackInSlot(_start + slot);
+        return _inv.getStackInSlot(_slots[slot]);
     }
 
     @Override
     public ItemStack decrStackSize(int slot, int amount)
     {
-        return _inv.decrStackSize(_start + slot, amount);
+        return _inv.decrStackSize(_slots[slot], amount);
     }
 
     @Override
     public ItemStack getStackInSlotOnClosing(int slot)
     {
-        return _inv.getStackInSlotOnClosing(_start + slot);
+        return _inv.getStackInSlotOnClosing(_slots[slot]);
     }
 
     @Override
     public void setInventorySlotContents(int slot, ItemStack stack)
     {
-        _inv.setInventorySlotContents(_start + slot, stack);
+        _inv.setInventorySlotContents(_slots[slot], stack);
     }
 
     @Override
@@ -130,15 +129,13 @@ public class BoundedInventory implements IInventory
     @Override
     public boolean isInvNameLocalized()
     {
-        // TODO Auto-generated method stub
-        return false;
+        return _inv.isInvNameLocalized();
     }
 
-    // Not sure why this is here
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
-        // TODO Auto-generated method stub
-        return false;
+        return _inv.isItemValidForSlot(_slots[i], itemstack);
     }
+
 }

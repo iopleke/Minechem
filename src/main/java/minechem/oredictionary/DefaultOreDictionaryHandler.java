@@ -7,9 +7,9 @@ import java.util.Map;
 import java.util.logging.Level;
 
 import minechem.ModMinechem;
+import minechem.potion.Chemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
-import minechem.utils.Chemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 

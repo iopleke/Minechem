@@ -1,6 +1,6 @@
 package minechem.item.molecule;
 
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 
 public class Molecule extends Chemical
 {

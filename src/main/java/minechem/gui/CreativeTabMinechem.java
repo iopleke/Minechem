@@ -1,5 +1,6 @@
-package minechem;
+package minechem.gui;
 
+import minechem.MinechemItemsGeneration;
 import minechem.item.element.EnumElement;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;

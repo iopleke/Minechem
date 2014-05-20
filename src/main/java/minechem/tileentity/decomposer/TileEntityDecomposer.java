@@ -5,9 +5,9 @@ import java.util.Iterator;
 
 import minechem.ModMinechem;
 import minechem.Settings;
+import minechem.potion.Chemical;
+import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
-import minechem.utils.BoundedInventory;
-import minechem.utils.Chemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
 import minechem.utils.Compare;

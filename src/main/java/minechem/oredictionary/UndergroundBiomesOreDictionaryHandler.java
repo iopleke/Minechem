@@ -2,8 +2,8 @@ package minechem.oredictionary;
 
 import minechem.item.molecule.EnumMolecule;
 import minechem.item.molecule.Molecule;
+import minechem.potion.Chemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
-import minechem.utils.Chemical;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 public class UndergroundBiomesOreDictionaryHandler implements OreDictionaryHandler

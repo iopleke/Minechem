@@ -9,6 +9,7 @@ import minechem.item.element.Element;
 import minechem.item.element.ItemElement;
 import minechem.item.molecule.ItemMolecule;
 import minechem.item.molecule.Molecule;
+import minechem.potion.Chemical;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;

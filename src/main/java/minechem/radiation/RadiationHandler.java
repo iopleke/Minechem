@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.IRadiationShield;
 import minechem.item.element.EnumRadioactivity;
 import minechem.item.element.ItemElement;
 import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;

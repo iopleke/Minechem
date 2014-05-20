@@ -1,8 +1,8 @@
 package minechem.tileentity.multiblock;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.IRadiationShield;
 import minechem.item.element.EnumElement;
+import minechem.radiation.IRadiationShield;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

@@ -3,7 +3,7 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Random;
 
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeChance extends DecomposerRecipe

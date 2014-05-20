@@ -1,6 +1,5 @@
-package minechem.slot;
+package minechem.tileentity.synthesis;
 
-import minechem.tileentity.synthesis.TileEntitySynthesis;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;

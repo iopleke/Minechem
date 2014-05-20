@@ -4,7 +4,7 @@ import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFusion;
 import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
-import minechem.utils.BoundedInventory;
+import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.SafeTimeTracker;

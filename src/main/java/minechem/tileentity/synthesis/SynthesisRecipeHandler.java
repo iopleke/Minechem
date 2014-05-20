@@ -2,7 +2,7 @@ package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
 
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Compare;
 import net.minecraft.inventory.IInventory;

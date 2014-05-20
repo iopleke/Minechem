@@ -3,7 +3,7 @@ package minechem.tileentity.multiblock;
 import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFission;
 import minechem.item.element.ItemElement;
-import minechem.utils.BoundedInventory;
+import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.SafeTimeTracker;

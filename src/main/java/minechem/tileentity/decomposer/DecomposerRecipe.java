@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import minechem.Settings;
-import minechem.utils.Chemical;
+import minechem.potion.Chemical;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipe

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.ModMinechem;
+import minechem.potion.Chemical;
 import minechem.tileentity.synthesis.GuiSynthesis;
 import minechem.tileentity.synthesis.SynthesisRecipe;
-import minechem.utils.Chemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import minechem.utils.Compare;
