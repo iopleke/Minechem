@@ -1,6 +1,6 @@
 package minechem.utils;
 
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
 
 public interface Reference
 {

@@ -6,8 +6,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import minechem.api.core.EnumElement;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.item.element.EnumElement;
 import minechem.item.polytool.GuiPolytool;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.item.polytool.PolytoolUpgradeType;

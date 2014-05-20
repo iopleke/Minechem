@@ -1,11 +1,11 @@
 package minechem.oredictionary;
 
-import minechem.api.core.Chemical;
-import minechem.api.core.EnumMolecule;
-import minechem.api.core.Molecule;
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.item.molecule.EnumMolecule;
+import minechem.item.molecule.Molecule;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.utils.Chemical;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 public class AppliedEnergisticsOreDictionaryHandler implements OreDictionaryHandler

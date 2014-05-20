@@ -2,7 +2,7 @@ package minechem.item.polytool;
 
 import java.util.ArrayList;
 
-import minechem.api.core.EnumElement;
+import minechem.item.element.EnumElement;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;

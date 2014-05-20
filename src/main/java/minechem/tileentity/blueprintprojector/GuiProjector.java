@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import minechem.client.gui.GuiContainerTabbed;
-import minechem.client.gui.tabs.TabHelp;
-import minechem.common.MinechemItems;
-import minechem.common.ModMinechem;
-import minechem.common.blueprint.BlueprintBlock;
-import minechem.common.blueprint.MinechemBlueprint;
+import minechem.MinechemItems;
+import minechem.ModMinechem;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.tabs.TabHelp;
+import minechem.item.blueprint.BlueprintBlock;
+import minechem.item.blueprint.MinechemBlueprint;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;

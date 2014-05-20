@@ -1,7 +1,7 @@
 package minechem.item.polytool.types;
 
-import minechem.api.core.EnumElement;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
+import minechem.item.element.EnumElement;
 import minechem.item.polytool.ItemPolytool;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;

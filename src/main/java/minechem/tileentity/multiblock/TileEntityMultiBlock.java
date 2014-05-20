@@ -2,8 +2,8 @@ package minechem.tileentity.multiblock;
 
 import java.util.HashMap;
 
-import minechem.common.blueprint.BlueprintBlock;
-import minechem.common.blueprint.MinechemBlueprint;
+import minechem.item.blueprint.BlueprintBlock;
+import minechem.item.blueprint.MinechemBlueprint;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;

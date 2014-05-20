@@ -1,7 +1,7 @@
 package minechem.tileentity.microscope;
 
-import minechem.client.render.item.ItemMinechemRenderer;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.item.ItemMinechemRenderer;
 import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;

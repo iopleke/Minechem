@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import minechem.api.core.EnumElement;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
+import minechem.item.element.EnumElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;

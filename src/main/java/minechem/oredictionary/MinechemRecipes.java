@@ -3,22 +3,22 @@ package minechem.oredictionary;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import minechem.api.core.Chemical;
-import minechem.api.core.Element;
-import minechem.api.core.EnumElement;
-import minechem.api.core.EnumMolecule;
-import minechem.api.core.Molecule;
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.recipe.DecomposerRecipeChance;
-import minechem.api.recipe.DecomposerRecipeSelect;
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.api.util.Util;
-import minechem.common.MinechemBlocks;
-import minechem.common.MinechemItems;
-import minechem.common.blueprint.MinechemBlueprint;
+import minechem.MinechemBlocks;
+import minechem.MinechemItems;
 import minechem.item.blueprint.ItemBlueprint;
+import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.element.Element;
+import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
+import minechem.item.molecule.EnumMolecule;
+import minechem.item.molecule.Molecule;
 import minechem.tileentity.decomposer.DecomposerFluidRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeChance;
+import minechem.tileentity.decomposer.DecomposerRecipeSelect;
+import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.utils.Chemical;
+import minechem.utils.Compare;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
@@ -1171,7 +1171,7 @@ public class MinechemRecipes
                     if (var4.hasNext())
                     {
                         SynthesisRecipe var5 = (SynthesisRecipe) var4.next();
-                        if (!Util.stacksAreSameKind(var5.getOutput(), var2.getInput()))
+                        if (!Compare.stacksAreSameKind(var5.getOutput(), var2.getInput()))
                         {
                             continue;
                         }

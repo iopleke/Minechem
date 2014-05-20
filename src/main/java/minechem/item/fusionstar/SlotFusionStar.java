@@ -1,6 +1,6 @@
 package minechem.item.fusionstar;
 
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.Item;

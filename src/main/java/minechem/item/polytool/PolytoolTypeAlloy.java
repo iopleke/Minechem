@@ -1,6 +1,6 @@
 package minechem.item.polytool;
 
-import minechem.api.core.EnumElement;
+import minechem.item.element.EnumElement;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;

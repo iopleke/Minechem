@@ -2,11 +2,11 @@ package minechem.tileentity.blueprintprojector;
 
 import java.util.ArrayList;
 
-import minechem.common.CommonProxy;
-import minechem.common.ModMinechem;
-import minechem.common.blocks.BlockMinechemContainer;
-import minechem.common.blueprint.MinechemBlueprint;
+import minechem.CommonProxy;
+import minechem.ModMinechem;
+import minechem.block.BlockMinechemContainer;
 import minechem.item.blueprint.ItemBlueprint;
+import minechem.item.blueprint.MinechemBlueprint;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

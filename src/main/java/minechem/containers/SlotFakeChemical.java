@@ -1,6 +1,6 @@
 package minechem.containers;
 
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 

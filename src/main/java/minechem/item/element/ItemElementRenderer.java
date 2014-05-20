@@ -1,7 +1,5 @@
 package minechem.item.element;
 
-import minechem.api.core.EnumClassification;
-import minechem.api.core.EnumElement;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

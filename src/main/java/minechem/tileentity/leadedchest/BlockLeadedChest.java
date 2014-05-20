@@ -2,7 +2,7 @@ package minechem.tileentity.leadedchest;
 
 import java.util.Random;
 
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;

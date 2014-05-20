@@ -1,6 +1,6 @@
 package minechem.tileentity.microscope;
 
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
 import minechem.item.chemistjournal.SlotJournal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

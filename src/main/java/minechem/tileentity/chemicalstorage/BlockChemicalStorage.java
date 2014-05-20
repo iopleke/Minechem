@@ -1,6 +1,6 @@
 package minechem.tileentity.chemicalstorage;
 
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

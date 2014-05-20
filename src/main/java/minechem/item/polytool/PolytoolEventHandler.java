@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import minechem.api.core.EnumElement;
+import minechem.item.element.EnumElement;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.EntityLivingBase;

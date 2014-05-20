@@ -2,8 +2,7 @@ package minechem.item;
 
 import java.util.List;
 
-import minechem.api.core.IRadiationShield;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.Entity;

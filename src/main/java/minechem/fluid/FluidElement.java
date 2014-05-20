@@ -1,7 +1,7 @@
 package minechem.fluid;
 
-import minechem.api.core.EnumElement;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
+import minechem.item.element.EnumElement;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;

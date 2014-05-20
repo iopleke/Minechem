@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock;
 
-import minechem.api.core.IRadiationShield;
+import minechem.item.IRadiationShield;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

@@ -2,9 +2,9 @@ package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
 
-import minechem.common.CommonProxy;
-import minechem.common.ModMinechem;
-import minechem.common.blocks.BlockMinechemContainer;
+import minechem.CommonProxy;
+import minechem.ModMinechem;
+import minechem.block.BlockMinechemContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;

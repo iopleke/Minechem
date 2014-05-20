@@ -2,8 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.api.core.Chemical;
-import minechem.api.recipe.DecomposerRecipe;
+import minechem.utils.Chemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;

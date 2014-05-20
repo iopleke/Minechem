@@ -3,15 +3,13 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.api.util.Util;
-import minechem.common.MinechemItems;
-import minechem.network.PacketSynthesisUpdate;
+import minechem.MinechemItems;
 import minechem.tileentity.decomposer.TileEntityDecomposer.State;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.BoundedInventory;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
+import minechem.utils.Compare;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -461,7 +459,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         for (int slot = 0; slot < storage.length; slot++)
         {
             ItemStack storageItem = storage[slot];
-            if (storageItem != null && Util.stacksAreSameKind(storageItem, ingredient))
+            if (storageItem != null && Compare.stacksAreSameKind(storageItem, ingredient))
             {
                 int amountToTake = Math.min(storageItem.stackSize, ingredientAmountLeft);
                 ingredientAmountLeft -= amountToTake;

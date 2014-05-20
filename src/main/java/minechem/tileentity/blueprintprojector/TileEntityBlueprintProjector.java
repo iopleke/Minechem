@@ -2,11 +2,11 @@ package minechem.tileentity.blueprintprojector;
 
 import java.util.HashMap;
 
-import minechem.common.MinechemBlocks;
-import minechem.common.MinechemItems;
-import minechem.common.blueprint.BlueprintBlock;
-import minechem.common.blueprint.BlueprintBlock.Type;
-import minechem.common.blueprint.MinechemBlueprint;
+import minechem.MinechemBlocks;
+import minechem.MinechemItems;
+import minechem.item.blueprint.BlueprintBlock;
+import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.blueprint.BlueprintBlock.Type;
 import minechem.sound.LoopingSound;
 import minechem.tileentity.multiblock.EnumBlockStatus;
 import minechem.tileentity.multiblock.TileEntityFusion;

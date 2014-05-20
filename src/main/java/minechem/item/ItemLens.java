@@ -2,7 +2,7 @@ package minechem.item;
 
 import java.util.List;
 
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;

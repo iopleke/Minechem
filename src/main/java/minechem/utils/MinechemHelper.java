@@ -4,13 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import minechem.api.core.Chemical;
-import minechem.api.core.Element;
-import minechem.api.core.Molecule;
-import minechem.api.util.Util;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
+import minechem.item.element.Element;
 import minechem.item.element.ItemElement;
 import minechem.item.molecule.ItemMolecule;
+import minechem.item.molecule.Molecule;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -273,11 +271,11 @@ public class MinechemHelper
 
     public static Chemical itemStackToChemical(ItemStack itemstack)
     {
-        if (Util.isStackAnElement(itemstack))
+        if (Compare.isStackAnElement(itemstack))
         {
             return new Element(ItemElement.getElement(itemstack), itemstack.stackSize);
         }
-        else if (Util.isStackAMolecule(itemstack))
+        else if (Compare.isStackAMolecule(itemstack))
         {
             return new Molecule(ItemMolecule.getMolecule(itemstack), itemstack.stackSize);
         }

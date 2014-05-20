@@ -3,9 +3,8 @@ package minechem.item.molecule;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.api.core.EnumMolecule;
-import minechem.common.ModMinechem;
-import minechem.common.PharmacologyEffect;
+import minechem.ModMinechem;
+import minechem.PharmacologyEffect;
 import minechem.item.element.ItemElement;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;

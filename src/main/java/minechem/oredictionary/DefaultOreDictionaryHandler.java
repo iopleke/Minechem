@@ -6,11 +6,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-import minechem.api.core.Chemical;
-import minechem.api.core.EnumOre;
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.utils.Chemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 

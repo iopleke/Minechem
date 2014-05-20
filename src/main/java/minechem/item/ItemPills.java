@@ -1,6 +1,6 @@
 package minechem.item;
 
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.player.EntityPlayer;

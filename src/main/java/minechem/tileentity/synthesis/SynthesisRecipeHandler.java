@@ -2,10 +2,9 @@ package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
 
-import minechem.api.core.Chemical;
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.api.util.Util;
+import minechem.utils.Chemical;
 import minechem.utils.MinechemHelper;
+import minechem.utils.Compare;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -23,7 +22,7 @@ public class SynthesisRecipeHandler
     {
         for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
         {
-            if (Util.stacksAreSameKind(output, recipe.getOutput()))
+            if (Compare.stacksAreSameKind(output, recipe.getOutput()))
                 return recipe;
         }
         return null;
@@ -96,7 +95,7 @@ public class SynthesisRecipeHandler
         for (int slot = 0; slot < ingredients.size(); slot++)
         {
             ItemStack ingredientStack = ingredients.get(slot);
-            if (ingredientStack != null && Util.stacksAreSameKind(itemstack, ingredientStack) && itemstack.stackSize == ingredientStack.stackSize)
+            if (ingredientStack != null && Compare.stacksAreSameKind(itemstack, ingredientStack) && itemstack.stackSize == ingredientStack.stackSize)
                 return slot;
         }
         return -1;

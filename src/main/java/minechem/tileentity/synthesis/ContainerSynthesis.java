@@ -2,12 +2,12 @@ package minechem.tileentity.synthesis;
 
 import java.util.List;
 
-import minechem.api.core.IRadiationShield;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
 import minechem.containers.ContainerWithFakeSlots;
 import minechem.containers.SlotChemical;
 import minechem.containers.SlotFake;
 import minechem.containers.SlotSynthesisOutput;
+import minechem.item.IRadiationShield;
 import minechem.item.chemistjournal.SlotJournal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

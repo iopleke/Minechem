@@ -1,9 +1,9 @@
 package minechem.tileentity.microscope;
 
-import minechem.client.gui.GuiContainerTabbed;
-import minechem.client.gui.GuiToggleSwitch;
-import minechem.client.gui.GuiToggleSwitch.ToggleButton;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.GuiToggleSwitch;
+import minechem.gui.GuiToggleSwitch.ToggleButton;
 import minechem.utils.Reference;
 import net.minecraft.util.ResourceLocation;
 

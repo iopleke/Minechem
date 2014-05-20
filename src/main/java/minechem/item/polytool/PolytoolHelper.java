@@ -2,7 +2,7 @@ package minechem.item.polytool;
 
 import java.util.HashMap;
 
-import minechem.api.core.EnumElement;
+import minechem.item.element.EnumElement;
 import minechem.item.polytool.types.PolytoolTypeArgon;
 import minechem.item.polytool.types.PolytoolTypeBeryllium;
 import minechem.item.polytool.types.PolytoolTypeBoron;

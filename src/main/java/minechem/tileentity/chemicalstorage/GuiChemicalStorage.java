@@ -1,8 +1,8 @@
 package minechem.tileentity.chemicalstorage;
 
-import minechem.client.gui.GuiContainerTabbed;
-import minechem.client.gui.tabs.TabHelp;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.tabs.TabHelp;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.ContainerChest;

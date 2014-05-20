@@ -1,6 +1,10 @@
 package minechem.network;
 
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.tileentity.chemicalstorage.PacketActiveJournalItem;
+import minechem.tileentity.decomposer.PacketDecomposerUpdate;
+import minechem.tileentity.multiblock.PacketGhostBlock;
+import minechem.tileentity.synthesis.PacketSynthesisUpdate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 

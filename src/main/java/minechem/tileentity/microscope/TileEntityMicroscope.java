@@ -1,10 +1,10 @@
 package minechem.tileentity.microscope;
 
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
+import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.prefab.MinechemTileEntity;
+import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.BoundedInventory;
 import minechem.utils.Transactor;

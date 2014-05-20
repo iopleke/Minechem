@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import minechem.api.core.EnumElement;
-import minechem.common.GuiHandler;
-import minechem.common.ModMinechem;
+import minechem.GuiHandler;
+import minechem.ModMinechem;
+import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;

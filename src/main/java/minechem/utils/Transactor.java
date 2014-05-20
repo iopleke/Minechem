@@ -2,7 +2,6 @@ package minechem.utils;
 
 import java.util.ArrayList;
 
-import minechem.api.util.Util;
 import net.minecraft.item.ItemStack;
 
 public class Transactor
@@ -106,7 +105,7 @@ public class Transactor
         }
         else
         {
-            return Util.stacksAreSameKind(var1, var5) ? this.appendStackToSlot(var1, var2, var3, var4) : 0;
+            return Compare.stacksAreSameKind(var1, var5) ? this.appendStackToSlot(var1, var2, var3, var4) : 0;
         }
     }
 

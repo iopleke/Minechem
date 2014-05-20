@@ -1,10 +1,10 @@
 package minechem.tileentity.multiblock;
 
-import minechem.api.util.Constants;
-import minechem.common.MinechemItems;
-import minechem.common.blueprint.BlueprintFission;
+import minechem.MinechemItems;
+import minechem.item.blueprint.BlueprintFission;
 import minechem.item.element.ItemElement;
 import minechem.utils.BoundedInventory;
+import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.SafeTimeTracker;
 import minechem.utils.Transactor;

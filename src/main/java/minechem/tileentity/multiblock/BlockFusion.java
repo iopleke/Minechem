@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import minechem.common.ModMinechem;
-import minechem.common.blocks.BlockMinechemContainer;
+import minechem.ModMinechem;
+import minechem.block.BlockMinechemContainer;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;

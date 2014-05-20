@@ -1,6 +1,6 @@
 package minechem.oredictionary;
 
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

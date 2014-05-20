@@ -1,6 +1,6 @@
 package minechem.tileentity.prefab;
 
-import minechem.common.MinechemBlocks;
+import minechem.MinechemBlocks;
 import minechem.tileentity.multiblock.TileEntityFission;
 import minechem.tileentity.multiblock.TileEntityFusion;
 import net.minecraft.entity.player.EntityPlayer;

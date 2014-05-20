@@ -2,8 +2,8 @@ package minechem.fluid;
 
 import java.util.HashMap;
 
-import minechem.api.core.EnumElement;
-import minechem.api.core.EnumMolecule;
+import minechem.item.element.EnumElement;
+import minechem.item.molecule.EnumMolecule;
 
 public class FluidHelper
 {

@@ -1,10 +1,10 @@
 package minechem.tileentity.decomposer;
 
-import minechem.client.gui.GuiContainerTabbed;
-import minechem.client.gui.tabs.TabEnergy;
-import minechem.client.gui.tabs.TabHelp;
-import minechem.client.gui.tabs.TabStateControlDecomposer;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.tabs.TabEnergy;
+import minechem.gui.tabs.TabHelp;
+import minechem.gui.tabs.TabStateControlDecomposer;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;

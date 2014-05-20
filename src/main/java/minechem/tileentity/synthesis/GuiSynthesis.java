@@ -1,10 +1,10 @@
 package minechem.tileentity.synthesis;
 
-import minechem.client.gui.GuiContainerTabbed;
-import minechem.client.gui.tabs.TabEnergy;
-import minechem.client.gui.tabs.TabHelp;
-import minechem.client.gui.tabs.TabStateControlSynthesis;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.tabs.TabEnergy;
+import minechem.gui.tabs.TabHelp;
+import minechem.gui.tabs.TabStateControlSynthesis;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;

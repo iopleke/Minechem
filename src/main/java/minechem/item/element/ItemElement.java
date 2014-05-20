@@ -3,14 +3,11 @@ package minechem.item.element;
 import java.util.EnumMap;
 import java.util.List;
 
-import minechem.api.core.EnumClassification;
-import minechem.api.core.EnumElement;
-import minechem.api.core.EnumRadioactivity;
-import minechem.api.util.Constants;
-import minechem.common.MinechemItems;
-import minechem.common.ModMinechem;
-import minechem.common.RadiationInfo;
+import minechem.MinechemItems;
+import minechem.ModMinechem;
+import minechem.RadiationInfo;
 import minechem.item.polytool.PolytoolHelper;
+import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;

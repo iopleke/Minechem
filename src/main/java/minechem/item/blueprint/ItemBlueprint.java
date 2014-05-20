@@ -2,9 +2,8 @@ package minechem.item.blueprint;
 
 import java.util.List;
 
-import minechem.common.MinechemItems;
-import minechem.common.ModMinechem;
-import minechem.common.blueprint.MinechemBlueprint;
+import minechem.MinechemItems;
+import minechem.ModMinechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;

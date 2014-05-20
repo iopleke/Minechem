@@ -1,6 +1,5 @@
 package minechem.item.molecule;
 
-import minechem.api.core.EnumMolecule;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;

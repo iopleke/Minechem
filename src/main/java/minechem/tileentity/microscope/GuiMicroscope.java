@@ -2,16 +2,16 @@ package minechem.tileentity.microscope;
 
 import java.util.ArrayList;
 
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.recipe.DecomposerRecipeChance;
-import minechem.api.recipe.DecomposerRecipeSelect;
-import minechem.api.recipe.SynthesisRecipe;
-import minechem.api.util.Constants;
-import minechem.client.gui.GuiContainerTabbed;
-import minechem.client.gui.tabs.TabHelp;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.tabs.TabHelp;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
+import minechem.tileentity.decomposer.DecomposerRecipeSelect;
+import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
+import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.Minecraft;

@@ -1,6 +1,6 @@
 package minechem.tileentity.chemicalstorage;
 
-import minechem.client.render.item.ItemMinechemRenderer;
+import minechem.item.ItemMinechemRenderer;
 import net.minecraft.client.renderer.tileentity.TileEntityRenderer;
 import net.minecraft.item.ItemStack;
 

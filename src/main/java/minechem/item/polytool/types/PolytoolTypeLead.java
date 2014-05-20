@@ -3,7 +3,7 @@ package minechem.item.polytool.types;
 import java.util.Iterator;
 import java.util.List;
 
-import minechem.api.core.EnumElement;
+import minechem.item.element.EnumElement;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;

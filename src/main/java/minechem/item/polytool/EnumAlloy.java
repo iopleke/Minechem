@@ -1,6 +1,6 @@
 package minechem.item.polytool;
 
-import minechem.api.core.EnumElement;
+import minechem.item.element.EnumElement;
 
 public enum EnumAlloy
 {

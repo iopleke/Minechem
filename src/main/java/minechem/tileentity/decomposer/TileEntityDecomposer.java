@@ -3,16 +3,14 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import minechem.api.core.Chemical;
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.util.Util;
-import minechem.common.ModMinechem;
-import minechem.common.Settings;
-import minechem.network.PacketDecomposerUpdate;
+import minechem.ModMinechem;
+import minechem.Settings;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.BoundedInventory;
+import minechem.utils.Chemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
+import minechem.utils.Compare;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -408,7 +406,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
                 setInventorySlotContents(outputSlot, itemstack);
                 return true;
             }
-            else if (Util.stacksAreSameKind(stackInSlot, itemstack) && (stackInSlot.stackSize + itemstack.stackSize) <= getInventoryStackLimit())
+            else if (Compare.stacksAreSameKind(stackInSlot, itemstack) && (stackInSlot.stackSize + itemstack.stackSize) <= getInventoryStackLimit())
             {
                 stackInSlot.stackSize += itemstack.stackSize;
                 return true;

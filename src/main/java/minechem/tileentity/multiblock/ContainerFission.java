@@ -1,8 +1,8 @@
 package minechem.tileentity.multiblock;
 
-import minechem.api.core.EnumElement;
-import minechem.api.core.IRadiationShield;
-import minechem.common.MinechemItems;
+import minechem.MinechemItems;
+import minechem.item.IRadiationShield;
+import minechem.item.element.EnumElement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

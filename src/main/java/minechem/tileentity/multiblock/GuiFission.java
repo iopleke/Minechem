@@ -1,7 +1,7 @@
 package minechem.tileentity.multiblock;
 
-import minechem.client.gui.GuiMinechemContainer;
-import minechem.common.ModMinechem;
+import minechem.ModMinechem;
+import minechem.gui.GuiMinechemContainer;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.entity.player.InventoryPlayer;

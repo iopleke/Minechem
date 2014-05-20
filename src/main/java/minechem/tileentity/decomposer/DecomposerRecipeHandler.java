@@ -2,11 +2,9 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.api.core.Chemical;
-import minechem.api.recipe.DecomposerRecipe;
-import minechem.api.recipe.DecomposerRecipeSelect;
-import minechem.api.util.Util;
+import minechem.utils.Chemical;
 import minechem.utils.MinechemHelper;
+import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -35,7 +33,7 @@ public class DecomposerRecipeHandler
     {
         for (DecomposerRecipe recipe : DecomposerRecipe.recipes)
         {
-            if (Util.stacksAreSameKind(input, recipe.getInput()))
+            if (Compare.stacksAreSameKind(input, recipe.getInput()))
                 return recipe;
         }
         if (level < 5)

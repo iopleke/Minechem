@@ -1,8 +1,7 @@
 package minechem.tileentity.multiblock;
 
-import minechem.common.blueprint.BlueprintBlock;
-import minechem.common.blueprint.MinechemBlueprint;
-import minechem.network.PacketGhostBlock;
+import minechem.item.blueprint.BlueprintBlock;
+import minechem.item.blueprint.MinechemBlueprint;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
