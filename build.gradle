@@ -1,17 +1,3 @@
-apply plugin: 'java'
-apply plugin: 'download-task'
-apply plugin: 'forge'
-
-// Set a couple of variables
-archivesBaseName = mod_name
-group = "pixlepix." + mod_name
-lib_dir = new File(lib_dir)
-
-// Set minecraft version
-minecraft {
-    version = minecraft_version + "-" + forge_version
-}
-
 buildscript {
     repositories {
         mavenCentral()
@@ -21,83 +7,105 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
-        classpath 'de.undercouch:gradle-download-task:1.0'
-        classpath "org.lwjgl.lwjgl:lwjgl:${lwjgl_version}"
+       classpath 'net.minecraftforge.gradle:ForgeGradle:1.0-SNAPSHOT'
     }
 }
 
-// Check for and download CodeChickenCore, CodeChickenLib, and NEI
-if ( !lib_dir.exists() ){
-    lib_dir.mkdirs()
-    ext.libFiles = [
-        'http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/NotEnoughItems-dev%201.6.1.9.jar',
-        'http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/CodeChickenCore-dev%200.9.0.9.jar',
-        'http://files.minecraftforge.net/CodeChickenLib/CodeChickenLib-dev-1.6.4-1.0.0.62.jar'
-    ]
-    download {
-        src libFiles
-        dest lib_dir
+apply plugin: 'idea'
+apply plugin: 'forge'
+apply plugin: 'scala'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+ext.buildProps = file "build.properties"
+ 
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+ 
+group = "minechem"
+ 
+minecraft {
+    version = "${rootProject.config.version.minecraft}-${rootProject.config.version.forge}"
+    
+    replaceIn "ModMinechem.java"
+    replace "@MAJOR@", rootProject.config.version.mod.major + "." + rootProject.config.version.mod.minor
+    replace "@BUILD@", "${System.getenv().BUILD_NUMBER}"
+}
+
+allprojects {
+    version = "${config.version.mod.major}.${config.version.mod.minor}.${config.version.mod.revis}"
+    
+    if (System.getenv("BUILD_NUMBER") != null)
+        version += ".${System.getenv("BUILD_NUMBER")}"
+        
+	repositories {
+        maven {
+            name 'Calclavia Maven'
+            url 'http://calclavia.com/maven'
+        }
+        maven {
+            name = "forge"
+            url = "http://files.minecraftforge.net/maven"
+        }
+		ivy {
+			name 'FMP'
+			artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
+		}
+		ivy {
+			artifactPattern "http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/[module]-dev%20[revision].[ext]"
+		}
+        mavenCentral()
     }
+    
+    dependencies {
+        compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${rootProject.config.version.universalelectricity}", classifier: "dev"
+
+		compile name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
+		compile name: 'NotEnoughItems', version: "${config.version.nei}", ext: 'jar'
+		compile name: 'CodeChickenCore', version: "${config.version.cccore}", ext: 'jar'
+	}
+    
+    jar {
+		
+        dependsOn ":copyBuildXml"
+        destinationDir = file (rootProject.getRootDir().getPath() + '/output')
+    }
+	
+	publishing {
+		publications {
+			mavenJava(MavenPublication) {
+				artifact jar
+			}
+		}
+		repositories {
+			maven {
+				url "file://var/www/maven"
+			}
+		}
+	}
 }
 
-// All libraries from the ./libs/ folder are added as dependencies
-dependencies {
-    compile fileTree(dir: lib_dir, includes: ['*.jar'])
-}
-
-// Get the build number from the environment, otherwise get from gradle.properties
-if (System.getenv().BUILD_NUMBER != null) {
-    build_number = System.getenv().BUILD_NUMBER
-}
-version = mod_version + "-" + build_number
-
-// @TODO - make this actually put the version/build number into the mcmod.info file
 processResources {
-    // replace stuff in mcmod.info, nothing else
-    from(sourceSets.main.resources.srcDirs) {
-        include 'mcmod/info'
-        include 'version.properties'
-        // replace version and mcversion
-        expand 'version': mod_version, 'mcversion': version, 'buildnumber': build_number
-    }
-
-    // copy everything else, thats not the mcmod.info
-    from(sourceSets.main.resources.srcDirs) {
-        exclude 'mcmod.info'
-        exclude 'version.properties'
-    }
+	from 'build.properties'
+}
+ 
+task copyBuildXml(type: Copy) {
+    from 'build.properties'
+    into 'output'
+}
+ 
+task apiZip(type: Zip) {
+    classifier = 'api'
+    from sourceSets*.allSource
+    include 'minechem/api/**'
+    destinationDir = file 'output'
+}
+	
+artifacts {
+    archives apiZip
 }
 
-task showProperties {
-    doLast {
-        println "~~Versions~~"
-        println "Minecraft: " + minecraft.version
-        println "Forge: $forge_version"
-        println "Version $version"
-        println "Minechem: $mod_version"
-        println "~~Misc~~"
-        println "Build #$build_number"
-        println "Libraries: $lib_dir"
-    }
-}
-
-task runClient(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "net.minecraft.launchwrapper.Launch"
-    args("--version", "1.6",
-        "--tweakClass", "cpw.mods.fml.common.launcher.FMLTweaker",
-        "--accessToken", "FML")
-    jvmArgs("-Xincgc",
-        "-Xmx1024M",
-        "-Xms1024M",
-        "-Djava.library.path=${project.buildDir}/natives",
-        "-Dfml.ignoreInvalidMinecraftCertificates=true")
-    workingDir("eclipse")
-}
-
-task runServer(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "cpw.mods.fml.relauncher.ServerLaunchWrapper"
-    jvmArgs("-Xincgc", "-Dfml.ignoreInvalidMinecraftCertificates=true")
-}
+build.dependsOn "apiZip", "copyBuildXml"
