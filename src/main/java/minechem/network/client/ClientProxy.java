@@ -10,9 +10,9 @@ import minechem.tickhandler.TickHandler;
 import minechem.tileentity.blueprintprojector.ItemBlueprintProjectorRenderer;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjectorRenderer;
-import minechem.tileentity.chemicalstorage.ItemChemicalStorageRenderer;
-import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
-import minechem.tileentity.chemicalstorage.TileEntityChemicalStorageRenderer;
+import minechem.tileentity.chemicalstorage.ChemicalStorageItemRenderer;
+import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntity;
+import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntityRenderer;
 import minechem.tileentity.decomposer.DecomposerItemRenderer;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.decomposer.DecomposerTileEntityRenderer;
@@ -57,7 +57,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.decomposer.blockID].itemID, new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.synthesis.blockID].itemID, new SynthesisItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.chemicalStorage.blockID].itemID, new ChemicalStorageItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.leadedChest.blockID].itemID, new LeadedChestItemRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
@@ -65,7 +65,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(ChemicalStorageTileEntity.class, new ChemicalStorageTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
     }
 

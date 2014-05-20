@@ -4,7 +4,7 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntityChest;
 
-public class TileEntityChemicalStorage extends TileEntityChest
+public class ChemicalStorageTileEntity extends TileEntityChest
 {
 
     public void addStackToInventory(ItemStack newStack)

@@ -15,18 +15,18 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
+public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
 {
     /** The normal small chest model. */
     private ModelChest chestModel = new ModelChest();
 
-    public TileEntityChemicalStorageRenderer()
+    public ChemicalStorageTileEntityRenderer()
     {
 
     }
 
     /** Renders the TileEntity for the chest at a position. */
-    public void renderTileEntityChestAt(TileEntityChemicalStorage chemicalStorage, double par2, double par4, double par6, float par8)
+    public void renderTileEntityChestAt(ChemicalStorageTileEntity chemicalStorage, double par2, double par4, double par6, float par8)
     {
         int var9;
 
@@ -109,6 +109,6 @@ public class TileEntityChemicalStorageRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity par1TileEntity, double par2, double par4, double par6, float par8)
     {
-        this.renderTileEntityChestAt((TileEntityChemicalStorage) par1TileEntity, par2, par4, par6, par8);
+        this.renderTileEntityChestAt((ChemicalStorageTileEntity) par1TileEntity, par2, par4, par6, par8);
     }
 }

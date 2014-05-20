@@ -7,14 +7,14 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class ItemChemicalStorageRenderer extends ItemMinechemRenderer
+public class ChemicalStorageItemRenderer extends ItemMinechemRenderer
 {
 
-    TileEntityChemicalStorage chemicalStorage;
+    ChemicalStorageTileEntity chemicalStorage;
 
-    public ItemChemicalStorageRenderer()
+    public ChemicalStorageItemRenderer()
     {
-        this.chemicalStorage = new TileEntityChemicalStorage();
+        this.chemicalStorage = new ChemicalStorageTileEntity();
     }
 
     @Override

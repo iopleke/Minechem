@@ -6,8 +6,8 @@ import minechem.item.element.Element;
 import minechem.item.element.EnumElement;
 import minechem.tileentity.blueprintprojector.BlockBlueprintProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
-import minechem.tileentity.chemicalstorage.BlockChemicalStorage;
-import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
+import minechem.tileentity.chemicalstorage.ChemicalStorageBlock;
+import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntity;
 import minechem.tileentity.decomposer.DecomposerBlock;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
@@ -82,9 +82,9 @@ public class MinechemBlocksGeneration
         GameRegistry.registerTileEntity(TileEntityBlueprintProjector.class, "minechem.tileEntityBlueprintProjector");
 
         // Chemical Storage Chest.
-        chemicalStorage = new BlockChemicalStorage(Settings.ChemicalStorage);
+        chemicalStorage = new ChemicalStorageBlock(Settings.ChemicalStorage);
         GameRegistry.registerBlock(chemicalStorage, "minechem.blockChemicalStorage");
-        GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
+        GameRegistry.registerTileEntity(ChemicalStorageTileEntity.class, "minechem.tileEntityChemicalStorage");
 
         // Uranium Ore (World Gen).
         uranium = new OreUranium(Settings.UraniumOre);

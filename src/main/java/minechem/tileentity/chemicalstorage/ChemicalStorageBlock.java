@@ -9,10 +9,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockChemicalStorage extends BlockChest
+public class ChemicalStorageBlock extends BlockChest
 {
 
-    public BlockChemicalStorage(int id)
+    public ChemicalStorageBlock(int id)
     {
         super(id, 0);
         setUnlocalizedName("minechem.blockChemicalStorage");
@@ -27,7 +27,7 @@ public class BlockChemicalStorage extends BlockChest
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (world.isRemote)
             return true;
-        if (tileEntity instanceof TileEntityChemicalStorage)
+        if (tileEntity instanceof ChemicalStorageTileEntity)
         {
             entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
             return true;
@@ -72,7 +72,7 @@ public class BlockChemicalStorage extends BlockChest
     @Override
     public TileEntity createTileEntity(World world, int metadata)
     {
-        return new TileEntityChemicalStorage();
+        return new ChemicalStorageTileEntity();
     }
 
     @Override
@@ -84,7 +84,7 @@ public class BlockChemicalStorage extends BlockChest
     @Override
     public TileEntity createNewTileEntity(World par1World)
     {
-        return new TileEntityChemicalStorage();
+        return new ChemicalStorageTileEntity();
     }
 
 }

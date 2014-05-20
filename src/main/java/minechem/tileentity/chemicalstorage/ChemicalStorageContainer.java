@@ -7,10 +7,10 @@ import net.minecraft.inventory.ContainerChest;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
-public class ContainerChemicalStorage extends ContainerChest
+public class ChemicalStorageContainer extends ContainerChest
 {
 
-    public ContainerChemicalStorage(IInventory playerInventory, IInventory blockInventory)
+    public ChemicalStorageContainer(IInventory playerInventory, IInventory blockInventory)
     {
         super(playerInventory, blockInventory);
     }

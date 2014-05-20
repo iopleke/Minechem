@@ -12,12 +12,12 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiChemicalStorage extends GuiContainerTabbed
+public class ChemicalStorageGui extends GuiContainerTabbed
 {
     private IInventory playerInventory;
     private int inventoryRows = 0;
 
-    public GuiChemicalStorage(IInventory playerInventory, IInventory blockInventory)
+    public ChemicalStorageGui(IInventory playerInventory, IInventory blockInventory)
     {
         super(new ContainerChest(playerInventory, blockInventory));
         this.playerInventory = playerInventory;

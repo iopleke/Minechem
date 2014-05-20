@@ -8,9 +8,9 @@ import minechem.item.polytool.GuiPolytool;
 import minechem.tileentity.blueprintprojector.ContainerProjector;
 import minechem.tileentity.blueprintprojector.GuiProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
-import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
-import minechem.tileentity.chemicalstorage.GuiChemicalStorage;
-import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
+import minechem.tileentity.chemicalstorage.ChemicalStorageContainer;
+import minechem.tileentity.chemicalstorage.ChemicalStorageGui;
+import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntity;
 import minechem.tileentity.decomposer.DecomposerContainer;
 import minechem.tileentity.decomposer.DecomposerGui;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
@@ -94,9 +94,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         }
-        if (tileEntity instanceof TileEntityChemicalStorage)
+        if (tileEntity instanceof ChemicalStorageTileEntity)
         {
-            return new ContainerChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
+            return new ChemicalStorageContainer(player.inventory, (ChemicalStorageTileEntity) tileEntity);
         }
         return null;
     }
@@ -175,9 +175,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         }
-        if (tileEntity instanceof TileEntityChemicalStorage)
+        if (tileEntity instanceof ChemicalStorageTileEntity)
         {
-            return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
+            return new ChemicalStorageGui(player.inventory, (ChemicalStorageTileEntity) tileEntity);
         }
         if (tileEntity instanceof FissionTileEntity)
         {
