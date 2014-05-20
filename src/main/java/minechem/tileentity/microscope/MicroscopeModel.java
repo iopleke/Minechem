@@ -9,7 +9,7 @@ package minechem.tileentity.microscope;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelMicroscope extends ModelBase
+public class MicroscopeModel extends ModelBase
 {
     // fields
     ModelRenderer base;
@@ -26,7 +26,7 @@ public class ModelMicroscope extends ModelBase
     ModelRenderer focus_left;
     ModelRenderer axle;
 
-    public ModelMicroscope()
+    public MicroscopeModel()
     {
         textureWidth = 64;
         textureHeight = 32;

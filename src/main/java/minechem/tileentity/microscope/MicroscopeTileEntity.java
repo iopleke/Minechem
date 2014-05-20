@@ -13,7 +13,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class TileEntityMicroscope extends MinechemTileEntity implements IInventory
+public class MicroscopeTileEntity extends MinechemTileEntity implements IInventory
 {
     public static int[] kInput = { 0 };
     public static int[] kJournal = { 1 };
@@ -25,7 +25,7 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     private Transactor inputTransactor = new Transactor(inputInvetory, 1);
     private Transactor journalTransactor = new Transactor(journalInventory, 1);
 
-    public TileEntityMicroscope()
+    public MicroscopeTileEntity()
     {
         inventory = new ItemStack[getSizeInventory()];
     }

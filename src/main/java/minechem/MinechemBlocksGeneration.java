@@ -13,8 +13,8 @@ import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.leadedchest.BlockLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
-import minechem.tileentity.microscope.BlockMicroscope;
-import minechem.tileentity.microscope.TileEntityMicroscope;
+import minechem.tileentity.microscope.MicroscopeBlock;
+import minechem.tileentity.microscope.MicroscopeTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.multiblock.fusion.FusionBlock;
 import minechem.tileentity.multiblock.fusion.FusionItemBlock;
@@ -57,9 +57,9 @@ public class MinechemBlocksGeneration
         GameRegistry.registerTileEntity(DecomposerTileEntity.class, "minechem.tileEntityDecomposer");
 
         // Microscope.
-        microscope = new BlockMicroscope(Settings.Microscope);
+        microscope = new MicroscopeBlock(Settings.Microscope);
         GameRegistry.registerBlock(microscope, "minechem.blockMicroscope");
-        GameRegistry.registerTileEntity(TileEntityMicroscope.class, "minechem.tileEntityMicroscope");
+        GameRegistry.registerTileEntity(MicroscopeTileEntity.class, "minechem.tileEntityMicroscope");
 
         // Chemical Synthesis Machine.
         synthesis = new SynthesisBlock(Settings.Synthesis);

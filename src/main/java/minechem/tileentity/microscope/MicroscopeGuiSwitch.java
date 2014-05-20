@@ -7,10 +7,10 @@ import minechem.gui.GuiToggleSwitch.ToggleButton;
 import minechem.utils.Reference;
 import net.minecraft.util.ResourceLocation;
 
-public class GuiMicroscopeSwitch extends GuiToggleSwitch
+public class MicroscopeGuiSwitch extends GuiToggleSwitch
 {
 
-    public GuiMicroscopeSwitch(GuiContainerTabbed container)
+    public MicroscopeGuiSwitch(GuiContainerTabbed container)
     {
         super();
         this.container = container;

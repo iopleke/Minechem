@@ -17,9 +17,9 @@ import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.leadedchest.ContainerLeadedChest;
 import minechem.tileentity.leadedchest.GuiLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
-import minechem.tileentity.microscope.ContainerMicroscope;
-import minechem.tileentity.microscope.GuiMicroscope;
-import minechem.tileentity.microscope.TileEntityMicroscope;
+import minechem.tileentity.microscope.MicroscopeContainer;
+import minechem.tileentity.microscope.MicroscopeGui;
+import minechem.tileentity.microscope.MicroscopeTileEntity;
 import minechem.tileentity.multiblock.fission.FissionContainer;
 import minechem.tileentity.multiblock.fission.FissionGui;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
@@ -68,9 +68,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
         }
-        if (tileEntity instanceof TileEntityMicroscope)
+        if (tileEntity instanceof MicroscopeTileEntity)
         {
-            return new ContainerMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
+            return new MicroscopeContainer(player.inventory, (MicroscopeTileEntity) tileEntity);
         }
         if (tileEntity instanceof SynthesisTileEntity)
         {
@@ -155,9 +155,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
         }
-        if (tileEntity instanceof TileEntityMicroscope)
+        if (tileEntity instanceof MicroscopeTileEntity)
         {
-            return new GuiMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
+            return new MicroscopeGui(player.inventory, (MicroscopeTileEntity) tileEntity);
         }
         if (tileEntity instanceof SynthesisTileEntity)
         {

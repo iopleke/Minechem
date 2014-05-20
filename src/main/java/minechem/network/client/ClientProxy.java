@@ -19,9 +19,9 @@ import minechem.tileentity.decomposer.DecomposerTileEntityRenderer;
 import minechem.tileentity.leadedchest.ItemLeadedChestRenderer;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChestRenderer;
-import minechem.tileentity.microscope.ItemMicroscopeRenderer;
-import minechem.tileentity.microscope.TileEntityMicroscope;
-import minechem.tileentity.microscope.TileEntityMicroscopeRenderer;
+import minechem.tileentity.microscope.MicroscopeItemRenderer;
+import minechem.tileentity.microscope.MicroscopeTileEntity;
+import minechem.tileentity.microscope.MicroscopeTileEntityRenderer;
 import minechem.tileentity.synthesis.SynthesisItemRenderer;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
 import minechem.tileentity.synthesis.SynthesisTileEntityRenderer;
@@ -53,7 +53,7 @@ public class ClientProxy extends CommonProxy
 
         MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule.itemID, new ItemMoleculeRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.microscope.blockID].itemID, new ItemMicroscopeRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.microscope.blockID].itemID, new MicroscopeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.decomposer.blockID].itemID, new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.synthesis.blockID].itemID, new SynthesisItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
@@ -61,7 +61,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityMicroscope.class, new TileEntityMicroscopeRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(MicroscopeTileEntity.class, new MicroscopeTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());

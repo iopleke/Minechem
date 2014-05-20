@@ -8,13 +8,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerMicroscope extends Container
+public class MicroscopeContainer extends Container
 {
 
-    TileEntityMicroscope microscope;
+    MicroscopeTileEntity microscope;
     InventoryPlayer inventoryPlayer;
 
-    public ContainerMicroscope(InventoryPlayer inventoryPlayer, TileEntityMicroscope microscope)
+    public MicroscopeContainer(InventoryPlayer inventoryPlayer, MicroscopeTileEntity microscope)
     {
         this.microscope = microscope;
         this.inventoryPlayer = inventoryPlayer;
@@ -25,7 +25,7 @@ public class ContainerMicroscope extends Container
         {
             for (int col = 0; col < 3; col++)
             {
-                addSlotToContainer(new SlotMicroscopeOutput(microscope, 2 + slot, 98 + (col * 18), 27 + (row * 18)));
+                addSlotToContainer(new MicroscopeSlotOutput(microscope, 2 + slot, 98 + (col * 18), 27 + (row * 18)));
                 slot++;
             }
         }

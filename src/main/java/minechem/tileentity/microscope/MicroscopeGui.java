@@ -22,7 +22,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiMicroscope extends GuiContainerTabbed
+public class MicroscopeGui extends GuiContainerTabbed
 {
 
     int guiWidth = 176;
@@ -34,19 +34,19 @@ public class GuiMicroscope extends GuiContainerTabbed
     int slideShowTimer = 0;
     int currentSlide = 0;
     public InventoryPlayer inventoryPlayer;
-    protected TileEntityMicroscope microscope;
-    GuiMicroscopeSwitch recipeSwitch;
+    protected MicroscopeTileEntity microscope;
+    MicroscopeGuiSwitch recipeSwitch;
     private boolean isShapedRecipe;
 
-    public GuiMicroscope(InventoryPlayer inventoryPlayer, TileEntityMicroscope microscope)
+    public MicroscopeGui(InventoryPlayer inventoryPlayer, MicroscopeTileEntity microscope)
     {
-        super(new ContainerMicroscope(inventoryPlayer, microscope));
+        super(new MicroscopeContainer(inventoryPlayer, microscope));
         this.inventoryPlayer = inventoryPlayer;
         this.microscope = microscope;
         this.xSize = guiWidth;
         this.ySize = guiHeight;
-        this.itemRenderer = new RenderGUIItemMicroscope(this);
-        this.recipeSwitch = new GuiMicroscopeSwitch(this);
+        this.itemRenderer = new MicroscopeRenderGUIItem(this);
+        this.recipeSwitch = new MicroscopeGuiSwitch(this);
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.microscope")));
     }
 

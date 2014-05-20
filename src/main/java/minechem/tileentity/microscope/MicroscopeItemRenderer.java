@@ -10,14 +10,14 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemMicroscopeRenderer extends ItemMinechemRenderer
+public class MicroscopeItemRenderer extends ItemMinechemRenderer
 {
 
-    private ModelMicroscope modelMicroscope;
+    private MicroscopeModel microscopeModel;
 
-    public ItemMicroscopeRenderer()
+    public MicroscopeItemRenderer()
     {
-        modelMicroscope = new ModelMicroscope();
+        microscopeModel = new MicroscopeModel();
     }
 
     @Override
@@ -93,7 +93,7 @@ public class ItemMicroscopeRenderer extends ItemMinechemRenderer
 
         }
 
-        modelMicroscope.render(0.0625F);
+        microscopeModel.render(0.0625F);
         GL11.glPopMatrix();
     }
 

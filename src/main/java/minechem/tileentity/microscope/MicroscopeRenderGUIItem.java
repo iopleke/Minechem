@@ -12,23 +12,23 @@ import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
 
-public class RenderGUIItemMicroscope extends RenderItem
+public class MicroscopeRenderGUIItem extends RenderItem
 {
-    public ContainerMicroscope microscopeContainer;
+    public MicroscopeContainer microscopeContainer;
     public InventoryPlayer inventoryPlayer;
-    public GuiMicroscope guiMicroscope;
+    public MicroscopeGui microscopeGui;
 
     int colorTextureID;
     int framebufferID;
     int depthRenderBufferID;
     boolean isFBOSupported;
 
-    public RenderGUIItemMicroscope(GuiMicroscope guiMicroscope)
+    public MicroscopeRenderGUIItem(MicroscopeGui microscopeGui)
     {
         super();
-        this.guiMicroscope = guiMicroscope;
-        microscopeContainer = (ContainerMicroscope) guiMicroscope.inventorySlots;
-        inventoryPlayer = guiMicroscope.inventoryPlayer;
+        this.microscopeGui = microscopeGui;
+        microscopeContainer = (MicroscopeContainer) microscopeGui.inventorySlots;
+        inventoryPlayer = microscopeGui.inventoryPlayer;
     }
 
     private void setScissor(float x, float y, float w, float h)
@@ -40,8 +40,8 @@ public class RenderGUIItemMicroscope extends RenderItem
         y *= scale;
         w *= scale;
         h *= scale;
-        float guiScaledWidth = (guiMicroscope.guiWidth * scale);
-        float guiScaledHeight = (guiMicroscope.guiHeight * scale);
+        float guiScaledWidth = (microscopeGui.guiWidth * scale);
+        float guiScaledHeight = (microscopeGui.guiHeight * scale);
         float guiLeft = ((mc.displayWidth / 2) - guiScaledWidth / 2);
         float guiTop = ((mc.displayHeight / 2) + guiScaledHeight / 2);
         int scissorX = Math.round((guiLeft + x));
@@ -64,7 +64,7 @@ public class RenderGUIItemMicroscope extends RenderItem
         if (itemstack == slot.getStack() || itemstack == inventoryPlayer.getItemStack())
         {
             GL11.glPushMatrix();
-            setScissor(guiMicroscope.eyepieceX, guiMicroscope.eyepieceY, 52, 52);
+            setScissor(microscopeGui.eyepieceX, microscopeGui.eyepieceY, 52, 52);
             GL11.glTranslatef(x, y, 0.0F);
             GL11.glScalef(3.0F, 3.0F, 1.0F);
             GL11.glTranslatef(-x - 5.3F, -y - 5.3F, 2.0F);
@@ -87,7 +87,7 @@ public class RenderGUIItemMicroscope extends RenderItem
         {
             GL11.glPushMatrix();
             GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-            drawRect(guiMicroscope.eyepieceX, guiMicroscope.eyepieceY, 54, 54);
+            drawRect(microscopeGui.eyepieceX, microscopeGui.eyepieceY, 54, 54);
             GL11.glPopMatrix();
         }
     }
@@ -112,7 +112,7 @@ public class RenderGUIItemMicroscope extends RenderItem
     {
         if (itemstack == null)
             return;
-        if (itemstack == microscopeContainer.getSlot(0).getStack() || (itemstack == inventoryPlayer.getItemStack() && guiMicroscope.isMouseInMicroscope()))
+        if (itemstack == microscopeContainer.getSlot(0).getStack() || (itemstack == inventoryPlayer.getItemStack() && microscopeGui.isMouseInMicroscope()))
         {
             // do nothing.
         }

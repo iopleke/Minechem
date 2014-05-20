@@ -18,11 +18,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockMicroscope extends BlockMinechemContainer
+public class MicroscopeBlock extends BlockMinechemContainer
 {
     private Icon front;
 
-    public BlockMicroscope(int par1)
+    public MicroscopeBlock(int par1)
     {
         super(par1, Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
@@ -51,13 +51,13 @@ public class BlockMicroscope extends BlockMinechemContainer
     @Override
     public TileEntity createNewTileEntity(World var1)
     {
-        return new TileEntityMicroscope();
+        return new MicroscopeTileEntity();
     }
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
     {
-        TileEntityMicroscope decomposer = (TileEntityMicroscope) tileEntity;
+        MicroscopeTileEntity decomposer = (MicroscopeTileEntity) tileEntity;
         for (int slot = 0; slot < decomposer.getSizeInventory(); slot++)
         {
             ItemStack itemstack = decomposer.getStackInSlot(slot);
