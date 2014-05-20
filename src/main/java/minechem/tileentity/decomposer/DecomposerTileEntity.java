@@ -234,6 +234,18 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         // Sends a packet to clients in dimension of origin about the machines current state.
         PacketDispatcher.sendPacketToAllInDimension(new DecomposerPacketUpdate(this).makePacket(), worldObj.provider.dimensionId);
 
+        // Determine if we should change our state to active.
+        if (state == state.kProcessIdle && this.isPowered() && canDecomposeInput())
+        {
+            state = State.kProcessActive;
+        }
+        else if (state == State.kProcessJammed && canUnjam() && this.isPowered())
+        {
+            // Reactivates the machine once output slots have been cleared.
+            // Note: It is possible for some items and blocks to decompose into more molecules than there are output slots!
+            state = State.kProcessActive;
+        }
+        
         // If the machines state is currently not set to active then stop operation.
         if (state != State.kProcessActive)
         {
@@ -247,7 +259,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             // Consume energy to create the needed base elements.
             this.consumeEnergy(1);
         }
-        else if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput())
+        else if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput() && this.isPowered())
         {
             // Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
             activeStack = null;
@@ -260,12 +272,6 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             // Prepares the machine for another pass if we have recently finished.
             activeStack = null;
             state = State.kProcessIdle;
-        }
-        else if (state == State.kProcessJammed && canUnjam())
-        {
-            // Reactivates the machine once output slots have been cleared.
-            // Note: It is possible for some items and blocks to decompose into more molecules than there are output slots!
-            state = State.kProcessActive;
         }
         
         // Notify minecraft that the inventory items in this machine have changed.
