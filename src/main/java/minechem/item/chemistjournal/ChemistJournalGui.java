@@ -31,7 +31,7 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalScrollContainer
+public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
 
     private static final int SYNTHESIS_X = 198;
@@ -54,9 +54,9 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     DecomposerRecipe currentDecomposerRecipe;
     ItemStack journalStack;
 
-    public GuiChemistJournal(EntityPlayer entityPlayer)
+    public ChemistJournalGui(EntityPlayer entityPlayer)
     {
-        super(new ContainerChemistJournal(entityPlayer.inventory));
+        super(new ChemistJournalContainer(entityPlayer.inventory));
         this.player = entityPlayer;
         this.journalStack = entityPlayer.inventory.getCurrentItem();
         this.currentItemStack = MinechemItemsGeneration.journal.getActiveStack(journalStack);
@@ -159,7 +159,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     {
         currentItemStack = itemstack;
         MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
-        PacketActiveJournalItem packet = new PacketActiveJournalItem(itemstack, player);
+        ChemistJournalPacketActiveItem packet = new ChemistJournalPacketActiveItem(itemstack, player);
         PacketDispatcher.sendPacketToServer(packet.makePacket());
 
         SynthesisRecipe synthesisRecipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(itemstack);

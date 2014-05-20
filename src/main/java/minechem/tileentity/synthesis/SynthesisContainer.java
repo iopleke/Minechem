@@ -4,7 +4,7 @@ import java.util.List;
 
 import minechem.MinechemItemsGeneration;
 import minechem.container.ContainerWithFakeSlots;
-import minechem.item.chemistjournal.SlotJournal;
+import minechem.item.chemistjournal.ChemistJournalSlot;
 import minechem.radiation.IRadiationShield;
 import minechem.slot.SlotChemical;
 import minechem.slot.SlotFake;
@@ -24,7 +24,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         addSlotToContainer(new SynthesisSlotOutput(synthesis, SynthesisTileEntity.kStartOutput, 134, 18));
         bindRecipeMatrixSlots();
         bindStorageSlots();
-        addSlotToContainer(new SlotJournal(synthesis, SynthesisTileEntity.kStartJournal, 26, 36));
+        addSlotToContainer(new ChemistJournalSlot(synthesis, SynthesisTileEntity.kStartJournal, 26, 36));
         bindPlayerInventory(inventoryPlayer);
     }
 

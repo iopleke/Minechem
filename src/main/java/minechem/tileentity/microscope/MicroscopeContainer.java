@@ -1,7 +1,7 @@
 package minechem.tileentity.microscope;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.chemistjournal.SlotJournal;
+import minechem.item.chemistjournal.ChemistJournalSlot;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -19,7 +19,7 @@ public class MicroscopeContainer extends Container
         this.microscope = microscope;
         this.inventoryPlayer = inventoryPlayer;
         addSlotToContainer(new Slot(microscope, 0, 44, 45));
-        addSlotToContainer(new SlotJournal(microscope, 1, 80, 95));
+        addSlotToContainer(new ChemistJournalSlot(microscope, 1, 80, 95));
         int slot = 0;
         for (int row = 0; row < 3; row++)
         {

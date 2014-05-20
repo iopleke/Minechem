@@ -11,7 +11,7 @@ import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
 
-public class PacketActiveJournalItem extends MinechemPackets
+public class ChemistJournalPacketActiveItem extends MinechemPackets
 {
     /** Item ID for the currently active item in the players chemist journal. */
     private int itemID;
@@ -22,7 +22,7 @@ public class PacketActiveJournalItem extends MinechemPackets
     /** Reference to the slot number in the chemist journal that this item corresponds to. */
     private int slot;
 
-    public PacketActiveJournalItem(ItemStack activeStack, EntityPlayer player)
+    public ChemistJournalPacketActiveItem(ItemStack activeStack, EntityPlayer player)
     {
         // Receives information from a client specifically about current active item the player has set in their journal.
         this.itemID = activeStack.itemID;
@@ -30,7 +30,7 @@ public class PacketActiveJournalItem extends MinechemPackets
         this.slot = player.inventory.currentItem;
     }
 
-    public PacketActiveJournalItem()
+    public ChemistJournalPacketActiveItem()
     {
         // Required for reflection.
     }

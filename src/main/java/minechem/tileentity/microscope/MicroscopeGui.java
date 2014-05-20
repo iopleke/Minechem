@@ -155,7 +155,7 @@ public class MicroscopeGui extends GuiContainerTabbed
     {
         if (!recipeSwitch.isMoverOver())
         {
-            String cost = String.format("%d RF", recipe.energyCost());
+            String cost = String.format("%d Energy", recipe.energyCost());
             fontRenderer.drawString(cost, x + 108, y + 85, 0x000000);
         }
     }
@@ -191,8 +191,12 @@ public class MicroscopeGui extends GuiContainerTabbed
             slideShowTimer = 0;
             currentSlide++;
         }
+        
         if (currentSlide == recipes.size())
+        {
             currentSlide = 0;
+        }
+        
         slideShowTimer++;
         DecomposerRecipe recipe = recipes.get(currentSlide);
         ArrayList<ItemStack> output = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutputRaw());

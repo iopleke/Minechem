@@ -1,8 +1,8 @@
 package minechem.gui;
 
 import minechem.ModMinechem;
-import minechem.item.chemistjournal.ContainerChemistJournal;
-import minechem.item.chemistjournal.TabJournal;
+import minechem.item.chemistjournal.ChemistJournalContainer;
+import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,8 +17,8 @@ public class GuiTableOfElements extends GuiContainerTabbed
 
     public GuiTableOfElements(EntityPlayer entityPlayer)
     {
-        super(new ContainerChemistJournal(entityPlayer.inventory));
-        addTab(new TabJournal(this));
+        super(new ChemistJournalContainer(entityPlayer.inventory));
+        addTab(new ChemistJournalTab(this));
         this.xSize = GUI_WIDTH;
         this.ySize = GUI_HEIGHT;
     }
@@ -34,7 +34,7 @@ public class GuiTableOfElements extends GuiContainerTabbed
         GL11.glPushMatrix();
         GL11.glScalef(2.1F, 1.5F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.table_HEX));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TABLE_HEX));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();

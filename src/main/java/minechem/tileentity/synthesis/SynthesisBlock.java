@@ -2,10 +2,14 @@ package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
 import minechem.block.BlockMinechemContainer;
 import minechem.network.server.CommonProxy;
+import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -70,6 +74,13 @@ public class SynthesisBlock extends BlockMinechemContainer
     public boolean isOpaqueCube()
     {
         return false;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister ir)
+    {
+        blockIcon = ir.registerIcon(Reference.SYNTHESIS_TEX);
     }
 
     @Override

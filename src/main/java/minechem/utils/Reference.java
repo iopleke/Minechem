@@ -20,7 +20,6 @@ public interface Reference
     public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";
     public static final String BLUEPRINT_TEX = TEXTURE_MOD_ID + "Blueprint";
     public static final String CHEMIST_JOURNAL_TEX = TEXTURE_MOD_ID + "ChemistJournal";
-    public static final String CHEMISTRY_UPGRADE_TEX = TEXTURE_MOD_ID + "ChemistryUpgrade";
     public static final String FILLED_TESTTUBE_TEX = TEXTURE_MOD_ID + "filledTestTube";
     public static final String MOLECULE_PASS1_TEX = TEXTURE_MOD_ID + "Molecule_Pass1";
     public static final String MOLECULE_PASS2_TEX = TEXTURE_MOD_ID + "Molecule_Pass2";
@@ -41,11 +40,6 @@ public interface Reference
     public static final String ELEMENT_LIQUID7_TEX = TEXTURE_MOD_ID + "liquid7";
     public static final String ELEMENT_SOLID_TEX = TEXTURE_MOD_ID + "solid";
     public static final String PILL_TEX = TEXTURE_MOD_ID + "pill";
-    public static final String PHOTONIC_INDUCTION_TEX = TEXTURE_MOD_ID + "PhotonicInduction";
-    public static final String HAZMAT_FEET_TEX = TEXTURE_MOD_ID + "hazmatFeet";
-    public static final String HAZMAT_HEAD_TEX = TEXTURE_MOD_ID + "hazmatHead";
-    public static final String HAZMAT_LEGS_TEX = TEXTURE_MOD_ID + "hazmatLegs";
-    public static final String HAZMAT_TORSO_TEX = TEXTURE_MOD_ID + "hazmatTorso";
     public static final String LENS1_TEX = TEXTURE_MOD_ID + "lens1";
     public static final String LENS2_TEX = TEXTURE_MOD_ID + "lens2";
     public static final String LENS3_TEX = TEXTURE_MOD_ID + "lens3";
@@ -55,16 +49,19 @@ public interface Reference
     public static final String POWER_ICON = TEXTURE_MOD_ID + "i_power";
     public static final String HELP_ICON = TEXTURE_MOD_ID + "i_help";
     public static final String DECOMPOSER_FRONT_TEX = TEXTURE_MOD_ID + "decomposerFront";
-    public static final String DECOMPOSER_TEX = TEXTURE_MOD_ID + "decomposer";
+    public static final String DECOMPOSER_TEX = TEXTURE_MOD_ID + "blockDecomposer";
+    public static final String SYNTHESIS_TEX = TEXTURE_MOD_ID + "blockSynthesis";
+    public static final String LEADEDCHEST_TEX = TEXTURE_MOD_ID + "leadedchest";
     public static final String MICROSCOPE_FRONT_TEX = TEXTURE_MOD_ID + "microscopeFront";
-    public static final String MICROSCOPE_TEX = TEXTURE_MOD_ID + "microscope";
+    public static final String MICROSCOPE_TEX = TEXTURE_MOD_ID + "blockMicroscope";
+    public static final String BLUEPRINTPROJECTOR_TEX = TEXTURE_MOD_ID + "blockBlueprintProjector";
     public static final String FUSION1_TEX = TEXTURE_MOD_ID + "fusion1";
     public static final String FUSION2_TEX = TEXTURE_MOD_ID + "fusion2";
 
     public static final String BLUEPRINT1_TEX = TEXTURE_MOD_ID + "blueprint1";
     public static final String BLUEPRINT2_TEX = TEXTURE_MOD_ID + "blueprint2";
     public static final String DEFAULT_TEX = TEXTURE_MOD_ID + "default";
-    public static final String table_HEX = TEXTURE_GUI_DIR + "TableGUI.png";
+    public static final String TABLE_HEX = TEXTURE_GUI_DIR + "TableGUI.png";
     public static final String TAB_LEFT = TEXTURE_GUI_DIR + "tab_left.png";
     public static final String TAB_RIGHT = TEXTURE_GUI_DIR + "tab_right.png";
     public static final String DECOMPOSER_GUI = TEXTURE_GUI_DIR + "ChemicalDecomposerGUI.png";

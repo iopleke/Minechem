@@ -7,11 +7,11 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
-public class TabJournal extends GuiTab
+public class ChemistJournalTab extends GuiTab
 {
     public static Icon helpIcon;
 
-    public TabJournal(Gui gui)
+    public ChemistJournalTab(Gui gui)
     {
         super(gui);
 

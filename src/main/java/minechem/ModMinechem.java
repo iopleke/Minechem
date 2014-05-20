@@ -11,7 +11,7 @@ import minechem.gui.GuiTabHelp;
 import minechem.gui.GuiTabStateControl;
 import minechem.gui.GuiTabTable;
 import minechem.item.blueprint.MinechemBlueprint;
-import minechem.item.chemistjournal.TabJournal;
+import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.MinechemPacketHandler;
 import minechem.network.server.CommonProxy;
@@ -222,7 +222,7 @@ public class ModMinechem
         GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
-        TabJournal.helpIcon = icon.registerIcon(Reference.POWER_ICON);
+        ChemistJournalTab.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 
     @ForgeSubscribe

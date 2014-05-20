@@ -2,9 +2,13 @@ package minechem.tileentity.leadedchest;
 
 import java.util.Random;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
+import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -111,6 +115,13 @@ public class LeadedChestBlock extends BlockContainer
     public boolean renderAsNormalBlock()
     {
         return false;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister ir)
+    {
+        blockIcon = ir.registerIcon(Reference.LEADEDCHEST_TEX);
     }
 
     @Override

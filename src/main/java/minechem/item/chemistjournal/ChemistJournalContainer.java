@@ -9,12 +9,12 @@ import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ContainerChemistJournal extends Container
+public class ChemistJournalContainer extends Container
 {
 
-    public GuiChemistJournal gui;
+    public ChemistJournalGui gui;
 
-    public ContainerChemistJournal(InventoryPlayer inventoryPlayer)
+    public ChemistJournalContainer(InventoryPlayer inventoryPlayer)
     {
 
     }

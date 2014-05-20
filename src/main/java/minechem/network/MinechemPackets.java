@@ -1,7 +1,7 @@
 package minechem.network;
 
 import minechem.ModMinechem;
-import minechem.item.chemistjournal.PacketActiveJournalItem;
+import minechem.item.chemistjournal.ChemistJournalPacketActiveItem;
 import minechem.tileentity.decomposer.DecomposerPacketUpdate;
 import minechem.tileentity.multiblock.ghostblock.GhostPacketBlock;
 import minechem.tileentity.synthesis.SynthesisPacketUpdate;
@@ -49,7 +49,7 @@ public abstract class MinechemPackets
         ImmutableBiMap.Builder<Integer, Class<? extends MinechemPackets>> builder = ImmutableBiMap.builder();
 
         // Chemists Journal
-        builder.put(Integer.valueOf(0), PacketActiveJournalItem.class);
+        builder.put(Integer.valueOf(0), ChemistJournalPacketActiveItem.class);
 
         // Chemical Decomposer Machine
         builder.put(Integer.valueOf(1), DecomposerPacketUpdate.class);

@@ -64,8 +64,6 @@ public class DecomposerBlock extends BlockMinechemContainer
     {
         blockIcon = ir.registerIcon(Reference.DECOMPOSER_TEX);
         front = ir.registerIcon(Reference.DECOMPOSER_FRONT_TEX);
-
-        // Yes, this is hacky
         ModMinechem.INSTANCE.textureHook(ir);
     }
 

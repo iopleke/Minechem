@@ -17,18 +17,18 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class ItemChemistJournal extends Item
+public class ChemistJournalItem extends Item
 {
 
     public static final String ITEMS_TAG_NAME = "discoveredItems";
     private static final String ACTIVE_ITEMSTACK_TAG = "activeItemStack";
     private static final String JOURNAL_OWNER_TAG = "owner";
 
-    public ItemChemistJournal(int id)
+    public ChemistJournalItem(int id)
     {
         super(id);
         setUnlocalizedName("minechem.itemChemistJournal");
-        setCreativeTab(null);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override

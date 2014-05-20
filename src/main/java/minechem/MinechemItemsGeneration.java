@@ -4,7 +4,7 @@ import minechem.item.ItemAtomicManipulator;
 import minechem.item.ItemLens;
 import minechem.item.ItemPills;
 import minechem.item.blueprint.ItemBlueprint;
-import minechem.item.chemistjournal.ItemChemistJournal;
+import minechem.item.chemistjournal.ChemistJournalItem;
 import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
 import minechem.item.fusionstar.ItemFusionStar;
@@ -22,7 +22,7 @@ public class MinechemItemsGeneration
     public static ItemAtomicManipulator atomicManipulator;
     public static ItemFusionStar fusionStar;
     public static ItemBlueprint blueprint;
-    public static ItemChemistJournal journal;
+    public static ChemistJournalItem journal;
     public static ItemStack convexLens;
     public static ItemStack concaveLens;
     public static ItemStack projectorLens;
@@ -39,7 +39,7 @@ public class MinechemItemsGeneration
         atomicManipulator = new ItemAtomicManipulator(Settings.AtomicManipulator);
         fusionStar = new ItemFusionStar(Settings.FusionStar);
         blueprint = new ItemBlueprint(Settings.Blueprint);
-        journal = new ItemChemistJournal(Settings.ChemistJournal);
+        journal = new ChemistJournalItem(Settings.ChemistJournal);
         EmptyPillz = new ItemPills(Settings.EmptyPills, 0);
         polytool = new ItemPolytool(Settings.Polytool);
 

@@ -2,12 +2,16 @@ package minechem.tileentity.blueprintprojector;
 
 import java.util.ArrayList;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
 import minechem.block.BlockMinechemContainer;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.network.server.CommonProxy;
+import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
+import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -69,6 +73,13 @@ public class BlueprintProjectorBlock extends BlockMinechemContainer
                 itemStacks.add(takeBlueprintFromProjector(projector));
         }
         return;
+    }
+    
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister ir)
+    {
+        blockIcon = ir.registerIcon(Reference.BLUEPRINTPROJECTOR_TEX);
     }
 
     @Override

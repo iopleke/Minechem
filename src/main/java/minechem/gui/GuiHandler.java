@@ -1,8 +1,8 @@
 package minechem.gui;
 
 import minechem.container.CotainerTable;
-import minechem.item.chemistjournal.ContainerChemistJournal;
-import minechem.item.chemistjournal.GuiChemistJournal;
+import minechem.item.chemistjournal.ChemistJournalContainer;
+import minechem.item.chemistjournal.ChemistJournalGui;
 import minechem.item.polytool.ContainerPolytool;
 import minechem.item.polytool.GuiPolytool;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorContainer;
@@ -124,7 +124,7 @@ public class GuiHandler implements IGuiHandler
 
     public Object getServerGuiElementForJournal(EntityPlayer entityPlayer, World world)
     {
-        return new ContainerChemistJournal(entityPlayer.inventory);
+        return new ChemistJournalContainer(entityPlayer.inventory);
     }
 
     @Override
@@ -209,7 +209,7 @@ public class GuiHandler implements IGuiHandler
 
     public Object getClientGuiElementForJournal(EntityPlayer player, World world)
     {
-        return new GuiChemistJournal(player);
+        return new ChemistJournalGui(player);
     }
 
     public Object getClientGuiForJournal(EntityPlayer player, World world)
