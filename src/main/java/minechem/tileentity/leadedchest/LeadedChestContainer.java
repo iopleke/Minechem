@@ -9,12 +9,12 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerLeadedChest extends Container
+public class LeadedChestContainer extends Container
 {
 
-    protected TileEntityLeadedChest leadedchest;
+    protected LeadedChestTileEntity leadedchest;
 
-    public ContainerLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest leadedChest)
+    public LeadedChestContainer(InventoryPlayer inventoryPlayer, LeadedChestTileEntity leadedChest)
     {
         this.leadedchest = leadedChest;
 

@@ -14,9 +14,9 @@ import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
 import minechem.tileentity.decomposer.DecomposerContainer;
 import minechem.tileentity.decomposer.DecomposerGui;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
-import minechem.tileentity.leadedchest.ContainerLeadedChest;
-import minechem.tileentity.leadedchest.GuiLeadedChest;
-import minechem.tileentity.leadedchest.TileEntityLeadedChest;
+import minechem.tileentity.leadedchest.LeadedChestContainer;
+import minechem.tileentity.leadedchest.LeadedChestGui;
+import minechem.tileentity.leadedchest.LeadedChestTileEntity;
 import minechem.tileentity.microscope.MicroscopeContainer;
 import minechem.tileentity.microscope.MicroscopeGui;
 import minechem.tileentity.microscope.MicroscopeTileEntity;
@@ -64,9 +64,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new DecomposerContainer(player.inventory, (DecomposerTileEntity) tileEntity);
         }
-        if (tileEntity instanceof TileEntityLeadedChest)
+        if (tileEntity instanceof LeadedChestTileEntity)
         {
-            return new ContainerLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
+            return new LeadedChestContainer(player.inventory, (LeadedChestTileEntity) tileEntity);
         }
         if (tileEntity instanceof MicroscopeTileEntity)
         {
@@ -151,9 +151,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new DecomposerGui(player.inventory, (DecomposerTileEntity) tileEntity);
         }
-        if (tileEntity instanceof TileEntityLeadedChest)
+        if (tileEntity instanceof LeadedChestTileEntity)
         {
-            return new GuiLeadedChest(player.inventory, (TileEntityLeadedChest) tileEntity);
+            return new LeadedChestGui(player.inventory, (LeadedChestTileEntity) tileEntity);
         }
         if (tileEntity instanceof MicroscopeTileEntity)
         {

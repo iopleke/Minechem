@@ -7,7 +7,7 @@ import minechem.MinechemItemsGeneration;
 import minechem.item.element.EnumRadioactivity;
 import minechem.item.element.ItemElement;
 import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
-import minechem.tileentity.leadedchest.ContainerLeadedChest;
+import minechem.tileentity.leadedchest.LeadedChestContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -48,7 +48,7 @@ public class RadiationHandler
         {
             updateChemicalStorageContainer(player, openContainer);
         }
-        else if (openContainer != null && openContainer instanceof ContainerLeadedChest)
+        else if (openContainer != null && openContainer instanceof LeadedChestContainer)
         {
             updateContainerLeadedChest(player, openContainer);
         }
@@ -75,7 +75,7 @@ public class RadiationHandler
 
     private void updateContainerLeadedChest(EntityPlayer player, Container openContainer)
     {
-        ContainerLeadedChest leadedChest = (ContainerLeadedChest) openContainer;
+        LeadedChestContainer leadedChest = (LeadedChestContainer) openContainer;
         List<ItemStack> itemstacks = leadedChest.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {

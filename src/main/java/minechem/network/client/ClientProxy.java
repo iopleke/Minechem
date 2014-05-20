@@ -16,9 +16,9 @@ import minechem.tileentity.chemicalstorage.TileEntityChemicalStorageRenderer;
 import minechem.tileentity.decomposer.DecomposerItemRenderer;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.decomposer.DecomposerTileEntityRenderer;
-import minechem.tileentity.leadedchest.ItemLeadedChestRenderer;
-import minechem.tileentity.leadedchest.TileEntityLeadedChest;
-import minechem.tileentity.leadedchest.TileEntityLeadedChestRenderer;
+import minechem.tileentity.leadedchest.LeadedChestItemRenderer;
+import minechem.tileentity.leadedchest.LeadedChestTileEntity;
+import minechem.tileentity.leadedchest.LeadedChestTileEntityRenderer;
 import minechem.tileentity.microscope.MicroscopeItemRenderer;
 import minechem.tileentity.microscope.MicroscopeTileEntity;
 import minechem.tileentity.microscope.MicroscopeTileEntityRenderer;
@@ -58,7 +58,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.synthesis.blockID].itemID, new SynthesisItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.leadedChest.blockID].itemID, new LeadedChestItemRenderer());
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
         ClientRegistry.bindTileEntitySpecialRenderer(MicroscopeTileEntity.class, new MicroscopeTileEntityRenderer());
@@ -66,7 +66,7 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityBlueprintProjector.class, new TileEntityBlueprintProjectorRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(TileEntityChemicalStorage.class, new TileEntityChemicalStorageRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(TileEntityLeadedChest.class, new TileEntityLeadedChestRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
     }
 
     @Override

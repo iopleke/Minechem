@@ -7,13 +7,13 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityLeadedChest extends TileEntity implements IInventory
+public class LeadedChestTileEntity extends TileEntity implements IInventory
 {
 
     private final ItemStack[] inventory;
     private final int stackLimit = 64;
 
-    public TileEntityLeadedChest()
+    public LeadedChestTileEntity()
     {
         inventory = new ItemStack[9];
     }

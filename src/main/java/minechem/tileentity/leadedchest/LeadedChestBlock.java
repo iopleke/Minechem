@@ -15,10 +15,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockLeadedChest extends BlockContainer
+public class LeadedChestBlock extends BlockContainer
 {
 
-    public BlockLeadedChest(int id)
+    public LeadedChestBlock(int id)
     {
         super(id, Material.wood);
         this.setHardness(2.0F);
@@ -32,7 +32,7 @@ public class BlockLeadedChest extends BlockContainer
     {
         if (!world.isRemote)
         {
-            TileEntityLeadedChest leadedchest = (TileEntityLeadedChest) world.getBlockTileEntity(xCoord, yCoord, zCoord);
+            LeadedChestTileEntity leadedchest = (LeadedChestTileEntity) world.getBlockTileEntity(xCoord, yCoord, zCoord);
             if (leadedchest == null || player.isSneaking())
             {
                 return false;
@@ -92,7 +92,7 @@ public class BlockLeadedChest extends BlockContainer
     @Override
     public TileEntity createNewTileEntity(World world)
     {
-        return new TileEntityLeadedChest();
+        return new LeadedChestTileEntity();
     }
 
     @Override

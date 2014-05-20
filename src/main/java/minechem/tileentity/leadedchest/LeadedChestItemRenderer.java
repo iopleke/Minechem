@@ -7,14 +7,14 @@ import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-public class ItemLeadedChestRenderer extends ItemMinechemRenderer
+public class LeadedChestItemRenderer extends ItemMinechemRenderer
 {
 
-    TileEntityLeadedChest leadedChest;
+    LeadedChestTileEntity leadedChest;
 
-    public ItemLeadedChestRenderer()
+    public LeadedChestItemRenderer()
     {
-        this.leadedChest = new TileEntityLeadedChest();
+        this.leadedChest = new LeadedChestTileEntity();
     }
 
     @Override

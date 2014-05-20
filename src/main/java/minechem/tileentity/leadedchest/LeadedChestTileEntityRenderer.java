@@ -15,17 +15,17 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer
+public class LeadedChestTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
     private final ModelChest leadedChestModel = new ModelChest();
 
-    public TileEntityLeadedChestRenderer()
+    public LeadedChestTileEntityRenderer()
     {
 
     }
 
-    public void renderTileEntityLeadedChestAt(TileEntityLeadedChest leadedChest, double xCoord, double yCoord, double zCoord, float partialTick)
+    public void renderTileEntityLeadedChestAt(LeadedChestTileEntity leadedChest, double xCoord, double yCoord, double zCoord, float partialTick)
     {
         if (leadedChest == null)
         {
@@ -92,6 +92,6 @@ public class TileEntityLeadedChestRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileentity, double xCoord, double yCoord, double zCoord, float partialTick)
     {
-        this.renderTileEntityLeadedChestAt((TileEntityLeadedChest) tileentity, xCoord, yCoord, zCoord, partialTick);
+        this.renderTileEntityLeadedChestAt((LeadedChestTileEntity) tileentity, xCoord, yCoord, zCoord, partialTick);
     }
 }

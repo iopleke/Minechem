@@ -11,16 +11,16 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiLeadedChest extends GuiContainerTabbed
+public class LeadedChestGui extends GuiContainerTabbed
 {
 
     int guiWidth = 176;
     int guiHeight = 217;
-    TileEntityLeadedChest leadedchest;
+    LeadedChestTileEntity leadedchest;
 
-    public GuiLeadedChest(InventoryPlayer inventoryPlayer, TileEntityLeadedChest leadedChest)
+    public LeadedChestGui(InventoryPlayer inventoryPlayer, LeadedChestTileEntity leadedChest)
     {
-        super(new ContainerLeadedChest(inventoryPlayer, leadedChest));
+        super(new LeadedChestContainer(inventoryPlayer, leadedChest));
         this.leadedchest = leadedChest;
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.leadedChest")));
     }

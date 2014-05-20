@@ -11,8 +11,8 @@ import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
 import minechem.tileentity.decomposer.DecomposerBlock;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
-import minechem.tileentity.leadedchest.BlockLeadedChest;
-import minechem.tileentity.leadedchest.TileEntityLeadedChest;
+import minechem.tileentity.leadedchest.LeadedChestBlock;
+import minechem.tileentity.leadedchest.LeadedChestTileEntity;
 import minechem.tileentity.microscope.MicroscopeBlock;
 import minechem.tileentity.microscope.MicroscopeTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
@@ -93,9 +93,9 @@ public class MinechemBlocksGeneration
         DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(EnumElement.U, 48)));
 
         // Leaded Chest (for storing radioactive isotopes).
-        leadedChest = new BlockLeadedChest(Settings.LeadedChest);
+        leadedChest = new LeadedChestBlock(Settings.LeadedChest);
         GameRegistry.registerBlock(leadedChest, "minechem.leadedChest");
-        GameRegistry.registerTileEntity(TileEntityLeadedChest.class, "minechem.tileEntityLeadedChest");
+        GameRegistry.registerTileEntity(LeadedChestTileEntity.class, "minechem.tileEntityLeadedChest");
 
         // Fission Reactor.
         GameRegistry.registerTileEntity(FissionTileEntity.class, "minechem.tileEntityFission");
