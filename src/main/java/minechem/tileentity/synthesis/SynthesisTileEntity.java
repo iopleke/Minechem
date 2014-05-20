@@ -381,6 +381,8 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         if (doTake)
         {
             storageInventory.setInventoryStacks(storage);
+            
+            // Consume the required amount of energy that was the cost of the item being created.
             this.consumeEnergy(currentRecipe.energyCost());
         }
         

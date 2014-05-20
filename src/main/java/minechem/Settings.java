@@ -62,8 +62,6 @@ public class Settings
     public static @CfgId
     int ChemistJournal = getNextItemID();
     public static @CfgId
-    int EmptyPills = getNextItemID();
-    public static @CfgId
     int Polytool = getNextItemID();
 
     // ------

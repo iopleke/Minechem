@@ -55,7 +55,7 @@ import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION, useMetadata = false, acceptedMinecraftVersions = "[1.6.4,)", dependencies = "required-after:Forge@[9.11.1.953,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
+@Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.6.4,)", dependencies = "required-after:Forge@[9.11.1.953,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
 @ModstatInfo(prefix = ModMinechem.ID)
 @NetworkMod(clientSideRequired = true, serverSideRequired = false, channels =
 { ModMinechem.CHANNEL_NAME }, packetHandler = MinechemPacketHandler.class)
@@ -71,7 +71,11 @@ public class ModMinechem
     public static final String NAME = "MineChem";
     
     /** Main version information that will be displayed in mod listing and for other purposes. **/
-    public static final String VERSION = "5.0.4";
+    public static final String V_MAJOR = "@MAJOR@";
+    public static final String V_MINOR = "@MINOR@";
+    public static final String V_REVIS = "@REVIS@";
+    public static final String V_BUILD = "@BUILD@";
+    public static final String VERSION_FULL = V_MAJOR + "." + V_MINOR + V_REVIS + "." + V_BUILD;
 
     /** Provides logging **/
     @Instance(value = CHANNEL_NAME)
@@ -122,7 +126,7 @@ public class ModMinechem
         metadata.description = ModMinechem.NAME + " is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements.";
         metadata.url = "http://www.minechemmod.com/";
         metadata.logoFile = "assets/" + ModMinechem.ID + "/logo.png";
-        metadata.version = ModMinechem.VERSION;
+        metadata.version = V_MAJOR + "." + V_MINOR + V_REVIS;
         metadata.authorList = Arrays.asList(new String[]
         { "pixlepix", "jakimfett", "maxwolf" });
         metadata.credits = "View a full list of contributors on our site!";

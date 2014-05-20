@@ -19,8 +19,8 @@ public class PotionPharmacologyEffect
     { // This for the swords?
         MoleculeEnum[] possibles =
         { MoleculeEnum.water, MoleculeEnum.starch, MoleculeEnum.xylitol, MoleculeEnum.sucrose, MoleculeEnum.psilocybin, MoleculeEnum.amphetamine, MoleculeEnum.methamphetamine, MoleculeEnum.mycotoxin, MoleculeEnum.ethanol, MoleculeEnum.cyanide,
-                MoleculeEnum.penicillin, MoleculeEnum.testosterone, MoleculeEnum.xanax, MoleculeEnum.mescaline, MoleculeEnum.asprin, MoleculeEnum.shikimicAcid, MoleculeEnum.phosgene, MoleculeEnum.ttx, MoleculeEnum.fingolimod, MoleculeEnum.afroman,
-                MoleculeEnum.nod, MoleculeEnum.hist, MoleculeEnum.pal2, MoleculeEnum.theobromine, MoleculeEnum.retinol, MoleculeEnum.glycine, MoleculeEnum.alinine, MoleculeEnum.serine, MoleculeEnum.arginine, MoleculeEnum.cocaine, MoleculeEnum.cocainehcl,
+                MoleculeEnum.penicillin, MoleculeEnum.testosterone, MoleculeEnum.xanax, MoleculeEnum.mescaline, MoleculeEnum.asprin, MoleculeEnum.shikimicAcid, MoleculeEnum.phosgene, MoleculeEnum.tetrodotoxin, MoleculeEnum.fingolimod, MoleculeEnum.thc,
+                MoleculeEnum.nodularin, MoleculeEnum.hist, MoleculeEnum.pal2, MoleculeEnum.theobromine, MoleculeEnum.retinol, MoleculeEnum.glycine, MoleculeEnum.alinine, MoleculeEnum.serine, MoleculeEnum.arginine, MoleculeEnum.cocaine, MoleculeEnum.cocainehcl,
                 MoleculeEnum.metblue, MoleculeEnum.meoh, MoleculeEnum.radchlor, MoleculeEnum.caulerpenyne, MoleculeEnum.latropine };
 
         for (MoleculeEnum molecule : possibles)
@@ -131,7 +131,7 @@ public class PotionPharmacologyEffect
             entityPlayer.setFire(1000);
             break;
 
-        case ttx:
+        case tetrodotoxin:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_SECOND * 30, 8));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.wither.getId(), Constants.TICKS_PER_SECOND * 30, 1));
             break;
@@ -142,13 +142,13 @@ public class PotionPharmacologyEffect
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 1, 1));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_SECOND * 300, 1));
             break;
-        case afroman:
+        case thc:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration.getId(), Constants.TICKS_PER_MINUTE * 1, 1));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion.getId(), Constants.TICKS_PER_MINUTE * 60, 5));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.moveSlowdown.getId(), Constants.TICKS_PER_MINUTE * 60, 3));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_MINUTE * 120, 20));
             break;
-        case nod:
+        case nodularin:
             entityPlayer.addPotionEffect(new PotionEffect(Potion.poison.getId(), Constants.TICKS_PER_MINUTE * 1, 3));
             entityPlayer.addPotionEffect(new PotionEffect(Potion.hunger.getId(), Constants.TICKS_PER_MINUTE * 8, 3));
             break;

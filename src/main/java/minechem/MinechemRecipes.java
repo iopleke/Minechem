@@ -293,7 +293,7 @@ public class MinechemRecipes
         // Tall Grass
         ItemStack blockTallGrass = new ItemStack(Block.tallGrass, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(blockTallGrass, 0.1F, new PotionChemical[]
-        { new Molecule(MoleculeEnum.afroman, 2) }));
+        { new Molecule(MoleculeEnum.thc, 2) }));
 
         // Sandstone
         ItemStack blockSandStone = new ItemStack(Block.sandStone, 1, 0);
@@ -901,7 +901,7 @@ public class MinechemRecipes
         // Rotten Flesh
         ItemStack itemRottenFlesh = new ItemStack(Item.rottenFlesh);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemRottenFlesh, 0.05F, new PotionChemical[]
-        { new Molecule(MoleculeEnum.nod, 1) }));
+        { new Molecule(MoleculeEnum.nodularin, 1) }));
 
         // Enderpearl
         ItemStack itemEnderPearl = new ItemStack(Item.enderPearl);
@@ -938,9 +938,9 @@ public class MinechemRecipes
         // Spider Eye
         ItemStack itemSpiderEye = new ItemStack(Item.spiderEye);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemSpiderEye, 0.2F, new PotionChemical[]
-        { this.molecule(MoleculeEnum.ttx) }));
+        { this.molecule(MoleculeEnum.tetrodotoxin) }));
         SynthesisRecipe.add(new SynthesisRecipe(itemSpiderEye, true, 2000, new PotionChemical[]
-        { this.element(ElementEnum.C), null, null, null, this.molecule(MoleculeEnum.ttx), null, null, null, this.element(ElementEnum.C) }));
+        { this.element(ElementEnum.C), null, null, null, this.molecule(MoleculeEnum.tetrodotoxin), null, null, null, this.element(ElementEnum.C) }));
 
         // Fermented Spider Eye
         ItemStack itemFermentedSpiderEye = new ItemStack(Item.fermentedSpiderEye);
@@ -1077,19 +1077,12 @@ public class MinechemRecipes
         { "ABA", Character.valueOf('A'), MinechemItemsGeneration.concaveLens, Character.valueOf('B'), MinechemItemsGeneration.convexLens });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.blueprintProjector), new Object[]
         { " I ", "GPL", " I ", Character.valueOf('I'), itemIngotIron, Character.valueOf('P'), blockThinGlass, Character.valueOf('L'), MinechemItemsGeneration.projectorLens, Character.valueOf('G'), new ItemStack(Block.redstoneLampIdle) });
-        // GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatFeet), new Object[]{ "   ", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
-        // GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatLegs), new Object[]{ "PPP", "P P", "P P", Character.valueOf('P'), moleculePolyvinylChloride });
-        // GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatTorso), new Object[]{ " P ", "PPP", "PPP", Character.valueOf('P'), moleculePolyvinylChloride });
-        // GameRegistry.addRecipe(new ItemStack(MinechemItems.hazmatHead), new Object[]{ "PPP", "P P", "   ", Character.valueOf('P'), moleculePolyvinylChloride });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.leadedChest), new Object[]
         { "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsGeneration.element, 1, ElementEnum.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Block.chest) });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemBlocksGeneration.leadedChest), new Object[]
         { new ItemStack(MinechemBlocksGeneration.chemicalStorage) });
-        // GameRegistry.addRecipe(new ItemStack(MinechemItems.IAintAvinit), new Object[]{ "ZZZ", "ZSZ", " S ", Character.valueOf('Z'), new ItemStack(Item.ingotIron), Character.valueOf('S'), new ItemStack(Item.stick) });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsGeneration.journal), new Object[]
         { new ItemStack(Item.book), new ItemStack(Block.glass) });
-        GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsGeneration.EmptyPillz, 4), new Object[]
-        { new ItemStack(Item.sugar), new ItemStack(Item.slimeBall), new ItemStack(Item.slimeBall) });
         // Fusion
         GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fusion), new Object[]
         { new ItemStack(Item.paper), new ItemStack(Block.blockDiamond) });
@@ -1116,10 +1109,10 @@ public class MinechemRecipes
         this.registerPoisonRecipes(MoleculeEnum.mescaline);
         this.registerPoisonRecipes(MoleculeEnum.asprin);
         this.registerPoisonRecipes(MoleculeEnum.sulfuricAcid);
-        this.registerPoisonRecipes(MoleculeEnum.ttx);
+        this.registerPoisonRecipes(MoleculeEnum.tetrodotoxin);
         this.registerPoisonRecipes(MoleculeEnum.pal2);
-        this.registerPoisonRecipes(MoleculeEnum.nod);
-        this.registerPoisonRecipes(MoleculeEnum.afroman);
+        this.registerPoisonRecipes(MoleculeEnum.nodularin);
+        this.registerPoisonRecipes(MoleculeEnum.thc);
         this.registerPoisonRecipes(MoleculeEnum.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
         this.registerPoisonRecipes(MoleculeEnum.cocaine);
         this.registerPoisonRecipes(MoleculeEnum.cocainehcl);
@@ -1170,8 +1163,7 @@ public class MinechemRecipes
             {
                 boolean var3 = false;
                 Iterator var4 = SynthesisRecipe.recipes.iterator();
-                // What kind of crappy code is this?
-                // I've got to fix it.....If I can figure out what it does
+
                 while (true)
                 {
                     if (var4.hasNext())
@@ -1235,31 +1227,15 @@ public class MinechemRecipes
 
     private void registerPoisonRecipes(MoleculeEnum molecule)
     {
-
         for (Item i : Item.itemsList)
-        { // Thanks Adrian!
-
+        { 
+            // Should allow for lacing of BOP and AquaCulture foodstuffs.
             if (i != null && i instanceof ItemFood)
-            { // Should allow for lacing of BOP and AquaCulture foodstuffs.
-
+            { 
                 this.createPoisonedItemStack(i, 0, molecule);
-
             }
-
         }
-
     }
-
-    /* This stuff is unused and is replaced by pixlepix.minechem.particlephysics.recipe.handlers.DefaultOreDictionaryHandler String[] compounds = {"Aluminium","Titanium","Chrome", "Tungsten", "Lead", "Zinc", "Platinum", "Nickel", "Osmium", "Iron", "Gold",
-     * "Coal", "Copper", "Tin", "Silver", "RefinedIron", "Steel", "Bronze", "Brass", "Electrum", "Invar"};//,"Iridium"};
-     * 
-     * EnumElement[][] elements = {{EnumElement.Al}, {EnumElement.Ti}, {EnumElement.Cr}, {EnumElement.W}, {EnumElement.Pb}, {EnumElement.Zn}, {EnumElement.Pt}, {EnumElement.Ni}, {EnumElement.Os}, {EnumElement.Fe}, {EnumElement.Au}, {EnumElement.C},
-     * {EnumElement.Cu}, {EnumElement.Sn}, {EnumElement.Ag}, {EnumElement.Fe}, {EnumElement.Fe, EnumElement.C}, //Steel {EnumElement.Sn, EnumElement.Cu}, {EnumElement.Cu},//Bronze {EnumElement.Zn, EnumElement.Cu}, //Brass {EnumElement.Ag, EnumElement.Au},
-     * //Electrum {EnumElement.Fe, EnumElement.Ni} //Invar };//, EnumElement.Ir
-     * 
-     * int[][] proportions = {{4},{4},{4}, {4},{4},{4}, {4},{4},{4}, {4},{4},{4}, {4},{4},{4}, {4}, {4,4}, {1,3},{1,3},{2,2},{2,1}};
-     * 
-     * String[] itemTypes = {"dustSmall", "dust", "ore" , "ingot", "block", "gear", "plate"}; //"nugget", "plate" boolean[] craftable = {true, true, false, false, false, false, false}; int[] sizeCoeff = {1, 4, 8, 4, 36, 16, 4}; */
 
     private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
 

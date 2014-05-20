@@ -27,7 +27,6 @@ public class MinechemItemsGeneration
     public static ItemStack concaveLens;
     public static ItemStack projectorLens;
     public static ItemStack microscopeLens;
-    public static ItemPills EmptyPillz;
     public static ItemStack minechempills;
     public static Item polytool;
 
@@ -40,14 +39,12 @@ public class MinechemItemsGeneration
         fusionStar = new FusionStarItem(Settings.FusionStar);
         blueprint = new ItemBlueprint(Settings.Blueprint);
         journal = new ChemistJournalItem(Settings.ChemistJournal);
-        EmptyPillz = new ItemPills(Settings.EmptyPills, 0);
         polytool = new PolytoolItem(Settings.Polytool);
 
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
-        minechempills = new ItemStack(EmptyPillz, 1, 0);
     }
 
     public static void registerToOreDictionary()
