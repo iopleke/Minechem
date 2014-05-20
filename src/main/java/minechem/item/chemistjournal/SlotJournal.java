@@ -1,6 +1,10 @@
 package minechem.item.chemistjournal;
 
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,7 +20,11 @@ public class SlotJournal extends Slot
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
+<<<<<<< HEAD
         return itemstack.itemID == MinechemItemGeneration.journal.itemID;
+=======
+        return itemstack.itemID == MinechemItemsGeneration.journal.itemID;
+>>>>>>> MaxwolfRewrite
     }
 
     @Override

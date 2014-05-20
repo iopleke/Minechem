@@ -1,6 +1,10 @@
 package minechem.tileentity.microscope;
 
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 import minechem.item.chemistjournal.SlotJournal;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -69,13 +73,21 @@ public class ContainerMicroscope extends Container
                 if (!mergeItemStack(stackInSlot, 2, inventorySlots.size(), true))
                     return null;
             }
+<<<<<<< HEAD
             else if (slot != 1 && stack.itemID == MinechemItemGeneration.journal.itemID && !getSlot(1).getHasStack())
+=======
+            else if (slot != 1 && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(1).getHasStack())
+>>>>>>> MaxwolfRewrite
             {
                 ItemStack copy = slotObject.decrStackSize(1);
                 getSlot(1).putStack(copy);
                 return null;
             }
+<<<<<<< HEAD
             else if (slot > 1 && stack.itemID != MinechemItemGeneration.journal.itemID && !getSlot(0).getHasStack())
+=======
+            else if (slot > 1 && stack.itemID != MinechemItemsGeneration.journal.itemID && !getSlot(0).getHasStack())
+>>>>>>> MaxwolfRewrite
             {
                 ItemStack copy = slotObject.decrStackSize(1);
                 getSlot(0).putStack(copy);

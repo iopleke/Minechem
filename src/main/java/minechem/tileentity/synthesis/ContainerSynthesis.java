@@ -2,11 +2,21 @@ package minechem.tileentity.synthesis;
 
 import java.util.List;
 
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
 import minechem.item.chemistjournal.SlotJournal;
 import minechem.radiation.IRadiationShield;
 import minechem.slots.SlotChemical;
 import minechem.slots.SlotFake;
+=======
+import minechem.MinechemItemsGeneration;
+import minechem.container.ContainerWithFakeSlots;
+import minechem.item.IRadiationShield;
+import minechem.item.chemistjournal.SlotJournal;
+import minechem.slot.SlotChemical;
+import minechem.slot.SlotFake;
+import minechem.slot.SlotSynthesisOutput;
+>>>>>>> MaxwolfRewrite
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -80,7 +90,11 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
+<<<<<<< HEAD
             if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
+=======
+            if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
+>>>>>>> MaxwolfRewrite
             {
                 ItemStack copystack = slotObject.decrStackSize(1);
                 getSlot(TileEntitySynthesis.kStartJournal).putStack(copystack);
@@ -91,7 +105,11 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
                 if (!craftMaxmimum())
                     return null;
             }
+<<<<<<< HEAD
             else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemGeneration.element.itemID || stackInSlot.itemID == MinechemItemGeneration.molecule.itemID))
+=======
+            else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
+>>>>>>> MaxwolfRewrite
             {
                 if (!mergeItemStack(stackInSlot, TileEntitySynthesis.kStartStorage, TileEntitySynthesis.kStartStorage + TileEntitySynthesis.kSizeStorage, false))
                     return null;

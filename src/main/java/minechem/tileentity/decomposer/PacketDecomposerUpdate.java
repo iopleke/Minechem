@@ -86,7 +86,6 @@ public class PacketDecomposerUpdate extends MinechemPackets
             this.tileEntity.currentItemCookingMaximum = lastItemCookTimeMaximum;
             
             // Energy.
-            ModMinechem.LOGGER.info("[Decomposer] lastItemStoredEnergy: " + String.valueOf(lastItemStoredEnergy));
             this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
             this.tileEntity.setEnergyCapacity(lastItemStoredEnergyMaximum);
             

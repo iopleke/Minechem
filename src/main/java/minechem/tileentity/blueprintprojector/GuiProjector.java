@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
@@ -78,7 +82,11 @@ public class GuiProjector extends GuiContainerTabbed
 
     private void drawBlueprintInfo(ItemStack blueprintStack)
     {
+<<<<<<< HEAD
         MinechemBlueprint blueprint = MinechemItemGeneration.blueprint.getBlueprint(blueprintStack);
+=======
+        MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
+>>>>>>> MaxwolfRewrite
         if (blueprint == null)
         {
             return;

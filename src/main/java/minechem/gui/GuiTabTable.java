@@ -1,23 +1,19 @@
-package minechem.item.chemistjournal;
+package minechem.gui;
 
 import minechem.ModMinechem;
-<<<<<<< HEAD:src/main/java/minechem/item/chemistjournal/TabJournal.java
-=======
-import minechem.gui.GuiTableOfElements;
->>>>>>> MaxwolfRewrite:src/main/java/minechem/item/chemistjournal/TabJournal.java
-import minechem.gui.GuiTab;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
-public class TabJournal extends GuiTab
+public class GuiTabTable extends GuiTab
 {
     public static Icon helpIcon;
 
-    public TabJournal(Gui gui)
+    public GuiTabTable(Gui gui)
     {
         super(gui);
-        this.overlayColor = 0x2F7DAA;
+
+        this.overlayColor = 0x2F7DAA;// TODO Auto-generated constructor stub
     }
 
     @Override
@@ -36,7 +32,7 @@ public class TabJournal extends GuiTab
     public String getTooltip()
     {
 
-        return "Journal";
+        return "Table Of Elements";
     }
 
     @Override

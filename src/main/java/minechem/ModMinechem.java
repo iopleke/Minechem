@@ -4,11 +4,18 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 import minechem.fluid.FluidHelper;
+<<<<<<< HEAD
 import minechem.gui.CreativeTabMinechem;
+=======
+>>>>>>> MaxwolfRewrite
 import minechem.gui.GuiHandler;
 import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
 import minechem.gui.GuiTabStateControl;
+<<<<<<< HEAD
+=======
+import minechem.gui.GuiTabTable;
+>>>>>>> MaxwolfRewrite
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.TabJournal;
 import minechem.item.polytool.PolytoolEventHandler;
@@ -19,8 +26,13 @@ import minechem.potion.CoatingRecipe;
 import minechem.potion.CoatingSubscribe;
 import minechem.potion.EnchantmentCoated;
 import minechem.potion.PotionInjector;
+<<<<<<< HEAD
 import minechem.tick.ScheduledTickHandler;
 import minechem.tick.TickHandler;
+=======
+import minechem.tickhandler.ScheduledTickHandler;
+import minechem.tickhandler.TickHandler;
+>>>>>>> MaxwolfRewrite
 import minechem.tileentity.synthesis.TabStateControlSynthesis;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -84,7 +96,7 @@ public class ModMinechem
     @Mod.Metadata(ModMinechem.ID)
     public static ModMetadata metadata;
 
-    @SidedProxy(clientSide = "minechem.client.ClientProxy", serverSide = "minechem.common.CommonProxy")
+    @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.common.CommonProxy")
     public static CommonProxy PROXY;
 
     /** Creative mode tab that shows up in Minecraft. **/
@@ -130,10 +142,17 @@ public class ModMinechem
 
         // Register items and blocks.
         LOGGER.info("Registering Items...");
+<<<<<<< HEAD
         MinechemItemGeneration.registerItems();
 
         LOGGER.info("Registering Blocks...");
         MinechemBlockGeneration.registerBlocks();
+=======
+        MinechemItemsGeneration.registerItems();
+
+        LOGGER.info("Registering Blocks...");
+        MinechemBlocksGeneration.registerBlocks();
+>>>>>>> MaxwolfRewrite
 
         LOGGER.info("Registering Blueprints...");
         MinechemBlueprint.registerBlueprints();
@@ -144,7 +163,11 @@ public class ModMinechem
         MinechemRecipes.getInstance().registerFluidRecipies();
 
         LOGGER.info("Registering OreDict Compatability...");
+<<<<<<< HEAD
         MinechemItemGeneration.registerToOreDictionary();
+=======
+        MinechemItemsGeneration.registerToOreDictionary();
+>>>>>>> MaxwolfRewrite
 
         LOGGER.info("Registering Minechem Recipes...");
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
@@ -207,8 +230,13 @@ public class ModMinechem
     {
         LOGGER.info("Adding blueprints to dungeon loot...");
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+<<<<<<< HEAD
         ItemStack A = new ItemStack(MinechemItemGeneration.blueprint, 1, 0);
         ItemStack B = new ItemStack(MinechemItemGeneration.blueprint, 1, 1);
+=======
+        ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
+        ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
+>>>>>>> MaxwolfRewrite
         ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
         ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
     }
@@ -220,6 +248,10 @@ public class ModMinechem
         TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
         GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+<<<<<<< HEAD
+=======
+        GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+>>>>>>> MaxwolfRewrite
         TabJournal.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 

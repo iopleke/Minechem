@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 import minechem.item.element.EnumElement;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -84,7 +88,11 @@ public class GuiPolytool extends GuiContainer
             ((GuiElementHelper) iter.next()).draw(this, renders);
         }
 
+<<<<<<< HEAD
         drawItemStack(new ItemStack(MinechemItemGeneration.polytool), 80, 42, "");
+=======
+        drawItemStack(new ItemStack(MinechemItemsGeneration.polytool), 80, 42, "");
+>>>>>>> MaxwolfRewrite
         fontRenderer.drawString("Sword: " + ItemPolytool.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
         fontRenderer.drawString("Ores: " + ItemPolytool.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
         fontRenderer.drawString("Stone: " + ItemPolytool.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);

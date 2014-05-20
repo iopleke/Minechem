@@ -100,7 +100,7 @@ public class Settings
 
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
-    boolean DebugMode = true;
+    boolean DebugMode = false;
 
     public static void load(Configuration config)
     {

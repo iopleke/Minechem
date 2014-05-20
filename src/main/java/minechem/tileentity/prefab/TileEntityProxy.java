@@ -1,8 +1,14 @@
 package minechem.tileentity.prefab;
 
+<<<<<<< HEAD
 import minechem.MinechemBlockGeneration;
 import minechem.tileentity.fission.TileEntityFission;
 import minechem.tileentity.fusion.TileEntityFusion;
+=======
+import minechem.MinechemBlocksGeneration;
+import minechem.tileentity.multiblock.TileEntityFission;
+import minechem.tileentity.multiblock.TileEntityFusion;
+>>>>>>> MaxwolfRewrite
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -60,7 +66,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
 
             return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
+<<<<<<< HEAD
         if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlockGeneration.fusion.blockID)
+=======
+        if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion.blockID)
+>>>>>>> MaxwolfRewrite
         {
             this.manager = buildManagerBlock();
             return this.manager;
@@ -80,7 +90,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fusion.zCoord = this.managerZOffset + zCoord;
             fusion.yCoord = this.managerYOffset + yCoord;
             fusion.xCoord = this.managerXOffset + xCoord;
+<<<<<<< HEAD
             fusion.blockType = MinechemBlockGeneration.fusion;
+=======
+            fusion.blockType = MinechemBlocksGeneration.fusion;
+>>>>>>> MaxwolfRewrite
             worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fusion);
         }
         if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 3)
@@ -90,7 +104,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fission.zCoord = this.managerZOffset + zCoord;
             fission.yCoord = this.managerYOffset + yCoord;
             fission.xCoord = this.managerXOffset + xCoord;
+<<<<<<< HEAD
             fission.blockType = MinechemBlockGeneration.fusion;
+=======
+            fission.blockType = MinechemBlocksGeneration.fusion;
+>>>>>>> MaxwolfRewrite
             worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fission);
         }
         return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);

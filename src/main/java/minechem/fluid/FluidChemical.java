@@ -1,6 +1,10 @@
 package minechem.fluid;
 
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 import minechem.item.molecule.EnumMolecule;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -31,7 +35,11 @@ public class FluidChemical extends Fluid implements IMinechemFluid
     @Override
     public ItemStack getOutputStack()
     {
+<<<<<<< HEAD
         return new ItemStack(MinechemItemGeneration.molecule, 1, molecule.id());
+=======
+        return new ItemStack(MinechemItemsGeneration.molecule, 1, molecule.id());
+>>>>>>> MaxwolfRewrite
     }
 
     @Override

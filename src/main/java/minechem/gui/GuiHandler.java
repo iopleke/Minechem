@@ -1,5 +1,9 @@
 package minechem.gui;
 
+<<<<<<< HEAD:src/main/java/minechem/gui/GuiHandler.java
+=======
+import minechem.container.CotainerTable;
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/gui/GuiHandler.java
 import minechem.item.chemistjournal.ContainerChemistJournal;
 import minechem.item.chemistjournal.GuiChemistJournal;
 import minechem.item.polytool.ContainerPolytool;
