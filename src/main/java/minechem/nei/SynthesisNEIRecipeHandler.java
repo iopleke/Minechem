@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.ModMinechem;
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisGui;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.MinechemHelper;
@@ -98,7 +98,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
         {
             return;
         }
-        Chemical ingredientChemical = MinechemHelper.itemStackToChemical(ingredient);
+        PotionChemical ingredientChemical = MinechemHelper.itemStackToChemical(ingredient);
         if (ingredientChemical == null)
         {
             return;
@@ -108,8 +108,8 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
         {
             if (sr.isShaped())
             {
-                Chemical[] recipeInputs = sr.getShapedRecipe();
-                for (Chemical c : recipeInputs)
+                PotionChemical[] recipeInputs = sr.getShapedRecipe();
+                for (PotionChemical c : recipeInputs)
                 {
                     if (ingredientChemical.sameAs(c))
                     {
@@ -122,7 +122,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
             {
                 for (Object o : sr.getShapelessRecipe())
                 {
-                    Chemical c = (Chemical) o;
+                    PotionChemical c = (PotionChemical) o;
                     if (ingredientChemical.sameAs(c))
                     {
                         registerSynthesisRecipe(sr);
@@ -161,10 +161,10 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
             if (sr.isShaped())
             {
                 // Input elements go into specified positions.
-                Chemical[] inputChemicals = sr.getShapedRecipe();
+                PotionChemical[] inputChemicals = sr.getShapedRecipe();
                 int xSlot = 0;
                 int ySlot = 0;
-                for (Chemical c : inputChemicals)
+                for (PotionChemical c : inputChemicals)
                 {
                     if (c != null)
                     {
@@ -188,7 +188,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
                 int ySlot = 0;
                 for (Object o : inputChemicals)
                 {
-                    Chemical c = (Chemical) o;
+                    PotionChemical c = (PotionChemical) o;
                     ItemStack inputItem = MinechemHelper.chemicalToItemStack(c, c.amount);
                     inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + xSlot * INPUT_X_SCALE, INPUT_Y_OFS + ySlot * INPUT_Y_SCALE));
                     xSlot++;

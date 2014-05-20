@@ -2,7 +2,7 @@ package minechem.item.polytool;
 
 import java.util.ArrayList;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.Icon;
@@ -35,7 +35,7 @@ public class PolytoolInventoryRender implements IItemRenderer
         return false;
     }
 
-    public float getRed(EnumElement element)
+    public float getRed(ElementEnum element)
     {
         switch (element.classification())
         {
@@ -51,7 +51,7 @@ public class PolytoolInventoryRender implements IItemRenderer
         }
     }
 
-    public float getGreen(EnumElement element)
+    public float getGreen(ElementEnum element)
     {
         switch (element.classification())
         {
@@ -69,7 +69,7 @@ public class PolytoolInventoryRender implements IItemRenderer
         }
     }
 
-    public float getBlue(EnumElement element)
+    public float getBlue(ElementEnum element)
     {
         switch (element.classification())
         {
@@ -89,7 +89,7 @@ public class PolytoolInventoryRender implements IItemRenderer
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
         GL11.glPushMatrix();
-        ArrayList upgrades = ItemPolytool.getUpgrades(item);
+        ArrayList upgrades = PolytoolItem.getUpgrades(item);
         int count = 1;
         float red = 0F;
         float green = 0F;
@@ -106,7 +106,7 @@ public class PolytoolInventoryRender implements IItemRenderer
         {
             for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++)
             {
-                EnumElement element = ((PolytoolUpgradeType) upgrades.get(i)).getElement();
+                ElementEnum element = ((PolytoolUpgradeType) upgrades.get(i)).getElement();
                 red += (1 / count) * getRed(element);
                 green += (1 / count) * getGreen(element);
                 blue += (1 / count) * getBlue(element);

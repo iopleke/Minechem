@@ -1,6 +1,6 @@
 package minechem.item.polytool;
 
-import minechem.item.element.ItemElement;
+import minechem.item.element.ElementItem;
 import minechem.network.MinechemPacketHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -61,15 +61,15 @@ public class PolytoolInventory implements IInventory
     {
         item = itemstack;
 
-        if (itemstack != null && itemstack.stackSize == 64 && (itemstack.getItem() instanceof ItemElement) && PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack), 1) != null
-                && ItemPolytool.validAlloyInfusion(player.getCurrentEquippedItem(), itemstack))
+        if (itemstack != null && itemstack.stackSize == 64 && (itemstack.getItem() instanceof ElementItem) && PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1) != null
+                && PolytoolItem.validAlloyInfusion(player.getCurrentEquippedItem(), itemstack))
         {
             item = null;
-            ItemPolytool.addTypeToNBT(player.inventory.getCurrentItem(), PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack), 1));
+            PolytoolItem.addTypeToNBT(player.inventory.getCurrentItem(), PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1));
 
             if (!player.worldObj.isRemote)
             {
-                MinechemPacketHandler.sendPolytoolUpdatePacket(PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack), 1), player);
+                MinechemPacketHandler.sendPolytoolUpdatePacket(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1), player);
             }
         }
 
@@ -122,7 +122,7 @@ public class PolytoolInventory implements IInventory
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
 
-        return itemstack == null || itemstack.stackSize == 64 && (itemstack.getItem() instanceof ItemElement) && PolytoolHelper.getTypeFromElement(ItemElement.getElement(itemstack), 1) != null;
+        return itemstack == null || itemstack.stackSize == 64 && (itemstack.getItem() instanceof ElementItem) && PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1) != null;
     }
 
 }

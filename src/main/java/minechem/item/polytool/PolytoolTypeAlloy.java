@@ -1,6 +1,7 @@
 package minechem.item.polytool;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
+import minechem.item.element.ElementAlloyEnum;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.Item;
@@ -12,9 +13,9 @@ import net.minecraftforge.oredict.OreDictionary;
 public class PolytoolTypeAlloy extends PolytoolUpgradeType
 {
 
-    private EnumAlloy alloy;
+    private ElementAlloyEnum alloy;
 
-    public PolytoolTypeAlloy(EnumAlloy alloy, float power)
+    public PolytoolTypeAlloy(ElementAlloyEnum alloy, float power)
     {
 
         super(true);
@@ -90,7 +91,7 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
     }
 
     @Override
-    public EnumElement getElement()
+    public ElementEnum getElement()
     {
 
         return alloy.element;

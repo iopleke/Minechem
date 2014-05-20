@@ -5,7 +5,7 @@ import java.util.Iterator;
 
 import minechem.ModMinechem;
 import minechem.Settings;
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.MinechemHelper;
@@ -240,30 +240,16 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             return;
         }
         
-        while (this.isPowered())
+        // Determines the current state of the machine.
+        state = determineOperationalState();           
+        if (state == State.kProcessActive && this.isPowered())
         {
             // Consume energy to create the needed base elements.
-            this.consume();
-            
-            // Move items from temporary buffer and into output slots.
-            state = determineOperationalState();
-            
-            // If our state changes then stop the output.
-            if (state != State.kProcessActive)
-            {
-                break;
-            }
-            
-            // If we lose power then stop the output.
-            if (this.energy.isEmpty())
-            {
-                break;
-            }
+            this.consumeEnergy(1);
         }
-
-        // Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
-        if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput())
+        else if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput())
         {
+            // Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
             activeStack = null;
             decomposeActiveStack();
             state = State.kProcessActive;
@@ -325,7 +311,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
             if (recipe != null)
             {
-                ArrayList<Chemical> output = recipe.getOutput();
+                ArrayList<PotionChemical> output = recipe.getOutput();
                 if (output != null)
                 {
                     ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);

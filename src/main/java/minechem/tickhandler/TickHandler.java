@@ -4,7 +4,7 @@ import java.util.EnumSet;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.molecule.EnumMolecule;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionInjector;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -62,7 +62,7 @@ public class TickHandler implements ITickHandler
                 List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
                 for (EntityItem entityItem : itemList)
                 {
-                    if ((entityItem.getEntityItem().itemID == new ItemStack(MinechemItemsGeneration.element, 1, EnumMolecule.potassiumNitrate.ordinal()).itemID && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
+                    if ((entityItem.getEntityItem().itemID == new ItemStack(MinechemItemsGeneration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).itemID && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
                     {
                         world.createExplosion(entityItem, entityItem.posX, entityItem.posY, entityItem.posZ, 0.9F, true);
                         int dx = MathHelper.floor_double(entityItem.posX);

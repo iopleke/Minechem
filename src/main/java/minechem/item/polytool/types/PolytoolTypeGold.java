@@ -1,6 +1,6 @@
 package minechem.item.polytool.types;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -39,10 +39,10 @@ public class PolytoolTypeGold extends PolytoolUpgradeType
     }
 
     @Override
-    public EnumElement getElement()
+    public ElementEnum getElement()
     {
 
-        return EnumElement.Au;
+        return ElementEnum.Au;
     }
 
     @Override

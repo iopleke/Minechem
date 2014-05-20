@@ -1,7 +1,7 @@
 package minechem.fluid;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -12,9 +12,9 @@ import cpw.mods.fml.relauncher.Side;
 public class FluidElement extends Fluid implements IMinechemFluid
 {
 
-    public EnumElement element;
+    public ElementEnum element;
 
-    public FluidElement(EnumElement element)
+    public FluidElement(ElementEnum element)
     {
         super(element.descriptiveName());
         this.element = element;

@@ -2,8 +2,8 @@ package minechem.tileentity.multiblock.fission;
 
 import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFission;
-import minechem.item.element.ItemElement;
-import minechem.tileentity.multiblock.TileEntityMultiBlock;
+import minechem.item.element.ElementItem;
+import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class FissionTileEntity extends TileEntityMultiBlock implements ISidedInventory
+public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
 
     public static int[] kInput =
@@ -62,7 +62,7 @@ public class FissionTileEntity extends TileEntityMultiBlock implements ISidedInv
         shouldSendUpdatePacket = false;
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 50 == 0 && inventory[kStartFuel] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
         {
-            if (inventory[kStartInput] != null && inventory[kStartFuel] != null && inventory[kStartFuel].getItemDamage() == 91 && inventory[kStartFuel].getItem() instanceof ItemElement)
+            if (inventory[kStartInput] != null && inventory[kStartFuel] != null && inventory[kStartFuel].getItemDamage() == 91 && inventory[kStartFuel].getItem() instanceof ElementItem)
             {
                 ItemStack fissionResult = getFissionOutput();
                 if (inventory[kOutput[0]] == null || (fissionResult != null && fissionResult.itemID == inventory[kOutput[0]].itemID && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
@@ -201,7 +201,7 @@ public class FissionTileEntity extends TileEntityMultiBlock implements ISidedInv
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
 
-        if (i != kOutput[0] && itemstack.getItem() instanceof ItemElement)
+        if (i != kOutput[0] && itemstack.getItem() instanceof ElementItem)
         {
             return true;
         }

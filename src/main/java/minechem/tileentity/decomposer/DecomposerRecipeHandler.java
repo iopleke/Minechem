@@ -2,7 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
@@ -38,7 +38,7 @@ public class DecomposerRecipeHandler
         }
         if (level < 5)
         {
-            ArrayList<Chemical> output = new ArrayList<Chemical>();
+            ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
             int foundRecipies = 0;
             for (Object recipe : CraftingManager.getInstance().getRecipeList())
             {
@@ -94,7 +94,7 @@ public class DecomposerRecipeHandler
 
                         if (components != null)
                         {
-                            ArrayList<Chemical> sum = new ArrayList<Chemical>();
+                            ArrayList<PotionChemical> sum = new ArrayList<PotionChemical>();
                             for (ItemStack item : components)
                             {
                                 if (item != null)
@@ -122,7 +122,7 @@ public class DecomposerRecipeHandler
 
             if (!output.isEmpty())
             {
-                return new DecomposerRecipe(input, output.toArray(new Chemical[output.size()]));
+                return new DecomposerRecipe(input, output.toArray(new PotionChemical[output.size()]));
             }
         }
 

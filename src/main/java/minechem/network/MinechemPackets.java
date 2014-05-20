@@ -3,7 +3,7 @@ package minechem.network;
 import minechem.ModMinechem;
 import minechem.item.chemistjournal.ChemistJournalPacketActiveItem;
 import minechem.tileentity.decomposer.DecomposerPacketUpdate;
-import minechem.tileentity.multiblock.ghostblock.GhostPacketBlock;
+import minechem.tileentity.multiblock.ghostblock.GhostBlockPacket;
 import minechem.tileentity.synthesis.SynthesisPacketUpdate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
@@ -55,7 +55,7 @@ public abstract class MinechemPackets
         builder.put(Integer.valueOf(1), DecomposerPacketUpdate.class);
 
         // Fusion Reactor Ghost Blocks
-        builder.put(Integer.valueOf(2), GhostPacketBlock.class);
+        builder.put(Integer.valueOf(2), GhostBlockPacket.class);
 
         // Chemical Synthesis Machine
         builder.put(Integer.valueOf(3), SynthesisPacketUpdate.class);

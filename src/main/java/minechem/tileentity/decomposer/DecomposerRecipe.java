@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import minechem.Settings;
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipe
@@ -13,7 +13,7 @@ public class DecomposerRecipe
     public static ArrayList<DecomposerRecipe> recipes = new ArrayList<DecomposerRecipe>();
 
     ItemStack input;
-    public ArrayList<Chemical> output = new ArrayList<Chemical>();
+    public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
 
     public static DecomposerRecipe add(DecomposerRecipe recipe)
     {
@@ -21,16 +21,16 @@ public class DecomposerRecipe
         return recipe;
     }
 
-    public DecomposerRecipe(ItemStack input, Chemical... chemicals)
+    public DecomposerRecipe(ItemStack input, PotionChemical... chemicals)
     {
         this(chemicals);
         this.input = input;
     }
 
-    public DecomposerRecipe(Chemical... chemicals)
+    public DecomposerRecipe(PotionChemical... chemicals)
     {
-        for (Chemical chemical : chemicals)
-            this.output.add(chemical);
+        for (PotionChemical potionChemical : chemicals)
+            this.output.add(potionChemical);
     }
 
     public ItemStack getInput()
@@ -38,27 +38,27 @@ public class DecomposerRecipe
         return this.input;
     }
 
-    public ArrayList<Chemical> getOutput()
+    public ArrayList<PotionChemical> getOutput()
     {
         return this.output;
     }
 
-    public ArrayList<Chemical> getOutputRaw()
+    public ArrayList<PotionChemical> getOutputRaw()
     {
         return this.output;
     }
 
-    public ArrayList<Chemical> getPartialOutputRaw(int f)
+    public ArrayList<PotionChemical> getPartialOutputRaw(int f)
     {
-        ArrayList<Chemical> raw = getOutput();
-        ArrayList<Chemical> result = new ArrayList<Chemical>();
+        ArrayList<PotionChemical> raw = getOutput();
+        ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
         if (raw != null)
         {
-            for (Chemical chem : raw)
+            for (PotionChemical chem : raw)
             {
                 try
                 {
-                    Chemical reduced = chem.copy();
+                    PotionChemical reduced = chem.copy();
                     reduced.amount = (int) Math.floor(chem.amount / f);
                     Random rand = new Random();
                     if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f))

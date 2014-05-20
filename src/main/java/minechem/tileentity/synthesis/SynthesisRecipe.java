@@ -3,7 +3,7 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 
 public class SynthesisRecipe
@@ -11,7 +11,7 @@ public class SynthesisRecipe
 
     public static ArrayList<SynthesisRecipe> recipes = new ArrayList<SynthesisRecipe>();
     private ItemStack output;
-    private Chemical[] shapedRecipe;
+    private PotionChemical[] shapedRecipe;
     private ArrayList unshapedRecipe;
     private int energyCost;
     private boolean isShaped;
@@ -48,19 +48,19 @@ public class SynthesisRecipe
 
     }
 
-    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, Chemical... var4)
+    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, PotionChemical... var4)
     {
         this.output = var1;
         this.isShaped = var2;
         this.energyCost = var3;
         this.shapedRecipe = var4;
         this.unshapedRecipe = new ArrayList();
-        Chemical[] var5 = var4;
+        PotionChemical[] var5 = var4;
         int var6 = var4.length;
 
         for (int var7 = 0; var7 < var6; ++var7)
         {
-            Chemical var8 = var5[var7];
+            PotionChemical var8 = var5[var7];
             if (var8 != null)
             {
                 this.unshapedRecipe.add(var8);
@@ -74,7 +74,7 @@ public class SynthesisRecipe
         this.output = var1;
         this.isShaped = var2;
         this.energyCost = var3;
-        this.shapedRecipe = (Chemical[]) var4.toArray(new Chemical[var4.size()]);
+        this.shapedRecipe = (PotionChemical[]) var4.toArray(new PotionChemical[var4.size()]);
         this.unshapedRecipe = var4;
     }
 
@@ -93,7 +93,7 @@ public class SynthesisRecipe
         return this.energyCost * 10;
     }
 
-    public Chemical[] getShapedRecipe()
+    public PotionChemical[] getShapedRecipe()
     {
         return this.shapedRecipe;
     }
@@ -107,10 +107,10 @@ public class SynthesisRecipe
     {
         int var1 = 0;
 
-        Chemical var3;
+        PotionChemical var3;
         for (Iterator var2 = this.unshapedRecipe.iterator(); var2.hasNext(); var1 += var3.amount)
         {
-            var3 = (Chemical) var2.next();
+            var3 = (PotionChemical) var2.next();
         }
 
         return var1;

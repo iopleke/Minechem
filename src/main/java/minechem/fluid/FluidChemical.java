@@ -1,7 +1,7 @@
 package minechem.fluid;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.molecule.EnumMolecule;
+import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -12,9 +12,9 @@ import cpw.mods.fml.relauncher.Side;
 public class FluidChemical extends Fluid implements IMinechemFluid
 {
 
-    public EnumMolecule molecule;
+    public MoleculeEnum molecule;
 
-    public FluidChemical(EnumMolecule molecule)
+    public FluidChemical(MoleculeEnum molecule)
     {
         super("Minechem Chemical: " + molecule.descriptiveName());
         this.molecule = molecule;

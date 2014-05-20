@@ -2,8 +2,8 @@ package minechem.tickhandler;
 
 import java.util.EnumSet;
 
-import minechem.item.molecule.EnumMolecule;
-import minechem.potion.PharmacologyEffect;
+import minechem.item.molecule.MoleculeEnum;
+import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationHandler;
 import minechem.utils.Constants;
 import net.minecraft.entity.player.EntityPlayer;
@@ -55,10 +55,10 @@ public class ScheduledTickHandler implements IScheduledTickHandler
             NBTTagCompound stackTag = currentItem.getTagCompound();
             boolean isPoisoned = stackTag.getBoolean("minechem.isPoisoned");
             int effectType = stackTag.getInteger("minechem.effectType");
-            EnumMolecule molecule = EnumMolecule.getById(effectType);
+            MoleculeEnum molecule = MoleculeEnum.getById(effectType);
             if (isPoisoned)
             {
-                PharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
+                PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
                 entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
             }
         }

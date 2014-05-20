@@ -1,6 +1,6 @@
 package minechem.item.polytool;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +18,7 @@ public abstract class PolytoolUpgradeType
 
     public abstract void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving);
 
-    public abstract EnumElement getElement();
+    public abstract ElementEnum getElement();
 
     public abstract void onTick();
 

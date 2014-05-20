@@ -1,36 +1,36 @@
 package minechem.item.element;
 
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 
-public class Element extends Chemical
+public class Element extends PotionChemical
 {
 
-    public EnumElement element;
+    public ElementEnum element;
 
-    public Element(EnumElement element, int amount)
+    public Element(ElementEnum element, int amount)
     {
         super(amount);
         this.element = element;
     }
 
     @Override
-    public Chemical copy()
+    public PotionChemical copy()
     {
         return new Element(element, amount);
     }
 
     ;
 
-    public Element(EnumElement element)
+    public Element(ElementEnum element)
     {
         super(1);
         this.element = element;
     }
 
     @Override
-    public boolean sameAs(Chemical chemical)
+    public boolean sameAs(PotionChemical potionChemical)
     {
-        return chemical instanceof Element && ((Element) chemical).element == element;
+        return potionChemical instanceof Element && ((Element) potionChemical).element == element;
     }
 
 }

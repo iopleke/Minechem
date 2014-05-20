@@ -1,6 +1,6 @@
 package minechem.item.polytool.types;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import minechem.utils.EnumColor;
 import net.minecraft.block.Block;
@@ -45,10 +45,10 @@ public class PolytoolTypeMercury extends PolytoolUpgradeType
     }
 
     @Override
-    public EnumElement getElement()
+    public ElementEnum getElement()
     {
 
-        return EnumElement.Hg;
+        return ElementEnum.Hg;
     }
 
     @Override

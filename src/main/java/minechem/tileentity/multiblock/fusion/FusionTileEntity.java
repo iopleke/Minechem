@@ -2,9 +2,9 @@ package minechem.tileentity.multiblock.fusion;
 
 import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFusion;
-import minechem.item.element.EnumElement;
-import minechem.item.element.ItemElement;
-import minechem.tileentity.multiblock.TileEntityMultiBlock;
+import minechem.item.element.ElementEnum;
+import minechem.item.element.ElementItem;
+import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class FusionTileEntity extends TileEntityMultiBlock
+public class FusionTileEntity extends MultiBlockTileEntity
 {
     public static int[] kFusionStar = { 0 };
     public static int[] kInput = { 1, 2 };
@@ -140,7 +140,7 @@ public class FusionTileEntity extends TileEntityMultiBlock
             int mass1 = inventory[kInput[0]].getItemDamage() + 1;
             int mass2 = inventory[kInput[1]].getItemDamage() + 1;
             int massSum = mass1 + mass2;
-            if (massSum <= EnumElement.heaviestMass)
+            if (massSum <= ElementEnum.heaviestMass)
             {
                 return new ItemStack(MinechemItemsGeneration.element, 1, massSum - 1);
             }
@@ -158,7 +158,7 @@ public class FusionTileEntity extends TileEntityMultiBlock
     private int getEnergyCost(ItemStack itemstack)
     {
         int mass = itemstack.getItemDamage();
-        int cost = (int) MinechemHelper.translateValue(mass + 1, 1, EnumElement.heaviestMass, 1, this.maxEnergy);
+        int cost = (int) MinechemHelper.translateValue(mass + 1, 1, ElementEnum.heaviestMass, 1, this.maxEnergy);
         return cost / 100;
     }
 
@@ -299,7 +299,7 @@ public class FusionTileEntity extends TileEntityMultiBlock
         }
         for (int slot : kInput)
         {
-            if (i == slot && itemstack.getItem() instanceof ItemElement)
+            if (i == slot && itemstack.getItem() instanceof ElementItem)
             {
                 return true;
             }

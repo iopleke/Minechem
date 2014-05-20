@@ -6,7 +6,7 @@ import java.util.Random;
 
 import minechem.ModMinechem;
 import minechem.block.BlockMinechemContainer;
-import minechem.tileentity.multiblock.TileEntityMultiBlock;
+import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.Reference;
@@ -58,7 +58,7 @@ public class FusionBlock extends BlockMinechemContainer
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
     {
         // Should not drop blocks if this is a proxy
-        if (tileEntity instanceof TileEntityMultiBlock && tileEntity instanceof IInventory)
+        if (tileEntity instanceof MultiBlockTileEntity && tileEntity instanceof IInventory)
         {
             IInventory inv = (IInventory) tileEntity;
             for (int i = 0; i < inv.getSizeInventory(); i++)

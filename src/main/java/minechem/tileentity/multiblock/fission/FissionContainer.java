@@ -1,7 +1,7 @@
 package minechem.tileentity.multiblock.fission;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import minechem.radiation.IRadiationShield;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -78,7 +78,7 @@ public class FissionContainer extends Container implements IRadiationShield
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
                     return null;
             }
-            else if (stackInSlot.itemID == MinechemItemsGeneration.element.itemID && stackInSlot.getItemDamage() == EnumElement.U.atomicNumber() + 1)
+            else if (stackInSlot.itemID == MinechemItemsGeneration.element.itemID && stackInSlot.getItemDamage() == ElementEnum.U.atomicNumber() + 1)
             {
                 if (!mergeItemStack(stackInSlot, FissionTileEntity.kStartFuel, FissionTileEntity.kStartFuel + 1, false))
                     return null;

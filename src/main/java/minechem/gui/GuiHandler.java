@@ -1,10 +1,10 @@
 package minechem.gui;
 
-import minechem.container.CotainerTable;
+import minechem.container.ContainerTable;
 import minechem.item.chemistjournal.ChemistJournalContainer;
 import minechem.item.chemistjournal.ChemistJournalGui;
-import minechem.item.polytool.ContainerPolytool;
-import minechem.item.polytool.GuiPolytool;
+import minechem.item.polytool.PolytoolContainer;
+import minechem.item.polytool.PolytoolGui;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorContainer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorGui;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
@@ -57,7 +57,7 @@ public class GuiHandler implements IGuiHandler
         }
         if (ID == GUI_TABLE)
         {
-            return new CotainerTable(player.inventory);
+            return new ContainerTable(player.inventory);
         }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof DecomposerTileEntity)
@@ -104,7 +104,7 @@ public class GuiHandler implements IGuiHandler
     private Object getServerGuiElementForPolytool(EntityPlayer player, World world)
     {
 
-        return new ContainerPolytool(player);
+        return new PolytoolContainer(player);
     }
 
     public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
@@ -186,10 +186,10 @@ public class GuiHandler implements IGuiHandler
         return null;
     }
 
-    private GuiPolytool getClientGuiForPolytool(EntityPlayer player, World world)
+    private PolytoolGui getClientGuiForPolytool(EntityPlayer player, World world)
     {
 
-        return new GuiPolytool(new ContainerPolytool(player));
+        return new PolytoolGui(new PolytoolContainer(player));
     }
 
     public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)

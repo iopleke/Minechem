@@ -8,10 +8,10 @@ import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.blueprint.BlueprintBlock.Type;
 import minechem.sound.LoopingSound;
-import minechem.tileentity.multiblock.EnumBlockStatus;
-import minechem.tileentity.multiblock.TileEntityMultiBlock;
+import minechem.tileentity.multiblock.MultiBlockStatusEnum;
+import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fusion.FusionTileEntity;
-import minechem.tileentity.multiblock.ghostblock.GhostTileEntityBlock;
+import minechem.tileentity.multiblock.ghostblock.GhostBlockTileEntity;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.LocalPosition;
@@ -68,12 +68,12 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 {
                     if (shouldProjectGhostBlocks)
                     {
-                        EnumBlockStatus enumBlockStatus;
+                        MultiBlockStatusEnum multiBlockStatusEnum;
                         if (isManagerBlock(x, y, z))
-                            enumBlockStatus = EnumBlockStatus.CORRECT;
+                            multiBlockStatusEnum = MultiBlockStatusEnum.CORRECT;
                         else
-                            enumBlockStatus = projectGhostBlock(x, y, z, position);
-                        if (enumBlockStatus == EnumBlockStatus.CORRECT)
+                            multiBlockStatusEnum = projectGhostBlock(x, y, z, position);
+                        if (multiBlockStatusEnum == MultiBlockStatusEnum.CORRECT)
                         {
                             verticalIncorrectCount--;
                             totalIncorrectCount--;
@@ -89,7 +89,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 shouldProjectGhostBlocks = false;
         }
 
-        if (totalIncorrectCount == 0 && (!isComplete || !(worldObj.getBlockTileEntity(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ()) instanceof TileEntityMultiBlock)))
+        if (totalIncorrectCount == 0 && (!isComplete || !(worldObj.getBlockTileEntity(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ()) instanceof MultiBlockTileEntity)))
         {
             isComplete = true;
             buildStructure(position);
@@ -177,7 +177,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         }
     }
 
-    private EnumBlockStatus projectGhostBlock(int x, int y, int z, LocalPosition position)
+    private MultiBlockStatusEnum projectGhostBlock(int x, int y, int z, LocalPosition position)
     {
         Pos3 worldPos = position.getLocalPos(x, y, z);
         Integer structureID = structure[y][x][z];
@@ -185,17 +185,17 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         int blockMetadata = worldObj.getBlockMetadata(worldPos.x, worldPos.y, worldPos.z);
         if (structureID == MinechemBlueprint.wildcard)
         {
-            return EnumBlockStatus.CORRECT;
+            return MultiBlockStatusEnum.CORRECT;
         }
         else if (structureID == air)
         {
             if (blockID == air)
             {
-                return EnumBlockStatus.CORRECT;
+                return MultiBlockStatusEnum.CORRECT;
             }
             else
             {
-                return EnumBlockStatus.INCORRECT;
+                return MultiBlockStatusEnum.INCORRECT;
             }
         }
         else
@@ -205,15 +205,15 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
             if (blockID == air)
             {
                 createGhostBlock(worldPos.x, worldPos.y, worldPos.z, structureID);
-                return EnumBlockStatus.INCORRECT;
+                return MultiBlockStatusEnum.INCORRECT;
             }
             else if (blockID == blueprintBlock.block.blockID && (blockMetadata == blueprintBlock.metadata || blueprintBlock.metadata == -1))
             {
-                return EnumBlockStatus.CORRECT;
+                return MultiBlockStatusEnum.CORRECT;
             }
             else
             {
-                return EnumBlockStatus.INCORRECT;
+                return MultiBlockStatusEnum.INCORRECT;
             }
         }
     }
@@ -222,9 +222,9 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
     {
         worldObj.setBlock(x, y, z, MinechemBlocksGeneration.ghostBlock.blockID, 0, 3);
         TileEntity tileEntity = worldObj.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof GhostTileEntityBlock)
+        if (tileEntity instanceof GhostBlockTileEntity)
         {
-            GhostTileEntityBlock ghostBlock = (GhostTileEntityBlock) tileEntity;
+            GhostBlockTileEntity ghostBlock = (GhostBlockTileEntity) tileEntity;
             ghostBlock.setBlueprintAndID(blueprint, blockID);
         }
     }

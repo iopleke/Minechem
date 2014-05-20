@@ -1,6 +1,5 @@
 package minechem.radiation;
 
-import minechem.item.element.EnumRadioactivity;
 import net.minecraft.item.ItemStack;
 
 public class RadiationInfo
@@ -11,9 +10,9 @@ public class RadiationInfo
     public int radiationDamage;
     public int dimensionID;
     public ItemStack itemstack;
-    public EnumRadioactivity radioactivity;
+    public RadiationEnum radioactivity;
 
-    public RadiationInfo(ItemStack itemstack, long radiationLife, long lastRadiationUpdate, int dimensionID, EnumRadioactivity radioactivity)
+    public RadiationInfo(ItemStack itemstack, long radiationLife, long lastRadiationUpdate, int dimensionID, RadiationEnum radioactivity)
     {
         this.itemstack = itemstack;
         this.radiationLife = radiationLife;
@@ -22,7 +21,7 @@ public class RadiationInfo
         this.radioactivity = radioactivity;
     }
 
-    public RadiationInfo(ItemStack itemstack, EnumRadioactivity radioactivity)
+    public RadiationInfo(ItemStack itemstack, RadiationEnum radioactivity)
     {
         this.itemstack = itemstack;
         this.radioactivity = radioactivity;
@@ -33,6 +32,6 @@ public class RadiationInfo
 
     public boolean isRadioactive()
     {
-        return this.radioactivity != EnumRadioactivity.stable;
+        return this.radioactivity != RadiationEnum.stable;
     }
 }

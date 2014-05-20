@@ -2,8 +2,8 @@ package minechem.network.client;
 
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsGeneration;
-import minechem.item.element.ItemElementRenderer;
-import minechem.item.molecule.ItemMoleculeRenderer;
+import minechem.item.element.ElementItemRenderer;
+import minechem.item.molecule.MoleculeItemRenderer;
 import minechem.network.server.CommonProxy;
 import minechem.sound.MinechemSoundEvent;
 import minechem.tickhandler.TickHandler;
@@ -51,8 +51,8 @@ public class ClientProxy extends CommonProxy
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element.itemID, new ItemElementRenderer());
-        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule.itemID, new ItemMoleculeRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element.itemID, new ElementItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule.itemID, new MoleculeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.microscope.blockID].itemID, new MicroscopeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.decomposer.blockID].itemID, new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.synthesis.blockID].itemID, new SynthesisItemRenderer());

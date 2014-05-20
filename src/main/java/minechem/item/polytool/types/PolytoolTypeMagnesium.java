@@ -3,7 +3,7 @@ package minechem.item.polytool.types;
 import java.util.Iterator;
 import java.util.List;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -46,10 +46,10 @@ public class PolytoolTypeMagnesium extends PolytoolUpgradeType
     }
 
     @Override
-    public EnumElement getElement()
+    public ElementEnum getElement()
     {
 
-        return EnumElement.Mg;
+        return ElementEnum.Mg;
     }
 
     @Override

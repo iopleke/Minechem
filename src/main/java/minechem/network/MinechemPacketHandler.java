@@ -7,8 +7,8 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 
 import minechem.ModMinechem;
-import minechem.item.element.EnumElement;
-import minechem.item.polytool.GuiPolytool;
+import minechem.item.element.ElementEnum;
+import minechem.item.polytool.PolytoolGui;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.item.polytool.PolytoolUpgradeType;
 import minechem.network.MinechemPackets.ProtocolException;
@@ -102,15 +102,15 @@ public class MinechemPacketHandler implements IPacketHandler
     @SideOnly(Side.CLIENT)
     public void receivePolytoolUpdate(INetworkManager manager, Packet250CustomPayload packet, Player player)
     {
-        if (Minecraft.getMinecraft().currentScreen instanceof GuiPolytool)
+        if (Minecraft.getMinecraft().currentScreen instanceof PolytoolGui)
         {
             ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(packet.data);
             DataInputStream inputStream = new DataInputStream(byteArrayInputStream);
             try
             {
                 inputStream.readByte();
-                PolytoolUpgradeType upgrade = PolytoolHelper.getTypeFromElement(EnumElement.values()[inputStream.readByte()], inputStream.readByte());
-                ((GuiPolytool) Minecraft.getMinecraft().currentScreen).addUpgrade(upgrade);
+                PolytoolUpgradeType upgrade = PolytoolHelper.getTypeFromElement(ElementEnum.values()[inputStream.readByte()], inputStream.readByte());
+                ((PolytoolGui) Minecraft.getMinecraft().currentScreen).addUpgrade(upgrade);
             }
             catch (IOException e)
             {

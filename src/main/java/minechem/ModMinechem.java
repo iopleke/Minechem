@@ -15,10 +15,9 @@ import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.MinechemPacketHandler;
 import minechem.network.server.CommonProxy;
-import minechem.oredictionary.MinechemRecipes;
-import minechem.potion.CoatingRecipe;
-import minechem.potion.CoatingSubscribe;
-import minechem.potion.EnchantmentCoated;
+import minechem.potion.PotionCoatingRecipe;
+import minechem.potion.PotionCoatingSubscribe;
+import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.tickhandler.ScheduledTickHandler;
 import minechem.tickhandler.TickHandler;
@@ -151,7 +150,7 @@ public class ModMinechem
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
 
         LOGGER.info("Registering Chemical Effects...");
-        MinecraftForge.EVENT_BUS.register(new CoatingSubscribe());
+        MinecraftForge.EVENT_BUS.register(new PotionCoatingSubscribe());
 
         LOGGER.info("Registering Polytool Event Handler...");
         MinecraftForge.EVENT_BUS.register(new PolytoolEventHandler());
@@ -169,7 +168,7 @@ public class ModMinechem
         PotionInjector.inject();
 
         LOGGER.info("Matching Pharmacology Effects to Chemicals...");
-        CraftingManager.getInstance().getRecipeList().add(new CoatingRecipe());
+        CraftingManager.getInstance().getRecipeList().add(new PotionCoatingRecipe());
 
         LOGGER.info("Registering fluids...");
         FluidHelper.registerFluids();
@@ -199,7 +198,7 @@ public class ModMinechem
         addonDungeonLoot();
 
         LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
-        EnchantmentCoated.registerCoatings();
+        PotionEnchantmentCoated.registerCoatings();
 
         LOGGER.info("POSTINIT PASSED");
     }

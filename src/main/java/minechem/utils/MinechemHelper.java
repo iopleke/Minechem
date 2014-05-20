@@ -6,10 +6,10 @@ import java.util.Random;
 
 import minechem.MinechemItemsGeneration;
 import minechem.item.element.Element;
-import minechem.item.element.ItemElement;
-import minechem.item.molecule.ItemMolecule;
+import minechem.item.element.ElementItem;
+import minechem.item.molecule.MoleculeItem;
 import minechem.item.molecule.Molecule;
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
@@ -112,58 +112,58 @@ public class MinechemHelper
         return itemlist;
     }
 
-    public static ArrayList<ItemStack> convertChemicalsIntoItemStacks(ArrayList<Chemical> chemicals)
+    public static ArrayList<ItemStack> convertChemicalsIntoItemStacks(ArrayList<PotionChemical> potionChemicals)
     {
         ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();
-        if (chemicals == null)
+        if (potionChemicals == null)
             return stacks;
-        for (Chemical chemical : chemicals)
+        for (PotionChemical potionChemical : potionChemicals)
         {
-            if (chemical instanceof Element)
+            if (potionChemical instanceof Element)
             {
-                stacks.add(new ItemStack(MinechemItemsGeneration.element, chemical.amount, ((Element) chemical).element.ordinal()));
+                stacks.add(new ItemStack(MinechemItemsGeneration.element, potionChemical.amount, ((Element) potionChemical).element.ordinal()));
             }
-            else if (chemical instanceof Molecule)
+            else if (potionChemical instanceof Molecule)
             {
-                stacks.add(new ItemStack(MinechemItemsGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal()));
+                stacks.add(new ItemStack(MinechemItemsGeneration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal()));
             }
         }
         return stacks;
     }
 
-    public static ItemStack[] convertChemicalArrayIntoItemStackArray(Chemical[] chemicals)
+    public static ItemStack[] convertChemicalArrayIntoItemStackArray(PotionChemical[] chemicals)
     {
         ItemStack[] stacks = new ItemStack[chemicals.length];
         for (int i = 0; i < chemicals.length; i++)
         {
-            Chemical chemical = chemicals[i];
-            if (chemical instanceof Element)
+            PotionChemical potionChemical = chemicals[i];
+            if (potionChemical instanceof Element)
             {
-                stacks[i] = new ItemStack(MinechemItemsGeneration.element, chemical.amount, ((Element) chemical).element.ordinal());
+                stacks[i] = new ItemStack(MinechemItemsGeneration.element, potionChemical.amount, ((Element) potionChemical).element.ordinal());
             }
-            else if (chemical instanceof Molecule)
+            else if (potionChemical instanceof Molecule)
             {
-                stacks[i] = new ItemStack(MinechemItemsGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal());
+                stacks[i] = new ItemStack(MinechemItemsGeneration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal());
             }
         }
         return stacks;
     }
 
-    public static boolean itemStackMatchesChemical(ItemStack itemstack, Chemical chemical)
+    public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical)
     {
-        return itemStackMatchesChemical(itemstack, chemical, 1);
+        return itemStackMatchesChemical(itemstack, potionChemical, 1);
     }
 
-    public static boolean itemStackMatchesChemical(ItemStack itemstack, Chemical chemical, int factor)
+    public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical, int factor)
     {
-        if (chemical instanceof Element && itemstack.itemID == MinechemItemsGeneration.element.itemID)
+        if (potionChemical instanceof Element && itemstack.itemID == MinechemItemsGeneration.element.itemID)
         {
-            Element element = (Element) chemical;
+            Element element = (Element) potionChemical;
             return (itemstack.getItemDamage() == element.element.ordinal()) && (itemstack.stackSize >= element.amount * factor);
         }
-        if (chemical instanceof Molecule && itemstack.itemID == MinechemItemsGeneration.molecule.itemID)
+        if (potionChemical instanceof Molecule && itemstack.itemID == MinechemItemsGeneration.molecule.itemID)
         {
-            Molecule molecule = (Molecule) chemical;
+            Molecule molecule = (Molecule) potionChemical;
             return (itemstack.getItemDamage() == molecule.molecule.ordinal()) && (itemstack.stackSize >= molecule.amount * factor);
         }
         return false;
@@ -253,32 +253,32 @@ public class MinechemHelper
         return null;
     }
 
-    public static String getChemicalName(Chemical chemical)
+    public static String getChemicalName(PotionChemical potionChemical)
     {
-        if (chemical instanceof Element)
-            return ((Element) chemical).element.descriptiveName();
+        if (potionChemical instanceof Element)
+            return ((Element) potionChemical).element.descriptiveName();
         else
-            return ((Molecule) chemical).molecule.descriptiveName();
+            return ((Molecule) potionChemical).molecule.descriptiveName();
     }
 
-    public static ItemStack chemicalToItemStack(Chemical chemical, int amount)
+    public static ItemStack chemicalToItemStack(PotionChemical potionChemical, int amount)
     {
-        if (chemical instanceof Element)
-            return new ItemStack(MinechemItemsGeneration.element, amount, ((Element) chemical).element.ordinal());
-        else if (chemical instanceof Molecule)
-            return new ItemStack(MinechemItemsGeneration.molecule, amount, ((Molecule) chemical).molecule.id());
+        if (potionChemical instanceof Element)
+            return new ItemStack(MinechemItemsGeneration.element, amount, ((Element) potionChemical).element.ordinal());
+        else if (potionChemical instanceof Molecule)
+            return new ItemStack(MinechemItemsGeneration.molecule, amount, ((Molecule) potionChemical).molecule.id());
         return null;
     }
 
-    public static Chemical itemStackToChemical(ItemStack itemstack)
+    public static PotionChemical itemStackToChemical(ItemStack itemstack)
     {
         if (Compare.isStackAnElement(itemstack))
         {
-            return new Element(ItemElement.getElement(itemstack), itemstack.stackSize);
+            return new Element(ElementItem.getElement(itemstack), itemstack.stackSize);
         }
         else if (Compare.isStackAMolecule(itemstack))
         {
-            return new Molecule(ItemMolecule.getMolecule(itemstack), itemstack.stackSize);
+            return new Molecule(MoleculeItem.getMolecule(itemstack), itemstack.stackSize);
         }
         return null;
     }

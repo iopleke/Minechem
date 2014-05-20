@@ -2,7 +2,7 @@ package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
 
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Compare;
 import net.minecraft.inventory.IInventory;
@@ -73,7 +73,7 @@ public class SynthesisRecipeHandler
 
     private boolean itemStacksMatchesShapedRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor)
     {
-        Chemical[] chemicals = recipe.getShapedRecipe();
+        PotionChemical[] chemicals = recipe.getShapedRecipe();
         for (int i = 0; i < chemicals.length; i++)
         {
             if (stacks[i] == null && chemicals[i] != null)

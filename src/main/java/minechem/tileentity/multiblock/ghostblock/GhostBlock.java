@@ -66,9 +66,9 @@ public class GhostBlock extends BlockContainer
             return true;
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof GhostTileEntityBlock)
+        if (tileEntity instanceof GhostBlockTileEntity)
         {
-            GhostTileEntityBlock ghostBlock = (GhostTileEntityBlock) tileEntity;
+            GhostBlockTileEntity ghostBlock = (GhostBlockTileEntity) tileEntity;
             ItemStack blockAsStack = ghostBlock.getBlockAsItemStack();
             if (playerIsHoldingItem(entityPlayer, blockAsStack))
             {
@@ -157,7 +157,7 @@ public class GhostBlock extends BlockContainer
     @Override
     public TileEntity createNewTileEntity(World var1)
     {
-        return new GhostTileEntityBlock();
+        return new GhostBlockTileEntity();
     }
 
     @Override

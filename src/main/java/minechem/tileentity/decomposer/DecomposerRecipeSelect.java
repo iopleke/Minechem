@@ -2,7 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeSelect extends DecomposerRecipeChance
@@ -18,7 +18,7 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
     }
 
     @Override
-    public ArrayList<Chemical> getOutput()
+    public ArrayList<PotionChemical> getOutput()
     {
         if (random.nextFloat() < this.chance)
         {
@@ -29,7 +29,7 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
     }
 
     @Override
-    public ArrayList<Chemical> getOutputRaw()
+    public ArrayList<PotionChemical> getOutputRaw()
     {
         return possibleRecipes.get(0).getOutputRaw();
     }

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.ModMinechem;
-import minechem.potion.Chemical;
+import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
@@ -80,17 +80,17 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             return;
         }
         // Add all decomposer recipes that can yield the result.
-        Chemical resultChemical = MinechemHelper.itemStackToChemical(result);
+        PotionChemical resultChemical = MinechemHelper.itemStackToChemical(result);
         if (resultChemical == null)
         {
             return;
         }
         for (DecomposerRecipe dr : DecomposerRecipe.recipes)
         {
-            ArrayList<Chemical> rawOutputs = dr.getOutputRaw();
+            ArrayList<PotionChemical> rawOutputs = dr.getOutputRaw();
             if (rawOutputs != null)
             {
-                for (Chemical c : rawOutputs)
+                for (PotionChemical c : rawOutputs)
                 {
                     if (resultChemical.sameAs(c))
                     {

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.EntityLivingBase;
@@ -36,7 +36,7 @@ public class PolytoolEventHandler
     public void breakSpeed(PlayerEvent.BreakSpeed event)
     {
         // Again, there must be a better way to do this
-        if (event.entityPlayer.inventory.getCurrentItem() != null && event.entityPlayer.inventory.getCurrentItem().getItem() instanceof ItemPolytool)
+        if (event.entityPlayer.inventory.getCurrentItem() != null && event.entityPlayer.inventory.getCurrentItem().getItem() instanceof PolytoolItem)
         {
             event.newSpeed = event.entityPlayer.inventory.getCurrentItem().getItem().getStrVsBlock(event.entityPlayer.inventory.getCurrentItem(), event.block);
         }
@@ -54,9 +54,9 @@ public class PolytoolEventHandler
             if (event.entityLiving instanceof EntitySpider)
             {
 
-                if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof ItemPolytool)
+                if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof PolytoolItem)
                 {
-                    double damage = .8 * ItemPolytool.getPowerOfType(stack, EnumElement.B);
+                    double damage = .8 * PolytoolItem.getPowerOfType(stack, ElementEnum.B);
 
                     event.ammount += damage;
 
@@ -66,9 +66,9 @@ public class PolytoolEventHandler
             if (event.entityLiving instanceof EntityEnderman)
             {
 
-                if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof ItemPolytool)
+                if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof PolytoolItem)
                 {
-                    double damage = .8 * ItemPolytool.getPowerOfType(stack, EnumElement.Ag);
+                    double damage = .8 * PolytoolItem.getPowerOfType(stack, ElementEnum.Ag);
                     event.ammount += damage;
 
                 }
@@ -90,9 +90,9 @@ public class PolytoolEventHandler
             EntityPlayer player = (EntityPlayer) event.source.getEntity();
             ItemStack stack = player.getCurrentEquippedItem();
             Random random = new Random();
-            if (stack != null && stack.getItem() instanceof ItemPolytool)
+            if (stack != null && stack.getItem() instanceof PolytoolItem)
             {
-                float powerSilicon = ItemPolytool.getPowerOfType(stack, EnumElement.Si);
+                float powerSilicon = PolytoolItem.getPowerOfType(stack, ElementEnum.Si);
                 if (powerSilicon > 0)
                 {
                     int amount = (int) Math.ceil(random.nextDouble() * powerSilicon);
@@ -137,10 +137,10 @@ public class PolytoolEventHandler
 
                 EntityLivingBase enemy = event.entityLiving;
 
-                if (stack != null && stack.getItem() instanceof ItemPolytool)
+                if (stack != null && stack.getItem() instanceof PolytoolItem)
                 {
 
-                    float powerTitanium = ItemPolytool.getPowerOfType(stack, EnumElement.Ti);
+                    float powerTitanium = PolytoolItem.getPowerOfType(stack, ElementEnum.Ti);
 
                     if (powerTitanium > 0)
                     {
@@ -160,7 +160,7 @@ public class PolytoolEventHandler
                     if (enemy instanceof EntityZombie)
                     {
 
-                        float power = ItemPolytool.getPowerOfType(stack, EnumElement.N);
+                        float power = PolytoolItem.getPowerOfType(stack, ElementEnum.N);
                         if (power > 0)
                         {
                             int amount = (int) Math.ceil(random.nextDouble() * power);
@@ -180,7 +180,7 @@ public class PolytoolEventHandler
                     if (enemy instanceof EntitySkeleton)
                     {
 
-                        float power = ItemPolytool.getPowerOfType(stack, EnumElement.Ca);
+                        float power = PolytoolItem.getPowerOfType(stack, ElementEnum.Ca);
                         if (power > 0)
                         {
                             int amount = (int) Math.ceil(random.nextDouble() * power);
@@ -196,7 +196,7 @@ public class PolytoolEventHandler
                         }
                     }
                     // Beryllium beheading
-                    float beheading = ItemPolytool.getPowerOfType(stack, EnumElement.Be);
+                    float beheading = PolytoolItem.getPowerOfType(stack, ElementEnum.Be);
                     while (beheading > 5)
                     {
                         if (beheading > 0 && random.nextInt(5) < beheading * 10)

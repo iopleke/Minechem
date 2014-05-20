@@ -1,7 +1,7 @@
 package minechem.gui;
 
 import minechem.MinechemItemsGeneration;
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 
@@ -21,7 +21,7 @@ public class CreativeTabMinechem extends CreativeTabs
     @Override
     public ItemStack getIconItemStack()
     {
-        return new ItemStack(MinechemItemsGeneration.element, 1, EnumElement.U.ordinal());
+        return new ItemStack(MinechemItemsGeneration.element, 1, ElementEnum.U.ordinal());
     }
 
 }

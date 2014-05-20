@@ -1,9 +1,8 @@
 package minechem;
 
-import minechem.block.MaterialGas;
-import minechem.block.OreUranium;
+import minechem.block.uranium.BlockUraniumOre;
 import minechem.item.element.Element;
-import minechem.item.element.EnumElement;
+import minechem.item.element.ElementEnum;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorBlock;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.chemicalstorage.ChemicalStorageBlock;
@@ -20,8 +19,8 @@ import minechem.tileentity.multiblock.fusion.FusionBlock;
 import minechem.tileentity.multiblock.fusion.FusionItemBlock;
 import minechem.tileentity.multiblock.fusion.FusionTileEntity;
 import minechem.tileentity.multiblock.ghostblock.GhostBlock;
-import minechem.tileentity.multiblock.ghostblock.GhostItemBlock;
-import minechem.tileentity.multiblock.ghostblock.GhostTileEntityBlock;
+import minechem.tileentity.multiblock.ghostblock.GhostBlockItem;
+import minechem.tileentity.multiblock.ghostblock.GhostBlockTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.tileentity.synthesis.SynthesisBlock;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
@@ -46,7 +45,6 @@ public class MinechemBlocksGeneration
     public static Block leadedChest;
 
     public static Block uranium;
-    public static Material materialGas = new MaterialGas();
     public static Material materialGhost = new MaterialTransparent(MapColor.airColor);
 
     public static void registerBlocks()
@@ -73,8 +71,8 @@ public class MinechemBlocksGeneration
 
         // Ghost Block.
         ghostBlock = new GhostBlock(Settings.GhostBlock);
-        GameRegistry.registerBlock(ghostBlock, GhostItemBlock.class, "minechem.blockGhostBlock");
-        GameRegistry.registerTileEntity(GhostTileEntityBlock.class, "minechem.tileEntityGhostBock");
+        GameRegistry.registerBlock(ghostBlock, GhostBlockItem.class, "minechem.blockGhostBlock");
+        GameRegistry.registerTileEntity(GhostBlockTileEntity.class, "minechem.tileEntityGhostBock");
 
         // Blueprint Projector.
         blueprintProjector = new BlueprintProjectorBlock(Settings.BlueprintProjector);
@@ -87,10 +85,10 @@ public class MinechemBlocksGeneration
         GameRegistry.registerTileEntity(ChemicalStorageTileEntity.class, "minechem.tileEntityChemicalStorage");
 
         // Uranium Ore (World Gen).
-        uranium = new OreUranium(Settings.UraniumOre);
+        uranium = new BlockUraniumOre(Settings.UraniumOre);
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
         OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
-        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(EnumElement.U, 48)));
+        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(ElementEnum.U, 48)));
 
         // Leaded Chest (for storing radioactive isotopes).
         leadedChest = new LeadedChestBlock(Settings.LeadedChest);
