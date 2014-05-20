@@ -1,8 +1,8 @@
 package minechem.tileentity.prefab;
 
 import minechem.MinechemBlocksGeneration;
-import minechem.tileentity.multiblock.fission.TileEntityFission;
-import minechem.tileentity.multiblock.fusion.TileEntityFusion;
+import minechem.tileentity.multiblock.fission.FissionTileEntity;
+import minechem.tileentity.multiblock.fusion.FusionTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -75,7 +75,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
 
         if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 2)
         {
-            TileEntityFusion fusion = new TileEntityFusion();
+            FusionTileEntity fusion = new FusionTileEntity();
             fusion.worldObj = this.worldObj;
             fusion.zCoord = this.managerZOffset + zCoord;
             fusion.yCoord = this.managerYOffset + yCoord;
@@ -85,7 +85,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         }
         if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 3)
         {
-            TileEntityFission fission = new TileEntityFission();
+            FissionTileEntity fission = new FissionTileEntity();
             fission.worldObj = this.worldObj;
             fission.zCoord = this.managerZOffset + zCoord;
             fission.yCoord = this.managerYOffset + yCoord;

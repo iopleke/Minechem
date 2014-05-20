@@ -9,9 +9,9 @@ import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.blueprint.BlueprintBlock.Type;
 import minechem.sound.LoopingSound;
 import minechem.tileentity.multiblock.EnumBlockStatus;
-import minechem.tileentity.multiblock.TileEntityGhostBlock;
 import minechem.tileentity.multiblock.TileEntityMultiBlock;
-import minechem.tileentity.multiblock.fusion.TileEntityFusion;
+import minechem.tileentity.multiblock.fusion.FusionTileEntity;
+import minechem.tileentity.multiblock.ghostblock.GhostTileEntityBlock;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.LocalPosition;
@@ -132,7 +132,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, managerBlock.block.blockID, managerBlock.metadata, 3);
             if (this.blueprint == MinechemBlueprint.fusion)
             {
-                TileEntityFusion fusion = new TileEntityFusion();
+                FusionTileEntity fusion = new FusionTileEntity();
                 fusion.worldObj = this.worldObj;
                 fusion.xCoord = worldPos.x;
                 fusion.yCoord = worldPos.y;
@@ -222,9 +222,9 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     {
         worldObj.setBlock(x, y, z, MinechemBlocksGeneration.ghostBlock.blockID, 0, 3);
         TileEntity tileEntity = worldObj.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityGhostBlock)
+        if (tileEntity instanceof GhostTileEntityBlock)
         {
-            TileEntityGhostBlock ghostBlock = (TileEntityGhostBlock) tileEntity;
+            GhostTileEntityBlock ghostBlock = (GhostTileEntityBlock) tileEntity;
             ghostBlock.setBlueprintAndID(blueprint, blockID);
         }
     }

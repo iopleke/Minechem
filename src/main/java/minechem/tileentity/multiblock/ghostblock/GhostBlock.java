@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.ghostblock;
 
 import java.util.Random;
 
@@ -17,10 +17,10 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockGhostBlock extends BlockContainer
+public class GhostBlock extends BlockContainer
 {
 
-    public BlockGhostBlock(int id)
+    public GhostBlock(int id)
     {
         super(id, Material.iron);
         setUnlocalizedName("block.minechemGhostBlock");
@@ -66,9 +66,9 @@ public class BlockGhostBlock extends BlockContainer
             return true;
 
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityGhostBlock)
+        if (tileEntity instanceof GhostTileEntityBlock)
         {
-            TileEntityGhostBlock ghostBlock = (TileEntityGhostBlock) tileEntity;
+            GhostTileEntityBlock ghostBlock = (GhostTileEntityBlock) tileEntity;
             ItemStack blockAsStack = ghostBlock.getBlockAsItemStack();
             if (playerIsHoldingItem(entityPlayer, blockAsStack))
             {
@@ -157,7 +157,7 @@ public class BlockGhostBlock extends BlockContainer
     @Override
     public TileEntity createNewTileEntity(World var1)
     {
-        return new TileEntityGhostBlock();
+        return new GhostTileEntityBlock();
     }
 
     @Override

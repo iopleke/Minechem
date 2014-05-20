@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.ghostblock;
 
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -8,7 +8,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.common.network.PacketDispatcher;
 
-public class TileEntityGhostBlock extends MinechemTileEntity
+public class GhostTileEntityBlock extends MinechemTileEntity
 {
     private MinechemBlueprint blueprint;
     private int blockID;
@@ -20,7 +20,7 @@ public class TileEntityGhostBlock extends MinechemTileEntity
         this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, blueprint.getBlockLookup().get(this.blockID).metadata, 3);
         if (worldObj != null && !worldObj.isRemote)
         {
-            PacketGhostBlock packet = new PacketGhostBlock(this);
+            GhostPacketBlock packet = new GhostPacketBlock(this);
             int dimensionID = worldObj.provider.dimensionId;
             PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
         }

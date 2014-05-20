@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.ghostblock;
 
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.network.MinechemPackets;
@@ -10,7 +10,7 @@ import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
 
-public class PacketGhostBlock extends MinechemPackets
+public class GhostPacketBlock extends MinechemPackets
 {
     /** X coordinates of tile entity source. */
     private int tilePosX;
@@ -22,7 +22,7 @@ public class PacketGhostBlock extends MinechemPackets
     private int tilePosZ;
     
     /** Client only reference to our block. */
-    private TileEntityGhostBlock tileEntity;
+    private GhostTileEntityBlock tileEntity;
     
     /** Stores the blueprint ID for the type of machine that we are to be. */
     private int blueprintID;
@@ -30,7 +30,7 @@ public class PacketGhostBlock extends MinechemPackets
     /** Reference number for which ghost block in the total machine layout this makes. */
     private int ghostBlockID;
 
-    public PacketGhostBlock(TileEntityGhostBlock ghostBlock)
+    public GhostPacketBlock(GhostTileEntityBlock ghostBlock)
     {
         // World position information.
         tilePosX = ghostBlock.xCoord;
@@ -42,7 +42,7 @@ public class PacketGhostBlock extends MinechemPackets
         this.ghostBlockID = ghostBlock.getBlockID();
     }
 
-    public PacketGhostBlock()
+    public GhostPacketBlock()
     {
         // Required for reflection.
     }
@@ -51,7 +51,7 @@ public class PacketGhostBlock extends MinechemPackets
     public void execute(EntityPlayer player, Side side) throws ProtocolException
     {
         // Grab and populate our reference to the ghost block in the world.
-        this.tileEntity = (TileEntityGhostBlock) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
+        this.tileEntity = (GhostTileEntityBlock) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
         if (tileEntity == null)
         {
             return;

@@ -15,13 +15,13 @@ import minechem.tileentity.leadedchest.BlockLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.microscope.BlockMicroscope;
 import minechem.tileentity.microscope.TileEntityMicroscope;
-import minechem.tileentity.multiblock.BlockGhostBlock;
-import minechem.tileentity.multiblock.ItemGhostBlock;
-import minechem.tileentity.multiblock.TileEntityGhostBlock;
-import minechem.tileentity.multiblock.fission.TileEntityFission;
-import minechem.tileentity.multiblock.fusion.BlockFusion;
-import minechem.tileentity.multiblock.fusion.ItemBlockFusion;
-import minechem.tileentity.multiblock.fusion.TileEntityFusion;
+import minechem.tileentity.multiblock.fission.FissionTileEntity;
+import minechem.tileentity.multiblock.fusion.FusionBlock;
+import minechem.tileentity.multiblock.fusion.FusionItemBlock;
+import minechem.tileentity.multiblock.fusion.FusionTileEntity;
+import minechem.tileentity.multiblock.ghostblock.GhostBlock;
+import minechem.tileentity.multiblock.ghostblock.GhostItemBlock;
+import minechem.tileentity.multiblock.ghostblock.GhostTileEntityBlock;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.tileentity.synthesis.SynthesisBlock;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
@@ -67,14 +67,14 @@ public class MinechemBlocksGeneration
         GameRegistry.registerTileEntity(SynthesisTileEntity.class, "minechem.tileEntitySynthesis");
 
         // Fusion Reactor.
-        fusion = new BlockFusion(Settings.FusionChamber);
-        GameRegistry.registerBlock(fusion, ItemBlockFusion.class, "minechem.blockFusion");
-        GameRegistry.registerTileEntity(TileEntityFusion.class, "minechem.tileEntityFusion");
+        fusion = new FusionBlock(Settings.FusionChamber);
+        GameRegistry.registerBlock(fusion, FusionItemBlock.class, "minechem.blockFusion");
+        GameRegistry.registerTileEntity(FusionTileEntity.class, "minechem.tileEntityFusion");
 
         // Ghost Block.
-        ghostBlock = new BlockGhostBlock(Settings.GhostBlock);
-        GameRegistry.registerBlock(ghostBlock, ItemGhostBlock.class, "minechem.blockGhostBlock");
-        GameRegistry.registerTileEntity(TileEntityGhostBlock.class, "minechem.tileEntityGhostBock");
+        ghostBlock = new GhostBlock(Settings.GhostBlock);
+        GameRegistry.registerBlock(ghostBlock, GhostItemBlock.class, "minechem.blockGhostBlock");
+        GameRegistry.registerTileEntity(GhostTileEntityBlock.class, "minechem.tileEntityGhostBock");
 
         // Blueprint Projector.
         blueprintProjector = new BlockBlueprintProjector(Settings.BlueprintProjector);
@@ -98,7 +98,7 @@ public class MinechemBlocksGeneration
         GameRegistry.registerTileEntity(TileEntityLeadedChest.class, "minechem.tileEntityLeadedChest");
 
         // Fission Reactor.
-        GameRegistry.registerTileEntity(TileEntityFission.class, "minechem.tileEntityFission");
+        GameRegistry.registerTileEntity(FissionTileEntity.class, "minechem.tileEntityFission");
 
         // Tile Entity Proxy.
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");

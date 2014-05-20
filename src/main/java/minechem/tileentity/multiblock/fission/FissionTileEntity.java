@@ -15,7 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class TileEntityFission extends TileEntityMultiBlock implements ISidedInventory
+public class FissionTileEntity extends TileEntityMultiBlock implements ISidedInventory
 {
 
     public static int[] kInput =
@@ -40,7 +40,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements ISidedInv
     SafeTimeTracker energyUpdateTracker = new SafeTimeTracker();
     boolean shouldSendUpdatePacket;
 
-    public TileEntityFission()
+    public FissionTileEntity()
     {
         inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);
@@ -227,11 +227,11 @@ public class TileEntityFission extends TileEntityMultiBlock implements ISidedInv
         switch (i)
         {
         case 0:
-            return TileEntityFission.kOutput;
+            return FissionTileEntity.kOutput;
         case 1:
-            return TileEntityFission.kInput;
+            return FissionTileEntity.kInput;
         default:
-            return TileEntityFission.kFuel;
+            return FissionTileEntity.kFuel;
         }
     }
 

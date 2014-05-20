@@ -10,20 +10,20 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiFission extends GuiMinechemContainer
+public class FissionGui extends GuiMinechemContainer
 {
 
     int guiWidth = 176;
     int guiHeight = 166;
 
-    public GuiFission(Container par1Container)
+    public FissionGui(Container par1Container)
     {
         super(par1Container);
     }
 
-    public GuiFission(InventoryPlayer inventoryPlayer, TileEntityFission fission)
+    public FissionGui(InventoryPlayer inventoryPlayer, FissionTileEntity fission)
     {
-        super(new ContainerFission(inventoryPlayer, fission));
+        super(new FissionContainer(inventoryPlayer, fission));
     }
 
     @Override

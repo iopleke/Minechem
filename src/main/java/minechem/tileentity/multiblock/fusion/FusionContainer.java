@@ -7,21 +7,21 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerFusion extends Container implements IRadiationShield
+public class FusionContainer extends Container implements IRadiationShield
 {
 
-    TileEntityFusion fusion;
+    FusionTileEntity fusion;
     InventoryPlayer inventoryPlayer;
 
-    public ContainerFusion(InventoryPlayer inventoryPlayer, TileEntityFusion fusion)
+    public FusionContainer(InventoryPlayer inventoryPlayer, FusionTileEntity fusion)
     {
         this.inventoryPlayer = inventoryPlayer;
         this.fusion = fusion;
 
-        addSlotToContainer(new Slot(fusion, TileEntityFusion.kStartFusionStar, 80, 18));
-        addSlotToContainer(new Slot(fusion, TileEntityFusion.kStartInput1, 22, 62));
-        addSlotToContainer(new Slot(fusion, TileEntityFusion.kStartInput2, 138, 62));
-        addSlotToContainer(new Slot(fusion, TileEntityFusion.kStartOutput, 80, 62));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartFusionStar, 80, 18));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartInput1, 22, 62));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartInput2, 138, 62));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartOutput, 80, 62));
 
         bindPlayerInventory(inventoryPlayer);
     }
@@ -66,7 +66,7 @@ public class ContainerFusion extends Container implements IRadiationShield
             }
             else if (slot >= fusion.getSizeInventory())
             {
-                if (!mergeItemStack(stackInSlot, TileEntityFusion.kStartInput1, TileEntityFusion.kStartInput1 + 1, false))
+                if (!mergeItemStack(stackInSlot, FusionTileEntity.kStartInput1, FusionTileEntity.kStartInput1 + 1, false))
                 {
                     return null;
                 }

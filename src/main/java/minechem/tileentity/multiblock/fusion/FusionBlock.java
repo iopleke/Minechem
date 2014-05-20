@@ -7,7 +7,7 @@ import java.util.Random;
 import minechem.ModMinechem;
 import minechem.block.BlockMinechemContainer;
 import minechem.tileentity.multiblock.TileEntityMultiBlock;
-import minechem.tileentity.multiblock.fission.TileEntityFission;
+import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
@@ -22,11 +22,11 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockFusion extends BlockMinechemContainer
+public class FusionBlock extends BlockMinechemContainer
 {
     private Icon icon1, icon2;
 
-    public BlockFusion(int id)
+    public FusionBlock(int id)
     {
         super(id, Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
@@ -72,9 +72,9 @@ public class BlockFusion extends BlockMinechemContainer
     public TileEntity createTileEntity(World world, int metadata)
     {
         if (metadata == 2)
-            return new TileEntityFusion();
+            return new FusionTileEntity();
         if (metadata == 3)
-            return new TileEntityFission();
+            return new FissionTileEntity();
         else
             return new TileEntityProxy();
     }

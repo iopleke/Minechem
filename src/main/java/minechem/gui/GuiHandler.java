@@ -20,12 +20,12 @@ import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.microscope.ContainerMicroscope;
 import minechem.tileentity.microscope.GuiMicroscope;
 import minechem.tileentity.microscope.TileEntityMicroscope;
-import minechem.tileentity.multiblock.fission.ContainerFission;
-import minechem.tileentity.multiblock.fission.GuiFission;
-import minechem.tileentity.multiblock.fission.TileEntityFission;
-import minechem.tileentity.multiblock.fusion.ContainerFusion;
-import minechem.tileentity.multiblock.fusion.GuiFusion;
-import minechem.tileentity.multiblock.fusion.TileEntityFusion;
+import minechem.tileentity.multiblock.fission.FissionContainer;
+import minechem.tileentity.multiblock.fission.FissionGui;
+import minechem.tileentity.multiblock.fission.FissionTileEntity;
+import minechem.tileentity.multiblock.fusion.FusionContainer;
+import minechem.tileentity.multiblock.fusion.FusionGui;
+import minechem.tileentity.multiblock.fusion.FusionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.tileentity.synthesis.SynthesisContainer;
 import minechem.tileentity.synthesis.SynthesisGui;
@@ -76,13 +76,13 @@ public class GuiHandler implements IGuiHandler
         {
             return new SynthesisContainer(player.inventory, (SynthesisTileEntity) tileEntity);
         }
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof FusionTileEntity)
         {
-            return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
+            return new FusionContainer(player.inventory, (FusionTileEntity) tileEntity);
         }
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof FissionTileEntity)
         {
-            return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
+            return new FissionContainer(player.inventory, (FissionTileEntity) tileEntity);
         }
 
         if (tileEntity instanceof TileEntityProxy)
@@ -110,14 +110,14 @@ public class GuiHandler implements IGuiHandler
     public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
     {
         TileEntity tileEntity = proxy.getManager();
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof FusionTileEntity)
         {
-            return new ContainerFusion(player.inventory, (TileEntityFusion) tileEntity);
+            return new FusionContainer(player.inventory, (FusionTileEntity) tileEntity);
         }
 
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof FissionTileEntity)
         {
-            return new ContainerFission(player.inventory, (TileEntityFission) tileEntity);
+            return new FissionContainer(player.inventory, (FissionTileEntity) tileEntity);
         }
         return null;
     }
@@ -163,9 +163,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new SynthesisGui(player.inventory, (SynthesisTileEntity) tileEntity);
         }
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof FusionTileEntity)
         {
-            return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
+            return new FusionGui(player.inventory, (FusionTileEntity) tileEntity);
         }
         if (tileEntity instanceof TileEntityProxy)
         {
@@ -179,9 +179,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         }
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof FissionTileEntity)
         {
-            return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
+            return new FissionGui(player.inventory, (FissionTileEntity) tileEntity);
         }
         return null;
     }
@@ -195,14 +195,14 @@ public class GuiHandler implements IGuiHandler
     public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
     {
         TileEntity tileEntity = proxy.getManager();
-        if (tileEntity instanceof TileEntityFusion)
+        if (tileEntity instanceof FusionTileEntity)
         {
-            return new GuiFusion(player.inventory, (TileEntityFusion) tileEntity);
+            return new FusionGui(player.inventory, (FusionTileEntity) tileEntity);
         }
 
-        if (tileEntity instanceof TileEntityFission)
+        if (tileEntity instanceof FissionTileEntity)
         {
-            return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
+            return new FissionGui(player.inventory, (FissionTileEntity) tileEntity);
         }
         return null;
     }

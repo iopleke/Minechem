@@ -9,22 +9,22 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerFission extends Container implements IRadiationShield
+public class FissionContainer extends Container implements IRadiationShield
 {
 
-    protected TileEntityFission fission;
+    protected FissionTileEntity fission;
     protected final int kPlayerInventorySlotStart;
     protected final int kPlayerInventorySlotEnd;
     protected final int kDecomposerInventoryEnd;
 
-    public ContainerFission(InventoryPlayer inventoryPlayer, TileEntityFission fission)
+    public FissionContainer(InventoryPlayer inventoryPlayer, FissionTileEntity fission)
     {
         this.fission = fission;
         kPlayerInventorySlotStart = fission.getSizeInventory();
         kPlayerInventorySlotEnd = kPlayerInventorySlotStart + (9 * 4);
         kDecomposerInventoryEnd = fission.getSizeInventory();
 
-        addSlotToContainer(new Slot(fission, TileEntityFission.kInput[0], 80, 16));
+        addSlotToContainer(new Slot(fission, FissionTileEntity.kInput[0], 80, 16));
         bindOutputSlot();
         bindFuelSlot();
         bindPlayerInventory(inventoryPlayer);
@@ -40,7 +40,7 @@ public class ContainerFission extends Container implements IRadiationShield
 
     private void bindFuelSlot()
     {
-        addSlotToContainer(new Slot(fission, TileEntityFission.kStartFuel, 125, 33));
+        addSlotToContainer(new Slot(fission, FissionTileEntity.kStartFuel, 125, 33));
     }
 
     private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
@@ -80,12 +80,12 @@ public class ContainerFission extends Container implements IRadiationShield
             }
             else if (stackInSlot.itemID == MinechemItemsGeneration.element.itemID && stackInSlot.getItemDamage() == EnumElement.U.atomicNumber() + 1)
             {
-                if (!mergeItemStack(stackInSlot, TileEntityFission.kStartFuel, TileEntityFission.kStartFuel + 1, false))
+                if (!mergeItemStack(stackInSlot, FissionTileEntity.kStartFuel, FissionTileEntity.kStartFuel + 1, false))
                     return null;
             }
             else if (slot >= kPlayerInventorySlotStart)
             {
-                if (!mergeItemStack(stackInSlot, TileEntityFission.kStartInput, TileEntityFission.kStartInput + 1, false))
+                if (!mergeItemStack(stackInSlot, FissionTileEntity.kStartInput, FissionTileEntity.kStartInput + 1, false))
                     return null;
             }
             else if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))

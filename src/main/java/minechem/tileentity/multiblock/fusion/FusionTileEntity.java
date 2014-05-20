@@ -16,7 +16,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class TileEntityFusion extends TileEntityMultiBlock
+public class FusionTileEntity extends TileEntityMultiBlock
 {
     public static int[] kFusionStar = { 0 };
     public static int[] kInput = { 1, 2 };
@@ -42,7 +42,7 @@ public class TileEntityFusion extends TileEntityMultiBlock
     SafeTimeTracker energyUpdateTracker = new SafeTimeTracker();
     boolean shouldSendUpdatePacket;
 
-    public TileEntityFusion()
+    public FusionTileEntity()
     {
         inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);

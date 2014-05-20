@@ -12,21 +12,21 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiFusion extends GuiContainerTabbed
+public class FusionGui extends GuiContainerTabbed
 {
 
     static float increaseRate = .2F;
     static float decreaseRate = .4F;
 
-    TileEntityFusion fusion;
+    FusionTileEntity fusion;
     int guiWidth = 176;
     int guiHeight = 187;
     float energy = 0.0F;
     int targetEnergy = 0;
 
-    public GuiFusion(InventoryPlayer inventoryPlayer, TileEntityFusion fusion)
+    public FusionGui(InventoryPlayer inventoryPlayer, FusionTileEntity fusion)
     {
-        super(new ContainerFusion(inventoryPlayer, fusion));
+        super(new FusionContainer(inventoryPlayer, fusion));
         this.fusion = fusion;
         energy = fusion.getEnergy(ForgeDirection.UNKNOWN);
         this.xSize = guiWidth;

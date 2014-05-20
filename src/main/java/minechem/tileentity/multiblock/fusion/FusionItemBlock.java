@@ -3,13 +3,13 @@ package minechem.tileentity.multiblock.fusion;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class ItemBlockFusion extends ItemBlock
+public class FusionItemBlock extends ItemBlock
 {
 
     private static final String[] names =
     { "Fusion Wall", "Tungsten Plating", "Fusion Core" };
 
-    public ItemBlockFusion(int par1)
+    public FusionItemBlock(int par1)
     {
         super(par1);
         setHasSubtypes(true);
