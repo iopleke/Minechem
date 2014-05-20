@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fusion;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;

@@ -1,9 +1,10 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fusion;
 
 import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFusion;
 import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
+import minechem.tileentity.multiblock.TileEntityMultiBlock;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;

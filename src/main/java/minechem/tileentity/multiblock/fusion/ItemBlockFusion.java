@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fusion;
 
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;

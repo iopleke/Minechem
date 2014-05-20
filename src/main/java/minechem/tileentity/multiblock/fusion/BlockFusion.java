@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fusion;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,6 +6,8 @@ import java.util.Random;
 
 import minechem.ModMinechem;
 import minechem.block.BlockMinechemContainer;
+import minechem.tileentity.multiblock.TileEntityMultiBlock;
+import minechem.tileentity.multiblock.fission.TileEntityFission;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;

@@ -1,8 +1,9 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fission;
 
 import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFission;
 import minechem.item.element.ItemElement;
+import minechem.tileentity.multiblock.TileEntityMultiBlock;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;

@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fusion;
 
 import minechem.radiation.IRadiationShield;
 import net.minecraft.entity.player.EntityPlayer;

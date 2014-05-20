@@ -1,8 +1,8 @@
 package minechem.tileentity.prefab;
 
 import minechem.MinechemBlocksGeneration;
-import minechem.tileentity.multiblock.TileEntityFission;
-import minechem.tileentity.multiblock.TileEntityFusion;
+import minechem.tileentity.multiblock.fission.TileEntityFission;
+import minechem.tileentity.multiblock.fusion.TileEntityFusion;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;

@@ -1,4 +1,4 @@
-package minechem.tileentity.multiblock;
+package minechem.tileentity.multiblock.fission;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiMinechemContainer;
