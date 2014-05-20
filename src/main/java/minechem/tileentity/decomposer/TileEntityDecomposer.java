@@ -203,7 +203,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
         super.updateEntity();
 
         // Prevents any code below this line from running on clients.
-        if (!worldObj.isRemote)
+        if (worldObj.isRemote)
         {
             return;
         }
@@ -282,7 +282,7 @@ public class TileEntityDecomposer extends MinechemTileEntity implements ISidedIn
             state = State.kProcessActive;
         }
         
-        // Notify minecraft that the inventory items in this 
+        // Notify minecraft that the inventory items in this machine have changed.
         this.onInventoryChanged();
     }
 
