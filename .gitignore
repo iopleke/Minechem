@@ -43,3 +43,4 @@ output/
 gradlew
 gradlew.bat
 gradle/
+install.bat

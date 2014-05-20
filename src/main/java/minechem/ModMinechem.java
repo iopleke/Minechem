@@ -72,8 +72,10 @@ public class ModMinechem
     
     /** Main version information that will be displayed in mod listing and for other purposes. **/
     public static final String V_MAJOR = "@MAJOR@";
+    public static final String V_MINOR = "@MINOR@";
+    public static final String V_REVIS = "@REVIS@";
     public static final String V_BUILD = "@BUILD@";
-    public static final String VERSION_FULL = V_MAJOR + "." + V_BUILD;
+    public static final String VERSION_FULL = V_MAJOR + "." + V_MINOR + V_REVIS + "." + V_BUILD;
 
     /** Provides logging **/
     @Instance(value = CHANNEL_NAME)
@@ -124,7 +126,7 @@ public class ModMinechem
         metadata.description = ModMinechem.NAME + " is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements.";
         metadata.url = "http://www.minechemmod.com/";
         metadata.logoFile = "assets/" + ModMinechem.ID + "/logo.png";
-        metadata.version = V_MAJOR;
+        metadata.version = V_MAJOR + "." + V_MINOR + V_REVIS;
         metadata.authorList = Arrays.asList(new String[]
         { "pixlepix", "jakimfett", "maxwolf" });
         metadata.credits = "View a full list of contributors on our site!";

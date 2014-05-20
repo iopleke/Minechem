@@ -31,8 +31,17 @@ minecraft {
     version = "${rootProject.config.version.minecraft}-${rootProject.config.version.forge}"
     
     replaceIn "ModMinechem.java"
-    replace "@MAJOR@", rootProject.config.version.mod.major + "." + rootProject.config.version.mod.minor
-    replace "@BUILD@", "${System.getenv().BUILD_NUMBER}"
+	replace "@MAJOR@", config.version.mod.major
+	replace "@MINOR@", config.version.mod.minor
+	replace "@REVIS@", config.version.mod.revis
+	
+	if (System.getenv("BUILD_NUMBER") != null) {
+		replace "@BUILD@", System.getenv("BUILD_NUMBER")
+	}
+	else
+	{
+		replace "@BUILD@", "[NIGHTLY]"
+	}
 }
 
 allprojects {
