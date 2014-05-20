@@ -38,3 +38,9 @@ lib/1.6.4/
 .nb*
 /nbproject/private/
 /nbbuild/
+lib/
+output/
+gradlew
+gradlew.bat
+gradle/
+install.bat
