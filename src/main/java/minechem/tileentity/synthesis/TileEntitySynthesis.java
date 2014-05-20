@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -450,7 +454,11 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     private void onPutJournal(ItemStack itemstack)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         ItemStack activeItem = MinechemItemGeneration.journal.getActiveStack(itemstack);
+=======
+        ItemStack activeItem = MinechemItemsGeneration.journal.getActiveStack(itemstack);
+>>>>>>> MaxwolfRewrite
 =======
         ItemStack activeItem = MinechemItemsGeneration.journal.getActiveStack(itemstack);
 >>>>>>> MaxwolfRewrite

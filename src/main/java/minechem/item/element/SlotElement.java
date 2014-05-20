@@ -1,7 +1,11 @@
 package minechem.item.element;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -21,7 +25,11 @@ public class SlotElement extends Slot
     public boolean isItemValid(ItemStack itemStack)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return itemStack.itemID == MinechemItemGeneration.element.itemID;
+=======
+        return itemStack.itemID == MinechemItemsGeneration.element.itemID;
+>>>>>>> MaxwolfRewrite
 =======
         return itemStack.itemID == MinechemItemsGeneration.element.itemID;
 >>>>>>> MaxwolfRewrite

@@ -5,7 +5,11 @@ import java.util.Iterator;
 import java.util.Random;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -89,7 +93,11 @@ public class GuiPolytool extends GuiContainer
         }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         drawItemStack(new ItemStack(MinechemItemGeneration.polytool), 80, 42, "");
+=======
+        drawItemStack(new ItemStack(MinechemItemsGeneration.polytool), 80, 42, "");
+>>>>>>> MaxwolfRewrite
 =======
         drawItemStack(new ItemStack(MinechemItemsGeneration.polytool), 80, 42, "");
 >>>>>>> MaxwolfRewrite

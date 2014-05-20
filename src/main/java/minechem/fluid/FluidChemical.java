@@ -1,7 +1,11 @@
 package minechem.fluid;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -36,7 +40,11 @@ public class FluidChemical extends Fluid implements IMinechemFluid
     public ItemStack getOutputStack()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return new ItemStack(MinechemItemGeneration.molecule, 1, molecule.id());
+=======
+        return new ItemStack(MinechemItemsGeneration.molecule, 1, molecule.id());
+>>>>>>> MaxwolfRewrite
 =======
         return new ItemStack(MinechemItemsGeneration.molecule, 1, molecule.id());
 >>>>>>> MaxwolfRewrite

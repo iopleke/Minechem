@@ -3,7 +3,11 @@ package minechem.item.blueprint;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -42,7 +46,11 @@ public class ItemBlueprint extends Item
     public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return new ItemStack(MinechemItemGeneration.blueprint, 1, blueprint.id);
+=======
+        return new ItemStack(MinechemItemsGeneration.blueprint, 1, blueprint.id);
+>>>>>>> MaxwolfRewrite
 =======
         return new ItemStack(MinechemItemsGeneration.blueprint, 1, blueprint.id);
 >>>>>>> MaxwolfRewrite

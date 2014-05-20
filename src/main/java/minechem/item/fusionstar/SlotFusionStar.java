@@ -1,7 +1,11 @@
 package minechem.item.fusionstar;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -22,7 +26,11 @@ public class SlotFusionStar extends Slot
     public boolean isItemValid(ItemStack itemStack)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return itemStack.itemID == Item.netherStar.itemID || itemStack.itemID == MinechemItemGeneration.fusionStar.itemID;
+=======
+        return itemStack.itemID == Item.netherStar.itemID || itemStack.itemID == MinechemItemsGeneration.fusionStar.itemID;
+>>>>>>> MaxwolfRewrite
 =======
         return itemStack.itemID == Item.netherStar.itemID || itemStack.itemID == MinechemItemsGeneration.fusionStar.itemID;
 >>>>>>> MaxwolfRewrite

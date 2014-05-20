@@ -3,8 +3,13 @@ package minechem.tileentity.blueprintprojector;
 import java.util.HashMap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemBlockGeneration;
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemBlocksGeneration;
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsGeneration;
@@ -143,7 +148,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
                 fusion.yCoord = worldPos.y;
                 fusion.zCoord = worldPos.z;
 <<<<<<< HEAD
+<<<<<<< HEAD
                 fusion.blockType = MinechemBlockGeneration.fusion;
+=======
+                fusion.blockType = MinechemBlocksGeneration.fusion;
+>>>>>>> MaxwolfRewrite
 =======
                 fusion.blockType = MinechemBlocksGeneration.fusion;
 >>>>>>> MaxwolfRewrite
@@ -230,7 +239,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     private void createGhostBlock(int x, int y, int z, int blockID)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         worldObj.setBlock(x, y, z, MinechemBlockGeneration.ghostBlock.blockID, 0, 3);
+=======
+        worldObj.setBlock(x, y, z, MinechemBlocksGeneration.ghostBlock.blockID, 0, 3);
+>>>>>>> MaxwolfRewrite
 =======
         worldObj.setBlock(x, y, z, MinechemBlocksGeneration.ghostBlock.blockID, 0, 3);
 >>>>>>> MaxwolfRewrite
@@ -268,7 +281,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
         Pos3 worldPos = position.getLocalPos(x, y, z);
         int blockID = worldObj.getBlockId(worldPos.x, worldPos.y, worldPos.z);
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (blockID == MinechemBlockGeneration.ghostBlock.blockID)
+=======
+        if (blockID == MinechemBlocksGeneration.ghostBlock.blockID)
+>>>>>>> MaxwolfRewrite
 =======
         if (blockID == MinechemBlocksGeneration.ghostBlock.blockID)
 >>>>>>> MaxwolfRewrite
@@ -330,7 +347,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
         if (itemstack != null)
         {
 <<<<<<< HEAD
+<<<<<<< HEAD
             MinechemBlueprint blueprint = MinechemItemGeneration.blueprint.getBlueprint(itemstack);
+=======
+            MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(itemstack);
+>>>>>>> MaxwolfRewrite
 =======
             MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(itemstack);
 >>>>>>> MaxwolfRewrite
@@ -374,7 +395,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
         {
             ItemStack blueprintStack = ItemStack.loadItemStackFromNBT(blueprintNBT);
 <<<<<<< HEAD
+<<<<<<< HEAD
             MinechemBlueprint blueprint = MinechemItemGeneration.blueprint.getBlueprint(blueprintStack);
+=======
+            MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
+>>>>>>> MaxwolfRewrite
 =======
             MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
 >>>>>>> MaxwolfRewrite
@@ -400,7 +425,11 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return itemstack.itemID == MinechemItemGeneration.blueprint.itemID;
+=======
+        return itemstack.itemID == MinechemItemsGeneration.blueprint.itemID;
+>>>>>>> MaxwolfRewrite
 =======
         return itemstack.itemID == MinechemItemsGeneration.blueprint.itemID;
 >>>>>>> MaxwolfRewrite

@@ -1,7 +1,11 @@
 package minechem.tileentity.fission;
 
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
@@ -128,7 +132,11 @@ public class TileEntityFission extends TileEntityMultiBlock implements ISidedInv
             if (newMass > 1)
             {
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
                 return new ItemStack(MinechemItemGeneration.element, 2, newMass - 1);
+=======
+                return new ItemStack(MinechemItemsGeneration.element, 2, newMass - 1);
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
 =======
                 return new ItemStack(MinechemItemsGeneration.element, 2, newMass - 1);
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java

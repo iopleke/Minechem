@@ -1,8 +1,13 @@
 package minechem.network.client;
 
 <<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
+<<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
 import minechem.MinechemBlockGeneration;
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemBlocksGeneration;
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/network/client/ClientProxy.java
 =======
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsGeneration;
@@ -12,7 +17,11 @@ import minechem.item.molecule.ItemMoleculeRenderer;
 import minechem.network.server.CommonProxy;
 import minechem.sound.MinechemSoundEvent;
 <<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
+<<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
 import minechem.tick.TickHandler;
+=======
+import minechem.tickhandler.TickHandler;
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/network/client/ClientProxy.java
 =======
 import minechem.tickhandler.TickHandler;
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/network/client/ClientProxy.java
@@ -50,6 +59,7 @@ public class ClientProxy extends CommonProxy
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
 <<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
+<<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
         MinecraftForgeClient.registerItemRenderer(MinechemItemGeneration.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItemGeneration.molecule.itemID, new ItemMoleculeRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.microscope.blockID].itemID, new ItemMicroscopeRenderer());
@@ -58,6 +68,8 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlockGeneration.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
 =======
+=======
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/network/client/ClientProxy.java
         MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element.itemID, new ItemElementRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule.itemID, new ItemMoleculeRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.microscope.blockID].itemID, new ItemMicroscopeRenderer());
@@ -66,6 +78,9 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.blueprintProjector.blockID].itemID, new ItemBlueprintProjectorRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.chemicalStorage.blockID].itemID, new ItemChemicalStorageRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.leadedChest.blockID].itemID, new ItemLeadedChestRenderer());
+<<<<<<< HEAD:src/main/java/minechem/network/client/ClientProxy.java
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/network/client/ClientProxy.java
+=======
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/network/client/ClientProxy.java
 
         TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);

@@ -4,6 +4,9 @@ import minechem.ModMinechem;
 <<<<<<< HEAD:src/main/java/minechem/item/chemistjournal/TabJournal.java
 =======
 import minechem.gui.GuiTableOfElements;
+<<<<<<< HEAD:src/main/java/minechem/item/chemistjournal/TabJournal.java
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/item/chemistjournal/TabJournal.java
+=======
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/item/chemistjournal/TabJournal.java
 import minechem.gui.GuiTab;
 import net.minecraft.client.gui.Gui;

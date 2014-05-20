@@ -1,7 +1,11 @@
 package minechem.tileentity.fusion;
 
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
@@ -147,7 +151,11 @@ public class TileEntityFusion extends TileEntityMultiBlock
             if (massSum <= EnumElement.heaviestMass)
             {
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
                 return new ItemStack(MinechemItemGeneration.element, 1, massSum - 1);
+=======
+                return new ItemStack(MinechemItemsGeneration.element, 1, massSum - 1);
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
 =======
                 return new ItemStack(MinechemItemsGeneration.element, 1, massSum - 1);
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
@@ -235,7 +243,11 @@ public class TileEntityFusion extends TileEntityMultiBlock
         {
             System.out.println("Turning nether star into fusion star");
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
             this.inventory[slot] = new ItemStack(MinechemItemGeneration.fusionStar);
+=======
+            this.inventory[slot] = new ItemStack(MinechemItemsGeneration.fusionStar);
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
 =======
             this.inventory[slot] = new ItemStack(MinechemItemsGeneration.fusionStar);
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
@@ -305,7 +317,11 @@ public class TileEntityFusion extends TileEntityMultiBlock
         if (i == kFusionStar[0])
         {
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fusion/TileEntityFusion.java
             if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItemGeneration.fusionStar.itemID)
+=======
+            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItemsGeneration.fusionStar.itemID)
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java
 =======
             if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItemsGeneration.fusionStar.itemID)
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFusion.java

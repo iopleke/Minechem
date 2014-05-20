@@ -5,7 +5,10 @@ import java.util.logging.Logger;
 
 import minechem.fluid.FluidHelper;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.gui.CreativeTabMinechem;
+=======
+>>>>>>> MaxwolfRewrite
 =======
 >>>>>>> MaxwolfRewrite
 import minechem.gui.GuiHandler;
@@ -13,6 +16,10 @@ import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
 import minechem.gui.GuiTabStateControl;
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+import minechem.gui.GuiTabTable;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.gui.GuiTabTable;
 >>>>>>> MaxwolfRewrite
@@ -27,8 +34,13 @@ import minechem.potion.CoatingSubscribe;
 import minechem.potion.EnchantmentCoated;
 import minechem.potion.PotionInjector;
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.tick.ScheduledTickHandler;
 import minechem.tick.TickHandler;
+=======
+import minechem.tickhandler.ScheduledTickHandler;
+import minechem.tickhandler.TickHandler;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.tickhandler.ScheduledTickHandler;
 import minechem.tickhandler.TickHandler;
@@ -143,10 +155,17 @@ public class ModMinechem
         // Register items and blocks.
         LOGGER.info("Registering Items...");
 <<<<<<< HEAD
+<<<<<<< HEAD
         MinechemItemGeneration.registerItems();
 
         LOGGER.info("Registering Blocks...");
         MinechemBlockGeneration.registerBlocks();
+=======
+        MinechemItemsGeneration.registerItems();
+
+        LOGGER.info("Registering Blocks...");
+        MinechemBlocksGeneration.registerBlocks();
+>>>>>>> MaxwolfRewrite
 =======
         MinechemItemsGeneration.registerItems();
 
@@ -164,7 +183,11 @@ public class ModMinechem
 
         LOGGER.info("Registering OreDict Compatability...");
 <<<<<<< HEAD
+<<<<<<< HEAD
         MinechemItemGeneration.registerToOreDictionary();
+=======
+        MinechemItemsGeneration.registerToOreDictionary();
+>>>>>>> MaxwolfRewrite
 =======
         MinechemItemsGeneration.registerToOreDictionary();
 >>>>>>> MaxwolfRewrite
@@ -231,8 +254,13 @@ public class ModMinechem
         LOGGER.info("Adding blueprints to dungeon loot...");
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
 <<<<<<< HEAD
+<<<<<<< HEAD
         ItemStack A = new ItemStack(MinechemItemGeneration.blueprint, 1, 0);
         ItemStack B = new ItemStack(MinechemItemGeneration.blueprint, 1, 1);
+=======
+        ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
+        ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
+>>>>>>> MaxwolfRewrite
 =======
         ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
         ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
@@ -249,6 +277,10 @@ public class ModMinechem
         GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+>>>>>>> MaxwolfRewrite
 =======
         GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
 >>>>>>> MaxwolfRewrite

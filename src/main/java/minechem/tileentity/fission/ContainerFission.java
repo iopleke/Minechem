@@ -1,8 +1,11 @@
 package minechem.tileentity.fission;
 
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fission/ContainerFission.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/ContainerFission.java
 import minechem.MinechemItemGeneration;
 =======
+=======
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/ContainerFission.java
 import minechem.MinechemItemsGeneration;
 import minechem.item.IRadiationShield;
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/ContainerFission.java
@@ -84,7 +87,11 @@ public class ContainerFission extends Container implements IRadiationShield
                     return null;
             }
 <<<<<<< HEAD:src/main/java/minechem/tileentity/fission/ContainerFission.java
+<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/ContainerFission.java
             else if (stackInSlot.itemID == MinechemItemGeneration.element.itemID && stackInSlot.getItemDamage() == EnumElement.U.atomicNumber() + 1)
+=======
+            else if (stackInSlot.itemID == MinechemItemsGeneration.element.itemID && stackInSlot.getItemDamage() == EnumElement.U.atomicNumber() + 1)
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/ContainerFission.java
 =======
             else if (stackInSlot.itemID == MinechemItemsGeneration.element.itemID && stackInSlot.getItemDamage() == EnumElement.U.atomicNumber() + 1)
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/ContainerFission.java

@@ -1,8 +1,13 @@
 package minechem.tileentity.decomposer;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.radiation.IRadiationShield;
 import minechem.slots.SlotOutput;
+=======
+import minechem.item.IRadiationShield;
+import minechem.slot.SlotOutput;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.item.IRadiationShield;
 import minechem.slot.SlotOutput;

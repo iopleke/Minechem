@@ -3,12 +3,15 @@ package minechem.tileentity.synthesis;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
 import minechem.item.chemistjournal.SlotJournal;
 import minechem.radiation.IRadiationShield;
 import minechem.slots.SlotChemical;
 import minechem.slots.SlotFake;
 =======
+=======
+>>>>>>> MaxwolfRewrite
 import minechem.MinechemItemsGeneration;
 import minechem.container.ContainerWithFakeSlots;
 import minechem.item.IRadiationShield;
@@ -16,6 +19,9 @@ import minechem.item.chemistjournal.SlotJournal;
 import minechem.slot.SlotChemical;
 import minechem.slot.SlotFake;
 import minechem.slot.SlotSynthesisOutput;
+<<<<<<< HEAD
+>>>>>>> MaxwolfRewrite
+=======
 >>>>>>> MaxwolfRewrite
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -91,7 +97,11 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
 <<<<<<< HEAD
+<<<<<<< HEAD
             if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
+=======
+            if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
+>>>>>>> MaxwolfRewrite
 =======
             if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
 >>>>>>> MaxwolfRewrite
@@ -106,7 +116,11 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
                     return null;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemGeneration.element.itemID || stackInSlot.itemID == MinechemItemGeneration.molecule.itemID))
+=======
+            else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
+>>>>>>> MaxwolfRewrite
 =======
             else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
 >>>>>>> MaxwolfRewrite

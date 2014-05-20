@@ -6,7 +6,11 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -83,7 +87,11 @@ public class GuiProjector extends GuiContainerTabbed
     private void drawBlueprintInfo(ItemStack blueprintStack)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         MinechemBlueprint blueprint = MinechemItemGeneration.blueprint.getBlueprint(blueprintStack);
+=======
+        MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
+>>>>>>> MaxwolfRewrite
 =======
         MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
 >>>>>>> MaxwolfRewrite

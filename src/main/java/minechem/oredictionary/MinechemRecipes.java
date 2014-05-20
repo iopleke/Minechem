@@ -4,8 +4,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemBlockGeneration;
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemBlocksGeneration;
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsGeneration;
@@ -650,7 +655,11 @@ public class MinechemRecipes
 
         // Polytool
 <<<<<<< HEAD
+<<<<<<< HEAD
         SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItemGeneration.polytool), true, '\uea60', new Chemical[]
+=======
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItemsGeneration.polytool), true, '\uea60', new Chemical[]
+>>>>>>> MaxwolfRewrite
 =======
         SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItemsGeneration.polytool), true, '\uea60', new Chemical[]
 >>>>>>> MaxwolfRewrite
@@ -1054,6 +1063,7 @@ public class MinechemRecipes
         ItemStack itemIngotIron = new ItemStack(Item.ingotIron);
         ItemStack itemRedstone = new ItemStack(Item.redstone);
 <<<<<<< HEAD
+<<<<<<< HEAD
         ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItemGeneration.atomicManipulator);
         ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemGeneration.molecule, 1, EnumMolecule.polyvinylChloride.ordinal());
 
@@ -1124,6 +1134,31 @@ public class MinechemRecipes
         { "ILI", "ILI", "ILI", Character.valueOf('I'), itemIngotIron, Character.valueOf('L'), ItemElement.createStackOf(EnumElement.Pb, 1) });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.fusion, 16, 1), new Object[]
         { "IWI", "IBI", "IWI", Character.valueOf('I'), itemIngotIron, Character.valueOf('W'), ItemElement.createStackOf(EnumElement.W, 1), Character.valueOf('B'), ItemElement.createStackOf(EnumElement.Be, 1) });
+=======
+        ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItemsGeneration.atomicManipulator);
+        ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemsGeneration.molecule, 1, EnumMolecule.polyvinylChloride.ordinal());
+
+        GameRegistry.addRecipe(MinechemItemsGeneration.concaveLens, new Object[]
+        { "G G", "GGG", "G G", Character.valueOf('G'), blockGlass });
+        GameRegistry.addRecipe(MinechemItemsGeneration.convexLens, new Object[]
+        { " G ", "GGG", " G ", Character.valueOf('G'), blockGlass });
+        GameRegistry.addRecipe(MinechemItemsGeneration.microscopeLens, new Object[]
+        { "A", "B", "A", Character.valueOf('A'), MinechemItemsGeneration.convexLens, Character.valueOf('B'), MinechemItemsGeneration.concaveLens });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.microscope), new Object[]
+        { " LI", " PI", "III", Character.valueOf('L'), MinechemItemsGeneration.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.microscope), new Object[]
+        { " LI", " PI", "III", Character.valueOf('L'), MinechemItemsGeneration.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron });
+        GameRegistry.addRecipe(new ItemStack(MinechemItemsGeneration.atomicManipulator), new Object[]
+        { "PPP", "PIP", "PPP", Character.valueOf('P'), new ItemStack(Block.pistonBase), Character.valueOf('I'), blockIron });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.decomposer), new Object[]
+        { "III", "IAI", "IRI", Character.valueOf('A'), minechemItemsAtomicManipulator, Character.valueOf('I'), itemIngotIron, Character.valueOf('R'), itemRedstone });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.synthesis), new Object[]
+        { "IRI", "IAI", "IDI", Character.valueOf('A'), minechemItemsAtomicManipulator, Character.valueOf('I'), itemIngotIron, Character.valueOf('R'), itemRedstone, Character.valueOf('D'), new ItemStack(Item.diamond) });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.fusion, 16, 0), new Object[]
+        { "ILI", "ILI", "ILI", Character.valueOf('I'), itemIngotIron, Character.valueOf('L'), ItemElement.createStackOf(EnumElement.Pb, 1) });
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.fusion, 16, 1), new Object[]
+        { "IWI", "IBI", "IWI", Character.valueOf('I'), itemIngotIron, Character.valueOf('W'), ItemElement.createStackOf(EnumElement.W, 1), Character.valueOf('B'), ItemElement.createStackOf(EnumElement.Be, 1) });
+>>>>>>> MaxwolfRewrite
         GameRegistry.addRecipe(MinechemItemsGeneration.projectorLens, new Object[]
         { "ABA", Character.valueOf('A'), MinechemItemsGeneration.concaveLens, Character.valueOf('B'), MinechemItemsGeneration.convexLens });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.blueprintProjector), new Object[]
@@ -1140,6 +1175,9 @@ public class MinechemRecipes
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsGeneration.journal), new Object[]
         { new ItemStack(Item.book), new ItemStack(Block.glass) });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsGeneration.EmptyPillz, 4), new Object[]
+<<<<<<< HEAD
+>>>>>>> MaxwolfRewrite
+=======
 >>>>>>> MaxwolfRewrite
         { new ItemStack(Item.sugar), new ItemStack(Item.slimeBall), new ItemStack(Item.slimeBall) });
         // Fusion
@@ -1193,7 +1231,11 @@ public class MinechemRecipes
             ArrayList var5 = var4.components();
             Chemical[] var6 = (Chemical[]) var5.toArray(new Chemical[var5.size()]);
 <<<<<<< HEAD
+<<<<<<< HEAD
             ItemStack var7 = new ItemStack(MinechemItemGeneration.molecule, 1, var4.id());
+=======
+            ItemStack var7 = new ItemStack(MinechemItemsGeneration.molecule, 1, var4.id());
+>>>>>>> MaxwolfRewrite
 =======
             ItemStack var7 = new ItemStack(MinechemItemsGeneration.molecule, 1, var4.id());
 >>>>>>> MaxwolfRewrite
@@ -1212,7 +1254,11 @@ public class MinechemRecipes
             EnumMolecule var4 = var1[var3];
             ArrayList var5 = var4.components();
 <<<<<<< HEAD
+<<<<<<< HEAD
             ItemStack var6 = new ItemStack(MinechemItemGeneration.molecule, 1, var4.id());
+=======
+            ItemStack var6 = new ItemStack(MinechemItemsGeneration.molecule, 1, var4.id());
+>>>>>>> MaxwolfRewrite
 =======
             ItemStack var6 = new ItemStack(MinechemItemsGeneration.molecule, 1, var4.id());
 >>>>>>> MaxwolfRewrite
@@ -1284,7 +1330,11 @@ public class MinechemRecipes
     private ItemStack createPoisonedItemStack(Item var1, int var2, EnumMolecule var3)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         ItemStack var4 = new ItemStack(MinechemItemGeneration.molecule, 1, var3.id());
+=======
+        ItemStack var4 = new ItemStack(MinechemItemsGeneration.molecule, 1, var3.id());
+>>>>>>> MaxwolfRewrite
 =======
         ItemStack var4 = new ItemStack(MinechemItemsGeneration.molecule, 1, var3.id());
 >>>>>>> MaxwolfRewrite

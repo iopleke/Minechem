@@ -3,7 +3,11 @@ package minechem.item.blueprint;
 import java.util.HashMap;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemBlockGeneration;
+=======
+import minechem.MinechemBlocksGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemBlocksGeneration;
 >>>>>>> MaxwolfRewrite
@@ -99,8 +103,13 @@ public class BlueprintFusion extends MinechemBlueprint
     {
         HashMap<Integer, BlueprintBlock> lookup = new HashMap<Integer, BlueprintBlock>();
 <<<<<<< HEAD
+<<<<<<< HEAD
         lookup.put(A, new BlueprintBlock(MinechemBlockGeneration.fusion, 0, Type.PROXY));
         lookup.put(C, new BlueprintBlock(MinechemBlockGeneration.fusion, 1, Type.NORMAL));
+=======
+        lookup.put(A, new BlueprintBlock(MinechemBlocksGeneration.fusion, 0, Type.PROXY));
+        lookup.put(C, new BlueprintBlock(MinechemBlocksGeneration.fusion, 1, Type.NORMAL));
+>>>>>>> MaxwolfRewrite
 =======
         lookup.put(A, new BlueprintBlock(MinechemBlocksGeneration.fusion, 0, Type.PROXY));
         lookup.put(C, new BlueprintBlock(MinechemBlocksGeneration.fusion, 1, Type.NORMAL));
@@ -142,7 +151,11 @@ public class BlueprintFusion extends MinechemBlueprint
     public BlueprintBlock getManagerBlock()
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return new BlueprintBlock(MinechemBlockGeneration.fusion, 2, Type.MANAGER);
+=======
+        return new BlueprintBlock(MinechemBlocksGeneration.fusion, 2, Type.MANAGER);
+>>>>>>> MaxwolfRewrite
 =======
         return new BlueprintBlock(MinechemBlocksGeneration.fusion, 2, Type.MANAGER);
 >>>>>>> MaxwolfRewrite

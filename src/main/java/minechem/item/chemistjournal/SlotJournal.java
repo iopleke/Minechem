@@ -1,7 +1,11 @@
 package minechem.item.chemistjournal;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -21,7 +25,11 @@ public class SlotJournal extends Slot
     public boolean isItemValid(ItemStack itemstack)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         return itemstack.itemID == MinechemItemGeneration.journal.itemID;
+=======
+        return itemstack.itemID == MinechemItemsGeneration.journal.itemID;
+>>>>>>> MaxwolfRewrite
 =======
         return itemstack.itemID == MinechemItemsGeneration.journal.itemID;
 >>>>>>> MaxwolfRewrite

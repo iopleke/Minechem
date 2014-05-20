@@ -5,7 +5,11 @@ import java.util.List;
 import java.util.Random;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -125,11 +129,19 @@ public class MinechemHelper
             if (chemical instanceof Element)
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 stacks.add(new ItemStack(MinechemItemGeneration.element, chemical.amount, ((Element) chemical).element.ordinal()));
             }
             else if (chemical instanceof Molecule)
             {
                 stacks.add(new ItemStack(MinechemItemGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal()));
+=======
+                stacks.add(new ItemStack(MinechemItemsGeneration.element, chemical.amount, ((Element) chemical).element.ordinal()));
+            }
+            else if (chemical instanceof Molecule)
+            {
+                stacks.add(new ItemStack(MinechemItemsGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal()));
+>>>>>>> MaxwolfRewrite
 =======
                 stacks.add(new ItemStack(MinechemItemsGeneration.element, chemical.amount, ((Element) chemical).element.ordinal()));
             }
@@ -151,11 +163,19 @@ public class MinechemHelper
             if (chemical instanceof Element)
             {
 <<<<<<< HEAD
+<<<<<<< HEAD
                 stacks[i] = new ItemStack(MinechemItemGeneration.element, chemical.amount, ((Element) chemical).element.ordinal());
             }
             else if (chemical instanceof Molecule)
             {
                 stacks[i] = new ItemStack(MinechemItemGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal());
+=======
+                stacks[i] = new ItemStack(MinechemItemsGeneration.element, chemical.amount, ((Element) chemical).element.ordinal());
+            }
+            else if (chemical instanceof Molecule)
+            {
+                stacks[i] = new ItemStack(MinechemItemsGeneration.molecule, chemical.amount, ((Molecule) chemical).molecule.ordinal());
+>>>>>>> MaxwolfRewrite
 =======
                 stacks[i] = new ItemStack(MinechemItemsGeneration.element, chemical.amount, ((Element) chemical).element.ordinal());
             }
@@ -176,7 +196,11 @@ public class MinechemHelper
     public static boolean itemStackMatchesChemical(ItemStack itemstack, Chemical chemical, int factor)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (chemical instanceof Element && itemstack.itemID == MinechemItemGeneration.element.itemID)
+=======
+        if (chemical instanceof Element && itemstack.itemID == MinechemItemsGeneration.element.itemID)
+>>>>>>> MaxwolfRewrite
 =======
         if (chemical instanceof Element && itemstack.itemID == MinechemItemsGeneration.element.itemID)
 >>>>>>> MaxwolfRewrite
@@ -185,7 +209,11 @@ public class MinechemHelper
             return (itemstack.getItemDamage() == element.element.ordinal()) && (itemstack.stackSize >= element.amount * factor);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (chemical instanceof Molecule && itemstack.itemID == MinechemItemGeneration.molecule.itemID)
+=======
+        if (chemical instanceof Molecule && itemstack.itemID == MinechemItemsGeneration.molecule.itemID)
+>>>>>>> MaxwolfRewrite
 =======
         if (chemical instanceof Molecule && itemstack.itemID == MinechemItemsGeneration.molecule.itemID)
 >>>>>>> MaxwolfRewrite
@@ -292,9 +320,15 @@ public class MinechemHelper
     {
         if (chemical instanceof Element)
 <<<<<<< HEAD
+<<<<<<< HEAD
             return new ItemStack(MinechemItemGeneration.element, amount, ((Element) chemical).element.ordinal());
         else if (chemical instanceof Molecule)
             return new ItemStack(MinechemItemGeneration.molecule, amount, ((Molecule) chemical).molecule.id());
+=======
+            return new ItemStack(MinechemItemsGeneration.element, amount, ((Element) chemical).element.ordinal());
+        else if (chemical instanceof Molecule)
+            return new ItemStack(MinechemItemsGeneration.molecule, amount, ((Molecule) chemical).molecule.id());
+>>>>>>> MaxwolfRewrite
 =======
             return new ItemStack(MinechemItemsGeneration.element, amount, ((Element) chemical).element.ordinal());
         else if (chemical instanceof Molecule)

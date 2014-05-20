@@ -1,7 +1,11 @@
 package minechem.tileentity.microscope;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -74,7 +78,11 @@ public class ContainerMicroscope extends Container
                     return null;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             else if (slot != 1 && stack.itemID == MinechemItemGeneration.journal.itemID && !getSlot(1).getHasStack())
+=======
+            else if (slot != 1 && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(1).getHasStack())
+>>>>>>> MaxwolfRewrite
 =======
             else if (slot != 1 && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(1).getHasStack())
 >>>>>>> MaxwolfRewrite
@@ -84,7 +92,11 @@ public class ContainerMicroscope extends Container
                 return null;
             }
 <<<<<<< HEAD
+<<<<<<< HEAD
             else if (slot > 1 && stack.itemID != MinechemItemGeneration.journal.itemID && !getSlot(0).getHasStack())
+=======
+            else if (slot > 1 && stack.itemID != MinechemItemsGeneration.journal.itemID && !getSlot(0).getHasStack())
+>>>>>>> MaxwolfRewrite
 =======
             else if (slot > 1 && stack.itemID != MinechemItemsGeneration.journal.itemID && !getSlot(0).getHasStack())
 >>>>>>> MaxwolfRewrite

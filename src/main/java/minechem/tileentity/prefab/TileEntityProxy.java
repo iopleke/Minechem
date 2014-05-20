@@ -1,10 +1,13 @@
 package minechem.tileentity.prefab;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemBlockGeneration;
 import minechem.tileentity.fission.TileEntityFission;
 import minechem.tileentity.fusion.TileEntityFusion;
 =======
+=======
+>>>>>>> MaxwolfRewrite
 import minechem.MinechemBlocksGeneration;
 import minechem.tileentity.multiblock.TileEntityFission;
 import minechem.tileentity.multiblock.TileEntityFusion;
@@ -67,7 +70,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
         if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlockGeneration.fusion.blockID)
+=======
+        if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion.blockID)
+>>>>>>> MaxwolfRewrite
 =======
         if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion.blockID)
 >>>>>>> MaxwolfRewrite
@@ -91,7 +98,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fusion.yCoord = this.managerYOffset + yCoord;
             fusion.xCoord = this.managerXOffset + xCoord;
 <<<<<<< HEAD
+<<<<<<< HEAD
             fusion.blockType = MinechemBlockGeneration.fusion;
+=======
+            fusion.blockType = MinechemBlocksGeneration.fusion;
+>>>>>>> MaxwolfRewrite
 =======
             fusion.blockType = MinechemBlocksGeneration.fusion;
 >>>>>>> MaxwolfRewrite
@@ -105,7 +116,11 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fission.yCoord = this.managerYOffset + yCoord;
             fission.xCoord = this.managerXOffset + xCoord;
 <<<<<<< HEAD
+<<<<<<< HEAD
             fission.blockType = MinechemBlockGeneration.fusion;
+=======
+            fission.blockType = MinechemBlocksGeneration.fusion;
+>>>>>>> MaxwolfRewrite
 =======
             fission.blockType = MinechemBlocksGeneration.fusion;
 >>>>>>> MaxwolfRewrite

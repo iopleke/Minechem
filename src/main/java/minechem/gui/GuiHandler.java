@@ -1,6 +1,10 @@
 package minechem.gui;
 
 <<<<<<< HEAD:src/main/java/minechem/gui/GuiHandler.java
+<<<<<<< HEAD:src/main/java/minechem/gui/GuiHandler.java
+=======
+import minechem.container.CotainerTable;
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/gui/GuiHandler.java
 =======
 import minechem.container.CotainerTable;
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/gui/GuiHandler.java

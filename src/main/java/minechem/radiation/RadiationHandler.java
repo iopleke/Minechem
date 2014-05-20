@@ -4,8 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 <<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
+<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
 import minechem.MinechemItemGeneration;
 =======
+=======
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
 import minechem.MinechemItemsGeneration;
 import minechem.item.IRadiationShield;
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
@@ -80,7 +83,11 @@ public class RadiationHandler
         for (ItemStack itemstack : itemstacks)
         {
 <<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
+<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
             if (itemstack != null && itemstack.itemID == MinechemItemGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
+=======
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
 =======
             if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
@@ -126,7 +133,11 @@ public class RadiationHandler
         for (ItemStack itemstack : itemstacks)
         {
 <<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
+<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
             if (itemstack != null && itemstack.itemID == MinechemItemGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
+=======
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
 =======
             if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java

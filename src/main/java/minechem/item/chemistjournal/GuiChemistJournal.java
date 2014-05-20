@@ -4,7 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 import minechem.MinechemItemGeneration;
+=======
+import minechem.MinechemItemsGeneration;
+>>>>>>> MaxwolfRewrite
 =======
 import minechem.MinechemItemsGeneration;
 >>>>>>> MaxwolfRewrite
@@ -64,7 +68,11 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         this.player = entityPlayer;
         this.journalStack = entityPlayer.inventory.getCurrentItem();
 <<<<<<< HEAD
+<<<<<<< HEAD
         this.currentItemStack = MinechemItemGeneration.journal.getActiveStack(journalStack);
+=======
+        this.currentItemStack = MinechemItemsGeneration.journal.getActiveStack(journalStack);
+>>>>>>> MaxwolfRewrite
 =======
         this.currentItemStack = MinechemItemsGeneration.journal.getActiveStack(journalStack);
 >>>>>>> MaxwolfRewrite
@@ -77,7 +85,11 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         scrollBar = new GuiVerticalScrollBar(this, 128, 14, 157, this.xSize, this.ySize);
 
 <<<<<<< HEAD
+<<<<<<< HEAD
         List<ItemStack> itemList = MinechemItemGeneration.journal.getItemList(this.journalStack);
+=======
+        List<ItemStack> itemList = MinechemItemsGeneration.journal.getItemList(this.journalStack);
+>>>>>>> MaxwolfRewrite
 =======
         List<ItemStack> itemList = MinechemItemsGeneration.journal.getItemList(this.journalStack);
 >>>>>>> MaxwolfRewrite
@@ -171,7 +183,11 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     {
         currentItemStack = itemstack;
 <<<<<<< HEAD
+<<<<<<< HEAD
         MinechemItemGeneration.journal.setActiveStack(itemstack, journalStack);
+=======
+        MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
+>>>>>>> MaxwolfRewrite
 =======
         MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
 >>>>>>> MaxwolfRewrite

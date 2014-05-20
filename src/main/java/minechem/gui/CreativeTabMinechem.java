@@ -22,7 +22,11 @@ public class CreativeTabMinechem extends CreativeTabs
     public ItemStack getIconItemStack()
     {
 <<<<<<< HEAD:src/main/java/minechem/gui/CreativeTabMinechem.java
+<<<<<<< HEAD:src/main/java/minechem/gui/CreativeTabMinechem.java
         return new ItemStack(MinechemItemGeneration.element, 1, EnumElement.U.ordinal());
+=======
+        return new ItemStack(MinechemItemsGeneration.element, 1, EnumElement.U.ordinal());
+>>>>>>> MaxwolfRewrite:src/main/java/minechem/CreativeTabMinechem.java
 =======
         return new ItemStack(MinechemItemsGeneration.element, 1, EnumElement.U.ordinal());
 >>>>>>> MaxwolfRewrite:src/main/java/minechem/CreativeTabMinechem.java
