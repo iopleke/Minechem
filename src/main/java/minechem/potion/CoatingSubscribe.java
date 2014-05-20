@@ -1,4 +1,4 @@
-package minechem.coating;
+package minechem.potion;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
