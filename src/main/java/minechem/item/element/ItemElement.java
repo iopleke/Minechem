@@ -3,10 +3,10 @@ package minechem.item.element;
 import java.util.EnumMap;
 import java.util.List;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemsGeneration;
 import minechem.ModMinechem;
-import minechem.RadiationInfo;
 import minechem.item.polytool.PolytoolHelper;
+import minechem.radiation.RadiationInfo;
 import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
@@ -231,7 +231,7 @@ public class ItemElement extends Item // implements IStorageTank
 
     public static Object createStackOf(EnumElement element, int amount)
     {
-        return new ItemStack(MinechemItems.element, amount, element.ordinal());
+        return new ItemStack(MinechemItemsGeneration.element, amount, element.ordinal());
     }
 
     public static RadiationInfo getRadiationInfo(ItemStack element, World world)

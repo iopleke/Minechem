@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.tabs.TabHelp;
+import minechem.gui.GuiTabHelp;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
@@ -47,7 +47,7 @@ public class GuiMicroscope extends GuiContainerTabbed
         this.ySize = guiHeight;
         this.itemRenderer = new RenderGUIItemMicroscope(this);
         this.recipeSwitch = new GuiMicroscopeSwitch(this);
-        addTab(new TabHelp(this, MinechemHelper.getLocalString("help.microscope")));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.microscope")));
     }
 
     public boolean isMouseInMicroscope()

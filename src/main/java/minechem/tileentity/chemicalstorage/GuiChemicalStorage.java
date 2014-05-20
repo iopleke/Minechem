@@ -2,7 +2,7 @@ package minechem.tileentity.chemicalstorage;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.tabs.TabHelp;
+import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.inventory.ContainerChest;
@@ -14,7 +14,6 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiChemicalStorage extends GuiContainerTabbed
 {
-
     private IInventory playerInventory;
     private int inventoryRows = 0;
 
@@ -23,14 +22,14 @@ public class GuiChemicalStorage extends GuiContainerTabbed
         super(new ContainerChest(playerInventory, blockInventory));
         this.playerInventory = playerInventory;
         this.inventoryRows = blockInventory.getSizeInventory() / 9;
-        addTab(new TabHelp(this, MinechemHelper.getLocalString("help.chemicalStorage")));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.chemicalStorage")));
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String chestName = MinechemHelper.getLocalString("block.name.chemicalStorage");
+        String chestName = MinechemHelper.getLocalString("tile.minechem.blockChemicalStorage.name");
         String playerInventoryTitle = StatCollector.translateToLocal(this.playerInventory.getInvName());
         this.fontRenderer.drawString(chestName, 8, 6, 4210752);
         this.fontRenderer.drawString(playerInventoryTitle, 8, this.ySize - 96 + 2, 4210752);
@@ -53,5 +52,4 @@ public class GuiChemicalStorage extends GuiContainerTabbed
         // TODO Auto-generated method stub
         return false;
     }
-
 }

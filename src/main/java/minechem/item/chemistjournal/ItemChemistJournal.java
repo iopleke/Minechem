@@ -3,8 +3,8 @@ package minechem.item.chemistjournal;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.GuiHandler;
 import minechem.ModMinechem;
+import minechem.gui.GuiHandler;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;

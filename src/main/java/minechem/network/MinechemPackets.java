@@ -1,7 +1,7 @@
 package minechem.network;
 
 import minechem.ModMinechem;
-import minechem.tileentity.chemicalstorage.PacketActiveJournalItem;
+import minechem.item.chemistjournal.PacketActiveJournalItem;
 import minechem.tileentity.decomposer.PacketDecomposerUpdate;
 import minechem.tileentity.multiblock.PacketGhostBlock;
 import minechem.tileentity.synthesis.PacketSynthesisUpdate;

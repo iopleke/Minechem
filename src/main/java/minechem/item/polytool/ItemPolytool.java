@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import minechem.GuiHandler;
 import minechem.ModMinechem;
+import minechem.gui.GuiHandler;
 import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
 import minechem.utils.Reference;

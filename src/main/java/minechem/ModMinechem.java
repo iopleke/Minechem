@@ -3,20 +3,25 @@ package minechem;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
-import minechem.coating.CoatingRecipe;
-import minechem.coating.CoatingSubscribe;
-import minechem.coating.EnchantmentCoated;
 import minechem.fluid.FluidHelper;
-import minechem.gui.tabs.TabEnergy;
-import minechem.gui.tabs.TabHelp;
-import minechem.gui.tabs.TabJournal;
-import minechem.gui.tabs.TabStateControl;
-import minechem.gui.tabs.TabStateControlSynthesis;
-import minechem.gui.tabs.TabTable;
+import minechem.gui.GuiHandler;
+import minechem.gui.GuiTabEnergy;
+import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabStateControl;
+import minechem.gui.GuiTabTable;
 import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.chemistjournal.TabJournal;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.MinechemPacketHandler;
+import minechem.network.server.CommonProxy;
 import minechem.oredictionary.MinechemRecipes;
+import minechem.potion.CoatingRecipe;
+import minechem.potion.CoatingSubscribe;
+import minechem.potion.EnchantmentCoated;
+import minechem.potion.PotionInjector;
+import minechem.tickhandler.ScheduledTickHandler;
+import minechem.tickhandler.TickHandler;
+import minechem.tileentity.synthesis.TabStateControlSynthesis;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -79,7 +84,7 @@ public class ModMinechem
     @Mod.Metadata(ModMinechem.ID)
     public static ModMetadata metadata;
 
-    @SidedProxy(clientSide = "minechem.client.ClientProxy", serverSide = "minechem.common.CommonProxy")
+    @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.common.CommonProxy")
     public static CommonProxy PROXY;
 
     /** Creative mode tab that shows up in Minecraft. **/
@@ -125,10 +130,10 @@ public class ModMinechem
 
         // Register items and blocks.
         LOGGER.info("Registering Items...");
-        MinechemItems.registerItems();
+        MinechemItemsGeneration.registerItems();
 
         LOGGER.info("Registering Blocks...");
-        MinechemBlocks.registerBlocks();
+        MinechemBlocksGeneration.registerBlocks();
 
         LOGGER.info("Registering Blueprints...");
         MinechemBlueprint.registerBlueprints();
@@ -139,7 +144,7 @@ public class ModMinechem
         MinechemRecipes.getInstance().registerFluidRecipies();
 
         LOGGER.info("Registering OreDict Compatability...");
-        MinechemItems.registerToOreDictionary();
+        MinechemItemsGeneration.registerToOreDictionary();
 
         LOGGER.info("Registering Minechem Recipes...");
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
@@ -202,8 +207,8 @@ public class ModMinechem
     {
         LOGGER.info("Adding rare chemicals to dungeon loot...");
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-        ItemStack A = new ItemStack(MinechemItems.blueprint, 1, 0);
-        ItemStack B = new ItemStack(MinechemItems.blueprint, 1, 1);
+        ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
+        ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
         ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
         ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
     }
@@ -211,11 +216,11 @@ public class ModMinechem
     @SideOnly(Side.CLIENT)
     public void textureHook(IconRegister icon)
     {
-        TabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
+        GuiTabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
         TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
-        TabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
-        TabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
-        TabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+        GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
+        GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
+        GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         TabJournal.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 

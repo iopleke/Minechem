@@ -1,8 +1,8 @@
 package minechem.gui;
 
 import minechem.ModMinechem;
-import minechem.gui.tabs.TabJournal;
 import minechem.item.chemistjournal.ContainerChemistJournal;
+import minechem.item.chemistjournal.TabJournal;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;

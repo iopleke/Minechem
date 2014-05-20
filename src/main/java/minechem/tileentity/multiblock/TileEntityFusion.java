@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFusion;
 import minechem.item.element.EnumElement;
 import minechem.item.element.ItemElement;
@@ -141,7 +141,7 @@ public class TileEntityFusion extends TileEntityMultiBlock
             int massSum = mass1 + mass2;
             if (massSum <= EnumElement.heaviestMass)
             {
-                return new ItemStack(MinechemItems.element, 1, massSum - 1);
+                return new ItemStack(MinechemItemsGeneration.element, 1, massSum - 1);
             }
             else
             {
@@ -225,7 +225,7 @@ public class TileEntityFusion extends TileEntityMultiBlock
         if (slot == 0 && itemstack != null && itemstack.itemID == Item.netherStar.itemID)
         {
             System.out.println("Turning nether star into fusion star");
-            this.inventory[slot] = new ItemStack(MinechemItems.fusionStar);
+            this.inventory[slot] = new ItemStack(MinechemItemsGeneration.fusionStar);
         }
         else
         {
@@ -291,7 +291,7 @@ public class TileEntityFusion extends TileEntityMultiBlock
     {
         if (i == kFusionStar[0])
         {
-            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItems.fusionStar.itemID)
+            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItemsGeneration.fusionStar.itemID)
             {
                 return true;
             }

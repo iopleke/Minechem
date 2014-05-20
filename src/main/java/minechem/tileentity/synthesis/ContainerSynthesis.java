@@ -2,13 +2,13 @@ package minechem.tileentity.synthesis;
 
 import java.util.List;
 
-import minechem.MinechemItems;
-import minechem.containers.ContainerWithFakeSlots;
-import minechem.containers.SlotChemical;
-import minechem.containers.SlotFake;
-import minechem.containers.SlotSynthesisOutput;
+import minechem.MinechemItemsGeneration;
+import minechem.container.ContainerWithFakeSlots;
 import minechem.item.IRadiationShield;
 import minechem.item.chemistjournal.SlotJournal;
+import minechem.slot.SlotChemical;
+import minechem.slot.SlotFake;
+import minechem.slot.SlotSynthesisOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
@@ -82,7 +82,7 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
-            if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItems.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
+            if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
             {
                 ItemStack copystack = slotObject.decrStackSize(1);
                 getSlot(TileEntitySynthesis.kStartJournal).putStack(copystack);
@@ -93,7 +93,7 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
                 if (!craftMaxmimum())
                     return null;
             }
-            else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItems.element.itemID || stackInSlot.itemID == MinechemItems.molecule.itemID))
+            else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
             {
                 if (!mergeItemStack(stackInSlot, TileEntitySynthesis.kStartStorage, TileEntitySynthesis.kStartStorage + TileEntitySynthesis.kSizeStorage, false))
                     return null;

@@ -20,7 +20,7 @@ public class CreativeTabMinechem extends CreativeTabs
     @Override
     public ItemStack getIconItemStack()
     {
-        return new ItemStack(MinechemItems.element, 1, EnumElement.U.ordinal());
+        return new ItemStack(MinechemItemsGeneration.element, 1, EnumElement.U.ordinal());
     }
 
 }

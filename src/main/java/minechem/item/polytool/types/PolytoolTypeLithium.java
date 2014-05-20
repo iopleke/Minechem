@@ -1,6 +1,6 @@
 package minechem.item.polytool.types;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemsGeneration;
 import minechem.item.element.EnumElement;
 import minechem.item.polytool.ItemPolytool;
 import minechem.item.polytool.PolytoolUpgradeType;
@@ -30,7 +30,7 @@ public class PolytoolTypeLithium extends PolytoolUpgradeType
     {
         DamageSource damage = DamageSource.causeMobDamage(target);
         // Never goes below 0
-        double damageAmount = Math.ceil(Math.max(0, Math.log10(((ItemPolytool) MinechemItems.polytool).getEnergy(itemStack)) - 7));
+        double damageAmount = Math.ceil(Math.max(0, Math.log10(((ItemPolytool) MinechemItemsGeneration.polytool).getEnergy(itemStack)) - 7));
         System.out.println(damageAmount);
         target.attackEntityFrom(damage, (float) damageAmount);
     }

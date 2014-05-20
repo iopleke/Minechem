@@ -1,6 +1,6 @@
 package minechem.tileentity.microscope;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemsGeneration;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.prefab.MinechemTileEntity;
@@ -36,7 +36,7 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
         DecomposerRecipe decomposerRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);
         if (inventory[1] != null && (synthesisRecipe != null || decomposerRecipe != null))
         {
-            MinechemItems.journal.addItemStackToJournal(itemstack, inventory[1], worldObj);
+            MinechemItemsGeneration.journal.addItemStackToJournal(itemstack, inventory[1], worldObj);
         }
     }
 
@@ -159,7 +159,7 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     {
         if (i == kInput[0])
             return true;
-        if (i == kJournal[0] && itemstack.itemID == MinechemItems.journal.itemID)
+        if (i == kJournal[0] && itemstack.itemID == MinechemItemsGeneration.journal.itemID)
             return true;
         return false;
     }

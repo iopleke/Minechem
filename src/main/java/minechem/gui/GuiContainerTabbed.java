@@ -3,7 +3,6 @@ package minechem.gui;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.gui.tabs.Tab;
 import minechem.utils.SessionVars;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -44,8 +43,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     protected static int SCALE_PROGRESS = 24;
     protected static int SCALE_SPEED = 16;
 
-    protected ArrayList<Tab> tabListLeft = new ArrayList<Tab>();
-    protected ArrayList<Tab> tabListRight = new ArrayList<Tab>();
+    protected ArrayList<GuiTab> tabListLeft = new ArrayList<GuiTab>();
+    protected ArrayList<GuiTab> tabListRight = new ArrayList<GuiTab>();
 
     public int mouseX = 0;
     public int mouseY = 0;
@@ -295,16 +294,16 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         super.mouseClicked(x, y, mouseButton);
 
-        Tab tab = getTabAtPosition(mouseX, mouseY);
+        GuiTab guiTab = getTabAtPosition(mouseX, mouseY);
 
-        if (tab != null && !tab.handleMouseClicked(mouseX, mouseY, mouseButton))
+        if (guiTab != null && !guiTab.handleMouseClicked(mouseX, mouseY, mouseButton))
         {
 
-            if (tab.leftSide)
+            if (guiTab.leftSide)
             {
-                for (Tab other : tabListLeft)
+                for (GuiTab other : tabListLeft)
                 {
-                    if (other != tab && other.isOpen())
+                    if (other != guiTab && other.isOpen())
                     {
                         other.toggleOpen();
                     }
@@ -312,15 +311,15 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
             }
             else
             {
-                for (Tab other : tabListRight)
+                for (GuiTab other : tabListRight)
                 {
-                    if (other != tab && other.isOpen())
+                    if (other != guiTab && other.isOpen())
                     {
                         other.toggleOpen();
                     }
                 }
             }
-            tab.toggleOpen();
+            guiTab.toggleOpen();
         }
     }
 
@@ -335,20 +334,20 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     /* TAB MANAGEMENT */
-    public void addTab(Tab tab)
+    public void addTab(GuiTab guiTab)
     {
 
-        if (tab.leftSide)
+        if (guiTab.leftSide)
         {
-            tabListLeft.add(tab);
+            tabListLeft.add(guiTab);
         }
         else
         {
-            tabListRight.add(tab);
+            tabListRight.add(guiTab);
         }
-        if (SessionVars.getOpenedTab() != null && tab.getClass().equals(SessionVars.getOpenedTab()))
+        if (SessionVars.getOpenedTab() != null && guiTab.getClass().equals(SessionVars.getOpenedTab()))
         {
-            tab.setFullyOpen();
+            guiTab.setFullyOpen();
         }
     }
 
@@ -357,34 +356,34 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         int yPosRight = 4;
 
-        for (Tab tab : tabListLeft)
+        for (GuiTab guiTab : tabListLeft)
         {
 
-            tab.update();
-            if (!tab.isVisible())
+            guiTab.update();
+            if (!guiTab.isVisible())
             {
                 continue;
             }
-            tab.draw(0, yPosRight);
+            guiTab.draw(0, yPosRight);
         }
 
-        for (Tab tab : tabListRight)
+        for (GuiTab guiTab : tabListRight)
         {
 
-            tab.update();
-            if (!tab.isVisible())
+            guiTab.update();
+            if (!guiTab.isVisible())
             {
                 continue;
             }
 
-            tab.draw(xSize, yPosRight);
-            yPosRight += tab.getHeight();
+            guiTab.draw(xSize, yPosRight);
+            yPosRight += guiTab.getHeight();
         }
 
-        Tab tab = getTabAtPosition(mX, mY);
-        if (tab != null)
+        GuiTab guiTab = getTabAtPosition(mX, mY);
+        if (guiTab != null)
         {
-            String tooltip = tab.getTooltip();
+            String tooltip = guiTab.getTooltip();
             if (tooltip != null)
             {
                 drawTooltip(tooltip);
@@ -392,7 +391,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         }
     }
 
-    protected Tab getTabAtPosition(int mX, int mY)
+    protected GuiTab getTabAtPosition(int mX, int mY)
     {
 
         int xShift = 0;
@@ -400,19 +399,19 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         for (int i = 0; i < tabListLeft.size(); ++i)
         {
-            Tab tab = tabListLeft.get(i);
-            if (!tab.isVisible())
+            GuiTab guiTab = tabListLeft.get(i);
+            if (!guiTab.isVisible())
             {
                 continue;
             }
 
-            tab.currentShiftX = xShift;
-            tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            guiTab.currentShiftX = xShift;
+            guiTab.currentShiftY = yShift;
+            if (guiTab.intersectsWith(mX, mY, xShift, yShift))
             {
-                return tab;
+                return guiTab;
             }
-            yShift += tab.getHeight();
+            yShift += guiTab.getHeight();
         }
 
         xShift = xSize;
@@ -420,19 +419,19 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         for (int i = 0; i < tabListRight.size(); ++i)
         {
-            Tab tab = tabListRight.get(i);
-            if (!tab.isVisible())
+            GuiTab guiTab = tabListRight.get(i);
+            if (!guiTab.isVisible())
             {
                 continue;
             }
 
-            tab.currentShiftX = xShift;
-            tab.currentShiftY = yShift;
-            if (tab.intersectsWith(mX, mY, xShift, yShift))
+            guiTab.currentShiftX = xShift;
+            guiTab.currentShiftY = yShift;
+            if (guiTab.intersectsWith(mX, mY, xShift, yShift))
             {
-                return tab;
+                return guiTab;
             }
-            yShift += tab.getHeight();
+            yShift += guiTab.getHeight();
         }
 
         return null;

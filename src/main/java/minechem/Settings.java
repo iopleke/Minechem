@@ -92,18 +92,6 @@ public class Settings
     public static @CfgId(block = true)
     int LeadedChest = getNextBlockID();
 
-    // Particle Physics
-    public static @CfgId(block = true)
-    int Emitter = getNextBlockID();
-    public static @CfgId(block = true)
-    int PolarizedGlass = getNextBlockID();
-    public static @CfgId(block = true)
-    int SeriesReceptor = getNextBlockID();
-    public static @CfgId(block = true)
-    int ControlGlass = getNextBlockID();
-    public static @CfgId(block = true)
-    int InfiniteEmitter = getNextBlockID();
-
     // --------
     // FEATURES
     // --------
@@ -114,7 +102,7 @@ public class Settings
 
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
-    boolean DebugMode = true;
+    boolean DebugMode = false;
 
     public static void load(Configuration config)
     {

@@ -1,6 +1,6 @@
 package minechem.item.chemistjournal;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemsGeneration;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -16,7 +16,7 @@ public class SlotJournal extends Slot
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.itemID == MinechemItems.journal.itemID;
+        return itemstack.itemID == MinechemItemsGeneration.journal.itemID;
     }
 
     @Override

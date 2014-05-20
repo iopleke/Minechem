@@ -1,7 +1,7 @@
 package minechem.tileentity.decomposer;
 
-import minechem.containers.SlotOutput;
 import minechem.item.IRadiationShield;
+import minechem.slot.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;

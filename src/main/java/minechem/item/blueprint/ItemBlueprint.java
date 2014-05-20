@@ -2,7 +2,7 @@ package minechem.item.blueprint;
 
 import java.util.List;
 
-import minechem.MinechemItems;
+import minechem.MinechemItemsGeneration;
 import minechem.ModMinechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -37,7 +37,7 @@ public class ItemBlueprint extends Item
 
     public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint)
     {
-        return new ItemStack(MinechemItems.blueprint, 1, blueprint.id);
+        return new ItemStack(MinechemItemsGeneration.blueprint, 1, blueprint.id);
     }
 
     public MinechemBlueprint getBlueprint(ItemStack itemstack)

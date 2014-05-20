@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.ModMinechem;
-import minechem.PharmacologyEffect;
 import minechem.item.element.ItemElement;
+import minechem.potion.PharmacologyEffect;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;

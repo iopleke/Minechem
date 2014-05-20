@@ -2,7 +2,7 @@ package minechem.tileentity.multiblock;
 
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.tabs.TabHelp;
+import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -31,7 +31,7 @@ public class GuiFusion extends GuiContainerTabbed
         energy = fusion.getEnergy(ForgeDirection.UNKNOWN);
         this.xSize = guiWidth;
         this.ySize = guiHeight;
-        addTab(new TabHelp(this, MinechemHelper.getLocalString("help.fusion")));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
     }
 
     @Override
