@@ -3,15 +3,7 @@ package minechem.item.chemistjournal;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.MinechemItemGeneration;
-=======
 import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiFakeSlot;
@@ -67,15 +59,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         super(new ContainerChemistJournal(entityPlayer.inventory));
         this.player = entityPlayer;
         this.journalStack = entityPlayer.inventory.getCurrentItem();
-<<<<<<< HEAD
-<<<<<<< HEAD
-        this.currentItemStack = MinechemItemGeneration.journal.getActiveStack(journalStack);
-=======
         this.currentItemStack = MinechemItemsGeneration.journal.getActiveStack(journalStack);
->>>>>>> MaxwolfRewrite
-=======
-        this.currentItemStack = MinechemItemsGeneration.journal.getActiveStack(journalStack);
->>>>>>> MaxwolfRewrite
         if (this.currentItemStack != null)
         {
             showRecipesForStack(currentItemStack);
@@ -84,15 +68,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
         this.ySize = GUI_HEIGHT;
         scrollBar = new GuiVerticalScrollBar(this, 128, 14, 157, this.xSize, this.ySize);
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-        List<ItemStack> itemList = MinechemItemGeneration.journal.getItemList(this.journalStack);
-=======
         List<ItemStack> itemList = MinechemItemsGeneration.journal.getItemList(this.journalStack);
->>>>>>> MaxwolfRewrite
-=======
-        List<ItemStack> itemList = MinechemItemsGeneration.journal.getItemList(this.journalStack);
->>>>>>> MaxwolfRewrite
         if (itemList != null)
         {
             populateItemList(itemList, entityPlayer);
@@ -182,15 +158,7 @@ public class GuiChemistJournal extends GuiContainerTabbed implements IVerticalSc
     public void showRecipesForStack(ItemStack itemstack)
     {
         currentItemStack = itemstack;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        MinechemItemGeneration.journal.setActiveStack(itemstack, journalStack);
-=======
         MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
->>>>>>> MaxwolfRewrite
-=======
-        MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
->>>>>>> MaxwolfRewrite
         PacketActiveJournalItem packet = new PacketActiveJournalItem(itemstack, player);
         PacketDispatcher.sendPacketToServer(packet.makePacket());
 

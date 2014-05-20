@@ -84,6 +84,8 @@ public class Settings
     public static @CfgId(block = true)
     int FusionChamber = getNextBlockID();
     public static @CfgId(block = true)
+    int ChemicalStorage = getNextBlockID();
+    public static @CfgId(block = true)
     int BluePrintPrinter = getNextBlockID();
     public static @CfgId(block = true)
     int UraniumOre = getNextBlockID();

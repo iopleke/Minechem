@@ -1,4 +1,4 @@
-package minechem.tileentity.ghostblock;
+package minechem.tileentity.multiblock;
 
 public enum EnumBlockStatus
 {

@@ -1,14 +1,6 @@
 package minechem.tileentity.microscope;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.MinechemItemGeneration;
-=======
 import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.prefab.MinechemTileEntity;
@@ -44,15 +36,7 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
         DecomposerRecipe decomposerRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);
         if (inventory[1] != null && (synthesisRecipe != null || decomposerRecipe != null))
         {
-<<<<<<< HEAD
-<<<<<<< HEAD
-            MinechemItemGeneration.journal.addItemStackToJournal(itemstack, inventory[1], worldObj);
-=======
             MinechemItemsGeneration.journal.addItemStackToJournal(itemstack, inventory[1], worldObj);
->>>>>>> MaxwolfRewrite
-=======
-            MinechemItemsGeneration.journal.addItemStackToJournal(itemstack, inventory[1], worldObj);
->>>>>>> MaxwolfRewrite
         }
     }
 
@@ -175,15 +159,7 @@ public class TileEntityMicroscope extends MinechemTileEntity implements IInvento
     {
         if (i == kInput[0])
             return true;
-<<<<<<< HEAD
-<<<<<<< HEAD
-        if (i == kJournal[0] && itemstack.itemID == MinechemItemGeneration.journal.itemID)
-=======
         if (i == kJournal[0] && itemstack.itemID == MinechemItemsGeneration.journal.itemID)
->>>>>>> MaxwolfRewrite
-=======
-        if (i == kJournal[0] && itemstack.itemID == MinechemItemsGeneration.journal.itemID)
->>>>>>> MaxwolfRewrite
             return true;
         return false;
     }

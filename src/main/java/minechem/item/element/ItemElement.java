@@ -3,15 +3,7 @@ package minechem.item.element;
 import java.util.EnumMap;
 import java.util.List;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.MinechemItemGeneration;
-=======
 import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
 import minechem.ModMinechem;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationInfo;
@@ -239,15 +231,7 @@ public class ItemElement extends Item // implements IStorageTank
 
     public static Object createStackOf(EnumElement element, int amount)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return new ItemStack(MinechemItemGeneration.element, amount, element.ordinal());
-=======
         return new ItemStack(MinechemItemsGeneration.element, amount, element.ordinal());
->>>>>>> MaxwolfRewrite
-=======
-        return new ItemStack(MinechemItemsGeneration.element, amount, element.ordinal());
->>>>>>> MaxwolfRewrite
     }
 
     public static RadiationInfo getRadiationInfo(ItemStack element, World world)

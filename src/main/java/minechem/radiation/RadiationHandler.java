@@ -3,17 +3,11 @@ package minechem.radiation;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-import minechem.MinechemItemGeneration;
-=======
-=======
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
 import minechem.MinechemItemsGeneration;
 import minechem.item.IRadiationShield;
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
 import minechem.item.element.EnumRadioactivity;
 import minechem.item.element.ItemElement;
+import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
 import minechem.tileentity.leadedchest.ContainerLeadedChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -51,7 +45,11 @@ public class RadiationHandler
     public void update(EntityPlayer player)
     {
         Container openContainer = player.openContainer;
-        if (openContainer != null && openContainer instanceof ContainerLeadedChest)
+        if (openContainer != null && openContainer instanceof ContainerChemicalStorage)
+        {
+            updateChemicalStorageContainer(player, openContainer);
+        }
+        else if (openContainer != null && openContainer instanceof ContainerLeadedChest)
         {
             updateContainerLeadedChest(player, openContainer);
         }
@@ -82,15 +80,7 @@ public class RadiationHandler
         List<ItemStack> itemstacks = leadedChest.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-            if (itemstack != null && itemstack.itemID == MinechemItemGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
-=======
             if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
-=======
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
             {
                 RadiationInfo radiationInfo = ItemElement.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
@@ -101,8 +91,6 @@ public class RadiationHandler
         updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
     }
 
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-=======
     private void updateChemicalStorageContainer(EntityPlayer player, Container openContainer)
     {
         ContainerChemicalStorage chemicalStorage = (ContainerChemicalStorage) openContainer;
@@ -120,7 +108,6 @@ public class RadiationHandler
         updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
     }
 
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
     private void updateContainer(EntityPlayer player, Container container)
     {
         List<ItemStack> itemstacks = container.getInventory();
@@ -132,15 +119,7 @@ public class RadiationHandler
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks)
         {
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-<<<<<<< HEAD:src/main/java/minechem/radiation/RadiationHandler.java
-            if (itemstack != null && itemstack.itemID == MinechemItemGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
-=======
             if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
-=======
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
->>>>>>> MaxwolfRewrite:src/main/java/minechem/radiation/RadiationHandler.java
             {
                 DecayEvent decayEvent = new DecayEvent();
                 decayEvent.before = itemstack.copy();

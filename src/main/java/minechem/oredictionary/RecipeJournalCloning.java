@@ -1,14 +1,6 @@
 package minechem.oredictionary;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.MinechemItemGeneration;
-=======
 import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -23,15 +15,7 @@ public class RecipeJournalCloning implements IRecipe
     {
         ItemStack itemstack1 = crafting.getStackInSlot(0);
         ItemStack itemstack2 = crafting.getStackInSlot(1);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return (itemstack1 != null && itemstack1.itemID == MinechemItemGeneration.journal.itemID) && (itemstack2 != null && itemstack2.itemID == Item.book.itemID);
-=======
         return (itemstack1 != null && itemstack1.itemID == MinechemItemsGeneration.journal.itemID) && (itemstack2 != null && itemstack2.itemID == Item.book.itemID);
->>>>>>> MaxwolfRewrite
-=======
-        return (itemstack1 != null && itemstack1.itemID == MinechemItemsGeneration.journal.itemID) && (itemstack2 != null && itemstack2.itemID == Item.book.itemID);
->>>>>>> MaxwolfRewrite
     }
 
     @Override

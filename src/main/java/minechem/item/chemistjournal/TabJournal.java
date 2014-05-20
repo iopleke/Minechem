@@ -1,13 +1,7 @@
 package minechem.item.chemistjournal;
 
 import minechem.ModMinechem;
-<<<<<<< HEAD:src/main/java/minechem/item/chemistjournal/TabJournal.java
-=======
 import minechem.gui.GuiTableOfElements;
-<<<<<<< HEAD:src/main/java/minechem/item/chemistjournal/TabJournal.java
->>>>>>> MaxwolfRewrite:src/main/java/minechem/item/chemistjournal/TabJournal.java
-=======
->>>>>>> MaxwolfRewrite:src/main/java/minechem/item/chemistjournal/TabJournal.java
 import minechem.gui.GuiTab;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
@@ -20,6 +14,9 @@ public class TabJournal extends GuiTab
     public TabJournal(Gui gui)
     {
         super(gui);
+
+        this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;
+        this.currentShiftY = GuiTableOfElements.GUI_HEIGHT - 411;
         this.overlayColor = 0x2F7DAA;
     }
 

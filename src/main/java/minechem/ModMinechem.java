@@ -4,25 +4,11 @@ import java.util.Arrays;
 import java.util.logging.Logger;
 
 import minechem.fluid.FluidHelper;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.gui.CreativeTabMinechem;
-=======
->>>>>>> MaxwolfRewrite
-=======
->>>>>>> MaxwolfRewrite
 import minechem.gui.GuiHandler;
 import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
 import minechem.gui.GuiTabStateControl;
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
 import minechem.gui.GuiTabTable;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.gui.GuiTabTable;
->>>>>>> MaxwolfRewrite
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.TabJournal;
 import minechem.item.polytool.PolytoolEventHandler;
@@ -33,18 +19,8 @@ import minechem.potion.CoatingRecipe;
 import minechem.potion.CoatingSubscribe;
 import minechem.potion.EnchantmentCoated;
 import minechem.potion.PotionInjector;
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.tick.ScheduledTickHandler;
-import minechem.tick.TickHandler;
-=======
 import minechem.tickhandler.ScheduledTickHandler;
 import minechem.tickhandler.TickHandler;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.tickhandler.ScheduledTickHandler;
-import minechem.tickhandler.TickHandler;
->>>>>>> MaxwolfRewrite
 import minechem.tileentity.synthesis.TabStateControlSynthesis;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
@@ -154,24 +130,10 @@ public class ModMinechem
 
         // Register items and blocks.
         LOGGER.info("Registering Items...");
-<<<<<<< HEAD
-<<<<<<< HEAD
-        MinechemItemGeneration.registerItems();
-
-        LOGGER.info("Registering Blocks...");
-        MinechemBlockGeneration.registerBlocks();
-=======
         MinechemItemsGeneration.registerItems();
 
         LOGGER.info("Registering Blocks...");
         MinechemBlocksGeneration.registerBlocks();
->>>>>>> MaxwolfRewrite
-=======
-        MinechemItemsGeneration.registerItems();
-
-        LOGGER.info("Registering Blocks...");
-        MinechemBlocksGeneration.registerBlocks();
->>>>>>> MaxwolfRewrite
 
         LOGGER.info("Registering Blueprints...");
         MinechemBlueprint.registerBlueprints();
@@ -182,15 +144,7 @@ public class ModMinechem
         MinechemRecipes.getInstance().registerFluidRecipies();
 
         LOGGER.info("Registering OreDict Compatability...");
-<<<<<<< HEAD
-<<<<<<< HEAD
-        MinechemItemGeneration.registerToOreDictionary();
-=======
         MinechemItemsGeneration.registerToOreDictionary();
->>>>>>> MaxwolfRewrite
-=======
-        MinechemItemsGeneration.registerToOreDictionary();
->>>>>>> MaxwolfRewrite
 
         LOGGER.info("Registering Minechem Recipes...");
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
@@ -220,7 +174,7 @@ public class ModMinechem
         FluidHelper.registerFluids();
 
         LOGGER.info("Registering Ore Generation...");
-        GameRegistry.registerWorldGenerator(new MinechemOreGeneration());
+        GameRegistry.registerWorldGenerator(new MinechemGeneration());
 
         LOGGER.info("Registering GUI and Container handlers...");
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
@@ -251,20 +205,10 @@ public class ModMinechem
 
     private void addonDungeonLoot()
     {
-        LOGGER.info("Adding blueprints to dungeon loot...");
+        LOGGER.info("Adding rare chemicals to dungeon loot...");
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-<<<<<<< HEAD
-<<<<<<< HEAD
-        ItemStack A = new ItemStack(MinechemItemGeneration.blueprint, 1, 0);
-        ItemStack B = new ItemStack(MinechemItemGeneration.blueprint, 1, 1);
-=======
         ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
         ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
->>>>>>> MaxwolfRewrite
-=======
-        ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
-        ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
->>>>>>> MaxwolfRewrite
         ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
         ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
     }
@@ -276,14 +220,7 @@ public class ModMinechem
         TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
         GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
->>>>>>> MaxwolfRewrite
-=======
-        GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
->>>>>>> MaxwolfRewrite
         TabJournal.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 

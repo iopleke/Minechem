@@ -1,17 +1,8 @@
-package minechem.tileentity.fission;
+package minechem.tileentity.multiblock;
 
-<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
-<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
-import minechem.MinechemItemGeneration;
-=======
 import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
-=======
-import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
 import minechem.item.blueprint.BlueprintFission;
 import minechem.item.element.ItemElement;
-import minechem.tileentity.ghostblock.TileEntityMultiBlock;
 import minechem.utils.BoundedInventory;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
@@ -131,15 +122,7 @@ public class TileEntityFission extends TileEntityMultiBlock implements ISidedInv
             int newMass = mass / 2;
             if (newMass > 1)
             {
-<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
-<<<<<<< HEAD:src/main/java/minechem/tileentity/fission/TileEntityFission.java
-                return new ItemStack(MinechemItemGeneration.element, 2, newMass - 1);
-=======
                 return new ItemStack(MinechemItemsGeneration.element, 2, newMass - 1);
->>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
-=======
-                return new ItemStack(MinechemItemsGeneration.element, 2, newMass - 1);
->>>>>>> MaxwolfRewrite:src/main/java/minechem/tileentity/multiblock/TileEntityFission.java
             }
             else
             {

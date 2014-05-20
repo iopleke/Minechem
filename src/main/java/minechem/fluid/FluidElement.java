@@ -1,14 +1,6 @@
 package minechem.fluid;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-import minechem.MinechemItemGeneration;
-=======
 import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
-=======
-import minechem.MinechemItemsGeneration;
->>>>>>> MaxwolfRewrite
 import minechem.item.element.EnumElement;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
@@ -40,15 +32,7 @@ public class FluidElement extends Fluid implements IMinechemFluid
     @Override
     public ItemStack getOutputStack()
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        return new ItemStack(MinechemItemGeneration.element, 0, element.ordinal());
-=======
         return new ItemStack(MinechemItemsGeneration.element, 0, element.ordinal());
->>>>>>> MaxwolfRewrite
-=======
-        return new ItemStack(MinechemItemsGeneration.element, 0, element.ordinal());
->>>>>>> MaxwolfRewrite
     }
 
     @Override

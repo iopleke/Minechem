@@ -8,7 +8,7 @@ import net.minecraft.world.gen.feature.WorldGenMinable;
 import cpw.mods.fml.common.IWorldGenerator;
 import cpw.mods.fml.common.Loader;
 
-public class MinechemOreGeneration implements IWorldGenerator
+public class MinechemGeneration implements IWorldGenerator
 {
 
     @Override
@@ -25,15 +25,7 @@ public class MinechemOreGeneration implements IWorldGenerator
                         int firstBlockXCoord = 16 * chunkX + random.nextInt(16);
                         int firstBlockYCoord = random.nextInt(30);
                         int firstBlockZCoord = 16 * chunkZ + random.nextInt(16);
-<<<<<<< HEAD:src/main/java/minechem/MinechemOreGeneration.java
-<<<<<<< HEAD:src/main/java/minechem/MinechemOreGeneration.java
-                        WorldGenMinable mineable = new WorldGenMinable(MinechemBlockGeneration.uranium.blockID, 4);
-=======
                         WorldGenMinable mineable = new WorldGenMinable(MinechemBlocksGeneration.uranium.blockID, 4);
->>>>>>> MaxwolfRewrite:src/main/java/minechem/MinechemGeneration.java
-=======
-                        WorldGenMinable mineable = new WorldGenMinable(MinechemBlocksGeneration.uranium.blockID, 4);
->>>>>>> MaxwolfRewrite:src/main/java/minechem/MinechemGeneration.java
                         mineable.generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
                     }
                 }
