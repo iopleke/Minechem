@@ -12,18 +12,18 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiSynthesis extends GuiContainerTabbed
+public class SynthesisGui extends GuiContainerTabbed
 {
 
     int guiWidth = 176;
     int guiHeight = 187;
 
-    public GuiSynthesis(InventoryPlayer inventoryPlayer, TileEntitySynthesis synthesis)
+    public SynthesisGui(InventoryPlayer inventoryPlayer, SynthesisTileEntity synthesis)
     {
-        super(new ContainerSynthesis(inventoryPlayer, synthesis));
+        super(new SynthesisContainer(inventoryPlayer, synthesis));
         this.xSize = guiWidth;
         this.ySize = guiHeight;
-        addTab(new TabStateControlSynthesis(this, synthesis));
+        addTab(new SynthesisTabStateControl(this, synthesis));
         addTab(new GuiTabEnergy(this, synthesis));
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.synthesis")));
     }

@@ -23,8 +23,8 @@ import minechem.tileentity.multiblock.TileEntityFission;
 import minechem.tileentity.multiblock.TileEntityFusion;
 import minechem.tileentity.multiblock.TileEntityGhostBlock;
 import minechem.tileentity.prefab.TileEntityProxy;
-import minechem.tileentity.synthesis.BlockSynthesis;
-import minechem.tileentity.synthesis.TileEntitySynthesis;
+import minechem.tileentity.synthesis.SynthesisBlock;
+import minechem.tileentity.synthesis.SynthesisTileEntity;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
@@ -62,9 +62,9 @@ public class MinechemBlocksGeneration
         GameRegistry.registerTileEntity(TileEntityMicroscope.class, "minechem.tileEntityMicroscope");
 
         // Chemical Synthesis Machine.
-        synthesis = new BlockSynthesis(Settings.Synthesis);
+        synthesis = new SynthesisBlock(Settings.Synthesis);
         GameRegistry.registerBlock(synthesis, "minechem.blockSynthesis");
-        GameRegistry.registerTileEntity(TileEntitySynthesis.class, "minechem.tileEntitySynthesis");
+        GameRegistry.registerTileEntity(SynthesisTileEntity.class, "minechem.tileEntitySynthesis");
 
         // Fusion Reactor.
         fusion = new BlockFusion(Settings.FusionChamber);

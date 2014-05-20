@@ -27,9 +27,9 @@ import minechem.tileentity.multiblock.GuiFusion;
 import minechem.tileentity.multiblock.TileEntityFission;
 import minechem.tileentity.multiblock.TileEntityFusion;
 import minechem.tileentity.prefab.TileEntityProxy;
-import minechem.tileentity.synthesis.ContainerSynthesis;
-import minechem.tileentity.synthesis.GuiSynthesis;
-import minechem.tileentity.synthesis.TileEntitySynthesis;
+import minechem.tileentity.synthesis.SynthesisContainer;
+import minechem.tileentity.synthesis.SynthesisGui;
+import minechem.tileentity.synthesis.SynthesisTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -72,9 +72,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
         }
-        if (tileEntity instanceof TileEntitySynthesis)
+        if (tileEntity instanceof SynthesisTileEntity)
         {
-            return new ContainerSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
+            return new SynthesisContainer(player.inventory, (SynthesisTileEntity) tileEntity);
         }
         if (tileEntity instanceof TileEntityFusion)
         {
@@ -159,9 +159,9 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiMicroscope(player.inventory, (TileEntityMicroscope) tileEntity);
         }
-        if (tileEntity instanceof TileEntitySynthesis)
+        if (tileEntity instanceof SynthesisTileEntity)
         {
-            return new GuiSynthesis(player.inventory, (TileEntitySynthesis) tileEntity);
+            return new SynthesisGui(player.inventory, (SynthesisTileEntity) tileEntity);
         }
         if (tileEntity instanceof TileEntityFusion)
         {

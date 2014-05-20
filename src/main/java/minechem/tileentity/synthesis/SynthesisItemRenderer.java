@@ -10,14 +10,14 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemSynthesisRenderer extends ItemMinechemRenderer
+public class SynthesisItemRenderer extends ItemMinechemRenderer
 {
 
-    private ModelSynthesizer model;
+    private SynthesisModel model;
 
-    public ItemSynthesisRenderer()
+    public SynthesisItemRenderer()
     {
-        model = new ModelSynthesizer();
+        model = new SynthesisModel();
     }
 
     @Override

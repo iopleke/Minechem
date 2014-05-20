@@ -9,15 +9,15 @@ import net.minecraftforge.common.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
-public class TileEntitySynthesisRenderer extends TileEntitySpecialRenderer
+public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
     {
-        if (tileEntity instanceof TileEntitySynthesis)
+        if (tileEntity instanceof SynthesisTileEntity)
         {
-            TileEntitySynthesis synthesis = (TileEntitySynthesis) tileEntity;
+            SynthesisTileEntity synthesis = (SynthesisTileEntity) tileEntity;
             int facing = synthesis.getFacing();
 
             if (synthesis.getEnergy(ForgeDirection.UNKNOWN) > 100)

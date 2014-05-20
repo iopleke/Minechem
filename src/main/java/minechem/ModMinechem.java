@@ -22,7 +22,7 @@ import minechem.potion.EnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.tickhandler.ScheduledTickHandler;
 import minechem.tickhandler.TickHandler;
-import minechem.tileentity.synthesis.TabStateControlSynthesis;
+import minechem.tileentity.synthesis.SynthesisTabStateControl;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -218,7 +218,7 @@ public class ModMinechem
     public void textureHook(IconRegister icon)
     {
         GuiTabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
-        TabStateControlSynthesis.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
+        SynthesisTabStateControl.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
         GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);

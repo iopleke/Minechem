@@ -8,10 +8,10 @@ import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TabStateControlSynthesis extends GuiTabStateControl
+public class SynthesisTabStateControl extends GuiTabStateControl
 {
     public static Icon noRecipeIcon, unpoweredIcon;
-    TileEntitySynthesis synthesis;
+    SynthesisTileEntity synthesis;
 
     enum TabState
     {
@@ -33,7 +33,7 @@ public class TabStateControlSynthesis extends GuiTabStateControl
 
     TabState state;
 
-    public TabStateControlSynthesis(Gui gui, TileEntitySynthesis synthesis)
+    public SynthesisTabStateControl(Gui gui, SynthesisTileEntity synthesis)
     {
         super(gui);
         this.synthesis = synthesis;

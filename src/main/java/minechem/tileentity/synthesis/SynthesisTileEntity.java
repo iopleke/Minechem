@@ -21,7 +21,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
 
-public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInventory
+public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInventory
 {
     /** Amount of power the machine will accept in a single update. */
     private static final int POWER_INPUT = 200;
@@ -48,7 +48,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     private SynthesisRecipe currentRecipe;
     
     /** Client-side only model that is used to represent the machine to the player. */
-    public ModelSynthesizer model;
+    public SynthesisModel model;
     
     /** Holds the maximum number of input slots on the crafting matrix. Same as a crafting table in vanilla Minecraft. */
     public static final int kSizeStorage = 9;
@@ -92,7 +92,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     /** The number of ticks that the current item has been cooking for */
     public int currentItemCookingValue;
     
-    public TileEntitySynthesis()
+    public SynthesisTileEntity()
     {
         // Establishes maximum power and total amount of power that can be accepted per update.
         super(MAX_POWER, POWER_INPUT);
@@ -127,7 +127,7 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
         {
             // TODO: Replace with model loader and move to client proxy.
-            model = new ModelSynthesizer();
+            model = new SynthesisModel();
         }
     }
 
@@ -389,9 +389,9 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
 
         if (!worldObj.isRemote)
         {
-            PacketSynthesisUpdate packetSynthesisUpdate = new PacketSynthesisUpdate(this);
+            SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
             int dimensionID = worldObj.provider.dimensionId;
-            PacketDispatcher.sendPacketToAllInDimension(packetSynthesisUpdate.makePacket(), dimensionID);
+            PacketDispatcher.sendPacketToAllInDimension(synthesisPacketUpdate.makePacket(), dimensionID);
         }
 
         if (currentRecipe != null && inventory[kOutput[0]] == null)
@@ -593,10 +593,10 @@ public class TileEntitySynthesis extends MinechemTileEntity implements ISidedInv
     {
         if (var1 != 1 && takeStacksFromStorage(false))
         {
-            return TileEntitySynthesis.kOutput;
+            return SynthesisTileEntity.kOutput;
         }
         
-        return TileEntitySynthesis.kStorage;
+        return SynthesisTileEntity.kStorage;
     }
 
     @Override

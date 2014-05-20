@@ -12,10 +12,10 @@ import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
 
-public class PacketSynthesisUpdate extends MinechemPackets
+public class SynthesisPacketUpdate extends MinechemPackets
 {
     /** Client only reference to the tile entity that is the chemical synthesis machine. */
-    private TileEntitySynthesis tileEntity;
+    private SynthesisTileEntity tileEntity;
     
     /** X coordinates of tile entity source. */
     private int tilePosX;
@@ -38,7 +38,7 @@ public class PacketSynthesisUpdate extends MinechemPackets
     /** Total amount of time that will be spent processing current item. */
     private int lastItemCookTimeMaximum;
 
-    public PacketSynthesisUpdate(TileEntitySynthesis tileSynthesis)
+    public SynthesisPacketUpdate(SynthesisTileEntity tileSynthesis)
     {
         // World position information.
         tilePosX = tileSynthesis.xCoord;
@@ -57,7 +57,7 @@ public class PacketSynthesisUpdate extends MinechemPackets
         this.tileEntity = tileSynthesis;
     }
 
-    public PacketSynthesisUpdate()
+    public SynthesisPacketUpdate()
     {
         // Required for reflection.
     }
@@ -72,7 +72,7 @@ public class PacketSynthesisUpdate extends MinechemPackets
         // Packet received by client, executing payload.
         if (side.isClient())
         {
-            tileEntity = (TileEntitySynthesis) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
+            tileEntity = (SynthesisTileEntity) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
             if (tileEntity == null)
             {
                 return;

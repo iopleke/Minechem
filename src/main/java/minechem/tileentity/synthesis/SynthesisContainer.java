@@ -13,18 +13,18 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadiationShield
+public class SynthesisContainer extends ContainerWithFakeSlots implements IRadiationShield
 {
 
-    private TileEntitySynthesis synthesis;
+    private SynthesisTileEntity synthesis;
 
-    public ContainerSynthesis(InventoryPlayer inventoryPlayer, TileEntitySynthesis synthesis)
+    public SynthesisContainer(InventoryPlayer inventoryPlayer, SynthesisTileEntity synthesis)
     {
         this.synthesis = synthesis;
-        addSlotToContainer(new SlotSynthesisOutput(synthesis, TileEntitySynthesis.kStartOutput, 134, 18));
+        addSlotToContainer(new SynthesisSlotOutput(synthesis, SynthesisTileEntity.kStartOutput, 134, 18));
         bindRecipeMatrixSlots();
         bindStorageSlots();
-        addSlotToContainer(new SlotJournal(synthesis, TileEntitySynthesis.kStartJournal, 26, 36));
+        addSlotToContainer(new SlotJournal(synthesis, SynthesisTileEntity.kStartJournal, 26, 36));
         bindPlayerInventory(inventoryPlayer);
     }
 
@@ -35,7 +35,7 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
         {
             for (int col = 0; col < 3; col++)
             {
-                addSlotToContainer(new SlotFake(synthesis, TileEntitySynthesis.kStartRecipe + slot, 62 + (col * 18), 18 + (row * 18)));
+                addSlotToContainer(new SlotFake(synthesis, SynthesisTileEntity.kStartRecipe + slot, 62 + (col * 18), 18 + (row * 18)));
                 slot++;
             }
         }
@@ -46,7 +46,7 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
         int slot = 0;
         for (int col = 0; col < 9; col++)
         {
-            addSlotToContainer(new SlotChemical(synthesis, TileEntitySynthesis.kStartStorage + slot, 8 + (col * 18), 84));
+            addSlotToContainer(new SlotChemical(synthesis, SynthesisTileEntity.kStartStorage + slot, 8 + (col * 18), 84));
             slot++;
         }
     }
@@ -81,28 +81,28 @@ public class ContainerSynthesis extends ContainerWithFakeSlots implements IRadia
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
-            if (slot != TileEntitySynthesis.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(TileEntitySynthesis.kStartJournal).getHasStack())
+            if (slot != SynthesisTileEntity.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(SynthesisTileEntity.kStartJournal).getHasStack())
             {
                 ItemStack copystack = slotObject.decrStackSize(1);
-                getSlot(TileEntitySynthesis.kStartJournal).putStack(copystack);
+                getSlot(SynthesisTileEntity.kStartJournal).putStack(copystack);
                 return null;
             }
-            else if (slot == TileEntitySynthesis.kStartOutput)
+            else if (slot == SynthesisTileEntity.kStartOutput)
             {
                 if (!craftMaxmimum())
                     return null;
             }
             else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
             {
-                if (!mergeItemStack(stackInSlot, TileEntitySynthesis.kStartStorage, TileEntitySynthesis.kStartStorage + TileEntitySynthesis.kSizeStorage, false))
+                if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
                     return null;
             }
-            else if (slot >= TileEntitySynthesis.kStartStorage && slot < TileEntitySynthesis.kStartStorage + TileEntitySynthesis.kSizeStorage)
+            else if (slot >= SynthesisTileEntity.kStartStorage && slot < SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage)
             {
                 if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
                     return null;
             }
-            else if (slot == TileEntitySynthesis.kStartJournal)
+            else if (slot == SynthesisTileEntity.kStartJournal)
             {
                 if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
                     return null;

@@ -14,11 +14,11 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /** Chemical Synthesizer block. Its associated TileEntitySynthesis's inventory inventory has many specialized slots, including some "ghost" slots whose contents don't really exist and shouldn't be able to be extracted or dumped when the block is broken. See
- * {@link minechem.tileentity.synthesis.TileEntitySynthesis} for details of the inventory slots. */
-public class BlockSynthesis extends BlockMinechemContainer
+ * {@link minechem.tileentity.synthesis.SynthesisTileEntity} for details of the inventory slots. */
+public class SynthesisBlock extends BlockMinechemContainer
 {
 
-    public BlockSynthesis(int par1)
+    public SynthesisBlock(int par1)
     {
         super(par1, Material.iron);
         setUnlocalizedName("minechem.blockSynthesis");
@@ -46,14 +46,14 @@ public class BlockSynthesis extends BlockMinechemContainer
     @Override
     public TileEntity createNewTileEntity(World var1)
     {
-        return new TileEntitySynthesis();
+        return new SynthesisTileEntity();
     }
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList itemStacks)
     {
-        TileEntitySynthesis synthesizer = (TileEntitySynthesis) tileEntity;
-        for (int slot : TileEntitySynthesis.kRealSlots)
+        SynthesisTileEntity synthesizer = (SynthesisTileEntity) tileEntity;
+        for (int slot : SynthesisTileEntity.kRealSlots)
         {
             if (synthesizer.isRealItemSlot(slot))
             {

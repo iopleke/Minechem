@@ -4,7 +4,7 @@ import minechem.ModMinechem;
 import minechem.item.chemistjournal.PacketActiveJournalItem;
 import minechem.tileentity.decomposer.DecomposerPacketUpdate;
 import minechem.tileentity.multiblock.PacketGhostBlock;
-import minechem.tileentity.synthesis.PacketSynthesisUpdate;
+import minechem.tileentity.synthesis.SynthesisPacketUpdate;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.network.packet.Packet;
 
@@ -58,7 +58,7 @@ public abstract class MinechemPackets
         builder.put(Integer.valueOf(2), PacketGhostBlock.class);
 
         // Chemical Synthesis Machine
-        builder.put(Integer.valueOf(3), PacketSynthesisUpdate.class);
+        builder.put(Integer.valueOf(3), SynthesisPacketUpdate.class);
 
         idMap = builder.build();
     }

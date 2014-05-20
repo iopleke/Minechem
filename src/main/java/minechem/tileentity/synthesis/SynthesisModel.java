@@ -10,7 +10,7 @@ import minechem.utils.MinechemHelper;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelSynthesizer extends ModelBase
+public class SynthesisModel extends ModelBase
 {
     // fields
     ModelRenderer base;
@@ -32,7 +32,7 @@ public class ModelSynthesizer extends ModelBase
 
     float animationTimer = 0;
 
-    public ModelSynthesizer()
+    public SynthesisModel()
     {
         textureWidth = 128;
         textureHeight = 64;

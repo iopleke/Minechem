@@ -6,7 +6,7 @@ import java.util.List;
 
 import minechem.ModMinechem;
 import minechem.potion.Chemical;
-import minechem.tileentity.synthesis.GuiSynthesis;
+import minechem.tileentity.synthesis.SynthesisGui;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -55,7 +55,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
     @Override
     public Class getGuiClass()
     {
-        return GuiSynthesis.class;
+        return SynthesisGui.class;
     }
 
     @Override
