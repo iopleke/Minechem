@@ -25,12 +25,14 @@ buildProps.withReader {
     ext.config = new ConfigSlurper().parse prop
 }
  
+version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
 group = "minechem"
- 
+archivesBaseName = "MineChem"
+
 minecraft {
-    version = "${rootProject.config.version.minecraft}-${rootProject.config.version.forge}"
-    
-    replaceIn "ModMinechem.java"
+    version = "${config.version.minecraft}-${config.version.forge}"
+	
+	replaceIn "ModMinechem.java"
 	replace "@MAJOR@", config.version.mod.major
 	replace "@MINOR@", config.version.mod.minor
 	replace "@REVIS@", config.version.mod.revis
@@ -42,6 +44,17 @@ minecraft {
 	{
 		replace "@BUILD@", "[NIGHTLY]"
 	}
+}
+
+if (System.getenv("BUILD_NUMBER") != null) {
+    version += ".${System.getenv("BUILD_NUMBER")}";
+}
+else {
+	version = "MC${config.version.minecraft}-F${config.version.forge}_[NIGHTLY]"
+}
+
+processResources {
+	from 'build.properties'
 }
 
 allprojects {
@@ -95,10 +108,6 @@ allprojects {
 			}
 		}
 	}
-}
-
-processResources {
-	from 'build.properties'
 }
  
 task copyBuildXml(type: Copy) {
