@@ -11,7 +11,6 @@ import minechem.gui.GuiVerticalScrollBar;
 import minechem.gui.IVerticalScrollContainer;
 import minechem.gui.ScissorHelper;
 import minechem.gui.tabs.Tab;
-import minechem.tileentity.chemicalstorage.PacketActiveJournalItem;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;

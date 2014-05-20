@@ -6,7 +6,6 @@ import java.util.List;
 import minechem.item.IRadiationShield;
 import minechem.item.element.EnumRadioactivity;
 import minechem.item.element.ItemElement;
-import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
 import minechem.tileentity.leadedchest.ContainerLeadedChest;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -44,11 +43,7 @@ public class RadiationHandler
     public void update(EntityPlayer player)
     {
         Container openContainer = player.openContainer;
-        if (openContainer != null && openContainer instanceof ContainerChemicalStorage)
-        {
-            updateChemicalStorageContainer(player, openContainer);
-        }
-        else if (openContainer != null && openContainer instanceof ContainerLeadedChest)
+        if (openContainer != null && openContainer instanceof ContainerLeadedChest)
         {
             updateContainerLeadedChest(player, openContainer);
         }
@@ -87,23 +82,6 @@ public class RadiationHandler
             }
         }
         List<ItemStack> playerStacks = leadedChest.getPlayerInventory();
-        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
-    }
-
-    private void updateChemicalStorageContainer(EntityPlayer player, Container openContainer)
-    {
-        ContainerChemicalStorage chemicalStorage = (ContainerChemicalStorage) openContainer;
-        List<ItemStack> itemstacks = chemicalStorage.getStorageInventory();
-        for (ItemStack itemstack : itemstacks)
-        {
-            if (itemstack != null && itemstack.itemID == MinechemItems.element.itemID && ItemElement.getRadioactivity(itemstack) != EnumRadioactivity.stable)
-            {
-                RadiationInfo radiationInfo = ItemElement.getRadiationInfo(itemstack, player.worldObj);
-                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
-                ItemElement.setRadiationInfo(radiationInfo, itemstack);
-            }
-        }
-        List<ItemStack> playerStacks = chemicalStorage.getPlayerInventory();
         updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
     }
 

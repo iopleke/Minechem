@@ -2,9 +2,9 @@ package minechem.tileentity.microscope;
 
 import java.util.ArrayList;
 
-import minechem.CommonProxy;
 import minechem.ModMinechem;
 import minechem.block.BlockMinechemContainer;
+import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

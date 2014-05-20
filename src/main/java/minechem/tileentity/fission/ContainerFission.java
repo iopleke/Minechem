@@ -1,43 +1,46 @@
-package minechem.tileentity.decomposer;
+package minechem.tileentity.fission;
 
+import minechem.MinechemItems;
 import minechem.item.IRadiationShield;
-import minechem.slots.SlotOutput;
+import minechem.item.element.EnumElement;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerDecomposer extends Container implements IRadiationShield
+public class ContainerFission extends Container implements IRadiationShield
 {
 
-    protected TileEntityDecomposer decomposer;
+    protected TileEntityFission fission;
     protected final int kPlayerInventorySlotStart;
     protected final int kPlayerInventorySlotEnd;
     protected final int kDecomposerInventoryEnd;
 
-    public ContainerDecomposer(InventoryPlayer inventoryPlayer, TileEntityDecomposer decomposer)
+    public ContainerFission(InventoryPlayer inventoryPlayer, TileEntityFission fission)
     {
-        this.decomposer = decomposer;
-        kPlayerInventorySlotStart = decomposer.getSizeInventory();
+        this.fission = fission;
+        kPlayerInventorySlotStart = fission.getSizeInventory();
         kPlayerInventorySlotEnd = kPlayerInventorySlotStart + (9 * 4);
-        kDecomposerInventoryEnd = decomposer.getSizeInventory();
+        kDecomposerInventoryEnd = fission.getSizeInventory();
 
-        addSlotToContainer(new Slot(decomposer, decomposer.kInputSlot, 80, 16));
-        bindOutputSlots();
+        addSlotToContainer(new Slot(fission, TileEntityFission.kInput[0], 80, 16));
+        bindOutputSlot();
+        bindFuelSlot();
         bindPlayerInventory(inventoryPlayer);
     }
 
-    private void bindOutputSlots()
+    private void bindOutputSlot()
     {
         int x = 8;
         int y = 62;
         int j = 0;
-        for (int i = 1; i < 10; i++)
-        {
-            addSlotToContainer(new SlotOutput(decomposer, i, x + (j * 18), y));
-            j++;
-        }
+        addSlotToContainer(new Slot(fission, 2, x + (4 * 18), y));
+    }
+
+    private void bindFuelSlot()
+    {
+        addSlotToContainer(new Slot(fission, TileEntityFission.kStartFuel, 125, 33));
     }
 
     private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
@@ -59,7 +62,7 @@ public class ContainerDecomposer extends Container implements IRadiationShield
     @Override
     public boolean canInteractWith(EntityPlayer entityPlayer)
     {
-        return decomposer.isUseableByPlayer(entityPlayer);
+        return fission.isUseableByPlayer(entityPlayer);
     }
 
     @Override
@@ -75,9 +78,14 @@ public class ContainerDecomposer extends Container implements IRadiationShield
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
                     return null;
             }
+            else if (stackInSlot.itemID == MinechemItems.element.itemID && stackInSlot.getItemDamage() == EnumElement.U.atomicNumber() + 1)
+            {
+                if (!mergeItemStack(stackInSlot, TileEntityFission.kStartFuel, TileEntityFission.kStartFuel + 1, false))
+                    return null;
+            }
             else if (slot >= kPlayerInventorySlotStart)
             {
-                if (!mergeItemStack(stackInSlot, decomposer.kInputSlot, decomposer.kInputSlot + 1, false))
+                if (!mergeItemStack(stackInSlot, TileEntityFission.kStartInput, TileEntityFission.kStartInput + 1, false))
                     return null;
             }
             else if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))

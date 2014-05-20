@@ -28,7 +28,7 @@ public class ItemChemistJournal extends Item
     {
         super(id);
         setUnlocalizedName("minechem.itemChemistJournal");
-        setCreativeTab(null);
+        setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
     @Override

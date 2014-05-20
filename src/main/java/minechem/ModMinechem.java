@@ -16,6 +16,7 @@ import minechem.gui.tabs.TabTable;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.MinechemPacketHandler;
+import minechem.network.server.CommonProxy;
 import minechem.oredictionary.MinechemRecipes;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IconRegister;

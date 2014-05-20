@@ -3,7 +3,7 @@ package minechem.block;
 import java.util.ArrayList;
 import java.util.Random;
 
-import minechem.CommonProxy;
+import minechem.network.server.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IconRegister;

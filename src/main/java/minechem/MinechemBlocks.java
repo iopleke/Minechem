@@ -6,22 +6,20 @@ import minechem.item.element.Element;
 import minechem.item.element.EnumElement;
 import minechem.tileentity.blueprintprojector.BlockBlueprintProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
-import minechem.tileentity.chemicalstorage.BlockChemicalStorage;
-import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
 import minechem.tileentity.decomposer.BlockDecomposer;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.TileEntityDecomposer;
+import minechem.tileentity.fission.TileEntityFission;
+import minechem.tileentity.fusion.BlockFusion;
+import minechem.tileentity.fusion.ItemBlockFusion;
+import minechem.tileentity.fusion.TileEntityFusion;
+import minechem.tileentity.ghostblock.BlockGhostBlock;
+import minechem.tileentity.ghostblock.ItemGhostBlock;
+import minechem.tileentity.ghostblock.TileEntityGhostBlock;
 import minechem.tileentity.leadedchest.BlockLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.microscope.BlockMicroscope;
 import minechem.tileentity.microscope.TileEntityMicroscope;
-import minechem.tileentity.multiblock.BlockFusion;
-import minechem.tileentity.multiblock.BlockGhostBlock;
-import minechem.tileentity.multiblock.ItemBlockFusion;
-import minechem.tileentity.multiblock.ItemGhostBlock;
-import minechem.tileentity.multiblock.TileEntityFission;
-import minechem.tileentity.multiblock.TileEntityFusion;
-import minechem.tileentity.multiblock.TileEntityGhostBlock;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.tileentity.synthesis.BlockSynthesis;
 import minechem.tileentity.synthesis.TileEntitySynthesis;
@@ -41,7 +39,6 @@ public class MinechemBlocks
     public static Block ghostBlock;
     public static Block blueprintProjector;
     public static Block fusion;
-    public static Block chemicalStorage;
     public static Block printer;
     public static Block leadedChest;
 
@@ -80,11 +77,6 @@ public class MinechemBlocks
         blueprintProjector = new BlockBlueprintProjector(Settings.BlueprintProjector);
         GameRegistry.registerBlock(blueprintProjector, "minechem.blockBlueprintProjector");
         GameRegistry.registerTileEntity(TileEntityBlueprintProjector.class, "minechem.tileEntityBlueprintProjector");
-
-        // Chemical Storage Chest.
-        chemicalStorage = new BlockChemicalStorage(Settings.ChemicalStorage);
-        GameRegistry.registerBlock(chemicalStorage, "minechem.blockChemicalStorage");
-        GameRegistry.registerTileEntity(TileEntityChemicalStorage.class, "minechem.tileEntityChemicalStorage");
 
         // Uranium Ore (World Gen).
         uranium = new OreUranium(Settings.UraniumOre);

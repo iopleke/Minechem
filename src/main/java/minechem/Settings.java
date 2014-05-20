@@ -84,25 +84,11 @@ public class Settings
     public static @CfgId(block = true)
     int FusionChamber = getNextBlockID();
     public static @CfgId(block = true)
-    int ChemicalStorage = getNextBlockID();
-    public static @CfgId(block = true)
     int BluePrintPrinter = getNextBlockID();
     public static @CfgId(block = true)
     int UraniumOre = getNextBlockID();
     public static @CfgId(block = true)
     int LeadedChest = getNextBlockID();
-
-    // Particle Physics
-    public static @CfgId(block = true)
-    int Emitter = getNextBlockID();
-    public static @CfgId(block = true)
-    int PolarizedGlass = getNextBlockID();
-    public static @CfgId(block = true)
-    int SeriesReceptor = getNextBlockID();
-    public static @CfgId(block = true)
-    int ControlGlass = getNextBlockID();
-    public static @CfgId(block = true)
-    int InfiniteEmitter = getNextBlockID();
 
     // --------
     // FEATURES

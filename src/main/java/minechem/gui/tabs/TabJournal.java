@@ -1,7 +1,6 @@
 package minechem.gui.tabs;
 
 import minechem.ModMinechem;
-import minechem.gui.GuiTableOfElements;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
@@ -13,9 +12,6 @@ public class TabJournal extends Tab
     public TabJournal(Gui gui)
     {
         super(gui);
-
-        this.currentShiftX = GuiTableOfElements.GUI_WIDTH - 411;
-        this.currentShiftY = GuiTableOfElements.GUI_HEIGHT - 411;
         this.overlayColor = 0x2F7DAA;
     }
 

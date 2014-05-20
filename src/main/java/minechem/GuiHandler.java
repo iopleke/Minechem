@@ -1,7 +1,5 @@
 package minechem;
 
-import minechem.containers.CotainerTable;
-import minechem.gui.GuiTableOfElements;
 import minechem.item.chemistjournal.ContainerChemistJournal;
 import minechem.item.chemistjournal.GuiChemistJournal;
 import minechem.item.polytool.ContainerPolytool;
@@ -9,24 +7,21 @@ import minechem.item.polytool.GuiPolytool;
 import minechem.tileentity.blueprintprojector.ContainerProjector;
 import minechem.tileentity.blueprintprojector.GuiProjector;
 import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
-import minechem.tileentity.chemicalstorage.ContainerChemicalStorage;
-import minechem.tileentity.chemicalstorage.GuiChemicalStorage;
-import minechem.tileentity.chemicalstorage.TileEntityChemicalStorage;
 import minechem.tileentity.decomposer.ContainerDecomposer;
 import minechem.tileentity.decomposer.GuiDecomposer;
 import minechem.tileentity.decomposer.TileEntityDecomposer;
+import minechem.tileentity.fission.ContainerFission;
+import minechem.tileentity.fission.GuiFission;
+import minechem.tileentity.fission.TileEntityFission;
+import minechem.tileentity.fusion.ContainerFusion;
+import minechem.tileentity.fusion.GuiFusion;
+import minechem.tileentity.fusion.TileEntityFusion;
 import minechem.tileentity.leadedchest.ContainerLeadedChest;
 import minechem.tileentity.leadedchest.GuiLeadedChest;
 import minechem.tileentity.leadedchest.TileEntityLeadedChest;
 import minechem.tileentity.microscope.ContainerMicroscope;
 import minechem.tileentity.microscope.GuiMicroscope;
 import minechem.tileentity.microscope.TileEntityMicroscope;
-import minechem.tileentity.multiblock.ContainerFission;
-import minechem.tileentity.multiblock.ContainerFusion;
-import minechem.tileentity.multiblock.GuiFission;
-import minechem.tileentity.multiblock.GuiFusion;
-import minechem.tileentity.multiblock.TileEntityFission;
-import minechem.tileentity.multiblock.TileEntityFusion;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.tileentity.synthesis.ContainerSynthesis;
 import minechem.tileentity.synthesis.GuiSynthesis;
@@ -41,7 +36,6 @@ public class GuiHandler implements IGuiHandler
 
     public static final int GUI_ID_TILEENTITY = 0;
     public static final int GUI_ID_JOURNAL = 1;
-    public static final int GUI_TABLE = 2;
 
     public static final int GUI_ID_POLYTOOL = 3;
 
@@ -55,10 +49,6 @@ public class GuiHandler implements IGuiHandler
         if (ID == GUI_ID_POLYTOOL)
         {
             return getServerGuiElementForPolytool(player, world);
-        }
-        if (ID == GUI_TABLE)
-        {
-            return new CotainerTable(player.inventory);
         }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (tileEntity instanceof TileEntityDecomposer)
@@ -94,10 +84,6 @@ public class GuiHandler implements IGuiHandler
         if (tileEntity instanceof TileEntityBlueprintProjector)
         {
             return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
-        }
-        if (tileEntity instanceof TileEntityChemicalStorage)
-        {
-            return new ContainerChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
         }
         return null;
     }
@@ -135,11 +121,6 @@ public class GuiHandler implements IGuiHandler
         {
             return getClientGuiElementForJournal(player, world);
         }
-        
-        if (ID == GUI_TABLE)
-        {
-            return getClientGuiForJournal(player, world);
-        }
 
         if (ID == GUI_ID_POLYTOOL)
         {
@@ -176,10 +157,6 @@ public class GuiHandler implements IGuiHandler
         {
             return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
         }
-        if (tileEntity instanceof TileEntityChemicalStorage)
-        {
-            return new GuiChemicalStorage(player.inventory, (TileEntityChemicalStorage) tileEntity);
-        }
         if (tileEntity instanceof TileEntityFission)
         {
             return new GuiFission(player.inventory, (TileEntityFission) tileEntity);
@@ -212,10 +189,4 @@ public class GuiHandler implements IGuiHandler
     {
         return new GuiChemistJournal(player);
     }
-
-    public Object getClientGuiForJournal(EntityPlayer player, World world)
-    {
-        return new GuiTableOfElements(player);
-    }
-
 }
