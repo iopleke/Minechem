@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
-import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
+import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.SafeTimeTracker;

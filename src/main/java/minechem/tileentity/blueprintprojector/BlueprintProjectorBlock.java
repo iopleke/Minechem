@@ -15,10 +15,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlockBlueprintProjector extends BlockMinechemContainer
+public class BlueprintProjectorBlock extends BlockMinechemContainer
 {
 
-    public BlockBlueprintProjector(int id)
+    public BlueprintProjectorBlock(int id)
     {
         super(id, Material.iron);
         setUnlocalizedName("minechem.blockBlueprintProjector");
@@ -38,7 +38,7 @@ public class BlockBlueprintProjector extends BlockMinechemContainer
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
     {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
             entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
             return true;
@@ -46,7 +46,7 @@ public class BlockBlueprintProjector extends BlockMinechemContainer
         return false;
     }
 
-    private ItemStack takeBlueprintFromProjector(TileEntityBlueprintProjector projector)
+    private ItemStack takeBlueprintFromProjector(BlueprintProjectorTileEntity projector)
     {
         MinechemBlueprint blueprint = projector.takeBlueprint();
         ItemStack blueprintItem = ItemBlueprint.createItemStackFromBlueprint(blueprint);
@@ -56,15 +56,15 @@ public class BlockBlueprintProjector extends BlockMinechemContainer
     @Override
     public TileEntity createNewTileEntity(World world)
     {
-        return new TileEntityBlueprintProjector();
+        return new BlueprintProjectorTileEntity();
     }
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
     {
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
-            TileEntityBlueprintProjector projector = (TileEntityBlueprintProjector) tileEntity;
+            BlueprintProjectorTileEntity projector = (BlueprintProjectorTileEntity) tileEntity;
             if (projector.hasBlueprint())
                 itemStacks.add(takeBlueprintFromProjector(projector));
         }

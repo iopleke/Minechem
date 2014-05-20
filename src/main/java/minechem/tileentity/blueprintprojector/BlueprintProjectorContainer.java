@@ -7,13 +7,13 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class ContainerProjector extends Container
+public class BlueprintProjectorContainer extends Container
 {
 
-    TileEntityBlueprintProjector projector;
+    BlueprintProjectorTileEntity projector;
     InventoryPlayer inventoryPlayer;
 
-    public ContainerProjector(InventoryPlayer inventoryPlayer, TileEntityBlueprintProjector projector)
+    public BlueprintProjectorContainer(InventoryPlayer inventoryPlayer, BlueprintProjectorTileEntity projector)
     {
         this.inventoryPlayer = inventoryPlayer;
         this.projector = projector;

@@ -5,9 +5,9 @@ import minechem.item.chemistjournal.ContainerChemistJournal;
 import minechem.item.chemistjournal.GuiChemistJournal;
 import minechem.item.polytool.ContainerPolytool;
 import minechem.item.polytool.GuiPolytool;
-import minechem.tileentity.blueprintprojector.ContainerProjector;
-import minechem.tileentity.blueprintprojector.GuiProjector;
-import minechem.tileentity.blueprintprojector.TileEntityBlueprintProjector;
+import minechem.tileentity.blueprintprojector.BlueprintProjectorContainer;
+import minechem.tileentity.blueprintprojector.BlueprintProjectorGui;
+import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.chemicalstorage.ChemicalStorageContainer;
 import minechem.tileentity.chemicalstorage.ChemicalStorageGui;
 import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntity;
@@ -90,9 +90,9 @@ public class GuiHandler implements IGuiHandler
             return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
 
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
-            return new ContainerProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
+            return new BlueprintProjectorContainer(player.inventory, (BlueprintProjectorTileEntity) tileEntity);
         }
         if (tileEntity instanceof ChemicalStorageTileEntity)
         {
@@ -171,9 +171,9 @@ public class GuiHandler implements IGuiHandler
         {
             return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
         }
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
-            return new GuiProjector(player.inventory, (TileEntityBlueprintProjector) tileEntity);
+            return new BlueprintProjectorGui(player.inventory, (BlueprintProjectorTileEntity) tileEntity);
         }
         if (tileEntity instanceof ChemicalStorageTileEntity)
         {

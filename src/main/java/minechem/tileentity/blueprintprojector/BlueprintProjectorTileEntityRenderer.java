@@ -8,22 +8,22 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class TileEntityBlueprintProjectorRenderer extends TileEntitySpecialRenderer
+public class BlueprintProjectorTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
-    ModelProjector model;
+    BlueprintProjectorModel model;
 
-    public TileEntityBlueprintProjectorRenderer()
+    public BlueprintProjectorTileEntityRenderer()
     {
-        this.model = new ModelProjector();
+        this.model = new BlueprintProjectorModel();
     }
 
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
     {
-        if (tileEntity instanceof TileEntityBlueprintProjector)
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
-            TileEntityBlueprintProjector blueprintProjector = (TileEntityBlueprintProjector) tileEntity;
+            BlueprintProjectorTileEntity blueprintProjector = (BlueprintProjectorTileEntity) tileEntity;
             int facing = blueprintProjector.getFacing();
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);

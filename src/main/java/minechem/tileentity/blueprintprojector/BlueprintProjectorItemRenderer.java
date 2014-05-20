@@ -10,14 +10,14 @@ import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class ItemBlueprintProjectorRenderer extends ItemMinechemRenderer
+public class BlueprintProjectorItemRenderer extends ItemMinechemRenderer
 {
 
-    private ModelProjector model;
+    private BlueprintProjectorModel model;
 
-    public ItemBlueprintProjectorRenderer()
+    public BlueprintProjectorItemRenderer()
     {
-        model = new ModelProjector();
+        model = new BlueprintProjectorModel();
     }
 
     @Override

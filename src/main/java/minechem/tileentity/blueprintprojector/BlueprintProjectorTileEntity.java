@@ -23,7 +23,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.ForgeDirection;
 
-public class TileEntityBlueprintProjector extends MinechemTileEntity
+public class BlueprintProjectorTileEntity extends MinechemTileEntity
 {
     private static int air;
     MinechemBlueprint blueprint;
@@ -32,7 +32,7 @@ public class TileEntityBlueprintProjector extends MinechemTileEntity
     Integer[][][] structure;
     LoopingSound projectorSound;
 
-    public TileEntityBlueprintProjector()
+    public BlueprintProjectorTileEntity()
     {
         this.projectorSound = new LoopingSound("pixlepix.minechem.projector", 20);
         this.projectorSound.setVolume(.2F);

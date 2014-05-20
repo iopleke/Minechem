@@ -9,7 +9,7 @@ package minechem.tileentity.blueprintprojector;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
-public class ModelProjector extends ModelBase
+public class BlueprintProjectorModel extends ModelBase
 {
     // fields
     ModelRenderer base;
@@ -28,7 +28,7 @@ public class ModelProjector extends ModelBase
     ModelRenderer keypadstand;
     ModelRenderer lecternlip;
 
-    public ModelProjector()
+    public BlueprintProjectorModel()
     {
         textureWidth = 128;
         textureHeight = 64;

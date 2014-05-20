@@ -20,14 +20,14 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class GuiProjector extends GuiContainerTabbed
+public class BlueprintProjectorGui extends GuiContainerTabbed
 {
 
-    TileEntityBlueprintProjector projector;
+    BlueprintProjectorTileEntity projector;
 
-    public GuiProjector(InventoryPlayer inventoryPlayer, TileEntityBlueprintProjector projector)
+    public BlueprintProjectorGui(InventoryPlayer inventoryPlayer, BlueprintProjectorTileEntity projector)
     {
-        super(new ContainerProjector(inventoryPlayer, projector));
+        super(new BlueprintProjectorContainer(inventoryPlayer, projector));
         this.projector = projector;
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.projector")));
     }
