@@ -31,12 +31,6 @@ public class SynthesisPacketUpdate extends MinechemPackets
     
     /** Maximum amount of energy. */
     private long lastItemStoredEnergyMaximum;
-    
-    /** Current amount of time that has been spent processing current item. */
-    private int lastItemCookTimeValue;
-    
-    /** Total amount of time that will be spent processing current item. */
-    private int lastItemCookTimeMaximum;
 
     public SynthesisPacketUpdate(SynthesisTileEntity tileSynthesis)
     {
@@ -44,10 +38,6 @@ public class SynthesisPacketUpdate extends MinechemPackets
         tilePosX = tileSynthesis.xCoord;
         tilePosY = tileSynthesis.yCoord;
         tilePosZ = tileSynthesis.zCoord;
-        
-        // Cook time.
-        lastItemCookTimeValue = tileSynthesis.currentItemCookingValue;
-        lastItemCookTimeMaximum = tileSynthesis.currentItemCookingMaximum;
         
         // Energy.
         lastItemStoredEnergy = tileSynthesis.getEnergy(ForgeDirection.UNKNOWN);
@@ -77,10 +67,6 @@ public class SynthesisPacketUpdate extends MinechemPackets
             {
                 return;
             }
-            
-            // Cook time.
-            this.tileEntity.currentItemCookingValue = lastItemCookTimeValue;
-            this.tileEntity.currentItemCookingMaximum = lastItemCookTimeMaximum;
 
             // Energy.
             this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
@@ -104,10 +90,6 @@ public class SynthesisPacketUpdate extends MinechemPackets
         this.tilePosY = in.readInt();
         this.tilePosZ = in.readInt();
 
-        // Cook time.
-        this.lastItemCookTimeValue = in.readInt();
-        this.lastItemCookTimeMaximum = in.readInt();
-
         // Energy.
         this.lastItemStoredEnergy = in.readLong();
         this.lastItemStoredEnergyMaximum = in.readLong();
@@ -124,10 +106,6 @@ public class SynthesisPacketUpdate extends MinechemPackets
         out.writeInt(tilePosX);
         out.writeInt(tilePosY);
         out.writeInt(tilePosZ);
-
-        // Cook time.
-        out.writeInt(lastItemCookTimeValue);
-        out.writeInt(lastItemCookTimeMaximum);
 
         // Energy.
         out.writeLong(lastItemStoredEnergy);

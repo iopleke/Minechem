@@ -32,12 +32,6 @@ public class DecomposerPacketUpdate extends MinechemPackets
     /** Maximum amount of energy. */
     private long lastItemStoredEnergyMaximum;
     
-    /** Current amount of time that has been spent processing current item. */
-    private int lastItemCookTimeValue;
-    
-    /** Total amount of time that will be spent processing current item. */
-    private int lastItemCookTimeMaximum;
-    
     /** Reference object that will be hooked on client side only */
     private DecomposerTileEntity tileEntity;
 
@@ -47,10 +41,6 @@ public class DecomposerPacketUpdate extends MinechemPackets
         tilePosX = serverDecomposer.xCoord;
         tilePosY = serverDecomposer.yCoord;
         tilePosZ = serverDecomposer.zCoord;
-        
-        // Cook time.
-        lastItemCookTimeValue = serverDecomposer.currentItemCookingValue;
-        lastItemCookTimeMaximum = serverDecomposer.currentItemCookingMaximum;
         
         // Energy.
         lastItemStoredEnergy = serverDecomposer.getEnergy(ForgeDirection.UNKNOWN);
@@ -81,10 +71,6 @@ public class DecomposerPacketUpdate extends MinechemPackets
                 return;
             }
             
-            // Cook time.
-            this.tileEntity.currentItemCookingValue = lastItemCookTimeValue;
-            this.tileEntity.currentItemCookingMaximum = lastItemCookTimeMaximum;
-            
             // Energy.
             this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
             this.tileEntity.setEnergyCapacity(lastItemStoredEnergyMaximum);
@@ -110,10 +96,6 @@ public class DecomposerPacketUpdate extends MinechemPackets
         this.tilePosY = in.readInt();
         this.tilePosZ = in.readInt();
 
-        // Cook time.
-        this.lastItemCookTimeValue = in.readInt();
-        this.lastItemCookTimeMaximum = in.readInt();
-
         // Energy.
         this.lastItemStoredEnergy = in.readLong();
         this.lastItemStoredEnergyMaximum = in.readLong();
@@ -133,10 +115,6 @@ public class DecomposerPacketUpdate extends MinechemPackets
         out.writeInt(tilePosX);
         out.writeInt(tilePosY);
         out.writeInt(tilePosZ);
-
-        // Cook time.
-        out.writeInt(lastItemCookTimeValue);
-        out.writeInt(lastItemCookTimeMaximum);
 
         // Energy.
         out.writeLong(lastItemStoredEnergy);

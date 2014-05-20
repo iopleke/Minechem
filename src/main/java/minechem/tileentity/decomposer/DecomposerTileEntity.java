@@ -33,12 +33,6 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     /** Output Slots */
     public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
     
-    /** The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for */
-    public int currentItemCookingMaximum;
-
-    /** The number of ticks that the current item has been cooking for */
-    public int currentItemCookingValue;
-    
     /** Items waiting to be unloaded into output slots from decomposition process. */
     private ArrayList<ItemStack> outputBuffer;
     
@@ -440,9 +434,6 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         }
         
         nbt.setByte("state", (byte) state.ordinal());
-        
-        // Amount of time left to cook current item inside of the furnace.
-        nbt.setShort("CookTime", (short) this.currentItemCookingValue);
     }
 
     @Override
@@ -463,9 +454,6 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             activeStack = ItemStack.loadItemStackFromNBT(activeStackCompound);
         }
         state = State.values()[nbt.getByte("state")];
-        
-        // Current amount of time job has to completion.
-        this.currentItemCookingValue = nbt.getShort("CookTime");
     }
 
     /** Returns the current working state of the machine as an object. */

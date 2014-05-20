@@ -86,12 +86,6 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     /** Wrapper for moving items in and out of the Chemist's Journal slot. */
     private final Transactor journalTransactor = new Transactor(journalInventory, 1);
     
-    /** The number of ticks that a fresh copy of the currently-burning item would keep the furnace burning for */
-    public int currentItemCookingMaximum;
-
-    /** The number of ticks that the current item has been cooking for */
-    public int currentItemCookingValue;
-    
     public SynthesisTileEntity()
     {
         // Establishes maximum power and total amount of power that can be accepted per update.
@@ -131,11 +125,13 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
+    /** Determines if the player or automation is allowed to take the item from output slot. */
     public boolean canTakeOutputStack()
     {
         return inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(false);
     }
 
+    /** Clears the ghost recipe items that are not real and only used to help the player place his own items down. */
     public void clearRecipeMatrix()
     {
         for (int slot : kRecipe)
@@ -254,29 +250,36 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
+    /** Determines if there is any 'real' output to be given based on what is left in the internal buffer. */
     public ItemStack[] extractOutput(boolean doRemove, int maxItemCount)
     {
+        // Stops execution if no recipe, empty output buffer, or no power or not enough items.
         if (currentRecipe == null || !takeStacksFromStorage(false) || !canAffordRecipe(currentRecipe))
         {
             return null;
         }
 
+        // Make a copy of the item that will be given to the player.
         ItemStack outputStack = currentRecipe.getOutput().copy();
-        ItemStack[] output = new ItemStack[]
-        { outputStack };
+        ItemStack[] output = new ItemStack[] { outputStack };
+        
+        // Actually removes the items from the output buffer.
         if (doRemove)
         {
             takeStacksFromStorage(true);
         }
 
+        // Item that will be given to the player.
         return output;
     }
 
+    /** Returns the current recipe for real items that the player has inserted into the machines crafting matrix. */
     public SynthesisRecipe getCurrentRecipe()
     {
         return currentRecipe;
     }
 
+    /** Get an ordinal number representing the direction the block is facing based on metadata. */
     public int getFacing()
     {
         return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
@@ -288,6 +291,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return "container.synthesis";
     }
 
+    /** Returns ItemStack array of ghost items that makeup the recipe for whatever is the active recipe in the chemists journal in that slot. */
     public ItemStack[] getRecipeMatrixItems()
     {
         return recipeMatrix.copyInventoryToArray();
@@ -299,6 +303,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return 24;
     }
 
+    /** Determines if there is enough power to allow the player to take the item from the output slot. */
     public boolean hasEnoughPowerForCurrentRecipe()
     {
         return currentRecipe != null && this.getEnergy(ForgeDirection.UNKNOWN) >= currentRecipe.energyCost();
@@ -324,15 +329,11 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         super.readFromNBT(nbt);
         NBTTagList inventoryTagList = nbt.getTagList("inventory");
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
-        
-        // Current amount of time job has to completion.
-        this.currentItemCookingValue = nbt.getShort("CookTime");
     }
     
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
-
         if (slot == kOutput[0] && getStackInSlot(slot) != null)
         {
             if (itemstack == null)
@@ -357,13 +358,16 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
+    /** Determines if there are items in the internal buffer which can be moved into the output slots. Allows the action of moving them to be stopped with doTake being false. */
     public boolean takeStacksFromStorage(boolean doTake)
     {
+        // Don't allow the machine to perform synthesis when no recipe or power. 
         if (this.currentRecipe == null || !this.hasEnoughPowerForCurrentRecipe())
         {
             return false;
         }
 
+        // One of the most important features in Minechem is the ability to recombine decomposed molecules and elements into items again.
         List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
         ItemStack[] storage = storageInventory.copyInventoryToArray();
         for (ItemStack ingredient : ingredients)
@@ -377,6 +381,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         if (doTake)
         {
             storageInventory.setInventoryStacks(storage);
+            this.consumeEnergy(currentRecipe.energyCost());
         }
         
         return true;
@@ -394,6 +399,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             PacketDispatcher.sendPacketToAllInDimension(synthesisPacketUpdate.makePacket(), dimensionID);
         }
 
+        // Forces the output slot to only take a single item preventing stacking.
         if (currentRecipe != null && inventory[kOutput[0]] == null)
         {
             inventory[kOutput[0]] = currentRecipe.getOutput().copy();
@@ -413,17 +419,16 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         super.writeToNBT(nbt);
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         nbt.setTag("inventory", inventoryTagList);
-        
-        // Amount of time left to cook current item inside of the furnace.
-        nbt.setShort("CookTime", (short) this.currentItemCookingValue);
     }
 
-    private boolean canAffordRecipe(SynthesisRecipe recipe)
+    /** Determines if there is enough energy in the machines internal reserve to allow the creation of this item. */
+    public boolean canAffordRecipe(SynthesisRecipe recipe)
     {
         int energyCost = recipe.energyCost();
         return this.getEnergy(ForgeDirection.UNKNOWN) >= energyCost;
     }
 
+    /** Returns the current recipe result for whatever is in the crafting matrix. */
     private boolean getRecipeResult()
     {
         ItemStack[] recipeMatrixItems = getRecipeMatrixItems();
@@ -443,6 +448,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
+    /** Called when the player places his chemists journal into the slot for it and sets ghost items to selected item recipe if active. */
     private void onPutJournal(ItemStack itemstack)
     {
         ItemStack activeItem = MinechemItemsGeneration.journal.getActiveStack(itemstack);
@@ -549,6 +555,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return outputs;
     }
 
+    /** Sets ghost items that will make the crafting recipe from currently selected item in chemists journal if located in that slot. */
     public void setRecipe(SynthesisRecipe recipe)
     {
         clearRecipeMatrix();
@@ -585,6 +592,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
+        // Strangely every item is always valid in the crafting matrix according to this, even though slot code prevents anything but elements of molecules. 
         return true;
     }
 
@@ -618,26 +626,5 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
         
         return true;
-    }
-
-    public void addStackToInventory(ItemStack newStack)
-    {
-        for (int i = 0; i < this.storageInventory.getSizeInventory(); i++)
-        {
-            ItemStack stack = this.storageInventory.getStackInSlot(i);
-            if (stack == null)
-            {
-                this.storageInventory.setInventorySlotContents(i, newStack);
-                return;
-            }
-            
-            if (stack.stackSize < 64 && stack.getItem() == newStack.getItem() && stack.getItemDamage() == newStack.getItemDamage())
-            {
-                stack.stackSize++;
-                return;
-            }
-        }
-
-        worldObj.spawnEntityInWorld(new EntityItem(worldObj, xCoord, yCoord + 2, zCoord, newStack));
     }
 }

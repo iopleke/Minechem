@@ -11,7 +11,6 @@ import org.lwjgl.opengl.GL11;
 
 public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 {
-
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
     {
@@ -20,7 +19,9 @@ public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
             SynthesisTileEntity synthesis = (SynthesisTileEntity) tileEntity;
             int facing = synthesis.getFacing();
 
-            if (synthesis.getEnergy(ForgeDirection.UNKNOWN) > 100)
+            // Animate the machine if it has power and something to work on.
+            SynthesisRecipe currentRecipe = synthesis.getCurrentRecipe();
+            if (synthesis.isPowered() && currentRecipe != null && !synthesis.canAffordRecipe(currentRecipe))
             {
                 synthesis.model.updateArm();
             }
@@ -39,5 +40,4 @@ public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
             GL11.glPopMatrix();
         }
     }
-
 }

@@ -90,30 +90,43 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
             else if (slot == SynthesisTileEntity.kStartOutput)
             {
                 if (!craftMaxmimum())
+                {
                     return null;
+                }
             }
             else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
             {
                 if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
+                {
                     return null;
+                }
             }
             else if (slot >= SynthesisTileEntity.kStartStorage && slot < SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage)
             {
                 if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
+                {
                     return null;
+                }
             }
             else if (slot == SynthesisTileEntity.kStartJournal)
             {
                 if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
+                {
                     return null;
+                }
             }
             else
                 return null;
 
+            
             if (stackInSlot.stackSize == 0)
+            {
                 slotObject.putStack(null);
+            }
             else
+            {
                 slotObject.onSlotChanged();
+            }
 
             return stack;
         }
@@ -124,12 +137,18 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     {
         List<ItemStack> outputs = synthesis.getMaximumOutput();
         if (outputs == null)
+        {
             return false;
+        }
+        
         for (ItemStack output : outputs)
         {
             if (!mergeItemStack(output, synthesis.getSizeInventory(), inventorySlots.size(), true))
+            {
                 return false;
+            }
         }
+        
         return true;
     }
 

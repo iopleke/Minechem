@@ -15,7 +15,6 @@ public class SynthesisTabStateControl extends GuiTabStateControl
 
     enum TabState
     {
-
         unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY), powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, null), norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"),
                 0xAA0000, ModMinechem.ICON_NO_RECIPE);
         public String tooltip;
@@ -32,6 +31,7 @@ public class SynthesisTabStateControl extends GuiTabStateControl
     }
 
     TabState state;
+    private int lastKnownEnergyCost;
 
     public SynthesisTabStateControl(Gui gui, SynthesisTileEntity synthesis)
     {
@@ -55,11 +55,15 @@ public class SynthesisTabStateControl extends GuiTabStateControl
         }
         else
         {
-            int energyCost = recipe.energyCost();
-            if (synthesis.getEnergy(ForgeDirection.UNKNOWN) >= energyCost)
+            lastKnownEnergyCost = recipe.energyCost();
+            if (synthesis.getEnergy(ForgeDirection.UNKNOWN) >= lastKnownEnergyCost)
+            {
                 state = TabState.powered;
+            }
             else
+            {
                 state = TabState.unpowered;
+            }
         }
 
         this.overlayColor = this.state.color;
@@ -69,15 +73,26 @@ public class SynthesisTabStateControl extends GuiTabStateControl
     public void draw(int x, int y)
     {
         drawBackground(x, y);
+        
         if (this.state.resource != null)
+        {
             drawIcon(x + 3, y + 5);
+        }
+        
         if (!isFullyOpened())
+        {
             return;
+        }
     }
 
     @Override
     public String getTooltip()
     {
+        if (state == TabState.unpowered && lastKnownEnergyCost > 0)
+        {
+            return "Energy Needed: " + lastKnownEnergyCost;
+        }
+        
         return this.state.tooltip;
     }
 
