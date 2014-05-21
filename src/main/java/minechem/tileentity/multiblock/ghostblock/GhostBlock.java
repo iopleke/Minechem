@@ -83,10 +83,17 @@ public class GhostBlock extends BlockContainer
         return false;
     }
 
-    private boolean playerIsHoldingItem(EntityPlayer entityPlayer, ItemStack itemstack)
+    private boolean playerIsHoldingItem(EntityPlayer entityPlayer, ItemStack itemstack) 
     {
         ItemStack helditem = entityPlayer.inventory.getCurrentItem();
-        return helditem != null && helditem.itemID == itemstack.itemID && (helditem.getItemDamage() == itemstack.getItemDamage() || itemstack.getItemDamage() == -1);
+        if (helditem != null && itemstack != null) {
+            if (helditem.itemID == itemstack.itemID) {
+                if (helditem.getItemDamage() == itemstack.getItemDamage() || itemstack.getItemDamage() == -1) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /** Returns whether this block is collideable based on the arguments passed in Args: blockMetaData, unknownFlag */
