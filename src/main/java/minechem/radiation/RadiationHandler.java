@@ -47,7 +47,9 @@ public class RadiationHandler
         Container openContainer = player.openContainer;
         if (openContainer != null)
         {
-            if (openContainer instanceof LeadedChestContainer
+            if (openContainer instanceof DecomposerContainer
+                    || openContainer instanceof SynthesisContainer
+                    || openContainer instanceof LeadedChestContainer
                     || openContainer instanceof ChemicalStorageContainer)
             {
                 // radiation stays
