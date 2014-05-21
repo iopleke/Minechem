@@ -30,7 +30,9 @@ public class DecomposerRecipe
     public DecomposerRecipe(PotionChemical... chemicals)
     {
         for (PotionChemical potionChemical : chemicals)
+        {
             this.output.add(potionChemical);
+        }
     }
 
     public ItemStack getInput()
@@ -58,22 +60,22 @@ public class DecomposerRecipe
             {
                 try
                 {
-                    PotionChemical reduced = chem.copy();
-                    reduced.amount = (int) Math.floor(chem.amount / f);
-                    Random rand = new Random();
-                    if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f))
+                    if (chem != null)
                     {
-                        reduced.amount = 1;
+                        PotionChemical reduced = chem.copy();
+                        if (reduced != null)
+                        {
+                            reduced.amount = (int) Math.floor(chem.amount / f);
+                            Random rand = new Random();
+                            if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f))
+                            {
+                                reduced.amount = 1;
+                            }
+                            result.add(reduced);
+                        }
                     }
-                    result.add(reduced);
 
-                    if (Settings.DebugMode)
-                    {
-                        System.out.println(f + ":" + chem.amount + ":" + reduced.amount);
-                    }
-
-                }
-                catch (Exception e)
+                } catch (Exception e)
                 {
                     // something has gone wrong
                     // but we do not know quite why
