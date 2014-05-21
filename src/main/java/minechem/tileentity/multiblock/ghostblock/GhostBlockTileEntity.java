@@ -1,12 +1,13 @@
 package minechem.tileentity.multiblock.ghostblock;
 
+import cpw.mods.fml.common.network.PacketDispatcher;
+import minechem.Settings;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class GhostBlockTileEntity extends MinechemTileEntity
 {
@@ -48,8 +49,24 @@ public class GhostBlockTileEntity extends MinechemTileEntity
 
     public ItemStack getBlockAsItemStack()
     {
-        BlueprintBlock blueprintBlock = this.blueprint.getBlockLookup().get(this.blockID);
-        return new ItemStack(blueprintBlock.block, 1, blueprintBlock.metadata);
+        try
+        {
+            BlueprintBlock blueprintBlock = this.blueprint.getBlockLookup().get(this.blockID);
+            if (blueprintBlock != null)
+            {
+                return new ItemStack(blueprintBlock.block, 1, blueprintBlock.metadata);
+            }
+        } catch (Exception e)
+        {
+            // this code has now failed
+            // it cannot be recovered
+            // snowflake on hot iron
+            if (Settings.DebugMode)
+            {
+                System.out.println("Block generated an exception at: x" + this.xCoord + " y" + this.yCoord + " z" + this.zCoord);
+            }
+        }
+        return null;
     }
 
     @Override
@@ -60,7 +77,7 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         {
             nbtTagCompound.setInteger("blueprintID", blueprint.id);
         }
-        
+
         nbtTagCompound.setInteger("blockID", blockID);
     }
 
