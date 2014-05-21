@@ -88,7 +88,7 @@ public class ModMinechem
     @Mod.Metadata(ModMinechem.ID)
     public static ModMetadata metadata;
 
-    @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.common.CommonProxy")
+    @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.server.CommonProxy")
     public static CommonProxy PROXY;
 
     /** Creative mode tab that shows up in Minecraft. **/
