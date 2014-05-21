@@ -47,14 +47,18 @@ public class RadiationHandler
         Container openContainer = player.openContainer;
         if (openContainer != null)
         {
-            if (openContainer instanceof DecomposerContainer
-                    || openContainer instanceof SynthesisContainer
-                    || openContainer instanceof LeadedChestContainer
-                    || openContainer instanceof ChemicalStorageContainer)
+            if (openContainer instanceof ChemicalStorageContainer)
             {
-                // radiation stays
-                // unaffected container
-                // sealed inside not lost
+                updateChemicalStorageContainer(player, openContainer);
+            } else if (openContainer instanceof LeadedChestContainer)
+            {
+                updateContainerLeadedChest(player, openContainer);
+            } else if (openContainer instanceof DecomposerContainer)
+            {
+                updateDecomposerContainer(player, openContainer);
+            } else if (openContainer instanceof SynthesisContainer)
+            {
+                updateSynthesisContainer(player, openContainer);
             } else
             {
                 updateContainer(player, openContainer);
@@ -74,6 +78,74 @@ public class RadiationHandler
     {
         RadiationInfo info = ElementItem.getRadiationInfo(itemstack, world);
         return (int) (info.radiationLife);
+    }
+
+    private void updateContainerLeadedChest(EntityPlayer player, Container openContainer)
+    {
+        LeadedChestContainer leadedChest = (LeadedChestContainer) openContainer;
+        List<ItemStack> itemstacks = leadedChest.getStorageInventory();
+        for (ItemStack itemstack : itemstacks)
+        {
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            {
+                RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ElementItem.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = leadedChest.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+    }
+
+    private void updateChemicalStorageContainer(EntityPlayer player, Container openContainer)
+    {
+        ChemicalStorageContainer chemicalStorage = (ChemicalStorageContainer) openContainer;
+        List<ItemStack> itemstacks = chemicalStorage.getStorageInventory();
+        for (ItemStack itemstack : itemstacks)
+        {
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            {
+                RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ElementItem.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = chemicalStorage.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+    }
+
+    private void updateDecomposerContainer(EntityPlayer player, Container openContainer)
+    {
+        DecomposerContainer decomposer = (DecomposerContainer) openContainer;
+        List<ItemStack> itemstacks = decomposer.getStorageInventory();
+        for (ItemStack itemstack : itemstacks)
+        {
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            {
+                RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ElementItem.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = decomposer.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+    }
+
+    private void updateSynthesisContainer(EntityPlayer player, Container openContainer)
+    {
+        SynthesisContainer synthesizer = (SynthesisContainer) openContainer;
+        List<ItemStack> itemstacks = synthesizer.getStorageInventory();
+        for (ItemStack itemstack : itemstacks)
+        {
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            {
+                RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ElementItem.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = synthesizer.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
     }
 
     private void updateContainer(EntityPlayer player, Container container)
