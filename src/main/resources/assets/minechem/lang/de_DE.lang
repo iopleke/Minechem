@@ -42,9 +42,7 @@ item.name.periodicTable=Periodensystem der Elemente
 item.minechem.itemChemistJournal.name=Chemisches Nachschlagewerk
 item.name.blueprintFusion=Fusionskammer-Bauplan
 item.name.blueprintFission=Kernspaltungskammer-Bauplan
-item.name.blueprintDirewolf=Direwolf's 9x9
 item.name.chemistryUpgrade=Chemie-Turtle-Modul
-item.minechem.itempill.name=Leere Pillenkapsel
 
 element.property.solid=Fest
 element.property.gas=Gasförmig
