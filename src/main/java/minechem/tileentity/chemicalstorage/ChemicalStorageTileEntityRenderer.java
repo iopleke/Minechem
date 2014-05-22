@@ -93,12 +93,11 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
 
         GL11.glRotatef(var11, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        float var12 = chemicalStorage.prevLidAngle + (chemicalStorage.lidAngle - chemicalStorage.prevLidAngle) * partialTick;
-        float var13;
+        float currentLidAngle = chemicalStorage.prevLidAngle + (chemicalStorage.lidAngle - chemicalStorage.prevLidAngle) * partialTick;
 
-        var12 = 1.0F - var12;
-        var12 = 1.0F - var12 * var12 * var12;
-        var14.chestLid.rotateAngleX = -(var12 * (float) Math.PI / 2.0F);
+        currentLidAngle = 1.0F - currentLidAngle;
+        currentLidAngle = 1.0F - currentLidAngle * currentLidAngle * currentLidAngle;
+        var14.chestLid.rotateAngleX = -(currentLidAngle * (float) Math.PI / 2.0F);
         var14.renderAll();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();
