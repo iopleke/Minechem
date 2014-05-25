@@ -26,7 +26,7 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
     }
 
     /** Renders the TileEntity for the chest at a position. */
-    public void renderTileEntityChestAt(ChemicalStorageTileEntity chemicalStorage, double par2, double par4, double par6, float par8)
+    public void renderTileEntityChestAt(ChemicalStorageTileEntity chemicalStorage, double xCoord, double yCoord, double zCoord, float partialTick)
     {
         int var9;
 
@@ -56,7 +56,7 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        GL11.glTranslatef((float) par2, (float) par4 + 1.0F, (float) par6 + 1.0F);
+        GL11.glTranslatef((float) xCoord, (float) yCoord + 1.0F, (float) zCoord + 1.0F);
         GL11.glScalef(1.0F, -1.0F, -1.0F);
         GL11.glTranslatef(0.5F, 0.5F, 0.5F);
         short var11 = 0;
@@ -93,12 +93,11 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
 
         GL11.glRotatef(var11, 0.0F, 1.0F, 0.0F);
         GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-        float var12 = chemicalStorage.prevLidAngle + (chemicalStorage.lidAngle - chemicalStorage.prevLidAngle) * par8;
-        float var13;
+        float currentLidAngle = chemicalStorage.prevLidAngle + (chemicalStorage.lidAngle - chemicalStorage.prevLidAngle) * partialTick;
 
-        var12 = 1.0F - var12;
-        var12 = 1.0F - var12 * var12 * var12;
-        var14.chestLid.rotateAngleX = -(var12 * (float) Math.PI / 2.0F);
+        currentLidAngle = 1.0F - currentLidAngle;
+        currentLidAngle = 1.0F - currentLidAngle * currentLidAngle * currentLidAngle;
+        var14.chestLid.rotateAngleX = -(currentLidAngle * (float) Math.PI / 2.0F);
         var14.renderAll();
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         GL11.glPopMatrix();

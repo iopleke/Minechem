@@ -1,5 +1,6 @@
 package minechem.tileentity.synthesis;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
@@ -156,6 +157,30 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     public float getRadiationReductionFactor(int baseDamage, ItemStack itemstack, EntityPlayer player)
     {
         return 0.4F;
+    }
+
+    public List<ItemStack> getStorageInventory()
+    {
+        List<ItemStack> storageInventory = new ArrayList<ItemStack>();
+        for (int slot = 0; slot < 27; slot++)
+        {
+            ItemStack stack = getSlot(slot).getStack();
+            if (stack != null)
+                storageInventory.add(stack);
+        }
+        return storageInventory;
+    }
+
+    public List<ItemStack> getPlayerInventory()
+    {
+        List<ItemStack> playerInventory = new ArrayList<ItemStack>();
+        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+        {
+            ItemStack stack = getSlot(slot).getStack();
+            if (stack != null)
+                playerInventory.add(stack);
+        }
+        return playerInventory;
     }
 
 }

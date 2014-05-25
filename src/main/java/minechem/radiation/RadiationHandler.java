@@ -6,7 +6,9 @@ import java.util.List;
 import minechem.MinechemItemsGeneration;
 import minechem.item.element.ElementItem;
 import minechem.tileentity.chemicalstorage.ChemicalStorageContainer;
+import minechem.tileentity.decomposer.DecomposerContainer;
 import minechem.tileentity.leadedchest.LeadedChestContainer;
+import minechem.tileentity.synthesis.SynthesisContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
@@ -43,19 +45,25 @@ public class RadiationHandler
     public void update(EntityPlayer player)
     {
         Container openContainer = player.openContainer;
-        if (openContainer != null && openContainer instanceof ChemicalStorageContainer)
+        if (openContainer != null)
         {
-            updateChemicalStorageContainer(player, openContainer);
-        }
-        else if (openContainer != null && openContainer instanceof LeadedChestContainer)
-        {
-            updateContainerLeadedChest(player, openContainer);
-        }
-        else if (openContainer != null)
-        {
-            updateContainer(player, openContainer);
-        }
-        else
+            if (openContainer instanceof ChemicalStorageContainer)
+            {
+                updateChemicalStorageContainer(player, openContainer);
+            } else if (openContainer instanceof LeadedChestContainer)
+            {
+                updateContainerLeadedChest(player, openContainer);
+            } else if (openContainer instanceof DecomposerContainer)
+            {
+                updateDecomposerContainer(player, openContainer);
+            } else if (openContainer instanceof SynthesisContainer)
+            {
+                updateSynthesisContainer(player, openContainer);
+            } else
+            {
+                updateContainer(player, openContainer);
+            }
+        } else
         {
             updateContainer(player, player.inventoryContainer);
         }
@@ -103,6 +111,40 @@ public class RadiationHandler
             }
         }
         List<ItemStack> playerStacks = chemicalStorage.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+    }
+
+    private void updateDecomposerContainer(EntityPlayer player, Container openContainer)
+    {
+        DecomposerContainer decomposer = (DecomposerContainer) openContainer;
+        List<ItemStack> itemstacks = decomposer.getStorageInventory();
+        for (ItemStack itemstack : itemstacks)
+        {
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            {
+                RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ElementItem.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = decomposer.getPlayerInventory();
+        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+    }
+
+    private void updateSynthesisContainer(EntityPlayer player, Container openContainer)
+    {
+        SynthesisContainer synthesizer = (SynthesisContainer) openContainer;
+        List<ItemStack> itemstacks = synthesizer.getStorageInventory();
+        for (ItemStack itemstack : itemstacks)
+        {
+            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            {
+                RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
+                ElementItem.setRadiationInfo(radiationInfo, itemstack);
+            }
+        }
+        List<ItemStack> playerStacks = synthesizer.getPlayerInventory();
         updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
     }
 
@@ -183,8 +225,7 @@ public class RadiationHandler
             radiationInfo.dimensionID = dimensionID;
             ElementItem.setRadiationInfo(radiationInfo, element);
             return 0;
-        }
-        else
+        } else
         {
             long currentTime = world.getTotalWorldTime();
             return decayElement(element, radiationInfo, currentTime, world);
