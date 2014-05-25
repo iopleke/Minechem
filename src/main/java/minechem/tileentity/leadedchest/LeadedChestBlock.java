@@ -36,8 +36,8 @@ public class LeadedChestBlock extends BlockContainer
     {
         if (!world.isRemote)
         {
-            LeadedChestTileEntity leadedchest = (LeadedChestTileEntity) world.getBlockTileEntity(xCoord, yCoord, zCoord);
-            if (leadedchest == null || player.isSneaking())
+            LeadedChestTileEntity leadedChest = (LeadedChestTileEntity) world.getBlockTileEntity(xCoord, yCoord, zCoord);
+            if (leadedChest == null || player.isSneaking())
             {
                 return false;
             }
