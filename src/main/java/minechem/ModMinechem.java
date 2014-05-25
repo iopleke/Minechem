@@ -191,7 +191,11 @@ public class ModMinechem
 
         LOGGER.info("Registering ModStats Usage Tracking...");
         Modstats.instance().getReporter().registerMod(this);
-
+        
+        if (!Loader.isModLoaded("UniversalElectricity")) {
+        LOGGER.warning("Universal Electricity Core NOT installed. The energy system will not function as intended.");
+        }
+        
         LOGGER.info("INIT PASSED");
     }
 
