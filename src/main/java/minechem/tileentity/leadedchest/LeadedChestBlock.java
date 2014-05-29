@@ -20,7 +20,6 @@ import net.minecraft.world.World;
 
 public class LeadedChestBlock extends BlockContainer
 {
-
     public LeadedChestBlock(int id)
     {
         super(id, Material.wood);
