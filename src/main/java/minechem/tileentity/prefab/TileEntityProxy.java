@@ -54,12 +54,14 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
 
     public TileEntity getManager()
     {
+        // Return the next block in sequence but never the TileEntityProxy.
         if (worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) != null
                 && !(worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) instanceof TileEntityProxy))
         {
-
             return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
+        
+        // Return the entire fusion generator as a whole (indicating the structure is complete).
         if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion.blockID)
         {
             this.manager = buildManagerBlock();
@@ -210,20 +212,14 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     @Override
     public boolean canInsertItem(int i, ItemStack itemstack, int j)
     {
-        if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
-        {
-            return ((ISidedInventory) this.getManager()).canInsertItem(i, itemstack, j);
-        }
+        // Cannot insert items into reactor with automations.
         return false;
     }
 
     @Override
     public boolean canExtractItem(int i, ItemStack itemstack, int j)
     {
-        if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
-        {
-            return ((ISidedInventory) this.getManager()).canExtractItem(i, itemstack, j);
-        }
+        // Cannot extract items into reactor with automations.
         return false;
     }
 
