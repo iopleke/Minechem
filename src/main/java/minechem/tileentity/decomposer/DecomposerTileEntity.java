@@ -27,53 +27,90 @@ import cpw.mods.fml.relauncher.Side;
 
 public class DecomposerTileEntity extends MinechemTileEntity implements ISidedInventory, IFluidHandler
 {
-    /** Input Slots */
-    public static final int[] kInput = { 0 };
-    
-    /** Output Slots */
-    public static final int[] kOutput = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    
-    /** Items waiting to be unloaded into output slots from decomposition process. */
+    /**
+     * Input Slots
+     */
+    public static final int[] kInput =
+    {
+        0
+    };
+
+    /**
+     * Output Slots
+     */
+    public static final int[] kOutput =
+    {
+        1, 2, 3, 4, 5, 6, 7, 8, 9
+    };
+
+    /**
+     * Items waiting to be unloaded into output slots from decomposition process.
+     */
     private ArrayList<ItemStack> outputBuffer;
-    
-    /** Number of input slot 1. */
+
+    /**
+     * Number of input slot 1.
+     */
     public final int kInputSlot = 0;
-    
-    /** Number of starting output slot. */
+
+    /**
+     * Number of starting output slot.
+     */
     public final int kOutputSlotStart = 1;
-    
-    /** Number of ending output slot. */
+
+    /**
+     * Number of ending output slot.
+     */
     public final int kOutputSlotEnd = 9;
-    
-    /** Holds the current state of our machine.
-    Valid States: IDLE, ACTIVE, FINISHED, JAMMED  */
+
+    /**
+     * Holds the current state of our machine. Valid States: IDLE, ACTIVE, FINISHED, JAMMED
+     */
     public State state = State.kProcessIdle;
-    
-    /** Holds a reference to the itemstack that is being held in the input slot. */
+
+    /**
+     * Holds a reference to the itemstack that is being held in the input slot.
+     */
     private ItemStack activeStack;
-    
-    /** Instance of our model for the decomposer. */
+
+    /**
+     * Instance of our model for the decomposer.
+     */
     public DecomposerModel model;
 
-    /** Wrapper for output inventory functions. */
+    /**
+     * Wrapper for output inventory functions.
+     */
     private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
-    
-    /** Wrapper for input inventory functions. */
+
+    /**
+     * Wrapper for input inventory functions.
+     */
     private final BoundedInventory inputInventory = new BoundedInventory(this, kInput);
-    
-    /** Wrapper for interacting with output slots. */
+
+    /**
+     * Wrapper for interacting with output slots.
+     */
     private final Transactor outputTransactor = new Transactor(outputInventory);
-    
-    /** Wrapper for interacting with input slots. */
+
+    /**
+     * Wrapper for interacting with input slots.
+     */
     private final Transactor inputTransactor = new Transactor(inputInventory);
 
-    /** Determines amount of energy we are allowed to input into the machine with a given update. */
+    /**
+     * Determines amount of energy we are allowed to input into the machine with a given update.
+     */
     private static final long MAX_ENERGY_RECIEVED = 20;
-    
-    /** Determines total amount of energy that this machine can store. */
+
+    /**
+     * Determines total amount of energy that this machine can store.
+     */
     private static final long MAX_ENERGY_STORED = 10000;
 
-    /** Holds a reference to all known fluids that are stored inside of the machine currently and being decomposed. */
+    /**
+     * Holds a reference to all known fluids that are stored inside of the machine currently and being decomposed.
+     */
     ArrayList<FluidStack> fluids = new ArrayList<FluidStack>();
 
     @Override
@@ -88,7 +125,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return null;
     }
 
-    /** Expands the internal fluid storage array to keep as many different fluids as needed in order to decompose them properly. */
+    /**
+     * Expands the internal fluid storage array to keep as many different fluids as needed in order to decompose them properly.
+     */
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
     {
@@ -121,7 +160,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return maxFill;
     }
 
-    /** Determines if there is a valid recipe to decompose a given fluid in our internal fluid array storage. */
+    /**
+     * Determines if there is a valid recipe to decompose a given fluid in our internal fluid array storage.
+     */
     public boolean isFluidValidForDecomposer(Fluid fluid)
     {
         for (DecomposerRecipe recipe : DecomposerRecipe.recipes)
@@ -167,7 +208,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return result;
     }
 
-    /** Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user. */
+    /**
+     * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
+     */
     public enum State
     {
         kProcessIdle, kProcessActive, kProcessFinished, kProcessJammed
@@ -201,7 +244,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         {
             return;
         }
-        
+
         // Determine if we can decompose the object in the input slot while in a powered and idle state.
         if (this.inputInventory.getStackInSlot(0) == null && state == State.kProcessIdle)
         {
@@ -232,42 +275,39 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         if (state == state.kProcessIdle && this.isPowered() && canDecomposeInput())
         {
             state = State.kProcessActive;
-        }
-        else if (state == State.kProcessJammed && canUnjam() && this.isPowered())
+        } else if (state == State.kProcessJammed && canUnjam() && this.isPowered())
         {
             // Reactivates the machine once output slots have been cleared.
             // Note: It is possible for some items and blocks to decompose into more molecules than there are output slots!
             state = State.kProcessActive;
         }
-        
+
         // If the machines state is currently not set to active then stop operation.
         if (state != State.kProcessActive)
         {
             return;
         }
-        
+
         // Determines the current state of the machine.
-        state = determineOperationalState();           
+        state = determineOperationalState();
         if (state == State.kProcessActive && this.isPowered())
         {
             // Consume energy to create the needed base elements.
             this.consumeEnergy(1);
-        }
-        else if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput() && this.isPowered())
+        } else if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput() && this.isPowered())
         {
             // Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
             activeStack = null;
             decomposeActiveStack();
             state = State.kProcessActive;
             this.onInventoryChanged();
-        }
-        else if (state == State.kProcessFinished)
+        } else if (state == State.kProcessFinished)
         {
             // Prepares the machine for another pass if we have recently finished.
             activeStack = null;
             state = State.kProcessIdle;
         }
-        
+
         // Notify minecraft that the inventory items in this machine have changed.
         this.onInventoryChanged();
     }
@@ -279,8 +319,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             if (getStackInSlot(kInput[0]) != null)
             {
                 activeStack = decrStackSize(kInput[0], 1);
-            }
-            else
+            } else
             {
                 return null;
             }
@@ -288,7 +327,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return activeStack;
     }
 
-    /** Determines if it is possible to decompose the current itemStack in the input slot. */
+    /**
+     * Determines if it is possible to decompose the current itemStack in the input slot.
+     */
     private boolean canDecomposeInput()
     {
         ItemStack inputStack = getStackInSlot(kInput[0]);
@@ -301,7 +342,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return (recipe != null);
     }
 
-    /** One of the most important functions in MineChem is the ability to decompose items into base molecules. */
+    /**
+     * One of the most important functions in MineChem is the ability to decompose items into base molecules.
+     */
     private void decomposeActiveStack()
     {
         try
@@ -318,8 +361,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                     placeStacksInBuffer(stacks);
                 }
             }
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             // softly falls the rain
             // but the forest does not see
@@ -328,20 +370,23 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
     }
 
-    /** Accepts an array list of itemStacks that should be outputted into the machines output slot over time and with electric power. */
+    /**
+     * Accepts an array list of itemStacks that should be outputted into the machines output slot over time and with electric power.
+     */
     private void placeStacksInBuffer(ArrayList<ItemStack> outputStacks)
     {
         if (outputStacks != null)
         {
             outputBuffer = outputStacks;
-        }
-        else
+        } else
         {
             state = State.kProcessFinished;
         }
     }
 
-    /** Determines if there are any open slots in the output slots by looping through them. */
+    /**
+     * Determines if there are any open slots in the output slots by looping through them.
+     */
     private boolean canUnjam()
     {
         for (int slot : kOutput)
@@ -355,9 +400,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return false;
     }
 
-    /** Returns JAMMED state if there are items in the output buffer but output slots are full.
-     *  Returns ACTIVE state if there is room in output slots for output buffer items.
-     *  Returns FINISHED if output buffer is empty and output slots have all items [that was decomposed]. */
+    /**
+     * Returns JAMMED state if there are items in the output buffer but output slots are full. Returns ACTIVE state if there is room in output slots for output buffer items. Returns FINISHED if output buffer is empty and output slots have all items [that was decomposed].
+     */
     private State determineOperationalState()
     {
         for (ItemStack outputStack : outputBuffer)
@@ -371,8 +416,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                 }
 
                 return State.kProcessActive;
-            }
-            else
+            } else
             {
                 return State.kProcessJammed;
             }
@@ -380,7 +424,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return State.kProcessFinished;
     }
 
-    /** Moves items from the output buffer and into the actual output slots of the machine. */
+    /**
+     * Moves items from the output buffer and into the actual output slots of the machine.
+     */
     private boolean addStackToOutputSlots(ItemStack itemstack)
     {
         itemstack.getItem().onCreated(itemstack, this.worldObj, null);
@@ -391,8 +437,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             {
                 setInventorySlotContents(outputSlot, itemstack);
                 return true;
-            }
-            else if (Compare.stacksAreSameKind(stackInSlot, itemstack) && (stackInSlot.stackSize + itemstack.stackSize) <= getInventoryStackLimit())
+            } else if (Compare.stacksAreSameKind(stackInSlot, itemstack) && (stackInSlot.stackSize + itemstack.stackSize) <= getInventoryStackLimit())
             {
                 stackInSlot.stackSize += itemstack.stackSize;
                 return true;
@@ -404,7 +449,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     @Override
     public int getSizeInventory()
     {
-        return 14;
+        return 10;
     }
 
     @Override
@@ -417,22 +462,22 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     public void writeToNBT(NBTTagCompound nbt)
     {
         super.writeToNBT(nbt);
-        
+
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
-        
+
         NBTTagList buffer = MinechemHelper.writeItemStackListToTagList(outputBuffer);
-        
+
         nbt.setTag("inventory", inventoryTagList);
-        
+
         nbt.setTag("buffer", buffer);
-        
+
         if (activeStack != null)
         {
             NBTTagCompound activeStackCompound = new NBTTagCompound();
             activeStack.writeToNBT(activeStackCompound);
             nbt.setTag("activeStack", activeStackCompound);
         }
-        
+
         nbt.setByte("state", (byte) state.ordinal());
     }
 
@@ -440,11 +485,11 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        
+
         NBTTagList inventoryTagList = nbt.getTagList("inventory");
-        
+
         NBTTagList buffer = nbt.getTagList("buffer");
-        
+
         outputBuffer = MinechemHelper.readTagListToItemStackList(buffer);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
 
@@ -456,13 +501,17 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         state = State.values()[nbt.getByte("state")];
     }
 
-    /** Returns the current working state of the machine as an object. */
+    /**
+     * Returns the current working state of the machine as an object.
+     */
     public State getState()
     {
         return state;
     }
 
-    /** Sets the current state of the machine using an integer to reference an enumeration. */
+    /**
+     * Sets the current state of the machine using an integer to reference an enumeration.
+     */
     public void setState(int state)
     {
         this.state = State.values()[state];
@@ -481,7 +530,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         {
             return true;
         }
-        
+
         return false;
     }
 
@@ -489,10 +538,10 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     {
         switch (side)
         {
-        case 1:
-            return kInput;
-        default:
-            return kOutput;
+            case 1:
+                return kInput;
+            default:
+                return kOutput;
         }
     }
 
@@ -538,12 +587,12 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                 }
             }
         }
-        
+
         if (itemstack != null && itemstack.stackSize > this.getInventoryStackLimit())
         {
             itemstack.stackSize = this.getInventoryStackLimit();
         }
-        
+
         this.inventory[slot] = itemstack;
     }
 

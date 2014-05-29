@@ -24,69 +24,123 @@ import cpw.mods.fml.relauncher.Side;
 
 public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInventory
 {
-    /** Amount of power the machine will accept in a single update. */
+    /**
+     * Amount of power the machine will accept in a single update.
+     */
     private static final int POWER_INPUT = 200;
-    
-    /** Maximum amount of power the machine can accept in total. */
-    private static final int MAX_POWER = 1022220;
-    
-    /** Output slot for completed item the machine will create. */
-    public static final int[] kOutput = { 0 };
-    
-    /** Inventory slots that are "ghost" slots used to show the inputs of a crafting recipe from active recipe in Chemist Journal. */
-    public static final int[] kRecipe = { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    
-    /** Input slots that make up the crafting grid so players can assemble molecules into needed shapes. */
-    public static final int[] kStorage = { 10, 11, 12, 13, 14, 15, 16, 17, 18 };
-    
-    /** Journal slot number. */
-    public static final int[] kJournal = { 19 };
 
-    /** Slots that contain *real* items. For the purpose of dropping upon break. These are bottles, storage, and journal. */
+    /**
+     * Maximum amount of power the machine can accept in total.
+     */
+    private static final int MAX_POWER = 1022220;
+
+    /**
+     * Output slot for completed item the machine will create.
+     */
+    public static final int[] kOutput =
+    {
+        0
+    };
+
+    /**
+     * Inventory slots that are "ghost" slots used to show the inputs of a crafting recipe from active recipe in Chemist Journal.
+     */
+    public static final int[] kRecipe =
+    {
+        1, 2, 3, 4, 5, 6, 7, 8, 9
+    };
+
+    /**
+     * Input slots that make up the crafting grid so players can assemble molecules into needed shapes.
+     */
+    public static final int[] kStorage =
+    {
+        10, 11, 12, 13, 14, 15, 16, 17, 18
+    };
+
+    /**
+     * Journal slot number.
+     */
+    public static final int[] kJournal =
+    {
+        19
+    };
+
+    /**
+     * Slots that contain *real* items. For the purpose of dropping upon break. These are bottles, storage, and journal.
+     */
     public static int[] kRealSlots;
 
-    /** Holds the current result for whatever the crafting matrix contains. This can change as the player moves the items around. */
+    /**
+     * Holds the current result for whatever the crafting matrix contains. This can change as the player moves the items around.
+     */
     private SynthesisRecipe currentRecipe;
-    
-    /** Client-side only model that is used to represent the machine to the player. */
+
+    /**
+     * Client-side only model that is used to represent the machine to the player.
+     */
     public SynthesisModel model;
-    
-    /** Holds the maximum number of input slots on the crafting matrix. Same as a crafting table in vanilla Minecraft. */
+
+    /**
+     * Holds the maximum number of input slots on the crafting matrix. Same as a crafting table in vanilla Minecraft.
+     */
     public static final int kSizeStorage = 9;
-    
-    /** Holds the slot number for the output slot for created item. */
+
+    /**
+     * Holds the slot number for the output slot for created item.
+     */
     public static final int kStartOutput = 0;
-    
-    /** Holds the starting slot number for the 'ghost' inventory slots that makeup the recipe from Chemist Journal. */
+
+    /**
+     * Holds the starting slot number for the 'ghost' inventory slots that makeup the recipe from Chemist Journal.
+     */
     public static final int kStartRecipe = 1;
-    
-    /** Starting slot number for actual crafting grid matrix that will create an item from those chemicals. */
+
+    /**
+     * Starting slot number for actual crafting grid matrix that will create an item from those chemicals.
+     */
     public static final int kStartStorage = 10;
-    
-    /** Slot number for Chemist's Journal which can activate needed synthesis recipe on crafting matrix. */
+
+    /**
+     * Slot number for Chemist's Journal which can activate needed synthesis recipe on crafting matrix.
+     */
     public static final int kStartJournal = 19;
-    
-    /** Wrapper for 'ghost' inventory items that show recipe from Chemist Journal. */
+
+    /**
+     * Wrapper for 'ghost' inventory items that show recipe from Chemist Journal.
+     */
     private final BoundedInventory recipeMatrix = new BoundedInventory(this, kRecipe);
-    
-    /** Wrapper for crafting matrix items that make up recipe for synthesis machine. */
+
+    /**
+     * Wrapper for crafting matrix items that make up recipe for synthesis machine.
+     */
     private final BoundedInventory storageInventory = new BoundedInventory(this, kStorage);
-    
-    /** Wrapper for output slot that will hold the end result the machine will produce for the player. */
+
+    /**
+     * Wrapper for output slot that will hold the end result the machine will produce for the player.
+     */
     private final BoundedInventory outputInventory = new BoundedInventory(this, kOutput);
-    
-    /** Wrapper for Chemist's Journal slot that will read the currently active item from the journal to show in 'ghost' recipe slots. */
+
+    /**
+     * Wrapper for Chemist's Journal slot that will read the currently active item from the journal to show in 'ghost' recipe slots.
+     */
     private final BoundedInventory journalInventory = new BoundedInventory(this, kJournal);
-    
-    /** Wrapper for moving items in and out of the custom crafting matrix. */
+
+    /**
+     * Wrapper for moving items in and out of the custom crafting matrix.
+     */
     private final Transactor storageTransactor = new Transactor(storageInventory);
-    
-    /** Wrapper for moving items in and out of the output slot. */
+
+    /**
+     * Wrapper for moving items in and out of the output slot.
+     */
     private final Transactor outputTransactor = new Transactor(outputInventory);
-    
-    /** Wrapper for moving items in and out of the Chemist's Journal slot. */
+
+    /**
+     * Wrapper for moving items in and out of the Chemist's Journal slot.
+     */
     private final Transactor journalTransactor = new Transactor(journalInventory, 1);
-    
+
     public SynthesisTileEntity()
     {
         // Establishes maximum power and total amount of power that can be accepted per update.
@@ -94,10 +148,10 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
 
         // Creates internal inventory that will represent all of the needed slots that makeup the machine.
         inventory = new ItemStack[getSizeInventory()];
-        
+
         // Initializes the individual inventory slots and assigns them accordingly.
         ArrayList l = new ArrayList();
-        
+
         // Creates the slots for 'ghost' items that will show recipe from Chemist's Journal.
         for (int v : kStorage)
         {
@@ -126,13 +180,17 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    /** Determines if the player or automation is allowed to take the item from output slot. */
+    /**
+     * Determines if the player or automation is allowed to take the item from output slot.
+     */
     public boolean canTakeOutputStack()
     {
         return inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(false);
     }
 
-    /** Clears the ghost recipe items that are not real and only used to help the player place his own items down. */
+    /**
+     * Clears the ghost recipe items that are not real and only used to help the player place his own items down.
+     */
     public void clearRecipeMatrix()
     {
         for (int slot : kRecipe)
@@ -152,7 +210,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         {
             return false;
         }
-        
+
         for (int v : arr)
         {
             if (value == v)
@@ -163,37 +221,45 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return false;
     }
 
-    /** Returns true if the given inventory slot is a "ghost" slot used to show the output of the configured recipe. Ghost output items don't really exist and should never be dumped or extracted, except when the recipe is crafted.
-     * 
+    /**
+     * Returns true if the given inventory slot is a "ghost" slot used to show the output of the configured recipe. Ghost output items don't really exist and should never be dumped or extracted, except when the recipe is crafted.
+     *
      * @param slotId Slot Id to check.
-     * @return true if the slot is a "ghost" slot for the recipe output. */
+     * @return true if the slot is a "ghost" slot for the recipe output.
+     */
     public boolean isGhostOutputSlot(int slotId)
     {
         return valueIn(slotId, kOutput);
     }
 
-    /** Returns true if the given inventory slot is a "ghost" slot used to show the inputs of a crafting recipe. Items in these slots don't really exist and should never be dumped or extracted.
-     * 
+    /**
+     * Returns true if the given inventory slot is a "ghost" slot used to show the inputs of a crafting recipe. Items in these slots don't really exist and should never be dumped or extracted.
+     *
      * @param slotId Slot Id to check.
-     * @return true if the slot is a "ghost" slot for the recipe. */
+     * @return true if the slot is a "ghost" slot for the recipe.
+     */
     public boolean isGhostCraftingRecipeSlot(int slotId)
     {
         return valueIn(slotId, kRecipe);
     }
 
-    /** Returns true if the given inventory slot holds a "ghost" item that doesn't really exist.
-     * 
+    /**
+     * Returns true if the given inventory slot holds a "ghost" item that doesn't really exist.
+     *
      * @param slotId Slot Id to check.
-     * @return true if the slot holds a "ghost" item. */
+     * @return true if the slot holds a "ghost" item.
+     */
     public boolean isGhostSlot(int slotId)
     {
         return isGhostOutputSlot(slotId) || isGhostCraftingRecipeSlot(slotId);
     }
 
-    /** Returns true if the given inventory slot can hold a real (non-ghost) item, i.e., one that is really stored in the inventory.
-     * 
+    /**
+     * Returns true if the given inventory slot can hold a real (non-ghost) item, i.e., one that is really stored in the inventory.
+     *
      * @param slotId Slot Id to check.
-     * @return true if the slot can hold a real item. */
+     * @return true if the slot can hold a real item.
+     */
     public boolean isRealItemSlot(int slotId)
     {
         return !isGhostSlot(slotId);
@@ -203,7 +269,9 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     public ItemStack decrStackSize(int slot, int amount)
     {
         if (slot == kJournal[0])
+        {
             clearRecipeMatrix();
+        }
         if (this.inventory[slot] != null)
         {
             ItemStack itemstack;
@@ -215,14 +283,12 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
                     if (takeInputStacks())
                     {
                         toRemove--;
-                    }
-                    else
+                    } else
                     {
                         if (amount == toRemove)
                         {
                             return null;
-                        }
-                        else
+                        } else
                         {
                             ItemStack result = getStackInSlot(slot).copy();
                             result.stackSize = (amount - toRemove);
@@ -236,22 +302,24 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
                 itemstack = this.inventory[slot];
                 this.inventory[slot] = null;
                 return itemstack;
-            }
-            else
+            } else
             {
                 itemstack = this.inventory[slot].splitStack(amount);
                 if (this.inventory[slot].stackSize == 0)
+                {
                     this.inventory[slot] = null;
+                }
                 return itemstack;
             }
-        }
-        else
+        } else
         {
             return null;
         }
     }
 
-    /** Determines if there is any 'real' output to be given based on what is left in the internal buffer. */
+    /**
+     * Determines if there is any 'real' output to be given based on what is left in the internal buffer.
+     */
     public ItemStack[] extractOutput(boolean doRemove, int maxItemCount)
     {
         // Stops execution if no recipe, empty output buffer, or no power or not enough items.
@@ -262,8 +330,11 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
 
         // Make a copy of the item that will be given to the player.
         ItemStack outputStack = currentRecipe.getOutput().copy();
-        ItemStack[] output = new ItemStack[] { outputStack };
-        
+        ItemStack[] output = new ItemStack[]
+        {
+            outputStack
+        };
+
         // Actually removes the items from the output buffer.
         if (doRemove)
         {
@@ -274,13 +345,17 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return output;
     }
 
-    /** Returns the current recipe for real items that the player has inserted into the machines crafting matrix. */
+    /**
+     * Returns the current recipe for real items that the player has inserted into the machines crafting matrix.
+     */
     public SynthesisRecipe getCurrentRecipe()
     {
         return currentRecipe;
     }
 
-    /** Get an ordinal number representing the direction the block is facing based on metadata. */
+    /**
+     * Get an ordinal number representing the direction the block is facing based on metadata.
+     */
     public int getFacing()
     {
         return worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
@@ -292,7 +367,9 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return "container.synthesis";
     }
 
-    /** Returns ItemStack array of ghost items that makeup the recipe for whatever is the active recipe in the chemists journal in that slot. */
+    /**
+     * Returns ItemStack array of ghost items that makeup the recipe for whatever is the active recipe in the chemists journal in that slot.
+     */
     public ItemStack[] getRecipeMatrixItems()
     {
         return recipeMatrix.copyInventoryToArray();
@@ -301,10 +378,12 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     @Override
     public int getSizeInventory()
     {
-        return 24;
+        return 20;
     }
 
-    /** Determines if there is enough power to allow the player to take the item from the output slot. */
+    /**
+     * Determines if there is enough power to allow the player to take the item from the output slot.
+     */
     public boolean hasEnoughPowerForCurrentRecipe()
     {
         return currentRecipe != null && this.getEnergy(ForgeDirection.UNKNOWN) >= currentRecipe.energyCost();
@@ -331,7 +410,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         NBTTagList inventoryTagList = nbt.getTagList("inventory");
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
     }
-    
+
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
@@ -359,7 +438,9 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    /** Determines if there are items in the internal buffer which can be moved into the output slots. Allows the action of moving them to be stopped with doTake being false. */
+    /**
+     * Determines if there are items in the internal buffer which can be moved into the output slots. Allows the action of moving them to be stopped with doTake being false.
+     */
     public boolean takeStacksFromStorage(boolean doTake)
     {
         // Don't allow the machine to perform synthesis when no recipe or power. 
@@ -382,11 +463,11 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         if (doTake)
         {
             storageInventory.setInventoryStacks(storage);
-            
+
             // Consume the required amount of energy that was the cost of the item being created.
             this.consumeEnergy(currentRecipe.energyCost());
         }
-        
+
         return true;
     }
 
@@ -424,14 +505,18 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         nbt.setTag("inventory", inventoryTagList);
     }
 
-    /** Determines if there is enough energy in the machines internal reserve to allow the creation of this item. */
+    /**
+     * Determines if there is enough energy in the machines internal reserve to allow the creation of this item.
+     */
     public boolean canAffordRecipe(SynthesisRecipe recipe)
     {
         int energyCost = recipe.energyCost();
         return this.getEnergy(ForgeDirection.UNKNOWN) >= energyCost;
     }
 
-    /** Returns the current recipe result for whatever is in the crafting matrix. */
+    /**
+     * Returns the current recipe result for whatever is in the crafting matrix.
+     */
     private boolean getRecipeResult()
     {
         ItemStack[] recipeMatrixItems = getRecipeMatrixItems();
@@ -442,8 +527,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             inventory[kOutput[0]] = recipe.getOutput().copy();
             currentRecipe = recipe;
             return true;
-        }
-        else
+        } else
         {
             inventory[kOutput[0]] = null;
             currentRecipe = null;
@@ -451,7 +535,9 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    /** Called when the player places his chemists journal into the slot for it and sets ghost items to selected item recipe if active. */
+    /**
+     * Called when the player places his chemists journal into the slot for it and sets ghost items to selected item recipe if active.
+     */
     private void onPutJournal(ItemStack itemstack)
     {
         ItemStack activeItem = MinechemItemsGeneration.journal.getActiveStack(itemstack);
@@ -545,8 +631,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
                     newOutput.stackSize = leftOverStackSize;
                     outputs.add(newOutput);
                 }
-            }
-            else
+            } else
             {
                 output.stackSize += template.stackSize;
             }
@@ -558,11 +643,13 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return outputs;
     }
 
-    /** Sets ghost items that will make the crafting recipe from currently selected item in chemists journal if located in that slot. */
+    /**
+     * Sets ghost items that will make the crafting recipe from currently selected item in chemists journal if located in that slot.
+     */
     public void setRecipe(SynthesisRecipe recipe)
     {
         clearRecipeMatrix();
-        
+
         if (recipe != null)
         {
             ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
@@ -570,7 +657,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             {
                 inventory[kRecipe[i]] = ingredients[i];
             }
-            
+
             onInventoryChanged();
         }
     }
@@ -585,10 +672,10 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     {
         switch (side)
         {
-        case 1:
-            return kStorage;
-        default:
-            return kOutput;
+            case 1:
+                return kStorage;
+            default:
+                return kOutput;
         }
     }
 
@@ -606,7 +693,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         {
             return SynthesisTileEntity.kOutput;
         }
-        
+
         return SynthesisTileEntity.kStorage;
     }
 
@@ -627,7 +714,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             }
             return false;
         }
-        
+
         return true;
     }
 }
