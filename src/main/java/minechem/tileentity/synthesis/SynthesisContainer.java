@@ -2,7 +2,6 @@ package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import minechem.MinechemItemsGeneration;
 import minechem.container.ContainerWithFakeSlots;
 import minechem.item.chemistjournal.ChemistJournalSlot;
@@ -29,6 +28,22 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         bindPlayerInventory(inventoryPlayer);
     }
 
+    private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 9; j++)
+            {
+                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 105 + i * 18));
+            }
+        }
+
+        for (int i = 0; i < 9; i++)
+        {
+            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 163));
+        }
+    }
+
     private void bindRecipeMatrixSlots()
     {
         int slot = 0;
@@ -52,86 +67,10 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         }
     }
 
-    private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
-    {
-        for (int i = 0; i < 3; i++)
-        {
-            for (int j = 0; j < 9; j++)
-            {
-                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 105 + i * 18));
-            }
-        }
-
-        for (int i = 0; i < 9; i++)
-        {
-            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 163));
-        }
-    }
-
     @Override
     public boolean canInteractWith(EntityPlayer var1)
     {
         return synthesis.isUseableByPlayer(var1);
-    }
-
-    @Override
-    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
-    {
-        Slot slotObject = (Slot) inventorySlots.get(slot);
-        if (slotObject != null && slotObject.getHasStack())
-        {
-            ItemStack stackInSlot = slotObject.getStack();
-            ItemStack stack = stackInSlot.copy();
-            if (slot != SynthesisTileEntity.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(SynthesisTileEntity.kStartJournal).getHasStack())
-            {
-                ItemStack copystack = slotObject.decrStackSize(1);
-                getSlot(SynthesisTileEntity.kStartJournal).putStack(copystack);
-                return null;
-            }
-            else if (slot == SynthesisTileEntity.kStartOutput)
-            {
-                if (!craftMaxmimum())
-                {
-                    return null;
-                }
-            }
-            else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
-            {
-                if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
-                {
-                    return null;
-                }
-            }
-            else if (slot >= SynthesisTileEntity.kStartStorage && slot < SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage)
-            {
-                if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
-                {
-                    return null;
-                }
-            }
-            else if (slot == SynthesisTileEntity.kStartJournal)
-            {
-                if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
-                {
-                    return null;
-                }
-            }
-            else
-                return null;
-
-            
-            if (stackInSlot.stackSize == 0)
-            {
-                slotObject.putStack(null);
-            }
-            else
-            {
-                slotObject.onSlotChanged();
-            }
-
-            return stack;
-        }
-        return null;
     }
 
     public boolean craftMaxmimum()
@@ -141,7 +80,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         {
             return false;
         }
-        
+
         for (ItemStack output : outputs)
         {
             if (!mergeItemStack(output, synthesis.getSizeInventory(), inventorySlots.size(), true))
@@ -149,8 +88,22 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 return false;
             }
         }
-        
+
         return true;
+    }
+
+    public List<ItemStack> getPlayerInventory()
+    {
+        List<ItemStack> playerInventory = new ArrayList<ItemStack>();
+        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+        {
+            ItemStack stack = getSlot(slot).getStack();
+            if (stack != null)
+            {
+                playerInventory.add(stack);
+            }
+        }
+        return playerInventory;
     }
 
     @Override
@@ -166,21 +119,66 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
+            {
                 storageInventory.add(stack);
+            }
         }
         return storageInventory;
     }
 
-    public List<ItemStack> getPlayerInventory()
+    @Override
+    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
-        List<ItemStack> playerInventory = new ArrayList<ItemStack>();
-        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
-        {
-            ItemStack stack = getSlot(slot).getStack();
-            if (stack != null)
-                playerInventory.add(stack);
-        }
-        return playerInventory;
-    }
+        Slot slotObject = (Slot) inventorySlots.get(slot);
 
+        if (slotObject != null && slotObject.getHasStack())
+        {
+            ItemStack stackInSlot = slotObject.getStack();
+            ItemStack stack = stackInSlot.copy();
+            if (slot != SynthesisTileEntity.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(SynthesisTileEntity.kStartJournal).getHasStack())
+            {
+                ItemStack copystack = slotObject.decrStackSize(1);
+                getSlot(SynthesisTileEntity.kStartJournal).putStack(copystack);
+                return null;
+            } else if (slot == SynthesisTileEntity.kStartOutput)
+            {
+                if (!craftMaxmimum())
+                {
+                    return null;
+                }
+            } else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
+            {
+                if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
+                {
+                    return null;
+                }
+            } else if (slot >= SynthesisTileEntity.kStartStorage && slot < SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage)
+            {
+                if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
+                {
+                    return null;
+                }
+            } else if (slot == SynthesisTileEntity.kStartJournal)
+            {
+                if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
+                {
+                    return null;
+                }
+            } else
+            {
+                return null;
+            }
+
+            if (stackInSlot.stackSize == 0)
+            {
+                slotObject.putStack(null);
+            } else
+            {
+                slotObject.onSlotChanged();
+            }
+
+            return stack;
+        }
+        return null;
+    }
 }
