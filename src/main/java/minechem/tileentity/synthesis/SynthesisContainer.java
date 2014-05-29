@@ -142,6 +142,10 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 return null;
             } else if (slot == SynthesisTileEntity.kStartOutput)
             {
+                if (entityPlayer.inventory.getFirstEmptyStack() == -1)
+                {
+                    return null;
+                }
                 if (!craftMaxmimum())
                 {
                     return null;
