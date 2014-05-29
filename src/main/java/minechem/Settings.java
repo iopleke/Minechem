@@ -142,6 +142,16 @@ public class Settings
                         field.setBoolean(null, bool);
                     }
                 }
+                else if (annoBool == null && annoBlock == null && annoInt != null)
+                {
+                    // Config property is int.
+                    if (field.isAnnotationPresent(CfgInt.class))
+                    {
+                        int someInt = field.getInt(null);
+                        someInt = config.get(Configuration.CATEGORY_GENERAL, field.getName(), someInt).getInt(someInt);
+                        field.setInt(null, someInt);
+                    }
+                }
             }
         }
         catch (Exception e)
