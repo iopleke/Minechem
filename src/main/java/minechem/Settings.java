@@ -101,6 +101,10 @@ public class Settings
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
     boolean DebugMode = false;
+    
+    // Determines how far away in blocks a packet will be sent to players in a given dimension to reduce packet spam.
+    public static @CfgInt
+    int UpdateRadius = 20;
 
     public static void load(Configuration config)
     {
@@ -136,6 +140,16 @@ public class Settings
                         boolean bool = field.getBoolean(null);
                         bool = config.get(Configuration.CATEGORY_GENERAL, field.getName(), bool).getBoolean(bool);
                         field.setBoolean(null, bool);
+                    }
+                }
+                else if (annoBool == null && annoBlock == null && annoInt != null)
+                {
+                    // Config property is int.
+                    if (field.isAnnotationPresent(CfgInt.class))
+                    {
+                        int someInt = field.getInt(null);
+                        someInt = config.get(Configuration.CATEGORY_GENERAL, field.getName(), someInt).getInt(someInt);
+                        field.setInt(null, someInt);
                     }
                 }
             }
