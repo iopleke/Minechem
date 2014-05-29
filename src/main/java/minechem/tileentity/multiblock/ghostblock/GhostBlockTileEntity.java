@@ -23,7 +23,7 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         {
             GhostBlockPacket packet = new GhostBlockPacket(this);
             int dimensionID = worldObj.provider.dimensionId;
-            PacketDispatcher.sendPacketToAllInDimension(packet.makePacket(), dimensionID);
+            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, packet.makePacket());
         }
     }
 

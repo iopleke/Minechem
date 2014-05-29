@@ -225,8 +225,8 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             }
         }
 
-        // Sends a packet to clients in dimension of origin about the machines current state.
-        PacketDispatcher.sendPacketToAllInDimension(new DecomposerPacketUpdate(this).makePacket(), worldObj.provider.dimensionId);
+        // Sends a packet to clients around the machine.
+        PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, new DecomposerPacketUpdate(this).makePacket());
 
         // Determine if we should change our state to active.
         if (state == state.kProcessIdle && this.isPowered() && canDecomposeInput())

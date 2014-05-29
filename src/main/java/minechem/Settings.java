@@ -101,6 +101,10 @@ public class Settings
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
     boolean DebugMode = false;
+    
+    // Determines how far away in blocks a packet will be sent to players in a given dimension to reduce packet spam.
+    public static @CfgInt
+    int UpdateRadius = 20;
 
     public static void load(Configuration config)
     {

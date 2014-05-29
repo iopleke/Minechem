@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
+import minechem.Settings;
 import minechem.tileentity.decomposer.DecomposerTileEntity.State;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
@@ -398,7 +399,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         {
             SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
             int dimensionID = worldObj.provider.dimensionId;
-            PacketDispatcher.sendPacketToAllInDimension(synthesisPacketUpdate.makePacket(), dimensionID);
+            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, synthesisPacketUpdate.makePacket());
         }
 
         // Forces the output slot to only take a single item preventing stacking.
