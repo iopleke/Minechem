@@ -1,9 +1,8 @@
 package minechem.tileentity.leadedchest;
 
-import java.util.Random;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 import minechem.ModMinechem;
 import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
@@ -21,29 +20,13 @@ import net.minecraft.world.World;
 
 public class LeadedChestBlock extends BlockContainer
 {
-
     public LeadedChestBlock(int id)
     {
         super(id, Material.wood);
+        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setUnlocalizedName("container.leadedchest");
-        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
-    }
-
-    @Override
-    public boolean onBlockActivated(World world, int xCoord, int yCoord, int zCoord, EntityPlayer player, int metadata, float par7, float par8, float par9)
-    {
-        if (!world.isRemote)
-        {
-            LeadedChestTileEntity leadedchest = (LeadedChestTileEntity) world.getBlockTileEntity(xCoord, yCoord, zCoord);
-            if (leadedchest == null || player.isSneaking())
-            {
-                return false;
-            }
-            player.openGui(ModMinechem.INSTANCE, 0, world, xCoord, yCoord, zCoord);
-        }
-        return true;
     }
 
     @Override
@@ -51,6 +34,12 @@ public class LeadedChestBlock extends BlockContainer
     {
         this.dropItems(world, xCoord, yCoord, zCoord);
         super.breakBlock(world, xCoord, yCoord, zCoord, par5, par6);
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World world)
+    {
+        return new LeadedChestTileEntity();
     }
 
     private void dropItems(World world, int xCoord, int yCoord, int zCoord)
@@ -94,12 +83,6 @@ public class LeadedChestBlock extends BlockContainer
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world)
-    {
-        return new LeadedChestTileEntity();
-    }
-
-    @Override
     public int getRenderType()
     {
         return -1;
@@ -112,16 +95,18 @@ public class LeadedChestBlock extends BlockContainer
     }
 
     @Override
-    public boolean renderAsNormalBlock()
+    public boolean onBlockActivated(World world, int xCoord, int yCoord, int zCoord, EntityPlayer player, int metadata, float par7, float par8, float par9)
     {
-        return false;
-    }
-    
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
-    {
-        blockIcon = ir.registerIcon(Reference.LEADEDCHEST_TEX);
+        if (!world.isRemote)
+        {
+            LeadedChestTileEntity leadedChest = (LeadedChestTileEntity) world.getBlockTileEntity(xCoord, yCoord, zCoord);
+            if (leadedChest == null || player.isSneaking())
+            {
+                return false;
+            }
+            player.openGui(ModMinechem.INSTANCE, 0, world, xCoord, yCoord, zCoord);
+        }
+        return true;
     }
 
     @Override
@@ -150,5 +135,18 @@ public class LeadedChestBlock extends BlockContainer
             facing = 4;
         }
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IconRegister ir)
+    {
+        blockIcon = ir.registerIcon(Reference.LEADEDCHEST_TEX);
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
     }
 }

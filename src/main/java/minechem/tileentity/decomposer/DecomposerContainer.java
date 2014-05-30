@@ -75,20 +75,27 @@ public class DecomposerContainer extends Container implements IRadiationShield
             if (slot >= 0 && slot < kDecomposerInventoryEnd)
             {
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
+                {
                     return null;
-            }
-            else if (slot >= kPlayerInventorySlotStart)
+                }
+            } else if (slot >= kPlayerInventorySlotStart)
             {
                 if (!mergeItemStack(stackInSlot, decomposer.kInputSlot, decomposer.kInputSlot + 1, false))
+                {
                     return null;
-            }
-            else if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
+                }
+            } else if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
+            {
                 return null;
+            }
 
             if (stackInSlot.stackSize == 0)
+            {
                 slotObject.putStack(null);
-            else
+            } else
+            {
                 slotObject.onSlotChanged();
+            }
 
             return stack;
         }
@@ -108,7 +115,9 @@ public class DecomposerContainer extends Container implements IRadiationShield
         {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
+            {
                 storageInventory.add(stack);
+            }
         }
         return storageInventory;
     }
@@ -120,7 +129,9 @@ public class DecomposerContainer extends Container implements IRadiationShield
         {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
+            {
                 playerInventory.add(stack);
+            }
         }
         return playerInventory;
     }
