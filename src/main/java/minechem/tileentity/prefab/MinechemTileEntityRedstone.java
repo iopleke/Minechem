@@ -10,7 +10,9 @@ public abstract class MinechemTileEntityRedstone extends MinechemTileEntityBase
     public void checkRedstonePower()
     {
         // Determines if there is a redstone current flowing through this block.
-        isRedstonePowered = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+        // Temporarily disabling this to make a "rescue build" for Resonant Rise
+        //isRedstonePowered = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord);
+        isRedstonePowered = false;
     }
 
     @Override
