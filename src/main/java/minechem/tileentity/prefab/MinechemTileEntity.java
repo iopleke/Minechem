@@ -18,7 +18,7 @@ import universalelectricity.api.energy.IEnergyInterface;
 import universalelectricity.api.vector.Vector3;
 
 @UniversalClass
-public abstract class MinechemTileEntity extends MinechemTileEntityRedstone implements IInventory, IEnergyInterface, IEnergyContainer
+public abstract class MinechemTileEntity extends MinechemTileEntityBase implements IInventory, IEnergyInterface, IEnergyContainer
 {
     private EnergyStorageHandler energy;
     public ItemStack[] inventory;
