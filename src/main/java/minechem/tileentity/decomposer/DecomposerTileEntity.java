@@ -561,7 +561,15 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     @Override
     public boolean canInsertItem(int i, ItemStack itemstack, int j)
     {
-        return itemstack != null && !Compare.isStackAnElement(itemstack);
+        if (itemstack == null)
+        {
+            return false;
+        }
+        else
+        {
+            boolean hasRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
+            return hasRecipe;
+        }
     }
 
     @Override
