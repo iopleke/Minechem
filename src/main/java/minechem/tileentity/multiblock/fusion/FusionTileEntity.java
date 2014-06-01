@@ -4,6 +4,7 @@ import minechem.MinechemItemsGeneration;
 import minechem.item.blueprint.BlueprintFusion;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
+import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
@@ -11,16 +12,26 @@ import minechem.utils.MinechemHelper;
 import minechem.utils.SafeTimeTracker;
 import minechem.utils.Transactor;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 
-public class FusionTileEntity extends MultiBlockTileEntity
+public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
-    public static int[] kFusionStar = { 0 };
-    public static int[] kInput = { 1, 2 };
-    public static int[] kOutput = { 3 };
+    public static int[] kFusionStar =
+    {
+        0
+    };
+    public static int[] kInput =
+    {
+        1, 2
+    };
+    public static int[] kOutput =
+    {
+        3
+    };
 
     private final BoundedInventory inputInventory;
     private final BoundedInventory outputInventory;
@@ -56,6 +67,18 @@ public class FusionTileEntity extends MultiBlockTileEntity
     }
 
     @Override
+    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    {
+        return false;
+    }
+
+    @Override
+    public int[] getAccessibleSlotsFromSide(int var1)
+    {
+        return null;
+    }
+
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
@@ -63,7 +86,7 @@ public class FusionTileEntity extends MultiBlockTileEntity
         {
             return;
         }
-        
+
         shouldSendUpdatePacket = false;
         if (!worldObj.isRemote && inventory[kStartFusionStar] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
         {
@@ -71,17 +94,16 @@ public class FusionTileEntity extends MultiBlockTileEntity
             {
                 targetEnergy = takeEnergyFromStar(inventory[kStartFusionStar], true);
             }
-            
+
             if (targetEnergy > 0)
             {
                 isRecharging = true;
             }
-            
+
             if (isRecharging)
             {
                 recharge();
-            }
-            else
+            } else
             {
                 ItemStack fusionResult = getFusionOutput();
                 while (fusionResult != null && canFuse(fusionResult))
@@ -91,14 +113,14 @@ public class FusionTileEntity extends MultiBlockTileEntity
                         addToOutput(fusionResult);
                         removeInputs();
                     }
-                    
+
                     energyStored -= getEnergyCost(fusionResult);
                     fusionResult = getFusionOutput();
                     shouldSendUpdatePacket = true;
                 }
             }
         }
-        
+
         if (shouldSendUpdatePacket && !worldObj.isRemote)
         {
             // TODO Write update packet for fusion reactor.
@@ -111,8 +133,7 @@ public class FusionTileEntity extends MultiBlockTileEntity
         {
             ItemStack output = fusionResult.copy();
             inventory[kOutput[0]] = output;
-        }
-        else
+        } else
         {
             inventory[kOutput[0]].stackSize++;
         }
@@ -128,9 +149,12 @@ public class FusionTileEntity extends MultiBlockTileEntity
     {
         ItemStack itemInOutput = inventory[kOutput[0]];
         if (itemInOutput != null)
+        {
             return itemInOutput.stackSize < getInventoryStackLimit() && itemInOutput.isItemEqual(fusionResult) && energyStored >= getEnergyCost(fusionResult);
-        else
+        } else
+        {
             return energyStored >= getEnergyCost(fusionResult);
+        }
     }
 
     private ItemStack getFusionOutput()
@@ -143,13 +167,11 @@ public class FusionTileEntity extends MultiBlockTileEntity
             if (massSum <= ElementEnum.heaviestMass)
             {
                 return new ItemStack(MinechemItemsGeneration.element, 1, massSum - 1);
-            }
-            else
+            } else
             {
                 return null;
             }
-        }
-        else
+        } else
         {
             return null;
         }
@@ -173,8 +195,7 @@ public class FusionTileEntity extends MultiBlockTileEntity
         {
             energyStored++;
             shouldSendUpdatePacket = true;
-        }
-        else
+        } else
         {
             isRecharging = false;
             targetEnergy = 0;
@@ -189,8 +210,7 @@ public class FusionTileEntity extends MultiBlockTileEntity
         if (energyCapacityAvailable == 0)
         {
             return 0;
-        }
-        else if (energyInStar > energyCapacityAvailable)
+        } else if (energyInStar > energyCapacityAvailable)
         {
             if (doTake)
             {
@@ -198,8 +218,7 @@ public class FusionTileEntity extends MultiBlockTileEntity
                 fusionStar.setItemDamage(fusionStarDamage);
             }
             return maxEnergy;
-        }
-        else
+        } else
         {
             if (doTake)
             {
@@ -223,12 +242,17 @@ public class FusionTileEntity extends MultiBlockTileEntity
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
-        if (slot == 0 && itemstack != null && itemstack.itemID == Item.netherStar.itemID)
+        if (itemstack != null)
         {
-            System.out.println("Turning nether star into fusion star");
-            this.inventory[slot] = new ItemStack(MinechemItemsGeneration.fusionStar);
+            System.out.println("int i = " + slot);
+            System.out.println("Item ID = " + itemstack.itemID);
+            System.out.println("Star ID = " + Item.netherStar.itemID);
         }
-        else
+        if (slot == 0){
+            if(itemstack != null && itemstack.itemID == Item.netherStar.itemID){
+                this.inventory[slot] = new ItemStack(MinechemItemsGeneration.fusionStar);
+            }
+        } else
         {
             this.inventory[slot] = itemstack;
         }
@@ -243,10 +267,7 @@ public class FusionTileEntity extends MultiBlockTileEntity
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
-        if (!completeStructure)
-            return false;
-
-        return true;
+        return completeStructure;
     }
 
     @Override
@@ -311,14 +332,14 @@ public class FusionTileEntity extends MultiBlockTileEntity
     {
         switch (side)
         {
-        case 0:
-        case 1:
-            return kInput;
-        default:
-            return kOutput;
+            case 0:
+            case 1:
+                return kInput;
+            default:
+                return kOutput;
         }
     }
-    
+
     public int getFusionEnergyStored()
     {
         if (this.inventory[0] != null)
@@ -328,4 +349,13 @@ public class FusionTileEntity extends MultiBlockTileEntity
         return 0;
     }
 
+    @Override
+    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    {
+        if (itemstack == null)
+        {
+            return false;
+        }
+        return itemstack.itemID == Item.netherStar.itemID;
+    }
 }
