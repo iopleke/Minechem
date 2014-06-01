@@ -242,15 +242,14 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     @Override
     public void setInventorySlotContents(int slot, ItemStack itemstack)
     {
-        if (itemstack != null)
+        if (slot == 0 && itemstack != null)
         {
-            System.out.println("int i = " + slot);
-            System.out.println("Item ID = " + itemstack.itemID);
-            System.out.println("Star ID = " + Item.netherStar.itemID);
-        }
-        if (slot == 0){
-            if(itemstack != null && itemstack.itemID == Item.netherStar.itemID){
+            if (itemstack.itemID == Item.netherStar.itemID)
+            {
                 this.inventory[slot] = new ItemStack(MinechemItemsGeneration.fusionStar);
+            } else if (itemstack.itemID == MinechemItemsGeneration.fusionStar.itemID)
+            {
+                this.inventory[slot] = itemstack;
             }
         } else
         {
