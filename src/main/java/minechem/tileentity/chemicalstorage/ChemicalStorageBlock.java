@@ -24,9 +24,15 @@ public class ChemicalStorageBlock extends BlockChest
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
     {
+        if (!world.isRemote)
+        {
+            entityPlayer.addChatMessage("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid");
+        }
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
         if (world.isRemote)
+        {
             return true;
+        }
         if (tileEntity instanceof ChemicalStorageTileEntity)
         {
             entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
@@ -78,7 +84,7 @@ public class ChemicalStorageBlock extends BlockChest
     @Override
     public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
     {
-        return true;
+        return false;
     }
 
     @Override
