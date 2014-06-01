@@ -12,6 +12,7 @@ MinecraftForge-License.txt
 lib/Mekanism*
 lib/Universal*
 lib/1.6.4/
+._*
 
 ## gradle
 /.gradle
