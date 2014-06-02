@@ -148,6 +148,9 @@ public class MicroscopeGui extends GuiContainerTabbed
         {
             this.inventorySlots.putStackInSlot(slot, itemstack);
             slot++;
+            if(slot >= 11){
+                break;
+            }
         }
     }
 
@@ -181,6 +184,9 @@ public class MicroscopeGui extends GuiContainerTabbed
         {
             this.inventorySlots.putStackInSlot(slot, itemstack);
             slot++;
+            if(slot >= 11){
+                break;
+            }
         }
     }
 
