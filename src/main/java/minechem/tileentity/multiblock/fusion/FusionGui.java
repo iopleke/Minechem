@@ -57,7 +57,7 @@ public class FusionGui extends GuiContainerTabbed
         // DRAW ENERGY BAR
         updateEnergy();
         // energy = fusion.getEnergyStored();
-        int energyBarWidth = (int) MinechemHelper.translateValue(energy, 0, fusion.getMaxEnergy(), 0, 160);
+        int energyBarWidth = (int) MinechemHelper.translateValue(energy, 0, fusion.output, 0, 160);
         drawTexturedModalRect(x + 8, y + 38, 0, 192, energyBarWidth, 3);
 
         // DRAW ENERGY BAR OVERLAY
@@ -75,7 +75,7 @@ public class FusionGui extends GuiContainerTabbed
 
     private void updateEnergy()
     {
-        targetEnergy = fusion.getFusionEnergyStored();
+        targetEnergy = fusion.output;
         if (energy < (targetEnergy))
         {
             energy += increaseRate;

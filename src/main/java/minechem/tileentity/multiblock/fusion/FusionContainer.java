@@ -18,10 +18,10 @@ public class FusionContainer extends Container implements IRadiationShield
         this.inventoryPlayer = inventoryPlayer;
         this.fusion = fusion;
 
-        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartFusionStar, 80, 18));
-        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartInput1, 22, 62));
-        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartInput2, 138, 62));
-        addSlotToContainer(new Slot(fusion, FusionTileEntity.kStartOutput, 80, 62));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.fuelSlot, 80, 18));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.inputLeft, 22, 62));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.inputRight, 138, 62));
+        addSlotToContainer(new Slot(fusion, FusionTileEntity.output, 80, 62));
 
         bindPlayerInventory(inventoryPlayer);
     }
@@ -66,7 +66,7 @@ public class FusionContainer extends Container implements IRadiationShield
             }
             else if (slot >= fusion.getSizeInventory())
             {
-                if (!mergeItemStack(stackInSlot, FusionTileEntity.kStartInput1, FusionTileEntity.kStartInput1 + 1, false))
+                if (!mergeItemStack(stackInSlot, FusionTileEntity.inputLeft, FusionTileEntity.inputRight, false))
                 {
                     return null;
                 }
