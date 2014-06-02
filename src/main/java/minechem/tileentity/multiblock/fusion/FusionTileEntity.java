@@ -22,9 +22,6 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     public static int inputRight = 2;
     public static int output = 3;
 
-    SafeTimeTracker energyUpdateTracker = new SafeTimeTracker();
-    boolean shouldSendUpdatePacket;
-
     public FusionTileEntity()
     {
         this.inventory = new ItemStack[getSizeInventory()];
