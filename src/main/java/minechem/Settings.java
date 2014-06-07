@@ -105,6 +105,10 @@ public class Settings
     // Determines how far away in blocks a packet will be sent to players in a given dimension to reduce packet spam.
     public static @CfgInt
     int UpdateRadius = 20;
+    
+    // Enabling automation can allow duping. Disabled by default.
+    public static @CfgBool
+    boolean AllowAutomation = false;
 
     public static void load(Configuration config)
     {

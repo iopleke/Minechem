@@ -706,6 +706,13 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     @Override
     public boolean canExtractItem(int i, ItemStack itemstack, int j)
     {
+        if (Settings.AllowAutomation)
+        {
+            if (takeStacksFromStorage(false))
+            {
+                return true;
+            }
+        }
         return false;
     }
 }
