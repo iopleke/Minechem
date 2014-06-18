@@ -31,7 +31,7 @@ public class Settings
     }
 
     // ** Auto-incrementing configuration IDs. Use this to make sure no config ID is the same. **/
-    public static final IDManager idManager = new IDManager(4012, 4736);
+    public static final IDManager idManager = new IDManager(256, 4097);
 
     public static int getNextBlockID()
     {
