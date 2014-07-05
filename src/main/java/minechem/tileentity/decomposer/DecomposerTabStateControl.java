@@ -47,7 +47,7 @@ public class DecomposerTabStateControl extends GuiTabStateControl
     {
         super.update();
         State state = decomposer.getState();
-        if (state == State.kProcessJammed)
+        if (state == State.jammed)
         {
             this.state = TabState.jammed;
         }

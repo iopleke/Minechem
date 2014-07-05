@@ -24,11 +24,11 @@ public class DecomposerTileEntityRenderer extends TileEntitySpecialRenderer
             GL11.glEnable(GL11.GL_LIGHTING);
             
             // When the decomposer is powered we will change the texture to reflect this.
-            if (decomposer.isPowered() && decomposer.state != State.kProcessActive)
+            if (decomposer.isPowered() && decomposer.state != State.active)
             {
                 bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_ON));
             }
-            else if (decomposer.isPowered() && decomposer.state == State.kProcessActive)
+            else if (decomposer.isPowered() && decomposer.state == State.active)
             {
                 // Makes the machine spin and look active while it is actually decomposing items in the input slot.
                 bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_ON));
