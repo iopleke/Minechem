@@ -66,7 +66,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     /**
      * Holds the current state of our machine. Valid States: IDLE, ACTIVE, FINISHED, JAMMED
      */
-    public State state = State.kProcessIdle;
+    public State state = State.idle;
 
     /**
      * Holds a reference to the itemstack that is being held in the input slot.
@@ -162,6 +162,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
     /**
      * Determines if there is a valid recipe to decompose a given fluid in our internal fluid array storage.
+     * 
+     * @param fluid Fluid to be checked
+     * @return boolean
      */
     public boolean isFluidValidForDecomposer(Fluid fluid)
     {
@@ -213,7 +216,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
      */
     public enum State
     {
-        kProcessIdle, kProcessActive, kProcessFinished, kProcessJammed
+        idle, active, finished, jammed
     }
 
     public DecomposerTileEntity()
@@ -246,7 +249,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         }
 
         // Determine if we can decompose the object in the input slot while in a powered and idle state.
-        if (this.inputInventory.getStackInSlot(0) == null && state == State.kProcessIdle)
+        if (this.inputInventory.getStackInSlot(0) == null && state == State.idle)
         {
             for (int i = 0; i < fluids.size(); i++)
             {
@@ -272,40 +275,40 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, new DecomposerPacketUpdate(this).makePacket());
 
         // Determine if we should change our state to active.
-        if (state == state.kProcessIdle && this.isPowered() && canDecomposeInput())
+        if (state == state.idle && this.isPowered() && canDecomposeInput())
         {
-            state = State.kProcessActive;
-        } else if (state == State.kProcessJammed && canUnjam() && this.isPowered())
+            state = State.active;
+        } else if (state == State.jammed && canUnjam() && this.isPowered())
         {
             // Reactivates the machine once output slots have been cleared.
             // Note: It is possible for some items and blocks to decompose into more molecules than there are output slots!
-            state = State.kProcessActive;
+            state = State.active;
         }
 
         // If the machines state is currently not set to active then stop operation.
-        if (state != State.kProcessActive)
+        if (state != State.active)
         {
             return;
         }
 
         // Determines the current state of the machine.
         state = determineOperationalState();
-        if (state == State.kProcessActive && this.isPowered())
+        if (state == State.active && this.isPowered())
         {
             // Consume energy to create the needed base elements.
             this.consumeEnergy(1);
-        } else if ((state == State.kProcessIdle || state == State.kProcessFinished) && canDecomposeInput() && this.isPowered())
+        } else if ((state == State.idle || state == State.finished) && canDecomposeInput() && this.isPowered())
         {
             // Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
             activeStack = null;
             decomposeActiveStack();
-            state = State.kProcessActive;
+            state = State.active;
             this.onInventoryChanged();
-        } else if (state == State.kProcessFinished)
+        } else if (state == State.finished)
         {
             // Prepares the machine for another pass if we have recently finished.
             activeStack = null;
-            state = State.kProcessIdle;
+            state = State.idle;
         }
 
         // Notify minecraft that the inventory items in this machine have changed.
@@ -380,7 +383,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             outputBuffer = outputStacks;
         } else
         {
-            state = State.kProcessFinished;
+            state = State.finished;
         }
     }
 
@@ -415,13 +418,13 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                     outputBuffer.remove(outputStack);
                 }
 
-                return State.kProcessActive;
+                return State.active;
             } else
             {
-                return State.kProcessJammed;
+                return State.jammed;
             }
         }
-        return State.kProcessFinished;
+        return State.finished;
     }
 
     /**
