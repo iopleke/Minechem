@@ -11,9 +11,6 @@ import net.minecraftforge.common.Configuration;
 
 public class Settings
 {
-    // Modified from Source
-    // http://www.minecraftforge.net/wiki/Reference_Mod_File
-
     @Retention(RetentionPolicy.RUNTIME)
     private static @interface CfgBool
     {
@@ -46,7 +43,6 @@ public class Settings
     // -----
     // ITEMS
     // -----
-
     public static @CfgId
     int Element = getNextItemID();
     public static @CfgId
@@ -67,7 +63,6 @@ public class Settings
     // ------
     // BLOCKS
     // ------
-
     // Minechem
     public static @CfgId(block = true)
     int Microscope = getNextBlockID();
@@ -93,7 +88,6 @@ public class Settings
     // --------
     // FEATURES
     // --------
-
     // Determines if the mod will generate ore at all.
     public static @CfgBool
     boolean WorldGenOre = true;
@@ -101,11 +95,11 @@ public class Settings
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
     boolean DebugMode = false;
-    
+
     // Determines how far away in blocks a packet will be sent to players in a given dimension to reduce packet spam.
     public static @CfgInt
     int UpdateRadius = 20;
-    
+
     // Enabling automation can allow duping. Disabled by default.
     public static @CfgBool
     boolean AllowAutomation = false;
@@ -129,14 +123,12 @@ public class Settings
                     if (annoBlock.block())
                     {
                         id = config.getBlock(field.getName(), id).getInt();
-                    }
-                    else
+                    } else
                     {
                         id = config.getItem(field.getName(), id).getInt();
                     }
                     field.setInt(null, id);
-                }
-                else if (annoBool != null && annoBlock == null && annoInt == null)
+                } else if (annoBool != null && annoBlock == null && annoInt == null)
                 {
                     // Config property is bool.
                     if (field.isAnnotationPresent(CfgBool.class))
@@ -145,8 +137,7 @@ public class Settings
                         bool = config.get(Configuration.CATEGORY_GENERAL, field.getName(), bool).getBoolean(bool);
                         field.setBoolean(null, bool);
                     }
-                }
-                else if (annoBool == null && annoBlock == null && annoInt != null)
+                } else if (annoBool == null && annoBlock == null && annoInt != null)
                 {
                     // Config property is int.
                     if (field.isAnnotationPresent(CfgInt.class))
@@ -157,13 +148,11 @@ public class Settings
                     }
                 }
             }
-        }
-        catch (Exception e)
+        } catch (Exception e)
         {
             // failed to load config log
             LogWrapper.log(Level.WARNING, "Failed to load configuration file!");
-        }
-        finally
+        } finally
         {
             config.save();
         }
