@@ -3,7 +3,6 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Random;
 
-import minechem.Settings;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 
