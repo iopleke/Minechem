@@ -1,5 +1,9 @@
 package minechem.api;
 
+import java.lang.reflect.Array;
+
+import net.minecraft.item.ItemStack;
+
 public class RecipeAPI{
 
     /**
