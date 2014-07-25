@@ -47,9 +47,9 @@ repositories {
 dependencies {
     compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${config.version.universalelectricity}", classifier: "dev"
 
-    compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
-    compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar'
-    compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar'
+    compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
+    compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
+    compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
 } 
 version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
 group = "minechem"
