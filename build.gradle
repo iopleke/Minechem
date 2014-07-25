@@ -45,10 +45,11 @@ repositories {
 }
 
 dependencies {
-    compile "universalelectricity:Universal-Electricity:${rootProject.config.version.universalelectricity}:dev"
-    compile "codechicken:CodeChickenLib:${config.version.minecraft}-${config.version.cclib}:dev"
-    compile "codechicken:NotEnoughItems:${config.version.minecraft}-${config.version.nei}:dev"
-    compile "codechicken:CodeChickenCore:${config.version.minecraft}-${config.version.cccore}:dev"
+    compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${rootProject.config.version.universalelectricity}", classifier: "dev"
+
+    compile name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
+    compile name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar'
+    compile name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar'
 } 
 version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
 group = "minechem"
