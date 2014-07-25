@@ -36,7 +36,7 @@ repositories {
     }
     maven { // the repo from which to get NEI and stuff
 	name 'CB Repo'
-	url "http://chickenbones.net/maven/codechicken/"
+	url "http://chickenbones.net/maven/"
     }
     ivy {
 	name 'FMP'
@@ -45,11 +45,11 @@ repositories {
 }
 
 dependencies {
-    compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${rootProject.config.version.universalelectricity}", classifier: "dev"
+    compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${config.version.universalelectricity}", classifier: "dev"
 
-    compile name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
-    compile name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar'
-    compile name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar'
+    compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
+    compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar'
+    compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar'
 } 
 version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
 group = "minechem"
