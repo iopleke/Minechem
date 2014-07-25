@@ -85,10 +85,10 @@ allprojects {
     dependencies {
         compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${rootProject.config.version.universalelectricity}", classifier: "dev"
 
-		compile name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
-		compile name: 'NotEnoughItems', version: "${config.version.nei}", ext: 'jar'
-		compile name: 'CodeChickenCore', version: "${config.version.cccore}", ext: 'jar'
-	}
+        compile name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
+        compile name: 'NotEnoughItems', version: "${config.version.nei}", ext: 'jar'
+        compile name: 'CodeChickenCore', version: "${config.version.cccore}", ext: 'jar'
+    }
     
     jar {
 		
