@@ -36,7 +36,7 @@ repositories {
     }
     maven { // the repo from which to get NEI and stuff
 	name 'CB Repo'
-	url "http://chickenbones.net/maven/"
+	url "http://chickenbones.net/maven/codechicken/"
     }
     ivy {
 	name 'FMP'
