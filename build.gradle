@@ -80,9 +80,6 @@ allprojects {
 		name 'FMP'
 		artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
 	}
-	ivy {
-		artifactPattern "http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/[module]-dev%20[revision].[ext]"
-	}
         mavenCentral()
     }
     
