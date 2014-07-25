@@ -11,6 +11,20 @@ buildscript {
     }
 }
 
+apply plugin: 'forge'
+apply plugin: 'idea'
+apply plugin: 'scala'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+ext.buildProps = file "build.properties"
+ 
+buildProps.withReader {
+    def prop = new Properties()
+    prop.load(it)
+    ext.config = new ConfigSlurper().parse prop
+}
+
 repositories {
     maven {
 	name 'Calclavia Maven'
@@ -30,29 +44,13 @@ repositories {
     }
 }
 
-apply plugin: 'forge'
-
 dependencies {
     compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${rootProject.config.version.universalelectricity}", classifier: "dev"
 
     compile name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar'
     compile name: 'NotEnoughItems', version: "${config.version.nei}", ext: 'jar'
     compile name: 'CodeChickenCore', version: "${config.version.cccore}", ext: 'jar'
-}
-
-apply plugin: 'idea'
-apply plugin: 'scala'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-
-ext.buildProps = file "build.properties"
- 
-buildProps.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    ext.config = new ConfigSlurper().parse prop
-}
- 
+} 
 version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
 group = "minechem"
 archivesBaseName = "MineChem"
