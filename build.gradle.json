@@ -72,17 +72,13 @@ allprojects {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
-    	maven { // the repo from which to get NEI and stuff
-        	name 'CB Repo'
-            	url "http://chickenbones.net/maven/"
-    	}
-	ivy {
-		name 'FMP'
-		artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
-	}
-	ivy {
-		artifactPattern "http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/[module]-dev%20[revision].[ext]"
-	}
+		ivy {
+			name 'FMP'
+			artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
+		}
+		ivy {
+			artifactPattern "http://www.chickenbones.craftsaddle.org/Files/New_Versions/1.6.4/[module]-dev%20[revision].[ext]"
+		}
         mavenCentral()
     }
     
