@@ -166,7 +166,7 @@ public enum MoleculeEnum
     isoleucine(143, new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
     glutamates(144, new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
     asparagine(145, new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
-    keratin(146, new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline, 2), new Molecule(cysteine, 3), new Molecule(proline), new Molecule(threonine), new Molecule(cysteine), new Molecule(proline));
+    keratin(146, new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline), new Molecule(cysteine), new Molecule(proline));
       
     public static MoleculeEnum[] molecules = values();
     private final String localizationKey;
