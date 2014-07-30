@@ -746,9 +746,9 @@ public class MinechemRecipes
         // Leather
         ItemStack itemLeather = new ItemStack(Item.leather);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemLeather, 0.5F, new PotionChemical[]
-        { this.molecule(MoleculeEnum.arginine), this.molecule(MoleculeEnum.glycine), this.molecule(MoleculeEnum.keratin) }));
+        { this.molecule(MoleculeEnum.keratin) }));
         SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.leather, 5), true, 700, new PotionChemical[]
-        { this.molecule(MoleculeEnum.arginine), null, null, null, this.molecule(MoleculeEnum.keratin), null, null, null, this.molecule(MoleculeEnum.glycine) }));
+        { null, null, null, null, this.molecule(MoleculeEnum.keratin), null, null, null, null}));
 
         // Brick
         ItemStack itemBrick = new ItemStack(Item.brick);
