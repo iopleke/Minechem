@@ -6,8 +6,8 @@ import java.lang.reflect.Field;
 import java.util.logging.Level;
 
 import minechem.utils.IDManager;
-import net.minecraft.launchwrapper.LogWrapper;
 import net.minecraftforge.common.Configuration;
+import net.minecraftforge.common.config.Configuration;
 
 public class Settings
 {
@@ -151,7 +151,7 @@ public class Settings
         } catch (Exception e)
         {
             // failed to load config log
-            LogWrapper.log(Level.WARNING, "Failed to load configuration file!");
+            ModMinechem.LOGGER.log(Level.WARNING, "Failed to load configuration file!");
         } finally
         {
             config.save();
