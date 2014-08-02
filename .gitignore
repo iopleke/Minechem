@@ -46,3 +46,6 @@ gradlew.bat
 gradle/
 install.bat
 .cache
+build.xml
+natives/
+nbproject/
