@@ -2,15 +2,14 @@ package minechem.item.chemistjournal;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import minechem.MinechemItemsGeneration;
 import minechem.ModMinechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiFakeSlot;
+import minechem.gui.GuiTab;
 import minechem.gui.GuiVerticalScrollBar;
 import minechem.gui.IVerticalScrollContainer;
 import minechem.gui.ScissorHelper;
-import minechem.gui.GuiTab;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
@@ -25,11 +24,8 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.common.network.PacketDispatcher;
 
 public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
@@ -83,7 +79,9 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         for (ItemStack itemstack : items)
         {
             if (itemstack == null)
+            {
                 continue;
+            }
             int xpos = (i * 18) + 18;
             int ypos = (j * 18) + 10;
             GuiFakeSlot slot = new GuiFakeSlot(this, this.player);
@@ -134,8 +132,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
                     }
                 }
-            }
-            else
+            } else
             {
                 for (GuiTab other : tabListRight)
                 {
@@ -208,7 +205,9 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
             slideShowTimer = 0;
             currentSlide++;
             if (currentSlide >= recipes.size())
+            {
                 currentSlide = 0;
+            }
         }
         if (slideShowTimer == 0)
         {
@@ -229,7 +228,9 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         for (ItemStack ingredient : ingredients)
         {
             if (pos >= 9)
+            {
                 break;
+            }
             slotArray[pos] = null;
             if (ingredient != null)
             {
@@ -273,8 +274,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
             drawRecipeGrid();
             drawText();
             drawRecipeSlots(x, y);
-        }
-        else
+        } else
         {
             drawHelp();
         }
@@ -315,8 +315,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped())
         {
             drawTexturedModalRect(197 / 2, 121 / 2, 104 / 2, 192 / 2, 54 / 2, 54 / 2);
-        }
-        else
+        } else
         {
             drawTexturedModalRect(197 / 2, 121 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
         }
@@ -330,7 +329,9 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         GL11.glDisable(GL11.GL_LIGHTING);
         String itemname = String.format("%sl%s", Constants.TEXT_MODIFIER, currentItemStack.getDisplayName());
         if (itemname.length() > 18)
+        {
             itemname = itemname.substring(0, 18).trim() + "...";
+        }
         fontRenderer.drawString(itemname, 175, 10, 0x0000FF);
         fontRenderer.drawString(MinechemHelper.getLocalString("gui.journal.decomposer"), 175, 20, 0x884400);
 
@@ -341,7 +342,9 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
             chance *= 100.0F;
         }
         if (currentDecomposerRecipe != null)
+        {
             fontRenderer.drawString(String.format("%.1f%% chance", chance), 175, 30, 0x555555);
+        }
 
         fontRenderer.drawString(MinechemHelper.getLocalString("gui.journal.synthesis"), 175, 100, 0x884400);
         if (currentSynthesisRecipe != null)
@@ -404,12 +407,16 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         for (GuiFakeSlot slot : synthesisSlots)
         {
             if (slot != null)
+            {
                 slot.drawTooltip(mouseX + 10, mouseY);
+            }
         }
         for (GuiFakeSlot slot : decomposerSlots)
         {
             if (slot != null)
+            {
                 slot.drawTooltip(mouseX + 10, mouseY);
+            }
         }
     }
 
