@@ -1,27 +1,23 @@
 package minechem.gui;
 
-import minechem.MinechemItemsGeneration;
-import minechem.item.element.ElementEnum;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
+import net.minecraft.item.Item;
 
 public class CreativeTabMinechem extends CreativeTabs
 {
-
-    public CreativeTabMinechem(String label)
+    private final Item tabIconItem;
+    
+    public CreativeTabMinechem(int tabID, String tabName, Item tabIconItem)
     {
-        super(label);
-    }
-
-    public CreativeTabMinechem(int par1, String par2Str)
-    {
-        super(par1, par2Str);
+        super(tabID, tabName);
+        
+        this.tabIconItem = tabIconItem;
     }
 
     @Override
-    public ItemStack getIconItemStack()
+    public Item getTabIconItem()
     {
-        return new ItemStack(MinechemItemsGeneration.element, 1, ElementEnum.U.ordinal());
+        return this.tabIconItem;
     }
 
 }
