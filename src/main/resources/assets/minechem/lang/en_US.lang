@@ -20,7 +20,7 @@ gui.journal.decomposer=Decomposer
 gui.journal.synthesis=Synthesis
 
 tile.blockChemicalDecomposer.name=Chemical Decomposer
-tile.minechem.uraniumOre.name=Uranium Ore
+tile.uraniumOre.name=Uranium Ore
 tile.minechem.blockMicroscope.name=Microscope
 tile.container.leadedchest.name=Leaded Chest
 tile.minechem.blockSynthesis.name=Chemical Synthesis Machine

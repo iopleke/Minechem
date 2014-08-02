@@ -1,30 +1,37 @@
 package minechem.block.uranium;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
-import net.minecraft.util.Icon;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.util.IIcon;
 
 public class BlockUraniumOre extends Block
 {
-    private Icon icon1, icon2;
+    private IIcon blockIcon;
 
-    public BlockUraniumOre(int id)
+    public BlockUraniumOre()
     {
-        super(id, Material.iron);
+        super(Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setUnlocalizedName("minechem.uraniumOre");
+        this.setBlockName("Uranium Ore");
         this.setHardness(4F);
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    @Override
+    public void registerBlockIcons(IIconRegister p_149651_1_)
     {
-        blockIcon = ir.registerIcon(Reference.URANIUM_TEX);
+        blockIcon = p_149651_1_.registerIcon(Reference.URANIUM_TEX);
+    }
+
+    @SideOnly(Side.CLIENT)
+    @Override
+    public IIcon getIcon(int p_149691_1_, int p_149691_2_)
+    {
+        return blockIcon;
     }
 }
