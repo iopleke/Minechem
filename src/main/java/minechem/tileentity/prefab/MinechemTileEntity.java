@@ -1,26 +1,24 @@
 package minechem.tileentity.prefab;
 
 import java.util.EnumSet;
+import minechem.utils.Vector3;
 
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.INetworkManager;
-import net.minecraft.network.packet.Packet;
-import net.minecraft.network.packet.Packet132TileEntityData;
+import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
-import universalelectricity.api.CompatibilityModule;
+import net.minecraftforge.common.util.ForgeDirection;
 import universalelectricity.api.UniversalClass;
-import universalelectricity.api.energy.EnergyStorageHandler;
-import universalelectricity.api.energy.IEnergyContainer;
-import universalelectricity.api.energy.IEnergyInterface;
-import universalelectricity.api.vector.Vector3;
+import universalelectricity.api.core.grid.electric.EnergyStorage;
+import universalelectricity.api.core.grid.electric.IEnergyContainer;
+import universalelectricity.compatibility.Compatibility.CompatibilityModule;
 
 @UniversalClass
-public abstract class MinechemTileEntity extends MinechemTileEntityBase implements IInventory, IEnergyInterface, IEnergyContainer
+public abstract class MinechemTileEntity extends MinechemTileEntityBase implements IInventory, IEnergyContainer
 {
-    private EnergyStorageHandler energy;
+    private EnergyStorage energy;
     public ItemStack[] inventory;
 
     public MinechemTileEntity()
@@ -35,12 +33,12 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
 
     public MinechemTileEntity(long energyCapacity, long transferRate)
     {
-        energy = new EnergyStorageHandler(energyCapacity, transferRate);
+        energy = new EnergyStorage(energyCapacity, transferRate);
     }
 
     public MinechemTileEntity(long capacity, long maxReceive, long maxExtract)
     {
-        energy = new EnergyStorageHandler(capacity, maxReceive, maxExtract);
+        energy = new EnergyStorage(capacity, maxReceive, maxExtract);
     }
 
     @Override
@@ -48,13 +46,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
     {
         NBTTagCompound tagCompound = new NBTTagCompound();
         this.writeToNBT(tagCompound);
-        return new Packet132TileEntityData(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
-    }
-
-    @Override
-    public boolean canConnect(ForgeDirection direction, Object obj)
-    {
-        return true;
+        return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
     }
 
     protected void consume()
