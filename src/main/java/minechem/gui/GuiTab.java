@@ -1,25 +1,23 @@
 package minechem.gui;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import minechem.ModMinechem;
 import minechem.utils.Reference;
 import minechem.utils.SessionVars;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.SoundManager;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
-import cpw.mods.fml.client.FMLClientHandler;
 
 public abstract class GuiTab
 {
 
     public FontRenderer tabFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
-    public SoundManager tabSoundManager = FMLClientHandler.instance().getClient().sndManager;
 
+    // Not sure what method replaces this in 1.7
+    // public SoundManager tabSoundManager = FMLClientHandler.instance().getClient().sndManager;
     private boolean open;
 
     protected Gui myGui;
@@ -67,8 +65,7 @@ public abstract class GuiTab
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
             myGui.drawTexturedModalRect(x - currentWidth, y, 0, 0, 4, 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y + 4, 256 - currentWidth + 4, 256 - currentHeight + 4, currentWidth - 4, currentHeight - 4);
-        }
-        else
+        } else
         {
 
             Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TAB_RIGHT));
@@ -89,8 +86,7 @@ public abstract class GuiTab
         if (myGui instanceof GuiContainerTabbed)
         {
             ((GuiContainerTabbed) myGui).drawTexture(x, y, resource);
-        }
-        else
+        } else
         {
             System.out.println("Failed to draw tab icons on a minechem gui that was not GuiContainerTabbed. This is a bug");
         }
@@ -123,8 +119,7 @@ public abstract class GuiTab
             {
                 return true;
             }
-        }
-        else if (mouseX >= shiftX && mouseX <= shiftX + currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight)
+        } else if (mouseX >= shiftX && mouseX <= shiftX + currentWidth && mouseY >= shiftY && mouseY <= shiftY + currentHeight)
         {
             return true;
         }
@@ -164,8 +159,7 @@ public abstract class GuiTab
         {
             open = false;
             SessionVars.setOpenedTab(null);
-        }
-        else
+        } else
         {
             open = true;
             SessionVars.setOpenedTab(this.getClass());
@@ -178,8 +172,7 @@ public abstract class GuiTab
         if (open && currentWidth < maxWidth)
         {
             currentWidth += 8;
-        }
-        else if (!open && currentWidth > minWidth)
+        } else if (!open && currentWidth > minWidth)
         {
             currentWidth -= 8;
         }
@@ -187,8 +180,7 @@ public abstract class GuiTab
         if (currentWidth > maxWidth)
         {
             currentWidth = maxWidth;
-        }
-        else if (currentWidth < minWidth)
+        } else if (currentWidth < minWidth)
         {
             currentWidth = minWidth;
         }
@@ -196,8 +188,7 @@ public abstract class GuiTab
         if (open && currentHeight < maxHeight)
         {
             currentHeight += 8;
-        }
-        else if (!open && currentHeight > minHeight)
+        } else if (!open && currentHeight > minHeight)
         {
             currentHeight -= 8;
         }
@@ -205,8 +196,7 @@ public abstract class GuiTab
         if (currentHeight > maxHeight)
         {
             currentHeight = maxHeight;
-        }
-        else if (currentHeight < minHeight)
+        } else if (currentHeight < minHeight)
         {
             currentHeight = minHeight;
         }
