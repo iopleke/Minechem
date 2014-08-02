@@ -96,8 +96,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         if (drawBorders)
         {
             drawColoredSlotWithBorder(x, y, color, type, render);
-        }
-        else
+        } else
         {
             drawColoredSlotNoBorder(x, y, color, type, render);
         }
@@ -113,38 +112,38 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         switch (type)
         {
-        case SINGLE:
-            sizeX = 16;
-            sizeY = 16;
-            offsetX += 8;
-            offsetY += 8;
-            break;
-        case OUTPUT:
-            sizeX = 24;
-            sizeY = 24;
-            offsetX += 36;
-            offsetY += 4;
-            break;
-        case DOUBLEOUTPUT:
-            sizeX = 42;
-            sizeY = 24;
-            offsetX += 75;
-            offsetY += 4;
-            break;
+            case SINGLE:
+                sizeX = 16;
+                sizeY = 16;
+                offsetX += 8;
+                offsetY += 8;
+                break;
+            case OUTPUT:
+                sizeX = 24;
+                sizeY = 24;
+                offsetX += 36;
+                offsetY += 4;
+                break;
+            case DOUBLEOUTPUT:
+                sizeX = 42;
+                sizeY = 24;
+                offsetX += 75;
+                offsetY += 4;
+                break;
         }
 
         switch (render)
         {
-        case TOP:
-            sizeY /= 2;
-            break;
-        case BOTTOM:
-            sizeY /= 2;
-            y += sizeY;
-            offsetY += sizeY;
-            break;
-        case FULL:
-            break;
+            case TOP:
+                sizeY /= 2;
+                break;
+            case BOTTOM:
+                sizeY /= 2;
+                y += sizeY;
+                offsetY += sizeY;
+                break;
+            case FULL:
+                break;
         }
 
         drawTexturedModalRect(x, y, offsetX, offsetY, sizeX, sizeY);
@@ -167,32 +166,32 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
         switch (type)
         {
-        case SINGLE:
-            x -= 8;
-            y -= 8;
-            break;
-        case OUTPUT:
-            x -= 4;
-            y -= 4;
-            break;
-        case DOUBLEOUTPUT:
-            x -= 11;
-            y -= 4;
-            break;
+            case SINGLE:
+                x -= 8;
+                y -= 8;
+                break;
+            case OUTPUT:
+                x -= 4;
+                y -= 4;
+                break;
+            case DOUBLEOUTPUT:
+                x -= 11;
+                y -= 4;
+                break;
         }
 
         switch (render)
         {
-        case TOP:
-            sizeY /= 2;
-            break;
-        case BOTTOM:
-            sizeY /= 2;
-            y += sizeY;
-            offsetY += sizeY;
-            break;
-        case FULL:
-            break;
+            case TOP:
+                sizeY /= 2;
+                break;
+            case BOTTOM:
+                sizeY /= 2;
+                y += sizeY;
+                offsetY += sizeY;
+                break;
+            case FULL:
+                break;
         }
 
         drawTexturedModalRect(x, y, offsetX, offsetY, sizeX, sizeY);
@@ -204,8 +203,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         if (drawBorders)
         {
             drawColoredLiquidSlotWithBorder(x, y, color);
-        }
-        else
+        } else
         {
             drawColoredLiquidSlotNoBorder(x, y, color);
         }
@@ -274,8 +272,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
                         other.toggleOpen();
                     }
                 }
-            }
-            else
+            } else
             {
                 for (GuiTab other : tabListRight)
                 {
@@ -306,8 +303,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         if (guiTab.leftSide)
         {
             tabListLeft.add(guiTab);
-        }
-        else
+        } else
         {
             tabListRight.add(guiTab);
         }
