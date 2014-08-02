@@ -107,9 +107,13 @@ public class GuiFakeSlot extends Gui
         GL11.glTranslatef(getXPos(), yPos, 0);
 
         if (getMouseIsOver())
+        {
             drawBackgroundHighlight();
+        }
         if (itemstack != null)
+        {
             drawItemStack(itemstack);
+        }
 
         GL11.glPopMatrix();
     }
@@ -119,7 +123,9 @@ public class GuiFakeSlot extends Gui
         GL11.glPushMatrix();
         GL11.glTranslatef(x, y, 0);
         if (itemstack != null && getMouseIsOver())
+        {
             drawItemStackTooltip(itemstack);
+        }
         GL11.glPopMatrix();
     }
 
@@ -154,7 +160,9 @@ public class GuiFakeSlot extends Gui
         {
             int lineWidth = mc.fontRenderer.getStringWidth(line);
             if (lineWidth > maxLineWidth)
+            {
                 maxLineWidth = lineWidth;
+            }
         }
 
         int bkX = x - 3;
@@ -173,7 +181,9 @@ public class GuiFakeSlot extends Gui
             int ty = y + (i * 10);
             String tooltip = lines.get(i);
             if (i == 0)
-                tooltip = "\u00a7" + Integer.toHexString(itemstack.getRarity().rarityColor) + tooltip;
+            {
+                tooltip = "\u00a7" + itemstack.getRarity().rarityColor + tooltip;
+            }
             mc.fontRenderer.drawStringWithShadow(tooltip, tx, ty, 0xFFFFFFFF);
         }
     }
