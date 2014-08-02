@@ -59,7 +59,7 @@ public class GuiHandler implements IGuiHandler
         {
             return new ContainerTable(player.inventory);
         }
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof DecomposerTileEntity)
         {
             return new DecomposerContainer(player.inventory, (DecomposerTileEntity) tileEntity);
@@ -145,7 +145,7 @@ public class GuiHandler implements IGuiHandler
             return getClientGuiForPolytool(player, world);
         }
         
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         
         if (tileEntity instanceof DecomposerTileEntity)
         {
