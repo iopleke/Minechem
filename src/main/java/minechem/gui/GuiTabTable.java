@@ -2,18 +2,18 @@ package minechem.gui;
 
 import minechem.ModMinechem;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiTabTable extends GuiTab
 {
-    public static Icon helpIcon;
+    public static IIcon helpIcon;
 
     public GuiTabTable(Gui gui)
     {
         super(gui);
 
-        this.overlayColor = 0x2F7DAA;// TODO Auto-generated constructor stub
+        this.overlayColor = 0x2F7DAA;
     }
 
     @Override
@@ -38,7 +38,6 @@ public class GuiTabTable extends GuiTab
     @Override
     public ResourceLocation getIcon()
     {
-        // TODO Auto-generated method stub
         return ModMinechem.ICON_HELP;
     }
 
