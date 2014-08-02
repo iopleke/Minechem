@@ -2,12 +2,9 @@ package minechem.fluid;
 
 import minechem.MinechemItemsGeneration;
 import minechem.item.element.ElementEnum;
-import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 
 public class FluidElement extends Fluid implements IMinechemFluid
 {
@@ -22,11 +19,11 @@ public class FluidElement extends Fluid implements IMinechemFluid
         setViscosity(1000); // How fast the fluid flows.
         FluidRegistry.registerFluid(this);
 
-        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
-        {
-            this.setFlowingIcon(Block.waterMoving.getIcon(0, 0));
-            this.setStillIcon(Block.waterMoving.getIcon(0, 0));
-        }
+//        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
+//        {
+//            this.setFlowingIcon(Block.waterMoving.getIcon(0, 0));
+//            this.setStillIcon(Block.waterMoving.getIcon(0, 0));
+//        }
     }
 
     @Override
