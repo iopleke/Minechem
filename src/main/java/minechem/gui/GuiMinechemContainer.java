@@ -534,18 +534,16 @@ public abstract class GuiMinechemContainer extends GuiScreen
     /**
      * Returns if the passed mouse position is over the specified slot.
      */
-    private boolean isMouseOverSlot(Slot par1Slot, int par2, int par3)
+    private boolean isMouseOverSlot(Slot theSlot, int mouseX, int mouseY)
     {
-        return this.func_74188_c(par1Slot.xDisplayPosition, par1Slot.yDisplayPosition, 16, 16, par2, par3);
+        return this.isMouseOverSlot(theSlot.xDisplayPosition, theSlot.yDisplayPosition, 16, 16, mouseX, mouseY);
     }
 
-    protected boolean func_74188_c(int par1, int par2, int par3, int par4, int par5, int par6)
+    protected boolean isMouseOverSlot(int slotXDisplayPosition, int slotYDisplayPosition, int offsetX, int offsetY, int mouseX, int mouseY)
     {
-        int var7 = this.guiLeft;
-        int var8 = this.guiTop;
-        par5 -= var7;
-        par6 -= var8;
-        return par5 >= par1 - 1 && par5 < par1 + par3 + 1 && par6 >= par2 - 1 && par6 < par2 + par4 + 1;
+        mouseX -= this.guiLeft;
+        mouseY -= this.guiTop;
+        return mouseX >= slotXDisplayPosition - 1 && mouseX < slotXDisplayPosition + offsetX + 1 && mouseY >= slotYDisplayPosition - 1 && mouseY < slotYDisplayPosition + offsetY + 1;
     }
 
     protected void handleMouseClick(Slot par1Slot, int par2, int par3, int par4)
