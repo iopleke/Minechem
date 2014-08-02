@@ -1,27 +1,24 @@
 package minechem.gui;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
-
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
+import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
-
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.renderer.entity.RenderManager;
 
 @SideOnly(Side.CLIENT)
 public abstract class GuiMinechemContainer extends GuiScreen
@@ -358,7 +355,7 @@ public abstract class GuiMinechemContainer extends GuiScreen
 
         if (stackInSlot == null)
         {
-            Icon slotBackgroundIconIndex = theSlot.getBackgroundIconIndex();
+            IIcon slotBackgroundIconIndex = theSlot.getBackgroundIconIndex();
 
             if (slotBackgroundIconIndex != null)
             {
@@ -546,44 +543,44 @@ public abstract class GuiMinechemContainer extends GuiScreen
         return mouseX >= slotXDisplayPosition - 1 && mouseX < slotXDisplayPosition + offsetX + 1 && mouseY >= slotYDisplayPosition - 1 && mouseY < slotYDisplayPosition + offsetY + 1;
     }
 
-    protected void handleMouseClick(Slot par1Slot, int par2, int par3, int par4)
+    protected void handleMouseClick(Slot clickedSlot, int clickedSlotID, int buttonID, int modifiers)
     {
-        if (par1Slot != null)
+        if (clickedSlot != null)
         {
-            par2 = par1Slot.slotNumber;
+            clickedSlotID = clickedSlot.slotNumber;
         }
 
-        this.mc.playerController.windowClick(this.inventorySlots.windowId, par2, par3, par4, this.mc.thePlayer);
+        this.mc.playerController.windowClick(this.inventorySlots.windowId, clickedSlotID, buttonID, modifiers, this.mc.thePlayer);
     }
 
     /**
      * Fired when a key is typed. This is the equivalent of KeyListener.keyTyped(KeyEvent e).
      */
     @Override
-    protected void keyTyped(char par1, int par2)
+    protected void keyTyped(char character, int keyCode)
     {
-        if (par2 == 1 || par2 == this.mc.gameSettings.keyBindInventory.keyCode)
+        if (keyCode == 1 || keyCode == this.mc.gameSettings.keyBindInventory.getKeyCode())
         {
             this.mc.thePlayer.closeScreen();
         }
 
-        this.func_82319_a(par2);
+        this.doMouseClicksForKeyCode(keyCode);
 
-        if (par2 == this.mc.gameSettings.keyBindPickBlock.keyCode && this.theSlot != null && this.theSlot.getHasStack())
+        if (keyCode == this.mc.gameSettings.keyBindPickBlock.getKeyCode() && this.theSlot != null && this.theSlot.getHasStack())
         {
             this.handleMouseClick(this.theSlot, this.theSlot.slotNumber, this.ySize, 3);
         }
     }
 
-    protected boolean func_82319_a(int par1)
+    protected boolean doMouseClicksForKeyCode(int keyCode)
     {
         if (this.mc.thePlayer.inventory.getItemStack() == null && this.theSlot != null)
         {
-            for (int var2 = 0; var2 < 9; ++var2)
+            for (int count = 0; count < 9; ++count)
             {
-                if (par1 == 2 + var2)
+                if (keyCode == 2 + count)
                 {
-                    this.handleMouseClick(this.theSlot, this.theSlot.slotNumber, var2, 2);
+                    this.handleMouseClick(this.theSlot, this.theSlot.slotNumber, count, 2);
                     return true;
                 }
             }
