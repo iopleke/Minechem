@@ -487,7 +487,7 @@ public abstract class GuiMinechemContainer extends GuiScreen
                     this.draggedStack = this.clickedSlot.getStack();
                 }
 
-                boolean var9 = this.func_92031_b(theSlot);
+                boolean var9 = this.stacksCanMerge(theSlot);
 
                 if (var8 != -1 && this.draggedStack != null && var9)
                 {
@@ -521,16 +521,16 @@ public abstract class GuiMinechemContainer extends GuiScreen
         }
     }
 
-    private boolean func_92031_b(Slot par1Slot)
+    private boolean stacksCanMerge(Slot theSlot)
     {
-        boolean var2 = par1Slot == null || !par1Slot.getHasStack();
+        boolean slotIsNull = (theSlot == null || !theSlot.getHasStack());
 
-        if (par1Slot != null && par1Slot.getHasStack() && this.draggedStack != null && ItemStack.areItemStackTagsEqual(par1Slot.getStack(), this.draggedStack))
+        if (theSlot != null && theSlot.getHasStack() && this.draggedStack != null && ItemStack.areItemStackTagsEqual(theSlot.getStack(), this.draggedStack))
         {
-            var2 |= par1Slot.getStack().stackSize + this.draggedStack.stackSize <= this.draggedStack.getMaxStackSize();
+            slotIsNull |= theSlot.getStack().stackSize + this.draggedStack.stackSize <= this.draggedStack.getMaxStackSize();
         }
 
-        return var2;
+        return slotIsNull;
     }
 
     /**
