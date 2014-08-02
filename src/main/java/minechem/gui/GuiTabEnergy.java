@@ -4,13 +4,13 @@ import minechem.ModMinechem;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class GuiTabEnergy extends GuiTab
 {
-    public static Icon powerIcon;
+    public static IIcon powerIcon;
 
     // I'm copying the layout for the buildcraft
     // engine tab, because users will be familiar.
@@ -62,8 +62,7 @@ public class GuiTabEnergy extends GuiTab
         if (!isOpen())
         {
             return TILE_ENTITY.getPowerRemainingScaled(100) + "%";
-        }
-        else
+        } else
         {
             return null;
         }
