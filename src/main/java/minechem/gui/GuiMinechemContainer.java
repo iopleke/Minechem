@@ -192,90 +192,93 @@ public abstract class GuiMinechemContainer extends GuiScreen
         RenderHelper.enableStandardItemLighting();
     }
 
-    private void drawItemStack(ItemStack par1ItemStack, int par2, int par3)
+    private void drawItemStack(ItemStack theStack, int drawX, int drawY)
     {
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
         itemRenderer.zLevel = 200.0F;
-        itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3);
-        itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, par1ItemStack, par2, par3 - (this.draggedStack == null ? 0 : 8));
+        itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, theStack, drawX, drawY);
+        itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, theStack, drawX, drawY - (this.draggedStack == null ? 0 : 8));
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
     }
 
-    protected void drawItemStackTooltip(ItemStack par1ItemStack, int par2, int par3)
+    protected void drawItemStackTooltip(ItemStack theStack, int drawX, int drawY)
     {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        List<?> var4 = par1ItemStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
+        List<?> stackToolTip = theStack.getTooltip(this.mc.thePlayer, this.mc.gameSettings.advancedItemTooltips);
 
-        if (!var4.isEmpty())
+        if (!stackToolTip.isEmpty())
         {
-            int var5 = 0;
-            int var6;
-            int var7;
+            int variableStringWidth = 0;
+            int count;
+            int stringWidth;
 
-            for (var6 = 0; var6 < var4.size(); ++var6)
+            for (count = 0; count < stackToolTip.size(); count = count + 1)
             {
-                var7 = this.fontRenderer.getStringWidth((String) var4.get(var6));
+                stringWidth = this.fontRenderer.getStringWidth((String) stackToolTip.get(count));
 
-                if (var7 > var5)
+                if (stringWidth > variableStringWidth)
                 {
-                    var5 = var7;
+                    variableStringWidth = stringWidth;
                 }
             }
 
-            var6 = par2 + 12;
-            var7 = par3 - 12;
-            int var9 = 8;
+            count = drawX + 12;
+            stringWidth = drawY - 12;
+            int adjustedWidth = 8;
 
-            if (var4.size() > 1)
+            if (stackToolTip.size() > 1)
             {
-                var9 += 2 + (var4.size() - 1) * 10;
+                adjustedWidth += 2 + (stackToolTip.size() - 1) * 10;
             }
 
-            if (this.guiTop + var7 + var9 + 6 > this.height)
+            if (this.guiTop + stringWidth + adjustedWidth + 6 > this.height)
             {
-                var7 = this.height - var9 - this.guiTop - 6;
+                stringWidth = this.height - adjustedWidth - this.guiTop - 6;
             }
 
+            // when you enter here
+            // you foolish mortal being
+            // abandon all hope
             this.zLevel = 300.0F;
             itemRenderer.zLevel = 300.0F;
             int var10 = -267386864;
-            this.drawGradientRect(var6 - 3, var7 - 4, var6 + var5 + 3, var7 - 3, var10, var10);
-            this.drawGradientRect(var6 - 3, var7 + var9 + 3, var6 + var5 + 3, var7 + var9 + 4, var10, var10);
-            this.drawGradientRect(var6 - 3, var7 - 3, var6 + var5 + 3, var7 + var9 + 3, var10, var10);
-            this.drawGradientRect(var6 - 4, var7 - 3, var6 - 3, var7 + var9 + 3, var10, var10);
-            this.drawGradientRect(var6 + var5 + 3, var7 - 3, var6 + var5 + 4, var7 + var9 + 3, var10, var10);
+            this.drawGradientRect(count - 3, stringWidth - 4, count + variableStringWidth + 3, stringWidth - 3, var10, var10);
+            this.drawGradientRect(count - 3, stringWidth + adjustedWidth + 3, count + variableStringWidth + 3, stringWidth + adjustedWidth + 4, var10, var10);
+            this.drawGradientRect(count - 3, stringWidth - 3, count + variableStringWidth + 3, stringWidth + adjustedWidth + 3, var10, var10);
+            this.drawGradientRect(count - 4, stringWidth - 3, count - 3, stringWidth + adjustedWidth + 3, var10, var10);
+            this.drawGradientRect(count + variableStringWidth + 3, stringWidth - 3, count + variableStringWidth + 4, stringWidth + adjustedWidth + 3, var10, var10);
             int var11 = 1347420415;
             int var12 = (var11 & 16711422) >> 1 | var11 & -16777216;
-            this.drawGradientRect(var6 - 3, var7 - 3 + 1, var6 - 3 + 1, var7 + var9 + 3 - 1, var11, var12);
-            this.drawGradientRect(var6 + var5 + 2, var7 - 3 + 1, var6 + var5 + 3, var7 + var9 + 3 - 1, var11, var12);
-            this.drawGradientRect(var6 - 3, var7 - 3, var6 + var5 + 3, var7 - 3 + 1, var11, var11);
-            this.drawGradientRect(var6 - 3, var7 + var9 + 2, var6 + var5 + 3, var7 + var9 + 3, var12, var12);
+            this.drawGradientRect(count - 3, stringWidth - 3 + 1, count - 3 + 1, stringWidth + adjustedWidth + 3 - 1, var11, var12);
+            this.drawGradientRect(count + variableStringWidth + 2, stringWidth - 3 + 1, count + variableStringWidth + 3, stringWidth + adjustedWidth + 3 - 1, var11, var12);
+            this.drawGradientRect(count - 3, stringWidth - 3, count + variableStringWidth + 3, stringWidth - 3 + 1, var11, var11);
+            this.drawGradientRect(count - 3, stringWidth + adjustedWidth + 2, count + variableStringWidth + 3, stringWidth + adjustedWidth + 3, var12, var12);
 
-            for (int var13 = 0; var13 < var4.size(); ++var13)
+            for (count = 0; count < stackToolTip.size(); ++count)
             {
-                String var14 = (String) var4.get(var13);
+                String var14 = (String) stackToolTip.get(count);
 
-                if (var13 == 0)
+                if (count == 0)
                 {
-                    var14 = "\u00a7" + Integer.toHexString(par1ItemStack.getRarity().rarityColor) + var14;
+                    var14 = "\u00a7" + theStack.getRarity().rarityColor + var14;
                 } else
                 {
                     var14 = "\u00a77" + var14;
                 }
 
-                this.fontRenderer.drawStringWithShadow(var14, var6, var7, -1);
+                this.fontRenderer.drawStringWithShadow(var14, count, stringWidth, -1);
 
-                if (var13 == 0)
+                if (count == 0)
                 {
-                    var7 += 2;
+                    stringWidth += 2;
                 }
 
-                var7 += 10;
+                stringWidth += 10;
             }
 
             this.zLevel = 0.0F;
@@ -286,31 +289,31 @@ public abstract class GuiMinechemContainer extends GuiScreen
     /**
      * Draws the text when mouse is over creative inventory tab. Params: current creative tab to be checked, current mouse x position, current mouse y position.
      */
-    protected void drawCreativeTabHoveringText(String par1Str, int par2, int par3)
+    protected void drawCreativeTabHoveringText(String creativeTab, int mouseX, int mouseY)
     {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
-        int var4 = this.fontRenderer.getStringWidth(par1Str);
-        int var5 = par2 + 12;
-        int var6 = par3 - 12;
-        byte var8 = 8;
+        int tabNameWidth = this.fontRenderer.getStringWidth(creativeTab);
+        int mouseXOffset = mouseX + 12;
+        int mouseYOffset = mouseY - 12;
+        byte eight = 8;
         this.zLevel = 300.0F;
         itemRenderer.zLevel = 300.0F;
         int var9 = -267386864;
-        this.drawGradientRect(var5 - 3, var6 - 4, var5 + var4 + 3, var6 - 3, var9, var9);
-        this.drawGradientRect(var5 - 3, var6 + var8 + 3, var5 + var4 + 3, var6 + var8 + 4, var9, var9);
-        this.drawGradientRect(var5 - 3, var6 - 3, var5 + var4 + 3, var6 + var8 + 3, var9, var9);
-        this.drawGradientRect(var5 - 4, var6 - 3, var5 - 3, var6 + var8 + 3, var9, var9);
-        this.drawGradientRect(var5 + var4 + 3, var6 - 3, var5 + var4 + 4, var6 + var8 + 3, var9, var9);
+        this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 4, mouseXOffset + tabNameWidth + 3, mouseYOffset - 3, var9, var9);
+        this.drawGradientRect(mouseXOffset - 3, mouseYOffset + eight + 3, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 4, var9, var9);
+        this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 3, var9, var9);
+        this.drawGradientRect(mouseXOffset - 4, mouseYOffset - 3, mouseXOffset - 3, mouseYOffset + eight + 3, var9, var9);
+        this.drawGradientRect(mouseXOffset + tabNameWidth + 3, mouseYOffset - 3, mouseXOffset + tabNameWidth + 4, mouseYOffset + eight + 3, var9, var9);
         int var10 = 1347420415;
         int var11 = (var10 & 16711422) >> 1 | var10 & -16777216;
-        this.drawGradientRect(var5 - 3, var6 - 3 + 1, var5 - 3 + 1, var6 + var8 + 3 - 1, var10, var11);
-        this.drawGradientRect(var5 + var4 + 2, var6 - 3 + 1, var5 + var4 + 3, var6 + var8 + 3 - 1, var10, var11);
-        this.drawGradientRect(var5 - 3, var6 - 3, var5 + var4 + 3, var6 - 3 + 1, var10, var10);
-        this.drawGradientRect(var5 - 3, var6 + var8 + 2, var5 + var4 + 3, var6 + var8 + 3, var11, var11);
-        this.fontRenderer.drawStringWithShadow(par1Str, var5, var6, -1);
+        this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3 + 1, mouseXOffset - 3 + 1, mouseYOffset + eight + 3 - 1, var10, var11);
+        this.drawGradientRect(mouseXOffset + tabNameWidth + 2, mouseYOffset - 3 + 1, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 3 - 1, var10, var11);
+        this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + tabNameWidth + 3, mouseYOffset - 3 + 1, var10, var10);
+        this.drawGradientRect(mouseXOffset - 3, mouseYOffset + eight + 2, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 3, var11, var11);
+        this.fontRenderer.drawStringWithShadow(creativeTab, mouseXOffset, mouseYOffset, -1);
         this.zLevel = 0.0F;
         itemRenderer.zLevel = 0.0F;
         GL11.glEnable(GL11.GL_LIGHTING);
@@ -322,8 +325,11 @@ public abstract class GuiMinechemContainer extends GuiScreen
     /**
      * Draw the foreground layer for the GuiContainer (everything in front of the items)
      */
-    protected void drawGuiContainerForegroundLayer(int par1, int par2)
+    protected void drawGuiContainerForegroundLayer(int drawX, int drawY)
     {
+        // not sure what this does
+        // it's empty and has no name
+        // perhaps no-one knows?
     }
 
     /**
@@ -334,41 +340,41 @@ public abstract class GuiMinechemContainer extends GuiScreen
     /**
      * Draws an inventory slot
      */
-    protected void drawSlotInventory(Slot par1Slot)
+    protected void drawSlotInventory(Slot theSlot)
     {
-        int var2 = par1Slot.xDisplayPosition;
-        int var3 = par1Slot.yDisplayPosition;
-        ItemStack var4 = par1Slot.getStack();
-        boolean var5 = par1Slot == this.clickedSlot && this.draggedStack != null && !this.field_90018_r;
+        int slotXPosition = theSlot.xDisplayPosition;
+        int slotYPosition = theSlot.yDisplayPosition;
+        ItemStack stackInSlot = theSlot.getStack();
+        boolean hasBackgroundIconIndex = (theSlot == this.clickedSlot && this.draggedStack != null && !this.field_90018_r);
 
-        if (par1Slot == this.clickedSlot && this.draggedStack != null && this.field_90018_r && var4 != null)
+        if (theSlot == this.clickedSlot && this.draggedStack != null && this.field_90018_r && stackInSlot != null)
         {
-            var4 = var4.copy();
-            var4.stackSize /= 2;
+            stackInSlot = stackInSlot.copy();
+            stackInSlot.stackSize /= 2;
         }
 
         this.zLevel = 100.0F;
         itemRenderer.zLevel = 100.0F;
 
-        if (var4 == null)
+        if (stackInSlot == null)
         {
-            Icon var6 = par1Slot.getBackgroundIconIndex();
+            Icon slotBackgroundIconIndex = theSlot.getBackgroundIconIndex();
 
-            if (var6 != null)
+            if (slotBackgroundIconIndex != null)
             {
                 GL11.glDisable(GL11.GL_LIGHTING);
-                this.mc.renderEngine.bindTexture(par1Slot.getBackgroundIconTexture());
-                this.drawTexturedModalRect(var2, var3, 0, 0, 16, 16);
+                this.mc.renderEngine.bindTexture(theSlot.getBackgroundIconTexture());
+                this.drawTexturedModalRect(slotXPosition, slotYPosition, 0, 0, 16, 16);
                 GL11.glEnable(GL11.GL_LIGHTING);
-                var5 = true;
+                hasBackgroundIconIndex = true;
             }
         }
 
-        if (!var5)
+        if (!hasBackgroundIconIndex)
         {
             GL11.glEnable(GL11.GL_DEPTH_TEST);
-            itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, var4, var2, var3);
-            itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, var4, var2, var3);
+            itemRenderer.renderItemAndEffectIntoGUI(this.fontRenderer, this.mc.renderEngine, stackInSlot, slotXPosition, slotYPosition);
+            itemRenderer.renderItemOverlayIntoGUI(this.fontRenderer, this.mc.renderEngine, stackInSlot, slotXPosition, slotYPosition);
         }
 
         itemRenderer.zLevel = 0.0F;
@@ -378,15 +384,15 @@ public abstract class GuiMinechemContainer extends GuiScreen
     /**
      * Returns the slot at the given coordinates or null if there is none.
      */
-    private Slot getSlotAtPosition(int par1, int par2)
+    private Slot getSlotAtPosition(int mouseX, int mouseY)
     {
-        for (int var3 = 0; var3 < this.inventorySlots.inventorySlots.size(); ++var3)
+        for (int count = 0; count < this.inventorySlots.inventorySlots.size(); ++count)
         {
-            Slot var4 = (Slot) this.inventorySlots.inventorySlots.get(var3);
+            Slot slotToCheck = (Slot) this.inventorySlots.inventorySlots.get(count);
 
-            if (this.isMouseOverSlot(var4, par1, par2))
+            if (this.isMouseOverSlot(slotToCheck, mouseX, mouseY))
             {
-                return var4;
+                return slotToCheck;
             }
         }
 
@@ -397,55 +403,54 @@ public abstract class GuiMinechemContainer extends GuiScreen
      * Called when the mouse is clicked.
      */
     @Override
-    protected void mouseClicked(int par1, int par2, int par3)
+    protected void mouseClicked(int x, int y, int buttonID)
     {
-        super.mouseClicked(par1, par2, par3);
-        boolean var4 = par3 == this.mc.gameSettings.keyBindPickBlock.keyCode + 100;
+        super.mouseClicked(x, y, buttonID);
 
-        if (par3 == 0 || par3 == 1 || var4)
+        boolean isPickBlockKey = buttonID == this.mc.gameSettings.keyBindPickBlock.getKeyCode() + 100;
+
+        if (buttonID == 0 || buttonID == 1 || isPickBlockKey)
         {
-            Slot var5 = this.getSlotAtPosition(par1, par2);
-            int var6 = this.guiLeft;
-            int var7 = this.guiTop;
-            boolean var8 = par1 < var6 || par2 < var7 || par1 >= var6 + this.xSize || par2 >= var7 + this.ySize;
-            int var9 = -1;
+            Slot theSlot = this.getSlotAtPosition(x, y);
+            boolean isClickOutsideGUI = x < this.guiLeft || y < this.guiTop || x >= this.guiLeft + this.xSize || y >= this.guiTop + this.ySize;
+            int slotNumber = -1;
 
-            if (var5 != null)
+            if (theSlot != null)
             {
-                var9 = var5.slotNumber;
+                slotNumber = theSlot.slotNumber;
             }
 
-            if (var8)
+            if (isClickOutsideGUI)
             {
-                var9 = -999;
+                slotNumber = -999;
             }
 
-            if (this.mc.gameSettings.touchscreen && var8 && this.mc.thePlayer.inventory.getItemStack() == null)
+            if (this.mc.gameSettings.touchscreen && isClickOutsideGUI && this.mc.thePlayer.inventory.getItemStack() == null)
             {
                 this.mc.displayGuiScreen((GuiScreen) null);
                 return;
             }
 
-            if (var9 != -1)
+            if (slotNumber != -1)
             {
                 if (this.mc.gameSettings.touchscreen)
                 {
-                    if (var5 != null && var5.getHasStack())
+                    if (theSlot != null && theSlot.getHasStack())
                     {
-                        this.clickedSlot = var5;
+                        this.clickedSlot = theSlot;
                         this.draggedStack = null;
-                        this.field_90018_r = par3 == 1;
+                        this.field_90018_r = buttonID == 1;
                     } else
                     {
                         this.clickedSlot = null;
                     }
-                } else if (var4)
+                } else if (isPickBlockKey)
                 {
-                    this.handleMouseClick(var5, var9, par3, 3);
+                    this.handleMouseClick(theSlot, slotNumber, buttonID, 3);
                 } else
                 {
-                    boolean var10 = var9 != -999 && (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
-                    this.handleMouseClick(var5, var9, par3, var10 ? 1 : 0);
+                    boolean var10 = slotNumber != -999 && (Keyboard.isKeyDown(42) || Keyboard.isKeyDown(54));
+                    this.handleMouseClick(theSlot, slotNumber, buttonID, var10 ? 1 : 0);
                 }
             }
         }
