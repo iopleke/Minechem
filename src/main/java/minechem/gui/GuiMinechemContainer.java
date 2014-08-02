@@ -460,21 +460,21 @@ public abstract class GuiMinechemContainer extends GuiScreen
      * Called when the mouse is moved or a mouse button is released. Signature: (mouseX, mouseY, which) which==-1 is mouseMove, which==0 or which==1 is mouseUp
      */
     @Override
-    protected void mouseMovedOrUp(int par1, int par2, int par3)
+    protected void mouseMovedOrUp(int mouseX, int mouseY, int which)
     {
         if (this.clickedSlot != null && this.mc.gameSettings.touchscreen)
         {
-            if (par3 == 0 || par3 == 1)
+            if (which == 0 || which == 1)
             {
-                Slot var4 = this.getSlotAtPosition(par1, par2);
+                Slot theSlot = this.getSlotAtPosition(mouseX, mouseY);
                 int var5 = this.guiLeft;
                 int var6 = this.guiTop;
-                boolean var7 = par1 < var5 || par2 < var6 || par1 >= var5 + this.xSize || par2 >= var6 + this.ySize;
+                boolean var7 = mouseX < this.guiLeft || mouseY < this.guiTop || mouseX >= this.guiLeft + this.xSize || mouseY >= this.guiTop + this.ySize;
                 int var8 = -1;
 
-                if (var4 != null)
+                if (theSlot != null)
                 {
-                    var8 = var4.slotNumber;
+                    var8 = theSlot.slotNumber;
                 }
 
                 if (var7)
@@ -482,23 +482,23 @@ public abstract class GuiMinechemContainer extends GuiScreen
                     var8 = -999;
                 }
 
-                if (this.draggedStack == null && var4 != this.clickedSlot)
+                if (this.draggedStack == null && theSlot != this.clickedSlot)
                 {
                     this.draggedStack = this.clickedSlot.getStack();
                 }
 
-                boolean var9 = this.func_92031_b(var4);
+                boolean var9 = this.func_92031_b(theSlot);
 
                 if (var8 != -1 && this.draggedStack != null && var9)
                 {
-                    this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, par3, 0);
-                    this.handleMouseClick(var4, var8, 0, 0);
+                    this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, which, 0);
+                    this.handleMouseClick(theSlot, var8, 0, 0);
 
                     if (this.mc.thePlayer.inventory.getItemStack() != null)
                     {
-                        this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, par3, 0);
-                        this.guiXOffset = par1 - var5;
-                        this.guiYOffset = par2 - var6;
+                        this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, which, 0);
+                        this.guiXOffset = mouseX - this.guiLeft;
+                        this.guiYOffset = mouseY - this.guiTop;
                         this.returningStackDestSlot = this.clickedSlot;
                         this.returningStack = this.draggedStack;
                         this.returningStackTime = Minecraft.getSystemTime();
@@ -508,8 +508,8 @@ public abstract class GuiMinechemContainer extends GuiScreen
                     }
                 } else if (this.draggedStack != null)
                 {
-                    this.guiXOffset = par1 - var5;
-                    this.guiYOffset = par2 - var6;
+                    this.guiXOffset = mouseX - this.guiLeft;
+                    this.guiYOffset = mouseY - this.guiTop;
                     this.returningStackDestSlot = this.clickedSlot;
                     this.returningStack = this.draggedStack;
                     this.returningStackTime = Minecraft.getSystemTime();
