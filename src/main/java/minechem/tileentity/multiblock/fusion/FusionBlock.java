@@ -124,7 +124,7 @@ public class FusionBlock extends BlockMinechemContainer
 
     //
     @Override
-    public void breakBlock(World world, int x, int y, int z, int oldBlockId, int oldMetadata)
+    public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
     {
         super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);
 
