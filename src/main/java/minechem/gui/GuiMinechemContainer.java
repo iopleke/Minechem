@@ -456,44 +456,6 @@ public abstract class GuiMinechemContainer extends GuiScreen
         }
     }
 
-    protected void func_85041_a(int par1, int par2, int par3, long par4)
-    {
-        if (this.clickedSlot != null && this.mc.gameSettings.touchscreen)
-        {
-            if (par3 == 0 || par3 == 1)
-            {
-                Slot var6 = this.getSlotAtPosition(par1, par2);
-
-                if (this.draggedStack == null)
-                {
-                    if (var6 != this.clickedSlot)
-                    {
-                        this.draggedStack = this.clickedSlot.getStack().copy();
-                    }
-                } else if (this.draggedStack.stackSize > 1 && var6 != null && this.func_92031_b(var6))
-                {
-                    long var7 = Minecraft.getSystemTime();
-
-                    if (this.field_92033_y == var6)
-                    {
-                        if (var7 - this.field_92032_z > 500L)
-                        {
-                            this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, 0, 0);
-                            this.handleMouseClick(var6, var6.slotNumber, 1, 0);
-                            this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, 0, 0);
-                            this.field_92032_z = var7 + 750L;
-                            --this.draggedStack.stackSize;
-                        }
-                    } else
-                    {
-                        this.field_92033_y = var6;
-                        this.field_92032_z = var7;
-                    }
-                }
-            }
-        }
-    }
-
     /**
      * Called when the mouse is moved or a mouse button is released. Signature: (mouseX, mouseY, which) which==-1 is mouseMove, which==0 or which==1 is mouseUp
      */
