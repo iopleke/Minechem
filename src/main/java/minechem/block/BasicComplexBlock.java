@@ -22,45 +22,26 @@ import net.minecraft.world.World;
 
 public abstract class BasicComplexBlock extends Block implements IBlock
 {
+    public IIcon[] blockIconList;
+    public String fullTextureName;
+    public int blockSideCount;
 
-    public IIcon connectorIcon;
-    public IIcon topIcon;
-    static int blockIdIncrement;
-    public String textureBase = "minechem:";
-
-    public abstract String getFront();
-
-    public abstract String getTop();
-
-    @Override
-    public boolean renderAsNormalBlock()
-    {
-        return true;
-    }
-
-    @Override
-    public boolean isOpaqueCube()
-    {
-        return false;
-    }
-
-    public boolean hasModel()
-    {
-        return false;
-    }
-
-    public BasicComplexBlock(Material material)
+    public BasicComplexBlock(Material material, String partialTextureName, int blockSideCount)
     {
         super(material);
+
+        this.fullTextureName = ModMinechem.textureBase + partialTextureName;
+
+        this.blockSideCount = blockSideCount;
 
         this.setCreativeTab(ModMinechem.CREATIVE_TAB);
 
     }
 
     @Override
-    public boolean inCreativeTab()
+    public void addRecipe()
     {
-        return true;
+
     }
 
     public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
@@ -104,6 +85,44 @@ public abstract class BasicComplexBlock extends Block implements IBlock
 
     }
 
+    @Override
+    public TileEntity createTileEntity(World var1, int metadata)
+    {
+        try
+        {
+            return getTileEntityClass().newInstance();
+        } catch (Throwable e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        System.out.println("Error while creating tile entity");
+        return null;
+
+    }
+
+    @Override
+    public IIcon getIcon(int side, int meta)
+    {
+        return this.blockIconList[side];
+
+    }
+
+    @Override
+    public Class getItemBlock()
+    {
+        // TODO Auto-generated method stub
+
+        return ItemBlock.class;
+    }
+
+    @Override
+    public String getName()
+    {
+        // TODO Auto-generated method stub
+        return "BasicComplexBlock";
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public int getRenderType()
@@ -116,27 +135,46 @@ public abstract class BasicComplexBlock extends Block implements IBlock
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void registerBlockIcons(IIconRegister par1IconRegister)
+    public Class<TileEntity> getTileEntityClass()
     {
+        return null;
+    }
 
-        blockIcon = par1IconRegister.registerIcon(textureBase + this.getFront());
-        topIcon = par1IconRegister.registerIcon(textureBase + this.getTop());
+    public abstract String getTop();
+
+    @Override
+    public boolean hasItemBlock()
+    {
+        // TODO Auto-generated method stub
+        return false;
+    }
+
+    public boolean hasModel()
+    {
+        return false;
     }
 
     @Override
-    public IIcon getIcon(int side, int meta)
+    public boolean hasTileEntity(int metadata)
     {
-        if (topSidedTextures())
-        {
+        return getTileEntityClass() != null;
+    }
 
-            if (side == 1 || side == 0)
-            {
-                return topIcon;
-            }
-        }
-        return blockIcon;
+    @Override
+    public boolean inCreativeTab()
+    {
+        return true;
+    }
 
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
+
+    public boolean isPlantMaterial()
+    {
+        return false;
     }
 
     @Override
@@ -166,69 +204,25 @@ public abstract class BasicComplexBlock extends Block implements IBlock
     }
 
     @Override
-    public TileEntity createTileEntity(World var1, int metadata)
+    @SideOnly(Side.CLIENT)
+    public void registerBlockIcons(IIconRegister iconRegister)
     {
-        try
+        this.blockIconList = new IIcon[this.blockSideCount];
+        for (int countDown = this.blockSideCount; countDown > 0; countDown = countDown - 1)
         {
-            return getTileEntityClass().newInstance();
-        } catch (Throwable e)
-        {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            blockIconList[countDown] = iconRegister.registerIcon(this.fullTextureName);
         }
-        System.out.println("Error while creating tile entity");
-        return null;
-
     }
 
     @Override
-    public boolean hasTileEntity(int metadata)
+    public boolean renderAsNormalBlock()
     {
-        return getTileEntityClass() != null;
-    }
-
-    @Override
-    public void addRecipe()
-    {
-
-    }
-
-    @Override
-    public String getName()
-    {
-        // TODO Auto-generated method stub
-        return "BasicComplexBlock";
-    }
-
-    @Override
-    public boolean hasItemBlock()
-    {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-    @Override
-    public Class getItemBlock()
-    {
-        // TODO Auto-generated method stub
-
-        return ItemBlock.class;
+        return true;
     }
 
     public boolean topSidedTextures()
     {
         return true;
-    }
-
-    @Override
-    public Class<TileEntity> getTileEntityClass()
-    {
-        return null;
-    }
-
-    public boolean isPlantMaterial()
-    {
-        return false;
     }
 
 }
