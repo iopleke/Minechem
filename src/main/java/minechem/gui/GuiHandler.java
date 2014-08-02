@@ -1,5 +1,6 @@
 package minechem.gui;
 
+import cpw.mods.fml.common.network.IGuiHandler;
 import minechem.container.ContainerTable;
 import minechem.item.chemistjournal.ChemistJournalContainer;
 import minechem.item.chemistjournal.ChemistJournalGui;
@@ -33,7 +34,6 @@ import minechem.tileentity.synthesis.SynthesisTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
-import cpw.mods.fml.common.network.IGuiHandler;
 
 public class GuiHandler implements IGuiHandler
 {
@@ -134,7 +134,7 @@ public class GuiHandler implements IGuiHandler
         {
             return getClientGuiElementForJournal(player, world);
         }
-        
+
         if (ID == GUI_TABLE)
         {
             return getClientGuiForJournal(player, world);
@@ -144,9 +144,9 @@ public class GuiHandler implements IGuiHandler
         {
             return getClientGuiForPolytool(player, world);
         }
-        
+
         TileEntity tileEntity = world.getTileEntity(x, y, z);
-        
+
         if (tileEntity instanceof DecomposerTileEntity)
         {
             return new DecomposerGui(player.inventory, (DecomposerTileEntity) tileEntity);
