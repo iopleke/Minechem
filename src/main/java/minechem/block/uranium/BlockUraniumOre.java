@@ -11,8 +11,6 @@ import net.minecraft.util.IIcon;
 
 public class BlockUraniumOre extends Block
 {
-    private IIcon blockIcon;
-
     public BlockUraniumOre()
     {
         super(Material.iron);
