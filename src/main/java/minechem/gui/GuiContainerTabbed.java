@@ -4,13 +4,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.utils.SessionVars;
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.inventory.Container;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.input.Mouse;
@@ -19,6 +16,8 @@ import org.lwjgl.opengl.GL11;
 import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.entity.RenderManager;
 
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler
 {
@@ -241,40 +240,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
     }
 
-    protected void drawLiquid(int j, int k, int liquidId, int liquidMeta, int width, int height)
-    {
-
-        Icon liquidImg = null;
-
-        if (liquidId < Block.blocksList.length && Block.blocksList[liquidId] != null)
-        {
-            liquidImg = Block.blocksList[liquidId].getBlockTextureFromSide(0);
-        }
-        else if (Item.itemsList[liquidId] != null)
-        {
-            liquidImg = Item.itemsList[liquidId].getIconFromDamage(liquidMeta);
-        }
-        if (liquidImg == null)
-            return;
-        int x = 0;
-        int y = 0;
-
-        int drawHeight = 0;
-        int drawWidth = 0;
-
-        for (x = 0; x < width; x += 16)
-        {
-            for (y = 0; y < height; y += 16)
-            {
-
-                drawWidth = Math.min(width - x, 16);
-                drawHeight = Math.min(height - y, 16);
-
-                drawTexturedModelRectFromIcon(j + x, k + y, liquidImg, drawWidth, drawHeight);
-            }
-        }
-    }
-
     /* UTILITY FUNCTIONS */
     protected int getCenteredOffset(String string)
     {
@@ -284,6 +249,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
     protected int getCenteredOffset(String string, int xWidth)
     {
+        FontRenderer fontRenderer = RenderManager.instance.getFontRenderer();
 
         return (xWidth - fontRenderer.getStringWidth(string)) / 2;
     }
