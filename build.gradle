@@ -50,11 +50,10 @@ repositories {
 }
 
 dependencies {
-    compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${config.version.universalelectricity}", classifier: "dev"
+    compile 'dev.calclavia.universalelectricity:universal-electricity:+:dev'
 
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
-    compile 'net.md-5:SpecialSource:1.7-SNAPSHOT' // deobf and reobs
 } 
 version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
 group = "minechem"
