@@ -1,28 +1,29 @@
 package minechem.item.blueprint;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
-
 import minechem.MinechemItemsGeneration;
 import minechem.ModMinechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemBlueprint extends Item
 {
 
     public static final String[] names =
-    { "item.name.blueprintFusion", "item.name.blueprintFission" };
-
-    public ItemBlueprint(int id)
     {
-        super(id);
+        "item.name.blueprintFusion", "item.name.blueprintFission"
+    };
+
+    public ItemBlueprint()
+    {
+        super();
         setUnlocalizedName("minechem.itemBlueprint");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
@@ -30,7 +31,7 @@ public class ItemBlueprint extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(Reference.BLUEPRINT_TEX);
     }
@@ -65,19 +66,18 @@ public class ItemBlueprint extends Item
     }
 
     @Override
-    public String getItemDisplayName(ItemStack itemstack)
+    public String getItemStackDisplayName(ItemStack itemstack)
     {
         int metadata = itemstack.getItemDamage();
         return MinechemHelper.getLocalString(names[metadata]);
     }
 
     @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(int id, CreativeTabs creativeTabs, List list)
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
     {
         for (int i = 0; i < names.length; i++)
         {
-            list.add(new ItemStack(id, 1, i));
+            list.add(new ItemStack(item, 1, i));
         }
     }
 
