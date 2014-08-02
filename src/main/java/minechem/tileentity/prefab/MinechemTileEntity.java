@@ -11,12 +11,13 @@ import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import universalelectricity.api.UniversalClass;
+import universalelectricity.api.core.grid.INodeProvider;
 import universalelectricity.api.core.grid.electric.EnergyStorage;
 import universalelectricity.api.core.grid.electric.IEnergyContainer;
 import universalelectricity.compatibility.Compatibility.CompatibilityModule;
 
 @UniversalClass
-public abstract class MinechemTileEntity extends MinechemTileEntityBase implements IInventory, IEnergyContainer
+public abstract class MinechemTileEntity extends MinechemTileEntityBase implements IInventory, INodeProvider, IEnergyContainer
 {
     private EnergyStorage energy;
     public ItemStack[] inventory;
