@@ -16,8 +16,8 @@ public class BlockUraniumOre extends Block
     public BlockUraniumOre()
     {
         super(Material.iron);
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
-        this.setBlockName("Uranium Ore");
+        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
+        //this.setBlockName("Uranium Ore");
         this.setHardness(4F);
     }
 
@@ -25,13 +25,13 @@ public class BlockUraniumOre extends Block
     @Override
     public void registerBlockIcons(IIconRegister p_149651_1_)
     {
-        blockIcon = p_149651_1_.registerIcon(Reference.URANIUM_TEX);
+        this.blockIcon = p_149651_1_.registerIcon(Reference.URANIUM_TEX);
     }
 
     @SideOnly(Side.CLIENT)
     @Override
     public IIcon getIcon(int p_149691_1_, int p_149691_2_)
     {
-        return blockIcon;
+        return this.blockIcon;
     }
 }
