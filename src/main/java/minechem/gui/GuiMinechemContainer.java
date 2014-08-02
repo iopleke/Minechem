@@ -466,33 +466,31 @@ public abstract class GuiMinechemContainer extends GuiScreen
         {
             if (which == 0 || which == 1)
             {
-                Slot theSlot = this.getSlotAtPosition(mouseX, mouseY);
-                int var5 = this.guiLeft;
-                int var6 = this.guiTop;
+                Slot slotAtPosition = this.getSlotAtPosition(mouseX, mouseY);
                 boolean var7 = mouseX < this.guiLeft || mouseY < this.guiTop || mouseX >= this.guiLeft + this.xSize || mouseY >= this.guiTop + this.ySize;
-                int var8 = -1;
+                int slotNumber = -1;
 
-                if (theSlot != null)
+                if (slotAtPosition != null)
                 {
-                    var8 = theSlot.slotNumber;
+                    slotNumber = slotAtPosition.slotNumber;
                 }
 
                 if (var7)
                 {
-                    var8 = -999;
+                    slotNumber = -999;
                 }
 
-                if (this.draggedStack == null && theSlot != this.clickedSlot)
+                if (this.draggedStack == null && slotAtPosition != this.clickedSlot)
                 {
                     this.draggedStack = this.clickedSlot.getStack();
                 }
 
-                boolean var9 = this.stacksCanMerge(theSlot);
+                boolean stacksCanMerge = this.stacksCanMerge(slotAtPosition);
 
-                if (var8 != -1 && this.draggedStack != null && var9)
+                if (slotNumber != -1 && this.draggedStack != null && stacksCanMerge)
                 {
                     this.handleMouseClick(this.clickedSlot, this.clickedSlot.slotNumber, which, 0);
-                    this.handleMouseClick(theSlot, var8, 0, 0);
+                    this.handleMouseClick(slotAtPosition, slotNumber, 0, 0);
 
                     if (this.mc.thePlayer.inventory.getItemStack() != null)
                     {
