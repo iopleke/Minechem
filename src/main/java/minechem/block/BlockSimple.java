@@ -20,13 +20,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public abstract class BasicComplexBlock extends Block implements IBlock
+public abstract class BlockSimple extends Block implements IBlock
 {
     public IIcon[] blockIconList;
     public String fullTextureName;
     public int blockSideCount;
 
-    public BasicComplexBlock(Material material, String partialTextureName, int blockSideCount)
+    public BlockSimple(Material material, String partialTextureName, int blockSideCount)
     {
         super(material);
 
