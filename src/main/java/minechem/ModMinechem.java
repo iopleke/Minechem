@@ -75,6 +75,9 @@ public class ModMinechem
     public static final String V_REVIS = "@REVIS@";
     public static final String V_BUILD = "@BUILD@";
     public static final String VERSION_FULL = V_MAJOR + "." + V_MINOR + V_REVIS + "." + V_BUILD;
+    
+    // Misc variables
+    public static final String textureBase = "minechem:";
 
     // Provides logging
     @Instance(value = CHANNEL_NAME)
