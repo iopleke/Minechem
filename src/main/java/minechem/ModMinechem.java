@@ -184,7 +184,7 @@ public class ModMinechem
         FluidHelper.registerFluids();
 
         LOGGER.info("Registering Ore Generation...");
-        GameRegistry.registerWorldGenerator(new MinechemGeneration());
+        GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
 
         LOGGER.info("Registering GUI and Container handlers...");
         NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());

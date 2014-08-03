@@ -40,7 +40,7 @@ public class PolytoolTypeChromium extends PolytoolUpgradeType
             {
                 world.destroyBlock(x, y, z, false);
 
-                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Block.cloth.blockID, 1, rand.nextInt(15))));
+                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Blocks.cloth.blockID, 1, rand.nextInt(15))));
             }
         }
 

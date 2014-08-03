@@ -95,7 +95,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
             BlueprintBlock block = blockLookup.get(entry.getKey());
             if (block != null)
             {
-                ItemStack itemstack = new ItemStack(block.block, 1, block.metadata);
+                ItemStack itemstack = new ItemStack(Blocks.block, 1, block.metadata);
                 String info = String.format("%dx%s", entry.getValue(), itemstack.getDisplayName());
                 this.fontRenderer.drawString(info, 64, y, 0xDDDDDD);
                 y += 10;
