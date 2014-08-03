@@ -52,7 +52,7 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
     public float getStrVsBlock(ItemStack itemStack, Block block)
     {
         // There must be a better way to do this
-        if (ForgeHooks.isToolEffective(new ItemStack(Item.pickaxeDiamond), block, 0))
+        if (ForgeHooks.isToolEffective(new ItemStack(Items.pickaxeDiamond), block, 0))
         {
 
             if (block.blockID == Block.stone.blockID || block.blockID == Block.cobblestone.blockID || OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(block))).contains("stone"))
@@ -62,17 +62,17 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
             }
             return this.getStrOre();
         }
-        else if (ForgeHooks.isToolEffective(new ItemStack(Item.shovelDiamond), block, 0))
+        else if (ForgeHooks.isToolEffective(new ItemStack(Items.shovelDiamond), block, 0))
         {
 
             return this.getStrShovel();
         }
-        else if (ForgeHooks.isToolEffective(new ItemStack(Item.swordDiamond), block, 0))
+        else if (ForgeHooks.isToolEffective(new ItemStack(Items.swordDiamond), block, 0))
         {
 
             return this.getStrSword();
         }
-        else if (ForgeHooks.isToolEffective(new ItemStack(Item.axeDiamond), block, 0))
+        else if (ForgeHooks.isToolEffective(new ItemStack(Items.axeDiamond), block, 0))
         {
 
             return this.getStrAxe();

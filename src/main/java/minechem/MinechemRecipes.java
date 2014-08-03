@@ -855,7 +855,7 @@ public class MinechemRecipes
         }));
 
         // Nether B
-        ItemStack itemNetherbrick = new ItemStack(Item.netherrackBrick);
+        ItemStack itemNetherbrick = new ItemStack(Items.netherrackBrick);
         DecomposerRecipe.add(new DecomposerRecipeSelect(itemNetherbrick, 0.15F, new DecomposerRecipe[]
         {
             new DecomposerRecipe(new PotionChemical[]
@@ -881,7 +881,7 @@ public class MinechemRecipes
         }));
 
         // Water Bottle
-        ItemStack itemPotion = new ItemStack(Item.potion, 1, 0);
+        ItemStack itemPotion = new ItemStack(Items.potion, 1, 0);
         DecomposerRecipe.add(new DecomposerRecipe(itemPotion, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water, 8)
@@ -1016,7 +1016,7 @@ public class MinechemRecipes
 
         // Section 2 - Items
         // Apple
-        ItemStack itemAppleRed = new ItemStack(Item.appleRed);
+        ItemStack itemAppleRed = new ItemStack(Items.appleRed);
         DecomposerRecipe.add(new DecomposerRecipe(itemAppleRed, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.malicAcid)
@@ -1027,14 +1027,14 @@ public class MinechemRecipes
         }));
 
         // Arrow
-        ItemStack itemArrow = new ItemStack(Item.arrow);
+        ItemStack itemArrow = new ItemStack(Items.arrow);
         DecomposerRecipe.add(new DecomposerRecipe(itemArrow, new PotionChemical[]
         {
             this.element(ElementEnum.Si), this.element(ElementEnum.O, 2), this.element(ElementEnum.N, 6)
         }));
 
         // Coal
-        ItemStack itemCoal = new ItemStack(Item.coal);
+        ItemStack itemCoal = new ItemStack(Items.coal);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemCoal, 0.92F, new PotionChemical[]
         {
             this.element(ElementEnum.C, 8)
@@ -1048,14 +1048,14 @@ public class MinechemRecipes
         }));
 
         // Charcoal
-        ItemStack itemChar = new ItemStack(Item.coal, 1, 1);
+        ItemStack itemChar = new ItemStack(Items.coal, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemChar, 0.82F, new PotionChemical[]
         {
             this.element(ElementEnum.C, 1)
         }));
 
         // Diamond
-        ItemStack itemDiamond = new ItemStack(Item.diamond);
+        ItemStack itemDiamond = new ItemStack(Items.diamond);
         DecomposerRecipe.add(new DecomposerRecipe(itemDiamond, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.fullrene, 4)
@@ -1072,7 +1072,7 @@ public class MinechemRecipes
         }));
 
         // Iron Ingot
-        ItemStack itemIngotIron = new ItemStack(Item.ingotIron);
+        ItemStack itemIngotIron = new ItemStack(Items.ingotIron);
         DecomposerRecipe.add(new DecomposerRecipe(itemIngotIron, new PotionChemical[]
         {
             this.element(ElementEnum.Fe, 16)
@@ -1083,7 +1083,7 @@ public class MinechemRecipes
         }));
 
         // Gold Ingot
-        ItemStack itemIngotGold = new ItemStack(Item.ingotGold);
+        ItemStack itemIngotGold = new ItemStack(Items.ingotGold);
         DecomposerRecipe.add(new DecomposerRecipe(itemIngotGold, new PotionChemical[]
         {
             this.element(ElementEnum.Au, 16)
@@ -1094,14 +1094,14 @@ public class MinechemRecipes
         }));
 
         // Stick
-        ItemStack itemStick = new ItemStack(Item.stick);
+        ItemStack itemStick = new ItemStack(Items.stick);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemStick, 0.3F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose)
         }));
 
         // String
-        ItemStack itemSilk = new ItemStack(Item.silk);
+        ItemStack itemSilk = new ItemStack(Items.silk);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemSilk, 0.45F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.serine), this.molecule(MoleculeEnum.glycine), this.molecule(MoleculeEnum.alinine)
@@ -1112,7 +1112,7 @@ public class MinechemRecipes
         }));
 
         // Feather
-        ItemStack itemFeather = new ItemStack(Item.feather);
+        ItemStack itemFeather = new ItemStack(Items.feather);
         DecomposerRecipe.add(new DecomposerRecipe(itemFeather, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water, 8), this.element(ElementEnum.N, 6)
@@ -1124,7 +1124,7 @@ public class MinechemRecipes
         }));
 
         // Gunpowder
-        ItemStack itemGunpowder = new ItemStack(Item.gunpowder);
+        ItemStack itemGunpowder = new ItemStack(Items.gunpowder);
         DecomposerRecipe.add(new DecomposerRecipe(itemGunpowder, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.potassiumNitrate), this.element(ElementEnum.S, 2), this.element(ElementEnum.C)
@@ -1135,14 +1135,14 @@ public class MinechemRecipes
         }));
 
         // Bread
-        ItemStack itemBread = new ItemStack(Item.bread);
+        ItemStack itemBread = new ItemStack(Items.bread);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemBread, 0.1F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.starch), this.molecule(MoleculeEnum.sucrose)
         }));
 
         // Flint
-        ItemStack itemFlint = new ItemStack(Item.flint);
+        ItemStack itemFlint = new ItemStack(Items.flint);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemFlint, 0.5F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.siliconDioxide)
@@ -1153,28 +1153,28 @@ public class MinechemRecipes
         }));
 
         // Golden Apple
-        ItemStack itemAppleGold = new ItemStack(Item.appleGold, 1, 0);
+        ItemStack itemAppleGold = new ItemStack(Items.appleGold, 1, 0);
         DecomposerRecipe.add(new DecomposerRecipe(itemAppleGold, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.malicAcid), this.element(ElementEnum.Au, 64)
         }));
 
         // Wooden Door
-        ItemStack itemDoorWood = new ItemStack(Item.doorWood);
+        ItemStack itemDoorWood = new ItemStack(Items.doorWood);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemDoorWood, 0.4F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose, 12)
         }));
 
         // Water Bucket
-        ItemStack itemBucketWater = new ItemStack(Item.bucketWater);
+        ItemStack itemBucketWater = new ItemStack(Items.bucketWater);
         DecomposerRecipe.add(new DecomposerRecipe(itemBucketWater, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water, 16)
         }));
 
         // Redstone
-        ItemStack itemRedstone = new ItemStack(Item.redstone);
+        ItemStack itemRedstone = new ItemStack(Items.redstone);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemRedstone, 0.42F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
@@ -1195,69 +1195,69 @@ public class MinechemRecipes
         }));
 
         // Snowball
-        ItemStack itemSnowball = new ItemStack(Item.snowball);
+        ItemStack itemSnowball = new ItemStack(Items.snowball);
         DecomposerRecipe.add(new DecomposerRecipe(itemSnowball, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water)
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.snowball, 5), true, 20, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.snowball, 5), true, 20, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water), null, this.molecule(MoleculeEnum.water), null, this.molecule(MoleculeEnum.water), null, this.molecule(MoleculeEnum.water), null, this.molecule(MoleculeEnum.water)
         }));
 
         // Leather
-        ItemStack itemLeather = new ItemStack(Item.leather);
+        ItemStack itemLeather = new ItemStack(Items.leather);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemLeather, 0.5F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.keratin)
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.leather, 5), true, 700, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.leather, 5), true, 700, new PotionChemical[]
         {
             null, null, null, null, this.molecule(MoleculeEnum.keratin), null, null, null, null
         }));
 
         // Brick
-        ItemStack itemBrick = new ItemStack(Item.brick);
+        ItemStack itemBrick = new ItemStack(Items.brick);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemBrick, 0.5F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.kaolinite)
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.brick, 8), true, 400, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.brick, 8), true, 400, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.kaolinite), this.molecule(MoleculeEnum.kaolinite), null, this.molecule(MoleculeEnum.kaolinite), this.molecule(MoleculeEnum.kaolinite), null
         }));
 
         // Clay
-        ItemStack itemClay = new ItemStack(Item.clay);
+        ItemStack itemClay = new ItemStack(Items.clay);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemClay, 0.3F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.kaolinite)
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.clay, 12), false, 100, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.clay, 12), false, 100, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.kaolinite)
         }));
 
         // Reed
-        ItemStack itemReed = new ItemStack(Item.reed);
+        ItemStack itemReed = new ItemStack(Items.reed);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemReed, 0.65F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.sucrose), this.element(ElementEnum.H, 2), this.element(ElementEnum.O)
         }));
 
         // Paper
-        ItemStack itemPaper = new ItemStack(Item.paper);
+        ItemStack itemPaper = new ItemStack(Items.paper);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemPaper, 0.25F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose)
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Item.paper, 16), true, 150, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.paper, 16), true, 150, new PotionChemical[]
         {
             null, this.molecule(MoleculeEnum.cellulose), null, null, this.molecule(MoleculeEnum.cellulose), null, null, this.molecule(MoleculeEnum.cellulose), null
         }));
 
         // Slimeball
-        ItemStack itemSlimeBall = new ItemStack(Item.slimeBall);
+        ItemStack itemSlimeBall = new ItemStack(Items.slimeBall);
         DecomposerRecipe.add(new DecomposerRecipeSelect(itemSlimeBall, 0.9F, new DecomposerRecipe[]
         {
             new DecomposerRecipe(new PotionChemical[]
@@ -1273,29 +1273,29 @@ public class MinechemRecipes
         }));
 
         // Glowstone Dust
-        ItemStack itemGlowstone = new ItemStack(Item.glowstone);
+        ItemStack itemGlowstone = new ItemStack(Items.glowstone);
         DecomposerRecipe.add(new DecomposerRecipe(itemGlowstone, new PotionChemical[]
         {
             this.element(ElementEnum.P)
         }));
 
         // Dyes
-        ItemStack itemDyePowderBlack = new ItemStack(Item.dyePowder, 1, 0);
-        ItemStack itemDyePowderRed = new ItemStack(Item.dyePowder, 1, 1);
-        ItemStack itemDyePowderGreen = new ItemStack(Item.dyePowder, 1, 2);
-        ItemStack itemDyePowderBrown = new ItemStack(Item.dyePowder, 1, 3);
-        ItemStack itemDyePowderBlue = new ItemStack(Item.dyePowder, 1, 4);
-        ItemStack itemDyePowderPurple = new ItemStack(Item.dyePowder, 1, 5);
-        ItemStack itemDyePowderCyan = new ItemStack(Item.dyePowder, 1, 6);
-        ItemStack itemDyePowderLightGray = new ItemStack(Item.dyePowder, 1, 7);
-        ItemStack itemDyePowderGray = new ItemStack(Item.dyePowder, 1, 8);
-        ItemStack itemDyePowderPink = new ItemStack(Item.dyePowder, 1, 9);
-        ItemStack itemDyePowderLime = new ItemStack(Item.dyePowder, 1, 10);
-        ItemStack itemDyePowderYellow = new ItemStack(Item.dyePowder, 1, 11);
-        ItemStack itemDyePowderLightBlue = new ItemStack(Item.dyePowder, 1, 12);
-        ItemStack itemDyePowderMagenta = new ItemStack(Item.dyePowder, 1, 13);
-        ItemStack itemDyePowderOrange = new ItemStack(Item.dyePowder, 1, 14);
-        ItemStack itemDyePowderWhite = new ItemStack(Item.dyePowder, 1, 15);
+        ItemStack itemDyePowderBlack = new ItemStack(Items.dyePowder, 1, 0);
+        ItemStack itemDyePowderRed = new ItemStack(Items.dyePowder, 1, 1);
+        ItemStack itemDyePowderGreen = new ItemStack(Items.dyePowder, 1, 2);
+        ItemStack itemDyePowderBrown = new ItemStack(Items.dyePowder, 1, 3);
+        ItemStack itemDyePowderBlue = new ItemStack(Items.dyePowder, 1, 4);
+        ItemStack itemDyePowderPurple = new ItemStack(Items.dyePowder, 1, 5);
+        ItemStack itemDyePowderCyan = new ItemStack(Items.dyePowder, 1, 6);
+        ItemStack itemDyePowderLightGray = new ItemStack(Items.dyePowder, 1, 7);
+        ItemStack itemDyePowderGray = new ItemStack(Items.dyePowder, 1, 8);
+        ItemStack itemDyePowderPink = new ItemStack(Items.dyePowder, 1, 9);
+        ItemStack itemDyePowderLime = new ItemStack(Items.dyePowder, 1, 10);
+        ItemStack itemDyePowderYellow = new ItemStack(Items.dyePowder, 1, 11);
+        ItemStack itemDyePowderLightBlue = new ItemStack(Items.dyePowder, 1, 12);
+        ItemStack itemDyePowderMagenta = new ItemStack(Items.dyePowder, 1, 13);
+        ItemStack itemDyePowderOrange = new ItemStack(Items.dyePowder, 1, 14);
+        ItemStack itemDyePowderWhite = new ItemStack(Items.dyePowder, 1, 15);
         DecomposerRecipe.add(new DecomposerRecipe(itemDyePowderBlack, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.blackPigment)
@@ -1427,7 +1427,7 @@ public class MinechemRecipes
         }));
 
         // Bone
-        ItemStack itemBone = new ItemStack(Item.bone);
+        ItemStack itemBone = new ItemStack(Items.bone);
         DecomposerRecipe.add(new DecomposerRecipe(itemBone, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.hydroxylapatite)
@@ -1438,7 +1438,7 @@ public class MinechemRecipes
         }));
 
         // Sugar
-        ItemStack itemSugar = new ItemStack(Item.sugar);
+        ItemStack itemSugar = new ItemStack(Items.sugar);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemSugar, 0.75F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.sucrose)
@@ -1449,14 +1449,14 @@ public class MinechemRecipes
         }));
 
         // Melon
-        ItemStack itemMelon = new ItemStack(Item.melon);
+        ItemStack itemMelon = new ItemStack(Items.melon);
         DecomposerRecipe.add(new DecomposerRecipe(itemMelon, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water)
         }));
 
         // Cooked Chicken
-        ItemStack itemChickenCooked = new ItemStack(Item.chickenCooked);
+        ItemStack itemChickenCooked = new ItemStack(Items.chickenCooked);
         DecomposerRecipe.add(new DecomposerRecipe(itemChickenCooked, new PotionChemical[]
         {
             this.element(ElementEnum.K), this.element(ElementEnum.Na), this.element(ElementEnum.C, 2)
@@ -1467,14 +1467,14 @@ public class MinechemRecipes
         }));
 
         // Rotten Flesh
-        ItemStack itemRottenFlesh = new ItemStack(Item.rottenFlesh);
+        ItemStack itemRottenFlesh = new ItemStack(Items.rottenFlesh);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemRottenFlesh, 0.05F, new PotionChemical[]
         {
             new Molecule(MoleculeEnum.nodularin, 1)
         }));
 
         // Enderpearl
-        ItemStack itemEnderPearl = new ItemStack(Item.enderPearl);
+        ItemStack itemEnderPearl = new ItemStack(Items.enderPearl);
         DecomposerRecipe.add(new DecomposerRecipe(itemEnderPearl, new PotionChemical[]
         {
             this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
@@ -1486,7 +1486,7 @@ public class MinechemRecipes
         }));
 
         // Blaze Rod
-        ItemStack itemBlazeRod = new ItemStack(Item.blazeRod);
+        ItemStack itemBlazeRod = new ItemStack(Items.blazeRod);
         DecomposerRecipe.add(new DecomposerRecipe(itemBlazeRod, new PotionChemical[]
         {
             this.element(ElementEnum.Pu, 6)
@@ -1497,14 +1497,14 @@ public class MinechemRecipes
         }));
 
         // Blaze Powder
-        ItemStack itemBlazePowder = new ItemStack(Item.blazePowder);
+        ItemStack itemBlazePowder = new ItemStack(Items.blazePowder);
         DecomposerRecipe.add(new DecomposerRecipe(itemBlazePowder, new PotionChemical[]
         {
             this.element(ElementEnum.Pu)
         }));
 
         // Ghast Tear
-        ItemStack itemGhastTear = new ItemStack(Item.ghastTear);
+        ItemStack itemGhastTear = new ItemStack(Items.ghastTear);
         DecomposerRecipe.add(new DecomposerRecipe(itemGhastTear, new PotionChemical[]
         {
             this.element(ElementEnum.Yb, 4), this.element(ElementEnum.No, 4)
@@ -1515,14 +1515,14 @@ public class MinechemRecipes
         }));
 
         // Nether Wart
-        ItemStack itemNetherStalkSeeds = new ItemStack(Item.netherStalkSeeds);
+        ItemStack itemNetherStalkSeeds = new ItemStack(Items.netherStalkSeeds);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemNetherStalkSeeds, 0.5F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cocainehcl)
         }));
 
         // Spider Eye
-        ItemStack itemSpiderEye = new ItemStack(Item.spiderEye);
+        ItemStack itemSpiderEye = new ItemStack(Items.spiderEye);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemSpiderEye, 0.2F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.tetrodotoxin)
@@ -1533,14 +1533,14 @@ public class MinechemRecipes
         }));
 
         // Fermented Spider Eye
-        ItemStack itemFermentedSpiderEye = new ItemStack(Item.fermentedSpiderEye);
+        ItemStack itemFermentedSpiderEye = new ItemStack(Items.fermentedSpiderEye);
         DecomposerRecipe.add(new DecomposerRecipe(itemFermentedSpiderEye, new PotionChemical[]
         {
             this.element(ElementEnum.Po), this.molecule(MoleculeEnum.ethanol)
         }));
 
         // Magma Cream
-        ItemStack itemMagmaCream = new ItemStack(Item.magmaCream);
+        ItemStack itemMagmaCream = new ItemStack(Items.magmaCream);
         DecomposerRecipe.add(new DecomposerRecipe(itemMagmaCream, new PotionChemical[]
         {
             this.element(ElementEnum.Hg), this.element(ElementEnum.Pu), this.molecule(MoleculeEnum.pmma, 3)
@@ -1551,14 +1551,14 @@ public class MinechemRecipes
         }));
 
         // Glistering Melon
-        ItemStack itemSpeckledMelon = new ItemStack(Item.speckledMelon);
+        ItemStack itemSpeckledMelon = new ItemStack(Items.speckledMelon);
         DecomposerRecipe.add(new DecomposerRecipe(itemSpeckledMelon, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water, 4), this.molecule(MoleculeEnum.whitePigment), this.element(ElementEnum.Au, 1)
         }));
 
         // Emerald
-        ItemStack itemEmerald = new ItemStack(Item.emerald);
+        ItemStack itemEmerald = new ItemStack(Items.emerald);
         DecomposerRecipe.add(new DecomposerRecipe(itemEmerald, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.beryl, 2), this.element(ElementEnum.Cr, 2), this.element(ElementEnum.V, 2)
@@ -1569,28 +1569,28 @@ public class MinechemRecipes
         }));
 
         // Carrot
-        ItemStack itemCarrot = new ItemStack(Item.carrot);
+        ItemStack itemCarrot = new ItemStack(Items.carrot);
         DecomposerRecipe.add(new DecomposerRecipe(itemCarrot, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.retinol)
         }));
 
         // Potato
-        ItemStack itemPotato = new ItemStack(Item.potato);
+        ItemStack itemPotato = new ItemStack(Items.potato);
         DecomposerRecipe.add(new DecomposerRecipeChance(itemPotato, 0.4F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.water, 8), this.element(ElementEnum.K, 2), this.molecule(MoleculeEnum.cellulose)
         }));
 
         // Golden Carrot
-        ItemStack itemGoldenCarrot = new ItemStack(Item.goldenCarrot);
+        ItemStack itemGoldenCarrot = new ItemStack(Items.goldenCarrot);
         DecomposerRecipe.add(new DecomposerRecipe(itemGoldenCarrot, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.retinol), this.element(ElementEnum.Au, 4)
         }));
 
         // Nether Star
-        ItemStack itemNetherStar = new ItemStack(Item.netherStar);
+        ItemStack itemNetherStar = new ItemStack(Items.netherStar);
         DecomposerRecipe.add(new DecomposerRecipe(itemNetherStar, new PotionChemical[]
         {
             this.element(ElementEnum.Cn, 16), elementHydrogen, elementHydrogen, elementHydrogen, elementHelium, elementHelium, elementHelium, elementCarbon, elementCarbon
@@ -1601,22 +1601,22 @@ public class MinechemRecipes
         }));
 
         // Nether Quartz
-        ItemStack itemNetherQuartz = new ItemStack(Item.netherQuartz);
+        ItemStack itemNetherQuartz = new ItemStack(Items.netherQuartz);
         DecomposerRecipe.add(new DecomposerRecipe(itemNetherQuartz, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.galliumarsenide, 1)
         }));
 
         // Music Records
-        ItemStack itemRecord13 = new ItemStack(Item.record13);
-        ItemStack itemRecordCat = new ItemStack(Item.recordCat);
-        ItemStack itemRecordFar = new ItemStack(Item.recordFar);
-        ItemStack itemRecordMall = new ItemStack(Item.recordMall);
-        ItemStack itemRecordMellohi = new ItemStack(Item.recordMellohi);
-        ItemStack itemRecordStal = new ItemStack(Item.recordStal);
-        ItemStack itemRecordStrad = new ItemStack(Item.recordStrad);
-        ItemStack itemRecordWard = new ItemStack(Item.recordWard);
-        ItemStack itemRecordChirp = new ItemStack(Item.recordChirp);
+        ItemStack itemRecord13 = new ItemStack(Items.record13);
+        ItemStack itemRecordCat = new ItemStack(Items.recordCat);
+        ItemStack itemRecordFar = new ItemStack(Items.recordFar);
+        ItemStack itemRecordMall = new ItemStack(Items.recordMall);
+        ItemStack itemRecordMellohi = new ItemStack(Items.recordMellohi);
+        ItemStack itemRecordStal = new ItemStack(Items.recordStal);
+        ItemStack itemRecordStrad = new ItemStack(Items.recordStrad);
+        ItemStack itemRecordWard = new ItemStack(Items.recordWard);
+        ItemStack itemRecordChirp = new ItemStack(Items.recordChirp);
         DecomposerRecipe.add(new DecomposerRecipe(itemRecord13, new PotionChemical[]
         {
             moleculePolyvinylChloride
@@ -1698,8 +1698,8 @@ public class MinechemRecipes
         ItemStack blockGlass = new ItemStack(Blocks.glass);
         ItemStack blockThinGlass = new ItemStack(Blocks.thinGlass);
         ItemStack blockIron = new ItemStack(Blocks.blockIron);
-        ItemStack itemIngotIron = new ItemStack(Item.ingotIron);
-        ItemStack itemRedstone = new ItemStack(Item.redstone);
+        ItemStack itemIngotIron = new ItemStack(Items.ingotIron);
+        ItemStack itemRedstone = new ItemStack(Items.redstone);
         ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItemsGeneration.atomicManipulator);
         ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemsGeneration.molecule, 1, MoleculeEnum.polyvinylChloride.ordinal());
 
@@ -1733,7 +1733,7 @@ public class MinechemRecipes
         });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.synthesis), new Object[]
         {
-            "IRI", "IAI", "IDI", Character.valueOf('A'), minechemItemsAtomicManipulator, Character.valueOf('I'), itemIngotIron, Character.valueOf('R'), itemRedstone, Character.valueOf('D'), new ItemStack(Item.diamond)
+            "IRI", "IAI", "IDI", Character.valueOf('A'), minechemItemsAtomicManipulator, Character.valueOf('I'), itemIngotIron, Character.valueOf('R'), itemRedstone, Character.valueOf('D'), new ItemStack(Items.diamond)
         });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.fusion, 16, 0), new Object[]
         {
@@ -1761,17 +1761,17 @@ public class MinechemRecipes
         });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsGeneration.journal), new Object[]
         {
-            new ItemStack(Item.book), new ItemStack(Blocks.glass)
+            new ItemStack(Items.book), new ItemStack(Blocks.glass)
         });
         // Fusion
         GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fusion), new Object[]
         {
-            new ItemStack(Item.paper), new ItemStack(Blocks.blockDiamond)
+            new ItemStack(Items.paper), new ItemStack(Blocks.blockDiamond)
         });
         // Fission
         GameRegistry.addShapelessRecipe(ItemBlueprint.createItemStackFromBlueprint(MinechemBlueprint.fission), new Object[]
         {
-            new ItemStack(Item.paper), new ItemStack(Item.diamond)
+            new ItemStack(Items.paper), new ItemStack(Items.diamond)
         });
 
         GameRegistry.addRecipe(new ChemistJournalRecipeCloning());

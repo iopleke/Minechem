@@ -62,7 +62,7 @@ public class LeadedChestBlock extends BlockContainer
                     float randomY = rand.nextFloat() * 0.8F + 0.1F;
                     float randomZ = rand.nextFloat() * 0.8F + 0.1F;
 
-                    EntityItem entityItem = new EntityItem(world, xCoord, yCoord, zCoord, new ItemStack(item.itemID, item.stackSize, item.getItemDamage()));
+                    EntityItem entityItem = new EntityItem(world, xCoord, yCoord, zCoord, new ItemStack(Items.itemID, item.stackSize, item.getItemDamage()));
 
                     if (item.hasTagCompound())
                     {

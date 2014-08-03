@@ -41,7 +41,7 @@ public class PolytoolTypeBromine extends PolytoolUpgradeType
             if (id == Block.oreGold.blockID)
             {
                 world.destroyBlock(x, y, z, false);
-                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Item.ingotGold.itemID, 2 + bonus, 0)));
+                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Items.ingotGold.itemID, 2 + bonus, 0)));
             }
         }
     }

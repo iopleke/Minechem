@@ -40,11 +40,11 @@ public class PolytoolTypeCarbon extends PolytoolUpgradeType
             int bonus = (int) (rand.nextDouble() * Math.log(this.power));
             if (id == Block.oreCoal.blockID)
             {
-                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Item.coal.itemID, bonus, 0)));
+                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Items.coal.itemID, bonus, 0)));
             }
             if (id == Block.oreDiamond.blockID)
             {
-                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Item.diamond.itemID, bonus, 0)));
+                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Items.diamond.itemID, bonus, 0)));
             }
         }
     }

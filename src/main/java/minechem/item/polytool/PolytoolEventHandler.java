@@ -164,7 +164,7 @@ public class PolytoolEventHandler
                         if (power > 0)
                         {
                             int amount = (int) Math.ceil(random.nextDouble() * power);
-                            addDrops(event, new ItemStack(Item.beefCooked, amount, 0));
+                            addDrops(event, new ItemStack(Items.beefCooked, amount, 0));
                             Iterator iter = event.drops.iterator();
                             while (iter.hasNext())
                             {
@@ -204,15 +204,15 @@ public class PolytoolEventHandler
                             if (event.entityLiving instanceof EntitySkeleton)
                             {
                                 EntitySkeleton skeleton = (EntitySkeleton) enemy;
-                                addDrops(event, new ItemStack(Item.skull.itemID, 1, skeleton.getSkeletonType()));
+                                addDrops(event, new ItemStack(Items.skull.itemID, 1, skeleton.getSkeletonType()));
                             }
                             else if (event.entityLiving instanceof EntityZombie)
                             {
-                                addDrops(event, new ItemStack(Item.skull.itemID, 1, 2));
+                                addDrops(event, new ItemStack(Items.skull.itemID, 1, 2));
                             }
                             else if (event.entityLiving instanceof EntityPlayer)
                             {
-                                ItemStack dropStack = new ItemStack(Item.skull.itemID, 1, 3);
+                                ItemStack dropStack = new ItemStack(Items.skull.itemID, 1, 3);
                                 NBTTagCompound nametag = new NBTTagCompound();
                                 nametag.setString("SkullOwner", player.username);
                                 addDrops(event, dropStack);
