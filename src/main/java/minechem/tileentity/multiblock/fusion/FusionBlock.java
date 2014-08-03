@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import minechem.ModMinechem;
-import minechem.block.BlockMinechemContainer;
+import minechem.block.BlockSimpleContainer;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class FusionBlock extends BlockMinechemContainer
+public class FusionBlock extends BlockSimpleContainer
 {
     private Icon icon1, icon2;
 
@@ -30,7 +30,7 @@ public class FusionBlock extends BlockMinechemContainer
     {
         super(id, Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setUnlocalizedName("minechem.blockFusion");
+        setBlockName("minechem.blockFusion");
     }
 
     @Override

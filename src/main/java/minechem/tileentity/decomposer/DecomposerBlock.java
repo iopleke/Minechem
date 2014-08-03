@@ -3,7 +3,7 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 
 import minechem.ModMinechem;
-import minechem.block.BlockMinechemContainer;
+import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
@@ -16,14 +16,14 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class DecomposerBlock extends BlockMinechemContainer
+public class DecomposerBlock extends BlockSimpleContainer
 {
     private Icon front;
 
     public DecomposerBlock(int id)
     {
         super(id, Material.iron);
-        setUnlocalizedName("blockChemicalDecomposer");
+        setBlockName("blockChemicalDecomposer");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 

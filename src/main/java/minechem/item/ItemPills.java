@@ -18,7 +18,7 @@ public class ItemPills extends ItemFood
         super(id, heal, 0.4F, false);
         setMaxDamage(0);
         setMaxStackSize(32);
-        this.setUnlocalizedName("minechem.itempill");
+        this.setBlockName("minechem.itempill");
         this.setCreativeTab(ModMinechem.CREATIVE_TAB);
         this.setAlwaysEdible();
     }

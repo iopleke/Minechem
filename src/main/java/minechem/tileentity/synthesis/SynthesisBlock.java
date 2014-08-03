@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
-import minechem.block.BlockMinechemContainer;
+import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
@@ -19,13 +19,13 @@ import net.minecraft.world.World;
 
 /** Chemical Synthesizer block. Its associated TileEntitySynthesis's inventory inventory has many specialized slots, including some "ghost" slots whose contents don't really exist and shouldn't be able to be extracted or dumped when the block is broken. See
  * {@link minechem.tileentity.synthesis.SynthesisTileEntity} for details of the inventory slots. */
-public class SynthesisBlock extends BlockMinechemContainer
+public class SynthesisBlock extends BlockSimpleContainer
 {
 
     public SynthesisBlock(int par1)
     {
         super(par1, Material.iron);
-        setUnlocalizedName("minechem.blockSynthesis");
+        setBlockName("minechem.blockSynthesis");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 

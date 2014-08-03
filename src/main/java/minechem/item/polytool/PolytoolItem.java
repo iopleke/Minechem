@@ -35,7 +35,7 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
         super(par1, EnumToolMaterial.IRON);
         instance = this;
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setUnlocalizedName("Polytool");
+        setBlockName("Polytool");
     }
 
     public static boolean validAlloyInfusion(ItemStack polytool, ItemStack element)

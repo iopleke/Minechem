@@ -3,7 +3,7 @@ package minechem.tileentity.microscope;
 import java.util.ArrayList;
 
 import minechem.ModMinechem;
-import minechem.block.BlockMinechemContainer;
+import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
@@ -18,7 +18,7 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class MicroscopeBlock extends BlockMinechemContainer
+public class MicroscopeBlock extends BlockSimpleContainer
 {
     private Icon front;
 
@@ -26,7 +26,7 @@ public class MicroscopeBlock extends BlockMinechemContainer
     {
         super(par1, Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setUnlocalizedName("minechem.blockMicroscope");
+        setBlockName("minechem.blockMicroscope");
         setLightValue(0.5F);
     }
 

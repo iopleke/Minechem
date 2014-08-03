@@ -28,7 +28,7 @@ public class MoleculeItem extends Item
         super(par1);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
-        setUnlocalizedName("minechem.itemMolecule");
+        setBlockName("minechem.itemMolecule");
     }
 
     @Override

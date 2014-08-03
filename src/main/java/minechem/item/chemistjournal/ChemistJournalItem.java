@@ -27,7 +27,7 @@ public class ChemistJournalItem extends Item
     public ChemistJournalItem(int id)
     {
         super(id);
-        setUnlocalizedName("minechem.itemChemistJournal");
+        setBlockName("minechem.itemChemistJournal");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 

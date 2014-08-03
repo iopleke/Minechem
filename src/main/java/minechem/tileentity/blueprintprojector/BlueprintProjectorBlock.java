@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
-import minechem.block.BlockMinechemContainer;
+import minechem.block.BlockSimpleContainer;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.network.server.CommonProxy;
@@ -19,13 +19,13 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-public class BlueprintProjectorBlock extends BlockMinechemContainer
+public class BlueprintProjectorBlock extends BlockSimpleContainer
 {
 
     public BlueprintProjectorBlock(int id)
     {
         super(id, Material.iron);
-        setUnlocalizedName("minechem.blockBlueprintProjector");
+        setBlockName("minechem.blockBlueprintProjector");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setLightValue(0.7F);
     }

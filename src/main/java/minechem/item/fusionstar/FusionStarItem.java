@@ -18,7 +18,7 @@ public class FusionStarItem extends Item
         this.maxStackSize = 1;
         this.setMaxDamage(2000);
         this.setNoRepair();
-        this.setUnlocalizedName("minechem.itemFusionStar");
+        this.setBlockName("minechem.itemFusionStar");
     }
 
     @Override

@@ -23,7 +23,6 @@ import minechem.tickhandler.ScheduledTickHandler;
 import minechem.tickhandler.TickHandler;
 import minechem.tileentity.synthesis.SynthesisTabStateControl;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -31,9 +30,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.Configuration;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.ForgeSubscribe;
 
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
@@ -48,16 +45,15 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.network.NetworkMod;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.common.registry.TickRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.common.config.Configuration;
 
-@Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.6.4,)", dependencies = "required-after:Forge@[9.11.1.953,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
+@Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
 @ModstatInfo(prefix = ModMinechem.ID)
-@NetworkMod(clientSideRequired = true, serverSideRequired = false, channels = {ModMinechem.CHANNEL_NAME}, packetHandler = MinechemPacketHandler.class)
 public class ModMinechem
 {
     // Internal mod name used for reference purposes and resource gathering.
@@ -92,6 +88,9 @@ public class ModMinechem
 
     @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.server.CommonProxy")
     public static CommonProxy PROXY;
+    
+    // Register a SimpleNetworkWrapper
+    public static SimpleNetworkWrapper network;
 
     // Creative mode tab that shows up in Minecraft.
     public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME);
@@ -112,6 +111,9 @@ public class ModMinechem
     {
         // Register instance.
         INSTANCE = this;
+        
+        // Initialize the network wrapper
+        network = NetworkRegistry.INSTANCE.newSimpleChannel(ModMinechem.ID);
 
         // Setup logging.
         LOGGER = event.getModLog();

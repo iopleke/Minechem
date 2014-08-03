@@ -11,7 +11,7 @@ public class GhostBlockItem extends ItemBlock
     public GhostBlockItem(int id)
     {
         super(id);
-        setUnlocalizedName("itemGhostBlock");
+        setBlockName("itemGhostBlock");
         setHasSubtypes(true);
     }
 

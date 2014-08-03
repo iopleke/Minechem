@@ -40,7 +40,7 @@ public class ElementItem extends Item // implements IStorageTank
     {
         super(par1);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setUnlocalizedName("minechem.itemElement");
+        setBlockName("minechem.itemElement");
         setHasSubtypes(true);
         classificationIndexes.put(ElementClassificationEnum.nonmetal, 0);
         classificationIndexes.put(ElementClassificationEnum.halogen, 1);

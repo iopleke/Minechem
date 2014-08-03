@@ -22,7 +22,7 @@ public class ItemLens extends Item
     public ItemLens(int id)
     {
         super(id);
-        setUnlocalizedName("minechem.itemLens");
+        setBlockName("minechem.itemLens");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
     }

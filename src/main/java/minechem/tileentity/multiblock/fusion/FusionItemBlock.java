@@ -13,7 +13,7 @@ public class FusionItemBlock extends ItemBlock
     {
         super(par1);
         setHasSubtypes(true);
-        setUnlocalizedName("minechem.itemBlockFusion");
+        setBlockName("minechem.itemBlockFusion");
     }
 
     @Override
