@@ -1,16 +1,17 @@
 package minechem;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalRecipeCloning;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.Molecule;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.oredictionary.OreDictionaryAppliedEnergisticsHandler;
 import minechem.oredictionary.OreDictionaryDefaultHandler;
 import minechem.oredictionary.OreDictionaryGregTechHandler;
@@ -25,18 +26,15 @@ import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
-import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.registry.GameRegistry;
-import net.minecraft.init.Blocks;
 
 public class MinechemRecipes
 {
@@ -1882,7 +1880,7 @@ public class MinechemRecipes
     {
         switch (id)
         {
-        // Vanilla ores should not be synthesized
+            // Vanilla ores should not be synthesized
             // To prevent exploits
             case 14:
             case 15:
