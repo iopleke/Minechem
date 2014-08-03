@@ -1921,18 +1921,16 @@ public class MinechemRecipes
     }
 
     private void registerPoisonRecipes(MoleculeEnum molecule)
-    {
-        // disabling poisoned food recipes until I can figure out 
-        // how to get a list of items from the itemRegistry
+    {        
+        Iterator<Item> it = Item.itemRegistry.iterator();
         
-//        for (Item i : Item.itemRegistry)
-//        {
-//            // Should allow for lacing of BOP and AquaCulture foodstuffs.
-//            if (i != null && i instanceof ItemFood)
-//            {
-//                this.createPoisonedItemStack(i, 0, molecule);
-//            }
-//        }
+        while(it.hasNext()){
+            Item item = it.next();
+            if (item != null && item instanceof ItemFood)
+            {
+                this.createPoisonedItemStack(item, 0, molecule);
+            }
+        }
     }
 
     private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
