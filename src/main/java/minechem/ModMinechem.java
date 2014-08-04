@@ -16,10 +16,7 @@ import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.PacketDispatcher;
-import minechem.network.packet.ChemistJournalPacketActiveItem;
-import minechem.network.packet.DecomposerPacketUpdate;
-import minechem.network.packet.GhostBlockPacket;
-import minechem.network.packet.SynthesisPacketUpdate;
+import minechem.network.packet.*;
 import minechem.network.server.CommonProxy;
 import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
@@ -186,6 +183,7 @@ public class ModMinechem
 	    network.registerPacket(1, Side.SERVER, ChemistJournalPacketActiveItem.class);
 	    network.registerPacket(2, Side.CLIENT, GhostBlockPacket.class);
 	    network.registerPacket(3, Side.CLIENT, DecomposerPacketUpdate.class);
+	    network.registerPacket(4, Side.CLIENT, PolytoolTypePacket.class);
 
         LOGGER.info("Registering Ore Generation...");
         GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
