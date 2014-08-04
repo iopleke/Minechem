@@ -5,12 +5,12 @@ import minechem.network.MinechemPackets;
 import minechem.network.MinechemPackets.ProtocolException;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.ForgeDirection;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class SynthesisPacketUpdate extends MinechemPackets
 {
@@ -27,10 +27,10 @@ public class SynthesisPacketUpdate extends MinechemPackets
     private int tilePosZ;
     
     /** Energy stored */
-    private long lastItemStoredEnergy;
+    private double lastItemStoredEnergy;
     
     /** Maximum amount of energy. */
-    private long lastItemStoredEnergyMaximum;
+    private double lastItemStoredEnergyMaximum;
 
     public SynthesisPacketUpdate(SynthesisTileEntity tileSynthesis)
     {
@@ -62,7 +62,7 @@ public class SynthesisPacketUpdate extends MinechemPackets
         // Packet received by client, executing payload.
         if (side.isClient())
         {
-            tileEntity = (SynthesisTileEntity) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
+            tileEntity = (SynthesisTileEntity) player.worldObj.getTileEntity(tilePosX, tilePosY, tilePosZ);
             if (tileEntity == null)
             {
                 return;
@@ -70,7 +70,7 @@ public class SynthesisPacketUpdate extends MinechemPackets
 
             // Energy.
             this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
-            this.tileEntity.setEnergyCapacity(lastItemStoredEnergyMaximum);
+            this.tileEntity.setEnergyCapacity((long) lastItemStoredEnergyMaximum);
         }
         else
         {
@@ -108,7 +108,7 @@ public class SynthesisPacketUpdate extends MinechemPackets
         out.writeInt(tilePosZ);
 
         // Energy.
-        out.writeLong(lastItemStoredEnergy);
-        out.writeLong(lastItemStoredEnergyMaximum);
+        out.writeLong((long) lastItemStoredEnergy);
+        out.writeLong((long) lastItemStoredEnergyMaximum);
     }
 }

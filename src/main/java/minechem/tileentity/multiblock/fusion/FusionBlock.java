@@ -11,7 +11,7 @@ import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -36,7 +36,7 @@ public class FusionBlock extends BlockSimpleContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
     {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         // if(tileEntity instanceof TileEntityProxy){
         // TileEntityProxy proxy=(TileEntityProxy) tileEntity;
@@ -107,7 +107,7 @@ public class FusionBlock extends BlockSimpleContainer
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
         icon1 = ir.registerIcon(Reference.FUSION1_TEX);
@@ -128,7 +128,7 @@ public class FusionBlock extends BlockSimpleContainer
     {
         super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);
 
-        /* if (oldMetadata < 2) { if (world.getBlockTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getBlockTileEntity(x, y, z);
+        /* if (oldMetadata < 2) { if (world.getTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getTileEntity(x, y, z);
          * 
          * world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true); } } */
 

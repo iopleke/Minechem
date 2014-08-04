@@ -2,7 +2,7 @@ package minechem.item;
 
 import minechem.ModMinechem;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -15,10 +15,10 @@ public class ItemPills extends ItemFood
     // PILLZ HERE!!!!!!!!!!
     public ItemPills(int id, int heal)
     {
-        super(id, heal, 0.4F, false);
+        super(heal, 0.4F, false);
         setMaxDamage(0);
         setMaxStackSize(32);
-        this.setBlockName("minechem.itempill");
+        this.setUnlocalizedName("minechem.itempill");
         this.setCreativeTab(ModMinechem.CREATIVE_TAB);
         this.setAlwaysEdible();
     }
@@ -42,7 +42,7 @@ public class ItemPills extends ItemFood
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(Reference.PILL_TEX);
     }

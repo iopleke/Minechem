@@ -4,13 +4,14 @@ import minechem.ModMinechem;
 import minechem.gui.GuiTabStateControl;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class SynthesisTabStateControl extends GuiTabStateControl
 {
-    public static Icon noRecipeIcon, unpoweredIcon;
+    public static IIcon noRecipeIcon;
+	public static IIcon unpoweredIcon;
     SynthesisTileEntity synthesis;
 
     enum TabState
@@ -19,7 +20,7 @@ public class SynthesisTabStateControl extends GuiTabStateControl
                 0xAA0000, ModMinechem.ICON_NO_RECIPE);
         public String tooltip;
         public int color;
-        public Icon icon;
+        public IIcon icon;
         private ResourceLocation resource;
 
         private TabState(String tooltip, int color, ResourceLocation resource)

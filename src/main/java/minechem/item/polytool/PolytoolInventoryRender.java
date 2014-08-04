@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import minechem.item.element.ElementEnum;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -115,7 +115,7 @@ public class PolytoolInventoryRender implements IItemRenderer
         GL11.glColor3f(red, green, blue);
 
         // Get icon index for the texture
-        Icon icon = item.getIconIndex();
+        IIcon icon = item.getIconIndex();
         // Use vanilla code to render the icon in a 16x16 square of inventory slot
         renderItem.renderIcon(0, 0, icon, 16, 16);
 

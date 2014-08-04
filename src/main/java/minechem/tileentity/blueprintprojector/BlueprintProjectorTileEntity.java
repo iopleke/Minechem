@@ -17,11 +17,14 @@ import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.LocalPosition;
 import minechem.utils.MinechemHelper;
 import minechem.utils.LocalPosition.Pos3;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.INode;
 
 public class BlueprintProjectorTileEntity extends MinechemTileEntity
 {
@@ -89,7 +92,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 shouldProjectGhostBlocks = false;
         }
 
-        if (totalIncorrectCount == 0 && (!isComplete || !(worldObj.getBlockTileEntity(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ()) instanceof MultiBlockTileEntity)))
+        if (totalIncorrectCount == 0 && (!isComplete || !(worldObj.getTileEntity(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ()) instanceof MultiBlockTileEntity)))
         {
             isComplete = true;
             buildStructure(position);
@@ -129,7 +132,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         if (managerBlock != null)
         {
             Pos3 worldPos = position.getLocalPos(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ());
-            worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, managerBlock.block.blockID, managerBlock.metadata, 3);
+            worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, managerBlock.block, managerBlock.metadata, 3);
             if (this.blueprint == MinechemBlueprint.fusion)
             {
                 FusionTileEntity fusion = new FusionTileEntity();
@@ -138,9 +141,9 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 fusion.yCoord = worldPos.y;
                 fusion.zCoord = worldPos.z;
                 fusion.blockType = MinechemBlocksGeneration.fusion;
-                worldObj.setBlockTileEntity(xCoord, yCoord, zCoord, fusion);
+                worldObj.setTileEntity(xCoord, yCoord, zCoord, fusion);
             }
-            return worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
+            return worldObj.getTileEntity(worldPos.x, worldPos.y, worldPos.z);
         }
         else
         {
@@ -164,10 +167,10 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
             BlueprintBlock blueprintBlock = blockLookup.get(structureId);
             if (blueprintBlock.type == Type.MANAGER)
                 return;
-            worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, blueprintBlock.block.blockID, blueprintBlock.metadata, 3);
+            worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, blueprintBlock.block, blueprintBlock.metadata, 3);
             if (blueprintBlock.type == Type.PROXY)
             {
-                TileEntity te = worldObj.getBlockTileEntity(worldPos.x, worldPos.y, worldPos.z);
+                TileEntity te = worldObj.getTileEntity(worldPos.x, worldPos.y, worldPos.z);
                 if (te instanceof TileEntityProxy)
                 {
                     TileEntityProxy proxy = (TileEntityProxy) te;
@@ -181,7 +184,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
     {
         Pos3 worldPos = position.getLocalPos(x, y, z);
         Integer structureID = structure[y][x][z];
-        int blockID = worldObj.getBlockId(worldPos.x, worldPos.y, worldPos.z);
+        Block block = worldObj.getBlock(worldPos.x, worldPos.y, worldPos.z);
         int blockMetadata = worldObj.getBlockMetadata(worldPos.x, worldPos.y, worldPos.z);
         if (structureID == MinechemBlueprint.wildcard)
         {
@@ -189,7 +192,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         }
         else if (structureID == air)
         {
-            if (blockID == air)
+            if (block == Blocks.air)
             {
                 return MultiBlockStatusEnum.CORRECT;
             }
@@ -202,12 +205,12 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         {
             HashMap<Integer, BlueprintBlock> lut = blueprint.getBlockLookup();
             BlueprintBlock blueprintBlock = lut.get(structureID);
-            if (blockID == air)
+            if (block == Blocks.air)
             {
                 createGhostBlock(worldPos.x, worldPos.y, worldPos.z, structureID);
                 return MultiBlockStatusEnum.INCORRECT;
             }
-            else if (blockID == blueprintBlock.block.blockID && (blockMetadata == blueprintBlock.metadata || blueprintBlock.metadata == -1))
+            else if (block == blueprintBlock.block && (blockMetadata == blueprintBlock.metadata || blueprintBlock.metadata == -1))
             {
                 return MultiBlockStatusEnum.CORRECT;
             }
@@ -220,8 +223,8 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 
     private void createGhostBlock(int x, int y, int z, int blockID)
     {
-        worldObj.setBlock(x, y, z, MinechemBlocksGeneration.ghostBlock.blockID, 0, 3);
-        TileEntity tileEntity = worldObj.getBlockTileEntity(x, y, z);
+        worldObj.setBlock(x, y, z, MinechemBlocksGeneration.ghostBlock, 0, 3);
+        TileEntity tileEntity = worldObj.getTileEntity(x, y, z);
         if (tileEntity instanceof GhostBlockTileEntity)
         {
             GhostBlockTileEntity ghostBlock = (GhostBlockTileEntity) tileEntity;
@@ -253,8 +256,8 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
     private void destroyGhostBlock(int x, int y, int z, LocalPosition position)
     {
         Pos3 worldPos = position.getLocalPos(x, y, z);
-        int blockID = worldObj.getBlockId(worldPos.x, worldPos.y, worldPos.z);
-        if (blockID == MinechemBlocksGeneration.ghostBlock.blockID)
+        Block block = worldObj.getBlock(worldPos.x, worldPos.y, worldPos.z);
+        if (block == MinechemBlocksGeneration.ghostBlock)
         {
             worldObj.setBlockToAir(worldPos.x, worldPos.y, worldPos.z);
         }
@@ -317,11 +320,16 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         }
     }
 
-    @Override
-    public String getInvName()
-    {
-        return "container.blueprintProjector";
-    }
+	@Override
+	public String getInventoryName() {
+		return "container.blueprintProjector";
+	}
+
+	// Does inventory has custom name.
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
 
     @Override
     public int getInventoryStackLimit()
@@ -363,18 +371,11 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         return this.blueprint;
     }
 
-    // Does inventory has custom name.
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
-
     // Is item valid.
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
-        return itemstack.itemID == MinechemItemsGeneration.blueprint.itemID;
+        return itemstack.getItem() == MinechemItemsGeneration.blueprint;
     }
 
     @Override
@@ -383,4 +384,23 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         return true;
     }
 
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
+	public void setEnergy(ForgeDirection from, double energy) {
+
+	}
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
 }

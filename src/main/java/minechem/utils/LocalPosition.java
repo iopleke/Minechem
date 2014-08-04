@@ -1,6 +1,6 @@
 package minechem.utils;
 
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class LocalPosition extends Position
 {

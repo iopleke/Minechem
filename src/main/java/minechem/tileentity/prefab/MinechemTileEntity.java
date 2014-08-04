@@ -6,6 +6,7 @@ import minechem.utils.Vector3;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -50,7 +51,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
     }
 
-    protected void consume()
+    public void consume()
     {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
         {
@@ -60,7 +61,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
 
                 if (tileEntity != null)
                 {
-                    long maxRecieve = this.energy.getMaxReceive();
+                    double maxRecieve = this.energy.getMaxReceive();
                     long used = CompatibilityModule.extractEnergy(tileEntity, direction.getOpposite(), this.energy.receiveEnergy(maxRecieve, false), true);
                     this.energy.receiveEnergy(used, true);
                 }
@@ -77,13 +78,13 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
     }
 
     @Override
-    public long getEnergy(ForgeDirection from)
+    public double getEnergy(ForgeDirection from)
     {
         return this.energy.getEnergy();
     }
 
     @Override
-    public long getEnergyCapacity(ForgeDirection from)
+    public double getEnergyCapacity(ForgeDirection from)
     {
         return this.energy.getEnergyCapacity();
     }
@@ -106,7 +107,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
 
     public int getPowerRemainingScaled(int prgPixels)
     {
-        Double result = Long.valueOf(this.getEnergy(ForgeDirection.UNKNOWN)).doubleValue() * Long.valueOf(prgPixels).doubleValue() / Long.valueOf(this.getEnergyCapacity(ForgeDirection.UNKNOWN)).doubleValue();
+        Double result = Double.valueOf(this.getEnergy(ForgeDirection.UNKNOWN)).doubleValue() * Long.valueOf(prgPixels).doubleValue() / Long.valueOf(this.getEnergyCapacity(ForgeDirection.UNKNOWN)).doubleValue();
         return result.intValue();
     }
 
@@ -133,7 +134,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         return this.energy.receiveEnergy(receive, doReceive);
     }
 
-    protected void produce()
+    public void produce()
     {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
         {
@@ -165,8 +166,8 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         this.energy.readFromNBT(nbt);
     }
 
-    @Override
-    public void setEnergy(ForgeDirection from, long energy)
+	@Override
+    public void setEnergy(ForgeDirection from, double energy)
     {
         this.energy.setEnergy(energy);
     }
@@ -207,21 +208,10 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         return 64;
     }
 
-    @Override
-    public void openChest()
-    {
-    }
-
-    @Override
-    public void closeChest()
-    {
-    }
-
-    @Override
-    public void onDataPacket(INetworkManager net, Packet132TileEntityData pkt)
-    {
-        this.readFromNBT(pkt.data);
-    }
+	@Override
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		this.readFromNBT(pkt.func_148857_g());
+	}
 
     @Override
     public ItemStack decrStackSize(int slot, int amount)

@@ -26,6 +26,7 @@ import minechem.tileentity.synthesis.SynthesisItemRenderer;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
 import minechem.tileentity.synthesis.SynthesisTileEntityRenderer;
 import net.minecraft.item.Item;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.Icon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
@@ -38,21 +39,21 @@ import cpw.mods.fml.relauncher.Side;
 
 public class ClientProxy extends CommonProxy
 {
-    public static Icon clay;
-    public static Icon coal;
-    public static Icon concentrated;
-    public static Icon seed;
-    public static Icon split;
+    public static IIcon clay;
+    public static IIcon coal;
+    public static IIcon concentrated;
+    public static IIcon seed;
+    public static IIcon split;
 
-    public static Icon sand;
+    public static IIcon sand;
 
     @Override
     public void registerRenderers()
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element.itemID, new ElementItemRenderer());
-        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule.itemID, new MoleculeItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element, new ElementItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule, new MoleculeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.microscope.blockID].itemID, new MicroscopeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.decomposer.blockID].itemID, new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.synthesis.blockID].itemID, new SynthesisItemRenderer());
@@ -60,7 +61,7 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.chemicalStorage.blockID].itemID, new ChemicalStorageItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.itemsList[MinechemBlocksGeneration.leadedChest.blockID].itemID, new LeadedChestItemRenderer());
 
-        TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);
+        //TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);//TODO:change so it will use events
         ClientRegistry.bindTileEntitySpecialRenderer(MicroscopeTileEntity.class, new MicroscopeTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());

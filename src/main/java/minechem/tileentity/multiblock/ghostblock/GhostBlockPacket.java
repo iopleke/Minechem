@@ -51,7 +51,7 @@ public class GhostBlockPacket extends MinechemPackets
     public void execute(EntityPlayer player, Side side) throws ProtocolException
     {
         // Grab and populate our reference to the ghost block in the world.
-        this.tileEntity = (GhostBlockTileEntity) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
+        this.tileEntity = (GhostBlockTileEntity) player.worldObj.getTileEntity(tilePosX, tilePosY, tilePosZ);
         if (tileEntity == null)
         {
             return;

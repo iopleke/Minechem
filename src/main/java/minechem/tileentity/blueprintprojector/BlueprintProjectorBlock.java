@@ -11,7 +11,7 @@ import minechem.item.blueprint.MinechemBlueprint;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -24,10 +24,10 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
 
     public BlueprintProjectorBlock(int id)
     {
-        super(id, Material.iron);
+        super(Material.iron);
         setBlockName("minechem.blockBlueprintProjector");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setLightValue(0.7F);
+        setLightLevel(0.7F);
     }
 
     @Override
@@ -41,7 +41,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
     {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
             entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
@@ -77,7 +77,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.BLUEPRINTPROJECTOR_TEX);
     }

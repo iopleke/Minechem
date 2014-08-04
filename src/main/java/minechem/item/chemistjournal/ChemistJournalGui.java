@@ -157,7 +157,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         currentItemStack = itemstack;
         MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
         ChemistJournalPacketActiveItem packet = new ChemistJournalPacketActiveItem(itemstack, player);
-        PacketDispatcher.sendPacketToServer(packet.makePacket());
+        PacketDispatcher.sendPacketToServer(packet.makePacket());//TODO: Change packet system
 
         SynthesisRecipe synthesisRecipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(itemstack);
         DecomposerRecipe decomposerRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);
@@ -332,8 +332,8 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         {
             itemname = itemname.substring(0, 18).trim() + "...";
         }
-        fontRenderer.drawString(itemname, 175, 10, 0x0000FF);
-        fontRenderer.drawString(MinechemHelper.getLocalString("gui.journal.decomposer"), 175, 20, 0x884400);
+        fontRendererObj.drawString(itemname, 175, 10, 0x0000FF);
+        fontRendererObj.drawString(MinechemHelper.getLocalString("gui.journal.decomposer"), 175, 20, 0x884400);
 
         float chance = 100;
         if (currentDecomposerRecipe != null && currentDecomposerRecipe instanceof DecomposerRecipeChance)
@@ -343,25 +343,25 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         }
         if (currentDecomposerRecipe != null)
         {
-            fontRenderer.drawString(String.format("%.1f%% chance", chance), 175, 30, 0x555555);
+            fontRendererObj.drawString(String.format("%.1f%% chance", chance), 175, 30, 0x555555);
         }
 
-        fontRenderer.drawString(MinechemHelper.getLocalString("gui.journal.synthesis"), 175, 100, 0x884400);
+        fontRendererObj.drawString(MinechemHelper.getLocalString("gui.journal.synthesis"), 175, 100, 0x884400);
         if (currentSynthesisRecipe != null)
         {
             int energyCost = currentSynthesisRecipe.energyCost();
-            fontRenderer.drawString(String.format("%d Energy", energyCost), 175, 110, 0x555555);
+            fontRendererObj.drawString(String.format("%d Energy", energyCost), 175, 110, 0x555555);
         }
     }
 
     private void drawHelp()
     {
-        fontRenderer.drawString(MinechemHelper.getLocalString("item.minechem.itemChemistJournal.name"), 180, 18, 0xFF000000);
+        fontRendererObj.drawString(MinechemHelper.getLocalString("item.minechem.itemChemistJournal.name"), 180, 18, 0xFF000000);
         String help = MinechemHelper.getLocalString("help.journal");
         GL11.glPushMatrix();
         float scale = 0.5F;
         GL11.glScalef(scale, scale, 1);
-        fontRenderer.drawSplitString(help, 345, 70, 200, 0xAA000000);
+        fontRendererObj.drawSplitString(help, 345, 70, 200, 0xAA000000);
         GL11.glPopMatrix();
     }
 

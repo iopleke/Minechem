@@ -65,7 +65,7 @@ public class DecomposerPacketUpdate extends MinechemPackets
         // Packet received by client, executing payload.
         if (side.isClient())
         {
-            tileEntity = (DecomposerTileEntity) player.worldObj.getBlockTileEntity(tilePosX, tilePosY, tilePosZ);
+            tileEntity = (DecomposerTileEntity) player.worldObj.getTileEntity(tilePosX, tilePosY, tilePosZ);
             if (tileEntity == null)
             {
                 return;

@@ -1,11 +1,13 @@
 package minechem.tileentity.decomposer;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.ModMinechem;
 import minechem.gui.GuiTabStateControl;
 import minechem.tileentity.decomposer.DecomposerTileEntity.State;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 public class DecomposerTabStateControl extends GuiTabStateControl
@@ -18,8 +20,10 @@ public class DecomposerTabStateControl extends GuiTabStateControl
                 .getLocalString("tab.tooltip.powered"), 0x00CC00, null), unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY);
         public String tooltip;
         public int color;
-        public Icon icon;
-        public ResourceLocation resource;
+	    @SideOnly(Side.CLIENT)
+        public IIcon icon;
+	    @SideOnly(Side.CLIENT)
+	    public ResourceLocation resource;
 
         private TabState(String tooltip, int color, ResourceLocation resource)
         {

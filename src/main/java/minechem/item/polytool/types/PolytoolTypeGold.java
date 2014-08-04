@@ -9,9 +9,9 @@ import net.minecraft.entity.effect.EntityLightningBolt;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
-import universalelectricity.api.energy.IEnergyContainer;
-import universalelectricity.api.energy.IEnergyInterface;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.electric.IEnergyContainer;
+import universalelectricity.api.core.grid.electric.IEnergyInterface;
 
 public class PolytoolTypeGold extends PolytoolUpgradeType
 {
@@ -34,7 +34,7 @@ public class PolytoolTypeGold extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving)
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
     }
 

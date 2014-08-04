@@ -8,31 +8,31 @@ import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class MoleculeItem extends Item
 {
-    public Icon render_pass1, render_pass2, filledMolecule;
+    public IIcon render_pass1, render_pass2, filledMolecule;
 
     public MoleculeItem(int par1)
     {
-        super(par1);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);
-        setBlockName("minechem.itemMolecule");
+        setUnlocalizedName("minechem.itemMolecule");
     }
 
+
     @Override
-    public String getItemDisplayName(ItemStack par1ItemStack)
+    public String getItemStackDisplayName(ItemStack par1ItemStack)
     {
         int itemDamage = par1ItemStack.getItemDamage();
         return MoleculeEnum.getById(itemDamage).descriptiveName();
@@ -40,7 +40,7 @@ public class MoleculeItem extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(Reference.FILLED_TESTTUBE_TEX);
         render_pass1 = ir.registerIcon(Reference.MOLECULE_PASS1_TEX);
@@ -114,11 +114,11 @@ public class MoleculeItem extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(int itemID, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (MoleculeEnum molecule : MoleculeEnum.molecules)
         {
-            par3List.add(new ItemStack(itemID, 1, molecule.id()));
+            par3List.add(new ItemStack(item, 1, molecule.id()));
         }
     }
 

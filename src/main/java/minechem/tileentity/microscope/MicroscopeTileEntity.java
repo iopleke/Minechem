@@ -100,7 +100,7 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
         double dist = entityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D);
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
     }
 
     @Override

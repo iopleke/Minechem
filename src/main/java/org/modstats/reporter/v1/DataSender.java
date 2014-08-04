@@ -27,11 +27,11 @@
 
 package org.modstats.reporter.v1;
 
-import argo.jdom.JdomParser;
-import argo.jdom.JsonNode;
-import argo.jdom.JsonRootNode;
-import argo.jdom.JsonStringNode;
-import argo.saj.InvalidSyntaxException;
+//import argo.jdom.JdomParser;
+//import argo.jdom.JsonNode;
+//import argo.jdom.JsonRootNode;
+//import argo.jdom.JsonStringNode;
+//import argo.saj.InvalidSyntaxException;
 import com.google.common.base.Charsets;
 import com.google.common.hash.Hashing;
 import com.google.common.io.Files;
@@ -40,7 +40,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.versioning.ComparableVersion;
 import net.minecraft.client.Minecraft;
-import net.minecraft.crash.CallableMinecraftVersion;
+//import net.minecraft.crash.CallableMinecraftVersion;
 import net.minecraftforge.common.MinecraftForge;
 import org.modstats.ModVersionData;
 import org.modstats.ModsUpdateEvent;
@@ -125,7 +125,7 @@ class DataSender extends Thread {
         return new ComparableVersion(received).compareTo(new ComparableVersion(current)) > 0;
     }
 
-
+	//TODO: Switch to Gson?
     private void parseResponse(String response) {
         try {
             JsonRootNode json = (new JdomParser()).parse(response);

@@ -2,6 +2,8 @@ package minechem.tickhandler;
 
 import java.util.EnumSet;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationHandler;
@@ -9,43 +11,21 @@ import minechem.utils.Constants;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import cpw.mods.fml.common.IScheduledTickHandler;
-import cpw.mods.fml.common.TickType;
 
-public class ScheduledTickHandler implements IScheduledTickHandler
+public class ScheduledTickHandler
 {
 
-    @Override
-    public void tickStart(EnumSet<TickType> type, Object... tickData)
-    {
-        EntityPlayer entityPlayer = (EntityPlayer) tickData[0];
-        RadiationHandler.getInstance().update(entityPlayer);
-    }
+	@SubscribeEvent
+	public void tick(TickEvent.PlayerTickEvent event){
+		if(event.phase == TickEvent.Phase.START){
+			EntityPlayer player = event.player;
+			RadiationHandler.getInstance().update(player);
+		} else if(event.phase == TickEvent.Phase.END){
+			EntityPlayer player = event.player;
+			checkForPoison(player);
+		}
+	}
 
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData)
-    {
-        EntityPlayer entityPlayer = (EntityPlayer) tickData[0];
-        checkForPoison(entityPlayer);
-    }
-
-    @Override
-    public EnumSet<TickType> ticks()
-    {
-        return EnumSet.of(TickType.PLAYER);
-    }
-
-    @Override
-    public String getLabel()
-    {
-        return "minechem.ScheduledTickHandler";
-    }
-
-    @Override
-    public int nextTickSpacing()
-    {
-        return Constants.TICKS_PER_SECOND;
-    }
 
     private void checkForPoison(EntityPlayer entityPlayer)
     {

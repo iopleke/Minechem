@@ -10,17 +10,18 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumToolMaterial;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.Constants;
 import universalelectricity.api.item.IEnergyItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -32,10 +33,10 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
 
     public PolytoolItem(int par1)
     {
-        super(par1, EnumToolMaterial.IRON);
+        super(ToolMaterial.IRON);
         instance = this;
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setBlockName("Polytool");
+        setUnlocalizedName("Polytool");
     }
 
     public static boolean validAlloyInfusion(ItemStack polytool, ItemStack element)
@@ -70,40 +71,41 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
 
     public float getSwordStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Block.web);
+        return this.getStrVsBlock(stack, Blocks.web);
     }
 
     public float getPickaxeStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Block.oreCoal);
+        return this.getStrVsBlock(stack, Blocks.coal_ore);
     }
 
     public float getStoneStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Block.stone);
+        return this.getStrVsBlock(stack, Blocks.stone);
     }
 
     public float getAxeStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Block.wood);
+        return this.getStrVsBlock(stack, Blocks.planks);
     }
 
     public float getShovelStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Block.dirt);
+        return this.getStrVsBlock(stack, Blocks.dirt);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(Reference.POLYTOOL_TEX);
     }
 
+	//TODO: Find replacement
     @Override
-    public float getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
+    public long getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
     {
-        float sum = 8;
+        long sum = 8;
         ArrayList upgrades = getUpgrades(par1ItemStack);
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
@@ -117,10 +119,10 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
     {
         ensureNBT(stack);
         ArrayList toReturn = new ArrayList();
-        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades");
+        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_LIST);
         for (int i = 0; i < list.tagCount(); i++)
         {
-            NBTTagCompound nbt = (NBTTagCompound) list.tagAt(i);
+            NBTTagCompound nbt = list.getCompoundTagAt(i);
             toReturn.add(PolytoolHelper.getTypeFromElement(ElementEnum.values()[nbt.getInteger("Element")], nbt.getFloat("Power")));
         }
         return toReturn;
@@ -141,29 +143,27 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
         return true;
     }
 
-    @Override
-    public boolean onBlockDestroyed(ItemStack par1ItemStack, World par2World, int par3, int par4, int par5, int par6, EntityLivingBase par7EntityLivingBase)
-    {
-
-        ArrayList upgrades = getUpgrades(par1ItemStack);
-        Iterator iter = upgrades.iterator();
-        while (iter.hasNext())
-        {
-            ((PolytoolUpgradeType) iter.next()).onBlockDestroyed(par1ItemStack, par2World, par3, par4, par5, par6, par7EntityLivingBase);
-        }
-        return true;
-    }
+	@Override
+	public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
+		ArrayList upgrades = getUpgrades(p_150894_1_);
+		Iterator iter = upgrades.iterator();
+		while (iter.hasNext())
+		{
+			((PolytoolUpgradeType) iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
+		}
+		return true;
+	}
 
     public static void addTypeToNBT(ItemStack stack, PolytoolUpgradeType type)
     {
         ensureNBT(stack);
         NBTTagCompound compound = new NBTTagCompound();
-        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades");
+        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_LIST);
         for (int i = 0; i < list.tagCount(); i++)
         {
-            if (((NBTTagCompound) list.tagAt(i)).getInteger("Element") == type.getElement().ordinal())
+            if (list.getCompoundTagAt(i).getInteger("Element") == type.getElement().ordinal())
             {
-                ((NBTTagCompound) list.tagAt(i)).setFloat("Power", ((NBTTagCompound) list.tagAt(i)).getFloat("Power") + type.power);
+                list.getCompoundTagAt(i).setFloat("Power", list.getCompoundTagAt(i).getFloat("Power") + type.power);
 
                 return;
             }
@@ -229,35 +229,32 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
         }
     }
 
-    @Override
-    public long recharge(ItemStack itemStack, long energy, boolean doRecharge)
-    {
-        ensureNBT(itemStack);
+	@Override
+	public double recharge(ItemStack itemStack, double energy, boolean doRecharge) {
+		ensureNBT(itemStack);
 
-        if (getPowerOfType(itemStack, ElementEnum.Li) != 0)
-        {
+		if (getPowerOfType(itemStack, ElementEnum.Li) != 0)
+		{
 
-            if (!doRecharge)
-            {
-                int toAdd = (int) (energy * getPowerOfType(itemStack, ElementEnum.Li));
-                itemStack.stackTagCompound.setLong("Energy", getEnergy(itemStack) + toAdd);
+			if (!doRecharge)
+			{
+				int toAdd = (int) (energy * getPowerOfType(itemStack, ElementEnum.Li));
+				itemStack.stackTagCompound.setDouble("Energy", getEnergy(itemStack) + toAdd);
 
-            }
-            return energy;
+			}
+			return energy;
 
-        }
-        return energy;
-    }
+		}
+		return energy;
+	}
 
-    @Override
-    public long discharge(ItemStack itemStack, long energy, boolean doDischarge)
-    {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+	@Override
+	public double discharge(ItemStack itemStack, double energy, boolean doDischarge) {
+		return 0;
+	}
 
-    @Override
-    public long getEnergy(ItemStack theItem)
+	@Override
+    public double getEnergy(ItemStack theItem)
     {
         ensureNBT(theItem);
         if (getPowerOfType(theItem, ElementEnum.Li) != 0)
@@ -268,18 +265,20 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
 
     }
 
-    @Override
-    public long getEnergyCapacity(ItemStack theItem)
-    {
-        // TODO Auto-generated method stub
-        return Integer.MAX_VALUE;
-    }
+	@Override
+	public double getEnergyCapacity(ItemStack theItem) {
+		return Integer.MAX_VALUE;
+	}
 
-    @Override
-    public void setEnergy(ItemStack itemStack, long energy)
-    {
-        // TODO Auto-generated method stub
+	@Override
+	public void setEnergy(ItemStack itemStack, double energy) {
 
-    }
+	}
+
+	@Override
+	public double getVoltage(ItemStack theItem) {
+		return 0;
+	}
+
 
 }

@@ -5,7 +5,7 @@ import java.util.Random;
 import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -47,7 +47,7 @@ public class GhostBlock extends BlockContainer
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
         icon1 = ir.registerIcon(Reference.BLUEPRINT1_TEX);
@@ -65,7 +65,7 @@ public class GhostBlock extends BlockContainer
         if (entityPlayer.getDistanceSq(x + 0.5D, y + 0.5D, z + 0.5D) > 64.0D)
             return true;
 
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof GhostBlockTileEntity)
         {
             GhostBlockTileEntity ghostBlock = (GhostBlockTileEntity) tileEntity;

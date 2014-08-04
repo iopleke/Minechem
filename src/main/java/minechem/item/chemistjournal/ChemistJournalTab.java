@@ -4,12 +4,12 @@ import minechem.ModMinechem;
 import minechem.gui.GuiTableOfElements;
 import minechem.gui.GuiTab;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 public class ChemistJournalTab extends GuiTab
 {
-    public static Icon helpIcon;
+    public static IIcon helpIcon;
 
     public ChemistJournalTab(Gui gui)
     {

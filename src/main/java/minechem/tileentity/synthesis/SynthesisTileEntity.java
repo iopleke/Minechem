@@ -17,10 +17,11 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.INode;
 
 public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInventory
 {
@@ -199,11 +200,6 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    @Override
-    public void closeChest()
-    {
-    }
-
     private boolean valueIn(int value, int[] arr)
     {
         if (arr == null)
@@ -362,7 +358,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.synthesis";
     }
@@ -393,10 +389,20 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
         double dist = entityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D);
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
     }
 
-    @Override
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
     public void onInventoryChanged()
     {
         super.onInventoryChanged();
@@ -407,7 +413,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        NBTTagList inventoryTagList = nbt.getTagList("inventory");
+        NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_LIST);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
     }
 
@@ -438,7 +444,12 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    /**
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	/**
      * Determines if there are items in the internal buffer which can be moved into the output slots. Allows the action of moving them to be stopped with doTake being false.
      */
     public boolean takeStacksFromStorage(boolean doTake)
@@ -480,6 +491,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         {
             SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
             int dimensionID = worldObj.provider.dimensionId;
+	        //TODO: Work on packet system
             PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, synthesisPacketUpdate.makePacket());
         }
 
@@ -662,12 +674,6 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
-
     public int[] getSizeInventorySide(int side)
     {
         switch (side)
@@ -715,4 +721,9 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
         return false;
     }
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
 }

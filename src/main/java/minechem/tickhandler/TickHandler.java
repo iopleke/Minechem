@@ -3,6 +3,8 @@ package minechem.tickhandler;
 import java.util.EnumSet;
 import java.util.List;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsGeneration;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionInjector;
@@ -12,6 +14,7 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.MathHelper;
@@ -20,31 +23,29 @@ import net.minecraft.world.World;
 import org.lwjgl.opengl.GL11;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.ITickHandler;
-import cpw.mods.fml.common.TickType;
 
 // Thanks to thepers for teaching me rendering - Mandrake
-public class TickHandler implements ITickHandler
+public class TickHandler
 {
     public void transmuteWaterToPortal(World world, int dx, int dy, int dz)
     {
         int px = dx;
         int pz = dz;
 
-        if (world.getBlockMaterial(px - 1, dy, pz) == Material.water)
+        if (world.getBlock(px - 1, dy, pz) == Blocks.water)
         {
             px--;
         }
-        if (world.getBlockMaterial(px, dy, pz - 1) == Material.water)
+        if (world.getBlock(px, dy, pz - 1) == Blocks.water)
         {
             pz--;
         }
 
-        world.setBlock(px + 0, dy, pz + 0, 1, 0, 2);
+        world.setBlock(px + 0, dy, pz + 0, Blocks.stone, 0, 2);
     }
 
-    @Override
-    public void tickStart(EnumSet<TickType> type, Object... tickData)
+    @SubscribeEvent
+    public void tickStart(TickEvent.WorldTickEvent event)
     {
         Minecraft mc = FMLClientHandler.instance().getClient();
         if (mc.isSingleplayer())
@@ -62,7 +63,7 @@ public class TickHandler implements ITickHandler
                 List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
                 for (EntityItem entityItem : itemList)
                 {
-                    if ((entityItem.getEntityItem().itemID == new ItemStack(MinechemItemsGeneration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).itemID && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
+                    if ((entityItem.getEntityItem().getItem()== new ItemStack(MinechemItemsGeneration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).getItem() && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
                     {
                         world.createExplosion(entityItem, entityItem.posX, entityItem.posY, entityItem.posZ, 0.9F, true);
                         int dx = MathHelper.floor_double(entityItem.posX);
@@ -74,12 +75,6 @@ public class TickHandler implements ITickHandler
                 }
             }
         }
-
-    }
-
-    @Override
-    public void tickEnd(EnumSet<TickType> type, Object... tickData)
-    {
 
     }
 
@@ -98,17 +93,6 @@ public class TickHandler implements ITickHandler
         }
     }
 
-    @Override
-    public EnumSet<TickType> ticks()
-    {
-        return EnumSet.of(TickType.RENDER, TickType.CLIENT);
-    }
-
-    @Override
-    public String getLabel()
-    {
-        return null;
-    }
 
     /* // this is all unused code for a WIP gas system private void renderOverlays(float parialTickTime) { Minecraft mc = FMLClientHandler.instance().getClient(); if (mc.renderViewEntity != null && mc.gameSettings.thirdPersonView == 0 &&
      * !mc.renderViewEntity.isPlayerSleeping() && mc.thePlayer.isInsideOfMaterial(MinechemBlocks.materialGas)) { renderWarpedTextureOverlay(mc, new ResourceLocation(ModMinechem.ID,"/misc/water.png")); } }
@@ -126,7 +110,7 @@ public class TickHandler implements ITickHandler
      * GL11.glPopMatrix(); GL11.glDisable(GL11.GL_BLEND); GL11.glEnable(GL11.GL_ALPHA_TEST); } */
     public static void RenderDelirium(int markiplier)
     {
-        ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft().gameSettings, Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
+        ScaledResolution scale = new ScaledResolution(Minecraft.getMinecraft(), Minecraft.getMinecraft().displayWidth, Minecraft.getMinecraft().displayHeight);
         int width = scale.getScaledWidth();
         int height = scale.getScaledHeight();
         Gui gui = new Gui();

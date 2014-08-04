@@ -28,7 +28,7 @@ public class ChemicalStorageBlock extends BlockChest
         {
             entityPlayer.addChatMessage("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid");
         }
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (world.isRemote)
         {
             return true;

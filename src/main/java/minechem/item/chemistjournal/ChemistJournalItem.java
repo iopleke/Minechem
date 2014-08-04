@@ -7,7 +7,7 @@ import minechem.ModMinechem;
 import minechem.gui.GuiHandler;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -16,6 +16,7 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraftforge.common.util.Constants;
 
 public class ChemistJournalItem extends Item
 {
@@ -26,8 +27,7 @@ public class ChemistJournalItem extends Item
 
     public ChemistJournalItem(int id)
     {
-        super(id);
-        setBlockName("minechem.itemChemistJournal");
+        setUnlocalizedName("minechem.itemChemistJournal");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
@@ -46,7 +46,7 @@ public class ChemistJournalItem extends Item
             }
             
             // Save the players username onto the book for owned by purposes.
-            tagCompound.setString(JOURNAL_OWNER_TAG, entityPlayer.username);
+            tagCompound.setString(JOURNAL_OWNER_TAG, entityPlayer.getDisplayName());
             
             itemStack.setTagCompound(tagCompound);
         }
@@ -110,7 +110,7 @@ public class ChemistJournalItem extends Item
         NBTTagCompound tag = journal.getTagCompound();
         if (tag != null)
         {
-            NBTTagList taglist = tag.getTagList(ITEMS_TAG_NAME);
+            NBTTagList taglist = tag.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_LIST);
             if (taglist != null)
             {
                 return MinechemHelper.readTagListToItemStackList(taglist);
@@ -128,7 +128,7 @@ public class ChemistJournalItem extends Item
             tagCompound = new NBTTagCompound();
         }
         
-        NBTTagList taglist = tagCompound.getTagList(ITEMS_TAG_NAME);
+        NBTTagList taglist = tagCompound.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_LIST);
         if (taglist == null)
         {
             taglist = new NBTTagList();
@@ -158,7 +158,7 @@ public class ChemistJournalItem extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(Reference.CHEMIST_JOURNAL_TEX);
     }

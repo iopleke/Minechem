@@ -71,7 +71,7 @@ public abstract class MultiBlockTileEntity extends MinechemTileEntity
         int worldX = xCoord + offsetX + x;
         int worldY = yCoord + offsetY + y;
         int worldZ = zCoord + offsetZ + z;
-        TileEntity tileEntity = worldObj.getBlockTileEntity(worldX, worldY, worldZ);
+        TileEntity tileEntity = worldObj.getTileEntity(worldX, worldY, worldZ);
         if (tileEntity != null && tileEntity instanceof TileEntityProxy)
         {
             ((TileEntityProxy) tileEntity).setManager(null);
@@ -98,7 +98,7 @@ public abstract class MultiBlockTileEntity extends MinechemTileEntity
         int worldY = yCoord + offsetY + y;
         int worldZ = zCoord + offsetZ + z;
         HashMap<Integer, BlueprintBlock> lut = blueprint.getBlockLookup();
-        TileEntity tileEntity = worldObj.getBlockTileEntity(worldX, worldY, worldZ);
+        TileEntity tileEntity = worldObj.getTileEntity(worldX, worldY, worldZ);
         if (tileEntity != null && tileEntity instanceof TileEntityProxy)
         {
             ((TileEntityProxy) tileEntity).setManager(this);

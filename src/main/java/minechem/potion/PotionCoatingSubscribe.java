@@ -1,17 +1,17 @@
 package minechem.potion;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingAttackEvent;
 
 public class PotionCoatingSubscribe
 {
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void entityAttacked(LivingAttackEvent event)
     {
         if (event.source.getSourceOfDamage() instanceof EntityLivingBase)
@@ -29,7 +29,7 @@ public class PotionCoatingSubscribe
             }
             for (int i = 0; i < list.tagCount(); i++)
             {
-                NBTTagCompound enchantmentTag = (NBTTagCompound) list.tagAt(i);
+                NBTTagCompound enchantmentTag = list.getCompoundTagAt(i);
                 Enchantment enchant = Enchantment.enchantmentsList[enchantmentTag.getShort("id")];
                 if (enchant instanceof PotionEnchantmentCoated)
                 {

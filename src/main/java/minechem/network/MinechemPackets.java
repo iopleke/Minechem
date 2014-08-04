@@ -6,7 +6,6 @@ import minechem.tileentity.decomposer.DecomposerPacketUpdate;
 import minechem.tileentity.multiblock.ghostblock.GhostBlockPacket;
 import minechem.tileentity.synthesis.SynthesisPacketUpdate;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.network.packet.Packet;
 
 import com.google.common.collect.BiMap;
 import com.google.common.collect.ImmutableBiMap;
@@ -14,8 +13,8 @@ import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 import com.google.common.io.ByteStreams;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
+import net.minecraft.network.Packet;
 
 public abstract class MinechemPackets
 {
@@ -95,6 +94,7 @@ public abstract class MinechemPackets
         ByteArrayDataOutput out = ByteStreams.newDataOutput();
         out.writeByte(getPacketId());
         write(out);
+	    //TODO decide how to handle this
         return PacketDispatcher.getPacket(ModMinechem.CHANNEL_NAME, out.toByteArray());
     }
 

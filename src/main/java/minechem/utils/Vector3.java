@@ -145,7 +145,7 @@ public class Vector3 implements Cloneable
 
     public TileEntity getTileEntity(IBlockAccess world)
     {
-        return world.getBlockTileEntity(this.intX(), this.intY(), this.intZ());
+        return world.getTileEntity(this.intX(), this.intY(), this.intZ());
     }
 
     public boolean setBlock(World world, int id, int metadata, int notify)
@@ -232,7 +232,7 @@ public class Vector3 implements Cloneable
         return this;
     }
 
-    public Vector3 translate(Vector3 par1)
+    public Vector3 translate(ForgeDirection par1)
     {
         this.x += par1.x;
         this.y += par1.y;

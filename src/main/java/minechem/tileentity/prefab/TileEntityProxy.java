@@ -37,7 +37,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         managerYOffset = nbtTagCompound.getInteger("managerYOffset");
         managerZOffset = nbtTagCompound.getInteger("managerZOffset");
         if (worldObj != null)
-            manager = worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+            manager = worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
     }
 
     public void setManager(TileEntity managerTileEntity)
@@ -55,10 +55,10 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     public TileEntity getManager()
     {
         // Return the next block in sequence but never the TileEntityProxy.
-        if (worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) != null
-                && !(worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) instanceof TileEntityProxy))
+        if (worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) != null
+                && !(worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) instanceof TileEntityProxy))
         {
-            return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+            return worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
         
         // Return the entire fusion generator as a whole (indicating the structure is complete).
@@ -95,7 +95,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
             fission.blockType = MinechemBlocksGeneration.fusion;
             worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fission);
         }
-        return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+        return worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
 
     }
 
