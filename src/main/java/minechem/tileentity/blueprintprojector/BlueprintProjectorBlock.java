@@ -58,7 +58,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
     }
 
     @Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int i)
     {
         return new BlueprintProjectorTileEntity();
     }
@@ -77,7 +77,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
     
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister ir)
+    public void registerBlockIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.BLUEPRINTPROJECTOR_TEX);
     }

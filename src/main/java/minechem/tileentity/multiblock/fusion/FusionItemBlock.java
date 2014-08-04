@@ -11,9 +11,10 @@ public class FusionItemBlock extends ItemBlock
 
     public FusionItemBlock(int par1)
     {
-        super(par1);
+	    //TODO: Add item block
+        super();
         setHasSubtypes(true);
-        setBlockName("minechem.itemBlockFusion");
+        setUnlocalizedName("minechem.itemBlockFusion");
     }
 
     @Override
@@ -29,7 +30,7 @@ public class FusionItemBlock extends ItemBlock
     }
 
     @Override
-    public String getItemDisplayName(ItemStack itemstack)
+    public String getItemStackDisplayName(ItemStack itemstack)
     {
         return names[itemstack.getItemDamage()];
     }

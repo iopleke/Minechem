@@ -12,7 +12,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -20,14 +20,14 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class MicroscopeBlock extends BlockSimpleContainer
 {
-    private Icon front;
+    private IIcon front;
 
     public MicroscopeBlock(int par1)
     {
-        super(par1, Material.iron);
+        super(Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setBlockName("minechem.blockMicroscope");
-        setLightValue(0.5F);
+        setLightLevel(0.5F);
     }
 
     @Override
@@ -49,7 +49,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
     }
 
     @Override
-    public TileEntity createNewTileEntity(World var1)
+    public TileEntity createNewTileEntity(World var1, int i)
     {
         return new MicroscopeTileEntity();
     }
@@ -71,7 +71,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IIconRegister ir)
+    public void registerBlockIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.MICROSCOPE_TEX);
         front = ir.registerIcon(Reference.MICROSCOPE_FRONT_TEX);

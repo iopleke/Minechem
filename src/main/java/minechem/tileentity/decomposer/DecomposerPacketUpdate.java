@@ -5,12 +5,12 @@ import minechem.Settings;
 import minechem.network.MinechemPackets;
 import minechem.network.MinechemPackets.ProtocolException;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraftforge.common.ForgeDirection;
 
 import com.google.common.io.ByteArrayDataInput;
 import com.google.common.io.ByteArrayDataOutput;
 
 import cpw.mods.fml.relauncher.Side;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class DecomposerPacketUpdate extends MinechemPackets
 {
@@ -27,10 +27,10 @@ public class DecomposerPacketUpdate extends MinechemPackets
     private int state;
     
     /** Energy stored */
-    private long lastItemStoredEnergy;
+    private double lastItemStoredEnergy;
     
     /** Maximum amount of energy. */
-    private long lastItemStoredEnergyMaximum;
+    private double lastItemStoredEnergyMaximum;
     
     /** Reference object that will be hooked on client side only */
     private DecomposerTileEntity tileEntity;
@@ -73,7 +73,7 @@ public class DecomposerPacketUpdate extends MinechemPackets
             
             // Energy.
             this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
-            this.tileEntity.setEnergyCapacity(lastItemStoredEnergyMaximum);
+            this.tileEntity.setEnergyCapacity((long) lastItemStoredEnergyMaximum);
             
             // Machine state.
             this.tileEntity.setState(this.state);
@@ -117,8 +117,8 @@ public class DecomposerPacketUpdate extends MinechemPackets
         out.writeInt(tilePosZ);
 
         // Energy.
-        out.writeLong(lastItemStoredEnergy);
-        out.writeLong(lastItemStoredEnergyMaximum);
+        out.writeLong((long) lastItemStoredEnergy);
+        out.writeLong((long) lastItemStoredEnergyMaximum);
         
         // Machine state.
         out.writeInt(state);

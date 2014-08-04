@@ -28,8 +28,8 @@
 package org.modstats;
 
 import cpw.mods.fml.common.FMLLog;
-import net.minecraftforge.event.Cancelable;
-import net.minecraftforge.event.Event;
+import cpw.mods.fml.common.eventhandler.Cancelable;
+import cpw.mods.fml.common.eventhandler.Event;
 
 import java.util.LinkedList;
 import java.util.List;
