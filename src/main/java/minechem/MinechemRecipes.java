@@ -1935,6 +1935,7 @@ public class MinechemRecipes
 
     private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
 
+    @SubscribeEvent
     public void oreEvent(OreDictionary.OreRegisterEvent var1)
     {
         if (var1.Name.contains("gemApatite"))
