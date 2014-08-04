@@ -34,7 +34,7 @@ public class MicroscopeRenderGUIItem extends RenderItem
     private void setScissor(float x, float y, float w, float h)
     {
         Minecraft mc = Minecraft.getMinecraft();
-        ScaledResolution scaledRes = new ScaledResolution(mc.gameSettings, mc.displayWidth, mc.displayHeight);
+        ScaledResolution scaledRes = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
         int scale = scaledRes.getScaleFactor();
         x *= scale;
         y *= scale;

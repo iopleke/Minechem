@@ -39,7 +39,7 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
     {
         ArrayList<CoordTuple> queue = new ArrayList<CoordTuple>(100);
         if (id == Blocks.coal_ore || id == Blocks.diamond_ore || id == Blocks.emerald_ore || id == Blocks.gold_ore || id == Blocks.iron_ore || id == Blocks.lapis_ore || id == Blocks.quartz_ore
-                || id == Blocks.redstone_ore|| OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(itemStack.getItem(), 1, 0))).contains("ore"))
+                || id == Blocks.redstone_ore|| OreDictionary.getOreName(OreDictionary.getOreID(itemStack.getDisplayName())).contains("ore"))
         {
 
             int toMine = (int) power;

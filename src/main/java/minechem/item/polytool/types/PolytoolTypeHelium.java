@@ -29,11 +29,11 @@ public class PolytoolTypeHelium extends PolytoolUpgradeType
     public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
     {
 
-        itemStack.stackTagCompound.setInteger("HeliumHitEntity", target.entityId);
+        itemStack.stackTagCompound.setInteger("HeliumHitEntity", target.getEntityId());
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving)
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
     }
 

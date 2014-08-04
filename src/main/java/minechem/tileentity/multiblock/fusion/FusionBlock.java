@@ -28,7 +28,7 @@ public class FusionBlock extends BlockSimpleContainer
 {
     private IIcon icon1, icon2;
 
-    public FusionBlock(int id)
+    public FusionBlock()
     {
         super(Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
@@ -55,8 +55,6 @@ public class FusionBlock extends BlockSimpleContainer
         }
         return true;
     }
-
-
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
@@ -136,12 +134,6 @@ public class FusionBlock extends BlockSimpleContainer
          * 
          * world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true); } } */
 
-    }
-
-    @Override
-    public boolean hasTileEntity()
-    {
-        return true;
     }
 
 	@Override

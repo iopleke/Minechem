@@ -135,7 +135,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
-            if (slot != SynthesisTileEntity.kStartJournal && stack.itemID == MinechemItemsGeneration.journal.itemID && !getSlot(SynthesisTileEntity.kStartJournal).getHasStack())
+            if (slot != SynthesisTileEntity.kStartJournal && stack.getItem() == MinechemItemsGeneration.journal && !getSlot(SynthesisTileEntity.kStartJournal).getHasStack())
             {
                 ItemStack copystack = slotObject.decrStackSize(1);
                 getSlot(SynthesisTileEntity.kStartJournal).putStack(copystack);
@@ -150,7 +150,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 {
                     return null;
                 }
-            } else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.itemID == MinechemItemsGeneration.element.itemID || stackInSlot.itemID == MinechemItemsGeneration.molecule.itemID))
+            } else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.getItem() == MinechemItemsGeneration.element || stackInSlot.getItem() == MinechemItemsGeneration.molecule))
             {
                 if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
                 {

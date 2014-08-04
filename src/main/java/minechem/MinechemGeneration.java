@@ -25,7 +25,7 @@ public class MinechemGeneration implements IWorldGenerator
                         int firstBlockXCoord = 16 * chunkX + random.nextInt(16);
                         int firstBlockYCoord = random.nextInt(30);
                         int firstBlockZCoord = 16 * chunkZ + random.nextInt(16);
-                        WorldGenMinable mineable = new WorldGenMinable(MinechemBlocksGeneration.uranium.blockID, 4);
+                        WorldGenMinable mineable = new WorldGenMinable(MinechemBlocksGeneration.uranium, 4);
                         mineable.generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
                     }
                 }

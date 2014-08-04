@@ -36,7 +36,7 @@ public class ElementItem extends Item // implements IStorageTank
     public final IIcon liquid[] = new IIcon[7], gas[] = new IIcon[7];
     public IIcon solid;
 
-    public ElementItem(int par1)
+    public ElementItem()
     {
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setUnlocalizedName("minechem.itemElement");

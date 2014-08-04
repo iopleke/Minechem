@@ -10,7 +10,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemAtomicManipulator extends Item
 {
 
-    public ItemAtomicManipulator(int id)
+    public ItemAtomicManipulator()
     {
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setUnlocalizedName("minechem.itemAtomicManipulator");

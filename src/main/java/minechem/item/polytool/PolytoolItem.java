@@ -31,7 +31,7 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
 
     public static PolytoolItem instance;
 
-    public PolytoolItem(int par1)
+    public PolytoolItem()
     {
         super(ToolMaterial.IRON);
         instance = this;
@@ -71,27 +71,27 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
 
     public float getSwordStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Blocks.web);
+        return this.func_150893_a(stack, Blocks.web);
     }
 
     public float getPickaxeStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Blocks.coal_ore);
+        return this.func_150893_a(stack, Blocks.coal_ore);
     }
 
     public float getStoneStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Blocks.stone);
+        return this.func_150893_a(stack, Blocks.stone);
     }
 
     public float getAxeStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Blocks.planks);
+        return this.func_150893_a(stack, Blocks.planks);
     }
 
     public float getShovelStr(ItemStack stack)
     {
-        return this.getStrVsBlock(stack, Blocks.dirt);
+        return this.func_150893_a(stack, Blocks.dirt);
     }
 
     @Override
@@ -101,9 +101,8 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
         itemIcon = ir.registerIcon(Reference.POLYTOOL_TEX);
     }
 
-	//TODO: Find replacement
     @Override
-    public long getStrVsBlock(ItemStack par1ItemStack, Block par2Block)
+    public float func_150893_a(ItemStack par1ItemStack, Block par2Block)
     {
         long sum = 8;
         ArrayList upgrades = getUpgrades(par1ItemStack);

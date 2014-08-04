@@ -13,7 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class FusionStarItem extends Item
 {
 
-    public FusionStarItem(int id)
+    public FusionStarItem()
     {
         this.maxStackSize = 1;
         this.setMaxDamage(2000);

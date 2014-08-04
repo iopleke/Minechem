@@ -56,12 +56,12 @@ public class PotionCoatingRecipe implements IRecipe
                         {
                             for (int k = 0; k < l.tagCount(); k++)
                             {
-                                NBTTagCompound tag = (NBTTagCompound) l.tagAt(k);
+                                NBTTagCompound tag = l.getCompoundTagAt(k);
                                 if (tag.getShort("id") == PotionEnchantmentCoated.chemLookup.get(MoleculeEnum.getById(s2.getItemDamage())).effectId)
                                 {
                                     level = tag.getShort("lvl");
                                     ItemStack result = s.copy();
-                                    ((NBTTagCompound) result.getEnchantmentTagList().tagAt(k)).setInteger("lvl", level + 1);
+                                    result.getEnchantmentTagList().getCompoundTagAt(k).setInteger("lvl", level + 1);
                                 }
                             }
                         }

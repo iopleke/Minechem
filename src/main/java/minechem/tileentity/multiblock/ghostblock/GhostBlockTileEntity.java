@@ -1,8 +1,10 @@
 package minechem.tileentity.multiblock.ghostblock;
 
+import minechem.ModMinechem;
 import minechem.Settings;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
+import minechem.network.packet.GhostBlockPacket;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -25,8 +27,7 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         {
             GhostBlockPacket packet = new GhostBlockPacket(this);
             int dimensionID = worldObj.provider.dimensionId;
-	        //TODO: rewrite packet
-            MinecraftServer.getServer().getConfigurationManager().sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, packet.makePacket());
+            ModMinechem.network.sendPacketAllAround(worldObj,this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, packet);
         }
     }
 

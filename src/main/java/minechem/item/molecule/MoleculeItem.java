@@ -23,7 +23,7 @@ public class MoleculeItem extends Item
 {
     public IIcon render_pass1, render_pass2, filledMolecule;
 
-    public MoleculeItem(int par1)
+    public MoleculeItem()
     {
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHasSubtypes(true);

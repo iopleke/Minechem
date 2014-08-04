@@ -20,7 +20,7 @@ public class ItemLens extends Item
     @SideOnly(Side.CLIENT)
 	private final IIcon[] icons = new IIcon[4];
 
-    public ItemLens(int id)
+    public ItemLens()
     {
         super();
         setUnlocalizedName("minechem.itemLens");

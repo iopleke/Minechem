@@ -20,7 +20,7 @@ import net.minecraft.world.World;
 
 public class LeadedChestBlock extends BlockContainer
 {
-    public LeadedChestBlock(int id)
+    public LeadedChestBlock()
     {
         super(Material.wood);
         this.setCreativeTab(ModMinechem.CREATIVE_TAB);

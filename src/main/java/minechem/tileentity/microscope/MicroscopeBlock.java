@@ -22,7 +22,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
 {
     private IIcon front;
 
-    public MicroscopeBlock(int par1)
+    public MicroscopeBlock()
     {
         super(Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);

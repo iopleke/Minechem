@@ -20,7 +20,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GhostBlock extends BlockContainer
 {
 
-    public GhostBlock(int id)
+    public GhostBlock()
     {
         super(Material.iron);
         setBlockName("block.minechemGhostBlock");

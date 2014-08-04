@@ -10,6 +10,7 @@ import minechem.gui.GuiTab;
 import minechem.gui.GuiVerticalScrollBar;
 import minechem.gui.IVerticalScrollContainer;
 import minechem.gui.ScissorHelper;
+import minechem.network.packet.ChemistJournalPacketActiveItem;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
@@ -157,7 +158,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         currentItemStack = itemstack;
         MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
         ChemistJournalPacketActiveItem packet = new ChemistJournalPacketActiveItem(itemstack, player);
-        PacketDispatcher.sendPacketToServer(packet.makePacket());//TODO: Change packet system
+        ModMinechem.network.sendToServer(packet);//TODO: Change packet system
 
         SynthesisRecipe synthesisRecipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(itemstack);
         DecomposerRecipe decomposerRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);

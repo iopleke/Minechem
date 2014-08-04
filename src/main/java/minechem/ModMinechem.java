@@ -15,15 +15,18 @@ import minechem.gui.GuiTabTable;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
-import minechem.network.MinechemPacketHandler;
 import minechem.network.PacketDispatcher;
+import minechem.network.packet.ChemistJournalPacketActiveItem;
+import minechem.network.packet.DecomposerPacketUpdate;
+import minechem.network.packet.GhostBlockPacket;
+import minechem.network.packet.SynthesisPacketUpdate;
 import minechem.network.server.CommonProxy;
 import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
 import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
-import minechem.tickhandler.ScheduledTickHandler;
-import minechem.tickhandler.TickHandler;
+import minechem.tick.ScheduledTickHandler;
+import minechem.tick.TickHandler;
 import minechem.tileentity.synthesis.SynthesisTabStateControl;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -36,8 +39,6 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
 
-import org.modstats.ModstatInfo;
-import org.modstats.Modstats;
 
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -45,14 +46,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.config.Configuration;
 
 @Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
-@ModstatInfo(prefix = ModMinechem.ID)
 public class ModMinechem
 {
     // Internal mod name used for reference purposes and resource gathering.
@@ -182,22 +181,24 @@ public class ModMinechem
         LOGGER.info("Registering fluids...");
         FluidHelper.registerFluids();
 
+	    LOGGER.info("Registering Packets...");
+	    network.registerPacket(0, Side.CLIENT, SynthesisPacketUpdate.class);
+	    network.registerPacket(1, Side.SERVER, ChemistJournalPacketActiveItem.class);
+	    network.registerPacket(2, Side.CLIENT, GhostBlockPacket.class);
+	    network.registerPacket(3, Side.CLIENT, DecomposerPacketUpdate.class);
+
         LOGGER.info("Registering Ore Generation...");
         GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
 
         LOGGER.info("Registering GUI and Container handlers...");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-        LOGGER.info("Register Tick Handler for chemical effects tracking...");
-	    //TickHandlers are now in events
-        //TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
-	    //if(event.getSide() == Side.SERVER)//TODO:Maybe this would work for deciding the side where to register this
-	        FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
+        LOGGER.info("Register Tick Events for chemical effects tracking...");
+	    FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
+	    FMLCommonHandler.instance().bus().register(new TickHandler());
+
         LOGGER.info("Registering ClientProxy Rendering Hooks...");
         PROXY.registerRenderers();
-
-        LOGGER.info("Registering ModStats Usage Tracking...");
-        Modstats.instance().getReporter().registerMod(this);
 
         if (!Loader.isModLoaded("UniversalElectricity"))
         {

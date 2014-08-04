@@ -31,7 +31,7 @@ public abstract class MinechemTileEntityBase extends TileEntity
     }
 
     /** Called on the TileEntity's first tick. */
-    public void initiate()
+    public void initiate()//TODO: Why is this here?
     {
     }
 

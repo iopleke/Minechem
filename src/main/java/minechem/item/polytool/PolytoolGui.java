@@ -59,16 +59,16 @@ public class PolytoolGui extends GuiContainer
         // Copied from GuiContainer
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
         this.zLevel = 200.0F;
-        itemRenderer.zLevel = 200.0F;
+        itemRender.zLevel = 200.0F;
         FontRenderer font = null;
         if (par1ItemStack != null)
             font = par1ItemStack.getItem().getFontRenderer(par1ItemStack);
         if (font == null)
-            font = fontRenderer;
-        itemRenderer.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3);
-        itemRenderer.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3 - (8), par4Str);
+            font = fontRendererObj;
+        itemRender.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3);
+        itemRender.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3 - (8), par4Str);
         this.zLevel = 0.0F;
-        itemRenderer.zLevel = 0.0F;
+        itemRender.zLevel = 0.0F;
     }
 
     @Override
@@ -86,11 +86,11 @@ public class PolytoolGui extends GuiContainer
         }
 
         drawItemStack(new ItemStack(MinechemItemsGeneration.polytool), 80, 42, "");
-        fontRenderer.drawString("Sword: " + PolytoolItem.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
-        fontRenderer.drawString("Ores: " + PolytoolItem.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
-        fontRenderer.drawString("Stone: " + PolytoolItem.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);
-        fontRenderer.drawString("Axe: " + PolytoolItem.instance.getAxeStr(polytool), guiLeft + 10, guiTop + 110, 0x404040);
-        fontRenderer.drawString("Shovel: " + PolytoolItem.instance.getShovelStr(polytool), guiLeft + 10, guiTop + 120, 0x404040);
+        fontRendererObj.drawString("Sword: " + PolytoolItem.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
+        fontRendererObj.drawString("Ores: " + PolytoolItem.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
+        fontRendererObj.drawString("Stone: " + PolytoolItem.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);
+        fontRendererObj.drawString("Axe: " + PolytoolItem.instance.getAxeStr(polytool), guiLeft + 10, guiTop + 110, 0x404040);
+        fontRendererObj.drawString("Shovel: " + PolytoolItem.instance.getShovelStr(polytool), guiLeft + 10, guiTop + 120, 0x404040);
 
     }
 

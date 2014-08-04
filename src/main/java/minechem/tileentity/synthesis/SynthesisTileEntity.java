@@ -4,14 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
+import minechem.ModMinechem;
 import minechem.Settings;
-import minechem.tileentity.decomposer.DecomposerTileEntity.State;
+import minechem.network.packet.SynthesisPacketUpdate;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
 import minechem.utils.Compare;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -492,7 +492,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
             int dimensionID = worldObj.provider.dimensionId;
 	        //TODO: Work on packet system
-            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, synthesisPacketUpdate.makePacket());
+            ModMinechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, synthesisPacketUpdate);
         }
 
         // Forces the output slot to only take a single item preventing stacking.
@@ -648,7 +648,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
                 output.stackSize += template.stackSize;
             }
 
-            onInventoryChanged();
+            //onInventoryChanged();
             amount--;
         }
 

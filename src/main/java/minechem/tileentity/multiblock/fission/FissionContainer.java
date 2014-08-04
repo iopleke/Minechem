@@ -78,7 +78,7 @@ public class FissionContainer extends Container implements IRadiationShield
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
                     return null;
             }
-            else if (stackInSlot.itemID == MinechemItemsGeneration.element.itemID && stackInSlot.getItemDamage() == ElementEnum.U.atomicNumber() + 1)
+            else if (stackInSlot.getItem() == MinechemItemsGeneration.element && stackInSlot.getItemDamage() == ElementEnum.U.atomicNumber() + 1)
             {
                 if (!mergeItemStack(stackInSlot, FissionTileEntity.kStartFuel, FissionTileEntity.kStartFuel + 1, false))
                     return null;

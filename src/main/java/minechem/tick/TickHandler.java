@@ -1,6 +1,5 @@
-package minechem.tickhandler;
+package minechem.tick;
 
-import java.util.EnumSet;
 import java.util.List;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -45,7 +44,7 @@ public class TickHandler
     }
 
     @SubscribeEvent
-    public void tickStart(TickEvent.WorldTickEvent event)
+    public void tick(TickEvent.WorldTickEvent event)
     {
         Minecraft mc = FMLClientHandler.instance().getClient();
         if (mc.isSingleplayer())
