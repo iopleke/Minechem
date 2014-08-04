@@ -235,7 +235,7 @@ minechem.molecule.methyl=메틸 이온
 minechem.molecule.methylene=메틸렌 이온
 minechem.molecule.cyanoacrylate=사이아노아크릴레이트
 minechem.molecule.polycyanoacrylate=폴리사이아노아크릴레이트
-minechem.molecule.redPigment질산코발트(II)
+minechem.molecule.redPigment=질산코발트(II)
 minechem.molecule.orangePigment=이크롬산칼륨
 minechem.molecule.yellowPigment=크롬산칼륨
 minechem.molecule.limePigment=염화제일니켈
