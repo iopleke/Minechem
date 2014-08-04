@@ -538,7 +538,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                         if (fluids.get(i).amount > ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount)
                         {
                             // The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
-                            this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlockID(), 1, 0));
+                            this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlock(), 1, 0));
                             fluids.get(i).amount -= ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount;
                         }
                     }
@@ -579,7 +579,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             activeStack = null;
             decomposeActiveStack();
             state = State.active;
-            this.onInventoryChanged();
+            //this.onInventoryChanged();
         } else if (state == State.finished)
         {
             // Prepares the machine for another pass if we have recently finished.
@@ -588,7 +588,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         }
 
         // Notify minecraft that the inventory items in this machine have changed.
-        this.onInventoryChanged();
+        //this.onInventoryChanged();//TODO:Find alt if available
     }
 
     @Override

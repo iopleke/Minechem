@@ -8,6 +8,8 @@ import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.SafeTimeTracker;
+import net.minecraft.block.Block;
+import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
@@ -132,14 +134,14 @@ public abstract class MultiBlockTileEntity extends MinechemTileEntity
         int worldY = yCoord + (offsetY + y);
         int worldZ = zCoord + (offsetZ + z);
         Integer structureID = structure[y][x][z];
-        int blockID = worldObj.getBlockId(worldX, worldY, worldZ);
+        Block block = worldObj.getBlock(worldX, worldY, worldZ);
         if (structureID == MinechemBlueprint.wildcard)
         {
             return MultiBlockStatusEnum.CORRECT;
         }
         else if (structureID == air)
         {
-            if (blockID == air)
+            if (block == Blocks.air)
                 return MultiBlockStatusEnum.CORRECT;
             else
                 return MultiBlockStatusEnum.INCORRECT;
@@ -148,7 +150,7 @@ public abstract class MultiBlockTileEntity extends MinechemTileEntity
         {
             HashMap<Integer, BlueprintBlock> lut = blueprint.getBlockLookup();
             BlueprintBlock blueprintBlock = lut.get(structureID);
-            if (blockID == blueprintBlock.block.blockID && worldObj.getBlockMetadata(worldX, worldY, worldZ) == blueprintBlock.metadata)
+            if (block == blueprintBlock.block && worldObj.getBlockMetadata(worldX, worldY, worldZ) == blueprintBlock.metadata)
             {
                 return MultiBlockStatusEnum.CORRECT;
             }

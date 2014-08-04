@@ -116,23 +116,18 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         return this.energy.getEnergy() > 0;
     }
 
-    @Override
-    public long onExtractEnergy(ForgeDirection from, long extract, boolean doExtract)
-    {
-        return this.energy.extractEnergy(extract, doExtract);
-    }
-
-    @Override
-    public void onInventoryChanged()
-    {
-        super.onInventoryChanged();
-    }
-
-    @Override
-    public long onReceiveEnergy(ForgeDirection from, long receive, boolean doReceive)
-    {
-        return this.energy.receiveEnergy(receive, doReceive);
-    }
+//    @Override
+//    public long onExtractEnergy(ForgeDirection from, long extract, boolean doExtract)
+//    {
+//        return this.energy.extractEnergy(extract, doExtract);
+//    }
+//
+//
+//    @Override
+//    public long onReceiveEnergy(ForgeDirection from, long receive, boolean doReceive)
+//    {
+//        return this.energy.receiveEnergy(receive, doReceive);
+//    }
 
     public void produce()
     {

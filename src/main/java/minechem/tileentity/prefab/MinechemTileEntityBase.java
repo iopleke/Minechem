@@ -24,7 +24,7 @@ public abstract class MinechemTileEntityBase extends TileEntity
     {
         if (this.blockType == null)
         {
-            this.blockType = Block.blocksList[this.worldObj.getBlockId(this.xCoord, this.yCoord, this.zCoord)];
+            this.blockType = this.worldObj.getBlock(this.xCoord, this.yCoord, this.zCoord);
         }
 
         return this.blockType;
@@ -33,18 +33,6 @@ public abstract class MinechemTileEntityBase extends TileEntity
     /** Called on the TileEntity's first tick. */
     public void initiate()
     {
-    }
-
-    @Override
-    public void onInventoryChanged()
-    {
-        super.onInventoryChanged();
-    }
-
-    @Override
-    public void readFromNBT(NBTTagCompound nbt)
-    {
-        super.readFromNBT(nbt);
     }
 
     @Override
@@ -61,11 +49,5 @@ public abstract class MinechemTileEntityBase extends TileEntity
         }
 
         this.ticks++;
-    }
-
-    @Override
-    public void writeToNBT(NBTTagCompound nbt)
-    {
-        super.writeToNBT(nbt);
     }
 }

@@ -5,6 +5,7 @@ import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
@@ -31,11 +32,11 @@ public class PolytoolTypeFluorine extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving)
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
         if (entityLiving instanceof EntityPlayer && world.rand.nextInt(10) < this.power)
         {
-            ((EntityPlayer) entityLiving).getFoodStats().addStats((ItemFood) Item.carrot);
+            ((EntityPlayer) entityLiving).getFoodStats().addStats((ItemFood) Items.carrot);
         }
     }
 

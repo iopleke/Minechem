@@ -136,7 +136,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
             if (this.blueprint == MinechemBlueprint.fusion)
             {
                 FusionTileEntity fusion = new FusionTileEntity();
-                fusion.worldObj = this.worldObj;
+                fusion.setWorldObj(this.worldObj);
                 fusion.xCoord = worldPos.x;
                 fusion.yCoord = worldPos.y;
                 fusion.zCoord = worldPos.z;

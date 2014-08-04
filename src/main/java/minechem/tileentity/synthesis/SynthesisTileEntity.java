@@ -402,12 +402,12 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
 
 	}
 
-	@Override
-    public void onInventoryChanged()
-    {
-        super.onInventoryChanged();
-        getRecipeResult();
-    }
+//	@Override
+//    public void onInventoryChanged()
+//    {
+//        super.onInventoryChanged();
+//        getRecipeResult();
+//    }
 
     @Override
     public void readFromNBT(NBTTagCompound nbt)
@@ -670,7 +670,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
                 inventory[kRecipe[i]] = ingredients[i];
             }
 
-            onInventoryChanged();
+            //onInventoryChanged();
         }
     }
 

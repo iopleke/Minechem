@@ -11,7 +11,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import universalelectricity.api.core.grid.electric.IEnergyContainer;
-import universalelectricity.api.core.grid.electric.IEnergyInterface;
+import universalelectricity.api.core.grid.electric.EnergyStorage;
 
 public class PolytoolTypeGold extends PolytoolUpgradeType
 {

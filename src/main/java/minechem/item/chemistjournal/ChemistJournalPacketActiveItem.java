@@ -4,6 +4,7 @@ import minechem.MinechemItemsGeneration;
 import minechem.network.MinechemPackets;
 import minechem.network.MinechemPackets.ProtocolException;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 import com.google.common.io.ByteArrayDataInput;
@@ -14,7 +15,7 @@ import cpw.mods.fml.relauncher.Side;
 public class ChemistJournalPacketActiveItem extends MinechemPackets
 {
     /** Item ID for the currently active item in the players chemist journal. */
-    private int itemID;
+    private Item item;
     
     /** Damage value for the active item for metadata tracking purposes. */
     private int itemDMG;
@@ -25,7 +26,7 @@ public class ChemistJournalPacketActiveItem extends MinechemPackets
     public ChemistJournalPacketActiveItem(ItemStack activeStack, EntityPlayer player)
     {
         // Receives information from a client specifically about current active item the player has set in their journal.
-        this.itemID = activeStack.itemID;
+        this.item = activeStack.getItem();
         this.itemDMG = activeStack.getItemDamage();
         this.slot = player.inventory.currentItem;
     }
@@ -45,10 +46,10 @@ public class ChemistJournalPacketActiveItem extends MinechemPackets
             ItemStack journal = player.inventory.mainInventory[this.slot];
             
             // Check that it is indeed a journal and matches the ID we have internally for that item.
-            if (journal != null && journal.itemID == MinechemItemsGeneration.journal.itemID)
+            if (journal != null && journal.getItem() == MinechemItemsGeneration.journal)
             {
                 // Set the active damage amount for the active item to ensure meta-data items show up properly.
-                ItemStack activeStack = new ItemStack(this.itemID, 1, this.itemDMG);
+                ItemStack activeStack = new ItemStack(this.item, 1, this.itemDMG);
                 
                 // Sets the active stack in the server instance of the chemists journal.
                 MinechemItemsGeneration.journal.setActiveStack(activeStack, journal);
@@ -56,11 +57,12 @@ public class ChemistJournalPacketActiveItem extends MinechemPackets
         }
     }
 
+	//TODO: Redo packets
     @Override
     public void read(ByteArrayDataInput in) throws ProtocolException
     {
         // Chemist Journal specific being read on the server world instance.
-        this.itemID = in.readInt();
+        this.item = in.read;
         this.itemDMG = in.readInt();
         this.slot = in.readInt();
     }
@@ -69,7 +71,7 @@ public class ChemistJournalPacketActiveItem extends MinechemPackets
     public void write(ByteArrayDataOutput out)
     {
         // Chemist Journal specific from the client instance of the item.
-        out.writeInt(this.itemID);
+        out.writeInt(Item.getIdFromItem(this.item));//TODO: Double check to see if getIdFromItem is still in used or possible use string
         out.writeInt(this.itemDMG);
         out.writeInt(this.slot);
     }
