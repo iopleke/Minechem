@@ -7,9 +7,10 @@ import minechem.item.polytool.PolytoolUpgradeType;
 import minechem.utils.CoordTuple;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class PolytoolTypeIron extends PolytoolUpgradeType
@@ -33,12 +34,12 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
 
     }
 
-    @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x1, int y1, int z1, EntityLivingBase entityLiving)
+	@Override
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block id, int x1, int y1, int z1, EntityLivingBase entityLiving)
     {
         ArrayList<CoordTuple> queue = new ArrayList<CoordTuple>(100);
-        if (id == Block.oreCoal.blockID || id == Block.oreDiamond.blockID || id == Block.oreEmerald.blockID || id == Block.oreGold.blockID || id == Block.oreIron.blockID || id == Block.oreLapis.blockID || id == Block.oreNetherQuartz.blockID
-                || id == Block.oreRedstone.blockID || OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(id, 1, 0))).contains("ore"))
+        if (id == Blocks.coal_ore || id == Blocks.diamond_ore || id == Blocks.emerald_ore || id == Blocks.gold_ore || id == Blocks.iron_ore || id == Blocks.lapis_ore || id == Blocks.quartz_ore
+                || id == Blocks.redstone_ore|| OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(itemStack.getItem(), 1, 0))).contains("ore"))
         {
 
             int toMine = (int) power;
@@ -51,9 +52,9 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
                 int z = coord.z;
                 for (ForgeDirection dir : ForgeDirection.VALID_DIRECTIONS)
                 {
-                    if (world.getBlockId(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == id)
+                    if (world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == id)
                     {
-                        world.destroyBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ, true);
+                        world.setBlockToAir(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ);
                         queue.add(new CoordTuple(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ));
                         toMine--;
                         if (toMine <= 0)

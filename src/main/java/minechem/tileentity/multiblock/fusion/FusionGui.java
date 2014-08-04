@@ -8,8 +8,8 @@ import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
-import net.minecraftforge.common.ForgeDirection;
 
+import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class FusionGui extends GuiContainerTabbed
@@ -28,7 +28,7 @@ public class FusionGui extends GuiContainerTabbed
     {
         super(new FusionContainer(inventoryPlayer, fusion));
         this.fusion = fusion;
-        energy = fusion.getEnergy(ForgeDirection.UNKNOWN);
+        energy = (float) fusion.getEnergy(ForgeDirection.UNKNOWN);
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
@@ -39,8 +39,8 @@ public class FusionGui extends GuiContainerTabbed
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("block.name.fusion.name");
-        int infoWidth = fontRenderer.getStringWidth(info);
-        fontRenderer.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xFFFFFF);
+        int infoWidth = fontRendererObj.getStringWidth(info);
+        fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xFFFFFF);
     }
 
     @Override

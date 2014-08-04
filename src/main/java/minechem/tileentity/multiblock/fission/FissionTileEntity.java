@@ -14,6 +14,8 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.INode;
 
 public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
@@ -65,7 +67,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
             if (inventory[kStartInput] != null && inventory[kStartFuel] != null && inventory[kStartFuel].getItemDamage() == 91 && inventory[kStartFuel].getItem() instanceof ElementItem)
             {
                 ItemStack fissionResult = getFissionOutput();
-                if (inventory[kOutput[0]] == null || (fissionResult != null && fissionResult.itemID == inventory[kOutput[0]].itemID && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
+                if (inventory[kOutput[0]] == null || (fissionResult != null && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
                 {
                     addToOutput(fissionResult);
                     removeInputs();
@@ -156,12 +158,17 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.minechemFission";
     }
 
-    @Override
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
         if (!completeStructure)
@@ -170,7 +177,17 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         return true;
     }
 
-    @Override
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
@@ -183,18 +200,12 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         super.readFromNBT(nbtTagCompound);
         inventory = new ItemStack[getSizeInventory()];
-        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory"), inventory);
+        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", net.minecraftforge.common.util.Constants.NBT.TAG_LIST), inventory);
     }
 
     public void setEnergyStored(int amount)
     {
         this.setEnergyStored(amount);
-    }
-
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
     }
 
     @Override
@@ -246,4 +257,9 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         return true;
     }
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
 }

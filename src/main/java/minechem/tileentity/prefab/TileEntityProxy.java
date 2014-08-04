@@ -37,7 +37,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         managerYOffset = nbtTagCompound.getInteger("managerYOffset");
         managerZOffset = nbtTagCompound.getInteger("managerZOffset");
         if (worldObj != null)
-            manager = worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+            manager = worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
     }
 
     public void setManager(TileEntity managerTileEntity)
@@ -55,14 +55,14 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     public TileEntity getManager()
     {
         // Return the next block in sequence but never the TileEntityProxy.
-        if (worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) != null
-                && !(worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) instanceof TileEntityProxy))
+        if (worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) != null
+                && !(worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) instanceof TileEntityProxy))
         {
-            return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+            return worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
         
         // Return the entire fusion generator as a whole (indicating the structure is complete).
-        if (worldObj.getBlockId(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion.blockID)
+        if (worldObj.getBlock(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion)
         {
             this.manager = buildManagerBlock();
             return this.manager;
@@ -78,24 +78,24 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 2)
         {
             FusionTileEntity fusion = new FusionTileEntity();
-            fusion.worldObj = this.worldObj;
+            fusion.setWorldObj(this.worldObj);
             fusion.zCoord = this.managerZOffset + zCoord;
             fusion.yCoord = this.managerYOffset + yCoord;
             fusion.xCoord = this.managerXOffset + xCoord;
             fusion.blockType = MinechemBlocksGeneration.fusion;
-            worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fusion);
+            worldObj.setTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fusion);
         }
         if (this.worldObj.getBlockMetadata(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == 3)
         {
             FissionTileEntity fission = new FissionTileEntity();
-            fission.worldObj = this.worldObj;
+            fission.setWorldObj(this.worldObj);
             fission.zCoord = this.managerZOffset + zCoord;
             fission.yCoord = this.managerYOffset + yCoord;
             fission.xCoord = this.managerXOffset + xCoord;
             fission.blockType = MinechemBlocksGeneration.fusion;
-            worldObj.setBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fission);
+            worldObj.setTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset, fission);
         }
-        return worldObj.getBlockTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+        return worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
 
     }
 
@@ -149,18 +149,17 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "Multiblock Minechem proxy";
     }
 
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
 
-    @Override
+	@Override
     public int getInventoryStackLimit()
     {
         if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
@@ -170,25 +169,22 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         return 0;
     }
 
-    @Override
-    public boolean isUseableByPlayer(EntityPlayer entityplayer)
-    {
-        return true;
-    }
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
+		return false;
+	}
 
-    @Override
-    public void openChest()
-    {
+	@Override
+	public void openInventory() {
 
-    }
+	}
 
-    @Override
-    public void closeChest()
-    {
+	@Override
+	public void closeInventory() {
 
-    }
+	}
 
-    @Override
+	@Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         if (this.getManager() != null && this.getManager() instanceof ISidedInventory)

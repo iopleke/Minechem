@@ -7,7 +7,7 @@ import minechem.ModMinechem;
 import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,22 +22,21 @@ public class LeadedChestBlock extends BlockContainer
 {
     public LeadedChestBlock(int id)
     {
-        super(id, Material.wood);
+        super(Material.wood);
         this.setCreativeTab(ModMinechem.CREATIVE_TAB);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setBlockName("container.leadedchest");
     }
 
-    @Override
-    public void breakBlock(World world, int xCoord, int yCoord, int zCoord, int par5, int par6)
-    {
-        this.dropItems(world, xCoord, yCoord, zCoord);
-        super.breakBlock(world, xCoord, yCoord, zCoord, par5, par6);
-    }
+	@Override
+	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_, int p_149664_5_) {
+		this.dropItems(p_149664_1_, p_149664_2_,  p_149664_3_, p_149664_4_);
+		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
+	}
 
     @Override
-    public TileEntity createNewTileEntity(World world)
+    public TileEntity createNewTileEntity(World world, int i)
     {
         return new LeadedChestTileEntity();
     }
@@ -46,7 +45,7 @@ public class LeadedChestBlock extends BlockContainer
     {
         Random rand = new Random();
 
-        TileEntity te = world.getBlockTileEntity(xCoord, yCoord, zCoord);
+        TileEntity te = world.getTileEntity(xCoord, yCoord, zCoord);
         if (te instanceof IInventory)
         {
             IInventory inventory = (IInventory) te;
@@ -62,7 +61,7 @@ public class LeadedChestBlock extends BlockContainer
                     float randomY = rand.nextFloat() * 0.8F + 0.1F;
                     float randomZ = rand.nextFloat() * 0.8F + 0.1F;
 
-                    EntityItem entityItem = new EntityItem(world, xCoord, yCoord, zCoord, new ItemStack(Items.itemID, item.stackSize, item.getItemDamage()));
+                    EntityItem entityItem = new EntityItem(world, xCoord, yCoord, zCoord, new ItemStack(item.getItem(), item.stackSize, item.getItemDamage()));
 
                     if (item.hasTagCompound())
                     {
@@ -99,7 +98,7 @@ public class LeadedChestBlock extends BlockContainer
     {
         if (!world.isRemote)
         {
-            LeadedChestTileEntity leadedChest = (LeadedChestTileEntity) world.getBlockTileEntity(xCoord, yCoord, zCoord);
+            LeadedChestTileEntity leadedChest = (LeadedChestTileEntity) world.getTileEntity(xCoord, yCoord, zCoord);
             if (leadedChest == null || player.isSneaking())
             {
                 return false;
@@ -137,12 +136,11 @@ public class LeadedChestBlock extends BlockContainer
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
-    {
-        blockIcon = ir.registerIcon(Reference.LEADEDCHEST_TEX);
-    }
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void registerBlockIcons(IIconRegister ir) {
+		blockIcon = ir.registerIcon(Reference.LEADEDCHEST_TEX);
+	}
 
     @Override
     public boolean renderAsNormalBlock()

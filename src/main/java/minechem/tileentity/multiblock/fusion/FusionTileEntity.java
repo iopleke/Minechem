@@ -6,11 +6,15 @@ import minechem.item.element.ElementEnum;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.INode;
 
 public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
@@ -43,7 +47,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 
     private boolean checkValidFuel()
     {
-        return inventory[fuelSlot].itemID == Item.netherStar.itemID || inventory[fuelSlot].itemID == MinechemItemsGeneration.fusionStar.itemID;
+        return inventory[fuelSlot].getItem() == Items.nether_star || inventory[fuelSlot].getItem() == MinechemItemsGeneration.fusionStar;
     }
 
     private void fuseInputs()
@@ -67,7 +71,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.minechemFusion";
     }
@@ -91,23 +95,17 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     }
 
     @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
-
-    @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack)
     {
         if (slot == fuelSlot)
         {
-            if (itemstack.itemID == Item.netherStar.itemID || itemstack.itemID == MinechemItemsGeneration.fusionStar.itemID)
+            if (itemstack.getItem() == Items.nether_star || itemstack.getItem() == MinechemItemsGeneration.fusionStar)
             {
                 return true;
             }
         } else if (slot == inputLeft || slot == inputRight)
         {
-            if (itemstack.itemID == MinechemItemsGeneration.element.itemID)
+            if (itemstack.getItem() == MinechemItemsGeneration.element)
             {
                 return true;
             }
@@ -121,14 +119,24 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         return completeStructure;
     }
 
-    @Override
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
         fusedResult = nbtTagCompound.getInteger("fusedResult");
         canProcess = nbtTagCompound.getBoolean("canProcess");
         inventory = new ItemStack[getSizeInventory()];
-        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory"), inventory);
+        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", Constants.NBT.TAG_LIST), inventory);
     }
 
     private void removeInputs()
@@ -143,7 +151,12 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         this.inventory[slot] = itemstack;
     }
 
-    @Override
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
     public void updateEntity()
     {
         super.updateEntity();
@@ -177,10 +190,10 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 
     private void useFuel()
     {
-        if (inventory[fuelSlot].itemID == Item.netherStar.itemID)
+        if (inventory[fuelSlot].getItem() == Items.nether_star)
         {
             this.inventory[fuelSlot] = new ItemStack(MinechemItemsGeneration.fusionStar);
-        } else if (inventory[fuelSlot].itemID == MinechemItemsGeneration.fusionStar.itemID)
+        } else if (inventory[fuelSlot].getItem() == MinechemItemsGeneration.fusionStar)
         {
             inventory[fuelSlot].setItemDamage(inventory[fuelSlot].getItemDamage() + 1);
         }
@@ -195,4 +208,9 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         nbtTagCompound.setTag("inventory", inventoryTagList);
     }
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
 }

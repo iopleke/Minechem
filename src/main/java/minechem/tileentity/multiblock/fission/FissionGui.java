@@ -31,8 +31,8 @@ public class FissionGui extends GuiMinechemContainer
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("Fission");
-        int infoWidth = fontRenderer.getStringWidth(info);
-        fontRenderer.drawString(info, (width - infoWidth) / 2, 5, 0xFFFFFF);
+        int infoWidth = fontRendererObj.getStringWidth(info);
+        fontRendererObj.drawString(info, (width - infoWidth) / 2, 5, 0xFFFFFF);
     }
 
     @Override

@@ -1,11 +1,13 @@
 package minechem.tileentity.chemicalstorage;
 
 import minechem.ModMinechem;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -14,11 +16,11 @@ public class ChemicalStorageBlock extends BlockChest
 
     public ChemicalStorageBlock(int id)
     {
-        super(id, 0);
+        super(0);
         setBlockName("minechem.blockChemicalStorage");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHardness(2.5F);
-        setStepSound(soundWoodFootstep);
+        setStepSound(Block.soundTypeWood);
     }
 
     @Override
@@ -26,9 +28,9 @@ public class ChemicalStorageBlock extends BlockChest
     {
         if (!world.isRemote)
         {
-            entityPlayer.addChatMessage("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid");
+            entityPlayer.addChatMessage(new ChatComponentText("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid"));
         }
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (world.isRemote)
         {
             return true;
@@ -44,7 +46,7 @@ public class ChemicalStorageBlock extends BlockChest
     @Override
     public void onBlockAdded(World par1World, int par2, int par3, int par4)
     {
-        par1World.setBlockTileEntity(par2, par3, par4, this.createTileEntity(par1World, par1World.getBlockMetadata(par2, par3, par4)));
+        par1World.setTileEntity(par2, par3, par4, this.createTileEntity(par1World, par1World.getBlockMetadata(par2, par3, par4)));
     }
 
     @Override
@@ -88,7 +90,7 @@ public class ChemicalStorageBlock extends BlockChest
     }
 
     @Override
-    public TileEntity createNewTileEntity(World par1World)
+    public TileEntity createNewTileEntity(World par1World, int i)
     {
         return new ChemicalStorageTileEntity();
     }

@@ -10,25 +10,27 @@ import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.Reference;
+import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class FusionBlock extends BlockSimpleContainer
 {
-    private Icon icon1, icon2;
+    private IIcon icon1, icon2;
 
     public FusionBlock(int id)
     {
-        super(id, Material.iron);
+        super(Material.iron);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setBlockName("minechem.blockFusion");
     }
@@ -36,7 +38,7 @@ public class FusionBlock extends BlockSimpleContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
     {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
         // if(tileEntity instanceof TileEntityProxy){
         // TileEntityProxy proxy=(TileEntityProxy) tileEntity;
@@ -53,6 +55,8 @@ public class FusionBlock extends BlockSimpleContainer
         }
         return true;
     }
+
+
 
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
@@ -93,7 +97,7 @@ public class FusionBlock extends BlockSimpleContainer
     }
 
     @Override
-    public Icon getIcon(int par1, int metadata)
+    public IIcon getIcon(int par1, int metadata)
     {
         switch (metadata)
         {
@@ -107,7 +111,7 @@ public class FusionBlock extends BlockSimpleContainer
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerBlockIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
         icon1 = ir.registerIcon(Reference.FUSION1_TEX);
@@ -116,19 +120,19 @@ public class FusionBlock extends BlockSimpleContainer
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubBlocks(int par1, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (int i = 0; i < 2; i++)
-            par3List.add(new ItemStack(this.blockID, 1, i));
+            par3List.add(new ItemStack(item, 1, i));
     }
 
     //
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
     {
-        super.breakBlock(world, x, y, z, oldBlockId, oldMetadata);
+        super.breakBlock(world, x, y, z, block, metaData);
 
-        /* if (oldMetadata < 2) { if (world.getBlockTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getBlockTileEntity(x, y, z);
+        /* if (oldMetadata < 2) { if (world.getTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getTileEntity(x, y, z);
          * 
          * world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true); } } */
 
@@ -140,10 +144,9 @@ public class FusionBlock extends BlockSimpleContainer
         return true;
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World world)
-    {
-        return new TileEntityProxy();
-    }
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) {
+		return new TileEntityProxy();
+	}
 
 }

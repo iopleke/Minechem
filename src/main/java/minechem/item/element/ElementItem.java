@@ -12,7 +12,7 @@ import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +20,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -33,14 +33,13 @@ public class ElementItem extends Item // implements IStorageTank
 
     private final static ElementEnum[] elements = ElementEnum.values();
     private final EnumMap<ElementClassificationEnum, Integer> classificationIndexes = new EnumMap<ElementClassificationEnum, Integer>(ElementClassificationEnum.class);
-    public final Icon liquid[] = new Icon[7], gas[] = new Icon[7];
-    public Icon solid;
+    public final IIcon liquid[] = new IIcon[7], gas[] = new IIcon[7];
+    public IIcon solid;
 
     public ElementItem(int par1)
     {
-        super(par1);
         setCreativeTab(ModMinechem.CREATIVE_TAB);
-        setBlockName("minechem.itemElement");
+        setUnlocalizedName("minechem.itemElement");
         setHasSubtypes(true);
         classificationIndexes.put(ElementClassificationEnum.nonmetal, 0);
         classificationIndexes.put(ElementClassificationEnum.halogen, 1);
@@ -99,7 +98,7 @@ public class ElementItem extends Item // implements IStorageTank
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(Reference.FILLED_TESTTUBE_TEX);
         gas[0] = ir.registerIcon(Reference.ELEMENT_GAS1_TEX);
@@ -125,11 +124,10 @@ public class ElementItem extends Item // implements IStorageTank
         return "minechem.itemElement." + getShortName(par1ItemStack);
     }
 
-    @Override
-    public String getItemDisplayName(ItemStack par1ItemStack)
-    {
-        return getLongName(par1ItemStack);
-    }
+	@Override
+	public String getItemStackDisplayName(ItemStack p_77653_1_) {
+		return getLongName(p_77653_1_);
+	}
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -220,16 +218,14 @@ public class ElementItem extends Item // implements IStorageTank
         return par1;
     }
 
-    @Override
-    @SideOnly(Side.CLIENT)
-    public void getSubItems(int itemID, CreativeTabs par2CreativeTabs, List par3List)
-    {
-        for (ElementEnum element : ElementEnum.values())
-        {
-            par3List.add(new ItemStack(itemID, 1, element.ordinal()));
-        }
-    }
-
+	@Override
+	@SideOnly(Side.CLIENT)
+	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List) {
+		for (ElementEnum element : ElementEnum.values())
+		{
+			par3List.add(new ItemStack(item, 1, element.ordinal()));
+		}
+	}
     public static Object createStackOf(ElementEnum element, int amount)
     {
         return new ItemStack(MinechemItemsGeneration.element, amount, element.ordinal());

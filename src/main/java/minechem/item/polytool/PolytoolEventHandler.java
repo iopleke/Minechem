@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.MinechemHelper;
@@ -14,10 +15,9 @@ import net.minecraft.entity.monster.EntitySkeleton;
 import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.Item;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.event.ForgeSubscribe;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -32,17 +32,17 @@ public class PolytoolEventHandler
         event.drops.add(entityitem);
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void breakSpeed(PlayerEvent.BreakSpeed event)
     {
         // Again, there must be a better way to do this
         if (event.entityPlayer.inventory.getCurrentItem() != null && event.entityPlayer.inventory.getCurrentItem().getItem() instanceof PolytoolItem)
         {
-            event.newSpeed = event.entityPlayer.inventory.getCurrentItem().getItem().getStrVsBlock(event.entityPlayer.inventory.getCurrentItem(), event.block);
+            event.newSpeed = ((PolytoolItem) event.entityPlayer.inventory.getCurrentItem().getItem()).getStrVsBlock(event.entityPlayer.inventory.getCurrentItem(), event.block);
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onHit(LivingHurtEvent event)
     {
 
@@ -77,7 +77,7 @@ public class PolytoolEventHandler
         }
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onDrop(LivingDropsEvent event)
     {
 
@@ -146,7 +146,7 @@ public class PolytoolEventHandler
                     {
                         for (int j = 0; j < enemy.getLastActiveItems().length; ++j)
                         {
-                            ItemStack itemstack = enemy.getCurrentItemOrArmor(j);
+                            ItemStack itemstack = enemy.getEquipmentInSlot(j);
                             if (itemstack != null)
                             {
 
@@ -164,12 +164,12 @@ public class PolytoolEventHandler
                         if (power > 0)
                         {
                             int amount = (int) Math.ceil(random.nextDouble() * power);
-                            addDrops(event, new ItemStack(Items.beefCooked, amount, 0));
+                            addDrops(event, new ItemStack(Items.cooked_beef, amount, 0));
                             Iterator iter = event.drops.iterator();
                             while (iter.hasNext())
                             {
                                 EntityItem entityItem = (EntityItem) iter.next();
-                                if (entityItem.getEntityItem().itemID == Item.rottenFlesh.itemID)
+                                if (entityItem.getEntityItem().getItem() == Items.rotten_flesh)
                                 {
                                     iter.remove();
                                 }
@@ -188,7 +188,7 @@ public class PolytoolEventHandler
                             while (iter.hasNext())
                             {
                                 EntityItem entityItem = (EntityItem) iter.next();
-                                if (entityItem.getEntityItem().itemID == Item.bone.itemID)
+                                if (entityItem.getEntityItem().getItem() == Items.bone)
                                 {
                                     entityItem.getEntityItem().stackSize += amount;
                                 }
@@ -204,17 +204,17 @@ public class PolytoolEventHandler
                             if (event.entityLiving instanceof EntitySkeleton)
                             {
                                 EntitySkeleton skeleton = (EntitySkeleton) enemy;
-                                addDrops(event, new ItemStack(Items.skull.itemID, 1, skeleton.getSkeletonType()));
+                                addDrops(event, new ItemStack(Items.skull, 1, skeleton.getSkeletonType()));
                             }
                             else if (event.entityLiving instanceof EntityZombie)
                             {
-                                addDrops(event, new ItemStack(Items.skull.itemID, 1, 2));
+                                addDrops(event, new ItemStack(Items.skull, 1, 2));
                             }
                             else if (event.entityLiving instanceof EntityPlayer)
                             {
-                                ItemStack dropStack = new ItemStack(Items.skull.itemID, 1, 3);
+                                ItemStack dropStack = new ItemStack(Items.skull, 1, 3);
                                 NBTTagCompound nametag = new NBTTagCompound();
-                                nametag.setString("SkullOwner", player.username);
+                                nametag.setString("SkullOwner", player.getDisplayName());
                                 addDrops(event, dropStack);
                             }
                         }

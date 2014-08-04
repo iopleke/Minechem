@@ -16,7 +16,7 @@ public abstract class PolytoolUpgradeType
 
     public abstract void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player);
 
-    public abstract void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving);
+    public abstract void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving);
 
     public abstract ElementEnum getElement();
 

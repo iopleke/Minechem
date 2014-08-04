@@ -15,14 +15,15 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.Constants;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.PacketDispatcher;
 import cpw.mods.fml.relauncher.Side;
+import universalelectricity.api.core.grid.INode;
 
 public class DecomposerTileEntity extends MinechemTileEntity implements ISidedInventory, IFluidHandler
 {
@@ -341,7 +342,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.decomposer";
     }
@@ -411,12 +412,6 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     }
 
     @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
-
-    @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         if (i == inputSlots[0])
@@ -433,7 +428,17 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return true;
     }
 
-    /**
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	/**
      * Accepts an array list of itemStacks that should be outputted into the machines output slot over time and with electric power.
      */
     private void placeStacksInBuffer(ArrayList<ItemStack> outputStacks)
@@ -452,9 +457,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     {
         super.readFromNBT(nbt);
 
-        NBTTagList inventoryTagList = nbt.getTagList("inventory");
+        NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_LIST);
 
-        NBTTagList buffer = nbt.getTagList("buffer");
+        NBTTagList buffer = nbt.getTagList("buffer",Constants.NBT.TAG_LIST);
 
         outputBuffer = MinechemHelper.readTagListToItemStackList(buffer);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
@@ -493,7 +498,12 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         this.inventory[slot] = itemstack;
     }
 
-    /**
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	/**
      * Sets the current state of the machine using an integer to reference an enumeration.
      */
     public void setState(int state)
@@ -528,7 +538,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                         if (fluids.get(i).amount > ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount)
                         {
                             // The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
-                            this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlockID(), 1, 0));
+                            this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlock(), 1, 0));
                             fluids.get(i).amount -= ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount;
                         }
                     }
@@ -536,6 +546,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             }
         }
 
+	    //TODO: Setup packet
         // Sends a packet to clients around the machine.
         PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, new DecomposerPacketUpdate(this).makePacket());
 
@@ -568,7 +579,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             activeStack = null;
             decomposeActiveStack();
             state = State.active;
-            this.onInventoryChanged();
+            //this.onInventoryChanged();
         } else if (state == State.finished)
         {
             // Prepares the machine for another pass if we have recently finished.
@@ -577,7 +588,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         }
 
         // Notify minecraft that the inventory items in this machine have changed.
-        this.onInventoryChanged();
+        //this.onInventoryChanged();//TODO:Find alt if available
     }
 
     @Override
@@ -603,7 +614,17 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         nbt.setByte("state", (byte) state.ordinal());
     }
 
-    /**
+	@Override
+	public void setEnergy(ForgeDirection from, double energy) {
+
+	}
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
+
+	/**
      * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
      */
     public enum State

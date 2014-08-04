@@ -30,7 +30,7 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
     {
         int var9;
 
-        if ((chemicalStorage.worldObj == null))
+        if ((chemicalStorage.getWorldObj() == null))
         {
             var9 = 0;
         }
@@ -85,8 +85,7 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
         {
             GL11.glTranslatef(1.0F, 0.0F, 0.0F);
         }
-
-        if (var9 == 5 && chemicalStorage.adjacentChestZPosition != null)
+        if (var9 == 5 && chemicalStorage.adjacentChestZPos != null)
         {
             GL11.glTranslatef(0.0F, 0.0F, -1.0F);
         }

@@ -84,7 +84,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
             return;
         }
         String name = blueprintStack.getDisplayName().replace("Blueprint", "");
-        this.fontRenderer.drawStringWithShadow(name, 64, 12, 0xFFFFFF);
+        this.fontRendererObj.drawStringWithShadow(name, 64, 12, 0xFFFFFF);
         HashMap<Integer, Integer> blockCount = getBlockCount(blueprint);
         HashMap<Integer, BlueprintBlock> blockLookup = blueprint.getBlockLookup();
         int y = 23;
@@ -95,9 +95,9 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
             BlueprintBlock block = blockLookup.get(entry.getKey());
             if (block != null)
             {
-                ItemStack itemstack = new ItemStack(Blocks.block, 1, block.metadata);
+                ItemStack itemstack = new ItemStack(block.block, 1, block.metadata);
                 String info = String.format("%dx%s", entry.getValue(), itemstack.getDisplayName());
-                this.fontRenderer.drawString(info, 64, y, 0xDDDDDD);
+                this.fontRendererObj.drawString(info, 64, y, 0xDDDDDD);
                 y += 10;
             }
         }

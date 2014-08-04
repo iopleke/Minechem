@@ -30,9 +30,9 @@ public class ChemicalStorageGui extends GuiContainerTabbed
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String chestName = MinechemHelper.getLocalString("tile.minechem.blockChemicalStorage.name");
-        String playerInventoryTitle = StatCollector.translateToLocal(this.playerInventory.getInvName());
-        this.fontRenderer.drawString(chestName, 8, 6, 4210752);
-        this.fontRenderer.drawString(playerInventoryTitle, 8, this.ySize - 96 + 2, 4210752);
+        String playerInventoryTitle = StatCollector.translateToLocal(this.playerInventory.getInventoryName());
+        this.fontRendererObj.drawString(chestName, 8, 6, 4210752);
+        this.fontRendererObj.drawString(playerInventoryTitle, 8, this.ySize - 96 + 2, 4210752);
     }
 
     @Override

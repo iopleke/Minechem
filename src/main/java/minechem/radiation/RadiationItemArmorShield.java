@@ -4,10 +4,9 @@ import java.util.List;
 
 import minechem.ModMinechem;
 import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.EnumArmorMaterial;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.relauncher.Side;
@@ -21,16 +20,16 @@ public class RadiationItemArmorShield extends ItemArmor implements IRadiationShi
 
     public RadiationItemArmorShield(int id, int part, float radiationShieldFactor, String texture)
     {
-        super(id, EnumArmorMaterial.CHAIN, 2, part);
+        super(ArmorMaterial.CHAIN, 2, part);
         this.radiationShieldFactor = radiationShieldFactor;
-        setBlockName("minechem.itemArmorRadiationShield");
+        this.setUnlocalizedName("minechem.itemArmorRadiationShield");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         textureFile = texture;
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         itemIcon = ir.registerIcon(textureFile);
     }

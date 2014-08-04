@@ -4,6 +4,7 @@ import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -28,11 +29,11 @@ public class PolytoolTypeSodium extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving)
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
         if (world.rand.nextInt(35) < power && !world.isRemote)
         {
-            world.setBlock((int) Math.floor(entityLiving.posX), (int) Math.floor(entityLiving.posY), (int) Math.floor(entityLiving.posZ), Block.torchWood.blockID, 0, 3);
+            world.setBlock((int) Math.floor(entityLiving.posX), (int) Math.floor(entityLiving.posY), (int) Math.floor(entityLiving.posZ), Blocks.torch, 0, 3);
         }
     }
 

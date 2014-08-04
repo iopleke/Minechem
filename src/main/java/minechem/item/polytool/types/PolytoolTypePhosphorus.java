@@ -4,9 +4,10 @@ import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeDirection;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class PolytoolTypePhosphorus extends PolytoolUpgradeType
 {
@@ -30,11 +31,11 @@ public class PolytoolTypePhosphorus extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase target)
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase target)
     {
         if (!target.worldObj.isRemote)
         {
-            if (Block.blocksList[id].isFlammable(world, x, y, z, 0, ForgeDirection.UP))
+            if (block.isFlammable(world, x, y, z, ForgeDirection.UP))
             {
                 for (int i = (int) (x - power); i < x + power; i++)
                 {
@@ -42,9 +43,9 @@ public class PolytoolTypePhosphorus extends PolytoolUpgradeType
                     {
                         for (int k = (int) (z - power); k < z + power; k++)
                         {
-                            if (world.getBlockId(i, j, k) == 0)
+                            if (world.getBlock(i, j, k) == Blocks.air)
                             {
-                                world.setBlock(i, j, k, Block.fire.blockID);
+                                world.setBlock(i, j, k, Blocks.fire);
                             }
                         }
                     }

@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
+import scala.tools.nsc.backend.opt.ConstantOptimization;
 
 public class LeadedChestTileEntity extends TileEntity implements IInventory
 {
@@ -78,40 +80,38 @@ public class LeadedChestTileEntity extends TileEntity implements IInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.leadedchest";
     }
 
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
 
-    @Override
-    public int getInventoryStackLimit()
-    {
-        return this.stackLimit;
-    }
+	@Override
+	public int getInventoryStackLimit(){
+		return this.stackLimit;
+	}
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player)
     {
-        return worldObj.getBlockTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
+        return worldObj.getTileEntity(xCoord, yCoord, zCoord) == this && player.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D) <= 64D;
     }
 
-    @Override
-    public void openChest()
-    {
-    }
+	@Override
+	public void openInventory() {
 
-    @Override
-    public void closeChest()
-    {
-    }
+	}
 
-    @Override
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
     public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
         // water through a sieve
@@ -125,11 +125,11 @@ public class LeadedChestTileEntity extends TileEntity implements IInventory
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        NBTTagList nbttaglist = nbttagcompound.getTagList("Items");
+        NBTTagList nbttaglist = nbttagcompound.getTagList("Items", Constants.NBT.TAG_LIST);
 
         for (int i = 0; i < nbttaglist.tagCount(); i++)
         {
-            NBTTagCompound nbttagcompound1 = (NBTTagCompound) nbttaglist.tagAt(i);
+            NBTTagCompound nbttagcompound1 = nbttaglist.getCompoundTagAt(i);
             int j = nbttagcompound1.getByte("Slot") & 0xff;
             if (j >= 0 && j < inventory.length)
             {
@@ -158,3 +158,5 @@ public class LeadedChestTileEntity extends TileEntity implements IInventory
     }
 
 }
+
+

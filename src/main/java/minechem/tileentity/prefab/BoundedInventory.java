@@ -91,9 +91,9 @@ public class BoundedInventory implements IInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
-        return _inv.getInvName();
+        return _inv.getInventoryName();
     }
 
     @Override
@@ -102,11 +102,16 @@ public class BoundedInventory implements IInventory
         return _inv.getInventoryStackLimit();
     }
 
-    @Override
-    public void onInventoryChanged()
-    {
-        _inv.onInventoryChanged();
-    }
+	@Override
+	public void markDirty() {
+		_inv.markDirty();
+	}
+
+//    @Override
+//    public void onInventoryChanged()
+//    {
+//        _inv.
+//    }
 
     @Override
     public boolean isUseableByPlayer(EntityPlayer player)
@@ -115,21 +120,21 @@ public class BoundedInventory implements IInventory
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
-        _inv.openChest();
+        _inv.openInventory();
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
-        _inv.closeChest();
+        _inv.closeInventory();
     }
 
     @Override
-    public boolean isInvNameLocalized()
+    public boolean hasCustomInventoryName()
     {
-        return _inv.isInvNameLocalized();
+        return _inv.hasCustomInventoryName();
     }
 
     @Override

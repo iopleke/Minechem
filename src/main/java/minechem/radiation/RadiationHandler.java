@@ -12,6 +12,7 @@ import minechem.tileentity.synthesis.SynthesisContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 
@@ -86,7 +87,7 @@ public class RadiationHandler
         List<ItemStack> itemstacks = leadedChest.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            if (itemstack != null && itemstack.getItem() == MinechemItemsGeneration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
             {
                 RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
@@ -103,7 +104,7 @@ public class RadiationHandler
         List<ItemStack> itemstacks = chemicalStorage.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            if (itemstack != null && itemstack.getItem() == MinechemItemsGeneration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
             {
                 RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
@@ -120,7 +121,7 @@ public class RadiationHandler
         List<ItemStack> itemstacks = decomposer.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            if (itemstack != null && itemstack.getItem() == MinechemItemsGeneration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
             {
                 RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
@@ -137,7 +138,7 @@ public class RadiationHandler
         List<ItemStack> itemstacks = synthesizer.getStorageInventory();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            if (itemstack != null && itemstack.getItem() == MinechemItemsGeneration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
             {
                 RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
                 radiationInfo.lastRadiationUpdate = player.worldObj.getTotalWorldTime();
@@ -159,7 +160,7 @@ public class RadiationHandler
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.itemID == MinechemItemsGeneration.element.itemID && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+            if (itemstack != null && itemstack.getItem() == MinechemItemsGeneration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
             {
                 DecayEvent decayEvent = new DecayEvent();
                 decayEvent.before = itemstack.copy();
@@ -213,7 +214,7 @@ public class RadiationHandler
         String nameBeforeDecay = ElementItem.getLongName(decayEvent.before);
         String nameAfterDecay = ElementItem.getLongName(decayEvent.after);
         String message = String.format("Radiation Warning: Element %s decayed into %s.", nameBeforeDecay, nameAfterDecay);
-        player.addChatMessage(message);
+        player.addChatMessage(new ChatComponentText(message));
     }
 
     private int updateRadiation(World world, ItemStack element)

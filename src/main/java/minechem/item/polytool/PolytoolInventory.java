@@ -76,49 +76,48 @@ public class PolytoolInventory implements IInventory
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
 
         return "Polytool Inventory";
     }
 
-    @Override
-    public boolean isInvNameLocalized()
-    {
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
 
-        return false;
-    }
 
-    @Override
+	@Override
     public int getInventoryStackLimit()
     {
 
         return 64;
     }
 
-    @Override
-    public void onInventoryChanged()
-    {
-    }
+	@Override
+	public void markDirty() {
 
-    @Override
+	}
+
+	@Override
     public boolean isUseableByPlayer(EntityPlayer entityplayer)
     {
 
         return false;
     }
 
-    @Override
-    public void openChest()
-    {
-    }
+	@Override
+	public void openInventory() {
 
-    @Override
-    public void closeChest()
-    {
-    }
+	}
 
-    @Override
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
 

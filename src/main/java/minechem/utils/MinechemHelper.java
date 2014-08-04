@@ -22,11 +22,11 @@ import net.minecraft.tileentity.TileEntityChest;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
-import net.minecraftforge.common.ForgeDirection;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.server.FMLServerHandler;
+import net.minecraftforge.common.util.ForgeDirection;
 
 public class MinechemHelper
 {
@@ -81,7 +81,7 @@ public class MinechemHelper
     {
         for (int i = 0; i < taglist.tagCount(); i++)
         {
-            NBTTagCompound itemstackCompound = (NBTTagCompound) taglist.tagAt(i);
+            NBTTagCompound itemstackCompound = taglist.getCompoundTagAt(i);
             byte slot = itemstackCompound.getByte("slot");
             itemstacks[slot] = ItemStack.loadItemStackFromNBT(itemstackCompound);
         }
@@ -105,7 +105,7 @@ public class MinechemHelper
         ArrayList<ItemStack> itemlist = new ArrayList<ItemStack>();
         for (int i = 0; i < taglist.tagCount(); i++)
         {
-            NBTTagCompound itemstackCompound = (NBTTagCompound) taglist.tagAt(i);
+            NBTTagCompound itemstackCompound = taglist.getCompoundTagAt(i);
             ItemStack itemstack = ItemStack.loadItemStackFromNBT(itemstackCompound);
             itemlist.add(itemstack);
         }
@@ -156,12 +156,12 @@ public class MinechemHelper
 
     public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical, int factor)
     {
-        if (potionChemical instanceof Element && itemstack.itemID == MinechemItemsGeneration.element.itemID)
+        if (potionChemical instanceof Element && itemstack.getItem()== MinechemItemsGeneration.element)
         {
             Element element = (Element) potionChemical;
             return (itemstack.getItemDamage() == element.element.ordinal()) && (itemstack.stackSize >= element.amount * factor);
         }
-        if (potionChemical instanceof Molecule && itemstack.itemID == MinechemItemsGeneration.molecule.itemID)
+        if (potionChemical instanceof Molecule && itemstack.getItem() == MinechemItemsGeneration.molecule)
         {
             Molecule molecule = (Molecule) potionChemical;
             return (itemstack.getItemDamage() == molecule.molecule.ordinal()) && (itemstack.stackSize >= molecule.amount * factor);
@@ -197,7 +197,7 @@ public class MinechemHelper
             if (randomN > itemstack.stackSize)
                 randomN = itemstack.stackSize;
             itemstack.stackSize -= randomN;
-            new EntityItem(world, x + randomX, y + randomY, z + randomZ, new ItemStack(itemstack.itemID, randomN, itemstack.getItemDamage()));
+            new EntityItem(world, x + randomX, y + randomY, z + randomZ, new ItemStack(itemstack.getItem(), randomN, itemstack.getItemDamage()));
 
         }
     }
@@ -214,16 +214,16 @@ public class MinechemHelper
             Position pos = new Position(chest.xCoord, chest.yCoord, chest.zCoord);
             TileEntity tile;
             IInventory chest2 = null;
-            tile = getTile(chest.worldObj, pos, ForgeDirection.WEST);
+            tile = getTile(chest.getWorldObj(), pos, ForgeDirection.WEST);
             if (tile instanceof TileEntityChest)
                 chest2 = (IInventory) tile;
-            tile = getTile(chest.worldObj, pos, ForgeDirection.EAST);
+            tile = getTile(chest.getWorldObj(), pos, ForgeDirection.EAST);
             if (tile instanceof TileEntityChest)
                 chest2 = (IInventory) tile;
-            tile = getTile(chest.worldObj, pos, ForgeDirection.NORTH);
+            tile = getTile(chest.getWorldObj(), pos, ForgeDirection.NORTH);
             if (tile instanceof TileEntityChest)
                 chest2 = (IInventory) tile;
-            tile = getTile(chest.worldObj, pos, ForgeDirection.SOUTH);
+            tile = getTile(chest.getWorldObj(), pos, ForgeDirection.SOUTH);
             if (tile instanceof TileEntityChest)
                 chest2 = (IInventory) tile;
             if (chest2 != null)
@@ -238,7 +238,7 @@ public class MinechemHelper
         tmp.orientation = dir;
         tmp.moveForwards(1.0);
 
-        return world.getBlockTileEntity((int) tmp.x, (int) tmp.y, (int) tmp.z);
+        return world.getTileEntity((int) tmp.x, (int) tmp.y, (int) tmp.z);
     }
 
     @SideOnly(Side.SERVER)

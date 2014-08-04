@@ -16,7 +16,6 @@ import minechem.utils.Reference;
 import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import codechicken.core.gui.GuiDraw;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 
@@ -142,7 +141,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
         if (chance < 1.0f)
         {
             String chanceStr = String.format("%2.0f%%", chance * 100.0);
-            int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr);
+            int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr);//TODO: Find whats needed for guidraw
             GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS, 8, false);
         }
 

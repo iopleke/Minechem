@@ -5,7 +5,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -39,7 +39,7 @@ public class MoleculeItemRenderer implements IItemRenderer
     public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data)
     {
         MoleculeItem item = (MoleculeItem) itemstack.getItem();
-        Icon testtube = itemstack.getIconIndex();
+        IIcon testtube = itemstack.getIconIndex();
         if (type == ItemRenderType.INVENTORY)
         {
             renderItemInInventory(type, itemstack, item.filledMolecule, item.render_pass1, item.render_pass2);
@@ -67,7 +67,7 @@ public class MoleculeItemRenderer implements IItemRenderer
         }
     }
 
-    private void renderItemInInventory(ItemRenderType type, ItemStack itemstack, Icon testtube, Icon pass1, Icon pass2)
+    private void renderItemInInventory(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)
     {
         MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
         GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
@@ -78,7 +78,7 @@ public class MoleculeItemRenderer implements IItemRenderer
         drawTexturedRectUV(type, 0, 0, 0, 16, 16, testtube);
     }
 
-    private void renderItemInEquipped(ItemRenderType type, ItemStack itemstack, Icon testtube, Icon pass1, Icon pass2)
+    private void renderItemInEquipped(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)
     {
         MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
         /* float scale = 0.75F; GL11.glPushMatrix(); GL11.glScalef(scale, scale, scale); GL11.glTranslatef(1.2F, 1.1F, -0.25F); GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F); GL11.glColor3f(molecule.red, molecule.green, molecule.blue); drawTexturedRectUV(type,
@@ -93,7 +93,7 @@ public class MoleculeItemRenderer implements IItemRenderer
         ItemRenderer.renderItemIn2D(tessellator, testtube.getMaxU(), testtube.getMinV(), testtube.getMinU(), testtube.getMaxV(), testtube.getIconWidth(), testtube.getIconHeight(), 0.0625F);
     }
 
-    private void renderItemAsEntity(ItemRenderType type, ItemStack itemstack, Icon testtube, Icon pass1, Icon pass2)
+    private void renderItemAsEntity(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)
     {
         MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
         GL11.glPushMatrix();
@@ -106,7 +106,7 @@ public class MoleculeItemRenderer implements IItemRenderer
         GL11.glPopMatrix();
     }
 
-    private void drawTextureIn3D(Icon texture)
+    private void drawTextureIn3D(IIcon texture)
     {
         Tessellator tesselator = Tessellator.instance;
         float scale = 0.7F;
@@ -116,7 +116,7 @@ public class MoleculeItemRenderer implements IItemRenderer
         GL11.glPopMatrix();
     }
 
-    private void drawTexturedRectUV(ItemRenderType type, float x, float y, float z, float w, float h, Icon icon)
+    private void drawTexturedRectUV(ItemRenderType type, float x, float y, float z, float w, float h, IIcon icon)
     {
         Tessellator tesselator = Tessellator.instance;
         tesselator.startDrawingQuads();

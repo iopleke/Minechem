@@ -7,22 +7,23 @@ import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 public class DecomposerBlock extends BlockSimpleContainer
 {
-    private Icon front;
+	@SideOnly(Side.CLIENT)//Make sure this is only shown/used on client and not server
+    private IIcon front;
 
     public DecomposerBlock(int id)
     {
-        super(id, Material.iron);
+        super(Material.iron);
         setBlockName("blockChemicalDecomposer");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
@@ -30,19 +31,18 @@ public class DecomposerBlock extends BlockSimpleContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int par6, float par7, float par8, float par9)
     {
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
         entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
         return true;
     }
 
-    @Override
-    public TileEntity createNewTileEntity(World var1)
-    {
-        return new DecomposerTileEntity();
-    }
-
+	@Override
+	public TileEntity createNewTileEntity(World world, int i) {
+		return new DecomposerTileEntity();
+	}
+	//TODO: Find replacement
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
     {
@@ -58,9 +58,8 @@ public class DecomposerBlock extends BlockSimpleContainer
         return;
     }
 
-    @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.DECOMPOSER_TEX);
         front = ir.registerIcon(Reference.DECOMPOSER_FRONT_TEX);

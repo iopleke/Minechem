@@ -16,6 +16,6 @@ public class ElementSlot extends Slot
     @Override
     public boolean isItemValid(ItemStack itemStack)
     {
-        return itemStack.itemID == MinechemItemsGeneration.element.itemID;
+        return itemStack.getItem() == MinechemItemsGeneration.element;
     }
 }

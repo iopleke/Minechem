@@ -1,6 +1,5 @@
 package minechem.tileentity.multiblock.ghostblock;
 
-import cpw.mods.fml.common.network.PacketDispatcher;
 import minechem.Settings;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -8,6 +7,9 @@ import minechem.tileentity.prefab.MinechemTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.server.MinecraftServer;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.INode;
 
 public class GhostBlockTileEntity extends MinechemTileEntity
 {
@@ -23,7 +25,8 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         {
             GhostBlockPacket packet = new GhostBlockPacket(this);
             int dimensionID = worldObj.provider.dimensionId;
-            PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, packet.makePacket());
+	        //TODO: rewrite packet
+            MinecraftServer.getServer().getConfigurationManager().sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, packet.makePacket());
         }
     }
 
@@ -97,18 +100,17 @@ public class GhostBlockTileEntity extends MinechemTileEntity
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return null;
     }
 
-    @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
 
-    @Override
+	@Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         return false;
@@ -120,4 +122,18 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         return false;
     }
 
+	@Override
+	public void openInventory() {
+
+	}
+
+	@Override
+	public void closeInventory() {
+
+	}
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
 }

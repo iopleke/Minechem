@@ -3,6 +3,8 @@ package minechem;
 import java.util.Arrays;
 import java.util.logging.Logger;
 
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
@@ -14,6 +16,7 @@ import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.MinechemPacketHandler;
+import minechem.network.PacketDispatcher;
 import minechem.network.server.CommonProxy;
 import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
@@ -23,6 +26,7 @@ import minechem.tickhandler.ScheduledTickHandler;
 import minechem.tickhandler.TickHandler;
 import minechem.tileentity.synthesis.SynthesisTabStateControl;
 import minechem.utils.Reference;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -35,13 +39,8 @@ import net.minecraftforge.common.MinecraftForge;
 import org.modstats.ModstatInfo;
 import org.modstats.Modstats;
 
-import cpw.mods.fml.common.FMLLog;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -90,10 +89,10 @@ public class ModMinechem
     public static CommonProxy PROXY;
     
     // Register a SimpleNetworkWrapper
-    public static SimpleNetworkWrapper network;
+    public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME);
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(0,ModMinechem.NAME,null);//TODO: set id and item for creative tab
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
@@ -113,11 +112,11 @@ public class ModMinechem
         INSTANCE = this;
         
         // Initialize the network wrapper
-        network = NetworkRegistry.INSTANCE.newSimpleChannel(ModMinechem.ID);
+        network = new PacketDispatcher(ModMinechem.ID);
 
         // Setup logging.
-        LOGGER = event.getModLog();
-        LOGGER.setParent(FMLLog.getLogger());
+        LOGGER = (Logger) event.getModLog();
+        LOGGER.setParent((Logger) FMLLog.getLogger());
 
         // Load configuration.
         LOGGER.info("Loading configuration...");
@@ -187,11 +186,13 @@ public class ModMinechem
         GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
 
         LOGGER.info("Registering GUI and Container handlers...");
-        NetworkRegistry.instance().registerGuiHandler(this, new GuiHandler());
+        NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         LOGGER.info("Register Tick Handler for chemical effects tracking...");
-        TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
-
+	    //TickHandlers are now in events
+        //TickRegistry.registerScheduledTickHandler(new ScheduledTickHandler(), Side.SERVER);
+	    //if(event.getSide() == Side.SERVER)//TODO:Maybe this would work for deciding the side where to register this
+	        FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
         LOGGER.info("Registering ClientProxy Rendering Hooks...");
         PROXY.registerRenderers();
 
@@ -229,7 +230,7 @@ public class ModMinechem
     }
 
     @SideOnly(Side.CLIENT)
-    public void textureHook(IconRegister icon)
+    public void textureHook(IIconRegister icon)
     {
         GuiTabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
         SynthesisTabStateControl.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
@@ -239,7 +240,7 @@ public class ModMinechem
         ChemistJournalTab.helpIcon = icon.registerIcon(Reference.POWER_ICON);
     }
 
-    @ForgeSubscribe
+    @SubscribeEvent
     public void onPreRender(RenderGameOverlayEvent.Pre e)
     {
         TickHandler.renderEffects();

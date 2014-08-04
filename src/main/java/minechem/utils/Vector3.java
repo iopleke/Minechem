@@ -2,6 +2,7 @@ package minechem.utils;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -133,9 +134,9 @@ public class Vector3 implements Cloneable
      * 
      * @param world
      * @return */
-    public int getBlockID(IBlockAccess world)
+    public Block getBlock(IBlockAccess world)
     {
-        return world.getBlockId(this.intX(), this.intY(), this.intZ());
+        return world.getBlock(this.intX(), this.intY(), this.intZ());
     }
 
     public int getBlockMetadata(IBlockAccess world)
@@ -145,22 +146,22 @@ public class Vector3 implements Cloneable
 
     public TileEntity getTileEntity(IBlockAccess world)
     {
-        return world.getBlockTileEntity(this.intX(), this.intY(), this.intZ());
+        return world.getTileEntity(this.intX(), this.intY(), this.intZ());
     }
 
-    public boolean setBlock(World world, int id, int metadata, int notify)
+    public boolean setBlock(World world, Block block, int metadata, int notify)
     {
-        return world.setBlock(this.intX(), this.intY(), this.intZ(), id, metadata, notify);
+        return world.setBlock(this.intX(), this.intY(), this.intZ(), block, metadata, notify);
     }
 
-    public boolean setBlock(World world, int id, int metadata)
+    public boolean setBlock(World world, Block block, int metadata)
     {
-        return this.setBlock(world, id, metadata, 3);
+        return this.setBlock(world, block, metadata, 3);
     }
 
-    public boolean setBlock(World world, int id)
+    public boolean setBlock(World world, Block block)
     {
-        return this.setBlock(world, id, 0);
+        return this.setBlock(world, block, 0);
     }
 
     /** Converts this vector three into a Minecraft Vec3 object */
@@ -232,11 +233,11 @@ public class Vector3 implements Cloneable
         return this;
     }
 
-    public Vector3 translate(Vector3 par1)
+    public Vector3 translate(ForgeDirection par1)
     {
-        this.x += par1.x;
-        this.y += par1.y;
-        this.z += par1.z;
+        this.x += par1.offsetX;
+        this.y += par1.offsetY;
+        this.z += par1.offsetZ;
         return this;
     }
 
@@ -683,10 +684,14 @@ public class Vector3 implements Cloneable
     {
         Vector3 lookVector = Vector3.getDeltaPositionFromRotation(rotationYaw, rotationPitch);
         Vector3 reachPoint = this.clone().translate(lookVector.clone().scale(reachDistance));
-        return world.rayTraceBlocks_do_do(this.toVec3(), reachPoint.toVec3(), collisionFlag, !collisionFlag);
+        return world.func_147447_a(this.toVec3(), reachPoint.toVec3(), collisionFlag, !collisionFlag, false);
     }
 
-    @Deprecated
+	private Vector3 translate(Vector3 scale) {
+		return scale.clone();
+	}
+
+	@Deprecated
     public MovingObjectPosition rayTraceEntities(World world, float rotationYaw, float rotationPitch, boolean collisionFlag, double reachDistance)
     {
         return this.rayTraceEntities(world, rotationYaw, rotationPitch, reachDistance);
@@ -711,7 +716,7 @@ public class Vector3 implements Cloneable
         Vec3 reachPoint = Vec3.createVectorHelper(startingPosition.xCoord + look.xCoord * reachDistance, startingPosition.yCoord + look.yCoord * reachDistance, startingPosition.zCoord + look.zCoord * reachDistance);
 
         double checkBorder = 1.1 * reachDistance;
-        AxisAlignedBB boxToScan = AxisAlignedBB.getAABBPool().getAABB(-checkBorder, -checkBorder, -checkBorder, checkBorder, checkBorder, checkBorder).offset(this.x, this.y, this.z);
+        AxisAlignedBB boxToScan = AxisAlignedBB.getBoundingBox(-checkBorder, -checkBorder, -checkBorder, checkBorder, checkBorder, checkBorder).offset(this.x, this.y, this.z);
 
         @SuppressWarnings("unchecked")
         List<Entity> entitiesHit = world.getEntitiesWithinAABBExcludingEntity(null, boxToScan);

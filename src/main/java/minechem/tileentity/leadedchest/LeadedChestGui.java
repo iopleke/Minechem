@@ -30,8 +30,8 @@ public class LeadedChestGui extends GuiContainerTabbed
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("gui.title.leadedchest");
-        int infoWidth = fontRenderer.getStringWidth(info);
-        fontRenderer.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xCCCCCC);
+        int infoWidth = this.fontRendererObj.getStringWidth(info);
+        this.fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xCCCCCC);
     }
 
     @Override

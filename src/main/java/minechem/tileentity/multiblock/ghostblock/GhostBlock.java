@@ -5,13 +5,13 @@ import java.util.Random;
 import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IconRegister;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.AxisAlignedBB;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
@@ -22,18 +22,18 @@ public class GhostBlock extends BlockContainer
 
     public GhostBlock(int id)
     {
-        super(id, Material.iron);
+        super(Material.iron);
         setBlockName("block.minechemGhostBlock");
-        setLightValue(0.5F);
+        setLightLevel(0.5F);
         setHardness(1000F);
         setResistance(1000F);
     }
 
-    public Icon icon1;
-    public Icon icon2;
+    public IIcon icon1;
+    public IIcon icon2;
 
     @Override
-    public Icon getIcon(int par1, int metadata)
+    public IIcon getIcon(int par1, int metadata)
     {
         switch (metadata)
         {
@@ -47,7 +47,7 @@ public class GhostBlock extends BlockContainer
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void registerIcons(IconRegister ir)
+    public void registerBlockIcons(IIconRegister ir)
     {
         blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
         icon1 = ir.registerIcon(Reference.BLUEPRINT1_TEX);
@@ -65,7 +65,7 @@ public class GhostBlock extends BlockContainer
         if (entityPlayer.getDistanceSq(x + 0.5D, y + 0.5D, z + 0.5D) > 64.0D)
             return true;
 
-        TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof GhostBlockTileEntity)
         {
             GhostBlockTileEntity ghostBlock = (GhostBlockTileEntity) tileEntity;
@@ -73,8 +73,8 @@ public class GhostBlock extends BlockContainer
             if (playerIsHoldingItem(entityPlayer, blockAsStack))
             {
 
-                world.setBlock(x, y, z, blockAsStack.getItem().itemID, 0, 0);
-                world.setBlock(x, y, z, blockAsStack.getItem().itemID, blockAsStack.getItemDamage(), 3);
+                world.setBlock(x, y, z, /*blockAsStack.getItem()*/this, 0, 0);
+                world.setBlock(x, y, z, this, blockAsStack.getItemDamage(), 3);
                 if (!entityPlayer.capabilities.isCreativeMode)
                     entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
                 return true;
@@ -87,7 +87,7 @@ public class GhostBlock extends BlockContainer
     {
         ItemStack helditem = entityPlayer.inventory.getCurrentItem();
         if (helditem != null && itemstack != null) {
-            if (helditem.itemID == itemstack.itemID) {
+            if (helditem.getItem() == itemstack.getItem()) {
                 if (helditem.getItemDamage() == itemstack.getItemDamage() || itemstack.getItemDamage() == -1) {
                     return true;
                 }
@@ -151,25 +151,9 @@ public class GhostBlock extends BlockContainer
     }
 
     @Override
-    public void breakBlock(World par1World, int par2, int par3, int par4, int par5, int par6)
-    {
-    }
-
-    @Override
-    public int idDropped(int par1, Random par2Random, int par3)
-    {
-        return 0;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World var1)
+    public TileEntity createNewTileEntity(World var1, int i)
     {
         return new GhostBlockTileEntity();
     }
 
-    @Override
-    public boolean isBlockReplaceable(World world, int x, int y, int z)
-    {
-        return true;
-    }
 }

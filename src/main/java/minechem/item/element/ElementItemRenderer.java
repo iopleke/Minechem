@@ -7,7 +7,7 @@ import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Icon;
+import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
@@ -41,8 +41,8 @@ public class ElementItemRenderer implements IItemRenderer
     public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data)
     {
         ElementItem item = (ElementItem) itemstack.getItem();
-        Icon testtube = itemstack.getIconIndex();
-        Icon contentsTex = null;
+        IIcon testtube = itemstack.getIconIndex();
+        IIcon contentsTex = null;
         ElementEnum element = ElementItem.getElement(itemstack);
         float duration = 1500;
         float t = (int) (Minecraft.getSystemTime() % duration);
@@ -86,7 +86,7 @@ public class ElementItemRenderer implements IItemRenderer
         }
     }
 
-    private void renderItemInInventory(ItemStack itemstack, ElementEnum element, Icon testtube, Icon contents)
+    private void renderItemInInventory(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
     {
         String shortName = ElementItem.getShortName(itemstack);
         setColorForElement(element);
@@ -99,7 +99,7 @@ public class ElementItemRenderer implements IItemRenderer
         fontRenderer.drawString(shortName, 1, 1, 0xEEEEEE);
     }
 
-    private void renderItemInEquipped(ItemStack itemstack, ElementEnum element, Icon testtube, Icon contents)
+    private void renderItemInEquipped(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
     {
         /* float scale = .06F; GL11.glPushMatrix(); GL11.glScalef(scale, scale, scale); GL11.glTranslatef(20.0F, 15.0F, 0.0F); GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F); GL11.glColor3f(1.0F, 1.0F, 1.0F); setColorForElement(element); drawTexturedRectUV(0, 0,
          * 0, 16, 16, contents); GL11.glColor3f(1.0F, 1.0F, 1.0F); for (float i = 0.0F; i < 1.0F; i += .1F) { drawTexturedRectUV(0, 0, i, 16, 16, testtube); } GL11.glPopMatrix(); */
@@ -111,7 +111,7 @@ public class ElementItemRenderer implements IItemRenderer
 
     }
 
-    private void renderItemAsEntity(ItemStack itemstack, ElementEnum element, Icon testtube, Icon contents)
+    private void renderItemAsEntity(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
     {
         GL11.glPushMatrix();
         setColorForElement(element);
@@ -121,7 +121,7 @@ public class ElementItemRenderer implements IItemRenderer
         GL11.glPopMatrix();
     }
 
-    private void drawTextureIn3D(Icon texture)
+    private void drawTextureIn3D(IIcon texture)
     {
         Tessellator tesselator = Tessellator.instance;
         float scale = 0.7F;
@@ -131,7 +131,7 @@ public class ElementItemRenderer implements IItemRenderer
         GL11.glPopMatrix();
     }
 
-    private void drawTexturedRectUV(float x, float y, float z, int w, int h, Icon icon)
+    private void drawTexturedRectUV(float x, float y, float z, int w, int h, IIcon icon)
     {
         Tessellator tesselator = Tessellator.instance;
         tesselator.startDrawingQuads();
