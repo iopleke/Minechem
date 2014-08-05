@@ -4,6 +4,8 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementAlloyEnum;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
@@ -52,27 +54,27 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
     public float getStrVsBlock(ItemStack itemStack, Block block)
     {
         // There must be a better way to do this
-        if (ForgeHooks.isToolEffective(new ItemStack(Items.pickaxeDiamond), block, 0))
+        if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_pickaxe), block, 0))
         {
 
-            if (block.blockID == Block.stone.blockID || block.blockID == Block.cobblestone.blockID || OreDictionary.getOreName(OreDictionary.getOreID(new ItemStack(block))).contains("stone"))
+            if (block == Blocks.stone || block == Blocks.cobblestone || OreDictionary.getOreName(OreDictionary.getOreID(block.getUnlocalizedName())).contains("stone"))
             {
 
                 return this.getStrStone();
             }
             return this.getStrOre();
         }
-        else if (ForgeHooks.isToolEffective(new ItemStack(Items.shovelDiamond), block, 0))
+        else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_shovel), block, 0))
         {
 
             return this.getStrShovel();
         }
-        else if (ForgeHooks.isToolEffective(new ItemStack(Items.swordDiamond), block, 0))
+        else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_sword), block, 0))
         {
 
             return this.getStrSword();
         }
-        else if (ForgeHooks.isToolEffective(new ItemStack(Items.axeDiamond), block, 0))
+        else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_axe), block, 0))
         {
 
             return this.getStrAxe();
@@ -86,7 +88,7 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, int id, int x, int y, int z, EntityLivingBase entityLiving)
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
     }
 

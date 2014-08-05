@@ -21,7 +21,7 @@ public class DecomposerBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)//Make sure this is only shown/used on client and not server
     private IIcon front;
 
-    public DecomposerBlock(int id)
+    public DecomposerBlock()
     {
         super(Material.iron);
         setBlockName("blockChemicalDecomposer");
@@ -42,6 +42,7 @@ public class DecomposerBlock extends BlockSimpleContainer
 	public TileEntity createNewTileEntity(World world, int i) {
 		return new DecomposerTileEntity();
 	}
+
 	//TODO: Find replacement
     @Override
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)

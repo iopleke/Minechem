@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class BlueprintProjectorBlock extends BlockSimpleContainer
 {
 
-    public BlueprintProjectorBlock(int id)
+    public BlueprintProjectorBlock()
     {
         super(Material.iron);
         setBlockName("minechem.blockBlueprintProjector");

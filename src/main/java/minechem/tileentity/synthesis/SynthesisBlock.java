@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 public class SynthesisBlock extends BlockSimpleContainer
 {
 
-    public SynthesisBlock(int par1)
+    public SynthesisBlock()
     {
         super(Material.iron);
         setBlockName("minechem.blockSynthesis");
@@ -51,6 +51,7 @@ public class SynthesisBlock extends BlockSimpleContainer
 	public TileEntity createNewTileEntity(World world, int i) {
 		return new SynthesisTileEntity();
 	}
+
 
 	//TODO:Find replacement
     @Override

@@ -1,6 +1,7 @@
 package minechem.item.chemistjournal;
 
 import minechem.MinechemItemsGeneration;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,7 @@ public class ChemistJournalRecipeCloning implements IRecipe
     {
         ItemStack itemstack1 = crafting.getStackInSlot(0);
         ItemStack itemstack2 = crafting.getStackInSlot(1);
-        return (itemstack1 != null && itemstack1.itemID == MinechemItemsGeneration.journal.itemID) && (itemstack2 != null && itemstack2.itemID == Item.book.itemID);
+        return (itemstack1 != null && itemstack1.getItem() == MinechemItemsGeneration.journal) && (itemstack2 != null && itemstack2.getItem() == Items.book);
     }
 
     @Override

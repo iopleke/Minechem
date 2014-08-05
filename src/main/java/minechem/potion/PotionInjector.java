@@ -38,6 +38,6 @@ public class PotionInjector
         {
             System.err.println("He's Dead Jim" + " " + e);
         }
-        atropineHigh = new PotionProvider(potionTotal, true, 0x00FF6E).setPotionName("Delirium").setIconIndex(2, 1);
+        atropineHigh = new PotionProvider(potionTotal, true, 0x00FF6E).setPotionName("Delirium")/*.setIconIndex(2, 1)*/;
     }
 }

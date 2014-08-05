@@ -39,8 +39,8 @@ public class DecomposerGui extends GuiContainerTabbed
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("gui.title.decomposer");
-        int infoWidth = fontRenderer.getStringWidth(info);
-        fontRenderer.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xCCCCCC);
+        int infoWidth = fontRendererObj.getStringWidth(info);
+        fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xCCCCCC);
     }
 
     @Override

@@ -548,7 +548,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
 	    //TODO: Setup packet
         // Sends a packet to clients around the machine.
-        PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, new DecomposerPacketUpdate(this).makePacket());
+        //PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, new DecomposerPacketUpdate(this).makePacket());
 
         // Determine if we should change our state to active.
         if (state == state.idle && this.isPowered() && canDecomposeInput())

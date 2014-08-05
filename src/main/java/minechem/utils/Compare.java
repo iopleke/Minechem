@@ -9,7 +9,7 @@ public class Compare
     {
         int dmg1 = is1.getItemDamage();
         int dmg2 = is2.getItemDamage();
-        return is1.itemID == is2.itemID && (dmg1 == -1 || dmg2 == -1 || (dmg1 == dmg2));
+        return is1.getItem() == is2.getItem() && (dmg1 == -1 || dmg2 == -1 || (dmg1 == dmg2));
     }
 
     public static boolean isStackAChemical(ItemStack itemstack)

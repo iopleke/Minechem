@@ -15,7 +15,7 @@ public class SlotFakeChemical extends SlotFake
     @Override
     public boolean isItemValid(ItemStack itemStack)
     {
-        return itemStack.itemID == MinechemItemsGeneration.element.itemID || itemStack.itemID == MinechemItemsGeneration.molecule.itemID;
+        return itemStack.getItem() == MinechemItemsGeneration.element || itemStack.getItem() == MinechemItemsGeneration.molecule;
     }
 
 }

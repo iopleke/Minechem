@@ -50,48 +50,48 @@ public class MinechemBlocksGeneration
     public static void registerBlocks()
     {
         // Decomposer
-        decomposer = new DecomposerBlock(Settings.Decomposer);
+        decomposer = new DecomposerBlock();
         GameRegistry.registerBlock(decomposer, "minechem.blockDecomposer");
         GameRegistry.registerTileEntity(DecomposerTileEntity.class, "minechem.tileEntityDecomposer");
 
         // Microscope.
-        microscope = new MicroscopeBlock(Settings.Microscope);
+        microscope = new MicroscopeBlock();
         GameRegistry.registerBlock(microscope, "minechem.blockMicroscope");
         GameRegistry.registerTileEntity(MicroscopeTileEntity.class, "minechem.tileEntityMicroscope");
 
         // Chemical Synthesis Machine.
-        synthesis = new SynthesisBlock(Settings.Synthesis);
+        synthesis = new SynthesisBlock();
         GameRegistry.registerBlock(synthesis, "minechem.blockSynthesis");
         GameRegistry.registerTileEntity(SynthesisTileEntity.class, "minechem.tileEntitySynthesis");
 
         // Fusion Reactor.
-        fusion = new FusionBlock(Settings.FusionChamber);
+        fusion = new FusionBlock();
         GameRegistry.registerBlock(fusion, FusionItemBlock.class, "minechem.blockFusion");
         GameRegistry.registerTileEntity(FusionTileEntity.class, "minechem.tileEntityFusion");
 
         // Ghost Block.
-        ghostBlock = new GhostBlock(Settings.GhostBlock);
+        ghostBlock = new GhostBlock();
         GameRegistry.registerBlock(ghostBlock, GhostBlockItem.class, "minechem.blockGhostBlock");
         GameRegistry.registerTileEntity(GhostBlockTileEntity.class, "minechem.tileEntityGhostBock");
 
         // Blueprint Projector.
-        blueprintProjector = new BlueprintProjectorBlock(Settings.BlueprintProjector);
+        blueprintProjector = new BlueprintProjectorBlock();
         GameRegistry.registerBlock(blueprintProjector, "minechem.blockBlueprintProjector");
         GameRegistry.registerTileEntity(BlueprintProjectorTileEntity.class, "minechem.tileEntityBlueprintProjector");
 
         // Chemical Storage Chest.
-        chemicalStorage = new ChemicalStorageBlock(Settings.ChemicalStorage);
+        chemicalStorage = new ChemicalStorageBlock();
         GameRegistry.registerBlock(chemicalStorage, "minechem.blockChemicalStorage");
         GameRegistry.registerTileEntity(ChemicalStorageTileEntity.class, "minechem.tileEntityChemicalStorage");
 
         // Uranium Ore (World Gen).
-        uranium = new BlockUraniumOre(Settings.UraniumOre);
+        uranium = new BlockUraniumOre();
         GameRegistry.registerBlock(uranium, "minechem.uraniumOre");
         OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
         DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(ElementEnum.U, 48)));
 
         // Leaded Chest (for storing radioactive isotopes).
-        leadedChest = new LeadedChestBlock(Settings.LeadedChest);
+        leadedChest = new LeadedChestBlock();
         GameRegistry.registerBlock(leadedChest, "minechem.leadedChest");
         GameRegistry.registerTileEntity(LeadedChestTileEntity.class, "minechem.tileEntityLeadedChest");
 

@@ -25,7 +25,7 @@ public class ChemistJournalItem extends Item
     private static final String ACTIVE_ITEMSTACK_TAG = "activeItemStack";
     private static final String JOURNAL_OWNER_TAG = "owner";
 
-    public ChemistJournalItem(int id)
+    public ChemistJournalItem()
     {
         setUnlocalizedName("minechem.itemChemistJournal");
         setCreativeTab(ModMinechem.CREATIVE_TAB);

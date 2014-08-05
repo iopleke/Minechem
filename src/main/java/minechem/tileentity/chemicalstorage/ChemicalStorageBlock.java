@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public class ChemicalStorageBlock extends BlockChest
 {
 
-    public ChemicalStorageBlock(int id)
+    public ChemicalStorageBlock()
     {
         super(0);
         setBlockName("minechem.blockChemicalStorage");

@@ -33,8 +33,8 @@ public class SynthesisGui extends GuiContainerTabbed
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("gui.title.synthesis");
-        int infoWidth = fontRenderer.getStringWidth(info);
-        fontRenderer.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
+        int infoWidth = fontRendererObj.getStringWidth(info);
+        fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
     }
 
     @Override

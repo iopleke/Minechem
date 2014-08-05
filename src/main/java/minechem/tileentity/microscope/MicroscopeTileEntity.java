@@ -12,6 +12,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.common.util.ForgeDirection;
+import universalelectricity.api.core.grid.INode;
 
 public class MicroscopeTileEntity extends MinechemTileEntity implements IInventory
 {
@@ -85,12 +87,17 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
     }
 
     @Override
-    public String getInvName()
+    public String getInventoryName()
     {
         return "container.microscope";
     }
 
-    @Override
+	@Override
+	public boolean hasCustomInventoryName() {
+		return false;
+	}
+
+	@Override
     public int getInventoryStackLimit()
     {
         return 1;
@@ -104,12 +111,12 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
     }
 
     @Override
-    public void openChest()
+    public void openInventory()
     {
     }
 
     @Override
-    public void closeChest()
+    public void closeInventory()
     {
     }
 
@@ -149,18 +156,17 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
     }
 
     @Override
-    public boolean isInvNameLocalized()
-    {
-        return false;
-    }
-
-    @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         if (i == kInput[0])
             return true;
-        if (i == kJournal[0] && itemstack.itemID == MinechemItemsGeneration.journal.itemID)
+        if (i == kJournal[0] && itemstack.getItem() == MinechemItemsGeneration.journal)
             return true;
         return false;
     }
+
+	@Override
+	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
+		return null;
+	}
 }

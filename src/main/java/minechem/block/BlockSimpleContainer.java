@@ -24,7 +24,7 @@ public abstract class BlockSimpleContainer extends BlockContainer
         setResistance(50F);
     }
 
-    //public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
+    public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
@@ -34,7 +34,7 @@ public abstract class BlockSimpleContainer extends BlockContainer
         if (tileEntity != null)
         {
             ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
-            //addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
+            addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
             for (ItemStack itemstack : droppedStacks)
             {
                 float randomX = random.nextFloat() * 0.8F + 0.1F;

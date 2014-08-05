@@ -32,14 +32,14 @@ public class MinechemItemsGeneration
 
     public static void registerItems()
     {
-        element = new ElementItem(Settings.Element);
-        molecule = new MoleculeItem(Settings.Molecule);
-        lens = new ItemLens(Settings.Lens);
-        atomicManipulator = new ItemAtomicManipulator(Settings.AtomicManipulator);
-        fusionStar = new FusionStarItem(Settings.FusionStar);
-        blueprint = new ItemBlueprint(Settings.Blueprint);
-        journal = new ChemistJournalItem(Settings.ChemistJournal);
-        polytool = new PolytoolItem(Settings.Polytool);
+        element = new ElementItem();
+        molecule = new MoleculeItem();
+        lens = new ItemLens();
+        atomicManipulator = new ItemAtomicManipulator();
+        fusionStar = new FusionStarItem();
+        blueprint = new ItemBlueprint();
+        journal = new ChemistJournalItem();
+        polytool = new PolytoolItem();
 
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);

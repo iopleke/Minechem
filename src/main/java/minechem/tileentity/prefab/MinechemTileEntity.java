@@ -107,7 +107,7 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
 
     public int getPowerRemainingScaled(int prgPixels)
     {
-        Double result = Double.valueOf(this.getEnergy(ForgeDirection.UNKNOWN)).doubleValue() * Long.valueOf(prgPixels).doubleValue() / Long.valueOf(this.getEnergyCapacity(ForgeDirection.UNKNOWN)).doubleValue();
+        Double result = Double.valueOf(this.getEnergy(ForgeDirection.UNKNOWN)).doubleValue() * Long.valueOf(prgPixels).doubleValue() / this.getEnergyCapacity(ForgeDirection.UNKNOWN);
         return result.intValue();
     }
 

@@ -80,8 +80,8 @@ public class MicroscopeGui extends GuiContainerTabbed
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
         String info = MinechemHelper.getLocalString("gui.title.microscope");
-        int infoWidth = fontRenderer.getStringWidth(info);
-        fontRenderer.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
+        int infoWidth = fontRendererObj.getStringWidth(info);
+        fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
     }
 
     @Override
@@ -159,7 +159,7 @@ public class MicroscopeGui extends GuiContainerTabbed
         if (!recipeSwitch.isMoverOver())
         {
             String cost = String.format("%d Energy", recipe.energyCost());
-            fontRenderer.drawString(cost, x + 108, y + 85, 0x000000);
+            fontRendererObj.drawString(cost, x + 108, y + 85, 0x000000);
         }
     }
 
@@ -216,7 +216,7 @@ public class MicroscopeGui extends GuiContainerTabbed
             DecomposerRecipeChance recipeChance = (DecomposerRecipeChance) recipe;
             int chance = (int) (recipeChance.getChance() * 100);
             String info = String.format("%d%%", chance);
-            fontRenderer.drawString(info, x + 108, y + 85, 0x000000);
+            fontRendererObj.drawString(info, x + 108, y + 85, 0x000000);
         }
     }
 

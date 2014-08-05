@@ -1,5 +1,7 @@
 package minechem.tileentity.multiblock.fusion;
 
+import minechem.ModMinechem;
+import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
@@ -9,10 +11,10 @@ public class FusionItemBlock extends ItemBlock
     private static final String[] names =
     { "Fusion Wall", "Tungsten Plating", "Fusion Core" };
 
-    public FusionItemBlock(int par1)
+    public FusionItemBlock(Block block)
     {
-	    //TODO: Add item block
-        super();
+		//TODO: Find matching block
+	    super(block);
         setHasSubtypes(true);
         setUnlocalizedName("minechem.itemBlockFusion");
     }

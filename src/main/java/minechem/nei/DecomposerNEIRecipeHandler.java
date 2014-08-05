@@ -18,6 +18,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import codechicken.lib.gui.GuiDraw;
+
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 {
@@ -141,7 +143,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
         if (chance < 1.0f)
         {
             String chanceStr = String.format("%2.0f%%", chance * 100.0);
-            int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr);//TODO: Find whats needed for guidraw
+            int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr);
             GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS, 8, false);
         }
 

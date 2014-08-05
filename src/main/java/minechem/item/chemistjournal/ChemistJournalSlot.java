@@ -16,7 +16,7 @@ public class ChemistJournalSlot extends Slot
     @Override
     public boolean isItemValid(ItemStack itemstack)
     {
-        return itemstack.itemID == MinechemItemsGeneration.journal.itemID;
+        return itemstack.getItem() == MinechemItemsGeneration.journal;
     }
 
     @Override
