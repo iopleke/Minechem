@@ -1,24 +1,23 @@
 package minechem.nei;
 
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
-
 import minechem.ModMinechem;
+import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
+import minechem.tileentity.decomposer.DecomposerGui;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
-import minechem.tileentity.decomposer.DecomposerGui;
+import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
-import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
-import codechicken.lib.gui.GuiDraw;
 
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
