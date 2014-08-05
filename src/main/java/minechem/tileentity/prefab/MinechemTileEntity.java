@@ -62,7 +62,8 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
                 if (tileEntity != null)
                 {
                     double maxRecieve = this.energy.getMaxReceive();
-                    long used = CompatibilityModule.extractEnergy(tileEntity, direction.getOpposite(), this.energy.receiveEnergy(maxRecieve, false), true);
+                    //double used = CompatibilityModule.extractEnergy(tileEntity, direction.getOpposite(), this.energy.receiveEnergy(maxRecieve, false), true);
+                    double used = this.energy.extractEnergy(this.energy.receiveEnergy(maxRecieve, false), true);
                     this.energy.receiveEnergy(used, true);
                 }
             }
@@ -116,19 +117,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         return this.energy.getEnergy() > 0;
     }
 
-//    @Override
-//    public long onExtractEnergy(ForgeDirection from, long extract, boolean doExtract)
-//    {
-//        return this.energy.extractEnergy(extract, doExtract);
-//    }
-//
-//
-//    @Override
-//    public long onReceiveEnergy(ForgeDirection from, long receive, boolean doReceive)
-//    {
-//        return this.energy.receiveEnergy(receive, doReceive);
-//    }
-
     public void produce()
     {
         for (ForgeDirection direction : ForgeDirection.VALID_DIRECTIONS)
@@ -139,7 +127,8 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
 
                 if (tileEntity != null)
                 {
-                    long used = CompatibilityModule.receiveEnergy(tileEntity, direction.getOpposite(), this.energy.extractEnergy(this.energy.getEnergy(), false), true);
+                    //double used = CompatibilityModule.receiveEnergy(tileEntity, direction.getOpposite(), this.energy.extractEnergy(this.energy.getEnergy(), false), true);
+                    double used = this.energy.extractEnergy(this.energy.extractEnergy(this.energy.getEnergy(), false), true);
                     this.energy.extractEnergy(used, true);
                 }
             }
