@@ -6,6 +6,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraft.server.MinecraftServer;
 
 public class CommonProxy implements Reference
 {
@@ -27,15 +28,16 @@ public class CommonProxy implements Reference
 
     public EntityPlayer findEntityPlayerByName(String name)
     {
-        WorldServer[] servers = FMLCommonHandler.instance().getMinecraftServerInstance().worldServers;
-        EntityPlayer player = null;
-        for (WorldServer server : servers)
+
+        EntityPlayer player;
+        player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
+
+        if (player != null)
         {
-            player = server.getPlayerEntityByName(name);
-            if (player != null)
-                return player;
+            return player;
         }
-        return player;
+
+        return null;
     }
 
     public String getCurrentLanguage()
