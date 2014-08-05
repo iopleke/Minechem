@@ -1,7 +1,6 @@
 package minechem;
 
 import java.util.Arrays;
-import java.util.logging.Logger;
 
 import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -47,6 +46,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.common.config.Configuration;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
 public class ModMinechem
@@ -70,12 +71,12 @@ public class ModMinechem
     // Misc variables
     public static final String textureBase = "minechem:";
 
-    // Provides logging
+    // Instancing
     @Instance(value = CHANNEL_NAME)
     public static ModMinechem INSTANCE;
 
     // Provides standard logging from the Forge.
-    public static Logger LOGGER;
+    // public static Logger LOGGER;
 
     // Public extra data about our mod that Forge uses in the mods listing page for more information.
     @Mod.Metadata(ModMinechem.ID)
@@ -101,6 +102,9 @@ public class ModMinechem
     public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_noRecipe.png");
     public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_unpowered.png");
 
+    // Logging
+    public static final Logger LOGGER = LogManager.getLogger(ModMinechem.ID);
+
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
     {
@@ -109,16 +113,12 @@ public class ModMinechem
         
         // Initialize the network wrapper
         network = new PacketDispatcher(ModMinechem.ID);
-
-        // Setup logging.
-        LOGGER = (Logger) event.getModLog();
-        LOGGER.setParent((Logger) FMLLog.getLogger());
-
+		
         // Load configuration.
         LOGGER.info("Loading configuration...");
         CONFIG = new Configuration(event.getSuggestedConfigurationFile());
         Settings.load(CONFIG);
-
+         
         // Setup Mod Metadata for players to see in mod list with other mods.
         metadata.modId = ModMinechem.ID;
         metadata.name = ModMinechem.NAME;
@@ -200,7 +200,7 @@ public class ModMinechem
 
         if (!Loader.isModLoaded("UniversalElectricity"))
         {
-            LOGGER.warning("Universal Electricity Core NOT installed. The energy system will not function as intended.");
+            LOGGER.warn("Universal Electricity Core NOT installed. The energy system will not function as intended.");
         }
 
         LOGGER.info("INIT PASSED");
@@ -210,7 +210,8 @@ public class ModMinechem
     public void postInit(FMLPostInitializationEvent event)
     {
         // Adds blueprints to dungeon loot.
-        addonDungeonLoot();
+		LOGGER.info("Adding blueprints to dungeon loot...");
+        addDungeonLoot();
 
         LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
         PotionEnchantmentCoated.registerCoatings();
@@ -218,9 +219,8 @@ public class ModMinechem
         LOGGER.info("POSTINIT PASSED");
     }
 
-    private void addonDungeonLoot()
+    private void addDungeonLoot()
     {
-        LOGGER.info("Adding rare chemicals to dungeon loot...");
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
         ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
         ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);

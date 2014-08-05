@@ -64,7 +64,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
     @Override
     public void handle(OreRegisterEvent event)
     {
-        ModMinechem.LOGGER.log(Level.INFO, OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + event.Name);
+        ModMinechem.LOGGER.info(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + event.Name);
 
         String[] tokens = this.parseOreName(event.Name);
         EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
@@ -111,7 +111,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
             break;
 
         default:
-            ModMinechem.LOGGER.log(Level.WARNING, OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
+            ModMinechem.LOGGER.warn(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
             break;
         }
 
