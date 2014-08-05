@@ -11,7 +11,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import universalelectricity.api.core.grid.electric.IEnergyContainer;
-import universalelectricity.api.core.grid.electric.EnergyStorage;
 
 public class PolytoolTypeGold extends PolytoolUpgradeType
 {
@@ -58,7 +57,7 @@ public class PolytoolTypeGold extends PolytoolUpgradeType
                 {
                     if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof IEnergyContainer)
                     {
-                        ((IEnergyInterface) player.inventory.getStackInSlot(i).getItem()).onReceiveEnergy(ForgeDirection.UNKNOWN, 5000000, false);
+                        ((IEnergyContainer) player.inventory.getStackInSlot(i).getItem()).setEnergy(ForgeDirection.UNKNOWN, 5000000);
                     }
                 }
             }
@@ -75,7 +74,7 @@ public class PolytoolTypeGold extends PolytoolUpgradeType
     public String getDescription()
     {
 
-        return "Ocasionally creates lightning strikes which chage inventory";
+        return "Ocasionally creates lightning strikes which charge inventory";
     }
 
 }
