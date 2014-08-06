@@ -14,4 +14,9 @@ public class BlockUraniumOre extends BlockSimple
         //this.setBlockName("Uranium Ore");
         this.setHardness(4F);
     }
+    
+    @Override
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks){
+        // set uranium drops here
+    };
 }
