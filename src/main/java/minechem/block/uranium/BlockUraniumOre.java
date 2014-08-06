@@ -6,6 +6,7 @@ import minechem.block.BlockSimple;
 import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.block.material.Material;
+import net.minecraft.tileentity.TileEntity;
 
 public class BlockUraniumOre extends BlockSimple
 {
