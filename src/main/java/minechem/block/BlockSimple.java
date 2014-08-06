@@ -47,7 +47,7 @@ public abstract class BlockSimple extends Block implements IBlock
 
     }
 
-    //public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
+    public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
