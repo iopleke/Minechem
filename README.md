@@ -10,3 +10,6 @@ If you're planning to use any of the powered machines, you'll need to [download 
 
 ## Contributors and permissions
 The list of contributors can be found on the [website](http://www.minechemmod.com/index.php/docs/11-contributors)
+
+## License
+Minechem 5.0.5 and higher are licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
