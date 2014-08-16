@@ -7,6 +7,7 @@ public interface Reference
     public static final String TEXTURE_DIR = "assets/minechem/textures/";
     public static final String TEXTURE_GUI_DIR = "textures/gui/";
     public static final String TEXTURE_MODEL_DIR = "textures/model/";
+    public static final String TEXTURE_BLOCK_DIR = "textures/blocks/"; // @TODO - refactor this to 'block'
     public static final String SOUNDS_DIR = "sounds/minechem/";
     public static final String LANG_DIR = "/assets/minechem/languages/";
     
@@ -87,6 +88,6 @@ public interface Reference
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
     public static final String ICON_BASE = "textures/icons/";
-    public static final String URANIUM_TEX = TEXTURE_MOD_ID + "uraniumOre";
+    public static final String URANIUM_TEX = "uraniumOre";
     public static final String FISSION_GUI = TEXTURE_GUI_DIR + "FissionGUI.png";
 }
