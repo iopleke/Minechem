@@ -22,7 +22,7 @@ import net.minecraft.world.World;
 
 public abstract class BlockSimple extends Block implements IBlock
 {
-    public IIcon[] blockIconList;
+    public IIcon blockIcon;
     public String fullTextureName;
     public String blockName;
     public int blockSideCount;
@@ -107,7 +107,7 @@ public abstract class BlockSimple extends Block implements IBlock
     @Override
     public IIcon getIcon(int side, int meta)
     {
-        return this.blockIconList[side];
+        return this.blockIcon;
 
     }
 
@@ -204,11 +204,7 @@ public abstract class BlockSimple extends Block implements IBlock
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-        this.blockIconList = new IIcon[this.blockSideCount];
-        for (int countDown = this.blockSideCount; countDown > 0; countDown = countDown - 1)
-        {
-            blockIconList[countDown] = iconRegister.registerIcon(this.fullTextureName);
-        }
+            blockIcon = iconRegister.registerIcon(this.fullTextureName);
     }
 
     @Override
