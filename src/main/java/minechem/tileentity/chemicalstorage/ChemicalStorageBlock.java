@@ -52,8 +52,8 @@ public class ChemicalStorageBlock extends BlockChest
     {
         if (!world.isRemote)
         {
-            entityPlayer.addChatMessage(new ChatComponentText("The Chemical Storage Chest was replaced by the Leaded Chest."));
-            entityPlayer.addChatMessage(new ChatComponentText("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid"));
+            //entityPlayer.addChatMessage(new ChatComponentText("The Chemical Storage Chest was replaced by the Leaded Chest."));
+            //entityPlayer.addChatMessage(new ChatComponentText("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid"));
         }
         byte facing = 0;
         int facingI = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
