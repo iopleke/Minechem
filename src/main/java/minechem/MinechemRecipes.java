@@ -493,9 +493,11 @@ public class MinechemRecipes
         ItemStack blockDiamond = new ItemStack(Block.blockDiamond);
         DecomposerRecipe.add(new DecomposerRecipe(blockDiamond, new PotionChemical[]
         { this.molecule(MoleculeEnum.fullrene, 36) }));
-        SynthesisRecipe.add(new SynthesisRecipe(blockDiamond, true, 120000, new PotionChemical[]
-        { this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4),
-                this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4) }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockDiamond, true, 100000, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4),
+            this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4)
+        }));
 
         // Pressure Plate
         ItemStack blockPressurePlatePlanks = new ItemStack(Block.pressurePlatePlanks);
