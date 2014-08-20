@@ -6,7 +6,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
@@ -20,6 +19,24 @@ public class ChemicalStorageBlock extends BlockChest
         setCreativeTab(ModMinechem.CREATIVE_TAB);
         setHardness(2.5F);
         setStepSound(soundWoodFootstep);
+    }
+
+    @Override
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return false;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World par1World)
+    {
+        return new ChemicalStorageTileEntity();
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new ChemicalStorageTileEntity();
     }
 
     @Override
@@ -54,8 +71,8 @@ public class ChemicalStorageBlock extends BlockChest
         if (!world.isRemote && el instanceof EntityPlayer)
         {
             EntityPlayer entityPlayer = (EntityPlayer) el;
-            entityPlayer.addChatMessage(new ChatComponentText("The Chemical Storage Chest was replaced by the Leaded Chest."));
-            entityPlayer.addChatMessage(new ChatComponentText("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid"));
+            entityPlayer.addChatMessage("The Chemical Storage Chest was replaced by the Leaded Chest.");
+            entityPlayer.addChatMessage("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid");
         }
         byte facing = 0;
         int facingI = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
@@ -80,24 +97,6 @@ public class ChemicalStorageBlock extends BlockChest
             facing = 4;
         }
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
-    }
-
-    @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
-        return new ChemicalStorageTileEntity();
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
-        return false;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World par1World)
-    {
-        return new ChemicalStorageTileEntity();
     }
 
 }
