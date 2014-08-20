@@ -24,6 +24,24 @@ public class ChemicalStorageBlock extends BlockChest
     }
 
     @Override
+    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
+    {
+        return false;
+    }
+
+    @Override
+    public TileEntity createNewTileEntity(World par1World, int i)
+    {
+        return new ChemicalStorageTileEntity();
+    }
+
+    @Override
+    public TileEntity createTileEntity(World world, int metadata)
+    {
+        return new ChemicalStorageTileEntity();
+    }
+
+    @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer entityPlayer, int side, float par7, float par8, float par9)
     {
         if (!world.isRemote)
@@ -81,24 +99,6 @@ public class ChemicalStorageBlock extends BlockChest
             facing = 4;
         }
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
-    }
-
-    @Override
-    public TileEntity createTileEntity(World world, int metadata)
-    {
-        return new ChemicalStorageTileEntity();
-    }
-
-    @Override
-    public boolean canPlaceBlockAt(World par1World, int par2, int par3, int par4)
-    {
-        return false;
-    }
-
-    @Override
-    public TileEntity createNewTileEntity(World par1World, int i)
-    {
-        return new ChemicalStorageTileEntity();
     }
 
 }
