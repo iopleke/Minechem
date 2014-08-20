@@ -52,8 +52,9 @@ public class ChemicalStorageBlock extends BlockChest
     @Override
     public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is)
     {
-        if (!world.isRemote)
+        if (!world.isRemote && el instanceof EntityPlayer)
         {
+            EntityPlayer entityPlayer = (EntityPlayer) el;
             entityPlayer.addChatMessage(new ChatComponentText("The Chemical Storage Chest was replaced by the Leaded Chest."));
             entityPlayer.addChatMessage(new ChatComponentText("Please pick up all Chemical Storage Chests and convert them to Leaded Chests using a crafting grid"));
         }
