@@ -30,6 +30,12 @@ public class Settings
     // --------
     // Determines if the mod will generate ore at all.
     public static boolean WorldGenOre = true;
+    
+    // Size of Uranium ore clusters
+    public static int UraniumOreClusterSize = 2;
+    
+    // How many times per chunk will uranium attempt to generate?
+    public static int UraniumOreDensity = 4;
 
     // Determines if the mod will print out tons of extra information while running.
     public static boolean DebugMode = false;
