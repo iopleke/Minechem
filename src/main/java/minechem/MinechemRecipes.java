@@ -244,8 +244,9 @@ public class MinechemRecipes
         { this.element(ElementEnum.C, 48) }));
         
         // Uranium Ore
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(uranium, 1), new Object[] { "oreUranium" }));
-
+        if (Settings.CraftableUranium){
+            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(uranium, 1), new Object[] { "oreUranium" }));
+        }
         // Wood
         ItemStack blockOakWood = new ItemStack(Block.wood, 1, 0);
         ItemStack blockSpruceWood = new ItemStack(Block.wood, 1, 1);

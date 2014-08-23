@@ -99,6 +99,10 @@ public class Settings
     // How many times per chunk will uranium attempt to generate?
     public static @CfgInt
     int UraniumOreDensity = 5;
+    
+    // Can Minechem uranium be crafted from other uranium?
+    public static @CfgBool
+    boolean CraftableUranium = true;
 
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
