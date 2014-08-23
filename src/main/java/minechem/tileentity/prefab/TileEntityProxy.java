@@ -1,6 +1,7 @@
 package minechem.tileentity.prefab;
 
 import minechem.MinechemBlocksGeneration;
+import minechem.Settings;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.multiblock.fusion.FusionTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -37,7 +38,10 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         managerYOffset = nbtTagCompound.getInteger("managerYOffset");
         managerZOffset = nbtTagCompound.getInteger("managerZOffset");
         if (worldObj != null)
+        {
             manager = worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
+        }
+
     }
 
     public void setManager(TileEntity managerTileEntity)
@@ -60,7 +64,7 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         {
             return worldObj.getTileEntity(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset);
         }
-        
+
         // Return the entire fusion generator as a whole (indicating the structure is complete).
         if (worldObj.getBlock(xCoord + managerXOffset, yCoord + managerYOffset, zCoord + managerZOffset) == MinechemBlocksGeneration.fusion)
         {
@@ -154,12 +158,13 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         return "Multiblock Minechem proxy";
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
-	@Override
+    @Override
     public int getInventoryStackLimit()
     {
         if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
@@ -169,22 +174,25 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
         return 0;
     }
 
-	@Override
-	public boolean isUseableByPlayer(EntityPlayer entityPlayer) {
-		return false;
-	}
+    @Override
+    public boolean isUseableByPlayer(EntityPlayer entityPlayer)
+    {
+        return false;
+    }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory()
+    {
 
-	}
+    }
 
-	@Override
+    @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
@@ -199,8 +207,19 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     {
         if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
         {
-            return ((ISidedInventory) this.getManager()).getAccessibleSlotsFromSide(var1);
-
+            try
+            {
+                return ((ISidedInventory) this.getManager()).getAccessibleSlotsFromSide(var1);
+            } catch (StackOverflowError o)
+            {
+                // wrapped in a try-catch
+                // prevents right clicking failure
+                // with a buildcraft pipe
+                if (Settings.DebugMode)
+                {
+                    System.out.println("TileEntity generated a StackOverflowError at: x" + this.xCoord + " y" + this.yCoord + " z" + this.zCoord);
+                }
+            }
         }
         return new int[0];
     }
