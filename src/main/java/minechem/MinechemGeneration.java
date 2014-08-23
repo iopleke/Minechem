@@ -17,13 +17,21 @@ public class MinechemGeneration implements IWorldGenerator
         {
             if (world.provider.isSurfaceWorld())
             {
-                for (int k = 0; k < 2; k++)
+                for (int k = 0; k <= Settings.UraniumOreDensity; k++)
                 {
-                    int firstBlockXCoord = 16 * chunkX + random.nextInt(16);
-                    int firstBlockYCoord = random.nextInt(30);
-                    int firstBlockZCoord = 16 * chunkZ + random.nextInt(16);
-                    WorldGenMinable mineable = new WorldGenMinable(MinechemBlocksGeneration.uranium.blockID, 4);
-                    mineable.generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+                    int firstBlockXCoord = (16 * chunkX) + random.nextInt(16);
+                    int firstBlockYCoord = random.nextInt(50);
+                    int firstBlockZCoord = (16 * chunkZ) + random.nextInt(16);
+                    int oreCount = random.nextInt(Settings.UraniumOreClusterSize + 10);
+
+                    (new WorldGenMinable(MinechemBlocksGeneration.uranium.blockID, oreCount)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+                    if (Settings.DebugMode)
+                    {
+                        System.out.println("Minechem generated Uranium generated at:");
+                        System.out.println("X :" + firstBlockXCoord);
+                        System.out.println("Y :" + firstBlockYCoord);
+                        System.out.println("Z :" + firstBlockZCoord);
+                    }
                 }
             }
         }
