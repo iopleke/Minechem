@@ -36,6 +36,8 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import static minechem.MinechemBlocksGeneration.uranium;
+import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class MinechemRecipes
 {
@@ -240,6 +242,9 @@ public class MinechemRecipes
         ItemStack oreCoal = new ItemStack(Block.oreCoal);
         DecomposerRecipe.add(new DecomposerRecipe(oreCoal, new PotionChemical[]
         { this.element(ElementEnum.C, 48) }));
+        
+        // Uranium Ore
+        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(uranium, 1), new Object[] { "oreUranium" }));
 
         // Wood
         ItemStack blockOakWood = new ItemStack(Block.wood, 1, 0);
