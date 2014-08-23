@@ -7,7 +7,9 @@ public class FusionItemBlock extends ItemBlock
 {
 
     private static final String[] names =
-    { "Fusion Wall", "Tungsten Plating", "Fusion Core" };
+    {
+        "Fusion Wall", "Tungsten Plating", "Fusion Core"
+    };
 
     public FusionItemBlock(int par1)
     {
@@ -33,5 +35,4 @@ public class FusionItemBlock extends ItemBlock
     {
         return names[itemstack.getItemDamage()];
     }
-
 }
