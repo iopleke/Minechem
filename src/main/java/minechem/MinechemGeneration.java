@@ -14,8 +14,6 @@ public class MinechemGeneration implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        if (!Loader.isModLoaded("AtomicScience") && !Loader.isModLoaded("IC2"))
-        {
             if (Settings.WorldGenOre)
             {
                 if (world.provider.isSurfaceWorld())
@@ -29,8 +27,6 @@ public class MinechemGeneration implements IWorldGenerator
                         mineable.generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
                     }
                 }
-            }
         }
-
     }
 }
