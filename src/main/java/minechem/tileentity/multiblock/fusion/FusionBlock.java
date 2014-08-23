@@ -48,7 +48,9 @@ public class FusionBlock extends BlockSimpleContainer
         // return true;
         // }
         if (tileEntity == null || entityPlayer.isSneaking())
+        {
             return false;
+        }
         if (!world.isRemote)
         {
             entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
@@ -74,11 +76,16 @@ public class FusionBlock extends BlockSimpleContainer
     public TileEntity createTileEntity(World world, int metadata)
     {
         if (metadata == 2)
+        {
             return new FusionTileEntity();
+        }
         if (metadata == 3)
+        {
             return new FissionTileEntity();
-        else
+        } else
+        {
             return new TileEntityProxy();
+        }
     }
 
     @Override
@@ -99,10 +106,10 @@ public class FusionBlock extends BlockSimpleContainer
     {
         switch (metadata)
         {
-        case 0:
-            return icon1;
-        case 1:
-            return icon2;
+            case 0:
+                return icon1;
+            case 1:
+                return icon2;
         }
         return blockIcon;
     }
@@ -121,7 +128,9 @@ public class FusionBlock extends BlockSimpleContainer
     public void getSubBlocks(Item item, CreativeTabs par2CreativeTabs, List par3List)
     {
         for (int i = 0; i < 2; i++)
+        {
             par3List.add(new ItemStack(item, 1, i));
+        }
     }
 
     //
@@ -133,12 +142,12 @@ public class FusionBlock extends BlockSimpleContainer
         /* if (oldMetadata < 2) { if (world.getTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getTileEntity(x, y, z);
          * 
          * world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true); } } */
-
     }
 
-	@Override
-	public TileEntity createNewTileEntity(World world, int i) {
-		return new TileEntityProxy();
-	}
+    @Override
+    public TileEntity createNewTileEntity(World world, int i)
+    {
+        return new TileEntityProxy();
+    }
 
 }
