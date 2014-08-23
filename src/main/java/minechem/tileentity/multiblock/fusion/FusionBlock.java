@@ -38,13 +38,6 @@ public class FusionBlock extends BlockMinechemContainer
     {
         TileEntity tileEntity = world.getBlockTileEntity(x, y, z);
 
-        // if(tileEntity instanceof TileEntityProxy){
-        // TileEntityProxy proxy=(TileEntityProxy) tileEntity;
-        // if(proxy.manager!=null){
-        // this.onBlockActivated(world, proxy.manager.xCoord,proxy.manager.yCoord,proxy.manager.zCoord, entityPlayer, side, par7, par8, par9);
-        // }
-        // return true;
-        // }
         if (tileEntity == null || entityPlayer.isSneaking())
         {
             return false;
