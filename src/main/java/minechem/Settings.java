@@ -102,7 +102,7 @@ public class Settings
     
     // Can Minechem uranium be crafted from other uranium?
     public static @CfgBool
-    boolean CraftableUranium = true;
+    boolean UraniumOreCraftable = true;
 
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
