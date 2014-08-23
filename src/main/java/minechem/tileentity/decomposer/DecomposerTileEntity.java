@@ -66,7 +66,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
      * Wrapper for input inventory functions.
      */
     private final BoundedInventory inputInventory = new BoundedInventory(this, inputSlots);
-    
+
     /**
      * Wrapper for interacting with input slots.
      */
@@ -75,23 +75,23 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     /**
      * Number of input slot 1.
      */
-    public final int kInputSlot = 0;
+    public final int InputSlotID = 0;
 
     /**
      * Number of ending output slot.
      */
-    public final int kOutputSlotEnd = 9;
+    public final int OutputSlotIDEnd = 9;
 
     /**
      * Number of starting output slot.
      */
-    public final int kOutputSlotStart = 1;
+    public final int OutputSlotIDStart = 1;
 
     /**
      * Instance of our model for the decomposer.
      */
     public DecomposerModel model;
-    
+
     /**
      * Items waiting to be unloaded into output slots from decomposition process.
      */
@@ -528,7 +528,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                         if (fluids.get(i).amount > ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount)
                         {
                             // The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
-                            this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlockID(), 1, 0));
+                            this.setInventorySlotContents(this.InputSlotID, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlockID(), 1, 0));
                             fluids.get(i).amount -= ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount;
                         }
                     }
