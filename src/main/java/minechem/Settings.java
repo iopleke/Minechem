@@ -94,11 +94,11 @@ public class Settings
     
     // Size of Uranium ore clusters
     public static @CfgInt
-    int UraniumOreClusterSize = 2;
+    int UraniumOreClusterSize = 3;
     
     // How many times per chunk will uranium attempt to generate?
     public static @CfgInt
-    int UraniumOreDensity = 4;
+    int UraniumOreDensity = 5;
 
     // Determines if the mod will print out tons of extra information while running.
     public static @CfgBool
