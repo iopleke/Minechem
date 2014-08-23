@@ -13,20 +13,29 @@ public class MinechemGeneration implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-            if (Settings.WorldGenOre)
+        if (Settings.WorldGenOre)
+        {
+            if (world.provider.isSurfaceWorld())
             {
-                if (world.provider.isSurfaceWorld())
+
+                for (int k = 0; k <= Settings.UraniumOreDensity; k++)
                 {
-                    for (int k = 0; k < 2; k++)
+                    int firstBlockXCoord = (16 * chunkX) + random.nextInt(16);
+                    int firstBlockYCoord = random.nextInt(50);
+                    int firstBlockZCoord = (16 * chunkZ) + random.nextInt(16);
+                    int oreCount = random.nextInt(Settings.UraniumOreClusterSize + 10);
+
+                    (new WorldGenMinable(MinechemBlocksGeneration.uranium, oreCount)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+                    if (Settings.DebugMode)
                     {
-                        int firstBlockXCoord = 16 * chunkX + random.nextInt(16);
-                        int firstBlockYCoord = random.nextInt(30);
-                        int firstBlockZCoord = 16 * chunkZ + random.nextInt(16);
-                        WorldGenMinable mineable = new WorldGenMinable(MinechemBlocksGeneration.uranium, 4);
-                        mineable.generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
+                        System.out.println("Minechem generated Uranium generated at:");
+                        System.out.println("X :" + firstBlockXCoord);
+                        System.out.println("Y :" + firstBlockYCoord);
+                        System.out.println("Z :" + firstBlockZCoord);
                     }
                 }
             }
-            
+
+        }
     }
 }
