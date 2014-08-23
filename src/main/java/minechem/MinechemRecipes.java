@@ -383,10 +383,13 @@ public class MinechemRecipes
         }));
 
         // Uranium Ore
-        GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(uranium, 1), new Object[]
+        if (Settings.UraniumOreCraftable)
         {
-            "oreUranium"
-        }));
+            GameRegistry.addRecipe(new ShapelessOreRecipe(new ItemStack(uranium, 1), new Object[]
+            {
+                "oreUranium"
+            }));
+        }
 
         // Log
         ItemStack blockOakLog = new ItemStack(Blocks.log, 1, 0);

@@ -37,6 +37,9 @@ public class Settings
     // How many times per chunk will uranium attempt to generate?
     public static int UraniumOreDensity = 5;
 
+    // Can Minechem uranium be crafted from other uranium?
+    public static boolean UraniumOreCraftable = true;
+
     // Determines if the mod will print out tons of extra information while running.
     public static boolean DebugMode = false;
 
