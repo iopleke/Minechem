@@ -25,7 +25,7 @@ public class DecomposerContainer extends Container implements IRadiationShield
         kPlayerInventorySlotEnd = kPlayerInventorySlotStart + (9 * 4);
         kDecomposerInventoryEnd = decomposer.getSizeInventory();
 
-        addSlotToContainer(new Slot(decomposer, decomposer.kInputSlot, 80, 16));
+        addSlotToContainer(new Slot(decomposer, decomposer.InputSlotID, 80, 16));
         bindOutputSlots();
         bindPlayerInventory(inventoryPlayer);
     }
@@ -80,7 +80,7 @@ public class DecomposerContainer extends Container implements IRadiationShield
                 }
             } else if (slot >= kPlayerInventorySlotStart)
             {
-                if (!mergeItemStack(stackInSlot, decomposer.kInputSlot, decomposer.kInputSlot + 1, false))
+                if (!mergeItemStack(stackInSlot, decomposer.InputSlotID, decomposer.InputSlotID + 1, false))
                 {
                     return null;
                 }
