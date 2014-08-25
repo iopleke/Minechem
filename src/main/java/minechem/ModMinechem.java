@@ -89,7 +89,7 @@ public class ModMinechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(0,ModMinechem.NAME,null);//TODO: set id and item for creative tab
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME,null);//TODO: set item for creative tab
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
