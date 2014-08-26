@@ -10,7 +10,7 @@ help.projector=The Blueprint Projector is used for building complex structures, 
 help.fusion=The Fusion Chamber takes two elements and fuses them together with great energy, combining their mass to create a heavier element. Only a nether star contains enough energy to fuse elements. 
 help.journal=Use this journal to keep notes of all the scientific discoveries you make. There's a slot in the microscope for the journal, when inspecting an item the recipes will be recorded to your journal. Discovered recipes will be show on the left, click on an item to activate the recipe. Place this journal in the Synthesis Machine and the active recipe will be automatically loaded.
 help.chemicalStorage=The Chemical Storage will safely store radioactive chemicals and prevent them from decaying.
-help.leadedChest=The Leaded Chest will safely store radioactive chemicals and prevent them from decaying.
+help.leadChest=The Leaded Chest will safely store radioactive chemicals and prevent them from decaying.
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
@@ -19,12 +19,12 @@ gui.title.synthesis=Chemical Synthesis Machine
 gui.journal.decomposer=Decomposer
 gui.journal.synthesis=Synthesis
 
-tile.blockChemicalDecomposer.name=Chemical Decomposer
+tile.chemicalDecomposer.name=Chemical Decomposer
 tile.oreUranium.name=Uranium Ore
-tile.minechem.blockMicroscope.name=Microscope
-tile.container.leadedchest.name=Leaded Chest
-tile.minechem.blockSynthesis.name=Chemical Synthesis Machine
-tile.minechem.blockBlueprintProjector.name=Blueprint Projector
+tile.opticalMicroscope.name=Microscope
+tile.leadChest.name=Leaded Chest
+tile.synthesizer.name=Chemical Synthesis Machine
+tile.blueprintProjector.name=Blueprint Projector
 block.name.fusion.name=Chemical Fusion Chamber
 block.name.fission.name=Chemical Fission Chamber
 block.name.atomicClock.name=Atomic Clock (WIP)
