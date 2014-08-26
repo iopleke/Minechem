@@ -79,11 +79,6 @@ public class MinechemBlocksGeneration
         GameRegistry.registerBlock(blueprintProjector, blueprintProjector.getUnlocalizedName());
         GameRegistry.registerTileEntity(BlueprintProjectorTileEntity.class, blueprintProjector.getUnlocalizedName());
 
-        // Chemical Storage Chest.
-        chemicalStorage = new ChemicalStorageBlock();
-        GameRegistry.registerBlock(chemicalStorage, "minechem.blockChemicalStorage");
-        GameRegistry.registerTileEntity(ChemicalStorageTileEntity.class, "minechem.tileEntityChemicalStorage");
-
         // Uranium Ore (World Gen).
         uranium = new BlockUraniumOre();
         GameRegistry.registerBlock(uranium, uranium.getUnlocalizedName());
