@@ -45,6 +45,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import net.minecraft.init.Items;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -89,7 +90,7 @@ public class ModMinechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME,Items.Book);//TODO: set item for creative tab
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME,Items.book);//TODO: set item for creative tab
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
