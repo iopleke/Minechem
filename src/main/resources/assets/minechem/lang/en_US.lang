@@ -25,10 +25,8 @@ tile.opticalMicroscope.name=Microscope
 tile.leadChest.name=Leaded Chest
 tile.synthesizer.name=Chemical Synthesis Machine
 tile.blueprintProjector.name=Blueprint Projector
-block.name.fusion.name=Chemical Fusion Chamber
-block.name.fission.name=Chemical Fission Chamber
-block.name.atomicClock.name=Atomic Clock (WIP)
-tile.minechem.blockChemicalStorage.name=Chemical Storage Chest
+block.fusionReactor.name=Chemical Fusion Chamber
+block.fissionReactor.name=Chemical Fission Chamber
 
 item.Polytool.name=Polytool
 item.name.concavelens=Concave Lens
