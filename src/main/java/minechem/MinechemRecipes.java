@@ -1767,11 +1767,11 @@ public class MinechemRecipes
         {
             " I ", "GPL", " I ", Character.valueOf('I'), itemIngotIron, Character.valueOf('P'), blockThinGlass, Character.valueOf('L'), MinechemItemsGeneration.projectorLens, Character.valueOf('G'), new ItemStack(Blocks.redstone_lamp)
         });
-        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.leadedChest), new Object[]
+        GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.leadChest), new Object[]
         {
             "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsGeneration.element, 1, ElementEnum.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Blocks.chest)
         });
-        GameRegistry.addShapelessRecipe(new ItemStack(MinechemBlocksGeneration.leadedChest), new Object[]
+        GameRegistry.addShapelessRecipe(new ItemStack(MinechemBlocksGeneration.leadChest), new Object[]
         {
             new ItemStack(MinechemBlocksGeneration.chemicalStorage)
         });
