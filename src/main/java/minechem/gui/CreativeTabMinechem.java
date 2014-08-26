@@ -7,9 +7,9 @@ public class CreativeTabMinechem extends CreativeTabs
 {
     private final Item tabIconItem;
 
-    public CreativeTabMinechem(int tabID, String tabName, Item tabIconItem)
+    public CreativeTabMinechem(String tabName, Item tabIconItem)
     {
-        super(tabID, tabName);
+        super(tabName);
 
         this.tabIconItem = tabIconItem;
     }
