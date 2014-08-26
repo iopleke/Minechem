@@ -22,7 +22,6 @@ import net.minecraft.world.World;
 
 public abstract class BlockSimple extends Block implements IBlock
 {
-    public IIcon blockIcon;
     public String fullTextureName;
     public String blockName;
     public int blockSideCount;
