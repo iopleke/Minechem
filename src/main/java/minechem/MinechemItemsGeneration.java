@@ -2,7 +2,6 @@ package minechem;
 
 import minechem.item.ItemAtomicManipulator;
 import minechem.item.ItemLens;
-import minechem.item.ItemPills;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalItem;
 import minechem.item.element.ElementEnum;
