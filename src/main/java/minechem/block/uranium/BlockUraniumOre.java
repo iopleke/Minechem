@@ -14,7 +14,7 @@ public class BlockUraniumOre extends BlockSimple
     {
         super(Material.iron, Reference.URANIUM_TEX, 1, "Uranium Ore");
         this.setCreativeTab(ModMinechem.CREATIVE_TAB);
-        //this.setBlockName("Uranium Ore");
+        this.setBlockName("oreUranium");
         this.setHardness(4F);
     }
     
