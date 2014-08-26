@@ -18,13 +18,13 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class DecomposerBlock extends BlockSimpleContainer
 {
-	@SideOnly(Side.CLIENT)//Make sure this is only shown/used on client and not server
+    @SideOnly(Side.CLIENT)
     private IIcon front;
 
     public DecomposerBlock()
     {
         super(Material.iron);
-        setBlockName("blockChemicalDecomposer");
+        setBlockName("decomposer");
         setCreativeTab(ModMinechem.CREATIVE_TAB);
     }
 
