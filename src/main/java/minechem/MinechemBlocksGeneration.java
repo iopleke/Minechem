@@ -42,7 +42,7 @@ public class MinechemBlocksGeneration
     public static Block fusion;
     public static Block chemicalStorage;
     public static Block printer;
-    public static Block leadedChest;
+    public static Block leadChest;
 
     public static Block uranium;
     public static Material materialGhost = new MaterialTransparent(MapColor.airColor);
@@ -51,33 +51,33 @@ public class MinechemBlocksGeneration
     {
         // Decomposer
         decomposer = new DecomposerBlock();
-        GameRegistry.registerBlock(decomposer, "minechem.blockDecomposer");
-        GameRegistry.registerTileEntity(DecomposerTileEntity.class, "minechem.tileEntityDecomposer");
+        GameRegistry.registerBlock(decomposer, decomposer.getUnlocalizedName());
+        GameRegistry.registerTileEntity(DecomposerTileEntity.class, decomposer.getUnlocalizedName());
 
         // Microscope.
         microscope = new MicroscopeBlock();
-        GameRegistry.registerBlock(microscope, "minechem.blockMicroscope");
-        GameRegistry.registerTileEntity(MicroscopeTileEntity.class, "minechem.tileEntityMicroscope");
+        GameRegistry.registerBlock(microscope, microscope.getUnlocalizedName());
+        GameRegistry.registerTileEntity(MicroscopeTileEntity.class, microscope.getUnlocalizedName());
 
         // Chemical Synthesis Machine.
         synthesis = new SynthesisBlock();
-        GameRegistry.registerBlock(synthesis, "minechem.blockSynthesis");
-        GameRegistry.registerTileEntity(SynthesisTileEntity.class, "minechem.tileEntitySynthesis");
+        GameRegistry.registerBlock(synthesis, synthesis.getUnlocalizedName());
+        GameRegistry.registerTileEntity(SynthesisTileEntity.class, synthesis.getUnlocalizedName());
 
         // Fusion Reactor.
         fusion = new FusionBlock();
-        GameRegistry.registerBlock(fusion, FusionItemBlock.class, "minechem.blockFusion");
-        GameRegistry.registerTileEntity(FusionTileEntity.class, "minechem.tileEntityFusion");
+        GameRegistry.registerBlock(fusion, FusionItemBlock.class, fusion.getUnlocalizedName());
+        GameRegistry.registerTileEntity(FusionTileEntity.class, fusion.getUnlocalizedName());
 
         // Ghost Block.
         ghostBlock = new GhostBlock();
-        GameRegistry.registerBlock(ghostBlock, GhostBlockItem.class, "minechem.blockGhostBlock");
-        GameRegistry.registerTileEntity(GhostBlockTileEntity.class, "minechem.tileEntityGhostBock");
+        GameRegistry.registerBlock(ghostBlock, GhostBlockItem.class, ghostBlock.getUnlocalizedName());
+        GameRegistry.registerTileEntity(GhostBlockTileEntity.class, ghostBlock.getUnlocalizedName());
 
         // Blueprint Projector.
         blueprintProjector = new BlueprintProjectorBlock();
-        GameRegistry.registerBlock(blueprintProjector, "minechem.blockBlueprintProjector");
-        GameRegistry.registerTileEntity(BlueprintProjectorTileEntity.class, "minechem.tileEntityBlueprintProjector");
+        GameRegistry.registerBlock(blueprintProjector, blueprintProjector.getUnlocalizedName());
+        GameRegistry.registerTileEntity(BlueprintProjectorTileEntity.class, blueprintProjector.getUnlocalizedName());
 
         // Chemical Storage Chest.
         chemicalStorage = new ChemicalStorageBlock();
@@ -91,12 +91,12 @@ public class MinechemBlocksGeneration
         DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(ElementEnum.U, 48)));
 
         // Leaded Chest (for storing radioactive isotopes).
-        leadedChest = new LeadedChestBlock();
-        GameRegistry.registerBlock(leadedChest, "minechem.leadedChest");
-        GameRegistry.registerTileEntity(LeadedChestTileEntity.class, "minechem.tileEntityLeadedChest");
+        leadChest = new LeadedChestBlock();
+        GameRegistry.registerBlock(leadChest, leadChest.getUnlocalizedName());
+        GameRegistry.registerTileEntity(LeadedChestTileEntity.class, leadChest.getUnlocalizedName());
 
         // Fission Reactor.
-        GameRegistry.registerTileEntity(FissionTileEntity.class, "minechem.tileEntityFission");
+        GameRegistry.registerTileEntity(FissionTileEntity.class, "fissionReactor");
 
         // Tile Entity Proxy.
         GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
