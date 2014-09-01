@@ -1,6 +1,6 @@
 package minechem.item.polytool;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.item.element.ElementItem;
 import minechem.network.packet.PolytoolTypePacket;
 import net.minecraft.entity.player.EntityPlayer;
@@ -72,7 +72,7 @@ public class PolytoolInventory implements IInventory
             {
 	            //TODO: Test?
 	            PolytoolTypePacket packet = new PolytoolTypePacket(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1));
-                ModMinechem.network.sendPacket(player, packet);
+                Minechem.network.sendPacket(player, packet);
 	            //MinechemPacketHandler.sendPolytoolUpdatePacket(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1), player);
             }
         }

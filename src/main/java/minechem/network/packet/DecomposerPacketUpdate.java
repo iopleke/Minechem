@@ -1,6 +1,6 @@
 package minechem.network.packet;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.Settings;
 import minechem.network.PacketDispatcher;
 import minechem.tileentity.decomposer.DecomposerTileEntity;

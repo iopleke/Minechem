@@ -4,7 +4,7 @@ import java.util.EnumMap;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -38,7 +38,7 @@ public class ElementItem extends Item // implements IStorageTank
 
     public ElementItem()
     {
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setUnlocalizedName("minechem.itemElement");
         setHasSubtypes(true);
         classificationIndexes.put(ElementClassificationEnum.nonmetal, 0);

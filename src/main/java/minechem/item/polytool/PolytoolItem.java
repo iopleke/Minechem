@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiHandler;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -35,7 +35,7 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
     {
         super(ToolMaterial.IRON);
         instance = this;
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setUnlocalizedName("Polytool");
     }
 
@@ -65,7 +65,7 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
         // Copied from journal code
         // I don't know why chunkCoordX is used
         // But LJDP probably knows, and he is smarter than me
-        entityPlayer.openGui(ModMinechem.INSTANCE, GuiHandler.GUI_ID_POLYTOOL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY, entityPlayer.chunkCoordY);
+        entityPlayer.openGui(Minechem.INSTANCE, GuiHandler.GUI_ID_POLYTOOL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY, entityPlayer.chunkCoordY);
         return par1ItemStack;
     }
 

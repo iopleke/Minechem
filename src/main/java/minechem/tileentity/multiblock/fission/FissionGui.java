@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock.fission;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiMinechemContainer;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -40,7 +40,7 @@ public class FissionGui extends GuiMinechemContainer
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.FISSION_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.FISSION_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         // DRAW GUI

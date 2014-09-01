@@ -1,7 +1,7 @@
 package minechem.block.uranium;
 
 import java.util.ArrayList;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.block.BlockSimple;
 import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
@@ -13,7 +13,7 @@ public class BlockUraniumOre extends BlockSimple
     public BlockUraniumOre()
     {
         super(Material.iron, Reference.URANIUM_TEX, 1, "Uranium Ore");
-        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB);
         this.setBlockName("oreUranium");
         this.setHardness(4F);
     }

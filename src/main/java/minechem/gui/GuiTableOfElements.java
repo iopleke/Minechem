@@ -1,6 +1,6 @@
 package minechem.gui;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.item.chemistjournal.ChemistJournalContainer;
 import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.utils.Reference;
@@ -34,7 +34,7 @@ public class GuiTableOfElements extends GuiContainerTabbed
         GL11.glPushMatrix();
         GL11.glScalef(2.1F, 1.5F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TABLE_HEX));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.TABLE_HEX));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -49,7 +49,7 @@ public class GuiTableOfElements extends GuiContainerTabbed
         {
             if (y == GUI_HEIGHT - 411)
             {
-                mc.thePlayer.openGui(ModMinechem.INSTANCE, 2, mc.theWorld, x, y, 0);
+                mc.thePlayer.openGui(Minechem.INSTANCE, 2, mc.theWorld, x, y, 0);
             }
 
         }

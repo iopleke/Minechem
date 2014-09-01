@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisGui;
 import minechem.tileentity.synthesis.SynthesisRecipe;
@@ -23,7 +23,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
     private static final String MINECHEM_SYNTHESIS_RECIPES_ID = "minechem.synthesis";
 
     // TODO: The Gui's class itself should really expose this.
-    private ResourceLocation texture = new ResourceLocation(ModMinechem.ID, Reference.SYNTHESIS_GUI);
+    private ResourceLocation texture = new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_GUI);
 
     // GUI slot offsets, in GUI-relative pixel values.
     private static final int INPUT_X_OFS = 57;

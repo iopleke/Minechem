@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
 import minechem.MinechemItemsGeneration;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -25,7 +25,7 @@ public class ItemBlueprint extends Item
     {
         super();
         setUnlocalizedName("minechem.itemBlueprint");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setHasSubtypes(true);
     }
 

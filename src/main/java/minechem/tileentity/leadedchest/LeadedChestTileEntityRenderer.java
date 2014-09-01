@@ -1,6 +1,6 @@
 package minechem.tileentity.leadedchest;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
@@ -50,7 +50,7 @@ public class LeadedChestTileEntityRenderer extends TileEntitySpecialRenderer
 
         ModelChest var14 = this.leadedChestModel;
 
-        bindTexture(new ResourceLocation(ModMinechem.ID, Reference.LEADED_CHEST_MODEL));
+        bindTexture(new ResourceLocation(Minechem.ID, Reference.LEADED_CHEST_MODEL));
 
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

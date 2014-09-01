@@ -1,6 +1,6 @@
 package minechem.gui;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

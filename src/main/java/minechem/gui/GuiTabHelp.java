@@ -1,6 +1,6 @@
 package minechem.gui;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.IIcon;
@@ -51,7 +51,7 @@ public class GuiTabHelp extends GuiTab
     public ResourceLocation getIcon()
     {
         // TODO Auto-generated method stub
-        return ModMinechem.ICON_HELP;
+        return Minechem.ICON_HELP;
     }
 
 }

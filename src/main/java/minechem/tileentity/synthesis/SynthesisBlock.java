@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
@@ -26,7 +26,7 @@ public class SynthesisBlock extends BlockSimpleContainer
     {
         super(Material.iron);
         setBlockName("minechem.blockSynthesis");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
     }
 
     @Override
@@ -43,7 +43,7 @@ public class SynthesisBlock extends BlockSimpleContainer
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
-        entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
+        entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
         return true;
     }
 

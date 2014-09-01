@@ -1,6 +1,6 @@
 package minechem.utils;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 
 public interface Reference
 {
@@ -15,7 +15,7 @@ public interface Reference
     public static final int SECOND_IN_TICKS = 20;
 
     // Used for resourceLocations in 1.6
-    public static final String TEXTURE_MOD_ID = ModMinechem.ID + ":";
+    public static final String TEXTURE_MOD_ID = Minechem.ID + ":";
 
     public static final String POLYTOOL_TEX = TEXTURE_MOD_ID + "polytool";
     public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";

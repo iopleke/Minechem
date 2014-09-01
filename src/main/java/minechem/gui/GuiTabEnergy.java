@@ -1,6 +1,6 @@
 package minechem.gui;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
@@ -71,7 +71,7 @@ public class GuiTabEnergy extends GuiTab
     @Override
     public ResourceLocation getIcon()
     {
-        return ModMinechem.ICON_ENERGY;
+        return Minechem.ICON_ENERGY;
     }
 
 }

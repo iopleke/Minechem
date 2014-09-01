@@ -2,7 +2,7 @@ package minechem.item;
 
 import java.util.List;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -24,7 +24,7 @@ public class ItemLens extends Item
     {
         super();
         setUnlocalizedName("minechem.itemLens");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setHasSubtypes(true);
     }
 

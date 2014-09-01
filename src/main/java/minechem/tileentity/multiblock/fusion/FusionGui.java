@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock.fusion;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
@@ -48,7 +48,7 @@ public class FusionGui extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.FUSION_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.FUSION_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         // DRAW GUI

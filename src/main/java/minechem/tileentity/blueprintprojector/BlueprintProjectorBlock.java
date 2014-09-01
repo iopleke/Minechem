@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -25,8 +25,8 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
     public BlueprintProjectorBlock()
     {
         super(Material.iron);
-        setBlockName("minechem.blockBlueprintProjector");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setBlockName("blueprintProjector");
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setLightLevel(0.7F);
     }
 
@@ -44,7 +44,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof BlueprintProjectorTileEntity)
         {
-            entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
+            entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
             return true;
         }
         return false;

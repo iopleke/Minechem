@@ -3,7 +3,7 @@ package minechem.tileentity.leadedchest;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -23,7 +23,7 @@ public class LeadedChestBlock extends BlockContainer
     public LeadedChestBlock()
     {
         super(Material.wood);
-        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setBlockName("container.leadedchest");
@@ -103,7 +103,7 @@ public class LeadedChestBlock extends BlockContainer
             {
                 return false;
             }
-            player.openGui(ModMinechem.INSTANCE, 0, world, xCoord, yCoord, zCoord);
+            player.openGui(Minechem.INSTANCE, 0, world, xCoord, yCoord, zCoord);
         }
         return true;
     }

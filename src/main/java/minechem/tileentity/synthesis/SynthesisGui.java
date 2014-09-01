@@ -1,6 +1,6 @@
 package minechem.tileentity.synthesis;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
@@ -42,7 +42,7 @@ public class SynthesisGui extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.SYNTHESIS_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

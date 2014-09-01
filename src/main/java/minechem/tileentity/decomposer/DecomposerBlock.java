@@ -2,7 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
@@ -25,7 +25,7 @@ public class DecomposerBlock extends BlockSimpleContainer
     {
         super(Material.iron);
         setBlockName("decomposer");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
     }
 
     @Override
@@ -34,7 +34,7 @@ public class DecomposerBlock extends BlockSimpleContainer
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
-        entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
+        entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
         return true;
     }
 
@@ -64,7 +64,7 @@ public class DecomposerBlock extends BlockSimpleContainer
     {
         blockIcon = ir.registerIcon(Reference.DECOMPOSER_TEX);
         front = ir.registerIcon(Reference.DECOMPOSER_FRONT_TEX);
-        ModMinechem.INSTANCE.textureHook(ir);
+        Minechem.INSTANCE.textureHook(ir);
     }
 
     @Override

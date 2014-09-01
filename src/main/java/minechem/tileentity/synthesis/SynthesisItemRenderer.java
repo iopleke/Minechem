@@ -1,6 +1,6 @@
 package minechem.tileentity.synthesis;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.item.ItemMinechemRenderer;
 import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
@@ -23,7 +23,7 @@ public class SynthesisItemRenderer extends ItemMinechemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack item, Object... data)
     {
-        ResourceLocation texture = new ResourceLocation(ModMinechem.ID, Reference.SYNTHESIS_MODEL);
+        ResourceLocation texture = new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_MODEL);
         GL11.glPushMatrix();
         FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
         switch (type.ordinal())

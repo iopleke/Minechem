@@ -1,6 +1,6 @@
 package minechem.tileentity.microscope;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiToggleSwitch;
 import minechem.gui.GuiToggleSwitch.ToggleButton;
@@ -17,7 +17,7 @@ public class MicroscopeGuiSwitch extends GuiToggleSwitch
         this.width = 13;
         this.height = 13;
         this.numStates = 2;
-        this.texture = new ResourceLocation(ModMinechem.ID, Reference.MICROSCOPE_GUI);
+        this.texture = new ResourceLocation(Minechem.ID, Reference.MICROSCOPE_GUI);
         ToggleButton buttonSynthesis = new ToggleButton();
         buttonSynthesis.u = 176;
         buttonSynthesis.v = 124;

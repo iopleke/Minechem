@@ -3,7 +3,7 @@ package minechem.item.chemistjournal;
 import java.util.ArrayList;
 import java.util.List;
 import minechem.MinechemItemsGeneration;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiFakeSlot;
 import minechem.gui.GuiTab;
@@ -143,7 +143,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
                     }
                 }
             }
-            mc.thePlayer.openGui(ModMinechem.INSTANCE, 2, mc.theWorld, x, y, 0);
+            mc.thePlayer.openGui(Minechem.INSTANCE, 2, mc.theWorld, x, y, 0);
         }
     }
 
@@ -158,7 +158,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         currentItemStack = itemstack;
         MinechemItemsGeneration.journal.setActiveStack(itemstack, journalStack);
         ChemistJournalPacketActiveItem packet = new ChemistJournalPacketActiveItem(itemstack, player);
-        ModMinechem.network.sendToServer(packet);//TODO: Change packet system
+        Minechem.network.sendToServer(packet);//TODO: Change packet system
 
         SynthesisRecipe synthesisRecipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(itemstack);
         DecomposerRecipe decomposerRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);
@@ -265,7 +265,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         GL11.glPushMatrix();
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI));
         drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
         GL11.glPopMatrix();
 
@@ -290,7 +290,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI));
         drawTexturedModalRect(8 / 2, 164 / 2, 161 / 2, 192 / 2, 20 / 2, 20 / 2);
         GL11.glPopMatrix();
         GL11.glPopMatrix();
@@ -310,7 +310,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
         GL11.glScalef(2.0F, 2.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.JOURNAL_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI));
 
         drawTexturedModalRect(197 / 2, 41 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
         if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped())

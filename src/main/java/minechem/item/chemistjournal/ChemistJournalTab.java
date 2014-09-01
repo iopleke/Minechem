@@ -1,6 +1,6 @@
 package minechem.item.chemistjournal;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiTableOfElements;
 import minechem.gui.GuiTab;
 import net.minecraft.client.gui.Gui;
@@ -43,7 +43,7 @@ public class ChemistJournalTab extends GuiTab
     public ResourceLocation getIcon()
     {
         // TODO Auto-generated method stub
-        return ModMinechem.ICON_HELP;
+        return Minechem.ICON_HELP;
     }
 
 }

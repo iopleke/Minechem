@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.network.server.CommonProxy;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -30,13 +30,13 @@ public abstract class BlockSimple extends Block implements IBlock
     {
         super(material);
 
-        this.fullTextureName = ModMinechem.textureBase + partialTextureName;
+        this.fullTextureName = Minechem.textureBase + partialTextureName;
 
         this.blockSideCount = blockSideCount;
         
         this.blockName = blockName;
 
-        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB);
 
     }
 

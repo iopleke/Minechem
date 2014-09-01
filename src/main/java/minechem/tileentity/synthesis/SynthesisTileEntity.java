@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemItemsGeneration;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.Settings;
 import minechem.network.packet.SynthesisPacketUpdate;
 import minechem.tileentity.prefab.BoundedInventory;
@@ -492,7 +492,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
             int dimensionID = worldObj.provider.dimensionId;
 	        //TODO: Work on packet system
-            ModMinechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, synthesisPacketUpdate);
+            Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, synthesisPacketUpdate);
         }
 
         // Forces the output slot to only take a single item preventing stacking.

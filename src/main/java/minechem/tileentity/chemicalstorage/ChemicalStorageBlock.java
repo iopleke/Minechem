@@ -1,6 +1,6 @@
 package minechem.tileentity.chemicalstorage;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockChest;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +18,7 @@ public class ChemicalStorageBlock extends BlockChest
     {
         super(0);
         setBlockName("minechem.blockChemicalStorage");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setHardness(2.5F);
         setStepSound(Block.soundTypeWood);
     }
@@ -55,7 +55,7 @@ public class ChemicalStorageBlock extends BlockChest
         }
         if (tileEntity instanceof ChemicalStorageTileEntity)
         {
-            entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
+            entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
             return true;
         }
         return false;

@@ -1,6 +1,6 @@
 package minechem.tileentity.chemicalstorage;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
@@ -39,7 +39,7 @@ public class ChemicalStorageGui extends GuiContainerTabbed
     protected void drawGuiContainerBackgroundLayer(float var1, int var2, int var3)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, "textures/gui/container.png"));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, "textures/gui/container.png"));
         int var5 = (this.width - this.xSize) / 2;
         int var6 = (this.height - this.ySize) / 2;
         this.drawTexturedModalRect(var5, var6, 0, 0, this.xSize, this.inventoryRows * 18 + 17);

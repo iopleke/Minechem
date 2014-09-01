@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock.ghostblock;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.Settings;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -27,7 +27,7 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         {
             GhostBlockPacket packet = new GhostBlockPacket(this);
             int dimensionID = worldObj.provider.dimensionId;
-            ModMinechem.network.sendPacketAllAround(worldObj,this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, packet);
+            Minechem.network.sendPacketAllAround(worldObj,this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, packet);
         }
     }
 

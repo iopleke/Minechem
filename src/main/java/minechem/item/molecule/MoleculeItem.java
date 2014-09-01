@@ -3,7 +3,7 @@ package minechem.item.molecule;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.utils.MinechemHelper;
@@ -25,7 +25,7 @@ public class MoleculeItem extends Item
 
     public MoleculeItem()
     {
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setHasSubtypes(true);
         setUnlocalizedName("minechem.itemMolecule");
     }

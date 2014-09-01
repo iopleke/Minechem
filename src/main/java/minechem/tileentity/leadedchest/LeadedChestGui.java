@@ -1,6 +1,6 @@
 package minechem.tileentity.leadedchest;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
@@ -39,7 +39,7 @@ public class LeadedChestGui extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.LEADED_CHEST_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.LEADED_CHEST_GUI));
 
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

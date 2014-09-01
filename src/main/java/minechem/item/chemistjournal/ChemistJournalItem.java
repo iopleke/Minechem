@@ -3,7 +3,7 @@ package minechem.item.chemistjournal;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiHandler;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -28,7 +28,7 @@ public class ChemistJournalItem extends Item
     public ChemistJournalItem()
     {
         setUnlocalizedName("minechem.itemChemistJournal");
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
     }
 
     @Override
@@ -37,7 +37,7 @@ public class ChemistJournalItem extends Item
         // Opens the GUI for the chemists journal.
         if (!world.isRemote)
         {
-            entityPlayer.openGui(ModMinechem.INSTANCE, GuiHandler.GUI_ID_JOURNAL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY, entityPlayer.chunkCoordY);
+            entityPlayer.openGui(Minechem.INSTANCE, GuiHandler.GUI_ID_JOURNAL, world, entityPlayer.chunkCoordX, entityPlayer.chunkCoordY, entityPlayer.chunkCoordY);
             
             NBTTagCompound tagCompound = itemStack.getTagCompound();
             if (tagCompound == null)

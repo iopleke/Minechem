@@ -1,6 +1,6 @@
 package minechem.item;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,7 +19,7 @@ public class ItemPills extends ItemFood
         setMaxDamage(0);
         setMaxStackSize(32);
         this.setUnlocalizedName("minechem.itempill");
-        this.setCreativeTab(ModMinechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB);
         this.setAlwaysEdible();
     }
 

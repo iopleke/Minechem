@@ -2,7 +2,7 @@ package minechem.tileentity.microscope;
 
 import java.util.ArrayList;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.tileentity.decomposer.DecomposerRecipe;
@@ -89,7 +89,7 @@ public class MicroscopeGui extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.MICROSCOPE_GUI));
+        Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.MICROSCOPE_GUI));
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         zLevel = 0;

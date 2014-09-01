@@ -1,6 +1,6 @@
 package minechem.tileentity.chemicalstorage;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
@@ -51,7 +51,7 @@ public class ChemicalStorageTileEntityRenderer extends TileEntitySpecialRenderer
         // if (chemicalStorage.adjacentChestZNeg == null && chemicalStorage.adjacentChestXNeg == null) {
         ModelChest var14 = this.chestModel;
 
-        bindTexture(new ResourceLocation(ModMinechem.ID, Reference.CHEMICAL_STORAGE_MODEL));
+        bindTexture(new ResourceLocation(Minechem.ID, Reference.CHEMICAL_STORAGE_MODEL));
 
         GL11.glPushMatrix();
         GL11.glEnable(GL12.GL_RESCALE_NORMAL);

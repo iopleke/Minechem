@@ -1,6 +1,6 @@
 package minechem.item;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
@@ -12,7 +12,7 @@ public class ItemAtomicManipulator extends Item
 
     public ItemAtomicManipulator()
     {
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setUnlocalizedName("minechem.itemAtomicManipulator");
     }
 

@@ -1,7 +1,7 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import minechem.utils.SessionVars;
 import net.minecraft.client.Minecraft;
@@ -59,7 +59,7 @@ public abstract class GuiTab
         if (leftSide)
         {
 
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TAB_LEFT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.TAB_LEFT));
 
             myGui.drawTexturedModalRect(x - currentWidth, y + 4, 0, 256 - currentHeight + 4, 4, currentHeight - 4);
             myGui.drawTexturedModalRect(x - currentWidth + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);
@@ -68,7 +68,7 @@ public abstract class GuiTab
         } else
         {
 
-            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.TAB_RIGHT));
+            Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.TAB_RIGHT));
 
             myGui.drawTexturedModalRect(x, y, 0, 256 - currentHeight, 4, currentHeight);
             myGui.drawTexturedModalRect(x + 4, y, 256 - currentWidth + 4, 0, currentWidth - 4, 4);

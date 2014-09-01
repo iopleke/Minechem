@@ -1,6 +1,6 @@
 package minechem.oredictionary;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.Molecule;
 import minechem.potion.PotionChemical;
@@ -47,7 +47,7 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
         }
         else
         {
-            ModMinechem.LOGGER.info("Unknown type of Certus Quartz : " + oreEvent.Name);
+            Minechem.LOGGER.info("Unknown type of Certus Quartz : " + oreEvent.Name);
         }
     }
 }

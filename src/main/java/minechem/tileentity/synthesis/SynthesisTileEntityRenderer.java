@@ -1,6 +1,6 @@
 package minechem.tileentity.synthesis;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -32,7 +32,7 @@ public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-            bindTexture(new ResourceLocation(ModMinechem.ID, Reference.SYNTHESIS_MODEL));
+            bindTexture(new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_MODEL));
             synthesis.model.render(0.0625F);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glDisable(GL11.GL_LIGHTING);

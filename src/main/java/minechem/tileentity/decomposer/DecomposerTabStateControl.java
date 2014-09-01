@@ -2,7 +2,7 @@ package minechem.tileentity.decomposer;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiTabStateControl;
 import minechem.tileentity.decomposer.DecomposerTileEntity.State;
 import minechem.utils.MinechemHelper;
@@ -16,8 +16,8 @@ public class DecomposerTabStateControl extends GuiTabStateControl
 
     enum TabState
     {
-        jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, ModMinechem.ICON_JAMMED), noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, ModMinechem.ICON_NO_BOTTLES), powered(MinechemHelper
-                .getLocalString("tab.tooltip.powered"), 0x00CC00, null), unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, ModMinechem.ICON_NO_ENERGY);
+        jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, Minechem.ICON_JAMMED), noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, Minechem.ICON_NO_BOTTLES), powered(MinechemHelper
+                .getLocalString("tab.tooltip.powered"), 0x00CC00, null), unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, Minechem.ICON_NO_ENERGY);
         public String tooltip;
         public int color;
 	    @SideOnly(Side.CLIENT)

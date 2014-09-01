@@ -1,6 +1,6 @@
 package minechem.tileentity.decomposer;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
@@ -21,7 +21,7 @@ public class DecomposerGui extends GuiContainerTabbed
     int mouseY = 0;
     int guiWidth = 176;
     int guiHeight = 166;
-    public static ResourceLocation TEXTURE = new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_GUI);
+    public static ResourceLocation TEXTURE = new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_GUI);
 
     public DecomposerGui(InventoryPlayer inventoryPlayer, DecomposerTileEntity decomposer)
     {

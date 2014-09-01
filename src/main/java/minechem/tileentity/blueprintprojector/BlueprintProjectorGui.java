@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import minechem.MinechemItemsGeneration;
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.item.blueprint.BlueprintBlock;
@@ -37,7 +37,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-        this.mc.renderEngine.bindTexture(new ResourceLocation(ModMinechem.ID, Reference.PROJECTOR_GUI));
+        this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.PROJECTOR_GUI));
         ;
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;

@@ -50,8 +50,8 @@ import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = ModMinechem.ID, name = ModMinechem.NAME, version = ModMinechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
-public class ModMinechem
+@Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
+public class Minechem
 {
     // Internal mod name used for reference purposes and resource gathering.
     public static final String ID = "minechem";
@@ -74,13 +74,13 @@ public class ModMinechem
 
     // Instancing
     @Instance(value = CHANNEL_NAME)
-    public static ModMinechem INSTANCE;
+    public static Minechem INSTANCE;
 
     // Provides standard logging from the Forge.
     // public static Logger LOGGER;
 
     // Public extra data about our mod that Forge uses in the mods listing page for more information.
-    @Mod.Metadata(ModMinechem.ID)
+    @Mod.Metadata(Minechem.ID)
     public static ModMetadata metadata;
 
     @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.server.CommonProxy")
@@ -90,21 +90,21 @@ public class ModMinechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(ModMinechem.NAME,Items.book);//TODO: set item for creative tab
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME,Items.book);//TODO: set item for creative tab
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
 
-    public static final ResourceLocation ICON_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_power.png");
-    public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_fullEower.png");
-    public static final ResourceLocation ICON_HELP = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_help.png");
-    public static final ResourceLocation ICON_JAMMED = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_jammed.png");
-    public static final ResourceLocation ICON_NO_BOTTLES = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_noBottles.png");
-    public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_noRecipe.png");
-    public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(ModMinechem.ID, Reference.ICON_BASE + "i_unpowered.png");
+    public static final ResourceLocation ICON_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_power.png");
+    public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_fullEower.png");
+    public static final ResourceLocation ICON_HELP = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_help.png");
+    public static final ResourceLocation ICON_JAMMED = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_jammed.png");
+    public static final ResourceLocation ICON_NO_BOTTLES = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_noBottles.png");
+    public static final ResourceLocation ICON_NO_RECIPE = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_noRecipe.png");
+    public static final ResourceLocation ICON_NO_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_unpowered.png");
 
     // Logging
-    public static final Logger LOGGER = LogManager.getLogger(ModMinechem.ID);
+    public static final Logger LOGGER = LogManager.getLogger(Minechem.ID);
 
     @EventHandler
     public void preInit(FMLPreInitializationEvent event)
@@ -113,7 +113,7 @@ public class ModMinechem
         INSTANCE = this;
         
         // Initialize the network wrapper
-        network = new PacketDispatcher(ModMinechem.ID);
+        network = new PacketDispatcher(Minechem.ID);
 		
         // Load configuration.
         LOGGER.info("Loading configuration...");
@@ -121,11 +121,11 @@ public class ModMinechem
         Settings.load(CONFIG);
          
         // Setup Mod Metadata for players to see in mod list with other mods.
-        metadata.modId = ModMinechem.ID;
-        metadata.name = ModMinechem.NAME;
-        metadata.description = ModMinechem.NAME + " is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements.";
+        metadata.modId = Minechem.ID;
+        metadata.name = Minechem.NAME;
+        metadata.description = Minechem.NAME + " is a mod about chemistry, allowing you to research blocks and items, and then break them down into their base compounds and elements.";
         metadata.url = "http://www.minechemmod.com/";
-        metadata.logoFile = "assets/" + ModMinechem.ID + "/logo.png";
+        metadata.logoFile = "assets/" + Minechem.ID + "/logo.png";
         metadata.version = V_MAJOR + "." + V_MINOR + V_REVIS;
         metadata.authorList = Arrays.asList(new String[]
         {

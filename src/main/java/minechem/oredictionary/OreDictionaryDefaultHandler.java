@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
@@ -64,7 +64,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
     @Override
     public void handle(OreRegisterEvent event)
     {
-        ModMinechem.LOGGER.info(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + event.Name);
+        Minechem.LOGGER.info(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + event.Name);
 
         String[] tokens = this.parseOreName(event.Name);
         EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
@@ -111,7 +111,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
             break;
 
         default:
-            ModMinechem.LOGGER.warn(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
+            Minechem.LOGGER.warn(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
             break;
         }
 

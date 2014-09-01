@@ -1,6 +1,6 @@
 package minechem.tileentity.decomposer;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.tileentity.decomposer.DecomposerTileEntity.State;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -26,23 +26,23 @@ public class DecomposerTileEntityRenderer extends TileEntitySpecialRenderer
             // When the decomposer is powered we will change the texture to reflect this.
             if (decomposer.isPowered() && decomposer.state != State.active)
             {
-                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_ON));
+                bindTexture(new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_ON));
             }
             else if (decomposer.isPowered() && decomposer.state == State.active)
             {
                 // Makes the machine spin and look active while it is actually decomposing items in the input slot.
-                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_ON));
+                bindTexture(new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_ON));
                 decomposer.model.updateWindillRotation(decomposer);
             }
             else if (!decomposer.isPowered())
             {
                 // When the machine has no power we will reflect this with texture.
-                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_OFF));
+                bindTexture(new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_OFF));
             }
             else
             {
                 // If we somehow enter another weird state just turn off.
-                bindTexture(new ResourceLocation(ModMinechem.ID, Reference.DECOMPOSER_MODEL_OFF));
+                bindTexture(new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_OFF));
             }
             
             decomposer.model.render(0.0625F);

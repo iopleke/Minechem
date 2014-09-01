@@ -96,7 +96,7 @@ public class Settings
         } catch (Exception e)
         {
             // failed to load config log
-            ModMinechem.LOGGER.warn("Failed to load configuration file!");
+            Minechem.LOGGER.warn("Failed to load configuration file!");
         } finally
         {
             config.save();

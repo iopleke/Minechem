@@ -2,7 +2,7 @@ package minechem.tileentity.microscope;
 
 import java.util.ArrayList;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
 import minechem.network.server.CommonProxy;
 import minechem.utils.Reference;
@@ -25,7 +25,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
     public MicroscopeBlock()
     {
         super(Material.iron);
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setBlockName("opticalMicroscope");
         setLightLevel(0.5F);
     }
@@ -44,7 +44,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity == null || entityPlayer.isSneaking())
             return false;
-        entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
+        entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
         return true;
     }
 

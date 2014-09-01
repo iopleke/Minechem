@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import minechem.ModMinechem;
+import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
@@ -31,7 +31,7 @@ public class FusionBlock extends BlockSimpleContainer
     public FusionBlock()
     {
         super(Material.iron);
-        setCreativeTab(ModMinechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB);
         setBlockName("minechem.blockFusion");
     }
 
@@ -53,7 +53,7 @@ public class FusionBlock extends BlockSimpleContainer
         }
         if (!world.isRemote)
         {
-            entityPlayer.openGui(ModMinechem.INSTANCE, 0, world, x, y, z);
+            entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
         }
         return true;
     }
