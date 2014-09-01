@@ -1,54 +1,57 @@
 package minechem.network.packet;
 
-import minechem.Minechem;
-import minechem.Settings;
 import minechem.network.PacketDispatcher;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-
-import cpw.mods.fml.relauncher.Side;
 import net.minecraft.network.PacketBuffer;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import java.io.IOException;
 
 public class DecomposerPacketUpdate extends PacketDispatcher.AbstractPacket<DecomposerPacketUpdate>
 {
-    /** X coordinates of tile entity source. */
+    /**
+     * X coordinates of tile entity source.
+     */
     private int tilePosX;
-    
-    /** Y coordinates of tile entity source. */
+
+    /**
+     * Y coordinates of tile entity source.
+     */
     private int tilePosY;
-    
-    /** Z coordinates of tile entity source. */
+
+    /**
+     * Z coordinates of tile entity source.
+     */
     private int tilePosZ;
-    
-    /** Holds integer that is a reference to enumeration for current state machine is in. */
+
+    /**
+     * Holds integer that is a reference to enumeration for current state machine is in.
+     */
     private int state;
-    
-    /** Energy stored */
+
+    /**
+     * Energy stored
+     */
     private double lastItemStoredEnergy;
-    
-    /** Maximum amount of energy. */
+
+    /**
+     * Maximum amount of energy.
+     */
     private double lastItemStoredEnergyMaximum;
-    
-    /** Reference object that will be hooked on client side only */
+
+    /**
+     * Reference object that will be hooked on client side only
+     */
     private DecomposerTileEntity tileEntity;
 
     public DecomposerPacketUpdate(DecomposerTileEntity serverDecomposer)
-    {        
+    {
         // World position information.
         tilePosX = serverDecomposer.xCoord;
         tilePosY = serverDecomposer.yCoord;
         tilePosZ = serverDecomposer.zCoord;
-        
-        // Energy.
-        lastItemStoredEnergy = serverDecomposer.getEnergy(ForgeDirection.UNKNOWN);
-        lastItemStoredEnergyMaximum = serverDecomposer.getEnergyCapacity(ForgeDirection.UNKNOWN);
-        
+
         // Tile entity specific information.
         this.state = serverDecomposer.getState().ordinal();
     }
@@ -58,57 +61,58 @@ public class DecomposerPacketUpdate extends PacketDispatcher.AbstractPacket<Deco
         // Required for reflection.
     }
 
-	@Override
-	public void sendPacket(PacketBuffer out) throws IOException {
+    @Override
+    public void sendPacket(PacketBuffer out) throws IOException
+    {
 		// ------
-		// SERVER
+        // SERVER
+        // ------
+
+        // World coordinate information.
+        out.writeInt(tilePosX);
+        out.writeInt(tilePosY);
+        out.writeInt(tilePosZ);
+
+        // Energy.
+        out.writeLong((long) lastItemStoredEnergy);
+        out.writeLong((long) lastItemStoredEnergyMaximum);
+
+        // Machine state.
+        out.writeInt(state);
+    }
+
+    @Override
+    public void receivePacket(PacketBuffer in) throws IOException
+    {
 		// ------
+        // CLIENT
+        // ------
 
-		// World coordinate information.
-		out.writeInt(tilePosX);
-		out.writeInt(tilePosY);
-		out.writeInt(tilePosZ);
+        // World coordinate information.
+        this.tilePosX = in.readInt();
+        this.tilePosY = in.readInt();
+        this.tilePosZ = in.readInt();
 
-		// Energy.
-		out.writeLong((long) lastItemStoredEnergy);
-		out.writeLong((long) lastItemStoredEnergyMaximum);
+        // Energy.
+        this.lastItemStoredEnergy = in.readLong();
+        this.lastItemStoredEnergyMaximum = in.readLong();
 
-		// Machine state.
-		out.writeInt(state);
-	}
+        // Machine state.
+        this.state = in.readInt();
+    }
 
-	@Override
-	public void receivePacket(PacketBuffer in) throws IOException {
-		// ------
-		// CLIENT
-		// ------
+    @Override
+    public void processPacket(EntityPlayer player)
+    {
+        tileEntity = (DecomposerTileEntity) player.worldObj.getTileEntity(tilePosX, tilePosY, tilePosZ);
+        if (tileEntity == null)
+        {
+            return;
+        }
 
-		// World coordinate information.
-		this.tilePosX = in.readInt();
-		this.tilePosY = in.readInt();
-		this.tilePosZ = in.readInt();
-
-		// Energy.
-		this.lastItemStoredEnergy = in.readLong();
-		this.lastItemStoredEnergyMaximum = in.readLong();
-
-		// Machine state.
-		this.state = in.readInt();
-	}
-
-	@Override
-	public void processPacket(EntityPlayer player) {
-		tileEntity = (DecomposerTileEntity) player.worldObj.getTileEntity(tilePosX, tilePosY, tilePosZ);
-		if (tileEntity == null)
-		{
-			return;
-		}
-
-		// Energy.
-		this.tileEntity.setEnergy(ForgeDirection.UNKNOWN, lastItemStoredEnergy);
-		this.tileEntity.setEnergyCapacity((long) lastItemStoredEnergyMaximum);
-
-		// Machine state.
-		this.tileEntity.setState(this.state);
-	}
+        // Energy.
+        // @TODO - implement an energy system
+        // Machine state.
+        this.tileEntity.setState(this.state);
+    }
 }

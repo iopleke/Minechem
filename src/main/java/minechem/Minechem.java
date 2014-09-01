@@ -7,7 +7,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
-import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
 import minechem.gui.GuiTabStateControl;
 import minechem.gui.GuiTabTable;
@@ -34,7 +33,6 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
-
 
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -68,7 +66,7 @@ public class Minechem
     public static final String V_REVIS = "@REVIS@";
     public static final String V_BUILD = "@BUILD@";
     public static final String VERSION_FULL = V_MAJOR + "." + V_MINOR + V_REVIS + "." + V_BUILD;
-    
+
     // Misc variables
     public static final String textureBase = "minechem:";
 
@@ -78,14 +76,13 @@ public class Minechem
 
     // Provides standard logging from the Forge.
     // public static Logger LOGGER;
-
     // Public extra data about our mod that Forge uses in the mods listing page for more information.
     @Mod.Metadata(Minechem.ID)
     public static ModMetadata metadata;
 
     @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.server.CommonProxy")
     public static CommonProxy PROXY;
-    
+
     // Register a SimpleNetworkWrapper
     public static PacketDispatcher network;
 
@@ -111,15 +108,15 @@ public class Minechem
     {
         // Register instance.
         INSTANCE = this;
-        
+
         // Initialize the network wrapper
         network = new PacketDispatcher(Minechem.ID);
-		
+
         // Load configuration.
         LOGGER.info("Loading configuration...");
         CONFIG = new Configuration(event.getSuggestedConfigurationFile());
         Settings.load(CONFIG);
-         
+
         // Setup Mod Metadata for players to see in mod list with other mods.
         metadata.modId = Minechem.ID;
         metadata.name = Minechem.NAME;
@@ -179,12 +176,12 @@ public class Minechem
         LOGGER.info("Registering fluids...");
         FluidHelper.registerFluids();
 
-	    LOGGER.info("Registering Packets...");
-	    network.registerPacket(0, Side.CLIENT, SynthesisPacketUpdate.class);
-	    network.registerPacket(1, Side.SERVER, ChemistJournalPacketActiveItem.class);
-	    network.registerPacket(2, Side.CLIENT, GhostBlockPacket.class);
-	    network.registerPacket(3, Side.CLIENT, DecomposerPacketUpdate.class);
-	    network.registerPacket(4, Side.CLIENT, PolytoolTypePacket.class);
+        LOGGER.info("Registering Packets...");
+        network.registerPacket(0, Side.CLIENT, SynthesisPacketUpdate.class);
+        network.registerPacket(1, Side.SERVER, ChemistJournalPacketActiveItem.class);
+        network.registerPacket(2, Side.CLIENT, GhostBlockPacket.class);
+        network.registerPacket(3, Side.CLIENT, DecomposerPacketUpdate.class);
+        network.registerPacket(4, Side.CLIENT, PolytoolTypePacket.class);
 
         LOGGER.info("Registering Ore Generation...");
         GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
@@ -193,8 +190,8 @@ public class Minechem
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         LOGGER.info("Register Tick Events for chemical effects tracking...");
-	    FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
-	    FMLCommonHandler.instance().bus().register(new TickHandler());
+        FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
+        FMLCommonHandler.instance().bus().register(new TickHandler());
 
         LOGGER.info("Registering ClientProxy Rendering Hooks...");
         PROXY.registerRenderers();
@@ -211,7 +208,7 @@ public class Minechem
     public void postInit(FMLPostInitializationEvent event)
     {
         // Adds blueprints to dungeon loot.
-		LOGGER.info("Adding blueprints to dungeon loot...");
+        LOGGER.info("Adding blueprints to dungeon loot...");
         addDungeonLoot();
 
         LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
@@ -234,7 +231,6 @@ public class Minechem
     {
         GuiTabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
         SynthesisTabStateControl.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
-        GuiTabEnergy.powerIcon = icon.registerIcon(Reference.POWER_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         ChemistJournalTab.helpIcon = icon.registerIcon(Reference.POWER_ICON);

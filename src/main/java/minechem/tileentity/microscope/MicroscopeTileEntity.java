@@ -12,13 +12,17 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.INode;
 
 public class MicroscopeTileEntity extends MinechemTileEntity implements IInventory
 {
-    public static int[] kInput = { 0 };
-    public static int[] kJournal = { 1 };
+    public static int[] kInput =
+    {
+        0
+    };
+    public static int[] kJournal =
+    {
+        1
+    };
 
     public boolean isShaped = true;
 
@@ -63,8 +67,7 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
             ItemStack itemstack = inventory[slot];
             inventory[slot] = null;
             return itemstack;
-        }
-        else
+        } else
         {
             return null;
         }
@@ -81,9 +84,13 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
     {
         inventory[slot] = itemStack;
         if (slot == 0 && itemStack != null && !worldObj.isRemote)
+        {
             onInspectItemStack(itemStack);
+        }
         if (slot == 1 && itemStack != null && inventory[0] != null && !worldObj.isRemote)
+        {
             onInspectItemStack(inventory[0]);
+        }
     }
 
     @Override
@@ -92,12 +99,13 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
         return "container.microscope";
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
-	@Override
+    @Override
     public int getInventoryStackLimit()
     {
         return 1;
@@ -159,14 +167,13 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         if (i == kInput[0])
+        {
             return true;
+        }
         if (i == kJournal[0] && itemstack.getItem() == MinechemItemsRegistration.journal)
+        {
             return true;
+        }
         return false;
     }
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
 }

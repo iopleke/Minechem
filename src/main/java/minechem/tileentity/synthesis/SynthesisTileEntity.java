@@ -21,19 +21,9 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.INode;
 
 public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInventory
 {
-    /**
-     * Amount of power the machine will accept in a single update.
-     */
-    private static final int POWER_INPUT = 200;
-
-    /**
-     * Maximum amount of power the machine can accept in total.
-     */
-    private static final int MAX_POWER = 1022220;
 
     /**
      * Output slot for completed item the machine will create.
@@ -144,8 +134,8 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
 
     public SynthesisTileEntity()
     {
-        // Establishes maximum power and total amount of power that can be accepted per update.
-        super(MAX_POWER, POWER_INPUT);
+        // @TODO - re-add power requirements
+        super();
 
         // Creates internal inventory that will represent all of the needed slots that makeup the machine.
         inventory = new ItemStack[getSizeInventory()];
@@ -186,7 +176,8 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
      */
     public boolean canTakeOutputStack()
     {
-        return inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(false);
+        boolean theState = inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(false);
+        return theState;
     }
 
     /**
@@ -382,7 +373,8 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
      */
     public boolean hasEnoughPowerForCurrentRecipe()
     {
-        return currentRecipe != null && this.getEnergy(ForgeDirection.UNKNOWN) >= currentRecipe.energyCost();
+        // @TODO - check for enough energy before returning true
+        return true;
     }
 
     @Override
@@ -392,23 +384,18 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
     }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory()
+    {
 
-	}
-
-//	@Override
-//    public void onInventoryChanged()
-//    {
-//        super.onInventoryChanged();
-//        getRecipeResult();
-//    }
-
+    }
+    
     @Override
     public void readFromNBT(NBTTagCompound nbt)
     {
@@ -444,12 +431,13 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
-	/**
+    /**
      * Determines if there are items in the internal buffer which can be moved into the output slots. Allows the action of moving them to be stopped with doTake being false.
      */
     public boolean takeStacksFromStorage(boolean doTake)
@@ -476,7 +464,6 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             storageInventory.setInventoryStacks(storage);
 
             // Consume the required amount of energy that was the cost of the item being created.
-            this.consumeEnergy(currentRecipe.energyCost());
         }
 
         return true;
@@ -491,14 +478,15 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         {
             SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
             int dimensionID = worldObj.provider.dimensionId;
-	        //TODO: Work on packet system
+            //TODO: Work on packet system
             Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, synthesisPacketUpdate);
         }
-
         // Forces the output slot to only take a single item preventing stacking.
         if (currentRecipe != null && inventory[kOutput[0]] == null)
         {
             inventory[kOutput[0]] = currentRecipe.getOutput().copy();
+        } else {
+            this.validate();
         }
     }
 
@@ -522,8 +510,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
      */
     public boolean canAffordRecipe(SynthesisRecipe recipe)
     {
-        int energyCost = recipe.energyCost();
-        return this.getEnergy(ForgeDirection.UNKNOWN) >= energyCost;
+        return true;// @TODO - calculate if energy cost can be paid
     }
 
     /**
@@ -721,9 +708,4 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         }
         return false;
     }
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
 }

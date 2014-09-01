@@ -8,13 +8,10 @@ import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.ISidedInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
-import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.INode;
 
 public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
@@ -119,17 +116,19 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         return completeStructure;
     }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory()
+    {
 
-	}
+    }
 
-	@Override
+    @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
     {
         super.readFromNBT(nbtTagCompound);
@@ -151,12 +150,13 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         this.inventory[slot] = itemstack;
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
-	@Override
+    @Override
     public void updateEntity()
     {
         super.updateEntity();
@@ -208,9 +208,4 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         nbtTagCompound.setTag("inventory", inventoryTagList);
     }
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
 }

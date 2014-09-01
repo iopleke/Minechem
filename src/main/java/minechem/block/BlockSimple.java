@@ -33,7 +33,7 @@ public abstract class BlockSimple extends Block implements IBlock
         this.fullTextureName = Minechem.textureBase + partialTextureName;
 
         this.blockSideCount = blockSideCount;
-        
+
         this.blockName = blockName;
 
         this.setCreativeTab(Minechem.CREATIVE_TAB);
@@ -203,7 +203,7 @@ public abstract class BlockSimple extends Block implements IBlock
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister iconRegister)
     {
-            blockIcon = iconRegister.registerIcon(this.fullTextureName);
+        blockIcon = iconRegister.registerIcon(this.fullTextureName);
     }
 
     @Override

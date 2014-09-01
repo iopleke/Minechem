@@ -3,7 +3,6 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
@@ -23,7 +22,6 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
-import universalelectricity.api.core.grid.INode;
 
 public class DecomposerTileEntity extends MinechemTileEntity implements ISidedInventory, IFluidHandler
 {
@@ -67,7 +65,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
      * Wrapper for input inventory functions.
      */
     private final BoundedInventory inputInventory = new BoundedInventory(this, inputSlots);
-    
+
     /**
      * Wrapper for interacting with input slots.
      */
@@ -92,7 +90,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
      * Instance of our model for the decomposer.
      */
     public DecomposerModel model;
-    
+
     /**
      * Items waiting to be unloaded into output slots from decomposition process.
      */
@@ -115,8 +113,8 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
     public DecomposerTileEntity()
     {
-        // Sets the total amount of energy that can be stored and the amount we can receive in a single network update.
-        super(MAX_ENERGY_STORED, MAX_ENERGY_RECIEVED);
+        // @TODO - Set the total amount of energy that can be stored and the amount we can receive in a single network update.
+        super();
 
         // Sets up internal input and output slots used by the server to keep track of items inside of the machine for processing.
         inventory = new ItemStack[getSizeInventory()];
@@ -212,6 +210,12 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         }
 
         return false;
+    }
+
+    @Override
+    public void closeInventory()
+    {
+        
     }
 
     /**
@@ -386,6 +390,12 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return result;
     }
 
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
+
     /**
      * Determines if there is a valid recipe to decompose a given fluid in our internal fluid array storage.
      *
@@ -428,17 +438,13 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         return true;
     }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
-
-	}
-
-	/**
+    /**
      * Accepts an array list of itemStacks that should be outputted into the machines output slot over time and with electric power.
      */
     private void placeStacksInBuffer(ArrayList<ItemStack> outputStacks)
@@ -459,7 +465,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
         NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_LIST);
 
-        NBTTagList buffer = nbt.getTagList("buffer",Constants.NBT.TAG_LIST);
+        NBTTagList buffer = nbt.getTagList("buffer", Constants.NBT.TAG_LIST);
 
         outputBuffer = MinechemHelper.readTagListToItemStackList(buffer);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
@@ -498,12 +504,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         this.inventory[slot] = itemstack;
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
-
-	/**
+    /**
      * Sets the current state of the machine using an integer to reference an enumeration.
      */
     public void setState(int state)
@@ -545,35 +546,10 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
                 }
             }
         }
-
-	    //TODO: Setup packet
-        // Sends a packet to clients around the machine.
-        //PacketDispatcher.sendPacketToAllAround(this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, worldObj.provider.dimensionId, new DecomposerPacketUpdate(this).makePacket());
-
-        // Determine if we should change our state to active.
-        if (state == state.idle && this.isPowered() && canDecomposeInput())
-        {
-            state = State.active;
-        } else if (state == State.jammed && canUnjam() && this.isPowered())
-        {
-            // Reactivates the machine once output slots have been cleared.
-            // Note: It is possible for some items and blocks to decompose into more molecules than there are output slots!
-            state = State.active;
-        }
-
-        // If the machines state is currently not set to active then stop operation.
-        if (state != State.active)
-        {
-            return;
-        }
-
+        
         // Determines the current state of the machine.
         state = determineOperationalState();
-        if (state == State.active && this.isPowered())
-        {
-            // Consume energy to create the needed base elements.
-            this.consumeEnergy(1);
-        } else if ((state == State.idle || state == State.finished) && canDecomposeInput() && this.isPowered())
+        if ((state == State.idle || state == State.finished) && canDecomposeInput())
         {
             // Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
             activeStack = null;
@@ -614,17 +590,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
         nbt.setByte("state", (byte) state.ordinal());
     }
 
-	@Override
-	public void setEnergy(ForgeDirection from, double energy) {
-
-	}
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
-
-	/**
+    /**
      * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
      */
     public enum State

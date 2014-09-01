@@ -14,18 +14,22 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.INode;
 
 public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
 
     public static int[] kInput =
-    { 0 };
+    {
+        0
+    };
     public static int[] kFuel =
-    { 1 };
+    {
+        1
+    };
     public static int[] kOutput =
-    { 2 };
+    {
+        2
+    };
 
     private final BoundedInventory inputInventory;
     private final BoundedInventory outputInventory;
@@ -60,7 +64,9 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         super.updateEntity();
         if (!completeStructure)
+        {
             return;
+        }
         shouldSendUpdatePacket = false;
         if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 50 == 0 && inventory[kStartFuel] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
         {
@@ -95,8 +101,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             ItemStack output = fusionResult.copy();
             inventory[kOutput[0]] = output;
-        }
-        else
+        } else
         {
             inventory[kOutput[0]].stackSize += 2;
         }
@@ -113,7 +118,9 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         ItemStack itemInOutput = inventory[kOutput[0]];
         if (itemInOutput != null)
+        {
             return itemInOutput.stackSize < getInventoryStackLimit() && itemInOutput.isItemEqual(fusionResult);
+        }
         return true;
     }
 
@@ -126,13 +133,11 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
             if (newMass > 1)
             {
                 return new ItemStack(MinechemItemsRegistration.element, 2, newMass - 1);
-            }
-            else
+            } else
             {
                 return null;
             }
-        }
-        else
+        } else
         {
             return null;
         }
@@ -163,31 +168,36 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         return "container.minechemFission";
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
-	@Override
+    @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
         if (!completeStructure)
+        {
             return false;
+        }
 
         return true;
     }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory()
+    {
 
-	}
+    }
 
-	@Override
+    @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
         super.writeToNBT(nbtTagCompound);
@@ -223,12 +233,12 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         switch (side)
         {
-        case 0:
-            return kOutput;
-        case 1:
-            return kInput;
-        default:
-            return kFuel;
+            case 0:
+                return kOutput;
+            case 1:
+                return kInput;
+            default:
+                return kFuel;
         }
     }
 
@@ -237,12 +247,12 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         switch (i)
         {
-        case 0:
-            return FissionTileEntity.kOutput;
-        case 1:
-            return FissionTileEntity.kInput;
-        default:
-            return FissionTileEntity.kFuel;
+            case 0:
+                return FissionTileEntity.kOutput;
+            case 1:
+                return FissionTileEntity.kInput;
+            default:
+                return FissionTileEntity.kFuel;
         }
     }
 
@@ -257,9 +267,4 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         return true;
     }
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
 }

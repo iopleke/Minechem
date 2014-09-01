@@ -22,11 +22,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
-import universalelectricity.api.item.IEnergyItem;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class PolytoolItem extends ItemPickaxe implements IEnergyItem
+public class PolytoolItem extends ItemPickaxe
 {
 
     public static PolytoolItem instance;
@@ -142,16 +141,17 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
         return true;
     }
 
-	@Override
-	public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_) {
-		ArrayList upgrades = getUpgrades(p_150894_1_);
-		Iterator iter = upgrades.iterator();
-		while (iter.hasNext())
-		{
-			((PolytoolUpgradeType) iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
-		}
-		return true;
-	}
+    @Override
+    public boolean onBlockDestroyed(ItemStack p_150894_1_, World p_150894_2_, Block p_150894_3_, int p_150894_4_, int p_150894_5_, int p_150894_6_, EntityLivingBase p_150894_7_)
+    {
+        ArrayList upgrades = getUpgrades(p_150894_1_);
+        Iterator iter = upgrades.iterator();
+        while (iter.hasNext())
+        {
+            ((PolytoolUpgradeType) iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
+        }
+        return true;
+    }
 
     public static void addTypeToNBT(ItemStack stack, PolytoolUpgradeType type)
     {
@@ -220,64 +220,7 @@ public class PolytoolItem extends ItemPickaxe implements IEnergyItem
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List list, boolean par4)
     {
-
         super.addInformation(par1ItemStack, par2EntityPlayer, list, par4);
-        if (PolytoolItem.getPowerOfType(par1ItemStack, ElementEnum.Be) != 0)
-        {
-            list.add("Stored: " + this.getEnergy(par1ItemStack) + ", +" + Math.ceil(Math.max(0, Math.log10(this.getEnergy(par1ItemStack)) - 7)));
-        }
     }
-
-	@Override
-	public double recharge(ItemStack itemStack, double energy, boolean doRecharge) {
-		ensureNBT(itemStack);
-
-		if (getPowerOfType(itemStack, ElementEnum.Li) != 0)
-		{
-
-			if (!doRecharge)
-			{
-				int toAdd = (int) (energy * getPowerOfType(itemStack, ElementEnum.Li));
-				itemStack.stackTagCompound.setDouble("Energy", getEnergy(itemStack) + toAdd);
-
-			}
-			return energy;
-
-		}
-		return energy;
-	}
-
-	@Override
-	public double discharge(ItemStack itemStack, double energy, boolean doDischarge) {
-		return 0;
-	}
-
-	@Override
-    public double getEnergy(ItemStack theItem)
-    {
-        ensureNBT(theItem);
-        if (getPowerOfType(theItem, ElementEnum.Li) != 0)
-        {
-            return theItem.stackTagCompound.getInteger("Energy");
-        }
-        return 0;
-
-    }
-
-	@Override
-	public double getEnergyCapacity(ItemStack theItem) {
-		return Integer.MAX_VALUE;
-	}
-
-	@Override
-	public void setEnergy(ItemStack itemStack, double energy) {
-
-	}
-
-	@Override
-	public double getVoltage(ItemStack theItem) {
-		return 0;
-	}
-
 
 }

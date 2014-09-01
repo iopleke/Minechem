@@ -2,7 +2,6 @@ package minechem.tileentity.synthesis;
 
 import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -24,7 +23,6 @@ public class SynthesisGui extends GuiContainerTabbed
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new SynthesisTabStateControl(this, synthesis));
-        addTab(new GuiTabEnergy(this, synthesis));
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.synthesis")));
     }
 

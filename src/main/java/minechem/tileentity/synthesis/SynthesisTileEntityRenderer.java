@@ -20,7 +20,9 @@ public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 
             // Animate the machine if it has power and something to work on.
             SynthesisRecipe currentRecipe = synthesis.getCurrentRecipe();
-            if (synthesis.isPowered() && currentRecipe != null && !synthesis.canAffordRecipe(currentRecipe))
+            
+            // @TODO - check if machine is powered
+            if (currentRecipe != null && !synthesis.canAffordRecipe(currentRecipe))
             {
                 synthesis.model.updateArm();
             }

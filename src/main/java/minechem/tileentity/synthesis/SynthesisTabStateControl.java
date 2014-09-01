@@ -11,7 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 public class SynthesisTabStateControl extends GuiTabStateControl
 {
     public static IIcon noRecipeIcon;
-	public static IIcon unpoweredIcon;
+    public static IIcon unpoweredIcon;
     SynthesisTileEntity synthesis;
 
     enum TabState
@@ -53,15 +53,14 @@ public class SynthesisTabStateControl extends GuiTabStateControl
         if (recipe == null)
         {
             state = TabState.norecipe;
-        }
-        else
+        } else
         {
             lastKnownEnergyCost = recipe.energyCost();
-            if (synthesis.getEnergy(ForgeDirection.UNKNOWN) >= lastKnownEnergyCost)
+            // @TODO - if UE is detected, display tab, otherwise have machine always powered
+            if (true)
             {
                 state = TabState.powered;
-            }
-            else
+            } else
             {
                 state = TabState.unpowered;
             }
@@ -74,12 +73,12 @@ public class SynthesisTabStateControl extends GuiTabStateControl
     public void draw(int x, int y)
     {
         drawBackground(x, y);
-        
+
         if (this.state.resource != null)
         {
             drawIcon(x + 3, y + 5);
         }
-        
+
         if (!isFullyOpened())
         {
             return;
@@ -93,7 +92,7 @@ public class SynthesisTabStateControl extends GuiTabStateControl
         {
             return "Energy Needed: " + lastKnownEnergyCost;
         }
-        
+
         return this.state.tooltip;
     }
 

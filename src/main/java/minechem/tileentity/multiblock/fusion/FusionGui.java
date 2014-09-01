@@ -9,7 +9,6 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 
-import net.minecraftforge.common.util.ForgeDirection;
 import org.lwjgl.opengl.GL11;
 
 public class FusionGui extends GuiContainerTabbed
@@ -21,14 +20,12 @@ public class FusionGui extends GuiContainerTabbed
     FusionTileEntity fusion;
     int guiWidth = 176;
     int guiHeight = 187;
-    float energy = 0.0F;
     int targetEnergy = 0;
 
     public FusionGui(InventoryPlayer inventoryPlayer, FusionTileEntity fusion)
     {
         super(new FusionContainer(inventoryPlayer, fusion));
         this.fusion = fusion;
-        energy = (float) fusion.getEnergy(ForgeDirection.UNKNOWN);
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
@@ -56,9 +53,9 @@ public class FusionGui extends GuiContainerTabbed
 
         // DRAW ENERGY BAR
         updateEnergy();
-        // energy = fusion.getEnergyStored();
-        int energyBarWidth = (int) MinechemHelper.translateValue(energy, 0, fusion.output, 0, 160);
-        drawTexturedModalRect(x + 8, y + 38, 0, 192, energyBarWidth, 3);
+
+        // @TODO - calculate energybar width based on machine state and energy
+        drawTexturedModalRect(x + 8, y + 38, 0, 192, 10, 3);
 
         // DRAW ENERGY BAR OVERLAY
         drawEnergyBarOverlay();
@@ -76,18 +73,7 @@ public class FusionGui extends GuiContainerTabbed
     private void updateEnergy()
     {
         targetEnergy = fusion.output;
-        if (energy < (targetEnergy))
-        {
-            energy += increaseRate;
-            if (energy > targetEnergy)
-                energy = targetEnergy;
-        }
-        else if (energy > (targetEnergy))
-        {
-            energy -= decreaseRate;
-            if (energy < targetEnergy)
-                energy = targetEnergy;
-        }
+        // @TODO - calculate energy 
     }
 
     @Override

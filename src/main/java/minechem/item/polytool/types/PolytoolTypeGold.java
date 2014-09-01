@@ -10,7 +10,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.electric.IEnergyContainer;
 
 public class PolytoolTypeGold extends PolytoolUpgradeType
 {
@@ -55,10 +54,11 @@ public class PolytoolTypeGold extends PolytoolUpgradeType
                 EntityPlayer player = (EntityPlayer) entity;
                 for (int i = 0; i < player.inventory.getSizeInventory(); i++)
                 {
-                    if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof IEnergyContainer)
-                    {
-                        ((IEnergyContainer) player.inventory.getStackInSlot(i).getItem()).setEnergy(ForgeDirection.UNKNOWN, 5000000);
-                    }
+                    // @TODO - make this recharge inventory items
+//                    if (player.inventory.getStackInSlot(i) != null && player.inventory.getStackInSlot(i).getItem() instanceof IEnergyContainer)
+//                    {
+//                        ((IEnergyContainer) player.inventory.getStackInSlot(i).getItem()).setEnergy(ForgeDirection.UNKNOWN, 5000000);
+//                    }
                 }
             }
         }

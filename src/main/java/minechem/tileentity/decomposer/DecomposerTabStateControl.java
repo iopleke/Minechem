@@ -20,10 +20,10 @@ public class DecomposerTabStateControl extends GuiTabStateControl
                 .getLocalString("tab.tooltip.powered"), 0x00CC00, null), unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, Minechem.ICON_NO_ENERGY);
         public String tooltip;
         public int color;
-	    @SideOnly(Side.CLIENT)
+        @SideOnly(Side.CLIENT)
         public IIcon icon;
-	    @SideOnly(Side.CLIENT)
-	    public ResourceLocation resource;
+        @SideOnly(Side.CLIENT)
+        public ResourceLocation resource;
 
         private TabState(String tooltip, int color, ResourceLocation resource)
         {
@@ -54,13 +54,9 @@ public class DecomposerTabStateControl extends GuiTabStateControl
         if (state == State.jammed)
         {
             this.state = TabState.jammed;
-        }
-        else if (decomposer.isPowered())
+        } else
         {
-            this.state = TabState.powered;
-        }
-        else
-        {
+            // @TODO - check if machine is powered
             this.state = TabState.unpowered;
         }
 
@@ -72,9 +68,13 @@ public class DecomposerTabStateControl extends GuiTabStateControl
     {
         drawBackground(x, y);
         if (this.state.resource != null)
+        {
             drawIcon(x + 3, y + 5);
+        }
         if (!isFullyOpened())
+        {
             return;
+        }
     }
 
     @Override

@@ -9,9 +9,6 @@ import minechem.tileentity.prefab.MinechemTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.server.MinecraftServer;
-import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.INode;
 
 public class GhostBlockTileEntity extends MinechemTileEntity
 {
@@ -27,7 +24,7 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         {
             GhostBlockPacket packet = new GhostBlockPacket(this);
             int dimensionID = worldObj.provider.dimensionId;
-            Minechem.network.sendPacketAllAround(worldObj,this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, packet);
+            Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, packet);
         }
     }
 
@@ -106,12 +103,13 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         return null;
     }
 
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
-	@Override
+    @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
         return false;
@@ -123,18 +121,15 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         return false;
     }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory()
+    {
 
-	}
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
+    }
 }

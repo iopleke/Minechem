@@ -21,7 +21,6 @@ import minechem.item.polytool.types.PolytoolTypeHydrogen;
 import minechem.item.polytool.types.PolytoolTypeIron;
 import minechem.item.polytool.types.PolytoolTypeKrypton;
 import minechem.item.polytool.types.PolytoolTypeLead;
-import minechem.item.polytool.types.PolytoolTypeLithium;
 import minechem.item.polytool.types.PolytoolTypeMagnesium;
 import minechem.item.polytool.types.PolytoolTypeMercury;
 import minechem.item.polytool.types.PolytoolTypeNeon;
@@ -45,7 +44,7 @@ public class PolytoolHelper
     public static boolean loaded;
     public static HashMap<ElementEnum, Class<PolytoolUpgradeType>> types = new HashMap();
     public static Class[] typeClasses =
-    { PolytoolTypeArgon.class, PolytoolTypeLithium.class, PolytoolTypeBeryllium.class, PolytoolTypeMagnesium.class, PolytoolTypeBoron.class, PolytoolTypeMercury.class, PolytoolTypeBromine.class, PolytoolTypeNeon.class, PolytoolTypeCaesium.class,
+    { PolytoolTypeArgon.class, PolytoolTypeBeryllium.class, PolytoolTypeMagnesium.class, PolytoolTypeBoron.class, PolytoolTypeMercury.class, PolytoolTypeBromine.class, PolytoolTypeNeon.class, PolytoolTypeCaesium.class,
             PolytoolTypeNickel.class, PolytoolTypeCalcium.class, PolytoolTypeNitrogen.class, PolytoolTypeCarbon.class, PolytoolTypeOxygen.class, PolytoolTypeChlorine.class, PolytoolTypePhosphorus.class, PolytoolTypeChromium.class,
             PolytoolTypePlatnium.class, PolytoolTypeFluorine.class, PolytoolTypeRubidium.class, PolytoolTypeFrancium.class, PolytoolTypeSilicon.class, PolytoolTypeGold.class, PolytoolTypeSilver.class, PolytoolTypeHelium.class, PolytoolTypeSodium.class,
             PolytoolTypeHydrogen.class, PolytoolTypeSulfur.class, PolytoolTypeIron.class, PolytoolTypeTitanium.class, PolytoolTypeKrypton.class, PolytoolTypeUranium.class, PolytoolTypeLead.class, PolytoolTypeZirconium.class };

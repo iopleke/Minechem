@@ -2,7 +2,6 @@ package minechem.tileentity.decomposer;
 
 import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
-import minechem.gui.GuiTabEnergy;
 import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -29,7 +28,6 @@ public class DecomposerGui extends GuiContainerTabbed
         DecomposerGui.ENTITY = decomposer;
         this.PLAYER_INVENTORY = inventoryPlayer;
         addTab(new DecomposerTabStateControl(this, decomposer));
-        addTab(new GuiTabEnergy(this, decomposer));
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.decomposer")));
 
     }

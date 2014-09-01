@@ -24,7 +24,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
-import universalelectricity.api.core.grid.INode;
 
 public class BlueprintProjectorTileEntity extends MinechemTileEntity
 {
@@ -73,23 +72,27 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                     {
                         MultiBlockStatusEnum multiBlockStatusEnum;
                         if (isManagerBlock(x, y, z))
+                        {
                             multiBlockStatusEnum = MultiBlockStatusEnum.CORRECT;
-                        else
+                        } else
+                        {
                             multiBlockStatusEnum = projectGhostBlock(x, y, z, position);
+                        }
                         if (multiBlockStatusEnum == MultiBlockStatusEnum.CORRECT)
                         {
                             verticalIncorrectCount--;
                             totalIncorrectCount--;
                         }
-                    }
-                    else
+                    } else
                     {
                         destroyGhostBlock(x, y, z, position);
                     }
                 }
             }
             if (verticalIncorrectCount != 0)
+            {
                 shouldProjectGhostBlocks = false;
+            }
         }
 
         if (totalIncorrectCount == 0 && (!isComplete || !(worldObj.getTileEntity(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ()) instanceof MultiBlockTileEntity)))
@@ -113,7 +116,9 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 for (int z = 0; z < blueprint.zSize; z++)
                 {
                     if (isManagerBlock(x, y, z))
+                    {
                         continue;
+                    }
                     int structureId = resultStructure[y][x][z];
                     setBlock(x, y, z, position, structureId, blockLookup, managerTileEntity);
                 }
@@ -144,8 +149,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 worldObj.setTileEntity(xCoord, yCoord, zCoord, fusion);
             }
             return worldObj.getTileEntity(worldPos.x, worldPos.y, worldPos.z);
-        }
-        else
+        } else
         {
             return null;
         }
@@ -161,12 +165,13 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         if (structureId == air)
         {
             worldObj.setBlockToAir(worldPos.x, worldPos.y, worldPos.z);
-        }
-        else
+        } else
         {
             BlueprintBlock blueprintBlock = blockLookup.get(structureId);
             if (blueprintBlock.type == Type.MANAGER)
+            {
                 return;
+            }
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, blueprintBlock.block, blueprintBlock.metadata, 3);
             if (blueprintBlock.type == Type.PROXY)
             {
@@ -189,19 +194,16 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         if (structureID == MinechemBlueprint.wildcard)
         {
             return MultiBlockStatusEnum.CORRECT;
-        }
-        else if (structureID == air)
+        } else if (structureID == air)
         {
             if (block == Blocks.air)
             {
                 return MultiBlockStatusEnum.CORRECT;
-            }
-            else
+            } else
             {
                 return MultiBlockStatusEnum.INCORRECT;
             }
-        }
-        else
+        } else
         {
             HashMap<Integer, BlueprintBlock> lut = blueprint.getBlockLookup();
             BlueprintBlock blueprintBlock = lut.get(structureID);
@@ -209,12 +211,10 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
             {
                 createGhostBlock(worldPos.x, worldPos.y, worldPos.z, structureID);
                 return MultiBlockStatusEnum.INCORRECT;
-            }
-            else if (block == blueprintBlock.block && (blockMetadata == blueprintBlock.metadata || blueprintBlock.metadata == -1))
+            } else if (block == blueprintBlock.block && (blockMetadata == blueprintBlock.metadata || blueprintBlock.metadata == -1))
             {
                 return MultiBlockStatusEnum.CORRECT;
-            }
-            else
+            } else
             {
                 return MultiBlockStatusEnum.INCORRECT;
             }
@@ -235,7 +235,9 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
     public void destroyProjection()
     {
         if (this.blueprint == null)
+        {
             return;
+        }
         int facing = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
         ForgeDirection direction = MinechemHelper.getDirectionFromFacing(facing);
         LocalPosition position = new LocalPosition(xCoord, yCoord, zCoord, direction);
@@ -274,8 +276,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         {
             this.blueprint = blueprint;
             this.structure = blueprint.getStructure();
-        }
-        else
+        } else
         {
             destroyProjection();
             this.blueprint = null;
@@ -320,16 +321,18 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         }
     }
 
-	@Override
-	public String getInventoryName() {
-		return "container.blueprintProjector";
-	}
+    @Override
+    public String getInventoryName()
+    {
+        return "container.blueprintProjector";
+    }
 
-	// Does inventory has custom name.
-	@Override
-	public boolean hasCustomInventoryName() {
-		return false;
-	}
+    // Does inventory has custom name.
+    @Override
+    public boolean hasCustomInventoryName()
+    {
+        return false;
+    }
 
     @Override
     public int getInventoryStackLimit()
@@ -384,23 +387,15 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         return true;
     }
 
-	@Override
-	public void openInventory() {
+    @Override
+    public void openInventory()
+    {
 
-	}
+    }
 
-	@Override
-	public void closeInventory() {
+    @Override
+    public void closeInventory()
+    {
 
-	}
-
-	@Override
-	public void setEnergy(ForgeDirection from, double energy) {
-
-	}
-
-	@Override
-	public <N extends INode> N getNode(Class<N> nodeType, ForgeDirection from) {
-		return null;
-	}
+    }
 }
