@@ -56,8 +56,7 @@ public class SynthesisTabStateControl extends GuiTabStateControl
         } else
         {
             lastKnownEnergyCost = recipe.energyCost();
-            // @TODO - if UE is detected, display tab, otherwise have machine always powered
-            if (true)
+            if (!Minechem.UELoaded)
             {
                 state = TabState.powered;
             } else
