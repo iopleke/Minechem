@@ -33,6 +33,8 @@ public class MinechemItemsRegistration
     public static void init()
     {
         element = new ElementItem();
+        GameRegistry.registerItem(element, "minechemElement");
+        
         molecule = new MoleculeItem();
         lens = new OpticalMicroscopeLens();
         GameRegistry.registerItem(lens, "opticalMicroscopeLens");
