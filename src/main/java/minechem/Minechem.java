@@ -43,6 +43,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minechem.item.element.ElementItem;
 import net.minecraft.init.Items;
 import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
@@ -87,7 +88,7 @@ public class Minechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB;
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME);;
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
@@ -164,9 +165,6 @@ public class Minechem
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
-
-        Minechem.CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME, MinechemItemsRegistration.element);
-        
         LOGGER.info("Registering Proxy Hooks...");
         PROXY.registerHooks();
 
