@@ -196,11 +196,6 @@ public class Minechem
         LOGGER.info("Registering ClientProxy Rendering Hooks...");
         PROXY.registerRenderers();
 
-        if (!Loader.isModLoaded("UniversalElectricity"))
-        {
-            LOGGER.warn("Universal Electricity Core NOT installed. The energy system will not function as intended.");
-        }
-
         LOGGER.info("INIT PASSED");
     }
 
