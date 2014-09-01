@@ -25,7 +25,7 @@ public class SynthesisBlock extends BlockSimpleContainer
     public SynthesisBlock()
     {
         super(Material.iron);
-        setBlockName("minechem.blockSynthesis");
+        setBlockName("chemicalSynthesizer");
         setCreativeTab(Minechem.CREATIVE_TAB);
     }
 

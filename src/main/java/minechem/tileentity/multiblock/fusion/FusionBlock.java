@@ -32,7 +32,7 @@ public class FusionBlock extends BlockSimpleContainer
     {
         super(Material.iron);
         setCreativeTab(Minechem.CREATIVE_TAB);
-        setBlockName("minechem.blockFusion");
+        setBlockName("fusionWall");
     }
 
     @Override

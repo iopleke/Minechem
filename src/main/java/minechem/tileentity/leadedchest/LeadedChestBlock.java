@@ -26,7 +26,7 @@ public class LeadedChestBlock extends BlockContainer
         this.setCreativeTab(Minechem.CREATIVE_TAB);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
-        this.setBlockName("container.leadedchest");
+        this.setBlockName("leadChest");
     }
 
 	@Override

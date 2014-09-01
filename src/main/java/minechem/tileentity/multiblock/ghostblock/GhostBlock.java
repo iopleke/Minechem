@@ -23,7 +23,7 @@ public class GhostBlock extends BlockContainer
     public GhostBlock()
     {
         super(Material.iron);
-        setBlockName("block.minechemGhostBlock");
+        setBlockName("ghostBlock");
         setLightLevel(0.5F);
         setHardness(1000F);
         setResistance(1000F);

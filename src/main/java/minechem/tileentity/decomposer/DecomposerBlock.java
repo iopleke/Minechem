@@ -19,7 +19,7 @@ public class DecomposerBlock extends BlockSimpleContainer
     public DecomposerBlock()
     {
         super(Material.iron);
-        setBlockName("decomposer");
+        setBlockName("chemicalDecomposer");
         setCreativeTab(Minechem.CREATIVE_TAB);
     }
 
