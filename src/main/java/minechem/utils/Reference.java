@@ -10,8 +10,10 @@ public interface Reference
     public static final String TEXTURE_BLOCK_DIR = "textures/blocks/"; // @TODO - refactor this to 'block'
     public static final String SOUNDS_DIR = "sounds/minechem/";
     public static final String LANG_DIR = "/assets/minechem/languages/";
-    
-    /** Reference to how many ticks make up a second in Minecraft. **/
+
+    /**
+     * Reference to how many ticks make up a second in Minecraft. *
+     */
     public static final int SECOND_IN_TICKS = 20;
 
     // Used for resourceLocations in 1.6
@@ -50,7 +52,7 @@ public interface Reference
     public static final String POWER_ICON = TEXTURE_MOD_ID + "i_power";
     public static final String HELP_ICON = TEXTURE_MOD_ID + "i_help";
     public static final String DECOMPOSER_FRONT_TEX = TEXTURE_MOD_ID + "decomposerFront";
-    public static final String DECOMPOSER_TEX = TEXTURE_MOD_ID + "blockDecomposer";
+    public static final String DECOMPOSER_TEX = TEXTURE_MOD_ID + "decomposer";
     public static final String SYNTHESIS_TEX = TEXTURE_MOD_ID + "blockSynthesis";
     public static final String LEADEDCHEST_TEX = TEXTURE_MOD_ID + "leadedchest";
     public static final String MICROSCOPE_FRONT_TEX = TEXTURE_MOD_ID + "microscopeFront";
