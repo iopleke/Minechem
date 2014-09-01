@@ -87,7 +87,7 @@ public class Minechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME, Items.book);//TODO: set item for creative tab
+    public static CreativeTabs CREATIVE_TAB;
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
@@ -164,6 +164,9 @@ public class Minechem
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+
+        Minechem.CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME, MinechemItemsRegistration.element);
+        
         LOGGER.info("Registering Proxy Hooks...");
         PROXY.registerHooks();
 
