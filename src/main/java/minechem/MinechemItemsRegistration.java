@@ -33,32 +33,32 @@ public class MinechemItemsRegistration
     public static void init()
     {
         element = new ElementItem();
-        GameRegistry.registerItem(element, "minechemElement");
+        GameRegistry.registerItem(element, Minechem.ID + "Element");
         
         molecule = new MoleculeItem();
-        GameRegistry.registerItem(molecule, "minechemMolecule");
+        GameRegistry.registerItem(molecule, Minechem.ID + "Molecule");
         
         lens = new OpticalMicroscopeLens();
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
-        GameRegistry.registerItem(lens, "opticalMicroscopeLens");
+        GameRegistry.registerItem(lens, Minechem.ID + "OpticalMicroscopeLens");
         
         atomicManipulator = new ItemAtomicManipulator();
-        GameRegistry.registerItem(atomicManipulator, "atomicManipulator");
+        GameRegistry.registerItem(atomicManipulator, Minechem.ID + "AtomicManipulator");
         
         fusionStar = new FusionStarItem();
-        GameRegistry.registerItem(fusionStar, "fusionStar");
+        GameRegistry.registerItem(fusionStar, Minechem.ID + "FusionStar");
         
         blueprint = new ItemBlueprint();
-        GameRegistry.registerItem(blueprint, "blueprint");
+        GameRegistry.registerItem(blueprint, Minechem.ID + "Blueprint");
         
         journal = new ChemistJournalItem();
-        GameRegistry.registerItem(journal, "journal");
+        GameRegistry.registerItem(journal, Minechem.ID + "Journal");
         
         polytool = new PolytoolItem();
-        GameRegistry.registerItem(polytool, "polytool");
+        GameRegistry.registerItem(polytool, Minechem.ID + "Polytool");
 
     }
 
