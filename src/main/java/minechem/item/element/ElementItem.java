@@ -124,10 +124,11 @@ public class ElementItem extends Item // implements IStorageTank
         return "minechem.itemElement." + getShortName(par1ItemStack);
     }
 
-	@Override
-	public String getItemStackDisplayName(ItemStack p_77653_1_) {
-		return getLongName(p_77653_1_);
-	}
+    @Override
+    public String getItemStackDisplayName(ItemStack p_77653_1_)
+    {
+        return getLongName(p_77653_1_);
+    }
 
     @Override
     @SideOnly(Side.CLIENT)
@@ -144,27 +145,27 @@ public class ElementItem extends Item // implements IStorageTank
         RadiationEnum radioactivity = getRadioactivity(itemstack);
         switch (radioactivity)
         {
-        case stable:
-            radioactivityColor = Constants.TEXT_MODIFIER + "7";
-            break;
-        case hardlyRadioactive:
-            radioactivityColor = Constants.TEXT_MODIFIER + "a";
-            break;
-        case slightlyRadioactive:
-            radioactivityColor = Constants.TEXT_MODIFIER + "2";
-            break;
-        case radioactive:
-            radioactivityColor = Constants.TEXT_MODIFIER + "e";
-            break;
-        case highlyRadioactive:
-            radioactivityColor = Constants.TEXT_MODIFIER + "6";
-            break;
-        case extremelyRadioactive:
-            radioactivityColor = Constants.TEXT_MODIFIER + "4";
-            break;
-        default:
-            radioactivityColor = "";
-            break;
+            case stable:
+                radioactivityColor = Constants.TEXT_MODIFIER + "7";
+                break;
+            case hardlyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "a";
+                break;
+            case slightlyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "2";
+                break;
+            case radioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "e";
+                break;
+            case highlyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "6";
+                break;
+            case extremelyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "4";
+                break;
+            default:
+                radioactivityColor = "";
+                break;
         }
 
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
@@ -186,8 +187,7 @@ public class ElementItem extends Item // implements IStorageTank
 
                 par3List.add(EnumColor.AQUA + localizedDesc);
 
-            }
-            else
+            } else
             {
                 par3List.add(EnumColor.DARK_GREEN + "SHIFT to show polytool information");
             }
@@ -203,11 +203,15 @@ public class ElementItem extends Item // implements IStorageTank
             NBTTagCompound tagCompound = itemstack.getTagCompound();
             long life = tagCompound.getLong("life");
             if (life < Constants.TICKS_PER_MINUTE)
+            {
                 timeLeft = (life / Constants.TICKS_PER_SECOND) + "s";
-            else if (life < Constants.TICKS_PER_HOUR)
+            } else if (life < Constants.TICKS_PER_HOUR)
+            {
                 timeLeft = (life / Constants.TICKS_PER_MINUTE) + "m";
-            else if (life < Constants.TICKS_PER_DAY)
+            } else if (life < Constants.TICKS_PER_DAY)
+            {
                 timeLeft = (life / Constants.TICKS_PER_HOUR) + "hr";
+            }
         }
         return timeLeft;
     }
@@ -218,14 +222,16 @@ public class ElementItem extends Item // implements IStorageTank
         return par1;
     }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List) {
-		for (ElementEnum element : ElementEnum.values())
-		{
-			par3List.add(new ItemStack(item, 1, element.ordinal()));
-		}
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List)
+    {
+        for (ElementEnum element : ElementEnum.values())
+        {
+            par3List.add(new ItemStack(item, 1, element.ordinal()));
+        }
+    }
+
     public static Object createStackOf(ElementEnum element, int amount)
     {
         return new ItemStack(MinechemItemsGeneration.element, amount, element.ordinal());
@@ -237,15 +243,13 @@ public class ElementItem extends Item // implements IStorageTank
         if (radioactivity == RadiationEnum.stable)
         {
             return new RadiationInfo(element, radioactivity);
-        }
-        else
+        } else
         {
             NBTTagCompound stackTag = element.getTagCompound();
             if (stackTag == null)
             {
                 return initiateRadioactivity(element, world);
-            }
-            else
+            } else
             {
                 int dimensionID = stackTag.getInteger("dimensionID");
                 long lastUpdate = stackTag.getLong("lastUpdate");
@@ -271,7 +275,9 @@ public class ElementItem extends Item // implements IStorageTank
     {
         NBTTagCompound stackTag = element.getTagCompound();
         if (stackTag == null)
+        {
             stackTag = new NBTTagCompound();
+        }
         stackTag.setLong("lastUpdate", radiationInfo.lastRadiationUpdate);
         stackTag.setLong("life", radiationInfo.radiationLife);
         stackTag.setInteger("dimensionID", radiationInfo.dimensionID);
