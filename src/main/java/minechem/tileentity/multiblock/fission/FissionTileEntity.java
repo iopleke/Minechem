@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock.fission;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.blueprint.BlueprintFission;
 import minechem.item.element.ElementItem;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
@@ -125,7 +125,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
             int newMass = mass / 2;
             if (newMass > 1)
             {
-                return new ItemStack(MinechemItemsGeneration.element, 2, newMass - 1);
+                return new ItemStack(MinechemItemsRegistration.element, 2, newMass - 1);
             }
             else
             {

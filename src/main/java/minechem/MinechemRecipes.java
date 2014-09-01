@@ -1078,7 +1078,7 @@ public class MinechemRecipes
         }));
 
         // Polytool
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItemsGeneration.polytool), true, '\uea60', new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItemsRegistration.polytool), true, '\uea60', new PotionChemical[]
         {
             null, this.molecule(MoleculeEnum.fullrene, 64), null, this.molecule(MoleculeEnum.fullrene, 64), null, this.molecule(MoleculeEnum.fullrene, 64), null, this.molecule(MoleculeEnum.fullrene, 64), null
         }));
@@ -1716,30 +1716,30 @@ public class MinechemRecipes
         ItemStack blockIron = new ItemStack(Blocks.iron_block);
         ItemStack itemIngotIron = new ItemStack(Items.iron_ingot);
         ItemStack itemRedstone = new ItemStack(Items.redstone);
-        ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItemsGeneration.atomicManipulator);
-        ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemsGeneration.molecule, 1, MoleculeEnum.polyvinylChloride.ordinal());
+        ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItemsRegistration.atomicManipulator);
+        ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.polyvinylChloride.ordinal());
 
-        GameRegistry.addRecipe(MinechemItemsGeneration.concaveLens, new Object[]
+        GameRegistry.addRecipe(MinechemItemsRegistration.concaveLens, new Object[]
         {
             "G G", "GGG", "G G", Character.valueOf('G'), blockGlass
         });
-        GameRegistry.addRecipe(MinechemItemsGeneration.convexLens, new Object[]
+        GameRegistry.addRecipe(MinechemItemsRegistration.convexLens, new Object[]
         {
             " G ", "GGG", " G ", Character.valueOf('G'), blockGlass
         });
-        GameRegistry.addRecipe(MinechemItemsGeneration.microscopeLens, new Object[]
+        GameRegistry.addRecipe(MinechemItemsRegistration.microscopeLens, new Object[]
         {
-            "A", "B", "A", Character.valueOf('A'), MinechemItemsGeneration.convexLens, Character.valueOf('B'), MinechemItemsGeneration.concaveLens
+            "A", "B", "A", Character.valueOf('A'), MinechemItemsRegistration.convexLens, Character.valueOf('B'), MinechemItemsRegistration.concaveLens
         });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.microscope), new Object[]
         {
-            " LI", " PI", "III", Character.valueOf('L'), MinechemItemsGeneration.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron
+            " LI", " PI", "III", Character.valueOf('L'), MinechemItemsRegistration.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron
         });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.microscope), new Object[]
         {
-            " LI", " PI", "III", Character.valueOf('L'), MinechemItemsGeneration.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron
+            " LI", " PI", "III", Character.valueOf('L'), MinechemItemsRegistration.microscopeLens, Character.valueOf('P'), blockThinGlass, Character.valueOf('I'), itemIngotIron
         });
-        GameRegistry.addRecipe(new ItemStack(MinechemItemsGeneration.atomicManipulator), new Object[]
+        GameRegistry.addRecipe(new ItemStack(MinechemItemsRegistration.atomicManipulator), new Object[]
         {
             "PPP", "PIP", "PPP", Character.valueOf('P'), new ItemStack(Blocks.piston), Character.valueOf('I'), blockIron
         });
@@ -1759,23 +1759,23 @@ public class MinechemRecipes
         {
             "IWI", "IBI", "IWI", Character.valueOf('I'), itemIngotIron, Character.valueOf('W'), ElementItem.createStackOf(ElementEnum.W, 1), Character.valueOf('B'), ElementItem.createStackOf(ElementEnum.Be, 1)
         });
-        GameRegistry.addRecipe(MinechemItemsGeneration.projectorLens, new Object[]
+        GameRegistry.addRecipe(MinechemItemsRegistration.projectorLens, new Object[]
         {
-            "ABA", Character.valueOf('A'), MinechemItemsGeneration.concaveLens, Character.valueOf('B'), MinechemItemsGeneration.convexLens
+            "ABA", Character.valueOf('A'), MinechemItemsRegistration.concaveLens, Character.valueOf('B'), MinechemItemsRegistration.convexLens
         });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.blueprintProjector), new Object[]
         {
-            " I ", "GPL", " I ", Character.valueOf('I'), itemIngotIron, Character.valueOf('P'), blockThinGlass, Character.valueOf('L'), MinechemItemsGeneration.projectorLens, Character.valueOf('G'), new ItemStack(Blocks.redstone_lamp)
+            " I ", "GPL", " I ", Character.valueOf('I'), itemIngotIron, Character.valueOf('P'), blockThinGlass, Character.valueOf('L'), MinechemItemsRegistration.projectorLens, Character.valueOf('G'), new ItemStack(Blocks.redstone_lamp)
         });
         GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.leadChest), new Object[]
         {
-            "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsGeneration.element, 1, ElementEnum.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Blocks.chest)
+            "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Blocks.chest)
         });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemBlocksGeneration.leadChest), new Object[]
         {
             new ItemStack(MinechemBlocksGeneration.chemicalStorage)
         });
-        GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsGeneration.journal), new Object[]
+        GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsRegistration.journal), new Object[]
         {
             new ItemStack(Items.book), new ItemStack(Blocks.glass)
         });
@@ -1831,7 +1831,7 @@ public class MinechemRecipes
             MoleculeEnum var4 = var1[var3];
             ArrayList var5 = var4.components();
             PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
-            ItemStack var7 = new ItemStack(MinechemItemsGeneration.molecule, 1, var4.id());
+            ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, var4.id());
             DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
         }
 
@@ -1846,7 +1846,7 @@ public class MinechemRecipes
         {
             MoleculeEnum var4 = var1[var3];
             ArrayList var5 = var4.components();
-            ItemStack var6 = new ItemStack(MinechemItemsGeneration.molecule, 1, var4.id());
+            ItemStack var6 = new ItemStack(MinechemItemsRegistration.molecule, 1, var4.id());
             SynthesisRecipe.add(new SynthesisRecipe(var6, false, 50, var5));
         }
 
@@ -1918,7 +1918,7 @@ public class MinechemRecipes
 
     private ItemStack createPoisonedItemStack(Item item, int count, MoleculeEnum molecule)
     {
-        ItemStack moleculeForShapelessRecipe = new ItemStack(MinechemItemsGeneration.molecule, 1, molecule.id());
+        ItemStack moleculeForShapelessRecipe = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
         ItemStack var5 = new ItemStack(item, 1, count);
         ItemStack var6 = new ItemStack(item, 1, count);
         NBTTagCompound var7 = new NBTTagCompound();

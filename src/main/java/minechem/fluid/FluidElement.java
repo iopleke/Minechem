@@ -1,6 +1,6 @@
 package minechem.fluid;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementEnum;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
@@ -29,7 +29,7 @@ public class FluidElement extends Fluid implements IMinechemFluid
     @Override
     public ItemStack getOutputStack()
     {
-        return new ItemStack(MinechemItemsGeneration.element, 0, element.ordinal());
+        return new ItemStack(MinechemItemsRegistration.element, 0, element.ordinal());
     }
 
     @Override

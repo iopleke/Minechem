@@ -1,6 +1,6 @@
 package minechem.tileentity.multiblock.fusion;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.blueprint.BlueprintFusion;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
@@ -47,14 +47,14 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 
     private boolean checkValidFuel()
     {
-        return inventory[fuelSlot].getItem() == Items.nether_star || inventory[fuelSlot].getItem() == MinechemItemsGeneration.fusionStar;
+        return inventory[fuelSlot].getItem() == Items.nether_star || inventory[fuelSlot].getItem() == MinechemItemsRegistration.fusionStar;
     }
 
     private void fuseInputs()
     {
         if (inventory[output] == null)
         {
-            inventory[output] = new ItemStack(MinechemItemsGeneration.element, 1, fusedResult - 1);
+            inventory[output] = new ItemStack(MinechemItemsRegistration.element, 1, fusedResult - 1);
         } else if (inventory[output].getItemDamage() == fusedResult - 1)
         {
             inventory[output].stackSize++;
@@ -99,13 +99,13 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     {
         if (slot == fuelSlot)
         {
-            if (itemstack.getItem() == Items.nether_star || itemstack.getItem() == MinechemItemsGeneration.fusionStar)
+            if (itemstack.getItem() == Items.nether_star || itemstack.getItem() == MinechemItemsRegistration.fusionStar)
             {
                 return true;
             }
         } else if (slot == inputLeft || slot == inputRight)
         {
-            if (itemstack.getItem() == MinechemItemsGeneration.element)
+            if (itemstack.getItem() == MinechemItemsRegistration.element)
             {
                 return true;
             }
@@ -192,8 +192,8 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     {
         if (inventory[fuelSlot].getItem() == Items.nether_star)
         {
-            this.inventory[fuelSlot] = new ItemStack(MinechemItemsGeneration.fusionStar);
-        } else if (inventory[fuelSlot].getItem() == MinechemItemsGeneration.fusionStar)
+            this.inventory[fuelSlot] = new ItemStack(MinechemItemsRegistration.fusionStar);
+        } else if (inventory[fuelSlot].getItem() == MinechemItemsRegistration.fusionStar)
         {
             inventory[fuelSlot].setItemDamage(inventory[fuelSlot].getItemDamage() + 1);
         }

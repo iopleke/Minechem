@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
@@ -78,7 +78,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
 
     private void drawBlueprintInfo(ItemStack blueprintStack)
     {
-        MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
+        MinechemBlueprint blueprint = MinechemItemsRegistration.blueprint.getBlueprint(blueprintStack);
         if (blueprint == null)
         {
             return;

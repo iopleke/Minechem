@@ -1,7 +1,7 @@
 package minechem.network.client;
 
 import minechem.MinechemBlocksGeneration;
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
 import minechem.network.server.CommonProxy;
@@ -48,8 +48,8 @@ public class ClientProxy extends CommonProxy
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
-        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.element, new ElementItemRenderer());
-        MinecraftForgeClient.registerItemRenderer(MinechemItemsGeneration.molecule, new MoleculeItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.microscope), new MicroscopeItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.decomposer), new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.synthesis), new SynthesisItemRenderer());

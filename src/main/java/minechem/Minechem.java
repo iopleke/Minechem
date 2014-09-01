@@ -90,7 +90,7 @@ public class Minechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME,Items.book);//TODO: set item for creative tab
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME, Items.book);//TODO: set item for creative tab
 
     // Provides standardized configuration file offered by the Forge.
     private static Configuration CONFIG;
@@ -136,7 +136,7 @@ public class Minechem
 
         // Register items and blocks.
         LOGGER.info("Registering Items...");
-        MinechemItemsGeneration.registerItems();
+        MinechemItemsRegistration.init();
 
         LOGGER.info("Registering Blocks...");
         MinechemBlocksGeneration.registerBlocks();
@@ -150,7 +150,7 @@ public class Minechem
         MinechemRecipes.getInstance().registerFluidRecipies();
 
         LOGGER.info("Registering OreDict Compatability...");
-        MinechemItemsGeneration.registerToOreDictionary();
+        MinechemItemsRegistration.registerToOreDictionary();
 
         LOGGER.info("Registering Minechem Recipes...");
         MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
@@ -223,8 +223,8 @@ public class Minechem
     private void addDungeonLoot()
     {
         ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-        ItemStack A = new ItemStack(MinechemItemsGeneration.blueprint, 1, 0);
-        ItemStack B = new ItemStack(MinechemItemsGeneration.blueprint, 1, 1);
+        ItemStack A = new ItemStack(MinechemItemsRegistration.blueprint, 1, 0);
+        ItemStack B = new ItemStack(MinechemItemsRegistration.blueprint, 1, 1);
         ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
         ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
     }

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementGuiHelper;
 import net.minecraft.client.Minecraft;
@@ -85,7 +85,7 @@ public class PolytoolGui extends GuiContainer
             ((ElementGuiHelper) iter.next()).draw(this, renders);
         }
 
-        drawItemStack(new ItemStack(MinechemItemsGeneration.polytool), 80, 42, "");
+        drawItemStack(new ItemStack(MinechemItemsRegistration.polytool), 80, 42, "");
         fontRendererObj.drawString("Sword: " + PolytoolItem.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
         fontRendererObj.drawString("Ores: " + PolytoolItem.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
         fontRendererObj.drawString("Stone: " + PolytoolItem.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.element.Element;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
@@ -121,11 +121,11 @@ public class MinechemHelper
         {
             if (potionChemical instanceof Element)
             {
-                stacks.add(new ItemStack(MinechemItemsGeneration.element, potionChemical.amount, ((Element) potionChemical).element.ordinal()));
+                stacks.add(new ItemStack(MinechemItemsRegistration.element, potionChemical.amount, ((Element) potionChemical).element.ordinal()));
             }
             else if (potionChemical instanceof Molecule)
             {
-                stacks.add(new ItemStack(MinechemItemsGeneration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal()));
+                stacks.add(new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal()));
             }
         }
         return stacks;
@@ -139,11 +139,11 @@ public class MinechemHelper
             PotionChemical potionChemical = chemicals[i];
             if (potionChemical instanceof Element)
             {
-                stacks[i] = new ItemStack(MinechemItemsGeneration.element, potionChemical.amount, ((Element) potionChemical).element.ordinal());
+                stacks[i] = new ItemStack(MinechemItemsRegistration.element, potionChemical.amount, ((Element) potionChemical).element.ordinal());
             }
             else if (potionChemical instanceof Molecule)
             {
-                stacks[i] = new ItemStack(MinechemItemsGeneration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal());
+                stacks[i] = new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal());
             }
         }
         return stacks;
@@ -156,12 +156,12 @@ public class MinechemHelper
 
     public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical, int factor)
     {
-        if (potionChemical instanceof Element && itemstack.getItem()== MinechemItemsGeneration.element)
+        if (potionChemical instanceof Element && itemstack.getItem()== MinechemItemsRegistration.element)
         {
             Element element = (Element) potionChemical;
             return (itemstack.getItemDamage() == element.element.ordinal()) && (itemstack.stackSize >= element.amount * factor);
         }
-        if (potionChemical instanceof Molecule && itemstack.getItem() == MinechemItemsGeneration.molecule)
+        if (potionChemical instanceof Molecule && itemstack.getItem() == MinechemItemsRegistration.molecule)
         {
             Molecule molecule = (Molecule) potionChemical;
             return (itemstack.getItemDamage() == molecule.molecule.ordinal()) && (itemstack.stackSize >= molecule.amount * factor);
@@ -264,9 +264,9 @@ public class MinechemHelper
     public static ItemStack chemicalToItemStack(PotionChemical potionChemical, int amount)
     {
         if (potionChemical instanceof Element)
-            return new ItemStack(MinechemItemsGeneration.element, amount, ((Element) potionChemical).element.ordinal());
+            return new ItemStack(MinechemItemsRegistration.element, amount, ((Element) potionChemical).element.ordinal());
         else if (potionChemical instanceof Molecule)
-            return new ItemStack(MinechemItemsGeneration.molecule, amount, ((Molecule) potionChemical).molecule.id());
+            return new ItemStack(MinechemItemsRegistration.molecule, amount, ((Molecule) potionChemical).molecule.id());
         return null;
     }
 

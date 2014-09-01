@@ -4,7 +4,7 @@ import java.util.List;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionInjector;
 import net.minecraft.block.material.Material;
@@ -62,7 +62,7 @@ public class TickHandler
                 List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
                 for (EntityItem entityItem : itemList)
                 {
-                    if ((entityItem.getEntityItem().getItem()== new ItemStack(MinechemItemsGeneration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).getItem() && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
+                    if ((entityItem.getEntityItem().getItem()== new ItemStack(MinechemItemsRegistration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).getItem() && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
                     {
                         world.createExplosion(entityItem, entityItem.posX, entityItem.posY, entityItem.posZ, 0.9F, true);
                         int dx = MathHelper.floor_double(entityItem.posX);

@@ -3,7 +3,7 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.List;
 
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.network.packet.SynthesisPacketUpdate;
@@ -552,7 +552,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
      */
     private void onPutJournal(ItemStack itemstack)
     {
-        ItemStack activeItem = MinechemItemsGeneration.journal.getActiveStack(itemstack);
+        ItemStack activeItem = MinechemItemsRegistration.journal.getActiveStack(itemstack);
         if (activeItem != null)
         {
             SynthesisRecipe recipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(activeItem);

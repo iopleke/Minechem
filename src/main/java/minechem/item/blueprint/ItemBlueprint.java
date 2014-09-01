@@ -3,7 +3,7 @@ package minechem.item.blueprint;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.List;
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -38,7 +38,7 @@ public class ItemBlueprint extends Item
 
     public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint)
     {
-        return new ItemStack(MinechemItemsGeneration.blueprint, 1, blueprint.id);
+        return new ItemStack(MinechemItemsRegistration.blueprint, 1, blueprint.id);
     }
 
     public MinechemBlueprint getBlueprint(ItemStack itemstack)

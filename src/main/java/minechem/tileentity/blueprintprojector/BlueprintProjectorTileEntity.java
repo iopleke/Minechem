@@ -3,7 +3,7 @@ package minechem.tileentity.blueprintprojector;
 import java.util.HashMap;
 
 import minechem.MinechemBlocksGeneration;
-import minechem.MinechemItemsGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.blueprint.BlueprintBlock.Type;
@@ -315,7 +315,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         super.setInventorySlotContents(slot, itemstack);
         if (itemstack != null)
         {
-            MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(itemstack);
+            MinechemBlueprint blueprint = MinechemItemsRegistration.blueprint.getBlueprint(itemstack);
             setBlueprint(blueprint);
         }
     }
@@ -360,7 +360,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         if (blueprintNBT != null)
         {
             ItemStack blueprintStack = ItemStack.loadItemStackFromNBT(blueprintNBT);
-            MinechemBlueprint blueprint = MinechemItemsGeneration.blueprint.getBlueprint(blueprintStack);
+            MinechemBlueprint blueprint = MinechemItemsRegistration.blueprint.getBlueprint(blueprintStack);
             setBlueprint(blueprint);
             this.inventory[0] = blueprintStack;
         }
@@ -375,7 +375,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
     @Override
     public boolean isItemValidForSlot(int i, ItemStack itemstack)
     {
-        return itemstack.getItem() == MinechemItemsGeneration.blueprint;
+        return itemstack.getItem() == MinechemItemsRegistration.blueprint;
     }
 
     @Override

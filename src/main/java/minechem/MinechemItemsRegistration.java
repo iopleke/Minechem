@@ -1,7 +1,7 @@
 package minechem;
 
 import minechem.item.ItemAtomicManipulator;
-import minechem.item.ItemLens;
+import minechem.item.OpticalMicroscopeLens;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalItem;
 import minechem.item.element.ElementEnum;
@@ -13,11 +13,11 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-public class MinechemItemsGeneration
+public class MinechemItemsRegistration
 {
     public static ElementItem element;
     public static MoleculeItem molecule;
-    public static ItemLens lens;
+    public static OpticalMicroscopeLens lens;
     public static ItemAtomicManipulator atomicManipulator;
     public static FusionStarItem fusionStar;
     public static ItemBlueprint blueprint;
@@ -29,11 +29,11 @@ public class MinechemItemsGeneration
     public static ItemStack minechempills;
     public static Item polytool;
 
-    public static void registerItems()
+    public static void init()
     {
         element = new ElementItem();
         molecule = new MoleculeItem();
-        lens = new ItemLens();
+        lens = new OpticalMicroscopeLens();
         atomicManipulator = new ItemAtomicManipulator();
         fusionStar = new FusionStarItem();
         blueprint = new ItemBlueprint();
@@ -50,7 +50,7 @@ public class MinechemItemsGeneration
     {
         for (ElementEnum element : ElementEnum.values())
         {
-            OreDictionary.registerOre("element" + element.descriptiveName(), new ItemStack(MinechemItemsGeneration.element, 1, element.ordinal()));
+            OreDictionary.registerOre("element" + element.descriptiveName(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
         }
     }
 }
