@@ -39,18 +39,27 @@ public class MinechemItemsRegistration
         GameRegistry.registerItem(molecule, "minechemMolecule");
         
         lens = new OpticalMicroscopeLens();
-        GameRegistry.registerItem(lens, "opticalMicroscopeLens");
-        
-        atomicManipulator = new ItemAtomicManipulator();
-        fusionStar = new FusionStarItem();
-        blueprint = new ItemBlueprint();
-        journal = new ChemistJournalItem();
-        polytool = new PolytoolItem();
-
         concaveLens = new ItemStack(lens, 1, 0);
         convexLens = new ItemStack(lens, 1, 1);
         microscopeLens = new ItemStack(lens, 1, 2);
         projectorLens = new ItemStack(lens, 1, 3);
+        GameRegistry.registerItem(lens, "opticalMicroscopeLens");
+        
+        atomicManipulator = new ItemAtomicManipulator();
+        GameRegistry.registerItem(atomicManipulator, "atomicManipulator");
+        
+        fusionStar = new FusionStarItem();
+        GameRegistry.registerItem(fusionStar, "fusionStar");
+        
+        blueprint = new ItemBlueprint();
+        GameRegistry.registerItem(blueprint, "blueprint");
+        
+        journal = new ChemistJournalItem();
+        GameRegistry.registerItem(journal, "journal");
+        
+        polytool = new PolytoolItem();
+        GameRegistry.registerItem(polytool, "polytool");
+
     }
 
     public static void registerToOreDictionary()
