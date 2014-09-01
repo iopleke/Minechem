@@ -262,7 +262,7 @@ public abstract class GuiMinechemContainer extends GuiScreen
 
                 if (count == 0)
                 {
-                    var14 = "\u00a7" + theStack.getRarity().rarityColor + var14;
+                    var14 = theStack.getRarity().rarityColor + var14;
                 }
 
                 this.fontRenderer.drawStringWithShadow(var14, drawX + 12, stringWidth, -1);
