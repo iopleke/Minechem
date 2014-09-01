@@ -1,7 +1,6 @@
 package minechem.gui;
 
 import cpw.mods.fml.common.network.IGuiHandler;
-import minechem.container.ContainerTable;
 import minechem.item.chemistjournal.ChemistJournalContainer;
 import minechem.item.chemistjournal.ChemistJournalGui;
 import minechem.item.polytool.PolytoolContainer;
@@ -54,10 +53,6 @@ public class GuiHandler implements IGuiHandler
         if (ID == GUI_ID_POLYTOOL)
         {
             return getServerGuiElementForPolytool(player, world);
-        }
-        if (ID == GUI_TABLE)
-        {
-            return new ContainerTable(player.inventory);
         }
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity instanceof DecomposerTileEntity)
