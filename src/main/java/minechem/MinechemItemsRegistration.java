@@ -36,6 +36,8 @@ public class MinechemItemsRegistration
         GameRegistry.registerItem(element, "minechemElement");
         
         molecule = new MoleculeItem();
+        GameRegistry.registerItem(molecule, "minechemMolecule");
+        
         lens = new OpticalMicroscopeLens();
         GameRegistry.registerItem(lens, "opticalMicroscopeLens");
         
