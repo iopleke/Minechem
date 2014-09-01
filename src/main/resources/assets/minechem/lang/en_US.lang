@@ -29,10 +29,10 @@ block.fusionReactor.name=Chemical Fusion Chamber
 block.fissionReactor.name=Chemical Fission Chamber
 
 item.Polytool.name=Polytool
-item.name.concavelens=Concave Lens
-item.name.convexlens=Convex Lens
-item.name.microscopelens=Microscope Lens
-item.name.projectorlens=Projector Lens
+item.name.concaveLens=Concave Lens
+item.name.convexLens=Convex Lens
+item.name.microscopeLens=Microscope Lens
+item.name.projectorLens=Projector Lens
 item.minechem.itemAtomicManipulator.name=Atomic Manipulator
 item.minechem.itemFusionStar.name=Fusion Star
 item.name.testtube=Empty Test Tube
