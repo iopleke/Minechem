@@ -9,6 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minechem.Minechem;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
@@ -21,6 +22,7 @@ public class FusionStarItem extends Item
         this.setMaxDamage(2000);
         this.setNoRepair();
         this.setUnlocalizedName("fusionStar");
+        this.setCreativeTab(Minechem.CREATIVE_TAB);
     }
 
     @Override
