@@ -1,5 +1,6 @@
 package minechem;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.item.ItemAtomicManipulator;
 import minechem.item.OpticalMicroscopeLens;
 import minechem.item.blueprint.ItemBlueprint;
@@ -34,6 +35,8 @@ public class MinechemItemsRegistration
         element = new ElementItem();
         molecule = new MoleculeItem();
         lens = new OpticalMicroscopeLens();
+        GameRegistry.registerItem(lens, "opticalMicroscopeLens");
+        
         atomicManipulator = new ItemAtomicManipulator();
         fusionStar = new FusionStarItem();
         blueprint = new ItemBlueprint();
