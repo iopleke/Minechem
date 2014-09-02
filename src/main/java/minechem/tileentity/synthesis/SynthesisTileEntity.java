@@ -400,7 +400,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     public void readFromNBT(NBTTagCompound nbt)
     {
         super.readFromNBT(nbt);
-        NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_LIST);
+        NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
     }
 
