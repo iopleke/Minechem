@@ -210,7 +210,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         super.readFromNBT(nbtTagCompound);
         inventory = new ItemStack[getSizeInventory()];
-        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", net.minecraftforge.common.util.Constants.NBT.TAG_LIST), inventory);
+        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND), inventory);
     }
 
     public void setEnergyStored(int amount)
