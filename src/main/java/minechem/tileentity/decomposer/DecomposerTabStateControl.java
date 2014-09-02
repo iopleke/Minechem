@@ -56,8 +56,13 @@ public class DecomposerTabStateControl extends GuiTabStateControl
             this.state = TabState.jammed;
         } else
         {
-            // @TODO - check if machine is powered
-            this.state = TabState.unpowered;
+            if (!Minechem.UELoaded)
+            {
+                this.state = TabState.powered;
+            } else
+            {
+                this.state = TabState.unpowered;
+            }
         }
 
         this.overlayColor = this.state.color;

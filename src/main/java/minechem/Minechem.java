@@ -70,6 +70,7 @@ public class Minechem
 
     // Misc variables
     public static final String textureBase = "minechem:";
+    public static boolean UELoaded = false;
 
     // Instancing
     @Instance(value = CHANNEL_NAME)
@@ -209,6 +210,9 @@ public class Minechem
 
         LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
         PotionEnchantmentCoated.registerCoatings();
+
+        LOGGER.info("Checking to see if we need power to run the lab...");
+        UELoaded = Loader.isModLoaded("UniversalElectricity");
 
         LOGGER.info("POSTINIT PASSED");
     }
