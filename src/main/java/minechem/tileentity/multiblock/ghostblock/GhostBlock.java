@@ -22,7 +22,7 @@ public class GhostBlock extends BlockContainer
 
     public GhostBlock()
     {
-        super(Material.snow);
+        super(Material.iron);
         setBlockName("ghostBlock");
         setLightLevel(0.5F);
         setHardness(1000F);
