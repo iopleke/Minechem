@@ -110,7 +110,7 @@ public class ChemistJournalItem extends Item
         NBTTagCompound tag = journal.getTagCompound();
         if (tag != null)
         {
-            NBTTagList taglist = tag.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_LIST);
+            NBTTagList taglist = tag.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_COMPOUND);
             if (taglist != null)
             {
                 return MinechemHelper.readTagListToItemStackList(taglist);
@@ -128,7 +128,7 @@ public class ChemistJournalItem extends Item
             tagCompound = new NBTTagCompound();
         }
         
-        NBTTagList taglist = tagCompound.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_LIST);
+        NBTTagList taglist = tagCompound.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_COMPOUND);
         if (taglist == null)
         {
             taglist = new NBTTagList();
