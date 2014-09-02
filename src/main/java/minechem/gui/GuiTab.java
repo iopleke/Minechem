@@ -5,6 +5,7 @@ import minechem.Minechem;
 import minechem.utils.Reference;
 import minechem.utils.SessionVars;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.audio.SoundHandler;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -16,8 +17,9 @@ public abstract class GuiTab
 
     public FontRenderer tabFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
 
-    // Not sure what method replaces this in 1.7
+    // Replacement for SoundManager is SoundHandler
     // public SoundManager tabSoundManager = FMLClientHandler.instance().getClient().sndManager;
+    public SoundHandler tabSoundManager = FMLClientHandler.instance().getClient().getSoundHandler();
     private boolean open;
 
     protected Gui myGui;
