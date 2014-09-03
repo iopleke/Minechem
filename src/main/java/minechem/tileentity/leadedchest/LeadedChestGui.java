@@ -22,7 +22,7 @@ public class LeadedChestGui extends GuiContainerTabbed
     {
         super(new LeadedChestContainer(inventoryPlayer, leadedChest));
         this.leadedchest = leadedChest;
-        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.leadedChest")));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.leadChest")));
     }
 
     @Override
