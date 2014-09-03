@@ -3,6 +3,7 @@ package minechem.tick;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
+import minechem.Settings;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationHandler;
@@ -37,7 +38,10 @@ public class ScheduledTickHandler
             MoleculeEnum molecule = MoleculeEnum.getById(effectType);
             if (isPoisoned)
             {
-                PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
+                if (Settings.FoodSpiking)
+                {
+                    PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
+                }
                 entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
             }
         }

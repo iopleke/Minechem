@@ -8,10 +8,11 @@ help.microscope=Place an item under the glass to discover new recipes. Press the
 help.synthesis=The Chemical Synthesis table takes a recipe of elements and molecules and synthesizes an item, to discover recipes make a Microscope. Each item costs a certain amount of energy to synthesise.
 help.projector=The Blueprint Projector is used for building complex structures, such as the Fusion Chamber. You can buy blueprints from a librarian villager.
 help.fusion=The Fusion Chamber takes two elements and fuses them together with great energy, combining their mass to create a heavier element. Only a nether star contains enough energy to fuse elements. 
-help.fission=The Fission Chamber uses Plutonium radiation to decay an element. By bombarding the element with radiation you are able to split it into two elements with half the atomic number. 
+help.fission=The Fission Chamber splits elements in half, resulting in two elements with half the atomic number of the original. This process is powered by radiation from Uranium.
 help.journal=Use this journal to keep notes of all the scientific discoveries you make. There's a slot in the microscope for the journal, when inspecting an item the recipes will be recorded to your journal. Discovered recipes will be show on the left, click on an item to activate the recipe. Place this journal in the Synthesis Machine and the active recipe will be automatically loaded.
 help.chemicalStorage=The Chemical Storage will safely store radioactive chemicals and prevent them from decaying.
 help.leadChest=The Leaded Chest will safely store radioactive chemicals and prevent them from decaying.
+help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with certain elements to give it special effects.
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
