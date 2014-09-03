@@ -1,7 +1,5 @@
 package minechem.tileentity.multiblock.ghostblock;
 
-import java.util.Random;
-
 import minechem.utils.Reference;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -16,13 +14,14 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minechem.MinechemBlocksGeneration;
 
 public class GhostBlock extends BlockContainer
 {
 
     public GhostBlock()
     {
-        super(Material.snow);
+        super(Material.iron);
         setBlockName("ghostBlock");
         setLightLevel(0.5F);
         setHardness(1000F);
@@ -76,9 +75,7 @@ public class GhostBlock extends BlockContainer
             ItemStack blockAsStack = ghostBlock.getBlockAsItemStack();
             if (playerIsHoldingItem(entityPlayer, blockAsStack))
             {
-
-                world.setBlock(x, y, z, /*blockAsStack.getItem()*/ this, 0, 0);
-                world.setBlock(x, y, z, this, blockAsStack.getItemDamage(), 3);
+                world.setBlock(x, y, z, MinechemBlocksGeneration.fusion, blockAsStack.getItemDamage(), 3);
                 if (!entityPlayer.capabilities.isCreativeMode)
                 {
                     entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
