@@ -1792,29 +1792,32 @@ public class MinechemRecipes
         this.addDecomposerRecipesFromMolecules();
         this.addSynthesisRecipesFromMolecules();
         this.addUnusedSynthesisRecipes();
-        this.registerPoisonRecipes(MoleculeEnum.mycotoxin);
-        this.registerPoisonRecipes(MoleculeEnum.sucrose);
-        this.registerPoisonRecipes(MoleculeEnum.psilocybin);
-        this.registerPoisonRecipes(MoleculeEnum.methamphetamine);
-        this.registerPoisonRecipes(MoleculeEnum.amphetamine);
-        this.registerPoisonRecipes(MoleculeEnum.pantherine);
-        this.registerPoisonRecipes(MoleculeEnum.ethanol);
-        this.registerPoisonRecipes(MoleculeEnum.penicillin);
-        this.registerPoisonRecipes(MoleculeEnum.testosterone);
-        this.registerPoisonRecipes(MoleculeEnum.xanax);
-        this.registerPoisonRecipes(MoleculeEnum.mescaline);
-        this.registerPoisonRecipes(MoleculeEnum.asprin);
-        this.registerPoisonRecipes(MoleculeEnum.sulfuricAcid);
-        this.registerPoisonRecipes(MoleculeEnum.tetrodotoxin);
-        this.registerPoisonRecipes(MoleculeEnum.pal2);
-        this.registerPoisonRecipes(MoleculeEnum.nodularin);
-        this.registerPoisonRecipes(MoleculeEnum.thc);
-        this.registerPoisonRecipes(MoleculeEnum.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
-        this.registerPoisonRecipes(MoleculeEnum.cocaine);
-        this.registerPoisonRecipes(MoleculeEnum.cocainehcl);
-        this.registerPoisonRecipes(MoleculeEnum.theobromine);
-        this.registerPoisonRecipes(MoleculeEnum.caulerpenyne);
-        this.registerPoisonRecipes(MoleculeEnum.latropine);
+        if (Settings.FoodSpiking)
+        {
+            this.registerPoisonRecipes(MoleculeEnum.mycotoxin);
+            this.registerPoisonRecipes(MoleculeEnum.sucrose);
+            this.registerPoisonRecipes(MoleculeEnum.psilocybin);
+            this.registerPoisonRecipes(MoleculeEnum.methamphetamine);
+            this.registerPoisonRecipes(MoleculeEnum.amphetamine);
+            this.registerPoisonRecipes(MoleculeEnum.pantherine);
+            this.registerPoisonRecipes(MoleculeEnum.ethanol);
+            this.registerPoisonRecipes(MoleculeEnum.penicillin);
+            this.registerPoisonRecipes(MoleculeEnum.testosterone);
+            this.registerPoisonRecipes(MoleculeEnum.xanax);
+            this.registerPoisonRecipes(MoleculeEnum.mescaline);
+            this.registerPoisonRecipes(MoleculeEnum.asprin);
+            this.registerPoisonRecipes(MoleculeEnum.sulfuricAcid);
+            this.registerPoisonRecipes(MoleculeEnum.tetrodotoxin);
+            this.registerPoisonRecipes(MoleculeEnum.pal2);
+            this.registerPoisonRecipes(MoleculeEnum.nodularin);
+            this.registerPoisonRecipes(MoleculeEnum.thc);
+            this.registerPoisonRecipes(MoleculeEnum.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
+            this.registerPoisonRecipes(MoleculeEnum.cocaine);
+            this.registerPoisonRecipes(MoleculeEnum.cocainehcl);
+            this.registerPoisonRecipes(MoleculeEnum.theobromine);
+            this.registerPoisonRecipes(MoleculeEnum.caulerpenyne);
+            this.registerPoisonRecipes(MoleculeEnum.latropine);
+        }
     }
 
     private void addDecomposerRecipesFromMolecules()

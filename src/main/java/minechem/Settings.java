@@ -1,39 +1,25 @@
 package minechem;
 
-import java.lang.annotation.Retention;
-import java.lang.annotation.RetentionPolicy;
-import java.lang.reflect.Field;
-import java.util.logging.Level;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.common.config.Configuration;
+
+import java.io.File;
 
 public class Settings
 {
-    @Retention(RetentionPolicy.RUNTIME)
-    private static @interface CfgBool
-    {
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    private static @interface CfgId
-    {
-        public boolean block() default false;
-    }
-
-    @Retention(RetentionPolicy.RUNTIME)
-    private static @interface CfgInt
-    {
-    }
-
+    // Config file
+    public static Configuration config;
 
     // --------
     // FEATURES
     // --------
     // Determines if the mod will generate ore at all.
     public static boolean WorldGenOre = true;
-    
+
     // Size of Uranium ore clusters
     public static int UraniumOreClusterSize = 3;
-    
+
     // How many times per chunk will uranium attempt to generate?
     public static int UraniumOreDensity = 5;
 
@@ -49,58 +35,43 @@ public class Settings
     // Enabling automation can allow duping. Disabled by default.
     public static boolean AllowAutomation = false;
 
-    public static void load(Configuration config)
-    {
-        try
-        {
-            config.load();
-            Field[] fields = Settings.class.getFields();
-            for (Field field : fields)
-            {
-                CfgId annoBlock = field.getAnnotation(CfgId.class);
-                CfgBool annoBool = field.getAnnotation(CfgBool.class);
-                CfgInt annoInt = field.getAnnotation(CfgInt.class);
+    // Disabling of enchants and spikes
+    public static boolean FoodSpiking = true;
+    public static boolean SwordEffects = true;
 
-                // Config property is block or item.
-                if (annoBlock != null && annoBool == null && annoInt == null)
-                {
-                    int id = field.getInt(null);
-//                    if (annoBlock.block())
-//                    {
-                        id = config.get(Configuration.CATEGORY_GENERAL, field.getName(), id).getInt();//TODO: Why?
-//                    } else
-//                    {
-//                        id = config.getItem(field.getName(), id).getInt();
-//                    }
-                    field.setInt(null, id);
-                } else if (annoBool != null && annoBlock == null && annoInt == null)
-                {
-                    // Config property is bool.
-                    if (field.isAnnotationPresent(CfgBool.class))
-                    {
-                        boolean bool = field.getBoolean(null);
-                        bool = config.get(Configuration.CATEGORY_GENERAL, field.getName(), bool).getBoolean(bool);
-                        field.setBoolean(null, bool);
-                    }
-                } else if (annoBool == null && annoBlock == null && annoInt != null)
-                {
-                    // Config property is int.
-                    if (field.isAnnotationPresent(CfgInt.class))
-                    {
-                        int someInt = field.getInt(null);
-                        someInt = config.get(Configuration.CATEGORY_GENERAL, field.getName(), someInt).getInt(someInt);
-                        field.setInt(null, someInt);
-                    }
-                }
-            }
-        } catch (Exception e)
+    public static void init(File configFile)
+    {
+        if (config == null)
         {
-            // failed to load config log
-            Minechem.LOGGER.warn("Failed to load configuration file!");
-        } finally
+            config = new Configuration(configFile);
+            loadConfig();
+        }
+    }
+
+    @SubscribeEvent
+    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.modID.equalsIgnoreCase(Minechem.ID))
+        {
+            loadConfig();
+        }
+    }
+
+    private static void loadConfig()
+    {
+        WorldGenOre = config.getBoolean("WorldGenOre", Configuration.CATEGORY_GENERAL, true, "Turn on and off ore gen");
+        UraniumOreClusterSize = config.getInt("UraniumOreClusterSize", Configuration.CATEGORY_GENERAL, 3, 1, 10, "Size of uranium clusters");
+        UraniumOreDensity = config.getInt("UraniumOreDensity", Configuration.CATEGORY_GENERAL, 5, 1, 64, "How often will uranium be generated in a chuck");
+        UraniumOreCraftable = config.getBoolean("UraniumOreCraftable", Configuration.CATEGORY_GENERAL, true, "Can minechem uranium be crafted from other uranium");
+        DebugMode = config.getBoolean("DebugMode", Configuration.CATEGORY_GENERAL, false, "Mod will print tons of info while running");
+        UpdateRadius = config.getInt("UpdateRadius", Configuration.CATEGORY_GENERAL, 20, 1, 50, "Determines how far away in blocks packets will be set to players");
+        AllowAutomation = config.getBoolean("AllowAutomation", Configuration.CATEGORY_GENERAL, false, "Mod will print tons of info while running");
+        FoodSpiking = config.getBoolean("FoodSpiking", Configuration.CATEGORY_GENERAL, true, "Allow food spiking");
+        SwordEffects = config.getBoolean("SwordEffects", Configuration.CATEGORY_GENERAL, true, "Enable enchantments");
+
+        if (config.hasChanged())
         {
             config.save();
         }
     }
-
 }
