@@ -9,9 +9,6 @@ import minechem.sound.MinechemSoundEvent;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntityRenderer;
-import minechem.tileentity.chemicalstorage.ChemicalStorageItemRenderer;
-import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntity;
-import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntityRenderer;
 import minechem.tileentity.decomposer.DecomposerItemRenderer;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.decomposer.DecomposerTileEntityRenderer;
@@ -54,7 +51,6 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.decomposer), new DecomposerItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.synthesis), new SynthesisItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.blueprintProjector), new BlueprintProjectorItemRenderer());
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.chemicalStorage), new ChemicalStorageItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.leadChest), new LeadedChestItemRenderer());
 
         //TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);//TODO:change so it will use events
@@ -62,7 +58,6 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
-        ClientRegistry.bindTileEntitySpecialRenderer(ChemicalStorageTileEntity.class, new ChemicalStorageTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
     }
 

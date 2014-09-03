@@ -5,8 +5,6 @@ import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorBlock;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
-import minechem.tileentity.chemicalstorage.ChemicalStorageBlock;
-import minechem.tileentity.chemicalstorage.ChemicalStorageTileEntity;
 import minechem.tileentity.decomposer.DecomposerBlock;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
@@ -40,7 +38,6 @@ public class MinechemBlocksGeneration
     public static Block ghostBlock;
     public static Block blueprintProjector;
     public static Block fusion;
-    public static Block chemicalStorage;
     public static Block printer;
     public static Block leadChest;
 

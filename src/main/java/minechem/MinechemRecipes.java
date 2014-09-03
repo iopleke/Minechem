@@ -1771,10 +1771,6 @@ public class MinechemRecipes
         {
             "LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Blocks.chest)
         });
-        GameRegistry.addShapelessRecipe(new ItemStack(MinechemBlocksGeneration.leadChest), new Object[]
-        {
-            new ItemStack(MinechemBlocksGeneration.chemicalStorage)
-        });
         GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsRegistration.journal), new Object[]
         {
             new ItemStack(Items.book), new ItemStack(Blocks.glass)
