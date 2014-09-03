@@ -109,9 +109,8 @@ public class PolytoolGui extends GuiContainerTabbed
     }
 
 	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
-			int h) {
-		// TODO Auto-generated method stub
+	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) 
+	{
 		return false;
 	}
 
