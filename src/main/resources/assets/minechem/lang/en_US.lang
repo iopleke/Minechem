@@ -12,6 +12,7 @@ help.fission=The Fission Chamber uses Plutonium radiation to decay an element. B
 help.journal=Use this journal to keep notes of all the scientific discoveries you make. There's a slot in the microscope for the journal, when inspecting an item the recipes will be recorded to your journal. Discovered recipes will be show on the left, click on an item to activate the recipe. Place this journal in the Synthesis Machine and the active recipe will be automatically loaded.
 help.chemicalStorage=The Chemical Storage will safely store radioactive chemicals and prevent them from decaying.
 help.leadChest=The Leaded Chest will safely store radioactive chemicals and prevent them from decaying.
+help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with certain elements to give it special effects.
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest

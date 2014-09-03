@@ -5,8 +5,11 @@ import java.util.Iterator;
 import java.util.Random;
 
 import minechem.MinechemItemsRegistration;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.GuiTabHelp;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementGuiHelper;
+import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -16,7 +19,7 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class PolytoolGui extends GuiContainer
+public class PolytoolGui extends GuiContainerTabbed
 {
     private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/polytool.png");
     public ArrayList<ElementGuiHelper> elements = new ArrayList();
@@ -49,6 +52,8 @@ public class PolytoolGui extends GuiContainer
 
             }
         }
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.polytool")));
+
     }
 
     public void drawItemStack(ItemStack par1ItemStack, int par2, int par3, String par4Str)
@@ -58,7 +63,7 @@ public class PolytoolGui extends GuiContainer
 
         // Copied from GuiContainer
         GL11.glTranslatef(0.0F, 0.0F, 32.0F);
-        this.zLevel = 200.0F;
+        this.zLevel = 3;
         itemRender.zLevel = 200.0F;
         FontRenderer font = null;
         if (par1ItemStack != null)
@@ -67,13 +72,14 @@ public class PolytoolGui extends GuiContainer
             font = fontRendererObj;
         itemRender.renderItemAndEffectIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3);
         itemRender.renderItemOverlayIntoGUI(font, this.mc.getTextureManager(), par1ItemStack, par2, par3 - (8), par4Str);
-        this.zLevel = 0.0F;
+        this.zLevel = 3;
         itemRender.zLevel = 0.0F;
     }
 
     @Override
     protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
     {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
         Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
 
@@ -91,7 +97,6 @@ public class PolytoolGui extends GuiContainer
         fontRendererObj.drawString("Stone: " + PolytoolItem.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);
         fontRendererObj.drawString("Axe: " + PolytoolItem.instance.getAxeStr(polytool), guiLeft + 10, guiTop + 110, 0x404040);
         fontRendererObj.drawString("Shovel: " + PolytoolItem.instance.getShovelStr(polytool), guiLeft + 10, guiTop + 120, 0x404040);
-
     }
 
     public void addUpgrade(PolytoolUpgradeType upgrade)
@@ -102,5 +107,12 @@ public class PolytoolGui extends GuiContainer
             elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, upgrade.getElement()));
         }
     }
+
+	@Override
+	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w,
+			int h) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
 }
