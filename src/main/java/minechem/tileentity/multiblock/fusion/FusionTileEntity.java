@@ -135,7 +135,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         fusedResult = nbtTagCompound.getInteger("fusedResult");
         canProcess = nbtTagCompound.getBoolean("canProcess");
         inventory = new ItemStack[getSizeInventory()];
-        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", Constants.NBT.TAG_LIST), inventory);
+        MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND), inventory);
     }
 
     private void removeInputs()

@@ -463,9 +463,9 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     {
         super.readFromNBT(nbt);
 
-        NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_LIST);
+        NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
 
-        NBTTagList buffer = nbt.getTagList("buffer", Constants.NBT.TAG_LIST);
+        NBTTagList buffer = nbt.getTagList("buffer", Constants.NBT.TAG_COMPOUND);
 
         outputBuffer = MinechemHelper.readTagListToItemStackList(buffer);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
