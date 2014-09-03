@@ -117,7 +117,7 @@ public class PolytoolItem extends ItemPickaxe
     {
         ensureNBT(stack);
         ArrayList toReturn = new ArrayList();
-        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_LIST);
+        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.tagCount(); i++)
         {
             NBTTagCompound nbt = list.getCompoundTagAt(i);
@@ -157,7 +157,7 @@ public class PolytoolItem extends ItemPickaxe
     {
         ensureNBT(stack);
         NBTTagCompound compound = new NBTTagCompound();
-        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_LIST);
+        NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.tagCount(); i++)
         {
             if (list.getCompoundTagAt(i).getInteger("Element") == type.getElement().ordinal())
