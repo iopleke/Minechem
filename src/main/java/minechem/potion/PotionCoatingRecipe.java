@@ -1,5 +1,6 @@
 package minechem.potion;
 
+import minechem.Settings;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import net.minecraft.inventory.InventoryCrafting;
@@ -16,19 +17,22 @@ public class PotionCoatingRecipe implements IRecipe
     @Override
     public boolean matches(InventoryCrafting inv, World world)
     {
-        for (int i = 0; i < inv.getSizeInventory(); i++)
+        if (Settings.SwordEffects)
         {
-            ItemStack s = inv.getStackInSlot(i);
-            if (s != null && s.getItem() instanceof ItemSword)
+            for (int i = 0; i < inv.getSizeInventory(); i++)
             {
-                for (int j = 0; j < inv.getSizeInventory(); j++)
+                ItemStack s = inv.getStackInSlot(i);
+                if (s != null && s.getItem() instanceof ItemSword)
                 {
-                    ItemStack s2 = inv.getStackInSlot(j);
-                    if (s2 != null && s2.getItem() instanceof MoleculeItem)
+                    for (int j = 0; j < inv.getSizeInventory(); j++)
                     {
-                        if (PotionPharmacologyEffect.givesEffect(MoleculeEnum.getById(s2.getItemDamage())))
+                        ItemStack s2 = inv.getStackInSlot(j);
+                        if (s2 != null && s2.getItem() instanceof MoleculeItem)
                         {
-                            return true;
+                            if (PotionPharmacologyEffect.givesEffect(MoleculeEnum.getById(s2.getItemDamage())))
+                            {
+                                return true;
+                            }
                         }
                     }
                 }

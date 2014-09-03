@@ -43,13 +43,10 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.item.element.ElementItem;
-import net.minecraft.init.Items;
-import net.minecraftforge.common.config.Configuration;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-@Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
+@Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
 public class Minechem
 {
     // Internal mod name used for reference purposes and resource gathering.
@@ -88,10 +85,7 @@ public class Minechem
     public static PacketDispatcher network;
 
     // Creative mode tab that shows up in Minecraft.
-    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME);;
-
-    // Provides standardized configuration file offered by the Forge.
-    private static Configuration CONFIG;
+    public static CreativeTabs CREATIVE_TAB = new CreativeTabMinechem(Minechem.NAME);
 
     public static final ResourceLocation ICON_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_power.png");
     public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_fullEower.png");
@@ -115,8 +109,8 @@ public class Minechem
 
         // Load configuration.
         LOGGER.info("Loading configuration...");
-        CONFIG = new Configuration(event.getSuggestedConfigurationFile());
-        Settings.load(CONFIG);
+        Settings.init(event.getSuggestedConfigurationFile());
+        FMLCommonHandler.instance().bus().register(new Settings());
 
         // Setup Mod Metadata for players to see in mod list with other mods.
         metadata.modId = Minechem.ID;
