@@ -182,7 +182,7 @@ public class GuiFakeSlot extends Gui
             String tooltip = lines.get(i);
             if (i == 0)
             {
-                tooltip = "\u00a7" + itemstack.getRarity().rarityColor + tooltip;
+                tooltip = itemstack.getRarity().rarityColor + tooltip;
             }
             mc.fontRenderer.drawStringWithShadow(tooltip, tx, ty, 0xFFFFFFFF);
         }
