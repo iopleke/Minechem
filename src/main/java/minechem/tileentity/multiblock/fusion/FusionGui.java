@@ -35,7 +35,7 @@ public class FusionGui extends GuiContainerTabbed
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String info = MinechemHelper.getLocalString("block.name.fusion.name");
+        String info = MinechemHelper.getLocalString("block.fusionReactor.name");
         int infoWidth = fontRendererObj.getStringWidth(info);
         fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xFFFFFF);
     }

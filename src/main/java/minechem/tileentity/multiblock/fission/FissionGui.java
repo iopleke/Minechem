@@ -1,16 +1,18 @@
 package minechem.tileentity.multiblock.fission;
 
 import minechem.Minechem;
-import minechem.gui.GuiMinechemContainer;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.GuiTabHelp;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
+import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
-public class FissionGui extends GuiMinechemContainer
+public class FissionGui extends GuiContainerTabbed
 {
 
     int guiWidth = 176;
@@ -24,15 +26,17 @@ public class FissionGui extends GuiMinechemContainer
     public FissionGui(InventoryPlayer inventoryPlayer, FissionTileEntity fission)
     {
         super(new FissionContainer(inventoryPlayer, fission));
+        addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fission")));
+
     }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
     {
         super.drawGuiContainerForegroundLayer(par1, par2);
-        String info = MinechemHelper.getLocalString("Fission");
+        String info = MinechemHelper.getLocalString("block.fissionReactor.name");
         int infoWidth = fontRendererObj.getStringWidth(info);
-        fontRendererObj.drawString(info, (width - infoWidth) / 2, 5, 0xFFFFFF);
+        fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0xFFFFFF);
     }
 
     @Override
@@ -47,5 +51,11 @@ public class FissionGui extends GuiMinechemContainer
         drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 
     }
+
+	@Override
+	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h) 
+	{
+		return false;
+	}
 
 }
