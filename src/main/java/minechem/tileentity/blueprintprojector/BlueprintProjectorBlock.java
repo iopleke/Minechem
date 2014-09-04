@@ -74,7 +74,19 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
         }
         return;
     }
-    
+
+    @Override
+    public boolean removedByPlayer(World world, EntityPlayer player, int x, int y, int z, boolean willHarvest)
+    {
+        TileEntity tileEntity = world.getTileEntity(x,y,z);
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
+        {
+            BlueprintProjectorTileEntity projector = (BlueprintProjectorTileEntity) tileEntity;
+            projector.destroyProjection();
+        }
+        return super.removedByPlayer(world, player, x, y, z, willHarvest);
+    }
+
     @Override
     @SideOnly(Side.CLIENT)
     public void registerBlockIcons(IIconRegister ir)
