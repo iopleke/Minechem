@@ -67,7 +67,10 @@ public class FusionBlock extends BlockSimpleContainer
             IInventory inv = (IInventory) tileEntity;
             for (int i = 0; i < inv.getSizeInventory(); i++)
             {
-                itemStacks.add(inv.getStackInSlot(i));
+                if (inv.getStackInSlot(i) != null)
+                {
+                    itemStacks.add(inv.getStackInSlot(i));
+                }
             }
         }
     }
