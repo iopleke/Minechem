@@ -8,9 +8,11 @@ help.microscope=Plaats een item onder het glas om nieuwe recepten te ontdekken. 
 help.synthesis=De Chemische Samensteller neemt een recept van atomen en moneculen en stelt deze samen tot een item, om recepten te ontdekken kan je gebruik maken van een Microscoop. Elk item kost een bepaalde hoeveelheid energie om samen te stellen.
 help.projector=De Blauwdruk Projector wordt gebruikt voor het bouwen van complexe structuren zoals de fusiekamer. Je kan blauwdrukken kopen bij de bibliothecaris in een dorp.
 help.fusion=The Fusion Chamber takes two elements and fuses them together with great energy, combining their mass to create a heavier element. Only a nether star contains enough energy to fuse elements.
+help.fission=The Fission Chamber splits elements in half, resulting in two elements with half the atomic number of the original. This process is powered by radiation from Uranium.
 help.journal=Gebruik dit dagboek om aantekeningen van al je wetenschappelijke ontdekkigen bij te houden. Onder de Microscoop is er een gleuf voor het dagboek, bij het inspecteren van een voorwerp wordt het automatisch in je dagboek opgenomen. Ontdekte recepten kan je aan de linkerkant zien, als je op een item klikt activeer je het recept. Plaats je dan het dagboek in een Chemische Samensteller dan wordt het actieve recept geladen.
 help.chemicalStorage=De Chemische Opslag zal veilig radioactive stoffen op slaan en voorkomen dat ze in verval gaan.
 help.leadChest=De Loden Kist zal veilig radioactive stoffen op slaan en voorkomen dat ze in verval gaan.
+help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with certain elements to give it special effects.
 
 gui.title.decomposer=Chemische Ontleder
 gui.title.leadedchest=Loden Kist
