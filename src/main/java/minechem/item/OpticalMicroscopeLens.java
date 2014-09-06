@@ -19,7 +19,7 @@ public class OpticalMicroscopeLens extends Item
         "item.name.concaveLens", "item.name.convexLens", "item.name.microscopeLens", "item.name.projectorLens"
     };
     @SideOnly(Side.CLIENT)
-    private final IIcon[] icons = new IIcon[4];
+    private IIcon[] opticalMicroscopeLens;
 
     public OpticalMicroscopeLens()
     {
@@ -33,7 +33,7 @@ public class OpticalMicroscopeLens extends Item
     @SideOnly(Side.CLIENT)
     public IIcon getIconFromDamage(int i)
     {
-        return icons[i];
+        return this.opticalMicroscopeLens[i];
     }
 
     @Override
@@ -57,10 +57,11 @@ public class OpticalMicroscopeLens extends Item
     @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister ir)
     {
-        icons[0] = ir.registerIcon(Reference.LENS1_TEX);
-        icons[1] = ir.registerIcon(Reference.LENS2_TEX);
-        icons[2] = ir.registerIcon(Reference.LENS3_TEX);
-        icons[3] = ir.registerIcon(Reference.LENS4_TEX);
+        this.opticalMicroscopeLens = new IIcon[4];
+        this.opticalMicroscopeLens[0] = ir.registerIcon(Reference.LENS1_TEX);
+        this.opticalMicroscopeLens[1] = ir.registerIcon(Reference.LENS2_TEX);
+        this.opticalMicroscopeLens[2] = ir.registerIcon(Reference.LENS3_TEX);
+        this.opticalMicroscopeLens[3] = ir.registerIcon(Reference.LENS4_TEX);
     }
 
 }
