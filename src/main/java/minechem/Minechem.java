@@ -15,7 +15,7 @@ import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.network.PacketDispatcher;
 import minechem.network.packet.*;
-import minechem.network.server.CommonProxy;
+import minechem.proxy.CommonProxy;
 import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
 import minechem.potion.PotionEnchantmentCoated;
@@ -78,7 +78,7 @@ public class Minechem
     @Mod.Metadata(Minechem.ID)
     public static ModMetadata metadata;
 
-    @SidedProxy(clientSide = "minechem.network.client.ClientProxy", serverSide = "minechem.network.server.CommonProxy")
+    @SidedProxy(clientSide = "minechem.proxy.ClientProxy", serverSide = "minechem.proxy.CommonProxy")
     public static CommonProxy PROXY;
 
     // Register a SimpleNetworkWrapper

@@ -1,10 +1,10 @@
-package minechem.network.client;
+package minechem.proxy;
 
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
-import minechem.network.server.CommonProxy;
+import minechem.proxy.CommonProxy;
 import minechem.sound.MinechemSoundEvent;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
