@@ -62,6 +62,9 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         int h = 16;
         this.mc.getTextureManager().bindTexture(resource);
         GL11.glColor4f(1F, 1F, 1F, 1F);
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x + 0, y + h, this.zLevel, 0D, 1D);
@@ -69,6 +72,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         tessellator.addVertexWithUV(x + w, y + 0, this.zLevel, 1D, 0D);
         tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0D, 0D);
         tessellator.draw();
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     public GuiContainerTabbed(Container container)
