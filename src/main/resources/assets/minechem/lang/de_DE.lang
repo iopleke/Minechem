@@ -22,7 +22,7 @@ gui.journal.decomposer=Zersetzer
 gui.journal.synthesis=Synthesemaschine
 
 tile.chemicalDecomposer.name=Chemischer Zersetzer
-tile.uraniumOre.name=Uranerz
+tile.oreUranium.name=Uranerz
 tile.opticalMicroscope.name=Mikroskop
 tile.leadChest.name=Verbleite Truhe
 tile.chemicalSynthesizer.name=Chemische Synthesemaschine
