@@ -8,11 +8,11 @@ help.microscope=렌즈 밑에 아이템을 놓아 새로운 조합법을 확인�
 help.synthesis=화학 합성기는 원소들과 분자들을 합성해 아이템으로 만들어 줍니다. 합성법을 알아보기 위해서는 현미경을 사용하십시오. 아이템을 합성할 때마다 특정한 양의 에너지가 소모됩니다.
 help.projector=도면 투영기는 화학 핵융합로 등 복잡한 구조물들을 건설하기 위해 사용됩니다. 도면은 NPC 마을의 사서 주민에게서 구입할 수 있습니다.
 help.fusion=화학 핵융합로는 두 개의 원소를 많은 에너지로 합쳐 더 무거운 원소로 만듭니다. 네더 스타만이 원소를 융합하기에 충분한 에너지를 가지고 있습니다. 
-help.fission=The Fission Chamber splits elements in half, resulting in two elements with half the atomic number of the original. This process is powered by radiation from Uranium.
+help.fission=핵분열로는 원자를 반으로 쪼갭니다. 쪼개진 원자의 원자번호는 원래 원자의 반입니다. 우라늄의 방사선 에너지로 작동합니다.
 help.journal=이 책에 당신의 모든 과학적 발견을 기록하십시오. 현미경에는 이 책을 넣어 분해법/합성법을 기록하기 위한 슬롯이 있습니다. 분해법/합성법이 발견된 아이템들은 왼쪽에 보일 것입니다. 클릭해서 조합법을 보십시오. 이 책을 화학 합성기에 넣으면 자동적으로 합성법이 보여질 것입니다.
 help.chemicalStorage=화학 약품 보관 상자는 방사성 화학 물질을 안전하게 저장하고 붕괴를 방지합니다.
 help.leadChest=납으로 차폐된 상자는 방사성 화학 물질을 안전하게 저장하고 붕괴를 방지합니다.
-help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with certain elements to give it special effects.
+help.polytool=폴리툴은 특정 원소로 업그레이드하여 효과를 부여하는 다용도 도구입니다.
 
 gui.title.decomposer=화학 분해기
 gui.title.leadedchest=납으로 차폐된 상자
