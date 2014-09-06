@@ -29,8 +29,6 @@ tile.chemicalSynthesizer.name=화학 합성기
 tile.blueprintProjector.name=도면 투영기
 block.fusionReactor.name=화학 핵융합로
 block.fissionReactor.name=화학 핵분열로
-block.name.atomicClock.name=원자시계(WIP)
-tile.minechem.blockChemicalStorage.name=화학 약품 보관 상자
 
 item.Polytool.name=폴리툴
 item.name.concaveLens=오목 렌즈
