@@ -56,7 +56,7 @@ public class Minechem
     public static final String CHANNEL_NAME = ID;
 
     // User friendly version of our mods name.
-    public static final String NAME = "MineChem";
+    public static final String NAME = "Minechem";
 
     // Main version information that will be displayed in mod listing and for other purposes.
     public static final String V_MAJOR = "@MAJOR@";
