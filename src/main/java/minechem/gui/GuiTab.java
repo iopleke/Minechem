@@ -49,6 +49,18 @@ public abstract class GuiTab
 
     public abstract void draw(int x, int y);
 
+    public void drawTab(int x, int y) {
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+
+        draw(x, y);
+
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_LIGHTING);
+    }
+
     protected void drawBackground(int x, int y)
     {
 
@@ -87,7 +99,7 @@ public abstract class GuiTab
         // Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
         if (myGui instanceof GuiContainerTabbed)
         {
-            ((GuiContainerTabbed) myGui).drawTexture(x, y, resource);
+            ((GuiContainerTabbed) myGui).drawTexposerTabStateControl.jture(x, y, resource);
         } else
         {
             System.out.println("Failed to draw tab icons on a minechem gui that was not GuiContainerTabbed. This is a bug");
