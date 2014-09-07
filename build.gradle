@@ -125,26 +125,6 @@ task apiZip(type: Zip) {
     include 'minechem/api/**'
     destinationDir = file 'output'
 }
-
-task commandlineRunClient(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "net.minecraft.launchwrapper.Launch"
-    args("--version", "1.6",
-        "--tweakClass", "cpw.mods.fml.common.launcher.FMLTweaker",
-        "--accessToken", "FML")
-    jvmArgs("-Xincgc",
-        "-Xmx1024M",
-        "-Xms1024M",
-        "-Djava.library.path=${project.buildDir}/natives",
-        "-Dfml.ignoreInvalidMinecraftCertificates=true")
-    workingDir("eclipse")
-}
-
-task commandlineRunServer(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "cpw.mods.fml.relauncher.ServerLaunchWrapper"
-    jvmArgs("-Xincgc", "-Dfml.ignoreInvalidMinecraftCertificates=true")
-}
 	
 artifacts {
     archives apiZip
