@@ -99,7 +99,7 @@ public abstract class GuiTab
         // Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
         if (myGui instanceof GuiContainerTabbed)
         {
-            ((GuiContainerTabbed) myGui).drawTexposerTabStateControl.jture(x, y, resource);
+            ((GuiContainerTabbed) myGui).drawTexture(x, y, resource);
         } else
         {
             System.out.println("Failed to draw tab icons on a minechem gui that was not GuiContainerTabbed. This is a bug");
