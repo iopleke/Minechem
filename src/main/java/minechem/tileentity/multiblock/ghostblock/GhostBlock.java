@@ -5,6 +5,7 @@ import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -15,6 +16,8 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.MinechemBlocksGeneration;
+
+import java.util.Random;
 
 public class GhostBlock extends BlockContainer
 {
@@ -172,4 +175,15 @@ public class GhostBlock extends BlockContainer
         return new GhostBlockTileEntity();
     }
 
+    /**
+     * When player places a ghost block delete it
+     */
+    @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase entity, ItemStack itemStack)
+    {
+        if (entity instanceof EntityPlayer)
+        {
+            world.setBlockToAir(x, y, z);
+        }
+    }
 }
