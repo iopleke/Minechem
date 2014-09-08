@@ -12,7 +12,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemPills extends ItemFood
 {
-    // PILLZ HERE!!!!!!!!!!
     public ItemPills(int id, int heal)
     {
         super(heal, 0.4F, false);

@@ -8,7 +8,7 @@ import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
-import minechem.network.server.CommonProxy;
+import minechem.proxy.CommonProxy;
 import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;

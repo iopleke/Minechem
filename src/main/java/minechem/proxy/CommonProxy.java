@@ -1,4 +1,4 @@
-package minechem.network.server;
+package minechem.proxy;
 
 import minechem.utils.Reference;
 import net.minecraft.entity.player.EntityPlayer;

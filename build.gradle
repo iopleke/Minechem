@@ -50,8 +50,11 @@ repositories {
 }
 
 dependencies {
+    
+    // Would really like to switch to using the new method, so I can update to gradle 2
+    //compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${config.version.universalelectricity}", ext: 'jar', classifier: "dev"
     compile 'dev.calclavia.universalelectricity:universal-electricity:+:dev'
-
+    
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
@@ -124,26 +127,6 @@ task apiZip(type: Zip) {
     from sourceSets*.allSource
     include 'minechem/api/**'
     destinationDir = file 'output'
-}
-
-task commandlineRunClient(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "net.minecraft.launchwrapper.Launch"
-    args("--version", "1.6",
-        "--tweakClass", "cpw.mods.fml.common.launcher.FMLTweaker",
-        "--accessToken", "FML")
-    jvmArgs("-Xincgc",
-        "-Xmx1024M",
-        "-Xms1024M",
-        "-Djava.library.path=${project.buildDir}/natives",
-        "-Dfml.ignoreInvalidMinecraftCertificates=true")
-    workingDir("eclipse")
-}
-
-task commandlineRunServer(type: JavaExec) {
-    classpath = sourceSets.main.runtimeClasspath
-    main = "cpw.mods.fml.relauncher.ServerLaunchWrapper"
-    jvmArgs("-Xincgc", "-Dfml.ignoreInvalidMinecraftCertificates=true")
 }
 	
 artifacts {

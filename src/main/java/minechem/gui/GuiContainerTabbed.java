@@ -326,7 +326,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
             {
                 continue;
             }
-            guiTab.draw(0, yPosRight);
+            guiTab.drawTab(0, yPosRight);
         }
 
         for (GuiTab guiTab : tabListRight)
@@ -338,7 +338,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
                 continue;
             }
 
-            guiTab.draw(xSize, yPosRight);
+            guiTab.drawTab(xSize, yPosRight);
             yPosRight += guiTab.getHeight();
         }
 
