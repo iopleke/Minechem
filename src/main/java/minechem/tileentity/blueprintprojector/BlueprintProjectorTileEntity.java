@@ -36,7 +36,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 
     public BlueprintProjectorTileEntity()
     {
-        this.projectorSound = new LoopingSound("pixlepix.minechem.projector", 20);
+        this.projectorSound = new LoopingSound("minechem:projector", 20);
         this.projectorSound.setVolume(.2F);
         this.inventory = new ItemStack[getSizeInventory()];
     }
