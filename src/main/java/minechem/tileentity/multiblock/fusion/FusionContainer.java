@@ -57,19 +57,34 @@ public class FusionContainer extends Container implements IRadiationShield
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
-            if (slot >= 0 && slot < fusion.getSizeInventory())
+
+            if (slot < fusion.getSizeInventory())
             {
                 if (!mergeItemStack(stackInSlot, fusion.getSizeInventory(), inventorySlots.size(), true))
                 {
                     return null;
                 }
             }
-            else if (slot >= fusion.getSizeInventory())
+            else 
             {
-                if (!mergeItemStack(stackInSlot, FusionTileEntity.inputLeft, FusionTileEntity.inputRight, false))
-                {
-                    return null;
-                }
+            	if(fusion.isItemValidForSlot(fusion.fuelSlot, stackInSlot))
+            	{
+	                if (!mergeItemStack(stackInSlot, 0, 1, false))
+	                {
+	                    return null;
+	                }
+            	}
+            	else if(fusion.isItemValidForSlot(1, stackInSlot))
+            	{
+	                if (!mergeItemStack(stackInSlot, fusion.inputLeft, fusion.inputRight+1, false))
+	                {
+	                    return null;
+	                }
+            	}
+            	else
+            	{
+            		return null;
+            	}
             }
 
             if (stackInSlot.stackSize == 0)

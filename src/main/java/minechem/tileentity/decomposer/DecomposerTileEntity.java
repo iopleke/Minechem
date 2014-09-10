@@ -3,6 +3,7 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import minechem.MinechemItemsRegistration;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
@@ -426,7 +427,12 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     {
         if (i == inputSlots[0])
         {
-            return true;
+            DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(itemstack);
+
+            if (recipe != null)
+            {
+            	return true;
+            }
         }
 
         return false;

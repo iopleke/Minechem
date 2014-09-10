@@ -73,24 +73,28 @@ public class FissionContainer extends Container implements IRadiationShield
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
-            if (slot >= 0 && slot < kDecomposerInventoryEnd)
+            if (slot < 3)
             {
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
                     return null;
             }
-            else if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage() == ElementEnum.U.atomicNumber() + 1)
+            else
             {
-                if (!mergeItemStack(stackInSlot, FissionTileEntity.kStartFuel, FissionTileEntity.kStartFuel + 1, false))
-                    return null;
+            	if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage() == ElementEnum.U.atomicNumber() - 1)
+            	{
+            		if (!mergeItemStack(stackInSlot, 2, 3, false))
+            			return null;
+            	}
+            	else if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage()>0)
+            	{
+            		if (!mergeItemStack(stackInSlot, 0, 1, false))
+            			return null;            		
+            	}
+            	else 
+            	{
+            		return null;
+            	}
             }
-            else if (slot >= kPlayerInventorySlotStart)
-            {
-                if (!mergeItemStack(stackInSlot, FissionTileEntity.kStartInput, FissionTileEntity.kStartInput + 1, false))
-                    return null;
-            }
-            else if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
-                return null;
-
             if (stackInSlot.stackSize == 0)
                 slotObject.putStack(null);
             else

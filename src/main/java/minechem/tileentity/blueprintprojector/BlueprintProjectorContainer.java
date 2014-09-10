@@ -48,13 +48,45 @@ public class BlueprintProjectorContainer extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
-        return null;
-        /* Slot slotObject = (Slot) inventorySlots.get(slot); if (slotObject != null && slotObject.getHasStack()) { ItemStack stackInSlot = slotObject.getStack(); ItemStack stack = stackInSlot.copy(); if (slot == 0) { if (!mergeItemStack(stackInSlot, 1,
-         * inventorySlots.size(), true)) return null; } else { if (!mergeItemStack(stackInSlot, 0, 1, false)) return null; }
-         * 
-         * if (stackInSlot.stackSize == 0) slotObject.putStack(null); else slotObject.onSlotChanged();
-         * 
-         * return stack; } return null; */
+         Slot slotObject = (Slot) inventorySlots.get(slot); 
+         if (slotObject != null && slotObject.getHasStack()) 
+         { 
+        	 ItemStack stackInSlot = slotObject.getStack(); 
+        	 ItemStack stack = stackInSlot.copy(); 
+        	 if (slot == 0) 
+        	 { 
+        		 if (!mergeItemStack(stackInSlot, 1, inventorySlots.size(), true)) 
+        			 return null; 
+        	 } 
+        	 else 
+        	 { 
+        		 if(projector.isItemValidForSlot(slot, stackInSlot) && !getSlot(0).getHasStack())
+        		 {
+                     ItemStack copy = slotObject.decrStackSize(1);
+                     getSlot(0).putStack(copy);
+                     return null;
+        		 }
+        		 else
+        		 {
+        			 return null;
+        		 }
+        	 }
+         
+         if (stackInSlot.stackSize == 0)
+         {
+        	 if(slot == 0)
+        	 {
+        		 projector.setBlueprint(null);
+        	 }
+        	 slotObject.putStack(null); 
+         }
+         else
+         {
+        	 slotObject.onSlotChanged();
+         }	
+         
+         return stack; 
+         } 
+    return null; 
     }
-
 }
