@@ -1,11 +1,13 @@
 package minechem.proxy;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
-import minechem.proxy.CommonProxy;
 import minechem.sound.MinechemSoundEvent;
+import minechem.tick.TickHandler;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntityRenderer;
@@ -21,6 +23,8 @@ import minechem.tileentity.microscope.MicroscopeTileEntityRenderer;
 import minechem.tileentity.synthesis.SynthesisItemRenderer;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
 import minechem.tileentity.synthesis.SynthesisTileEntityRenderer;
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
@@ -53,7 +57,6 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.blueprintProjector), new BlueprintProjectorItemRenderer());
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.leadChest), new LeadedChestItemRenderer());
 
-        //TickRegistry.registerTickHandler(new TickHandler(), Side.CLIENT);//TODO:change so it will use events
         ClientRegistry.bindTileEntitySpecialRenderer(MicroscopeTileEntity.class, new MicroscopeTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
@@ -73,4 +76,16 @@ public class ClientProxy extends CommonProxy
         return FMLClientHandler.instance().getClient().theWorld;
     }
 
+    @Override
+    public void registerTickHandlers()
+    {
+        super.registerTickHandlers();
+        FMLCommonHandler.instance().bus().register(new TickHandler());
+    }
+
+    @Override
+    public EntityPlayer getPlayer(MessageContext context)
+    {
+        return Minecraft.getMinecraft().thePlayer;
+    }
 }

@@ -7,7 +7,7 @@ import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
-import net.minecraft.client.Minecraft;
+import minechem.Minechem;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -122,8 +122,7 @@ public class PacketDispatcher extends SimpleNetworkWrapper
         @Override
         public final IMessage onMessage(T message, MessageContext context)
         {
-            message.processPacket(context.side.isServer() ? context.getServerHandler().playerEntity
-                    : Minecraft.getMinecraft().thePlayer);
+            processPacket(Minechem.PROXY.getPlayer(context));
             return null;
         }
 
