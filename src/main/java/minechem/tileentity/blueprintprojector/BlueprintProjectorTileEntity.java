@@ -146,7 +146,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
                 fusion.yCoord = worldPos.y;
                 fusion.zCoord = worldPos.z;
                 fusion.blockType = MinechemBlocksGeneration.fusion;
-                worldObj.setTileEntity(xCoord, yCoord, zCoord, fusion);
+                worldObj.addTileEntity(fusion);
             }
             return worldObj.getTileEntity(worldPos.x, worldPos.y, worldPos.z);
         } else
