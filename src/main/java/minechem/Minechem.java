@@ -20,7 +20,6 @@ import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
 import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
-import minechem.tick.ScheduledTickHandler;
 import minechem.tick.TickHandler;
 import minechem.tileentity.synthesis.SynthesisTabStateControl;
 import minechem.utils.Reference;
@@ -185,8 +184,7 @@ public class Minechem
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
         LOGGER.info("Register Tick Events for chemical effects tracking...");
-        FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
-        FMLCommonHandler.instance().bus().register(new TickHandler());
+        PROXY.registerTickHandlers();
 
         LOGGER.info("Registering ClientProxy Rendering Hooks...");
         PROXY.registerRenderers();

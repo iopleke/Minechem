@@ -1,10 +1,11 @@
 package minechem.proxy;
 
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import minechem.tick.ScheduledTickHandler;
 import minechem.utils.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-import net.minecraft.world.WorldServer;
 import cpw.mods.fml.common.FMLCommonHandler;
 import net.minecraft.server.MinecraftServer;
 
@@ -15,6 +16,10 @@ public class CommonProxy implements Reference
     public void registerRenderers()
     {
 
+    }
+
+    public void registerTickHandlers() {
+        FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
     }
 
     public World getClientWorld()
@@ -56,5 +61,10 @@ public class CommonProxy implements Reference
     public String getItemDisplayName(ItemStack newStack)
     {
         return "";
+    }
+
+    public EntityPlayer getPlayer(MessageContext context)
+    {
+        return context.getServerHandler().playerEntity;
     }
 }
