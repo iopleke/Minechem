@@ -72,23 +72,27 @@ public class DecomposerContainer extends Container implements IRadiationShield
         {
             ItemStack stackInSlot = slotObject.getStack();
             ItemStack stack = stackInSlot.copy();
-            if (slot >= 0 && slot < kDecomposerInventoryEnd)
+            if (slot < kDecomposerInventoryEnd)
             {
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
                 {
                     return null;
                 }
-            } else if (slot >= kPlayerInventorySlotStart)
-            {
-                if (!mergeItemStack(stackInSlot, decomposer.kInputSlot, decomposer.kInputSlot + 1, false))
-                {
-                    return null;
-                }
-            } else if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
-            {
-                return null;
+            } 
+            else 
+            {	
+            	if(decomposer.isItemValidForSlot(0, stackInSlot))
+            	{
+                    if (!mergeItemStack(stackInSlot, decomposer.kInputSlot, decomposer.kInputSlot + 1, false))
+                    {
+                        return null;
+                    }
+            	}
+            	else
+            	{
+            	return null;
+            	}
             }
-
             if (stackInSlot.stackSize == 0)
             {
                 slotObject.putStack(null);
