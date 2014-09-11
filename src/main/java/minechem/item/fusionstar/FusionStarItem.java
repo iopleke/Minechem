@@ -18,7 +18,6 @@ public class FusionStarItem extends Item
 
     public FusionStarItem()
     {
-        this.maxStackSize = 1;
         this.setMaxDamage(2000);
         this.setNoRepair();
         this.setUnlocalizedName("fusionStar");
