@@ -59,24 +59,24 @@ dependencies {
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
 }
-version = "MC${config.version.minecraft}-F${config.version.forge}_v${config.version.mod.major}.${config.version.mod.minor}${config.version.mod.revis}"
+
 group = "minechem"
 archivesBaseName = "Minechem"
 
 minecraft {
     version = "${config.version.minecraft}-${config.version.forge}"
 	
-    replaceIn "ModMinechem.java"
+    replaceIn "Minechem.java"
     replace "@MAJOR@", config.version.mod.major
     replace "@MINOR@", config.version.mod.minor
     replace "@REVIS@", config.version.mod.revis
 	
     if (System.getenv("BUILD_NUMBER") != null) {
-	replace "@BUILD@", System.getenv("BUILD_NUMBER")
+        replace "@BUILD@", System.getenv("BUILD_NUMBER")
     }
     else
     {
-	replace "@BUILD@", "ManuallyBuilt"
+        replace "@BUILD@", "ManuallyBuilt"
     }
 }
 
@@ -94,22 +94,21 @@ allprojects {
     }
     
     jar {
-		
         dependsOn ":copyBuildXml"
         destinationDir = file (rootProject.getRootDir().getPath() + '/output')
     }
 	
     publishing {
-	publications {
-	    mavenJava(MavenPublication) {
-		artifact jar
-	    }
-	}
-	repositories {
-	    maven {
-		url "file://var/www/maven"
-	    }
-	}
+        publications {
+            mavenJava(MavenPublication) {
+                artifact jar
+            }
+        }
+        repositories {
+            maven {
+                url "file://var/www/maven"
+            }
+        }
     }
 }
  
