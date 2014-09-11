@@ -1,5 +1,6 @@
 package minechem.item.polytool;
 
+import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -113,5 +114,12 @@ public class PolytoolGui extends GuiContainerTabbed
 	{
 		return false;
 	}
+
+    @Optional.Method(modid = "NotEnoughItems")
+    @Override
+    public Iterable<Integer> getItemSpawnSlots(GuiContainer gc, ItemStack is)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
 }

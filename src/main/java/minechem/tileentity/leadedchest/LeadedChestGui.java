@@ -1,5 +1,6 @@
 package minechem.tileentity.leadedchest;
 
+import cpw.mods.fml.common.Optional;
 import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
@@ -7,6 +8,7 @@ import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
@@ -54,6 +56,13 @@ public class LeadedChestGui extends GuiContainerTabbed
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
     {
         return false;
+    }
+
+    @Optional.Method(modid = "NotEnoughItems")
+    @Override
+    public Iterable<Integer> getItemSpawnSlots(GuiContainer gc, ItemStack is)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
 }

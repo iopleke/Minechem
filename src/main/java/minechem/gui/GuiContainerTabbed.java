@@ -424,7 +424,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     @Optional.Method(modid = "NotEnoughItems")
-    @Override
     public int getItemSpawnSlot(GuiContainer gui, ItemStack item)
     {
         return -1;
