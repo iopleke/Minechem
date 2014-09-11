@@ -1,5 +1,7 @@
 package minechem.item.element;
 
+import net.minecraft.util.StatCollector;
+
 public enum ElementClassificationEnum
 {
     nonmetal("Non-metal"), inertGas("Inert gas"), halogen("Halogen"), alkaliMetal("Alkali metal"), alkalineEarthMetal("Alkaline earth metal"), semimetallic("Metalloid"), // Yes this is the proper name!
@@ -14,6 +16,11 @@ public enum ElementClassificationEnum
 
     public String descriptiveName()
     {
+        String localizedName = StatCollector.translateToLocal("minechem.element.classification." + descriptiveName);
+        if (localizedName.isEmpty()) 
+        {
+            return localizedName;
+        }
         return descriptiveName;
     }
 }

@@ -68,6 +68,20 @@ tab.title.maxUsage=Max Usage
 tab.title.stored=Stored
 tab.title.activationEnergy=Energy per item
 
+minechem.element.classification.Non-metal=Non-metal
+minechem.element.classification.Inert gas=Inert gas
+minechem.element.classification.Halogen=Halogen
+minechem.element.classification.Alkali metal=Alkali Metal
+minechem.element.classification.Alkaline earth metal=Alkali Earth Metal
+minechem.element.classification.Metalloid=Metalloid
+minechem.element.classification.Other metal=Other Metal
+minechem.element.classification.Transition metal=Transition Metal
+minechem.element.classification.Lanthanide=Lanthanide
+minechem.element.classification.Actinide=Actinide
+minechem.element.classification.Solid=Solid
+minechem.element.classification.Gaseous=Gaseous
+minechem.element.classification.Liquid=Liquid
+
 minechem.element.H=Hydrogen
 minechem.element.He=Helium
 minechem.element.Li=Lithium
