@@ -9,7 +9,7 @@ public class NEIMinechemConfig implements IConfigureNEI
     @Override
     public String getName()
     {
-        return "MineChem NEI Plugin";
+        return "Minechem NEI Plugin";
     }
 
     @Override

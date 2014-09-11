@@ -220,7 +220,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
     }
 
     /**
-     * One of the most important functions in MineChem is the ability to decompose items into base molecules.
+     * One of the most important functions in Minechem is the ability to decompose items into base molecules.
      */
     private void decomposeActiveStack()
     {
