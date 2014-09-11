@@ -946,14 +946,7 @@ public class MinechemRecipes
         {
             null, null, null, this.molecule(MoleculeEnum.siliconDioxide), null, null, null, null, null
         }));
-
-        // Melon
-        ItemStack blockMelon = new ItemStack(Blocks.melon_block);
-        DecomposerRecipe.add(new DecomposerRecipe(blockMelon, new PotionChemical[]
-        {
-            this.molecule(MoleculeEnum.cucurbitacin), this.molecule(MoleculeEnum.asparticAcid), this.molecule(MoleculeEnum.water, 16)
-        }));
-
+        
         // Mycelium
         ItemStack blockMycelium = new ItemStack(Blocks.mycelium);
         DecomposerRecipe.add(new DecomposerRecipeChance(blockMycelium, 0.09F, new PotionChemical[]
@@ -1464,11 +1457,27 @@ public class MinechemRecipes
             this.molecule(MoleculeEnum.sucrose)
         }));
 
-        // Melon
+        // Melon Slice
         ItemStack itemMelon = new ItemStack(Items.melon);
         DecomposerRecipe.add(new DecomposerRecipe(itemMelon, new PotionChemical[]
         {
-            this.molecule(MoleculeEnum.water)
+            this.molecule(MoleculeEnum.water, 1)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.melon), false, 300, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cucurbitacin), this.molecule(MoleculeEnum.asparticAcid), this.molecule(MoleculeEnum.water, 1)
+        }));
+        
+
+        // Melon
+        ItemStack blockMelon = new ItemStack(Blocks.melon_block);
+        DecomposerRecipe.add(new DecomposerRecipe(blockMelon, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cucurbitacin), this.molecule(MoleculeEnum.asparticAcid), this.molecule(MoleculeEnum.water, 16)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.melon_block, 1), false, 300, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cucurbitacin), this.molecule(MoleculeEnum.asparticAcid), this.molecule(MoleculeEnum.water, 16)
         }));
 
         // Cooked Chicken
