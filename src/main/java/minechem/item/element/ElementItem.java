@@ -38,7 +38,7 @@ public class ElementItem extends Item // implements IStorageTank
 
     public ElementItem()
     {
-        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+        setCreativeTab(Minechem.CREATIVE_TAB_ELEMENTS);
         setUnlocalizedName("minechem.itemElement");
         setHasSubtypes(true);
         classificationIndexes.put(ElementClassificationEnum.nonmetal, 0);

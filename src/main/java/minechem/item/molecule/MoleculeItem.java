@@ -25,7 +25,7 @@ public class MoleculeItem extends Item
 
     public MoleculeItem()
     {
-        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+        setCreativeTab(Minechem.CREATIVE_TAB_ELEMENTS);
         setHasSubtypes(true);
         setUnlocalizedName("minechem.itemMolecule");
     }

@@ -85,6 +85,7 @@ public class Minechem
 
     // Creative mode tab that shows up in Minecraft.
     public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Minechem.NAME);
+    public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Minechem.NAME);
 
     public static final ResourceLocation ICON_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_power.png");
     public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_fullEower.png");
