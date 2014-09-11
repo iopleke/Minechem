@@ -42,6 +42,8 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import minechem.tileentity.leadedchest.LeadedChestBlock;
+import minechem.tileentity.microscope.MicroscopeBlock;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -85,7 +87,7 @@ public class Minechem
 
     // Creative mode tab that shows up in Minecraft.
     public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Minechem.NAME);
-    public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Minechem.NAME);
+    public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Minechem.NAME + ".Elements");
 
     public static final ResourceLocation ICON_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_power.png");
     public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_fullEower.png");

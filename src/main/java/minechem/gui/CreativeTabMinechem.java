@@ -11,7 +11,6 @@ public class CreativeTabMinechem extends CreativeTabs
     public CreativeTabMinechem(String tabName)
     {
         super(tabName);
-
         this.tabIconItem = new FusionStarItem();
     }
 
