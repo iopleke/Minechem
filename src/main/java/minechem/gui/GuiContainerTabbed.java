@@ -16,9 +16,11 @@ import org.lwjgl.opengl.GL11;
 import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
+import cpw.mods.fml.common.Optional;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderManager;
 
+@Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler
 {
 
@@ -410,6 +412,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     }
 
     /* INEIGuiHandler */
+    @Optional.Method(modid = "NotEnoughItems")
     @Override
     public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility)
     {
@@ -420,18 +423,21 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         return currentVisibility;
     }
 
+    @Optional.Method(modid = "NotEnoughItems")
     @Override
     public int getItemSpawnSlot(GuiContainer gui, ItemStack item)
     {
         return -1;
     }
 
+    @Optional.Method(modid = "NotEnoughItems")
     @Override
     public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui)
     {
         return null;
     }
 
+    @Optional.Method(modid = "NotEnoughItems")
     @Override
     public boolean handleDragNDrop(GuiContainer gui, int mousex, int mousey, ItemStack draggedStack, int button)
     {
