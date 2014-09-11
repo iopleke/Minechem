@@ -48,11 +48,11 @@ public class SynthesisRecipe
 
     }
 
-    public SynthesisRecipe(ItemStack var1, boolean var2, int var3, PotionChemical... var4)
+    public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... var4)
     {
-        this.output = var1;
-        this.isShaped = var2;
-        this.energyCost = var3;
+        this.output = output;
+        this.isShaped = isShaped;
+        this.energyCost = energyCost;
         this.shapedRecipe = var4;
         this.unshapedRecipe = new ArrayList();
         PotionChemical[] var5 = var4;
