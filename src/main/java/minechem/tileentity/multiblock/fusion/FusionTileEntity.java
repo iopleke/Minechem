@@ -29,7 +29,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    public boolean canExtractItem(int slot, ItemStack itemstack, int side)
     {
         // @TODO - set up for automation
         return false;
@@ -64,7 +64,8 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     @Override
     public int[] getAccessibleSlotsFromSide(int var1)
     {
-        return null;
+    	int[] slots={FusionTileEntity.fuelSlot,FusionTileEntity.inputLeft,FusionTileEntity.inputRight,FusionTileEntity.output};
+        return slots;
     }
 
     @Override
