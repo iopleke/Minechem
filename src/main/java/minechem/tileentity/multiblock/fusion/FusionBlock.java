@@ -31,7 +31,7 @@ public class FusionBlock extends BlockSimpleContainer
     public FusionBlock()
     {
         super(Material.iron);
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setBlockName("fusionWall");
     }
 

@@ -20,7 +20,7 @@ public class DecomposerBlock extends BlockSimpleContainer
     {
         super(Material.iron);
         setBlockName("chemicalDecomposer");
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
     }
 
     @Override

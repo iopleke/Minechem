@@ -36,7 +36,7 @@ public abstract class BlockSimple extends Block implements IBlock
 
         this.blockName = blockName;
 
-        this.setCreativeTab(Minechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
 
     }
 

@@ -25,7 +25,7 @@ public class OpticalMicroscopeLens extends Item
     {
         super();
         setUnlocalizedName("opticalMicroscopeLens");
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setHasSubtypes(true);
     }
 

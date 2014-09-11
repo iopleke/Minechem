@@ -18,7 +18,7 @@ public class ItemPills extends ItemFood
         setMaxDamage(0);
         setMaxStackSize(32);
         this.setUnlocalizedName("minechem.itempill");
-        this.setCreativeTab(Minechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         this.setAlwaysEdible();
     }
 

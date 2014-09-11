@@ -25,7 +25,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
     public MicroscopeBlock()
     {
         super(Material.iron);
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setBlockName("opticalMicroscope");
         setLightLevel(0.5F);
     }

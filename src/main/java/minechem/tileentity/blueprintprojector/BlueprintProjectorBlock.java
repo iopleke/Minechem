@@ -26,7 +26,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
     {
         super(Material.iron);
         setBlockName("blueprintProjector");
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setLightLevel(0.7F);
     }
 

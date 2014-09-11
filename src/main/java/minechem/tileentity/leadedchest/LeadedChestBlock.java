@@ -23,7 +23,7 @@ public class LeadedChestBlock extends BlockContainer
     public LeadedChestBlock()
     {
         super(Material.wood);
-        this.setCreativeTab(Minechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         this.setHardness(2.0F);
         this.setResistance(5.0F);
         this.setBlockName("leadChest");

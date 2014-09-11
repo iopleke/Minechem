@@ -22,7 +22,7 @@ public class FusionStarItem extends Item
         this.setMaxDamage(2000);
         this.setNoRepair();
         this.setUnlocalizedName("fusionStar");
-        this.setCreativeTab(Minechem.CREATIVE_TAB);
+        this.setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
     }
 
     @Override

@@ -12,7 +12,7 @@ public class ItemAtomicManipulator extends Item
 
     public ItemAtomicManipulator()
     {
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setUnlocalizedName("minechem.itemAtomicManipulator");
     }
 

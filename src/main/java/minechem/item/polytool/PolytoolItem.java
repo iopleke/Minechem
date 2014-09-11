@@ -34,7 +34,7 @@ public class PolytoolItem extends ItemPickaxe
     {
         super(ToolMaterial.IRON);
         instance = this;
-        setCreativeTab(Minechem.CREATIVE_TAB);
+        setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setUnlocalizedName("Polytool");
     }
 
