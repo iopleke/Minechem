@@ -26,7 +26,7 @@ public class DecomposerRecipe
     {
         for (ItemStack i : OreDictionary.getOres(item))
         {
-            DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), amount), chemicals));
+            DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), amount, i.getItemDamage()), chemicals));
         }
     }
 
