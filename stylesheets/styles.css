@@ -215,7 +215,8 @@ td {
 /* Header */
 
 header {
-	background: #171717 /* url("../images/sidebar.png") no-repeat */;
+	background-color:rgba(0,0,0,0.7);
+	/* background: #171717 url("../images/sidebar.png") no-repeat */;
 	color: #FDFDFB;
 	width:170px;
 	float:left;
@@ -323,9 +324,14 @@ section {
 	float:right;
 	padding: 10px;
 	padding-bottom:50px;
-	background-color:rgba(255,255,255,0.5);
+	margin-top: 30px;
+	background-color:rgba(255,255,255,0.7);
 	border: 2px white;
 	border-radius: 6px;
+}
+
+section h1 {
+	margin-top: 25px;
 }
 
 
