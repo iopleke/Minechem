@@ -30,6 +30,8 @@ body {
 	font-family:"Helvetica Neue", Helvetica, Arial, sans-serif;
 	font-size: 14px;
 	color: #232323;
+	background: url("../images/banner.png") no-repeat;
+	background-size: cover;
 	background-color: #FBFAF7;
 	margin: 0;
 	line-height: 1.8em;
@@ -213,7 +215,7 @@ td {
 /* Header */
 
 header {
-	background: #171717 url("../images/sidebar.png") no-repeat;
+	background: #171717 /* url("../images/sidebar.png") no-repeat */;
 	color: #FDFDFB;
 	width:170px;
 	float:left;
@@ -319,7 +321,11 @@ a.buttons:hover {
 section {
 	width:650px;
 	float:right;
+	padding: 10px;
 	padding-bottom:50px;
+	background-color:rgba(255,255,255,0.5);
+	border: 2px white;
+	border-radius: 6px;
 }
 
 
