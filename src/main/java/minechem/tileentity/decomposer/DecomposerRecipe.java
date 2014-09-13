@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.Random;
 
 import minechem.potion.PotionChemical;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
@@ -18,6 +20,14 @@ public class DecomposerRecipe
     {
         recipes.add(recipe);
         return recipe;
+    }
+
+    public static void createAndAddRecipeSafely(String item, int amount, PotionChemical... chemicals)
+    {
+        for (ItemStack i : OreDictionary.getOres(item))
+        {
+            DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), amount, i.getItemDamage()), chemicals));
+        }
     }
 
     public DecomposerRecipe(ItemStack input, PotionChemical... chemicals)
