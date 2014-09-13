@@ -213,7 +213,7 @@ td {
 /* Header */
 
 header {
-	background-color: #171717;
+	background: #171717 url("../images/sidebar.png") no-repeat;
 	color: #FDFDFB;
 	width:170px;
 	float:left;
