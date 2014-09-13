@@ -179,17 +179,18 @@ public class ElementItem extends Item // implements IStorageTank
             if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
             {
                 String polytoolDesc = PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1).getDescription();
-                // String localizedDesc=MinechemHelper.getLocalString("polytool.description."+polytoolDesc);
+                String localizedDesc=MinechemHelper.getLocalString("polytool.description."+ElementItem.getLongName(itemstack));
 
-                // if(localizedDesc.equals("")){
-                String localizedDesc = polytoolDesc;
-                // }
-
+                 if(localizedDesc.equals("polytool.description."+ElementItem.getLongName(itemstack)) || localizedDesc.equals(""))
+                 {
+                	 localizedDesc = polytoolDesc;
+                 }
+                 
                 par3List.add(EnumColor.AQUA + localizedDesc);
 
             } else
             {
-                par3List.add(EnumColor.DARK_GREEN + "SHIFT to show polytool information");
+                par3List.add(EnumColor.DARK_GREEN + MinechemHelper.getLocalString("polytool.information"));
             }
         }
 
