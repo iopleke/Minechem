@@ -186,7 +186,7 @@ table {
 }
 
 table {
-	border: 1px solid #ccc;
+	border: 1px solid #000;
 	margin-bottom: 32px;
 	text-align: left;
 }
@@ -201,8 +201,19 @@ th {
 }
 
 td {
+	border: 1px solid gray;
 	padding: 10px;
 	background: #ccc;
+}
+
+.odd td {
+	padding: 0px 8px;
+	background: #ccc;
+}
+
+.even td {
+	padding: 0px 8px;
+	background: #bbb;
 }
 
 
@@ -301,7 +312,7 @@ header li:hover {
 a.buttons {
 	-webkit-font-smoothing: antialiased;
 	background: url(../images/arrow-down.png) no-repeat;
-	font-weight: normal;
+	font-weight: bold;
 	text-shadow: rgba(0, 0, 0, 0.4) 0 -1px 0;
 	padding: 2px 2px 2px 22px;
 	height: 30px;
