@@ -206,12 +206,12 @@ td {
 	background: #ccc;
 }
 
-.odd td {
+tr:nth-of-type(2n) td {
 	padding: 0px 8px;
 	background: #ccc;
 }
 
-.even td {
+tr:nth-of-type(2n+1) td {
 	padding: 0px 8px;
 	background: #bbb;
 }
