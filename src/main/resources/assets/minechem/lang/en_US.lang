@@ -21,6 +21,16 @@ gui.title.microscope=Microscope
 gui.title.synthesis=Chemical Synthesis Machine
 gui.journal.decomposer=Decomposer
 gui.journal.synthesis=Synthesis
+minechem.gui.polytool.sword=Sword
+minechem.gui.polytool.stone=Stone
+minechem.gui.polytool.pickaxe=Pickaxe
+minechem.gui.polytool.axe=Axe
+minechem.gui.polytool.shovel=Shovel
+minechem.owner.tag=Owner
+minechem.enchantment.coated=coated
+minechem.FusionWall=Fusion Wall
+minechem.TungstenPlating=Tungsten Plating
+minechem.FusionCore=Fusion Core
 
 tile.chemicalDecomposer.name=Chemical Decomposer
 tile.oreUranium.name=Uranium Ore
