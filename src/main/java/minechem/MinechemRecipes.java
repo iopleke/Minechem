@@ -181,7 +181,7 @@ public class MinechemRecipes
         }));
 
         // Grass Block
-        ItemStack blockGrass = new ItemStack(Blocks.grass);
+        ItemStack blockGrass = new ItemStack(Blocks.grass,1,0);
         DecomposerRecipe.add(new DecomposerRecipeSelect(blockGrass, 0.07F, new DecomposerRecipe[]
         {
             new DecomposerRecipe(new PotionChemical[]
@@ -216,7 +216,9 @@ public class MinechemRecipes
         }));
 
         // Dirt
-        ItemStack blockDirt = new ItemStack(Blocks.dirt);
+        ItemStack blockDirt = new ItemStack(Blocks.dirt,1,0);
+        ItemStack blockPodzol = new ItemStack(Blocks.dirt,1,2);
+
         DecomposerRecipe.add(new DecomposerRecipeSelect(blockDirt, 0.07F, new DecomposerRecipe[]
         {
             new DecomposerRecipe(new PotionChemical[]
@@ -242,9 +244,38 @@ public class MinechemRecipes
                 this.element(ElementEnum.Ga), this.element(ElementEnum.As)
             })
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 16), true, 50, new PotionChemical[]
+        DecomposerRecipe.add(new DecomposerRecipeSelect(blockPodzol, 0.07F, new DecomposerRecipe[]
+        {
+            new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Si), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Fe), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Mg), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Ti), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Pb), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Zn), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                this.element(ElementEnum.Ga), this.element(ElementEnum.As)
+            })
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 16, 0), true, 50, new PotionChemical[]
         {
             null, null, null, null, this.element(ElementEnum.O, 2), this.element(ElementEnum.Si)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 16, 2), true, 50, new PotionChemical[]
+        {
+            null, null, null, null, null, null, this.element(ElementEnum.O, 2), this.element(ElementEnum.Si)
         }));
 
         // Cobblestone
@@ -277,11 +308,13 @@ public class MinechemRecipes
         }));
 
         // Planks
-        // TODO: Add synthesizer recipes?
         ItemStack blockOakWoodPlanks = new ItemStack(Blocks.planks, 1, 0);
         ItemStack blockSpruceWoodPlanks = new ItemStack(Blocks.planks, 1, 1);
         ItemStack blockBirchWoodPlanks = new ItemStack(Blocks.planks, 1, 2);
         ItemStack blockJungleWoodPlanks = new ItemStack(Blocks.planks, 1, 3);
+        ItemStack blockAcaciaWoodPlanks = new ItemStack(Blocks.planks, 1, 4);
+        ItemStack blockDarkOakWoodPlanks = new ItemStack(Blocks.planks, 1, 5);
+        
         DecomposerRecipe.add(new DecomposerRecipeChance(blockOakWoodPlanks, 0.4F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose, 2)
@@ -298,12 +331,103 @@ public class MinechemRecipes
         {
             this.molecule(MoleculeEnum.cellulose, 2)
         }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAcaciaWoodPlanks, 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockDarkOakWoodPlanks, 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockOakWoodPlanks, true, 20, new PotionChemical[]
+        {
+            null, null, null, null, null, null, null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockSpruceWoodPlanks, true, 20, new PotionChemical[]
+        {
+            null, null, null, null, null, null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBirchWoodPlanks, true, 20, new PotionChemical[]
+        {
+            null, null, null, null, null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockJungleWoodPlanks, true, 20, new PotionChemical[]
+        {
+            null, null, null, null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockAcaciaWoodPlanks, true, 20, new PotionChemical[]
+        {
+            null, null, null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockDarkOakWoodPlanks, true, 20, new PotionChemical[]
+        {
+            null, null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null, null, null, null, null
+        }));
+
+        // Wooden Slabs
+        ItemStack blockOakWoodSlabs = new ItemStack(Blocks.wooden_slab, 1, 0);
+        ItemStack blockSpruceWoodSlabs = new ItemStack(Blocks.wooden_slab, 1, 1);
+        ItemStack blockBirchWoodSlabs = new ItemStack(Blocks.wooden_slab, 1, 2);
+        ItemStack blockJungleWoodSlabs = new ItemStack(Blocks.wooden_slab, 1, 3);
+        ItemStack blockAcaciaWoodSlabs = new ItemStack(Blocks.wooden_slab, 1, 4);
+        ItemStack blockDarkOakWoodSlabs = new ItemStack(Blocks.wooden_slab, 1, 5);
+        
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockOakWoodSlabs , 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockSpruceWoodSlabs , 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockBirchWoodSlabs , 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockJungleWoodSlabs , 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAcaciaWoodSlabs , 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockDarkOakWoodSlabs , 0.4F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 2)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockOakWoodSlabs , true, 20, new PotionChemical[]
+        {
+            null, null, null, null, null, null, this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockSpruceWoodSlabs , true, 20, new PotionChemical[]
+        {
+            null, null, null, null, null, this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBirchWoodSlabs , true, 20, new PotionChemical[]
+        {
+            null, null, null, null, this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockJungleWoodSlabs , true, 20, new PotionChemical[]
+        {
+            null, null, null, this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockAcaciaWoodSlabs , true, 20, new PotionChemical[]
+        {
+            null, null, this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockDarkOakWoodSlabs , true, 20, new PotionChemical[]
+        {
+            null, this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), null, null, null, null, null
+        }));
 
         // Saplings
         ItemStack blockOakSapling = new ItemStack(Blocks.sapling, 1, 0);
         ItemStack blockSpruceSapling = new ItemStack(Blocks.sapling, 1, 1);
         ItemStack blockBirchSapling = new ItemStack(Blocks.sapling, 1, 2);
         ItemStack blockJungleSapling = new ItemStack(Blocks.sapling, 1, 3);
+        ItemStack blockAcaciaSapling = new ItemStack(Blocks.sapling, 1, 4);
+        ItemStack blockDarkOakSapling = new ItemStack(Blocks.sapling, 1, 5);
         DecomposerRecipe.add(new DecomposerRecipeChance(blockOakSapling, 0.25F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose)
@@ -317,6 +441,14 @@ public class MinechemRecipes
             this.molecule(MoleculeEnum.cellulose)
         }));
         DecomposerRecipe.add(new DecomposerRecipeChance(blockJungleSapling, 0.25F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAcaciaSapling, 0.25F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockDarkOakSapling, 0.25F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose)
         }));
@@ -335,6 +467,14 @@ public class MinechemRecipes
         SynthesisRecipe.add(new SynthesisRecipe(blockJungleSapling, true, 20, new PotionChemical[]
         {
             null, null, null, null, null, this.molecule(MoleculeEnum.cellulose), null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockAcaciaSapling, true, 20, new PotionChemical[]
+        {
+            null, null, null, null, this.molecule(MoleculeEnum.cellulose), null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockDarkOakSapling, true, 20, new PotionChemical[]
+        {
+            null, null, null, this.molecule(MoleculeEnum.cellulose), null, null, null, null, null
         }));
 
         // Lava
@@ -396,6 +536,8 @@ public class MinechemRecipes
         ItemStack blockSpruceLog = new ItemStack(Blocks.log, 1, 1);
         ItemStack blockBirchLog = new ItemStack(Blocks.log, 1, 2);
         ItemStack blockJungleLog = new ItemStack(Blocks.log, 1, 3);
+        ItemStack blockAcaciaLog = new ItemStack(Blocks.log2, 1, 0);
+        ItemStack blockDarkOakLog = new ItemStack(Blocks.log2, 1, 1);
         DecomposerRecipe.add(new DecomposerRecipeChance(blockOakLog, 0.5F, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.cellulose, 8)
@@ -412,34 +554,387 @@ public class MinechemRecipes
         {
             this.molecule(MoleculeEnum.cellulose, 8)
         }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAcaciaLog, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 8)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockDarkOakLog, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 8)
+        }));
         SynthesisRecipe.add(new SynthesisRecipe(blockOakLog, true, 100, new PotionChemical[]
         {
-            moleculeCellulose, moleculeCellulose, moleculeCellulose, null, moleculeCellulose, null, null, null, null
+        		this.molecule(MoleculeEnum.cellulose,2), this.molecule(MoleculeEnum.cellulose,2), this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), null, null, null, null
         }));
         SynthesisRecipe.add(new SynthesisRecipe(blockSpruceLog, true, 100, new PotionChemical[]
         {
-            null, null, null, null, moleculeCellulose, null, moleculeCellulose, moleculeCellulose, moleculeCellulose
+            null, null, null, null, this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), this.molecule(MoleculeEnum.cellulose,2), this.molecule(MoleculeEnum.cellulose,2)
         }));
         SynthesisRecipe.add(new SynthesisRecipe(blockBirchLog, true, 100, new PotionChemical[]
         {
-            moleculeCellulose, null, moleculeCellulose, null, null, null, moleculeCellulose, null, moleculeCellulose
+        		this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), null, null, null, this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2)
         }));
         SynthesisRecipe.add(new SynthesisRecipe(blockJungleLog, true, 100, new PotionChemical[]
         {
-            moleculeCellulose, null, null, moleculeCellulose, moleculeCellulose, null, moleculeCellulose, null, null
+        		this.molecule(MoleculeEnum.cellulose,2), null, null, this.molecule(MoleculeEnum.cellulose,2), this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockAcaciaLog, true, 100, new PotionChemical[]
+        {
+            null, null, this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), this.molecule(MoleculeEnum.cellulose,2), null, null, this.molecule(MoleculeEnum.cellulose,2)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockDarkOakLog, true, 100, new PotionChemical[]
+        {
+            null, this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), null, this.molecule(MoleculeEnum.cellulose,2), null
         }));
 
         // Leaves
-        // TODO: Add support for leaves
+        ItemStack blockOakLeaves = new ItemStack(Blocks.leaves, 1, 0);
+        ItemStack blockSpruceLeaves = new ItemStack(Blocks.leaves, 1, 1);
+        ItemStack blockBirchLeaves = new ItemStack(Blocks.leaves, 1, 2);
+        ItemStack blockJungleLeaves = new ItemStack(Blocks.leaves, 1, 3);
+        ItemStack blockAcaciaLeaves = new ItemStack(Blocks.leaves2, 1, 0);
+        ItemStack blockDarkOakLeaves = new ItemStack(Blocks.leaves2, 1, 1);
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockOakLeaves, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 4)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockSpruceLeaves, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 4)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockBirchLeaves, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 4)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockJungleLeaves, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 4)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAcaciaLeaves, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 4)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockDarkOakLeaves, 0.5F, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.cellulose, 4)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockOakLeaves, true, 100, new PotionChemical[]
+        {
+        		moleculeCellulose, moleculeCellulose, moleculeCellulose, null, moleculeCellulose, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockSpruceLeaves, true, 100, new PotionChemical[]
+        {
+            null, null, null, null, moleculeCellulose, null, moleculeCellulose, moleculeCellulose, moleculeCellulose
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBirchLeaves, true, 100, new PotionChemical[]
+        {
+        		moleculeCellulose, null, moleculeCellulose, null, null, null, moleculeCellulose, null, moleculeCellulose
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockJungleLeaves, true, 100, new PotionChemical[]
+        {
+        		moleculeCellulose, null, null, moleculeCellulose, moleculeCellulose, null, moleculeCellulose, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockAcaciaLeaves, true, 100, new PotionChemical[]
+        {
+            null, null, moleculeCellulose, null, moleculeCellulose, moleculeCellulose, null, null, moleculeCellulose
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockDarkOakLeaves, true, 100, new PotionChemical[]
+        {
+            null, moleculeCellulose, null, moleculeCellulose, null, moleculeCellulose, null, moleculeCellulose, null
+        }));
+
         // Glass
         ItemStack blockGlass = new ItemStack(Blocks.glass);
+        ItemStack blockWhiteStainedGlass = new ItemStack(Blocks.stained_glass,1,0);
+        ItemStack blockOrangeStainedGlass = new ItemStack(Blocks.stained_glass,1,1);
+        ItemStack blockMagentaStainedGlass = new ItemStack(Blocks.stained_glass,1,2);
+        ItemStack blockLiteBlueStainedGlass = new ItemStack(Blocks.stained_glass,1,3);
+        ItemStack blockYellowStainedGlass = new ItemStack(Blocks.stained_glass,1,4);
+        ItemStack blockLimeStainedGlass = new ItemStack(Blocks.stained_glass,1,5);
+        ItemStack blockPinkStainedGlass = new ItemStack(Blocks.stained_glass,1,6);
+        ItemStack blockGrayStainedGlass = new ItemStack(Blocks.stained_glass,1,7);
+        ItemStack blockLiteGrayStainedGlass = new ItemStack(Blocks.stained_glass,1,8);
+        ItemStack blockCyanStainedGlass = new ItemStack(Blocks.stained_glass,1,9);
+        ItemStack blockPurpleStainedGlass = new ItemStack(Blocks.stained_glass,1,10);
+        ItemStack blockBlueStainedGlass = new ItemStack(Blocks.stained_glass,1,11);
+        ItemStack blockBrownStainedGlass = new ItemStack(Blocks.stained_glass,1,12);
+        ItemStack blockGreenStainedGlass = new ItemStack(Blocks.stained_glass,1,13);
+        ItemStack blockRedStainedGlass = new ItemStack(Blocks.stained_glass,1,14);
+        ItemStack blockBlackStainedGlass = new ItemStack(Blocks.stained_glass,1,15);
         DecomposerRecipe.add(new DecomposerRecipe(blockGlass, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.siliconDioxide, 16)
         }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockWhiteStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockOrangeStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.orangePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockMagentaStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.redPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockLiteBlueStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.lazurite), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockYellowStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.yellowPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockLimeStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.limePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockPinkStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.redPigment), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockGrayStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.blackPigment), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockCyanStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockPurpleStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.purplePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockGreenStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.greenPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockBrownStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.tannicacid)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockRedStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.redPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockBlackStainedGlass, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.blackPigment)
+        }));
         SynthesisRecipe.add(new SynthesisRecipe(blockGlass, true, 500, new PotionChemical[]
         {
             moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, null, null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockWhiteStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.whitePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockOrangeStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.orangePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockMagentaStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.lightbluePigment), null, this.molecule(MoleculeEnum.redPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLiteBlueStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.lightbluePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockYellowStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.yellowPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLimeStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.limePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockPinkStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), null, this.molecule(MoleculeEnum.redPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockGrayStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), null, this.molecule(MoleculeEnum.blackPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLiteGrayStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.blackPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockCyanStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), null, this.molecule(MoleculeEnum.lightbluePigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockPurpleStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.purplePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBlueStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.lazurite), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBrownStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.tannicacid), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockGreenStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.greenPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockRedStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.redPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBlackStainedGlass, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.blackPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+
+        // Glass Panes
+        ItemStack blockGlassPane = new ItemStack(Blocks.glass_pane);
+        ItemStack blockWhiteStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,0);
+        ItemStack blockOrangeStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,1);
+        ItemStack blockMagentaStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,2);
+        ItemStack blockLiteBlueStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,3);
+        ItemStack blockYellowStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,4);
+        ItemStack blockLimeStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,5);
+        ItemStack blockPinkStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,6);
+        ItemStack blockGrayStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,7);
+        ItemStack blockLiteGrayStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,8);
+        ItemStack blockCyanStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,9);
+        ItemStack blockPurpleStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,10);
+        ItemStack blockBlueStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,11);
+        ItemStack blockBrownStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,12);
+        ItemStack blockGreenStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,13);
+        ItemStack blockRedStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,14);
+        ItemStack blockBlackStainedGlassPane = new ItemStack(Blocks.stained_glass_pane,1,15);
+        DecomposerRecipe.add(new DecomposerRecipe(blockGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockWhiteStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockOrangeStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.orangePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockMagentaStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.redPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockLiteBlueStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.lazurite), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockYellowStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.yellowPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockLimeStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.limePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockPinkStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.redPigment), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockGrayStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.blackPigment), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockCyanStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.whitePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockPurpleStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.purplePigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockGreenStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.greenPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockBrownStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.tannicacid)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockRedStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.redPigment)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipe(blockBlackStainedGlassPane, new PotionChemical[]
+        {
+            this.molecule(MoleculeEnum.siliconDioxide, 1), this.molecule(MoleculeEnum.blackPigment)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, null, null, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockWhiteStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.whitePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockOrangeStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.orangePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockMagentaStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.lightbluePigment), null, this.molecule(MoleculeEnum.redPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLiteBlueStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.lightbluePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockYellowStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.yellowPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLimeStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.limePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockPinkStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), null, this.molecule(MoleculeEnum.redPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockGrayStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), null, this.molecule(MoleculeEnum.blackPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLiteGrayStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.blackPigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockCyanStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, this.molecule(MoleculeEnum.whitePigment), null, this.molecule(MoleculeEnum.lightbluePigment), moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockPurpleStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.purplePigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBlueStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.lazurite), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBrownStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.tannicacid), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockGreenStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.greenPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockRedStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.redPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockBlackStainedGlassPane, true, 500, new PotionChemical[]
+        {
+            moleculeSiliconDioxide, null, moleculeSiliconDioxide, null, this.molecule(MoleculeEnum.blackPigment), null, moleculeSiliconDioxide, null, moleculeSiliconDioxide
         }));
 
         // Lapis Lazuli Ore
@@ -467,11 +962,60 @@ public class MinechemRecipes
             this.molecule(MoleculeEnum.fibroin)
         }));
 
-        // Tall Grass
-        ItemStack blockTallGrass = new ItemStack(Blocks.tallgrass, 1, 1);
-        DecomposerRecipe.add(new DecomposerRecipeChance(blockTallGrass, 0.1F, new PotionChemical[]
+        //double tall plants
+        ItemStack blockSunFlower = new ItemStack(Blocks.double_plant,1,0);
+        ItemStack blockLilac = new ItemStack(Blocks.double_plant,1,1);
+        ItemStack blockTallGrass = new ItemStack(Blocks.double_plant,1,2);
+        ItemStack blockLargeFern = new ItemStack(Blocks.double_plant,1,3);
+        ItemStack blockRoseBush = new ItemStack(Blocks.double_plant,1,4);
+        ItemStack blockPeony = new ItemStack(Blocks.double_plant,1,5);
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockSunFlower, 0.3F, new PotionChemical[]
         {
-            new Molecule(MoleculeEnum.thc, 2)
+            new Molecule(MoleculeEnum.shikimicAcid, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockLilac, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockTallGrass, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockLargeFern, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockRoseBush, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockPeony, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockSunFlower, true, 450, new PotionChemical[]
+        {
+        	new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.yellowPigment), null, null, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLilac, true, 450, new PotionChemical[]
+        {
+        	new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.redPigment), new Molecule(MoleculeEnum.whitePigment,2), null, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockTallGrass, true, 450, new PotionChemical[]
+        {
+        	new Molecule(MoleculeEnum.shikimicAcid, 2), null, null, null, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockLargeFern, true, 450, new PotionChemical[]
+        {
+        	null, new Molecule(MoleculeEnum.shikimicAcid, 2), null, null, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockRoseBush, true, 450, new PotionChemical[]
+        {
+        	new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.redPigment), null, null, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockPeony, true, 450, new PotionChemical[]
+        {
+        	new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.redPigment), new Molecule(MoleculeEnum.whitePigment), null, null, null, null, null, null
         }));
 
         // Sandstone
@@ -732,16 +1276,56 @@ public class MinechemRecipes
         }));
 
         // Flowers
-        // TODO: Add support for Rose
         ItemStack blockYellowFlower = new ItemStack(Blocks.yellow_flower);
+        ItemStack blockPoppyFlower = new ItemStack(Blocks.red_flower,1,0);
+        ItemStack blockBlueOrchid = new ItemStack(Blocks.red_flower,1,1);
+        ItemStack blockAllium = new ItemStack(Blocks.red_flower,1,2);
+        ItemStack blockAsureBluet = new ItemStack(Blocks.red_flower,1,3);
+        ItemStack blockRedTulip = new ItemStack(Blocks.red_flower,1,4);
+        ItemStack blockOrangeTulip = new ItemStack(Blocks.red_flower,1,5);
+        ItemStack blockWhiteTulip = new ItemStack(Blocks.red_flower,1,6);
+        ItemStack blockPinkTulip = new ItemStack(Blocks.red_flower,1,7);
+        ItemStack blockOxeyeDaisy = new ItemStack(Blocks.red_flower,1,8);
+
         DecomposerRecipe.add(new DecomposerRecipeChance(blockYellowFlower, 0.3F, new PotionChemical[]
         {
-            new Molecule(MoleculeEnum.shikimicAcid, 2)
+            new Molecule(MoleculeEnum.shikimicAcid, 2),new Molecule(MoleculeEnum.yellowPigment,1)
         }));
-        ItemStack blockRedFlower = new ItemStack(Blocks.red_flower);
-        DecomposerRecipe.add(new DecomposerRecipeChance(blockRedFlower, 0.3F, new PotionChemical[]
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockPoppyFlower, 0.3F, new PotionChemical[]
         {
-            new Molecule(MoleculeEnum.shikimicAcid, 2)
+            new Molecule(MoleculeEnum.shikimicAcid, 2),new Molecule(MoleculeEnum.redPigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockBlueOrchid, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2), this.molecule(MoleculeEnum.lazurite)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAllium, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.purplePigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockAsureBluet, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.whitePigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockRedTulip, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2),new Molecule(MoleculeEnum.redPigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockOrangeTulip, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2),new Molecule(MoleculeEnum.orangePigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockWhiteTulip, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2),new Molecule(MoleculeEnum.whitePigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockPinkTulip, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2),new Molecule(MoleculeEnum.whitePigment,1),new Molecule(MoleculeEnum.redPigment,1)
+        }));
+        DecomposerRecipe.add(new DecomposerRecipeChance(blockOxeyeDaisy, 0.3F, new PotionChemical[]
+        {
+            new Molecule(MoleculeEnum.shikimicAcid, 2), new Molecule(MoleculeEnum.whitePigment,1)
         }));
 
         // Mushrooms
@@ -768,8 +1352,6 @@ public class MinechemRecipes
             this.element(ElementEnum.Fe, 144)
         }));
 
-        // Slabs
-        // TODO: Add support for slabs?
         // TNT
         ItemStack blockTnt = new ItemStack(Blocks.tnt);
         DecomposerRecipe.add(new DecomposerRecipe(blockTnt, new PotionChemical[]
@@ -934,17 +1516,6 @@ public class MinechemRecipes
         SynthesisRecipe.add(new SynthesisRecipe(blockGlowStone, true, 500, new PotionChemical[]
         {
             this.element(ElementEnum.P), null, this.element(ElementEnum.P), this.element(ElementEnum.P), null, this.element(ElementEnum.P), null, null, null
-        }));
-
-        // Glass Panes
-        ItemStack blockThinGlass = new ItemStack(Blocks.glass_pane);
-        DecomposerRecipe.add(new DecomposerRecipe(blockThinGlass, new PotionChemical[]
-        {
-            this.molecule(MoleculeEnum.siliconDioxide, 1)
-        }));
-        SynthesisRecipe.add(new SynthesisRecipe(blockThinGlass, true, 50, new PotionChemical[]
-        {
-            null, null, null, this.molecule(MoleculeEnum.siliconDioxide), null, null, null, null, null
         }));
         
         // Mycelium
