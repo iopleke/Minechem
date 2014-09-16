@@ -269,11 +269,11 @@ public class MinechemRecipes
                 this.element(ElementEnum.Ga), this.element(ElementEnum.As)
             })
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 16, 0), true, 50, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 1, 0), true, 50, new PotionChemical[]
         {
             null, null, null, null, this.element(ElementEnum.O, 2), this.element(ElementEnum.Si)
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 16, 2), true, 50, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.dirt, 1, 2), true, 50, new PotionChemical[]
         {
             null, null, null, null, null, null, this.element(ElementEnum.O, 2), this.element(ElementEnum.Si)
         }));
@@ -302,7 +302,7 @@ public class MinechemRecipes
                 this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
             })
         }));
-        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.cobblestone, 8), true, 50, new PotionChemical[]
+        SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.cobblestone), true, 50, new PotionChemical[]
         {
             this.element(ElementEnum.Si), null, null, null, this.element(ElementEnum.O, 2), null
         }));

@@ -691,17 +691,20 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
     }
 
     @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    public boolean canInsertItem(int slot, ItemStack itemstack, int side)
     {
-        return true;
+    	if(Settings.AllowAutomation && itemstack.getItem() == MinechemItemsRegistration.element)
+    		return true;
+    	else
+    		return false;
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    public boolean canExtractItem(int slot, ItemStack itemstack, int side)
     {
         if (Settings.AllowAutomation)
         {
-            if (takeStacksFromStorage(false))
+            if (takeStacksFromStorage(false) && side == 0)
             {
                 return true;
             }

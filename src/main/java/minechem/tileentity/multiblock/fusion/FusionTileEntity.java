@@ -94,7 +94,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack)
-    {
+    {    	
         if (slot == fuelSlot)
         {
             if (itemstack.getItem() == Items.nether_star || itemstack.getItem() == MinechemItemsRegistration.fusionStar)
