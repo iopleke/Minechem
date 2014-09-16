@@ -2,7 +2,9 @@ package minechem.potion;
 
 import java.util.HashMap;
 
+import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
+import minechem.utils.MinechemHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,7 +20,15 @@ public class PotionEnchantmentCoated extends Enchantment
     {
         super(id, 0, EnumEnchantmentType.weapon);
         this.chemical = chem;
-        this.setName(chem.descriptiveName() + " Coated");
+    	String coated = MinechemHelper.getLocalString("minechem.enchatment.coated");
+    	if(coated.isEmpty() || coated == "minechem.enchantment.coated")
+    	{
+    		this.setName(chem.descriptiveName() + " Coated");
+    	}
+    	else
+    	{
+    		this.setName(chem.descriptiveName() + " " + coated);
+    	}
         PotionEnchantmentCoated.chemLookup.put(chem, this);
     }
 
