@@ -219,12 +219,18 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     }
 
     @Override
-    public boolean isItemValidForSlot(int i, ItemStack itemstack)
+    public boolean isItemValidForSlot(int slot, ItemStack itemstack)
     {
-
-        if (i != kOutput[0] && itemstack.getItem() instanceof ElementItem)
+    	if (slot != 2 && itemstack.getItem() instanceof ElementItem)
         {
-            return true;
+    		if(slot==1 && itemstack.getItemDamage()==91)
+    		{
+    			return true;
+    		}
+    		if(slot==0)
+    		{
+    			return true;
+    		}
         }
         return false;
     }

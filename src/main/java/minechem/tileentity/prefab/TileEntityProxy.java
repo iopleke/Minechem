@@ -1,6 +1,7 @@
 package minechem.tileentity.prefab;
 
 import minechem.MinechemBlocksGeneration;
+import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.multiblock.fusion.FusionTileEntity;
@@ -225,17 +226,34 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     }
 
     @Override
-    public boolean canInsertItem(int i, ItemStack itemstack, int j)
+    public boolean canInsertItem(int slot, ItemStack itemstack, int side)
     {
-        // Cannot insert items into reactor with automations.
-        return false;
+        // Cannot insert items into reactor with automation disabled.
+    	if(Settings.AllowAutomation && isItemValidForSlot(slot,itemstack))
+    	{
+    		return true;
+    	}
+    	else
+    		return false;
     }
 
     @Override
-    public boolean canExtractItem(int i, ItemStack itemstack, int j)
+    public boolean canExtractItem(int slot, ItemStack itemstack, int side)
     {
-        // Cannot extract items into reactor with automations.
-        return false;
-    }
+        // Cannot extract items from reactor with automation disabled.
+    	// Can only extract from the bottom.
 
+    	//if this is a fusion reactor
+    	if(Settings.AllowAutomation&& side == 0 && this.isItemValidForSlot(0, new ItemStack(MinechemItemsRegistration.fusionStar)) && slot == 3)
+    	{
+    		return true;
+    	}
+    	
+    	//if this is a fission reactor
+    	if(Settings.AllowAutomation&& side == 0 && !this.isItemValidForSlot(0, new ItemStack(MinechemItemsRegistration.fusionStar)) && slot == 2)
+    	{
+    		return true;
+    	}
+    	return false;
+    }
 }
