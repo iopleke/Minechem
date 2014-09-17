@@ -7,6 +7,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Minechem;
@@ -31,11 +32,15 @@ public class FusionStarItem extends Item
     {
         int damage = itemStack.getItemDamage();
         int usesLeft = itemStack.getMaxDamage() - damage;
-        String fusionStarUsesLeft = MinechemHelper.getLocalString("minechem.fusionstar.usesleft");
-        if(fusionStarUsesLeft=="minechem.fusionstar.usesleft" || fusionStarUsesLeft.isEmpty())
+
+		if(StatCollector.canTranslate("minechem.fusionstar.usesleft"))
+		{
+	        list.add(StatCollector.translateToLocalFormatted("minechem.fusionstar.usesleft",usesLeft));
+		}
+		else
+		{
         	list.add(usesLeft + " Uses Left");
-        else
-        	list.add(usesLeft + " " + fusionStarUsesLeft);        	
+		}
     }
 
     @Override
