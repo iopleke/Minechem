@@ -59,7 +59,6 @@ public class MicroscopeContainer extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
-    	System.out.println("Slot Number" + slot);
         Slot slotObject = (Slot) inventorySlots.get(slot);
         ItemStack stack = null;
         if (slotObject != null && slotObject.getHasStack())
