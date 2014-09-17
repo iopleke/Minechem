@@ -27,11 +27,34 @@ minechem.gui.polytool.ores=Ores
 minechem.gui.polytool.axe=Axe
 minechem.gui.polytool.shovel=Shovel
 minechem.owner.tag=Owner
-minechem.fusionstar.usesleft=Uses Left
-minechem.enchantment.coated=coated
+minechem.enchantment.coated=%s Coated
+minechem.fusionstar.usesleft=%s Uses Left
+minechem.hour.abbr=hr
+minechem.min.abbr=m
+minechem.sec.abbr=s
 minechem.FusionWall.name=Fusion Wall
 minechem.TungstenPlating.name=Tungsten Plating
 minechem.FusionCore.name=Fusion Core
+
+minechem.gui.config.worldgenore=WorldGen Ore
+minechem.gui.config.uraniumoreclustersize=Uranium Ore Cluster Size
+minechem.gui.config.uraniumoredensity=Uranium Ore Density
+minechem.gui.config.uraniumorecraftable=uranium Ore Craftable
+minechem.gui.config.debugmode=Debug Mode
+minechem.gui.config.updateradius=Update Radius
+minechem.gui.config.allowautomation=Allow Automation
+minechem.gui.config.foodspiking=Food Spiking
+minechem.gui.config.swordeffects=Sword Effects
+
+minechem.gui.config.worldgenore.description=Turn on and off ore gen
+minechem.gui.config.uraniumoreclustersize.description=Size of uranium clusters
+minechem.gui.config.uraniumoredensity.description=How often will uranium be generated in a chuck
+minechem.gui.config.uraniumorecraftable.description=Can minechem uranium be crafted from other uranium
+minechem.gui.config.debugmode.description=Mod will print tons of info while running
+minechem.gui.config.updateradius.description=Determines how far away in blocks packets will be set to players
+minechem.gui.config.allowautomation.description=Allows automation of synthesiser and reactors
+minechem.gui.config.foodspiking.description=Allow food spiking
+minechem.gui.config.swordeffects.description=Enable enchantments
 
 tile.chemicalDecomposer.name=Chemical Decomposer
 tile.oreUranium.name=Uranium Ore
@@ -41,7 +64,6 @@ tile.chemicalSynthesizer.name=Chemical Synthesizer
 tile.blueprintProjector.name=Blueprint Projector
 block.fusionReactor.name=Chemical Fusion Chamber
 block.fissionReactor.name=Chemical Fission Chamber
-
 item.Polytool.name=Polytool
 item.name.concaveLens=Concave Lens
 item.name.convexLens=Convex Lens

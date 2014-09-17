@@ -9,6 +9,7 @@ import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.StatCollector;
 
 public class PotionEnchantmentCoated extends Enchantment
 {
@@ -20,15 +21,7 @@ public class PotionEnchantmentCoated extends Enchantment
     {
         super(id, 0, EnumEnchantmentType.weapon);
         this.chemical = chem;
-    	String coated = MinechemHelper.getLocalString("minechem.enchatment.coated");
-    	if(coated.isEmpty() || coated == "minechem.enchantment.coated")
-    	{
-    		this.setName(chem.descriptiveName() + " Coated");
-    	}
-    	else
-    	{
-    		this.setName(chem.descriptiveName() + " " + coated);
-    	}
+		this.setName(chem.descriptiveName() + ".coated");
         PotionEnchantmentCoated.chemLookup.put(chem, this);
     }
 
@@ -68,9 +61,17 @@ public class PotionEnchantmentCoated extends Enchantment
     }
 
     @Override
-    public String getTranslatedName(int par1)
+    public String getTranslatedName(int level)
     {
-        return this.chemical.descriptiveName() + " Coated";
+    	String enchantedName =this.chemical.descriptiveName() + " " + StatCollector.translateToLocal("enchantment.level." + level);
+    	if(StatCollector.canTranslate("minechem.enchantment.coated"))
+    	{
+    		return StatCollector.translateToLocalFormatted("minechem.enchantment.coated", enchantedName);
+    	}
+    	else
+    	{
+            return enchantedName + " Coated";
+    	}
     }
 
     public static void registerCoatings()

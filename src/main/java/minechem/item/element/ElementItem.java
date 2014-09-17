@@ -203,17 +203,47 @@ public class ElementItem extends Item // implements IStorageTank
         {
             NBTTagCompound tagCompound = itemstack.getTagCompound();
             long life = tagCompound.getLong("life");
-            if (life < Constants.TICKS_PER_MINUTE)
-            {
-                timeLeft = (life / Constants.TICKS_PER_SECOND) + "s";
-            } else if (life < Constants.TICKS_PER_HOUR)
-            {
-                timeLeft = (life / Constants.TICKS_PER_MINUTE) + "m";
-            } else if (life < Constants.TICKS_PER_DAY)
-            {
-                timeLeft = (life / Constants.TICKS_PER_HOUR) + "hr";
-            }
-        }
+            String hourabbr = MinechemHelper.getLocalString("minechem.hour.abbr");
+            String minabbr = MinechemHelper.getLocalString("minechem.min.abbr");
+            String secabbr = MinechemHelper.getLocalString("minechem.sec.abbr");
+            
+            if (life < Constants.TICKS_PER_DAY)
+			{
+				int hrs = (int) (life/Constants.TICKS_PER_HOUR);
+				life = life - (Constants.TICKS_PER_HOUR * hrs);
+				if (hrs>0)
+				{
+					if(hourabbr.isEmpty() || hourabbr == "minechem.hour.abbr")
+						timeLeft = hrs + "hr ";
+					else
+						timeLeft = hrs + hourabbr + " ";
+				}
+			}
+			if (life < Constants.TICKS_PER_HOUR)
+			{
+				int mins = (int) (life/Constants.TICKS_PER_MINUTE);
+				life = life - (Constants.TICKS_PER_MINUTE * mins);
+				if (mins>0)
+				{
+					if(minabbr.isEmpty() || minabbr == "minechem.min.abbr")
+						timeLeft = timeLeft + mins + "m ";
+					else
+						timeLeft = timeLeft + mins + minabbr + " ";
+				}
+			}
+			if (life < Constants.TICKS_PER_MINUTE)
+			{
+				int secs = (int) (life/Constants.TICKS_PER_SECOND);
+				life = life - (Constants.TICKS_PER_SECOND * secs);
+				if (secs>0)
+				{
+					if(secabbr.isEmpty() || secabbr == "minechem.sec.abbr")
+						timeLeft = timeLeft + secs + "s";
+					else
+						timeLeft = timeLeft + secs + secabbr;
+				}
+			}
+      }
         return timeLeft;
     }
 

@@ -2,6 +2,7 @@ package minechem;
 
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.Configuration;
 
 import java.io.File;
@@ -59,15 +60,15 @@ public class Settings
 
     private static void loadConfig()
     {
-        WorldGenOre = config.getBoolean("WorldGenOre", Configuration.CATEGORY_GENERAL, true, "Turn on and off ore gen");
-        UraniumOreClusterSize = config.getInt("UraniumOreClusterSize", Configuration.CATEGORY_GENERAL, 3, 1, 10, "Size of uranium clusters");
-        UraniumOreDensity = config.getInt("UraniumOreDensity", Configuration.CATEGORY_GENERAL, 5, 1, 64, "How often will uranium be generated in a chuck");
-        UraniumOreCraftable = config.getBoolean("UraniumOreCraftable", Configuration.CATEGORY_GENERAL, true, "Can minechem uranium be crafted from other uranium");
-        DebugMode = config.getBoolean("DebugMode", Configuration.CATEGORY_GENERAL, false, "Mod will print tons of info while running");
-        UpdateRadius = config.getInt("UpdateRadius", Configuration.CATEGORY_GENERAL, 20, 1, 50, "Determines how far away in blocks packets will be set to players");
-        AllowAutomation = config.getBoolean("AllowAutomation", Configuration.CATEGORY_GENERAL, false, "Mod will print tons of info while running");
-        FoodSpiking = config.getBoolean("FoodSpiking", Configuration.CATEGORY_GENERAL, true, "Allow food spiking");
-        SwordEffects = config.getBoolean("SwordEffects", Configuration.CATEGORY_GENERAL, true, "Enable enchantments");
+        WorldGenOre = config.getBoolean(StatCollector.translateToLocal("minechem.gui.config.worldgenore"), Configuration.CATEGORY_GENERAL, true, StatCollector.translateToLocal("minechem.gui.config.worldgenore.description"));
+        UraniumOreClusterSize = config.getInt(StatCollector.translateToLocal("minechem.gui.config.uraniumoreclustersize"), Configuration.CATEGORY_GENERAL, 3, 1, 10, StatCollector.translateToLocal("minechem.gui.config.uraniumoreclustersize.description"));
+        UraniumOreDensity = config.getInt(StatCollector.translateToLocal("minechem.gui.config.uraniumoredensity"), Configuration.CATEGORY_GENERAL, 5, 1, 64, StatCollector.translateToLocal("minechem.gui.config.uraniumoredensity.description"));
+        UraniumOreCraftable = config.getBoolean(StatCollector.translateToLocal("minechem.gui.config.uraniumorecraftable"), Configuration.CATEGORY_GENERAL, true, StatCollector.translateToLocal("minechem.gui.config.uraniumorecraftable.description"));
+        DebugMode = config.getBoolean(StatCollector.translateToLocal("minechem.gui.config.debugmode"), Configuration.CATEGORY_GENERAL, false, StatCollector.translateToLocal("minechem.gui.config.debugmode.description"));
+        UpdateRadius = config.getInt(StatCollector.translateToLocal("minechem.gui.config.updateradius"), Configuration.CATEGORY_GENERAL, 20, 1, 50, StatCollector.translateToLocal("minechem.gui.config.updateradius.description"));
+        AllowAutomation = config.getBoolean(StatCollector.translateToLocal("minechem.gui.config.allowautomation"), Configuration.CATEGORY_GENERAL, false, StatCollector.translateToLocal("minechem.gui.config.allowautomation"));
+        FoodSpiking = config.getBoolean(StatCollector.translateToLocal("minechem.gui.config.foodspiking"), Configuration.CATEGORY_GENERAL, true, StatCollector.translateToLocal("minechem.gui.config.foodspiking.description"));
+        SwordEffects = config.getBoolean(StatCollector.translateToLocal("minechem.gui.config.swordeffects"), Configuration.CATEGORY_GENERAL, true, StatCollector.translateToLocal("minechem.gui.config.swordeffects.description"));
 
         if (config.hasChanged())
         {
