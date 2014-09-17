@@ -17,7 +17,7 @@ public enum ElementClassificationEnum
     public String descriptiveName()
     {
         String localizedName = StatCollector.translateToLocal("minechem.element.classification." + descriptiveName);
-        if (localizedName.isEmpty()) 
+        if (!localizedName.isEmpty() || localizedName !="minechem.element.classification." + descriptiveName) 
         {
             return localizedName;
         }

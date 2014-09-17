@@ -68,10 +68,12 @@ public class DecomposerContainer extends Container implements IRadiationShield
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
         Slot slotObject = (Slot) inventorySlots.get(slot);
+        ItemStack stack = null;
+        
         if (slotObject != null && slotObject.getHasStack())
         {
             ItemStack stackInSlot = slotObject.getStack();
-            ItemStack stack = stackInSlot.copy();
+            stack = stackInSlot.copy();
             if (slot < kDecomposerInventoryEnd)
             {
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
@@ -88,10 +90,20 @@ public class DecomposerContainer extends Container implements IRadiationShield
                         return null;
                     }
             	}
-            	else
-            	{
-            	return null;
-            	}
+             	if(slot<37 && stackInSlot.stackSize == stack.stackSize)
+             	{
+             		if (!this.mergeItemStack(stackInSlot, 37, 46, false))
+             		{
+             			return null;
+             		}
+             	}
+             	if(slot>36 && stackInSlot.stackSize == stack.stackSize)
+             	{
+             		if (!this.mergeItemStack(stackInSlot, 10, 37, false))
+             		{
+             			return null;
+             		}
+             	}
             }
             if (stackInSlot.stackSize == 0)
             {
@@ -100,10 +112,13 @@ public class DecomposerContainer extends Container implements IRadiationShield
             {
                 slotObject.onSlotChanged();
             }
-
-            return stack;
+	         if (stackInSlot.stackSize == stack.stackSize)
+	         {
+	         	return null;
+	         }
+	         slotObject.onPickupFromSlot(entityPlayer, stackInSlot);
         }
-        return null;
+        return stack;
     }
 
     @Override

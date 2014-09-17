@@ -49,10 +49,11 @@ public class BlueprintProjectorContainer extends Container
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
          Slot slotObject = (Slot) inventorySlots.get(slot); 
+         ItemStack stack =  null;
          if (slotObject != null && slotObject.getHasStack()) 
          { 
         	 ItemStack stackInSlot = slotObject.getStack(); 
-        	 ItemStack stack = stackInSlot.copy(); 
+        	 stack = stackInSlot.copy(); 
         	 if (slot == 0) 
         	 { 
         		 if (!mergeItemStack(stackInSlot, 1, inventorySlots.size(), true)) 
@@ -66,27 +67,40 @@ public class BlueprintProjectorContainer extends Container
                      getSlot(0).putStack(copy);
                      return null;
         		 }
-        		 else
-        		 {
-        			 return null;
-        		 }
+             	if(slot<28 && stackInSlot.stackSize == stack.stackSize)
+             	{
+             		if (!this.mergeItemStack(stackInSlot, 28, 37, false))
+             		{
+             			return null;
+             		}
+             	}
+             	if(slot>27 && stackInSlot.stackSize == stack.stackSize)
+             	{
+             		if (!this.mergeItemStack(stackInSlot, 1, 28, false))
+             		{
+             			return null;
+             		}
+             	}
         	 }
          
-         if (stackInSlot.stackSize == 0)
-         {
-        	 if(slot == 0)
-        	 {
-        		 projector.setBlueprint(null);
-        	 }
-        	 slotObject.putStack(null); 
-         }
-         else
-         {
-        	 slotObject.onSlotChanged();
-         }	
-         
-         return stack; 
+	         if (stackInSlot.stackSize == 0)
+	         {
+	        	 if(slot == 0)
+	        	 {
+	        		 projector.setBlueprint(null);
+	        	 }
+	        	 slotObject.putStack(null); 
+	         }
+	         else
+	         {
+	        	 slotObject.onSlotChanged();
+	         }	
+	         if (stackInSlot.stackSize == stack.stackSize)
+	         {
+	         	return null;
+	         }
+	         slotObject.onPickupFromSlot(entityPlayer, stackInSlot);
          } 
-    return null; 
+         return stack; 
     }
 }

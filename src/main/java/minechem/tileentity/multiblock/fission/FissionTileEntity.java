@@ -73,11 +73,10 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
             if (inventory[kStartInput] != null && inventory[kStartFuel] != null && inventory[kStartFuel].getItemDamage() == 91 && inventory[kStartFuel].getItem() instanceof ElementItem)
             {
                 ItemStack fissionResult = getFissionOutput();
-                if (inventory[kOutput[0]] == null || (fissionResult != null && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
+                if (inventory[kOutput[0]] == null || (inventory[kOutput[0]].stackSize < 64 && fissionResult != null && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
                 {
                     addToOutput(fissionResult);
                     removeInputs();
-
                 }
                 fissionResult = getFissionOutput();
                 shouldSendUpdatePacket = true;

@@ -90,6 +90,12 @@ public class LeadedChestContainer extends Container
             {
                 slotObject.onSlotChanged();
             }
+            if (stackInSlot.stackSize == stack.stackSize)
+	        {
+	        	 return null;
+	        }
+	        slotObject.onPickupFromSlot(player, stackInSlot);
+
         }
         return stack;
     }
