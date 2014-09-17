@@ -40,7 +40,11 @@ public class GuiTabHelp extends GuiTab
     {
         if (!isOpen())
         {
-            return "Help";
+        	String localizedTooltip =MinechemHelper.getLocalString("tab.tooltip.help");
+        	if(localizedTooltip == "tab.tooltip.help" || localizedTooltip.isEmpty())
+        		return "Help";
+        	else
+        		return localizedTooltip;
         } else
         {
             return null;

@@ -51,12 +51,13 @@ public class FusionContainer extends Container implements IRadiationShield
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
-
         Slot slotObject = (Slot) inventorySlots.get(slot);
+        ItemStack stack = null;
+        
         if (slotObject != null && slotObject.getHasStack())
         {
             ItemStack stackInSlot = slotObject.getStack();
-            ItemStack stack = stackInSlot.copy();
+            stack = stackInSlot.copy();
 
             if (slot < fusion.getSizeInventory())
             {
@@ -74,16 +75,26 @@ public class FusionContainer extends Container implements IRadiationShield
 	                    return null;
 	                }
             	}
-            	else if(fusion.isItemValidForSlot(1, stackInSlot))
+            	if(fusion.isItemValidForSlot(1, stackInSlot))
             	{
 	                if (!mergeItemStack(stackInSlot, fusion.inputLeft, fusion.inputRight+1, false))
 	                {
 	                    return null;
 	                }
             	}
-            	else
+            	if(slot<31 && stackInSlot.stackSize == stack.stackSize)
             	{
-            		return null;
+            		if (!this.mergeItemStack(stackInSlot, 31, 40, false))
+            		{
+            			return null;
+            		}
+            	}
+            	if(slot>30 && stackInSlot.stackSize == stack.stackSize)
+            	{
+            		if (!this.mergeItemStack(stackInSlot, 4, 31, false))
+            		{
+            			return null;
+            		}
             	}
             }
 
@@ -95,9 +106,13 @@ public class FusionContainer extends Container implements IRadiationShield
             {
                 slotObject.onSlotChanged();
             }
-            return stack;
+            if (stackInSlot.stackSize == stack.stackSize)
+            {
+            	return null;
+            }
+            slotObject.onPickupFromSlot(entityPlayer, stackInSlot);
         }
-        return null;
+        return stack;
     }
 
     @Override

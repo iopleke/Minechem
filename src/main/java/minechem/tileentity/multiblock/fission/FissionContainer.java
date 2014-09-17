@@ -69,10 +69,13 @@ public class FissionContainer extends Container implements IRadiationShield
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
         Slot slotObject = (Slot) inventorySlots.get(slot);
+        ItemStack stack = null;
+
         if (slotObject != null && slotObject.getHasStack())
         {
+        	System.out.println("Slot = " + slot);
             ItemStack stackInSlot = slotObject.getStack();
-            ItemStack stack = stackInSlot.copy();
+            stack = stackInSlot.copy();
             if (slot < 3)
             {
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
@@ -85,14 +88,24 @@ public class FissionContainer extends Container implements IRadiationShield
             		if (!mergeItemStack(stackInSlot, 2, 3, false))
             			return null;
             	}
-            	else if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage()>0)
+            	if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage()>0)
             	{
             		if (!mergeItemStack(stackInSlot, 0, 1, false))
             			return null;            		
             	}
-            	else 
+            	if(slot<30 && stackInSlot.stackSize == stack.stackSize)
             	{
-            		return null;
+            		if (!this.mergeItemStack(stackInSlot, 30, 39, false))
+            		{
+            			return null;
+            		}
+            	}
+            	if(slot>29 && stackInSlot.stackSize == stack.stackSize)
+            	{
+            		if (!this.mergeItemStack(stackInSlot, 3, 30, false))
+            		{
+            			return null;
+            		}
             	}
             }
             if (stackInSlot.stackSize == 0)
@@ -100,9 +113,13 @@ public class FissionContainer extends Container implements IRadiationShield
             else
                 slotObject.onSlotChanged();
 
-            return stack;
+            if (stackInSlot.stackSize == stack.stackSize)
+            {
+            	return null;
+            }
+            slotObject.onPickupFromSlot(entityPlayer, stackInSlot);
         }
-        return null;
+        return stack;
     }
 
     @Override

@@ -44,7 +44,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 
     private boolean checkValidFuel()
     {
-        return inventory[fuelSlot].getItem() == Items.nether_star || inventory[fuelSlot].getItem() == MinechemItemsRegistration.fusionStar;
+        return inventory[fuelSlot].getItem() == Items.nether_star || inventory[fuelSlot].getItem() == MinechemItemsRegistration.fusionStar && inventory[fuelSlot].getItem().getDamage(inventory[fuelSlot]) < 2000;
     }
 
     private void fuseInputs()
@@ -169,7 +169,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         {
             if (inventory[fuelSlot] != null && !canProcess)
             {
-                canProcess = checkValidFuel() && inputsCanBeFused();
+                canProcess = checkValidFuel() && inputsCanBeFused() && inventory[output].stackSize<64;
 
             }
             if (canProcess)

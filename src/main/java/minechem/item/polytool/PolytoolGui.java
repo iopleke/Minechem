@@ -102,10 +102,10 @@ public class PolytoolGui extends GuiContainerTabbed
         }
         fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
 
-        localizedName=MinechemHelper.getLocalString("minechem.polytool.gui.pickaxe");
-        if(localizedName.isEmpty() || localizedName=="minechem.polytool.gui.pickaxe")
+        localizedName=MinechemHelper.getLocalString("minechem.polytool.gui.ores");
+        if(localizedName.isEmpty() || localizedName=="minechem.polytool.gui.ores")
         {
-        	localizedName="Pickaxe";
+        	localizedName="Ores";
         }
         fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
 

@@ -10,6 +10,7 @@ import net.minecraft.util.IIcon;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Minechem;
+import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
@@ -30,7 +31,11 @@ public class FusionStarItem extends Item
     {
         int damage = itemStack.getItemDamage();
         int usesLeft = itemStack.getMaxDamage() - damage;
-        list.add(usesLeft + " Uses Left");
+        String fusionStarUsesLeft = MinechemHelper.getLocalString("minechem.fusionstar.usesleft");
+        if(fusionStarUsesLeft=="minechem.fusionstar.usesleft" || fusionStarUsesLeft.isEmpty())
+        	list.add(usesLeft + " Uses Left");
+        else
+        	list.add(usesLeft + " " + fusionStarUsesLeft);        	
     }
 
     @Override

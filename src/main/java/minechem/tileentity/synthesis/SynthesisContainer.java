@@ -130,11 +130,12 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
         Slot slotObject = (Slot) inventorySlots.get(slot);
-
+        ItemStack stack = null;
+        
         if (slotObject != null && slotObject.getHasStack())
         {
             ItemStack stackInSlot = slotObject.getStack();
-            ItemStack stack = stackInSlot.copy();
+            stack = stackInSlot.copy();
             if (slot != SynthesisTileEntity.kStartJournal && stack.getItem() == MinechemItemsRegistration.journal && !getSlot(SynthesisTileEntity.kStartJournal).getHasStack())
             {
                 ItemStack copystack = slotObject.decrStackSize(1);
@@ -168,9 +169,20 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 {
                     return null;
                 }
-            } else
+            }
+            if(slot<47 && stackInSlot.stackSize == stack.stackSize)
             {
-                return null;
+            	if (!this.mergeItemStack(stackInSlot, 47, 56, false))
+            	{
+            		return null;
+            	}
+            }
+            if(slot>46 && stackInSlot.stackSize == stack.stackSize)
+            {
+            	if (!this.mergeItemStack(stackInSlot, 20, 47, false))
+            	{
+            		return null;
+            	}
             }
 
             if (stackInSlot.stackSize == 0)
@@ -180,9 +192,12 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
             {
                 slotObject.onSlotChanged();
             }
-
-            return stack;
+	         if (stackInSlot.stackSize == stack.stackSize)
+	        {
+	        	 return null;
+	        }
+	        slotObject.onPickupFromSlot(entityPlayer, stackInSlot);
         }
-        return null;
+        return stack;
     }
 }
