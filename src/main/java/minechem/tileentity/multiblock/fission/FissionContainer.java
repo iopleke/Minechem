@@ -73,7 +73,6 @@ public class FissionContainer extends Container implements IRadiationShield
 
         if (slotObject != null && slotObject.getHasStack())
         {
-        	System.out.println("Slot = " + slot);
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
             if (slot < 3)
