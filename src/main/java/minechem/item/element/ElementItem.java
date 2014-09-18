@@ -21,6 +21,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import org.lwjgl.input.Keyboard;
@@ -179,9 +180,9 @@ public class ElementItem extends Item // implements IStorageTank
             if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
             {
                 String polytoolDesc = PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1).getDescription();
-                String localizedDesc=MinechemHelper.getLocalString("polytool.description."+ElementItem.getLongName(itemstack));
-
-                 if(localizedDesc.equals("polytool.description."+ElementItem.getLongName(itemstack)) || localizedDesc.equals(""))
+                String localizedDesc=StatCollector.translateToLocal("polytool.description."+ElementItem.getShortName(itemstack));
+              	 
+                 if(!StatCollector.canTranslate("polytool.description."+ElementItem.getShortName(itemstack)))
                  {
                 	 localizedDesc = polytoolDesc;
                  }
