@@ -66,7 +66,7 @@ public class MinechemItemsRegistration
     {
         for (ElementEnum element : ElementEnum.values())
         {
-            OreDictionary.registerOre("element" + element.descriptiveName(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+            OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
         }
     }
 }
