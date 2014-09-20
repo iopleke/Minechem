@@ -32,10 +32,6 @@ buildProps.withReader {
 
 repositories {
     maven {
-	name 'Calclavia Maven'
-	url 'http://calclavia.com/maven'
-    }
-    maven {
 	name = "forge"
 	url = "http://files.minecraftforge.net/maven"
     }
@@ -49,12 +45,7 @@ repositories {
     }
 }
 
-dependencies {
-    
-    // Would really like to switch to using the new method, so I can update to gradle 2
-    //compile group: 'universalelectricity', name: 'Universal-Electricity', version: "${config.version.universalelectricity}", ext: 'jar', classifier: "dev"
-    compile 'dev.calclavia.universalelectricity:universal-electricity:+:dev'
-    
+dependencies {    
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
