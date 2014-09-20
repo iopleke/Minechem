@@ -40,6 +40,10 @@ public class ElementItemRenderer implements IItemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data)
     {
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+
         ElementItem item = (ElementItem) itemstack.getItem();
         IIcon testtube = itemstack.getIconIndex();
         IIcon contentsTex = null;
@@ -84,6 +88,9 @@ public class ElementItemRenderer implements IItemRenderer
                 renderItemAsEntity(itemstack, element, testtube, contentsTex);
             }
         }
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     private void renderItemInInventory(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
