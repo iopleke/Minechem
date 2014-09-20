@@ -1,8 +1,10 @@
 package minechem;
 
+import cpw.mods.fml.client.config.IConfigElement;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import net.minecraft.util.StatCollector;
+import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
 
@@ -42,6 +44,10 @@ public class Settings
     // Disabling of enchants and spikes
     public static boolean FoodSpiking = true;
     public static boolean SwordEffects = true;
+    
+    //Blacklisting
+    public static String[] DecomposerBlacklist = { };
+    public static String[] SynthesisMachineBlacklist = { };
 
     public static void init(File configFile)
     {
@@ -66,27 +72,32 @@ public class Settings
         Property prop;
         List<String> propOrder = new ArrayList<String>();
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "worldgenore", true);
+    	config.addCustomCategoryComment("world generation", "These settings allow you to tweak the ore generation.");
+    	config.addCustomCategoryComment("decomposer blacklist", "These settings allow you to keep the decomposer from decomposing the items listed.");
+    	config.addCustomCategoryComment("synthesis machine blacklist", "These settings allow you to keep the synthesis machine from making the items listed.");
+    	config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Misc settings.");
+
+        prop = config.get("world generation", "worldgenore", true);
         prop.comment = StatCollector.translateToLocal("minechem.gui.config.worldgenore.description");
         prop.setLanguageKey("minechem.gui.config.worldgenore");
         WorldGenOre = prop.getBoolean();
         propOrder.add(prop.getName());
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "uraniumoreclustersize", 3);
+        prop = config.get("world generation", "uraniumoreclustersize", 3);
         prop.setMinValue(1).setMaxValue(10);
         prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumoreclustersize.description");
         prop.setLanguageKey("minechem.gui.config.uraniumoreclustersize");
         UraniumOreClusterSize = prop.getInt();
         propOrder.add(prop.getName());
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "uraniumoredensity", 5);
+        prop = config.get("world generation", "uraniumoredensity", 5);
         prop.setMinValue(1).setMaxValue(64);
         prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumoredensity.description");
         prop.setLanguageKey("minechem.gui.config.uraniumoredensity");
         UraniumOreDensity = prop.getInt();
         propOrder.add(prop.getName());
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "uraniumorecraftable", true);
+        prop = config.get("world generation", "uraniumorecraftable", true);
         prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumorecraftable.description");
         prop.setLanguageKey("minechem.gui.config.uraniumorecraftable");
         UraniumOreCraftable = prop.getBoolean();
@@ -123,11 +134,31 @@ public class Settings
         SwordEffects = prop.getBoolean();
         propOrder.add(prop.getName());
 
-        config.setCategoryPropertyOrder(Configuration.CATEGORY_GENERAL, propOrder);
+        prop = config.get("decomposer blacklist", "Decomposer Blacklist", new String[] { "None" });
+        prop.setLanguageKey("minechem.gui.config.decomposerblacklist").setRequiresMcRestart(true);
+        prop.comment = StatCollector.translateToLocal("minechem.gui.config.decomposerblacklist.description");
+        DecomposerBlacklist = prop.getStringList();
+        propOrder.add(prop.getName());
+
+        prop = config.get("synthesis machine blacklist", "Synthesis Blacklist", new String[] { "None" });
+        prop.setLanguageKey("minechem.gui.config.synthesismachineblacklist").setRequiresMcRestart(true);
+        prop.comment = StatCollector.translateToLocal("minechem.gui.config.synthesismachineblacklist.description");
+        SynthesisMachineBlacklist = prop.getStringList();
+        propOrder.add(prop.getName());
 
         if (config.hasChanged())
         {
             config.save();
         }
+    }
+
+    public static List<IConfigElement> getConfigElements()
+    {
+    List<IConfigElement> list = new ArrayList<IConfigElement>();
+    list.addAll(new ConfigElement(config.getCategory("world generation")).getChildElements());
+    list.addAll(new ConfigElement(config.getCategory("decomposer blacklist")).getChildElements());
+    list.addAll(new ConfigElement(config.getCategory("synthesis machine blacklist")).getChildElements());
+    list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
+    return list;
     }
 }
