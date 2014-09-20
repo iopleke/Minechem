@@ -38,6 +38,10 @@ public class MoleculeItemRenderer implements IItemRenderer
     @Override
     public void renderItem(ItemRenderType type, ItemStack itemstack, Object... data)
     {
+        GL11.glDisable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_BLEND);
+
         MoleculeItem item = (MoleculeItem) itemstack.getItem();
         IIcon testtube = itemstack.getIconIndex();
         if (type == ItemRenderType.INVENTORY)
@@ -65,6 +69,10 @@ public class MoleculeItemRenderer implements IItemRenderer
                 renderItemAsEntity(type, itemstack, testtube, item.render_pass1, item.render_pass2);
             }
         }
+
+        GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_ALPHA_TEST);
+        GL11.glEnable(GL11.GL_LIGHTING);
     }
 
     private void renderItemInInventory(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)
