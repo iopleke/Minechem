@@ -3,6 +3,7 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Random;
 
+import minechem.Settings;
 import minechem.potion.PotionChemical;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -16,8 +17,19 @@ public class DecomposerRecipe
     ItemStack input;
     public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
 
+    //TODO:Add blacklist support for fluids
     public static DecomposerRecipe add(DecomposerRecipe recipe)
     {
+    	if(recipe.input != null )
+    	{
+            for(int i=0;i<Settings.DecomposerBlacklist.length;i++)
+        	{
+        		if(recipe.input.getDisplayName().equals(Settings.DecomposerBlacklist[i].toString()))
+        		{
+        			return null;    			
+        		}
+        	}
+    	}
         recipes.add(recipe);
         return recipe;
     }

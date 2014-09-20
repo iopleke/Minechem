@@ -12,7 +12,7 @@ public class ModGuiConfig extends GuiConfig
     public ModGuiConfig(GuiScreen guiScreen)
     {
         super(guiScreen,
-                new ConfigElement(Settings.config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements(),
+                Settings.getConfigElements(),
                 Minechem.ID,
                 false,
                 false,

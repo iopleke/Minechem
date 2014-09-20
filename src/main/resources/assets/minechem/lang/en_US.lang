@@ -45,6 +45,8 @@ minechem.gui.config.updateradius=Update Radius
 minechem.gui.config.allowautomation=Allow Automation
 minechem.gui.config.foodspiking=Food Spiking
 minechem.gui.config.swordeffects=Sword Effects
+minechem.gui.config.synthesismachineblacklist=Synthesis Machine Blacklist
+minechem.gui.config.decomposerblacklist=Decomposer Blacklist
 
 minechem.gui.config.worldgenore.description=Turn on and off ore gen
 minechem.gui.config.uraniumoreclustersize.description=Size of uranium clusters
@@ -55,6 +57,10 @@ minechem.gui.config.updateradius.description=Determines how far away in blocks p
 minechem.gui.config.allowautomation.description=Allows automation of synthesiser and reactors
 minechem.gui.config.foodspiking.description=Allow food spiking
 minechem.gui.config.swordeffects.description=Enable enchantments
+minechem.gui.config.synthesismachineblacklist.description=List of items names that Synthesiser can't make. ex: Blue Orchid
+
+minechem.gui.config.decomposerblacklist.description=List of items names that Decomposer can't decompose. ex: Chiseled Stone Bricks
+
 
 tile.chemicalDecomposer.name=Chemical Decomposer
 tile.oreUranium.name=Uranium Ore
