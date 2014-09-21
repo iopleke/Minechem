@@ -9,6 +9,7 @@ import minechem.Settings;
 import minechem.network.packet.SynthesisPacketUpdate;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntity;
+import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
 import minechem.utils.Compare;
@@ -22,7 +23,7 @@ import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInventory
+public class SynthesisTileEntity extends MinechemTileEntityElectric implements ISidedInventory
 {
 
     /**
@@ -134,7 +135,6 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
 
     public SynthesisTileEntity()
     {
-        // @TODO - re-add power requirements
         super();
 
         // Creates internal inventory that will represent all of the needed slots that makeup the machine.
@@ -373,7 +373,10 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
      */
     public boolean hasEnoughPowerForCurrentRecipe()
     {
-        // @TODO - check for enough energy before returning true
+        if (this.currentRecipe != null)
+        {
+            return canAffordRecipe(this.currentRecipe);
+        }
         return true;
     }
 
@@ -402,6 +405,16 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
         super.readFromNBT(nbt);
         NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
         inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
+    }
+
+    @Override
+    public int getEnergyNeeded()
+    {
+        if (this.currentRecipe != null && Settings.powerUsage)
+        {
+            return this.currentRecipe.energyCost();
+        }
+        return 0;
     }
 
     @Override
@@ -464,6 +477,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
             storageInventory.setInventoryStacks(storage);
 
             // Consume the required amount of energy that was the cost of the item being created.
+            this.useEnergy(this.currentRecipe.energyCost());
         }
 
         return true;
@@ -510,7 +524,7 @@ public class SynthesisTileEntity extends MinechemTileEntity implements ISidedInv
      */
     public boolean canAffordRecipe(SynthesisRecipe recipe)
     {
-        return true;// @TODO - calculate if energy cost can be paid
+        return this.getEnergyStored() >= recipe.energyCost();
     }
 
     /**

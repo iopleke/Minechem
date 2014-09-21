@@ -44,6 +44,9 @@ public class Settings
     // Disabling of enchants and spikes
     public static boolean FoodSpiking = true;
     public static boolean SwordEffects = true;
+
+    // Disable power usage
+    public static boolean powerUsage = true;
     
     //Blacklisting
     public static String[] DecomposerBlacklist = { };

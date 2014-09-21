@@ -218,8 +218,6 @@ public class Minechem
     @SideOnly(Side.CLIENT)
     public void textureHook(IIconRegister icon)
     {
-        GuiTabStateControl.unpoweredIcon = icon.registerIcon(Reference.UNPOWERED_ICON);
-        SynthesisTabStateControl.noRecipeIcon = icon.registerIcon(Reference.NO_RECIPE_ICON);
         GuiTabHelp.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         GuiTabTable.helpIcon = icon.registerIcon(Reference.HELP_ICON);
         ChemistJournalTab.helpIcon = icon.registerIcon(Reference.POWER_ICON);
