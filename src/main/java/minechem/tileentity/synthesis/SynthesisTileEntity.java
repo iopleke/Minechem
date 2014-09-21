@@ -649,7 +649,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 				output.stackSize += template.stackSize;
 			}
 
-			//onInventoryChanged();
+			this.markDirty();
 			amount--;
 		}
 
