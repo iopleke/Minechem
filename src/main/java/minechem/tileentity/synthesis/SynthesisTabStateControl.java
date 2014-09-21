@@ -41,12 +41,15 @@ public class SynthesisTabStateControl extends GuiTabStateControl
     @Override
     public String getTooltip()
     {
-        if (state == TabState.unpowered && lastKnownEnergyCost > 0)
+        if(!isFullyOpened())
         {
-            return "Energy Needed: " + lastKnownEnergyCost;
+            if (state == TabState.unpowered && lastKnownEnergyCost > 0)
+            {
+                return "Energy Needed: " + lastKnownEnergyCost;
+            }
+            return this.state.tooltip;
         }
-
-        return this.state.tooltip;
+        return null;
     }
 
 }

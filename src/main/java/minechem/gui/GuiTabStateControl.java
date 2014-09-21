@@ -6,6 +6,7 @@ import minechem.Minechem;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
