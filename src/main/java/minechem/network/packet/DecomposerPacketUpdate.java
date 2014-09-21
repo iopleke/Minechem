@@ -109,6 +109,11 @@ public class DecomposerPacketUpdate extends PacketDispatcher.AbstractPacket<Deco
         {
             return;
         }
+		
+		if(tileEntity.getEnergyStored() != this.lastItemStoredEnergy){
+			tileEntity.syncEnergyValue((int) this.lastItemStoredEnergy);
+		}
+		
 
         // Energy.
         // @TODO - implement an energy system

@@ -8,10 +8,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
 @Optional.InterfaceList(
-{
-	@Optional.Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHCore"),
-	@Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
-})
+		{
+			@Optional.Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHCore"),
+			@Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
+		})
 public abstract class MinechemTileEntityElectric extends MinechemTileEntity implements IEnergyStorage, IEnergyHandler
 {
 	/**
@@ -47,6 +47,18 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 			energyStored += received;
 		}
 		return received;
+	}
+
+	@Optional.Method(modid = "CoFHCore")
+	public void syncEnergyValue(int syncAt)
+	{
+		if (this.getEnergyStored() > syncAt)
+		{
+			this.useEnergy(this.getEnergyStored() - syncAt);
+		} else if (this.getEnergyStored() < syncAt)
+		{
+			this.receiveEnergy(syncAt - this.getEnergyStored(), false);
+		}
 	}
 
 	@Optional.Method(modid = "CoFHCore")
