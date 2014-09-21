@@ -22,16 +22,17 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 	/**
 	 * Determines total amount of energy that this machine can store.
 	 */
-	private static final int MAX_ENERGY_STORED = 10000;
+	private int MAX_ENERGY_STORED;
 
 	/**
 	 * Amount of energy stored
 	 */
 	private int energyStored;
 
-	public MinechemTileEntityElectric()
+	public MinechemTileEntityElectric(int maxEnergy)
 	{
 		super();
+		this.MAX_ENERGY_STORED = maxEnergy;
 		energyStored = 0;
 	}
 

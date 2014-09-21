@@ -104,7 +104,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	public DecomposerTileEntity()
 	{
-		super();
+		super(Settings.decomposerMaxStorage);
 
 		// Sets up internal input and output slots used by the server to keep track of items inside of the machine for processing.
 		inventory = new ItemStack[getSizeInventory()];
@@ -477,7 +477,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	@Override
 	public int getEnergyNeeded()
 	{
-		return Settings.powerUseEnabled ? 50 : 0;
+		return Settings.powerUseEnabled ? Settings.decompositionCost : 0;
 	}
 
 	@Override

@@ -47,6 +47,11 @@ public class Settings
 
 	// Power usage
 	public static boolean powerUseEnabled = true;
+	public static int decompositionCost = 50;
+	
+	// Power base storage values
+	public static int synthesisMaxStorage = 10240;
+	public static int decomposerMaxStorage = 1024;
 
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
