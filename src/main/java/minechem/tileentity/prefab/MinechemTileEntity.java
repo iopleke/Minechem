@@ -1,14 +1,11 @@
 package minechem.tileentity.prefab;
 
-import java.util.EnumSet;
-
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class MinechemTileEntity extends MinechemTileEntityBase implements IInventory
 {
@@ -25,26 +22,6 @@ public abstract class MinechemTileEntity extends MinechemTileEntityBase implemen
         NBTTagCompound tagCompound = new NBTTagCompound();
         this.writeToNBT(tagCompound);
         return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, 0, tagCompound);
-    }
-
-    /**
-     * The electrical input direction.
-     *
-     * @return The direction that electricity is entered into the tile. Return null for no input. By default you can accept power from all sides.
-     */
-    public EnumSet<ForgeDirection> getInputDirections()
-    {
-        return EnumSet.allOf(ForgeDirection.class);
-    }
-
-    /**
-     * The electrical output direction.
-     *
-     * @return The direction that electricity is output from the tile. Return null for no output. By default it will return an empty EnumSet.
-     */
-    public EnumSet<ForgeDirection> getOutputDirections()
-    {
-        return EnumSet.noneOf(ForgeDirection.class);
     }
 
     @Override

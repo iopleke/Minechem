@@ -3,10 +3,10 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
-import minechem.tileentity.prefab.MinechemTileEntity;
+import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
 import minechem.utils.Compare;
@@ -24,18 +24,8 @@ import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 
-public class DecomposerTileEntity extends MinechemTileEntity implements ISidedInventory, IFluidHandler
+public class DecomposerTileEntity extends MinechemTileEntityElectric implements ISidedInventory, IFluidHandler
 {
-    /**
-     * Determines amount of energy we are allowed to input into the machine with a given update.
-     */
-    private static final long MAX_ENERGY_RECIEVED = 20;
-
-    /**
-     * Determines total amount of energy that this machine can store.
-     */
-    private static final long MAX_ENERGY_STORED = 10000;
-
     /**
      * Input Slots
      */
@@ -114,7 +104,6 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
 
     public DecomposerTileEntity()
     {
-        // @TODO - Set the total amount of energy that can be stored and the amount we can receive in a single network update.
         super();
 
         // Sets up internal input and output slots used by the server to keep track of items inside of the machine for processing.
@@ -229,7 +218,7 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             ItemStack inputStack = getActiveStack();
             DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
 
-            if (recipe != null)
+            if (recipe != null && this.useEnergy(getEnergyNeeded()))
             {
                 ArrayList<PotionChemical> output = recipe.getOutput();
                 if (output != null)
@@ -482,6 +471,12 @@ public class DecomposerTileEntity extends MinechemTileEntity implements ISidedIn
             activeStack = ItemStack.loadItemStackFromNBT(activeStackCompound);
         }
         state = State.values()[nbt.getByte("state")];
+    }
+
+    @Override
+    public int getEnergyNeeded()
+    {
+        return Settings.powerUsage ? 50 : 0;
     }
 
     @Override
