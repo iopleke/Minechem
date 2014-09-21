@@ -21,7 +21,6 @@ public class DecomposerTileEntityRenderer extends TileEntitySpecialRenderer
             GL11.glPushMatrix();
             GL11.glTranslated(x + 0.5D, y + 1.5D, z + 0.5D);
             GL11.glRotatef(180f, 0f, 0f, 1f);
-            GL11.glEnable(GL11.GL_LIGHTING);
 
             // When the decomposer is powered we will change the texture to reflect this.
             if (decomposer.state != State.active)
@@ -39,7 +38,6 @@ public class DecomposerTileEntityRenderer extends TileEntitySpecialRenderer
             }
 
             decomposer.model.render(0.0625F);
-            GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glPopMatrix();
         }
     }
