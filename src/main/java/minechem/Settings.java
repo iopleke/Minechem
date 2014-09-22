@@ -47,7 +47,7 @@ public class Settings
 
 	// Power usage
 	public static boolean powerUseEnabled = true;
-	public static int decompositionCost = 50;
+	public static int decompositionCost = 80;
 	
 	// Power base storage values
 	public static int synthesisMaxStorage = 10240;
