@@ -122,7 +122,7 @@ public class PacketDispatcher extends SimpleNetworkWrapper
         @Override
         public final IMessage onMessage(T message, MessageContext context)
         {
-            processPacket(Minechem.PROXY.getPlayer(context));
+            message.processPacket(Minechem.PROXY.getPlayer(context));
             return null;
         }
 
