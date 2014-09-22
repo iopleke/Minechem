@@ -3,7 +3,9 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import minechem.Minechem;
 import minechem.Settings;
+import minechem.network.packet.DecomposerPacketUpdate;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
@@ -15,6 +17,7 @@ import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
+import net.minecraft.network.Packet;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -566,7 +569,10 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		}
 
         // Notify minecraft that the inventory items in this machine have changed.
-		this.markDirty();
+		//this.onInventoryChanged();//TODO:Find alt if available
+        DecomposerPacketUpdate decomposerPacketUpdate = new DecomposerPacketUpdate(this);
+        Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, decomposerPacketUpdate);
+        this.markDirty();
 	}
 
 	@Override
@@ -592,7 +598,14 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		nbt.setByte("state", (byte) state.ordinal());
 	}
 
-	/**
+    @Override
+    public Packet getDescriptionPacket()
+    {
+        writeToNBT(new NBTTagCompound());
+        return Minechem.network.getPacketFrom(new DecomposerPacketUpdate(this));
+    }
+
+    /**
 	 * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
 	 */
 	public enum State

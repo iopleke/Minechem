@@ -52,6 +52,9 @@ public class DecomposerPacketUpdate extends PacketDispatcher.AbstractPacket<Deco
         tilePosY = serverDecomposer.yCoord;
         tilePosZ = serverDecomposer.zCoord;
 
+        lastItemStoredEnergy = serverDecomposer.getEnergyStored();
+        lastItemStoredEnergyMaximum = serverDecomposer.getMaxEnergyStored();
+
         // Tile entity specific information.
         this.state = serverDecomposer.getState().ordinal();
     }
@@ -104,7 +107,7 @@ public class DecomposerPacketUpdate extends PacketDispatcher.AbstractPacket<Deco
     @Override
     public void processPacket(EntityPlayer player)
     {
-        tileEntity = (DecomposerTileEntity) player.worldObj.getTileEntity(tilePosX, tilePosY, tilePosZ);
+        tileEntity = (DecomposerTileEntity) player.worldObj.getTileEntity(this.tilePosX, this.tilePosY, this.tilePosZ);
         if (tileEntity == null)
         {
             return;
