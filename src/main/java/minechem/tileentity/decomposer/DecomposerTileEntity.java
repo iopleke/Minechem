@@ -157,6 +157,14 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
 		return (recipe != null);
 	}
+	
+	private boolean energyToDecompose(){
+		
+		if(this.getEnergyStored() >= Settings.decompositionCost){
+			return true;
+		}
+		return false;
+	}
 
 	@Override
 	public boolean canDrain(ForgeDirection from, Fluid fluid)
@@ -554,7 +562,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 		// Determines the current state of the machine.
 		state = determineOperationalState();
-		if ((state == State.idle || state == State.finished) && canDecomposeInput())
+		if ((state == State.idle || state == State.finished) && canDecomposeInput() && energyToDecompose())
 		{
 			// Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
 			activeStack = null;
