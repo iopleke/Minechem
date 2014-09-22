@@ -566,7 +566,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		}
 
         // Notify minecraft that the inventory items in this machine have changed.
-		//this.onInventoryChanged();//TODO:Find alt if available
+		this.markDirty();
 	}
 
 	@Override
