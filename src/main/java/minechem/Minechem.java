@@ -8,20 +8,17 @@ import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
 import minechem.gui.GuiTabHelp;
-import minechem.gui.GuiTabStateControl;
 import minechem.gui.GuiTabTable;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
-import minechem.network.PacketDispatcher;
-import minechem.network.packet.*;
+import minechem.network.MessageHandler;
 import minechem.proxy.CommonProxy;
 import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
 import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.tick.TickHandler;
-import minechem.tileentity.synthesis.SynthesisTabStateControl;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -80,9 +77,6 @@ public class Minechem
     @SidedProxy(clientSide = "minechem.proxy.ClientProxy", serverSide = "minechem.proxy.CommonProxy")
     public static CommonProxy PROXY;
 
-    // Register a SimpleNetworkWrapper
-    public static PacketDispatcher network;
-
     // Creative mode tab that shows up in Minecraft.
     public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Minechem.NAME);
     public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Minechem.NAME + ".Elements");
@@ -104,13 +98,13 @@ public class Minechem
         // Register instance.
         INSTANCE = this;
 
-        // Initialize the network wrapper
-        network = new PacketDispatcher(Minechem.ID);
-
         // Load configuration.
         LOGGER.info("Loading configuration...");
         Settings.init(event.getSuggestedConfigurationFile());
         FMLCommonHandler.instance().bus().register(new Settings());
+
+        LOGGER.info("Registering Packets...");
+        MessageHandler.init();
 
         // Setup Mod Metadata for players to see in mod list with other mods.
         metadata.modId = Minechem.ID;
@@ -171,12 +165,7 @@ public class Minechem
         LOGGER.info("Registering fluids...");
         FluidHelper.registerFluids();
 
-        LOGGER.info("Registering Packets...");
-        network.registerPacket(0, Side.CLIENT, SynthesisPacketUpdate.class);
-        network.registerPacket(1, Side.SERVER, ChemistJournalPacketActiveItem.class);
-        network.registerPacket(2, Side.CLIENT, GhostBlockPacket.class);
-        network.registerPacket(3, Side.CLIENT, DecomposerPacketUpdate.class);
-        network.registerPacket(4, Side.CLIENT, PolytoolTypePacket.class);
+
 
         LOGGER.info("Registering Ore Generation...");
         GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);

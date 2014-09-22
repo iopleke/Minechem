@@ -3,9 +3,11 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.Minechem;
 import minechem.Settings;
-import minechem.network.packet.DecomposerPacketUpdate;
+import minechem.network.MessageHandler;
+import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
@@ -577,9 +579,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		}
 
         // Notify minecraft that the inventory items in this machine have changed.
-		//this.onInventoryChanged();//TODO:Find alt if available
-        DecomposerPacketUpdate decomposerPacketUpdate = new DecomposerPacketUpdate(this);
-        Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, decomposerPacketUpdate);
+        DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
+        MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
         this.markDirty();
 	}
 
@@ -610,7 +611,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
     public Packet getDescriptionPacket()
     {
         writeToNBT(new NBTTagCompound());
-        return Minechem.network.getPacketFrom(new DecomposerPacketUpdate(this));
+        return MessageHandler.INSTANCE.getPacketFrom(new DecomposerUpdateMessage(this));
     }
 
     /**

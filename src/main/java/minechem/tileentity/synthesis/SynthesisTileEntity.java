@@ -3,10 +3,12 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.List;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
 import minechem.Settings;
-import minechem.network.packet.SynthesisPacketUpdate;
+import minechem.network.MessageHandler;
+import minechem.network.message.SynthesisUpdateMessage;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.MinechemHelper;
@@ -489,10 +491,8 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 		if (!worldObj.isRemote)
 		{
-			SynthesisPacketUpdate synthesisPacketUpdate = new SynthesisPacketUpdate(this);
-			int dimensionID = worldObj.provider.dimensionId;
-			//TODO: Work on packet system
-			Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, synthesisPacketUpdate);
+			SynthesisUpdateMessage message = new SynthesisUpdateMessage(this);
+            MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
 		}
 		// Forces the output slot to only take a single item preventing stacking.
 		if (currentRecipe != null && inventory[kOutput[0]] == null)
