@@ -90,59 +90,59 @@ public class Settings
 		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
 
 		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "generateUraniumOre", Settings.WorldGenOre);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.worldgenore.description");
-		prop.setLanguageKey("minechem.gui.config.worldgenore");
+		prop.comment = StatCollector.translateToLocal("config.worldgenore.description");
+		prop.setLanguageKey("config.worldgenore");
 		WorldGenOre = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumOreClusterSize", Settings.UraniumOreClusterSize);
 		prop.setMinValue(1).setMaxValue(10);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumoreclustersize.description");
-		prop.setLanguageKey("minechem.gui.config.uraniumoreclustersize");
+		prop.comment = StatCollector.translateToLocal("config.uraniumoreclustersize.description");
+		prop.setLanguageKey("config.uraniumoreclustersize");
 		UraniumOreClusterSize = prop.getInt();
 		configList.add(prop.getName());
 
 		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumoredensity", Settings.UraniumOreDensity);
 		prop.setMinValue(1).setMaxValue(64);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumoredensity.description");
-		prop.setLanguageKey("minechem.gui.config.uraniumoredensity");
+		prop.comment = StatCollector.translateToLocal("config.uraniumoredensity.description");
+		prop.setLanguageKey("config.uraniumoredensity");
 		UraniumOreDensity = prop.getInt();
 		configList.add(prop.getName());
 
 		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumOreCraftable", Settings.UraniumOreCraftable);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumorecraftable.description");
-		prop.setLanguageKey("minechem.gui.config.uraniumorecraftable");
+		prop.comment = StatCollector.translateToLocal("config.uraniumorecraftable.description");
+		prop.setLanguageKey("config.uraniumorecraftable");
 		UraniumOreCraftable = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get(Configuration.CATEGORY_GENERAL, "debugMode", Settings.DebugMode);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.debugmode.description");
-		prop.setLanguageKey("minechem.gui.config.debugmode");
+		prop.comment = StatCollector.translateToLocal("config.debugmode.description");
+		prop.setLanguageKey("config.debugmode");
 		DebugMode = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get(Configuration.CATEGORY_GENERAL, "updateRadius", Settings.UpdateRadius);
 		prop.setMinValue(1).setMaxValue(50);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.updateradius.description");
-		prop.setLanguageKey("minechem.gui.config.updateradius");
+		prop.comment = StatCollector.translateToLocal("config.updateradius.description");
+		prop.setLanguageKey("config.updateradius");
 		UpdateRadius = prop.getInt();
 		configList.add(prop.getName());
 
 		prop = config.get(Configuration.CATEGORY_GENERAL, "allowAutomation", Settings.AllowAutomation);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.allowautomation.description");
-		prop.setLanguageKey("minechem.gui.config.allowautomation");
+		prop.comment = StatCollector.translateToLocal("config.allowautomation.description");
+		prop.setLanguageKey("config.allowautomation");
 		AllowAutomation = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get(Configuration.CATEGORY_GENERAL, "foodSpiking", Settings.FoodSpiking);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.foodspiking.description");
-		prop.setLanguageKey("minechem.gui.config.foodspiking");
+		prop.comment = StatCollector.translateToLocal("config.foodspiking.description");
+		prop.setLanguageKey("config.foodspiking");
 		FoodSpiking = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get(Configuration.CATEGORY_GENERAL, "swordEffects", Settings.SwordEffects);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.swordeffects.description");
-		prop.setLanguageKey("minechem.gui.config.swordeffects");
+		prop.comment = StatCollector.translateToLocal("config.swordeffects.description");
+		prop.setLanguageKey("config.swordeffects");
 		SwordEffects = prop.getBoolean();
 		configList.add(prop.getName());
 
@@ -150,8 +150,8 @@ public class Settings
 		{
 			"None"
 		});
-		prop.setLanguageKey("minechem.gui.config.decomposerblacklist").setRequiresMcRestart(true);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.decomposerblacklist.description");
+		prop.setLanguageKey("config.decomposerblacklist").setRequiresMcRestart(true);
+		prop.comment = StatCollector.translateToLocal("config.decomposerblacklist.description");
 		DecomposerBlacklist = prop.getStringList();
 		configList.add(prop.getName());
 
@@ -159,8 +159,8 @@ public class Settings
 		{
 			"None"
 		});
-		prop.setLanguageKey("minechem.gui.config.synthesismachineblacklist").setRequiresMcRestart(true);
-		prop.comment = StatCollector.translateToLocal("minechem.gui.config.synthesismachineblacklist.description");
+		prop.setLanguageKey("config.synthesismachineblacklist").setRequiresMcRestart(true);
+		prop.comment = StatCollector.translateToLocal("config.synthesismachineblacklist.description");
 		SynthesisMachineBlacklist = prop.getStringList();
 		configList.add(prop.getName());
 

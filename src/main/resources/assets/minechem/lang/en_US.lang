@@ -45,30 +45,30 @@ minechem.FusionWall.name=Fusion Wall
 minechem.TungstenPlating.name=Tungsten Plating
 minechem.FusionCore.name=Fusion Core
 
-minechem.gui.config.worldgenore=WorldGen Ore
-minechem.gui.config.uraniumoreclustersize=Uranium Ore Cluster Size
-minechem.gui.config.uraniumoredensity=Uranium Ore Density
-minechem.gui.config.uraniumorecraftable=uranium Ore Craftable
-minechem.gui.config.debugmode=Debug Mode
-minechem.gui.config.updateradius=Update Radius
-minechem.gui.config.allowautomation=Allow Automation
-minechem.gui.config.foodspiking=Food Spiking
-minechem.gui.config.swordeffects=Sword Effects
-minechem.gui.config.synthesismachineblacklist=Synthesis Machine Blacklist
-minechem.gui.config.decomposerblacklist=Decomposer Blacklist
+config.worldgenore=WorldGen Ore
+config.uraniumoreclustersize=Uranium Ore Cluster Size
+config.uraniumoredensity=Uranium Ore Density
+config.uraniumorecraftable=uranium Ore Craftable
+config.debugmode=Debug Mode
+config.updateradius=Update Radius
+config.allowautomation=Allow Automation
+config.foodspiking=Food Spiking
+config.swordeffects=Sword Effects
+config.synthesismachineblacklist=Synthesis Machine Blacklist
+config.decomposerblacklist=Decomposer Blacklist
 
-minechem.gui.config.worldgenore.description=Turn on and off ore gen
-minechem.gui.config.uraniumoreclustersize.description=Size of uranium clusters
-minechem.gui.config.uraniumoredensity.description=How often will uranium be generated in a chuck
-minechem.gui.config.uraniumorecraftable.description=Can minechem uranium be crafted from other uranium
-minechem.gui.config.debugmode.description=Mod will print tons of info while running
-minechem.gui.config.updateradius.description=Determines how far away in blocks packets will be set to players
-minechem.gui.config.allowautomation.description=Allows automation of decomposer, synthesiser, and reactors
-minechem.gui.config.foodspiking.description=Allow food spiking
-minechem.gui.config.swordeffects.description=Enable enchantments
-minechem.gui.config.synthesismachineblacklist.description=List of items names that Synthesiser can't make. ex: Blue Orchid
+config.worldgenore.description=Turn on and off ore gen
+config.uraniumoreclustersize.description=Size of uranium clusters
+config.uraniumoredensity.description=How often will uranium be generated in a chuck
+config.uraniumorecraftable.description=Can minechem uranium be crafted from other uranium
+config.debugmode.description=Mod will print tons of info while running
+config.updateradius.description=Determines how far away in blocks packets will be set to players
+config.allowautomation.description=Allows automation of decomposer, synthesiser, and reactors
+config.foodspiking.description=Allow food spiking
+config.swordeffects.description=Enable enchantments
+config.synthesismachineblacklist.description=List of items names that Synthesiser can't make. ex: Blue Orchid
 
-minechem.gui.config.decomposerblacklist.description=List of items names that Decomposer can't decompose. ex: Chiseled Stone Bricks
+config.decomposerblacklist.description=List of items names that Decomposer can't decompose. ex: Chiseled Stone Bricks
 
 
 tile.chemicalDecomposer.name=Chemical Decomposer
