@@ -1,5 +1,6 @@
 package minechem.item.polytool;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -27,6 +28,7 @@ public class PolytoolGui extends GuiContainerTabbed
     long renders;
     ItemStack polytool;
     InventoryPlayer player;
+	boolean shouldUpdate;
 
     public PolytoolGui(PolytoolContainer par1Container)
     {
@@ -35,6 +37,7 @@ public class PolytoolGui extends GuiContainerTabbed
         ySize = 218;
         this.polytool = par1Container.player.getCurrentItem();
         this.player = par1Container.player;
+		this.shouldUpdate = true;
         ItemStack stack = par1Container.player.getCurrentItem();
         if (stack.getItem() instanceof PolytoolItem)
         {
@@ -78,7 +81,7 @@ public class PolytoolGui extends GuiContainerTabbed
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float f, int i, int j)
+    protected void drawGuiContainerBackgroundLayer(float f, int mouseX, int mouseY)
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
@@ -86,10 +89,36 @@ public class PolytoolGui extends GuiContainerTabbed
 
         drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
         renders++;
-        Iterator iter = elements.iterator();
-        while (iter.hasNext())
+		
+		ItemStack polytoolTemp = FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem();
+		
+		ArrayList<ElementGuiHelper> elementsUpdate = new ArrayList();
+		ArrayList<PolytoolUpgradeType> upgrades = PolytoolItem.getUpgrades(polytoolTemp);
+		Iterator<PolytoolUpgradeType> iter = upgrades.iterator();
+		Random rand = new Random();
+		while (iter.hasNext())
+		{
+			PolytoolUpgradeType upgrade = iter.next();
+			ElementEnum element = upgrade.getElement();
+			for (int i = 0; i < upgrade.power; i++)
+			{
+
+				elementsUpdate.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, element));
+			}
+
+		}
+		
+		boolean sizeEqual = elements.size() == elementsUpdate.size();
+		
+		if(!sizeEqual || this.shouldUpdate){
+			this.elements = elementsUpdate;
+			this.shouldUpdate = false;
+		}
+		
+		Iterator renderIter = elements.iterator();
+        while (renderIter.hasNext())
         {
-            ((ElementGuiHelper) iter.next()).draw(this, renders);
+            ((ElementGuiHelper) renderIter.next()).draw(this, renders);
         }
 
         drawItemStack(new ItemStack(MinechemItemsRegistration.polytool), 80, 42, "");
@@ -137,6 +166,7 @@ public class PolytoolGui extends GuiContainerTabbed
         for (int i = 0; i < upgrade.power; i++)
         {
             elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, upgrade.getElement()));
+			this.shouldUpdate = true;
         }
     }
 
