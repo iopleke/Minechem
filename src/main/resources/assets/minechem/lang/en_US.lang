@@ -15,14 +15,35 @@ help.chemicalStorage=The Chemical Storage will safely store radioactive chemical
 help.leadChest=The Leaded Chest will safely store radioactive chemicals and prevent them from decaying.
 help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with certain elements to give it special effects.
 
-config.worldgen.name=world generation
-config.worldgen.description=These settings allow you to tweak the ore generation.
-config.decomposer.blacklist.name=decomposer blacklist
+config.allowautomation.description=Allows automation of decomposer, synthesiser, and reactors
+config.allowautomation=Allow Automation
+config.debugmode.description=Mod will print tons of info while running
+config.debugmode=Debug Mode
 config.decomposer.blacklist.description=These settings allow you to keep the decomposer from decomposing the items listed.
-config.synthesis.blacklist.name=synthesis blacklist
-config.synthesis.blacklist.description=These settings allow you to keep the synthesis machine from producing the items listed.
+config.decomposer.blacklist.name=decomposer blacklist
+config.decomposerblacklist.description=List of items names that Decomposer can't decompose. ex: Chiseled Stone Bricks
+config.decomposerblacklist=Decomposer Blacklist
+config.foodspiking.description=Allow food spiking
+config.foodspiking=Food Spiking
 config.general.description=Misc settings
-
+config.swordeffects.description=Enable enchantments
+config.swordeffects=Sword Effects
+config.synthesis.blacklist.description=These settings allow you to keep the synthesis machine from producing the items listed.
+config.synthesis.blacklist.name=synthesis blacklist
+config.synthesismachineblacklist.description=List of items names that Synthesiser can't make. ex: Blue Orchid
+config.synthesismachineblacklist=Synthesis Machine Blacklist
+config.updateradius.description=Determines how far away in blocks packets will be set to players
+config.updateradius=Update Radius
+config.uraniumoreclustersize.description=Size of uranium clusters
+config.uraniumoreclustersize=Uranium Ore Cluster Size
+config.uraniumorecraftable.description=Can minechem uranium be crafted from other uranium
+config.uraniumorecraftable=uranium Ore Craftable
+config.uraniumoredensity.description=How often will uranium be generated in a chuck
+config.uraniumoredensity=Uranium Ore Density
+config.worldgen.description=These settings allow you to tweak the ore generation.
+config.worldgen.name=world generation
+config.worldgenore.description=Turn on and off ore gen
+config.worldgenore=WorldGen Ore
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
@@ -44,32 +65,6 @@ minechem.sec.abbr=s
 minechem.FusionWall.name=Fusion Wall
 minechem.TungstenPlating.name=Tungsten Plating
 minechem.FusionCore.name=Fusion Core
-
-config.worldgenore=WorldGen Ore
-config.uraniumoreclustersize=Uranium Ore Cluster Size
-config.uraniumoredensity=Uranium Ore Density
-config.uraniumorecraftable=uranium Ore Craftable
-config.debugmode=Debug Mode
-config.updateradius=Update Radius
-config.allowautomation=Allow Automation
-config.foodspiking=Food Spiking
-config.swordeffects=Sword Effects
-config.synthesismachineblacklist=Synthesis Machine Blacklist
-config.decomposerblacklist=Decomposer Blacklist
-
-config.worldgenore.description=Turn on and off ore gen
-config.uraniumoreclustersize.description=Size of uranium clusters
-config.uraniumoredensity.description=How often will uranium be generated in a chuck
-config.uraniumorecraftable.description=Can minechem uranium be crafted from other uranium
-config.debugmode.description=Mod will print tons of info while running
-config.updateradius.description=Determines how far away in blocks packets will be set to players
-config.allowautomation.description=Allows automation of decomposer, synthesiser, and reactors
-config.foodspiking.description=Allow food spiking
-config.swordeffects.description=Enable enchantments
-config.synthesismachineblacklist.description=List of items names that Synthesiser can't make. ex: Blue Orchid
-
-config.decomposerblacklist.description=List of items names that Decomposer can't decompose. ex: Chiseled Stone Bricks
-
 
 tile.chemicalDecomposer.name=Chemical Decomposer
 tile.oreUranium.name=Uranium Ore
