@@ -15,7 +15,7 @@ public class FusionItemBlock extends ItemBlock
 		//TODO: Find matching block
 	    super(block);
         setHasSubtypes(true);
-        setUnlocalizedName("minechem.itemBlockFusion");
+        setUnlocalizedName("itemBlockFusion");
     }
 
     @Override

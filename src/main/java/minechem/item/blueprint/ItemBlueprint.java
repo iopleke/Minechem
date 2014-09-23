@@ -24,7 +24,7 @@ public class ItemBlueprint extends Item
     public ItemBlueprint()
     {
         super();
-        setUnlocalizedName("minechem.itemBlueprint");
+        setUnlocalizedName("itemBlueprint");
         setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
         setHasSubtypes(true);
     }
