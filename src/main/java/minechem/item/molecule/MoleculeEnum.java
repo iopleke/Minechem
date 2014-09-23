@@ -183,7 +183,7 @@ public enum MoleculeEnum
     MoleculeEnum(int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, PotionChemical... chemicals) {
         this.id = id;
         this.components = new ArrayList<PotionChemical>();
-        this.localizationKey = "minechem.molecule." + name();
+        this.localizationKey = "molecule." + name();
         for (PotionChemical potionChemical : chemicals) 
         {
             this.components.add(potionChemical);
