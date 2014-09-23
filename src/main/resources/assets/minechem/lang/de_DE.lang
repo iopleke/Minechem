@@ -183,8 +183,8 @@ element.Rg=Roenthenium
 element.Cn=Copernicium
 element.Uut=Ununtrium
 
-minechem.mineral.quartz=Quarz
-minechem.mineral.berlinite=Berlinit
+mineral.quartz=Quarz
+mineral.berlinite=Berlinit
 
 molecule.cellulose=Cellulose
 molecule.water=Wasser

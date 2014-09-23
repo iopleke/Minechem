@@ -181,8 +181,8 @@ element.Rg=Roentgênio
 element.Cn=Copernício
 element.Uut=Ununtrio
 
-minechem.mineral.quartz=Quartzo
-minechem.mineral.berlinite=Berlinita
+mineral.quartz=Quartzo
+mineral.berlinite=Berlinita
 
 molecule.cellulose=Celulose
 molecule.water=Água

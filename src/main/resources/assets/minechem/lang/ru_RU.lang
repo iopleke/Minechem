@@ -256,8 +256,8 @@ element.Rg=Рентгений
 element.Cn=Коперниций
 element.Uut=Унунтрий
 
-minechem.mineral.quartz=Кварц
-minechem.mineral.berlinite=Берлинит
+mineral.quartz=Кварц
+mineral.berlinite=Берлинит
 
 molecule.cellulose=Целлюлоза
 molecule.water=Вода

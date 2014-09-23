@@ -181,8 +181,8 @@ element.Rg=钅仑
 element.Cn=鎶
 element.Uut=Uut
 
-minechem.mineral.quartz=石英
-minechem.mineral.berlinite=块磷铝矿
+mineral.quartz=石英
+mineral.berlinite=块磷铝矿
 
 molecule.cellulose=纤维素
 molecule.water=水

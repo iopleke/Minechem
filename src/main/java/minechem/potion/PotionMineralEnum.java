@@ -39,7 +39,7 @@ public enum PotionMineralEnum
     PotionMineralEnum(String descriptiveName, PotionChemical... chemicals)
     {
         this.descriptiveName = descriptiveName;
-        this.localizationKey = "minechem.mineral." + name();
+        this.localizationKey = "mineral." + name();
         this.components = new ArrayList<PotionChemical>();
         for (PotionChemical potionChemical : chemicals)
         {

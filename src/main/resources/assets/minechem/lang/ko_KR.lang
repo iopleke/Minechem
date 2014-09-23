@@ -256,8 +256,8 @@ element.Rg=뢴트게늄
 element.Cn=코페르니슘
 element.Uut=우눈트륨
 
-minechem.mineral.quartz=석영
-minechem.mineral.berlinite=베를리나이트
+mineral.quartz=석영
+mineral.berlinite=베를리나이트
 
 molecule.cellulose=셀룰로스
 molecule.water=물
