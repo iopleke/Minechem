@@ -1,6 +1,5 @@
 package minechem.item.polytool;
 
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -93,27 +92,6 @@ public class PolytoolGui extends GuiContainerTabbed
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		renders++;
-
-		// @TODO - figure out why this only updates the first time a new stack of elements is put into the polytool
-		if (PolytoolItem.getUpgrades(FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem()).size() != PolytoolItem.getUpgrades(this.polytool).size())
-		{
-			this.polytool = FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem();
-			this.elements = new ArrayList();
-
-			Iterator<PolytoolUpgradeType> iter = PolytoolItem.getUpgrades(this.polytool).iterator();
-			Random rand = new Random();
-			while (iter.hasNext())
-			{
-				PolytoolUpgradeType upgrade = iter.next();
-				ElementEnum element = upgrade.getElement();
-				for (int i = 0; i < upgrade.power; i++)
-				{
-					// @TODO - get values from existing elements so the positions don't jump around
-					this.elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, element));
-				}
-
-			}
-		}
 
 		Iterator renderIter = elements.iterator();
 		while (renderIter.hasNext())

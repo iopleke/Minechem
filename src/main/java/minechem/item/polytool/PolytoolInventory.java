@@ -3,6 +3,7 @@ package minechem.item.polytool;
 import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.PolytoolUpdateMessage;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -66,12 +67,17 @@ public class PolytoolInventory implements IInventory
                 && PolytoolItem.validAlloyInfusion(player.getCurrentEquippedItem(), itemstack))
         {
             item = null;
-            PolytoolItem.addTypeToNBT(player.inventory.getCurrentItem(), PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1));
+            PolytoolUpgradeType upgrade = PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1);
+            PolytoolItem.addTypeToNBT(player.inventory.getCurrentItem(), upgrade);
 
             if (!player.worldObj.isRemote)
             {
-                PolytoolUpdateMessage message = new PolytoolUpdateMessage(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1));
+                PolytoolUpdateMessage message = new PolytoolUpdateMessage(upgrade);
                 MessageHandler.INSTANCE.sendToServer(message);
+            }
+            else
+            {
+                ((PolytoolGui)Minecraft.getMinecraft().currentScreen).addUpgrade(upgrade);
             }
         }
 
