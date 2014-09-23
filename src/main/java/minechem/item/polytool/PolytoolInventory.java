@@ -1,8 +1,8 @@
 package minechem.item.polytool;
 
-import minechem.Minechem;
 import minechem.item.element.ElementItem;
-import minechem.network.packet.PolytoolTypePacket;
+import minechem.network.MessageHandler;
+import minechem.network.message.PolytoolUpdateMessage;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -70,10 +70,8 @@ public class PolytoolInventory implements IInventory
 
             if (!player.worldObj.isRemote)
             {
-	            //TODO: Test?
-	            PolytoolTypePacket packet = new PolytoolTypePacket(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1));
-                Minechem.network.sendPacket(player, packet);
-	            //MinechemPacketHandler.sendPolytoolUpdatePacket(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1), player);
+                PolytoolUpdateMessage message = new PolytoolUpdateMessage(PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1));
+                MessageHandler.INSTANCE.sendToServer(message);
             }
         }
 

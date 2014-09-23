@@ -49,7 +49,6 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 		return received;
 	}
 
-	@Optional.Method(modid = "CoFHCore")
 	public void syncEnergyValue(int syncAt)
 	{
 		if (this.getEnergyStored() > syncAt)

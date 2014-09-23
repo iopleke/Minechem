@@ -1,10 +1,11 @@
 package minechem.tileentity.multiblock.ghostblock;
 
-import minechem.Minechem;
+import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.Settings;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
-import minechem.network.packet.GhostBlockPacket;
+import minechem.network.MessageHandler;
+import minechem.network.message.GhostBlockMessage;
 import minechem.tileentity.prefab.MinechemTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -22,9 +23,8 @@ public class GhostBlockTileEntity extends MinechemTileEntity
         this.worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, blueprint.getBlockLookup().get(this.blockID).metadata, 3);
         if (worldObj != null && !worldObj.isRemote)
         {
-            GhostBlockPacket packet = new GhostBlockPacket(this);
-            int dimensionID = worldObj.provider.dimensionId;
-            Minechem.network.sendPacketAllAround(worldObj, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius, packet);
+            GhostBlockMessage message = new GhostBlockMessage(this);
+            MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
         }
     }
 
