@@ -94,30 +94,25 @@ public class PolytoolGui extends GuiContainerTabbed
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		renders++;
 
-		ItemStack polytoolTemp = FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem();
-
-		ArrayList<ElementGuiHelper> elementsUpdate = new ArrayList();
-		ArrayList<PolytoolUpgradeType> upgrades = PolytoolItem.getUpgrades(polytoolTemp);
-		Iterator<PolytoolUpgradeType> iter = upgrades.iterator();
-		Random rand = new Random();
-		while (iter.hasNext())
+		// @TODO - figure out why this only updates the first time a new stack of elements is put into the polytool
+		if (PolytoolItem.getUpgrades(FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem()).size() != PolytoolItem.getUpgrades(this.polytool).size())
 		{
-			PolytoolUpgradeType upgrade = iter.next();
-			ElementEnum element = upgrade.getElement();
-			for (int i = 0; i < upgrade.power; i++)
+			this.polytool = FMLClientHandler.instance().getClientPlayerEntity().getCurrentEquippedItem();
+			this.elements = new ArrayList();
+
+			Iterator<PolytoolUpgradeType> iter = PolytoolItem.getUpgrades(this.polytool).iterator();
+			Random rand = new Random();
+			while (iter.hasNext())
 			{
+				PolytoolUpgradeType upgrade = iter.next();
+				ElementEnum element = upgrade.getElement();
+				for (int i = 0; i < upgrade.power; i++)
+				{
+					// @TODO - get values from existing elements so the positions don't jump around
+					this.elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, element));
+				}
 
-				elementsUpdate.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, element));
 			}
-
-		}
-
-		boolean sizeEqual = elements.size() == elementsUpdate.size();
-
-		if (!sizeEqual || this.shouldUpdate)
-		{
-			this.elements = elementsUpdate;
-			this.shouldUpdate = false;
 		}
 
 		Iterator renderIter = elements.iterator();
