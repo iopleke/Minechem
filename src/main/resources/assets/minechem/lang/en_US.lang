@@ -289,8 +289,8 @@ element.Rg=Roentgenium
 element.Cn=Copernicium
 element.Uut=Ununtrium
 
-mineral.quartz=Quartz
 mineral.berlinite=Berlinite
+mineral.quartz=Quartz
 
 molecule.aalc=Allyl Alcohol
 molecule.acetate=Acetate (ion)
