@@ -82,69 +82,69 @@ public class Settings
 	private static void loadConfig()
 	{
 		Property prop;
-		List<String> propOrder = new ArrayList<String>();
+		List<String> configList = new ArrayList<String>();
 
-		config.addCustomCategoryComment("world generation", "These settings allow you to tweak the ore generation.");
-		config.addCustomCategoryComment("decomposer blacklist", "These settings allow you to keep the decomposer from decomposing the items listed.");
-		config.addCustomCategoryComment("synthesis machine blacklist", "These settings allow you to keep the synthesis machine from making the items listed.");
-		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, "Misc settings.");
+		config.addCustomCategoryComment(StatCollector.translateToLocal("config.worldgen.name"), StatCollector.translateToLocal("config.worldgen.description"));
+		config.addCustomCategoryComment(StatCollector.translateToLocal("config.decomposer.blacklist.name"), StatCollector.translateToLocal("config.decomposer.blacklist.description"));
+		config.addCustomCategoryComment(StatCollector.translateToLocal("config.synthesis.blacklist.name"), StatCollector.translateToLocal("config.synthesis.blacklist.description"));
+		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
 
-		prop = config.get("world generation", "worldgenore", true);
+		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "generateUraniumOre", Settings.WorldGenOre);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.worldgenore.description");
 		prop.setLanguageKey("minechem.gui.config.worldgenore");
 		WorldGenOre = prop.getBoolean();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get("world generation", "uraniumoreclustersize", 3);
+		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumOreClusterSize", Settings.UraniumOreClusterSize);
 		prop.setMinValue(1).setMaxValue(10);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumoreclustersize.description");
 		prop.setLanguageKey("minechem.gui.config.uraniumoreclustersize");
 		UraniumOreClusterSize = prop.getInt();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get("world generation", "uraniumoredensity", 5);
+		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumoredensity", Settings.UraniumOreDensity);
 		prop.setMinValue(1).setMaxValue(64);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumoredensity.description");
 		prop.setLanguageKey("minechem.gui.config.uraniumoredensity");
 		UraniumOreDensity = prop.getInt();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get("world generation", "uraniumorecraftable", true);
+		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumOreCraftable", Settings.UraniumOreCraftable);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.uraniumorecraftable.description");
 		prop.setLanguageKey("minechem.gui.config.uraniumorecraftable");
 		UraniumOreCraftable = prop.getBoolean();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get(Configuration.CATEGORY_GENERAL, "debugmode", false);
+		prop = config.get(Configuration.CATEGORY_GENERAL, "debugMode", Settings.DebugMode);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.debugmode.description");
 		prop.setLanguageKey("minechem.gui.config.debugmode");
 		DebugMode = prop.getBoolean();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get(Configuration.CATEGORY_GENERAL, "updateradius", 20);
+		prop = config.get(Configuration.CATEGORY_GENERAL, "updateRadius", Settings.UpdateRadius);
 		prop.setMinValue(1).setMaxValue(50);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.updateradius.description");
 		prop.setLanguageKey("minechem.gui.config.updateradius");
 		UpdateRadius = prop.getInt();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get(Configuration.CATEGORY_GENERAL, "allowautomation", true);
+		prop = config.get(Configuration.CATEGORY_GENERAL, "allowAutomation", Settings.AllowAutomation);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.allowautomation.description");
 		prop.setLanguageKey("minechem.gui.config.allowautomation");
 		AllowAutomation = prop.getBoolean();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get(Configuration.CATEGORY_GENERAL, "foodspiking", true);
+		prop = config.get(Configuration.CATEGORY_GENERAL, "foodSpiking", Settings.FoodSpiking);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.foodspiking.description");
 		prop.setLanguageKey("minechem.gui.config.foodspiking");
 		FoodSpiking = prop.getBoolean();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
-		prop = config.get(Configuration.CATEGORY_GENERAL, "swordeffects", true);
+		prop = config.get(Configuration.CATEGORY_GENERAL, "swordEffects", Settings.SwordEffects);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.swordeffects.description");
 		prop.setLanguageKey("minechem.gui.config.swordeffects");
 		SwordEffects = prop.getBoolean();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
 		prop = config.get("decomposer blacklist", "Decomposer Blacklist", new String[]
 		{
@@ -153,7 +153,7 @@ public class Settings
 		prop.setLanguageKey("minechem.gui.config.decomposerblacklist").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.decomposerblacklist.description");
 		DecomposerBlacklist = prop.getStringList();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
 		prop = config.get("synthesis machine blacklist", "Synthesis Blacklist", new String[]
 		{
@@ -162,7 +162,7 @@ public class Settings
 		prop.setLanguageKey("minechem.gui.config.synthesismachineblacklist").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("minechem.gui.config.synthesismachineblacklist.description");
 		SynthesisMachineBlacklist = prop.getStringList();
-		propOrder.add(prop.getName());
+		configList.add(prop.getName());
 
 		if (config.hasChanged())
 		{
@@ -173,9 +173,9 @@ public class Settings
 	public static List<IConfigElement> getConfigElements()
 	{
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
-		list.addAll(new ConfigElement(config.getCategory("world generation")).getChildElements());
-		list.addAll(new ConfigElement(config.getCategory("decomposer blacklist")).getChildElements());
-		list.addAll(new ConfigElement(config.getCategory("synthesis machine blacklist")).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory(StatCollector.translateToLocal("config.worldgen.name"))).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory(StatCollector.translateToLocal("config.decomposer.blacklist.name"))).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory(StatCollector.translateToLocal("config.synthesis.blacklist.name"))).getChildElements());
 		list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
 		return list;
 	}

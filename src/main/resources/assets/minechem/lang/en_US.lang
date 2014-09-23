@@ -15,6 +15,15 @@ help.chemicalStorage=The Chemical Storage will safely store radioactive chemical
 help.leadChest=The Leaded Chest will safely store radioactive chemicals and prevent them from decaying.
 help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with certain elements to give it special effects.
 
+config.worldgen.name=world generation
+config.worldgen.description=These settings allow you to tweak the ore generation.
+config.decomposer.blacklist.name=decomposer blacklist
+config.decomposer.blacklist.description=These settings allow you to keep the decomposer from decomposing the items listed.
+config.synthesis.blacklist.name=synthesis blacklist
+config.synthesis.blacklist.description=These settings allow you to keep the synthesis machine from producing the items listed.
+config.general.description=Misc settings
+
+
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
 gui.title.microscope=Microscope
@@ -54,7 +63,7 @@ minechem.gui.config.uraniumoredensity.description=How often will uranium be gene
 minechem.gui.config.uraniumorecraftable.description=Can minechem uranium be crafted from other uranium
 minechem.gui.config.debugmode.description=Mod will print tons of info while running
 minechem.gui.config.updateradius.description=Determines how far away in blocks packets will be set to players
-minechem.gui.config.allowautomation.description=Allows automation of synthesiser and reactors
+minechem.gui.config.allowautomation.description=Allows automation of decomposer, synthesiser, and reactors
 minechem.gui.config.foodspiking.description=Allow food spiking
 minechem.gui.config.swordeffects.description=Enable enchantments
 minechem.gui.config.synthesismachineblacklist.description=List of items names that Synthesiser can't make. ex: Blue Orchid
