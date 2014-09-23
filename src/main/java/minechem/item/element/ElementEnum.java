@@ -135,7 +135,7 @@ public enum ElementEnum
     ElementEnum(String descriptiveName, ElementClassificationEnum classification, ElementClassificationEnum roomState, RadiationEnum radioactivity)
     {
         this.descriptiveName = descriptiveName;
-        this.localizationKey = "minechem.element." + name();
+        this.localizationKey = "element." + name();
         this.classification = classification;
         this.roomState = roomState;
         this.radioactivity = radioactivity;
