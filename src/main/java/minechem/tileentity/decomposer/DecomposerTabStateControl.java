@@ -19,7 +19,7 @@ public class DecomposerTabStateControl extends GuiTabStateControl
 		super.update();
 		DecomposerTileEntity decomposer = (DecomposerTileEntity) this.tileEntity;
 		State state = decomposer.getState();
-		if (!Settings.powerUseEnabled || decomposer.getEnergyStored() > Settings.decompositionCost)
+		if (!Settings.powerUseEnabled || decomposer.getEnergyStored() > Settings.costDecomposition)
 		{
 			this.state = TabState.powered;
 		} else if (state == State.jammed)

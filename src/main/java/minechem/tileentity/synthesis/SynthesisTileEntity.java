@@ -135,7 +135,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 	public SynthesisTileEntity()
 	{
-		super(Settings.synthesisMaxStorage);
+		super(Settings.maxSynthesizerStorage);
 
 		// Creates internal inventory that will represent all of the needed slots that makeup the machine.
 		inventory = new ItemStack[getSizeInventory()];

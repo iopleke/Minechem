@@ -13,7 +13,7 @@ public class MinechemGeneration implements IWorldGenerator
     @Override
     public void generate(Random random, int chunkX, int chunkZ, World world, IChunkProvider chunkGenerator, IChunkProvider chunkProvider)
     {
-        if (Settings.WorldGenOre)
+        if (Settings.generateOre)
         {
             if (world.provider.isSurfaceWorld())
             {

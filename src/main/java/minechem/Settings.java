@@ -17,11 +17,11 @@ public class Settings
 	// Config file
 	public static Configuration config;
 
-    // --------
+	// --------
 	// FEATURES
 	// --------
 	// Determines if the mod will generate ore at all.
-	public static boolean WorldGenOre = true;
+	public static boolean generateOre = true;
 
 	// Size of Uranium ore clusters
 	public static int UraniumOreClusterSize = 3;
@@ -47,11 +47,12 @@ public class Settings
 
 	// Power usage
 	public static boolean powerUseEnabled = true;
-	public static int decompositionCost = 80;
-	
+	public static int costDecomposition = 80;
+	private static int synthesisMultiplier = 10;
+
 	// Power base storage values
-	public static int synthesisMaxStorage = 10240;
-	public static int decomposerMaxStorage = 1024;
+	public static int maxSynthesizerStorage = 10240;
+	public static int maxDecomposerStorage = 1024;
 
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
@@ -84,31 +85,32 @@ public class Settings
 		Property prop;
 		List<String> configList = new ArrayList<String>();
 
-		config.addCustomCategoryComment("worldGen", StatCollector.translateToLocal("config.worldgen.description"));
+		config.addCustomCategoryComment("worldgen", StatCollector.translateToLocal("config.worldgen.description"));
 		config.addCustomCategoryComment("blacklist", StatCollector.translateToLocal("config.blacklist.description"));
+		config.addCustomCategoryComment("power", StatCollector.translateToLocal("config.power.description"));
 		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
 
-		prop = config.get("worldGen", "generateUraniumOre", Settings.WorldGenOre);
-		prop.comment = StatCollector.translateToLocal("config.worldgenore.description");
-		prop.setLanguageKey("config.worldgenore");
-		WorldGenOre = prop.getBoolean();
+		prop = config.get("worldgen", "generateOre", Settings.generateOre);
+		prop.comment = StatCollector.translateToLocal("config.worldgen.ore.description");
+		prop.setLanguageKey("config.worldgen.ore.tooltip");
+		generateOre = prop.getBoolean();
 		configList.add(prop.getName());
 
-		prop = config.get("worldGen", "uraniumOreClusterSize", Settings.UraniumOreClusterSize);
+		prop = config.get("worldgen", "uraniumOreClusterSize", Settings.UraniumOreClusterSize);
 		prop.setMinValue(1).setMaxValue(10);
 		prop.comment = StatCollector.translateToLocal("config.uraniumoreclustersize.description");
 		prop.setLanguageKey("config.uraniumoreclustersize");
 		UraniumOreClusterSize = prop.getInt();
 		configList.add(prop.getName());
 
-		prop = config.get("worldGen", "uraniumoredensity", Settings.UraniumOreDensity);
+		prop = config.get("worldgen", "uraniumoredensity", Settings.UraniumOreDensity);
 		prop.setMinValue(1).setMaxValue(64);
 		prop.comment = StatCollector.translateToLocal("config.uraniumoredensity.description");
 		prop.setLanguageKey("config.uraniumoredensity");
 		UraniumOreDensity = prop.getInt();
 		configList.add(prop.getName());
 
-		prop = config.get("worldGen", "uraniumOreCraftable", Settings.UraniumOreCraftable);
+		prop = config.get("worldgen", "uraniumOreCraftable", Settings.UraniumOreCraftable);
 		prop.comment = StatCollector.translateToLocal("config.uraniumorecraftable.description");
 		prop.setLanguageKey("config.uraniumorecraftable");
 		UraniumOreCraftable = prop.getBoolean();
@@ -165,6 +167,38 @@ public class Settings
 		SynthesisMachineBlacklist = prop.getStringList();
 		configList.add(prop.getName());
 
+		prop = config.get("power", "enable", Settings.powerUseEnabled);
+		prop.comment = StatCollector.translateToLocal("config.power.enable.description");
+		prop.setLanguageKey("config.power.enable.name").setRequiresMcRestart(true);
+		powerUseEnabled = prop.getBoolean();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "maxDecomposerStorage", Settings.maxDecomposerStorage);
+		prop.comment = StatCollector.translateToLocal("config.power.decomposer.max.description");
+		prop.setLanguageKey("config.power.decomposer.max.name");
+		maxDecomposerStorage = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "costDecomposition", Settings.costDecomposition);
+		prop.setMinValue(1).setMaxValue(Settings.maxDecomposerStorage);
+		prop.comment = StatCollector.translateToLocal("config.power.decomposer.cost.description");
+		prop.setLanguageKey("config.power.decomposer.cost.name");
+		costDecomposition = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "maxSynthesizerStorage", Settings.maxSynthesizerStorage);
+		prop.comment = StatCollector.translateToLocal("config.power.synthesizer.max.description");
+		prop.setLanguageKey("config.power.synthesizer.max.name");
+		maxSynthesizerStorage = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "costSythesisMultiplier", Settings.synthesisMultiplier);
+		prop.setMinValue(1).setMaxValue(100);
+		prop.comment = StatCollector.translateToLocal("config.power.synthesizer.cost.description");
+		prop.setLanguageKey("config.power.synthesizer.cost.name");
+		synthesisMultiplier = prop.getInt();
+		configList.add(prop.getName());
+
 		if (config.hasChanged())
 		{
 			config.save();
@@ -174,8 +208,9 @@ public class Settings
 	public static List<IConfigElement> getConfigElements()
 	{
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
-		list.addAll(new ConfigElement(config.getCategory("worldGen")).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory("worldgen")).getChildElements());
 		list.addAll(new ConfigElement(config.getCategory("blacklist")).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory("power")).getChildElements());
 		list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
 		return list;
 	}
