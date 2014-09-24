@@ -2,9 +2,11 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 import java.util.Random;
+import minechem.Minechem;
 
 import minechem.Settings;
 import minechem.potion.PotionChemical;
+import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -23,8 +25,13 @@ public class DecomposerRecipe
 		{
 			for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 			{
-				if (recipe.input.getDisplayName().equals(Settings.DecomposerBlacklist[i].toString()))
+
+				if (Compare.stringSieve(recipe.input.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
 				{
+					if (Settings.DebugMode)
+					{
+						Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
+					}
 					return null;
 				}
 			}
@@ -97,7 +104,7 @@ public class DecomposerRecipe
 
 				} catch (Exception e)
 				{
-                    // something has gone wrong
+					// something has gone wrong
 					// but we do not know quite why
 					// debug code goes here
 				}

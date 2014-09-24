@@ -148,16 +148,18 @@ public class Settings
 
 		prop = config.get("decomposer blacklist", "Decomposer Blacklist", new String[]
 		{
-			"None"
+			"dirt",
+			"gravel"
 		});
 		prop.setLanguageKey("config.decomposerblacklist").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.decomposerblacklist.description");
 		DecomposerBlacklist = prop.getStringList();
 		configList.add(prop.getName());
 
-		prop = config.get("synthesis machine blacklist", "Synthesis Blacklist", new String[]
+		prop = config.get("synthesis blacklist", "Synthesis Blacklist", new String[]
 		{
-			"None"
+			"dirt",
+			"gravel"
 		});
 		prop.setLanguageKey("config.synthesismachineblacklist").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.synthesismachineblacklist.description");
