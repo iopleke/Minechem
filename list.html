@@ -1,0 +1,115 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="chrome=1">
+	<title>Minechem by jakimfett</title>
+
+	<link rel="stylesheet" href="stylesheets/styles.css">
+	<link rel="stylesheet" href="stylesheets/pygment_trac.css">
+	<script src="javascripts/scale.fix.js"></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	<link rel="icon" type="image/png" href="./favicon.png">
+		<!--[if lt IE 9]>
+		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+		<![endif]-->
+	</head>
+	<body>
+		<div class="wrapper" style="width: 1090px">
+			<header>
+				<a href="./"><h1 class="header">Minechem</h1></a>
+				<br/>
+
+
+				<ul>
+					Releases:
+					<li class="download"><a class="buttons" href="http://minecraft.curseforge.com/mc-mods/73373" target="_blank">CurseForge</a></li>
+					<li class="download"><a class="buttons" href="https://github.com/jakimfett/Minechem/releases" target="_blank">Github</a></li>
+					Development:
+					<li class="download"><a class="buttons" href="http://voidmind.jakimfett.com/job/Minechem%201.7/lastSuccessfulBuild/artifact/" target="_blank">Jenkins Builds</a></li>
+					<li><a class="buttons github" href="https://github.com/jakimfett/MineChem">View Source</a></li>
+				</ul>
+			</header>
+			<section style="width: 800px">
+				<h1>List of Elements and Molecules</h1>
+				<input class="autoSearch" type="text" id="search" placeholder="search"></input>
+				<table>
+					<tr>
+						<th>Symbol</th>
+						<th>Discriptive name</th>
+						<th>Name used in API</th>
+					</tr>
+				</table>
+			</section>
+			<footer>
+				<p>
+					<small>
+						We're on <a href="http://patreon.com/jakimfett" target='_blank' title="Support Minechem development with a Patreon pledge">Patreon</a>!
+						<br/>
+						List of <a href="https://github.com/jakimfett/Minechem/graphs/contributors">contributors</a>
+						<br/>
+						Back <a href="./">to home</a>
+					</small>
+				</p>
+			</footer>
+		</div>
+		<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		<script type="text/javascript">
+			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+			document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+		</script>
+		<script type="text/javascript">
+			try {
+				var pageTracker = _gat._getTracker("UA-51742343-4");
+				pageTracker._trackPageview();
+			} catch (err) {
+			}
+		</script>
+		<script type="text/javascript" src="javascripts/elements.js"></script>
+		<script type="text/javascript" src="javascripts/molecules.js"></script>
+		<script type="text/javascript">
+			$(function()
+			{
+				//table filling
+				for(var i = 0; i < elements.length; i++)
+				{
+					$("table").append("<tr><td>" + elements[i][2] + "</td><td>" + elements[i][1]+"</td><td>" + elements[i][0]+"</td></tr>");
+				}
+				for(var i = 0; i < molecules.length; i++)
+				{
+					$("table").append("<tr><td>" + molecules[i][2] + "</td><td>" + molecules[i][1]+"</td><td>" + molecules[i][0]+"</td></tr>");
+				}
+
+				//live search
+				$("#search").on("keyup", function()
+				{
+					var value = $(this).val().trim().toLowerCase();
+					if (value !== "" || value !== null)
+					{
+						$("table tr").each(function(i)
+						{
+							if (i !== 0)
+							{
+								var found = false;
+								$(this).find("td").each(function(j)
+								{
+									if($(this).text().toLowerCase().indexOf(value) > -1) {
+										found = true;
+									}
+								});
+								if (found) {
+									$(this).removeClass("hidden");
+								}
+								else
+								{
+									$(this).addClass("hidden");	
+								}
+							}
+						});
+					}
+				});
+			});
+		</script>
+	</body>
+	</html>

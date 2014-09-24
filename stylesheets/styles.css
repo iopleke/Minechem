@@ -216,6 +216,22 @@ tr:nth-of-type(2n+1) td {
 	background: #bbb;
 }
 
+.hidden {
+	display: none;
+}
+
+sub {
+	position: relative;
+	top: 0.3em;
+	font-size: 0.8em;
+}
+
+.autoSearch {
+	width: 800px;
+	margin-bottom: 5px;
+	font-size: 20px;
+}
+
 
 /* Wrapper */
 .wrapper {
