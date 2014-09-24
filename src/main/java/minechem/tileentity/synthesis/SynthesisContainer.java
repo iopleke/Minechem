@@ -169,15 +169,13 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 {
                     return null;
                 }
-            }
-            if(slot<47 && stackInSlot.stackSize == stack.stackSize)
+            } else if(slot<47 && stackInSlot.stackSize == stack.stackSize)
             {
             	if (!this.mergeItemStack(stackInSlot, 47, 56, false))
             	{
             		return null;
             	}
-            }
-            if(slot>46 && stackInSlot.stackSize == stack.stackSize)
+            } else if(slot>46 && stackInSlot.stackSize == stack.stackSize)
             {
             	if (!this.mergeItemStack(stackInSlot, 20, 47, false))
             	{

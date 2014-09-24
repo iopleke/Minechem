@@ -2,6 +2,7 @@ package minechem.item.polytool;
 
 import java.util.ArrayList;
 
+import minechem.item.element.ElementItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
@@ -41,10 +42,57 @@ public class PolytoolContainer extends Container
     }
 
     @Override
-    public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2)
+    public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
-
-        return null;
+    	System.out.println(slot);
+        Slot slotObject = (Slot) inventorySlots.get(slot);
+        ItemStack stack = null;
+        
+        if (slotObject != null && slotObject.getHasStack())
+        {
+            ItemStack stackInSlot = slotObject.getStack();
+            stack = stackInSlot.copy();
+            if (slot ==0)
+            {
+            	return null;
+            } 
+            else 
+            {	
+            	if(stackInSlot.stackSize == 64 && (stackInSlot.getItem() instanceof ElementItem) && PolytoolHelper.getTypeFromElement(ElementItem.getElement(stackInSlot), 1) != null)
+            	{
+                    if (!mergeItemStack(stackInSlot, 0, 1, false))
+                    {
+                        return null;
+                    }
+            	}
+            	else if(slot < 10)
+             	{
+             		if (!this.mergeItemStack(stackInSlot, 10, 37, true))
+             		{
+             			return null;
+             		}
+             	}
+            	else if(slot > 9)
+             	{
+             		if (!this.mergeItemStack(stackInSlot, 1, 10, true))
+             		{
+             			return null;
+             		}
+             	}
+            }
+            if (stackInSlot.stackSize == 0)
+            {
+                slotObject.putStack(null);
+            } else
+            {
+                slotObject.onSlotChanged();
+            }
+	         if (stackInSlot.stackSize == stack.stackSize)
+	         {
+	         	return null;
+	         }
+	         slotObject.onPickupFromSlot(entityPlayer, stackInSlot);
+        }
+        return stack;
     }
-
 }
