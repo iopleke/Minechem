@@ -132,15 +132,23 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		for (int outputSlot : outputSlots)
 		{
 			ItemStack stackInSlot = getStackInSlot(outputSlot);
-			if (stackInSlot == null)
-			{
-				setInventorySlotContents(outputSlot, itemstack);
-				return true;
-			} else if (Compare.stacksAreSameKind(stackInSlot, itemstack) && (stackInSlot.stackSize + itemstack.stackSize) <= getInventoryStackLimit())
+			if (stackInSlot != null && Compare.stacksAreSameKind(stackInSlot, itemstack) && (stackInSlot.stackSize + itemstack.stackSize) <= getInventoryStackLimit())
 			{
 				stackInSlot.stackSize += itemstack.stackSize;
 				return true;
 			}
+		}
+		itemstack.getItem().onCreated(itemstack, this.worldObj, null);
+		for (int outputSlot : outputSlots)
+		{
+			ItemStack stackInSlot = getStackInSlot(outputSlot);
+
+			if (stackInSlot == null)
+			{
+				setInventorySlotContents(outputSlot, itemstack);
+				return true;
+			} 
+			
 		}
 		return false;
 	}
