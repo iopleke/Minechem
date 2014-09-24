@@ -84,32 +84,31 @@ public class Settings
 		Property prop;
 		List<String> configList = new ArrayList<String>();
 
-		config.addCustomCategoryComment(StatCollector.translateToLocal("config.worldgen.name"), StatCollector.translateToLocal("config.worldgen.description"));
-		config.addCustomCategoryComment(StatCollector.translateToLocal("config.decomposer.blacklist.name"), StatCollector.translateToLocal("config.decomposer.blacklist.description"));
-		config.addCustomCategoryComment(StatCollector.translateToLocal("config.synthesis.blacklist.name"), StatCollector.translateToLocal("config.synthesis.blacklist.description"));
+		config.addCustomCategoryComment("worldGen", StatCollector.translateToLocal("config.worldgen.description"));
+		config.addCustomCategoryComment("blacklist", StatCollector.translateToLocal("config.blacklist.description"));
 		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
 
-		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "generateUraniumOre", Settings.WorldGenOre);
+		prop = config.get("worldGen", "generateUraniumOre", Settings.WorldGenOre);
 		prop.comment = StatCollector.translateToLocal("config.worldgenore.description");
 		prop.setLanguageKey("config.worldgenore");
 		WorldGenOre = prop.getBoolean();
 		configList.add(prop.getName());
 
-		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumOreClusterSize", Settings.UraniumOreClusterSize);
+		prop = config.get("worldGen", "uraniumOreClusterSize", Settings.UraniumOreClusterSize);
 		prop.setMinValue(1).setMaxValue(10);
 		prop.comment = StatCollector.translateToLocal("config.uraniumoreclustersize.description");
 		prop.setLanguageKey("config.uraniumoreclustersize");
 		UraniumOreClusterSize = prop.getInt();
 		configList.add(prop.getName());
 
-		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumoredensity", Settings.UraniumOreDensity);
+		prop = config.get("worldGen", "uraniumoredensity", Settings.UraniumOreDensity);
 		prop.setMinValue(1).setMaxValue(64);
 		prop.comment = StatCollector.translateToLocal("config.uraniumoredensity.description");
 		prop.setLanguageKey("config.uraniumoredensity");
 		UraniumOreDensity = prop.getInt();
 		configList.add(prop.getName());
 
-		prop = config.get(StatCollector.translateToLocal("config.worldgen.name"), "uraniumOreCraftable", Settings.UraniumOreCraftable);
+		prop = config.get("worldGen", "uraniumOreCraftable", Settings.UraniumOreCraftable);
 		prop.comment = StatCollector.translateToLocal("config.uraniumorecraftable.description");
 		prop.setLanguageKey("config.uraniumorecraftable");
 		UraniumOreCraftable = prop.getBoolean();
@@ -146,23 +145,23 @@ public class Settings
 		SwordEffects = prop.getBoolean();
 		configList.add(prop.getName());
 
-		prop = config.get("decomposer blacklist", "Decomposer Blacklist", new String[]
+		prop = config.get("blacklist", "decomposition", new String[]
 		{
 			"dirt",
 			"gravel"
 		});
-		prop.setLanguageKey("config.decomposerblacklist").setRequiresMcRestart(true);
-		prop.comment = StatCollector.translateToLocal("config.decomposerblacklist.description");
+		prop.setLanguageKey("config.blacklist.decomposition.tooltip").setRequiresMcRestart(true);
+		prop.comment = StatCollector.translateToLocal("config.blacklist.decomposition.example");
 		DecomposerBlacklist = prop.getStringList();
 		configList.add(prop.getName());
 
-		prop = config.get("synthesis blacklist", "Synthesis Blacklist", new String[]
+		prop = config.get("blacklist", "synthesis", new String[]
 		{
-			"dirt",
-			"gravel"
+			"diamond",
+			"emerald"
 		});
-		prop.setLanguageKey("config.synthesismachineblacklist").setRequiresMcRestart(true);
-		prop.comment = StatCollector.translateToLocal("config.synthesismachineblacklist.description");
+		prop.setLanguageKey("config.blacklist.synthesis.tooltip").setRequiresMcRestart(true);
+		prop.comment = StatCollector.translateToLocal("config.blacklist.synthesis.example");
 		SynthesisMachineBlacklist = prop.getStringList();
 		configList.add(prop.getName());
 
@@ -175,9 +174,8 @@ public class Settings
 	public static List<IConfigElement> getConfigElements()
 	{
 		List<IConfigElement> list = new ArrayList<IConfigElement>();
-		list.addAll(new ConfigElement(config.getCategory(StatCollector.translateToLocal("config.worldgen.name"))).getChildElements());
-		list.addAll(new ConfigElement(config.getCategory(StatCollector.translateToLocal("config.decomposer.blacklist.name"))).getChildElements());
-		list.addAll(new ConfigElement(config.getCategory(StatCollector.translateToLocal("config.synthesis.blacklist.name"))).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory("worldGen")).getChildElements());
+		list.addAll(new ConfigElement(config.getCategory("blacklist")).getChildElements());
 		list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
 		return list;
 	}
