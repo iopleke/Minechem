@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import minechem.Minechem;
 import minechem.Settings;
-
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
@@ -25,17 +24,20 @@ public class SynthesisRecipe
 		{
 			for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
 			{
-                if (recipe.getOutput().hasDisplayName())
-                {
-                    if (Compare.stringSieve(recipe.getOutput().getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
-                    {
-                        if (Settings.DebugMode)
-                        {
-                            Minechem.LOGGER.info("Synthesis recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
-                        }
-                        return null;
-                    }
-                }
+				if (recipe.getOutput().hasDisplayName())
+				{
+					if (recipe.getOutput().getDisplayName() != null && Settings.SynthesisMachineBlacklist[i] != null)
+					{
+						if (Compare.stringSieve(recipe.getOutput().getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
+						{
+							if (Settings.DebugMode)
+							{
+								Minechem.LOGGER.info("Synthesis recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
+							}
+							return null;
+						}
+					}
+				}
 			}
 		}
 		recipes.add(recipe);

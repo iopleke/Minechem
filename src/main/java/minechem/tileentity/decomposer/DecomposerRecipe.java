@@ -3,7 +3,6 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Random;
 import minechem.Minechem;
-
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
@@ -25,17 +24,20 @@ public class DecomposerRecipe
 		{
 			for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 			{
-                if (recipe.input.hasDisplayName())
-                {
-                    if (Compare.stringSieve(recipe.input.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
-                    {
-                        if (Settings.DebugMode)
-                        {
-                            Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
-                        }
-                        return null;
-                    }
-                }
+				if (recipe.input.hasDisplayName())
+				{
+					if (recipe.input.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
+					{
+						if (Compare.stringSieve(recipe.input.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
+						{
+							if (Settings.DebugMode)
+							{
+								Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
+							}
+							return null;
+						}
+					}
+				}
 			}
 		}
 		recipes.add(recipe);
