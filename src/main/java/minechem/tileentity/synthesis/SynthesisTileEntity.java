@@ -478,7 +478,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 			storageInventory.setInventoryStacks(storage);
 
 			// Consume the required amount of energy that was the cost of the item being created.
-			this.useEnergy(this.currentRecipe.energyCost());
+			//this.useEnergy(this.currentRecipe.energyCost());
 		}
 
 		return true;
@@ -598,11 +598,6 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		return false;
 	}
 
-	public List<ItemStack> getMaximumOutput()
-	{
-		return getOutput(0, true);
-	}
-
 	public ItemStack getOutputTemplate()
 	{
 		ItemStack template = null;
@@ -618,7 +613,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		return template;
 	}
 
-	public List<ItemStack> getOutput(int amount, boolean all)
+	public List<ItemStack> getOutput(int amount)
 	{
 		if (currentRecipe == null)
 		{
@@ -631,7 +626,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		initialStack.stackSize = 0;
 		outputs.add(initialStack);
 
-		while (canTakeOutputStack() && (amount > 0 || all) && takeInputStacks())
+		while (canTakeOutputStack() && (amount > 0) && takeInputStacks())
 		{
 			ItemStack output = outputs.get(outputs.size() - 1);
 			if (output.stackSize + template.stackSize > output.getMaxStackSize())
