@@ -107,9 +107,9 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
     @Override
     public int getSizeInventory()
     {
-        if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
+        if (this.manager != null && this.manager != this)
         {
-            return ((ISidedInventory) this.getManager()).getSizeInventory();
+            return ((ISidedInventory)this.manager).getSizeInventory();
         }
         return 0;
     }
