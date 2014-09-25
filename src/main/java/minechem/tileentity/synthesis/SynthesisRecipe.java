@@ -112,7 +112,7 @@ public class SynthesisRecipe
 
 	public int energyCost()
 	{
-		return this.energyCost * 10;
+		return this.energyCost * Settings.synthesisMultiplier;
 	}
 
 	public PotionChemical[] getShapedRecipe()

@@ -48,7 +48,7 @@ public class Settings
 	// Power usage
 	public static boolean powerUseEnabled = true;
 	public static int costDecomposition = 80;
-	private static int synthesisMultiplier = 10;
+	public static int synthesisMultiplier = 10;
 
 	// Power base storage values
 	public static int maxSynthesizerStorage = 10240;
