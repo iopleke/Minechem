@@ -25,15 +25,17 @@ public class SynthesisRecipe
 		{
 			for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
 			{
-
-				if (Compare.stringSieve(recipe.getOutput().getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
-				{
-					if (Settings.DebugMode)
-					{
-						Minechem.LOGGER.info("Synthesis recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
-					}
-					return null;
-				}
+                if (recipe.getOutput().hasDisplayName())
+                {
+                    if (Compare.stringSieve(recipe.getOutput().getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
+                    {
+                        if (Settings.DebugMode)
+                        {
+                            Minechem.LOGGER.info("Synthesis recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
+                        }
+                        return null;
+                    }
+                }
 			}
 		}
 		recipes.add(recipe);
