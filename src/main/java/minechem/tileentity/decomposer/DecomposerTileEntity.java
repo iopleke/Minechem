@@ -473,7 +473,45 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		{
 			state = State.finished;
 		}
+        pushQueue();
 	}
+
+    /**
+     * Combines stacks when possible
+     */
+    private void pushQueue()
+    {
+        for(int i = this.inventory.length -1; i > 0; i--)
+        {
+            if (i == 1 || this.inventory[i] == null)
+            {
+                continue;
+            }
+            for (int j = 1; j < i; j++)
+            {
+                if (this.inventory[j] == null) {
+                    setInventorySlotContents(j, this.inventory[i]);
+                    setInventorySlotContents(i, null);
+                    break;
+                }
+                else if (this.inventory[j].isItemEqual(this.inventory[i]))
+                {
+                    int spaceLeft = this.inventory[j].getMaxStackSize() - this.inventory[j].stackSize;
+                    if (spaceLeft >= this.inventory[i].stackSize)
+                    {
+                        this.inventory[j].stackSize += this.inventory[i].stackSize;
+                        this.inventory[i] = null;
+                    }
+                    else
+                    {
+                        this.inventory[j].stackSize += spaceLeft;
+                        this.inventory[i].stackSize -= spaceLeft;
+                    }
+                    break;
+                }
+            }
+        }
+    }
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
