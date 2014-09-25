@@ -1,6 +1,6 @@
 package minechem;
 
-import minechem.block.uranium.BlockUraniumOre;
+import minechem.block.BlockUraniumOre;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorBlock;
@@ -80,7 +80,7 @@ public class MinechemBlocksGeneration
         uranium = new BlockUraniumOre();
         GameRegistry.registerBlock(uranium, uranium.getUnlocalizedName());
         OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
-        DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(uranium), new Element(ElementEnum.U, 48)));
+        DecomposerRecipe.createAndAddRecipeSafely("oreUranium", 1, new Element(ElementEnum.U, 48));
 
         // Leaded Chest (for storing radioactive isotopes).
         leadChest = new LeadedChestBlock();

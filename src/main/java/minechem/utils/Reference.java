@@ -90,6 +90,6 @@ public interface Reference
 
     public static final String PROJECTOR_SOUND = SOUNDS_DIR + "projector.ogg";
     public static final String ICON_BASE = "textures/icons/";
-    public static final String URANIUM_TEX = "uraniumOre";
+    public static final String URANIUM_TEX = TEXTURE_MOD_ID + "uraniumOre";
     public static final String FISSION_GUI = TEXTURE_GUI_DIR + "FissionGUI.png";
 }
