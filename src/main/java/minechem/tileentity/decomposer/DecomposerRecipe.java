@@ -25,15 +25,17 @@ public class DecomposerRecipe
 		{
 			for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 			{
-
-				if (Compare.stringSieve(recipe.input.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
-				{
-					if (Settings.DebugMode)
-					{
-						Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
-					}
-					return null;
-				}
+                if (recipe.input.hasDisplayName())
+                {
+                    if (Compare.stringSieve(recipe.input.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
+                    {
+                        if (Settings.DebugMode)
+                        {
+                            Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
+                        }
+                        return null;
+                    }
+                }
 			}
 		}
 		recipes.add(recipe);
