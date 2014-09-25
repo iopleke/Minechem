@@ -73,23 +73,27 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         return synthesis.isUseableByPlayer(var1);
     }
 
-    public boolean craftMaxmimum()
+    public void craftMaxmimum()
     {
-        List<ItemStack> outputs = synthesis.getMaximumOutput();
-        if (outputs == null)
+        int amount = 0;
+        ItemStack outputItem = synthesis.getCurrentRecipe().getOutput();
+        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
         {
-            return false;
-        }
-
-        for (ItemStack output : outputs)
-        {
-            if (!mergeItemStack(output, synthesis.getSizeInventory(), inventorySlots.size(), true))
+            ItemStack stack = getSlot(slot).getStack();
+            if (stack == null)
             {
-                return false;
+                amount += outputItem.getMaxStackSize();
+            }
+            else if (stack.isItemEqual(outputItem)) {
+                amount += outputItem.getMaxStackSize() - stack.stackSize;
             }
         }
 
-        return true;
+        List<ItemStack> outputs = synthesis.getOutput(amount);
+        for (ItemStack output : outputs)
+        {
+            mergeItemStack(output, synthesis.getSizeInventory(), inventorySlots.size(), true);
+        }
     }
 
     public List<ItemStack> getPlayerInventory()
@@ -143,14 +147,8 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 return null;
             } else if (slot == SynthesisTileEntity.kStartOutput)
             {
-                if (entityPlayer.inventory.getFirstEmptyStack() == -1)
-                {
-                    return null;
-                }
-                if (!craftMaxmimum())
-                {
-                    return null;
-                }
+                craftMaxmimum();
+                return null;
             } else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.getItem() == MinechemItemsRegistration.element || stackInSlot.getItem() == MinechemItemsRegistration.molecule))
             {
                 if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
