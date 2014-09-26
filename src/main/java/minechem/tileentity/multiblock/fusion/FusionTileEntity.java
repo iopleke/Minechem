@@ -169,24 +169,33 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         {
             if (inventory[fuelSlot] != null && !canProcess)
             {
-                canProcess = checkValidFuel() && inputsCanBeFused() && inventory[output].stackSize<64;
-
+                canProcess = checkValidFuel() && inputsCanBeFused() && canOutput();
             }
             if (canProcess)
             {
                 fuseInputs();
                 useFuel();
-                if (canProcess)
-                {
-                    removeInputs();
-                    canProcess = false;
-                }
-
-            } else
+                removeInputs();
+                canProcess = false;
+            }
+            else
             {
                 fusedResult = 0;
             }
         }
+    }
+
+    private boolean canOutput()
+    {
+        if (inventory[output] == null)
+        {
+            return true;
+        }
+        else if (inventory[output].getItemDamage() == fusedResult -1)
+        {
+            return inventory[output].stackSize < 64;
+        }
+        return false;
     }
 
     private void useFuel()
