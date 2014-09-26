@@ -69,8 +69,6 @@ public class Minechem
 	@Instance(value = CHANNEL_NAME)
 	public static Minechem INSTANCE;
 
-	// Provides standard logging from the Forge.
-	// public static Logger LOGGER;
 	// Public extra data about our mod that Forge uses in the mods listing page for more information.
 	@Mod.Metadata(Minechem.ID)
 	public static ModMetadata metadata;
@@ -79,8 +77,8 @@ public class Minechem
 	public static CommonProxy PROXY;
 
 	// Creative mode tab that shows up in Minecraft.
-	public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Minechem.NAME);
-	public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Minechem.NAME + ".Elements");
+	public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Minechem.NAME, 0);
+	public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Minechem.NAME + ".Elements", 1);
 
 	public static final ResourceLocation ICON_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_power.png");
 	public static final ResourceLocation ICON_FULL_ENERGY = new ResourceLocation(Minechem.ID, Reference.ICON_BASE + "i_fullEower.png");
