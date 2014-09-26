@@ -8,6 +8,7 @@ import minechem.item.chemistjournal.ChemistJournalItem;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.fusionstar.FusionStarItem;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.item.polytool.PolytoolItem;
 import net.minecraft.item.Item;
@@ -68,5 +69,7 @@ public class MinechemItemsRegistration
         {
             OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
         }
+        OreDictionary.registerOre("dustSalpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.ordinal()));
+        OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.ordinal()));
     }
 }
