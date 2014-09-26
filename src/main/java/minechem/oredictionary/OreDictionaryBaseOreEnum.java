@@ -27,30 +27,24 @@ public enum OreDictionaryBaseOreEnum {
     uranium("Uranium", new Element(ElementEnum.U, 16)),
     plutonium("Plutonium", new Element(ElementEnum.Pu, 16)),
     manganese("Manganese", new Element(ElementEnum.Mn, 16)),
-
-        phosphorus("Phosphorus", new Element(ElementEnum.P, 16)),
-
-        bitumen("Bitumen", new Molecule(MoleculeEnum.propane, 16)),
-
-        prometheum("Prometheum", new Element(ElementEnum.Pm, 16)),
-
-        amethyst("Amethyst", new Molecule(MoleculeEnum.siliconDioxide, 16)),
-
-        peridot("Peridot", new Molecule(MoleculeEnum.peridot, 16)),
-
-        topaz("Topaz", new Molecule(MoleculeEnum.topaz, 16)),
-
-        tanzanite("Tanzanite", new Molecule(MoleculeEnum.zoisite, 16)),
-        potash("Potash", new Molecule(MoleculeEnum.potassiumNitrate, 16)),
-        sulfur("Sulfur", new Element(ElementEnum.S, 16)),
-        saphire("Sapphire", new Molecule(MoleculeEnum.aluminiumOxide, 1)),
+    phosphorus("Phosphorus", new Element(ElementEnum.P, 16)),
+    bitumen("Bitumen", new Molecule(MoleculeEnum.propane, 16)),
+    prometheum("Prometheum", new Element(ElementEnum.Pm, 16)),
+    amethyst("Amethyst", new Molecule(MoleculeEnum.siliconDioxide, 16)),
+    peridot("Peridot", new Molecule(MoleculeEnum.peridot, 16)),
+    topaz("Topaz", new Molecule(MoleculeEnum.topaz, 16)),
+    tanzanite("Tanzanite", new Molecule(MoleculeEnum.zoisite, 16)),
+    potash("Potash", new Molecule(MoleculeEnum.potassiumNitrate, 16)),
+    sulfur("Sulfur", new Element(ElementEnum.S, 16)),
+    saphire("Sapphire", new Molecule(MoleculeEnum.aluminiumOxide, 1)),
     ruby("Ruby", new Molecule(MoleculeEnum.aluminiumOxide, 1), new Element(ElementEnum.Cr, 1)),
-
     cobalt("Cobalt", new Element(ElementEnum.Co, 16)),
+    ardite("Ardite", new Element(ElementEnum.Ar, 16)),
+    salpeter("Salpeter", new Molecule(MoleculeEnum.potassiumNitrate, 1)),
+    salt("Salt", new Molecule(MoleculeEnum.salt, 1)),
+    limestone("Limestone", new Molecule(MoleculeEnum.calciumCarbonate, 1));
 
-        ardite("Ardite", new Element(ElementEnum.Ar, 16));
-
-        private String name;
+    private String name;
     private PotionChemical[] composition;
 
     public String getName() {

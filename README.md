@@ -6,7 +6,7 @@ Minechem 5
 
 Download the mod from [CurseForge](http://minecraft.curseforge.com/mc-mods/73373-minechem-5/files) or the releases page here on Github.
 
-If you're planning to use any of the powered machines, you'll need to [download the UE Core](http://universalelectricity.com/downloads/).
+By default machines will need power when [CoFHCore](http://www.curse.com/mc-mods/minecraft/cofhcore) is installed, this can be turned off in the configs.
 
 ## Contributors and permissions
 The list of contributors can be found on the [website](http://www.minechemmod.com/index.php/docs/11-contributors)
