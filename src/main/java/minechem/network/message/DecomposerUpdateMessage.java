@@ -12,7 +12,7 @@ import net.minecraft.tileentity.TileEntity;
 public class DecomposerUpdateMessage implements IMessage, IMessageHandler<DecomposerUpdateMessage, IMessage>
 {
     private int posX, posY, posZ;
-    private int energyStored;
+    private int energyStored, state;
 
     public DecomposerUpdateMessage()
     {
@@ -26,6 +26,7 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
         this.posZ = tile.zCoord;
 
         this.energyStored = tile.getEnergyStored();
+        this.state = tile.getState().ordinal();
     }
 
     @Override
@@ -36,6 +37,7 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
         this.posZ = buf.readInt();
 
         this.energyStored = buf.readInt();
+        this.state = buf.readInt();
     }
 
     @Override
@@ -46,6 +48,7 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
         buf.writeInt(this.posZ);
 
         buf.writeInt(this.energyStored);
+        buf.writeInt(this.state);
     }
 
     @Override
@@ -55,6 +58,7 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
         if (tileEntity instanceof DecomposerTileEntity)
         {
             ((DecomposerTileEntity) tileEntity).syncEnergyValue(message.energyStored);
+            ((DecomposerTileEntity) tileEntity).setState(message.state);
         }
         return null;
 
