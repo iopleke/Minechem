@@ -31,14 +31,12 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     @Override
     public boolean canExtractItem(int slot, ItemStack itemstack, int side)
     {
-        // @TODO - set up for automation
         return false;
     }
 
     @Override
     public boolean canInsertItem(int slot, ItemStack itemstack, int side)
     {
-        // @TODO - implement per-slot results
         return false;
     }
 

@@ -264,12 +264,12 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     @Override
     public boolean canInsertItem(int i, ItemStack itemStack, int i2)
     {
-        return true;
+        return false;
     }
 
     @Override
     public boolean canExtractItem(int i, ItemStack itemStack, int i2)
     {
-        return true;
+        return false;
     }
 }
