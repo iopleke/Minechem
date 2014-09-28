@@ -6,6 +6,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
+import java.awt.Color;
+
 public class FluidElement extends Fluid implements IMinechemFluid
 {
 
@@ -13,17 +15,11 @@ public class FluidElement extends Fluid implements IMinechemFluid
 
     public FluidElement(ElementEnum element)
     {
-        super(element.descriptiveName());
+        super(element.name());
         this.element = element;
         setDensity(10); // How tick the fluid is, affects movement inside the liquid.
         setViscosity(1000); // How fast the fluid flows.
         FluidRegistry.registerFluid(this);
-
-//        if (FMLCommonHandler.instance().getEffectiveSide() == Side.CLIENT)
-//        {
-//            this.setFlowingIcon(Block.waterMoving.getIcon(0, 0));
-//            this.setStillIcon(Block.waterMoving.getIcon(0, 0));
-//        }
     }
 
     @Override
@@ -81,7 +77,7 @@ public class FluidElement extends Fluid implements IMinechemFluid
             break;
         }
 
-        return (int) (0x100000 * red + 0x100 * green + blue);
+        return new Color(red, green ,blue).getRGB();
     }
 
 }
