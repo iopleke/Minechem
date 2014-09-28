@@ -19,8 +19,6 @@ public class Element extends PotionChemical
         return new Element(element, amount);
     }
 
-    ;
-
     public Element(ElementEnum element)
     {
         super(1);
