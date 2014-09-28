@@ -478,7 +478,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 			storageInventory.setInventoryStacks(storage);
 
 			// Consume the required amount of energy that was the cost of the item being created.
-			//this.useEnergy(this.currentRecipe.energyCost());
+			this.useEnergy(this.currentRecipe.energyCost());
 		}
 
 		return true;
