@@ -52,13 +52,13 @@ public class FluidHelper
         if(event.map.getTextureType() == 0)
         {
             IIconRegister ir = event.map;
-            for (FluidElement blockElement : elements.values())
+            for (FluidElement fluidElement : elements.values())
             {
-                blockElement.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
+                fluidElement.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
             }
-            for (FluidChemical blockElement : molecule.values())
+            for (FluidChemical fluidChemical : molecule.values())
             {
-                blockElement.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
+                fluidChemical.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
             }
         }
     }
