@@ -6,6 +6,7 @@ import minechem.utils.Reference;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
+import net.minecraft.world.IBlockAccess;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
@@ -45,5 +46,11 @@ public class FluidBlockChemical extends BlockFluidClassic
     public IIcon getIcon(int side, int meta)
     {
         return (side > 1) ? flowingIcon : stillIcon;
+    }
+
+    @Override
+    public int colorMultiplier(IBlockAccess block, int x, int y, int z)
+    {
+        return getFluid().getColor();
     }
 }

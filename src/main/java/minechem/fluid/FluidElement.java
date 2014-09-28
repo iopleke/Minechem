@@ -77,7 +77,7 @@ public class FluidElement extends Fluid implements IMinechemFluid
             break;
         }
 
-        return new Color(red, green ,blue, 0.25F).getRGB();
+        return new Color(red, green ,blue).getRGB();
     }
 
 }

@@ -35,7 +35,7 @@ public class FluidChemical extends Fluid implements IMinechemFluid
 
         int green = (int) (molecule.green * 256);
         int blue = (int) (molecule.blue * 256);
-        return new Color(red, green, blue, 120).getRGB();
+        return new Color(red, green, blue).getRGB();
     }
 
 }
