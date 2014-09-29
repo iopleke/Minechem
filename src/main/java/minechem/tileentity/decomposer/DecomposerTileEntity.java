@@ -14,6 +14,7 @@ import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
 import minechem.utils.Compare;
+import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -23,6 +24,7 @@ import net.minecraft.network.Packet;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -164,7 +166,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			return false;
 		}
 
-		DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
+		DecomposerRecipe recipe = getRecipeFromItemStack(inputStack);
 		return (recipe != null);
 	}
 	
@@ -237,7 +239,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		try
 		{
 			ItemStack inputStack = getActiveStack();
-			DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputStack);
+			DecomposerRecipe recipe = getRecipeFromItemStack(inputStack);
 
 			if (recipe != null && this.useEnergy(getEnergyNeeded()))
 			{
@@ -255,6 +257,15 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			// silently this fails
 		}
 
+	}
+	
+	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack){
+		FluidStack fluidStack = new FluidStack(FluidRegistry.lookupFluidForBlock(Block.getBlockFromItem(itemStack.getItem())),1000);
+		
+		DecomposerRecipe result = DecomposerRecipeHandler.instance.getRecipe(itemStack);
+		if (fluidStack!=null)
+			result = DecomposerRecipeHandler.instance.getRecipe(fluidStack);
+		return result;
 	}
 
 	/**
@@ -416,19 +427,9 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 */
 	public boolean isFluidValidForDecomposer(Fluid fluid)
 	{
-		for (DecomposerRecipe recipe : DecomposerRecipe.recipes.values())
-		{
-			if (recipe instanceof DecomposerFluidRecipe)
-			{
-				DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) recipe;
 
-				if (fluidRecipe.inputFluid.equals(fluid))
-				{
-					return true;
-				}
-
-			}
-		}
+		//Minechem.LOGGER.info(fluid.toString());
+		if (DecomposerRecipe.get(new FluidStack(fluid, 1))!=null) return true;
 
 		return false;
 	}
@@ -591,18 +592,16 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			for (int i = 0; i < fluids.size(); i++)
 			{
 				FluidStack input = fluids.get(i);
-				for (DecomposerRecipe recipeToTest : DecomposerRecipe.recipes.values())
+
+				//Minechem.LOGGER.info(input.toString());
+				DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) DecomposerRecipe.get(input);
+				if (fluidRecipe!=null)
 				{
-					// If there is fluid being pumped into the decomposer we will decompose that to if it matches something in our recipe list.
-					if (recipeToTest instanceof DecomposerFluidRecipe && input.isFluidEqual(((DecomposerFluidRecipe) recipeToTest).inputFluid))
-					{
-						// Recipes for fluid conversion take a certain amount of millibuckets (1000mB == Volume of bucket).
-						if (fluids.get(i).amount > ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount)
-						{
-							// The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
-							this.setInventorySlotContents(this.kInputSlot, new ItemStack(((DecomposerFluidRecipe) recipeToTest).inputFluid.getFluid().getBlock(), 1, 0));
-							fluids.get(i).amount -= ((DecomposerFluidRecipe) recipeToTest).inputFluid.amount;
-						}
+					
+					if (fluids.get(i).amount>=fluidRecipe.inputFluid.amount){
+						// The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
+						this.setInventorySlotContents(this.kInputSlot, new ItemStack(fluidRecipe.inputFluid.getFluid().getBlock(), 1, 0));
+						fluids.get(i).amount -= fluidRecipe.inputFluid.amount;
 					}
 				}
 			}

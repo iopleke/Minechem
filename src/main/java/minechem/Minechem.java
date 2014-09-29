@@ -255,8 +255,7 @@ public class Minechem
 			//LOGGER.info(recipe.toString()+": "+DecomposerRecipe.hashRecipes.get(recipe));
 		//for (Object recipe:CraftingManager.getInstance().getRecipeList()) LOGGER.info(((IRecipe)recipe).getRecipeOutput()+": "+((IRecipe)recipe).);
 		DecomposerRecipeHandler.recursiveRecipes();
-//		for (Object key:DecomposerRecipeHandler.recipes.keySet())
-//			LOGGER.info(key.toString()+": "+DecomposerRecipeHandler.recipes.get(key).toString());
+
 		LOGGER.info("Minechem has loaded");
 	}
 
