@@ -252,7 +252,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			}
 		} catch (Exception e)
 		{
-            // softly falls the rain
+		        // softly falls the rain
 			// but the forest does not see
 			// silently this fails
 		}
@@ -260,7 +260,6 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	}
 	
 	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack){
-		
 		Fluid fluid = FluidRegistry.lookupFluidForBlock(Block.getBlockFromItem(itemStack.getItem()));
 		FluidStack fluidStack = (fluid!=null)? new FluidStack(fluid,1000):null;
 		DecomposerRecipe result = DecomposerRecipeHandler.instance.getRecipe(itemStack);
