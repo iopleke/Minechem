@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.Minechem;
+import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
+import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +19,7 @@ import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -160,13 +164,6 @@ public class MoleculeItem extends Item implements IFluidContainerItem
         return itemStack;
     }
 
-    @Override
-    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer par3EntityPlayer)
-    {
-        par3EntityPlayer.setItemInUse(par1ItemStack, getMaxItemUseDuration(par1ItemStack));
-        return par1ItemStack;
-    }
-
     /** Returns True is the item is renderer in full 3D when hold. */
     @Override
     public boolean isFull3D()
@@ -196,5 +193,106 @@ public class MoleculeItem extends Item implements IFluidContainerItem
     public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
     {
         return getFluid(container);
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
+
+        MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
+        if (movingObjectPosition == null)
+        {
+            return itemStack;
+        }
+
+        if (movingObjectPosition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+        {
+            int blockX = movingObjectPosition.blockX;
+            int blockY = movingObjectPosition.blockY;
+            int blockZ = movingObjectPosition.blockZ;
+
+            if (movingObjectPosition.sideHit == 0)
+            {
+                --blockY;
+            }
+
+            if (movingObjectPosition.sideHit == 1)
+            {
+                ++blockY;
+            }
+
+            if (movingObjectPosition.sideHit == 2)
+            {
+                --blockZ;
+            }
+
+            if (movingObjectPosition.sideHit == 3)
+            {
+                ++blockZ;
+            }
+
+            if (movingObjectPosition.sideHit == 4)
+            {
+                --blockX;
+            }
+
+            if (movingObjectPosition.sideHit == 5)
+            {
+                ++blockX;
+            }
+
+            if (!player.canPlayerEdit(blockX, blockY,blockZ, movingObjectPosition.sideHit, itemStack))
+            {
+                return itemStack;
+            }
+
+            return emptyTube(itemStack, player, world, blockX, blockY, blockZ);
+        }
+
+        return itemStack;
+    }
+
+    private ItemStack fillTube(ItemStack itemStack, EntityPlayer player, int meta)
+    {
+        if (player.capabilities.isCreativeMode)
+        {
+            return itemStack;
+        }
+        else if (--itemStack.stackSize <= 0)
+        {
+            return new ItemStack(MinechemItemsRegistration.element, 1, meta);
+        }
+        else
+        {
+            if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, meta)))
+            {
+                player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, meta), false);
+            }
+        }
+        return itemStack;
+    }
+
+    private ItemStack emptyTube(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z)
+    {
+        if (world.isAirBlock(x, y, z))
+        {
+            Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(getMolecule(itemStack)));
+            world.setBlock(x, y, z, block, 0, 3);
+            if (player.capabilities.isCreativeMode)
+            {
+                return itemStack;
+            } else if (--itemStack.stackSize <= 0)
+            {
+                return new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+            } else
+            {
+                if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass)))
+                {
+                    player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass), false);
+                }
+            }
+        }
+        return itemStack;
     }
 }
