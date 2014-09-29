@@ -35,8 +35,8 @@ public class Settings
 	// Determines how far away in blocks a packet will be sent to players in a given dimension to reduce packet spam.
 	public static int UpdateRadius = 20;
 
-	// Enabling automation can allow duping. Disabled by default.
-	public static boolean AllowAutomation = false;
+	// Enabling automation can allow duping. Enabled by default.
+	public static boolean AllowAutomation = true;
 
 	// Disabling of enchants and spikes
 	public static boolean FoodSpiking = true;
