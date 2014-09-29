@@ -17,14 +17,12 @@ import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.tick.TickHandler;
-import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -102,7 +100,6 @@ public class Minechem
 	{
 		// Register instance.
 		INSTANCE = this;
-
 		// Load configuration.
 		if (Settings.DebugMode)
 		{
@@ -157,6 +154,11 @@ public class Minechem
 		}
 		MinechemBlueprint.registerBlueprints();
 
+	}
+
+	@EventHandler
+	public void init(FMLInitializationEvent event)
+	{
 		if (Settings.DebugMode)
 		{
 			LOGGER.info("Registering Recipe Handlers...");
@@ -164,7 +166,7 @@ public class Minechem
 		MinechemRecipes.getInstance().RegisterHandlers();
 		MinechemRecipes.getInstance().RegisterRecipes();
 		MinechemRecipes.getInstance().registerFluidRecipies();
-
+		
 		if (Settings.DebugMode)
 		{
 			LOGGER.info("Registering OreDict Compatability...");
@@ -188,11 +190,7 @@ public class Minechem
 			LOGGER.info("Registering Polytool Event Handler...");
 		}
 		MinecraftForge.EVENT_BUS.register(new PolytoolEventHandler());
-	}
-
-	@EventHandler
-	public void init(FMLInitializationEvent event)
-	{
+		
 		if (Settings.DebugMode)
 		{
 			LOGGER.info("Registering Proxy Hooks...");
@@ -234,11 +232,18 @@ public class Minechem
 			LOGGER.info("Registering ClientProxy Rendering Hooks...");
 		}
 		PROXY.registerRenderers();
+		if (Settings.DebugMode)
+		{
+			LOGGER.info("Registering Mod Recipes...");
+		}
+		MinechemRecipes.getInstance().RegisterModRecipes();
+		
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		//for (Object block:GameData.getBlockRegistry().getKeys()) LOGGER.info("Block: " + block);
 		// Adds blueprints to dungeon loot.
 		if (Settings.DebugMode)
 		{
@@ -254,7 +259,13 @@ public class Minechem
 		//for (Object recipe:DecomposerRecipe.hashRecipes.keySet()) 
 			//LOGGER.info(recipe.toString()+": "+DecomposerRecipe.hashRecipes.get(recipe));
 		//for (Object recipe:CraftingManager.getInstance().getRecipeList()) LOGGER.info(((IRecipe)recipe).getRecipeOutput()+": "+((IRecipe)recipe).);
+		
+		Long start = System.currentTimeMillis();
+		
+		
+		LOGGER.info("Registering Recipes");
 		DecomposerRecipeHandler.recursiveRecipes();
+		LOGGER.info((System.currentTimeMillis()-start)+"ms spent registering Recipes");
 
 		LOGGER.info("Minechem has loaded");
 	}

@@ -4,8 +4,10 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
+import minechem.Minechem;
 import minechem.potion.PotionChemical;
 import minechem.utils.MinechemHelper;
+import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.item.crafting.IRecipe;
@@ -19,8 +21,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class DecomposerRecipeHandler
 {
     public static DecomposerRecipeHandler instance = new DecomposerRecipeHandler();
-    public static Map<String,ItemStack[]> recipes = new Hashtable<String, ItemStack[]>();
-    public static Map<String,ItemStack> outputs = new Hashtable<String, ItemStack>();
+//    public static Map<String,ItemStack[]> recipes = new Hashtable<String, ItemStack[]>();
+//    public static Map<String,ItemStack> outputs = new Hashtable<String, ItemStack>();
+    public static Map<String,Recipe> recipes = new Hashtable<String, Recipe>();
     
     private DecomposerRecipeHandler()
     {
@@ -29,6 +32,7 @@ public class DecomposerRecipeHandler
     
     public static void recursiveRecipes()
     {
+    	int wrongValue=Short.MAX_VALUE;
         for (Object recipe : CraftingManager.getInstance().getRecipeList())
         {
             if (recipe instanceof IRecipe)
@@ -69,11 +73,10 @@ public class DecomposerRecipeHandler
                             else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
                             {
                             	ItemStack q =((ItemStack) ((ArrayList) o).get(0)).copy();
-                            	if (q.getItemDamage()>500)q.setItemDamage(0);
-                                inputs.add(q);
                             }
                         }
                         components = inputs.toArray(new ItemStack[inputs.size()]);
+                        
                     }
                     else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
                     {
@@ -86,32 +89,42 @@ public class DecomposerRecipeHandler
 
                     if (components != null)
                     {
-                    	outputs.put(DecomposerRecipe.getKey(input), input);
-                        recipes.put(DecomposerRecipe.getKey(input), components);
+                    	for(int i=0;i<components.length;i++)
+                    		if (components[i]!=null&&components[i].getItemDamage()==wrongValue)
+                    			components[i].setItemDamage(0);
+                    	Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+                    	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
+                    		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
+                    	}                        
                     }
                 }
             }
         }
         for (Object key:recipes.keySet()){
-        	if (!DecomposerRecipe.recipes.containsKey(key)){
+        	
+        	if (!DecomposerRecipe.recipes.containsKey(key)&&(!((String)key).contains("compressed_cobblestone"))){
         		DecomposerRecipe result = getRecursiveRecipe((String)key,0);
         		if (result!=null){
         			DecomposerRecipe.recipes.put((String)key, result);
         		}
         	}
+//        	String output =recipes.get(key).output.toString()+": ";
+//        	for (ItemStack component:recipes.get(key).inStacks)if (component!=null)output+=("["+component.toString()+"]");
+//        	Minechem.LOGGER.info(output);
         }
     }
     
     public static DecomposerRecipe getRecursiveRecipe(String input, int level)
     {
         DecomposerRecipe decomprecipe = DecomposerRecipe.recipes.get(input);
-        if (decomprecipe!=null){ 
+        if (decomprecipe!=null){
         	return decomprecipe;
         }
-        if (level < 20)
+        //Minechem.LOGGER.info(input);
+        if (level < 5 && recipes.get(input)!=null)
         {
         	ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
-        	ItemStack[] components = recipes.get(input);
+        	ItemStack[] components = recipes.get(input).inStacks;
         	if (components != null)
             {
                 ArrayList<PotionChemical> sum = new ArrayList<PotionChemical>();
@@ -122,7 +135,7 @@ public class DecomposerRecipeHandler
                         DecomposerRecipe decompRecipe = getRecursiveRecipe(DecomposerRecipe.getKey(item), level + 1);
                         if (decompRecipe != null && !(decompRecipe instanceof DecomposerRecipeSelect))
                         {
-                            sum.addAll(decompRecipe.getPartialOutputRaw(outputs.get(input).stackSize));
+                        	sum.addAll(decompRecipe.getPartialOutputRaw(recipes.get(input).getOutStackSize()));
                         }
                     }
 
@@ -137,7 +150,10 @@ public class DecomposerRecipeHandler
             }
         	 if (!output.isEmpty())
              {
-                 return new DecomposerRecipe(outputs.get(input), output.toArray(new PotionChemical[output.size()]));
+        		 DecomposerRecipe result = new DecomposerRecipe(recipes.get(input).output, output.toArray(new PotionChemical[output.size()]));
+        		 DecomposerRecipe.recipes.put(input, result);
+        		 //Minechem.LOGGER.info(input+": "+result.toString());
+                 return result;
              }
         }
         return null;

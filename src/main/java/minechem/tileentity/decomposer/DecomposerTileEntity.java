@@ -260,8 +260,9 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	}
 	
 	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack){
-		FluidStack fluidStack = new FluidStack(FluidRegistry.lookupFluidForBlock(Block.getBlockFromItem(itemStack.getItem())),1000);
 		
+		Fluid fluid = FluidRegistry.lookupFluidForBlock(Block.getBlockFromItem(itemStack.getItem()));
+		FluidStack fluidStack = (fluid!=null)? new FluidStack(fluid,1000):null;
 		DecomposerRecipe result = DecomposerRecipeHandler.instance.getRecipe(itemStack);
 		if (fluidStack!=null)
 			result = DecomposerRecipeHandler.instance.getRecipe(fluidStack);
