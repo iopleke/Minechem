@@ -13,6 +13,8 @@ lib/Mekanism*
 lib/Universal*
 lib/1.6.4/
 ._*
+*.txt
+*.log
 
 ## gradle
 /.gradle
@@ -55,3 +57,4 @@ nbproject/
 /mods/
 /saves/
 /logs/
+/crash-reports/

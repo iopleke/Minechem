@@ -18,11 +18,13 @@ import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.tick.TickHandler;
 import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
@@ -249,9 +251,12 @@ public class Minechem
 			LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
 		}
 		PotionEnchantmentCoated.registerCoatings();
-		for (Object recipe:DecomposerRecipe.hashRecipes.keySet()) 
-			LOGGER.info(recipe.toString()+": "+DecomposerRecipe.hashRecipes.get(recipe));
-		
+		//for (Object recipe:DecomposerRecipe.hashRecipes.keySet()) 
+			//LOGGER.info(recipe.toString()+": "+DecomposerRecipe.hashRecipes.get(recipe));
+		//for (Object recipe:CraftingManager.getInstance().getRecipeList()) LOGGER.info(((IRecipe)recipe).getRecipeOutput()+": "+((IRecipe)recipe).);
+		DecomposerRecipeHandler.recursiveRecipes();
+//		for (Object key:DecomposerRecipeHandler.recipes.keySet())
+//			LOGGER.info(key.toString()+": "+DecomposerRecipeHandler.recipes.get(key).toString());
 		LOGGER.info("Minechem has loaded");
 	}
 

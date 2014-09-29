@@ -17,7 +17,7 @@ public class DecomposerRecipe
 {
 
 	//public static ArrayList<DecomposerRecipe> recipes = new ArrayList<DecomposerRecipe>();
-	public static Map<String,DecomposerRecipe> hashRecipes = new Hashtable<String, DecomposerRecipe>();
+	public static Map<String,DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
 
 	ItemStack input;
 	public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
@@ -44,10 +44,10 @@ public class DecomposerRecipe
 					}
 				}
 			}
-			hashRecipes.put(getKey(recipe.input), recipe);
+			recipes.put(getKey(recipe.input), recipe);
 		}
 		else if (((DecomposerFluidRecipe)recipe).inputFluid!=null){
-			hashRecipes.put(getKey(((DecomposerFluidRecipe)recipe).inputFluid), recipe);
+			recipes.put(getKey(((DecomposerFluidRecipe)recipe).inputFluid), recipe);
 		}
 			
 		//recipes.add(recipe);
@@ -56,7 +56,7 @@ public class DecomposerRecipe
 	
 	public static DecomposerRecipe remove(DecomposerRecipe recipe)
 	{
-		if (hashRecipes.containsKey(recipe.input))hashRecipes.remove(recipe.input);
+		if (recipes.containsKey(recipe.input))recipes.remove(recipe.input);
 		return recipe;
 	}
 	
@@ -78,12 +78,12 @@ public class DecomposerRecipe
 	
 	public static DecomposerRecipe get(ItemStack item)
 	{
-		return hashRecipes.get(getKey(item));
+		return recipes.get(getKey(item));
 	}
 	
 	public static DecomposerRecipe get(FluidStack item)
 	{
-		return hashRecipes.get(getKey(item));
+		return recipes.get(getKey(item));
 	}
 	
 	public static void removeRecipeSafely(String item)
