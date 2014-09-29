@@ -8,6 +8,7 @@ import minechem.Minechem;
 import minechem.fluid.FluidBlockElement;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
+import minechem.fluid.IMinechemFluid;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -30,6 +31,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import org.lwjgl.input.Keyboard;
 
@@ -398,10 +400,13 @@ public class ElementItem extends Item implements IFluidContainerItem
 
             if(flag)
             {
-                if (block instanceof FluidBlockElement && meta == 0)
+                if (block instanceof IFluidBlock && meta == 0)
                 {
-                    world.setBlockToAir(blockX, blockY,blockZ);
-                    return fillTube(itemStack, player, ((FluidElement)((FluidBlockElement) block).getFluid()).element.ordinal());
+                    if (((IFluidBlock)block).getFluid() instanceof IMinechemFluid)
+                    {
+                        world.setBlockToAir(blockX, blockY, blockZ);
+                        return fillTube(itemStack, player, ((IMinechemFluid) ((IFluidBlock) block).getFluid()).getOutputStack());
+                    }
                 }
             }
             else
@@ -448,7 +453,7 @@ public class ElementItem extends Item implements IFluidContainerItem
         return itemStack;
     }
 
-    private ItemStack fillTube(ItemStack itemStack, EntityPlayer player, int meta)
+    private ItemStack fillTube(ItemStack itemStack, EntityPlayer player, ItemStack block)
     {
         if (player.capabilities.isCreativeMode)
         {
@@ -456,13 +461,13 @@ public class ElementItem extends Item implements IFluidContainerItem
         }
         else if (--itemStack.stackSize <= 0)
         {
-            return new ItemStack(MinechemItemsRegistration.element, 1, meta);
+            return block;
         }
         else
         {
-            if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, meta)))
+            if (!player.inventory.addItemStackToInventory(block))
             {
-                player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, meta), false);
+                player.dropPlayerItemWithRandomChoice(block, false);
             }
         }
         return itemStack;
