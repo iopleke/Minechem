@@ -33,6 +33,10 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
     {
         return possibleRecipes.get(0).getOutputRaw();
     }
+    
+    public DecomposerRecipe getRecipeRaw(){
+    	return possibleRecipes.get(0);
+    }
 
     public ArrayList<DecomposerRecipe> getAllPossibleRecipes()
     {

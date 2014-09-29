@@ -62,9 +62,9 @@ public class DecomposerRecipe
 	
 	public static String getKey(ItemStack item)
 	{
-			ItemStack result=((ItemStack) item).copy();
-			result.stackSize=1;
-			return result.toString();
+		ItemStack result=((ItemStack) item).copy();
+		result.stackSize=1;
+		return result.toString();
 	}
 	
 	
