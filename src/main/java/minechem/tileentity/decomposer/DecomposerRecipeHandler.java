@@ -147,6 +147,11 @@ public class DecomposerRecipeHandler
     {
         return DecomposerRecipe.get(input);
     }
+    
+	public DecomposerRecipe getRecipe(FluidStack fluidStack) {
+		return DecomposerRecipe.get(fluidStack);
+	}
+
 
     public ArrayList<ItemStack> getRecipeOutputForInput(ItemStack input)
     {
@@ -170,5 +175,6 @@ public class DecomposerRecipeHandler
         }
         return null;
     }
+
 
 }
