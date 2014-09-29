@@ -166,8 +166,12 @@ public enum MoleculeEnum
     isoleucine(143, new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2)),
     glutamates(144, new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4)),
     asparagine(145, new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3)),
-    keratin(146, new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline), new Molecule(cysteine), new Molecule(proline));
+    keratin(146, new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline), new Molecule(cysteine), new Molecule(proline)),
       
+    //Thermal Expansion
+    asbestos(147, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4));
+    
+    
     public static MoleculeEnum[] molecules = values();
     private final String localizationKey;
     private final ArrayList<PotionChemical> components;

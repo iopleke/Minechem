@@ -1,10 +1,8 @@
 package minechem;
 
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
+
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalRecipeCloning;
@@ -27,6 +25,7 @@ import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
+import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -37,6 +36,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @SuppressWarnings("RedundantArrayCreation")
 public class MinechemRecipes
@@ -336,6 +338,33 @@ public class MinechemRecipes
 			this.element(ElementEnum.Si), null, null, null, this.element(ElementEnum.O, 2), null
 		}));
 
+		//Furnace
+
+			ItemStack blockFurnace= new ItemStack(Blocks.furnace);
+			DecomposerRecipe.add(new DecomposerRecipeSelect(blockFurnace, 0.1F, new DecomposerRecipe[]
+			{
+				new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Si,8), this.element(ElementEnum.O,8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Fe,8), this.element(ElementEnum.O,8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Mg,8), this.element(ElementEnum.O,8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Ti,8), this.element(ElementEnum.O,8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Pb,8), this.element(ElementEnum.O,8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Na,8), this.element(ElementEnum.Cl,8)
+				})
+			}));
+		
+		
 		// Planks
 		ItemStack blockOakWoodPlanks = new ItemStack(Blocks.planks, 1, 0);
 		ItemStack blockSpruceWoodPlanks = new ItemStack(Blocks.planks, 1, 1);
@@ -1208,7 +1237,9 @@ public class MinechemRecipes
 		{
 			this.molecule(MoleculeEnum.glycine, 2), this.molecule(MoleculeEnum.blackPigment)
 		}));
-
+		
+		
+		
 		// Wool carpet
 		ItemStack carpetBlockWool = new ItemStack(Blocks.carpet, 1, 0);
 		ItemStack carpetBlockOrangeWool = new ItemStack(Blocks.carpet, 1, 1);
@@ -2253,6 +2284,13 @@ public class MinechemRecipes
 			null, this.element(ElementEnum.Cr), null, this.element(ElementEnum.V), this.molecule(MoleculeEnum.beryl, 2), this.element(ElementEnum.V), null, this.element(ElementEnum.Cr), null
 		}));
 
+		// Wheat
+		ItemStack itemWheat = new ItemStack(Items.wheat);
+		DecomposerRecipe.add(new DecomposerRecipeChance(itemWheat, 0.3F, new PotionChemical[]
+		{
+				this.molecule(MoleculeEnum.cellulose, 2)
+		}));
+		
 		// Carrot
 		ItemStack itemCarrot = new ItemStack(Items.carrot);
 		DecomposerRecipe.add(new DecomposerRecipe(itemCarrot, new PotionChemical[]
@@ -2376,6 +2414,155 @@ public class MinechemRecipes
 		}));
 	}
 
+	public void RegisterModRecipes()
+	{
+		//Thermal Expansion
+		if (Loader.isModLoaded("ThermalExpansion"))
+		{
+			Block rockwool = GameRegistry.findBlock("ThermalExpansion", "Rockwool");
+			ItemStack blockRockWool = new ItemStack(rockwool, 1, 0);
+			ItemStack blockRockOrangeWool = new ItemStack(rockwool, 1, 1);
+			ItemStack blockRockMagentaWool = new ItemStack(rockwool, 1, 2);
+			ItemStack blockRockLightBlueWool = new ItemStack(rockwool, 1, 3);
+			ItemStack blockRockYellowWool = new ItemStack(rockwool, 1, 4);
+			ItemStack blockRockLimeWool = new ItemStack(rockwool, 1, 5);
+			ItemStack blockRockPinkWool = new ItemStack(rockwool, 1, 6);
+			ItemStack blockRockGrayWool = new ItemStack(rockwool, 1, 7);
+			ItemStack blockRockLightGrayWool = new ItemStack(rockwool, 1, 8);
+			ItemStack blockRockCyanWool = new ItemStack(rockwool, 1, 9);
+			ItemStack blockRockPurpleWool = new ItemStack(rockwool, 1, 10);
+			ItemStack blockRockBlueWool = new ItemStack(rockwool, 1, 11);
+			ItemStack blockRockBrownWool = new ItemStack(rockwool, 1, 12);
+			ItemStack blockRockGreenWool = new ItemStack(rockwool, 1, 13);
+			ItemStack blockRockRedWool = new ItemStack(rockwool, 1, 14);
+			ItemStack blockRockBlackWool = new ItemStack(rockwool, 1, 15);
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.whitePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockOrangeWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.orangePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockMagentaWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.redPigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockLightBlueWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lightbluePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockYellowWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.yellowPigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockLimeWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.limePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockPinkWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.redPigment), this.molecule(MoleculeEnum.whitePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockGrayWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.blackPigment, 2)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockLightGrayWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.blackPigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockCyanWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.whitePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockPurpleWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.purplePigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockBlueWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lazurite)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockBrownWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.tannicacid)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockGreenWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.greenPigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockRedWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.redPigment)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeChance(blockRockBlackWool, 0.2F, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.blackPigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.whitePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockOrangeWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.orangePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockMagentaWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.redPigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockLightBlueWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lightbluePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockYellowWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.yellowPigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockLimeWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.limePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockPinkWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.redPigment), this.molecule(MoleculeEnum.whitePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockGrayWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.blackPigment, 2)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockLightGrayWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.whitePigment), this.molecule(MoleculeEnum.blackPigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockCyanWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lightbluePigment), this.molecule(MoleculeEnum.whitePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockPurpleWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.purplePigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockBlueWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.lazurite)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockGreenWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.greenPigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockRedWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.redPigment)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(blockRockBlackWool, false, COST_WOOL, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.blackPigment)
+			}));
+		}
+	}
+	
 	public void RegisterRecipes()
 	{
 		this.registerVanillaChemicalRecipes();
