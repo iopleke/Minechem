@@ -17,7 +17,7 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 	/**
 	 * Determines amount of energy we are allowed to input into the machine with a given update.
 	 */
-	private static final int MAX_ENERGY_RECIEVED = 20;
+	private static int MAX_ENERGY_RECIEVED = Settings.energyPacketSize;
 
 	/**
 	 * Determines total amount of energy that this machine can store.
