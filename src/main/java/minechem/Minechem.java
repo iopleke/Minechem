@@ -1,20 +1,7 @@
 package minechem;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Arrays;
+
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
@@ -30,18 +17,37 @@ import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.tick.TickHandler;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
 public class Minechem
@@ -245,7 +251,12 @@ public class Minechem
 			LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
 		}
 		PotionEnchantmentCoated.registerCoatings();
-
+		//for (Object recipe:DecomposerRecipe.hashRecipes.keySet()) 
+			//LOGGER.info(recipe.toString()+": "+DecomposerRecipe.hashRecipes.get(recipe));
+		//for (Object recipe:CraftingManager.getInstance().getRecipeList()) LOGGER.info(((IRecipe)recipe).getRecipeOutput()+": "+((IRecipe)recipe).);
+		DecomposerRecipeHandler.recursiveRecipes();
+//		for (Object key:DecomposerRecipeHandler.recipes.keySet())
+//			LOGGER.info(key.toString()+": "+DecomposerRecipeHandler.recipes.get(key).toString());
 		LOGGER.info("Minechem has loaded");
 	}
 

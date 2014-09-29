@@ -1,18 +1,23 @@
 package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 import java.util.Random;
+
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
 
-	public static ArrayList<DecomposerRecipe> recipes = new ArrayList<DecomposerRecipe>();
+	//public static ArrayList<DecomposerRecipe> recipes = new ArrayList<DecomposerRecipe>();
+	public static Map<String,DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
 
 	ItemStack input;
 	public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
@@ -39,9 +44,54 @@ public class DecomposerRecipe
 					}
 				}
 			}
+			recipes.put(getKey(recipe.input), recipe);
 		}
-		recipes.add(recipe);
+		else if (((DecomposerFluidRecipe)recipe).inputFluid!=null){
+			recipes.put(getKey(((DecomposerFluidRecipe)recipe).inputFluid), recipe);
+		}
+			
+		//recipes.add(recipe);
 		return recipe;
+	}
+	
+	public static DecomposerRecipe remove(DecomposerRecipe recipe)
+	{
+		if (recipes.containsKey(recipe.input))recipes.remove(recipe.input);
+		return recipe;
+	}
+	
+	public static String getKey(ItemStack item)
+	{
+			ItemStack result=((ItemStack) item).copy();
+			result.stackSize=1;
+			return result.toString();
+	}
+	
+	
+	public static String getKey(FluidStack item)
+	{
+		FluidStack result=((FluidStack) item).copy();
+		result.amount=1;
+		return result.toString();
+	}
+
+	
+	public static DecomposerRecipe get(ItemStack item)
+	{
+		return recipes.get(getKey(item));
+	}
+	
+	public static DecomposerRecipe get(FluidStack item)
+	{
+		return recipes.get(getKey(item));
+	}
+	
+	public static void removeRecipeSafely(String item)
+	{
+		for (ItemStack i : OreDictionary.getOres(item))
+		{
+			DecomposerRecipe.remove(new DecomposerRecipe(new ItemStack(i.getItem(),1, i.getItemDamage()), new PotionChemical[]{}));
+		}
 	}
 
 	public static void createAndAddRecipeSafely(String item, int amount, PotionChemical... chemicals)

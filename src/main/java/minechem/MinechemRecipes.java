@@ -2522,7 +2522,7 @@ public class MinechemRecipes
 
 	private void addUnusedSynthesisRecipes()
 	{
-		Iterator decomposerRecipes = DecomposerRecipe.recipes.iterator();
+		Iterator decomposerRecipes = DecomposerRecipe.recipes.values().iterator();
 
 		while (decomposerRecipes.hasNext())
 		{
