@@ -31,11 +31,11 @@ public class DecomposerRecipeHandler
 
     public DecomposerRecipe getRecipe(ItemStack input, int level)
     {
-        for (DecomposerRecipe recipe : DecomposerRecipe.recipes)
-        {
-            if (Compare.stacksAreSameKind(input, recipe.getInput()))
-                return recipe;
+        DecomposerRecipe decomprecipe = DecomposerRecipe.get(input);
+        if (decomprecipe!=null){ 
+        	return decomprecipe;
         }
+        
         if (level < 5)
         {
             ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
@@ -142,14 +142,15 @@ public class DecomposerRecipeHandler
 
     public ArrayList<ItemStack> getRecipeOutputForFluidInput(FluidStack input)
     {
-        DecomposerFluidRecipe fluidRecipe = null;
-        for (DecomposerRecipe recipe : DecomposerRecipe.recipes)
-        {
-            if (recipe instanceof DecomposerFluidRecipe && input.isFluidEqual(((DecomposerFluidRecipe) recipe).inputFluid))
-            {
-                fluidRecipe = (DecomposerFluidRecipe) recipe;
-            }
-        }
+//        DecomposerFluidRecipe fluidRecipe = null;
+//        for (DecomposerRecipe recipe : DecomposerRecipe.hashRecipes.values())
+//        {
+//            if (recipe instanceof DecomposerFluidRecipe && input.isFluidEqual(((DecomposerFluidRecipe) recipe).inputFluid))
+//            {
+//                fluidRecipe = (DecomposerFluidRecipe) recipe;
+//            }
+//        }
+    	DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe)DecomposerRecipe.get(input);
         if (fluidRecipe != null)
         {
             ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());

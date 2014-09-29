@@ -59,7 +59,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
         if (outputId.equals(MINECHEM_DECOMPOSER_RECIPES_ID))
         {
             // Add all decomposer recipes to local arecipes array.
-            for (DecomposerRecipe dr : DecomposerRecipe.recipes)
+            for (DecomposerRecipe dr : DecomposerRecipe.hashRecipes.values())
             {
                 registerDecomposerRecipe(dr);
             }
@@ -85,7 +85,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
         {
             return;
         }
-        for (DecomposerRecipe dr : DecomposerRecipe.recipes)
+        for (DecomposerRecipe dr : DecomposerRecipe.hashRecipes.values())
         {
             ArrayList<PotionChemical> rawOutputs = dr.getOutputRaw();
             if (rawOutputs != null)

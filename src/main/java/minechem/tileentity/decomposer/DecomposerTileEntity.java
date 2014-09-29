@@ -416,7 +416,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 */
 	public boolean isFluidValidForDecomposer(Fluid fluid)
 	{
-		for (DecomposerRecipe recipe : DecomposerRecipe.recipes)
+		for (DecomposerRecipe recipe : DecomposerRecipe.hashRecipes.values())
 		{
 			if (recipe instanceof DecomposerFluidRecipe)
 			{
@@ -591,7 +591,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			for (int i = 0; i < fluids.size(); i++)
 			{
 				FluidStack input = fluids.get(i);
-				for (DecomposerRecipe recipeToTest : DecomposerRecipe.recipes)
+				for (DecomposerRecipe recipeToTest : DecomposerRecipe.hashRecipes.values())
 				{
 					// If there is fluid being pumped into the decomposer we will decompose that to if it matches something in our recipe list.
 					if (recipeToTest instanceof DecomposerFluidRecipe && input.isFluidEqual(((DecomposerFluidRecipe) recipeToTest).inputFluid))

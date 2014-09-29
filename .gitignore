@@ -49,3 +49,9 @@ install.bat
 build.xml
 natives/
 nbproject/
+
+## minecraft
+/config/
+/mods/
+/saves/
+/logs/
