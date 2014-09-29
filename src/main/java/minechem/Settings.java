@@ -46,6 +46,7 @@ public class Settings
 	public static boolean powerUseEnabled = true;
 	public static int costDecomposition = 1000;
 	public static int synthesisMultiplier = 10;
+    public static int energyPacketSize = 100;
 
 	// Power base storage values
 	public static int maxSynthesizerStorage = 100000;
@@ -182,6 +183,12 @@ public class Settings
 		prop.setLanguageKey("config.power.synthesizer.max.name");
 		maxSynthesizerStorage = prop.getInt();
 		configList.add(prop.getName());
+
+        prop = config.get("power", "energyPacketSize", Settings.energyPacketSize);
+        prop.comment = StatCollector.translateToLocal("config.power.energyPacketSize.description");
+        prop.setLanguageKey("config.power.energyPacketSize.max.name");
+        energyPacketSize = prop.getInt();
+        configList.add(prop.getName());
 
 		prop = config.get("power", "costSythesisMultiplier", Settings.synthesisMultiplier);
 		prop.setMinValue(1).setMaxValue(100);
