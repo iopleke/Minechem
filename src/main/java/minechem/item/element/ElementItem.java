@@ -5,6 +5,8 @@ import java.util.List;
 
 import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
+import minechem.fluid.FluidBlockElement;
+import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
@@ -13,6 +15,7 @@ import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
+import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
@@ -22,6 +25,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -63,36 +67,36 @@ public class ElementItem extends Item implements IFluidContainerItem
     public static String getShortName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return elements[atomicNumber].name();
+        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].name() : MinechemHelper.getLocalString("element.empty");
     }
 
     public static String getLongName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return elements[atomicNumber].descriptiveName();
+        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].descriptiveName() : MinechemHelper.getLocalString("element.empty");
     }
 
     public static String getClassification(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return elements[atomicNumber].classification().descriptiveName();
+        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].classification().descriptiveName() : MinechemHelper.getLocalString("element.empty");
     }
 
     public static String getRoomState(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return elements[atomicNumber].roomState().descriptiveName();
+        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].roomState().descriptiveName() : MinechemHelper.getLocalString("element.empty");
     }
 
     public static RadiationEnum getRadioactivity(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return elements[atomicNumber].radioactivity();
+        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].radioactivity() : RadiationEnum.stable;
     }
 
     public static ElementEnum getElement(ItemStack itemstack)
     {
-        return ElementEnum.elements[itemstack.getItemDamage()];
+        return itemstack.getItemDamage() < ElementEnum.heaviestMass ? ElementEnum.elements[itemstack.getItemDamage()] : null;
     }
 
     public static void attackEntityWithRadiationDamage(ItemStack itemstack, int damage, Entity entity)
@@ -123,22 +127,27 @@ public class ElementItem extends Item implements IFluidContainerItem
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack par1ItemStack)
+    public String getUnlocalizedName(ItemStack itemStack)
     {
-        return "minechem.itemElement." + getShortName(par1ItemStack);
+        return "minechem.itemElement." + getShortName(itemStack);
     }
 
     @Override
-    public String getItemStackDisplayName(ItemStack p_77653_1_)
+    public String getItemStackDisplayName(ItemStack itemStack)
     {
-        return getLongName(p_77653_1_);
+        return getLongName(itemStack);
     }
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack itemstack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool)
     {
-        par3List.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage() + 1) + ")");
+        if (itemstack.getItemDamage() == ElementEnum.heaviestMass)
+        {
+            return;
+        }
+
+        list.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage() + 1) + ")");
 
         String radioactivityColor;
         String timeLeft = getRadioactiveLife(itemstack);
@@ -173,9 +182,9 @@ public class ElementItem extends Item implements IFluidContainerItem
         }
 
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        par3List.add(radioactivityColor + radioactiveName + " " + timeLeft);
-        par3List.add(getClassification(itemstack));
-        par3List.add(getRoomState(itemstack));
+        list.add(radioactivityColor + radioactiveName + " " + timeLeft);
+        list.add(getClassification(itemstack));
+        list.add(getRoomState(itemstack));
 
         if (PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1) != null)
         {
@@ -190,11 +199,11 @@ public class ElementItem extends Item implements IFluidContainerItem
                 	 localizedDesc = polytoolDesc;
                  }
                  
-                par3List.add(EnumColor.AQUA + localizedDesc);
+                list.add(EnumColor.AQUA + localizedDesc);
 
             } else
             {
-                par3List.add(EnumColor.DARK_GREEN + MinechemHelper.getLocalString("polytool.information"));
+                list.add(EnumColor.DARK_GREEN + MinechemHelper.getLocalString("polytool.information"));
             }
         }
 
@@ -259,11 +268,12 @@ public class ElementItem extends Item implements IFluidContainerItem
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List)
+    public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
     {
+        list.add(new ItemStack(item, 1, ElementEnum.heaviestMass));
         for (ElementEnum element : ElementEnum.values())
         {
-            par3List.add(new ItemStack(item, 1, element.ordinal()));
+            list.add(new ItemStack(item, 1, element.ordinal()));
         }
     }
 
@@ -329,13 +339,21 @@ public class ElementItem extends Item implements IFluidContainerItem
     @Override
     public FluidStack getFluid(ItemStack container)
     {
-        return new FluidStack(FluidHelper.elements.get(elements[container.getItemDamage()]), 100);
+        if (container.getItemDamage() != ElementEnum.heaviestMass)
+        {
+            return new FluidStack(FluidHelper.elements.get(elements[container.getItemDamage()]), getCapacity(container));
+        }
+        return null;
     }
 
     @Override
     public int getCapacity(ItemStack container)
     {
-        return 100;
+        if (container.getItemDamage() != ElementEnum.heaviestMass)
+        {
+            return 1000;
+        }
+        return 0;
     }
 
     @Override
@@ -347,6 +365,129 @@ public class ElementItem extends Item implements IFluidContainerItem
     @Override
     public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
     {
-        return getFluid(container);
+        if (container.getItemDamage() != ElementEnum.heaviestMass)
+        {
+            FluidStack fluidStack = getFluid(container);
+            if (container.stackSize > 0)
+            {
+                --container.stackSize;
+                return fluidStack;
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        boolean flag = itemStack.getItemDamage() == ElementEnum.heaviestMass;
+        MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, flag);
+        if (movingObjectPosition == null)
+        {
+            return itemStack;
+        }
+
+        if (movingObjectPosition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+        {
+            int blockX = movingObjectPosition.blockX;
+            int blockY = movingObjectPosition.blockY;
+            int blockZ = movingObjectPosition.blockZ;
+
+            Block block = world.getBlock(blockX, blockY,blockZ);
+            int meta = world.getBlockMetadata(blockX, blockY, blockZ);
+
+            if(flag)
+            {
+                if (block instanceof FluidBlockElement && meta == 0)
+                {
+                    world.setBlockToAir(blockX, blockY,blockZ);
+                    return fillTube(itemStack, player, ((FluidElement)((FluidBlockElement) block).getFluid()).element.ordinal());
+                }
+            }
+            else
+            {
+                if (movingObjectPosition.sideHit == 0)
+                {
+                    --blockY;
+                }
+
+                if (movingObjectPosition.sideHit == 1)
+                {
+                    ++blockY;
+                }
+
+                if (movingObjectPosition.sideHit == 2)
+                {
+                    --blockZ;
+                }
+
+                if (movingObjectPosition.sideHit == 3)
+                {
+                    ++blockZ;
+                }
+
+                if (movingObjectPosition.sideHit == 4)
+                {
+                    --blockX;
+                }
+
+                if (movingObjectPosition.sideHit == 5)
+                {
+                    ++blockX;
+                }
+
+                if (!player.canPlayerEdit(blockX, blockY,blockZ, movingObjectPosition.sideHit, itemStack))
+                {
+                    return itemStack;
+                }
+
+                return emptyTube(itemStack, player, world, blockX, blockY, blockZ);
+            }
+        }
+
+        return itemStack;
+    }
+
+    private ItemStack fillTube(ItemStack itemStack, EntityPlayer player, int meta)
+    {
+        if (player.capabilities.isCreativeMode)
+        {
+            return itemStack;
+        }
+        else if (--itemStack.stackSize <= 0)
+        {
+            return new ItemStack(MinechemItemsRegistration.element, 1, meta);
+        }
+        else
+        {
+            if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, meta)))
+            {
+                player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, meta), false);
+            }
+        }
+        return itemStack;
+    }
+
+    private ItemStack emptyTube(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z)
+    {
+        if (world.isAirBlock(x, y, z))
+        {
+            Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
+            world.setBlock(x, y, z, block, 0, 3);
+            if (player.capabilities.isCreativeMode)
+            {
+                return itemStack;
+            } else if (--itemStack.stackSize <= 0)
+            {
+                return new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+            } else
+            {
+                if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass)))
+                {
+                    player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass), false);
+                }
+            }
+        }
+        return itemStack;
     }
 }

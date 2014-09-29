@@ -18,6 +18,8 @@ public class ElementItemRenderer implements IItemRenderer
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type)
     {
+        if (item.getItemDamage() == ElementEnum.heaviestMass)
+            return false;
         if (type == ItemRenderType.INVENTORY)
             return true;
         if (type == ItemRenderType.EQUIPPED)
