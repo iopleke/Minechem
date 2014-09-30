@@ -31,11 +31,10 @@ public class FluidChemical extends Fluid implements IMinechemFluid
     @Override
     public int getColor()
     {
-        int red = (int) (molecule.red * 256);
+        int red = (int) (molecule.red * 255);
 
-        int green = (int) (molecule.green * 256);
-        int blue = (int) (molecule.blue * 256);
+        int green = (int) (molecule.green * 255);
+        int blue = (int) (molecule.blue * 255);
         return new Color(red, green, blue).getRGB();
     }
-
 }
