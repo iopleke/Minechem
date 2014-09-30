@@ -181,6 +181,7 @@ polytool.description.Pb=Laat tgenstanders tegen de grond vliegen
 polytool.description.Fr=Maakt explosies tijdens de regen
 polytool.description.U=Gebied of Effect Wither
 
+element.empty=Lege Tube
 element.H=Waterstof
 element.He=Helium
 element.Li=Lithium

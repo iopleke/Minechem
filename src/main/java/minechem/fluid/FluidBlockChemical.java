@@ -14,6 +14,7 @@ import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
 
 public class FluidBlockChemical extends BlockFluidClassic
 {
@@ -37,6 +38,12 @@ public class FluidBlockChemical extends BlockFluidClassic
     public String getUnlocalizedName()
     {
         return "fluid." + fluidName;
+    }
+
+    @Override
+    public String getLocalizedName()
+    {
+        return getFluid().getLocalizedName(null);
     }
 
     @SideOnly(Side.CLIENT)
