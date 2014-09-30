@@ -5,8 +5,6 @@ import java.util.List;
 
 import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
-import minechem.fluid.FluidBlockElement;
-import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.fluid.IMinechemFluid;
 import minechem.item.polytool.PolytoolHelper;
