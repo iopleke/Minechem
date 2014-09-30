@@ -8,6 +8,7 @@ import minechem.Minechem;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.item.crafting.ShapedRecipes;
 import net.minecraft.item.crafting.ShapelessRecipes;
@@ -17,7 +18,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Recipe {
 	public static Map<String,Recipe> recipes = new Hashtable<String, Recipe>();
-	
+	public static Map<ItemStack,ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
 	public ItemStack output;
 	public ItemStack[] inStacks;
 	
@@ -91,6 +92,13 @@ public class Recipe {
                     }
                 }
             }
+        }
+        for (ItemStack input:smelting.keySet())
+        {
+        	Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+        	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
+        		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, new ItemStack[]{smelting.get(input)}));
+        	}
         }
 	}
 	
