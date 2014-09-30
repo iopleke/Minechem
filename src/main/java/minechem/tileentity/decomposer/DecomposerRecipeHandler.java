@@ -19,17 +19,13 @@ public class DecomposerRecipeHandler
     
     public static void recursiveRecipes()
     {
-
         for (String key:Recipe.recipes.keySet()){
         	if (!DecomposerRecipe.recipes.containsKey(key)&&(!((String)key).contains("compressed_cobblestone"))){
         		Recipe recipe = Recipe.get(key);
         		DecomposerRecipe.add(new DecomposerRecipeSuper(recipe.output,recipe.inStacks));
         	}
-//        	String output =recipes.get(key).output.toString()+": ";
-//        	for (ItemStack component:recipes.get(key).inStacks)if (component!=null)output+=("["+component.toString()+"]");
-//        	Minechem.LOGGER.info(output);
         }
-        
+        //Culls null recipes (used for recursion but breaks stuff if left in)
         for (String key: DecomposerRecipe.recipes.keySet())
         {
         	if (DecomposerRecipe.get(key).isNull()) DecomposerRecipe.remove(key);

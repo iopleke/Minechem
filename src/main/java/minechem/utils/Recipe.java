@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
+import minechem.Minechem;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -25,6 +26,7 @@ public class Recipe {
     	int wrongValue=Short.MAX_VALUE;
         for (Object recipe : CraftingManager.getInstance().getRecipeList())
         {
+        	//Minechem.LOGGER.info(recipe);
             if (recipe instanceof IRecipe)
             {
                 if (((IRecipe) recipe).getRecipeOutput() != null)
