@@ -61,7 +61,8 @@ public class Recipe {
                             }
                             else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
                             {
-                            	inputs.addAll((ArrayList)o);
+                            	//TODO: pick the most basic results out of oredict - I am not sure if vanilla is always listed first
+                            	inputs.add((ItemStack)((ArrayList)o).get(0));
                             }
                         }
                         components = inputs.toArray(new ItemStack[inputs.size()]);
@@ -102,8 +103,28 @@ public class Recipe {
 		return output.stackSize;
 	}
 	
+	public static String getKey(ItemStack output)
+	{
+		ItemStack result=output.copy();
+		result.stackSize=1;
+		return result.toString();
+	}
+	
+	public static Recipe get(ItemStack output)
+	{
+		return recipes.get(getKey(output));
+	}
+	
+	public static Recipe get(String string)
+	{
+		return recipes.get(string);
+	}
+	
 	public String getKey()
 	{
-		return DecomposerRecipe.getKey(output);
+		ItemStack result=output.copy();
+		result.stackSize=1;
+		return result.toString();
 	}
+	
 }

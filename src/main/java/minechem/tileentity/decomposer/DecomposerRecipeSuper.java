@@ -5,50 +5,76 @@ import java.util.Hashtable;
 import java.util.Map;
 
 import minechem.potion.PotionChemical;
+import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeSuper extends DecomposerRecipe {
 	
 	public Map<DecomposerRecipeSelect,Integer> selectRecipes = new Hashtable<DecomposerRecipeSelect,Integer>();
 	
-	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components)
+	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input;
 		for (ItemStack component:components)
 		{
 			if (component!=null)
 			{
-				DecomposerRecipe recipe = DecomposerRecipe.get(component);
-				if (recipe!=null)
+				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
+				if (decompRecipe!=null)
 				{
-					if (recipe instanceof DecomposerRecipeSelect)
+					if (decompRecipe instanceof DecomposerRecipeSelect)
 					{
-						addSelectRecipe((DecomposerRecipeSelect)recipe,1);
+						addSelectRecipe((DecomposerRecipeSelect)decompRecipe,1);
 					}
-					else if (recipe instanceof DecomposerRecipeSuper)
+					else if (decompRecipe instanceof DecomposerRecipeSuper)
 					{
-						addPotionChemical(((DecomposerRecipeSuper)recipe).getGuaranteedOutput());
-						Map<DecomposerRecipeSelect,Integer> newSelectRecipes = ((DecomposerRecipeSuper)recipe).getSelectRecipes();
-						for (DecomposerRecipeSelect recipeSelect:newSelectRecipes.keySet())
-						{
-							addSelectRecipe(recipeSelect,newSelectRecipes.get(recipeSelect));
-						}
+						addDecompRecipeSuper((DecomposerRecipeSuper)decompRecipe);
 					}
-					else if (recipe instanceof DecomposerRecipeChance)
+					else if (decompRecipe instanceof DecomposerRecipeChance)
 					{
-						addSelectRecipe(new DecomposerRecipeSelect(recipe.getInput(),((DecomposerRecipeChance)recipe).getChance(),new DecomposerRecipe(recipe.getInput(), recipe.getOutputRaw())),1);
+						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(),((DecomposerRecipeChance)decompRecipe).getChance(),new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())),1);
 					}
 					else
 					{
-						addPotionChemical(recipe.getOutput());
+						addPotionChemical(decompRecipe.getOutput());
 					}
 				}
 				else
 				{
 					//Recursively generate recipe
-					System.out.println("no recipe");
+					//System.out.println("no recipe");
+					Recipe recipe = Recipe.get(component);
+					if (recipe!=null && level<10)
+					{
+//						System.out.println(recipe.output.getDisplayName()+": ");
+//						for (int i=0;i<recipe.inStacks.length;i++)
+//						{
+//							
+//							if (recipe.inStacks[i]!=null) System.out.print("["+recipe.inStacks[i].getDisplayName()+"]"+((i%3<2)?"":"\n"));
+//							else System.out.print("[     ]"+((i%3<2)?"":"\n"));
+//						}
+						System.out.println("");
+						DecomposerRecipeSuper newSuper;
+						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output,recipe.inStacks,level+1));
+						addDecompRecipeSuper(newSuper);
+					}
 				}
 			}
+		}
+	}
+	
+	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components)
+	{
+		this(input,components,0);
+	}
+	
+	private void addDecompRecipeSuper(DecomposerRecipeSuper recipeSuper)
+	{
+		addPotionChemical(recipeSuper.getGuaranteedOutput());
+		Map<DecomposerRecipeSelect,Integer> newSelectRecipes = recipeSuper.getSelectRecipes();
+		for (DecomposerRecipeSelect recipeSelect:newSelectRecipes.keySet())
+		{
+			addSelectRecipe(recipeSelect,newSelectRecipes.get(recipeSelect));
 		}
 	}
 	
@@ -104,6 +130,11 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 		return this.selectRecipes;
 	}
 	
+	public boolean isNull()
+	{
+		if (super.getOutput()==null && this.selectRecipes==null) return true;
+		return false;
+	}
 	
 	@Override
 	public ArrayList<PotionChemical> getPartialOutputRaw(int f) {

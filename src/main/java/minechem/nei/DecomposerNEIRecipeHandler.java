@@ -168,11 +168,11 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
         {
             return new CachedDecomposerRecipeChance((DecomposerRecipeChance) dr);
         }
-//        else if (dr instanceof DecomposerRecipeSuper)
-//        {
-//        	//TODO Super Recipe NEI handling properly
-//        	return new CachedDecomposerRecipe(dr);
-//        }
+        else if (dr instanceof DecomposerRecipeSuper)
+        {
+        	//TODO Super Recipe NEI handling properly
+        	return new CachedDecomposerRecipe(dr);
+        }
         else
         {
             return new CachedDecomposerRecipe(dr);

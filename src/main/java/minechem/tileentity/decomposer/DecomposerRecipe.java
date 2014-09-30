@@ -54,15 +54,25 @@ public class DecomposerRecipe
 		return recipe;
 	}
 	
+	public static DecomposerRecipe get(String string)
+	{
+		return recipes.get(string);
+	}
+	
 	public static DecomposerRecipe remove(DecomposerRecipe recipe)
 	{
-		if (recipes.containsKey(recipe.input))recipes.remove(recipe.input);
-		return recipe;
+		return remove(getKey(recipe.input));
+	}
+	
+	public static DecomposerRecipe remove(String string)
+	{
+		if (recipes.containsKey(string))return recipes.remove(string);
+		return null;
 	}
 	
 	public static String getKey(ItemStack item)
 	{
-		ItemStack result=((ItemStack) item).copy();
+		ItemStack result=item.copy();
 		result.stackSize=1;
 		return result.toString();
 	}
@@ -70,7 +80,7 @@ public class DecomposerRecipe
 	
 	public static String getKey(FluidStack item)
 	{
-		FluidStack result=((FluidStack) item).copy();
+		FluidStack result=item.copy();
 		result.amount=1;
 		return result.toString();
 	}
@@ -78,12 +88,12 @@ public class DecomposerRecipe
 	
 	public static DecomposerRecipe get(ItemStack item)
 	{
-		return recipes.get(getKey(item));
+		return get(getKey(item));
 	}
 	
 	public static DecomposerRecipe get(FluidStack item)
 	{
-		return recipes.get(getKey(item));
+		return get(getKey(item));
 	}
 	
 	public static void removeRecipeSafely(String item)
@@ -205,5 +215,10 @@ public class DecomposerRecipe
 		}
 
 		return result;
+	}
+	
+	public boolean isNull()
+	{
+		return this.output==null;
 	}
 }
