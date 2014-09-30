@@ -20,8 +20,8 @@ public class DecomposerRecipe
 	public static Map<String,DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
 
 	ItemStack input;
-	public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
-
+	//public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
+	public Map<PotionChemical,PotionChemical> output = new Hashtable<PotionChemical,PotionChemical>();
 	//TODO:Add blacklist support for fluids
 	public static DecomposerRecipe add(DecomposerRecipe recipe)
 	{
@@ -107,12 +107,37 @@ public class DecomposerRecipe
 		this(chemicals);
 		this.input = input;
 	}
+	
+	public DecomposerRecipe(ItemStack input,ArrayList<PotionChemical> chemicals)
+	{
+		this.input = input;
+		for (PotionChemical potionChemical : chemicals)
+		{
+			PotionChemical current = this.output.put(getPotionKey(potionChemical),potionChemical);
+			if (current!=null)
+			{
+				current.amount+=potionChemical.amount;
+				this.output.put(getPotionKey(potionChemical),potionChemical);
+			}
+		}
+	}
 
 	public DecomposerRecipe(PotionChemical... chemicals)
 	{
+		addChemicals(chemicals);
+	}
+	
+	public void addChemicals(PotionChemical... chemicals)
+	{
 		for (PotionChemical potionChemical : chemicals)
 		{
-			this.output.add(potionChemical);
+			//this.output.add(potionChemical);
+			PotionChemical current = this.output.put(getPotionKey(potionChemical),potionChemical);
+			if (current!=null)
+			{
+				current.amount+=potionChemical.amount;
+				this.output.put(getPotionKey(potionChemical),potionChemical);
+			}
 		}
 	}
 
@@ -123,12 +148,25 @@ public class DecomposerRecipe
 
 	public ArrayList<PotionChemical> getOutput()
 	{
-		return this.output;
+		//return this.output;
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		result.addAll(this.output.values());
+		return result;
 	}
 
+	public static PotionChemical getPotionKey(PotionChemical potion)
+	{
+		PotionChemical key = potion.copy();
+		key.amount=1;
+		return key;
+	}
+	
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
-		return this.output;
+		//return this.output;
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		result.addAll(this.output.values());
+		return result;
 	}
 
 	public ArrayList<PotionChemical> getPartialOutputRaw(int f)

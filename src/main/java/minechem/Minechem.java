@@ -17,10 +17,14 @@ import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.tick.TickHandler;
-import minechem.tileentity.decomposer.DecomposerRecipeHandler;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeSuper;
+import minechem.utils.Recipe;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraft.util.ResourceLocation;
@@ -264,7 +268,17 @@ public class Minechem
 		
 		
 		LOGGER.info("Registering Recipes");
-		DecomposerRecipeHandler.recursiveRecipes();
+		Recipe.init();
+		//DecomposerRecipeHandler.recursiveRecipes();
+		ItemStack cobble = new ItemStack(Blocks.cobblestone);
+		ItemStack iron = new ItemStack(Items.iron_ingot);
+		ItemStack piston = new ItemStack(Blocks.piston);
+		ItemStack redstone = new ItemStack(Items.redstone);
+		ItemStack furnace = new ItemStack(Blocks.furnace);
+		ItemStack gen = new ItemStack(GameRegistry.findBlock("ExtraUtilities", "generator"));
+		DecomposerRecipe.add(new DecomposerRecipeSuper(furnace,new ItemStack[]{cobble,cobble,cobble,cobble,cobble,cobble,cobble,cobble}));
+		DecomposerRecipe.add(new DecomposerRecipeSuper(gen,new ItemStack[]{cobble,cobble,cobble,iron, piston,iron,redstone,furnace,redstone}));
+		//for (PotionChemical chemical:furnace.getOutput()) LOGGER.info(chemical.toString());
 		LOGGER.info((System.currentTimeMillis()-start)+"ms spent registering Recipes");
 
 		LOGGER.info("Minechem has loaded");

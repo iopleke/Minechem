@@ -107,7 +107,7 @@ public class PolytoolEventHandler
                             while (item.stackSize > 0)
                             {
                                 // Always avoid chances
-                                ArrayList items = MinechemHelper.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).output);
+                                ArrayList items = null;//MinechemHelper.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).output);
 
                                 // ArrayList items=DecomposerRecipeHandler.instance.getRecipeOutputForInput(item);
                                 if (items != null)
