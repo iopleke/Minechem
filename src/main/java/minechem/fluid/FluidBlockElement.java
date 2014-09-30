@@ -40,6 +40,12 @@ public class FluidBlockElement extends BlockFluidClassic
         return "fluid." + fluidName;
     }
 
+    @Override
+    public String getLocalizedName()
+    {
+        return getFluid().getLocalizedName(null);
+    }
+
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister ir)

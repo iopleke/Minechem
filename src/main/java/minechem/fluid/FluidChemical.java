@@ -2,9 +2,11 @@ package minechem.fluid;
 
 import minechem.MinechemItemsRegistration;
 import minechem.item.molecule.MoleculeEnum;
+import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 import java.awt.*;
 
@@ -36,5 +38,11 @@ public class FluidChemical extends Fluid implements IMinechemFluid
         int green = (int) (molecule.green * 255);
         int blue = (int) (molecule.blue * 255);
         return new Color(red, green, blue).getRGB();
+    }
+
+    @Override
+    public String getLocalizedName(FluidStack stack)
+    {
+        return MinechemHelper.getLocalString("element.property.liquid") + " " + molecule.descriptiveName();
     }
 }

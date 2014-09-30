@@ -181,6 +181,7 @@ polytool.description.V=Ore: -4.0 Stone: 0.0 Sword: 0.0 Axe: -4.0 Shovel: 8.0
 polytool.description.Y=Ore: -4.0 Stone: 8.0 Sword: 0.0 Axe: -4.0 Shovel: 0.0
 polytool.description.Zn=Makes fake diamonds when mining dirt
 
+element.empty=Empty Tube
 element.Ac=Actinium
 element.Ag=Silver
 element.Al=Aluminium
