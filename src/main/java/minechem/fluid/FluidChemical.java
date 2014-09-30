@@ -2,9 +2,7 @@ package minechem.fluid;
 
 import minechem.MinechemItemsRegistration;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.potion.PotionPharmacologyEffect;
 import net.minecraft.item.ItemStack;
-import net.minecraft.potion.PotionEffect;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 

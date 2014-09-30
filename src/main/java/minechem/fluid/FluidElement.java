@@ -7,7 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 
-import java.awt.Color;
+import java.awt.*;
 
 public class FluidElement extends Fluid implements IMinechemFluid
 {
