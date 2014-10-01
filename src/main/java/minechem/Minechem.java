@@ -18,6 +18,7 @@ import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.tick.TickHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
+import minechem.utils.Recipe;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -264,6 +265,7 @@ public class Minechem
 		
 		
 		LOGGER.info("Registering Recipes");
+		Recipe.init();
 		DecomposerRecipeHandler.recursiveRecipes();
 		LOGGER.info((System.currentTimeMillis()-start)+"ms spent registering Recipes");
 

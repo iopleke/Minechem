@@ -1,10 +1,9 @@
 package minechem.nei;
 
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
+
 import minechem.Minechem;
 import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
@@ -13,11 +12,14 @@ import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
+import minechem.tileentity.decomposer.DecomposerRecipeSuper;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
@@ -165,6 +167,11 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
         else if (dr instanceof DecomposerRecipeChance)
         {
             return new CachedDecomposerRecipeChance((DecomposerRecipeChance) dr);
+        }
+        else if (dr instanceof DecomposerRecipeSuper)
+        {
+        	//TODO Super Recipe NEI handling properly
+        	return new CachedDecomposerRecipe(dr);
         }
         else
         {
