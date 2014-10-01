@@ -20,7 +20,7 @@ public class Recipe {
 	public static Map<String,Recipe> recipes = new Hashtable<String, Recipe>();
 	@SuppressWarnings("unchecked")
 	public static Map<ItemStack,ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
-	public static Map<String,String> oreDictionary;
+	public static Map<String,String> oreDictionary = new Hashtable<String,String>();
 	public ItemStack output;
 	public ItemStack[] inStacks;
 	
@@ -105,17 +105,18 @@ public class Recipe {
         for (String name:OreDictionary.getOreNames())
         {
         	ArrayList<ItemStack> oreDictStacks = OreDictionary.getOres(name);
-    		String toKey=null;
     		for (ItemStack thisStack:oreDictStacks)
     		{
     			String key = getKey(thisStack);
-    			if (DecomposerRecipe.get(key)==null)
+    			if (key!=null && DecomposerRecipe.get(key)!=null)
     			{
-	    			if (toKey==null) toKey = key;
-	    			else
+	    			for (ItemStack dictStack:oreDictStacks)
 	    			{
-		    			String fromKey = key;
-		    			if (fromKey!=null) oreDictionary.put(fromKey, toKey);
+	    				if (!dictStack.equals(thisStack))
+	    				{
+    		    			String fromKey = getKey(dictStack);
+    		    			if (fromKey!=null) oreDictionary.put(fromKey, key);
+	    				}
 	    			}
     			}
     		}
