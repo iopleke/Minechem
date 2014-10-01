@@ -88,7 +88,8 @@ public class Recipe {
                     		if (components[i]!=null&&components[i].getItemDamage()==wrongValue)
                     			components[i].setItemDamage(0);
                     	Recipe currRecipe = recipes.get(input);
-                    	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
+                    	if ((currRecipe==null||input.stackSize<currRecipe.getOutStackSize()) && input.getItem() != null)
+                        {
                     		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
                     	}                        
                     }
@@ -98,7 +99,8 @@ public class Recipe {
         for (ItemStack input:smelting.keySet())
         {
         	Recipe currRecipe = recipes.get(input);
-        	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
+            if ((currRecipe==null||input.stackSize<currRecipe.getOutStackSize()) && input.getItem() != null)
+            {
         		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, new ItemStack[]{smelting.get(input)}));
         	}
         }
