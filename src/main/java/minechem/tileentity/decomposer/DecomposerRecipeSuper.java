@@ -19,6 +19,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 		{
 			if (component!=null)
 			{
+				//TODO: Scale based on recipe output (4 stone bricks from 4 stone, etc)
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe!=null)
 				{
@@ -46,14 +47,6 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 					Recipe recipe = Recipe.get(component);
 					if (recipe!=null && level<10)
 					{
-//						System.out.println(recipe.output.getDisplayName()+": ");
-//						for (int i=0;i<recipe.inStacks.length;i++)
-//						{
-//							
-//							if (recipe.inStacks[i]!=null) System.out.print("["+recipe.inStacks[i].getDisplayName()+"]"+((i%3<2)?"":"\n"));
-//							else System.out.print("[     ]"+((i%3<2)?"":"\n"));
-//						}
-						System.out.println("");
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output,recipe.inStacks,level+1));
 						addDecompRecipeSuper(newSuper);
