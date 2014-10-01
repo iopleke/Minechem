@@ -73,38 +73,18 @@ public class DecomposerRecipe
 		return null;
 	}
 
-	public static String getKey(ItemStack item)
+	public static String getKey(ItemStack itemStack)
 	{
-		if (item != null)
-		{
-			ItemStack result = ((ItemStack) item).copy();
-			if (result != null)
-			{
-				result.stackSize = 1;
-				if (result.toString() != null && result.toString().length() > 0)
-				{
-					return result.toString();
-				}
-			}
-		}
-		return null;
+        ItemStack result = itemStack.copy();
+        result.stackSize = 1;
+        return result.toString();
 	}
 
-	public static String getKey(FluidStack item)
+	public static String getKey(FluidStack fluidStack)
 	{
-		if (item != null)
-		{
-			FluidStack result = ((FluidStack) item).copy();
-			if (result != null)
-			{
-				result.amount = 1;
-				if (result.toString() != null && result.toString().length() > 0)
-				{
-					return result.toString();
-				}
-			}
-		}
-		return null;
+        FluidStack result = fluidStack.copy();
+        result.amount = 1;
+        return result.toString();
 	}
 
 	public static DecomposerRecipe get(ItemStack item)
