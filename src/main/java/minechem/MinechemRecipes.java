@@ -38,6 +38,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @SuppressWarnings("RedundantArrayCreation")
@@ -2560,6 +2561,47 @@ public class MinechemRecipes
 				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.blackPigment)
 			}));
 		}
+		
+		//RailCraft
+		if (Loader.isModLoaded("Railcraft"))
+		{
+			Block metalPost = GameRegistry.findBlock("Railcraft", "tile.railcraft.post.metal");
+			Block metalPlatform = GameRegistry.findBlock("Railcraft", "tile.railcraft.post.metal.platform");
+			Block post = GameRegistry.findBlock("Railcraft", "tile.railcraft.post");
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPost), new PotionChemical[]
+			{
+				this.element(ElementEnum.Fe,5)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPlatform), new PotionChemical[]
+			{
+				this.element(ElementEnum.Fe,5)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]{}));
+		}
+		
+		//Mekanism
+		if (Loader.isModLoaded("Mekanism"))
+		{
+//			System.out.println(GameData.getItemRegistry().getKeys().toString());
+//			System.out.println(GameData.getBlockRegistry().getKeys().toString());
+			//Item ingotOsmium = GameRegistry.findItem(modId, name)
+		}
+		
+		//OreDict stuff
+		DecomposerRecipe.createAndAddRecipeSafely("ingotIron", 1, this.element(ElementEnum.Fe,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotGold", 1, this.element(ElementEnum.Au,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotCopper", 1, this.element(ElementEnum.Cu,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotTin", 1, this.element(ElementEnum.Sn,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotSilver", 1, this.element(ElementEnum.Ag,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotLead", 1, this.element(ElementEnum.Pb,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotPlatinum", 1, this.element(ElementEnum.Pt,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotAluminium", 1, this.element(ElementEnum.Au,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotSteel", 1, new PotionChemical[]{this.element(ElementEnum.Fe,15),this.element(ElementEnum.C,1)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotHSLA", 1, new PotionChemical[]{this.element(ElementEnum.Fe,15),this.element(ElementEnum.C,1)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotBronze", 1, new PotionChemical[]{this.element(ElementEnum.Cu,12),this.element(ElementEnum.Sn,4)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotElectrum", 1, new PotionChemical[]{this.element(ElementEnum.Ag,8),this.element(ElementEnum.Au,8)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotInvar", 1, new PotionChemical[]{this.element(ElementEnum.Fe,10),this.element(ElementEnum.Ni,6)});
+		
 	}
 	
 	public void RegisterRecipes()

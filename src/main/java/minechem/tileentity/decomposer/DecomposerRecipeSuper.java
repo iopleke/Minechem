@@ -15,6 +15,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input;
+		System.out.println(input.toString());
 		for (ItemStack component:components)
 		{
 			if (component!=null)
