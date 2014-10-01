@@ -18,7 +18,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Recipe {
 	public static Map<String,Recipe> recipes = new Hashtable<String, Recipe>();
+	@SuppressWarnings("unchecked")
 	public static Map<ItemStack,ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
+	public static Map<String,String> oreDictionary;
 	public ItemStack output;
 	public ItemStack[] inStacks;
 	
@@ -85,7 +87,7 @@ public class Recipe {
                     	for(int i=0;i<components.length;i++)
                     		if (components[i]!=null&&components[i].getItemDamage()==wrongValue)
                     			components[i].setItemDamage(0);
-                    	Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+                    	Recipe currRecipe = recipes.get(input);
                     	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
                     		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
                     	}                        
@@ -95,10 +97,28 @@ public class Recipe {
         }
         for (ItemStack input:smelting.keySet())
         {
-        	Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+        	Recipe currRecipe = recipes.get(input);
         	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
         		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, new ItemStack[]{smelting.get(input)}));
         	}
+        }
+        for (String name:OreDictionary.getOreNames())
+        {
+        	ArrayList<ItemStack> oreDictStacks = OreDictionary.getOres(name);
+    		String toKey=null;
+    		for (ItemStack thisStack:oreDictStacks)
+    		{
+    			String key = getKey(thisStack);
+    			if (DecomposerRecipe.get(key)==null)
+    			{
+	    			if (toKey==null) toKey = key;
+	    			else
+	    			{
+		    			String fromKey = key;
+		    			if (fromKey!=null) oreDictionary.put(fromKey, toKey);
+	    			}
+    			}
+    		}
         }
 	}
 	
@@ -115,14 +135,22 @@ public class Recipe {
 	
 	public static String getKey(ItemStack output)
 	{
-		ItemStack result=output.copy();
-		result.stackSize=1;
-		return result.toString();
+		if (output!=null){
+			ItemStack result=output.copy();
+			result.stackSize=1;
+			return result.toString();
+		}
+		return null;
 	}
 	
 	public static Recipe get(ItemStack output)
 	{
-		return recipes.get(getKey(output));
+		if (output!=null)
+		{
+			String key = getKey(output);
+			if (key!=null) return get(key);
+		}
+		return null;
 	}
 	
 	public static Recipe get(String string)

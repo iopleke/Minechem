@@ -109,12 +109,17 @@ public class DecomposerRecipe
 
 	public static DecomposerRecipe get(ItemStack item)
 	{
-		return recipes.get(getKey(item));
+		//ArrayList<ItemStack> oreDict= OreDictionary.getOres(OreDictionary.getOreID(item));
+		String key = getKey(item);
+		if (key!=null) return get(key);
+		return null;
 	}
 
 	public static DecomposerRecipe get(FluidStack item)
 	{
-		return recipes.get(getKey(item));
+		String key = getKey(item);
+		if (key!=null) return get(key);
+		return null;
 	}
 
 	public static void removeRecipeSafely(String item)
