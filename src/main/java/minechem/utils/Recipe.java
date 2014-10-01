@@ -85,7 +85,7 @@ public class Recipe {
                     	for(int i=0;i<components.length;i++)
                     		if (components[i]!=null&&components[i].getItemDamage()==wrongValue)
                     			components[i].setItemDamage(0);
-                    	Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+                    	Recipe currRecipe = recipes.get(input);
                     	if (currRecipe==null||input.stackSize<currRecipe.getOutStackSize()){
                     		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
                     	}                        
@@ -115,9 +115,12 @@ public class Recipe {
 	
 	public static String getKey(ItemStack output)
 	{
-		ItemStack result=output.copy();
-		result.stackSize=1;
-		return result.toString();
+		if (output!=null){
+			ItemStack result=output.copy();
+			result.stackSize=1;
+			return result.toString();
+		}
+		return null;
 	}
 	
 	public static Recipe get(ItemStack output)
