@@ -11,6 +11,7 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
@@ -43,7 +44,7 @@ public class FluidBlockElement extends BlockFluidClassic
     @Override
     public String getLocalizedName()
     {
-        return getFluid().getLocalizedName(null);
+        return StatCollector.translateToLocal("fluid." + fluidName + ".name");
     }
 
     @SideOnly(Side.CLIENT)
