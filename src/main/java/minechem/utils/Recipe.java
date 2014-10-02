@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
-import minechem.Minechem;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -29,7 +28,6 @@ public class Recipe {
     	int wrongValue=Short.MAX_VALUE;
         for (Object recipe : CraftingManager.getInstance().getRecipeList())
         {
-        	//Minechem.LOGGER.info(recipe);
             if (recipe instanceof IRecipe)
             {
                 if (((IRecipe) recipe).getRecipeOutput() != null)
@@ -85,13 +83,23 @@ public class Recipe {
                     if (components != null)
                     {
                     	for(int i=0;i<components.length;i++)
-                    		if (components[i]!=null&&components[i].getItemDamage()==wrongValue)
-                    			components[i].setItemDamage(0);
-                    	Recipe currRecipe = recipes.get(input);
-                    	if ((currRecipe==null||input.stackSize<currRecipe.getOutStackSize()) && input.getItem() != null)
                         {
-                    		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
-                    	}                        
+                            if (components[i] != null && components[i].getItem() != null)
+                            {
+                                if (components[i].getItemDamage() == wrongValue)
+                                {
+                                    components[i].setItemDamage(0);
+                                }
+                            }
+                        }
+                        if (input != null)
+                        {
+                            Recipe currRecipe = recipes.get(input);
+                            if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
+                            {
+                                recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
+                            }
+                        }
                     }
                 }
             }
