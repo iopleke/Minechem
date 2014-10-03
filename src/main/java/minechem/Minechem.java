@@ -1,7 +1,6 @@
 package minechem;
 
 import java.util.Arrays;
-
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
@@ -16,6 +15,7 @@ import minechem.potion.PotionCoatingSubscribe;
 import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
+import minechem.render.EffectsRenderer;
 import minechem.tick.TickHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Recipe;
@@ -29,10 +29,8 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.MinecraftForge;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -292,6 +290,6 @@ public class Minechem
 	@SubscribeEvent
 	public void onPreRender(RenderGameOverlayEvent.Pre e)
 	{
-		TickHandler.renderEffects();
+		EffectsRenderer.renderEffects();
 	}
 }

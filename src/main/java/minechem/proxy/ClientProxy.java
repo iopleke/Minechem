@@ -4,7 +4,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidHelper;
+import minechem.fluid.FluidTextureStitchHandler;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
 import minechem.sound.MinechemSoundEvent;
@@ -69,7 +69,7 @@ public class ClientProxy extends CommonProxy
     public void registerHooks()
     {
         MinecraftForge.EVENT_BUS.register(new MinechemSoundEvent());
-        MinecraftForge.EVENT_BUS.register(new FluidHelper());
+        MinecraftForge.EVENT_BUS.register(new FluidTextureStitchHandler());
     }
 
     @Override
@@ -82,7 +82,7 @@ public class ClientProxy extends CommonProxy
     public void registerTickHandlers()
     {
         super.registerTickHandlers();
-        FMLCommonHandler.instance().bus().register(new TickHandler());
+        
     }
 
     @Override

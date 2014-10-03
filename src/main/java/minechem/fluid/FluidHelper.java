@@ -1,13 +1,8 @@
 package minechem.fluid;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraftforge.client.event.TextureStitchEvent;
-
 import java.util.HashMap;
 
 public class FluidHelper
@@ -46,20 +41,4 @@ public class FluidHelper
         }
     }
 
-    @SubscribeEvent
-    public void onStitch(TextureStitchEvent.Pre event)
-    {
-        if(event.map.getTextureType() == 0)
-        {
-            IIconRegister ir = event.map;
-            for (FluidElement fluidElement : elements.values())
-            {
-                fluidElement.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
-            }
-            for (FluidChemical fluidChemical : molecule.values())
-            {
-                fluidChemical.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
-            }
-        }
-    }
 }
