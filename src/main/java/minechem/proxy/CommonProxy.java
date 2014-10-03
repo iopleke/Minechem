@@ -1,7 +1,9 @@
 package minechem.proxy;
 
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import minechem.Minechem;
 import minechem.tick.ScheduledTickHandler;
+import minechem.tick.TickHandler;
 import minechem.utils.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -20,6 +22,8 @@ public class CommonProxy implements Reference
 
     public void registerTickHandlers() {
         FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
+        FMLCommonHandler.instance().bus().register(new TickHandler());
+        FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
     }
 
     public World getClientWorld()
