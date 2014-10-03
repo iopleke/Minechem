@@ -2792,7 +2792,11 @@ public class MinechemRecipes
 
 	public boolean shouldCreateSynthesis(ItemStack item)
 	{
-		return true;
+        if (item.getItem() instanceof ItemBlock)
+        {
+            return shouldCreateSynthesis((ItemBlock)item.getItem());
+        }
+        return true;
 	}
 
 	public boolean shouldCreateSynthesis(ItemBlock block)
