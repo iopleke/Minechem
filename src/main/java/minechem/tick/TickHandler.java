@@ -46,35 +46,27 @@ public class TickHandler
     @SubscribeEvent
     public void tick(TickEvent.WorldTickEvent event)
     {
-        Minecraft mc = FMLClientHandler.instance().getClient();
-        if (mc.isSingleplayer())
-        {
-            EntityPlayer player = mc.thePlayer;
-            World world = mc.theWorld; // GuiIngame
-            if (player != null)
+        World world=event.world;
+        
+        for (Object p : world.playerEntities){
+            EntityPlayer player=(EntityPlayer) p;
+            double rangeToCheck = 32.0D;
+            
+            List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
+            for (EntityItem entityItem : itemList)
             {
-                if (world != null)
+                if ((entityItem.getEntityItem().getItem()== new ItemStack(MinechemItemsRegistration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).getItem() && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
                 {
-
-                }
-                double rangeToCheck = 32.0D;
-
-                List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
-                for (EntityItem entityItem : itemList)
-                {
-                    if ((entityItem.getEntityItem().getItem()== new ItemStack(MinechemItemsRegistration.element, 1, MoleculeEnum.potassiumNitrate.ordinal()).getItem() && (world.isMaterialInBB(entityItem.boundingBox, Material.water))))
-                    {
-                        world.createExplosion(entityItem, entityItem.posX, entityItem.posY, entityItem.posZ, 0.9F, true);
-                        int dx = MathHelper.floor_double(entityItem.posX);
-                        int dy = MathHelper.floor_double(entityItem.posY);
-                        int dz = MathHelper.floor_double(entityItem.posZ);
-                        transmuteWaterToPortal(world, dx, dy, dz);
-                        return;
-                    }
+                    world.createExplosion(entityItem, entityItem.posX, entityItem.posY, entityItem.posZ, 0.9F, true);
+                    int dx = MathHelper.floor_double(entityItem.posX);
+                    int dy = MathHelper.floor_double(entityItem.posY);
+                    int dz = MathHelper.floor_double(entityItem.posZ);
+                    transmuteWaterToPortal(world, dx, dy, dz);
+                    return;
                 }
             }
         }
-
+        
     }
 
     public static void renderEffects()
