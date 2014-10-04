@@ -158,8 +158,11 @@ public class Recipe {
 	{
 		if (output!=null)
 		{
-			String key = getKey(output);
-			if (key!=null) return get(key);
+			if (output.getItem()!=null)
+			{
+				String key = getKey(output);
+				if (key!=null) return get(key);
+			}
 		}
 		return null;
 	}
