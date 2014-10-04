@@ -126,7 +126,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
      * @param dr Decomposer recipe to add. */
     public void registerDecomposerRecipe(DecomposerRecipe dr)
     {
-        if (dr == null)
+        if (dr == null || dr.getOutput().isEmpty())
         {
             return;
         }
