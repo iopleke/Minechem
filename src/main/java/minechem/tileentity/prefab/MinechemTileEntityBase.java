@@ -1,7 +1,6 @@
 package minechem.tileentity.prefab;
 
 import net.minecraft.block.Block;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class MinechemTileEntityBase extends TileEntity

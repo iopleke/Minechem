@@ -125,6 +125,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 		return this.selectRecipes;
 	}
 	
+	@Override
 	public boolean isNull()
 	{
 		if (super.getOutput()==null && this.selectRecipes==null) return true;

@@ -68,7 +68,7 @@ public class FusionContainer extends Container implements IRadiationShield
             }
             else 
             {
-            	if(fusion.isItemValidForSlot(fusion.fuelSlot, stackInSlot))
+            	if(fusion.isItemValidForSlot(FusionTileEntity.fuelSlot, stackInSlot))
             	{
 	                if (!mergeItemStack(stackInSlot, 0, 1, false))
 	                {
@@ -77,7 +77,7 @@ public class FusionContainer extends Container implements IRadiationShield
             	}
             	if(fusion.isItemValidForSlot(1, stackInSlot))
             	{
-	                if (!mergeItemStack(stackInSlot, fusion.inputLeft, fusion.inputRight+1, false))
+	                if (!mergeItemStack(stackInSlot, FusionTileEntity.inputLeft, FusionTileEntity.inputRight+1, false))
 	                {
 	                    return null;
 	                }
