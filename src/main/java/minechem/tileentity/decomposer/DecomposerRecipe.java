@@ -75,16 +75,24 @@ public class DecomposerRecipe
 
 	public static String getKey(ItemStack itemStack)
 	{
-        ItemStack result = itemStack.copy();
-        result.stackSize = 1;
-        return result.toString();
+		if (itemStack!=null&&itemStack.getItem()!=null)
+        {
+			ItemStack result = itemStack.copy();
+			result.stackSize = 1;
+	        return result.toString();
+        }
+        return null;
 	}
 
 	public static String getKey(FluidStack fluidStack)
 	{
-        FluidStack result = fluidStack.copy();
-        result.amount = 1;
-        return result.toString();
+		if (fluidStack!=null&&fluidStack.getFluid()!=null)
+		{
+			FluidStack result = fluidStack.copy();
+			result.amount = 1;
+        	return result.toString();
+		}
+		return null;
 	}
 
 	public static DecomposerRecipe get(ItemStack item)

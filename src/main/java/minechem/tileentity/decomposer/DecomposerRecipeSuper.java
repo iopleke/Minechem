@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
+import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
@@ -15,7 +16,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input;
-		System.out.println(input.toString());
+		if (Settings.DebugMode) System.out.println(input.toString());
 		for (ItemStack component:components)
 		{
 			if (component!=null)
@@ -46,7 +47,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 					//Recursively generate recipe
 					//System.out.println("no recipe");
 					Recipe recipe = Recipe.get(component);
-					if (recipe!=null && level<10)
+					if (recipe!=null && level<6)
 					{
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output,recipe.inStacks,level+1));
