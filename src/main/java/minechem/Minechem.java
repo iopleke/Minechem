@@ -46,7 +46,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-@Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:BuildCraft|Energy;after:factorization;after:IC2;after:Railcraft;after:ThermalExpansion")
+@Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);")
 public class Minechem
 {
 	// Internal mod name used for reference purposes and resource gathering.
@@ -160,9 +160,8 @@ public class Minechem
 	{
 		if (Settings.DebugMode)
 		{
-			LOGGER.info("Registering Recipe Handlers...");
+			LOGGER.info("Registering Recipes...");
 		}
-		MinechemRecipes.getInstance().RegisterHandlers();
 		MinechemRecipes.getInstance().RegisterRecipes();
 		MinechemRecipes.getInstance().registerFluidRecipies();
 		
@@ -171,12 +170,6 @@ public class Minechem
 			LOGGER.info("Registering OreDict Compatability...");
 		}
 		MinechemItemsRegistration.registerToOreDictionary();
-
-		if (Settings.DebugMode)
-		{
-			LOGGER.info("Registering Minechem Recipes...");
-		}
-		MinecraftForge.EVENT_BUS.register(MinechemRecipes.getInstance());
 
 		if (Settings.DebugMode)
 		{
@@ -255,17 +248,14 @@ public class Minechem
 			LOGGER.info("Activating Chemical Effect Layering (Coatings)...");
 		}
 		PotionEnchantmentCoated.registerCoatings();
-		//for (Object recipe:DecomposerRecipe.hashRecipes.keySet()) 
-			//LOGGER.info(recipe.toString()+": "+DecomposerRecipe.hashRecipes.get(recipe));
-		//for (Object recipe:CraftingManager.getInstance().getRecipeList()) LOGGER.info(((IRecipe)recipe).getRecipeOutput()+": "+((IRecipe)recipe).);
-		
-		Long start = System.currentTimeMillis();
-		
-		
-		LOGGER.info("Registering Recipes");
+
+        Long start = System.currentTimeMillis();
+		LOGGER.info("Registering other Mod Recipes");
+        MinechemRecipes.getInstance().registerOreDictOres();
 		Recipe.init();
 		DecomposerRecipeHandler.recursiveRecipes();
 		LOGGER.info((System.currentTimeMillis()-start)+"ms spent registering Recipes");
+
 
 		LOGGER.info("Minechem has loaded");
 	}

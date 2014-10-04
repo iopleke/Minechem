@@ -1,19 +1,17 @@
 package minechem.oredictionary;
 
-import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
-
 public class OreDictionaryIC2Handler implements OreDictionaryHandler
 {
 
     @Override
-    public boolean canHandle(OreRegisterEvent event)
+    public boolean canHandle(String oreName)
     {
         // TODO Auto-generated method stub
         return false;
     }
 
     @Override
-    public void handle(OreRegisterEvent event)
+    public void handle(String oreName)
     {
         // TODO Auto-generated method stub
 

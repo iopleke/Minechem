@@ -20,7 +20,7 @@ public class SynthesisRecipeHandler
 
     public SynthesisRecipe getRecipeFromOutput(ItemStack output)
     {
-        for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
+        for (SynthesisRecipe recipe : SynthesisRecipe.recipes.values())
         {
             if (Compare.stacksAreSameKind(output, recipe.getOutput()))
                 return recipe;
@@ -30,7 +30,7 @@ public class SynthesisRecipeHandler
 
     public SynthesisRecipe getRecipeFromInput(ItemStack[] input)
     {
-        for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
+        for (SynthesisRecipe recipe : SynthesisRecipe.recipes.values())
         {
             if (itemStacksMatchesRecipe(input, recipe))
                 return recipe;

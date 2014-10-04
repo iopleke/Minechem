@@ -1,12 +1,11 @@
 package minechem.oredictionary;
 
 import minechem.Minechem;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.Molecule;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
-import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHandler
 {
@@ -25,29 +24,29 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
     { null, certusQuartzChemical, null, certusQuartzChemical, certusQuartzChemical, certusQuartzChemical, null, null, null };
 
     @Override
-    public boolean canHandle(OreRegisterEvent oreEvent)
+    public boolean canHandle(String oreName)
     {
-        return oreEvent.Name.endsWith("CertusQuartz");
+        return oreName.endsWith("CertusQuartz");
     }
 
     @Override
-    public void handle(OreRegisterEvent oreEvent)
+    public void handle(String oreName)
     {
-        if (oreEvent.Name.equals("dustCertusQuartz"))
+        if (oreName.equals("dustCertusQuartz"))
         {
-            DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore, certusQuartzDecompositionFormula));
-            SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true, 30000, certusQuartzDustSynthesisFormula));
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, certusQuartzDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, certusQuartzDustSynthesisFormula);
             // }
         }
-        else if (oreEvent.Name.equals("crystalCertusQuartz"))
+        else if (oreName.equals("crystalCertusQuartz"))
         {
-            DecomposerRecipe.add(new DecomposerRecipe(oreEvent.Ore, certusQuartzDecompositionFormula));
-            SynthesisRecipe.add(new SynthesisRecipe(oreEvent.Ore, true, 30000, certusQuartzCrystalSynthesisFormula));
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, certusQuartzDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, certusQuartzCrystalSynthesisFormula);
             // }
         }
         else
         {
-            Minechem.LOGGER.info("Unknown type of Certus Quartz : " + oreEvent.Name);
+            Minechem.LOGGER.info("Unknown type of Certus Quartz : " + oreName);
         }
     }
 }

@@ -49,8 +49,6 @@ public class DecomposerRecipe
 		{
 			recipes.put(getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
 		}
-
-		//recipes.add(recipe);
 		return recipe;
 	}
 
@@ -112,11 +110,11 @@ public class DecomposerRecipe
 		}
 	}
 
-	public static void createAndAddRecipeSafely(String item, int amount, PotionChemical... chemicals)
+	public static void createAndAddRecipeSafely(String item, PotionChemical... chemicals)
 	{
 		for (ItemStack i : OreDictionary.getOres(item))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), amount, i.getItemDamage()), chemicals));
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), chemicals));
 		}
 	}
 

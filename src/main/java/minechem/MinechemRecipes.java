@@ -2588,19 +2588,19 @@ public class MinechemRecipes
 		}
 		
 		//OreDict stuff
-		DecomposerRecipe.createAndAddRecipeSafely("ingotIron", 1, this.element(ElementEnum.Fe,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotGold", 1, this.element(ElementEnum.Au,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotCopper", 1, this.element(ElementEnum.Cu,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotTin", 1, this.element(ElementEnum.Sn,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotSilver", 1, this.element(ElementEnum.Ag,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotLead", 1, this.element(ElementEnum.Pb,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotPlatinum", 1, this.element(ElementEnum.Pt,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotAluminium", 1, this.element(ElementEnum.Au,16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotSteel", 1, new PotionChemical[]{this.element(ElementEnum.Fe,15),this.element(ElementEnum.C,1)});
-		DecomposerRecipe.createAndAddRecipeSafely("ingotHSLA", 1, new PotionChemical[]{this.element(ElementEnum.Fe,15),this.element(ElementEnum.C,1)});
-		DecomposerRecipe.createAndAddRecipeSafely("ingotBronze", 1, new PotionChemical[]{this.element(ElementEnum.Cu,12),this.element(ElementEnum.Sn,4)});
-		DecomposerRecipe.createAndAddRecipeSafely("ingotElectrum", 1, new PotionChemical[]{this.element(ElementEnum.Ag,8),this.element(ElementEnum.Au,8)});
-		DecomposerRecipe.createAndAddRecipeSafely("ingotInvar", 1, new PotionChemical[]{this.element(ElementEnum.Fe,10),this.element(ElementEnum.Ni,6)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotIron", this.element(ElementEnum.Fe,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotGold", this.element(ElementEnum.Au,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotCopper", this.element(ElementEnum.Cu,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotTin", this.element(ElementEnum.Sn,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotSilver", this.element(ElementEnum.Ag,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotLead", this.element(ElementEnum.Pb,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotPlatinum", this.element(ElementEnum.Pt,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotAluminium", this.element(ElementEnum.Au,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotSteel", new PotionChemical[]{this.element(ElementEnum.Fe,15),this.element(ElementEnum.C,1)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotHSLA", new PotionChemical[]{this.element(ElementEnum.Fe,15),this.element(ElementEnum.C,1)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotBronze", new PotionChemical[]{this.element(ElementEnum.Cu,12),this.element(ElementEnum.Sn,4)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotElectrum", new PotionChemical[]{this.element(ElementEnum.Ag,8),this.element(ElementEnum.Au,8)});
+		DecomposerRecipe.createAndAddRecipeSafely("ingotInvar", new PotionChemical[]{this.element(ElementEnum.Fe,10),this.element(ElementEnum.Ni,6)});
 		
 	}
 	
@@ -2758,7 +2758,7 @@ public class MinechemRecipes
 			if (nextDecomposerRecipe.getInput().getItemDamage() != -1)
 			{
 				boolean check = false;
-				Iterator synthesisRecipes = SynthesisRecipe.recipes.iterator();
+				Iterator synthesisRecipes = SynthesisRecipe.recipes.values().iterator();
 
 				while (true)
 				{
@@ -2848,189 +2848,197 @@ public class MinechemRecipes
 
 	private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
 
-	@SubscribeEvent
-	public void oreEvent(OreDictionary.OreRegisterEvent var1)
+    public void registerOreDictOres()
+    {
+        RegisterHandlers();
+        for (String oreName : OreDictionary.getOreNames())
+        {
+            registerOre(oreName);
+        }
+    }
+
+	public void registerOre(String oreName)
 	{
-		if (var1.Name.contains("gemApatite"))
+		if (oreName.contains("gemApatite"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Ca, 5), this.molecule(MoleculeEnum.phosphate, 4), this.element(ElementEnum.Cl)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.element(ElementEnum.Ca, 5), this.molecule(MoleculeEnum.phosphate, 4), this.element(ElementEnum.Cl)
-			}));
-		} else if (var1.Name.contains("ingotBronze"))
+			});
+		} else if (oreName.contains("ingotBronze"))
 		{
 			if (Loader.isModLoaded("Mekanism"))
 			{
-				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 				{
 					this.element(ElementEnum.Cu, 16), this.element(ElementEnum.Sn, 2)
-				}));
-				SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+				});
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 				{
 					this.element(ElementEnum.Cu, 16), this.element(ElementEnum.Sn, 2)
-				}));
+				});
 			} else
 			{
-				DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 				{
 					this.element(ElementEnum.Cu, 24), this.element(ElementEnum.Sn, 8)
-				}));
-				SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+				});
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 				{
 					this.element(ElementEnum.Cu, 24), this.element(ElementEnum.Sn, 8)
-				}));
+				});
 			}
-		} else if (var1.Name.contains("plateSilicon"))
+		} else if (oreName.contains("plateSilicon"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Si, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.element(ElementEnum.Si, 2)
-			}));
-		} else if (var1.Name.contains("xychoriumBlue"))
+			});
+		} else if (oreName.contains("xychoriumBlue"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Cu, 1)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 300, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Cu, 1)
-			}));
-		} else if (var1.Name.contains("xychoriumRed"))
+			});
+		} else if (oreName.contains("xychoriumRed"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Fe, 1)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 300, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Fe, 1)
-			}));
-		} else if (var1.Name.contains("xychoriumGreen"))
+			});
+		} else if (oreName.contains("xychoriumGreen"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.V, 1)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 300, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.V, 1)
-			}));
-		} else if (var1.Name.contains("xychoriumDark"))
+			});
+		} else if (oreName.contains("xychoriumDark"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Si, 1)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 300, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Si, 1)
-			}));
-		} else if (var1.Name.contains("xychoriumLight"))
+			});
+		} else if (oreName.contains("xychoriumLight"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Ti, 1)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 300, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 300, new PotionChemical[]
 			{
 				this.element(ElementEnum.Zr, 2), this.element(ElementEnum.Ti, 1)
-			}));
-		} else if (var1.Name.contains("gemPeridot"))
+			});
+		} else if (oreName.contains("gemPeridot"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.olivine)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.olivine)
-			}));
-		} else if (var1.Name.contains("cropMaloberry"))
+			});
+		} else if (oreName.contains("cropMaloberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.xylitol), this.molecule(MoleculeEnum.sucrose)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.xylitol), this.molecule(MoleculeEnum.sucrose)
-			}));
-		} else if (var1.Name.contains("cropDuskberry"))
+			});
+		} else if (oreName.contains("cropDuskberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.psilocybin), this.element(ElementEnum.S, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.psilocybin), this.element(ElementEnum.S, 2)
-			}));
-		} else if (var1.Name.contains("cropSkyberry"))
+			});
+		} else if (oreName.contains("cropSkyberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.theobromine), this.element(ElementEnum.S, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.theobromine), this.element(ElementEnum.S, 2)
-			}));
-		} else if (var1.Name.contains("cropBlightberry"))
+			});
+		} else if (oreName.contains("cropBlightberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.asprin), this.element(ElementEnum.S, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.asprin), this.element(ElementEnum.S, 2)
-			}));
-		} else if (var1.Name.contains("cropBlueberry"))
+			});
+		} else if (oreName.contains("cropBlueberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.blueorgodye), this.molecule(MoleculeEnum.sucrose, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.blueorgodye), this.molecule(MoleculeEnum.sucrose, 2)
-			}));
-		} else if (var1.Name.contains("cropRaspberry"))
+			});
+		} else if (oreName.contains("cropRaspberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.redorgodye), this.molecule(MoleculeEnum.sucrose, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.redorgodye), this.molecule(MoleculeEnum.sucrose, 2)
-			}));
-		} else if (var1.Name.contains("cropBlackberry"))
+			});
+		} else if (oreName.contains("cropBlackberry"))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(var1.Ore, new PotionChemical[]
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.purpleorgodye), this.molecule(MoleculeEnum.sucrose, 2)
-			}));
-			SynthesisRecipe.add(new SynthesisRecipe(var1.Ore, false, 1000, new PotionChemical[]
+			});
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
 			{
 				this.molecule(MoleculeEnum.purpleorgodye), this.molecule(MoleculeEnum.sucrose, 2)
-			}));
+			});
 		} else
 		{
 			for (OreDictionaryHandler handler : this.oreDictionaryHandlers)
 			{
-				if (handler.canHandle(var1))
+				if (handler.canHandle(oreName))
 				{
-					handler.handle(var1);
+					handler.handle(oreName);
 					return;
 				}
 			}

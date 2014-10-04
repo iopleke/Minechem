@@ -2,8 +2,8 @@ package minechem.oredictionary;
 
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.Molecule;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
 
 public enum OreDictionaryBaseOreEnum {
