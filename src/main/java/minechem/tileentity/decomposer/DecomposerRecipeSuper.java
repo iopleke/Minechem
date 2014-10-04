@@ -18,7 +18,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 		System.out.println(input.toString());
 		for (ItemStack component:components)
 		{
-			if (component!=null)
+			if (component!=null && component.getItem() != null)
 			{
 				//TODO: Scale based on recipe output (4 stone bricks from 4 stone, etc)
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
