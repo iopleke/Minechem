@@ -16,7 +16,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 	private enum EnumOrePrefix
 	{
-		dust, block, ingot, ore, dustSmall, nugget, dustDirty, plate, gem
+		dust, block, ingot, oreNether, ore, dustSmall, nugget, dustDirty, plate, gem
 	}
 
 	private String[] supportedOres;
@@ -79,6 +79,9 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 		switch (prefix)
 		{
+            case oreNether:
+                DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 6d));
+                break;
 			case ore:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 3d));
 				break;
