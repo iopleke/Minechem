@@ -25,7 +25,7 @@ public class DecomposerRecipe
 	//TODO:Add blacklist support for fluids
 	public static DecomposerRecipe add(DecomposerRecipe recipe)
 	{
-		if (recipe.input != null)
+		if (recipe.input != null && recipe.input.getItem() != null)
 		{
 			for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 			{
@@ -45,7 +45,7 @@ public class DecomposerRecipe
 				}
 			}
 			recipes.put(getKey(recipe.input), recipe);
-		} else if (((DecomposerFluidRecipe) recipe).inputFluid != null)
+		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
 			recipes.put(getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
 		}
