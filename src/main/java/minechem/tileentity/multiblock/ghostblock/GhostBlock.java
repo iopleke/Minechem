@@ -17,8 +17,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.MinechemBlocksGeneration;
 
-import java.util.Random;
-
 public class GhostBlock extends BlockContainer
 {
 

@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.Minechem;
 import minechem.Settings;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;

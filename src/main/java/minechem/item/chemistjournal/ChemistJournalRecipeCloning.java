@@ -3,7 +3,6 @@ package minechem.item.chemistjournal;
 import minechem.MinechemItemsRegistration;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;

@@ -5,7 +5,6 @@ import java.util.List;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.MinechemItemsRegistration;
-import minechem.Minechem;
 import minechem.Settings;
 import minechem.network.MessageHandler;
 import minechem.network.message.SynthesisUpdateMessage;

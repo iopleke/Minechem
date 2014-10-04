@@ -3,7 +3,6 @@ package minechem.tileentity.microscope;
 import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiToggleSwitch;
-import minechem.gui.GuiToggleSwitch.ToggleButton;
 import minechem.utils.Reference;
 import net.minecraft.util.ResourceLocation;
 

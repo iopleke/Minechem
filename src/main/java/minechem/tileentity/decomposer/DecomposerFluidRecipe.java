@@ -1,7 +1,5 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
-
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
