@@ -1,18 +1,15 @@
 package minechem.oredictionary;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.logging.Level;
-
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 {
@@ -26,7 +23,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 	private Map<OreDictionaryBaseOreEnum, ArrayList<EnumOrePrefix>> seenOres = new HashMap<OreDictionaryBaseOreEnum, ArrayList<EnumOrePrefix>>();
 
-	private Map<OreDictionaryBaseOreEnum, ItemStack> registeredIngots = new HashMap<OreDictionaryBaseOreEnum, ItemStack>();
+	private Map<OreDictionaryBaseOreEnum, String> registeredIngots = new HashMap<OreDictionaryBaseOreEnum, String>();
 
 	public OreDictionaryDefaultHandler()
 	{
@@ -59,9 +56,9 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 	}
 
 	@Override
-	public boolean canHandle(OreRegisterEvent event)
+	public boolean canHandle(String oreName)
 	{
-		if (this.parseOreName(event.Name) != null)
+		if (this.parseOreName(oreName) != null)
 		{
 			return true;
 		}
@@ -69,55 +66,53 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 	}
 
 	@Override
-	public void handle(OreRegisterEvent event)
+	public void handle(String oreName)
 	{
 		if (Settings.DebugMode)
 		{
-			Minechem.LOGGER.info(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + event.Name);
+			Minechem.LOGGER.info(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + oreName);
 		}
 
-		String[] tokens = this.parseOreName(event.Name);
+		String[] tokens = this.parseOreName(oreName);
 		EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
 		OreDictionaryBaseOreEnum ore = OreDictionaryBaseOreEnum.valueOf(tokens[1]);
 
 		switch (prefix)
 		{
 			case ore:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(ore.getComposition(), 3d)));
-            // Removed to prevent dupes with RC
-				// SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, scaleFloor(ore.getComposition(),3d)));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 3d));
 				break;
 			case ingot:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore.getComposition()));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				if (!haveSeen(ore, EnumOrePrefix.dust) && !haveSeen(ore, EnumOrePrefix.dustSmall))
 				{
-					SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore.getComposition()));
-					registeredIngots.put(ore, event.Ore);
+					SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, ore.getComposition());
+					registeredIngots.put(ore, oreName);
 				}
 				break;
 
 			case nugget:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(ore.getComposition(), 1d / 9d)));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 1d / 9d));
 				break;
 			case dust:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore.getComposition()));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				unregisterIngot(ore);
-				SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore.getComposition()));
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, ore.getComposition());
 				break;
 			case dustDirty:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore.getComposition()));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				break;
 			case plate:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore.getComposition()));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				break;
 			case dustSmall:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, scaleFloor(ore.getComposition(), 0.25d)));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 0.25d));
 				unregisterIngot(ore);
-				SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, scaleCeil(ore.getComposition(), 0.25d)));
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, scaleCeil(ore.getComposition(), 0.25d));
 				break;
 			case gem:
-				DecomposerRecipe.add(new DecomposerRecipe(event.Ore, ore.getComposition()));
-				SynthesisRecipe.add(new SynthesisRecipe(event.Ore, false, 1000, ore.getComposition()));
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, ore.getComposition());
 				break;
 
 			default:

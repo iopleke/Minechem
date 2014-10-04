@@ -25,7 +25,7 @@ public class DecomposerRecipe
 	//TODO:Add blacklist support for fluids
 	public static DecomposerRecipe add(DecomposerRecipe recipe)
 	{
-		if (recipe.input != null)
+		if (recipe.input != null && recipe.input.getItem() != null)
 		{
 			for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 			{
@@ -45,12 +45,10 @@ public class DecomposerRecipe
 				}
 			}
 			recipes.put(getKey(recipe.input), recipe);
-		} else if (((DecomposerFluidRecipe) recipe).inputFluid != null)
+		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
 			recipes.put(getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
 		}
-
-		//recipes.add(recipe);
 		return recipe;
 	}
 
@@ -112,11 +110,11 @@ public class DecomposerRecipe
 		}
 	}
 
-	public static void createAndAddRecipeSafely(String item, int amount, PotionChemical... chemicals)
+	public static void createAndAddRecipeSafely(String item, PotionChemical... chemicals)
 	{
 		for (ItemStack i : OreDictionary.getOres(item))
 		{
-			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), amount, i.getItemDamage()), chemicals));
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), chemicals));
 		}
 	}
 

@@ -64,7 +64,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
         if (outputId.equals(MINECHEM_SYNTHESIS_RECIPES_ID))
         {
             // Add all synthesis recipes to local arecipes array.
-            for (SynthesisRecipe sr : SynthesisRecipe.recipes)
+            for (SynthesisRecipe sr : SynthesisRecipe.recipes.values())
             {
                 registerSynthesisRecipe(sr);
             }
@@ -79,7 +79,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
     public void loadCraftingRecipes(ItemStack result)
     {
         // Add all synthesis recipes that can yield the result.
-        for (SynthesisRecipe sr : SynthesisRecipe.recipes)
+        for (SynthesisRecipe sr : SynthesisRecipe.recipes.values())
         {
             ItemStack recipeOutput = sr.getOutput();
             if (NEIServerUtils.areStacksSameTypeCrafting(result, recipeOutput))
@@ -104,7 +104,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
             return;
         }
         // Add all synthesis recipes that take the ingredient as an input.
-        for (SynthesisRecipe sr : SynthesisRecipe.recipes)
+        for (SynthesisRecipe sr : SynthesisRecipe.recipes.values())
         {
             if (sr.isShaped())
             {

@@ -1,17 +1,22 @@
 package minechem.tileentity.synthesis;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
+
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class SynthesisRecipe
 {
 
-	public static ArrayList<SynthesisRecipe> recipes = new ArrayList<SynthesisRecipe>();
+	//public static ArrayList<SynthesisRecipe> recipes = new ArrayList<SynthesisRecipe>();
+    public static Map<String, SynthesisRecipe> recipes = new HashMap<String, SynthesisRecipe>();
 	private ItemStack output;
 	private PotionChemical[] shapedRecipe;
 	private ArrayList unshapedRecipe;
@@ -20,7 +25,7 @@ public class SynthesisRecipe
 
 	public static SynthesisRecipe add(SynthesisRecipe recipe)
 	{
-		if (recipe.getOutput() != null)
+		if (recipe.getOutput() != null && recipe.getOutput().getItem() != null)
 		{
 			for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
 			{
@@ -39,10 +44,19 @@ public class SynthesisRecipe
 					}
 				}
 			}
+            recipes.put(getKey(recipe.output), recipe);
 		}
-		recipes.add(recipe);
+
 		return recipe;
 	}
+
+    public static void createAndAddRecipeSafely(String item, boolean shaped, int energyCost, PotionChemical... chemicals)
+    {
+        for (ItemStack i : OreDictionary.getOres(item))
+        {
+            SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), shaped, energyCost, chemicals));
+        }
+    }
 
 	public static void remove(ItemStack itemStack)
 	{
@@ -50,15 +64,24 @@ public class SynthesisRecipe
 
 		for (SynthesisRecipe recipe : recipes)
 		{
-			SynthesisRecipe.recipes.remove(recipe);
+			SynthesisRecipe.recipes.remove(getKey(recipe.output));
 		}
 	}
+    public static SynthesisRecipe remove(String string)
+    {
+        if (recipes.containsKey(string))
+        {
+            return recipes.remove(string);
+        }
+        return null;
+    }
+
 
 	public static ArrayList<SynthesisRecipe> search(ItemStack itemStack)
 	{
 		ArrayList<SynthesisRecipe> results = new ArrayList<SynthesisRecipe>();
 
-		for (SynthesisRecipe recipe : SynthesisRecipe.recipes)
+		for (SynthesisRecipe recipe : SynthesisRecipe.recipes.values())
 		{
 			if (itemStack.isItemEqual(recipe.output))
 			{
@@ -69,6 +92,13 @@ public class SynthesisRecipe
 		return results;
 
 	}
+
+    public static String getKey(ItemStack itemStack)
+    {
+        ItemStack result = itemStack.copy();
+        result.stackSize = 1;
+        return result.toString();
+    }
 
 	public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... var4)
 	{
