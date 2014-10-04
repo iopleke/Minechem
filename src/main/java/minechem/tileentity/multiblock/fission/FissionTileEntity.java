@@ -1,8 +1,12 @@
 package minechem.tileentity.multiblock.fission;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import minechem.item.blueprint.BlueprintFission;
 import minechem.item.element.ElementItem;
+import minechem.network.MessageHandler;
+import minechem.network.message.FissionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.Constants;
@@ -22,10 +26,6 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         0
     };
-    public static int[] kFuel =
-    {
-        1
-    };
     public static int[] kOutput =
     {
         2
@@ -33,28 +33,23 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 
     private final BoundedInventory inputInventory;
     private final BoundedInventory outputInventory;
-    private final BoundedInventory fuelInventory;
     private Transactor inputTransactor;
     private Transactor outputTransactor;
-    private Transactor fuelTransactor;
     public static int kStartInput = 0;
-    public static int kStartFuel = 1;
     public static int kStartOutput = 2;
     public static int kSizeInput = 1;
-    public static int kSizeFuel = 1;
     public static int kSizeOutput = 1;
     SafeTimeTracker energyUpdateTracker = new SafeTimeTracker();
     boolean shouldSendUpdatePacket;
 
     public FissionTileEntity()
     {
+    	super(Settings.maxFissionStorage);
         inventory = new ItemStack[getSizeInventory()];
         inputInventory = new BoundedInventory(this, kInput);
         outputInventory = new BoundedInventory(this, kOutput);
-        fuelInventory = new BoundedInventory(this, kFuel);
         inputTransactor = new Transactor(inputInventory);
         outputTransactor = new Transactor(outputInventory);
-        fuelTransactor = new Transactor(fuelInventory, 1);
         this.inventory = new ItemStack[this.getSizeInventory()];
         setBlueprint(new BlueprintFission());
     }
@@ -67,25 +62,26 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             return;
         }
-        shouldSendUpdatePacket = false;
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 50 == 0 && inventory[kStartFuel] != null && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
+        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 50 == 0 && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
         {
-            if (inventory[kStartInput] != null && inventory[kStartFuel] != null && inventory[kStartFuel].getItemDamage() == 91 && inventory[kStartFuel].getItem() instanceof ElementItem)
-            {
-                ItemStack fissionResult = getFissionOutput();
-                if (inventory[kOutput[0]] == null || (inventory[kOutput[0]].stackSize < 64 && fissionResult != null && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
-                {
-                    addToOutput(fissionResult);
-                    removeInputs();
-                }
-                fissionResult = getFissionOutput();
-                shouldSendUpdatePacket = true;
-            }
+        	 if (inventory[kStartInput] != null)
+        	 {
+        		 ItemStack fissionResult = getFissionOutput();
+	        	 if (inventory[kOutput[0]] == null || (inventory[kOutput[0]].stackSize < 64 && fissionResult != null && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
+	        	 {
+		        	 if(useEnergy(getEnergyNeeded()))
+		        	 {
+			        	 addToOutput(fissionResult);
+			        	 removeInputs();
+		        	 }
+	        	 }
+	        	 fissionResult = getFissionOutput();
+        	 }
         }
-
-        if (shouldSendUpdatePacket && !worldObj.isRemote)
+        if (!worldObj.isRemote)
         {
-            // TODO: Write update packet for energy information for client.
+			FissionUpdateMessage message = new FissionUpdateMessage(this);
+            MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
         }
     }
 
@@ -109,8 +105,6 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     private void removeInputs()
     {
         decrStackSize(kInput[0], 1);
-
-        decrStackSize(kFuel[0], 1);
     }
 
     private boolean canFuse(ItemStack fusionResult)
@@ -240,10 +234,8 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             case 0:
                 return kOutput;
-            case 1:
-                return kInput;
             default:
-                return kFuel;
+                return kInput;
         }
     }
 
@@ -254,10 +246,8 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             case 0:
                 return FissionTileEntity.kOutput;
-            case 1:
-                return FissionTileEntity.kInput;
             default:
-                return FissionTileEntity.kFuel;
+                return FissionTileEntity.kInput;
         }
     }
 
@@ -272,4 +262,11 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     {
         return false;
     }
+
+	@Override
+	public int getEnergyNeeded() {
+		if(inventory[0] != null)
+			return (1 + inventory[0].getItemDamage()) * Settings.fissionMultiplier;
+		return 0;
+	}
 }

@@ -12,13 +12,31 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public class TileEntityProxy extends TileEntity implements ISidedInventory
+public class TileEntityProxy extends MinechemTileEntityElectric implements ISidedInventory
 {
+
+	public TileEntityProxy(int maxEnergy) {
+		super(maxEnergy);
+	}
 
 	public TileEntity manager;
 	int managerXOffset;
 	int managerYOffset;
 	int managerZOffset;
+
+	@Override
+public void updateEntity()
+{
+	if(this.manager != null)
+	{
+		int ammountReceived = ((MinechemTileEntityElectric) manager).receiveEnergy(this.getEnergyStored(), true);
+		if(ammountReceived>0)
+		{
+			((MinechemTileEntityElectric) manager).receiveEnergy(ammountReceived, false);			
+			this.useEnergy(ammountReceived);
+		}
+	}
+}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound)
@@ -244,18 +262,16 @@ public class TileEntityProxy extends TileEntity implements ISidedInventory
 	{
         // Cannot extract items from reactor with automation disabled.
 		// Can only extract from the bottom.
-
-		//if this is a fusion reactor
-		if (Settings.AllowAutomation && side == 0 && this.isItemValidForSlot(0, new ItemStack(MinechemItemsRegistration.fusionStar)) && slot == 3)
+/*		if (Settings.AllowAutomation && side == 0 && slot == 2)
 		{
 			return true;
 		}
+*/		return false;
+	}
 
-		//if this is a fission reactor
-		if (Settings.AllowAutomation && side == 0 && !this.isItemValidForSlot(0, new ItemStack(MinechemItemsRegistration.fusionStar)) && slot == 2)
-		{
-			return true;
-		}
-		return false;
+	@Override
+	public int getEnergyNeeded() 
+	{
+		return 0;
 	}
 }

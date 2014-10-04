@@ -18,7 +18,6 @@ public class FusionContainer extends Container implements IRadiationShield
         this.inventoryPlayer = inventoryPlayer;
         this.fusion = fusion;
 
-        addSlotToContainer(new Slot(fusion, FusionTileEntity.fuelSlot, 80, 18));
         addSlotToContainer(new Slot(fusion, FusionTileEntity.inputLeft, 22, 62));
         addSlotToContainer(new Slot(fusion, FusionTileEntity.inputRight, 138, 62));
         addSlotToContainer(new Slot(fusion, FusionTileEntity.output, 80, 62));
@@ -68,13 +67,6 @@ public class FusionContainer extends Container implements IRadiationShield
             }
             else 
             {
-            	if(fusion.isItemValidForSlot(FusionTileEntity.fuelSlot, stackInSlot))
-            	{
-	                if (!mergeItemStack(stackInSlot, 0, 1, false))
-	                {
-	                    return null;
-	                }
-            	}
             	if(fusion.isItemValidForSlot(1, stackInSlot))
             	{
 	                if (!mergeItemStack(stackInSlot, FusionTileEntity.inputLeft, FusionTileEntity.inputRight+1, false))
@@ -82,16 +74,16 @@ public class FusionContainer extends Container implements IRadiationShield
 	                    return null;
 	                }
             	}
-            	if(slot<31 && stackInSlot.stackSize == stack.stackSize)
+            	if(slot<30 && stackInSlot.stackSize == stack.stackSize)
             	{
-            		if (!this.mergeItemStack(stackInSlot, 31, 40, false))
+            		if (!this.mergeItemStack(stackInSlot, 30, 39, false))
             		{
             			return null;
             		}
             	}
-            	if(slot>30 && stackInSlot.stackSize == stack.stackSize)
+            	if(slot>29 && stackInSlot.stackSize == stack.stackSize)
             	{
-            		if (!this.mergeItemStack(stackInSlot, 4, 31, false))
+            		if (!this.mergeItemStack(stackInSlot, 3, 30, false))
             		{
             			return null;
             		}

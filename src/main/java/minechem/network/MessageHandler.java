@@ -19,6 +19,8 @@ public class MessageHandler implements IMessageHandler
         INSTANCE.registerMessage(PolytoolUpdateMessage.class, PolytoolUpdateMessage.class, 2, Side.CLIENT);
         INSTANCE.registerMessage(GhostBlockMessage.class, GhostBlockMessage.class, 3, Side.CLIENT);
         INSTANCE.registerMessage(ChemistJournalActiveItemMessage.class, ChemistJournalActiveItemMessage.class, 4, Side.SERVER);
+        INSTANCE.registerMessage(FissionUpdateMessage.class, FissionUpdateMessage.class, 5, Side.CLIENT);
+        INSTANCE.registerMessage(FusionUpdateMessage.class, FusionUpdateMessage.class, 6, Side.CLIENT);
     }
 
     @Override

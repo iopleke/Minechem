@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Random;
 
 import minechem.Minechem;
+import minechem.Settings;
 import minechem.block.BlockSimpleContainer;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
@@ -87,7 +88,7 @@ public class FusionBlock extends BlockSimpleContainer
             return new FissionTileEntity();
         } else
         {
-            return new TileEntityProxy();
+            return new TileEntityProxy(Settings.energyPacketSize);
         }
     }
 
@@ -150,7 +151,7 @@ public class FusionBlock extends BlockSimpleContainer
     @Override
     public TileEntity createNewTileEntity(World world, int i)
     {
-        return new TileEntityProxy();
+        return new TileEntityProxy(Settings.energyPacketSize);
     }
 
 }

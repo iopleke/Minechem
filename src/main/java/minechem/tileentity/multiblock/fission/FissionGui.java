@@ -29,7 +29,7 @@ public class FissionGui extends GuiContainerTabbed
     {
         super(new FissionContainer(inventoryPlayer, fission));
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fission")));
-
+        addTab(new FissionTabStateControl(this, fission));
     }
 
     @Override

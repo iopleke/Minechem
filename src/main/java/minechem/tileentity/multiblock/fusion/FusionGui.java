@@ -31,7 +31,8 @@ public class FusionGui extends GuiContainerTabbed
         this.xSize = guiWidth;
         this.ySize = guiHeight;
         addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
-    }
+        addTab(new FusionTabStateControl(this, fusion));
+  }
 
     @Override
     protected void drawGuiContainerForegroundLayer(int par1, int par2)
