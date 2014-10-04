@@ -74,7 +74,7 @@ public class FusionGui extends GuiContainerTabbed
 
     private void updateEnergy()
     {
-        targetEnergy = fusion.output;
+        targetEnergy = FusionTileEntity.output;
         // @TODO - calculate energy 
     }
 

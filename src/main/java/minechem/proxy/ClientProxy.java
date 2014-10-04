@@ -1,6 +1,5 @@
 package minechem.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
@@ -8,7 +7,6 @@ import minechem.fluid.FluidTextureStitchHandler;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
 import minechem.sound.MinechemSoundEvent;
-import minechem.tick.TickHandler;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntityRenderer;

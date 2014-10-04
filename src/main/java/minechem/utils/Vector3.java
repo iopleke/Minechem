@@ -741,11 +741,8 @@ public class Vector3 implements Cloneable
                         if (0.0D < closestEntity || closestEntity == 0.0D)
                         {
                             pickedEntity = new MovingObjectPosition(entityHit);
-                            if (pickedEntity != null)
-                            {
-                                pickedEntity.hitVec = hitMOP.hitVec;
-                                closestEntity = 0.0D;
-                            }
+                            pickedEntity.hitVec = hitMOP.hitVec;
+                            closestEntity = 0.0D;
                         }
                     }
                     else

@@ -283,7 +283,8 @@ public abstract class GuiMinechemContainer extends GuiScreen
     /**
      * Draws the text when mouse is over creative inventory tab. Params: current creative tab to be checked, current mouse x position, current mouse y position.
      */
-    protected void drawCreativeTabHoveringText(String creativeTab, int mouseX, int mouseY)
+    @Override
+	protected void drawCreativeTabHoveringText(String creativeTab, int mouseX, int mouseY)
     {
         GL11.glDisable(GL12.GL_RESCALE_NORMAL);
         RenderHelper.disableStandardItemLighting();

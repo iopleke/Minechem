@@ -2,9 +2,7 @@ package minechem.potion;
 
 import java.util.HashMap;
 
-import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.utils.MinechemHelper;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;

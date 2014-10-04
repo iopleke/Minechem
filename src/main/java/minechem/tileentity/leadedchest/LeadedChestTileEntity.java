@@ -7,7 +7,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.Constants;
-import scala.tools.nsc.backend.opt.ConstantOptimization;
 
 public class LeadedChestTileEntity extends TileEntity implements IInventory
 {
