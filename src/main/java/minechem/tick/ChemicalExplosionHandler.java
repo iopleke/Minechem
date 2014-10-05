@@ -8,6 +8,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
+import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
@@ -98,6 +99,20 @@ public class ChemicalExplosionHandler
 
     public static void initExplodableChemical(){
     	// TODO Add more explosion rules
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Li));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Na));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.K));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Rb));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Cs));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Fr));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Mg));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ca));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Sr));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ba));
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ra));
+    	
+    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
+    	
     }
     
     private void explosionReaction(World world,EntityItem entityItem){
