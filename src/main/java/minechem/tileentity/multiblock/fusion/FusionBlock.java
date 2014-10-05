@@ -3,7 +3,6 @@ package minechem.tileentity.multiblock.fusion;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.block.BlockSimpleContainer;
@@ -41,14 +40,7 @@ public class FusionBlock extends BlockSimpleContainer
     {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-        // if(tileEntity instanceof TileEntityProxy){
-        // TileEntityProxy proxy=(TileEntityProxy) tileEntity;
-        // if(proxy.manager!=null){
-        // this.onBlockActivated(world, proxy.manager.xCoord,proxy.manager.yCoord,proxy.manager.zCoord, entityPlayer, side, par7, par8, par9);
-        // }
-        // return true;
-        // }
-        if (tileEntity == null || entityPlayer.isSneaking())
+        if (tileEntity == null)
         {
             return false;
         }
@@ -88,7 +80,7 @@ public class FusionBlock extends BlockSimpleContainer
             return new FissionTileEntity();
         } else
         {
-            return new TileEntityProxy(Settings.energyPacketSize);
+            return new TileEntityProxy();
         }
     }
 
@@ -137,21 +129,16 @@ public class FusionBlock extends BlockSimpleContainer
         }
     }
 
-    //
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
     {
         super.breakBlock(world, x, y, z, block, metaData);
-
-        /* if (oldMetadata < 2) { if (world.getTileEntity(x, y, z) instanceof TileEntityProxy) { TileEntityProxy tileEntity = (TileEntityProxy) world.getTileEntity(x, y, z);
-         * 
-         * world.destroyBlock(tileEntity.getManager().xCoord, tileEntity.getManager().yCoord, tileEntity.getManager().zCoord, true); } } */
     }
 
     @Override
     public TileEntity createNewTileEntity(World world, int i)
     {
-        return new TileEntityProxy(Settings.energyPacketSize);
+        return new TileEntityProxy();
     }
 
 }

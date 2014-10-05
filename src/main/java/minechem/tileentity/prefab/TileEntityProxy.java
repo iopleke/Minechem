@@ -15,8 +15,9 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityProxy extends MinechemTileEntityElectric implements ISidedInventory
 {
 
-	public TileEntityProxy(int maxEnergy) {
-		super(maxEnergy);
+	public TileEntityProxy() 
+	{
+		super(Settings.energyPacketSize);
 	}
 
 	public TileEntity manager;
