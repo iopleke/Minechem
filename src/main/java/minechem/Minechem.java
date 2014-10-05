@@ -1,6 +1,7 @@
 package minechem;
 
 import java.util.Arrays;
+import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
@@ -19,6 +20,7 @@ import minechem.render.EffectsRenderer;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Recipe;
 import minechem.utils.Reference;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.ItemStack;
@@ -229,6 +231,9 @@ public class Minechem
 		}
 		MinechemRecipes.getInstance().RegisterModRecipes();
 		
+		FluidChemicalDispenser dispenser=new FluidChemicalDispenser();
+		BlockDispenser.dispenseBehaviorRegistry.putObject(MinechemItemsRegistration.element, dispenser);
+		BlockDispenser.dispenseBehaviorRegistry.putObject(MinechemItemsRegistration.molecule, dispenser);
 	}
 
 	@EventHandler

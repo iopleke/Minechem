@@ -277,7 +277,7 @@ public class ElementItem extends Item implements IFluidContainerItem
         }
     }
 
-    public static Object createStackOf(ElementEnum element, int amount)
+    public static ItemStack createStackOf(ElementEnum element, int amount)
     {
         return new ItemStack(MinechemItemsRegistration.element, amount, element.ordinal());
     }
