@@ -16,6 +16,7 @@ import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.render.EffectsRenderer;
+import minechem.tick.ChemicalExplosionHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Recipe;
 import minechem.utils.Reference;
@@ -229,6 +230,7 @@ public class Minechem
 		}
 		MinechemRecipes.getInstance().RegisterModRecipes();
 		
+		ChemicalExplosionHandler.initExplodableChemical();
 	}
 
 	@EventHandler
