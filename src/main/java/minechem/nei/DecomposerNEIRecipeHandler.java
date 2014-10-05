@@ -127,14 +127,11 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	{
 		if (dr != null)
 		{
-			if (dr.getOutput() != null)
+			if (dr.hasOutput())
 			{
-				if (!dr.getOutput().isEmpty())
-				{
-					BaseCachedDecomposerRecipe cdr = buildCachedRecipe(dr);
+                BaseCachedDecomposerRecipe cdr = buildCachedRecipe(dr);
 
-					arecipes.add(cdr);
-				}
+                arecipes.add(cdr);
 			}
 		}
 

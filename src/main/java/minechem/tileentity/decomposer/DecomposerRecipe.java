@@ -235,4 +235,9 @@ public class DecomposerRecipe
 	{
 		return this.output == null;
 	}
+
+    public boolean hasOutput()
+    {
+        return !this.output.values().isEmpty();
+    }
 }
