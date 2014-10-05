@@ -17,6 +17,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 
 public class FluidChemicalDispenser implements IBehaviorDispenseItem {
@@ -37,22 +38,23 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 			if (frontBlock instanceof IFluidBlock){
 				Fluid fluid=((IFluidBlock)frontBlock).getFluid();
 				
-				Enum elementEnum=null;
+				ItemStack stack=null;
 				if (fluid instanceof FluidElement){
-					elementEnum=((FluidElement)fluid).element;
+					stack=ElementItem.createStackOf(ElementEnum.elements[((FluidElement)fluid).element.ordinal()], 1);
 				}else if (fluid instanceof FluidChemical){
-					elementEnum=((FluidChemical)fluid).molecule;
+					stack=new ItemStack(MinechemItemsRegistration.molecule, 1, ((FluidChemical)fluid).molecule.ordinal());
+				}else if (fluid==FluidRegistry.WATER){
+					stack=new ItemStack(MinechemItemsRegistration.molecule, 1,MoleculeEnum.water.ordinal());
 				}
 				
-				if (elementEnum==null){
+				if (stack==null){
 					// it is not a chemical fluid
 				}else{
-					ItemStack elementStack=createStackOf(elementEnum,1);
 					TileEntity tile=blockSource.getBlockTileEntity();
 					if (tile instanceof IInventory){
-						elementStack=addItemToInventory((IInventory)tile, elementStack);
+						stack=addItemToInventory((IInventory)tile, stack);
 					}
-					throwItemStack(world, elementStack, x, y, z);
+					throwItemStack(world, stack, x, y, z);
 					
 					--itemStack.stackSize;
 					world.setBlockToAir(x, y, z);
@@ -79,16 +81,6 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		}
 		
 		return itemStack;
-	}
-	
-	public ItemStack createStackOf(Enum elementEnum, int amount) {
-		if (elementEnum instanceof ElementEnum){
-			return ElementItem.createStackOf(ElementEnum.elements[elementEnum.ordinal()], amount);
-		}else if (elementEnum instanceof MoleculeEnum){
-			return new ItemStack(MinechemItemsRegistration.molecule, amount, elementEnum.ordinal());
-		}
-		
-		return null;
 	}
 	
 	public ItemStack addItemToInventory(IInventory inventory,ItemStack itemStack){

@@ -2,11 +2,11 @@ package minechem.item.element;
 
 import java.util.EnumMap;
 import java.util.List;
-
 import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
 import minechem.fluid.FluidHelper;
 import minechem.fluid.IMinechemFluid;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -19,6 +19,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -27,12 +28,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import org.lwjgl.input.Keyboard;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -400,11 +401,19 @@ public class ElementItem extends Item implements IFluidContainerItem
             {
                 if (block instanceof IFluidBlock && meta == 0)
                 {
-                    if (((IFluidBlock)block).getFluid() instanceof IMinechemFluid)
+                	Fluid fluid=((IFluidBlock)block).getFluid();
+                	ItemStack stack=null;
+                	
+                    if (fluid instanceof IMinechemFluid)
                     {
-                        world.setBlockToAir(blockX, blockY, blockZ);
-                        ItemStack stack=((IMinechemFluid) ((IFluidBlock) block).getFluid()).getOutputStack();
+                        stack=((IMinechemFluid) ((IFluidBlock) block).getFluid()).getOutputStack();
                         stack.stackSize=1;
+                    }else if (fluid==FluidRegistry.WATER){
+                    	stack=new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.water.ordinal());
+                    }
+                    
+                    if (stack!=null){
+                        world.setBlockToAir(blockX, blockY, blockZ);
                         return fillTube(itemStack, player, stack);
                     }
                 }
