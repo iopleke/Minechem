@@ -1,7 +1,7 @@
 package minechem.tileentity.multiblock.fusion;
 
-import minechem.Settings;
 import minechem.gui.GuiTabStateControl;
+import minechem.item.element.ElementItem;
 import net.minecraft.client.gui.Gui;
 
 public class FusionTabStateControl extends GuiTabStateControl
@@ -11,7 +11,7 @@ public class FusionTabStateControl extends GuiTabStateControl
 	public FusionTabStateControl(Gui gui, FusionTileEntity fusion)
 	{
 		super(gui);
-		this.tileEntity = fusion;
+		this.tileEntity = (FusionTileEntity) fusion;
 		this.state = TabState.norecipe;
 	}
 
@@ -19,21 +19,36 @@ public class FusionTabStateControl extends GuiTabStateControl
 	public void update()
 	{
 		super.update();
-		if (this.tileEntity.inventory[0] == null || this.tileEntity.inventory[1] == null)
+		if (this.tileEntity instanceof FusionTileEntity)
 		{
-			state = TabState.norecipe;
-		} else
-		{
-			lastKnownEnergyCost = (this.tileEntity.inventory[1].getItemDamage() + this.tileEntity.inventory[0].getItemDamage() + 2) * Settings.fusionMultiplier;
-			if (this.tileEntity.getEnergyNeeded() < this.tileEntity.getEnergyStored())
+			if (this.tileEntity.inventory[0] != null && this.tileEntity.inventory[1] != null)
 			{
-				state = TabState.powered;
+				if (this.tileEntity.inventory[0].getItem() instanceof ElementItem && this.tileEntity.inventory[1].getItem() instanceof ElementItem)
+				{
+					lastKnownEnergyCost = this.tileEntity.getEnergyNeeded();
+					if (lastKnownEnergyCost <= this.tileEntity.getEnergyStored())
+					{
+						if (((FusionTileEntity) this.tileEntity).canOutput())
+						{
+							state = TabState.powered;
+						} else
+						{
+							state = TabState.jammed;
+						}
+					} else
+					{
+						state = TabState.unpowered;
+					}
+				} else
+				{
+					this.state = TabState.norecipe;
+				}
 			} else
 			{
-				state = TabState.unpowered;
+				this.state = TabState.norecipe;
 			}
+			this.overlayColor = this.state.color;
 		}
-		this.overlayColor = this.state.color;
 	}
 
 	@Override

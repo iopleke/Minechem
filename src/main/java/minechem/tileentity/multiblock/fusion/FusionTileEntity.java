@@ -185,7 +185,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 		}
 	}
 
-	private boolean canOutput()
+	public boolean canOutput()
 	{
 		if (inventory[output] == null)
 		{
