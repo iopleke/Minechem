@@ -35,7 +35,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		if (itemStack.getItem() instanceof ElementItem&&itemStack.getItemDamage()>=ElementEnum.heaviestMass){
 			Block frontBlock=world.getBlock(x, y, z);
 			
-			if (frontBlock instanceof IFluidBlock){
+			if (frontBlock instanceof IFluidBlock&&((IFluidBlock)frontBlock).canDrain(world, x, y, z)){
 				Fluid fluid=((IFluidBlock)frontBlock).getFluid();
 				
 				ItemStack stack=null;
