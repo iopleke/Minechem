@@ -161,13 +161,12 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         {
         	 if (!canProcess)
         	 {
-//    	   		 System.out.println("Energy Needed: "+this.getEnergyNeeded() + " ENERGY STORED: "+this.getEnergyStored());
         		 if(this.getEnergyNeeded()<this.getEnergyStored() && inputsCanBeFused() && canOutput())
         		 {
         			 canProcess = true;
         		 }
         	 }
-        	 if (canProcess && this.useEnergy(1))
+        	 if (canProcess && this.useEnergy(this.getEnergyNeeded()))
         	 {
 	        	 fuseInputs();
 	        	 removeInputs();
@@ -208,7 +207,9 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 	@Override
 	public int getEnergyNeeded() {
 		if(inventory[inputLeft] != null && inventory[inputRight] != null && this.inputsCanBeFused())
+		{
 			return (inventory[inputLeft].getItemDamage() + inventory[inputRight].getItemDamage() + 2) * Settings.fusionMultiplier;
+		}
 		return 0;
 	}
 }

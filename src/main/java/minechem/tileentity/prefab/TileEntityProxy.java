@@ -24,7 +24,7 @@ public class TileEntityProxy extends MinechemTileEntityElectric implements ISide
 	int managerYOffset;
 	int managerZOffset;
 
-	@Override
+@Override
 public void updateEntity()
 {
 	if(this.manager != null)
@@ -262,11 +262,11 @@ public void updateEntity()
 	{
         // Cannot extract items from reactor with automation disabled.
 		// Can only extract from the bottom.
-/*		if (Settings.AllowAutomation && side == 0 && slot == 2)
+		if (Settings.AllowAutomation && side == 0 && slot == 2)
 		{
 			return true;
 		}
-*/		return false;
+		return false;
 	}
 
 	@Override
