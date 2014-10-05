@@ -403,7 +403,9 @@ public class ElementItem extends Item implements IFluidContainerItem
                     if (((IFluidBlock)block).getFluid() instanceof IMinechemFluid)
                     {
                         world.setBlockToAir(blockX, blockY, blockZ);
-                        return fillTube(itemStack, player, ((IMinechemFluid) ((IFluidBlock) block).getFluid()).getOutputStack());
+                        ItemStack stack=((IMinechemFluid) ((IFluidBlock) block).getFluid()).getOutputStack();
+                        stack.stackSize=1;
+                        return fillTube(itemStack, player, stack);
                     }
                 }
             }
