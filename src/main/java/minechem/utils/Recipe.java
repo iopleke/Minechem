@@ -25,7 +25,6 @@ public class Recipe {
 	
 	public static void init()
 	{
-    	int wrongValue=Short.MAX_VALUE;
         for (Object recipe : CraftingManager.getInstance().getRecipeList())
         {
             if (recipe instanceof IRecipe)
@@ -53,7 +52,7 @@ public class Recipe {
                         ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
                         for (Object o : ((ShapedOreRecipe) recipe).getInput())
                         {
-                        	
+
                             if (o instanceof ItemStack)
                             {
                                 inputs.add((ItemStack) o);
@@ -69,7 +68,7 @@ public class Recipe {
                             }
                         }
                         components = inputs.toArray(new ItemStack[inputs.size()]);
-                        
+
                     }
                     else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
                     {
@@ -80,25 +79,12 @@ public class Recipe {
                         components = ((ShapedRecipes) recipe).recipeItems;
                     }
 
-                    if (components != null)
+                    if (components != null && input != null)
                     {
-                    	for(int i=0;i<components.length;i++)
+                        Recipe currRecipe = recipes.get(input);
+                        if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
                         {
-                            if (components[i] != null && components[i].getItem() != null)
-                            {
-                                if (components[i].getItemDamage() == wrongValue)
-                                {
-                                    components[i].setItemDamage(0);
-                                }
-                            }
-                        }
-                        if (input != null)
-                        {
-                            Recipe currRecipe = recipes.get(input);
-                            if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
-                            {
-                                recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
-                            }
+                            recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
                         }
                     }
                 }
@@ -132,10 +118,31 @@ public class Recipe {
     		}
         }
 	}
-	
-	public Recipe(ItemStack outStack, ItemStack[] components)
+
+	public Recipe(ItemStack outStack, ItemStack[] componentsParam)
 	{
 		output=outStack;
+        ItemStack[] components = new ItemStack[componentsParam.length];
+        int i = 0;
+        for (ItemStack itemStack : componentsParam)
+        {
+            if (itemStack != null)
+            {
+                if (itemStack.getItemDamage() == Short.MAX_VALUE)
+                {
+                    components[i] = new ItemStack(itemStack.getItem(), itemStack.stackSize, 0);
+                }
+                else
+                {
+                    components[i] = new ItemStack(itemStack.getItem(), itemStack.stackSize, itemStack.getItemDamage());
+                }
+            }
+            else
+            {
+                components[i] = null;
+            }
+            i++;
+        }
 		inStacks=components;
 	}
 	
