@@ -23,6 +23,7 @@ import org.lwjgl.opengl.GL11;
 public class PolytoolGui extends GuiContainerTabbed
 {
 	private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/polytool.png");
+	private static final ItemStack polytoolItem=new ItemStack(MinechemItemsRegistration.polytool);
 	public ArrayList<ElementGuiHelper> elements = new ArrayList();
 	long renders;
 	ItemStack polytool;
@@ -99,7 +100,7 @@ public class PolytoolGui extends GuiContainerTabbed
 			((ElementGuiHelper) renderIter.next()).draw(this, renders);
 		}
 
-		drawItemStack(new ItemStack(MinechemItemsRegistration.polytool), 80, 42, "");
+		drawItemStack(polytoolItem, 80, 42, "");
 		String localizedName;
 
 		localizedName = MinechemHelper.getLocalString("gui.polytool.sword");

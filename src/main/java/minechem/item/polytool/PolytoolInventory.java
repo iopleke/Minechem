@@ -3,8 +3,8 @@ package minechem.item.polytool;
 import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.PolytoolUpdateMessage;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -73,11 +73,7 @@ public class PolytoolInventory implements IInventory
             if (!player.worldObj.isRemote)
             {
                 PolytoolUpdateMessage message = new PolytoolUpdateMessage(upgrade);
-                MessageHandler.INSTANCE.sendToServer(message);
-            }
-            else
-            {
-                ((PolytoolGui)Minecraft.getMinecraft().currentScreen).addUpgrade(upgrade);
+                MessageHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
             }
         }
 

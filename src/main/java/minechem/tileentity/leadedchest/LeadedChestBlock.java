@@ -5,6 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Random;
 import minechem.Minechem;
 import minechem.utils.Reference;
+import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -30,9 +31,9 @@ public class LeadedChestBlock extends BlockContainer
     }
 
 	@Override
-	public void onBlockDestroyedByPlayer(World p_149664_1_, int p_149664_2_, int p_149664_3_, int p_149664_4_, int p_149664_5_) {
-		this.dropItems(p_149664_1_, p_149664_2_,  p_149664_3_, p_149664_4_);
-		super.onBlockDestroyedByPlayer(p_149664_1_, p_149664_2_, p_149664_3_, p_149664_4_, p_149664_5_);
+	public void breakBlock(World world, int xCoord, int yCoord, int zCoord,Block block, int metaData) {
+		this.dropItems(world, xCoord,  yCoord, zCoord);
+		super.onBlockDestroyedByPlayer(world, xCoord, yCoord, zCoord, metaData);
 	}
 
     @Override
