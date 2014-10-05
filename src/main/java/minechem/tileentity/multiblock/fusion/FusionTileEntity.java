@@ -100,7 +100,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 	{
 		if (slot == inputLeft || slot == inputRight)
 		{
-			if (itemstack.getItem() == MinechemItemsRegistration.element)
+			if (itemstack.getItem() instanceof ElementItem)
 			{
 				return true;
 			}
