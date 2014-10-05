@@ -26,7 +26,6 @@ public class FissionContainer extends Container implements IRadiationShield
 
         addSlotToContainer(new Slot(fission, FissionTileEntity.kInput[0], 80, 16));
         bindOutputSlot();
-        bindFuelSlot();
         bindPlayerInventory(inventoryPlayer);
     }
 
@@ -36,11 +35,6 @@ public class FissionContainer extends Container implements IRadiationShield
         int y = 62;
         int j = 0;
         addSlotToContainer(new Slot(fission, 2, x + (4 * 18), y));
-    }
-
-    private void bindFuelSlot()
-    {
-        addSlotToContainer(new Slot(fission, FissionTileEntity.kStartFuel, 125, 33));
     }
 
     private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
@@ -75,33 +69,28 @@ public class FissionContainer extends Container implements IRadiationShield
         {
             ItemStack stackInSlot = slotObject.getStack();
             stack = stackInSlot.copy();
-            if (slot < 3)
+            if (slot < 2)
             {
                 if (!mergeItemStack(stackInSlot, kPlayerInventorySlotStart, inventorySlots.size(), true))
                     return null;
             }
             else
             {
-            	if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage() == ElementEnum.U.atomicNumber() - 1)
-            	{
-            		if (!mergeItemStack(stackInSlot, 2, 3, false))
-            			return null;
-            	}
             	if (stackInSlot.getItem() == MinechemItemsRegistration.element && stackInSlot.getItemDamage()>0)
             	{
             		if (!mergeItemStack(stackInSlot, 0, 1, false))
             			return null;            		
             	}
-            	if(slot<30 && stackInSlot.stackSize == stack.stackSize)
+            	if(slot<29 && stackInSlot.stackSize == stack.stackSize)
             	{
-            		if (!this.mergeItemStack(stackInSlot, 30, 39, false))
+            		if (!this.mergeItemStack(stackInSlot, 29, 38, false))
             		{
             			return null;
             		}
             	}
-            	if(slot>29 && stackInSlot.stackSize == stack.stackSize)
+            	if(slot>28 && stackInSlot.stackSize == stack.stackSize)
             	{
-            		if (!this.mergeItemStack(stackInSlot, 3, 30, false))
+            		if (!this.mergeItemStack(stackInSlot, 2, 29, false))
             		{
             			return null;
             		}

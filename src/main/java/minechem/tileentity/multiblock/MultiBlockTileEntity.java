@@ -5,6 +5,7 @@ import java.util.HashMap;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.tileentity.prefab.MinechemTileEntity;
+import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.SafeTimeTracker;
 import net.minecraft.block.Block;
@@ -12,10 +13,15 @@ import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
-public abstract class MultiBlockTileEntity extends MinechemTileEntity
+public abstract class MultiBlockTileEntity extends MinechemTileEntityElectric
 {
 
-    private static final Integer air = 0;
+    public MultiBlockTileEntity(int maxEnergy) 
+    {
+		super(maxEnergy);
+	}
+
+	private static final Integer air = 0;
     int offsetX;
     int offsetY;
     int offsetZ;

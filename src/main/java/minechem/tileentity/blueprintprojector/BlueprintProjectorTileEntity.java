@@ -138,7 +138,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
         {
             Pos3 worldPos = position.getLocalPos(blueprint.getManagerPosX(), blueprint.getManagerPosY(), blueprint.getManagerPosZ());
             worldObj.setBlock(worldPos.x, worldPos.y, worldPos.z, managerBlock.block, managerBlock.metadata, 3);
-            if (this.blueprint == MinechemBlueprint.fusion)
+            if (this.blueprint == MinechemBlueprint.fusion && worldObj.getTileEntity(worldPos.x, worldPos.y, worldPos.z) == null)
             {
                 FusionTileEntity fusion = new FusionTileEntity();
                 fusion.setWorldObj(this.worldObj);

@@ -47,11 +47,15 @@ public class Settings
 	public static boolean powerUseEnabled = true;
 	public static int costDecomposition = 1000;
 	public static int synthesisMultiplier = 10;
+	public static int fusionMultiplier = 100;
+	public static int fissionMultiplier = 100;
     public static int energyPacketSize = 100;
 
 	// Power base storage values
 	public static int maxSynthesizerStorage = 100000;
 	public static int maxDecomposerStorage = 10000;
+	public static int maxFissionStorage = 100000;
+	public static int maxFusionStorage = 100000;
 
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
@@ -203,6 +207,32 @@ public class Settings
 		prop.comment = StatCollector.translateToLocal("config.power.synthesizer.cost.description");
 		prop.setLanguageKey("config.power.synthesizer.cost.name");
 		synthesisMultiplier = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "costFissionMultiplier", Settings.fissionMultiplier);
+		prop.setMinValue(1).setMaxValue(100);
+		prop.comment = StatCollector.translateToLocal("config.power.fission.cost.description");
+		prop.setLanguageKey("config.power.fusion.cost.name");
+		fissionMultiplier = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "maxFissionStorage", Settings.maxFissionStorage);
+		prop.comment = StatCollector.translateToLocal("config.power.fission.max.description");
+		prop.setLanguageKey("config.power.fission.max.name");
+		maxFissionStorage = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "costFusionMultiplier", Settings.fusionMultiplier);
+		prop.setMinValue(1).setMaxValue(100);
+		prop.comment = StatCollector.translateToLocal("config.power.fusion.cost.description");
+		prop.setLanguageKey("config.power.fusion.cost.name");
+		fusionMultiplier = prop.getInt();
+		configList.add(prop.getName());
+
+		prop = config.get("power", "maxFusionStorage", Settings.maxFusionStorage);
+		prop.comment = StatCollector.translateToLocal("config.power.fusion.max.description");
+		prop.setLanguageKey("config.power.fusion.max.name");
+		maxFusionStorage = prop.getInt();
 		configList.add(prop.getName());
 
 		if (config.hasChanged())

@@ -1,8 +1,12 @@
 package minechem.tileentity.multiblock.fusion;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import minechem.item.blueprint.BlueprintFusion;
 import minechem.item.element.ElementEnum;
+import minechem.network.MessageHandler;
+import minechem.network.message.FusionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,14 +20,15 @@ import net.minecraftforge.common.util.Constants;
 public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInventory
 {
     public static boolean canProcess = false;
-    public static int fuelSlot = 0;
     public static int fusedResult = 0;
-    public static int inputLeft = 1;
-    public static int inputRight = 2;
-    public static int output = 3;
+//    public static int inputFuel = 0;
+    public static int inputLeft = 0;
+    public static int inputRight = 1;
+    public static int output = 2;
 
     public FusionTileEntity()
     {
+    	super(Settings.maxFusionStorage);
         this.inventory = new ItemStack[getSizeInventory()];
         setBlueprint(new BlueprintFusion());
     }
@@ -38,11 +43,6 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     public boolean canInsertItem(int slot, ItemStack itemstack, int side)
     {
         return false;
-    }
-
-    private boolean checkValidFuel()
-    {
-        return inventory[fuelSlot].getItem() == Items.nether_star || inventory[fuelSlot].getItem() == MinechemItemsRegistration.fusionStar && inventory[fuelSlot].getItem().getDamage(inventory[fuelSlot]) < 2000;
     }
 
     private void fuseInputs()
@@ -62,7 +62,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     @Override
     public int[] getAccessibleSlotsFromSide(int var1)
     {
-    	int[] slots={FusionTileEntity.fuelSlot,FusionTileEntity.inputLeft,FusionTileEntity.inputRight,FusionTileEntity.output};
+    	int[] slots={FusionTileEntity.inputLeft,FusionTileEntity.inputRight,FusionTileEntity.output};
         return slots;
     }
 
@@ -93,13 +93,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack itemstack)
     {    	
-        if (slot == fuelSlot)
-        {
-            if (itemstack.getItem() == Items.nether_star || itemstack.getItem() == MinechemItemsRegistration.fusionStar)
-            {
-                return true;
-            }
-        } else if (slot == inputLeft || slot == inputRight)
+        if (slot == inputLeft || slot == inputRight)
         {
             if (itemstack.getItem() == MinechemItemsRegistration.element)
             {
@@ -165,21 +159,25 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         }
         if (!worldObj.isRemote)
         {
-            if (inventory[fuelSlot] != null && !canProcess)
-            {
-                canProcess = checkValidFuel() && inputsCanBeFused() && canOutput();
-            }
-            if (canProcess)
-            {
-                fuseInputs();
-                useFuel();
-                removeInputs();
-                canProcess = false;
-            }
-            else
-            {
-                fusedResult = 0;
-            }
+        	 if (!canProcess)
+        	 {
+        		 if(this.getEnergyNeeded()<this.getEnergyStored() && inputsCanBeFused() && canOutput())
+        		 {
+        			 canProcess = true;
+        		 }
+        	 }
+        	 if (canProcess && this.useEnergy(this.getEnergyNeeded()))
+        	 {
+	        	 fuseInputs();
+	        	 removeInputs();
+	        	 canProcess = false;
+        	 }
+        	 else
+        	 {
+        		 fusedResult = 0;
+        	 }
+        	 FusionUpdateMessage message = new FusionUpdateMessage(this);
+             MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
         }
     }
 
@@ -196,17 +194,6 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         return false;
     }
 
-    private void useFuel()
-    {
-        if (inventory[fuelSlot].getItem() == Items.nether_star)
-        {
-            this.inventory[fuelSlot] = new ItemStack(MinechemItemsRegistration.fusionStar);
-        } else if (inventory[fuelSlot].getItem() == MinechemItemsRegistration.fusionStar)
-        {
-            inventory[fuelSlot].setItemDamage(inventory[fuelSlot].getItemDamage() + 1);
-        }
-    }
-
     @Override
     public void writeToNBT(NBTTagCompound nbtTagCompound)
     {
@@ -216,4 +203,13 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
         NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
         nbtTagCompound.setTag("inventory", inventoryTagList);
     }
+
+	@Override
+	public int getEnergyNeeded() {
+		if(inventory[inputLeft] != null && inventory[inputRight] != null && this.inputsCanBeFused())
+		{
+			return (inventory[inputLeft].getItemDamage() + inventory[inputRight].getItemDamage() + 2) * Settings.fusionMultiplier;
+		}
+		return 0;
+	}
 }
