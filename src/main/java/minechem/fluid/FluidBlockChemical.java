@@ -81,7 +81,7 @@ public class FluidBlockChemical extends BlockFluidClassic
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        if (entity instanceof EntityLivingBase && Settings.fluidEffects)
+        if (entity instanceof EntityLivingBase && Settings.fluidEffects&&getFluid() instanceof FluidChemical)
         {
             PotionPharmacologyEffect.triggerPlayerEffect(((FluidChemical) getFluid()).molecule, (EntityLivingBase) entity);
         }
