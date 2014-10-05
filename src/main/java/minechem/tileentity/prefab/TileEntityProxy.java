@@ -188,7 +188,7 @@ public void updateEntity()
 	@Override
 	public int getInventoryStackLimit()
 	{
-		if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
+		if (this.manager != null && this.manager != this)
 		{
 			return ((ISidedInventory) this.getManager()).getInventoryStackLimit();
 		}
