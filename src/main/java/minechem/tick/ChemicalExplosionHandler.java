@@ -133,4 +133,14 @@ public class ChemicalExplosionHandler
 		return chemical;
     }
     
+    public static boolean checkToExplode(Block source,Block destination,World world,int x,int y,int z){
+    	Enum chemicalA=getChemical(source);
+    	Enum chemicalB=getChemical(destination);
+    	if (chemicalA!=null&&chemicalB!=null&&explosionReactionRules.contains(new ChemicalExplosionReactionRule(chemicalA, chemicalB))){
+    		world.createExplosion(null, x, y, z, 0.9F, true);
+    		return true;
+    	}
+    	
+    	return false;
+    }
 }

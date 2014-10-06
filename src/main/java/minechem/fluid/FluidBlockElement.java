@@ -14,10 +14,9 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.BlockFluidClassic;
 import net.minecraftforge.fluids.Fluid;
 
-public class FluidBlockElement extends BlockFluidClassic
+public class FluidBlockElement extends MinechemFluidBlock
 {
     @SideOnly(Side.CLIENT)
     protected IIcon stillIcon;
