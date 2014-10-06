@@ -4,12 +4,12 @@ import java.util.EnumMap;
 import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
+import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
-import minechem.fluid.IMinechemFluid;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
+import minechem.tick.ChemicalExplosionHandler;
 import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
@@ -19,7 +19,6 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -28,10 +27,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidContainerItem;
 import org.lwjgl.input.Keyboard;
 import cpw.mods.fml.relauncher.Side;
@@ -395,28 +391,18 @@ public class ElementItem extends Item implements IFluidContainerItem
             int blockZ = movingObjectPosition.blockZ;
 
             Block block = world.getBlock(blockX, blockY,blockZ);
-            int meta = world.getBlockMetadata(blockX, blockY, blockZ);
 
             if(flag)
             {
-                if (block instanceof IFluidBlock && meta == 0)
-                {
-                	Fluid fluid=((IFluidBlock)block).getFluid();
-                	ItemStack stack=null;
-                	
-                    if (fluid instanceof IMinechemFluid)
-                    {
-                        stack=((IMinechemFluid) ((IFluidBlock) block).getFluid()).getOutputStack();
-                        stack.stackSize=1;
-                    }else if (fluid==FluidRegistry.WATER){
-                    	stack=new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.water.ordinal());
-                    }
-                    
-                    if (stack!=null){
-                        world.setBlockToAir(blockX, blockY, blockZ);
-                        return fillTube(itemStack, player, stack);
-                    }
-                }
+            	Enum chemical=ChemicalExplosionHandler.getChemical(block);
+            	if (chemical!=null&&FluidChemicalDispenser.canDrain(world, block, blockX, blockY, blockZ)){
+            		ItemStack stack=FluidChemicalDispenser.createItemStack(chemical, 1);
+            		
+                	if (stack!=null){
+                		world.setBlockToAir(blockX, blockY, blockZ);
+                		return fillTube(itemStack, player, stack);
+                	}
+            	}
             }
             else
             {
@@ -484,6 +470,14 @@ public class ElementItem extends Item implements IFluidContainerItem
 
     private ItemStack emptyTube(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z)
     {
+    	if (!world.isAirBlock(x, y, z)&&!world.getBlock(x, y, z).getMaterial().isSolid()){
+    		Block sourceBlock=world.getBlock(x, y, z);
+    		int metadata=world.getBlockMetadata(x, y, z);
+    		sourceBlock.harvestBlock(world, player, x, y, z, metadata);
+    		sourceBlock.breakBlock(world, x, y, z, sourceBlock, metadata);
+    		world.setBlockToAir(x, y, z);
+    	}
+    	
         if (world.isAirBlock(x, y, z))
         {
             Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));

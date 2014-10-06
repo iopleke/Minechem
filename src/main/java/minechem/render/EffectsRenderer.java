@@ -9,6 +9,7 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 
+//Thanks to thepers for teaching me rendering - Mandrake
 public class EffectsRenderer {
 
     public static void renderEffects()

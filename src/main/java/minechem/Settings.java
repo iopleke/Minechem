@@ -57,6 +57,10 @@ public class Settings
 	public static int maxFissionStorage = 100000;
 	public static int maxFusionStorage = 100000;
 
+	// Chemical Explosion
+	public static boolean explosionItemMeetFluid=true;
+	public static boolean explosionFluidMeetFluid=true;
+	
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
 	{
@@ -149,6 +153,18 @@ public class Settings
         prop.comment = StatCollector.translateToLocal("config.fluideffects.description");
         prop.setLanguageKey("config.fluideffects");
         fluidEffects = prop.getBoolean();
+        configList.add(prop.getName());
+        
+        prop = config.get(Configuration.CATEGORY_GENERAL, "explosionItemMeetFluid", Settings.explosionItemMeetFluid);
+        prop.comment = StatCollector.translateToLocal("config.explosionItemMeetFluid.description");
+        prop.setLanguageKey("config.explosionItemMeetFluid");
+        explosionItemMeetFluid = prop.getBoolean();
+        configList.add(prop.getName());
+        
+        prop = config.get(Configuration.CATEGORY_GENERAL, "explosionFluidMeetFluid", Settings.explosionFluidMeetFluid);
+        prop.comment = StatCollector.translateToLocal("config.explosionFluidMeetFluid.description");
+        prop.setLanguageKey("config.explosionFluidMeetFluid");
+        explosionFluidMeetFluid = prop.getBoolean();
         configList.add(prop.getName());
 
 		prop = config.get("blacklist", "decomposition", new String[]

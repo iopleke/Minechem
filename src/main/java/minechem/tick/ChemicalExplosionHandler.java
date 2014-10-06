@@ -6,6 +6,7 @@ import java.util.Set;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
 import minechem.item.element.ElementEnum;
@@ -25,7 +26,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 
-// Thanks to thepers for teaching me rendering - Mandrake
 public class ChemicalExplosionHandler
 {
 	
@@ -51,6 +51,10 @@ public class ChemicalExplosionHandler
     @SubscribeEvent
     public void tick(TickEvent.WorldTickEvent event)
     {
+    	if (!Settings.explosionItemMeetFluid){
+    		return;
+    	}
+    	
         World world=event.world;
         
         for (Object p : world.playerEntities){
@@ -71,24 +75,13 @@ public class ChemicalExplosionHandler
             	
             	if (chemA!=null&&world.isMaterialInBB(entityItem.boundingBox, Material.water)){
             		Block block=world.getBlock(MathHelper.floor_double(entityItem.posX), MathHelper.floor_double(entityItem.posY), MathHelper.floor_double(entityItem.posZ));
-            		Enum chemB=null;
-            		if (block instanceof IFluidBlock){
-            			Fluid fluid=((IFluidBlock)block).getFluid();
-            			if (fluid instanceof FluidElement){
-            				chemB=((FluidElement)fluid).element;
-            			}else if(fluid instanceof FluidChemical){
-            				chemB=((FluidChemical)fluid).molecule;
-            			}else if(fluid==FluidRegistry.WATER){
-            				chemB=MoleculeEnum.water;
-            			}
-            		}else if (block==Blocks.water){
-            			chemB=MoleculeEnum.water;
-            		}
+            		Enum chemB=getChemical(block);
             			
             		if (chemB!=null){
             			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemA, chemB);
             			if (explosionReactionRules.contains(rule)){
             				explosionReaction(world,entityItem);
+            				world.removeEntity(entityItem);
             			}
             		}
             		
@@ -125,5 +118,34 @@ public class ChemicalExplosionHandler
         int dz = MathHelper.floor_double(entityItem.posZ);
         transmuteWaterToPortal(world, dx, dy, dz);
         return;
+    }
+
+    public static Enum getChemical(Block block){
+		Enum chemical=null;
+		if (block instanceof IFluidBlock){
+			Fluid fluid=((IFluidBlock)block).getFluid();
+			if (fluid instanceof FluidElement){
+				chemical=((FluidElement)fluid).element;
+			}else if(fluid instanceof FluidChemical){
+				chemical=((FluidChemical)fluid).molecule;
+			}else if(fluid==FluidRegistry.WATER){
+				chemical=MoleculeEnum.water;
+			}
+		}else if (block==Blocks.water||block==Blocks.flowing_water){
+			chemical=MoleculeEnum.water;
+		}
+		
+		return chemical;
+    }
+    
+    public static boolean checkToExplode(Block source,Block destination,World world,int x,int y,int z){
+    	Enum chemicalA=getChemical(source);
+    	Enum chemicalB=getChemical(destination);
+    	if (chemicalA!=null&&chemicalB!=null&&explosionReactionRules.contains(new ChemicalExplosionReactionRule(chemicalA, chemicalB))){
+    		world.createExplosion(null, x, y, z, 0.9F, true);
+    		return true;
+    	}
+    	
+    	return false;
     }
 }
