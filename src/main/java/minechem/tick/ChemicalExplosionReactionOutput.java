@@ -8,7 +8,7 @@ public class ChemicalExplosionReactionOutput {
 	public final float explosionLevel;
 	
 	/**
-	 * The key of outputs is a chemical, the value of outputs is change.
+	 * The key of outputs is a chemical, the value of outputs is chance.
 	 * If explosionLevel==Float.NaN, then it will not explode.
 	 * 
 	 * @param outputs
