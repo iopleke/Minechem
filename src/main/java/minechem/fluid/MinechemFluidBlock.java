@@ -19,16 +19,22 @@ public class MinechemFluidBlock extends BlockFluidClassic {
 		super.onNeighborBlockChange(world, x, y, z, neighborBlock);
 		
 		if (Settings.explosionFluidMeetFluid){
-			checkToExplode(world,x+1,y,z);
-			checkToExplode(world,x,y+1,z);
-			checkToExplode(world,x,y,z+1);
-			checkToExplode(world,x-1,y,z);
-			checkToExplode(world,x,y-1,z);
-			checkToExplode(world,x,y,z-1);
+			boolean exploded=false;
+			
+			exploded|=checkToExplode(world,x+1,y,z);
+			exploded|=checkToExplode(world,x,y+1,z);
+			exploded|=checkToExplode(world,x,y,z+1);
+			exploded|=checkToExplode(world,x-1,y,z);
+			exploded|=checkToExplode(world,x,y-1,z);
+			exploded|=checkToExplode(world,x,y,z-1);
+			
+			if (exploded){
+				world.setBlockToAir(x, y, z);
+			}
 		}
 	}
 	
-	private void checkToExplode(World world,int x,int y,int z){
-		ChemicalExplosionHandler.checkToExplode(this, world.getBlock(x, y, z), world, x, y, z);
+	private boolean checkToExplode(World world,int x,int y,int z){
+		return ChemicalExplosionHandler.checkToExplode(this, world.getBlock(x, y, z), world, x, y, z);
 	}
 }

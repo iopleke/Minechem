@@ -26,7 +26,6 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 
-// Thanks to thepers for teaching me rendering - Mandrake
 public class ChemicalExplosionHandler
 {
 	
@@ -82,6 +81,7 @@ public class ChemicalExplosionHandler
             			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemA, chemB);
             			if (explosionReactionRules.contains(rule)){
             				explosionReaction(world,entityItem);
+            				world.removeEntity(entityItem);
             			}
             		}
             		
