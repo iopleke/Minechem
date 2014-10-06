@@ -1,20 +1,29 @@
 package minechem.tick;
 
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
+import java.util.Random;
+import java.util.Vector;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.fluid.FluidChemical;
+import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidElement;
+import minechem.fluid.FluidHelper;
+import minechem.item.element.ElementClassificationEnum;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
+import minechem.utils.Vector3;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -28,26 +37,10 @@ import net.minecraftforge.fluids.IFluidBlock;
 
 public class ChemicalExplosionHandler
 {
+	public static final Map<ChemicalExplosionReactionRule, ChemicalExplosionReactionOutput> reactionRules=new HashMap<ChemicalExplosionReactionRule, ChemicalExplosionReactionOutput>();
 	
-	public static final Set<ChemicalExplosionReactionRule> explosionReactionRules=new HashSet<ChemicalExplosionReactionRule>();
+	private static final Random ran=new Random();
 	
-    public void transmuteWaterToPortal(World world, int dx, int dy, int dz)
-    {
-        int px = dx;
-        int pz = dz;
-
-        if (world.getBlock(px - 1, dy, pz) == Blocks.water)
-        {
-            px--;
-        }
-        if (world.getBlock(px, dy, pz - 1) == Blocks.water)
-        {
-            pz--;
-        }
-
-        world.setBlock(px + 0, dy, pz + 0, Blocks.stone, 0, 2);
-    }
-
     @SubscribeEvent
     public void tick(TickEvent.WorldTickEvent event)
     {
@@ -66,21 +59,24 @@ public class ChemicalExplosionHandler
             {
             	ItemStack itemStack=entityItem.getEntityItem();
             	Item item=itemStack.getItem();
-            	Enum chemA=null;
+            	Enum chemicalA=null;
             	if (item==MinechemItemsRegistration.element){
-            		chemA=ElementItem.getElement(itemStack);
+            		chemicalA=ElementItem.getElement(itemStack);
             	}else if (item==MinechemItemsRegistration.molecule){
-            		chemA=MoleculeItem.getMolecule(itemStack);
+            		chemicalA=MoleculeItem.getMolecule(itemStack);
             	}
             	
-            	if (chemA!=null&&world.isMaterialInBB(entityItem.boundingBox, Material.water)){
-            		Block block=world.getBlock(MathHelper.floor_double(entityItem.posX), MathHelper.floor_double(entityItem.posY), MathHelper.floor_double(entityItem.posZ));
-            		Enum chemB=getChemical(block);
+            	if (chemicalA!=null&&world.isMaterialInBB(entityItem.boundingBox, Material.water)){
+            		int x=MathHelper.floor_double(entityItem.posX);
+            		int y=MathHelper.floor_double(entityItem.posY);
+            		int z=MathHelper.floor_double(entityItem.posZ);
+            		Block block=world.getBlock(x, y, z);
+            		Enum chemicalB=getChemical(block);
             			
-            		if (chemB!=null){
-            			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemA, chemB);
-            			if (explosionReactionRules.contains(rule)){
-            				explosionReaction(world,entityItem);
+            		if (chemicalB!=null){
+            			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemicalA, chemicalB);
+            			if (reactionRules.containsKey(rule)){
+            				explosionReaction(world,entityItem,x,y,z,rule,!(FluidChemicalDispenser.canDrain(world,block,x,y,z)));
             				world.removeEntity(entityItem);
             			}
             		}
@@ -92,32 +88,112 @@ public class ChemicalExplosionHandler
 
     public static void initExplodableChemical(){
     	// TODO Add more explosion rules
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Li));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Na));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.K));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Rb));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Cs));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Fr));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Mg));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ca));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Sr));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ba));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ra));
+    	Map<Enum, Float> map;
     	
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.calciumOxide));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.potassiumOxide));
-    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sodiumOxide));
+    	map=new HashMap<Enum, Float>();
+    	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.lithiumHydroxide, 1f);
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalExplosionReactionOutput(map, 0.4f));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Na));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.K));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Rb));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Cs));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Fr));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Mg));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ca));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Sr));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ba));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ra));
+//    	
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.calciumOxide));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.potassiumOxide));
+//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sodiumOxide));
     	
     }
     
-    private void explosionReaction(World world,EntityItem entityItem){
-        world.createExplosion(entityItem, entityItem.posX, entityItem.posY, entityItem.posZ, 0.9F, true);
-        int dx = MathHelper.floor_double(entityItem.posX);
-        int dy = MathHelper.floor_double(entityItem.posY);
-        int dz = MathHelper.floor_double(entityItem.posZ);
-        transmuteWaterToPortal(world, dx, dy, dz);
-        return;
+    private static void explosionReaction(World world,Entity entity,int x,int y,int z, ChemicalExplosionReactionRule rule,boolean popFlowingFluid){
+        ChemicalExplosionReactionOutput output=reactionRules.get(rule);
+        if (output==null){
+        	return;
+        }
+        
+        if (output.explosionLevel!=Float.NaN){
+        	world.createExplosion(null, x, y, z, output.explosionLevel, true);
+        }
+    	
+        /*
+         * 0:y-1
+         * 1:y
+         * 2:y+1
+         */
+        Vector[] availableVectors=new Vector[3];
+        for (int i=0;i<availableVectors.length;i++){
+        	availableVectors[i]=new Vector();
+        }
+        
+        int needVectors=output.outputs.size();
+        int foundVectors=0;
+        
+        findavailableVectors:for (int xOffset=-1;xOffset<2;xOffset++){
+        	for (int yOffset=-1;yOffset<2;yOffset++){
+        		for (int zOffset=-1;zOffset<2;zOffset++){
+        			if (foundVectors>=needVectors){
+        				break findavailableVectors;
+        			}
+        			
+        			int px=xOffset+x;
+        			int py=yOffset+y;
+        			int pz=zOffset+z;
+        			Block block=world.getBlock(px, py, pz);
+        			
+        			if ((world.isAirBlock(px, py, pz))||((block instanceof IFluidBlock)||(block instanceof BlockLiquid))||(!block.getMaterial().isSolid())){
+        				availableVectors[yOffset+1].add(new Vector3(px,py,pz));
+        				++foundVectors;
+        			}
+        		}
+        	}
+        }
+    	
+        Iterator<Enum> it=output.outputs.keySet().iterator();
+        while(it.hasNext()&&needVectors>0&&foundVectors>0){
+        	Enum chemical=it.next();
+        	
+        	boolean isGas=false;
+        	if (chemical instanceof ElementEnum){
+        		isGas=((ElementEnum) chemical).roomState()==ElementClassificationEnum.gas;
+        	}
+        	
+        	if (ran.nextFloat()<=output.outputs.get(chemical)){
+        		Vector3 vector=null;
+        		for (int i=isGas?availableVectors.length-1:0;isGas?i>-1:i<availableVectors.length;i+=isGas?-1:1){
+        			if (!availableVectors[i].isEmpty()){
+        				vector=(Vector3) availableVectors[i].remove(availableVectors[i].size()-1);
+        				break;
+        			}
+        		}
+        		
+        		if (vector!=null){
+        			int px=vector.intX();
+        			int py=vector.intY();
+        			int pz=vector.intZ();
+        			
+    	    		world.func_147480_a(px, py, pz, true);
+    	    		world.setBlockToAir(px, py, pz);
+    	    		
+    				Block fluidBlock=null;
+    				if (chemical instanceof ElementEnum){
+    					fluidBlock=FluidHelper.elementsBlocks.get(FluidHelper.elements.get(chemical));
+    				}else if (chemical instanceof MoleculeEnum){
+    					fluidBlock=FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(chemical));
+    				}
+    				
+    				if (fluidBlock!=null){
+    					world.setBlock(px, py, pz, fluidBlock, popFlowingFluid?1:0, 3);
+    				}
+        		}
+        	}
+        }
     }
 
     public static Enum getChemical(Block block){
@@ -138,12 +214,19 @@ public class ChemicalExplosionHandler
 		return chemical;
     }
     
-    public static boolean checkToExplode(Block source,Block destination,World world,int x,int y,int z){
+    public static boolean checkToExplode(Block source,Block destination,World world,int destinationX,int destinationY,int destinationZ,int sourceX,int sourceY,int sourceZ){
     	Enum chemicalA=getChemical(source);
     	Enum chemicalB=getChemical(destination);
-    	if (chemicalA!=null&&chemicalB!=null&&explosionReactionRules.contains(new ChemicalExplosionReactionRule(chemicalA, chemicalB))){
-    		world.createExplosion(null, x, y, z, 0.9F, true);
-    		return true;
+    	if (chemicalA!=null&&chemicalB!=null){
+    		ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemicalA, chemicalB);
+    		
+    		if (reactionRules.containsKey(rule)){
+    			boolean flag=!(FluidChemicalDispenser.canDrain(world, source, sourceX, sourceY, sourceZ)&&FluidChemicalDispenser.canDrain(world, destination, destinationX, destinationY, destinationZ));
+    			world.setBlockToAir(sourceX, sourceY, sourceZ);
+    			world.setBlockToAir(destinationX, destinationY, destinationZ);
+	    		explosionReaction(world,null,destinationX,destinationY,destinationZ,rule,flag);
+	    		return true;
+    		}
     	}
     	
     	return false;

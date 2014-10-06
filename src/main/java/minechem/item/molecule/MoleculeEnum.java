@@ -169,8 +169,10 @@ public enum MoleculeEnum
     keratin(146, new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline), new Molecule(cysteine), new Molecule(proline)),
       
     //Thermal Expansion
-    asbestos(147, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4));
+    asbestos(147, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4)),
     
+    //
+    lithiumHydroxide(148,new Element(Li, 1),new Molecule(hydroxide, 1));
     
     public static MoleculeEnum[] molecules = values();
     private final String localizationKey;
