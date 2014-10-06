@@ -470,6 +470,14 @@ public class ElementItem extends Item implements IFluidContainerItem
 
     private ItemStack emptyTube(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z)
     {
+    	if (!world.isAirBlock(x, y, z)&&!world.getBlock(x, y, z).getMaterial().isSolid()){
+    		Block sourceBlock=world.getBlock(x, y, z);
+    		int metadata=world.getBlockMetadata(x, y, z);
+    		sourceBlock.harvestBlock(world, player, x, y, z, metadata);
+    		sourceBlock.breakBlock(world, x, y, z, sourceBlock, metadata);
+    		world.setBlockToAir(x, y, z);
+    	}
+    	
         if (world.isAirBlock(x, y, z))
         {
             Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
