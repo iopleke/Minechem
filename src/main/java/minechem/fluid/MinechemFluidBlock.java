@@ -1,5 +1,6 @@
 package minechem.fluid;
 
+import minechem.Settings;
 import minechem.tick.ChemicalExplosionHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -17,12 +18,14 @@ public class MinechemFluidBlock extends BlockFluidClassic {
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborBlock){
 		super.onNeighborBlockChange(world, x, y, z, neighborBlock);
 		
-		checkToExplode(world,x+1,y,z);
-		checkToExplode(world,x,y+1,z);
-		checkToExplode(world,x,y,z+1);
-		checkToExplode(world,x-1,y,z);
-		checkToExplode(world,x,y-1,z);
-		checkToExplode(world,x,y,z-1);
+		if (Settings.explosionFluidMeetFluid){
+			checkToExplode(world,x+1,y,z);
+			checkToExplode(world,x,y+1,z);
+			checkToExplode(world,x,y,z+1);
+			checkToExplode(world,x-1,y,z);
+			checkToExplode(world,x,y-1,z);
+			checkToExplode(world,x,y,z-1);
+		}
 	}
 	
 	private void checkToExplode(World world,int x,int y,int z){

@@ -6,6 +6,7 @@ import java.util.Set;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
 import minechem.item.element.ElementEnum;
@@ -51,6 +52,10 @@ public class ChemicalExplosionHandler
     @SubscribeEvent
     public void tick(TickEvent.WorldTickEvent event)
     {
+    	if (!Settings.explosionItemMeetFluid){
+    		return;
+    	}
+    	
         World world=event.world;
         
         for (Object p : world.playerEntities){
