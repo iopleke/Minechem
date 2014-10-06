@@ -71,19 +71,7 @@ public class ChemicalExplosionHandler
             	
             	if (chemA!=null&&world.isMaterialInBB(entityItem.boundingBox, Material.water)){
             		Block block=world.getBlock(MathHelper.floor_double(entityItem.posX), MathHelper.floor_double(entityItem.posY), MathHelper.floor_double(entityItem.posZ));
-            		Enum chemB=null;
-            		if (block instanceof IFluidBlock){
-            			Fluid fluid=((IFluidBlock)block).getFluid();
-            			if (fluid instanceof FluidElement){
-            				chemB=((FluidElement)fluid).element;
-            			}else if(fluid instanceof FluidChemical){
-            				chemB=((FluidChemical)fluid).molecule;
-            			}else if(fluid==FluidRegistry.WATER){
-            				chemB=MoleculeEnum.water;
-            			}
-            		}else if (block==Blocks.water){
-            			chemB=MoleculeEnum.water;
-            		}
+            		Enum chemB=getChemical(block);
             			
             		if (chemB!=null){
             			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemA, chemB);
@@ -126,4 +114,23 @@ public class ChemicalExplosionHandler
         transmuteWaterToPortal(world, dx, dy, dz);
         return;
     }
+
+    public static Enum getChemical(Block block){
+		Enum chemical=null;
+		if (block instanceof IFluidBlock){
+			Fluid fluid=((IFluidBlock)block).getFluid();
+			if (fluid instanceof FluidElement){
+				chemical=((FluidElement)fluid).element;
+			}else if(fluid instanceof FluidChemical){
+				chemical=((FluidChemical)fluid).molecule;
+			}else if(fluid==FluidRegistry.WATER){
+				chemical=MoleculeEnum.water;
+			}
+		}else if (block==Blocks.water||block==Blocks.flowing_water){
+			chemical=MoleculeEnum.water;
+		}
+		
+		return chemical;
+    }
+    
 }

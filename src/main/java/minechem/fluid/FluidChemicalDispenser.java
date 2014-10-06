@@ -6,23 +6,23 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
+import minechem.tick.ChemicalExplosionHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 
 public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 	
-	private final Random ran=new Random();
+	private static final Random ran=new Random();
 	
 	@Override
 	public ItemStack dispense(IBlockSource blockSource,ItemStack itemStack) {
@@ -34,22 +34,12 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		
 		if (itemStack.getItem() instanceof ElementItem&&itemStack.getItemDamage()>=ElementEnum.heaviestMass){
 			Block frontBlock=world.getBlock(x, y, z);
+			Enum chemical=ChemicalExplosionHandler.getChemical(frontBlock);
 			
-			if (frontBlock instanceof IFluidBlock&&((IFluidBlock)frontBlock).canDrain(world, x, y, z)){
-				Fluid fluid=((IFluidBlock)frontBlock).getFluid();
+			if (chemical!=null&&canDrain(world,frontBlock, x, y, z)){
+				ItemStack stack=createItemStack(chemical, 1);
 				
-				ItemStack stack=null;
-				if (fluid instanceof FluidElement){
-					stack=ElementItem.createStackOf(ElementEnum.elements[((FluidElement)fluid).element.ordinal()], 1);
-				}else if (fluid instanceof FluidChemical){
-					stack=new ItemStack(MinechemItemsRegistration.molecule, 1, ((FluidChemical)fluid).molecule.ordinal());
-				}else if (fluid==FluidRegistry.WATER){
-					stack=new ItemStack(MinechemItemsRegistration.molecule, 1,MoleculeEnum.water.ordinal());
-				}
-				
-				if (stack==null){
-					// it is not a chemical fluid
-				}else{
+				if (stack!=null){
 					TileEntity tile=blockSource.getBlockTileEntity();
 					if (tile instanceof IInventory){
 						stack=addItemToInventory((IInventory)tile, stack);
@@ -83,7 +73,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		return itemStack;
 	}
 	
-	public ItemStack addItemToInventory(IInventory inventory,ItemStack itemStack){
+	public static ItemStack addItemToInventory(IInventory inventory,ItemStack itemStack){
 		if (itemStack==null){
 			return null;
 		}
@@ -110,7 +100,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		return itemStack;
 	}
 	
-	public void throwItemStack(World world,ItemStack itemStack,int x,int y,int z){
+	public static void throwItemStack(World world,ItemStack itemStack,int x,int y,int z){
 		if (itemStack!=null){
 			float f = ran.nextFloat() * 0.8F + 0.1F;
 			float f1 = ran.nextFloat() * 0.8F + 0.1F;
@@ -118,10 +108,30 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 			
 			EntityItem entityitem = new EntityItem(world, (double)((float)x + f), (double)((float)y + f1), (double)((float)z + f2), itemStack);
 			float f3 = 0.05F;
-			entityitem.motionX = (double)((float)this.ran.nextGaussian() * f3);
-			entityitem.motionY = (double)((float)this.ran.nextGaussian() * f3 + 0.2F);
-			entityitem.motionZ = (double)((float)this.ran.nextGaussian() * f3);
+			entityitem.motionX = (double)((float)ran.nextGaussian() * f3);
+			entityitem.motionY = (double)((float)ran.nextGaussian() * f3 + 0.2F);
+			entityitem.motionZ = (double)((float)ran.nextGaussian() * f3);
 			world.spawnEntityInWorld(entityitem);
 		}
+	}
+	
+	public static ItemStack createItemStack(Enum chemical,int amount){
+		ItemStack itemStack=null;
+		if (chemical instanceof ElementEnum){
+			itemStack=ElementItem.createStackOf(ElementEnum.elements[chemical.ordinal()], 1);
+		}else if (chemical instanceof MoleculeEnum){
+			itemStack=new ItemStack(MinechemItemsRegistration.molecule, 1, chemical.ordinal());
+		}
+		return itemStack;
+	}
+	
+	public static boolean canDrain(World world,Block block,int x,int y,int z){
+		if ((block==Blocks.water||block==Blocks.flowing_water)&&world.getBlockMetadata(x, y, z)==0){
+			return true;
+		}else if (block instanceof IFluidBlock){
+			return ((IFluidBlock) block).canDrain(world, x, y, z);
+		}
+		
+		return false;
 	}
 }
