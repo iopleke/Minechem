@@ -701,7 +701,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
 	{
-		if (Settings.AllowAutomation && itemstack.getItem() == MinechemItemsRegistration.element)
+		if (Settings.AllowAutomation && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule))
 		{
 			return true;
 		} else
