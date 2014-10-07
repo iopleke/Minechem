@@ -164,7 +164,10 @@ public class ChemicalExplosionHandler
     				}
     			}
     			
-    			if (vector!=null){
+    			if (vector==null){
+    				ItemStack itemStack=FluidChemicalDispenser.createItemStack(chemical, 1);
+    				FluidChemicalDispenser.throwItemStack(world, itemStack, x, y, z);
+    			}else{
     				int px=vector.intX();
     				int py=vector.intY();
     				int pz=vector.intZ();
