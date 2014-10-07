@@ -1,5 +1,6 @@
 package minechem.item.element;
 
+import minechem.item.ChemicalRoomStateEnum;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -9,7 +10,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 public class ElementItemRenderer implements IItemRenderer
@@ -53,11 +53,11 @@ public class ElementItemRenderer implements IItemRenderer
         float duration = 1500;
         float t = (int) (Minecraft.getSystemTime() % duration);
         int frame = (int) MinechemHelper.translateValue(t, 0, duration, 0, 7);
-        if (element.roomState() == ElementClassificationEnum.gas)
+        if (element.roomState() == ChemicalRoomStateEnum.gas)
         {
             contentsTex = item.gas[frame];
         }
-        else if (element.roomState() == ElementClassificationEnum.liquid)
+        else if (element.roomState() == ChemicalRoomStateEnum.liquid)
         {
             contentsTex = item.liquid[frame];
         }

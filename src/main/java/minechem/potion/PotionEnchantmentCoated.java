@@ -74,7 +74,7 @@ public class PotionEnchantmentCoated extends Enchantment
 
     public static void registerCoatings()
     {
-        for (MoleculeEnum molecule : MoleculeEnum.values())
+        for (MoleculeEnum molecule : MoleculeEnum.molecules)
         {
             if (PotionPharmacologyEffect.givesEffect(molecule))
             {

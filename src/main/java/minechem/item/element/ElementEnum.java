@@ -2,6 +2,9 @@ package minechem.item.element;
 
 import static minechem.item.element.ElementClassificationEnum.*;
 import static minechem.radiation.RadiationEnum.*;
+import static minechem.item.ChemicalRoomStateEnum.*;
+import minechem.item.ChemicalRoomStateEnum;
+import minechem.item.IDescriptiveName;
 import minechem.radiation.RadiationEnum;
 import net.minecraft.util.StatCollector;
 
@@ -129,10 +132,10 @@ public enum ElementEnum
     // Localization key.
     private final String localizationKey;
     private final ElementClassificationEnum classification;
-    private final ElementClassificationEnum roomState;
+    private final ChemicalRoomStateEnum roomState;
     private final RadiationEnum radioactivity;
 
-    ElementEnum(String descriptiveName, ElementClassificationEnum classification, ElementClassificationEnum roomState, RadiationEnum radioactivity)
+    ElementEnum(String descriptiveName, ElementClassificationEnum classification, ChemicalRoomStateEnum roomState, RadiationEnum radioactivity)
     {
         this.descriptiveName = descriptiveName;
         this.localizationKey = "element." + name();
@@ -162,7 +165,7 @@ public enum ElementEnum
         return classification;
     }
 
-    public ElementClassificationEnum roomState() 
+    public ChemicalRoomStateEnum roomState() 
     {
         return roomState;
     }

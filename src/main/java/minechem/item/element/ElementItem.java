@@ -1,11 +1,14 @@
 package minechem.item.element;
 
-import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import minechem.MinechemItemsRegistration;
 import minechem.Minechem;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
+import minechem.item.ChemicalRoomStateEnum;
+import minechem.item.IDescriptiveName;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -37,7 +40,7 @@ public class ElementItem extends Item implements IFluidContainerItem
 {
 
     private final static ElementEnum[] elements = ElementEnum.values();
-    private final EnumMap<ElementClassificationEnum, Integer> classificationIndexes = new EnumMap<ElementClassificationEnum, Integer>(ElementClassificationEnum.class);
+    private final Map<IDescriptiveName, Integer> classificationIndexes = new HashMap<IDescriptiveName, Integer>();
     public final IIcon liquid[] = new IIcon[7], gas[] = new IIcon[7];
     public IIcon solid;
 
@@ -56,9 +59,9 @@ public class ElementItem extends Item implements IFluidContainerItem
         classificationIndexes.put(ElementClassificationEnum.transitionMetal, 7);
         classificationIndexes.put(ElementClassificationEnum.lanthanide, 8);
         classificationIndexes.put(ElementClassificationEnum.actinide, 9);
-        classificationIndexes.put(ElementClassificationEnum.gas, 1);
-        classificationIndexes.put(ElementClassificationEnum.solid, 17);
-        classificationIndexes.put(ElementClassificationEnum.liquid, 33);
+        classificationIndexes.put(ChemicalRoomStateEnum.gas, 1);
+        classificationIndexes.put(ChemicalRoomStateEnum.solid, 17);
+        classificationIndexes.put(ChemicalRoomStateEnum.liquid, 33);
     }
 
     public static String getShortName(ItemStack itemstack)
