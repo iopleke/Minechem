@@ -21,7 +21,6 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.utils.Vector3;
 import net.minecraft.block.Block;
-import net.minecraft.block.BlockLiquid;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
@@ -113,74 +112,66 @@ public class ChemicalExplosionHandler
     }
     
     private static void explosionReaction(World world,Entity entity,int x,int y,int z, ChemicalExplosionReactionRule rule,boolean popFlowingFluid){
-        ChemicalExplosionReactionOutput output=reactionRules.get(rule);
-        if (output==null){
-        	return;
-        }
-        
-        if (output.explosionLevel!=Float.NaN){
-        	world.createExplosion(null, x, y, z, output.explosionLevel, true);
-        }
+    	ChemicalExplosionReactionOutput output=reactionRules.get(rule);
+    	if (output==null){
+    		return;
+    	}
     	
-        /*
-         * 0:y-1
-         * 1:y
-         * 2:y+1
-         */
-        Vector[] availableVectors=new Vector[3];
-        for (int i=0;i<availableVectors.length;i++){
-        	availableVectors[i]=new Vector();
-        }
-        
-        int needVectors=output.outputs.size();
-        int foundVectors=0;
-        
-        findavailableVectors:for (int xOffset=-1;xOffset<2;xOffset++){
-        	for (int yOffset=-1;yOffset<2;yOffset++){
-        		for (int zOffset=-1;zOffset<2;zOffset++){
-        			if (foundVectors>=needVectors){
-        				break findavailableVectors;
-        			}
-        			
-        			int px=xOffset+x;
-        			int py=yOffset+y;
-        			int pz=zOffset+z;
-        			Block block=world.getBlock(px, py, pz);
-        			
-        			if ((world.isAirBlock(px, py, pz))||((block instanceof IFluidBlock)||(block instanceof BlockLiquid))||(!block.getMaterial().isSolid())){
-        				availableVectors[yOffset+1].add(new Vector3(px,py,pz));
-        				++foundVectors;
-        			}
-        		}
-        	}
-        }
+    	if (output.explosionLevel!=Float.NaN){
+    		world.createExplosion(null, x, y, z, output.explosionLevel, true);
+    	}
     	
-        Iterator<Enum> it=output.outputs.keySet().iterator();
-        while(it.hasNext()&&needVectors>0&&foundVectors>0){
-        	Enum chemical=it.next();
-        	
-        	boolean isGas=false;
-        	if (chemical instanceof ElementEnum){
-        		isGas=((ElementEnum) chemical).roomState()==ElementClassificationEnum.gas;
-        	}
-        	
-        	if (ran.nextFloat()<=output.outputs.get(chemical)){
-        		Vector3 vector=null;
-        		for (int i=isGas?availableVectors.length-1:0;isGas?i>-1:i<availableVectors.length;i+=isGas?-1:1){
-        			if (!availableVectors[i].isEmpty()){
-        				vector=(Vector3) availableVectors[i].remove(availableVectors[i].size()-1);
-        				break;
-        			}
-        		}
-        		
-        		if (vector!=null){
-        			int px=vector.intX();
-        			int py=vector.intY();
-        			int pz=vector.intZ();
-        			
-    	    		world.func_147480_a(px, py, pz, true);
-    	    		world.setBlockToAir(px, py, pz);
-    	    		
+    	int foundVectors=0;
+    	
+    	/*
+    	 * 0:y-1
+    	 * 1:y
+    	 * 2:y+1
+    	 */
+    	Vector[] availableSpaces=new Vector[3];
+    	for (int i=0;i<availableSpaces.length;i++){
+    		availableSpaces[i]=findAvailableSpacesAtCrossSection(world, x, y-1+i, z, 1);
+    		foundVectors+=availableSpaces[i].size();
+    	}
+    	
+    	int needVectors=output.outputs.size();
+    	
+    	Iterator<Enum> it=output.outputs.keySet().iterator();
+    	while(it.hasNext()&&needVectors>0&&foundVectors>0){
+    		Enum chemical=it.next();
+    		
+    		boolean isGas=false;
+    		if (chemical instanceof ElementEnum){
+    			isGas=((ElementEnum) chemical).roomState()==ElementClassificationEnum.gas;
+    		}
+    		
+    		if (ran.nextFloat()<=output.outputs.get(chemical)){
+    			Vector3 vector=null;
+    			
+    			if (isGas){
+    				for (int i=availableSpaces.length-1;i>-1;i--){
+    					if (!availableSpaces[i].isEmpty()){
+    						vector=(Vector3) availableSpaces[i].remove(availableSpaces[i].size()-1);
+    						break;
+    					}
+    				}
+    			}else{
+    				for (int i=0;i<availableSpaces.length;i++){
+    					if (!availableSpaces[i].isEmpty()){
+    						vector=(Vector3) availableSpaces[i].remove(availableSpaces[i].size()-1);
+    						break;
+    					}
+    				}
+    			}
+    			
+    			if (vector!=null){
+    				int px=vector.intX();
+    				int py=vector.intY();
+    				int pz=vector.intZ();
+    				
+    				world.func_147480_a(px, py, pz, true);
+    				world.setBlockToAir(px, py, pz);
+    				
     				Block fluidBlock=null;
     				if (chemical instanceof ElementEnum){
     					fluidBlock=FluidHelper.elementsBlocks.get(FluidHelper.elements.get(chemical));
@@ -191,9 +182,9 @@ public class ChemicalExplosionHandler
     				if (fluidBlock!=null){
     					world.setBlock(px, py, pz, fluidBlock, popFlowingFluid?1:0, 3);
     				}
-        		}
-        	}
-        }
+    			}
+    		}
+    	}
     }
 
     public static Enum getChemical(Block block){
@@ -230,5 +221,21 @@ public class ChemicalExplosionHandler
     	}
     	
     	return false;
+    }
+    
+    public static Vector<Vector3> findAvailableSpacesAtCrossSection(World world,int centerX,int centerY,int centerZ,int size){
+    	Vector<Vector3> spaces=new Vector<Vector3>();
+    	for (int xOffset=-size;xOffset<=size;xOffset++){
+    		for (int zOffset=-size;zOffset<=size;zOffset++){
+    			int x=centerX+xOffset;
+    			int z=centerZ+zOffset;
+    			
+    			if (world.isAirBlock(x, centerY, z)||!world.getBlock(x, centerY, z).getMaterial().isSolid()){
+    				spaces.add(new Vector3(x,centerY,z));
+    			}
+    		}
+    	}
+    	
+    	return spaces;
     }
 }
