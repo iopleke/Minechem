@@ -92,4 +92,6 @@ public interface Reference
     public static final String ICON_BASE = "textures/icons/";
     public static final String URANIUM_TEX = TEXTURE_MOD_ID + "uraniumOre";
     public static final String FISSION_GUI = TEXTURE_GUI_DIR + "FissionGUI.png";
+
+    public static final String DECOMPOSER_GUI_NEI = TEXTURE_GUI_DIR + "ChemicalDecomposerGUINEI.png";
 }

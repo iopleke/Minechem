@@ -19,21 +19,25 @@ import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+
+import static codechicken.lib.gui.GuiDraw.changeTexture;
+import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 {
 
 	private static final String MINECHEM_DECOMPOSER_RECIPES_ID = "minechem.decomposer";
 
-	private ResourceLocation texture = new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_GUI);
+	private ResourceLocation texture = new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_GUI_NEI);
 
 	// GUI slot offsets, in GUI-relative pixel values.
 	private static final int INPUT_X_OFS = 75;
 	private static final int INPUT_Y_OFS = 5;
-	private static final int OUTPUT_X_OFS = 2;
+	private static final int OUTPUT_X_OFS = 10;
 	private static final int OUTPUT_X_SCALE = 18;
 	private static final int OUTPUT_Y_OFS = 51;
-	private static final int INPUT_ARROW_Y_OFS = 40;
+	private static final int INPUT_ARROW_Y_OFS = 20;
 
 	@Override
 	public String getRecipeName()
@@ -47,10 +51,24 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		return texture.toString();
 	}
 
-	@Override
+    @Override
+    public int recipiesPerPage()
+    {
+        return 1;
+    }
+
+    @Override
+    public void drawBackground(int recipe)
+    {
+        GL11.glColor4f(1, 1, 1, 1);
+        changeTexture(getGuiTexture());
+        drawTexturedModalRect(0, 0, 5, 11, 166, 131);
+    }
+
+    @Override
 	public void loadTransferRects()
 	{
-		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 24), MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
+		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 30), MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
 	}
 
 	@Override
@@ -146,8 +164,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		if (chance < 1.0f)
 		{
 			String chanceStr = String.format("%2.0f%%", chance * 100.0);
-			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr);
-			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS, 8, false);
+			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr) - 5;
+			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS + 10, 8, false);
 		}
 
 		// Potentially update the outputs that will be displayed on the next
@@ -227,17 +245,37 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 
 		protected void setOutputs(List<ItemStack> outputs)
 		{
+            outputs = MinechemHelper.pushTogetherStacks(outputs);
 			output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
 			otherOutputs = new ArrayList<PositionedStack>();
 			if (outputs.size() > 1)
 			{
+                int itemsPerLine = calcItemsPerLine(outputs);
+                double scale = 9.0 / itemsPerLine;
+                int output_x_scale = (int)Math.ceil(OUTPUT_X_SCALE * scale);
 				for (int idx = 1; idx < outputs.size(); idx++)
 				{
 					ItemStack o = outputs.get(idx);
-					otherOutputs.add(new PositionedStack(o, OUTPUT_X_OFS + OUTPUT_X_SCALE * idx, OUTPUT_Y_OFS));
+                    int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
+                    int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
+					otherOutputs.add(new PositionedStack(o, x, y));
 				}
 			}
 		}
+
+        private int calcItemsPerLine(List<ItemStack> list)
+        {
+            int highestStackSize = 0;
+            for (ItemStack stack : list)
+            {
+                if(highestStackSize < stack.stackSize)
+                {
+                    highestStackSize = stack.stackSize;
+                }
+            }
+            int length = (int)(Math.log10(highestStackSize)+1);
+            return 9 - length;
+        }
 	}
 
 	public class CachedDecomposerRecipe extends BaseCachedDecomposerRecipe

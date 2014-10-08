@@ -81,6 +81,7 @@ public class Recipe {
 
                     if (components != null && input != null)
                     {
+
                         Recipe currRecipe = recipes.get(input);
                         if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
                         {

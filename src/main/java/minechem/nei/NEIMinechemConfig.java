@@ -15,7 +15,7 @@ public class NEIMinechemConfig implements IConfigureNEI
     @Override
     public String getVersion()
     {
-        return "test-1";
+        return "v1";
     }
 
     @Override
