@@ -14,7 +14,6 @@ import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
-import minechem.item.element.ElementClassificationEnum;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
@@ -163,7 +162,7 @@ public class ChemicalExplosionHandler
     		
     		boolean isGas=false;
     		if (chemical instanceof ElementEnum){
-    			isGas=((ElementEnum) chemical).roomState()==ElementClassificationEnum.gas;
+    			isGas=((ElementEnum) chemical).roomState().isGas();
     		}
     		
     		if (ran.nextFloat()<=output.outputs.get(chemical)){

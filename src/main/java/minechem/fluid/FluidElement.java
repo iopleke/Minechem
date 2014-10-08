@@ -1,14 +1,12 @@
 package minechem.fluid;
 
 import minechem.MinechemItemsRegistration;
-import minechem.item.element.ElementClassificationEnum;
 import minechem.item.element.ElementEnum;
 import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
 import java.awt.*;
 
 public class FluidElement extends Fluid implements IMinechemFluid
@@ -20,8 +18,8 @@ public class FluidElement extends Fluid implements IMinechemFluid
     {
         super(element.name());
         this.element = element;
-        boolean isGas = this.element.roomState() == ElementClassificationEnum.gas;
-        setViscosity(1000); // How fast the fluid flows.
+        boolean isGas = this.element.roomState().isGas();
+        setViscosity(element.roomState().getViscosity()); // How fast the fluid flows.
         setGaseous(isGas);
         setDensity(isGas ? -10 : 10);
         FluidRegistry.registerFluid(this);

@@ -2,7 +2,6 @@ package minechem.tileentity.prefab;
 
 import minechem.Minechem;
 import minechem.MinechemBlocksGeneration;
-import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.multiblock.fusion.FusionTileEntity;
