@@ -127,7 +127,7 @@ public class Recipe {
         int i = 0;
         for (ItemStack itemStack : componentsParam)
         {
-            if (itemStack != null)
+            if (itemStack != null && itemStack.getItem() != null)
             {
                 if (itemStack.getItemDamage() == Short.MAX_VALUE)
                 {
