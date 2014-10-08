@@ -1,11 +1,11 @@
 package minechem.tick;
 
-public class ChemicalExplosionReactionRule {
+public class ChemicalFluidReactionRule {
 	
 	public final Enum chemicalA;
 	public final Enum chemicalB;
 	
-	public ChemicalExplosionReactionRule(Enum a,Enum b) {
+	public ChemicalFluidReactionRule(Enum a,Enum b) {
 		chemicalA=a;
 		chemicalB=b;
 	}
@@ -21,8 +21,8 @@ public class ChemicalExplosionReactionRule {
 			return true;
 		}
 		
-		if (obj instanceof ChemicalExplosionReactionRule){
-			ChemicalExplosionReactionRule another=(ChemicalExplosionReactionRule) obj;
+		if (obj instanceof ChemicalFluidReactionRule){
+			ChemicalFluidReactionRule another=(ChemicalFluidReactionRule) obj;
 			return (chemicalA==another.chemicalA&&chemicalB==another.chemicalB)||(chemicalB==another.chemicalA&&chemicalA==another.chemicalB);
 		}
 		

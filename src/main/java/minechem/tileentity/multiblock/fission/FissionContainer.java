@@ -1,7 +1,6 @@
 package minechem.tileentity.multiblock.fission;
 
 import minechem.MinechemItemsRegistration;
-import minechem.item.element.ElementEnum;
 import minechem.radiation.IRadiationShield;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

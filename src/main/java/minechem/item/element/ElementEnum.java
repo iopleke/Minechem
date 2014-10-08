@@ -4,7 +4,6 @@ import static minechem.item.element.ElementClassificationEnum.*;
 import static minechem.radiation.RadiationEnum.*;
 import static minechem.item.ChemicalRoomStateEnum.*;
 import minechem.item.ChemicalRoomStateEnum;
-import minechem.item.IDescriptiveName;
 import minechem.radiation.RadiationEnum;
 import net.minecraft.util.StatCollector;
 

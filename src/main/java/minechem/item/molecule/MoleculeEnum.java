@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
 import minechem.item.ChemicalRoomStateEnum;
-import minechem.item.IDescriptiveName;
 import minechem.item.element.Element;
 import minechem.potion.PotionChemical;
 import net.minecraft.util.StatCollector;
@@ -171,8 +170,16 @@ public enum MoleculeEnum
     keratin(146,solid, new Molecule(threonine), new Molecule(cysteine), new Molecule(proline), new Molecule(threonine), new Molecule(proline), new Molecule(cysteine), new Molecule(proline)),
       
     //Thermal Expansion
-    asbestos(147,solid, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4));
-    
+    asbestos(147,solid, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4)),
+
+    //
+    lithiumHydroxide(148,solid,new Element(Li, 1),new Molecule(hydroxide, 1)),
+    sodiumHydroxide(149,solid,new Element(Na, 1),new Molecule(hydroxide, 1)),
+    potassiumHydroxide(150,solid,new Element(K, 1),new Molecule(hydroxide, 1)),
+    rubidiumHydroxide(151,solid,new Element(Rb, 1),new Molecule(hydroxide, 1)),
+    cesiumHydroxide(152,solid,new Element(Cs, 1),new Molecule(hydroxide, 1)),
+    franciumHydroxide(153,solid,new Element(Fr, 1),new Molecule(hydroxide, 1)),
+    ;
     
     public static MoleculeEnum[] molecules = values();
     private final String localizationKey;

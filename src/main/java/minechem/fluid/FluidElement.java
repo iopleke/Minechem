@@ -1,7 +1,6 @@
 package minechem.fluid;
 
 import minechem.MinechemItemsRegistration;
-import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.element.ElementEnum;
 import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;

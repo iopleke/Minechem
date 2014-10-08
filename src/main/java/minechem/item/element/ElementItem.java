@@ -12,7 +12,7 @@ import minechem.item.IDescriptiveName;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
-import minechem.tick.ChemicalExplosionHandler;
+import minechem.tick.ChemicalFluidReactionHandler;
 import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
@@ -397,7 +397,7 @@ public class ElementItem extends Item implements IFluidContainerItem
 
             if(flag)
             {
-            	Enum chemical=ChemicalExplosionHandler.getChemical(block);
+            	Enum chemical=ChemicalFluidReactionHandler.getChemical(block);
             	if (chemical!=null&&FluidChemicalDispenser.canDrain(world, block, blockX, blockY, blockZ)){
             		ItemStack stack=FluidChemicalDispenser.createItemStack(chemical, 1);
             		

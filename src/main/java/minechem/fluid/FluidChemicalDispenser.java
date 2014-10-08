@@ -6,7 +6,7 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
-import minechem.tick.ChemicalExplosionHandler;
+import minechem.tick.ChemicalFluidReactionHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
@@ -34,7 +34,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		
 		if (itemStack.getItem() instanceof ElementItem&&itemStack.getItemDamage()>=ElementEnum.heaviestMass){
 			Block frontBlock=world.getBlock(x, y, z);
-			Enum chemical=ChemicalExplosionHandler.getChemical(frontBlock);
+			Enum chemical=ChemicalFluidReactionHandler.getChemical(frontBlock);
 			
 			if (chemical!=null&&canDrain(world,frontBlock, x, y, z)){
 				ItemStack stack=createItemStack(chemical, 1);
