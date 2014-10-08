@@ -33,16 +33,16 @@ import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
 
-public class ChemicalExplosionHandler
+public class ChemicalFluidReactionHandler
 {
-	public static final Map<ChemicalExplosionReactionRule, ChemicalExplosionReactionOutput> reactionRules=new HashMap<ChemicalExplosionReactionRule, ChemicalExplosionReactionOutput>();
+	public static final Map<ChemicalFluidReactionRule, ChemicalFluidReactionOutput> reactionRules=new HashMap<ChemicalFluidReactionRule, ChemicalFluidReactionOutput>();
 	
 	private static final Random ran=new Random();
 	
     @SubscribeEvent
     public void tick(TickEvent.WorldTickEvent event)
     {
-    	if (!Settings.explosionItemMeetFluid){
+    	if (!Settings.reactionItemMeetFluid){
     		return;
     	}
     	
@@ -72,7 +72,7 @@ public class ChemicalExplosionHandler
             		Enum chemicalB=getChemical(block);
             			
             		if (chemicalB!=null){
-            			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemicalA, chemicalB);
+            			ChemicalFluidReactionRule rule=new ChemicalFluidReactionRule(chemicalA, chemicalB);
             			if (reactionRules.containsKey(rule)){
             				explosionReaction(world,entityItem,x,y,z,rule,!(FluidChemicalDispenser.canDrain(world,block,x,y,z)));
             				itemStack.stackSize--;
@@ -90,49 +90,49 @@ public class ChemicalExplosionHandler
     }
 
     public static void initExplodableChemical(){
-    	// TODO Add more explosion rules
+    	// TODO Add more reaction rules -yushijinhun
     	Map<Enum, Float> map;
     	
     	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.lithiumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalExplosionReactionOutput(map, 0.1f));
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.sodiumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Na),new ChemicalExplosionReactionOutput(map, 0.15f));
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Na),new ChemicalFluidReactionOutput(map, 0.15f));
     	
     	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.potassiumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.K),new ChemicalExplosionReactionOutput(map, 0.2f));
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.K),new ChemicalFluidReactionOutput(map, 0.2f));
     	
     	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.rubidiumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Rb),new ChemicalExplosionReactionOutput(map, 0.25f));
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Rb),new ChemicalFluidReactionOutput(map, 0.25f));
 
        	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.cesiumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Cs),new ChemicalExplosionReactionOutput(map, 0.3f));
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Cs),new ChemicalFluidReactionOutput(map, 0.3f));
     	
        	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.franciumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Fr),new ChemicalExplosionReactionOutput(map, 0.4f));
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Fr),new ChemicalFluidReactionOutput(map, 0.4f));
 
 //    	
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.calciumOxide));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.potassiumOxide));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sodiumOxide));
+//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
+//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.calciumOxide));
+//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.potassiumOxide));
+//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.sodiumOxide));
     	
     }
     
-    private static void explosionReaction(World world,Entity entity,int x,int y,int z, ChemicalExplosionReactionRule rule,boolean popFlowingFluid){
-    	ChemicalExplosionReactionOutput output=reactionRules.get(rule);
+    private static void explosionReaction(World world,Entity entity,int x,int y,int z, ChemicalFluidReactionRule rule,boolean popFlowingFluid){
+    	ChemicalFluidReactionOutput output=reactionRules.get(rule);
     	if (output==null){
     		return;
     	}
@@ -232,7 +232,7 @@ public class ChemicalExplosionHandler
     	Enum chemicalA=getChemical(source);
     	Enum chemicalB=getChemical(destination);
     	if (chemicalA!=null&&chemicalB!=null){
-    		ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemicalA, chemicalB);
+    		ChemicalFluidReactionRule rule=new ChemicalFluidReactionRule(chemicalA, chemicalB);
     		
     		if (reactionRules.containsKey(rule)){
     			boolean flag=!(FluidChemicalDispenser.canDrain(world, source, sourceX, sourceY, sourceZ)&&FluidChemicalDispenser.canDrain(world, destination, destinationX, destinationY, destinationZ));

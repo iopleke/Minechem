@@ -58,8 +58,8 @@ public class Settings
 	public static int maxFusionStorage = 100000;
 
 	// Chemical Explosion
-	public static boolean explosionItemMeetFluid=true;
-	public static boolean explosionFluidMeetFluid=true;
+	public static boolean reactionItemMeetFluid=true;
+	public static boolean reactionFluidMeetFluid=true;
 	
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
@@ -155,16 +155,16 @@ public class Settings
         fluidEffects = prop.getBoolean();
         configList.add(prop.getName());
         
-        prop = config.get(Configuration.CATEGORY_GENERAL, "explosionItemMeetFluid", Settings.explosionItemMeetFluid);
-        prop.comment = StatCollector.translateToLocal("config.explosionItemMeetFluid.description");
-        prop.setLanguageKey("config.explosionItemMeetFluid");
-        explosionItemMeetFluid = prop.getBoolean();
+        prop = config.get(Configuration.CATEGORY_GENERAL, "reactionItemMeetFluid", Settings.reactionItemMeetFluid);
+        prop.comment = StatCollector.translateToLocal("config.reactionItemMeetFluid.description");
+        prop.setLanguageKey("config.reactionItemMeetFluid");
+        reactionItemMeetFluid = prop.getBoolean();
         configList.add(prop.getName());
         
-        prop = config.get(Configuration.CATEGORY_GENERAL, "explosionFluidMeetFluid", Settings.explosionFluidMeetFluid);
-        prop.comment = StatCollector.translateToLocal("config.explosionFluidMeetFluid.description");
-        prop.setLanguageKey("config.explosionFluidMeetFluid");
-        explosionFluidMeetFluid = prop.getBoolean();
+        prop = config.get(Configuration.CATEGORY_GENERAL, "reactionFluidMeetFluid", Settings.reactionFluidMeetFluid);
+        prop.comment = StatCollector.translateToLocal("config.reactionFluidMeetFluid.description");
+        prop.setLanguageKey("config.reactionFluidMeetFluid");
+        reactionFluidMeetFluid = prop.getBoolean();
         configList.add(prop.getName());
 
 		prop = config.get("blacklist", "decomposition", new String[]

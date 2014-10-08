@@ -2,7 +2,7 @@ package minechem.tick;
 
 import java.util.Map;
 
-public class ChemicalExplosionReactionOutput {
+public class ChemicalFluidReactionOutput {
 	
 	public final Map<Enum, Float> outputs;
 	public final float explosionLevel;
@@ -14,7 +14,7 @@ public class ChemicalExplosionReactionOutput {
 	 * @param outputs
 	 * @param explosionLevel
 	 */
-	public ChemicalExplosionReactionOutput(Map<Enum, Float> outputs,float explosionLevel) {
+	public ChemicalFluidReactionOutput(Map<Enum, Float> outputs,float explosionLevel) {
 		this.outputs = outputs;
 		this.explosionLevel = explosionLevel;
 	}

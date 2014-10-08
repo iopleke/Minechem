@@ -31,7 +31,7 @@ import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.render.EffectsRenderer;
-import minechem.tick.ChemicalExplosionHandler;
+import minechem.tick.ChemicalFluidReactionHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Recipe;
 import minechem.utils.Reference;
@@ -235,7 +235,7 @@ public class Minechem
 		FluidChemicalDispenser dispenser = new FluidChemicalDispenser();
 		BlockDispenser.dispenseBehaviorRegistry.putObject(MinechemItemsRegistration.element, dispenser);
 		BlockDispenser.dispenseBehaviorRegistry.putObject(MinechemItemsRegistration.molecule, dispenser);
-		ChemicalExplosionHandler.initExplodableChemical();
+		ChemicalFluidReactionHandler.initExplodableChemical();
 	}
 
 	@EventHandler
