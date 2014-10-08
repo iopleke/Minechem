@@ -76,7 +76,12 @@ public class ChemicalExplosionHandler
             			ChemicalExplosionReactionRule rule=new ChemicalExplosionReactionRule(chemicalA, chemicalB);
             			if (reactionRules.containsKey(rule)){
             				explosionReaction(world,entityItem,x,y,z,rule,!(FluidChemicalDispenser.canDrain(world,block,x,y,z)));
-            				world.removeEntity(entityItem);
+            				itemStack.stackSize--;
+            				if (itemStack.stackSize<=0){
+            					world.removeEntity(entityItem);
+            				}else{
+            					entityItem.setEntityItemStack(itemStack);
+            				}
             			}
             		}
             		
