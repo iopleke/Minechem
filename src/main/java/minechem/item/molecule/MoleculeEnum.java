@@ -172,7 +172,13 @@ public enum MoleculeEnum
     asbestos(147, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4)),
     
     //
-    lithiumHydroxide(148,new Element(Li, 1),new Molecule(hydroxide, 1));
+    lithiumHydroxide(148,new Element(Li, 1),new Molecule(hydroxide, 1)),
+    sodiumHydroxide(149,new Element(Na, 1),new Molecule(hydroxide, 1)),
+    potassiumHydroxide(150,new Element(K, 1),new Molecule(hydroxide, 1)),
+    rubidiumHydroxide(151,new Element(Rb, 1),new Molecule(hydroxide, 1)),
+    cesiumHydroxide(152,new Element(Cs, 1),new Molecule(hydroxide, 1)),
+    franciumHydroxide(153,new Element(Fr, 1),new Molecule(hydroxide, 1)),
+    ;
     
     public static MoleculeEnum[] molecules = values();
     private final String localizationKey;

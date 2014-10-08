@@ -92,17 +92,33 @@ public class ChemicalExplosionHandler
     	map=new HashMap<Enum, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.lithiumHydroxide, 1f);
-    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalExplosionReactionOutput(map, 0.4f));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Na));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.K));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Rb));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Cs));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Fr));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Mg));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ca));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Sr));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ba));
-//    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Ra));
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalExplosionReactionOutput(map, 0.1f));
+    	
+    	map=new HashMap<Enum, Float>();
+    	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.sodiumHydroxide, 1f);
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Na),new ChemicalExplosionReactionOutput(map, 0.15f));
+    	
+    	map=new HashMap<Enum, Float>();
+    	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.potassiumHydroxide, 1f);
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.K),new ChemicalExplosionReactionOutput(map, 0.2f));
+    	
+    	map=new HashMap<Enum, Float>();
+    	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.rubidiumHydroxide, 1f);
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Rb),new ChemicalExplosionReactionOutput(map, 0.25f));
+
+       	map=new HashMap<Enum, Float>();
+    	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.cesiumHydroxide, 1f);
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Cs),new ChemicalExplosionReactionOutput(map, 0.3f));
+    	
+       	map=new HashMap<Enum, Float>();
+    	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.franciumHydroxide, 1f);
+    	reactionRules.put(new ChemicalExplosionReactionRule(MoleculeEnum.water, ElementEnum.Fr),new ChemicalExplosionReactionOutput(map, 0.4f));
+
 //    	
 //    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
 //    	explosionReactionRules.add(new ChemicalExplosionReactionRule(MoleculeEnum.water, MoleculeEnum.calciumOxide));
