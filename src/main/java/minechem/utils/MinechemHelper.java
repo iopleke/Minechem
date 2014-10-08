@@ -1,8 +1,6 @@
 package minechem.utils;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.Element;
@@ -128,6 +126,38 @@ public class MinechemHelper
                 stacks.add(new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal()));
             }
         }
+        return stacks;
+    }
+
+    public static List<ItemStack> pushTogetherStacks(List<ItemStack> stacks)
+    {
+        // i slot to move
+        for (int i = stacks.size()-1; i >= 0; i--)
+        {
+            if (stacks.get(i) == null)
+            {
+                continue;
+            }
+            // spot for move
+            for (int j = 0; j < i; j++)
+            {
+                // empty spot
+                if (stacks.get(j) == null)
+                {
+                    stacks.set(j, stacks.get(i));
+                    stacks.set(j, null);
+                    break;
+                }
+                // same stack
+                else if (stacks.get(j).isItemEqual(stacks.get(i)))
+                {
+                    stacks.get(j).stackSize += stacks.get(i).stackSize;
+                    stacks.set(i, null);
+                    break;
+                }
+            }
+        }
+        stacks.removeAll(Collections.singleton(null));
         return stacks;
     }
 

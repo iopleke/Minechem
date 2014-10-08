@@ -33,7 +33,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	private static final int OUTPUT_X_OFS = 2;
 	private static final int OUTPUT_X_SCALE = 18;
 	private static final int OUTPUT_Y_OFS = 51;
-	private static final int INPUT_ARROW_Y_OFS = 40;
+	private static final int INPUT_ARROW_Y_OFS = 20;
 
 	@Override
 	public String getRecipeName()
@@ -50,7 +50,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadTransferRects()
 	{
-		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 24), MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
+		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 30), MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
 	}
 
 	@Override
@@ -146,8 +146,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		if (chance < 1.0f)
 		{
 			String chanceStr = String.format("%2.0f%%", chance * 100.0);
-			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr);
-			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS, 8, false);
+			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr) - 5;
+			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS + 10, 8, false);
 		}
 
 		// Potentially update the outputs that will be displayed on the next
@@ -227,6 +227,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 
 		protected void setOutputs(List<ItemStack> outputs)
 		{
+            outputs = MinechemHelper.pushTogetherStacks(outputs);
 			output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
 			otherOutputs = new ArrayList<PositionedStack>();
 			if (outputs.size() > 1)
@@ -234,7 +235,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				for (int idx = 1; idx < outputs.size(); idx++)
 				{
 					ItemStack o = outputs.get(idx);
-					otherOutputs.add(new PositionedStack(o, OUTPUT_X_OFS + OUTPUT_X_SCALE * idx, OUTPUT_Y_OFS));
+					otherOutputs.add(new PositionedStack(o, OUTPUT_X_OFS + OUTPUT_X_SCALE * (idx % 9), OUTPUT_Y_OFS + ((idx / 9) * OUTPUT_X_SCALE)));
 				}
 			}
 		}
