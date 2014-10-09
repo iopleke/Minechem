@@ -1,5 +1,7 @@
 package minechem.utils;
 
+import minechem.item.element.ElementItem;
+import minechem.item.molecule.MoleculeItem;
 import net.minecraft.item.ItemStack;
 
 public class Compare
@@ -14,17 +16,17 @@ public class Compare
 
 	public static boolean isStackAChemical(ItemStack itemstack)
 	{
-		return itemstack.toString().contains("minechem.itemElement") || itemstack.toString().contains("minechem.itemMolecule");
+		return itemstack.getItem() instanceof ElementItem || itemstack.getItem() instanceof MoleculeItem;
 	}
 
 	public static boolean isStackAnElement(ItemStack itemstack)
 	{
-		return itemstack.toString().contains("minechem.itemElement");
+		return itemstack.getItem() instanceof ElementItem;
 	}
 
 	public static boolean isStackAMolecule(ItemStack itemstack)
 	{
-		return itemstack.toString().contains("minechem.itemMolecule");
+		return itemstack.getItem() instanceof MoleculeItem;
 	}
 
 	public static boolean isStackAnEmptyTestTube(ItemStack itemstack)
