@@ -1,8 +1,7 @@
 package minechem.item.molecule;
 
-import java.util.ArrayList;
-import java.util.List;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
@@ -21,10 +20,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidContainerItem;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class MoleculeItem extends Item
 {

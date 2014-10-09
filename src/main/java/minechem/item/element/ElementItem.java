@@ -1,10 +1,9 @@
 package minechem.item.element;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import minechem.MinechemItemsRegistration;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Minechem;
+import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
@@ -30,11 +29,11 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidContainerItem;
 import org.lwjgl.input.Keyboard;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ElementItem extends Item
 {

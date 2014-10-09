@@ -7,7 +7,6 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
-
 import org.lwjgl.opengl.GL11;
 
 public class MoleculeItemRenderer implements IItemRenderer
