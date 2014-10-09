@@ -1,12 +1,14 @@
 package minechem.item.molecule;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.element.Element;
 import minechem.potion.PotionChemical;
 import net.minecraft.util.StatCollector;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
+
 import static minechem.item.ChemicalRoomStateEnum.*;
 import static minechem.item.element.ElementEnum.*;
 

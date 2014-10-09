@@ -1,10 +1,9 @@
 package minechem.item.element;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import minechem.MinechemItemsRegistration;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Minechem;
+import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
@@ -30,13 +29,13 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.IFluidContainerItem;
 import org.lwjgl.input.Keyboard;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
-public class ElementItem extends Item implements IFluidContainerItem
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class ElementItem extends Item
 {
 
     private final static ElementEnum[] elements = ElementEnum.values();
@@ -334,47 +333,6 @@ public class ElementItem extends Item implements IFluidContainerItem
         int atomicMass = element.getItemDamage();
         element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
-    }
-
-    @Override
-    public FluidStack getFluid(ItemStack container)
-    {
-        if (container.getItemDamage() != ElementEnum.heaviestMass)
-        {
-            return new FluidStack(FluidHelper.elements.get(elements[container.getItemDamage()]), getCapacity(container));
-        }
-        return null;
-    }
-
-    @Override
-    public int getCapacity(ItemStack container)
-    {
-        if (container.getItemDamage() != ElementEnum.heaviestMass)
-        {
-            return 1000;
-        }
-        return 0;
-    }
-
-    @Override
-    public int fill(ItemStack container, FluidStack resource, boolean doFill)
-    {
-        return 0;
-    }
-
-    @Override
-    public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
-    {
-        if (container.getItemDamage() != ElementEnum.heaviestMass)
-        {
-            FluidStack fluidStack = getFluid(container);
-            if (container.stackSize > 0)
-            {
-                --container.stackSize;
-                return fluidStack;
-            }
-        }
-        return null;
     }
 
     @Override

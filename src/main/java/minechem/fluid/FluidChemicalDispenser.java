@@ -1,6 +1,5 @@
 package minechem.fluid;
 
-import java.util.Random;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -19,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import java.util.Random;
 
 public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 	

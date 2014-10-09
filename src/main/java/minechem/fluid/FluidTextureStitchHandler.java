@@ -1,9 +1,9 @@
 package minechem.fluid;
 
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraftforge.client.event.TextureStitchEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class FluidTextureStitchHandler {
 	

@@ -1,11 +1,12 @@
 package minechem.item.element;
 
-import static minechem.item.element.ElementClassificationEnum.*;
-import static minechem.radiation.RadiationEnum.*;
-import static minechem.item.ChemicalRoomStateEnum.*;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.radiation.RadiationEnum;
 import net.minecraft.util.StatCollector;
+
+import static minechem.item.ChemicalRoomStateEnum.*;
+import static minechem.item.element.ElementClassificationEnum.*;
+import static minechem.radiation.RadiationEnum.*;
 
 public enum ElementEnum 
 {
