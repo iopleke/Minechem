@@ -26,7 +26,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public class MoleculeItem extends Item implements IFluidContainerItem
+public class MoleculeItem extends Item
 {
     public IIcon render_pass1, render_pass2, filledMolecule;
 
@@ -169,30 +169,6 @@ public class MoleculeItem extends Item implements IFluidContainerItem
     public boolean isFull3D()
     {
         return true;
-    }
-
-    @Override
-    public FluidStack getFluid(ItemStack container)
-    {
-        return new FluidStack(FluidHelper.molecule.get(MoleculeEnum.getById(container.getItemDamage())), 100);
-    }
-
-    @Override
-    public int getCapacity(ItemStack container)
-    {
-        return 100;
-    }
-
-    @Override
-    public int fill(ItemStack container, FluidStack resource, boolean doFill)
-    {
-        return 0;
-    }
-
-    @Override
-    public FluidStack drain(ItemStack container, int maxDrain, boolean doDrain)
-    {
-        return getFluid(container);
     }
 
     @Override
