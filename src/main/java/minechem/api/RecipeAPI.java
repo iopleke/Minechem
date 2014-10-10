@@ -172,4 +172,84 @@ public class RecipeAPI
             return false;
         }
     }
+
+    /**
+     * Removes a Decomposition recipe
+     *
+     * @param itemStack the item that has to be removed in ItemStack form
+     * @return Whether the decomposition recipe was removed
+     */
+    public static boolean removeDecompositionRecipe(ItemStack itemStack)
+    {
+        try
+        {
+            Class decomp = Class.forName("minechem.tileentity.decomposer.DecomposerRecipe");
+            decomp.getMethod("remove", ItemStack.class).invoke(null, itemStack);
+            return true;
+        }
+        catch (Exception e)
+        {
+          return false;
+        }
+    }
+
+    /**
+     * Removes all Decomposition recipes for a given oreDict name
+     *
+     * @param oreName oerDict name of the item
+     * @return Whether the decomposition recipe was removed
+     */
+    public static boolean removeDecompositionRecipe(String oreName)
+    {
+        try
+        {
+            Class decomp = Class.forName("minechem.tileentity.decomposer.DecomposerRecipe");
+            decomp.getMethod("removeRecipeSafely", String.class).invoke(null, oreName);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Removes a Synthesis recipe
+     *
+     * @param itemStack the item that has to be removed in ItemStack form
+     * @return Whether the Synthesis recipe was removed
+     */
+    public static boolean removeSynthesisRecipe(ItemStack itemStack)
+    {
+        try
+        {
+            Class synth = Class.forName("minechem.tileentity.synthesis.SynthesisRecipe");
+            synth.getMethod("remove", ItemStack.class).invoke(null, itemStack);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Removes all Synthesis recipes for a given oreDict name
+     *
+     * @param oreName oerDict name of the item
+     * @return Whether the Synthesis recipes were removed
+     */
+    public static boolean removeSynthesisRecipe(String oreName)
+    {
+        try
+        {
+            Class synth = Class.forName("minechem.tileentity.synthesis.SynthesisRecipe");
+            synth.getMethod("removeRecipeSafely", String.class).invoke(null, oreName);
+            return true;
+        }
+        catch (Exception e)
+        {
+            return false;
+        }
+    }
 }

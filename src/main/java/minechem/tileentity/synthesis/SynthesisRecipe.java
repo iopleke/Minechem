@@ -67,6 +67,15 @@ public class SynthesisRecipe
 			SynthesisRecipe.recipes.remove(getKey(recipe.output));
 		}
 	}
+
+    public static void removeRecipeSafely(String item)
+    {
+        for (ItemStack i : OreDictionary.getOres(item))
+        {
+            SynthesisRecipe.remove(i);
+        }
+    }
+
     public static SynthesisRecipe remove(String string)
     {
         if (recipes.containsKey(string))
@@ -75,7 +84,6 @@ public class SynthesisRecipe
         }
         return null;
     }
-
 
 	public static ArrayList<SynthesisRecipe> search(ItemStack itemStack)
 	{
