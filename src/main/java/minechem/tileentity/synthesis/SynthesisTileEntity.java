@@ -715,8 +715,9 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	{
 		if (Settings.AllowAutomation)
 		{
-			if (takeStacksFromStorage(false) && side == 0)
+			if (canTakeOutputStack() && side == 0)
 			{
+                takeStacksFromStorage(true);
 				return true;
 			}
 		}
