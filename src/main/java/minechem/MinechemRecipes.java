@@ -1544,6 +1544,17 @@ public class MinechemRecipes
 			this.molecule(MoleculeEnum.cucurbitacin)
 		}));
 
+        // Pumpkin seed
+        ItemStack pumpkinSeed = new ItemStack(Items.pumpkin_seeds);
+        DecomposerRecipe.add(new DecomposerRecipe(blockPumpkin, new PotionChemical[]
+        {
+                this.molecule(MoleculeEnum.water)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(blockPumpkin, false, COST_PLANT, new PotionChemical[]
+        {
+                this.molecule(MoleculeEnum.cucurbitacin)
+        }));
+
 		// Netherrack
 		ItemStack blockNetherrack = new ItemStack(Blocks.netherrack);
 		DecomposerRecipe.add(new DecomposerRecipeSelect(blockNetherrack, 0.1F, new DecomposerRecipe[]
@@ -2410,6 +2421,17 @@ public class MinechemRecipes
 		{
 			null, null, null, null, null, null, null, null, moleculePolyvinylChloride
 		}));
+
+        //Ironbars
+        ItemStack bars = new ItemStack(Blocks.iron_bars);
+        DecomposerRecipe.add(new DecomposerRecipe(bars, new PotionChemical[]
+        {
+           element(ElementEnum.Fe, 2)
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(bars, false, COST_BLOCK, new PotionChemical[]
+        {
+                element(ElementEnum.Fe, 2)
+        }));
 	}
 
 	public void RegisterModRecipes()
