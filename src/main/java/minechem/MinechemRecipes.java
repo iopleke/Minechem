@@ -20,6 +20,7 @@ import minechem.oredictionary.OreDictionaryMekanismHandler;
 import minechem.oredictionary.OreDictionaryUndergroundBiomesHandler;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerFluidRecipe;
+import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
@@ -534,7 +535,30 @@ public class MinechemRecipes
 		}));
 
         // Lava
-		// TODO: Add support for lava
+		// This assumes lava is composed from cobblestone at a 4:1 ratio
+		//   as well as having slightly higher purity
+		DecomposerRecipe.add(new DecomposerFluidRecipeSelect("lava", 250, 0.2F, new DecomposerRecipe[]
+				{
+					new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Si), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Fe), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Mg), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Ti), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Pb), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
+					})
+				}));
 		// Sand
 		ItemStack blockSand = new ItemStack(Blocks.sand);
 		DecomposerRecipe.add(new DecomposerRecipe(blockSand, new PotionChemical[]
@@ -988,7 +1012,7 @@ public class MinechemRecipes
 		ItemStack blockOreLapis = new ItemStack(Blocks.lapis_ore);
 		DecomposerRecipe.add(new DecomposerRecipe(blockOreLapis, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.lazurite, 6), this.molecule(MoleculeEnum.sodalite), this.molecule(MoleculeEnum.noselite), this.molecule(MoleculeEnum.calcite), this.molecule(MoleculeEnum.pyrite)
+			this.molecule(MoleculeEnum.lazurite, 6), this.molecule(MoleculeEnum.sodalite), this.molecule(MoleculeEnum.noselite), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.pyrite)
 		}));
 
 		// Lapis Lazuli Block

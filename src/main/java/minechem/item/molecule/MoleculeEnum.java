@@ -24,7 +24,8 @@ public enum MoleculeEnum
     potassiumNitrate(5, 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F,solid, new Element(K), new Element(N), new Element(O, 3)),
     tnt(6, 1, 1, 0, 1, 0.65F, 0,solid, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
     siliconDioxide(7, 1, 1, 1, 1, 1, 1,solid, new Element(Si), new Element(O, 2)),
-    calcite(8,solid, new Element(Ca), new Element(C), new Element(O, 3)), // TODO: Remove this as Calcium Carbonate is the exact same
+    // TODO: Replace this when a new element needs to added. It isn't used anywhere
+    calcite(8,solid, new Element(Ca), new Element(C), new Element(O, 3)),
     pyrite(9,solid, new Element(Fe), new Element(S, 2)),
     nepheline(10,solid, new Element(Al), new Element(Si), new Element(O, 4)),
     sulfate(11,solid, new Element(S), new Element(O, 4)),

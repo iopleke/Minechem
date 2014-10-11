@@ -80,7 +80,7 @@ public class OreDictionaryUndergroundBiomesHandler implements OreDictionaryHandl
             break;
         case stoneMarble:
             DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-                    {new Molecule(MoleculeEnum.calcite, 32)});
+                    {new Molecule(MoleculeEnum.calciumCarbonate, 32)});
             break;
         case stoneQuartzite:
             DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
