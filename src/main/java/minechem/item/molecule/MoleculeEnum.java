@@ -200,7 +200,11 @@ public enum MoleculeEnum
 
     // Tinkers Construct
     siliconOxide(164, solid, new Element(Si, 1), new Element(O, 1)),
-    ironOxide(165, solid, new Element(Fe, 1), new Element(O, 1))
+    ironOxide(165, solid, new Element(Fe, 1), new Element(O, 1)),
+    
+    // Extra utilities
+    galliumOxide(166, solid, new Element(Ga, 1), new Element(O, 2)),
+    arsenicOxide(167, solid, new Element(As, 1), new Element(O, 2))
     ;
     
     public static MoleculeEnum[] molecules = values();
