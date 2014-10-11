@@ -128,9 +128,34 @@ public class MinechemRecipes
 		{
 			this.element(ElementEnum.Fe, 2), this.element(ElementEnum.W, 2), this.element(ElementEnum.Si, 2)
 		});
+
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("bronze.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Sn, 4)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("aluminumbrass.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Al, 4)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("manyullyn.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Co, 8), this.element(ElementEnum.Fe, 1), this.element(ElementEnum.W, 1), this.element(ElementEnum.Si, 1)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("alumite.molten", fluidPerIngot, new PotionChemical[]
+        {
+        		this.element(ElementEnum.Al, 8), this.element(ElementEnum.Fe, 3), this.molecule(MoleculeEnum.siliconDioxide, 2) , this.molecule(MoleculeEnum.magnesiumOxide, 1)
+		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("obsidian.molten", fluidPerIngot, new PotionChemical[]
 		{
 			this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.magnesiumOxide, 8)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("steel.molten", fluidPerIngot, new PotionChemical[]
+	    { 
+        		this.element(ElementEnum.Fe, 14), this.element(ElementEnum.C, 2)
+		}); // This ratio should be tested
+	    DecomposerFluidRecipe.createAndAddFluidRecipeSafely("stone.seared", fluidPerIngot, new PotionChemical[]
+	    { 
+	    		this.molecule(MoleculeEnum.siliconOxide, 12), this.molecule(MoleculeEnum.ironOxide, 4)
 		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("glass.molten", fluidPerIngot, new PotionChemical[]
 		{
@@ -139,6 +164,10 @@ public class MinechemRecipes
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("emerald.molten", fluidPerIngot, new PotionChemical[]
 		{
 			this.molecule(MoleculeEnum.beryl, 6), this.element(ElementEnum.Cr, 6), this.element(ElementEnum.V, 6)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("blood.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.O, 6), this.element(ElementEnum.Fe, 2), this.molecule(MoleculeEnum.ironOxide, 8)
 		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("nickel.molten", fluidPerIngot, new PotionChemical[]
 		{
@@ -155,6 +184,14 @@ public class MinechemRecipes
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("platinum.molten", fluidPerIngot, new PotionChemical[]
 		{
 			this.element(ElementEnum.Pt, 16)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("invar.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Fe, 10), this.element(ElementEnum.Ni, 6)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("electrum.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Ag, 8), this.element(ElementEnum.Au, 8)
 		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely(
 				"ender",
