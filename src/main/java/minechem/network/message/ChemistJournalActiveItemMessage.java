@@ -44,7 +44,7 @@ public class ChemistJournalActiveItemMessage implements IMessage, IMessageHandle
     @Override
     public IMessage onMessage(ChemistJournalActiveItemMessage message, MessageContext ctx)
     {
-        ItemStack journal = ctx.getServerHandler().playerEntity.inventory.mainInventory[this.slot];
+        ItemStack journal = ctx.getServerHandler().playerEntity.inventory.mainInventory[message.slot];
         if (journal != null && journal.getItem() == MinechemItemsRegistration.journal)
         {
             ItemStack activeStack = new ItemStack(Item.getItemById(message.itemID), 1, message.itemDMG);
