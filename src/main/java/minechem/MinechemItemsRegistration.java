@@ -60,11 +60,13 @@ public class MinechemItemsRegistration
 
 	public static void registerToOreDictionary()
 	{
-		for (ElementEnum element : ElementEnum.values())
+		for (ElementEnum element : ElementEnum.elements)
 		{
-			OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+			if (element!=null){
+				OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+			}
 		}
-		OreDictionary.registerOre("dustSalpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.ordinal()));
-		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.ordinal()));
+		OreDictionary.registerOre("dustSalpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.id()));
+		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
 	}
 }

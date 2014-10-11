@@ -14,6 +14,7 @@ import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
+import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
@@ -57,7 +58,7 @@ public class ChemicalFluidReactionHandler
             {
             	ItemStack itemStack=entityItem.getEntityItem();
             	Item item=itemStack.getItem();
-            	Enum chemicalA=null;
+            	MinechemChemicalType chemicalA=null;
             	if (item==MinechemItemsRegistration.element){
             		chemicalA=ElementItem.getElement(itemStack);
             	}else if (item==MinechemItemsRegistration.molecule){
@@ -69,7 +70,7 @@ public class ChemicalFluidReactionHandler
             		int y=MathHelper.floor_double(entityItem.posY);
             		int z=MathHelper.floor_double(entityItem.posZ);
             		Block block=world.getBlock(x, y, z);
-            		Enum chemicalB=getChemical(block);
+            		MinechemChemicalType chemicalB=getChemical(block);
             			
             		if (chemicalB!=null){
             			ChemicalFluidReactionRule rule=new ChemicalFluidReactionRule(chemicalA, chemicalB);
@@ -91,34 +92,34 @@ public class ChemicalFluidReactionHandler
 
     public static void initExplodableChemical(){
     	// TODO Add more reaction rules -yushijinhun
-    	Map<Enum, Float> map;
+    	Map<MinechemChemicalType, Float> map;
     	
-    	map=new HashMap<Enum, Float>();
+    	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.lithiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalFluidReactionOutput(map, 0.1f));
     	
-    	map=new HashMap<Enum, Float>();
+    	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.sodiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Na),new ChemicalFluidReactionOutput(map, 0.15f));
     	
-    	map=new HashMap<Enum, Float>();
+    	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.potassiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.K),new ChemicalFluidReactionOutput(map, 0.2f));
     	
-    	map=new HashMap<Enum, Float>();
+    	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.rubidiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Rb),new ChemicalFluidReactionOutput(map, 0.25f));
 
-       	map=new HashMap<Enum, Float>();
+       	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.cesiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Cs),new ChemicalFluidReactionOutput(map, 0.3f));
     	
-       	map=new HashMap<Enum, Float>();
+       	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.franciumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Fr),new ChemicalFluidReactionOutput(map, 0.4f));
@@ -156,9 +157,9 @@ public class ChemicalFluidReactionHandler
     	
     	int needVectors=output.outputs.size();
     	
-    	Iterator<Enum> it=output.outputs.keySet().iterator();
+    	Iterator<MinechemChemicalType> it=output.outputs.keySet().iterator();
     	while(it.hasNext()&&needVectors>0&&foundVectors>0){
-    		Enum chemical=it.next();
+    	MinechemChemicalType chemical=it.next();
     		
     		boolean isGas=false;
     		if (chemical instanceof ElementEnum){
@@ -210,8 +211,8 @@ public class ChemicalFluidReactionHandler
     	}
     }
 
-    public static Enum getChemical(Block block){
-		Enum chemical=null;
+    public static MinechemChemicalType getChemical(Block block){
+    	MinechemChemicalType chemical=null;
 		if (block instanceof IFluidBlock){
 			Fluid fluid=((IFluidBlock)block).getFluid();
 			if (fluid instanceof FluidElement){
@@ -229,8 +230,8 @@ public class ChemicalFluidReactionHandler
     }
     
     public static boolean checkToExplode(Block source,Block destination,World world,int destinationX,int destinationY,int destinationZ,int sourceX,int sourceY,int sourceZ){
-    	Enum chemicalA=getChemical(source);
-    	Enum chemicalB=getChemical(destination);
+    	MinechemChemicalType chemicalA=getChemical(source);
+    	MinechemChemicalType chemicalB=getChemical(destination);
     	if (chemicalA!=null&&chemicalB!=null){
     		ChemicalFluidReactionRule rule=new ChemicalFluidReactionRule(chemicalA, chemicalB);
     		

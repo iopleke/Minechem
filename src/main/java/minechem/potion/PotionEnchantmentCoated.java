@@ -76,7 +76,7 @@ public class PotionEnchantmentCoated extends Enchantment
     {
         for (MoleculeEnum molecule : MoleculeEnum.molecules)
         {
-            if (PotionPharmacologyEffect.givesEffect(molecule))
+            if (molecule!=null&&PotionPharmacologyEffect.givesEffect(molecule))
             {
                 for (int i = 0; i < Enchantment.enchantmentsList.length; i++)
                 {

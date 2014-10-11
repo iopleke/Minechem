@@ -121,7 +121,7 @@ public class PolytoolItem extends ItemPickaxe
         for (int i = 0; i < list.tagCount(); i++)
         {
             NBTTagCompound nbt = list.getCompoundTagAt(i);
-            toReturn.add(PolytoolHelper.getTypeFromElement(ElementEnum.values()[nbt.getInteger("Element")], nbt.getFloat("Power")));
+            toReturn.add(PolytoolHelper.getTypeFromElement(ElementEnum.elements[nbt.getInteger("Element")], nbt.getFloat("Power")));
         }
         return toReturn;
 

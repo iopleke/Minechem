@@ -16,13 +16,17 @@ public class FluidHelper
 
     public static void registerFluids()
     {
-        for (MoleculeEnum moleculeToCreate : MoleculeEnum.values())
+        for (MoleculeEnum moleculeToCreate : MoleculeEnum.molecules)
         {
-            molecule.put(moleculeToCreate, new FluidChemical(moleculeToCreate));
+        	if (moleculeToCreate!=null){
+        		molecule.put(moleculeToCreate, new FluidChemical(moleculeToCreate));
+        	}
         }
-        for (ElementEnum moleculeToCreate : ElementEnum.values())
+        for (ElementEnum moleculeToCreate : ElementEnum.elements)
         {
-            elements.put(moleculeToCreate, new FluidElement(moleculeToCreate));
+        	if (moleculeToCreate!=null){
+        		elements.put(moleculeToCreate, new FluidElement(moleculeToCreate));
+        	}
         }
     }
 

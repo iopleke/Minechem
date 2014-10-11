@@ -1,11 +1,13 @@
 package minechem.tick;
 
+import minechem.item.MinechemChemicalType;
+
 public class ChemicalFluidReactionRule {
 	
-	public final Enum chemicalA;
-	public final Enum chemicalB;
+	public final MinechemChemicalType chemicalA;
+	public final MinechemChemicalType chemicalB;
 	
-	public ChemicalFluidReactionRule(Enum a,Enum b) {
+	public ChemicalFluidReactionRule(MinechemChemicalType a,MinechemChemicalType b) {
 		chemicalA=a;
 		chemicalB=b;
 	}

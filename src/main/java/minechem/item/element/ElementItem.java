@@ -9,6 +9,7 @@ import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.IDescriptiveName;
+import minechem.item.MinechemChemicalType;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -39,7 +40,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ElementItem extends Item implements IFluidContainerItem
 {
 
-    private final static ElementEnum[] elements = ElementEnum.values();
+    private final static ElementEnum[] elements = ElementEnum.elements;
     private final Map<IDescriptiveName, Integer> classificationIndexes = new HashMap<IDescriptiveName, Integer>();
     public final IIcon liquid[] = new IIcon[7], gas[] = new IIcon[7];
     public IIcon solid;
@@ -271,9 +272,11 @@ public class ElementItem extends Item implements IFluidContainerItem
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
     {
         list.add(new ItemStack(item, 1, ElementEnum.heaviestMass));
-        for (ElementEnum element : ElementEnum.values())
+        for (ElementEnum element : ElementEnum.elements)
         {
-            list.add(new ItemStack(item, 1, element.ordinal()));
+        	if (element!=null){
+                list.add(new ItemStack(item, 1, element.ordinal()));
+        	}
         }
     }
 
@@ -397,7 +400,7 @@ public class ElementItem extends Item implements IFluidContainerItem
 
             if(flag)
             {
-            	Enum chemical=ChemicalFluidReactionHandler.getChemical(block);
+            	MinechemChemicalType chemical=ChemicalFluidReactionHandler.getChemical(block);
             	if (chemical!=null&&FluidChemicalDispenser.canDrain(world, block, blockX, blockY, blockZ)){
             		ItemStack stack=FluidChemicalDispenser.createItemStack(chemical, 1);
             		
