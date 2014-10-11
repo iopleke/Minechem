@@ -44,6 +44,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class MinechemRecipes
 {
 
+	
 	private static final MinechemRecipes recipes = new MinechemRecipes();
 	public ArrayList decomposition = new ArrayList();
 	public ArrayList synthesis = new ArrayList();
@@ -77,7 +78,12 @@ public class MinechemRecipes
     public static int COST_GEM = 1000;
     public static int COST_GEMBLOCK = COST_GEM * BLOCK_MULTIPLIER;
 
-
+    /*
+     * Amount of fluid for given unit
+     */
+    private static final int INGOT_AMOUNT = 144;
+	private static final int BUCKET_AMOUNT = 10000;
+	
 	public static MinechemRecipes getInstance()
 	{
 		return recipes;
@@ -86,10 +92,10 @@ public class MinechemRecipes
 	public void registerFluidRecipies()
 	{
 		// Fluids
-		int fluidPerIngot = 144;
+		int fluidPerIngot = INGOT_AMOUNT;
 		// Quick and dirty fix for the Thermal Expansion Resonant Ender 6x bug
 		int threeQuarterFluidPerIngot = 180;
-		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new PotionChemical[]
+		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, BUCKET_AMOUNT), new PotionChemical[]
 		{
 			this.element(ElementEnum.H, 2), this.element(ElementEnum.O)
 		}));
@@ -201,7 +207,17 @@ public class MinechemRecipes
 					this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.element(ElementEnum.Es),
 					this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate)
 				});
+		registerMFRFluidRecipes();
+	}
 
+	private void registerMFRFluidRecipes() {
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("mushroomsoup", BUCKET_AMOUNT, new PotionChemical[] {
+			this.molecule(MoleculeEnum.water, 4), this.molecule(MoleculeEnum.pantherine, 2)	
+		});
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("chocolatemilk", BUCKET_AMOUNT, new PotionChemical[] {
+				this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.theobromine, 1)	
+		});
+		// If someone figures out compositions for the other fluids, add them here.
 	}
 
 	public void registerVanillaChemicalRecipes()
