@@ -5,7 +5,7 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
-import minechem.tick.ChemicalFluidReactionHandler;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
@@ -24,6 +24,13 @@ import java.util.Random;
 public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 	
 	private static final Random ran=new Random();
+
+    public static void init()
+    {
+        FluidChemicalDispenser dispenser = new FluidChemicalDispenser();
+        BlockDispenser.dispenseBehaviorRegistry.putObject(MinechemItemsRegistration.element, dispenser);
+        BlockDispenser.dispenseBehaviorRegistry.putObject(MinechemItemsRegistration.molecule, dispenser);
+    }
 	
 	@Override
 	public ItemStack dispense(IBlockSource blockSource,ItemStack itemStack) {

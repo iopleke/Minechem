@@ -1,7 +1,7 @@
 package minechem.fluid;
 
 import minechem.Settings;
-import minechem.tick.ChemicalFluidReactionHandler;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
