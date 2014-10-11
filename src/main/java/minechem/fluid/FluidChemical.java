@@ -19,7 +19,7 @@ public class FluidChemical extends Fluid implements IMinechemFluid
     {
         super(molecule.name());
         this.molecule = molecule;
-        ChemicalRoomStateEnum roomState=molecule.roomState;
+        ChemicalRoomStateEnum roomState=molecule.roomState();
         setDensity(roomState.isGas() ? -10 : 10); // How tick the fluid is, affects movement inside the liquid.
         setViscosity(roomState.getViscosity()); // How fast the fluid flows.
         setGaseous(roomState.isGas());

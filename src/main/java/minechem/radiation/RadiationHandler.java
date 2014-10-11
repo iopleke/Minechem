@@ -2,14 +2,15 @@ package minechem.radiation;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementItem;
+import minechem.item.molecule.MoleculeItem;
 import minechem.tileentity.decomposer.DecomposerContainer;
 import minechem.tileentity.leadedchest.LeadedChestContainer;
 import minechem.tileentity.synthesis.SynthesisContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
@@ -139,22 +140,32 @@ public class RadiationHandler
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks)
         {
-            if (itemstack != null && itemstack.getItem() == MinechemItemsRegistration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
-            {
-                DecayEvent decayEvent = new DecayEvent();
-                decayEvent.before = itemstack.copy();
-                decayEvent.damage = updateRadiation(world, itemstack);
-                decayEvent.after = itemstack.copy();
-                if (decayEvent.damage > 0)
-                {
-                    events.add(decayEvent);
-                }
-                if (decayEvent.damage > 0 && container != null)
-                {
-                    applyRadiationDamage(player, container, decayEvent.damage);
-                    printRadiationDamageToChat(player, decayEvent);
-                }
-            }
+        	if (itemstack != null){
+        		RadiationEnum radiation=null;
+        		Item item=itemstack.getItem();
+        		if (item==MinechemItemsRegistration.element){
+        			radiation=ElementItem.getRadioactivity(itemstack);
+        		}else if (item==MinechemItemsRegistration.molecule){
+        			radiation=MoleculeItem.getMolecule(itemstack).radioactivity();
+        		}
+        		
+	            if (radiation!=null&&radiation!=RadiationEnum.stable)
+	            {
+	                DecayEvent decayEvent = new DecayEvent();
+	                decayEvent.before = itemstack.copy();
+	                decayEvent.damage = updateRadiation(world, itemstack);
+	                decayEvent.after = itemstack.copy();
+	                if (decayEvent.damage > 0)
+	                {
+	                    events.add(decayEvent);
+	                }
+	                if (decayEvent.damage > 0 && container != null)
+	                {
+	                    applyRadiationDamage(player, container, decayEvent.damage);
+	                    printRadiationDamageToChat(player, decayEvent);
+	                }
+	            }
+        	}
         }
         return events;
     }
@@ -190,15 +201,25 @@ public class RadiationHandler
 
     private void printRadiationDamageToChat(EntityPlayer player, DecayEvent decayEvent)
     {
-        String nameBeforeDecay = ElementItem.getLongName(decayEvent.before);
-        String nameAfterDecay = ElementItem.getLongName(decayEvent.after);
+        String nameBeforeDecay = getLongName(decayEvent.before);
+        String nameAfterDecay = getLongName(decayEvent.after);
         String message = String.format("Radiation Warning: Element %s decayed into %s.", nameBeforeDecay, nameAfterDecay);
         player.addChatMessage(new ChatComponentText(message));
     }
 
+    private String getLongName(ItemStack stack){
+    	Item item=stack.getItem();
+    	if (item==MinechemItemsRegistration.element){
+    		return ElementItem.getLongName(stack);
+    	}else if (item==MinechemItemsRegistration.molecule){
+    		return MoleculeItem.getMolecule(stack).descriptiveName();
+    	}
+    	return "null";
+    }
+    
     private int updateRadiation(World world, ItemStack element)
     {
-        RadiationInfo radiationInfo = ElementItem.getRadiationInfo(element, world);
+        RadiationInfo radiationInfo = ElementItem.getRadiationInfo(element, world);System.err.println(radiationInfo.radiationLife);
         int dimensionID = world.provider.dimensionId;
         if (dimensionID != radiationInfo.dimensionID && radiationInfo.isRadioactive())
         {

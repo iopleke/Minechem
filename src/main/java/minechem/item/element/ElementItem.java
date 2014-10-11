@@ -10,6 +10,8 @@ import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.IDescriptiveName;
 import minechem.item.MinechemChemicalType;
+import minechem.item.molecule.MoleculeEnum;
+import minechem.item.molecule.MoleculeItem;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -91,8 +93,17 @@ public class ElementItem extends Item implements IFluidContainerItem
 
     public static RadiationEnum getRadioactivity(ItemStack itemstack)
     {
-        int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].radioactivity() : RadiationEnum.stable;
+        int id = itemstack.getItemDamage();
+        Item item=itemstack.getItem();
+        if (item==MinechemItemsRegistration.element){
+        	return id<ElementEnum.heaviestMass?ElementEnum.elements[id].radioactivity():RadiationEnum.stable;
+        }else if (item==MinechemItemsRegistration.molecule){
+        	if (id>=MoleculeEnum.molecules.length||MoleculeEnum.molecules[id]==null){
+        		return RadiationEnum.stable;
+        	}
+        	return MoleculeEnum.molecules[id].radioactivity();
+        }
+        return RadiationEnum.stable;
     }
 
     public static ElementEnum getElement(ItemStack itemstack)
@@ -334,8 +345,10 @@ public class ElementItem extends Item implements IFluidContainerItem
 
     public static RadiationInfo decay(ItemStack element, World world)
     {
-        int atomicMass = element.getItemDamage();
-        element.setItemDamage(atomicMass - 1);
+    	if (element.getItem()==MinechemItemsRegistration.element){
+	        int atomicMass = element.getItemDamage();
+	        element.setItemDamage(atomicMass - 1);
+    	}
         return initiateRadioactivity(element, world);
     }
 

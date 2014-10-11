@@ -134,13 +134,14 @@ public class ElementEnum extends MinechemChemicalType
     // Localization key.
     private final String localizationKey;
     private final ElementClassificationEnum classification;
-    private final ChemicalRoomStateEnum roomState;
-    private final RadiationEnum radioactivity;
+    
     private final String name;
     private final int id;
 
-    public ElementEnum(int id,String name,String descriptiveName, ElementClassificationEnum classification, ChemicalRoomStateEnum roomState, RadiationEnum radioactivity)
+    public ElementEnum(int id,String name,String descriptiveName, ElementClassificationEnum classification, ChemicalRoomStateEnum roomState,RadiationEnum radioactivity)
     {
+    	super(roomState,radioactivity);
+    	
     	if (elements[id]!=null){
     		throw new IllegalArgumentException("id "+id+" is used");
     	}
@@ -152,8 +153,6 @@ public class ElementEnum extends MinechemChemicalType
         this.descriptiveName = descriptiveName;
         this.localizationKey = "element." + name;
         this.classification = classification;
-        this.roomState = roomState;
-        this.radioactivity = radioactivity;
     }
 
     /**
@@ -175,16 +174,6 @@ public class ElementEnum extends MinechemChemicalType
     public ElementClassificationEnum classification() 
     {
         return classification;
-    }
-
-    public ChemicalRoomStateEnum roomState() 
-    {
-        return roomState;
-    }
-
-    public RadiationEnum radioactivity() 
-    {
-        return radioactivity;
     }
 
     public int atomicNumber() 

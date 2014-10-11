@@ -161,10 +161,7 @@ public class ChemicalFluidReactionHandler
     	while(it.hasNext()&&needVectors>0&&foundVectors>0){
     	MinechemChemicalType chemical=it.next();
     		
-    		boolean isGas=false;
-    		if (chemical instanceof ElementEnum){
-    			isGas=((ElementEnum) chemical).roomState().isGas();
-    		}
+    		boolean isGas=chemical.roomState().isGas();
     		
     		if (ran.nextFloat()<=output.outputs.get(chemical)){
     			Vector3 vector=null;

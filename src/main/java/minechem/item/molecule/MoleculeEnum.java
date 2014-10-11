@@ -7,6 +7,7 @@ import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.Element;
 import minechem.potion.PotionChemical;
+import minechem.radiation.RadiationEnum;
 import net.minecraft.util.StatCollector;
 import static minechem.item.ChemicalRoomStateEnum.*;
 import static minechem.item.element.ElementEnum.*;
@@ -189,10 +190,11 @@ public class MoleculeEnum extends MinechemChemicalType
     public float red2;
     public float green2;
     public float blue2;
-    public ChemicalRoomStateEnum roomState;
 
     //* Allows full definition of a given molecule down to even the colors that will be used. */
     public MoleculeEnum(String name,int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2,ChemicalRoomStateEnum roomState, PotionChemical... chemicals) {
+    	super(roomState,computRadioactivity(chemicals));
+    	
     	if (molecules[id]!=null){
     		throw new IllegalArgumentException("id "+id+" is used");
     	}
@@ -211,7 +213,6 @@ public class MoleculeEnum extends MinechemChemicalType
         this.red2 = colorRed2;
         this.green2 = colorGreen2;
         this.blue2 = colorBlue2;
-        this.roomState=roomState;
         
         molecules[id]=this;
     }
@@ -280,5 +281,23 @@ public class MoleculeEnum extends MinechemChemicalType
 
     public String name(){
     	return name;
+    }
+    
+    private static RadiationEnum computRadioactivity(PotionChemical[] components){
+    	RadiationEnum radiation=null;
+    	for (PotionChemical chemical:components){
+    		RadiationEnum anotherRadiation=null;
+    		if (chemical instanceof Element){
+    			anotherRadiation=((Element) chemical).element.radioactivity();
+    		}else if (chemical instanceof Molecule){
+    			anotherRadiation=((Molecule) chemical).molecule.radioactivity();
+    		}
+    		
+    		if (anotherRadiation!=null&&anotherRadiation!=RadiationEnum.stable&&(radiation==null||radiation.getLife()>anotherRadiation.getLife())){
+    			radiation=anotherRadiation;
+    		}
+    	}
+    	
+    	return radiation==null?RadiationEnum.stable:radiation;
     }
 }
