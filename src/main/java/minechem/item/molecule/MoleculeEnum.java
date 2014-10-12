@@ -24,7 +24,8 @@ public enum MoleculeEnum
     potassiumNitrate(5, 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F,solid, new Element(K), new Element(N), new Element(O, 3)),
     tnt(6, 1, 1, 0, 1, 0.65F, 0,solid, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene)),
     siliconDioxide(7, 1, 1, 1, 1, 1, 1,solid, new Element(Si), new Element(O, 2)),
-    calcite(8,solid, new Element(Ca), new Element(C), new Element(O, 3)), // TODO: Remove this as Calcium Carbonate is the exact same
+    // Pulled from bottom to replace calcite, which was a duplicate of another molecule
+    calcicPyroxene(8, solid, new Element(Ca, 1),new Element(Cr, 1), new Element(Si, 2), new Element(O, 6) ),
     pyrite(9,solid, new Element(Fe), new Element(S, 2)),
     nepheline(10,solid, new Element(Al), new Element(Si), new Element(O, 4)),
     sulfate(11,solid, new Element(S), new Element(O, 4)),
@@ -181,6 +182,29 @@ public enum MoleculeEnum
     rubidiumHydroxide(151,solid,new Element(Rb, 1),new Molecule(hydroxide, 1)),
     cesiumHydroxide(152,solid,new Element(Cs, 1),new Molecule(hydroxide, 1)),
     franciumHydroxide(153,solid,new Element(Fr, 1),new Molecule(hydroxide, 1)),
+
+    // AE2
+    hypophosphite(154, solid, new Element(H, 2), new Element(P, 1), new Element(O, 2)),
+    aluminumHypophosphite(155, solid, new Element(Al, 1), new Molecule(hypophosphite, 3)),
+    
+
+    // More things for Underground Biomes
+    omphacite(156, solid, new Element(Ca, 1), new Element(Al, 1), new Element(Si, 2), new Element(O, 6)),
+    silicate(157, solid, new Element(Si, 1), new Element(O, 4)),
+    pyrope(158, solid, new Element(Mg, 3), new Element(Al, 2), new Molecule(silicate, 3)),
+    almadine(159, solid, new Element(Fe, 3), new Element(Al, 2), new Molecule(silicate, 3)),
+    spessartine(160, solid, new Element(Mn, 3), new Element(Al, 2), new Molecule(silicate, 3)),
+    redGarnet(161, solid, new Molecule(pyrope, 3), new Molecule(almadine, 5), new Molecule(spessartine, 8)),
+    forsterite(162, solid, new Element(Mg, 2), new Molecule(silicate, 1)),
+    chromite(163, solid, new Element(Fe, 1), new Element(Cr, 2), new Element(O, 4)),
+
+    // Tinkers Construct
+    siliconOxide(164, solid, new Element(Si, 1), new Element(O, 1)),
+    ironOxide(165, solid, new Element(Fe, 1), new Element(O, 1)),
+    
+    // Extra utilities
+    galliumOxide(166, solid, new Element(Ga, 1), new Element(O, 2)),
+    arsenicOxide(167, solid, new Element(As, 1), new Element(O, 2))
     ;
     
     public static MoleculeEnum[] molecules = values();

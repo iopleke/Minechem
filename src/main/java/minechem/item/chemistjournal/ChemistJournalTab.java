@@ -42,7 +42,6 @@ public class ChemistJournalTab extends GuiTab
     @Override
     public ResourceLocation getIcon()
     {
-        // TODO Auto-generated method stub
         return Minechem.ICON_HELP;
     }
 

@@ -30,17 +30,18 @@ public abstract class MinechemTileEntityBase extends TileEntity
     }
 
     /** Called on the TileEntity's first tick. */
-    public void initiate()//TODO: Why is this here?
-    {
-    }
+    //TODO: Remove this once its reason for being is found
+    //public void initiate()
+    //{
+    //}
 
     @Override
     public void updateEntity()
     {
-        if (this.ticks == 0)
-        {
-            this.initiate();
-        }
+        //if (this.ticks == 0)
+        //{
+            //this.initiate();
+        //}
 
         if (this.ticks >= Long.MAX_VALUE)
         {

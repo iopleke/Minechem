@@ -60,10 +60,9 @@ public class OreDictionaryUndergroundBiomesHandler implements OreDictionaryHandl
                     {new Molecule(MoleculeEnum.plagioclaseAlbite, 8), new Molecule(MoleculeEnum.plagioclaseAnorthite, 8), new Molecule(MoleculeEnum.augite, 12), new Molecule(MoleculeEnum.olivine, 4)});
             break;
         case stoneKomatiite:
-            // TODO: find actual components (this is c/p from basalt)
-            DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-                    {new Molecule(MoleculeEnum.plagioclaseAlbite, 8), new Molecule(MoleculeEnum.plagioclaseAnorthite, 8), new Molecule(MoleculeEnum.augite, 12), new Molecule(MoleculeEnum.olivine, 4)});
-            break;
+        	DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
+                    { new Molecule(MoleculeEnum.forsterite, 8), new Molecule(MoleculeEnum.plagioclaseAnorthite, 8), new Molecule(MoleculeEnum.calcicPyroxene, 12), new Molecule(MoleculeEnum.chromite, 4) });
+        	break;
         case stoneDacite:
             DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
                     {new Molecule(MoleculeEnum.plagioclaseAlbite, 6), new Molecule(MoleculeEnum.plagioclaseAnorthite, 6), new Molecule(MoleculeEnum.biotite, 8), new Molecule(MoleculeEnum.siliconDioxide, 8), new Molecule(MoleculeEnum.augite, 4)});
@@ -74,13 +73,12 @@ public class OreDictionaryUndergroundBiomesHandler implements OreDictionaryHandl
                             new Molecule(MoleculeEnum.augite, 4)});
             break;
         case stoneEclogite:
-            // TODO: find actual components (this is c/p from basalt)
-            DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-                    {new Molecule(MoleculeEnum.plagioclaseAlbite, 8), new Molecule(MoleculeEnum.plagioclaseAnorthite, 8), new Molecule(MoleculeEnum.augite, 12), new Molecule(MoleculeEnum.olivine, 4)});
+        	DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
+                    { new Molecule(MoleculeEnum.omphacite, 8), new Molecule(MoleculeEnum.redGarnet, 8) });
             break;
         case stoneMarble:
             DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-                    {new Molecule(MoleculeEnum.calcite, 32)});
+                    {new Molecule(MoleculeEnum.calciumCarbonate, 32)});
             break;
         case stoneQuartzite:
             DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
