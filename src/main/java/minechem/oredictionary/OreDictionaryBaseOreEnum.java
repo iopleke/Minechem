@@ -42,7 +42,9 @@ public enum OreDictionaryBaseOreEnum {
     ardite("Ardite", new Element(ElementEnum.Ar, 16)),
     salpeter("Salpeter",new Element(ElementEnum.K), new Element(ElementEnum.N), new Element(ElementEnum.O, 3)),
     salt("Salt", new Element(ElementEnum.Na), new Element(ElementEnum.Cl)),
-    limestone("Limestone", new Molecule(MoleculeEnum.calciumCarbonate, 1));
+    limestone("Limestone", new Molecule(MoleculeEnum.calciumCarbonate, 1)),
+    obsidian("Obsidian", new Molecule(MoleculeEnum.siliconDioxide, 16), new Molecule(MoleculeEnum.magnesiumOxide, 8)),
+    diamond("Diamond", new Molecule(MoleculeEnum.fullrene, 3));
 
     private String name;
     private PotionChemical[] composition;

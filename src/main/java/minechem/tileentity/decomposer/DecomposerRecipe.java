@@ -81,7 +81,9 @@ public class DecomposerRecipe
         {
 			ItemStack result = itemStack.copy();
 			result.stackSize = 1;
-	        return result.toString();
+            if (result.toString().contains("null"))
+                return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+            return result.toString();
         }
         return null;
 	}

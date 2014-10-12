@@ -2,6 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
+import minechem.Minechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
@@ -20,7 +21,7 @@ public class DecomposerRecipeHandler
     public static void recursiveRecipes()
     {
         for (String key:Recipe.recipes.keySet()){
-        	if (!DecomposerRecipe.recipes.containsKey(key)&&(!((String)key).contains("compressed_cobblestone"))){
+        	if (!DecomposerRecipe.recipes.containsKey(key)&&(!(key.contains("compressed_cobblestone")))){
         		Recipe recipe = Recipe.get(key);
         		DecomposerRecipe.add(new DecomposerRecipeSuper(recipe.output,recipe.inStacks));
         	}
