@@ -343,10 +343,8 @@ public class ElementItem extends Item
 
     public static RadiationInfo decay(ItemStack element, World world)
     {
-    	if (element.getItem()==MinechemItemsRegistration.element){
-	        int atomicMass = element.getItemDamage();
-	        element.setItemDamage(atomicMass - 1);
-    	}
+	    int atomicMass = element.getItemDamage();
+	    element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
     }
 

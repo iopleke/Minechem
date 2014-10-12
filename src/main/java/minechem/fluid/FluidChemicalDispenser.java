@@ -107,7 +107,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		return itemStack;
 	}
 	
-	public static void throwItemStack(World world,ItemStack itemStack,int x,int y,int z){
+	public static void throwItemStack(World world,ItemStack itemStack,double x,double y,double z){
 		if (itemStack!=null){
 			float f = ran.nextFloat() * 0.8F + 0.1F;
 			float f1 = ran.nextFloat() * 0.8F + 0.1F;

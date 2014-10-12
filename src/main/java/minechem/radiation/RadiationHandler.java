@@ -8,8 +8,10 @@ import minechem.item.molecule.MoleculeItem;
 import minechem.tileentity.decomposer.DecomposerContainer;
 import minechem.tileentity.leadedchest.LeadedChestContainer;
 import minechem.tileentity.synthesis.SynthesisContainer;
+import minechem.utils.Vector3;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
@@ -50,26 +52,26 @@ public class RadiationHandler
         {
             if (openContainer instanceof LeadedChestContainer)
             {
-                updateContainerLeadedChest(player, openContainer);
+                updateContainerLeadedChest(player, openContainer, player.inventory);
             } else if (openContainer instanceof DecomposerContainer)
             {
-                updateDecomposerContainer(player, openContainer);
+                updateDecomposerContainer(player, openContainer, player.inventory);
             } else if (openContainer instanceof SynthesisContainer)
             {
-                updateSynthesisContainer(player, openContainer);
+                updateSynthesisContainer(player, openContainer, player.inventory);
             } else
             {
-                updateContainer(player, openContainer);
+                updateContainer(player, openContainer, player.inventory);
             }
         } else
         {
-            updateContainer(player, player.inventoryContainer);
+            updateContainer(player, player.inventoryContainer,player.inventory);
         }
     }
 
-    public List<DecayEvent> updateRadiationOnItems(World world, List<ItemStack> itemstacks)
+    public List<DecayEvent> updateRadiationOnItems(World world, List<ItemStack> itemstacks,Vector3 vector)
     {
-        return updateRadiationOnItems(world, null, null, itemstacks);
+        return updateRadiationOnItems(world,null, null, null, itemstacks);
     }
 
     public int getTicksUntilDecay(ItemStack itemstack, World world)
@@ -78,7 +80,7 @@ public class RadiationHandler
         return (int) (info.radiationLife);
     }
 
-    private void updateContainerLeadedChest(EntityPlayer player, Container openContainer)
+    private void updateContainerLeadedChest(EntityPlayer player, Container openContainer,IInventory inventory)
     {
         LeadedChestContainer leadedChest = (LeadedChestContainer) openContainer;
         List<ItemStack> itemstacks = leadedChest.getStorageInventory();
@@ -92,10 +94,10 @@ public class RadiationHandler
             }
         }
         List<ItemStack> playerStacks = leadedChest.getPlayerInventory();
-        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+        updateRadiationOnItems(player.worldObj, player,openContainer, inventory, playerStacks);
     }
 
-    private void updateDecomposerContainer(EntityPlayer player, Container openContainer)
+    private void updateDecomposerContainer(EntityPlayer player, Container openContainer,IInventory inventory)
     {
         DecomposerContainer decomposer = (DecomposerContainer) openContainer;
         List<ItemStack> itemstacks = decomposer.getStorageInventory();
@@ -109,10 +111,10 @@ public class RadiationHandler
             }
         }
         List<ItemStack> playerStacks = decomposer.getPlayerInventory();
-        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+        updateRadiationOnItems(player.worldObj, player,openContainer, inventory, playerStacks);
     }
 
-    private void updateSynthesisContainer(EntityPlayer player, Container openContainer)
+    private void updateSynthesisContainer(EntityPlayer player, Container openContainer,IInventory inventory)
     {
         SynthesisContainer synthesizer = (SynthesisContainer) openContainer;
         List<ItemStack> itemstacks = synthesizer.getStorageInventory();
@@ -126,16 +128,16 @@ public class RadiationHandler
             }
         }
         List<ItemStack> playerStacks = synthesizer.getPlayerInventory();
-        updateRadiationOnItems(player.worldObj, player, openContainer, playerStacks);
+        updateRadiationOnItems(player.worldObj, player,openContainer, inventory, playerStacks);
     }
 
-    private void updateContainer(EntityPlayer player, Container container)
+    private void updateContainer(EntityPlayer player, Container container,IInventory inventory )
     {
         List<ItemStack> itemstacks = container.getInventory();
-        updateRadiationOnItems(player.worldObj, player, container, itemstacks);
+        updateRadiationOnItems(player.worldObj, player,container, inventory, itemstacks);
     }
 
-    private List<DecayEvent> updateRadiationOnItems(World world, EntityPlayer player, Container container, List<ItemStack> itemstacks)
+    private List<DecayEvent> updateRadiationOnItems(World world, EntityPlayer player,Container container,IInventory inventory, List<ItemStack> itemstacks)
     {
         List<DecayEvent> events = new ArrayList<DecayEvent>();
         for (ItemStack itemstack : itemstacks)
@@ -153,7 +155,7 @@ public class RadiationHandler
 	            {
 	                DecayEvent decayEvent = new DecayEvent();
 	                decayEvent.before = itemstack.copy();
-	                decayEvent.damage = updateRadiation(world, itemstack);
+	                decayEvent.damage = updateRadiation(world, itemstack, inventory,player.posX,player.posY,player.posZ);
 	                decayEvent.after = itemstack.copy();
 	                if (decayEvent.damage > 0)
 	                {
@@ -217,7 +219,7 @@ public class RadiationHandler
     	return "null";
     }
     
-    private int updateRadiation(World world, ItemStack element)
+    private int updateRadiation(World world, ItemStack element,IInventory inventory,double x,double y,double z)
     {
         RadiationInfo radiationInfo = ElementItem.getRadiationInfo(element, world);
         int dimensionID = world.provider.dimensionId;
@@ -229,11 +231,11 @@ public class RadiationHandler
         } else
         {
             long currentTime = world.getTotalWorldTime();
-            return decayElement(element, radiationInfo, currentTime, world);
+            return decayElement(element, radiationInfo, currentTime, world, inventory,x,y,z);
         }
     }
 
-    private int decayElement(ItemStack element, RadiationInfo radiationInfo, long currentTime, World world)
+    private int decayElement(ItemStack element, RadiationInfo radiationInfo, long currentTime, World world,IInventory inventory,double x,double y,double z)
     {
         long timeDifference = currentTime - radiationInfo.lastRadiationUpdate;
         int maxDamage = 0;
@@ -247,7 +249,13 @@ public class RadiationHandler
             {
                 int defaultDamage = radiationInfo.radioactivity.getDamage();
                 maxDamage = Math.max(maxDamage, defaultDamage);
-                radiationInfo = ElementItem.decay(element, world);
+                
+                Item item=element.getItem();
+                if (item==MinechemItemsRegistration.element){
+                	radiationInfo = ElementItem.decay(element, world);
+                }else if (item==MinechemItemsRegistration.molecule){
+                	radiationInfo=RadiationMoleculeHandler.getInstance().handleRadiationMolecule(world, element,inventory,x,y,z);
+                }
             }
         }
         ElementItem.setRadiationInfo(radiationInfo, element);
