@@ -123,7 +123,9 @@ public class MoleculeItem extends Item
     {
         for (MoleculeEnum molecule : MoleculeEnum.molecules)
         {
-            par3List.add(new ItemStack(item, 1, molecule.id()));
+        	if (molecule!=null){
+        		par3List.add(new ItemStack(item, 1, molecule.id()));
+        	}
         }
     }
 

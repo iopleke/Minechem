@@ -8,6 +8,8 @@ import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.IDescriptiveName;
+import minechem.item.MinechemChemicalType;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
@@ -38,7 +40,7 @@ import java.util.Map;
 public class ElementItem extends Item
 {
 
-    private final static ElementEnum[] elements = ElementEnum.values();
+    private final static ElementEnum[] elements = ElementEnum.elements;
     private final Map<IDescriptiveName, Integer> classificationIndexes = new HashMap<IDescriptiveName, Integer>();
     public final IIcon liquid[] = new IIcon[7], gas[] = new IIcon[7];
     public IIcon solid;
@@ -89,8 +91,17 @@ public class ElementItem extends Item
 
     public static RadiationEnum getRadioactivity(ItemStack itemstack)
     {
-        int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].radioactivity() : RadiationEnum.stable;
+        int id = itemstack.getItemDamage();
+        Item item=itemstack.getItem();
+        if (item==MinechemItemsRegistration.element){
+        	return id<ElementEnum.heaviestMass?ElementEnum.elements[id].radioactivity():RadiationEnum.stable;
+        }else if (item==MinechemItemsRegistration.molecule){
+        	if (id>=MoleculeEnum.molecules.length||MoleculeEnum.molecules[id]==null){
+        		return RadiationEnum.stable;
+        	}
+        	return MoleculeEnum.molecules[id].radioactivity();
+        }
+        return RadiationEnum.stable;
     }
 
     public static ElementEnum getElement(ItemStack itemstack)
@@ -270,9 +281,11 @@ public class ElementItem extends Item
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
     {
         list.add(new ItemStack(item, 1, ElementEnum.heaviestMass));
-        for (ElementEnum element : ElementEnum.values())
+        for (ElementEnum element : ElementEnum.elements)
         {
-            list.add(new ItemStack(item, 1, element.ordinal()));
+        	if (element!=null){
+                list.add(new ItemStack(item, 1, element.ordinal()));
+        	}
         }
     }
 
@@ -330,8 +343,8 @@ public class ElementItem extends Item
 
     public static RadiationInfo decay(ItemStack element, World world)
     {
-        int atomicMass = element.getItemDamage();
-        element.setItemDamage(atomicMass - 1);
+	    int atomicMass = element.getItemDamage();
+	    element.setItemDamage(atomicMass - 1);
         return initiateRadioactivity(element, world);
     }
 
@@ -355,7 +368,7 @@ public class ElementItem extends Item
 
             if(flag)
             {
-            	Enum chemical=ChemicalFluidReactionHandler.getChemical(block);
+            	MinechemChemicalType chemical=ChemicalFluidReactionHandler.getChemical(block);
             	if (chemical!=null&&FluidChemicalDispenser.canDrain(world, block, blockX, blockY, blockZ)){
             		ItemStack stack=FluidChemicalDispenser.createItemStack(chemical, 1);
             		

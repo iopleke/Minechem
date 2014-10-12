@@ -64,26 +64,32 @@ public class MinechemItemsRegistration
     private static void registerFluidContainers()
     {
         ItemStack emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-        for (ElementEnum element : ElementEnum.values())
+        for (ElementEnum element : ElementEnum.elements)
         {
-            ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
-            FluidContainerRegistry.registerFluidContainer(FluidHelper.elements.get(element), tube, emptyTube);
+        	if (element!=null){
+	            ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
+	            FluidContainerRegistry.registerFluidContainer(FluidHelper.elements.get(element), tube, emptyTube);
+        	}
         }
 
-        for (MoleculeEnum molecule : MoleculeEnum.values())
+        for (MoleculeEnum molecule : MoleculeEnum.molecules)
         {
-            ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.ordinal());
-            FluidContainerRegistry.registerFluidContainer(FluidHelper.molecule.get(molecule), tube, emptyTube);
+        	if (molecule!=null){
+	            ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
+	            FluidContainerRegistry.registerFluidContainer(FluidHelper.molecule.get(molecule), tube, emptyTube);
+        	}
         }
     }
 
 	public static void registerToOreDictionary()
 	{
-		for (ElementEnum element : ElementEnum.values())
+		for (ElementEnum element : ElementEnum.elements)
 		{
-			OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+			if (element!=null){
+				OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+			}
 		}
-		OreDictionary.registerOre("dustSalpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.ordinal()));
-		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.ordinal()));
+		OreDictionary.registerOre("dustSalpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.id()));
+		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
 	}
 }

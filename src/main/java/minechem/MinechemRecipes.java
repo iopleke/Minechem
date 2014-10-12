@@ -2711,7 +2711,7 @@ public class MinechemRecipes
 		ItemStack itemIngotIron = new ItemStack(Items.iron_ingot);
 		ItemStack itemRedstone = new ItemStack(Items.redstone);
 		ItemStack minechemItemsAtomicManipulator = new ItemStack(MinechemItemsRegistration.atomicManipulator);
-		ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.polyvinylChloride.ordinal());
+		ItemStack moleculePolyvinylChloride = new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.polyvinylChloride.id());
 
 		GameRegistry.addRecipe(MinechemItemsRegistration.concaveLens, new Object[]
 		{
@@ -2822,10 +2822,13 @@ public class MinechemRecipes
 		for (int var3 = 0; var3 < var2; ++var3)
 		{
 			MoleculeEnum var4 = var1[var3];
-			ArrayList var5 = var4.components();
-			PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
-			ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, var4.id());
-			DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
+			
+			if (var4!=null){
+				ArrayList var5 = var4.components();
+				PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
+				ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, var4.id());
+				DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
+			}
 		}
 
 	}
@@ -2836,10 +2839,13 @@ public class MinechemRecipes
 
 		for (int i = 0; i < molecules.length; ++i)
 		{
+
 			MoleculeEnum molecule = molecules[i];
-			ArrayList components = molecule.components();
-			ItemStack moleculeItemStack = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-			SynthesisRecipe.add(new SynthesisRecipe(moleculeItemStack, false, COST_ITEM, components));
+			if (molecule!=null){
+				ArrayList components = molecule.components();
+				ItemStack moleculeItemStack = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
+				SynthesisRecipe.add(new SynthesisRecipe(moleculeItemStack, false, COST_ITEM, components));
+			}
 		}
 
 	}

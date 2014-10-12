@@ -1,6 +1,7 @@
 package minechem.fluid;
 
 import minechem.MinechemItemsRegistration;
+import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
@@ -42,7 +43,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		
 		if (itemStack.getItem() instanceof ElementItem&&itemStack.getItemDamage()>=ElementEnum.heaviestMass){
 			Block frontBlock=world.getBlock(x, y, z);
-			Enum chemical=ChemicalFluidReactionHandler.getChemical(frontBlock);
+			MinechemChemicalType chemical=ChemicalFluidReactionHandler.getChemical(frontBlock);
 			
 			if (chemical!=null&&canDrain(world,frontBlock, x, y, z)){
 				ItemStack stack=createItemStack(chemical, 1);
@@ -113,7 +114,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		return itemStack;
 	}
 	
-	public static void throwItemStack(World world,ItemStack itemStack,int x,int y,int z){
+	public static void throwItemStack(World world,ItemStack itemStack,double x,double y,double z){
 		if (itemStack!=null){
 			float f = ran.nextFloat() * 0.8F + 0.1F;
 			float f1 = ran.nextFloat() * 0.8F + 0.1F;
@@ -128,12 +129,12 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 		}
 	}
 	
-	public static ItemStack createItemStack(Enum chemical,int amount){
+	public static ItemStack createItemStack(MinechemChemicalType chemical,int amount){
 		ItemStack itemStack=null;
 		if (chemical instanceof ElementEnum){
-			itemStack=ElementItem.createStackOf(ElementEnum.elements[chemical.ordinal()], 1);
+			itemStack=ElementItem.createStackOf(ElementEnum.elements[((ElementEnum)chemical).ordinal()], 1);
 		}else if (chemical instanceof MoleculeEnum){
-			itemStack=new ItemStack(MinechemItemsRegistration.molecule, 1, chemical.ordinal());
+			itemStack=new ItemStack(MinechemItemsRegistration.molecule, 1, ((MoleculeEnum)chemical).id());
 		}
 		return itemStack;
 	}

@@ -9,7 +9,6 @@ import minechem.network.MessageHandler;
 import minechem.network.message.FissionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
-import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.SafeTimeTracker;
 import minechem.utils.Transactor;

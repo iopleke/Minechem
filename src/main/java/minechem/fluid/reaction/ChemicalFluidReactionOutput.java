@@ -1,10 +1,11 @@
 package minechem.fluid.reaction;
 
 import java.util.Map;
+import minechem.item.MinechemChemicalType;
 
 public class ChemicalFluidReactionOutput {
 	
-	public final Map<Enum, Float> outputs;
+	public final Map<MinechemChemicalType, Float> outputs;
 	public final float explosionLevel;
 	
 	/**
@@ -14,7 +15,7 @@ public class ChemicalFluidReactionOutput {
 	 * @param outputs
 	 * @param explosionLevel
 	 */
-	public ChemicalFluidReactionOutput(Map<Enum, Float> outputs,float explosionLevel) {
+	public ChemicalFluidReactionOutput(Map<MinechemChemicalType, Float> outputs,float explosionLevel) {
 		this.outputs = outputs;
 		this.explosionLevel = explosionLevel;
 	}

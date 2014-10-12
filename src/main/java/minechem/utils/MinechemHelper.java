@@ -123,7 +123,7 @@ public class MinechemHelper
             }
             else if (potionChemical instanceof Molecule)
             {
-                stacks.add(new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal()));
+                stacks.add(new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.id()));
             }
         }
         return stacks;
@@ -173,7 +173,7 @@ public class MinechemHelper
             }
             else if (potionChemical instanceof Molecule)
             {
-                stacks[i] = new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.ordinal());
+                stacks[i] = new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.id());
             }
         }
         return stacks;
@@ -194,7 +194,7 @@ public class MinechemHelper
         if (potionChemical instanceof Molecule && itemstack.getItem() == MinechemItemsRegistration.molecule)
         {
             Molecule molecule = (Molecule) potionChemical;
-            return (itemstack.getItemDamage() == molecule.molecule.ordinal()) && (itemstack.stackSize >= molecule.amount * factor);
+            return (itemstack.getItemDamage() == molecule.molecule.id()) && (itemstack.stackSize >= molecule.amount * factor);
         }
         return false;
     }
