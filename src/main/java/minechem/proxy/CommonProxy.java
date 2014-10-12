@@ -3,7 +3,7 @@ package minechem.proxy;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.Minechem;
 import minechem.tick.ScheduledTickHandler;
-import minechem.tick.ChemicalFluidReactionHandler;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.utils.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
