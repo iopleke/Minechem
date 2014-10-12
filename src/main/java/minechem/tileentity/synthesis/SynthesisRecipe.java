@@ -105,7 +105,7 @@ public class SynthesisRecipe
     {
         ItemStack result = itemStack.copy();
         result.stackSize = 1;
-        return result.toString();
+        return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
     }
 
 	public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... var4)
