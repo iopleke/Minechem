@@ -21,8 +21,7 @@ public class DecomposerRecipeHandler
     public static void recursiveRecipes()
     {
         for (String key:Recipe.recipes.keySet()){
-        	if (!DecomposerRecipe.recipes.containsKey(key)&&(!(key.contains("compressed_cobblestone")))&&(!(key.contains("extrautils:generator")))){
-                Minechem.LOGGER.info(key);
+        	if (!DecomposerRecipe.recipes.containsKey(key)&&(!(key.contains("compressed_cobblestone")))){
         		Recipe recipe = Recipe.get(key);
         		DecomposerRecipe.add(new DecomposerRecipeSuper(recipe.output,recipe.inStacks));
         	}

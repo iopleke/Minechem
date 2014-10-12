@@ -158,7 +158,9 @@ public class Recipe {
 			ItemStack result=output.copy();
 			result.stackSize=1;
             if (result.getItemDamage() == Short.MAX_VALUE) result.setItemDamage(0);
-            return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+            if (result.toString().contains("null"))
+                return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+            return result.toString();
 		}
 		return null;
 	}
@@ -186,7 +188,9 @@ public class Recipe {
 		ItemStack result=output.copy();
 		result.stackSize=1;
         if (result.getItemDamage() == Short.MAX_VALUE) result.setItemDamage(0);
-        return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+        if (result.toString().contains("null"))
+            return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+        return result.toString();
 	}
 	
 }
