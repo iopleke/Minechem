@@ -3,6 +3,7 @@ package minechem.fluid;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
+
 import java.util.HashMap;
 
 public class FluidHelper

@@ -40,8 +40,8 @@ public enum OreDictionaryBaseOreEnum {
     ruby("Ruby", new Molecule(MoleculeEnum.aluminiumOxide, 1), new Element(ElementEnum.Cr, 1)),
     cobalt("Cobalt", new Element(ElementEnum.Co, 16)),
     ardite("Ardite", new Element(ElementEnum.Ar, 16)),
-    salpeter("Salpeter", new Molecule(MoleculeEnum.potassiumNitrate, 1)),
-    salt("Salt", new Molecule(MoleculeEnum.salt, 1)),
+    salpeter("Salpeter",new Element(ElementEnum.K), new Element(ElementEnum.N), new Element(ElementEnum.O, 3)),
+    salt("Salt", new Element(ElementEnum.Na), new Element(ElementEnum.Cl)),
     limestone("Limestone", new Molecule(MoleculeEnum.calciumCarbonate, 1));
 
     private String name;

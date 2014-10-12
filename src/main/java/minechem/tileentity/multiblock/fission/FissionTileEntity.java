@@ -9,7 +9,6 @@ import minechem.network.MessageHandler;
 import minechem.network.message.FissionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
-import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.SafeTimeTracker;
 import minechem.utils.Transactor;
@@ -62,24 +61,20 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             return;
         }
-        if (!worldObj.isRemote && worldObj.getTotalWorldTime() % 50 == 0 && energyUpdateTracker.markTimeIfDelay(worldObj, Constants.TICKS_PER_SECOND * 2))
-        {
-        	 if (inventory[kStartInput] != null)
-        	 {
-        		 ItemStack fissionResult = getFissionOutput();
-	        	 if (inventory[kOutput[0]] == null || (inventory[kOutput[0]].stackSize < 64 && fissionResult != null && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage() && !worldObj.isRemote))
-	        	 {
-		        	 if(useEnergy(getEnergyNeeded()))
-		        	 {
-			        	 addToOutput(fissionResult);
-			        	 removeInputs();
-		        	 }
-	        	 }
-	        	 fissionResult = getFissionOutput();
-        	 }
-        }
         if (!worldObj.isRemote)
         {
+            if (inventory[kStartInput] != null)
+            {
+                ItemStack fissionResult = getFissionOutput();
+                if (fissionResult != null && (inventory[kOutput[0]] == null || (inventory[kOutput[0]].stackSize < 64 && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage())))
+                {
+                    if(useEnergy(getEnergyNeeded()))
+                    {
+                        addToOutput(fissionResult);
+                        removeInputs();
+                    }
+                }
+            }
 			FissionUpdateMessage message = new FissionUpdateMessage(this);
             MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
         }
@@ -123,7 +118,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             int mass = inventory[kInput[0]].getItemDamage() + 1;
             int newMass = mass / 2;
-            if (newMass > 1)
+            if (newMass > 0)
             {
                 return new ItemStack(MinechemItemsRegistration.element, 2, newMass - 1);
             } else
@@ -204,11 +199,6 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         super.readFromNBT(nbtTagCompound);
         inventory = new ItemStack[getSizeInventory()];
         MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND), inventory);
-    }
-
-    public void setEnergyStored(int amount)
-    {
-        this.setEnergyStored(amount);
     }
 
     @Override

@@ -219,7 +219,7 @@ public class RadiationHandler
     
     private int updateRadiation(World world, ItemStack element)
     {
-        RadiationInfo radiationInfo = ElementItem.getRadiationInfo(element, world);System.err.println(radiationInfo.radiationLife);
+        RadiationInfo radiationInfo = ElementItem.getRadiationInfo(element, world);
         int dimensionID = world.provider.dimensionId;
         if (dimensionID != radiationInfo.dimensionID && radiationInfo.isRadioactive())
         {

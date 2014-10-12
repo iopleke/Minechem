@@ -57,11 +57,6 @@ public class DecomposerRecipe
 		return recipes.get(string);
 	}
 
-	public static DecomposerRecipe remove(DecomposerRecipe recipe)
-	{
-		return remove(getKey(recipe.input));
-	}
-
 	public static DecomposerRecipe remove(String string)
 	{
 		if (recipes.containsKey(string))
@@ -70,6 +65,15 @@ public class DecomposerRecipe
 		}
 		return null;
 	}
+
+    public static DecomposerRecipe remove(ItemStack itemStack)
+    {
+        if (recipes.containsKey(getKey(itemStack)))
+        {
+            return recipes.remove(getKey(itemStack));
+        }
+        return null;
+    }
 
 	public static String getKey(ItemStack itemStack)
 	{
@@ -112,9 +116,7 @@ public class DecomposerRecipe
 	{
 		for (ItemStack i : OreDictionary.getOres(item))
 		{
-			DecomposerRecipe.remove(new DecomposerRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), new PotionChemical[]
-			{
-			}));
+			DecomposerRecipe.remove(i);
 		}
 	}
 

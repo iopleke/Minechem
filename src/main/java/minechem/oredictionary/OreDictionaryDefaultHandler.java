@@ -1,6 +1,7 @@
 package minechem.oredictionary;
 
 import minechem.Minechem;
+import minechem.MinechemRecipes;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
@@ -16,7 +17,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 	private enum EnumOrePrefix
 	{
-		dust, block, ingot, oreNether, ore, dustSmall, nugget, dustDirty, plate, gem
+		block, oreNether, ore, ingot, nugget, dustDirty, dustSmall, dust, plate, gem
 	}
 
 	private String[] supportedOres;
@@ -89,7 +90,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				if (!haveSeen(ore, EnumOrePrefix.dust) && !haveSeen(ore, EnumOrePrefix.dustSmall))
 				{
-					SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, ore.getComposition());
+					SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT , ore.getComposition());
 					registeredIngots.put(ore, oreName);
 				}
 				break;
@@ -100,10 +101,10 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 			case dust:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				unregisterIngot(ore);
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT , ore.getComposition());
 				break;
 			case dustDirty:
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 0.75d));
 				break;
 			case plate:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
@@ -111,11 +112,11 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 			case dustSmall:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 0.25d));
 				unregisterIngot(ore);
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, scaleCeil(ore.getComposition(), 0.25d));
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT / 4, scaleCeil(ore.getComposition(), 0.25d));
 				break;
 			case gem:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_GEM, ore.getComposition());
 				break;
 
 			default:

@@ -251,7 +251,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			if (outputs.size() > 1)
 			{
                 int itemsPerLine = calcItemsPerLine(outputs);
-                double scale = 9.0 / itemsPerLine;
+                double scale = 8.5 / itemsPerLine;
                 int output_x_scale = (int)Math.ceil(OUTPUT_X_SCALE * scale);
 				for (int idx = 1; idx < outputs.size(); idx++)
 				{

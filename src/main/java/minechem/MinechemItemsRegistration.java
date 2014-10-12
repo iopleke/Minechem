@@ -1,6 +1,7 @@
 package minechem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
+import minechem.fluid.FluidHelper;
 import minechem.item.ItemAtomicManipulator;
 import minechem.item.OpticalMicroscopeLens;
 import minechem.item.blueprint.ItemBlueprint;
@@ -12,6 +13,7 @@ import minechem.item.molecule.MoleculeItem;
 import minechem.item.polytool.PolytoolItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MinechemItemsRegistration
@@ -56,7 +58,28 @@ public class MinechemItemsRegistration
 		polytool = new PolytoolItem();
 		GameRegistry.registerItem(polytool, Minechem.ID + "Polytool");
 
+        registerFluidContainers();
 	}
+
+    private static void registerFluidContainers()
+    {
+        ItemStack emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+        for (ElementEnum element : ElementEnum.elements)
+        {
+        	if (element!=null){
+	            ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
+	            FluidContainerRegistry.registerFluidContainer(FluidHelper.elements.get(element), tube, emptyTube);
+        	}
+        }
+
+        for (MoleculeEnum molecule : MoleculeEnum.molecules)
+        {
+        	if (molecule!=null){
+	            ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
+	            FluidContainerRegistry.registerFluidContainer(FluidHelper.molecule.get(molecule), tube, emptyTube);
+        	}
+        }
+    }
 
 	public static void registerToOreDictionary()
 	{
