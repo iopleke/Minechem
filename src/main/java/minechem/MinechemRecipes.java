@@ -20,6 +20,7 @@ import minechem.oredictionary.OreDictionaryMekanismHandler;
 import minechem.oredictionary.OreDictionaryUndergroundBiomesHandler;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerFluidRecipe;
+import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
@@ -43,6 +44,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class MinechemRecipes
 {
 
+	
 	private static final MinechemRecipes recipes = new MinechemRecipes();
 	public ArrayList decomposition = new ArrayList();
 	public ArrayList synthesis = new ArrayList();
@@ -76,7 +78,12 @@ public class MinechemRecipes
     public static int COST_GEM = 1000;
     public static int COST_GEMBLOCK = COST_GEM * BLOCK_MULTIPLIER;
 
-
+    /*
+     * Amount of fluid for given unit
+     */
+    private static final int INGOT_AMOUNT = 144;
+	private static final int BUCKET_AMOUNT = 10000;
+	
 	public static MinechemRecipes getInstance()
 	{
 		return recipes;
@@ -85,10 +92,10 @@ public class MinechemRecipes
 	public void registerFluidRecipies()
 	{
 		// Fluids
-		int fluidPerIngot = 144;
+		int fluidPerIngot = INGOT_AMOUNT;
 		// Quick and dirty fix for the Thermal Expansion Resonant Ender 6x bug
 		int threeQuarterFluidPerIngot = 180;
-		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, 10000), new PotionChemical[]
+		DecomposerRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidRegistry.WATER, BUCKET_AMOUNT), new PotionChemical[]
 		{
 			this.element(ElementEnum.H, 2), this.element(ElementEnum.O)
 		}));
@@ -127,9 +134,34 @@ public class MinechemRecipes
 		{
 			this.element(ElementEnum.Fe, 2), this.element(ElementEnum.W, 2), this.element(ElementEnum.Si, 2)
 		});
+
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("bronze.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Sn, 4)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("aluminumbrass.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Al, 4)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("manyullyn.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Co, 8), this.element(ElementEnum.Fe, 1), this.element(ElementEnum.W, 1), this.element(ElementEnum.Si, 1)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("alumite.molten", fluidPerIngot, new PotionChemical[]
+        {
+        		this.element(ElementEnum.Al, 8), this.element(ElementEnum.Fe, 3), this.molecule(MoleculeEnum.siliconDioxide, 2) , this.molecule(MoleculeEnum.magnesiumOxide, 1)
+		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("obsidian.molten", fluidPerIngot, new PotionChemical[]
 		{
 			this.molecule(MoleculeEnum.siliconDioxide, 16), this.molecule(MoleculeEnum.magnesiumOxide, 8)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("steel.molten", fluidPerIngot, new PotionChemical[]
+	    { 
+        		this.element(ElementEnum.Fe, 14), this.element(ElementEnum.C, 2)
+		}); // This ratio should be tested
+	    DecomposerFluidRecipe.createAndAddFluidRecipeSafely("stone.seared", fluidPerIngot, new PotionChemical[]
+	    { 
+	    		this.molecule(MoleculeEnum.siliconOxide, 12), this.molecule(MoleculeEnum.ironOxide, 4)
 		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("glass.molten", fluidPerIngot, new PotionChemical[]
 		{
@@ -138,6 +170,10 @@ public class MinechemRecipes
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("emerald.molten", fluidPerIngot, new PotionChemical[]
 		{
 			this.molecule(MoleculeEnum.beryl, 6), this.element(ElementEnum.Cr, 6), this.element(ElementEnum.V, 6)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("blood.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.O, 6), this.element(ElementEnum.Fe, 2), this.molecule(MoleculeEnum.ironOxide, 8)
 		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("nickel.molten", fluidPerIngot, new PotionChemical[]
 		{
@@ -155,6 +191,14 @@ public class MinechemRecipes
 		{
 			this.element(ElementEnum.Pt, 16)
 		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("invar.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Fe, 10), this.element(ElementEnum.Ni, 6)
+		});
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("electrum.molten", fluidPerIngot, new PotionChemical[]
+        { 
+        		this.element(ElementEnum.Ag, 8), this.element(ElementEnum.Au, 8)
+		});
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely(
 				"ender",
 				threeQuarterFluidPerIngot,
@@ -163,7 +207,17 @@ public class MinechemRecipes
 					this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.element(ElementEnum.Es),
 					this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate)
 				});
+		registerMFRFluidRecipes();
+	}
 
+	private void registerMFRFluidRecipes() {
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("mushroomsoup", BUCKET_AMOUNT, new PotionChemical[] {
+			this.molecule(MoleculeEnum.water, 4), this.molecule(MoleculeEnum.pantherine, 2)	
+		});
+		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("chocolatemilk", BUCKET_AMOUNT, new PotionChemical[] {
+				this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.theobromine, 1)	
+		});
+		// If someone figures out compositions for the other fluids, add them here.
 	}
 
 	public void registerVanillaChemicalRecipes()
@@ -534,7 +588,30 @@ public class MinechemRecipes
 		}));
 
         // Lava
-		// TODO: Add support for lava
+		// This assumes lava is composed from cobblestone at a 4:1 ratio
+		//   as well as having slightly higher purity
+		DecomposerRecipe.add(new DecomposerFluidRecipeSelect("lava", 250, 0.2F, new DecomposerRecipe[]
+				{
+					new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Si), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Fe), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Mg), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Ti), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Pb), this.element(ElementEnum.O)
+					}), new DecomposerRecipe(new PotionChemical[]
+					{
+						this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
+					})
+				}));
 		// Sand
 		ItemStack blockSand = new ItemStack(Blocks.sand);
 		DecomposerRecipe.add(new DecomposerRecipe(blockSand, new PotionChemical[]
@@ -988,7 +1065,7 @@ public class MinechemRecipes
 		ItemStack blockOreLapis = new ItemStack(Blocks.lapis_ore);
 		DecomposerRecipe.add(new DecomposerRecipe(blockOreLapis, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.lazurite, 6), this.molecule(MoleculeEnum.sodalite), this.molecule(MoleculeEnum.noselite), this.molecule(MoleculeEnum.calcite), this.molecule(MoleculeEnum.pyrite)
+			this.molecule(MoleculeEnum.lazurite, 6), this.molecule(MoleculeEnum.sodalite), this.molecule(MoleculeEnum.noselite), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.pyrite)
 		}));
 
 		// Lapis Lazuli Block

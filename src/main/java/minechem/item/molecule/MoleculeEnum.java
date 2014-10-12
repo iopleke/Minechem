@@ -26,7 +26,8 @@ public class MoleculeEnum extends MinechemChemicalType
     public static final MoleculeEnum potassiumNitrate=new MoleculeEnum("potassiumNitrate",5, 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F,solid, new Element(K), new Element(N), new Element(O, 3));
     public static final MoleculeEnum tnt=new MoleculeEnum("tnt",6, 1, 1, 0, 1, 0.65F, 0,solid, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene));
     public static final MoleculeEnum siliconDioxide=new MoleculeEnum("siliconDioxide",7, 1, 1, 1, 1, 1, 1,solid, new Element(Si), new Element(O, 2));
-    public static final MoleculeEnum calcite=new MoleculeEnum("calcite",8,solid, new Element(Ca), new Element(C), new Element(O, 3)); // TODO: Remove this as Calcium Carbonate is the exact same
+    // Pulled from bottom to replace calcite, which was a duplicate of another molecule
+    public static final MoleculeEnum calcicPyroxene=new MoleculeEnum("calcicPyroxene",8,solid, new Element(Ca,1), new Element(Cr,1), new Element(Si, 2), new Element(O, 6));
     public static final MoleculeEnum pyrite=new MoleculeEnum("pyrite",9,solid, new Element(Fe), new Element(S, 2));
     public static final MoleculeEnum nepheline=new MoleculeEnum("nepheline",10,solid, new Element(Al), new Element(Si), new Element(O, 4));
     public static final MoleculeEnum sulfate=new MoleculeEnum("sulfate",11,solid, new Element(S), new Element(O, 4));
@@ -174,6 +175,7 @@ public class MoleculeEnum extends MinechemChemicalType
   
 	//Thermal Expansion
     public static final MoleculeEnum asbestos=new MoleculeEnum("asbestos",147,solid, new Element(Mg, 3), new Element(Si, 2), new Element(O, 5), new Molecule(hydroxide, 4));
+
     //
     public static final MoleculeEnum lithiumHydroxide=new MoleculeEnum("lithiumHydroxide",148,solid,new Element(Li, 1),new Molecule(hydroxide, 1));
     public static final MoleculeEnum sodiumHydroxide=new MoleculeEnum("sodiumHydroxide",149,solid,new Element(Na, 1),new Molecule(hydroxide, 1));
@@ -181,7 +183,30 @@ public class MoleculeEnum extends MinechemChemicalType
     public static final MoleculeEnum rubidiumHydroxide=new MoleculeEnum("rubidiumHydroxide",151,solid,new Element(Rb, 1),new Molecule(hydroxide, 1));
     public static final MoleculeEnum cesiumHydroxide=new MoleculeEnum("cesiumHydroxide",152,solid,new Element(Cs, 1),new Molecule(hydroxide, 1));
     public static final MoleculeEnum franciumHydroxide=new MoleculeEnum("franciumHydroxide",153,solid,new Element(Fr, 1),new Molecule(hydroxide, 1));
+
+    // AE2
+    public static final MoleculeEnum hypophosphite=new MoleculeEnum("hypophosphite",154, solid, new Element(H, 2), new Element(P, 1), new Element(O, 2));
+    public static final MoleculeEnum aluminumHypophosphite=new MoleculeEnum("aluminumHypophosphite",155, solid, new Element(Al, 1), new Molecule(hypophosphite, 3));
+
+    // More things for Underground Biomes
+    public static final MoleculeEnum omphacite=new MoleculeEnum("omphacite",156, solid, new Element(Ca, 1), new Element(Al, 1), new Element(Si, 2), new Element(O, 6));
+    public static final MoleculeEnum silicate=new MoleculeEnum("silicate",157, solid, new Element(Si, 1), new Element(O, 4));
+    public static final MoleculeEnum pyrope=new MoleculeEnum("pyrope",158, solid, new Element(Mg, 3), new Element(Al, 2), new Molecule(silicate, 3));
+    public static final MoleculeEnum almadine=new MoleculeEnum("almadine",159, solid, new Element(Fe, 3), new Element(Al, 2), new Molecule(silicate, 3));
+    public static final MoleculeEnum spessartine=new MoleculeEnum("spessartine",160, solid, new Element(Mn, 3), new Element(Al, 2), new Molecule(silicate, 3));
+    public static final MoleculeEnum redGarnet=new MoleculeEnum("redGarnet",161, solid, new Molecule(pyrope, 3), new Molecule(almadine, 5), new Molecule(spessartine, 8));
+    public static final MoleculeEnum forsterite=new MoleculeEnum("forsterite",162, solid, new Element(Mg, 2), new Molecule(silicate, 1));
+    public static final MoleculeEnum chromite=new MoleculeEnum("chromite",163, solid, new Element(Fe, 1), new Element(Cr, 2), new Element(O, 4));
+
+    // Tinkers Construct
+    public static final MoleculeEnum siliconOxide=new MoleculeEnum("siliconOxide",164, solid, new Element(Si, 1), new Element(O, 1));
+    public static final MoleculeEnum ironOxide=new MoleculeEnum("ironOxide",165, solid, new Element(Fe, 1), new Element(O, 1));
     
+    // Extra utilities
+    public static final MoleculeEnum galliumOxide=new MoleculeEnum("galliumOxide",166, solid, new Element(Ga, 1), new Element(O, 2));
+    public static final MoleculeEnum arsenicOxide=new MoleculeEnum("arsenicOxide",167, solid, new Element(As, 1), new Element(O, 2));
+    ;
+
     private final String localizationKey;
     private final ArrayList<PotionChemical> components;
     private int id;

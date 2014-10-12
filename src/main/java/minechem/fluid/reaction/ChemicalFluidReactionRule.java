@@ -1,4 +1,4 @@
-package minechem.tick;
+package minechem.fluid.reaction;
 
 import minechem.item.MinechemChemicalType;
 

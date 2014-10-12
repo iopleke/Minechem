@@ -13,7 +13,7 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
-import minechem.tick.ChemicalFluidReactionHandler;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;

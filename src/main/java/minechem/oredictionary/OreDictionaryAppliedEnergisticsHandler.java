@@ -14,6 +14,10 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 
     private PotionChemical certusQuartzChemical = new Molecule(certusQuartzMolecule);
 
+    private MoleculeEnum chargedCertusQuartzMolecule = MoleculeEnum.aluminumHypophosphite;
+    
+    private PotionChemical chargedCertusQuartzChemical = new Molecule(chargedCertusQuartzMolecule);
+
     private PotionChemical[] certusQuartzDecompositionFormula = new PotionChemical[]
     { new Molecule(certusQuartzMolecule, 4) };
 
@@ -22,6 +26,18 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 
     private PotionChemical[] certusQuartzDustSynthesisFormula = new PotionChemical[]
     { null, certusQuartzChemical, null, certusQuartzChemical, certusQuartzChemical, certusQuartzChemical, null, null, null };
+
+    private PotionChemical[] chargedCertusQuartzDecompositionFormula = new PotionChemical[]
+    { new Molecule(chargedCertusQuartzMolecule, 4)};
+
+    private PotionChemical[] chargedCertusQuartzCrystalSynthesisFormula = new PotionChemical[]
+    { null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null };
+
+    private PotionChemical[] fluixCertusQuartzDecompositionFormula = new PotionChemical[]
+    { new Molecule(certusQuartzMolecule, 2), new Molecule(chargedCertusQuartzMolecule)   };
+
+    private PotionChemical[] fluixQuartzCrystalSynthesisFormula = new PotionChemical[]
+    { null, new Molecule(MoleculeEnum.galliumarsenide, 1), null, certusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null };
 
     @Override
     public boolean canHandle(String oreName)
@@ -43,7 +59,17 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
             DecomposerRecipe.createAndAddRecipeSafely(oreName, certusQuartzDecompositionFormula);
             SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, certusQuartzCrystalSynthesisFormula);
             // }
+        } else if (oreName.equals("crystalChargedCertusQuartz")) 
+        {
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, chargedCertusQuartzDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, chargedCertusQuartzCrystalSynthesisFormula);
         }
+        else if (oreName.equals("crystalFluixQuartz"))
+        {
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixCertusQuartzDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzCrystalSynthesisFormula);
+        }
+       
         else
         {
             Minechem.LOGGER.info("Unknown type of Certus Quartz : " + oreName);
