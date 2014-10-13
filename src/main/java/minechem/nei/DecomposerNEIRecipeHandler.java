@@ -163,7 +163,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		float chance = cdr.getChance();
 		if (chance < 1.0f)
 		{
-			String chanceStr = String.format("%2.0f%%", chance * 100.0);
+            String format = chance > 0.1F ? "%2.0f%%" : "%3.3f%%";
+			String chanceStr = String.format(format, chance * 100.0);
 			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr) - 5;
 			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS + 10, 8, false);
 		}
@@ -188,8 +189,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			return new CachedDecomposerRecipeChance((DecomposerRecipeChance) dr);
 		} else if (dr instanceof DecomposerRecipeSuper)
 		{
-			//TODO Super Recipe NEI handling properly
-			return new CachedDecomposerRecipe(dr);
+			return new CachedDecomposerRecipeSuper((DecomposerRecipeSuper) dr);
 		} else
 		{
 			return new CachedDecomposerRecipe(dr);
@@ -245,22 +245,25 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 
 		protected void setOutputs(List<ItemStack> outputs)
 		{
-            outputs = MinechemHelper.pushTogetherStacks(outputs);
-			output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
-			otherOutputs = new ArrayList<PositionedStack>();
-			if (outputs.size() > 1)
-			{
-                int itemsPerLine = calcItemsPerLine(outputs);
-                double scale = 8.5 / itemsPerLine;
-                int output_x_scale = (int)Math.ceil(OUTPUT_X_SCALE * scale);
-				for (int idx = 1; idx < outputs.size(); idx++)
-				{
-					ItemStack o = outputs.get(idx);
-                    int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
-                    int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
-					otherOutputs.add(new PositionedStack(o, x, y));
-				}
-			}
+            if (outputs != null && !outputs.isEmpty())
+            {
+                outputs = MinechemHelper.pushTogetherStacks(outputs);
+                output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
+                otherOutputs = new ArrayList<PositionedStack>();
+                if (outputs.size() > 1)
+                {
+                    int itemsPerLine = calcItemsPerLine(outputs);
+                    double scale = 8.5 / itemsPerLine;
+                    int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
+                    for (int idx = 1; idx < outputs.size(); idx++)
+                    {
+                        ItemStack o = outputs.get(idx);
+                        int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
+                        int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
+                        otherOutputs.add(new PositionedStack(o, x, y));
+                    }
+                }
+            }
 		}
 
         private int calcItemsPerLine(List<ItemStack> list)
@@ -353,5 +356,44 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			}
 		}
 	}
+
+    public class CachedDecomposerRecipeSuper extends CachedDecomposerRecipe
+    {
+        // Which tick to cycle at. This is initialized lazily, so
+        // the first output set is shown for the normal duration.
+        private long cycleAtTick;
+
+        // The fractional chance [0, 1] that this recipe will yield any output.
+        private float chance;
+
+        private DecomposerRecipeSuper decomposerRecipeSuper;
+
+        public CachedDecomposerRecipeSuper(DecomposerRecipeSuper dr)
+        {
+            super(dr);
+            cycleAtTick = -1;
+            decomposerRecipeSuper = dr;
+            chance = dr.getChance();
+        }
+
+        @Override
+        public void cycleOutput(long tick)
+        {
+            if(cycleAtTick == -1) cycleAtTick = tick + 20;
+            if (tick >= cycleAtTick)
+            {
+                cycleAtTick = tick + 20;
+                ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
+                setOutputs(outputsToShow);
+            }
+        }
+
+        @Override
+        public float getChance()
+        {
+            return chance;
+        }
+
+    }
 
 }

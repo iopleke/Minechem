@@ -81,8 +81,11 @@ public class Recipe {
 
                     if (components != null && input != null)
                     {
-
-                        Recipe currRecipe = recipes.get(input);
+                        Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+                        if (DecomposerRecipe.getKey(input).contains("compressed"))
+                        {
+                            input.getMaxStackSize();
+                        }
                         if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
                         {
                             recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));

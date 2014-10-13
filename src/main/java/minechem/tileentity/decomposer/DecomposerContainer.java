@@ -2,7 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 import java.util.List;
-import minechem.radiation.IRadiationShield;
+import minechem.api.IRadiationShield;
 import minechem.slot.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

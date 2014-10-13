@@ -14,12 +14,9 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
-
-	//public static ArrayList<DecomposerRecipe> recipes = new ArrayList<DecomposerRecipe>();
 	public static Map<String, DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
 
 	ItemStack input;
-	//public ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
 	public Map<PotionChemical, PotionChemical> output = new Hashtable<PotionChemical, PotionChemical>();
 
 	//TODO:Add blacklist support for fluids
@@ -101,7 +98,6 @@ public class DecomposerRecipe
 
 	public static DecomposerRecipe get(ItemStack item)
 	{
-		//ArrayList<ItemStack> oreDict= OreDictionary.getOres(OreDictionary.getOreID(item));
 		String key = getKey(item);
 		if (key!=null) return get(key);
 		return null;
@@ -191,7 +187,6 @@ public class DecomposerRecipe
 
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
-		//return this.output;
 		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
 		result.addAll(this.output.values());
 		return result;
@@ -243,5 +238,13 @@ public class DecomposerRecipe
     public boolean hasOutput()
     {
         return !this.output.values().isEmpty();
+    }
+
+    public void scaleOutput(float scale)
+    {
+        for (PotionChemical chemical : output.values())
+        {
+            chemical.amount = Math.round(chemical.amount / scale);
+        }
     }
 }

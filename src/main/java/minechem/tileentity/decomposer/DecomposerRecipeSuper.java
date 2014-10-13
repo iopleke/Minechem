@@ -21,7 +21,6 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 		{
 			if (component!=null && component.getItem() != null)
 			{
-				//TODO: Scale based on recipe output (4 stone bricks from 4 stone, etc)
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe!=null)
 				{
@@ -45,9 +44,8 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 				else
 				{
 					//Recursively generate recipe
-					//System.out.println("no recipe");
 					Recipe recipe = Recipe.get(component);
-					if (recipe!=null && level<6)
+					if (recipe != null && level < 20)
 					{
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output,recipe.inStacks,level+1));
@@ -82,9 +80,9 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 	
 	private void addSelectRecipe(DecomposerRecipeSelect recipe, int number)
 	{
-		Integer current = this.selectRecipes.put((DecomposerRecipeSelect)recipe,number);
+		Integer current = this.selectRecipes.put(recipe,number);
 		if (current!=null)
-			this.selectRecipes.put((DecomposerRecipeSelect)recipe,current+number);
+			this.selectRecipes.put(recipe,current+number);
 	}
 	
 	@Override
@@ -136,4 +134,22 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 	public ArrayList<PotionChemical> getPartialOutputRaw(int f) {
 		return super.getPartialOutputRaw(f);
 	}
+
+    @Override
+    public boolean hasOutput()
+    {
+        return !this.selectRecipes.values().isEmpty();
+    }
+
+    public float getChance()
+    {
+        int count = 0;
+        float chances = 0;
+        for (Map.Entry<DecomposerRecipeSelect, Integer> entry : selectRecipes.entrySet())
+        {
+            chances += entry.getKey().getChance();
+            count += entry.getValue();
+        }
+        return chances / count;
+    }
 }

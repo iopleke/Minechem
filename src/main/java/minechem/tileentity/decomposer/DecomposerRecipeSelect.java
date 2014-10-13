@@ -48,4 +48,9 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
     	return (super.isNull()&&this.possibleRecipes==null);
     }
 
+    @Override
+    public boolean hasOutput()
+    {
+        return !this.possibleRecipes.isEmpty();
+    }
 }
