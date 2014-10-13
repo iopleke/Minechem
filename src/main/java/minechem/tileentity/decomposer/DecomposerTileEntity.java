@@ -5,6 +5,7 @@ import java.util.Iterator;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.Settings;
+import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
@@ -468,6 +469,13 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 		if (outputStacks != null)
 		{
+            for (ItemStack itemStack : outputStacks)
+            {
+                if(itemStack.getItem() instanceof ElementItem)
+                {
+                    ElementItem.initiateRadioactivity(itemStack, worldObj);
+                }
+            }
 			outputBuffer = outputStacks;
 		} else
 		{
