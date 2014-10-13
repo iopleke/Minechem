@@ -247,12 +247,12 @@ public class MoleculeEnum extends MinechemChemicalType
     /** Used to give random colors for elements so they don't have to be manually specified. */
     public MoleculeEnum(String name,int id,ChemicalRoomStateEnum roomState, PotionChemical... chemicals) 
     {
-        this(name,id, getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), roomState,chemicals);
+        this(name,id, getRandomColor(name.hashCode()), getRandomColor(name.hashCode()*2), getRandomColor(name.hashCode()*3), getRandomColor(name.hashCode()*4), getRandomColor(name.hashCode()*5), getRandomColor(name.hashCode()*6), roomState,chemicals);
     }
 
-    private static float getRandomColor() 
+    private static float getRandomColor(long seed) 
     {
-        Random random = new Random();
+        Random random = new Random(seed);
         return random.nextFloat();
     }
 
