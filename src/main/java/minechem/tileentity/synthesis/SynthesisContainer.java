@@ -3,6 +3,7 @@ package minechem.tileentity.synthesis;
 import java.util.ArrayList;
 import java.util.List;
 import minechem.MinechemItemsRegistration;
+import minechem.api.INoDecay;
 import minechem.container.ContainerWithFakeSlots;
 import minechem.item.chemistjournal.ChemistJournalSlot;
 import minechem.api.IRadiationShield;
@@ -13,7 +14,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class SynthesisContainer extends ContainerWithFakeSlots implements IRadiationShield
+public class SynthesisContainer extends ContainerWithFakeSlots implements IRadiationShield, INoDecay
 {
 
     private SynthesisTileEntity synthesis;
