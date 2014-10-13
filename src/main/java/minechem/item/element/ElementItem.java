@@ -4,7 +4,6 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.IDescriptiveName;
@@ -13,10 +12,10 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
-import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.utils.Constants;
 import minechem.utils.EnumColor;
 import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -32,7 +31,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -368,9 +366,9 @@ public class ElementItem extends Item
 
             if(flag)
             {
-            	MinechemChemicalType chemical=ChemicalFluidReactionHandler.getChemical(block);
-            	if (chemical!=null&&FluidChemicalDispenser.canDrain(world, block, blockX, blockY, blockZ)){
-            		ItemStack stack=FluidChemicalDispenser.createItemStack(chemical, 1);
+            	MinechemChemicalType chemical=MinechemUtil.getChemical(block);
+            	if (chemical!=null&&MinechemUtil.canDrain(world, block, blockX, blockY, blockZ)){
+            		ItemStack stack=MinechemUtil.createItemStack(chemical, 1);
             		
                 	if (stack!=null){
                 		world.setBlockToAir(blockX, blockY, blockZ);

@@ -9,6 +9,8 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.potion.Potion;
+import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
@@ -83,6 +85,12 @@ public class FluidBlockChemical extends MinechemFluidBlock
         if (entity instanceof EntityLivingBase && Settings.fluidEffects&&getFluid() instanceof FluidChemical)
         {
             PotionPharmacologyEffect.triggerPlayerEffect(((FluidChemical) getFluid()).molecule, (EntityLivingBase) entity);
+            
+            int power = ((FluidChemical) getFluid()).molecule.radioactivity().ordinal();
+            if (power > 0)
+            {
+                ((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.getId(), 10, power-1));
+            }
         }
     }
 }

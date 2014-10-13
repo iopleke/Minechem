@@ -11,7 +11,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidChemicalDispenser;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -19,6 +18,7 @@ import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
+import minechem.utils.MinechemUtil;
 import minechem.utils.SoftHashMap;
 
 public class RadiationMoleculeHandler {
@@ -49,9 +49,9 @@ public class RadiationMoleculeHandler {
 		}
 		ItemStack[] items=toItemStacks(decayedChemicals);
 		for (int i=1;i<items.length;i++){
-			ItemStack stack=FluidChemicalDispenser.addItemToInventory(inventory, items[i]);
+			ItemStack stack=MinechemUtil.addItemToInventory(inventory, items[i]);
 			if (stack!=null){
-				FluidChemicalDispenser.throwItemStack(world, itemStack, x, y, z);
+				MinechemUtil.throwItemStack(world, itemStack, x, y, z);
 			}
 		}
 		

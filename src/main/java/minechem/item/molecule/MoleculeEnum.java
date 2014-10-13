@@ -205,7 +205,12 @@ public class MoleculeEnum extends MinechemChemicalType
     // Extra utilities
     public static final MoleculeEnum galliumOxide=new MoleculeEnum("galliumOxide",166, solid, new Element(Ga, 1), new Element(O, 2));
     public static final MoleculeEnum arsenicOxide=new MoleculeEnum("arsenicOxide",167, solid, new Element(As, 1), new Element(O, 2));
-    ;
+    
+    //
+    public static final MoleculeEnum sulfurDioxide=new MoleculeEnum("sulfurDioxide", 168, gas, new Element(S),new Element(O,2));
+    public static final MoleculeEnum hydrogenSulfide=new MoleculeEnum("hydrogenSulfide", 169, gas, new Element(H,2),new Element(S));
+    public static final MoleculeEnum sodiumBisulfate=new MoleculeEnum("sodiumBisulfate", 170, solid, new Element(Na),new Element(H),new Molecule(sulfate));
+    public static final MoleculeEnum sodiumSulfate=new MoleculeEnum("sodiumSulfate", 171, solid, new Element(Na,2),new Molecule(sulfate));
 
     private final String localizationKey;
     private final ArrayList<PotionChemical> components;

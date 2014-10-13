@@ -10,29 +10,23 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
-import minechem.fluid.FluidChemical;
-import minechem.fluid.FluidChemicalDispenser;
-import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
-import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.IFluidBlock;
 
 public class ChemicalFluidReactionHandler
 {
@@ -70,12 +64,12 @@ public class ChemicalFluidReactionHandler
             		int y=MathHelper.floor_double(entityItem.posY);
             		int z=MathHelper.floor_double(entityItem.posZ);
             		Block block=world.getBlock(x, y, z);
-            		MinechemChemicalType chemicalB=getChemical(block);
+            		MinechemChemicalType chemicalB=MinechemUtil.getChemical(block);
             			
             		if (chemicalB!=null){
             			ChemicalFluidReactionRule rule=new ChemicalFluidReactionRule(chemicalA, chemicalB);
             			if (reactionRules.containsKey(rule)){
-            				explosionReaction(world,entityItem,x,y,z,rule,!(FluidChemicalDispenser.canDrain(world,block,x,y,z)));
+            				explosionReaction(world,entityItem,x,y,z,rule,!(MinechemUtil.canDrain(world,block,x,y,z)));
             				itemStack.stackSize--;
             				if (itemStack.stackSize<=0){
             					world.removeEntity(entityItem);
@@ -94,41 +88,88 @@ public class ChemicalFluidReactionHandler
     	// TODO Add more reaction rules -yushijinhun
     	Map<MinechemChemicalType, Float> map;
     	
+    	//H2O+Li==LiOH+H
     	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.lithiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalFluidReactionOutput(map, 0.1f));
     	
+    	//H2O+Na==NaOH+H
     	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.sodiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Na),new ChemicalFluidReactionOutput(map, 0.15f));
     	
+    	//H2O+K==KOH+H
     	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.potassiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.K),new ChemicalFluidReactionOutput(map, 0.2f));
     	
+    	//H2O+Li==RbOH+H
     	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.rubidiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Rb),new ChemicalFluidReactionOutput(map, 0.25f));
 
+    	//H2O+Cs==CsOH+H
        	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.cesiumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Cs),new ChemicalFluidReactionOutput(map, 0.3f));
     	
+    	//H2O+Fr==FrOH+H
        	map=new HashMap<MinechemChemicalType, Float>();
     	map.put(ElementEnum.H, 1f);
     	map.put(MoleculeEnum.franciumHydroxide, 1f);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Fr),new ChemicalFluidReactionOutput(map, 0.4f));
 
-//    	
-//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.sulfuricAcid));
-//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.calciumOxide));
-//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.potassiumOxide));
-//    	explosionReactionRules.add(new ChemicalFluidReactionRule(MoleculeEnum.water, MoleculeEnum.sodiumOxide));
+    	//H2SO4+Cu==CuSO4+2H
+       	map=new HashMap<MinechemChemicalType, Float>();
+       	map.put(ElementEnum.H, 1f);
+       	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.lightbluePigment, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, ElementEnum.Cu),new ChemicalFluidReactionOutput(map, 0.1f));
+    	
+    	//H2SO4+S==2SO2+2H
+       	map=new HashMap<MinechemChemicalType, Float>();
+       	map.put(ElementEnum.H, 1f);
+       	map.put(ElementEnum.H, 1f);
+    	map.put(MoleculeEnum.sulfurDioxide, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, ElementEnum.S),new ChemicalFluidReactionOutput(map, 0.1f));
+    	
+    	//H2SO4+H2S==S+SO2+2H2O
+       	map=new HashMap<MinechemChemicalType, Float>();
+       	map.put(ElementEnum.S, 1f);
+       	map.put(MoleculeEnum.sulfurDioxide, 1f);
+       	map.put(MoleculeEnum.water, 1f);
+       	map.put(MoleculeEnum.water, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, MoleculeEnum.hydrogenSulfide),new ChemicalFluidReactionOutput(map, 0.1f));
+
+    	//HCl+NaOH==H2O+NaCl
+       	map=new HashMap<MinechemChemicalType, Float>();
+       	map.put(MoleculeEnum.salt, 1f);
+       	map.put(MoleculeEnum.water, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.hcl, MoleculeEnum.sodiumHydroxide),new ChemicalFluidReactionOutput(map, 0.1f));
+
+    	//H+Cl==HCl
+       	map=new HashMap<MinechemChemicalType, Float>();
+       	map.put(MoleculeEnum.hcl, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(ElementEnum.H, ElementEnum.Cl),new ChemicalFluidReactionOutput(map, 0.1f));
+    	
+    	//NaCl+H2SO4==NaHSO4+HCl
+       	map=new HashMap<MinechemChemicalType, Float>();
+       	map.put(MoleculeEnum.sodiumBisulfate, 1f);
+       	map.put(MoleculeEnum.hcl, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.salt, MoleculeEnum.sulfuricAcid),new ChemicalFluidReactionOutput(map, 0.1f));
+    	
+    	//NaHSO4+NaCl==Na2SO4+2HCl
+    	map=new HashMap<MinechemChemicalType, Float>();
+    	map.put(MoleculeEnum.sodiumSulfate, 1f);
+    	map.put(MoleculeEnum.hcl, 1f);
+    	map.put(MoleculeEnum.hcl, 1f);
+    	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.salt, MoleculeEnum.sodiumBisulfate),new ChemicalFluidReactionOutput(map, 0.1f));
+    	
     	
     }
     
@@ -183,8 +224,8 @@ public class ChemicalFluidReactionHandler
     			}
     			
     			if (vector==null){
-    				ItemStack itemStack=FluidChemicalDispenser.createItemStack(chemical, 1);
-    				FluidChemicalDispenser.throwItemStack(world, itemStack, x, y, z);
+    				ItemStack itemStack=MinechemUtil.createItemStack(chemical, 1);
+    				MinechemUtil.throwItemStack(world, itemStack, x, y, z);
     			}else{
     				int px=vector.intX();
     				int py=vector.intY();
@@ -208,32 +249,14 @@ public class ChemicalFluidReactionHandler
     	}
     }
 
-    public static MinechemChemicalType getChemical(Block block){
-    	MinechemChemicalType chemical=null;
-		if (block instanceof IFluidBlock){
-			Fluid fluid=((IFluidBlock)block).getFluid();
-			if (fluid instanceof FluidElement){
-				chemical=((FluidElement)fluid).element;
-			}else if(fluid instanceof FluidChemical){
-				chemical=((FluidChemical)fluid).molecule;
-			}else if(fluid==FluidRegistry.WATER){
-				chemical=MoleculeEnum.water;
-			}
-		}else if (block==Blocks.water||block==Blocks.flowing_water){
-			chemical=MoleculeEnum.water;
-		}
-		
-		return chemical;
-    }
-    
     public static boolean checkToExplode(Block source,Block destination,World world,int destinationX,int destinationY,int destinationZ,int sourceX,int sourceY,int sourceZ){
-    	MinechemChemicalType chemicalA=getChemical(source);
-    	MinechemChemicalType chemicalB=getChemical(destination);
+    	MinechemChemicalType chemicalA=MinechemUtil.getChemical(source);
+    	MinechemChemicalType chemicalB=MinechemUtil.getChemical(destination);
     	if (chemicalA!=null&&chemicalB!=null){
     		ChemicalFluidReactionRule rule=new ChemicalFluidReactionRule(chemicalA, chemicalB);
     		
     		if (reactionRules.containsKey(rule)){
-    			boolean flag=!(FluidChemicalDispenser.canDrain(world, source, sourceX, sourceY, sourceZ)&&FluidChemicalDispenser.canDrain(world, destination, destinationX, destinationY, destinationZ));
+    			boolean flag=!(MinechemUtil.canDrain(world, source, sourceX, sourceY, sourceZ)&&MinechemUtil.canDrain(world, destination, destinationX, destinationY, destinationZ));
     			world.setBlockToAir(sourceX, sourceY, sourceZ);
     			world.setBlockToAir(destinationX, destinationY, destinationZ);
 	    		explosionReaction(world,null,destinationX,destinationY,destinationZ,rule,flag);
