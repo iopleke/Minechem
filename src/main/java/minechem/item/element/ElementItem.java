@@ -219,7 +219,7 @@ public class ElementItem extends Item
 
     }
 
-    private String getRadioactiveLife(ItemStack itemstack)
+    public static String getRadioactiveLife(ItemStack itemstack)
     {
         String timeLeft = "";
         if (getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)

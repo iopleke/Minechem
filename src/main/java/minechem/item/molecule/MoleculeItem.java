@@ -8,6 +8,8 @@ import minechem.fluid.FluidHelper;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
+import minechem.radiation.RadiationEnum;
+import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
 import net.minecraft.block.Block;
@@ -20,7 +22,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -112,9 +113,45 @@ public class MoleculeItem extends Item
 
     @Override
     @SideOnly(Side.CLIENT)
-    public void addInformation(ItemStack par1ItemStack, EntityPlayer par2EntityPlayer, List par3List, boolean par4)
+    public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool)
     {
-        par3List.add("\u00A79" + getFormulaWithSubscript(par1ItemStack));
+        list.add("\u00A79" + getFormulaWithSubscript(itemstack));
+        
+        String radioactivityColor;
+        String timeLeft = ElementItem.getRadioactiveLife(itemstack);
+        if (!timeLeft.equals(""))
+        {
+            timeLeft = "(" + timeLeft + ")";
+        }
+        RadiationEnum radioactivity = ElementItem.getRadioactivity(itemstack);
+        switch (radioactivity)
+        {
+            case stable:
+                radioactivityColor = Constants.TEXT_MODIFIER + "7";
+                break;
+            case hardlyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "a";
+                break;
+            case slightlyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "2";
+                break;
+            case radioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "e";
+                break;
+            case highlyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "6";
+                break;
+            case extremelyRadioactive:
+                radioactivityColor = Constants.TEXT_MODIFIER + "4";
+                break;
+            default:
+                radioactivityColor = "";
+                break;
+        }
+
+        String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
+        list.add(radioactivityColor + radioactiveName + " " + timeLeft);
+        list.add(getRoomState(itemstack));
     }
 
     @Override
@@ -278,5 +315,10 @@ public class MoleculeItem extends Item
             }
         }
         return itemStack;
+    }
+    
+    public static String getRoomState(ItemStack itemstack){
+        int id = itemstack.getItemDamage();
+        return (id>MoleculeEnum.molecules.length)||(MoleculeEnum.molecules[id]==null)?"null":MoleculeEnum.molecules[id].roomState().descriptiveName();
     }
 }
