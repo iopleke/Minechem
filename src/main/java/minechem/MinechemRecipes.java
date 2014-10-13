@@ -391,32 +391,6 @@ public class MinechemRecipes
 			this.element(ElementEnum.Si), null, null, null, this.element(ElementEnum.O, 2), null
 		}));
 
-//		//Furnace
-//		ItemStack blockFurnace= new ItemStack(Blocks.furnace);
-//		DecomposerRecipe.add(new DecomposerRecipeSelect(blockFurnace, 0.1F, new DecomposerRecipe[]
-//		{
-//			new DecomposerRecipe(new PotionChemical[]
-//			{
-//				this.element(ElementEnum.Si,8), this.element(ElementEnum.O,8)
-//			}), new DecomposerRecipe(new PotionChemical[]
-//			{
-//				this.element(ElementEnum.Fe,8), this.element(ElementEnum.O,8)
-//			}), new DecomposerRecipe(new PotionChemical[]
-//			{
-//				this.element(ElementEnum.Mg,8), this.element(ElementEnum.O,8)
-//			}), new DecomposerRecipe(new PotionChemical[]
-//			{
-//				this.element(ElementEnum.Ti,8), this.element(ElementEnum.O,8)
-//			}), new DecomposerRecipe(new PotionChemical[]
-//			{
-//				this.element(ElementEnum.Pb,8), this.element(ElementEnum.O,8)
-//			}), new DecomposerRecipe(new PotionChemical[]
-//			{
-//				this.element(ElementEnum.Na,8), this.element(ElementEnum.Cl,8)
-//			})
-//		}));
-		
-		
 		// Planks
 		ItemStack blockOakWoodPlanks = new ItemStack(Blocks.planks, 1, 0);
 		ItemStack blockSpruceWoodPlanks = new ItemStack(Blocks.planks, 1, 1);
