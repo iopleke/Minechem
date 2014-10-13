@@ -42,6 +42,7 @@ public class Settings
 	public static boolean FoodSpiking = true;
 	public static boolean SwordEffects = true;
     public static boolean fluidEffects = true;
+    public static boolean decaySafeMachines = false;
 
 	// Power usage
 	public static boolean powerUseEnabled = true;
@@ -148,6 +149,12 @@ public class Settings
 		prop.setLanguageKey("config.swordeffects");
 		SwordEffects = prop.getBoolean();
 		configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "decaySafeMachines", Settings.SwordEffects);
+        prop.comment = StatCollector.translateToLocal("config.decaySafeMachines.description");
+        prop.setLanguageKey("config.decaySafeMachines");
+        decaySafeMachines = prop.getBoolean();
+        configList.add(prop.getName());
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "fluidEffects", Settings.SwordEffects);
         prop.comment = StatCollector.translateToLocal("config.fluideffects.description");

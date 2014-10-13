@@ -2,6 +2,9 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import minechem.Settings;
+import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
 import minechem.slot.SlotOutput;
 import net.minecraft.entity.player.EntityPlayer;
@@ -10,7 +13,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
-public class DecomposerContainer extends Container implements IRadiationShield
+public class DecomposerContainer extends Container implements IRadiationShield, INoDecay
 {
 
     protected DecomposerTileEntity decomposer;
@@ -129,30 +132,53 @@ public class DecomposerContainer extends Container implements IRadiationShield
 
     public List<ItemStack> getStorageInventory()
     {
-        List<ItemStack> storageInventory = new ArrayList<ItemStack>();
-        for (int slot = 0; slot < 27; slot++)
+        if (Settings.decaySafeMachines)
         {
-            ItemStack stack = getSlot(slot).getStack();
-            if (stack != null)
-            {
-                storageInventory.add(stack);
-            }
+            return new ArrayList<ItemStack>();
         }
-        return storageInventory;
+        else
+        {
+            List<ItemStack> storageInventory = new ArrayList<ItemStack>();
+            for (int slot = 0; slot < 27; slot++)
+            {
+                ItemStack stack = getSlot(slot).getStack();
+                if (stack != null)
+                {
+                    storageInventory.add(stack);
+                }
+            }
+            return storageInventory;
+        }
     }
 
     public List<ItemStack> getPlayerInventory()
     {
-        List<ItemStack> playerInventory = new ArrayList<ItemStack>();
-        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+        if (Settings.decaySafeMachines)
         {
-            ItemStack stack = getSlot(slot).getStack();
-            if (stack != null)
+            List<ItemStack> inv = new ArrayList<ItemStack>();
+            for(int slot = 0; slot < this.inventorySlots.size(); slot++)
             {
-                playerInventory.add(stack);
+                ItemStack stack = getSlot(slot).getStack();
+                if (stack != null)
+                {
+                    inv.add(stack);
+                }
             }
+            return inv;
         }
-        return playerInventory;
+        else
+        {
+            List<ItemStack> playerInventory = new ArrayList<ItemStack>();
+            for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+            {
+                ItemStack stack = getSlot(slot).getStack();
+                if (stack != null)
+                {
+                    playerInventory.add(stack);
+                }
+            }
+            return playerInventory;
+        }
     }
 
 }
