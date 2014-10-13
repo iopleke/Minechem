@@ -3,6 +3,7 @@ package minechem.radiation;
 import java.util.ArrayList;
 import java.util.List;
 import minechem.MinechemItemsRegistration;
+import minechem.api.IRadiationShield;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
 import minechem.tileentity.decomposer.DecomposerContainer;

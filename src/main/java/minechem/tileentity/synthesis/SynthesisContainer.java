@@ -5,7 +5,7 @@ import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.container.ContainerWithFakeSlots;
 import minechem.item.chemistjournal.ChemistJournalSlot;
-import minechem.radiation.IRadiationShield;
+import minechem.api.IRadiationShield;
 import minechem.slot.SlotChemical;
 import minechem.slot.SlotFake;
 import net.minecraft.entity.player.EntityPlayer;

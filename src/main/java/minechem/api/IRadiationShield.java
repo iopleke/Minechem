@@ -1,4 +1,4 @@
-package minechem.radiation;
+package minechem.api;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;

@@ -3,6 +3,7 @@ package minechem.radiation;
 import java.util.List;
 
 import minechem.Minechem;
+import minechem.api.IRadiationShield;
 import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
