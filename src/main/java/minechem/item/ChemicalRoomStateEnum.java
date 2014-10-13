@@ -3,7 +3,7 @@ package minechem.item;
 import net.minecraft.util.StatCollector;
 
 public enum ChemicalRoomStateEnum implements IDescriptiveName {
-	liquid("Liquid",false,800),solid("Solid",false,2000),gas("Gaseous",true,200);
+	liquid("Liquid",false,800),solid("Solid",false,4000),gas("Gaseous",true,200);
 	
 	private boolean isGas;
 	private int viscosity;
@@ -24,10 +24,6 @@ public enum ChemicalRoomStateEnum implements IDescriptiveName {
 		return viscosity;
 	}
 
-	
-    /* （非 Javadoc）
-	 * @see minechem.item.IDescriptiveName#descriptiveName()
-	 */
     @Override
 	public String descriptiveName()
     {

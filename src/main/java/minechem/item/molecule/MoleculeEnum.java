@@ -205,7 +205,12 @@ public class MoleculeEnum extends MinechemChemicalType
     // Extra utilities
     public static final MoleculeEnum galliumOxide=new MoleculeEnum("galliumOxide",166, solid, new Element(Ga, 1), new Element(O, 2));
     public static final MoleculeEnum arsenicOxide=new MoleculeEnum("arsenicOxide",167, solid, new Element(As, 1), new Element(O, 2));
-    ;
+    
+    //
+    public static final MoleculeEnum sulfurDioxide=new MoleculeEnum("sulfurDioxide", 168, gas, new Element(S),new Element(O,2));
+    public static final MoleculeEnum hydrogenSulfide=new MoleculeEnum("hydrogenSulfide", 169, gas, new Element(H,2),new Element(S));
+    public static final MoleculeEnum sodiumBisulfate=new MoleculeEnum("sodiumBisulfate", 170, solid, new Element(Na),new Element(H),new Molecule(sulfate));
+    public static final MoleculeEnum sodiumSulfate=new MoleculeEnum("sodiumSulfate", 171, solid, new Element(Na,2),new Molecule(sulfate));
 
     private final String localizationKey;
     private final ArrayList<PotionChemical> components;
@@ -247,12 +252,12 @@ public class MoleculeEnum extends MinechemChemicalType
     /** Used to give random colors for elements so they don't have to be manually specified. */
     public MoleculeEnum(String name,int id,ChemicalRoomStateEnum roomState, PotionChemical... chemicals) 
     {
-        this(name,id, getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), getRandomColor(), roomState,chemicals);
+        this(name,id, getRandomColor(name.hashCode()), getRandomColor(name.hashCode()*2), getRandomColor(name.hashCode()*3), getRandomColor(name.hashCode()*4), getRandomColor(name.hashCode()*5), getRandomColor(name.hashCode()*6), roomState,chemicals);
     }
 
-    private static float getRandomColor() 
+    private static float getRandomColor(long seed) 
     {
-        Random random = new Random();
+        Random random = new Random(seed);
         return random.nextFloat();
     }
 
