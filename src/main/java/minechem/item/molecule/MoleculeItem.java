@@ -118,11 +118,6 @@ public class MoleculeItem extends Item
         list.add("\u00A79" + getFormulaWithSubscript(itemstack));
         
         String radioactivityColor;
-        String timeLeft = ElementItem.getRadioactiveLife(itemstack);
-        if (!timeLeft.equals(""))
-        {
-            timeLeft = "(" + timeLeft + ")";
-        }
         RadiationEnum radioactivity = ElementItem.getRadioactivity(itemstack);
         switch (radioactivity)
         {
@@ -150,7 +145,7 @@ public class MoleculeItem extends Item
         }
 
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        list.add(radioactivityColor + radioactiveName + " " + timeLeft);
+        list.add(radioactivityColor + radioactiveName);
         list.add(getRoomState(itemstack));
     }
 

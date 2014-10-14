@@ -225,7 +225,7 @@ public class MoleculeEnum extends MinechemChemicalType
 
     //* Allows full definition of a given molecule down to even the colors that will be used. */
     public MoleculeEnum(String name,int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2,ChemicalRoomStateEnum roomState, PotionChemical... chemicals) {
-    	super(roomState,computRadioactivity(chemicals));
+    	super(roomState, computeRadioactivity(chemicals));
     	
     	if (molecules[id]!=null){
     		throw new IllegalArgumentException("id "+id+" is used");
@@ -315,21 +315,26 @@ public class MoleculeEnum extends MinechemChemicalType
     	return name;
     }
     
-    private static RadiationEnum computRadioactivity(PotionChemical[] components){
-    	RadiationEnum radiation=null;
-    	for (PotionChemical chemical:components){
+    private static RadiationEnum computeRadioactivity(PotionChemical[] components)
+    {
+    	RadiationEnum radiation = null;
+    	for (PotionChemical chemical : components)
+        {
     		RadiationEnum anotherRadiation=null;
-    		if (chemical instanceof Element){
-    			anotherRadiation=((Element) chemical).element.radioactivity();
-    		}else if (chemical instanceof Molecule){
+    		if (chemical instanceof Element)
+            {
+    			anotherRadiation = ((Element) chemical).element.radioactivity();
+    		}
+            else if (chemical instanceof Molecule)
+            {
     			anotherRadiation=((Molecule) chemical).molecule.radioactivity();
     		}
     		
-    		if (anotherRadiation!=null&&anotherRadiation!=RadiationEnum.stable&&(radiation==null||radiation.getLife()>anotherRadiation.getLife())){
+    		if (anotherRadiation != null && anotherRadiation != RadiationEnum.stable && (radiation == null || radiation.getDecayChance() > anotherRadiation.getDecayChance()) ){
     			radiation=anotherRadiation;
     		}
     	}
     	
-    	return radiation==null?RadiationEnum.stable:radiation;
+    	return radiation==null ? RadiationEnum.stable : radiation;
     }
 }
