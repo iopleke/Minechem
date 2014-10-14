@@ -15,8 +15,8 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
+import minechem.utils.CoordTuple;
 import minechem.utils.MinechemUtil;
-import minechem.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -181,47 +181,47 @@ public class ChemicalFluidReactionHandler
     		world.createExplosion(null, x, y, z, output.explosionLevel, true);
     	}
     	
-    	int foundVectors=0;
+    	int foundSpaces=0;
 
     	int halfSpace=FLUIDS_GENERATE_SPACE/2;
     	List[] availableSpaces=new List[FLUIDS_GENERATE_SPACE];
     	for (int i=0;i<availableSpaces.length;i++){
     		availableSpaces[i]=findAvailableSpacesAtCrossSection(world, x, y-halfSpace+i, z, 1);
-    		foundVectors+=availableSpaces[i].size();
+    		foundSpaces+=availableSpaces[i].size();
     	}
     	
-    	int needVectors=output.outputs.size();
+    	int needSpaces=output.outputs.size();
     	
     	Iterator<MinechemChemicalType> it=output.outputs.iterator();
-    	while(it.hasNext()&&needVectors>0&&foundVectors>0){
+    	while(it.hasNext()&&needSpaces>0&&foundSpaces>0){
     		MinechemChemicalType chemical=it.next();
     		
     		boolean isGas=chemical.roomState().isGas();
-    		Vector3 vector=null;
+    		CoordTuple coords=null;
     		
     		if (isGas){
     			for (int i=availableSpaces.length-1;i>-1;i--){
     				if (!availableSpaces[i].isEmpty()){
-    					vector=(Vector3) availableSpaces[i].remove(availableSpaces[i].size()-1);
+    					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
     					break;
     				}
     			}
     		}else{
     			for (int i=0;i<availableSpaces.length;i++){
     				if (!availableSpaces[i].isEmpty()){
-    					vector=(Vector3) availableSpaces[i].remove(availableSpaces[i].size()-1);
+    					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
     					break;
     				}
     			}
     		}
     		
-    		if (vector==null){
+    		if (coords==null){
     			ItemStack itemStack=MinechemUtil.createItemStack(chemical, 1);
     			MinechemUtil.throwItemStack(world, itemStack, x, y, z);
     		}else{
-    			int px=vector.intX();
-    			int py=vector.intY();
-    			int pz=vector.intZ();
+    			int px=coords.getX();
+    			int py=coords.getY();
+    			int pz=coords.getZ();
     			
     			world.func_147480_a(px, py, pz, true);
     			world.setBlockToAir(px, py, pz);
@@ -258,15 +258,15 @@ public class ChemicalFluidReactionHandler
     	return false;
     }
     
-    public static List<Vector3> findAvailableSpacesAtCrossSection(World world,int centerX,int centerY,int centerZ,int size){
-    	List<Vector3> spaces=new ArrayList<Vector3>();
+    public static List<CoordTuple> findAvailableSpacesAtCrossSection(World world,int centerX,int centerY,int centerZ,int size){
+    	List<CoordTuple> spaces=new ArrayList<CoordTuple>();
     	for (int xOffset=-size;xOffset<=size;xOffset++){
     		for (int zOffset=-size;zOffset<=size;zOffset++){
     			int x=centerX+xOffset;
     			int z=centerZ+zOffset;
     			
     			if (world.isAirBlock(x, centerY, z)||!world.getBlock(x, centerY, z).getMaterial().isSolid()){
-    				spaces.add(new Vector3(x,centerY,z));
+    				spaces.add(new CoordTuple(x,centerY,z));
     			}
     		}
     	}
