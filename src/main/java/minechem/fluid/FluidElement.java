@@ -29,7 +29,7 @@ public class FluidElement extends Fluid implements IMinechemFluid
     @Override
     public ItemStack getOutputStack()
     {
-        return new ItemStack(MinechemItemsRegistration.element, 0, element.ordinal());
+        return new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
     }
 
     @Override
