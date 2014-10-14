@@ -38,6 +38,9 @@ public class Settings
 	// Enabling automation can allow duping. Enabled by default.
 	public static boolean AllowAutomation = true;
 
+    // Multiplier for half life of elements and molecules
+    public static int halfLifeMultiplier = 100;
+
 	// Disabling of enchants, spikes and fluidEffects
 	public static boolean FoodSpiking = true;
 	public static boolean SwordEffects = true;
@@ -69,6 +72,7 @@ public class Settings
 	public static String[] SynthesisMachineBlacklist =
 	{
 	};
+
 
 
     public static void init(File configFile)
@@ -149,6 +153,13 @@ public class Settings
 		prop.setLanguageKey("config.swordeffects");
 		SwordEffects = prop.getBoolean();
 		configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "halfLifeMultiplier", Settings.UpdateRadius);
+        prop.setMinValue(1).setMaxValue(200);
+        prop.comment = StatCollector.translateToLocal("config.halfLifeMultiplier.description");
+        prop.setLanguageKey("config.halfLifeMultiplier");
+        halfLifeMultiplier = prop.getInt();
+        configList.add(prop.getName());
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "decaySafeMachines", Settings.SwordEffects);
         prop.comment = StatCollector.translateToLocal("config.decaySafeMachines.description");

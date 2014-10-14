@@ -4,20 +4,19 @@ import net.minecraft.item.ItemStack;
 
 public class RadiationInfo
 {
-
-    public long radiationLife;
-    public long lastRadiationUpdate;
+    public long decayStarted;
+    public long lastDecayUpdate;
     public int radiationDamage;
     public int dimensionID;
     public ItemStack itemstack;
     public RadiationEnum radioactivity;
 
-    public RadiationInfo(ItemStack itemstack, long radiationLife, long lastRadiationUpdate, int dimensionID, RadiationEnum radioactivity)
+    public RadiationInfo(ItemStack itemstack, long decayStarted, long lastDecayUpdate, int dimensionID, RadiationEnum radioactivity)
     {
         this.itemstack = itemstack;
-        this.radiationLife = radiationLife;
+        this.decayStarted = decayStarted;
         this.dimensionID = dimensionID;
-        this.lastRadiationUpdate = lastRadiationUpdate;
+        this.lastDecayUpdate = lastDecayUpdate;
         this.radioactivity = radioactivity;
     }
 
@@ -25,9 +24,9 @@ public class RadiationInfo
     {
         this.itemstack = itemstack;
         this.radioactivity = radioactivity;
-        this.radiationLife = 0;
+        this.decayStarted = 0;
         this.dimensionID = 0;
-        this.lastRadiationUpdate = 0;
+        this.lastDecayUpdate = 0;
     }
 
     public boolean isRadioactive()

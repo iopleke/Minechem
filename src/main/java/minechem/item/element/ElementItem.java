@@ -90,11 +90,15 @@ public class ElementItem extends Item
     public static RadiationEnum getRadioactivity(ItemStack itemstack)
     {
         int id = itemstack.getItemDamage();
-        Item item=itemstack.getItem();
-        if (item==MinechemItemsRegistration.element){
-        	return id<ElementEnum.heaviestMass?ElementEnum.elements[id].radioactivity():RadiationEnum.stable;
-        }else if (item==MinechemItemsRegistration.molecule){
-        	if (id>=MoleculeEnum.molecules.length||MoleculeEnum.molecules[id]==null){
+        Item item = itemstack.getItem();
+        if (item == MinechemItemsRegistration.element)
+        {
+        	return id < ElementEnum.heaviestMass ? ElementEnum.elements[id].radioactivity() : RadiationEnum.stable;
+        }
+        else if (item == MinechemItemsRegistration.molecule)
+        {
+        	if (id >= MoleculeEnum.molecules.length || MoleculeEnum.molecules[id] == null)
+            {
         		return RadiationEnum.stable;
         	}
         	return MoleculeEnum.molecules[id].radioactivity();
@@ -158,11 +162,6 @@ public class ElementItem extends Item
         list.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage() + 1) + ")");
 
         String radioactivityColor;
-        String timeLeft = getRadioactiveLife(itemstack);
-        if (!timeLeft.equals(""))
-        {
-            timeLeft = "(" + timeLeft + ")";
-        }
         RadiationEnum radioactivity = getRadioactivity(itemstack);
         switch (radioactivity)
         {
@@ -190,7 +189,7 @@ public class ElementItem extends Item
         }
 
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        list.add(radioactivityColor + radioactiveName + " " + timeLeft);
+        list.add(radioactivityColor + radioactiveName);
         list.add(getClassification(itemstack));
         list.add(getRoomState(itemstack));
 
@@ -215,57 +214,6 @@ public class ElementItem extends Item
             }
         }
 
-    }
-
-    public static String getRadioactiveLife(ItemStack itemstack)
-    {
-        String timeLeft = "";
-        if (getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
-        {
-            NBTTagCompound tagCompound = itemstack.getTagCompound();
-            long life = tagCompound.getLong("life");
-            String hourabbr = MinechemHelper.getLocalString("minechem.hour.abbr");
-            String minabbr = MinechemHelper.getLocalString("minechem.min.abbr");
-            String secabbr = MinechemHelper.getLocalString("minechem.sec.abbr");
-            
-            if (life < Constants.TICKS_PER_DAY)
-			{
-				int hrs = (int) (life/Constants.TICKS_PER_HOUR);
-				life = life - (Constants.TICKS_PER_HOUR * hrs);
-				if (hrs>0)
-				{
-					if(hourabbr.isEmpty() || hourabbr == "minechem.hour.abbr")
-						timeLeft = hrs + "hr ";
-					else
-						timeLeft = hrs + hourabbr + " ";
-				}
-			}
-			if (life < Constants.TICKS_PER_HOUR)
-			{
-				int mins = (int) (life/Constants.TICKS_PER_MINUTE);
-				life = life - (Constants.TICKS_PER_MINUTE * mins);
-				if (mins>0)
-				{
-					if(minabbr.isEmpty() || minabbr == "minechem.min.abbr")
-						timeLeft = timeLeft + mins + "m ";
-					else
-						timeLeft = timeLeft + mins + minabbr + " ";
-				}
-			}
-			if (life < Constants.TICKS_PER_MINUTE)
-			{
-				int secs = (int) (life/Constants.TICKS_PER_SECOND);
-				life = life - (Constants.TICKS_PER_SECOND * secs);
-				if (secs>0)
-				{
-					if(secabbr.isEmpty() || secabbr == "minechem.sec.abbr")
-						timeLeft = timeLeft + secs + "s";
-					else
-						timeLeft = timeLeft + secs + secabbr;
-				}
-			}
-      }
-        return timeLeft;
     }
 
     @Override
@@ -308,8 +256,8 @@ public class ElementItem extends Item
             {
                 int dimensionID = stackTag.getInteger("dimensionID");
                 long lastUpdate = stackTag.getLong("lastUpdate");
-                long life = stackTag.getLong("life");
-                RadiationInfo info = new RadiationInfo(element, life, lastUpdate, dimensionID, radioactivity);
+                long decayStart = stackTag.getLong("decayStart");
+                RadiationInfo info = new RadiationInfo(element, decayStart, lastUpdate, dimensionID, radioactivity);
                 return info;
             }
         }
@@ -320,8 +268,7 @@ public class ElementItem extends Item
         RadiationEnum radioactivity = getRadioactivity(element);
         int dimensionID = world.provider.dimensionId;
         long lastUpdate = world.getTotalWorldTime();
-        long life = radioactivity.getLife();
-        RadiationInfo info = new RadiationInfo(element, life, lastUpdate, dimensionID, radioactivity);
+        RadiationInfo info = new RadiationInfo(element, lastUpdate, lastUpdate, dimensionID, radioactivity);
         setRadiationInfo(info, element);
         return info;
     }
@@ -333,8 +280,8 @@ public class ElementItem extends Item
         {
             stackTag = new NBTTagCompound();
         }
-        stackTag.setLong("lastUpdate", radiationInfo.lastRadiationUpdate);
-        stackTag.setLong("life", radiationInfo.radiationLife);
+        stackTag.setLong("lastUpdate", radiationInfo.lastDecayUpdate);
+        stackTag.setLong("decayStart", radiationInfo.decayStarted);
         stackTag.setInteger("dimensionID", radiationInfo.dimensionID);
         element.setTagCompound(stackTag);
     }
