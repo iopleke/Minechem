@@ -101,7 +101,8 @@ public class LeadedChestContainer extends Container implements INoDecay
         return stack;
     }
 
-    public List<ItemStack> getStorageInventory()
+    @Override
+	public List<ItemStack> getStorageInventory()
     {
         List<ItemStack> storageInventory = new ArrayList<ItemStack>();
         for (int slot = 0; slot < 27; slot++)
@@ -115,7 +116,8 @@ public class LeadedChestContainer extends Container implements INoDecay
         return storageInventory;
     }
 
-    public List<ItemStack> getPlayerInventory()
+    @Override
+	public List<ItemStack> getPlayerInventory()
     {
         List<ItemStack> playerInventory = new ArrayList<ItemStack>();
         for (int slot = 27; slot < this.inventorySlots.size(); slot++)

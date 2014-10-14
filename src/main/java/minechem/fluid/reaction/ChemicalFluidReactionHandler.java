@@ -1,11 +1,10 @@
 package minechem.fluid.reaction;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
-import java.util.Vector;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import minechem.MinechemItemsRegistration;
@@ -16,8 +15,8 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
+import minechem.utils.CoordTuple;
 import minechem.utils.MinechemUtil;
-import minechem.utils.Vector3;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
@@ -31,8 +30,7 @@ import net.minecraft.world.World;
 public class ChemicalFluidReactionHandler
 {
 	public static final Map<ChemicalFluidReactionRule, ChemicalFluidReactionOutput> reactionRules=new HashMap<ChemicalFluidReactionRule, ChemicalFluidReactionOutput>();
-	
-	private static final Random ran=new Random();
+	public static final int FLUIDS_GENERATE_SPACE=3;
 	
     @SubscribeEvent
     public void tick(TickEvent.WorldTickEvent event)
@@ -86,88 +84,88 @@ public class ChemicalFluidReactionHandler
 
     public static void initExplodableChemical(){
     	// TODO Add more reaction rules -yushijinhun
-    	Map<MinechemChemicalType, Float> map;
+    	List<MinechemChemicalType> map;
     	
     	//H2O+Li==LiOH+H
-    	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.lithiumHydroxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.lithiumHydroxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Li),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	//H2O+Na==NaOH+H
-    	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.sodiumHydroxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.sodiumHydroxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Na),new ChemicalFluidReactionOutput(map, 0.15f));
     	
     	//H2O+K==KOH+H
-    	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.potassiumHydroxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.potassiumHydroxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.K),new ChemicalFluidReactionOutput(map, 0.2f));
     	
     	//H2O+Li==RbOH+H
-    	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.rubidiumHydroxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.rubidiumHydroxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Rb),new ChemicalFluidReactionOutput(map, 0.25f));
 
     	//H2O+Cs==CsOH+H
-       	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.cesiumHydroxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.cesiumHydroxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Cs),new ChemicalFluidReactionOutput(map, 0.3f));
     	
     	//H2O+Fr==FrOH+H
-       	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.franciumHydroxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.franciumHydroxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Fr),new ChemicalFluidReactionOutput(map, 0.4f));
 
     	//H2SO4+Cu==CuSO4+2H
-       	map=new HashMap<MinechemChemicalType, Float>();
-       	map.put(ElementEnum.H, 1f);
-       	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.lightbluePigment, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+       	map.add(ElementEnum.H);
+       	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.lightbluePigment);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, ElementEnum.Cu),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	//H2SO4+S==2SO2+2H
-       	map=new HashMap<MinechemChemicalType, Float>();
-       	map.put(ElementEnum.H, 1f);
-       	map.put(ElementEnum.H, 1f);
-    	map.put(MoleculeEnum.sulfurDioxide, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+       	map.add(ElementEnum.H);
+       	map.add(ElementEnum.H);
+    	map.add(MoleculeEnum.sulfurDioxide);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, ElementEnum.S),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	//H2SO4+H2S==S+SO2+2H2O
-       	map=new HashMap<MinechemChemicalType, Float>();
-       	map.put(ElementEnum.S, 1f);
-       	map.put(MoleculeEnum.sulfurDioxide, 1f);
-       	map.put(MoleculeEnum.water, 1f);
-       	map.put(MoleculeEnum.water, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+       	map.add(ElementEnum.S);
+       	map.add(MoleculeEnum.sulfurDioxide);
+       	map.add(MoleculeEnum.water);
+       	map.add(MoleculeEnum.water);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, MoleculeEnum.hydrogenSulfide),new ChemicalFluidReactionOutput(map, 0.1f));
 
     	//HCl+NaOH==H2O+NaCl
-       	map=new HashMap<MinechemChemicalType, Float>();
-       	map.put(MoleculeEnum.salt, 1f);
-       	map.put(MoleculeEnum.water, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+       	map.add(MoleculeEnum.salt);
+       	map.add(MoleculeEnum.water);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.hcl, MoleculeEnum.sodiumHydroxide),new ChemicalFluidReactionOutput(map, 0.1f));
 
     	//H+Cl==HCl
-       	map=new HashMap<MinechemChemicalType, Float>();
-       	map.put(MoleculeEnum.hcl, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+       	map.add(MoleculeEnum.hcl);
     	reactionRules.put(new ChemicalFluidReactionRule(ElementEnum.H, ElementEnum.Cl),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	//NaCl+H2SO4==NaHSO4+HCl
-       	map=new HashMap<MinechemChemicalType, Float>();
-       	map.put(MoleculeEnum.sodiumBisulfate, 1f);
-       	map.put(MoleculeEnum.hcl, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+       	map.add(MoleculeEnum.sodiumBisulfate);
+       	map.add(MoleculeEnum.hcl);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.salt, MoleculeEnum.sulfuricAcid),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	//NaHSO4+NaCl==Na2SO4+2HCl
-    	map=new HashMap<MinechemChemicalType, Float>();
-    	map.put(MoleculeEnum.sodiumSulfate, 1f);
-    	map.put(MoleculeEnum.hcl, 1f);
-    	map.put(MoleculeEnum.hcl, 1f);
+    	map=new ArrayList<MinechemChemicalType>();
+    	map.add(MoleculeEnum.sodiumSulfate);
+    	map.add(MoleculeEnum.hcl);
+    	map.add(MoleculeEnum.hcl);
     	reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.salt, MoleculeEnum.sodiumBisulfate),new ChemicalFluidReactionOutput(map, 0.1f));
     	
     	
@@ -183,67 +181,60 @@ public class ChemicalFluidReactionHandler
     		world.createExplosion(null, x, y, z, output.explosionLevel, true);
     	}
     	
-    	int foundVectors=0;
-    	
-    	/*
-    	 * 0:y-1
-    	 * 1:y
-    	 * 2:y+1
-    	 */
-    	Vector[] availableSpaces=new Vector[3];
+    	int foundSpaces=0;
+
+    	int halfSpace=FLUIDS_GENERATE_SPACE/2;
+    	List[] availableSpaces=new List[FLUIDS_GENERATE_SPACE];
     	for (int i=0;i<availableSpaces.length;i++){
-    		availableSpaces[i]=findAvailableSpacesAtCrossSection(world, x, y-1+i, z, 1);
-    		foundVectors+=availableSpaces[i].size();
+    		availableSpaces[i]=findAvailableSpacesAtCrossSection(world, x, y-halfSpace+i, z, 1);
+    		foundSpaces+=availableSpaces[i].size();
     	}
     	
-    	int needVectors=output.outputs.size();
+    	int needSpaces=output.outputs.size();
     	
-    	Iterator<MinechemChemicalType> it=output.outputs.keySet().iterator();
-    	while(it.hasNext()&&needVectors>0&&foundVectors>0){
-    	MinechemChemicalType chemical=it.next();
+    	Iterator<MinechemChemicalType> it=output.outputs.iterator();
+    	while(it.hasNext()&&needSpaces>0&&foundSpaces>0){
+    		MinechemChemicalType chemical=it.next();
     		
     		boolean isGas=chemical.roomState().isGas();
+    		CoordTuple coords=null;
     		
-    		if (ran.nextFloat()<=output.outputs.get(chemical)){
-    			Vector3 vector=null;
-    			
-    			if (isGas){
-    				for (int i=availableSpaces.length-1;i>-1;i--){
-    					if (!availableSpaces[i].isEmpty()){
-    						vector=(Vector3) availableSpaces[i].remove(availableSpaces[i].size()-1);
-    						break;
-    					}
-    				}
-    			}else{
-    				for (int i=0;i<availableSpaces.length;i++){
-    					if (!availableSpaces[i].isEmpty()){
-    						vector=(Vector3) availableSpaces[i].remove(availableSpaces[i].size()-1);
-    						break;
-    					}
+    		if (isGas){
+    			for (int i=availableSpaces.length-1;i>-1;i--){
+    				if (!availableSpaces[i].isEmpty()){
+    					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
+    					break;
     				}
     			}
+    		}else{
+    			for (int i=0;i<availableSpaces.length;i++){
+    				if (!availableSpaces[i].isEmpty()){
+    					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
+    					break;
+    				}
+    			}
+    		}
+    		
+    		if (coords==null){
+    			ItemStack itemStack=MinechemUtil.createItemStack(chemical, 1);
+    			MinechemUtil.throwItemStack(world, itemStack, x, y, z);
+    		}else{
+    			int px=coords.getX();
+    			int py=coords.getY();
+    			int pz=coords.getZ();
     			
-    			if (vector==null){
-    				ItemStack itemStack=MinechemUtil.createItemStack(chemical, 1);
-    				MinechemUtil.throwItemStack(world, itemStack, x, y, z);
-    			}else{
-    				int px=vector.intX();
-    				int py=vector.intY();
-    				int pz=vector.intZ();
-    				
-    				world.func_147480_a(px, py, pz, true);
-    				world.setBlockToAir(px, py, pz);
-    				
-    				Block fluidBlock=null;
-    				if (chemical instanceof ElementEnum){
-    					fluidBlock=FluidHelper.elementsBlocks.get(FluidHelper.elements.get(chemical));
-    				}else if (chemical instanceof MoleculeEnum){
-    					fluidBlock=FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(chemical));
-    				}
-    				
-    				if (fluidBlock!=null){
-    					world.setBlock(px, py, pz, fluidBlock, popFlowingFluid?1:0, 3);
-    				}
+    			world.func_147480_a(px, py, pz, true);
+    			world.setBlockToAir(px, py, pz);
+    			
+    			Block fluidBlock=null;
+    			if (chemical instanceof ElementEnum){
+    				fluidBlock=FluidHelper.elementsBlocks.get(FluidHelper.elements.get(chemical));
+    			}else if (chemical instanceof MoleculeEnum){
+    				fluidBlock=FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(chemical));
+    			}
+    			
+    			if (fluidBlock!=null){
+    				world.setBlock(px, py, pz, fluidBlock, popFlowingFluid?1:0, 3);
     			}
     		}
     	}
@@ -267,15 +258,15 @@ public class ChemicalFluidReactionHandler
     	return false;
     }
     
-    public static Vector<Vector3> findAvailableSpacesAtCrossSection(World world,int centerX,int centerY,int centerZ,int size){
-    	Vector<Vector3> spaces=new Vector<Vector3>();
+    public static List<CoordTuple> findAvailableSpacesAtCrossSection(World world,int centerX,int centerY,int centerZ,int size){
+    	List<CoordTuple> spaces=new ArrayList<CoordTuple>();
     	for (int xOffset=-size;xOffset<=size;xOffset++){
     		for (int zOffset=-size;zOffset<=size;zOffset++){
     			int x=centerX+xOffset;
     			int z=centerZ+zOffset;
     			
     			if (world.isAirBlock(x, centerY, z)||!world.getBlock(x, centerY, z).getMaterial().isSolid()){
-    				spaces.add(new Vector3(x,centerY,z));
+    				spaces.add(new CoordTuple(x,centerY,z));
     			}
     		}
     	}

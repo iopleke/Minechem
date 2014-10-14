@@ -130,7 +130,8 @@ public class DecomposerContainer extends Container implements IRadiationShield, 
         return 0.4F;
     }
 
-    public List<ItemStack> getStorageInventory()
+    @Override
+	public List<ItemStack> getStorageInventory()
     {
         if (Settings.decaySafeMachines)
         {
@@ -151,7 +152,8 @@ public class DecomposerContainer extends Container implements IRadiationShield, 
         }
     }
 
-    public List<ItemStack> getPlayerInventory()
+    @Override
+	public List<ItemStack> getPlayerInventory()
     {
         if (Settings.decaySafeMachines)
         {
