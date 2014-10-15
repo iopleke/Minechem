@@ -3,6 +3,7 @@ package minechem.utils;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class Compare
 {
@@ -11,7 +12,14 @@ public class Compare
 	{
 		int dmg1 = is1.getItemDamage();
 		int dmg2 = is2.getItemDamage();
-		return is1.getItem() == is2.getItem() && (dmg1 == -1 || dmg2 == -1 || (dmg1 == dmg2));
+        NBTTagCompound nbt1 = is1.getTagCompound();
+        NBTTagCompound nbt2 = is2.getTagCompound();
+        boolean sameNBT = true;
+        if (nbt1 != null && nbt2 != null)
+        {
+            sameNBT = nbt1.equals(nbt2);
+        }
+		return is1.getItem() == is2.getItem() && (dmg1 == -1 || dmg2 == -1 || (dmg1 == dmg2)) && sameNBT;
 	}
 
 	public static boolean isStackAChemical(ItemStack itemstack)

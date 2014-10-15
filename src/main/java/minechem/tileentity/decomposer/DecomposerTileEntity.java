@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.Settings;
-import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
@@ -21,6 +20,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.network.Packet;
+import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
@@ -130,7 +130,6 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 */
 	private boolean addStackToOutputSlots(ItemStack itemstack)
 	{
-		itemstack.getItem().onCreated(itemstack, this.worldObj, null);
 		for (int outputSlot : outputSlots)
 		{
 			ItemStack stackInSlot = getStackInSlot(outputSlot);
@@ -495,7 +494,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
                     setInventorySlotContents(i, null);
                     break;
                 }
-                else if (this.inventory[j].isItemEqual(this.inventory[i]))
+                else if (Compare.stacksAreSameKind(this.inventory[j], this.inventory[i]))
                 {
                     int spaceLeft = this.inventory[j].getMaxStackSize() - this.inventory[j].stackSize;
                     if (spaceLeft >= this.inventory[i].stackSize)
