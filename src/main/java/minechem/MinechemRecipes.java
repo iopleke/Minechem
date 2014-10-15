@@ -27,6 +27,7 @@ import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockOre;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -2875,17 +2876,11 @@ public class MinechemRecipes
         return true;
 	}
 
+
 	public boolean shouldCreateSynthesis(ItemBlock block)
 	{
-		if (block == new ItemBlock(Blocks.coal_ore)
-				|| block == new ItemBlock(Blocks.iron_ore)
-				|| block == new ItemBlock(Blocks.lapis_ore)
-				|| block == new ItemBlock(Blocks.gold_ore)
-				|| block == new ItemBlock(Blocks.diamond_ore)
-				|| block == new ItemBlock(Blocks.redstone_ore)
-				|| block == new ItemBlock(Blocks.emerald_ore)
-				|| block == new ItemBlock(Blocks.quartz_ore)
-				|| block == new ItemBlock(Blocks.lit_redstone_ore))
+        // check if the block is an oreBlock
+		if (block.field_150939_a instanceof BlockOre)
 		{
 			return false;
 		}
