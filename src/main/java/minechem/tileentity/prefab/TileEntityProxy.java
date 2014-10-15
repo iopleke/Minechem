@@ -215,7 +215,7 @@ public void updateEntity()
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
-		if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
+		if (this.manager != null && this.manager != this)
 		{
 			return ((ISidedInventory) this.getManager()).isItemValidForSlot(i, itemstack);
 		}
@@ -225,21 +225,9 @@ public void updateEntity()
 	@Override
 	public int[] getAccessibleSlotsFromSide(int var1)
 	{
-		if (this.getManager() != null && this.getManager() instanceof ISidedInventory)
+		if (this.manager != null && this.manager != this)
 		{
-			try
-			{
-				return ((ISidedInventory) this.getManager()).getAccessibleSlotsFromSide(var1);
-			} catch (StackOverflowError o)
-			{
-                // wrapped in a try-catch
-				// prevents right clicking failure
-				// with a buildcraft pipe
-				if (Settings.DebugMode)
-				{
-					Minechem.LOGGER.info("TileEntity generated a StackOverflowError at: x" + this.xCoord + " y" + this.yCoord + " z" + this.zCoord);
-				}
-			}
+			return ((ISidedInventory) this.getManager()).getAccessibleSlotsFromSide(var1);
 		}
 		return new int[0];
 	}
