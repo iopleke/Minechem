@@ -425,6 +425,9 @@ public class ElementItem extends Item
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
         super.onCreated(itemStack, world, player);
-        setRadiationInfo(new RadiationInfo(itemStack, getRadioactivity(itemStack)),itemStack);
+        if (getRadioactivity(itemStack) != RadiationEnum.stable)
+        {
+            setRadiationInfo(new RadiationInfo(itemStack, world.getTotalWorldTime(), world.getTotalWorldTime(), world.provider.dimensionId, getRadioactivity(itemStack)), itemStack);
+        }
     }
 }
