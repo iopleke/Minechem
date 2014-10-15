@@ -1,16 +1,15 @@
 package minechem.item.molecule;
 
+import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.Element;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
 import net.minecraft.util.StatCollector;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
 import static minechem.item.ChemicalRoomStateEnum.*;
 import static minechem.item.element.ElementEnum.*;
 
@@ -26,7 +25,7 @@ public class MoleculeEnum extends MinechemChemicalType
     public static final MoleculeEnum potassiumNitrate=new MoleculeEnum("potassiumNitrate",5, 0.9F, 0.9F, 0.9F, 0.8F, 0.8F, 0.8F,solid, new Element(K), new Element(N), new Element(O, 3));
     public static final MoleculeEnum tnt=new MoleculeEnum("tnt",6, 1, 1, 0, 1, 0.65F, 0,solid, new Element(C, 6), new Element(H, 2), new Molecule(nitrogenDioxide, 3), new Molecule(toluene));
     public static final MoleculeEnum siliconDioxide=new MoleculeEnum("siliconDioxide",7, 1, 1, 1, 1, 1, 1,solid, new Element(Si), new Element(O, 2));
-    // Pulled from bottom to replace calcite, which was a duplicate of another molecule
+    // Pulled from bottom to replace calcite, which was a duplicate of another molecules
     public static final MoleculeEnum calcicPyroxene=new MoleculeEnum("calcicPyroxene",8,solid, new Element(Ca,1), new Element(Cr,1), new Element(Si, 2), new Element(O, 6));
     public static final MoleculeEnum pyrite=new MoleculeEnum("pyrite",9,solid, new Element(Fe), new Element(S, 2));
     public static final MoleculeEnum nepheline=new MoleculeEnum("nepheline",10,solid, new Element(Al), new Element(Si), new Element(O, 4));
@@ -223,7 +222,7 @@ public class MoleculeEnum extends MinechemChemicalType
     public float green2;
     public float blue2;
 
-    //* Allows full definition of a given molecule down to even the colors that will be used. */
+    //* Allows full definition of a given molecules down to even the colors that will be used. */
     public MoleculeEnum(String name,int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2,ChemicalRoomStateEnum roomState, PotionChemical... chemicals) {
     	super(roomState, computeRadioactivity(chemicals));
     	
@@ -234,7 +233,7 @@ public class MoleculeEnum extends MinechemChemicalType
     	this.id = id;
     	this.name=name;
         this.components = new ArrayList<PotionChemical>();
-        this.localizationKey = "molecule." + name;
+        this.localizationKey = "molecules." + name;
         for (PotionChemical potionChemical : chemicals) 
         {
             this.components.add(potionChemical);
@@ -247,6 +246,7 @@ public class MoleculeEnum extends MinechemChemicalType
         this.blue2 = colorBlue2;
         
         molecules[id]=this;
+        FluidHelper.registerMolecule(this);
     }
 
     /** Used to give random colors for elements so they don't have to be manually specified. */
@@ -279,7 +279,7 @@ public class MoleculeEnum extends MinechemChemicalType
     {
         for (MoleculeEnum molecule : molecules) 
         {
-            if (molecule.id == id)
+            if (molecule!=null&&molecule.id == id)
                 return molecule;
         }
         return null;
@@ -291,10 +291,10 @@ public class MoleculeEnum extends MinechemChemicalType
     }
 
     /**
-     * Returns the localized name of this molecule, or an en_US-based
+     * Returns the localized name of this molecules, or an en_US-based
      * placeholder if no localization was found.
      *
-     * @return Localized name of this molecule.
+     * @return Localized name of this molecules.
      */
     public String descriptiveName() 
     {
@@ -336,5 +336,10 @@ public class MoleculeEnum extends MinechemChemicalType
     	}
     	
     	return radiation==null ? RadiationEnum.stable : radiation;
+    }
+    
+    @Override
+	public String toString(){
+    	return name();
     }
 }

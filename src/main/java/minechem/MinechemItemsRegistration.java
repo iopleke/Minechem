@@ -76,7 +76,7 @@ public class MinechemItemsRegistration
         {
         	if (molecule!=null){
 	            ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-	            FluidContainerRegistry.registerFluidContainer(FluidHelper.molecule.get(molecule), tube, emptyTube);
+	            FluidContainerRegistry.registerFluidContainer(FluidHelper.molecules.get(molecule), tube, emptyTube);
         	}
         }
     }

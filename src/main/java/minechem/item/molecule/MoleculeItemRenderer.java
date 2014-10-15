@@ -88,8 +88,8 @@ public class MoleculeItemRenderer implements IItemRenderer
     private void renderItemInEquipped(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)
     {
         MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
-        /* float scale = 0.75F; GL11.glPushMatrix(); GL11.glScalef(scale, scale, scale); GL11.glTranslatef(1.2F, 1.1F, -0.25F); GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F); GL11.glColor3f(molecule.red, molecule.green, molecule.blue); drawTexturedRectUV(type,
-         * 0, 0, 0, 16, 16, pass1); GL11.glColor3f(molecule.red2, molecule.green2, molecule.blue2); drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass2); GL11.glColor3f(1.0F, 1.0F, 1.0F); GL11.glTranslatef(0.0F, 0.0F, -0.001F); for (float i = 0.0F; i < .1F; i
+        /* float scale = 0.75F; GL11.glPushMatrix(); GL11.glScalef(scale, scale, scale); GL11.glTranslatef(1.2F, 1.1F, -0.25F); GL11.glRotatef(180.0F, 0.0F, 0.0F, 1.0F); GL11.glColor3f(molecules.red, molecules.green, molecules.blue); drawTexturedRectUV(type,
+         * 0, 0, 0, 16, 16, pass1); GL11.glColor3f(molecules.red2, molecules.green2, molecules.blue2); drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass2); GL11.glColor3f(1.0F, 1.0F, 1.0F); GL11.glTranslatef(0.0F, 0.0F, -0.001F); for (float i = 0.0F; i < .1F; i
          * += .01F) { drawTexturedRectUV(type, 0, 0, i, 16, 16, testtube); } GL11.glPopMatrix(); */
         Tessellator tessellator = Tessellator.instance;
         GL11.glColor3f(molecule.red, molecule.green, molecule.blue);

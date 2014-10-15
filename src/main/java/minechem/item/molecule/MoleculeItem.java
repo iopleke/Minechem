@@ -293,7 +293,7 @@ public class MoleculeItem extends Item
     	
         if (world.isAirBlock(x, y, z))
         {
-            Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(getMolecule(itemStack)));
+            Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
             world.setBlock(x, y, z, block, 0, 3);
             if (player.capabilities.isCreativeMode)
             {

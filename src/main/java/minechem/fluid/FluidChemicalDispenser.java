@@ -57,7 +57,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem {
 			if (itemStack.getItem() instanceof ElementItem){
 				block=FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(itemStack)));
 			}else if (itemStack.getItem() instanceof MoleculeItem&&itemStack.getItemDamage()<MoleculeEnum.molecules.length){
-				block=FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(MoleculeEnum.molecules[itemStack.getItemDamage()]));
+				block=FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeEnum.molecules[itemStack.getItemDamage()]));
 			}
 			
 	    	if (!world.isAirBlock(x, y, z)&&!world.getBlock(x, y, z).getMaterial().isSolid()){

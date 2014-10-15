@@ -230,7 +230,7 @@ public class ChemicalFluidReactionHandler
     			if (chemical instanceof ElementEnum){
     				fluidBlock=FluidHelper.elementsBlocks.get(FluidHelper.elements.get(chemical));
     			}else if (chemical instanceof MoleculeEnum){
-    				fluidBlock=FluidHelper.moleculeBlocks.get(FluidHelper.molecule.get(chemical));
+    				fluidBlock=FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(chemical));
     			}
     			
     			if (fluidBlock!=null){
