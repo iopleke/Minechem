@@ -4,6 +4,10 @@ public class TimeHelper
 {
     public static String getTimeFromTicks(long ticks)
     {
+        if(ticks < 0)
+        {
+            return MinechemHelper.getLocalString("minechem.unstable");
+        }
         String timeLeft = "";
         String hourabbr = MinechemHelper.getLocalString("minechem.hour.abbr");
         String minabbr = MinechemHelper.getLocalString("minechem.min.abbr");

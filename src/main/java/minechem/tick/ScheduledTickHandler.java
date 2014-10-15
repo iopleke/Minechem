@@ -26,7 +26,6 @@ public class ScheduledTickHandler
 			}
 	}
 
-
     private void checkForPoison(EntityPlayer entityPlayer)
     {
         ItemStack currentItem = entityPlayer.inventory.getCurrentItem();

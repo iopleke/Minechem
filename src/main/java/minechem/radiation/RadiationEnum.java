@@ -1,27 +1,29 @@
 package minechem.radiation;
 
+import minechem.Settings;
+import minechem.utils.Constants;
+
 public enum RadiationEnum
 {
     stable(0, 0),
-    hardlyRadioactive(24, 1),
-    slightlyRadioactive(12, 2),
-    radioactive(6, 6),
-    highlyRadioactive(3, 8),
-    extremelyRadioactive(1, 16);
+    hardlyRadioactive(Constants.TICKS_PER_DAY, 1),
+    slightlyRadioactive(Constants.TICKS_PER_HOUR * 12, 2),
+    radioactive(Constants.TICKS_PER_HOUR * 6, 6),
+    highlyRadioactive(Constants.TICKS_PER_HOUR * 3, 8),
+    extremelyRadioactive(Constants.TICKS_PER_HOUR, 16);
 
-    private float decayChance;
+    private long life;
     private int damage;
 
-    // ttl is in hours
-    private RadiationEnum(int ttl, int damage)
+    private RadiationEnum(int life, int damage)
     {
-        this.decayChance = ttl == 0 ? 0F : (1F / ttl);
+        this.life = life;
         this.damage = damage;
     }
 
-    public float getDecayChance()
+    public long getLife()
     {
-        return this.decayChance;
+        return (long)(this.life * (Settings.halfLifeMultiplier / 100F));
     }
 
     public int getDamage()
