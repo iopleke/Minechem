@@ -12,15 +12,12 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationInfo;
-import minechem.utils.Constants;
-import minechem.utils.EnumColor;
-import minechem.utils.MinechemHelper;
-import minechem.utils.MinechemUtil;
-import minechem.utils.Reference;
+import minechem.utils.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -189,7 +186,13 @@ public class ElementItem extends Item
         }
 
         String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        list.add(radioactivityColor + radioactiveName);
+        String timeLeft = "";
+        if (getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
+        {
+            long worldTime = player.worldObj.getTotalWorldTime();
+            timeLeft= TimeHelper.getTimeFromTicks(getRadioactivity(itemstack).getLife() - (worldTime - itemstack.getTagCompound().getLong("decayStart")));
+        }
+        list.add(radioactivityColor + radioactiveName + (timeLeft.equals("") ? "" : " (" + timeLeft + ")"));
         list.add(getClassification(itemstack));
         list.add(getRoomState(itemstack));
 
@@ -416,5 +419,12 @@ public class ElementItem extends Item
             }
         }
         return itemStack;
+    }
+
+    @Override
+    public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        super.onCreated(itemStack, world, player);
+        setRadiationInfo(new RadiationInfo(itemStack, getRadioactivity(itemStack)),itemStack);
     }
 }

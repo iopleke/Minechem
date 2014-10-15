@@ -233,7 +233,7 @@ public class MoleculeEnum extends MinechemChemicalType
     	this.id = id;
     	this.name=name;
         this.components = new ArrayList<PotionChemical>();
-        this.localizationKey = "molecules." + name;
+        this.localizationKey = "molecule." + name;
         for (PotionChemical potionChemical : chemicals) 
         {
             this.components.add(potionChemical);
@@ -330,7 +330,7 @@ public class MoleculeEnum extends MinechemChemicalType
     			anotherRadiation=((Molecule) chemical).molecule.radioactivity();
     		}
     		
-    		if (anotherRadiation != null && anotherRadiation != RadiationEnum.stable && (radiation == null || radiation.getDecayChance() > anotherRadiation.getDecayChance()) ){
+    		if (anotherRadiation != null && anotherRadiation != RadiationEnum.stable && (radiation == null || radiation.getLife() > anotherRadiation.getLife()) ){
     			radiation=anotherRadiation;
     		}
     	}

@@ -469,13 +469,6 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 		if (outputStacks != null)
 		{
-            for (ItemStack itemStack : outputStacks)
-            {
-                if(itemStack.getItem() instanceof ElementItem)
-                {
-                    ElementItem.initiateRadioactivity(itemStack, worldObj);
-                }
-            }
 			outputBuffer = outputStacks;
 		} else
 		{
