@@ -17,7 +17,7 @@ public class FluidTextureStitchHandler {
             {
                 fluidElement.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
             }
-            for (FluidChemical fluidChemical : FluidHelper.molecule.values())
+            for (FluidChemical fluidChemical : FluidHelper.molecules.values())
             {
                 fluidChemical.setIcons(ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow"));
             }

@@ -43,7 +43,7 @@ public class RecipeAPI
                     Object element = el.getConstructor(ee, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
                 } catch (NoSuchFieldException e)
-                {//else add molecule
+                {//else add molecules
                     Object elementEnum = me.getField(elementName).get(null);
                     Object element = mo.getConstructor(me, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
@@ -104,7 +104,7 @@ public class RecipeAPI
                         Object element = el.getConstructor(ee, int.class).newInstance(elementEnum, count);
                         potions[idx] = element;
                     } catch (NoSuchFieldException e)
-                    {//else add molecule
+                    {//else add molecules
                         Object elementEnum = me.getField(elementName).get(null);
                         Object element = mo.getConstructor(me, int.class).newInstance(elementEnum, count);
                         potions[idx] = element;
@@ -157,7 +157,7 @@ public class RecipeAPI
                     Object element = el.getConstructor(ee, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
                 } catch (NoSuchFieldException e)
-                {//else add molecule
+                {//else add molecules
                     Object elementEnum = me.getField(elementName).get(null);
                     Object element = mo.getConstructor(me, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;

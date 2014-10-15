@@ -1,5 +1,6 @@
 package minechem.item.element;
 
+import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
 import minechem.radiation.RadiationEnum;
@@ -153,6 +154,8 @@ public class ElementEnum extends MinechemChemicalType
         this.descriptiveName = descriptiveName;
         this.localizationKey = "element." + name;
         this.classification = classification;
+        
+        FluidHelper.registerElement(this);
     }
 
     /**
@@ -187,5 +190,10 @@ public class ElementEnum extends MinechemChemicalType
     
     public String name(){
     	return name;
+    }
+    
+    @Override
+	public String toString(){
+    	return name();
     }
 }
