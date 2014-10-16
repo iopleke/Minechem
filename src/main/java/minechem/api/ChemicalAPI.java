@@ -167,6 +167,21 @@ public class ChemicalAPI {
 		return false;
 	}
 	
+	/**
+	 * Adds a fluid chemical reaction rule.
+	 * <p>
+	 * If explosionLevel==Float.NaN , it will not explode.<br>
+	 * Argument 'outputChemicals' means what fluid should generate
+	 * after the reaction. Its value should be like ["water","K"] , ["hcl,water"].
+	 * You could not write a number before the chemical, so value like these
+	 * ["2water","1K"] , [3,"hcl",2,"water"] are not available.
+	 * 
+	 * @param chemicalA one of the chemicals involved in the reaction
+	 * @param chemicalB another of the chemicals involved in the reaction
+	 * @param explosionLevel the level of the explosion
+	 * @param outputChemicals the chemicals of it outputs
+	 * @return Add the reaction successfully?
+	 */
 	public static boolean registerFluidChemicalReaction(String chemicalA,String chemicalB,float explosionLevel,String... outputChemicals){
 		if (!isMinechemInstalled){
 			return false;
