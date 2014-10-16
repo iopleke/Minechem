@@ -24,23 +24,10 @@ public class DecomposerRecipe
 	{
 		if (recipe.input != null && recipe.input.getItem() != null)
 		{
-			for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
-			{
-				if (recipe.input.hasDisplayName())
-				{
-					if (recipe.input.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
-					{
-						if (Compare.stringSieve(recipe.input.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
-						{
-							if (Settings.DebugMode)
-							{
-								Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
-							}
-							return null;
-						}
-					}
-				}
-			}
+            if (isBlacklisted(recipe.input))
+            {
+                return null;
+            }
 			recipes.put(getKey(recipe.input), recipe);
 		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
@@ -172,7 +159,6 @@ public class DecomposerRecipe
 
 	public ArrayList<PotionChemical> getOutput()
 	{
-		//return this.output;
 		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
 		result.addAll(this.output.values());
 		return result;
@@ -246,5 +232,24 @@ public class DecomposerRecipe
         {
             chemical.amount = Math.round(chemical.amount / scale);
         }
+    }
+
+    public static boolean isBlacklisted(ItemStack itemStack)
+    {
+        for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
+        {
+            if (itemStack.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
+            {
+                if (Compare.stringSieve(itemStack.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
+                {
+                    if (Settings.DebugMode)
+                    {
+                        Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

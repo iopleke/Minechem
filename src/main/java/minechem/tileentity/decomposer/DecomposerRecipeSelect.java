@@ -53,4 +53,13 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
     {
         return !this.possibleRecipes.isEmpty();
     }
+
+    @Override
+    public void scaleOutput(float scale)
+    {
+        for (DecomposerRecipe recipe : possibleRecipes)
+        {
+            recipe.scaleOutput(scale);
+        }
+    }
 }
