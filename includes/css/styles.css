@@ -337,7 +337,12 @@ a.buttons {
 a.github {
 	background: url(../images/octocat-small.png) no-repeat 1px;
 }
-
+a.patreon-greyscale {
+	background: url(../images/patreon-small-greyscale.png) no-repeat 1px;
+}
+a.patreon {
+	background: url(../images/patreon-small.png) no-repeat 1px;
+}
 a.buttons:hover {
 	color: #fff;
 	text-decoration: none;
@@ -345,6 +350,12 @@ a.buttons:hover {
 
 
 /* Section - for main page content */
+
+.sidebar-object {
+	height: auto;
+	width: auto;
+	overflow: visible;
+}
 
 section {
 	width:650px;
@@ -361,6 +372,18 @@ section {
 
 section h1 {
 	margin-top: 25px;
+}
+#content-heading {
+	margin: 10px 0 10px;
+}
+
+#banner {
+	position: relative;
+	margin: 0px auto;
+	max-width: 650px;
+	padding: 0px;
+	margin: 0px;
+	border: none;
 }
 
 

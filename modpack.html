@@ -5,44 +5,32 @@
 		<meta http-equiv="X-UA-Compatible" content="chrome=1">
 		<title>Minechem by jakimfett</title>
 
-		<link rel="stylesheet" href="stylesheets/styles.css">
-		<link rel="stylesheet" href="stylesheets/pygment_trac.css">
-		<script src="javascripts/scale.fix.js"></script>
+		<link rel="stylesheet" href="includes/css/styles.css">
+		<link rel="stylesheet" href="includes/css/pygment_trac.css">
+		<script src="includes/js/scale.fix.js"></script>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
 		<link rel="icon" type="image/png" href="./favicon.png">
 		<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
-		<script>
-			(function (i, s, o, g, r, a, m) {
-				i['GoogleAnalyticsObject'] = r;
-				i[r] = i[r] || function () {
-					(i[r].q = i[r].q || []).push(arguments)
-				}, i[r].l = 1 * new Date();
-				a = s.createElement(o),
-						m = s.getElementsByTagName(o)[0];
-				a.async = 1;
-				a.src = g;
-				m.parentNode.insertBefore(a, m)
-			})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
-
-			ga('create', 'UA-51742343-4', 'auto');
-			ga('send', 'pageview');
-
-		</script>
     </head>
     <body>
 		<div class="wrapper">
 			<header>
-				<a href="./"><h1 class="header">Minechem</h1></a>
+				<h1 class="header">Minechem</h1>
 				<br/>
 				<ul>
 					Releases:
 					<li class="download"><a class="buttons" href="http://minecraft.curseforge.com/mc-mods/73373" onClick="ga('send', 'event', 'CurseForge', 'SidebarClickLink', 'Click the sidebar link to CurseForge');" target='_blank'>CurseForge</a></li>
 					<li class="download"><a class="buttons" href="https://github.com/jakimfett/Minechem/releases" onClick="ga('send', 'event', 'GithubReleases', 'SidebarClickLink', 'Click the sidebar link to github releases');" target='_blank'>Github</a></li>
 					Development:
-					<li class="download"><a class="buttons" href="http://jenkins.jakimfett.com/job/Minechem%201.7/lastSuccessfulBuild/" onClick="ga('send', 'event', 'Jenkins', 'SidebarClickLink', 'Click the sidebar link to Jenkins');" target='_blank'>Jenkins Builds</a></li>
-					<li><a class="buttons github" href="https://github.com/jakimfett/MineChem/" onClick="ga('send', 'event', 'Github', 'SidebarClickLink', 'Click the sidebar link to github');" target='_blank'>View Source</a></li>
+					<li class="download"><a class="buttons" href="http://jenkins.jakimfett.com/job/Minechem%201.7/" onClick="ga('send', 'event', 'Jenkins', 'SidebarClickLink', 'Click the sidebar link to Jenkins');" target='_blank'>Jenkins Builds</a></li>
+					<li><a class="buttons github" href="https://github.com/jakimfett/MineChem/" onClick="ga('send', 'event', 'Github', 'SidebarClickLink', 'Click the sidebar link to github');" target='_blank' >View Source</a></li>
+					<li><a class="buttons github" href="https://github.com/jakimfett/Minechem/graphs/contributors" onClick="ga('send', 'event', 'GithubContributors', 'SidebarClickLink', 'Click the sidebar link to the github contributors list');" target='_blank' >Contributors</a></li>
+					Support:
+					<li><a class="buttons github" href="http://github.com/jakimfett/Minechem/issues" onClick="ga('send', 'event', 'GithubIssues', 'SidebarClickLink', 'Click the sidebar link to the github issues page');" target='_blank'>Issue Tracker</a></li>
+					<li><a class="buttons patreon" href="http://patreon.com/jakimfett" onClick="ga('send', 'event', 'Patreon', 'SidebarClickLink', 'Click through to Patreon');" target='_blank' title="Support Minechem development with a Patreon pledge">Patreon Page</a></li>
+
 				</ul>
 			</header>
 			<section>
@@ -177,7 +165,7 @@
 					<tr>
 						<td><a href="http://atomicstryker.net/necromancy.php">Necromancy</a></td>
 						<td><a href="http://www.patreon.com/user?u=82605">atomicstryker</a></td>
-						<td>Via <a href="images/perms/necromancy.png">PM</a></td>
+						<td>Via <a href="includes/images/permission/necromancy.png">PM</a></td>
 					</tr>
 					<tr>
 						<td><a href="http://minecraft.curseforge.com/mc-mods/66675">Nether Ores</a></td>
@@ -207,7 +195,7 @@
 					<tr>
 						<td><a href="http://minecraft.curseforge.com/mc-mods/73811">QuiverBow</a></td>
 						<td><a href="http://wildwestscifi.net/the-shop">Domochevsky</a></td>
-						<td>On the <a href="http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1292078-quiverbow-ranged-weaponry-thought-up-by-steve?comment=420">forums</a> (<a href="images/perms/quiverbow.png">alt</a>)</td>
+						<td>On the <a href="http://www.minecraftforum.net/forums/mapping-and-modding/minecraft-mods/1292078-quiverbow-ranged-weaponry-thought-up-by-steve?comment=420">forums</a> (<a href="includes/images/permission/quiverbow.png">alt</a>)</td>
 					</tr>
 					<tr>
 						<td><a href="http://www.railcraft.info/">Railcraft</a></td>
@@ -249,15 +237,28 @@
 			<footer>
 				<p>
 					<small>
-						We're on <a href="http://patreon.com/jakimfett" onClick="ga('send', 'event', 'Patreon', 'ClickLink', 'Click through to Patreon');" target='_blank' title="Support Minechem development with a Patreon pledge">Patreon</a>!
-						<br/>
-						List of <a href="https://github.com/jakimfett/Minechem/graphs/contributors">contributors</a>
-						<br/>
 						Back <a href="./">to home</a>
 					</small>
 				</p>
 			</footer>
 		</div>
 		<!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		<script>
+			(function (i, s, o, g, r, a, m) {
+				i['GoogleAnalyticsObject'] = r;
+				i[r] = i[r] || function () {
+					(i[r].q = i[r].q || []).push(arguments)
+				}, i[r].l = 1 * new Date();
+				a = s.createElement(o),
+						m = s.getElementsByTagName(o)[0];
+				a.async = 1;
+				a.src = g;
+				m.parentNode.insertBefore(a, m)
+			})(window, document, 'script', 'http://www.google-analytics.com/analytics.js', 'ga');
+
+			ga('create', 'UA-51742343-4', 'auto');
+			ga('send', 'pageview');
+
+		</script>
     </body>
 </html>
