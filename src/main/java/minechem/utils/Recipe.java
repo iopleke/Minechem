@@ -79,7 +79,7 @@ public class Recipe {
                         components = ((ShapedRecipes) recipe).recipeItems;
                     }
 
-                    if (components != null && input != null)
+                    if (components != null && input != null && input.getItem() != null)
                     {
                         Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
                         if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
