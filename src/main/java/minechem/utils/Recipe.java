@@ -82,10 +82,6 @@ public class Recipe {
                     if (components != null && input != null)
                     {
                         Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
-                        if (DecomposerRecipe.getKey(input).contains("compressed"))
-                        {
-                            input.getMaxStackSize();
-                        }
                         if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
                         {
                             recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
@@ -96,11 +92,14 @@ public class Recipe {
         }
         for (ItemStack input:smelting.keySet())
         {
-        	Recipe currRecipe = recipes.get(input);
-            if ((currRecipe==null||input.stackSize<currRecipe.getOutStackSize()) && input.getItem() != null)
+            if (input != null)
             {
-        		recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, new ItemStack[]{smelting.get(input)}));
-        	}
+                Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
+                if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
+                {
+                    recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, new ItemStack[]{smelting.get(DecomposerRecipe.getKey(input))}));
+                }
+            }
         }
         for (String name:OreDictionary.getOreNames())
         {
@@ -108,7 +107,7 @@ public class Recipe {
     		for (ItemStack thisStack:oreDictStacks)
     		{
     			String key = getKey(thisStack);
-    			if (key!=null && DecomposerRecipe.get(key)!=null)
+    			if (key != null && DecomposerRecipe.get(key) != null)
     			{
 	    			for (ItemStack dictStack:oreDictStacks)
 	    			{

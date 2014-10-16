@@ -24,6 +24,8 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe!=null)
 				{
+                    // TODO:Fix scale
+                    //decompRecipe.scaleOutput(input.stackSize);
 					if (decompRecipe instanceof DecomposerRecipeSelect)
 					{
 						addSelectRecipe((DecomposerRecipeSelect)decompRecipe,1);
@@ -138,7 +140,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
     @Override
     public boolean hasOutput()
     {
-        return !this.selectRecipes.values().isEmpty();
+        return !this.selectRecipes.values().isEmpty() || !this.output.isEmpty();
     }
 
     public float getChance()
@@ -151,5 +153,15 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
             count += entry.getValue();
         }
         return chances / count;
+    }
+
+    @Override
+    public void scaleOutput(float scale)
+    {
+        super.scaleOutput(scale);
+        for (DecomposerRecipe recipe : selectRecipes.keySet())
+        {
+            recipe.scaleOutput(scale);
+        }
     }
 }
