@@ -78,19 +78,7 @@ public class ChemicalAPI {
 			return false;
 		}
 		
-		List<Object> chemicals=new ArrayList<Object>();
-		int pos=0;
-		while (pos<molecule.length){
-			if (molecule[pos] instanceof Integer){
-				chemicals.add(createChemical(getChemicalType((String) molecule[pos+1]), (Integer) molecule[pos]));
-				pos+=2;
-			}else if(molecule[pos] instanceof String){
-				chemicals.add(createChemical(getChemicalType((String) molecule[pos+1]),1));
-				pos+=1;
-			}else{
-				throw new IllegalArgumentException("unknown argument");
-			}
-		}
+		List<Object> chemicals = toChemicalsWithAmount(molecule);
 		
 		try {
 			classMoleculeEnum.getConstructor(String.class,int.class,float.class,float.class,float.class,float.class,float.class,float.class,classChemicalRoomStateEnum,classArrayPotionChemical).newInstance(name,id,colorRed,colorGreen,colorBlue,colorRed2,colorGreen2,colorBlue2,getRoomStatus(roomStatus),chemicals.toArray((Object[])Array.newInstance(classPotionChemical, chemicals.size())));
@@ -115,6 +103,73 @@ public class ChemicalAPI {
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Adds a molecule with the random color to the game.
+	 * <p>
+	 * Argument 'molecule' means the compositions the molecule.
+	 * For example, if argument molecule is ["Fr","hydroxide"],
+	 * then the molecular formula of molecule is FrOH.
+	 * And if argument molecule is ["Fr",2,"hydroxide"],
+	 * then the molecular formula of molecule is Fr(OH)2.
+	 * So, you neen not to write '1' in front of the element.
+	 * <p>
+	 * Argument 'roomStatus' has 3 available value, "solid","liquid","gas".
+	 * 
+	 * @param id the id of the molecule
+	 * @param name the name of the molecule
+	 * @param roomStatus the room status of the molecule
+	 * @param molecule the compositions the molecule
+	 * @return Add the molecule successfully?
+	 */
+	public boolean registerMolecule(int id,String name,String roomStatus,Object... molecule){
+		if (!isMinechemInstalled){
+			return false;
+		}
+		
+		List<Object> chemicals = toChemicalsWithAmount(molecule);
+		
+		try {
+			classMoleculeEnum.getConstructor(String.class,int.class,classChemicalRoomStateEnum,classArrayPotionChemical).newInstance(name,id,getRoomStatus(roomStatus),chemicals.toArray((Object[])Array.newInstance(classPotionChemical, chemicals.size())));
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+			return false;
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+			return false;
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+			return false;
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+			return false;
+		} catch (SecurityException e) {
+			e.printStackTrace();
+			return false;
+		}
+		
+		return true;
+	}
+	
+	private static List<Object> toChemicalsWithAmount(Object[] molecule) {
+		List<Object> chemicals=new ArrayList<Object>();
+		int pos=0;
+		while (pos<molecule.length){
+			if (molecule[pos] instanceof Integer){
+				chemicals.add(createChemical(getChemicalType((String) molecule[pos+1]), (Integer) molecule[pos]));
+				pos+=2;
+			}else if(molecule[pos] instanceof String){
+				chemicals.add(createChemical(getChemicalType((String) molecule[pos+1]),1));
+				pos+=1;
+			}else{
+				throw new IllegalArgumentException("unknown argument");
+			}
+		}
+		return chemicals;
 	}
 	
 	private static Object getChemicalType(String name){
