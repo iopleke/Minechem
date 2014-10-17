@@ -180,45 +180,44 @@ public class ChemicalFluidReactionHandler
     	if (output.explosionLevel!=Float.NaN){
     		world.createExplosion(null, x, y, z, output.explosionLevel, true);
     	}
-    	
-    	int foundSpaces=0;
 
     	int halfSpace=FLUIDS_GENERATE_SPACE/2;
     	List[] availableSpaces=new List[FLUIDS_GENERATE_SPACE];
     	for (int i=0;i<availableSpaces.length;i++){
     		availableSpaces[i]=findAvailableSpacesAtCrossSection(world, x, y-halfSpace+i, z, 1);
-    		foundSpaces+=availableSpaces[i].size();
     	}
     	
-    	int needSpaces=output.outputs.size();
-    	
     	Iterator<MinechemChemicalType> it=output.outputs.iterator();
-    	while(it.hasNext()&&needSpaces>0&&foundSpaces>0){
+    	while(it.hasNext()){
     		MinechemChemicalType chemical=it.next();
+    		boolean hasFlowingStatus=chemical.roomState().getQuanta()>2;
     		
-    		boolean isGas=chemical.roomState().isGas();
     		CoordTuple coords=null;
-    		
-    		if (isGas){
-    			for (int i=availableSpaces.length-1;i>-1;i--){
-    				if (!availableSpaces[i].isEmpty()){
-    					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
-    					break;
-    				}
-    			}
-    		}else{
-    			for (int i=0;i<availableSpaces.length;i++){
-    				if (!availableSpaces[i].isEmpty()){
-    					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
-    					break;
-    				}
-    			}
+    		if (!(!hasFlowingStatus&&popFlowingFluid)){
+        		boolean isGas=chemical.roomState().isGas();
+        		if (isGas){
+        			for (int i=availableSpaces.length-1;i>-1;i--){
+        				if (!availableSpaces[i].isEmpty()){
+        					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
+        					break;
+        				}
+        			}
+        		}else{
+        			for (int i=0;i<availableSpaces.length;i++){
+        				if (!availableSpaces[i].isEmpty()){
+        					coords=(CoordTuple) availableSpaces[i].remove(availableSpaces[i].size()-1);
+        					break;
+        				}
+        			}
+        		}
     		}
     		
     		if (coords==null){
-    			ItemStack itemStack=MinechemUtil.createItemStack(chemical, 1);
-    			MinechemUtil.throwItemStack(world, itemStack, x, y, z);
-    		}else{
+    			if (!popFlowingFluid){
+	    			ItemStack itemStack=MinechemUtil.createItemStack(chemical, 1);
+	    			MinechemUtil.throwItemStack(world, itemStack, x, y, z);
+    			}
+    		}else if (!(popFlowingFluid&&!hasFlowingStatus)){
     			int px=coords.getX();
     			int py=coords.getY();
     			int pz=coords.getZ();

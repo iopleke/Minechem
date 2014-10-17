@@ -213,8 +213,8 @@ public class MoleculeEnum extends MinechemChemicalType
 
     private final String localizationKey;
     private final ArrayList<PotionChemical> components;
-    private int id;
-    private String name;
+    private final int id;
+    private final String name;
     public float red;
     public float green;
     public float blue;

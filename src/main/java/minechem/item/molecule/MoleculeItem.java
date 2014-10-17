@@ -12,6 +12,7 @@ import minechem.radiation.RadiationEnum;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
+import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -115,38 +116,42 @@ public class MoleculeItem extends Item
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool)
     {
-        list.add("\u00A79" + getFormulaWithSubscript(itemstack));
-        
-        String radioactivityColor;
-        RadiationEnum radioactivity = ElementItem.getRadioactivity(itemstack);
-        switch (radioactivity)
-        {
-            case stable:
-                radioactivityColor = Constants.TEXT_MODIFIER + "7";
-                break;
-            case hardlyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "a";
-                break;
-            case slightlyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "2";
-                break;
-            case radioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "e";
-                break;
-            case highlyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "6";
-                break;
-            case extremelyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "4";
-                break;
-            default:
-                radioactivityColor = "";
-                break;
-        }
-
-        String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
-        list.add(radioactivityColor + radioactiveName);
-        list.add(getRoomState(itemstack));
+    	list.add("\u00A79" + getFormulaWithSubscript(itemstack));
+		
+		String radioactivityColor;
+		RadiationEnum radioactivity = ElementItem.getRadioactivity(itemstack);
+		switch (radioactivity) {
+			case stable:
+				radioactivityColor = Constants.TEXT_MODIFIER + "7";
+				break;
+			case hardlyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "a";
+				break;
+			case slightlyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "2";
+				break;
+			case radioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "e";
+				break;
+			case highlyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "6";
+				break;
+			case extremelyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "4";
+				break;
+			default:
+				radioactivityColor = "";
+				break;
+		}
+		
+		String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
+		String timeLeft = "";
+		if (ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable&&itemstack.getTagCompound()!=null) {
+			long worldTime = player.worldObj.getTotalWorldTime();
+			timeLeft = TimeHelper.getTimeFromTicks(ElementItem.getRadioactivity(itemstack).getLife()- (worldTime - itemstack.getTagCompound().getLong("decayStart")));
+		}
+		list.add(radioactivityColor + radioactiveName+ (timeLeft.equals("") ? "" : " (" + timeLeft + ")"));
+		list.add(getRoomState(itemstack));
     }
 
     @Override
