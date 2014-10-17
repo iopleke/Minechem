@@ -40,12 +40,6 @@ public class FluidBlockChemical extends MinechemFluidBlock
         return "fluid." + fluidName;
     }
 
-    @Override
-    public String getLocalizedName()
-    {
-        return StatCollector.translateToLocal("fluid." + fluidName + ".name");
-    }
-
     @SideOnly(Side.CLIENT)
     @Override
     public void registerBlockIcons(IIconRegister ir)

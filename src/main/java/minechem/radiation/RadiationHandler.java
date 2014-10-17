@@ -164,7 +164,7 @@ public class RadiationHandler
     	if (item==MinechemItemsRegistration.element){
     		return ElementItem.getLongName(stack);
     	}else if (item==MinechemItemsRegistration.molecule){
-    		return MoleculeItem.getMolecule(stack).descriptiveName();
+    		return MoleculeItem.getMolecule(stack).name();
     	}
     	return "null";
     }

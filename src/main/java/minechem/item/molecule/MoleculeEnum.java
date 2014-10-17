@@ -290,22 +290,6 @@ public class MoleculeEnum extends MinechemChemicalType
         return this.id;
     }
 
-    /**
-     * Returns the localized name of this molecules, or an en_US-based
-     * placeholder if no localization was found.
-     *
-     * @return Localized name of this molecules.
-     */
-    public String descriptiveName() 
-    {
-        String localizedName = StatCollector.translateToLocal(this.localizationKey);
-        if (localizedName.isEmpty()) 
-        {
-            return localizationKey;
-        }
-        return localizedName;
-    }
-
     public ArrayList<PotionChemical> components() 
     {
         return this.components;
