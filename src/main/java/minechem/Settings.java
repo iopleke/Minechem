@@ -41,6 +41,9 @@ public class Settings
     // Multiplier for half life of elements and molecules
     public static int halfLifeMultiplier = 100;
 
+    // Depth of recursive recipe gen
+    public static int recursiveDepth = 10;
+
 	// Disabling of enchants, spikes and fluidEffects
 	public static boolean FoodSpiking = true;
 	public static boolean SwordEffects = true;
@@ -159,6 +162,13 @@ public class Settings
         prop.comment = StatCollector.translateToLocal("config.halfLifeMultiplier.description");
         prop.setLanguageKey("config.halfLifeMultiplier");
         halfLifeMultiplier = prop.getInt();
+        configList.add(prop.getName());
+
+        prop = config.get("power", "recursiveDepth", Settings.recursiveDepth);
+        prop.setMinValue(3).setMaxValue(20).requiresMcRestart();
+        prop.comment = StatCollector.translateToLocal("config.recursiveDepth.description");
+        prop.setLanguageKey("config.recursiveDepth.name");
+        recursiveDepth = prop.getInt();
         configList.add(prop.getName());
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "decaySafeMachines", Settings.SwordEffects);

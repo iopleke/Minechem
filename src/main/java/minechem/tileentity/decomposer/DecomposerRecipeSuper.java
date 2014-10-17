@@ -47,7 +47,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
-					if (recipe != null && level < 20)
+					if (recipe != null && level < Settings.recursiveDepth)
 					{
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output,recipe.inStacks,level+1));
