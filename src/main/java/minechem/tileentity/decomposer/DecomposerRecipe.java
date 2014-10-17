@@ -238,6 +238,7 @@ public class DecomposerRecipe
     {
         for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
         {
+            // TODO: stop using displayname since it depends on language should be unlocalized
             if (itemStack.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
             {
                 if (Compare.stringSieve(itemStack.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)

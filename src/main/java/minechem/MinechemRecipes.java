@@ -101,6 +101,32 @@ public class MinechemRecipes
 			this.element(ElementEnum.H, 2), this.element(ElementEnum.O)
 		}));
 
+        // Lava
+        // This assumes lava is composed from cobblestone at a 4:1 ratio
+        //   as well as having slightly higher purity
+        DecomposerRecipe.add(new DecomposerFluidRecipeSelect("lava", 250, 0.2F, new DecomposerRecipe[]
+        {
+            new DecomposerRecipe(new PotionChemical[]
+            {
+                    this.element(ElementEnum.Si), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                    this.element(ElementEnum.Fe), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                    this.element(ElementEnum.Mg), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                    this.element(ElementEnum.Ti), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                    this.element(ElementEnum.Pb), this.element(ElementEnum.O)
+            }), new DecomposerRecipe(new PotionChemical[]
+            {
+                    this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
+            })
+        }));
+
         // Mod fluids
 		// Checks if the fluid exists
 		DecomposerFluidRecipe.createAndAddFluidRecipeSafely("water", fluidPerIngot, new PotionChemical[]
@@ -562,31 +588,6 @@ public class MinechemRecipes
 			null, null, null, this.molecule(MoleculeEnum.cellulose), null, null, null, null, null
 		}));
 
-        // Lava
-		// This assumes lava is composed from cobblestone at a 4:1 ratio
-		//   as well as having slightly higher purity
-		DecomposerRecipe.add(new DecomposerFluidRecipeSelect("lava", 250, 0.2F, new DecomposerRecipe[]
-				{
-					new DecomposerRecipe(new PotionChemical[]
-					{
-						this.element(ElementEnum.Si), this.element(ElementEnum.O)
-					}), new DecomposerRecipe(new PotionChemical[]
-					{
-						this.element(ElementEnum.Fe), this.element(ElementEnum.O)
-					}), new DecomposerRecipe(new PotionChemical[]
-					{
-						this.element(ElementEnum.Mg), this.element(ElementEnum.O)
-					}), new DecomposerRecipe(new PotionChemical[]
-					{
-						this.element(ElementEnum.Ti), this.element(ElementEnum.O)
-					}), new DecomposerRecipe(new PotionChemical[]
-					{
-						this.element(ElementEnum.Pb), this.element(ElementEnum.O)
-					}), new DecomposerRecipe(new PotionChemical[]
-					{
-						this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
-					})
-				}));
 		// Sand
 		ItemStack blockSand = new ItemStack(Blocks.sand);
 		DecomposerRecipe.add(new DecomposerRecipe(blockSand, new PotionChemical[]

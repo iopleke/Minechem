@@ -27,22 +27,9 @@ public class SynthesisRecipe
 	{
 		if (recipe.getOutput() != null && recipe.getOutput().getItem() != null)
 		{
-			for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
-			{
-				if (recipe.getOutput().hasDisplayName())
-				{
-					if (recipe.getOutput().getDisplayName() != null && Settings.SynthesisMachineBlacklist[i] != null)
-					{
-						if (Compare.stringSieve(recipe.getOutput().getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
-						{
-							if (Settings.DebugMode)
-							{
-								Minechem.LOGGER.info("Synthesis recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
-							}
-							return null;
-						}
-					}
-				}
+			if (isBlacklisted(recipe.getOutput()))
+            {
+                return null;
 			}
             recipes.put(getKey(recipe.output), recipe);
 		}
@@ -175,5 +162,25 @@ public class SynthesisRecipe
 
 		return var1;
 	}
+
+    public static boolean isBlacklisted(ItemStack itemStack)
+    {
+        for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
+        {
+            // TODO: stop using displayname since it depends on language should be unlocalized
+            if (itemStack.getDisplayName() != null && Settings.SynthesisMachineBlacklist[i] != null)
+            {
+                if (Compare.stringSieve(itemStack.getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
+                {
+                    if (Settings.DebugMode)
+                    {
+                        Minechem.LOGGER.info("Decomposer recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
 }
