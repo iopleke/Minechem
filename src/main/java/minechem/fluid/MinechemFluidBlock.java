@@ -6,12 +6,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
-import net.minecraftforge.fluids.Fluid;
 
 public class MinechemFluidBlock extends BlockFluidClassic {
 
-	public MinechemFluidBlock(Fluid fluid, Material material) {
+	public MinechemFluidBlock(MinechemFluid fluid, Material material) {
 		super(fluid, material);
+		setQuantaPerBlock(fluid.getQuanta());
 	}
 	
 	@Override

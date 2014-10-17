@@ -14,7 +14,6 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import net.minecraftforge.fluids.Fluid;
 
 public class FluidBlockElement extends MinechemFluidBlock
 {
@@ -23,12 +22,12 @@ public class FluidBlockElement extends MinechemFluidBlock
     @SideOnly(Side.CLIENT)
     protected IIcon flowingIcon;
 
-    public FluidBlockElement(Fluid fluid, Material material)
+    public FluidBlockElement(MinechemFluid fluid, Material material)
     {
         super(fluid, material);
     }
 
-    public FluidBlockElement(Fluid fluid)
+    public FluidBlockElement(MinechemFluid fluid)
     {
         super(fluid, Material.water);
         this.setBlockName(fluidName);
