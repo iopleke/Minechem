@@ -11,7 +11,7 @@ import java.awt.*;
 public class FluidElement extends MinechemFluid
 {
 
-    public ElementEnum element;
+    public final ElementEnum element;
 
     public FluidElement(ElementEnum element)
     {

@@ -11,7 +11,7 @@ import java.awt.*;
 public class FluidChemical extends MinechemFluid
 {
 
-    public MoleculeEnum molecule;
+    public final MoleculeEnum molecule;
 
     public FluidChemical(MoleculeEnum molecule)
     {
