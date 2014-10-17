@@ -2,7 +2,6 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 
-import minechem.Minechem;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
