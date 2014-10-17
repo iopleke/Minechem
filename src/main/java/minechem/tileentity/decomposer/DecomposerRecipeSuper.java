@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 
+import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Recipe;
@@ -16,13 +17,13 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input;
-		if (Settings.DebugMode) System.out.println(input.toString());
+		if (Settings.DebugMode) Minechem.LOGGER.info(input.toString());
 		for (ItemStack component:components)
 		{
-			if (component!=null && component.getItem() != null)
+			if (component != null && component.getItem() != null)
 			{
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
-				if (decompRecipe!=null)
+				if (decompRecipe != null)
 				{
                     // TODO:Fix scale
                     //decompRecipe.scaleOutput(input.stackSize);
@@ -43,10 +44,14 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 						addPotionChemical(decompRecipe.getOutput());
 					}
 				}
-				else
+				else if (!component.isItemEqual(input))
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
+                    if(component.toString().contains("railcraft"))
+                    {
+                        component.canEditBlocks();
+                    }
 					if (recipe != null && level < Settings.recursiveDepth)
 					{
 						DecomposerRecipeSuper newSuper;
