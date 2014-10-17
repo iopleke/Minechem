@@ -142,13 +142,13 @@ public class DecomposerRecipe
 	{
 		for (PotionChemical potionChemical : chemicals)
 		{
-			//this.output.add(potionChemical);
-			PotionChemical current = this.output.put(getPotionKey(potionChemical), potionChemical);
+			PotionChemical current = this.output.get(getPotionKey(potionChemical));
 			if (current != null)
 			{
 				current.amount += potionChemical.amount;
-				this.output.put(getPotionKey(potionChemical), potionChemical);
+                continue;
 			}
+            this.output.put(getPotionKey(potionChemical), potionChemical);
 		}
 	}
 
