@@ -79,12 +79,13 @@ public class Recipe {
                         components = ((ShapedRecipes) recipe).recipeItems;
                     }
 
-                    if (components != null && input != null && input.getItem() != null)
+                    String key = DecomposerRecipe.getKey(input);
+                    if (components != null && key != null)
                     {
-                        Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
-                        if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
+                        Recipe currRecipe = recipes.get(key);
+                        if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()))
                         {
-                            recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, components));
+                            recipes.put(key, new Recipe(input, components));
                         }
                     }
                 }
@@ -92,12 +93,13 @@ public class Recipe {
         }
         for (ItemStack input:smelting.keySet())
         {
-            if (input != null)
+            String key = DecomposerRecipe.getKey(input);
+            if (key != null)
             {
-                Recipe currRecipe = recipes.get(DecomposerRecipe.getKey(input));
-                if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && input.getItem() != null)
+                Recipe currRecipe = recipes.get(key);
+                if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()))
                 {
-                    recipes.put(DecomposerRecipe.getKey(input), new Recipe(input, new ItemStack[]{smelting.get(DecomposerRecipe.getKey(input))}));
+                    recipes.put(key, new Recipe(input, new ItemStack[]{smelting.get(DecomposerRecipe.getKey(input))}));
                 }
             }
         }
