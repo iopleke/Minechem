@@ -158,22 +158,6 @@ public class ElementEnum extends MinechemChemicalType
         FluidHelper.registerElement(this);
     }
 
-    /**
-     * Returns the localized name of this element, or an en_US-based placeholder
-     * if no localization was found.
-     *
-     * @return Localized name of this element.
-     */
-    public String descriptiveName() 
-    {
-        String localizedName = StatCollector.translateToLocal(this.localizationKey);
-        if (localizedName.isEmpty()) 
-        {
-            return localizationKey;
-        }
-        return localizedName;
-    }
-
     public ElementClassificationEnum classification() 
     {
         return classification;

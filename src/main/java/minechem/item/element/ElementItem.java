@@ -68,7 +68,7 @@ public class ElementItem extends Item
     public static String getLongName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].descriptiveName() : MinechemHelper.getLocalString("element.empty");
+        return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].name() : MinechemHelper.getLocalString("element.empty");
     }
 
     public static String getClassification(ItemStack itemstack)

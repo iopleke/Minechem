@@ -42,7 +42,7 @@ public class MoleculeItem extends Item
     public String getItemStackDisplayName(ItemStack par1ItemStack)
     {
         int itemDamage = par1ItemStack.getItemDamage();
-        return MoleculeEnum.getById(itemDamage).descriptiveName();
+        return MoleculeEnum.getById(itemDamage).name();
     }
 
     @Override

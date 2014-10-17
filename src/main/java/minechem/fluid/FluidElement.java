@@ -80,6 +80,6 @@ public class FluidElement extends MinechemFluid
     @Override
     public String getLocalizedName(FluidStack stack)
     {
-        return MinechemHelper.getLocalString("element.property.liquid") + " " + element.descriptiveName();
+        return MinechemHelper.getLocalString("element.property.liquid") + " " + element.name();
     }
 }

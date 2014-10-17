@@ -19,7 +19,7 @@ public class PotionEnchantmentCoated extends Enchantment
     {
         super(id, 0, EnumEnchantmentType.weapon);
         this.chemical = chem;
-		this.setName(chem.descriptiveName() + ".coated");
+		this.setName(chem.name() + ".coated");
         PotionEnchantmentCoated.chemLookup.put(chem, this);
     }
 
@@ -61,7 +61,7 @@ public class PotionEnchantmentCoated extends Enchantment
     @Override
     public String getTranslatedName(int level)
     {
-    	String enchantedName =this.chemical.descriptiveName() + " " + StatCollector.translateToLocal("enchantment.level." + level);
+    	String enchantedName =this.chemical.name() + " " + StatCollector.translateToLocal("enchantment.level." + level);
     	if(StatCollector.canTranslate("minechem.enchantment.coated"))
     	{
     		return StatCollector.translateToLocalFormatted("minechem.enchantment.coated", enchantedName);
