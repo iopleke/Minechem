@@ -19,4 +19,6 @@ public abstract class MinechemChemicalType {
 	public ChemicalRoomStateEnum roomState(){
         return roomState;
     }
+	
+	abstract public String getUnlocalizedName();
 }

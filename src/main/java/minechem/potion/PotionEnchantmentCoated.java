@@ -19,7 +19,7 @@ public class PotionEnchantmentCoated extends Enchantment
     {
         super(id, 0, EnumEnchantmentType.weapon);
         this.chemical = chem;
-		this.setName(chem.name() + ".coated");
+		this.setName(chem.getUnlocalizedName() + ".coated");
         PotionEnchantmentCoated.chemLookup.put(chem, this);
     }
 

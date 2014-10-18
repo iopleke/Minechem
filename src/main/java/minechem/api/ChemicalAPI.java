@@ -7,64 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * To add molecules or fluid chemical reaction.
+ * 
+ * @author yushijinhun
+ */
 public class ChemicalAPI {
-
-	private static final Class classMoleculeEnum;
-	private static final Class classElementEnum;
-	private static final Class classElement;
-	private static final Class classMolecule;
-	private static final Class classChemicalRoomStateEnum;
-	private static final Class classArrayPotionChemical;
-	private static final Class classPotionChemical;
-	private static final Class classChemicalFluidReactionHandler;
-	private static final Class classChemicalFluidReactionOutput;
-	private static final Class classChemicalFluidReactionRule;
-	private static final Class classMinechemChemicalType;
-	private static final boolean isMinechemInstalled;
-	
-	static{
-		Class preClassMoleculeEnum=null;
-		Class preClassElementEnum=null;
-		Class preClassElement=null;
-		Class preClassMolecule=null;
-		Class preClassChemicalRoomStateEnum=null;
-		Class preClassArrayPotionChemical=null;
-		Class preClassPotionChemical=null;
-		Class preClassChemicalFluidReactionHandler=null;
-		Class preClassChemicalFluidReactionOutput=null;
-		Class preClassChemicalFluidReactionRule=null;
-		Class preClassMinechemChemicalType=null;
-		boolean preIsMinechemInstalled=true;
-		
-		try {
-			preClassMoleculeEnum=Class.forName("minechem.item.molecule.MoleculeEnum");
-			preClassElementEnum=Class.forName("minechem.item.element.ElementEnum");
-			preClassElement=Class.forName("minechem.item.element.Element");
-			preClassMolecule=Class.forName("minechem.item.molecule.Molecule");
-			preClassChemicalRoomStateEnum=Class.forName("minechem.item.ChemicalRoomStateEnum");
-			preClassPotionChemical=Class.forName("minechem.potion.PotionChemical");
-			preClassArrayPotionChemical=Class.forName("[Lminechem.potion.PotionChemical;");
-			preClassChemicalFluidReactionHandler=Class.forName("minechem.fluid.reaction.ChemicalFluidReactionHandler");
-			preClassChemicalFluidReactionOutput=Class.forName("minechem.fluid.reaction.ChemicalFluidReactionOutput");
-			preClassChemicalFluidReactionRule=Class.forName("minechem.fluid.reaction.ChemicalFluidReactionRule");
-			preClassMinechemChemicalType=Class.forName("minechem.item.MinechemChemicalType");
-		} catch (ClassNotFoundException e) {
-			preIsMinechemInstalled=false;
-		}
-		
-		isMinechemInstalled=preIsMinechemInstalled;
-		classElementEnum=preClassElementEnum;
-		classMoleculeEnum=preClassMoleculeEnum;
-		classElement=preClassElement;
-		classMolecule=preClassMolecule;
-		classChemicalRoomStateEnum=preClassChemicalRoomStateEnum;
-		classArrayPotionChemical=preClassArrayPotionChemical;
-		classPotionChemical=preClassPotionChemical;
-		classChemicalFluidReactionHandler=preClassChemicalFluidReactionHandler;
-		classChemicalFluidReactionOutput=preClassChemicalFluidReactionOutput;
-		classChemicalFluidReactionRule=preClassChemicalFluidReactionRule;
-		classMinechemChemicalType=preClassMinechemChemicalType;
-	}
 	
 	/**
 	 * Adds a molecule to the game.
@@ -91,14 +39,14 @@ public class ChemicalAPI {
 	 * @return Add the molecule successfully?
 	 */
 	public static boolean registerMolecule(int id,String name, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2,String roomStatus,Object... molecule){
-		if (!isMinechemInstalled){
+		if (!MinechemClassesAccess.isMinechemInstalled){
 			return false;
 		}
 		
 		List<Object> chemicals = toChemicalsWithAmount(molecule);
 		
 		try {
-			classMoleculeEnum.getConstructor(String.class,int.class,float.class,float.class,float.class,float.class,float.class,float.class,classChemicalRoomStateEnum,classArrayPotionChemical).newInstance(name,id,colorRed,colorGreen,colorBlue,colorRed2,colorGreen2,colorBlue2,getRoomStatus(roomStatus),chemicals.toArray((Object[])Array.newInstance(classPotionChemical, chemicals.size())));
+			MinechemClassesAccess.classMoleculeEnum.getConstructor(String.class,int.class,float.class,float.class,float.class,float.class,float.class,float.class,MinechemClassesAccess.classChemicalRoomStateEnum,MinechemClassesAccess.classArrayPotionChemical).newInstance(name,id,colorRed,colorGreen,colorBlue,colorRed2,colorGreen2,colorBlue2,getRoomStatus(roomStatus),chemicals.toArray((Object[])Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
 		} catch (InstantiationException e) {
 			e.printStackTrace();
 			return false;
@@ -141,14 +89,14 @@ public class ChemicalAPI {
 	 * @return Add the molecule successfully?
 	 */
 	public static boolean registerMolecule(int id,String name,String roomStatus,Object... molecule){
-		if (!isMinechemInstalled){
+		if (!MinechemClassesAccess.isMinechemInstalled){
 			return false;
 		}
 		
 		List<Object> chemicals = toChemicalsWithAmount(molecule);
 		
 		try {
-			classMoleculeEnum.getConstructor(String.class,int.class,classChemicalRoomStateEnum,classArrayPotionChemical).newInstance(name,id,getRoomStatus(roomStatus),chemicals.toArray((Object[])Array.newInstance(classPotionChemical, chemicals.size())));
+			MinechemClassesAccess.classMoleculeEnum.getConstructor(String.class,int.class,MinechemClassesAccess.classChemicalRoomStateEnum,MinechemClassesAccess.classArrayPotionChemical).newInstance(name,id,getRoomStatus(roomStatus),chemicals.toArray((Object[])Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
 			return true;
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -183,15 +131,15 @@ public class ChemicalAPI {
 	 * @return Add the reaction successfully?
 	 */
 	public static boolean registerFluidChemicalReaction(String chemicalA,String chemicalB,float explosionLevel,String... outputChemicals){
-		if (!isMinechemInstalled){
+		if (!MinechemClassesAccess.isMinechemInstalled){
 			return false;
 		}
 		
 		try {
 			List<Object> chemicals=toChemicals(outputChemicals);
-			Object rule=classChemicalFluidReactionRule.getConstructor(classMinechemChemicalType,classMinechemChemicalType).newInstance(getChemicalType(chemicalA),getChemicalType(chemicalB));
-			Object output=classChemicalFluidReactionOutput.getConstructor(List.class,float.class).newInstance(chemicals,explosionLevel);
-			((Map)classChemicalFluidReactionHandler.getDeclaredField("reactionRules").get(null)).put(rule, output);
+			Object rule=MinechemClassesAccess.classChemicalFluidReactionRule.getConstructor(MinechemClassesAccess.classMinechemChemicalType,MinechemClassesAccess.classMinechemChemicalType).newInstance(getChemicalType(chemicalA),getChemicalType(chemicalB));
+			Object output=MinechemClassesAccess.classChemicalFluidReactionOutput.getConstructor(List.class,float.class).newInstance(chemicals,explosionLevel);
+			((Map)MinechemClassesAccess.classChemicalFluidReactionHandler.getDeclaredField("reactionRules").get(null)).put(rule, output);
 			return true;
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
@@ -239,7 +187,7 @@ public class ChemicalAPI {
 	
 	private static Object getChemicalType(String name){
 		try{
-			Field elementsField=classElementEnum.getField("elements");
+			Field elementsField=MinechemClassesAccess.classElementEnum.getField("elements");
 			Object[] elements=(Object[]) elementsField.get(null);
 			for (Object element:elements){
 				if (element.toString().equals(name)){
@@ -247,7 +195,7 @@ public class ChemicalAPI {
 				}
 			}
 			
-			Field moleculesField=classMoleculeEnum.getField("molecules");
+			Field moleculesField=MinechemClassesAccess.classMoleculeEnum.getField("molecules");
 			Object[] molecules=(Object[]) moleculesField.get(null);
 			for (Object molecule:molecules){
 				if (molecule!=null&&molecule.toString().equals(name)){
@@ -269,10 +217,10 @@ public class ChemicalAPI {
 	
 	private static Object createChemical(Object chemical,int amount){
 		try{
-			if (chemical.getClass()==classElementEnum){
-				return classElement.getConstructor(classElementEnum,int.class).newInstance(chemical,amount);
-			}else if (chemical.getClass()==classMoleculeEnum){
-				return classMolecule.getConstructor(classMoleculeEnum,int.class).newInstance(chemical,amount);
+			if (chemical.getClass()==MinechemClassesAccess.classElementEnum){
+				return MinechemClassesAccess.classElement.getConstructor(MinechemClassesAccess.classElementEnum,int.class).newInstance(chemical,amount);
+			}else if (chemical.getClass()==MinechemClassesAccess.classMoleculeEnum){
+				return MinechemClassesAccess.classMolecule.getConstructor(MinechemClassesAccess.classMoleculeEnum,int.class).newInstance(chemical,amount);
 			}
 		} catch (InstantiationException e) {
 			e.printStackTrace();
@@ -293,7 +241,7 @@ public class ChemicalAPI {
 	
 	private static Object getRoomStatus(String roomStatus){
 		try {
-			return classChemicalRoomStateEnum.getField(roomStatus).get(null);
+			return MinechemClassesAccess.classChemicalRoomStateEnum.getField(roomStatus).get(null);
 		} catch (IllegalArgumentException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {

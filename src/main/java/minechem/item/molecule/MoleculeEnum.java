@@ -6,7 +6,6 @@ import minechem.item.MinechemChemicalType;
 import minechem.item.element.Element;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
-import net.minecraft.util.StatCollector;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
@@ -326,4 +325,9 @@ public class MoleculeEnum extends MinechemChemicalType
 	public String toString(){
     	return name();
     }
+
+	@Override
+	public String getUnlocalizedName() {
+		return localizationKey;
+	}
 }
