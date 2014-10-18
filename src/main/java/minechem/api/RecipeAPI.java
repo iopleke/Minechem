@@ -24,14 +24,7 @@ public class RecipeAPI
     {
         try
         {
-            Class dr = Class.forName("minechem.tileentity.decomposer.DecomposerRecipe");
-            Class ee = Class.forName("minechem.item.element.ElementEnum");
-            Class el = Class.forName("minechem.item.element.Element");
-
-            Class me = Class.forName("minechem.item.molecule.MoleculeEnum");
-            Class mo = Class.forName("minechem.item.molecule.Molecule");
-
-            Object[] potions = (Object[]) Array.newInstance(Class.forName("minechem.potion.PotionChemical"), outputs.length);
+            Object[] potions = (Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, outputs.length);
             int idx = 0;
             for (String s : outputs)
             {
@@ -39,19 +32,19 @@ public class RecipeAPI
                 int count = Integer.parseInt(s.split(" ")[0]);
                 try
                 {//try to add element
-                    Object elementEnum = ee.getField(elementName).get(null);
-                    Object element = el.getConstructor(ee, int.class).newInstance(elementEnum, count);
+                    Object elementEnum = MinechemClassesAccess.classElementEnum.getField(elementName).get(null);
+                    Object element = MinechemClassesAccess.classElement.getConstructor(MinechemClassesAccess.classElementEnum, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
                 } catch (NoSuchFieldException e)
                 {//else add molecules
-                    Object elementEnum = me.getField(elementName).get(null);
-                    Object element = mo.getConstructor(me, int.class).newInstance(elementEnum, count);
+                    Object elementEnum = MinechemClassesAccess.classMoleculeEnum.getField(elementName).get(null);
+                    Object element = MinechemClassesAccess.classMolecule.getConstructor(MinechemClassesAccess.classMoleculeEnum, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
                 }
                 idx++;
             }
-            Object drInst = dr.getConstructor(ItemStack.class, potions.getClass()).newInstance(input, potions);
-            dr.getMethod("add", dr).invoke(null, drInst);
+            Object drInst = MinechemClassesAccess.classDecomposerRecipe.getConstructor(ItemStack.class, potions.getClass()).newInstance(input, potions);
+            MinechemClassesAccess.classDecomposerRecipe.getMethod("add", MinechemClassesAccess.classDecomposerRecipe).invoke(null, drInst);
             return true;
         } catch (Exception e)
         {
@@ -80,14 +73,7 @@ public class RecipeAPI
     {
         try
         {
-            Class synth = Class.forName("minechem.tileentity.synthesis.SynthesisRecipe");
-            Class ee = Class.forName("minechem.item.element.ElementEnum");
-            Class el = Class.forName("minechem.item.element.Element");
-
-            Class me = Class.forName("minechem.item.molecule.MoleculeEnum");
-            Class mo = Class.forName("minechem.item.molecule.Molecule");
-
-            Object[] potions = (Object[]) Array.newInstance(Class.forName("minechem.potion.PotionChemical"), inputs.length);
+            Object[] potions = (Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, inputs.length);
             int idx = 0;
             for (String s : inputs)
             {
@@ -100,20 +86,20 @@ public class RecipeAPI
                     int count = Integer.parseInt(s.split(" ")[0]);
                     try
                     {//try to add element
-                        Object elementEnum = ee.getField(elementName).get(null);
-                        Object element = el.getConstructor(ee, int.class).newInstance(elementEnum, count);
+                        Object elementEnum = MinechemClassesAccess.classElementEnum.getField(elementName).get(null);
+                        Object element = MinechemClassesAccess.classElement.getConstructor(MinechemClassesAccess.classElementEnum, int.class).newInstance(elementEnum, count);
                         potions[idx] = element;
                     } catch (NoSuchFieldException e)
                     {//else add molecules
-                        Object elementEnum = me.getField(elementName).get(null);
-                        Object element = mo.getConstructor(me, int.class).newInstance(elementEnum, count);
+                        Object elementEnum = MinechemClassesAccess.classMoleculeEnum.getField(elementName).get(null);
+                        Object element = MinechemClassesAccess.classMolecule.getConstructor(MinechemClassesAccess.classMoleculeEnum, int.class).newInstance(elementEnum, count);
                         potions[idx] = element;
                     }
                 }
                 idx++;
             }
-            Object recipe = synth.getConstructor(ItemStack.class, boolean.class, int.class, potions.getClass()).newInstance(output, shaped, energyCost, potions);
-            synth.getMethod("add", synth).invoke(null, recipe);
+            Object recipe = MinechemClassesAccess.classSynthesisRecipe.getConstructor(ItemStack.class, boolean.class, int.class, potions.getClass()).newInstance(output, shaped, energyCost, potions);
+            MinechemClassesAccess.classSynthesisRecipe.getMethod("add", MinechemClassesAccess.classSynthesisRecipe).invoke(null, recipe);
             return true;
         } catch (Exception e)
         {
@@ -137,15 +123,7 @@ public class RecipeAPI
     {
         try
         {
-            Class dfr = Class.forName("minechem.tileentity.decomposer.DecomposerFluidRecipe");
-            Class dr = Class.forName("minechem.tileentity.decomposer.DecomposerRecipe");
-            Class ee = Class.forName("minechem.item.element.ElementEnum");
-            Class el = Class.forName("minechem.item.element.Element");
-
-            Class me = Class.forName("minechem.item.molecule.MoleculeEnum");
-            Class mo = Class.forName("minechem.item.molecule.Molecule");
-
-            Object[] potions = (Object[]) Array.newInstance(Class.forName("minechem.potion.PotionChemical"), outputs.length);
+            Object[] potions = (Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, outputs.length);
             int idx = 0;
             for (String s : outputs)
             {
@@ -153,19 +131,19 @@ public class RecipeAPI
                 int count = Integer.parseInt(s.split(" ")[0]);
                 try
                 {//try to add element
-                    Object elementEnum = ee.getField(elementName).get(null);
-                    Object element = el.getConstructor(ee, int.class).newInstance(elementEnum, count);
+                    Object elementEnum = MinechemClassesAccess.classElementEnum.getField(elementName).get(null);
+                    Object element = MinechemClassesAccess.classElement.getConstructor(MinechemClassesAccess.classElementEnum, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
                 } catch (NoSuchFieldException e)
                 {//else add molecules
-                    Object elementEnum = me.getField(elementName).get(null);
-                    Object element = mo.getConstructor(me, int.class).newInstance(elementEnum, count);
+                    Object elementEnum = minechem.api.MinechemClassesAccess.classMoleculeEnum.getField(elementName).get(null);
+                    Object element = MinechemClassesAccess.classMolecule.getConstructor(minechem.api.MinechemClassesAccess.classMoleculeEnum, int.class).newInstance(elementEnum, count);
                     potions[idx] = element;
                 }
                 idx++;
             }
-            Object dfrInst = dfr.getConstructor(FluidStack.class, potions.getClass()).newInstance(input, potions);
-            dr.getMethod("add", dr).invoke(null, dfrInst);
+            Object dfrInst = MinechemClassesAccess.classDecomposerFluidRecipe.getConstructor(FluidStack.class, potions.getClass()).newInstance(input, potions);
+            MinechemClassesAccess.classDecomposerRecipe.getMethod("add", MinechemClassesAccess.classDecomposerRecipe).invoke(null, dfrInst);
             return true;
         } catch (Exception e)
         {
@@ -183,8 +161,7 @@ public class RecipeAPI
     {
         try
         {
-            Class decomp = Class.forName("minechem.tileentity.decomposer.DecomposerRecipe");
-            decomp.getMethod("remove", ItemStack.class).invoke(null, itemStack);
+        	MinechemClassesAccess.classDecomposerRecipe.getMethod("remove", ItemStack.class).invoke(null, itemStack);
             return true;
         }
         catch (Exception e)
@@ -203,8 +180,7 @@ public class RecipeAPI
     {
         try
         {
-            Class decomp = Class.forName("minechem.tileentity.decomposer.DecomposerRecipe");
-            decomp.getMethod("removeRecipeSafely", String.class).invoke(null, oreName);
+        	MinechemClassesAccess.classDecomposerRecipe.getMethod("removeRecipeSafely", String.class).invoke(null, oreName);
             return true;
         }
         catch (Exception e)
@@ -223,8 +199,7 @@ public class RecipeAPI
     {
         try
         {
-            Class synth = Class.forName("minechem.tileentity.synthesis.SynthesisRecipe");
-            synth.getMethod("remove", ItemStack.class).invoke(null, itemStack);
+        	MinechemClassesAccess.classSynthesisRecipe.getMethod("remove", ItemStack.class).invoke(null, itemStack);
             return true;
         }
         catch (Exception e)
@@ -243,8 +218,7 @@ public class RecipeAPI
     {
         try
         {
-            Class synth = Class.forName("minechem.tileentity.synthesis.SynthesisRecipe");
-            synth.getMethod("removeRecipeSafely", String.class).invoke(null, oreName);
+        	MinechemClassesAccess.classSynthesisRecipe.getMethod("removeRecipeSafely", String.class).invoke(null, oreName);
             return true;
         }
         catch (Exception e)
