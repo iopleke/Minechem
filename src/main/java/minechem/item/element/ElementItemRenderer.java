@@ -118,7 +118,7 @@ public class ElementItemRenderer implements IItemRenderer
         setColorForElement(element);
         ItemRenderer.renderItemIn2D(tessellator, contents.getMaxU(), contents.getMinV(), contents.getMinU(), contents.getMaxV(), contents.getIconWidth(), contents.getIconHeight(), 0.0625F);
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
-
+        ItemRenderer.renderItemIn2D(tessellator, testtube.getMaxU(), testtube.getMinV(), testtube.getMinU(), testtube.getMaxV(), testtube.getIconWidth(), testtube.getIconHeight(), 0.0625F);
     }
 
     private void renderItemAsEntity(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)

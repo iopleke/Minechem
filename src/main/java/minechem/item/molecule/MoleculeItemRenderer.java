@@ -92,6 +92,7 @@ public class MoleculeItemRenderer implements IItemRenderer
          * 0, 0, 0, 16, 16, pass1); GL11.glColor3f(molecules.red2, molecules.green2, molecules.blue2); drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass2); GL11.glColor3f(1.0F, 1.0F, 1.0F); GL11.glTranslatef(0.0F, 0.0F, -0.001F); for (float i = 0.0F; i < .1F; i
          * += .01F) { drawTexturedRectUV(type, 0, 0, i, 16, 16, testtube); } GL11.glPopMatrix(); */
         Tessellator tessellator = Tessellator.instance;
+        GL11.glScalef(0.7f, 0.7f, 0.7f);
         GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
         ItemRenderer.renderItemIn2D(tessellator, pass1.getMaxU(), pass1.getMinV(), pass1.getMinU(), pass1.getMaxV(), pass1.getIconWidth(), pass1.getIconHeight(), 0.0625F);
         GL11.glColor3f(molecule.red2, molecule.green2, molecule.blue2);
