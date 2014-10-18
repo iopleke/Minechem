@@ -11,7 +11,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
-import net.minecraft.util.StatCollector;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -31,12 +30,6 @@ public class FluidBlockElement extends MinechemFluidBlock
     {
         super(fluid, Material.water);
         this.setBlockName(fluidName);
-    }
-
-    @Override
-    public String getUnlocalizedName()
-    {
-        return "fluid." + fluidName;
     }
 
     @SideOnly(Side.CLIENT)

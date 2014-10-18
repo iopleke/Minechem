@@ -9,9 +9,17 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 
 public class MinechemFluidBlock extends BlockFluidClassic {
 
+	private final String unlocalizedName;
+	
 	public MinechemFluidBlock(MinechemFluid fluid, Material material) {
 		super(fluid, material);
 		setQuantaPerBlock(fluid.getQuanta());
+		unlocalizedName=fluid.getUnlocalizedName();
+	}
+	
+	@Override
+	public String getUnlocalizedName(){
+		return unlocalizedName;
 	}
 	
 	@Override

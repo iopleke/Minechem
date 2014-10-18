@@ -7,6 +7,7 @@ import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
+import minechem.utils.MinechemHelper;
 import minechem.utils.TimeHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -164,7 +165,7 @@ public class RadiationHandler
     	if (item==MinechemItemsRegistration.element){
     		return ElementItem.getLongName(stack);
     	}else if (item==MinechemItemsRegistration.molecule){
-    		return MoleculeItem.getMolecule(stack).name();
+    		return MinechemHelper.getLocalString(MoleculeItem.getMolecule(stack).getUnlocalizedName());
     	}
     	return "null";
     }

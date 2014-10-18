@@ -286,9 +286,9 @@ public class MinechemHelper
     public static String getChemicalName(PotionChemical potionChemical)
     {
         if (potionChemical instanceof Element)
-            return ((Element) potionChemical).element.name();
+            return getLocalString(((Element) potionChemical).element.name());
         else
-            return ((Molecule) potionChemical).molecule.name();
+            return getLocalString(((Molecule) potionChemical).molecule.name());
     }
 
     public static ItemStack chemicalToItemStack(PotionChemical potionChemical, int amount)
