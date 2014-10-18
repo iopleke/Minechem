@@ -202,13 +202,6 @@ public class MoleculeItem extends Item
         return itemStack;
     }
 
-    /** Returns True is the item is renderer in full 3D when hold. */
-    @Override
-    public boolean isFull3D()
-    {
-        return true;
-    }
-
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
