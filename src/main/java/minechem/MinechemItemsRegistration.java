@@ -91,5 +91,6 @@ public class MinechemItemsRegistration
 		}
 		OreDictionary.registerOre("dustSaltpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.id()));
 		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
+        OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.ordinal()));
 	}
 }
