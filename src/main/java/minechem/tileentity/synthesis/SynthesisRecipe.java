@@ -166,7 +166,6 @@ public class SynthesisRecipe
 	{
 		for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
 		{
-			// TODO: stop using displayname since it depends on language should be unlocalized
 			if (itemStack.getUnlocalizedName() != null && Settings.SynthesisMachineBlacklist[i] != null)
 			{
 				if (Compare.stringSieve(itemStack.getDisplayName()).contains((CharSequence) Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])))

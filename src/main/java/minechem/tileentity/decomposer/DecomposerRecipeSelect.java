@@ -55,6 +55,21 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
     }
 
     @Override
+    public boolean outputContains(PotionChemical potionChemical)
+    {
+        boolean contains = false;
+        for(DecomposerRecipe dr : possibleRecipes)
+        {
+            contains = dr.outputContains(potionChemical);
+            if (contains)
+            {
+                break;
+            }
+        }
+        return contains;
+    }
+
+    @Override
     public void scaleOutput(float scale)
     {
         for (DecomposerRecipe recipe : possibleRecipes)
