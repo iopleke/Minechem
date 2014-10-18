@@ -205,7 +205,8 @@ public class Settings
 		prop = config.get("blacklist", "synthesis", new String[]
 		{
 			"diamond",
-			"emerald"
+			"emerald",
+			"dragon_egg"
 		});
 		prop.setLanguageKey("config.blacklist.synthesis.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.synthesis.example");
