@@ -188,8 +188,9 @@ public class MoleculeItem extends Item
     @Override
     public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
-
-        --itemStack.stackSize;
+    	if (!entityPlayer.capabilities.isCreativeMode){
+    		--itemStack.stackSize;
+    	}
 
         if (world.isRemote)
 
