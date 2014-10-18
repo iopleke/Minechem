@@ -176,7 +176,7 @@ public class ChemicalAPI {
 				chemicals.add(createChemical(getChemicalType((String) chemicalsStr[pos+1]), (Integer) chemicalsStr[pos]));
 				pos+=2;
 			}else if(chemicalsStr[pos] instanceof String){
-				chemicals.add(createChemical(getChemicalType((String) chemicalsStr[pos+1]),1));
+				chemicals.add(createChemical(getChemicalType((String) chemicalsStr[pos]),1));
 				pos+=1;
 			}else{
 				throw new IllegalArgumentException("unknown argument");

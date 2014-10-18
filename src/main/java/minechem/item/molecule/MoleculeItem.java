@@ -188,8 +188,9 @@ public class MoleculeItem extends Item
     @Override
     public ItemStack onEaten(ItemStack itemStack, World world, EntityPlayer entityPlayer)
     {
-
-        --itemStack.stackSize;
+    	if (!entityPlayer.capabilities.isCreativeMode){
+    		--itemStack.stackSize;
+    	}
 
         if (world.isRemote)
 
@@ -199,13 +200,6 @@ public class MoleculeItem extends Item
         PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
         world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F); // Thanks mDiyo!
         return itemStack;
-    }
-
-    /** Returns True is the item is renderer in full 3D when hold. */
-    @Override
-    public boolean isFull3D()
-    {
-        return true;
     }
 
     @Override

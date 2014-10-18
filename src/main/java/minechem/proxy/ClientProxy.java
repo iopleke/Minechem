@@ -6,6 +6,7 @@ import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidTextureStitchHandler;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
+import minechem.render.ChemicalFluidBlockRenderingHandler;
 import minechem.sound.MinechemSoundEvent;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
@@ -61,6 +62,8 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
         ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
+        
+        RenderingRegistry.registerBlockHandler(91, new ChemicalFluidBlockRenderingHandler());
     }
 
     @Override
