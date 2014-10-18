@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.Minechem;
+import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisGui;
 import minechem.tileentity.synthesis.SynthesisRecipe;
@@ -146,6 +147,18 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
         arecipes.add(csr);
     }
 
+    @Override
+    public void drawExtras(int recipeIdx)
+    {
+        CachedSynthesisRecipe cdr = (CachedSynthesisRecipe) arecipes.get(recipeIdx);
+        // Tell if shaped or not
+        String shapedString = cdr.isShaped() ? "Shaped" : "Shapless";
+        GuiDraw.drawString(shapedString, OUTPUT_X_OFS - 12, OUTPUT_Y_OFS + 25, 8, false);
+        // Show energy cost
+        String costString = cdr.getEnergyCost() + " RF";
+        GuiDraw.drawString(costString, OUTPUT_X_OFS - 12, OUTPUT_Y_OFS + 35, 8, false);
+    }
+
     public class CachedSynthesisRecipe extends TemplateRecipeHandler.CachedRecipe
     {
 
@@ -153,12 +166,17 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
         private List<PositionedStack> inputs;
         // Recipe's output.
         private PositionedStack output;
+        // Recipe's energy cost
+        private int energyCost;
+        // Is shaped
+        private boolean shaped;
 
         public CachedSynthesisRecipe(SynthesisRecipe sr)
         {
             super();
             inputs = new ArrayList<PositionedStack>();
-            if (sr.isShaped())
+            shaped = sr.isShaped();
+            if (shaped)
             {
                 // Input elements go into specified positions.
                 PotionChemical[] inputChemicals = sr.getShapedRecipe();
@@ -200,8 +218,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
                 }
             }
             output = new PositionedStack(sr.getOutput(), OUTPUT_X_OFS, OUTPUT_Y_OFS);
-
-            // TODO: Store energy cost?
+            energyCost = sr.energyCost();
         }
 
         @Override
@@ -220,6 +237,16 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
         public PositionedStack getResult()
         {
             return output;
+        }
+
+        public int getEnergyCost()
+        {
+            return energyCost;
+        }
+
+        public boolean isShaped()
+        {
+            return shaped;
         }
     }
 

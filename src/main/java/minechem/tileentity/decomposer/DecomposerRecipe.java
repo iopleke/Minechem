@@ -234,6 +234,20 @@ public class DecomposerRecipe
 		return !this.output.values().isEmpty();
 	}
 
+    public boolean outputContains(PotionChemical potionChemical)
+    {
+        boolean contains = false;
+        for (PotionChemical output : this.output.values())
+        {
+            contains = potionChemical.sameAs(output);
+            if (contains)
+            {
+                break;
+            }
+        }
+        return contains;
+    }
+
 	public void scaleOutput(float scale)
 	{
 		for (PotionChemical chemical : output.values())
