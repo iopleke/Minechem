@@ -3,14 +3,13 @@ package minechem;
 import cpw.mods.fml.client.config.IConfigElement;
 import cpw.mods.fml.client.event.ConfigChangedEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
-
-import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Settings
 {
@@ -38,17 +37,17 @@ public class Settings
 	// Enabling automation can allow duping. Enabled by default.
 	public static boolean AllowAutomation = true;
 
-    // Multiplier for half life of elements and molecules
-    public static int halfLifeMultiplier = 100;
+	// Multiplier for half life of elements and molecules
+	public static int halfLifeMultiplier = 100;
 
-    // Depth of recursive recipe gen
-    public static int recursiveDepth = 10;
+	// Depth of recursive recipe gen
+	public static int recursiveDepth = 10;
 
 	// Disabling of enchants, spikes and fluidEffects
 	public static boolean FoodSpiking = true;
 	public static boolean SwordEffects = true;
-    public static boolean fluidEffects = true;
-    public static boolean decaySafeMachines = false;
+	public static boolean fluidEffects = true;
+	public static boolean decaySafeMachines = false;
 
 	// Power usage
 	public static boolean powerUseEnabled = true;
@@ -56,7 +55,7 @@ public class Settings
 	public static int synthesisMultiplier = 10;
 	public static int fusionMultiplier = 100;
 	public static int fissionMultiplier = 100;
-    public static int energyPacketSize = 100;
+	public static int energyPacketSize = 100;
 
 	// Power base storage values
 	public static int maxSynthesizerStorage = 100000;
@@ -65,9 +64,9 @@ public class Settings
 	public static int maxFusionStorage = 100000;
 
 	// Chemical Explosion
-	public static boolean reactionItemMeetFluid=true;
-	public static boolean reactionFluidMeetFluid=true;
-	
+	public static boolean reactionItemMeetFluid = true;
+	public static boolean reactionFluidMeetFluid = true;
+
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
 	{
@@ -76,9 +75,7 @@ public class Settings
 	{
 	};
 
-
-
-    public static void init(File configFile)
+	public static void init(File configFile)
 	{
 		if (config == null)
 		{
@@ -157,43 +154,43 @@ public class Settings
 		SwordEffects = prop.getBoolean();
 		configList.add(prop.getName());
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "halfLifeMultiplier", Settings.UpdateRadius);
-        prop.setMinValue(1).setMaxValue(200);
-        prop.comment = StatCollector.translateToLocal("config.halfLifeMultiplier.description");
-        prop.setLanguageKey("config.halfLifeMultiplier");
-        halfLifeMultiplier = prop.getInt();
-        configList.add(prop.getName());
+		prop = config.get(Configuration.CATEGORY_GENERAL, "halfLifeMultiplier", Settings.UpdateRadius);
+		prop.setMinValue(1).setMaxValue(200);
+		prop.comment = StatCollector.translateToLocal("config.halfLifeMultiplier.description");
+		prop.setLanguageKey("config.halfLifeMultiplier");
+		halfLifeMultiplier = prop.getInt();
+		configList.add(prop.getName());
 
-        prop = config.get("power", "recursiveDepth", Settings.recursiveDepth);
-        prop.setMinValue(3).setMaxValue(20).requiresMcRestart();
-        prop.comment = StatCollector.translateToLocal("config.recursiveDepth.description");
-        prop.setLanguageKey("config.recursiveDepth.name");
-        recursiveDepth = prop.getInt();
-        configList.add(prop.getName());
+		prop = config.get("power", "recursiveDepth", Settings.recursiveDepth);
+		prop.setMinValue(3).setMaxValue(20).requiresMcRestart();
+		prop.comment = StatCollector.translateToLocal("config.recursiveDepth.description");
+		prop.setLanguageKey("config.recursiveDepth.name");
+		recursiveDepth = prop.getInt();
+		configList.add(prop.getName());
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "decaySafeMachines", Settings.SwordEffects);
-        prop.comment = StatCollector.translateToLocal("config.decaySafeMachines.description");
-        prop.setLanguageKey("config.decaySafeMachines");
-        decaySafeMachines = prop.getBoolean();
-        configList.add(prop.getName());
+		prop = config.get(Configuration.CATEGORY_GENERAL, "decaySafeMachines", Settings.SwordEffects);
+		prop.comment = StatCollector.translateToLocal("config.decaySafeMachines.description");
+		prop.setLanguageKey("config.decaySafeMachines");
+		decaySafeMachines = prop.getBoolean();
+		configList.add(prop.getName());
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "fluidEffects", Settings.SwordEffects);
-        prop.comment = StatCollector.translateToLocal("config.fluideffects.description");
-        prop.setLanguageKey("config.fluideffects");
-        fluidEffects = prop.getBoolean();
-        configList.add(prop.getName());
-        
-        prop = config.get(Configuration.CATEGORY_GENERAL, "reactionItemMeetFluid", Settings.reactionItemMeetFluid);
-        prop.comment = StatCollector.translateToLocal("config.reactionItemMeetFluid.description");
-        prop.setLanguageKey("config.reactionItemMeetFluid");
-        reactionItemMeetFluid = prop.getBoolean();
-        configList.add(prop.getName());
-        
-        prop = config.get(Configuration.CATEGORY_GENERAL, "reactionFluidMeetFluid", Settings.reactionFluidMeetFluid);
-        prop.comment = StatCollector.translateToLocal("config.reactionFluidMeetFluid.description");
-        prop.setLanguageKey("config.reactionFluidMeetFluid");
-        reactionFluidMeetFluid = prop.getBoolean();
-        configList.add(prop.getName());
+		prop = config.get(Configuration.CATEGORY_GENERAL, "fluidEffects", Settings.SwordEffects);
+		prop.comment = StatCollector.translateToLocal("config.fluideffects.description");
+		prop.setLanguageKey("config.fluideffects");
+		fluidEffects = prop.getBoolean();
+		configList.add(prop.getName());
+
+		prop = config.get(Configuration.CATEGORY_GENERAL, "reactionItemMeetFluid", Settings.reactionItemMeetFluid);
+		prop.comment = StatCollector.translateToLocal("config.reactionItemMeetFluid.description");
+		prop.setLanguageKey("config.reactionItemMeetFluid");
+		reactionItemMeetFluid = prop.getBoolean();
+		configList.add(prop.getName());
+
+		prop = config.get(Configuration.CATEGORY_GENERAL, "reactionFluidMeetFluid", Settings.reactionFluidMeetFluid);
+		prop.comment = StatCollector.translateToLocal("config.reactionFluidMeetFluid.description");
+		prop.setLanguageKey("config.reactionFluidMeetFluid");
+		reactionFluidMeetFluid = prop.getBoolean();
+		configList.add(prop.getName());
 
 		prop = config.get("blacklist", "decomposition", new String[]
 		{
@@ -240,11 +237,11 @@ public class Settings
 		maxSynthesizerStorage = prop.getInt();
 		configList.add(prop.getName());
 
-        prop = config.get("power", "energyPacketSize", Settings.energyPacketSize);
-        prop.comment = StatCollector.translateToLocal("config.power.energyPacketSize.description");
-        prop.setLanguageKey("config.power.energyPacketSize.max.name");
-        energyPacketSize = prop.getInt();
-        configList.add(prop.getName());
+		prop = config.get("power", "energyPacketSize", Settings.energyPacketSize);
+		prop.comment = StatCollector.translateToLocal("config.power.energyPacketSize.description");
+		prop.setLanguageKey("config.power.energyPacketSize.max.name");
+		energyPacketSize = prop.getInt();
+		configList.add(prop.getName());
 
 		prop = config.get("power", "costSythesisMultiplier", Settings.synthesisMultiplier);
 		prop.setMinValue(1).setMaxValue(100);

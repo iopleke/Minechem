@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
@@ -16,7 +15,7 @@ public class SynthesisRecipe
 {
 
 	//public static ArrayList<SynthesisRecipe> recipes = new ArrayList<SynthesisRecipe>();
-    public static Map<String, SynthesisRecipe> recipes = new HashMap<String, SynthesisRecipe>();
+	public static Map<String, SynthesisRecipe> recipes = new HashMap<String, SynthesisRecipe>();
 	private ItemStack output;
 	private PotionChemical[] shapedRecipe;
 	private ArrayList unshapedRecipe;
@@ -28,22 +27,22 @@ public class SynthesisRecipe
 		if (recipe.getOutput() != null && recipe.getOutput().getItem() != null)
 		{
 			if (isBlacklisted(recipe.getOutput()))
-            {
-                return null;
+			{
+				return null;
 			}
-            recipes.put(getKey(recipe.output), recipe);
+			recipes.put(getKey(recipe.output), recipe);
 		}
 
 		return recipe;
 	}
 
-    public static void createAndAddRecipeSafely(String item, boolean shaped, int energyCost, PotionChemical... chemicals)
-    {
-        for (ItemStack i : OreDictionary.getOres(item))
-        {
-            SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), shaped, energyCost, chemicals));
-        }
-    }
+	public static void createAndAddRecipeSafely(String item, boolean shaped, int energyCost, PotionChemical... chemicals)
+	{
+		for (ItemStack i : OreDictionary.getOres(item))
+		{
+			SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), shaped, energyCost, chemicals));
+		}
+	}
 
 	public static void remove(ItemStack itemStack)
 	{
@@ -55,22 +54,22 @@ public class SynthesisRecipe
 		}
 	}
 
-    public static void removeRecipeSafely(String item)
-    {
-        for (ItemStack i : OreDictionary.getOres(item))
-        {
-            SynthesisRecipe.remove(i);
-        }
-    }
+	public static void removeRecipeSafely(String item)
+	{
+		for (ItemStack i : OreDictionary.getOres(item))
+		{
+			SynthesisRecipe.remove(i);
+		}
+	}
 
-    public static SynthesisRecipe remove(String string)
-    {
-        if (recipes.containsKey(string))
-        {
-            return recipes.remove(string);
-        }
-        return null;
-    }
+	public static SynthesisRecipe remove(String string)
+	{
+		if (recipes.containsKey(string))
+		{
+			return recipes.remove(string);
+		}
+		return null;
+	}
 
 	public static ArrayList<SynthesisRecipe> search(ItemStack itemStack)
 	{
@@ -88,12 +87,12 @@ public class SynthesisRecipe
 
 	}
 
-    public static String getKey(ItemStack itemStack)
-    {
-        ItemStack result = itemStack.copy();
-        result.stackSize = 1;
-        return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
-    }
+	public static String getKey(ItemStack itemStack)
+	{
+		ItemStack result = itemStack.copy();
+		result.stackSize = 1;
+		return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+	}
 
 	public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... var4)
 	{
@@ -163,24 +162,24 @@ public class SynthesisRecipe
 		return var1;
 	}
 
-    public static boolean isBlacklisted(ItemStack itemStack)
-    {
-        for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
-        {
-            // TODO: stop using displayname since it depends on language should be unlocalized
-            if (itemStack.getDisplayName() != null && Settings.SynthesisMachineBlacklist[i] != null)
-            {
-                if (Compare.stringSieve(itemStack.getDisplayName()).compareTo(Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])) == 0)
-                {
-                    if (Settings.DebugMode)
-                    {
-                        Minechem.LOGGER.info("Decomposer recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	public static boolean isBlacklisted(ItemStack itemStack)
+	{
+		for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
+		{
+			// TODO: stop using displayname since it depends on language should be unlocalized
+			if (itemStack.getUnlocalizedName() != null && Settings.SynthesisMachineBlacklist[i] != null)
+			{
+				if (Compare.stringSieve(itemStack.getDisplayName()).contains((CharSequence) Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])))
+				{
+					if (Settings.DebugMode)
+					{
+						Minechem.LOGGER.info("Decomposer recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
+					}
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 }

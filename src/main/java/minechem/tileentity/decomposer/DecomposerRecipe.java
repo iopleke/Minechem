@@ -24,10 +24,10 @@ public class DecomposerRecipe
 	{
 		if (recipe.input != null && recipe.input.getItem() != null)
 		{
-            if (isBlacklisted(recipe.input))
-            {
-                return null;
-            }
+			if (isBlacklisted(recipe.input))
+			{
+				return null;
+			}
 			recipes.put(getKey(recipe.input), recipe);
 		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
@@ -50,26 +50,28 @@ public class DecomposerRecipe
 		return null;
 	}
 
-    public static DecomposerRecipe remove(ItemStack itemStack)
-    {
-        if (recipes.containsKey(getKey(itemStack)))
-        {
-            return recipes.remove(getKey(itemStack));
-        }
-        return null;
-    }
+	public static DecomposerRecipe remove(ItemStack itemStack)
+	{
+		if (recipes.containsKey(getKey(itemStack)))
+		{
+			return recipes.remove(getKey(itemStack));
+		}
+		return null;
+	}
 
 	public static String getKey(ItemStack itemStack)
 	{
 		if (itemStack != null && itemStack.getItem() != null)
-        {
+		{
 			ItemStack result = itemStack.copy();
 			result.stackSize = 1;
-            if (result.toString().contains("null"))
-                return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
-            return result.toString();
-        }
-        return null;
+			if (result.toString().contains("null"))
+			{
+				return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
+			}
+			return result.toString();
+		}
+		return null;
 	}
 
 	public static String getKey(FluidStack fluidStack)
@@ -78,7 +80,7 @@ public class DecomposerRecipe
 		{
 			FluidStack result = fluidStack.copy();
 			result.amount = 1;
-        	return result.toString();
+			return result.toString();
 		}
 		return null;
 	}
@@ -86,14 +88,20 @@ public class DecomposerRecipe
 	public static DecomposerRecipe get(ItemStack item)
 	{
 		String key = getKey(item);
-		if (key != null) return get(key);
+		if (key != null)
+		{
+			return get(key);
+		}
 		return null;
 	}
 
 	public static DecomposerRecipe get(FluidStack item)
 	{
 		String key = getKey(item);
-		if (key != null) return get(key);
+		if (key != null)
+		{
+			return get(key);
+		}
 		return null;
 	}
 
@@ -146,9 +154,9 @@ public class DecomposerRecipe
 			if (current != null)
 			{
 				current.amount += potionChemical.amount;
-                continue;
+				continue;
 			}
-            this.output.put(getPotionKey(potionChemical), potionChemical);
+			this.output.put(getPotionKey(potionChemical), potionChemical);
 		}
 	}
 
@@ -221,36 +229,36 @@ public class DecomposerRecipe
 		return this.output == null;
 	}
 
-    public boolean hasOutput()
-    {
-        return !this.output.values().isEmpty();
-    }
+	public boolean hasOutput()
+	{
+		return !this.output.values().isEmpty();
+	}
 
-    public void scaleOutput(float scale)
-    {
-        for (PotionChemical chemical : output.values())
-        {
-            chemical.amount = Math.round(chemical.amount / scale);
-        }
-    }
+	public void scaleOutput(float scale)
+	{
+		for (PotionChemical chemical : output.values())
+		{
+			chemical.amount = Math.round(chemical.amount / scale);
+		}
+	}
 
-    public static boolean isBlacklisted(ItemStack itemStack)
-    {
-        for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
-        {
-            // TODO: stop using displayname since it depends on language should be unlocalized
-            if (itemStack.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
-            {
-                if (Compare.stringSieve(itemStack.getDisplayName()).compareTo(Compare.stringSieve(Settings.DecomposerBlacklist[i])) == 0)
-                {
-                    if (Settings.DebugMode)
-                    {
-                        Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
-                    }
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	public static boolean isBlacklisted(ItemStack itemStack)
+	{
+		for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
+		{
+			// TODO: stop using displayname since it depends on language should be unlocalized
+			if (itemStack.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
+			{
+				if (Compare.stringSieve(itemStack.getDisplayName()).contains((CharSequence) Compare.stringSieve(Settings.DecomposerBlacklist[i])))
+				{
+					if (Settings.DebugMode)
+					{
+						Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
+					}
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }
