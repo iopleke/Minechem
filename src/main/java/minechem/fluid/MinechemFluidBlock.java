@@ -10,6 +10,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic {
 
 	private final String unlocalizedName;
+    public static int RENDER_ID;
 	
 	public MinechemFluidBlock(MinechemFluid fluid, Material material) {
 		super(fluid, material);
@@ -38,7 +39,7 @@ public class MinechemFluidBlock extends BlockFluidClassic {
 	
     @Override
     public int getRenderType(){
-    	return 91;
+    	return RENDER_ID;
     }
 	
 	private boolean checkToExplode(World world,int dx,int dy,int dz,int sx,int sy,int sz){

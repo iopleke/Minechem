@@ -3,6 +3,7 @@ package minechem.proxy;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
+import minechem.fluid.FluidBlockChemical;
 import minechem.fluid.FluidTextureStitchHandler;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
@@ -48,6 +49,7 @@ public class ClientProxy extends CommonProxy
     public void registerRenderers()
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+        FluidBlockChemical.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
         MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
         MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
