@@ -9,8 +9,8 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 @Optional.InterfaceList(
 		{
-			@Optional.Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHCore"),
-			@Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHCore")
+			@Optional.Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHAPI|energy"),
+			@Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHAPI|energy")
 		})
 public abstract class MinechemTileEntityElectric extends MinechemTileEntity implements IEnergyStorage, IEnergyHandler
 {
@@ -36,7 +36,7 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 		energyStored = 0;
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public int receiveEnergy(int maxReceive, boolean simulate)
 	{
@@ -60,7 +60,7 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 		}
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public int extractEnergy(int maxExtract, boolean simulate)
 	{
@@ -79,35 +79,35 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 		return MAX_ENERGY_STORED;
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public boolean canConnectEnergy(ForgeDirection from)
 	{
 		return true;
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
 	{
 		return receiveEnergy(maxReceive, simulate);
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate)
 	{
 		return extractEnergy(maxExtract, simulate);
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public int getEnergyStored(ForgeDirection from)
 	{
 		return getEnergyStored();
 	}
 
-	@Optional.Method(modid = "CoFHCore")
+	@Optional.Method(modid = "CoFHAPI|energy")
 	@Override
 	public int getMaxEnergyStored(ForgeDirection from)
 	{
