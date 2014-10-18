@@ -1,5 +1,6 @@
 package minechem.render;
 
+import minechem.fluid.MinechemFluidBlock;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.RenderBlocks;
@@ -126,6 +127,6 @@ public class ChemicalFluidBlockRenderingHandler extends RenderBlockFluid {
 	
 	@Override
 	public int getRenderId() {
-		return 91;
+		return MinechemFluidBlock.RENDER_ID;
 	}
 }
