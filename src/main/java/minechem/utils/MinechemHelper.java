@@ -180,6 +180,37 @@ public class MinechemHelper
 		return stacks;
 	}
 
+    public static ArrayList<PotionChemical> pushTogetherChemicals(ArrayList<PotionChemical> list)
+    {
+        for (int i = list.size()-1; i >= 0; i--)
+        {
+            if (list.get(i) == null)
+            {
+                continue;
+            }
+            // spot for move
+            for (int j = 0; j < i; j++)
+            {
+                // empty spot
+                if (list.get(j) == null)
+                {
+                    list.set(j, list.get(i));
+                    list.set(j, null);
+                    break;
+                }
+                // same stack
+                else if (list.get(j).sameAs(list.get(i)))
+                {
+                    list.get(j).amount += list.get(i).amount;
+                    list.set(i, null);
+                    break;
+                }
+            }
+        }
+        list.removeAll(Collections.singleton(null));
+        return list;
+    }
+
 	public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical)
 	{
 		return itemStackMatchesChemical(itemstack, potionChemical, 1);
