@@ -15,8 +15,8 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.Arrays;
-
 import minechem.fluid.FluidChemicalDispenser;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
 import minechem.gui.GuiTabHelp;
@@ -31,7 +31,6 @@ import minechem.potion.PotionEnchantmentCoated;
 import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.render.EffectsRenderer;
-import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.Recipe;
 import minechem.utils.Reference;
@@ -224,7 +223,7 @@ public class Minechem
 		}
 		MinechemRecipes.getInstance().RegisterModRecipes();
 
-        FluidChemicalDispenser.init();
+		FluidChemicalDispenser.init();
 		ChemicalFluidReactionHandler.initExplodableChemical();
 	}
 

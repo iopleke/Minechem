@@ -10,50 +10,51 @@ import net.minecraft.tileentity.TileEntity;
 
 public class FusionUpdateMessage implements IMessage, IMessageHandler<FusionUpdateMessage, IMessage>
 {
-    private int posX, posY, posZ;
-    private int energyStored;
+	private int posX, posY, posZ;
+	private int energyStored;
 
-    public FusionUpdateMessage() {
+	public FusionUpdateMessage()
+	{
 
-    }
+	}
 
-    public FusionUpdateMessage(FusionTileEntity tile)
-    {
-        this.posX = tile.xCoord;
-        this.posY = tile.yCoord;
-        this.posZ = tile.zCoord;
+	public FusionUpdateMessage(FusionTileEntity tile)
+	{
+		this.posX = tile.xCoord;
+		this.posY = tile.yCoord;
+		this.posZ = tile.zCoord;
 
-        this.energyStored = tile.getEnergyStored();
-    }
+		this.energyStored = tile.getEnergyStored();
+	}
 
-    @Override
-    public void fromBytes(ByteBuf buf)
-    {
-        this.posX = buf.readInt();
-        this.posY = buf.readInt();
-        this.posZ = buf.readInt();
+	@Override
+	public void fromBytes(ByteBuf buf)
+	{
+		this.posX = buf.readInt();
+		this.posY = buf.readInt();
+		this.posZ = buf.readInt();
 
-        this.energyStored = buf.readInt();
-    }
+		this.energyStored = buf.readInt();
+	}
 
-    @Override
-    public void toBytes(ByteBuf buf)
-    {
-        buf.writeInt(this.posX);
-        buf.writeInt(this.posY);
-        buf.writeInt(this.posZ);
+	@Override
+	public void toBytes(ByteBuf buf)
+	{
+		buf.writeInt(this.posX);
+		buf.writeInt(this.posY);
+		buf.writeInt(this.posZ);
 
-        buf.writeInt(this.energyStored);
-    }
+		buf.writeInt(this.energyStored);
+	}
 
-    @Override
-    public IMessage onMessage(FusionUpdateMessage message, MessageContext ctx)
-    {
-        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.posX, message.posY, message.posZ);
-        if (tileEntity instanceof FusionTileEntity)
-        {
-            ((FusionTileEntity) tileEntity).syncEnergyValue(message.energyStored);
-        }
-        return null;
-    }
+	@Override
+	public IMessage onMessage(FusionUpdateMessage message, MessageContext ctx)
+	{
+		TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.posX, message.posY, message.posZ);
+		if (tileEntity instanceof FusionTileEntity)
+		{
+			((FusionTileEntity) tileEntity).syncEnergyValue(message.energyStored);
+		}
+		return null;
+	}
 }

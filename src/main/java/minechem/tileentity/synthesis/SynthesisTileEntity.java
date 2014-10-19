@@ -1,25 +1,24 @@
 package minechem.tileentity.synthesis;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import java.util.ArrayList;
 import java.util.List;
-
-import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.network.MessageHandler;
 import minechem.network.message.SynthesisUpdateMessage;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
+import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
-import minechem.utils.Compare;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 import net.minecraftforge.common.util.Constants;
 
 public class SynthesisTileEntity extends MinechemTileEntityElectric implements ISidedInventory
@@ -455,7 +454,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	 */
 	public boolean takeStacksFromStorage(boolean doTake)
 	{
-		// Don't allow the machine to perform synthesis when no recipe or power. 
+		// Don't allow the machine to perform synthesis when no recipe or power.
 		if (this.currentRecipe == null || !this.hasEnoughPowerForCurrentRecipe())
 		{
 			return false;
@@ -491,7 +490,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		if (!worldObj.isRemote)
 		{
 			SynthesisUpdateMessage message = new SynthesisUpdateMessage(this);
-            MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
 		}
 		// Forces the output slot to only take a single item preventing stacking.
 		if (currentRecipe != null && inventory[kOutput[0]] == null)
@@ -683,7 +682,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
-		// Strangely every item is always valid in the crafting matrix according to this, even though slot code prevents anything but elements of molecules. 
+		// Strangely every item is always valid in the crafting matrix according to this, even though slot code prevents anything but elements of molecules.
 		return true;
 	}
 

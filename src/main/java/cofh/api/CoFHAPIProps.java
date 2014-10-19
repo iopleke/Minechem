@@ -1,8 +1,10 @@
 package cofh.api;
 
-public class CoFHAPIProps {
+public class CoFHAPIProps
+{
 
-	private CoFHAPIProps() {
+	private CoFHAPIProps()
+	{
 
 	}
 

@@ -168,7 +168,7 @@ public class SynthesisRecipe
 		{
 			if (itemStack.getUnlocalizedName() != null && Settings.SynthesisMachineBlacklist[i] != null)
 			{
-				if (Compare.stringSieve(itemStack.getDisplayName()).contains((CharSequence) Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])))
+				if (Compare.stringSieve(itemStack.getUnlocalizedName()).contains((CharSequence) Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])))
 				{
 					if (Settings.DebugMode)
 					{

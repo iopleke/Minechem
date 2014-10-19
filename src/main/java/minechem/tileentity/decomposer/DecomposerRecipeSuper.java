@@ -3,112 +3,121 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
-
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 
-public class DecomposerRecipeSuper extends DecomposerRecipe {
-	
-	public Map<DecomposerRecipeSelect,Integer> selectRecipes = new Hashtable<DecomposerRecipeSelect,Integer>();
-	
+public class DecomposerRecipeSuper extends DecomposerRecipe
+{
+
+	public Map<DecomposerRecipeSelect, Integer> selectRecipes = new Hashtable<DecomposerRecipeSelect, Integer>();
+
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input;
-		if (Settings.DebugMode) Minechem.LOGGER.info(input.toString());
-		for (ItemStack component:components)
+		if (Settings.DebugMode)
+		{
+			Minechem.LOGGER.info(input.toString());
+		}
+		for (ItemStack component : components)
 		{
 			if (component != null && component.getItem() != null)
 			{
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe != null)
 				{
-                    // TODO:Fix scale
-                    //decompRecipe.scaleOutput(input.stackSize);
+					// TODO:Fix scale
+					//decompRecipe.scaleOutput(input.stackSize);
 					if (decompRecipe instanceof DecomposerRecipeSelect)
 					{
-						addSelectRecipe((DecomposerRecipeSelect)decompRecipe,1);
-					}
-					else if (decompRecipe instanceof DecomposerRecipeSuper)
+						addSelectRecipe((DecomposerRecipeSelect) decompRecipe, 1);
+					} else if (decompRecipe instanceof DecomposerRecipeSuper)
 					{
-						addDecompRecipeSuper((DecomposerRecipeSuper)decompRecipe);
-					}
-					else if (decompRecipe instanceof DecomposerRecipeChance)
+						addDecompRecipeSuper((DecomposerRecipeSuper) decompRecipe);
+					} else if (decompRecipe instanceof DecomposerRecipeChance)
 					{
-						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(),((DecomposerRecipeChance)decompRecipe).getChance(),new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())),1);
-					}
-					else
+						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(), ((DecomposerRecipeChance) decompRecipe).getChance(), new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())), 1);
+					} else
 					{
 						addPotionChemical(decompRecipe.getOutput());
 					}
-				}
-				else if (!component.isItemEqual(input))
+				} else if (!component.isItemEqual(input))
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
-                    if(component.toString().contains("railcraft"))
-                    {
-                        component.canEditBlocks();
-                    }
+					if (component.toString().contains("railcraft"))
+					{
+						component.canEditBlocks();
+					}
 					if (recipe != null && level < Settings.recursiveDepth)
 					{
 						DecomposerRecipeSuper newSuper;
-						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output,recipe.inStacks,level+1));
+						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output, recipe.inStacks, level + 1));
 						addDecompRecipeSuper(newSuper);
 					}
 				}
 			}
 		}
 	}
-	
+
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components)
 	{
-		this(input,components,0);
+		this(input, components, 0);
 	}
-	
+
 	private void addDecompRecipeSuper(DecomposerRecipeSuper recipeSuper)
 	{
 		addPotionChemical(recipeSuper.getGuaranteedOutput());
-		Map<DecomposerRecipeSelect,Integer> newSelectRecipes = recipeSuper.getSelectRecipes();
-		for (DecomposerRecipeSelect recipeSelect:newSelectRecipes.keySet())
+		Map<DecomposerRecipeSelect, Integer> newSelectRecipes = recipeSuper.getSelectRecipes();
+		for (DecomposerRecipeSelect recipeSelect : newSelectRecipes.keySet())
 		{
-			addSelectRecipe(recipeSelect,newSelectRecipes.get(recipeSelect));
+			addSelectRecipe(recipeSelect, newSelectRecipes.get(recipeSelect));
 		}
 	}
-	
+
 	private void addPotionChemical(ArrayList<PotionChemical> out)
 	{
-		if (out!=null)
-			for (PotionChemical add:out)
+		if (out != null)
+		{
+			for (PotionChemical add : out)
+			{
 				super.addChemicals(add);
+			}
+		}
 	}
-	
+
 	private void addSelectRecipe(DecomposerRecipeSelect recipe, int number)
 	{
-		Integer current = this.selectRecipes.put(recipe,number);
-		if (current!=null)
-			this.selectRecipes.put(recipe,current+number);
+		Integer current = this.selectRecipes.put(recipe, number);
+		if (current != null)
+		{
+			this.selectRecipes.put(recipe, current + number);
+		}
 	}
-	
+
 	@Override
-	public ArrayList<PotionChemical> getOutput() 
+	public ArrayList<PotionChemical> getOutput()
 	{
 		ArrayList<PotionChemical> result = super.getOutput();
-		for (DecomposerRecipeSelect current:this.selectRecipes.keySet())
+		for (DecomposerRecipeSelect current : this.selectRecipes.keySet())
 		{
-			for (int i=0;i<this.selectRecipes.get(current);i++)
+			for (int i = 0; i < this.selectRecipes.get(current); i++)
 			{
 				ArrayList<PotionChemical> partialResult = current.getOutput();
-				if (partialResult!=null)result.addAll(partialResult);
+				if (partialResult != null)
+				{
+					result.addAll(partialResult);
+				}
 			}
 		}
 		return result;
 	}
-	
+
 	@Override
-	public ArrayList<PotionChemical> getOutputRaw() {
+	public ArrayList<PotionChemical> getOutputRaw()
+	{
 		ArrayList<PotionChemical> result = super.getOutputRaw();
 		for (DecomposerRecipeSelect current : this.selectRecipes.keySet())
 		{
@@ -119,73 +128,77 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 		}
 		return result;
 	}
-	
+
 	public ArrayList<PotionChemical> getGuaranteedOutput()
 	{
 		return super.getOutput();
 	}
-	
-	public Map<DecomposerRecipeSelect,Integer> getSelectRecipes()
+
+	public Map<DecomposerRecipeSelect, Integer> getSelectRecipes()
 	{
 		return this.selectRecipes;
 	}
-	
+
 	@Override
 	public boolean isNull()
 	{
-		if (super.getOutput()==null && this.selectRecipes==null) return true;
+		if (super.getOutput() == null && this.selectRecipes == null)
+		{
+			return true;
+		}
 		return false;
 	}
-	
+
 	@Override
-	public ArrayList<PotionChemical> getPartialOutputRaw(int f) {
+	public ArrayList<PotionChemical> getPartialOutputRaw(int f)
+	{
 		return super.getPartialOutputRaw(f);
 	}
 
-    @Override
-    public boolean hasOutput()
-    {
-        return !this.selectRecipes.values().isEmpty() || !this.output.isEmpty();
-    }
+	@Override
+	public boolean hasOutput()
+	{
+		return !this.selectRecipes.values().isEmpty() || !this.output.isEmpty();
+	}
 
-    @Override
-    public boolean outputContains(PotionChemical potionChemical)
-    {
-        boolean contains;
-        contains = super.outputContains(potionChemical);
-        if (!contains)
-        {
-            for (DecomposerRecipeSelect dr : selectRecipes.keySet())
-            {
-                contains = dr.outputContains(potionChemical);
-                if (contains)
-                {
-                    break;
-                }
-            }
-        }
-        return contains;
-    }
+	@Override
+	public boolean outputContains(PotionChemical potionChemical)
+	{
+		boolean contains;
+		contains = super.outputContains(potionChemical);
+		if (!contains)
+		{
+			for (DecomposerRecipeSelect dr : selectRecipes.keySet())
+			{
+				contains = dr.outputContains(potionChemical);
+				if (contains)
+				{
+					break;
+				}
+			}
+		}
+		return contains;
+	}
 
-    public float getChance()
-    {
-        int count = 0;
-        float chances = 0;
-        for (Map.Entry<DecomposerRecipeSelect, Integer> entry : selectRecipes.entrySet())
-        {
-            chances += entry.getKey().getChance();
-            count += entry.getValue();
-        }
-        return chances / count;
-    }
+	public float getChance()
+	{
+		int count = 0;
+		float chances = 0;
+		for (Map.Entry<DecomposerRecipeSelect, Integer> entry : selectRecipes.entrySet())
+		{
+			chances += entry.getKey().getChance();
+			count += entry.getValue();
+		}
+		return chances / count;
+	}
 
-    @Override
-    public void scaleOutput(float scale)
-    {
-        super.scaleOutput(scale);
-        for (DecomposerRecipe recipe : selectRecipes.keySet())
-        {
-            recipe.scaleOutput(scale);
-        }
-    }
+	@Override
+	public void scaleOutput(float scale)
+	{
+		super.scaleOutput(scale);
+		for (DecomposerRecipe recipe : selectRecipes.keySet())
+		{
+			recipe.scaleOutput(scale);
+		}
+	}
 }

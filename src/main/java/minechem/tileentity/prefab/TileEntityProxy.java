@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 public class TileEntityProxy extends MinechemTileEntityElectric implements ISidedInventory
 {
 
-	public TileEntityProxy() 
+	public TileEntityProxy()
 	{
 		super(Settings.energyPacketSize);
 	}
@@ -23,19 +23,19 @@ public class TileEntityProxy extends MinechemTileEntityElectric implements ISide
 	int managerYOffset;
 	int managerZOffset;
 
-@Override
-public void updateEntity()
-{
-	if(this.manager != null)
+	@Override
+	public void updateEntity()
 	{
-		int ammountReceived = ((MinechemTileEntityElectric) manager).receiveEnergy(this.getEnergyStored(), true);
-		if(ammountReceived>0)
+		if (this.manager != null)
 		{
-			((MinechemTileEntityElectric) manager).receiveEnergy(ammountReceived, false);			
-			this.useEnergy(ammountReceived);
+			int ammountReceived = ((MinechemTileEntityElectric) manager).receiveEnergy(this.getEnergyStored(), true);
+			if (ammountReceived > 0)
+			{
+				((MinechemTileEntityElectric) manager).receiveEnergy(ammountReceived, false);
+				this.useEnergy(ammountReceived);
+			}
 		}
 	}
-}
 
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound)
@@ -247,7 +247,7 @@ public void updateEntity()
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 	{
-        // Cannot extract items from reactor with automation disabled.
+		// Cannot extract items from reactor with automation disabled.
 		// Can only extract from the bottom.
 		if (Settings.AllowAutomation && side == 0 && slot == 2)
 		{
@@ -257,7 +257,7 @@ public void updateEntity()
 	}
 
 	@Override
-	public int getEnergyNeeded() 
+	public int getEnergyNeeded()
 	{
 		return 0;
 	}

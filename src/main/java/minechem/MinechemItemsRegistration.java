@@ -58,39 +58,42 @@ public class MinechemItemsRegistration
 		polytool = new PolytoolItem();
 		GameRegistry.registerItem(polytool, Minechem.ID + "Polytool");
 
-        registerFluidContainers();
+		registerFluidContainers();
 	}
 
-    private static void registerFluidContainers()
-    {
-        ItemStack emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-        for (ElementEnum element : ElementEnum.elements)
-        {
-        	if (element!=null){
-	            ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
-	            FluidContainerRegistry.registerFluidContainer(FluidHelper.elements.get(element), tube, emptyTube);
-        	}
-        }
+	private static void registerFluidContainers()
+	{
+		ItemStack emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+		for (ElementEnum element : ElementEnum.elements)
+		{
+			if (element != null)
+			{
+				ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
+				FluidContainerRegistry.registerFluidContainer(FluidHelper.elements.get(element), tube, emptyTube);
+			}
+		}
 
-        for (MoleculeEnum molecule : MoleculeEnum.molecules)
-        {
-        	if (molecule!=null){
-	            ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-	            FluidContainerRegistry.registerFluidContainer(FluidHelper.molecules.get(molecule), tube, emptyTube);
-        	}
-        }
-    }
+		for (MoleculeEnum molecule : MoleculeEnum.molecules)
+		{
+			if (molecule != null)
+			{
+				ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
+				FluidContainerRegistry.registerFluidContainer(FluidHelper.molecules.get(molecule), tube, emptyTube);
+			}
+		}
+	}
 
 	public static void registerToOreDictionary()
 	{
 		for (ElementEnum element : ElementEnum.elements)
 		{
-			if (element!=null){
+			if (element != null)
+			{
 				OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
 			}
 		}
 		OreDictionary.registerOre("dustSaltpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.id()));
 		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
-        OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.ordinal()));
+		OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.ordinal()));
 	}
 }

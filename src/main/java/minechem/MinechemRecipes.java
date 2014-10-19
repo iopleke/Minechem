@@ -27,7 +27,6 @@ import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
-import minechem.tileentity.decomposer.DecomposerRecipeSuper;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
 import net.minecraft.block.Block;
@@ -2510,7 +2509,7 @@ public class MinechemRecipes
 		DecomposerRecipe.createAndAddRecipeSafely("ingotLead", this.element(ElementEnum.Pb, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotPlatinum", this.element(ElementEnum.Pt, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotAluminium", this.element(ElementEnum.Au, 16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotMagnesium", this.element(ElementEnum.Mg,16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotMagnesium", this.element(ElementEnum.Mg, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotSteel", new PotionChemical[]
 		{
 			this.element(ElementEnum.Fe, 15), this.element(ElementEnum.C, 1)
@@ -2531,7 +2530,7 @@ public class MinechemRecipes
 		{
 			this.element(ElementEnum.Fe, 10), this.element(ElementEnum.Ni, 6)
 		});
-		
+
 		SynthesisRecipe.createAndAddRecipeSafely("ingotIron", false, COST_INGOT, this.element(ElementEnum.Fe));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotGold", false, COST_INGOT, this.element(ElementEnum.Au, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotCopper", false, COST_INGOT, this.element(ElementEnum.Cu, 16));
@@ -2540,7 +2539,7 @@ public class MinechemRecipes
 		SynthesisRecipe.createAndAddRecipeSafely("ingotLead", false, COST_INGOT, this.element(ElementEnum.Pb, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotPlatinum", false, COST_INGOT, this.element(ElementEnum.Pt, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotAluminium", false, COST_INGOT, this.element(ElementEnum.Au, 16));
-		SynthesisRecipe.createAndAddRecipeSafely("ingotMagnesium", false, COST_INGOT, this.element(ElementEnum.Mg,16));
+		SynthesisRecipe.createAndAddRecipeSafely("ingotMagnesium", false, COST_INGOT, this.element(ElementEnum.Mg, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotSteel", false, COST_INGOT, new PotionChemical[]
 		{
 			this.element(ElementEnum.Fe, 15), this.element(ElementEnum.C, 1)
@@ -2711,84 +2710,81 @@ public class MinechemRecipes
 		{
 			Item bucket = GameRegistry.findItem("ThermalFoundation", "bucket");
 			Item material = GameRegistry.findItem("ThermalFoundation", "material");
-		
-			
-			ItemStack redstoneBucket = new ItemStack(bucket,1,0);
-			ItemStack glowstoneBucket = new ItemStack(bucket,1,1);
-			ItemStack enderBucket = new ItemStack(bucket,1,2);
-			ItemStack signalumBlend = new ItemStack(material,1,42);
-			ItemStack lumiumBlend = new ItemStack(material,1,43);
-			ItemStack enderiumBlend = new ItemStack(material,1,44);
-			ItemStack signalumIngot = new ItemStack(material,1,74);
-			ItemStack lumiumIngot = new ItemStack(material,1,75);
-			ItemStack enderiumIngot = new ItemStack(material,1,76);
-			
+
+			ItemStack redstoneBucket = new ItemStack(bucket, 1, 0);
+			ItemStack glowstoneBucket = new ItemStack(bucket, 1, 1);
+			ItemStack enderBucket = new ItemStack(bucket, 1, 2);
+			ItemStack signalumBlend = new ItemStack(material, 1, 42);
+			ItemStack lumiumBlend = new ItemStack(material, 1, 43);
+			ItemStack enderiumBlend = new ItemStack(material, 1, 44);
+			ItemStack signalumIngot = new ItemStack(material, 1, 74);
+			ItemStack lumiumIngot = new ItemStack(material, 1, 75);
+			ItemStack enderiumIngot = new ItemStack(material, 1, 76);
+
 			DecomposerRecipe.add(new DecomposerRecipe(redstoneBucket, new PotionChemical[]
-					{
-					this.element(ElementEnum.Cu, 4), this.element(ElementEnum.Fe,48), this.molecule(MoleculeEnum.iron3oxide,4)
-					}));
-			DecomposerRecipe.add(new DecomposerRecipe(enderBucket,  new PotionChemical[]
-					{
-					this.element(ElementEnum.Fe,48), this.element(ElementEnum.Es,4), this.molecule(MoleculeEnum.calciumCarbonate, 32)
-					}));
+			{
+				this.element(ElementEnum.Cu, 4), this.element(ElementEnum.Fe, 48), this.molecule(MoleculeEnum.iron3oxide, 4)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(enderBucket, new PotionChemical[]
+			{
+				this.element(ElementEnum.Fe, 48), this.element(ElementEnum.Es, 4), this.molecule(MoleculeEnum.calciumCarbonate, 32)
+			}));
 			DecomposerRecipe.add(new DecomposerRecipe(glowstoneBucket, new PotionChemical[]
-					{
-					this.element(ElementEnum.Fe,48), this.element(ElementEnum.P,4)
-					}));
-			
+			{
+				this.element(ElementEnum.Fe, 48), this.element(ElementEnum.P, 4)
+			}));
+
 			DecomposerRecipe.add(new DecomposerRecipe(signalumBlend, new PotionChemical[]
-					{
-					this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag,4), this.molecule(MoleculeEnum.iron3oxide)
-					}));
+			{
+				this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag, 4), this.molecule(MoleculeEnum.iron3oxide)
+			}));
 			DecomposerRecipe.add(new DecomposerRecipe(signalumIngot, new PotionChemical[]
-					{
-					this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag,4), this.molecule(MoleculeEnum.iron3oxide)
-					}));
+			{
+				this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag, 4), this.molecule(MoleculeEnum.iron3oxide)
+			}));
 			DecomposerRecipe.add(new DecomposerRecipe(lumiumBlend, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag,4), this.element(ElementEnum.P)
-					}));
+			{
+				this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.P)
+			}));
 			DecomposerRecipe.add(new DecomposerRecipe(lumiumIngot, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag,4), this.element(ElementEnum.P)
-					}));
+			{
+				this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.P)
+			}));
 			DecomposerRecipe.add(new DecomposerRecipe(enderiumBlend, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag,4), this.element(ElementEnum.Pt,4),this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
-					}));
+			{
+				this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.Pt, 4), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
+			}));
 			DecomposerRecipe.add(new DecomposerRecipe(enderiumIngot, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag,4), this.element(ElementEnum.Pt,4),this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
-					}));
-			
-			
-			
+			{
+				this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.Pt, 4), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
+			}));
+
 			SynthesisRecipe.add(new SynthesisRecipe(signalumBlend, false, COST_INGOT, new PotionChemical[]
-					{
-					this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag,4), this.molecule(MoleculeEnum.iron3oxide)
-					}));
+			{
+				this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag, 4), this.molecule(MoleculeEnum.iron3oxide)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(signalumIngot, false, COST_INGOT, new PotionChemical[]
-					{
-					this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag,4), this.molecule(MoleculeEnum.iron3oxide)					
-					}));
+			{
+				this.element(ElementEnum.Cu, 12), this.element(ElementEnum.Ag, 4), this.molecule(MoleculeEnum.iron3oxide)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(lumiumBlend, false, COST_INGOT, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag,4), this.element(ElementEnum.P)
-					}));
+			{
+				this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.P)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(lumiumIngot, false, COST_INGOT, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag,4), this.element(ElementEnum.P)
-					}));
+			{
+				this.element(ElementEnum.Sn, 12), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.P)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(enderiumBlend, false, COST_INGOT, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag,4), this.element(ElementEnum.Pt,4),this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
-					}));
-			SynthesisRecipe.add(new SynthesisRecipe(enderiumIngot, false, COST_INGOT*2, new PotionChemical[]
-					{
-					this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag,4), this.element(ElementEnum.Pt,4),this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8), this.molecule(MoleculeEnum.iron3oxide),this.element(ElementEnum.Pu),this.element(ElementEnum.C, 8),this.element(ElementEnum.S,16)
-					}));
+			{
+				this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.Pt, 4), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8)
+			}));
+			SynthesisRecipe.add(new SynthesisRecipe(enderiumIngot, false, COST_INGOT * 2, new PotionChemical[]
+			{
+				this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.Pt, 4), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Pu), this.element(ElementEnum.C, 8), this.element(ElementEnum.S, 16)
+			}));
 		}
-		
+
 		//RailCraft
 		if (Loader.isModLoaded("Railcraft"))
 		{
@@ -2797,7 +2793,9 @@ public class MinechemRecipes
 			Block post = GameRegistry.findBlock("Railcraft", "tile.railcraft.post");
 			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPost), this.element(ElementEnum.Fe, 5)));
 			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPlatform), this.element(ElementEnum.Fe, 5)));
-			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]{}));
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]
+			{
+			}));
 		}
 
 		//Mekanism
