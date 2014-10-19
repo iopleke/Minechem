@@ -40,7 +40,6 @@ public class DecomposerFluidRecipe extends DecomposerRecipe
 	@Override
 	public ArrayList<PotionChemical> getOutput()
 	{
-		//return this.output;
 		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
 		result.addAll(this.output.values());
 		return result;
@@ -49,9 +48,8 @@ public class DecomposerFluidRecipe extends DecomposerRecipe
 	@Override
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
-		//return this.output;
-		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
-		result.addAll(this.output.values());
-		return result;
+        ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+        result.addAll(this.output.values());
+        return result;
 	}
 }

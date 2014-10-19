@@ -32,7 +32,6 @@ import org.lwjgl.opengl.GL11;
 
 public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
-
 	private static final int SYNTHESIS_X = 198;
 	private static final int SYNTHESIS_Y = 122;
 	private static final int DECOMPOSER_X = 198;
@@ -486,5 +485,4 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 	{
 		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
-
 }
