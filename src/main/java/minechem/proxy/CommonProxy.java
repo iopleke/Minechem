@@ -3,8 +3,10 @@ package minechem.proxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.Minechem;
-import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.tick.ScheduledTickHandler;
+import minechem.fluid.MinechemFluid;
+import minechem.fluid.MinechemFluidBlock;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.utils.Reference;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -68,8 +70,12 @@ public class CommonProxy implements Reference
 		return "";
 	}
 
-	public EntityPlayer getPlayer(MessageContext context)
-	{
-		return context.getServerHandler().playerEntity;
-	}
+    public EntityPlayer getPlayer(MessageContext context)
+    {
+        return context.getServerHandler().playerEntity;
+    }
+    
+    public void onAddFluid(MinechemFluid fluid,MinechemFluidBlock block){
+    	
+    }
 }

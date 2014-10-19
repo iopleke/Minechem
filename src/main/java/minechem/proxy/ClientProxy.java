@@ -6,11 +6,13 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidBlockChemical;
 import minechem.fluid.FluidTextureStitchHandler;
+import minechem.fluid.MinechemFluid;
+import minechem.fluid.MinechemFluidBlock;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
 import minechem.render.ChemicalFluidBlockRenderingHandler;
+import minechem.render.FluidItemRenderingHandler;
 import minechem.sound.MinechemSoundEvent;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
@@ -45,11 +47,13 @@ public class ClientProxy extends CommonProxy
 
 	public static IIcon sand;
 
+	public FluidItemRenderingHandler fluidItemRenderingHandler;
+	
 	@Override
 	public void registerRenderers()
 	{
-		RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-		FluidBlockChemical.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+		RENDER_ID=RenderingRegistry.getNextAvailableRenderId();
+		MinechemFluidBlock.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
@@ -65,7 +69,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
 
-		RenderingRegistry.registerBlockHandler(91, new ChemicalFluidBlockRenderingHandler());
+		RenderingRegistry.registerBlockHandler(MinechemFluidBlock.RENDER_ID, new ChemicalFluidBlockRenderingHandler());
 	}
 
 	@Override
@@ -93,4 +97,14 @@ public class ClientProxy extends CommonProxy
 	{
 		return Minecraft.getMinecraft().thePlayer;
 	}
+    
+    @Override
+	public void onAddFluid(MinechemFluid fluid,MinechemFluidBlock block){
+    	super.onAddFluid(fluid, block);
+    	
+    	if (fluidItemRenderingHandler==null){
+    		fluidItemRenderingHandler=new FluidItemRenderingHandler();
+    	}
+    	MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(block),fluidItemRenderingHandler);
+    }
 }
