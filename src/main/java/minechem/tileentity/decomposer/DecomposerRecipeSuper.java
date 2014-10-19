@@ -109,10 +109,10 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
 	
 	@Override
 	public ArrayList<PotionChemical> getOutputRaw() {
-		ArrayList<PotionChemical> result = super.getOutput();
-		for (DecomposerRecipeSelect current:this.selectRecipes.keySet())
+		ArrayList<PotionChemical> result = super.getOutputRaw();
+		for (DecomposerRecipeSelect current : this.selectRecipes.keySet())
 		{
-			for (int i=0;i<this.selectRecipes.get(current);i++)
+			for (int i = 0; i < this.selectRecipes.get(current); i++)
 			{
 				result.addAll(current.getOutputRaw());
 			}
@@ -146,6 +146,25 @@ public class DecomposerRecipeSuper extends DecomposerRecipe {
     public boolean hasOutput()
     {
         return !this.selectRecipes.values().isEmpty() || !this.output.isEmpty();
+    }
+
+    @Override
+    public boolean outputContains(PotionChemical potionChemical)
+    {
+        boolean contains;
+        contains = super.outputContains(potionChemical);
+        if (!contains)
+        {
+            for (DecomposerRecipeSelect dr : selectRecipes.keySet())
+            {
+                contains = dr.outputContains(potionChemical);
+                if (contains)
+                {
+                    break;
+                }
+            }
+        }
+        return contains;
     }
 
     public float getChance()

@@ -104,18 +104,10 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		}
 		for (DecomposerRecipe dr : DecomposerRecipe.recipes.values())
 		{
-			ArrayList<PotionChemical> rawOutputs = dr.getOutputRaw();
-			if (rawOutputs != null)
-			{
-				for (PotionChemical c : rawOutputs)
-				{
-					if (resultChemical.sameAs(c))
-					{
-						registerDecomposerRecipe(dr);
-						break;
-					}
-				}
-			}
+            if (dr.outputContains(resultChemical))
+            {
+                registerDecomposerRecipe(dr);
+            }
 		}
 	}
 
