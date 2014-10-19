@@ -44,7 +44,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					{
 						addPotionChemical(decompRecipe.getOutput());
 					}
-				} else if (!component.isItemEqual(input))
+				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
