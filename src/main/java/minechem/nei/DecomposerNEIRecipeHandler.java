@@ -194,7 +194,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		// The first item to be rendered from the multi-output decomposer recipe.
 		protected PositionedStack output1;
 		// Other items to be rendered from the multi-output decomposer recipe.
-		protected List<PositionedStack> otherOutputs;
+		protected List<PositionedStack> otherOutputs = new ArrayList<PositionedStack>();
 
 		protected BaseCachedDecomposerRecipe(ItemStack input)
 		{
@@ -240,11 +240,9 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             {
                 outputs = MinechemHelper.pushTogetherStacks(outputs);
                 output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
-                otherOutputs = new ArrayList<PositionedStack>();
                 if (outputs.size() > 1)
                 {
                     int itemsPerLine = calcItemsPerLine(outputs);
-                    itemsPerLine = itemsPerLine <= 0 ? 2 :  itemsPerLine;
                     double scale = 8.5 / itemsPerLine;
                     int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
                     for (int idx = 1; idx < outputs.size(); idx++)
@@ -279,7 +277,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			super(dr.getInput());
 			ArrayList<ItemStack> outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutput());
-			setOutputs(outputs);
+            setOutputs(outputs);
 		}
 	}
 
@@ -293,7 +291,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			super(dr.getInput());
 			this.chance = dr.getChance();
 			ArrayList<ItemStack> outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutput());
-			setOutputs(outputs);
+            setOutputs(outputs);
 		}
 
 		@Override
@@ -344,7 +342,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				}
 				ArrayList<DecomposerRecipe> possibleRecipes = decomposerRecipeSelect.getAllPossibleRecipes();
 				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(possibleRecipes.get(outputSetToShow).getOutput());
-                if (outputsToShow != null) setOutputs(outputsToShow);
+                setOutputs(outputsToShow);
 			}
 		}
 	}
@@ -376,7 +374,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             {
                 cycleAtTick = tick + 20;
                 ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
-                if (outputsToShow != null) setOutputs(outputsToShow);
+                setOutputs(outputsToShow);
             }
         }
 
