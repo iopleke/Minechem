@@ -234,19 +234,19 @@ public class DecomposerRecipe
 		return !this.output.values().isEmpty();
 	}
 
-    public boolean outputContains(PotionChemical potionChemical)
-    {
-        boolean contains = false;
-        for (PotionChemical output : this.output.values())
-        {
-            contains = potionChemical.sameAs(output);
-            if (contains)
-            {
-                break;
-            }
-        }
-        return contains;
-    }
+	public boolean outputContains(PotionChemical potionChemical)
+	{
+		boolean contains = false;
+		for (PotionChemical output : this.output.values())
+		{
+			contains = potionChemical.sameAs(output);
+			if (contains)
+			{
+				break;
+			}
+		}
+		return contains;
+	}
 
 	public void scaleOutput(float scale)
 	{
@@ -261,9 +261,9 @@ public class DecomposerRecipe
 		for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 		{
 			// TODO: stop using displayname since it depends on language should be unlocalized
-			if (itemStack.getDisplayName() != null && Settings.DecomposerBlacklist[i] != null)
+			if (itemStack.getUnlocalizedName() != null && Settings.DecomposerBlacklist[i] != null)
 			{
-				if (Compare.stringSieve(itemStack.getDisplayName()).contains((CharSequence) Compare.stringSieve(Settings.DecomposerBlacklist[i])))
+				if (Compare.stringSieve(itemStack.getUnlocalizedName()).contains((CharSequence) Compare.stringSieve(Settings.DecomposerBlacklist[i])))
 				{
 					if (Settings.DebugMode)
 					{
