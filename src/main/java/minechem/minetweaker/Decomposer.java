@@ -35,12 +35,9 @@ public class Decomposer {
 				toAdd=OreDictionary.getOres(((IOreDictEntry) input).getName());
 			else if(input instanceof IItemStack)
 				toAdd.add(InputHelper.toStack((IItemStack) input));
-			System.out.println(toAdd.toString());
 			for (ItemStack addInput:toAdd)
 				MineTweakerAPI.apply(new AddRecipeAction(addInput, output));
 		}
-		else
-			System.out.println("Empty output String!");
 	}
 	
 	
