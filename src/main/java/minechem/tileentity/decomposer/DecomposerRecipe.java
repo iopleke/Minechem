@@ -260,7 +260,6 @@ public class DecomposerRecipe
 	{
 		for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
 		{
-			// TODO: stop using displayname since it depends on language should be unlocalized
 			if (itemStack.getUnlocalizedName() != null && Settings.DecomposerBlacklist[i] != null)
 			{
 				if (Compare.stringSieve(itemStack.getUnlocalizedName()).contains((CharSequence) Compare.stringSieve(Settings.DecomposerBlacklist[i])))

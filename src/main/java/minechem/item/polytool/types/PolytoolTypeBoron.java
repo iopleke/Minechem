@@ -10,46 +10,46 @@ import net.minecraft.world.World;
 public class PolytoolTypeBoron extends PolytoolUpgradeType
 {
 
-    public PolytoolTypeBoron()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-    {
-    }
-
-	@Override
-	public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving) {
-		
+	public PolytoolTypeBoron()
+	{
+		super();
 	}
 
+	@Override
+	public float getStrVsBlock(ItemStack itemStack, Block block)
+	{
+
+		return 0;
+	}
 
 	@Override
-    public ElementEnum getElement()
-    {
+	public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+	{
+	}
 
-        return ElementEnum.B;
-    }
+	@Override
+	public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
+	{
 
-    @Override
-    public void onTick()
-    {
-    }
+	}
 
-    @Override
-    public String getDescription()
-    {
+	@Override
+	public ElementEnum getElement()
+	{
 
-        return "Kills spiders with pesticides";
-    }
+		return ElementEnum.B;
+	}
+
+	@Override
+	public void onTick()
+	{
+	}
+
+	@Override
+	public String getDescription()
+	{
+
+		return "Kills spiders with pesticides";
+	}
 
 }

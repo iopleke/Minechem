@@ -1,16 +1,15 @@
 package minechem.oredictionary;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import minechem.Minechem;
 import minechem.MinechemRecipes;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 {
@@ -80,9 +79,9 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 		switch (prefix)
 		{
-            case oreNether:
-                DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 6d));
-                break;
+			case oreNether:
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 6d));
+				break;
 			case ore:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 3d));
 				break;
@@ -90,7 +89,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				if (!haveSeen(ore, EnumOrePrefix.dust) && !haveSeen(ore, EnumOrePrefix.dustSmall))
 				{
-					SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT , ore.getComposition());
+					SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT, ore.getComposition());
 					registeredIngots.put(ore, oreName);
 				}
 				break;
@@ -101,7 +100,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 			case dust:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				unregisterIngot(ore);
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT , ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT, ore.getComposition());
 				break;
 			case dustDirty:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 0.75d));

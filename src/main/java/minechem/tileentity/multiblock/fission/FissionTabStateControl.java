@@ -1,10 +1,12 @@
 package minechem.tileentity.multiblock.fission;
+
 import minechem.Settings;
 import minechem.gui.GuiTabStateControl;
 import net.minecraft.client.gui.Gui;
+
 public class FissionTabStateControl extends GuiTabStateControl
 {
-	private int lastKnownEnergyCost =0;
+	private int lastKnownEnergyCost = 0;
 
 	public FissionTabStateControl(Gui gui, FissionTileEntity fission)
 	{
@@ -20,15 +22,13 @@ public class FissionTabStateControl extends GuiTabStateControl
 		if (this.tileEntity.inventory[0] == null)
 		{
 			state = TabState.norecipe;
-		}
-		else
+		} else
 		{
 			lastKnownEnergyCost = (this.tileEntity.inventory[0].getItemDamage() + 1) * Settings.fissionMultiplier;
 			if (this.tileEntity.getEnergyNeeded() < this.tileEntity.getEnergyStored())
 			{
 				state = TabState.powered;
-			}
-			else
+			} else
 			{
 				state = TabState.unpowered;
 			}
@@ -39,7 +39,7 @@ public class FissionTabStateControl extends GuiTabStateControl
 	@Override
 	public String getTooltip()
 	{
-		if(!isFullyOpened())
+		if (!isFullyOpened())
 		{
 			if (state == TabState.unpowered && lastKnownEnergyCost > 0)
 			{

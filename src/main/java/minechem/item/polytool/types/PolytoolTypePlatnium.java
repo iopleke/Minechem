@@ -11,60 +11,60 @@ import net.minecraft.world.World;
 public class PolytoolTypePlatnium extends PolytoolUpgradeType
 {
 
-    public PolytoolTypePlatnium()
-    {
-        super();
-    }
+	public PolytoolTypePlatnium()
+	{
+		super();
+	}
 
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
+	@Override
+	public float getStrVsBlock(ItemStack itemStack, Block block)
+	{
 
-        return 0;
-    }
+		return 0;
+	}
 
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-    {
-        if (!target.worldObj.isRemote)
-        {
-            if (target.worldObj.rand.nextInt(50) < power + 1)
-            {
-                player.worldObj.playAuxSFX(2002, (int) Math.round(player.posX), (int) Math.round(player.posY), (int) Math.round(player.posZ), 0);
-                int i = (int) (power + player.worldObj.rand.nextInt(5) + player.worldObj.rand.nextInt(5));
+	@Override
+	public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+	{
+		if (!target.worldObj.isRemote)
+		{
+			if (target.worldObj.rand.nextInt(50) < power + 1)
+			{
+				player.worldObj.playAuxSFX(2002, (int) Math.round(player.posX), (int) Math.round(player.posY), (int) Math.round(player.posZ), 0);
+				int i = (int) (power + player.worldObj.rand.nextInt(5) + player.worldObj.rand.nextInt(5));
 
-                while (i > 0)
-                {
-                    int j = EntityXPOrb.getXPSplit(i);
-                    i -= j;
-                    player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY, player.posZ, j));
-                }
-            }
-        }
-    }
+				while (i > 0)
+				{
+					int j = EntityXPOrb.getXPSplit(i);
+					i -= j;
+					player.worldObj.spawnEntityInWorld(new EntityXPOrb(player.worldObj, player.posX, player.posY, player.posZ, j));
+				}
+			}
+		}
+	}
 
-    @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world,Block block , int x, int y, int z, EntityLivingBase entityLiving)
-    {
-    }
+	@Override
+	public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
+	{
+	}
 
-    @Override
-    public ElementEnum getElement()
-    {
+	@Override
+	public ElementEnum getElement()
+	{
 
-        return ElementEnum.Pt;
-    }
+		return ElementEnum.Pt;
+	}
 
-    @Override
-    public void onTick()
-    {
-    }
+	@Override
+	public void onTick()
+	{
+	}
 
-    @Override
-    public String getDescription()
-    {
+	@Override
+	public String getDescription()
+	{
 
-        return "Bonus XP";
-    }
+		return "Bonus XP";
+	}
 
 }

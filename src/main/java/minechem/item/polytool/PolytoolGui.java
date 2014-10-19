@@ -4,7 +4,6 @@ import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Random;
-
 import minechem.MinechemItemsRegistration;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
@@ -17,13 +16,12 @@ import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class PolytoolGui extends GuiContainerTabbed
 {
 	private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/polytool.png");
-	private static final ItemStack polytoolItem=new ItemStack(MinechemItemsRegistration.polytool);
+	private static final ItemStack polytoolItem = new ItemStack(MinechemItemsRegistration.polytool);
 	public ArrayList<ElementGuiHelper> elements = new ArrayList();
 	long renders;
 	ItemStack polytool;

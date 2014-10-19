@@ -1,18 +1,19 @@
 package minechem.tileentity.decomposer;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import java.util.ArrayList;
 import java.util.Iterator;
-
-import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.Settings;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
+import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Transactor;
-import minechem.utils.Compare;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -27,8 +28,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.relauncher.Side;
 
 public class DecomposerTileEntity extends MinechemTileEntityElectric implements ISidedInventory, IFluidHandler
 {
@@ -147,8 +146,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			{
 				setInventorySlotContents(outputSlot, itemstack);
 				return true;
-			} 
-			
+			}
+
 		}
 		return false;
 	}
@@ -167,10 +166,12 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		DecomposerRecipe recipe = getRecipeFromItemStack(inputStack);
 		return (recipe != null);
 	}
-	
-	private boolean energyToDecompose(){
-		
-		if(this.getEnergyStored() >= Settings.costDecomposition){
+
+	private boolean energyToDecompose()
+	{
+
+		if (this.getEnergyStored() >= Settings.costDecomposition)
+		{
 			return true;
 		}
 		return false;
@@ -250,19 +251,22 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			}
 		} catch (Exception e)
 		{
-		        // softly falls the rain
+			// softly falls the rain
 			// but the forest does not see
 			// silently this fails
 		}
 
 	}
-	
-	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack){
+
+	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack)
+	{
 		Fluid fluid = FluidRegistry.lookupFluidForBlock(Block.getBlockFromItem(itemStack.getItem()));
-		FluidStack fluidStack = (fluid!=null)? new FluidStack(fluid,1000):null;
+		FluidStack fluidStack = (fluid != null) ? new FluidStack(fluid, 1000) : null;
 		DecomposerRecipe result = DecomposerRecipeHandler.instance.getRecipe(itemStack);
-		if (fluidStack!=null)
+		if (fluidStack != null)
+		{
 			result = DecomposerRecipeHandler.instance.getRecipe(fluidStack);
+		}
 		return result;
 	}
 
@@ -427,7 +431,10 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 
 		//Minechem.LOGGER.info(fluid.toString());
-		if (DecomposerRecipe.get(new FluidStack(fluid, 1))!=null) return true;
+		if (DecomposerRecipe.get(new FluidStack(fluid, 1)) != null)
+		{
+			return true;
+		}
 
 		return false;
 	}
@@ -472,45 +479,44 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		{
 			state = State.finished;
 		}
-        pushQueue();
+		pushQueue();
 	}
 
-    /**
-     * Combines stacks when possible
-     */
-    private void pushQueue()
-    {
-        for(int i = this.inventory.length -1; i > 0; i--)
-        {
-            if (i == 1 || this.inventory[i] == null)
-            {
-                continue;
-            }
-            for (int j = 1; j < i; j++)
-            {
-                if (this.inventory[j] == null) {
-                    setInventorySlotContents(j, this.inventory[i]);
-                    setInventorySlotContents(i, null);
-                    break;
-                }
-                else if (Compare.stacksAreSameKind(this.inventory[j], this.inventory[i]))
-                {
-                    int spaceLeft = this.inventory[j].getMaxStackSize() - this.inventory[j].stackSize;
-                    if (spaceLeft >= this.inventory[i].stackSize)
-                    {
-                        this.inventory[j].stackSize += this.inventory[i].stackSize;
-                        this.inventory[i] = null;
-                    }
-                    else
-                    {
-                        this.inventory[j].stackSize += spaceLeft;
-                        this.inventory[i].stackSize -= spaceLeft;
-                    }
-                    break;
-                }
-            }
-        }
-    }
+	/**
+	 * Combines stacks when possible
+	 */
+	private void pushQueue()
+	{
+		for (int i = this.inventory.length - 1; i > 0; i--)
+		{
+			if (i == 1 || this.inventory[i] == null)
+			{
+				continue;
+			}
+			for (int j = 1; j < i; j++)
+			{
+				if (this.inventory[j] == null)
+				{
+					setInventorySlotContents(j, this.inventory[i]);
+					setInventorySlotContents(i, null);
+					break;
+				} else if (Compare.stacksAreSameKind(this.inventory[j], this.inventory[i]))
+				{
+					int spaceLeft = this.inventory[j].getMaxStackSize() - this.inventory[j].stackSize;
+					if (spaceLeft >= this.inventory[i].stackSize)
+					{
+						this.inventory[j].stackSize += this.inventory[i].stackSize;
+						this.inventory[i] = null;
+					} else
+					{
+						this.inventory[j].stackSize += spaceLeft;
+						this.inventory[i].stackSize -= spaceLeft;
+					}
+					break;
+				}
+			}
+		}
+	}
 
 	@Override
 	public void readFromNBT(NBTTagCompound nbt)
@@ -593,10 +599,11 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 				//Minechem.LOGGER.info(input.toString());
 				DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) DecomposerRecipe.get(input);
-				if (fluidRecipe!=null)
+				if (fluidRecipe != null)
 				{
-					
-					if (fluids.get(i).amount>=fluidRecipe.inputFluid.amount){
+
+					if (fluids.get(i).amount >= fluidRecipe.inputFluid.amount)
+					{
 						// The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
 						this.setInventorySlotContents(this.kInputSlot, new ItemStack(fluidRecipe.inputFluid.getFluid().getBlock(), 1, 0));
 						fluids.get(i).amount -= fluidRecipe.inputFluid.amount;
@@ -621,10 +628,10 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			state = State.idle;
 		}
 
-        // Notify minecraft that the inventory items in this machine have changed.
-        DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
-        MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
-        this.markDirty();
+		// Notify minecraft that the inventory items in this machine have changed.
+		DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
+		MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+		this.markDirty();
 	}
 
 	@Override
@@ -650,14 +657,14 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		nbt.setByte("state", (byte) state.ordinal());
 	}
 
-    @Override
-    public Packet getDescriptionPacket()
-    {
-        writeToNBT(new NBTTagCompound());
-        return MessageHandler.INSTANCE.getPacketFrom(new DecomposerUpdateMessage(this));
-    }
+	@Override
+	public Packet getDescriptionPacket()
+	{
+		writeToNBT(new NBTTagCompound());
+		return MessageHandler.INSTANCE.getPacketFrom(new DecomposerUpdateMessage(this));
+	}
 
-    /**
+	/**
 	 * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
 	 */
 	public enum State

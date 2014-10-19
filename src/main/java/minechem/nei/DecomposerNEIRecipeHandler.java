@@ -1,5 +1,7 @@
 package minechem.nei;
 
+import static codechicken.lib.gui.GuiDraw.changeTexture;
+import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import java.awt.Rectangle;
@@ -20,9 +22,6 @@ import minechem.utils.Reference;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
-import static codechicken.lib.gui.GuiDraw.changeTexture;
-import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 {
@@ -51,21 +50,21 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		return texture.toString();
 	}
 
-    @Override
-    public int recipiesPerPage()
-    {
-        return 1;
-    }
+	@Override
+	public int recipiesPerPage()
+	{
+		return 1;
+	}
 
-    @Override
-    public void drawBackground(int recipe)
-    {
-        GL11.glColor4f(1, 1, 1, 1);
-        changeTexture(getGuiTexture());
-        drawTexturedModalRect(0, 0, 5, 11, 166, 131);
-    }
+	@Override
+	public void drawBackground(int recipe)
+	{
+		GL11.glColor4f(1, 1, 1, 1);
+		changeTexture(getGuiTexture());
+		drawTexturedModalRect(0, 0, 5, 11, 166, 131);
+	}
 
-    @Override
+	@Override
 	public void loadTransferRects()
 	{
 		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 30), MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
@@ -104,10 +103,10 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		}
 		for (DecomposerRecipe dr : DecomposerRecipe.recipes.values())
 		{
-            if (dr.outputContains(resultChemical))
-            {
-                registerDecomposerRecipe(dr);
-            }
+			if (dr.outputContains(resultChemical))
+			{
+				registerDecomposerRecipe(dr);
+			}
 		}
 	}
 
@@ -139,9 +138,9 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			if (dr.hasOutput())
 			{
-                BaseCachedDecomposerRecipe cdr = buildCachedRecipe(dr);
+				BaseCachedDecomposerRecipe cdr = buildCachedRecipe(dr);
 
-                arecipes.add(cdr);
+				arecipes.add(cdr);
 			}
 		}
 
@@ -155,7 +154,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		float chance = cdr.getChance();
 		if (chance < 1.0f)
 		{
-            String format = chance > 0.1F ? "%2.0f%%" : "%3.3f%%";
+			String format = chance > 0.1F ? "%2.0f%%" : "%3.3f%%";
 			String chanceStr = String.format(format, chance * 100.0);
 			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr) - 5;
 			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS + 10, 8, false);
@@ -237,40 +236,40 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 
 		protected void setOutputs(List<ItemStack> outputs)
 		{
-            if (outputs != null && !outputs.isEmpty())
-            {
-                outputs = MinechemHelper.pushTogetherStacks(outputs);
-                output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
-                otherOutputs = new ArrayList<PositionedStack>();
-                if (outputs.size() > 1)
-                {
-                    int itemsPerLine = calcItemsPerLine(outputs);
-                    double scale = 8.5 / itemsPerLine;
-                    int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
-                    for (int idx = 1; idx < outputs.size(); idx++)
-                    {
-                        ItemStack o = outputs.get(idx);
-                        int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
-                        int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
-                        otherOutputs.add(new PositionedStack(o, x, y));
-                    }
-                }
-            }
+			if (outputs != null && !outputs.isEmpty())
+			{
+				outputs = MinechemHelper.pushTogetherStacks(outputs);
+				output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
+				otherOutputs = new ArrayList<PositionedStack>();
+				if (outputs.size() > 1)
+				{
+					int itemsPerLine = calcItemsPerLine(outputs);
+					double scale = 8.5 / itemsPerLine;
+					int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
+					for (int idx = 1; idx < outputs.size(); idx++)
+					{
+						ItemStack o = outputs.get(idx);
+						int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
+						int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
+						otherOutputs.add(new PositionedStack(o, x, y));
+					}
+				}
+			}
 		}
 
-        private int calcItemsPerLine(List<ItemStack> list)
-        {
-            int highestStackSize = 0;
-            for (ItemStack stack : list)
-            {
-                if(highestStackSize < stack.stackSize)
-                {
-                    highestStackSize = stack.stackSize;
-                }
-            }
-            int length = (int)(Math.log10(highestStackSize)+1);
-            return 9 - length;
-        }
+		private int calcItemsPerLine(List<ItemStack> list)
+		{
+			int highestStackSize = 0;
+			for (ItemStack stack : list)
+			{
+				if (highestStackSize < stack.stackSize)
+				{
+					highestStackSize = stack.stackSize;
+				}
+			}
+			int length = (int) (Math.log10(highestStackSize) + 1);
+			return 9 - length;
+		}
 	}
 
 	public class CachedDecomposerRecipe extends BaseCachedDecomposerRecipe
@@ -349,43 +348,46 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		}
 	}
 
-    public class CachedDecomposerRecipeSuper extends CachedDecomposerRecipe
-    {
-        // Which tick to cycle at. This is initialized lazily, so
-        // the first output set is shown for the normal duration.
-        private long cycleAtTick;
+	public class CachedDecomposerRecipeSuper extends CachedDecomposerRecipe
+	{
+		// Which tick to cycle at. This is initialized lazily, so
+		// the first output set is shown for the normal duration.
+		private long cycleAtTick;
 
-        // The fractional chance [0, 1] that this recipe will yield any output.
-        private float chance;
+		// The fractional chance [0, 1] that this recipe will yield any output.
+		private float chance;
 
-        private DecomposerRecipeSuper decomposerRecipeSuper;
+		private DecomposerRecipeSuper decomposerRecipeSuper;
 
-        public CachedDecomposerRecipeSuper(DecomposerRecipeSuper dr)
-        {
-            super(dr);
-            cycleAtTick = -1;
-            decomposerRecipeSuper = dr;
-            chance = dr.getChance();
-        }
+		public CachedDecomposerRecipeSuper(DecomposerRecipeSuper dr)
+		{
+			super(dr);
+			cycleAtTick = -1;
+			decomposerRecipeSuper = dr;
+			chance = dr.getChance();
+		}
 
-        @Override
-        public void cycleOutput(long tick)
-        {
-            if(cycleAtTick == -1) cycleAtTick = tick + 20;
-            if (tick >= cycleAtTick)
-            {
-                cycleAtTick = tick + 20;
-                ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
-                setOutputs(outputsToShow);
-            }
-        }
+		@Override
+		public void cycleOutput(long tick)
+		{
+			if (cycleAtTick == -1)
+			{
+				cycleAtTick = tick + 20;
+			}
+			if (tick >= cycleAtTick)
+			{
+				cycleAtTick = tick + 20;
+				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
+				setOutputs(outputsToShow);
+			}
+		}
 
-        @Override
-        public float getChance()
-        {
-            return chance;
-        }
+		@Override
+		public float getChance()
+		{
+			return chance;
+		}
 
-    }
+	}
 
 }

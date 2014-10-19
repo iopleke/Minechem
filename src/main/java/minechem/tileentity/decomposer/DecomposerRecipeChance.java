@@ -2,36 +2,36 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 import java.util.Random;
-
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeChance extends DecomposerRecipe
 {
 
-    static Random random = new Random();
-    float chance;
+	static Random random = new Random();
+	float chance;
 
-    public DecomposerRecipeChance(ItemStack input, float chance, PotionChemical... output)
-    {
-        super(input, output);
-        this.chance = chance;
-    }
+	public DecomposerRecipeChance(ItemStack input, float chance, PotionChemical... output)
+	{
+		super(input, output);
+		this.chance = chance;
+	}
 
-    @Override
-    public ArrayList<PotionChemical> getOutput()
-    {
-        if (random.nextFloat() < this.chance)
-            return super.getOutput();
-        else
-        {
-            return null;
-        }
-    }
+	@Override
+	public ArrayList<PotionChemical> getOutput()
+	{
+		if (random.nextFloat() < this.chance)
+		{
+			return super.getOutput();
+		} else
+		{
+			return null;
+		}
+	}
 
-    public float getChance()
-    {
-        return chance;
-    }
+	public float getChance()
+	{
+		return chance;
+	}
 
 }
