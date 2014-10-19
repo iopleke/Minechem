@@ -134,13 +134,15 @@ public class InputHelper {
 			return null;
 		}
 		if (count<1) count=1;
-		for (ElementEnum val:ElementEnum.elements)
-			if (val.name()==name) 
-				return new Element(val,count);
-		for (MoleculeEnum val:MoleculeEnum.molecules)
-			if (val.name()==name) 
-				return new Molecule(val,count);
-		
+		for (ElementEnum ele:ElementEnum.elements)
+			if (ele!=null && ele.name()!=null && ele.name().equals(name)) 
+				return new Element(ele,count);
+		for (MoleculeEnum mol:MoleculeEnum.molecules)
+		{
+			if (mol!=null && mol.name()!=null && mol.name().equals(name))
+				return new Molecule(mol,count);
+
+		}
 		return null;
 	}
 }
