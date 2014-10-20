@@ -6,6 +6,7 @@ import java.util.Map;
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
+import minechem.utils.MinechemHelper;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 
@@ -106,10 +107,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 			for (int i = 0; i < this.selectRecipes.get(current); i++)
 			{
 				ArrayList<PotionChemical> partialResult = current.getOutput();
-				if (partialResult != null)
-				{
-					result.addAll(partialResult);
-				}
+				if (partialResult != null) result.addAll(partialResult);
 			}
 		}
 		return result;
@@ -123,10 +121,12 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		{
 			for (int i = 0; i < this.selectRecipes.get(current); i++)
 			{
-				result.addAll(current.getOutputRaw());
+                ArrayList<PotionChemical> partialResult = current.getOutputRaw();
+                partialResult = MinechemHelper.pushTogetherChemicals(partialResult);
+                if (partialResult != null) result.addAll(partialResult);
 			}
 		}
-		return result;
+		return MinechemHelper.pushTogetherChemicals(result);
 	}
 
 	public ArrayList<PotionChemical> getGuaranteedOutput()
