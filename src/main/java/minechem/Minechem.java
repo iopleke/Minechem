@@ -38,6 +38,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -232,8 +233,10 @@ public class Minechem
 		FluidChemicalDispenser.init();
 		ChemicalFluidReactionHandler.initExplodableChemical();
 		
-		MineTweakerAPI.registerClass(Decomposer.class);
-		MineTweakerAPI.registerClass(Synthesiser.class);
+		if (Loader.isModLoaded("MineTweaker3")) {
+			MineTweakerAPI.registerClass(Decomposer.class);
+			MineTweakerAPI.registerClass(Synthesiser.class);
+		}
 	}
 
 	@EventHandler
