@@ -240,6 +240,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             {
                 outputs = MinechemHelper.pushTogetherStacks(outputs);
                 output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
+                otherOutputs = new ArrayList<PositionedStack>();
                 if (outputs.size() > 1)
                 {
                     int itemsPerLine = calcItemsPerLine(outputs);
