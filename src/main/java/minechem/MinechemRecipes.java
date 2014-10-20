@@ -3290,7 +3290,7 @@ public class MinechemRecipes
 		{
 			this.oreDictionaryHandlers.add(new OreDictionaryIC2Handler());
 		}
-		if (Loader.isModLoaded("AppliedEnergistics"))
+		if (Loader.isModLoaded("appliedenergistics2"))
 		{
 			this.oreDictionaryHandlers.add(new OreDictionaryAppliedEnergisticsHandler());
 		}
