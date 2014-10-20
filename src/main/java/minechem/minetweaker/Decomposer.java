@@ -260,12 +260,12 @@ public class Decomposer {
 
 		@Override
 		public String describe() {
-			return "Adding decomposer recipe for " + recipe.getInput().getDisplayName();
+			return "Adding decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName();
+			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
 		}
 
 		@Override
@@ -302,12 +302,12 @@ public class Decomposer {
 
 		@Override
 		public String describe() {
-			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName();
+			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Restoring decomposer recipe for " + recipe.getInput().getDisplayName();
+			return "Restoring decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
 		}
 
 		@Override
