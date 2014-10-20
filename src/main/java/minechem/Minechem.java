@@ -1,5 +1,42 @@
 package minechem;
 
+import java.util.Arrays;
+
+import minechem.fluid.FluidChemicalDispenser;
+import minechem.fluid.reaction.ChemicalFluidReactionHandler;
+import minechem.gui.CreativeTabMinechem;
+import minechem.gui.GuiHandler;
+import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabTable;
+import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.chemistjournal.ChemistJournalTab;
+import minechem.item.polytool.PolytoolEventHandler;
+import minechem.minetweaker.Decomposer;
+import minechem.minetweaker.Synthesiser;
+import minechem.network.MessageHandler;
+import minechem.potion.PotionCoatingRecipe;
+import minechem.potion.PotionCoatingSubscribe;
+import minechem.potion.PotionEnchantmentCoated;
+import minechem.potion.PotionInjector;
+import minechem.proxy.CommonProxy;
+import minechem.render.EffectsRenderer;
+import minechem.tileentity.decomposer.DecomposerRecipeHandler;
+import minechem.utils.Recipe;
+import minechem.utils.Reference;
+import minetweaker.MineTweakerAPI;
+import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.item.ItemStack;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.client.event.RenderGameOverlayEvent;
+import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.MinecraftForge;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -14,37 +51,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.Arrays;
-import minechem.fluid.FluidChemicalDispenser;
-import minechem.fluid.reaction.ChemicalFluidReactionHandler;
-import minechem.gui.CreativeTabMinechem;
-import minechem.gui.GuiHandler;
-import minechem.gui.GuiTabHelp;
-import minechem.gui.GuiTabTable;
-import minechem.item.blueprint.MinechemBlueprint;
-import minechem.item.chemistjournal.ChemistJournalTab;
-import minechem.item.polytool.PolytoolEventHandler;
-import minechem.network.MessageHandler;
-import minechem.potion.PotionCoatingRecipe;
-import minechem.potion.PotionCoatingSubscribe;
-import minechem.potion.PotionEnchantmentCoated;
-import minechem.potion.PotionInjector;
-import minechem.proxy.CommonProxy;
-import minechem.render.EffectsRenderer;
-import minechem.tileentity.decomposer.DecomposerRecipeHandler;
-import minechem.utils.Recipe;
-import minechem.utils.Reference;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.WeightedRandomChestContent;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.MinecraftForge;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 @Mod(modid = Minechem.ID, name = Minechem.NAME, version = Minechem.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);")
 public class Minechem
@@ -145,7 +151,7 @@ public class Minechem
 			LOGGER.info("Registering Blueprints...");
 		}
 		MinechemBlueprint.registerBlueprints();
-
+		
 	}
 
 	@EventHandler
@@ -225,6 +231,9 @@ public class Minechem
 
 		FluidChemicalDispenser.init();
 		ChemicalFluidReactionHandler.initExplodableChemical();
+		
+		MineTweakerAPI.registerClass(Decomposer.class);
+		MineTweakerAPI.registerClass(Synthesiser.class);
 	}
 
 	@EventHandler

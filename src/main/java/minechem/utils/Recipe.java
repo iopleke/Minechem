@@ -77,8 +77,19 @@ public class Recipe
 					String key = DecomposerRecipe.getKey(input);
 					if (components != null && key != null)
 					{
+                        boolean badRecipe = false;
+                        for (ItemStack component : components)
+                        {
+                            if (component != null && component.getItem() != null)
+                            {
+                                if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage())
+                                {
+                                    badRecipe = true;
+                                }
+                            }
+                        }
 						Recipe currRecipe = recipes.get(key);
-						if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()))
+						if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
 						{
 							recipes.put(key, new Recipe(input, components));
 						}

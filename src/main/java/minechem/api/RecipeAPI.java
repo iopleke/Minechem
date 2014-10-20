@@ -48,7 +48,7 @@ public class RecipeAPI
 			return false;
 		}
 	}
-
+	
 	/**
 	 * Adds a chemical synthesis recipe to Minechem.
 	 * <p/>

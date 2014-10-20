@@ -44,14 +44,10 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					{
 						addPotionChemical(decompRecipe.getOutput());
 					}
-				} else if (!component.isItemEqual(input))
+				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
-					if (component.toString().contains("railcraft"))
-					{
-						component.canEditBlocks();
-					}
 					if (recipe != null && level < Settings.recursiveDepth)
 					{
 						DecomposerRecipeSuper newSuper;
