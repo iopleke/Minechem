@@ -84,12 +84,12 @@ public class Synthesiser {
 
 		@Override
 		public String describe() {
-			return "Adding synthesiser recipe for " + recipe.getOutput().getDisplayName();
+			return "Adding synthesiser recipe for " + recipe.getOutput().getDisplayName()+"\n";
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Removing synthesiser recipe for " + recipe.getOutput().getDisplayName();
+			return "Removing synthesiser recipe for " + recipe.getOutput().getDisplayName()+"\n";
 		}
 
 		@Override
@@ -122,12 +122,12 @@ public class Synthesiser {
 
 		@Override
 		public String describe() {
-			return "Removing synthesis recipe for " + recipe.getOutput().getDisplayName();
+			return "Removing synthesis recipe for " + recipe.getOutput().getDisplayName()+"\n";
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Restoring synthesis recipe for " + recipe.getOutput().getDisplayName();
+			return "Restoring synthesis recipe for " + recipe.getOutput().getDisplayName()+"\n";
 		}
 
 		@Override
