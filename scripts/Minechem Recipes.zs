@@ -2,11 +2,7 @@ import mods.minechem.Decomposer;
 import mods.minechem.Synthesiser;
 
 //Register commonly used items
-val HSLA = <RotaryCraft:rotarycraft_item_shaftcraft:1>;
-val tungsten = <RotaryCraft:rotarycraft_item_compacts:5>;
-val bedrock = <RotaryCraft:rotarycraft_item_compacts:3>;
 val redstone = <minecraft:redstone>;
-val diamond = <minecraft:diamond>;
 val iron = <ore:ingotIron>;
 val copper = <ore:ingotCopper>;
 val tin = <ore:ingotTin>;
@@ -14,10 +10,15 @@ val lead = <ore:ingotLead>;
 val gold = <ore:ingotGold>;
 val glass = <minecraft:glass>;
 
-//Decomposer.remove("ingotLead");
-Decomposer.remove(bedrock);
-//Decomposer.addRecipe(bedrock,["1 H", "2 ethanol"]);
-//Decomposer.addRecipe(<ore:ingotLead>,"16 Pb");
+//Decomposer.remove(lead);                             				-- Ore Dict Removal
+//Decomposer.remove(redstone);                         				-- Single Item Removal
+//Decomposer.remove(liquidWater*1000);                 				-- Fluid Removal
+//Decomposer.addRecipe(redstone,["1 H", "2 ethanol"]); 				-- Add basic recipe
+//Decomposer.addRecipe(liquidWater*1000,"16 water");   				-- Add fluid recipe
+//Decomposer.addRecipe(tin,0.5,["16 Sn","12 Sn"]);   				-- Add chance recipe
+//Decomposer.addRecipe(tin,[["16 Sn"],["12 Sn","4 Ag"]]);			-- Add select recipe with guaranteed output
+//Decomposer.addRecipe(tin,0.5,[["16 Sn"],["12 Sn","4 Ag"]]); 	  	-- Add select recipe with chance
+//Decomposer.addRecipe(glass,[iron,gold,redstone]);					-- Add super recipe with ingredients 
 
-//Synthesiser.addRecipe(bedrock,false,100,["1 H", "2 ethanol"]);
-//Synthesiser.remove(bedrock);
+//Synthesiser.remove(glass);										-- Remove Recipe (can also support oredict)
+//Synthesiser.addRecipe(glass,false,100,["1 H", "2 ethanol"]);		-- Add recipe (item, shaped?, energy, output)
