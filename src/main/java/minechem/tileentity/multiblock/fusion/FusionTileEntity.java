@@ -21,7 +21,6 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 {
 	public static boolean canProcess = false;
 	public static int fusedResult = 0;
-//    public static int inputFuel = 0;
 	public static int inputLeft = 0;
 	public static int inputRight = 1;
 	public static int output = 2;
@@ -81,7 +80,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 		return 4;
 	}
 
-	private boolean inputsCanBeFused()
+	public boolean inputsCanBeFused()
 	{
 		if (inventory[inputLeft] != null && inventory[inputRight] != null)
 		{

@@ -6,6 +6,8 @@ import codechicken.nei.api.TaggedInventoryArea;
 import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.List;
+
+import minechem.utils.Rect;
 import minechem.utils.SessionVars;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.inventory.GuiContainer;
@@ -49,10 +51,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
 	public static boolean drawBorders;
 
-	public void drawTabIcon()
-	{
-	}
-
 	public int zLevel = 3;
 
 	public void drawTexture(int x, int y, ResourceLocation resource)
@@ -82,7 +80,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 
 		drawTabs(mouseX, mouseY);
-		// drawTooltips(mouseX, mouseY);
 
 		GL11.glEnable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -232,9 +229,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
 	protected void drawTooltip(String tooltip)
 	{
-
-		drawCreativeTabHoveringText(tooltip, mouseX, mouseY);
-
+		drawHoveringText(tooltip, mouseX, mouseY);
 	}
 
 	/* UTILITY FUNCTIONS */
@@ -259,7 +254,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
 		GuiTab guiTab = getTabAtPosition(mouseX, mouseY);
 
-		if (guiTab != null && !guiTab.handleMouseClicked(mouseX, mouseY, mouseButton))
+		if (guiTab != null)
 		{
 
 			if (guiTab.leftSide)
@@ -315,7 +310,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 	protected void drawTabs(int mX, int mY)
 	{
 
-		int yPosRight = 4;
+		int yPos = 4;
 
 		for (GuiTab guiTab : tabListLeft)
 		{
@@ -325,9 +320,11 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 			{
 				continue;
 			}
-			guiTab.drawTab(0, yPosRight);
+			guiTab.drawTab(0, yPos);
+            yPos += guiTab.getHeight();
 		}
 
+        yPos = 4;
 		for (GuiTab guiTab : tabListRight)
 		{
 
@@ -337,8 +334,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 				continue;
 			}
 
-			guiTab.drawTab(xSize, yPosRight);
-			yPosRight += guiTab.getHeight();
+			guiTab.drawTab(xSize, yPos);
+            yPos += guiTab.getHeight();
 		}
 
 		GuiTab guiTab = getTabAtPosition(mX, mY);
@@ -366,8 +363,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 				continue;
 			}
 
-			guiTab.currentShiftX = xShift;
-			guiTab.currentShiftY = yShift;
+			guiTab.currentX = xShift;
+			guiTab.currentY = yShift;
 			if (guiTab.intersectsWith(mX, mY, xShift, yShift))
 			{
 				return guiTab;
@@ -386,8 +383,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 				continue;
 			}
 
-			guiTab.currentShiftX = xShift;
-			guiTab.currentShiftY = yShift;
+			guiTab.currentX = xShift;
+			guiTab.currentY = yShift;
 			if (guiTab.intersectsWith(mX, mY, xShift, yShift))
 			{
 				return guiTab;
@@ -413,20 +410,37 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 	@Override
 	public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData currentVisibility)
 	{
-		currentVisibility.showItemPanel = true;
-		currentVisibility.showItemSection = true;
-		/* UNCOMMENT ME WHEN TUTORIAL TABS ARE COMPLETED! */
-		// currentVisibility.showStateButtons = false;
 		return currentVisibility;
 	}
 
 	@Optional.Method(modid = "NotEnoughItems")
-	public int getItemSpawnSlot(GuiContainer gui, ItemStack item)
-	{
-		return -1;
-	}
+    @Override
+    public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack item)
+    {
+        return null;
+    }
 
-	@Optional.Method(modid = "NotEnoughItems")
+    @Optional.Method(modid = "NotEnoughItems")
+    @Override
+    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
+    {
+        if (gui instanceof GuiContainerTabbed)
+        {
+            Rect item = new Rect(x, y, w, h);
+            GuiContainerTabbed container = (GuiContainerTabbed) gui;
+            for (GuiTab tab : tabListRight)
+            {
+                Rect tabRect = new Rect(tab.currentX + container.guiLeft, tab.currentY + container.guiTop, tab.currentWidth, tab.currentHeight);
+                if (item.intersectsWith(tabRect))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    @Optional.Method(modid = "NotEnoughItems")
 	@Override
 	public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui)
 	{
