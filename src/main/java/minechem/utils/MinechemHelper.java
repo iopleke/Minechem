@@ -4,10 +4,13 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.server.FMLServerHandler;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Random;
+import java.util.regex.Pattern;
+
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.Element;
 import minechem.item.element.ElementItem;
@@ -53,7 +56,7 @@ public class MinechemHelper
 			String localString = StatCollector.translateToLocal(key);
 			if (localString.equals(""))
 			{
-				return key;
+				return key.replaceAll("molecule\\.|element\\.", "");
 			}
 			return localString;
 		}

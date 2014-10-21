@@ -73,7 +73,7 @@ public class MinechemItemsRegistration
 			}
 		}
 
-		for (MoleculeEnum molecule : MoleculeEnum.molecules)
+		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
 			if (molecule != null)
 			{

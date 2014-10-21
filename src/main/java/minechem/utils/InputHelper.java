@@ -140,7 +140,7 @@ public class InputHelper {
 		for (ElementEnum ele:ElementEnum.elements)
 			if (ele!=null && ele.name()!=null && ele.name().equals(name)) 
 				return new Element(ele,count);
-		for (MoleculeEnum mol:MoleculeEnum.molecules)
+		for (MoleculeEnum mol:MoleculeEnum.molecules.values())
 		{
 			if (mol!=null && mol.name()!=null && mol.name().equals(name))
 				return new Molecule(mol,count);
@@ -248,7 +248,7 @@ public class InputHelper {
 		ChemicalRoomStateEnum state=null;
 		for (ChemicalRoomStateEnum val:ChemicalRoomStateEnum.values())
 		{
-			if (val.descriptiveName().equalsIgnoreCase(input))
+			if (val.stateName().equalsIgnoreCase(input))
 			{
 				state = val;
 				break;
