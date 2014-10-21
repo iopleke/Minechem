@@ -32,8 +32,8 @@ public class GuiFakeSlot extends Gui
 	public GuiFakeSlot(GuiContainerTabbed parentContainer, EntityPlayer player)
 	{
 		this.parentContainer = parentContainer;
-		this.parentWidth = parentContainer.xSize;
-		this.parentHeight = parentContainer.ySize;
+		this.parentWidth = parentContainer.getXSize();
+		this.parentHeight = parentContainer.getYSize();
 		this.player = player;
 		this.mc = FMLClientHandler.instance().getClient();
 	}
@@ -131,14 +131,9 @@ public class GuiFakeSlot extends Gui
 		this.zLevel = 100.0F;
 		renderItem.zLevel = 100.0F;
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		GL11.glEnable(GL11.GL_DEPTH_TEST);
-		GL11.glDisable(GL11.GL_BLEND);
 		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240 / 1.0F, 240 / 1.0F);
-		RenderHelper.disableStandardItemLighting();
-		RenderHelper.enableGUIStandardItemLighting();
 		renderItem.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, 0, 0);
 		renderItem.renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, 0, 0);
-		RenderHelper.enableStandardItemLighting();
 		this.zLevel = 0.0F;
 		renderItem.zLevel = 0.0F;
 	}
@@ -192,6 +187,8 @@ public class GuiFakeSlot extends Gui
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		int color4 = 0x44000000;
 		drawGradientRect(0, 0, width, height, color4, color4);
+        GL11.glEnable(GL11.GL_LIGHTING);
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 
 }

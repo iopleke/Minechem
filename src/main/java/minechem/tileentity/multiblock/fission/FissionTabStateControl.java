@@ -25,13 +25,20 @@ public class FissionTabStateControl extends GuiTabStateControl
 		} else
 		{
 			lastKnownEnergyCost = (this.tileEntity.inventory[0].getItemDamage() + 1) * Settings.fissionMultiplier;
-			if (this.tileEntity.getEnergyNeeded() < this.tileEntity.getEnergyStored())
-			{
-				state = TabState.powered;
-			} else
-			{
-				state = TabState.unpowered;
-			}
+            if (((FissionTileEntity)this.tileEntity).inputIsFissionable())
+            {
+                if (this.tileEntity.getEnergyNeeded() < this.tileEntity.getEnergyStored())
+                {
+                    state = TabState.powered;
+                } else
+                {
+                    state = TabState.unpowered;
+                }
+            }
+            else
+            {
+                state = TabState.norecipe;
+            }
 		}
 		this.overlayColor = this.state.color;
 	}

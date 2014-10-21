@@ -27,8 +27,8 @@ public class FissionGui extends GuiContainerTabbed
 	public FissionGui(InventoryPlayer inventoryPlayer, FissionTileEntity fission)
 	{
 		super(new FissionContainer(inventoryPlayer, fission));
+        addTab(new FissionTabStateControl(this, fission));
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fission")));
-		addTab(new FissionTabStateControl(this, fission));
 	}
 
 	@Override
@@ -51,19 +51,6 @@ public class FissionGui extends GuiContainerTabbed
 		// DRAW GUI
 		drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 
-	}
-
-	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
-	{
-		return false;
-	}
-
-	@Optional.Method(modid = "NotEnoughItems")
-	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gc, ItemStack is)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 	}
 
 }
