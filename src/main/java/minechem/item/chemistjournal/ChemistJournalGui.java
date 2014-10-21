@@ -1,6 +1,5 @@
 package minechem.item.chemistjournal;
 
-import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.List;
 import minechem.Minechem;
@@ -16,7 +15,6 @@ import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.*;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
@@ -254,7 +252,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		if (currentItemStack != null)
 		{
 			drawRecipeGrid();
-			drawRecipeGrid();
+            drawRecipeGrid();
 			drawText();
 			drawRecipeSlots(x, y);
 		} else
@@ -456,16 +454,4 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		return 5;
 	}
 
-	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
-	{
-		return false;
-	}
-
-	@Optional.Method(modid = "NotEnoughItems")
-	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gc, ItemStack is)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
 }

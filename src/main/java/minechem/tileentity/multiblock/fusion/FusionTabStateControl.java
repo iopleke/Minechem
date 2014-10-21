@@ -23,7 +23,7 @@ public class FusionTabStateControl extends GuiTabStateControl
 		{
 			if (this.tileEntity.inventory[0] != null && this.tileEntity.inventory[1] != null)
 			{
-				if (this.tileEntity.inventory[0].getItem() instanceof ElementItem && this.tileEntity.inventory[1].getItem() instanceof ElementItem)
+				if (((FusionTileEntity)this.tileEntity).inputsCanBeFused())
 				{
 					lastKnownEnergyCost = this.tileEntity.getEnergyNeeded();
 					if (lastKnownEnergyCost <= this.tileEntity.getEnergyStored())
