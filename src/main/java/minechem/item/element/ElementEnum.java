@@ -28,7 +28,7 @@ public class ElementEnum extends MinechemChemicalType
 {
 
 	public static final int heaviestMass = 113;
-	public static final ElementEnum[] elements = new ElementEnum[heaviestMass];
+	public static ElementEnum[] elements = new ElementEnum[heaviestMass];
 
 	public static final ElementEnum H = new ElementEnum(0, "H", "Hydrogen", nonmetal, gas, stable);//Done
 	public static final ElementEnum He = new ElementEnum(1, "He", "Helium", inertGas, gas, stable);//Done

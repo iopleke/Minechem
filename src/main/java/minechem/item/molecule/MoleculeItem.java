@@ -164,7 +164,7 @@ public class MoleculeItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for (MoleculeEnum molecule : MoleculeEnum.molecules)
+		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
 			if (molecule != null)
 			{
@@ -327,6 +327,6 @@ public class MoleculeItem extends Item
 	public static String getRoomState(ItemStack itemstack)
 	{
 		int id = itemstack.getItemDamage();
-		return (id > MoleculeEnum.molecules.length) || (MoleculeEnum.molecules[id] == null) ? "null" : MoleculeEnum.molecules[id].roomState().descriptiveName();
+		return (id > MoleculeEnum.molecules.size()) || (MoleculeEnum.molecules.get(id) == null) ? "null" : MoleculeEnum.molecules.get(id).roomState().descriptiveName();
 	}
 }
