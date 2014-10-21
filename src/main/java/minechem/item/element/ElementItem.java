@@ -14,6 +14,7 @@ import minechem.item.MinechemChemicalType;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
+import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
 import minechem.utils.Constants;
 import minechem.utils.EnumColor;
@@ -29,6 +30,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
@@ -327,6 +329,11 @@ public class ElementItem extends Item
 
 					if (stack != null)
 					{
+						TileEntity tile=world.getTileEntity(blockX, blockY, blockZ);
+						if (tile instanceof RadiationFluidTileEntity&&((RadiationFluidTileEntity) tile).info!=null){
+							setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
+						}
+						
 						world.setBlockToAir(blockX, blockY, blockZ);
 						return fillTube(itemStack, player, stack);
 					}
@@ -408,6 +415,11 @@ public class ElementItem extends Item
 		{
 			Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
+			RadiationEnum radioactivity=elements[itemStack.getItemDamage()].radioactivity();
+			TileEntity tile=world.getTileEntity(x, y, z);
+			if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
+				((RadiationFluidTileEntity)tile).info=getRadiationInfo(itemStack, world);
+			}
 			if (player.capabilities.isCreativeMode)
 			{
 				return itemStack;

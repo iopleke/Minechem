@@ -7,7 +7,6 @@ import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.utils.InputHelper;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
-import minetweaker.annotations.ModOnly;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
 import minetweaker.api.oredict.IOreDictEntry;
