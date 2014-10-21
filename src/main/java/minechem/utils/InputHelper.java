@@ -2,6 +2,7 @@ package minechem.utils;
 
 import java.util.ArrayList;
 
+import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.Molecule;
@@ -147,14 +148,20 @@ public class InputHelper {
 		}
 		return null;
 	}
-    
- // Utility functions
 	
  	public static ArrayList<ItemStack> getInputs(IIngredient input)
  	{
  		ArrayList<ItemStack> toAdd = new ArrayList<ItemStack>();
  		if(input instanceof IOreDictEntry)
- 			toAdd=OreDictionary.getOres(((IOreDictEntry) input).getName());
+ 		{
+ 			for (ItemStack inStack:OreDictionary.getOres(((IOreDictEntry) input).getName()))
+ 			{
+ 				ItemStack result = inStack.copy();
+ 				result.stackSize=((IOreDictEntry) input).getAmount();
+ 				toAdd.add(result);
+ 			}
+ 				
+ 		}
  		else if(input instanceof IItemStack)
  			toAdd.add(InputHelper.toStack((IItemStack) input));
  		return toAdd;
@@ -164,7 +171,11 @@ public class InputHelper {
  	{
  		if (input==null) return null;
  		if(input instanceof IOreDictEntry)
-			return OreDictionary.getOres(((IOreDictEntry) input).getName()).get(0);
+ 		{
+ 			ItemStack result = OreDictionary.getOres(((IOreDictEntry) input).getName()).get(0).copy();
+ 			result.stackSize=((IOreDictEntry) input).getAmount();
+			return result;
+ 		}
 		else if (input instanceof IItemStack)
 			return InputHelper.toStack((IItemStack) input);
  		return null;
@@ -218,5 +229,35 @@ public class InputHelper {
  			result[i] = arrayList.get(i);
  		return result;
  	}
+
+	public static ArrayList<PotionChemical> getChemicals(IIngredient... array) {
+		ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
+ 		for (IIngredient outputStack:array)
+ 		{
+ 			PotionChemical out = MinechemHelper.itemStackToChemical(getInput(outputStack));
+ 			if (out!=null)
+ 				output.add(out);
+ 			else
+ 				throw new IllegalArgumentException(outputStack +" is not a Chemical");
+ 		}
+ 		return output;
+	}
+	
+	public static ChemicalRoomStateEnum getRoomState(String input)
+	{
+		ChemicalRoomStateEnum state=null;
+		for (ChemicalRoomStateEnum val:ChemicalRoomStateEnum.values())
+		{
+			if (val.descriptiveName().equalsIgnoreCase(input))
+			{
+				state = val;
+				break;
+			}
+		}
+		if (state==null)
+			throw new IllegalArgumentException(input +" is not a valid Room State");
+		
+		return state;
+	}
     
 }

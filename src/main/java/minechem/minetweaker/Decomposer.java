@@ -32,12 +32,12 @@ public class Decomposer {
 	 * @param outputs as chemical string array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, String... outputs) 
+	public static void addRecipe(String[] outputs, IIngredient input) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
-			addRecipe(input,output);
+			add(input,output);
 		}
 	}
 	
@@ -47,16 +47,16 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, IItemStack... outputs) 
+	public static void addRecipe(IItemStack[] outputs, IIngredient input) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
-			addRecipe(input,output);
+			add(input,output);
 		}
 	}
 	
-	private static void addRecipe(IIngredient input, ArrayList<PotionChemical> output)
+	private static void add(IIngredient input, ArrayList<PotionChemical> output)
 	{
 		ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 		for (ItemStack addInput:toAdd)
@@ -69,7 +69,7 @@ public class Decomposer {
 	 * @param outputs as chemical string array
 	 */
 	@ZenMethod
-	public static void addRecipe(ILiquidStack input, String... outputs) 
+	public static void addRecipe(String[] outputs, ILiquidStack input) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
@@ -86,7 +86,7 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(ILiquidStack input, IItemStack... outputs) 
+	public static void addRecipe(IItemStack[] outputs, ILiquidStack input) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
@@ -104,12 +104,12 @@ public class Decomposer {
 	 * @param outputs as chemical string array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, double chance, String... outputs) 
+	public static void addRecipe(String[] outputs, IIngredient input, double chance) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty() && chance>0 && chance<=1)
 		{
-			addRecipe(input, chance, output);
+			add(input, chance, output);
 		}
 	}
 	
@@ -120,16 +120,16 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, double chance, IItemStack... outputs) 
+	public static void addRecipe(IItemStack[] outputs, IIngredient input, double chance) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty() && chance>0 && chance<=1)
 		{
-			addRecipe(input, chance, output);
+			add(input, chance, output);
 		}
 	}
 	
-	private static void addRecipe(IIngredient input, double chance, ArrayList<PotionChemical> output)
+	private static void add(IIngredient input, double chance, ArrayList<PotionChemical> output)
 	{
 		ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 		for (ItemStack addInput:toAdd)
@@ -139,11 +139,11 @@ public class Decomposer {
 	/**
 	 * Add Super Recipe
 	 * @param input   as input stack
-	 * @param outputs as recipe ingredients array
+	 * @param recipe  as recipe ingredients array
 	 */
 	@ZenMethod
-	public static void addSuperRecipe(IIngredient input, IItemStack... recipe) 
-	{
+	public static void addSuperRecipe(IItemStack[] recipe,IIngredient input) 
+	{ 
 		ArrayList<ItemStack> output = new ArrayList<ItemStack>();
 		for (IItemStack ingredient:recipe)
 		{
@@ -167,7 +167,7 @@ public class Decomposer {
 	 * @param outputs as recipe output chemical array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, String[]... recipes) 
+	public static void addRecipe(String[][] recipes, IIngredient input) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (String[] recipe:recipes)
@@ -180,7 +180,7 @@ public class Decomposer {
 		}
 		if (!decompRecipes.isEmpty())
 		{
-			addRecipe(input, decompRecipes, 1F);
+			add(input, decompRecipes, 1F);
 		}
 	}
 	
@@ -190,7 +190,7 @@ public class Decomposer {
 	 * @param outputs as recipe output stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, IItemStack[]... recipes) 
+	public static void addRecipe(IItemStack[][] recipes, IIngredient input) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (IItemStack[] recipe:recipes)
@@ -203,7 +203,7 @@ public class Decomposer {
 		}
 		if (!decompRecipes.isEmpty())
 		{
-			addRecipe(input, decompRecipes, 1F);
+			add(input, decompRecipes, 1F);
 		}
 	}
 	
@@ -214,7 +214,7 @@ public class Decomposer {
 	 * @param outputs as recipe output array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, double chance, String[]... recipes) 
+	public static void addRecipe(String[][] recipes, IIngredient input, double chance) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (String[] recipe:recipes)
@@ -227,7 +227,7 @@ public class Decomposer {
 		}
 		if (!decompRecipes.isEmpty() && chance>0 && chance<=1)
 		{
-			addRecipe(input, decompRecipes, chance);
+			add(input, decompRecipes, chance);
 		}
 	}
 	
@@ -237,7 +237,7 @@ public class Decomposer {
 	 * @param outputs as recipe output stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, double chance, IItemStack[]... recipes) 
+	public static void addRecipe(IIngredient input, double chance, IItemStack[][] recipes) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (IItemStack[] recipe:recipes)
@@ -250,11 +250,11 @@ public class Decomposer {
 		}
 		if (!decompRecipes.isEmpty() && chance>0 && chance<=1)
 		{
-			addRecipe(input, decompRecipes, chance);
+			add(input, decompRecipes, chance);
 		}
 	}
 	
-	private static void addRecipe(IIngredient input, ArrayList<DecomposerRecipe> decompRecipes, double chance)
+	private static void add(IIngredient input, ArrayList<DecomposerRecipe> decompRecipes, double chance)
 	{
 		ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 		for (ItemStack addInput:toAdd)
@@ -323,12 +323,12 @@ public class Decomposer {
 
 		@Override
 		public String describe() {
-			return "Adding decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
+			return "Adding decomposer recipe for " + recipe.getInput().getDisplayName();
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
+			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName();
 		}
 
 		@Override
@@ -365,12 +365,12 @@ public class Decomposer {
 
 		@Override
 		public String describe() {
-			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
+			return "Removing decomposer recipe for " + recipe.getInput().getDisplayName();
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Restoring decomposer recipe for " + recipe.getInput().getDisplayName()+"\n";
+			return "Restoring decomposer recipe for " + recipe.getInput().getDisplayName();
 		}
 
 		@Override

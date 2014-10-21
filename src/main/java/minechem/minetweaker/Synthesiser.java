@@ -21,7 +21,7 @@ import stanhebben.zenscript.annotations.ZenMethod;
 @ZenClass("mods.minechem.Synthesiser")
 public class Synthesiser {
 	@ZenMethod
-	public static void addRecipe(IIngredient outputStack,boolean shaped,int energy, String... inputs) 
+	public static void addRecipe(String[] inputs, IIngredient outputStack,boolean shaped,int energy) 
 	{
 		boolean someValue=false;
 		PotionChemical[] input = InputHelper.getArray(InputHelper.getChemicals(inputs));
@@ -40,7 +40,7 @@ public class Synthesiser {
 	}
 	
 	@ZenMethod
-	public static void addRecipe(IIngredient outputStack,boolean shaped,int energy, IItemStack... inputs) 
+	public static void addRecipe(IItemStack[] inputs, IIngredient outputStack,boolean shaped,int energy) 
 	{
 		boolean someValue=false;
 		PotionChemical[] input = InputHelper.getArray(InputHelper.getChemicals(inputs));
@@ -100,12 +100,12 @@ public class Synthesiser {
 
 		@Override
 		public String describe() {
-			return "Adding synthesiser recipe for " + recipe.getOutput().getDisplayName()+"\n";
+			return "Adding synthesiser recipe for " + recipe.getOutput().getDisplayName();
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Removing synthesiser recipe for " + recipe.getOutput().getDisplayName()+"\n";
+			return "Removing synthesiser recipe for " + recipe.getOutput().getDisplayName();
 		}
 
 		@Override
@@ -138,12 +138,12 @@ public class Synthesiser {
 
 		@Override
 		public String describe() {
-			return "Removing synthesis recipe for " + recipe.getOutput().getDisplayName()+"\n";
+			return "Removing synthesis recipe for " + recipe.getOutput().getDisplayName();
 		}
 
 		@Override
 		public String describeUndo() {
-			return "Restoring synthesis recipe for " + recipe.getOutput().getDisplayName()+"\n";
+			return "Restoring synthesis recipe for " + recipe.getOutput().getDisplayName();
 		}
 
 		@Override
