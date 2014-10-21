@@ -2,11 +2,13 @@ package minechem.utils;
 
 import java.util.ArrayList;
 
+import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
+import minechem.tileentity.decomposer.DecomposerRecipe;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import minetweaker.api.item.IItemStack;
@@ -16,6 +18,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 public class InputHelper {
     public static boolean isABlock(IItemStack block) {
@@ -145,4 +148,116 @@ public class InputHelper {
 		}
 		return null;
 	}
+	
+ 	public static ArrayList<ItemStack> getInputs(IIngredient input)
+ 	{
+ 		ArrayList<ItemStack> toAdd = new ArrayList<ItemStack>();
+ 		if(input instanceof IOreDictEntry)
+ 		{
+ 			for (ItemStack inStack:OreDictionary.getOres(((IOreDictEntry) input).getName()))
+ 			{
+ 				ItemStack result = inStack.copy();
+ 				result.stackSize=((IOreDictEntry) input).getAmount();
+ 				toAdd.add(result);
+ 			}
+ 				
+ 		}
+ 		else if(input instanceof IItemStack)
+ 			toAdd.add(InputHelper.toStack((IItemStack) input));
+ 		return toAdd;
+ 	}
+ 	
+ 	public static ItemStack getInput(IIngredient input)
+ 	{
+ 		if (input==null) return null;
+ 		if(input instanceof IOreDictEntry)
+ 		{
+ 			ItemStack result = OreDictionary.getOres(((IOreDictEntry) input).getName()).get(0).copy();
+ 			result.stackSize=((IOreDictEntry) input).getAmount();
+			return result;
+ 		}
+		else if (input instanceof IItemStack)
+			return InputHelper.toStack((IItemStack) input);
+ 		return null;
+ 	}
+ 	
+ 	public static ArrayList<PotionChemical> getChemicals(String... array)
+ 	{
+ 		ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
+ 		for (String outputString:array)
+ 		{
+ 			PotionChemical out = InputHelper.getPotionChemical(outputString);
+ 			if (out!=null) 
+ 				output.add(out);
+ 			else
+ 				throw new IllegalArgumentException(outputString +" is not a Chemical");
+ 		}
+ 		return output;
+ 	}
+ 	
+ 	public static ArrayList<PotionChemical> getChemicals(IItemStack... array)
+ 	{
+ 		ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
+ 		for (IItemStack outputStack:array)
+ 		{
+ 			PotionChemical out = MinechemHelper.itemStackToChemical(InputHelper.toStack(outputStack));
+ 			if (out!=null)
+ 				output.add(out);
+ 			else
+ 				throw new IllegalArgumentException(outputStack +" is not a Chemical");
+ 		}
+ 		return output;
+ 	}
+ 	
+ 	public static DecomposerRecipe[] getDecompArray(ArrayList<DecomposerRecipe> arrayList) {
+ 		DecomposerRecipe[] result = new DecomposerRecipe[arrayList.size()];
+ 		for (int i=0;i<arrayList.size();i++)
+ 			result[i] = arrayList.get(i);
+ 		return result;
+ 	}
+ 	
+ 	public static ItemStack[] getItemArray(ArrayList<ItemStack> arrayList) {
+ 		ItemStack[] result = new ItemStack[arrayList.size()];
+ 		for (int i=0;i<arrayList.size();i++)
+ 			result[i] = arrayList.get(i);
+ 		return result;
+ 	}
+ 	
+ 	public static PotionChemical[] getArray(ArrayList<PotionChemical> arrayList) {
+ 		PotionChemical[] result = new PotionChemical[arrayList.size()];
+ 		for (int i=0;i<arrayList.size();i++)
+ 			result[i] = arrayList.get(i);
+ 		return result;
+ 	}
+
+	public static ArrayList<PotionChemical> getChemicals(IIngredient... array) {
+		ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
+ 		for (IIngredient outputStack:array)
+ 		{
+ 			PotionChemical out = MinechemHelper.itemStackToChemical(getInput(outputStack));
+ 			if (out!=null)
+ 				output.add(out);
+ 			else
+ 				throw new IllegalArgumentException(outputStack +" is not a Chemical");
+ 		}
+ 		return output;
+	}
+	
+	public static ChemicalRoomStateEnum getRoomState(String input)
+	{
+		ChemicalRoomStateEnum state=null;
+		for (ChemicalRoomStateEnum val:ChemicalRoomStateEnum.values())
+		{
+			if (val.descriptiveName().equalsIgnoreCase(input))
+			{
+				state = val;
+				break;
+			}
+		}
+		if (state==null)
+			throw new IllegalArgumentException(input +" is not a valid Room State");
+		
+		return state;
+	}
+    
 }
