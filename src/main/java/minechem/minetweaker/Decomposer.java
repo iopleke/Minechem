@@ -32,7 +32,7 @@ public class Decomposer {
 	 * @param outputs as chemical string array
 	 */
 	@ZenMethod
-	public static void addRecipe(String[] outputs, IIngredient input) 
+	public static void addRecipe( IIngredient input,String... outputs) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
@@ -47,13 +47,14 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IItemStack[] outputs, IIngredient input) 
+	public static void addRecipe(IIngredient input,IItemStack... outputs ) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
 			add(input,output);
 		}
+		else addSuperRecipe(input, outputs);
 	}
 	
 	private static void add(IIngredient input, ArrayList<PotionChemical> output)
@@ -69,7 +70,7 @@ public class Decomposer {
 	 * @param outputs as chemical string array
 	 */
 	@ZenMethod
-	public static void addRecipe(String[] outputs, ILiquidStack input) 
+	public static void addRecipe( ILiquidStack input,String... outputs) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
@@ -86,7 +87,7 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IItemStack[] outputs, ILiquidStack input) 
+	public static void addRecipe( ILiquidStack input,IItemStack... outputs) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
@@ -104,7 +105,7 @@ public class Decomposer {
 	 * @param outputs as chemical string array
 	 */
 	@ZenMethod
-	public static void addRecipe(String[] outputs, IIngredient input, double chance) 
+	public static void addRecipe(IIngredient input,String[] outputs, double chance) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty() && chance>0 && chance<=1)
@@ -120,7 +121,7 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IItemStack[] outputs, IIngredient input, double chance) 
+	public static void addRecipe( IIngredient input, IItemStack[] outputs,double chance) 
 	{
 		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty() && chance>0 && chance<=1)
@@ -136,13 +137,7 @@ public class Decomposer {
 			MineTweakerAPI.apply(new AddRecipeAction(addInput, (float) chance, InputHelper.getArray(output)));
 	}
 	
-	/**
-	 * Add Super Recipe
-	 * @param input   as input stack
-	 * @param recipe  as recipe ingredients array
-	 */
-	@ZenMethod
-	public static void addSuperRecipe(IItemStack[] recipe,IIngredient input) 
+	public static void addSuperRecipe(IIngredient input,IItemStack[] recipe) 
 	{ 
 		ArrayList<ItemStack> output = new ArrayList<ItemStack>();
 		for (IItemStack ingredient:recipe)
@@ -167,7 +162,7 @@ public class Decomposer {
 	 * @param outputs as recipe output chemical array
 	 */
 	@ZenMethod
-	public static void addRecipe(String[][] recipes, IIngredient input) 
+	public static void addRecipe(IIngredient input,String[]... recipes) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (String[] recipe:recipes)
@@ -190,7 +185,7 @@ public class Decomposer {
 	 * @param outputs as recipe output stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IItemStack[][] recipes, IIngredient input) 
+	public static void addRecipe(IIngredient input,IItemStack[]... recipes) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (IItemStack[] recipe:recipes)
@@ -214,7 +209,7 @@ public class Decomposer {
 	 * @param outputs as recipe output array
 	 */
 	@ZenMethod
-	public static void addRecipe(String[][] recipes, IIngredient input, double chance) 
+	public static void addRecipe(IIngredient input, double chance,String[]... recipes) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (String[] recipe:recipes)
@@ -237,7 +232,7 @@ public class Decomposer {
 	 * @param outputs as recipe output stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, double chance, IItemStack[][] recipes) 
+	public static void addRecipe(IIngredient input, double chance, IItemStack[]... recipes) 
 	{
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (IItemStack[] recipe:recipes)

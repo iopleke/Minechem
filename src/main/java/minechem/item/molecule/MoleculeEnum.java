@@ -42,8 +42,8 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Random;
 
-import net.minecraft.item.ItemStack;
 import minechem.MinechemItemsRegistration;
+import minechem.MinechemRecipes;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
@@ -51,6 +51,8 @@ import minechem.item.element.Element;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
 import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.synthesis.SynthesisRecipe;
+import net.minecraft.item.ItemStack;
 
 public class MoleculeEnum extends MinechemChemicalType
 {
@@ -311,16 +313,18 @@ public class MoleculeEnum extends MinechemChemicalType
 	public static void registerMTMolecule(MoleculeEnum molecule)
 	{
 		molecules.put(molecule.id(), molecule);
-		ArrayList var5 = molecule.components();
+		ArrayList<PotionChemical> var5 = molecule.components();
 		PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
 		ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
 		DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
+		SynthesisRecipe.add(new SynthesisRecipe(var7, true, MinechemRecipes.COST_ITEM, var6));
 	}
 	
 	public static void unregisterMolecule(MoleculeEnum molecule)
 	{
 		molecules.remove(molecule.id());
 		DecomposerRecipe.remove(new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
+		SynthesisRecipe.remove(new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
 	}
 	
 	/**
