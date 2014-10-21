@@ -34,7 +34,7 @@ public class Decomposer {
 	@ZenMethod
 	public static void addRecipe(IIngredient input, String... outputs) 
 	{
-		ArrayList<PotionChemical> output = getChemicals(outputs);
+		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
 			addRecipe(input,output);
@@ -49,7 +49,7 @@ public class Decomposer {
 	@ZenMethod
 	public static void addRecipe(IIngredient input, IItemStack... outputs) 
 	{
-		ArrayList<PotionChemical> output = getChemicals(outputs);
+		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
 			addRecipe(input,output);
@@ -58,7 +58,7 @@ public class Decomposer {
 	
 	private static void addRecipe(IIngredient input, ArrayList<PotionChemical> output)
 	{
-		ArrayList<ItemStack> toAdd = getInput(input);
+		ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 		for (ItemStack addInput:toAdd)
 			MineTweakerAPI.apply(new AddRecipeAction(addInput, output));
 	}
@@ -71,12 +71,12 @@ public class Decomposer {
 	@ZenMethod
 	public static void addRecipe(ILiquidStack input, String... outputs) 
 	{
-		ArrayList<PotionChemical> output = getChemicals(outputs);
+		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
 			FluidStack addInput = InputHelper.toFluid(input);
 			if (addInput!=null)
-				MineTweakerAPI.apply(new AddRecipeAction(addInput, getArray(output)));
+				MineTweakerAPI.apply(new AddRecipeAction(addInput, InputHelper.getArray(output)));
 		}
 	}
 	
@@ -88,12 +88,12 @@ public class Decomposer {
 	@ZenMethod
 	public static void addRecipe(ILiquidStack input, IItemStack... outputs) 
 	{
-		ArrayList<PotionChemical> output = getChemicals(outputs);
+		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty())
 		{
 			FluidStack addInput = InputHelper.toFluid(input);
 			if (addInput!=null)
-				MineTweakerAPI.apply(new AddRecipeAction(addInput, getArray(output)));
+				MineTweakerAPI.apply(new AddRecipeAction(addInput, InputHelper.getArray(output)));
 		}
 	}
 	
@@ -106,7 +106,7 @@ public class Decomposer {
 	@ZenMethod
 	public static void addRecipe(IIngredient input, double chance, String... outputs) 
 	{
-		ArrayList<PotionChemical> output = getChemicals(outputs);
+		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty() && chance>0 && chance<=1)
 		{
 			addRecipe(input, chance, output);
@@ -122,7 +122,7 @@ public class Decomposer {
 	@ZenMethod
 	public static void addRecipe(IIngredient input, double chance, IItemStack... outputs) 
 	{
-		ArrayList<PotionChemical> output = getChemicals(outputs);
+		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
 		if (!output.isEmpty() && chance>0 && chance<=1)
 		{
 			addRecipe(input, chance, output);
@@ -131,9 +131,9 @@ public class Decomposer {
 	
 	private static void addRecipe(IIngredient input, double chance, ArrayList<PotionChemical> output)
 	{
-		ArrayList<ItemStack> toAdd = getInput(input);
+		ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 		for (ItemStack addInput:toAdd)
-			MineTweakerAPI.apply(new AddRecipeAction(addInput, (float) chance, getArray(output)));
+			MineTweakerAPI.apply(new AddRecipeAction(addInput, (float) chance, InputHelper.getArray(output)));
 	}
 	
 	/**
@@ -147,11 +147,7 @@ public class Decomposer {
 		ArrayList<ItemStack> output = new ArrayList<ItemStack>();
 		for (IItemStack ingredient:recipe)
 		{
-			ItemStack in=null;
-			if(ingredient instanceof IOreDictEntry)
-				in=OreDictionary.getOres(((IOreDictEntry) ingredient).getName()).get(0);
-			else if(ingredient instanceof IItemStack)
-				in=(InputHelper.toStack((IItemStack) ingredient));
+			ItemStack in=InputHelper.getInput(ingredient);
 			if (in!=null && DecomposerRecipe.get(in)!=null)
 			{
 				output.add(in);
@@ -159,9 +155,9 @@ public class Decomposer {
 		}
 		if (!output.isEmpty())
 		{
-			ArrayList<ItemStack> toAdd = getInput(input);
+			ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 			for (ItemStack addInput:toAdd)
-				MineTweakerAPI.apply(new AddRecipeAction(addInput, getItemArray(output)));
+				MineTweakerAPI.apply(new AddRecipeAction(addInput, InputHelper.getItemArray(output)));
 		}
 	}
 	
@@ -176,10 +172,10 @@ public class Decomposer {
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (String[] recipe:recipes)
 		{
-			ArrayList<PotionChemical> output = getChemicals(recipe);
+			ArrayList<PotionChemical> output = InputHelper.getChemicals(recipe);
 			if (!output.isEmpty())
 			{
-				decompRecipes.add(new DecomposerRecipe(getArray(output)));
+				decompRecipes.add(new DecomposerRecipe(InputHelper.getArray(output)));
 			}
 		}
 		if (!decompRecipes.isEmpty())
@@ -199,10 +195,10 @@ public class Decomposer {
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (IItemStack[] recipe:recipes)
 		{
-			ArrayList<PotionChemical> output = getChemicals(recipe);
+			ArrayList<PotionChemical> output = InputHelper.getChemicals(recipe);
 			if (!output.isEmpty())
 			{
-				decompRecipes.add(new DecomposerRecipe(getArray(output)));
+				decompRecipes.add(new DecomposerRecipe(InputHelper.getArray(output)));
 			}
 		}
 		if (!decompRecipes.isEmpty())
@@ -223,10 +219,10 @@ public class Decomposer {
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (String[] recipe:recipes)
 		{
-			ArrayList<PotionChemical> output = getChemicals(recipe);
+			ArrayList<PotionChemical> output = InputHelper.getChemicals(recipe);
 			if (!output.isEmpty())
 			{
-				decompRecipes.add(new DecomposerRecipe(getArray(output)));
+				decompRecipes.add(new DecomposerRecipe(InputHelper.getArray(output)));
 			}
 		}
 		if (!decompRecipes.isEmpty() && chance>0 && chance<=1)
@@ -246,10 +242,10 @@ public class Decomposer {
 		ArrayList<DecomposerRecipe> decompRecipes = new ArrayList<DecomposerRecipe>();
 		for (IItemStack[] recipe:recipes)
 		{
-			ArrayList<PotionChemical> output = getChemicals(recipe);
+			ArrayList<PotionChemical> output = InputHelper.getChemicals(recipe);
 			if (!output.isEmpty())
 			{
-				decompRecipes.add(new DecomposerRecipe(getArray(output)));
+				decompRecipes.add(new DecomposerRecipe(InputHelper.getArray(output)));
 			}
 		}
 		if (!decompRecipes.isEmpty() && chance>0 && chance<=1)
@@ -260,78 +256,14 @@ public class Decomposer {
 	
 	private static void addRecipe(IIngredient input, ArrayList<DecomposerRecipe> decompRecipes, double chance)
 	{
-		ArrayList<ItemStack> toAdd = getInput(input);
+		ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
 		for (ItemStack addInput:toAdd)
-			MineTweakerAPI.apply(new AddRecipeAction(addInput, (float) chance,getDecompArray(decompRecipes)));
+			MineTweakerAPI.apply(new AddRecipeAction(addInput, (float) chance,InputHelper.getDecompArray(decompRecipes)));
 	}
-	
-	public static ArrayList<ItemStack> getInput(IIngredient input)
-	{
-		ArrayList<ItemStack> toAdd = new ArrayList<ItemStack>();
-		if(input instanceof IOreDictEntry)
-			toAdd=OreDictionary.getOres(((IOreDictEntry) input).getName());
-		else if(input instanceof IItemStack)
-			toAdd.add(InputHelper.toStack((IItemStack) input));
-		return toAdd;
-	}
-	
-	private static ArrayList<PotionChemical> getChemicals(String... array)
-	{
-		ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
-		for (String outputString:array)
-		{
-			PotionChemical out = InputHelper.getPotionChemical(outputString);
-			if (out!=null) 
-				output.add(out);
-			else
-				throw new IllegalArgumentException(outputString +" is not a Chemical");
-		}
-		return output;
-	}
-	private static ArrayList<PotionChemical> getChemicals(IItemStack... array)
-	{
-		ArrayList<PotionChemical> output = new ArrayList<PotionChemical>();
-		for (IItemStack outputStack:array)
-		{
-			PotionChemical out = MinechemHelper.itemStackToChemical(InputHelper.toStack(outputStack));
-			if (out!=null)
-				output.add(out);
-			else
-				throw new IllegalArgumentException(outputStack +" is not a Chemical");
-		}
-		return output;
-	}
-	
-	private static DecomposerRecipe[] getDecompArray(ArrayList<DecomposerRecipe> arrayList) {
-		DecomposerRecipe[] result = new DecomposerRecipe[arrayList.size()];
-		for (int i=0;i<arrayList.size();i++)
-			result[i] = arrayList.get(i);
-		return result;
-	}
-	
-	private static ItemStack[] getItemArray(ArrayList<ItemStack> arrayList) {
-		ItemStack[] result = new ItemStack[arrayList.size()];
-		for (int i=0;i<arrayList.size();i++)
-			result[i] = arrayList.get(i);
-		return result;
-	}
-	
-	private static PotionChemical[] getArray(ArrayList<PotionChemical> arrayList) {
-		PotionChemical[] result = new PotionChemical[arrayList.size()];
-		for (int i=0;i<arrayList.size();i++)
-			result[i] = arrayList.get(i);
-		return result;
-	}
-	
-	
 
 	@ZenMethod
 	public static void removeRecipe(IIngredient input) {
-		ArrayList<ItemStack> toRemove = new ArrayList<ItemStack>();
-		if(input instanceof IOreDictEntry)
-			toRemove=OreDictionary.getOres(((IOreDictEntry) input).getName());
-		else
-			toRemove.add(InputHelper.toStack((IItemStack) input));
+		ArrayList<ItemStack> toRemove = InputHelper.getInputs(input);
 		
 		for (ItemStack recipe : toRemove) {
 			if (DecomposerRecipe.get(recipe)!=null)
@@ -345,6 +277,7 @@ public class Decomposer {
 		if (DecomposerRecipe.get(recipe)!=null)
 			MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
 	}
+	
 	
 	// ######################
 	// ### Action classes ###
