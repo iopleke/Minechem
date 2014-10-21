@@ -22,6 +22,7 @@ import org.lwjgl.opengl.GL11;
 public class BlueprintProjectorGui extends GuiContainerTabbed
 {
 
+	private static final ResourceLocation resourceLocationProjectorGUI = new ResourceLocation(Minechem.ID, Reference.PROJECTOR_GUI);
 	BlueprintProjectorTileEntity projector;
 
 	public BlueprintProjectorGui(InventoryPlayer inventoryPlayer, BlueprintProjectorTileEntity projector)
@@ -36,7 +37,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.PROJECTOR_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationProjectorGUI);
 		;
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

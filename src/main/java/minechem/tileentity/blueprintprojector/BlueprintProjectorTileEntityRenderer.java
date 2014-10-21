@@ -11,6 +11,8 @@ import org.lwjgl.opengl.GL11;
 public class BlueprintProjectorTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
+	private static final ResourceLocation resourceLocationProjectorModelOff = new ResourceLocation(Minechem.ID, Reference.PROJECTOR_MODEL_OFF);
+	private static final ResourceLocation resourceLocationProjectorModelOn = new ResourceLocation(Minechem.ID, Reference.PROJECTOR_MODEL_ON);
 	BlueprintProjectorModel model;
 
 	public BlueprintProjectorTileEntityRenderer()
@@ -32,11 +34,11 @@ public class BlueprintProjectorTileEntityRenderer extends TileEntitySpecialRende
 			if (blueprintProjector.hasBlueprint())
 			{
 
-				bindTexture(new ResourceLocation(Minechem.ID, Reference.PROJECTOR_MODEL_ON));
+				bindTexture(resourceLocationProjectorModelOn);
 			} else
 			{
 
-				bindTexture(new ResourceLocation(Minechem.ID, Reference.PROJECTOR_MODEL_OFF));
+				bindTexture(resourceLocationProjectorModelOff);
 			}
 			model.render(0.0625F);
 			GL11.glPopMatrix();

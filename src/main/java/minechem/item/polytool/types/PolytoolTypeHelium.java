@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 public class PolytoolTypeHelium extends PolytoolUpgradeType
 {
 
+	private static final Random rand=new Random();
+	
 	public PolytoolTypeHelium()
 	{
 		super();
@@ -60,7 +62,6 @@ public class PolytoolTypeHelium extends PolytoolUpgradeType
 			if (target != null)
 			{
 				target.motionY = Math.min(target.motionY + .1, 1);
-				Random rand = new Random();
 				if (rand.nextInt((int) (10 * power)) == 0)
 				{
 					itemStack.stackTagCompound.setInteger("HeliumHitEntity", 0);

@@ -16,6 +16,7 @@ public class DecomposerRecipe
 {
 	public static Map<String, DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
 
+	private static final Random rand=new Random();
 	ItemStack input;
 	public Map<PotionChemical, PotionChemical> output = new Hashtable<PotionChemical, PotionChemical>();
 
@@ -202,7 +203,6 @@ public class DecomposerRecipe
                         if (reduced != null)
                         {
                             reduced.amount = (int) Math.floor(chem.amount / f);
-                            Random rand = new Random();
                             if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f))
                             {
                                 reduced.amount = 1;

@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 public class FusionGui extends GuiContainerTabbed
 {
 
+	private static final ResourceLocation resourceLocationFissionGUI = new ResourceLocation(Minechem.ID, Reference.FUSION_GUI);
 	static float increaseRate = .2F;
 	static float decreaseRate = .4F;
 
@@ -51,7 +52,7 @@ public class FusionGui extends GuiContainerTabbed
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		updateEnergy();
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.FUSION_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationFissionGUI);
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		// DRAW GUI

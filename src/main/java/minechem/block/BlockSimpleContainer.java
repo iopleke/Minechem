@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 public abstract class BlockSimpleContainer extends BlockContainer
 {
 
-	private Random random = new Random();
+	private static final Random random = new Random();
 
 	protected BlockSimpleContainer(Material material)
 	{
@@ -28,7 +28,6 @@ public abstract class BlockSimpleContainer extends BlockContainer
 	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
 	{
-		this.random = new Random();
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
 		if (tileEntity != null)
 		{

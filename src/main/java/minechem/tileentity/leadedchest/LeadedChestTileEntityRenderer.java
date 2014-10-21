@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL12;
 public class LeadedChestTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
+	private static final ResourceLocation resourceLocationLeadedChestModel = new ResourceLocation(Minechem.ID, Reference.LEADED_CHEST_MODEL);
 	private final ModelChest leadedChestModel = new ModelChest();
 
 	public LeadedChestTileEntityRenderer()
@@ -47,7 +48,7 @@ public class LeadedChestTileEntityRenderer extends TileEntitySpecialRenderer
 
 		ModelChest var14 = this.leadedChestModel;
 
-		bindTexture(new ResourceLocation(Minechem.ID, Reference.LEADED_CHEST_MODEL));
+		bindTexture(resourceLocationLeadedChestModel);
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);

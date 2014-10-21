@@ -15,6 +15,7 @@ import org.lwjgl.opengl.GL11;
 public class LeadedChestGui extends GuiContainerTabbed
 {
 
+	private static final ResourceLocation resourceLocationLeadedChestGUI = new ResourceLocation(Minechem.ID, Reference.LEADED_CHEST_GUI);
 	int guiWidth = 176;
 	int guiHeight = 217;
 	LeadedChestTileEntity leadedchest;
@@ -40,7 +41,7 @@ public class LeadedChestGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.LEADED_CHEST_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationLeadedChestGUI);
 
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

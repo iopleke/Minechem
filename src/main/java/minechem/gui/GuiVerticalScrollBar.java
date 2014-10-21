@@ -10,6 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiVerticalScrollBar extends Gui
 {
+	public static final ResourceLocation resourceLocationAllitems=new ResourceLocation(Reference.TEXTURE_MOD_ID + Reference.TEXTURE_GUI_DIR + "allitems.png");
 
 	Minecraft mc;
 	IVerticalScrollContainer container;
@@ -173,7 +174,7 @@ public class GuiVerticalScrollBar extends Gui
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Reference.TEXTURE_MOD_ID + Reference.TEXTURE_GUI_DIR + "allitems.png"));
+		this.mc.renderEngine.bindTexture(resourceLocationAllitems);
 		if (this.container.isScrollBarActive())
 		{
 			drawTexturedModalRect(xpos, ypos, activeU, activeV, width, height);

@@ -21,6 +21,8 @@ import net.minecraft.world.World;
 
 public class LeadedChestBlock extends BlockContainer
 {
+	private static final Random rand=new Random();
+	
 	public LeadedChestBlock()
 	{
 		super(Material.wood);
@@ -45,7 +47,6 @@ public class LeadedChestBlock extends BlockContainer
 
 	private void dropItems(World world, int xCoord, int yCoord, int zCoord)
 	{
-		Random rand = new Random();
 
 		TileEntity te = world.getTileEntity(xCoord, yCoord, zCoord);
 		if (te instanceof IInventory)

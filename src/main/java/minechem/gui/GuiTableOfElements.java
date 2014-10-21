@@ -15,6 +15,7 @@ public class GuiTableOfElements extends GuiContainerTabbed
 {
 	public static final int GUI_WIDTH = 876;
 	public static final int GUI_HEIGHT = 600;
+	private static final ResourceLocation resourceLocationTableHex=new ResourceLocation(Minechem.ID, Reference.TABLE_HEX);
 
 	public GuiTableOfElements(EntityPlayer entityPlayer)
 	{
@@ -35,7 +36,7 @@ public class GuiTableOfElements extends GuiContainerTabbed
 		GL11.glPushMatrix();
 		GL11.glScalef(2.1F, 1.5F, 2.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.TABLE_HEX));
+		this.mc.renderEngine.bindTexture(resourceLocationTableHex);
 		drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();

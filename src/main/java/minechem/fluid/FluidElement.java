@@ -9,11 +9,13 @@ public class FluidElement extends MinechemFluid
 {
 
 	public final ElementEnum element;
+	private final int color;
 
 	public FluidElement(ElementEnum element)
 	{
 		super(element.name(), element.roomState());
 		this.element = element;
+		color=computColor();
 	}
 
 	@Override
@@ -25,6 +27,10 @@ public class FluidElement extends MinechemFluid
 	@Override
 	public int getColor()
 	{
+		return color;
+	}
+	
+	private int computColor(){
 		float red = 0.0F;
 		float blue = 0.0F;
 		float green = 0.0F;

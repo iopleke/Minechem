@@ -24,6 +24,7 @@ import org.lwjgl.opengl.GL11;
 public class MicroscopeGui extends GuiContainerTabbed
 {
 
+	private static final ResourceLocation resourceLocationMicroscopeGUI = new ResourceLocation(Minechem.ID, Reference.MICROSCOPE_GUI);
 	int guiWidth = 176;
 	int guiHeight = 217;
 	int eyepieceX = 25;
@@ -88,7 +89,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.MICROSCOPE_GUI));
+		Minecraft.getMinecraft().renderEngine.bindTexture(resourceLocationMicroscopeGUI);
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		zLevel = 0;

@@ -10,6 +10,8 @@ import org.lwjgl.opengl.GL11;
 
 public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 {
+	private static final ResourceLocation resourceLocationSynthesisModel = new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_MODEL);
+
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
 	{
@@ -33,7 +35,7 @@ public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 			GL11.glRotatef(facing * 90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			bindTexture(new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_MODEL));
+			bindTexture(resourceLocationSynthesisModel);
 			synthesis.model.render(0.0625F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();
