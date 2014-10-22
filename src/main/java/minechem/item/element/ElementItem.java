@@ -97,11 +97,11 @@ public class ElementItem extends Item
 			return id < ElementEnum.heaviestMass ? ElementEnum.elements[id].radioactivity() : RadiationEnum.stable;
 		} else if (item == MinechemItemsRegistration.molecule)
 		{
-			if (id >= MoleculeEnum.molecules.length || MoleculeEnum.molecules[id] == null)
+			if (id >= MoleculeEnum.molecules.size() || MoleculeEnum.molecules.get(id) == null)
 			{
 				return RadiationEnum.stable;
 			}
-			return MoleculeEnum.molecules[id].radioactivity();
+			return MoleculeEnum.molecules.get(id).radioactivity();
 		}
 		return RadiationEnum.stable;
 	}

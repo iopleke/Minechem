@@ -6,41 +6,19 @@ import java.util.Arrays;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.InputHelper;
-import minechem.utils.MinechemHelper;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
-import minetweaker.api.item.IItemStack;
-import minetweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 
 @ZenClass("mods.minechem.Synthesiser")
 public class Synthesiser {
-	@ZenMethod
-	public static void addRecipe(String[] inputs, IIngredient outputStack,boolean shaped,int energy) 
-	{
-		boolean someValue=false;
-		PotionChemical[] input = InputHelper.getArray(InputHelper.getChemicals(inputs));
-		PotionChemical[] inputFixed = Arrays.copyOf(input, 9);
-		for (PotionChemical chem:inputFixed)
-		{
-			if (chem!=null) someValue = true; 
-			break;
-		}
-		if (someValue)
-		{
-			ItemStack output = InputHelper.getInput(outputStack);
-			if (output!=null)
-				MineTweakerAPI.apply(new AddRecipeAction(output,shaped,energy, inputFixed));
-		}
-	}
 	
 	@ZenMethod
-	public static void addRecipe(IItemStack[] inputs, IIngredient outputStack,boolean shaped,int energy) 
+	public static void addRecipe(IIngredient[] inputs, IIngredient outputStack,boolean shaped,int energy) 
 	{
 		boolean someValue=false;
 		PotionChemical[] input = InputHelper.getArray(InputHelper.getChemicals(inputs));

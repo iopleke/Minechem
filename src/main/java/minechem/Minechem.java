@@ -11,8 +11,7 @@ import minechem.gui.GuiTabTable;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
-import minechem.minetweaker.Decomposer;
-import minechem.minetweaker.Synthesiser;
+import minechem.minetweaker.*;
 import minechem.network.MessageHandler;
 import minechem.potion.PotionCoatingRecipe;
 import minechem.potion.PotionCoatingSubscribe;
@@ -234,6 +233,7 @@ public class Minechem
 		ChemicalFluidReactionHandler.initExplodableChemical();
 		
 		if (Loader.isModLoaded("MineTweaker3")) {
+			MineTweakerAPI.registerClass(Chemicals.class);
 			MineTweakerAPI.registerClass(Decomposer.class);
 			MineTweakerAPI.registerClass(Synthesiser.class);
 		}
