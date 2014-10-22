@@ -164,7 +164,7 @@ public class RadiationMoleculeHandler
 				Element element = (Element) chemical;
 				if (element.element.radioactivity() != RadiationEnum.stable)
 				{
-					element.element = ElementEnum.elements[element.element.ordinal() - 1];
+					element.element = ElementEnum.getByID(element.element.ordinal() - 1);
 				} else if (chemical instanceof Molecule)
 				{
 					Molecule molecule2 = (Molecule) chemical;

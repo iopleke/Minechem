@@ -4,10 +4,12 @@ import java.util.ArrayList;
 
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.element.Element;
+import minechem.item.element.ElementClassificationEnum;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
+import minechem.radiation.RadiationEnum;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
@@ -205,19 +207,36 @@ public class InputHelper {
 	
 	public static ChemicalRoomStateEnum getRoomState(String input)
 	{
-		ChemicalRoomStateEnum state=null;
 		for (ChemicalRoomStateEnum val:ChemicalRoomStateEnum.values())
 		{
 			if (val.stateName().equalsIgnoreCase(input))
 			{
-				state = val;
-				break;
+				return val;
 			}
 		}
-		if (state==null)
-			throw new IllegalArgumentException(input +" is not a valid Room State");
-		
-		return state;
+		throw new IllegalArgumentException(input +" is not a valid Room State");
+	}
+
+	public static ElementClassificationEnum getClassification(String input) {
+		for (ElementClassificationEnum val:ElementClassificationEnum.values())
+		{
+			if (val.className().equalsIgnoreCase(input))
+			{
+				return val;
+			}
+		}
+		throw new IllegalArgumentException(input +" is not a valid element Classification");
+	}
+
+	public static RadiationEnum getRadiation(String input) {
+		for (RadiationEnum val:RadiationEnum.values())
+		{
+			if (val.name().equalsIgnoreCase(input.replaceAll(" ", "")))
+			{
+				return val;
+			}
+		}
+		throw new IllegalArgumentException(input +" is not a valid radioactivity Classification");
 	}
     
 }

@@ -355,14 +355,14 @@ public class MoleculeEnum extends MinechemChemicalType
 
 	public static MoleculeEnum getById(int id)
 	{
-		for (MoleculeEnum molecule : molecules.values())
-		{
-			if (molecule != null && molecule.id == id)
-			{
-				return molecule;
-			}
-		}
-		return null;
+//		for (MoleculeEnum molecule : molecules.values())
+//		{
+//			if (molecule != null && molecule.id == id)
+//			{
+//				return molecule;
+//			}
+//		}
+		return molecules.get(id);
 	}
 	
 	public static MoleculeEnum getByName(String name)

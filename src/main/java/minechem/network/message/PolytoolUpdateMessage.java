@@ -45,7 +45,7 @@ public class PolytoolUpdateMessage implements IMessage, IMessageHandler<Polytool
 	{
 		if (Minecraft.getMinecraft().currentScreen instanceof PolytoolGui)
 		{
-			((PolytoolGui) Minecraft.getMinecraft().currentScreen).addUpgrade(PolytoolHelper.getTypeFromElement(ElementEnum.elements[message.element], message.power));
+			((PolytoolGui) Minecraft.getMinecraft().currentScreen).addUpgrade(PolytoolHelper.getTypeFromElement(ElementEnum.getByID(message.element), message.power));
 		}
 		return null;
 	}

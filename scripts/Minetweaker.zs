@@ -8,8 +8,18 @@ val ice = <minecraft:ice>;
 val lead = <ore:ingotLead>;
 val glass = <minecraft:glass>;
 val water = <minechem:minechemMolecule:1>;
+val ethanol = <minechem:minechemMolecule:62>;
+val phosgene = <minechem:minechemMolecule:91>;
+val hilburnium = <minechem:minechemMolecule:180>;
 val H = <minechem:minechemElement:0>;
 val He = <ore:element_He>;
+val Au = <ore:element_Au>;
+
+//###########Chemical Functions###################
+//Chemicals.addElement(114,"Hi","hilburnium","alkali Metal","gaseous","highly radioactive");
+//Chemicals.addElement(atomicNumber,Symbol,Full Name,Element Type,Room State,Radioactivity);
+//Chemicals.addMolecule("hilburnium awesomeus",180,"Solid",[He*3,ethanol*11,H*5,Au*5]);
+//Chemicals.addMolecule(name,id,Room State,[Array of components]);
 
 //###########Decomposer Functions#################
 //Decomposer.removeRecipe(redstone);                             		-- Remove Ore Dict or Item recipe
@@ -23,5 +33,8 @@ val He = <ore:element_He>;
 //Synthesiser.removeRecipe(glass);										-- Remove Recipe
 //Synthesiser.addRecipe([lead*10,ice*5],glass,false,100);				-- Add recipe ([inputs],output,shaped?, energy)
 
-//###########Chemical Functions################### NOT FULLY IMPLEMENTED
-//Chemicals.addMolecule("hilburnium",id,"Solid",[H*2,water*11])
+//############Input variables#####################
+//Element Types = "Non-metal","Inert gas","Halogen","Alkali metal","Alkaline Earth Metal","Metalloid","Other metal",
+//				  "Transition metal","Lanthanide","Actinide";
+//Room States   = "Liquid","Solid","Gaseous";
+//Radioactivity = "Stable","Hardly Radioactive","Slightly Radioactive","Radioactive","Highly Radioactive","Extremely Radioactive";
