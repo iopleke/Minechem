@@ -21,13 +21,14 @@ val Au = <ore:element_Au>;
 //Chemicals.addMolecule("hilburnium awesomeus",180,"Solid",[He*3,ethanol*11,H*5,Au*5]);
 //Chemicals.addMolecule(name,id,Room State,[Array of components]);
 
-//###########Decomposer Functions#################
-//Decomposer.removeRecipe(redstone);                             		-- Remove Ore Dict or Item recipe
+//###########Decomposer Functions#################  
+//Decomposer.removeRecipe(ice);                            				-- Remove Ore Dict or Item recipe
 //Decomposer.removeFluid(liquidWater*1000)								-- Remove Fluid Recipe
-//Decomposer.addRecipe(redstone,[H*64, He],0.6); 						-- Add recipe (chance optional) - Item or Ore Dict input
+//Decomposer.addRecipe(redstone,0.5,[[H*64, He]]); 						-- Add recipe (chance optional) - Item or Ore Dict input
+//Decomposer.addRecipe(ice,0.5,[[H*5, water*10],[H*20, water*5]]);		-- Add multi-output recipe (chance optional)
 //Decomposer.addRecipe(glass,[lead*10,ice*5,H])							-- Add decomposition for crafting recipe output,[inputs]
 //Decomposer.addFluid(liquidWater*1000,[H*10, water*10]); 				-- Add fluid recipe
-//Decomposer.addMultiRecipe(ice,[[H*5, water*10],[H*20, water*5]],0.5)	-- Add multi-output recipe (chance optional)
+
 
 //###########Synthesiser Functions################
 //Synthesiser.removeRecipe(glass);										-- Remove Recipe

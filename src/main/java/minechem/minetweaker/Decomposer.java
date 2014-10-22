@@ -34,21 +34,27 @@ public class Decomposer {
 	 * @param outputs as chemical stack array
 	 */
 	@ZenMethod
-	public static void addRecipe(IIngredient input, IIngredient[] outputs, @Optional double chance) 
+	public static void addRecipe(IIngredient input, @Optional double chance, IIngredient[]... multiOutputs) 
 	{
-		ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
-		if (output.size()==outputs.length)
+		if (multiOutputs.length==1)
 		{
-			ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
-			for (ItemStack addInput:toAdd)
+			IIngredient[] outputs = multiOutputs[0];
+			ArrayList<PotionChemical> output = InputHelper.getChemicals(outputs);
+			if (output.size()==outputs.length)
 			{
-				if (chance==0||chance>=1)
-					MineTweakerAPI.apply(new AddRecipeAction(addInput, output));
-				else if (chance<1)
-					MineTweakerAPI.apply(new AddRecipeAction(addInput, (float)chance, InputHelper.getArray(output)));
+				ArrayList<ItemStack> toAdd = InputHelper.getInputs(input);
+				for (ItemStack addInput:toAdd)
+				{
+					if (chance==0||chance>=1)
+						MineTweakerAPI.apply(new AddRecipeAction(addInput, output));
+					else if (chance<1)
+						MineTweakerAPI.apply(new AddRecipeAction(addInput, (float)chance, InputHelper.getArray(output)));
+				}
 			}
+			else addSuperRecipe(input, outputs, output);
 		}
-		else addSuperRecipe(input, outputs, output);
+		else
+			addMultiRecipe(input,multiOutputs,chance);
 	}
 
 	public static void addSuperRecipe(IIngredient input,IIngredient[] recipe, ArrayList<PotionChemical> chemicals) 
@@ -92,7 +98,7 @@ public class Decomposer {
 	 * @param input   as input stack
 	 * @param outputs as recipe output stack array
 	 */
-	@ZenMethod
+	//@ZenMethod
 	public static void addMultiRecipe(IIngredient input, IIngredient[][] multioutputs, @Optional double chance)
 	{
 		if (chance<=0||chance>1)chance=1;
