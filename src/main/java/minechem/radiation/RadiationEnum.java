@@ -20,7 +20,7 @@ public enum RadiationEnum
 		this.life = life;
 		this.damage = damage;
 	}
-
+	
 	public long getLife()
 	{
 		return (long) (this.life * (Settings.halfLifeMultiplier / 100F));

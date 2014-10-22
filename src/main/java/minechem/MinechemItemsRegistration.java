@@ -64,7 +64,7 @@ public class MinechemItemsRegistration
 	private static void registerFluidContainers()
 	{
 		ItemStack emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-		for (ElementEnum element : ElementEnum.elements)
+		for (ElementEnum element : ElementEnum.elements.values())
 		{
 			if (element != null)
 			{
@@ -85,7 +85,7 @@ public class MinechemItemsRegistration
 
 	public static void registerToOreDictionary()
 	{
-		for (ElementEnum element : ElementEnum.elements)
+		for (ElementEnum element : ElementEnum.elements.values())
 		{
 			if (element != null)
 			{

@@ -38,12 +38,9 @@ public class MoleculeItem extends Item
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack)
+	public String getItemStackDisplayName(ItemStack itemStack)
 	{
-		int itemDamage = par1ItemStack.getItemDamage();
-		MoleculeEnum mol = MoleculeEnum.getById(itemDamage);
-		if (mol==null) mol = MoleculeEnum.getById(0);
-		return MinechemHelper.getLocalString(mol.getUnlocalizedName()).replaceAll("molecule\\.|element\\.", "");
+		return MinechemHelper.getLocalString(getMolecule(itemStack).getUnlocalizedName());
 	}
 
 	@Override
@@ -177,7 +174,14 @@ public class MoleculeItem extends Item
 
 	public static MoleculeEnum getMolecule(ItemStack itemstack)
 	{
-		return MoleculeEnum.getById(itemstack.getItemDamage());
+		int itemDamage = itemstack.getItemDamage();
+		MoleculeEnum mol = MoleculeEnum.getById(itemDamage);
+		if (mol==null)
+		{
+			itemstack.setItemDamage(0);
+			mol = MoleculeEnum.getById(0);
+		}
+		return mol;
 	}
 
 	/**

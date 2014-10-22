@@ -39,7 +39,7 @@ import org.lwjgl.input.Keyboard;
 public class ElementItem extends Item
 {
 
-	private final static ElementEnum[] elements = ElementEnum.elements;
+	//private final static ElementEnum[] elements = ElementEnum.elements;
 	private final Map<IDescriptiveName, Integer> classificationIndexes = new HashMap<IDescriptiveName, Integer>();
 	public final IIcon liquid[] = new IIcon[7], gas[] = new IIcon[7];
 	public IIcon solid;
@@ -67,25 +67,28 @@ public class ElementItem extends Item
 	public static String getShortName(ItemStack itemstack)
 	{
 		int atomicNumber = itemstack.getItemDamage();
-		return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].name() : MinechemHelper.getLocalString("element.empty");
+		return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).name() : MinechemHelper.getLocalString("element.empty");
 	}
 
 	public static String getLongName(ItemStack itemstack)
 	{
 		int atomicNumber = itemstack.getItemDamage();
-		return atomicNumber < ElementEnum.heaviestMass ? MinechemHelper.getLocalString(elements[atomicNumber].getUnlocalizedName()) : MinechemHelper.getLocalString("element.empty");
+		String longName = atomicNumber < ElementEnum.heaviestMass ? MinechemHelper.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName()) : MinechemHelper.getLocalString("element.empty");
+		if (longName.contains("Element."))
+			longName = ElementEnum.getByID(atomicNumber).getLongName();
+		return longName;
 	}
 
 	public static String getClassification(ItemStack itemstack)
 	{
 		int atomicNumber = itemstack.getItemDamage();
-		return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].classification().descriptiveName() : MinechemHelper.getLocalString("element.empty");
+		return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).classification().descriptiveName() : MinechemHelper.getLocalString("element.empty");
 	}
 
 	public static String getRoomState(ItemStack itemstack)
 	{
 		int atomicNumber = itemstack.getItemDamage();
-		return atomicNumber < ElementEnum.heaviestMass ? elements[atomicNumber].roomState().descriptiveName() : MinechemHelper.getLocalString("element.empty");
+		return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).roomState().descriptiveName() : MinechemHelper.getLocalString("element.empty");
 	}
 
 	public static RadiationEnum getRadioactivity(ItemStack itemstack)
@@ -94,7 +97,7 @@ public class ElementItem extends Item
 		Item item = itemstack.getItem();
 		if (item == MinechemItemsRegistration.element)
 		{
-			return id < ElementEnum.heaviestMass ? ElementEnum.elements[id].radioactivity() : RadiationEnum.stable;
+			return id < ElementEnum.heaviestMass ? ElementEnum.getByID(id).radioactivity() : RadiationEnum.stable;
 		} else if (item == MinechemItemsRegistration.molecule)
 		{
 			if (id >= MoleculeEnum.molecules.size() || MoleculeEnum.molecules.get(id) == null)
@@ -108,7 +111,7 @@ public class ElementItem extends Item
 
 	public static ElementEnum getElement(ItemStack itemstack)
 	{
-		return itemstack.getItemDamage() < ElementEnum.heaviestMass ? ElementEnum.elements[itemstack.getItemDamage()] : null;
+		return itemstack.getItemDamage() < ElementEnum.heaviestMass ? ElementEnum.getByID(itemstack.getItemDamage()) : null;
 	}
 
 	public static void attackEntityWithRadiationDamage(ItemStack itemstack, int damage, Entity entity)
@@ -233,11 +236,12 @@ public class ElementItem extends Item
 	public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
 	{
 		list.add(new ItemStack(item, 1, ElementEnum.heaviestMass));
-		for (ElementEnum element : ElementEnum.elements)
+		for (int id = 0; id<ElementEnum.heaviestMass;id++)
 		{
+			ElementEnum element = ElementEnum.getByID(id);
 			if (element != null)
 			{
-				list.add(new ItemStack(item, 1, element.ordinal()));
+				list.add(new ItemStack(item, 1, id));
 			}
 		}
 	}

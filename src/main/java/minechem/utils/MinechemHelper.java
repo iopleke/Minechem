@@ -11,6 +11,8 @@ import java.util.List;
 import java.util.Random;
 import java.util.regex.Pattern;
 
+import org.apache.commons.lang3.StringUtils;
+
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.Element;
 import minechem.item.element.ElementItem;
@@ -56,11 +58,30 @@ public class MinechemHelper
 			String localString = StatCollector.translateToLocal(key);
 			if (localString.equals(""))
 			{
-				return key.replaceAll("molecule\\.|element\\.", "");
+				return key;
+			}
+			else
+			{
+				localString = capitalizeFully(localString.replaceAll("molecule\\.", ""));
 			}
 			return localString;
 		}
 		return key;
+	}
+	
+	public static String capitalizeFully(String input)
+	{
+		String[] splitString = input.split(" ");
+		String result ="";
+		for(int i = 0; i < splitString.length; i++) 
+		{
+		    char[] digit = splitString[i].toCharArray();
+		    digit[0] = Character.toUpperCase(digit[0]);
+		    for (int j=1;j<digit.length;j++)
+		    	digit[j]=Character.toLowerCase(digit[j]);
+		    result += new String(digit) + (i<splitString.length-1?" ":"");
+		}
+		return result;
 	}
 
 	public static NBTTagList writeItemStackArrayToTagList(ItemStack[] itemstacks)

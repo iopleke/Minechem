@@ -15,6 +15,11 @@ public enum ElementClassificationEnum implements IDescriptiveName
 		this.descriptiveName = descriptiveName;
 	}
 
+	public String className()
+	{
+		return descriptiveName;
+	}
+	
 	@Override
 	public String descriptiveName()
 	{
