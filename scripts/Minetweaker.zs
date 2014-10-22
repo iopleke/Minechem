@@ -24,4 +24,4 @@ val He = <ore:element_He>;
 //Synthesiser.addRecipe([lead*10,ice*5],glass,false,100);				-- Add recipe ([inputs],output,shaped?, energy)
 
 //###########Chemical Functions################### NOT FULLY IMPLEMENTED
-//Chemicals.addMolecule("hilburnium",id,"Solid",[H*2,water*11])
+Chemicals.addMolecule("hilburnium",id,"Solid",[H*2,water*11]);
