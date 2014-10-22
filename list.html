@@ -16,7 +16,7 @@
 		<![endif]-->
 	</head>
 	<body>
-		<div class="wrapper" style="width: 1090px">
+		<div class="wrapper" style="width: 1300px">
 			<header>
 				<a href="./"><h1 class="header">Minechem</h1></a>
 				<br/>
@@ -31,13 +31,14 @@
 					<li><a class="buttons github" href="https://github.com/jakimfett/MineChem">View Source</a></li>
 				</ul>
 			</header>
-			<section style="width: 800px">
+			<section style="width: 1020px">
 				<h1>List of Elements and Molecules</h1>
 				<input class="autoSearch" type="text" id="search" placeholder="search"></input>
 				<table>
 					<tr>
 						<th>Symbol</th>
 						<th>Discriptive name</th>
+						<th>OreDictionary name</th>
 						<th>Name used in API</th>
 					</tr>
 				</table>
@@ -74,11 +75,11 @@
 				//table filling
 				for(var i = 0; i < elements.length; i++)
 				{
-					$("table").append("<tr><td>" + elements[i][2] + "</td><td>" + elements[i][1]+"</td><td>" + elements[i][0]+"</td></tr>");
+					$("table").append("<tr><td>" + elements[i][2] + "</td><td>" + elements[i][1] + "</td><td>element_" + elements[i][0] + "</td><td>" + elements[i][0] + "</td></tr>");
 				}
 				for(var i = 0; i < molecules.length; i++)
 				{
-					$("table").append("<tr><td>" + molecules[i][2] + "</td><td>" + molecules[i][1]+"</td><td>" + molecules[i][0]+"</td></tr>");
+					$("table").append("<tr><td>" + molecules[i][2] + "</td><td>" + molecules[i][1] + "</td><td>molecule_" + molecules[i][0] + "</td><td>" + molecules[i][0] + "</td></tr>");
 				}
 
 				//live search
