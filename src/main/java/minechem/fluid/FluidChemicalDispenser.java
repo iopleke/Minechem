@@ -6,6 +6,8 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
+import minechem.radiation.RadiationEnum;
+import minechem.radiation.RadiationFluidTileEntity;
 import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -47,10 +49,15 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 
 				if (stack != null)
 				{
-					TileEntity tile = blockSource.getBlockTileEntity();
-					if (tile instanceof IInventory)
+					TileEntity tile=world.getTileEntity(x, y, z);
+					if (tile instanceof RadiationFluidTileEntity&&((RadiationFluidTileEntity) tile).info!=null){
+						ElementItem.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
+					}
+					
+					TileEntity inventoryTile = blockSource.getBlockTileEntity();
+					if (inventoryTile instanceof IInventory)
 					{
-						stack = MinechemUtil.addItemToInventory((IInventory) tile, stack);
+						stack = MinechemUtil.addItemToInventory((IInventory) inventoryTile, stack);
 					}
 					MinechemUtil.throwItemStack(world, stack, x, y, z);
 
@@ -61,12 +68,17 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 		} else
 		{
 			Block block = null;
+			RadiationEnum radioactivity=null;
 			if (itemStack.getItem() instanceof ElementItem)
 			{
-				block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(itemStack)));
+				ElementEnum element=ElementItem.getElement(itemStack);
+				block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(element));
+				radioactivity=element.radioactivity();
 			} else if (itemStack.getItem() instanceof MoleculeItem && itemStack.getItemDamage() < MoleculeEnum.molecules.length)
 			{
-				block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeEnum.molecules[itemStack.getItemDamage()]));
+				MoleculeEnum molecule=MoleculeEnum.molecules[itemStack.getItemDamage()];
+				block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(molecule));
+				radioactivity=molecule.radioactivity();
 			}
 
 			if (!world.isAirBlock(x, y, z) && !world.getBlock(x, y, z).getMaterial().isSolid())
@@ -79,11 +91,15 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 			{
 				world.setBlock(x, y, z, block, 0, 3);
 				--itemStack.stackSize;
+				TileEntity tile=world.getTileEntity(x, y, z);
+				if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
+					((RadiationFluidTileEntity)tile).info=ElementItem.getRadiationInfo(itemStack, world);
+				}
 				ItemStack elementStack = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-				TileEntity tile = blockSource.getBlockTileEntity();
-				if (tile instanceof IInventory)
+				TileEntity inventoryTile = blockSource.getBlockTileEntity();
+				if (inventoryTile instanceof IInventory)
 				{
-					elementStack = MinechemUtil.addItemToInventory((IInventory) tile, elementStack);
+					elementStack = MinechemUtil.addItemToInventory((IInventory) inventoryTile, elementStack);
 				}
 				MinechemUtil.throwItemStack(world, elementStack, x, y, z);
 			}
