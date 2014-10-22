@@ -195,7 +195,7 @@ public class ElementEnum extends MinechemChemicalType
 		{
 			throw new IllegalArgumentException("id " + element.id + " is used");
 		}
-		if (element.id>heaviestMass)heaviestMass=element.id+1;
+		if (element.id>=heaviestMass)heaviestMass=element.id+1;
 		elements.put(element.id, element);
 	}
 	
