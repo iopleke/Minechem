@@ -37,8 +37,8 @@ import static minechem.item.element.ElementEnum.Ti;
 import static minechem.item.element.ElementEnum.Zn;
 
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Random;
 
@@ -56,7 +56,7 @@ import net.minecraft.item.ItemStack;
 
 public class MoleculeEnum extends MinechemChemicalType
 {
-	public static Map<Integer,MoleculeEnum> molecules = new Hashtable<Integer,MoleculeEnum>();
+	public static Map<Integer,MoleculeEnum> molecules = new LinkedHashMap<Integer,MoleculeEnum>();
 	public static int baseMolecules = 171;
 
 	public static final MoleculeEnum cellulose = addMolecule("cellulose", 0, 0, 1, 0, 0, 0.25F, 0, solid, new Element(C, 6), new Element(H, 10), new Element(O, 5));
