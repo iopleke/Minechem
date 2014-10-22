@@ -269,8 +269,6 @@ public class MoleculeEnum extends MinechemChemicalType
 	{
 		super(roomState, computeRadioactivity(chemicals));
 		
-		System.out.println(name);
-		
 		if (molecules!=null&&id<molecules.size()&&molecules.get(id) != null)
 		{
 			throw new IllegalArgumentException("id " + id + " is used");

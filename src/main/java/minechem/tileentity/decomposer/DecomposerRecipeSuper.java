@@ -3,6 +3,7 @@ package minechem.tileentity.decomposer;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+
 import minechem.Minechem;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
@@ -62,6 +63,12 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components)
 	{
 		this(input, components, 0);
+	}
+	
+	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, ArrayList<PotionChemical> chemicals)
+	{
+		this(input, components, 0);
+		addPotionChemical(chemicals);
 	}
 
 	private void addDecompRecipeSuper(DecomposerRecipeSuper recipeSuper)
