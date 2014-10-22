@@ -30,8 +30,9 @@ public class Decomposer {
 
 	/**
 	 * Add Recipe
-	 * @param input   as input stack
-	 * @param outputs as chemical stack array
+	 * @param input   	as input stack
+	 * @param chance	chance of output (Optional)
+	 * @param outputs 	as Ingredient stack array
 	 */
 	@ZenMethod
 	public static void addRecipe(IIngredient input, @Optional double chance, IIngredient[]... multiOutputs) 
@@ -95,8 +96,9 @@ public class Decomposer {
 	
 	/**
 	 * Add Select Recipe
-	 * @param input   as input stack
-	 * @param outputs as recipe output stack array
+	 * @param input   		as input stack
+	 * @param multioutputs 	as recipe output stack array
+	 * @param chance 		chance of any output
 	 */
 	//@ZenMethod
 	public static void addMultiRecipe(IIngredient input, IIngredient[][] multioutputs, @Optional double chance)
