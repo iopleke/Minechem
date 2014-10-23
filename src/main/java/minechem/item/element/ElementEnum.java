@@ -23,7 +23,6 @@ import static minechem.radiation.RadiationEnum.stable;
 import java.util.Hashtable;
 import java.util.Map;
 
-import cpw.mods.fml.relauncher.Side;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
@@ -34,7 +33,6 @@ public class ElementEnum extends MinechemChemicalType
 {
 
 	public static int heaviestMass = 0;
-	//public static ElementEnum[] elements = new ElementEnum[heaviestMass];
 	public static Map<Integer,ElementEnum> elements = new Hashtable<Integer,ElementEnum>();
 
 	public static final ElementEnum H = addElement(0, "H", "Hydrogen", nonmetal, gas, stable);//Done
