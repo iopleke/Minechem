@@ -11,6 +11,7 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationEnum;
+import minechem.radiation.RadiationFluidTileEntity;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Reference;
@@ -22,6 +23,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
@@ -280,24 +282,6 @@ public class MoleculeItem extends Item
 		return itemStack;
 	}
 
-	private ItemStack fillTube(ItemStack itemStack, EntityPlayer player, int meta)
-	{
-		if (player.capabilities.isCreativeMode)
-		{
-			return itemStack;
-		} else if (--itemStack.stackSize <= 0)
-		{
-			return new ItemStack(MinechemItemsRegistration.element, 1, meta);
-		} else
-		{
-			if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, meta)))
-			{
-				player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, meta), false);
-			}
-		}
-		return itemStack;
-	}
-
 	private ItemStack emptyTube(ItemStack itemStack, EntityPlayer player, World world, int x, int y, int z)
 	{
 		if (!world.isAirBlock(x, y, z) && !world.getBlock(x, y, z).getMaterial().isSolid())
@@ -313,6 +297,11 @@ public class MoleculeItem extends Item
 		{
 			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
+			RadiationEnum radioactivity=MoleculeEnum.molecules.get(itemStack.getItemDamage()).radioactivity();
+			TileEntity tile=world.getTileEntity(x, y, z);
+			if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
+				((RadiationFluidTileEntity)tile).info=ElementItem.getRadiationInfo(itemStack, world);
+			}
 			if (player.capabilities.isCreativeMode)
 			{
 				return itemStack;

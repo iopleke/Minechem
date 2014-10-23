@@ -23,10 +23,12 @@ import org.lwjgl.opengl.GL11;
 
 public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
+	private static final ResourceLocation resourceLocationJournalGUI = new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI);
 	private static final int SYNTHESIS_X = 197;
 	private static final int SYNTHESIS_Y = 121;
 	private static final int DECOMPOSER_X = 197;
 	private static final int DECOMPOSER_Y = 41;
+
 	private static final int GUI_WIDTH = 302;
 	private static final int GUI_HEIGHT = 191;
 
@@ -245,7 +247,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		GL11.glPushMatrix();
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
 		drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
 		GL11.glPopMatrix();
 
@@ -272,7 +274,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
         GL11.glEnable(GL11.GL_BLEND);
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
 		drawTexturedModalRect(8 / 2, 164 / 2, 161 / 2, 192 / 2, 20 / 2, 20 / 2);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
@@ -292,7 +294,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
 		GL11.glScalef(2.0F, 2.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
 
 		drawTexturedModalRect(197 / 2, 41 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
 		if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped())

@@ -40,7 +40,9 @@ public final class MinechemUtil
 			if (stack == null)
 			{
 				int append = itemStack.stackSize > inventory.getInventoryStackLimit() ? inventory.getInventoryStackLimit() : itemStack.stackSize;
-				inventory.setInventorySlotContents(i, new ItemStack(itemStack.getItem(), append, itemStack.getItemDamage()));
+				ItemStack newStack=itemStack.copy();
+				newStack.stackSize=append;
+				inventory.setInventorySlotContents(i, newStack);
 				itemStack.stackSize -= append;
 			} else if (stack.getItem() == itemStack.getItem() && stack.getItemDamage() == itemStack.getItemDamage())
 			{

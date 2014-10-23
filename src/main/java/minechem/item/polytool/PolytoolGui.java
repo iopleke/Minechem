@@ -22,6 +22,7 @@ public class PolytoolGui extends GuiContainerTabbed
 {
 	private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/polytool.png");
 	private static final ItemStack polytoolItem = new ItemStack(MinechemItemsRegistration.polytool);
+	private static final Random rand=new Random();
 	public ArrayList<ElementGuiHelper> elements = new ArrayList();
 	long renders;
 	ItemStack polytool;
@@ -41,7 +42,6 @@ public class PolytoolGui extends GuiContainerTabbed
 		{
 			ArrayList<PolytoolUpgradeType> upgrades = PolytoolItem.getUpgrades(stack);
 			Iterator<PolytoolUpgradeType> iter = upgrades.iterator();
-			Random rand = new Random();
 			while (iter.hasNext())
 			{
 				PolytoolUpgradeType upgrade = iter.next();
@@ -139,7 +139,6 @@ public class PolytoolGui extends GuiContainerTabbed
 
 	public void addUpgrade(PolytoolUpgradeType upgrade)
 	{
-		Random rand = new Random();
 		for (int i = 0; i < upgrade.power; i++)
 		{
 			elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, upgrade.getElement()));

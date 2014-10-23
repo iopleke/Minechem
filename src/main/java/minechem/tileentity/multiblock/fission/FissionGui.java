@@ -16,6 +16,7 @@ import org.lwjgl.opengl.GL11;
 public class FissionGui extends GuiContainerTabbed
 {
 
+	private static final ResourceLocation resourceLocationFissionGUI = new ResourceLocation(Minechem.ID, Reference.FISSION_GUI);
 	int guiWidth = 176;
 	int guiHeight = 166;
 
@@ -45,7 +46,7 @@ public class FissionGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(new ResourceLocation(Minechem.ID, Reference.FISSION_GUI));
+		this.mc.renderEngine.bindTexture(resourceLocationFissionGUI);
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		// DRAW GUI

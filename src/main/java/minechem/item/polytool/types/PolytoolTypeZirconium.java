@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 public class PolytoolTypeZirconium extends PolytoolUpgradeType
 {
 
+	private static final Random rand=new Random();
+	
 	public PolytoolTypeZirconium()
 	{
 		super();
@@ -36,7 +38,6 @@ public class PolytoolTypeZirconium extends PolytoolUpgradeType
 	{
 		if (block == Blocks.dirt)
 		{
-			Random rand = new Random();
 			if (rand.nextInt(8192) < 1 + power)
 			{
 				world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Items.diamond, 1, 0)));

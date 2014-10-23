@@ -39,7 +39,7 @@ public class FluidItemRenderingHandler implements IItemRenderer{
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
-		GL11.glEnable(GL11.GL_BLEND);
+//		GL11.glEnable(GL11.GL_BLEND);
 		Fluid fluid=((BlockFluidBase)((ItemBlock)item.getItem()).field_150939_a).getFluid();
 		if (fluid instanceof FluidElement){
 	        switch (((FluidElement) fluid).element.classification())

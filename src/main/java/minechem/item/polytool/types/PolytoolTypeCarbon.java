@@ -14,6 +14,8 @@ import net.minecraft.world.World;
 public class PolytoolTypeCarbon extends PolytoolUpgradeType
 {
 
+	private static final Random rand=new Random();
+	
 	public PolytoolTypeCarbon()
 	{
 		super();
@@ -34,7 +36,6 @@ public class PolytoolTypeCarbon extends PolytoolUpgradeType
 	@Override
 	public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
 	{
-		Random rand = new Random();
 		if (!world.isRemote)
 		{
 			int bonus = (int) (rand.nextDouble() * Math.log(this.power));

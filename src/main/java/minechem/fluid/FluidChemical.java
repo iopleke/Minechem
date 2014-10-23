@@ -9,11 +9,13 @@ public class FluidChemical extends MinechemFluid
 {
 
 	public final MoleculeEnum molecule;
+	private final int color;
 
 	public FluidChemical(MoleculeEnum molecule)
 	{
 		super(molecule.name(), molecule.roomState());
 		this.molecule = molecule;
+		color=computColor();
 	}
 
 	@Override
@@ -25,6 +27,10 @@ public class FluidChemical extends MinechemFluid
 	@Override
 	public int getColor()
 	{
+		return color;
+	}
+	
+	private int computColor(){
 		int red = (int) (molecule.red * 255);
 		int green = (int) (molecule.green * 255);
 		int blue = (int) (molecule.blue * 255);

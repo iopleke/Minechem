@@ -24,6 +24,8 @@ import net.minecraftforge.event.entity.player.PlayerEvent;
 public class PolytoolEventHandler
 {
 
+	private static final Random random=new Random();
+	
 	public void addDrops(LivingDropsEvent event, ItemStack dropStack)
 	{
 		EntityItem entityitem = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, dropStack);
@@ -87,7 +89,6 @@ public class PolytoolEventHandler
 
 			EntityPlayer player = (EntityPlayer) event.source.getEntity();
 			ItemStack stack = player.getCurrentEquippedItem();
-			Random random = new Random();
 			if (stack != null && stack.getItem() instanceof PolytoolItem)
 			{
 				float powerSilicon = PolytoolItem.getPowerOfType(stack, ElementEnum.Si);

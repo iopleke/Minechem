@@ -12,6 +12,8 @@ import net.minecraft.world.World;
 
 public class PolytoolTypeChromium extends PolytoolUpgradeType
 {
+	
+	private static final Random rand=new Random();
 
 	public PolytoolTypeChromium()
 	{
@@ -33,7 +35,6 @@ public class PolytoolTypeChromium extends PolytoolUpgradeType
 	@Override
 	public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
 	{
-		Random rand = new Random();
 		if (!world.isRemote && rand.nextInt(10) < power)
 		{
 			if (block == Blocks.wool)

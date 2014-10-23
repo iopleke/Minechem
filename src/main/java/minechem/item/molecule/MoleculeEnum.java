@@ -257,6 +257,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	private final ArrayList<PotionChemical> components;
 	private final int id;
 	private final String name;
+	private final int size;
 	public float red;
 	public float green;
 	public float blue;
@@ -288,6 +289,7 @@ public class MoleculeEnum extends MinechemChemicalType
 		this.red2 = colorRed2;
 		this.green2 = colorGreen2;
 		this.blue2 = colorBlue2;
+		size=computSize();
 	}
 	
 	public static MoleculeEnum addMolecule(String name, int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, ChemicalRoomStateEnum roomState, PotionChemical... chemicals)
@@ -338,9 +340,8 @@ public class MoleculeEnum extends MinechemChemicalType
 		Random random = new Random(seed);
 		return random.nextFloat();
 	}
-
-	public int getSize()
-	{
+	
+	private int computSize(){
 		int result = 0;
 
 		Iterator iter = this.components().iterator();
@@ -349,19 +350,16 @@ public class MoleculeEnum extends MinechemChemicalType
 		{
 			result += ((PotionChemical) iter.next()).amount;
 		}
-
 		return result;
+	}
+
+	public int getSize()
+	{
+		return size;
 	}
 
 	public static MoleculeEnum getById(int id)
 	{
-//		for (MoleculeEnum molecule : molecules.values())
-//		{
-//			if (molecule != null && molecule.id == id)
-//			{
-//				return molecule;
-//			}
-//		}
 		return molecules.get(id);
 	}
 	

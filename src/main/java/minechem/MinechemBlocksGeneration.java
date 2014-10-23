@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.block.BlockUraniumOre;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
+import minechem.radiation.RadiationFluidTileEntity;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorBlock;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.decomposer.DecomposerBlock;
@@ -92,5 +93,7 @@ public class MinechemBlocksGeneration
 
 		// Tile Entity Proxy.
 		GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
+		
+		GameRegistry.registerTileEntity(RadiationFluidTileEntity.class, "minechem.tileEntityRadiationFluid");
 	}
 }
