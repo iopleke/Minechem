@@ -288,11 +288,14 @@ public class MinechemRecipes
 			}), new DecomposerRecipe(new PotionChemical[]
 			{
 				this.element(ElementEnum.Zn), this.element(ElementEnum.O)
+			}), new DecomposerRecipe(new PotionChemical[]
+			{
+				this.element(ElementEnum.Al), this.element(ElementEnum.O)
 			})
 		}));
-		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.stone, 7), true, COST_SMOOTH, new PotionChemical[]
+		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.stone, 16), true, COST_SMOOTH, new PotionChemical[]
 		{
-			this.element(ElementEnum.Si), null, null, this.element(ElementEnum.O, 2), null, null
+			this.element(ElementEnum.Si), this.element(ElementEnum.O, 2), null, this.element(ElementEnum.Al, 2), this.element(ElementEnum.O, 3), null
 		}));
 
 		// Grass Block
@@ -417,9 +420,9 @@ public class MinechemRecipes
 				this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
 			})
 		}));
-		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.cobblestone), true, COST_BLOCK, new PotionChemical[]
+		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.cobblestone,16), true, COST_SMOOTH, new PotionChemical[]
 		{
-			this.element(ElementEnum.Si), null, null, null, this.element(ElementEnum.O, 2), null
+			this.element(ElementEnum.Si,2), this.element(ElementEnum.O, 4), null
 		}));
 
 		// Planks
