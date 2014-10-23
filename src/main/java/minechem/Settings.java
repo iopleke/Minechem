@@ -200,6 +200,10 @@ public class Settings
 		prop.setLanguageKey("config.blacklist.decomposition.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.decomposition.example");
 		DecomposerBlacklist = prop.getStringList();
+		for (int i=0;i<DecomposerBlacklist.length;i++)
+		{
+			if (DecomposerBlacklist[i].equals("")) DecomposerBlacklist[i]=null;
+		}
 		configList.add(prop.getName());
 
 		prop = config.get("blacklist", "synthesis", new String[]
@@ -211,6 +215,10 @@ public class Settings
 		prop.setLanguageKey("config.blacklist.synthesis.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.synthesis.example");
 		SynthesisMachineBlacklist = prop.getStringList();
+		for (int i=0;i<SynthesisMachineBlacklist.length;i++)
+		{
+			if (SynthesisMachineBlacklist[i].equals("")) SynthesisMachineBlacklist[i]=null;
+		}
 		configList.add(prop.getName());
 
 		prop = config.get("power", "enable", Settings.powerUseEnabled);
