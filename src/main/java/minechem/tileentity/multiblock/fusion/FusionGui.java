@@ -33,8 +33,8 @@ public class FusionGui extends GuiContainerTabbed
 		this.ySize = guiHeight;
 		this.storedEnergy = this.fusion.getEnergyStored();
 		this.maxEnergy = fusion.getMaxEnergyStored();
+        addTab(new FusionTabStateControl(this, fusion));
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
-		addTab(new FusionTabStateControl(this, fusion));
 	}
 
 	@Override
@@ -74,17 +74,5 @@ public class FusionGui extends GuiContainerTabbed
 		this.storedEnergy = this.fusion.getEnergyStored();
 	}
 
-	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
-	{
-		return false;
-	}
-
-	@Optional.Method(modid = "NotEnoughItems")
-	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gc, ItemStack is)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
 
 }

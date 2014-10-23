@@ -1,6 +1,7 @@
 package minechem.oredictionary;
 
 import minechem.Minechem;
+import minechem.item.element.Element;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
@@ -53,10 +54,30 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 		null, new Molecule(MoleculeEnum.galliumarsenide, 1), null, certusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
 	};
 
+    private PotionChemical[] fluixQuartzDustDecompositionFormula = new PotionChemical[]
+    {
+            new Molecule(MoleculeEnum.galliumarsenide, 1), new Molecule(certusQuartzMolecule, 1), new Molecule(chargedCertusQuartzMolecule, 2)
+    };
+
+    private PotionChemical[] fluixQuartzDustSynthesisFormula = new PotionChemical[]
+    {
+            null, null, null, certusQuartzChemical, new Molecule(MoleculeEnum.galliumarsenide, 1), chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
+    };
+
+    private PotionChemical[] fluixQuartzPearlDecompositionFormula = new PotionChemical[]
+    {
+            new Molecule(MoleculeEnum.galliumarsenide, 2), certusQuartzChemical, new Molecule(chargedCertusQuartzMolecule, 2)
+    };
+
+    private PotionChemical[] fluixQuartzPearlSynthesisFormula = new PotionChemical[]
+    {
+            null, new Molecule(MoleculeEnum.galliumarsenide, 1), null, certusQuartzChemical, new Molecule(MoleculeEnum.galliumarsenide, 1), chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
+    };
+
 	@Override
 	public boolean canHandle(String oreName)
 	{
-		return oreName.endsWith("CertusQuartz");
+		return oreName.endsWith("CertusQuartz") || oreName.endsWith("Fluix");
 	}
 
 	@Override
@@ -66,23 +87,29 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 		{
 			DecomposerRecipe.createAndAddRecipeSafely(oreName, certusQuartzDecompositionFormula);
 			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, certusQuartzDustSynthesisFormula);
-			// }
 		} else if (oreName.equals("crystalCertusQuartz"))
 		{
 			DecomposerRecipe.createAndAddRecipeSafely(oreName, certusQuartzDecompositionFormula);
 			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, certusQuartzCrystalSynthesisFormula);
-			// }
 		} else if (oreName.equals("crystalChargedCertusQuartz"))
-		{
-			DecomposerRecipe.createAndAddRecipeSafely(oreName, chargedCertusQuartzDecompositionFormula);
-			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, chargedCertusQuartzCrystalSynthesisFormula);
-		} else if (oreName.equals("crystalFluixQuartz"))
+        {
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, chargedCertusQuartzDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, chargedCertusQuartzCrystalSynthesisFormula);
+		} else if (oreName.equals("crystalFluix"))
 		{
 			DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixCertusQuartzDecompositionFormula);
 			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzCrystalSynthesisFormula);
+        } else if (oreName.equals("dustFluix"))
+        {
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixQuartzDustDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzDustSynthesisFormula);
+        } else if (oreName.equals("pearlFluix"))
+        {
+            DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixQuartzPearlDecompositionFormula);
+            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzPearlSynthesisFormula);
 		} else
 		{
-			Minechem.LOGGER.info("Unknown type of Certus Quartz : " + oreName);
+			Minechem.LOGGER.info("Unknown type of AE2 item : " + oreName);
 		}
 	}
 }

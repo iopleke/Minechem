@@ -42,13 +42,13 @@ public abstract class GuiToggleSwitch
 		ToggleButton button = buttons.get(state);
 		drawTexturedModalRect(x, y, button.u, button.v, width, height);
 		String tooltip = MinechemHelper.getLocalString(button.tooltip);
-		int cx = (container.width - container.xSize) / 2;
-		int cy = (container.height - container.ySize) / 2;
+		int cx = (container.width - container.getXSize()) / 2;
+		int cy = (container.height - container.getYSize()) / 2;
 		int tooltipWidth = mc.fontRenderer.getStringWidth(tooltip);
 
 		if (isMoverOver())
 		{
-			container.drawCreativeTabHoveringText(tooltip, cx + 77 - (tooltipWidth / 2), cy + 100);
+			container.drawHoveringText(tooltip, cx + 77 - (tooltipWidth / 2), cy + 100);
 		}
 	}
 

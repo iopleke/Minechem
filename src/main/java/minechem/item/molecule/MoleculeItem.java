@@ -40,10 +40,9 @@ public class MoleculeItem extends Item
 	}
 
 	@Override
-	public String getItemStackDisplayName(ItemStack par1ItemStack)
+	public String getItemStackDisplayName(ItemStack itemStack)
 	{
-		int itemDamage = par1ItemStack.getItemDamage();
-		return MinechemHelper.getLocalString(MoleculeEnum.getById(itemDamage).getUnlocalizedName());
+		return MinechemHelper.getLocalString(getMolecule(itemStack).getUnlocalizedName());
 	}
 
 	@Override
@@ -166,7 +165,7 @@ public class MoleculeItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs par2CreativeTabs, List par3List)
 	{
-		for (MoleculeEnum molecule : MoleculeEnum.molecules)
+		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
 			if (molecule != null)
 			{
@@ -177,7 +176,14 @@ public class MoleculeItem extends Item
 
 	public static MoleculeEnum getMolecule(ItemStack itemstack)
 	{
-		return MoleculeEnum.getById(itemstack.getItemDamage());
+		int itemDamage = itemstack.getItemDamage();
+		MoleculeEnum mol = MoleculeEnum.getById(itemDamage);
+		if (mol==null)
+		{
+			itemstack.setItemDamage(0);
+			mol = MoleculeEnum.getById(0);
+		}
+		return mol;
 	}
 
 	/**
@@ -291,7 +297,7 @@ public class MoleculeItem extends Item
 		{
 			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
-			RadiationEnum radioactivity=MoleculeEnum.molecules[itemStack.getItemDamage()].radioactivity();
+			RadiationEnum radioactivity=MoleculeEnum.molecules.get(itemStack.getItemDamage()).radioactivity();
 			TileEntity tile=world.getTileEntity(x, y, z);
 			if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
 				((RadiationFluidTileEntity)tile).info=ElementItem.getRadiationInfo(itemStack, world);
@@ -316,6 +322,6 @@ public class MoleculeItem extends Item
 	public static String getRoomState(ItemStack itemstack)
 	{
 		int id = itemstack.getItemDamage();
-		return (id > MoleculeEnum.molecules.length) || (MoleculeEnum.molecules[id] == null) ? "null" : MoleculeEnum.molecules[id].roomState().descriptiveName();
+		return (MoleculeEnum.molecules.get(id) == null) ? "null" : MoleculeEnum.molecules.get(id).roomState().descriptiveName();
 	}
 }

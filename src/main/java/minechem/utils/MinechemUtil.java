@@ -84,7 +84,7 @@ public final class MinechemUtil
 		ItemStack itemStack = null;
 		if (chemical instanceof ElementEnum)
 		{
-			itemStack = ElementItem.createStackOf(ElementEnum.elements[((ElementEnum) chemical).ordinal()], 1);
+			itemStack = ElementItem.createStackOf(ElementEnum.getByID(((ElementEnum) chemical).ordinal()), 1);
 		} else if (chemical instanceof MoleculeEnum)
 		{
 			itemStack = new ItemStack(MinechemItemsRegistration.molecule, 1, ((MoleculeEnum) chemical).id());

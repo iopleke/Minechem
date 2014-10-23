@@ -1,6 +1,7 @@
 package minechem.minetweaker;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisRecipe;
@@ -8,46 +9,37 @@ import minechem.utils.InputHelper;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
-import minetweaker.api.item.IItemStack;
-import minetweaker.api.oredict.IOreDictEntry;
 import net.minecraft.item.ItemStack;
-import net.minecraftforge.oredict.OreDictionary;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
 
 
 @ZenClass("mods.minechem.Synthesiser")
 public class Synthesiser {
+	
 	@ZenMethod
-	public static void addRecipe(IIngredient outputStack,boolean shaped,int energy, String... inputs) 
+	public static void addRecipe(IIngredient[] inputs, IIngredient outputStack,boolean shaped,int energy) 
 	{
 		boolean someValue=false;
-		PotionChemical[] input = new PotionChemical[9];
-		for (int i=0;i<Math.min(inputs.length,9);i++)
+		PotionChemical[] input = InputHelper.getArray(InputHelper.getChemicals(inputs));
+		PotionChemical[] inputFixed = Arrays.copyOf(input, 9);
+		for (PotionChemical chem:inputFixed)
 		{
-			input[i]=InputHelper.getPotionChemical(inputs[i]);
-			if (input[i]!=null) someValue=true;
+			if (chem!=null) someValue = true; 
+			break;
 		}
 		if (someValue)
 		{
-			ItemStack output;
-			if(outputStack instanceof IOreDictEntry)
-				output=OreDictionary.getOres(((IOreDictEntry) outputStack).getName()).get(0);
-			else 
-				output=InputHelper.toStack((IItemStack) outputStack);
-			MineTweakerAPI.apply(new AddRecipeAction(output,shaped,energy, input));
+			ItemStack output = InputHelper.getInput(outputStack);
+			if (output!=null)
+				MineTweakerAPI.apply(new AddRecipeAction(output,shaped,energy, inputFixed));
 		}
 	}
 	
 	
 	@ZenMethod
 	public static void removeRecipe(IIngredient input) {
-		ArrayList<ItemStack> toRemove = new ArrayList<ItemStack>();
-		if(input instanceof IOreDictEntry)
-			toRemove=OreDictionary.getOres(((IOreDictEntry) input).getName());
-		else
-			toRemove.add(InputHelper.toStack((IItemStack) input));
-		
+		ArrayList<ItemStack> toRemove = InputHelper.getInputs(input);
 		for (ItemStack remove : toRemove) {
 			ArrayList<SynthesisRecipe> recipes = SynthesisRecipe.search(remove);
 			if (recipes!=null)
@@ -55,6 +47,8 @@ public class Synthesiser {
 					MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
 		}
 	}
+	
+	
 	
 	// ######################
 	// ### Action classes ###

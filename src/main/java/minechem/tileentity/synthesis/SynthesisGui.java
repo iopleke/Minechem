@@ -48,17 +48,4 @@ public class SynthesisGui extends GuiContainerTabbed
 		drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 	}
 
-	@Override
-	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
-	{
-		return false;
-	}
-
-	@Optional.Method(modid = "NotEnoughItems")
-	@Override
-	public Iterable<Integer> getItemSpawnSlots(GuiContainer gc, ItemStack is)
-	{
-		throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-	}
-
 }

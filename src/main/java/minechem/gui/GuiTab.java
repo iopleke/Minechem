@@ -21,18 +21,16 @@ public abstract class GuiTab
 	private static final ResourceLocation resourceLocationTabLeft = new ResourceLocation(Minechem.ID, Reference.TAB_LEFT);
 
 	public FontRenderer tabFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
-
-	// Replacement for SoundManager is SoundHandler
-	// public SoundManager tabSoundManager = FMLClientHandler.instance().getClient().sndManager;
 	public SoundHandler tabSoundManager = FMLClientHandler.instance().getClient().getSoundHandler();
+
 	private boolean open;
 
 	protected Gui myGui;
 	public boolean leftSide;
 	protected int overlayColor = 0xffffff;
 
-	public int currentShiftX = 0;
-	public int currentShiftY = 0;
+	public int currentX = 0;
+	public int currentY = 0;
 
 	protected int limitWidth = 128;
 	protected int maxWidth = 124;
@@ -59,6 +57,9 @@ public abstract class GuiTab
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
+
+        currentX = x;
+        currentY = y;
 
 		draw(x, y);
 
@@ -102,7 +103,6 @@ public abstract class GuiTab
 	protected void drawIcon(int x, int y)
 	{
 		ResourceLocation resource = this.getIcon();
-		// Minecraft.getMinecraft().renderEngine.bindTexture(new ResourceLocation(ConstantValue.MOD_ID,"textures/gui/allitems.png"));
 		if (myGui instanceof GuiContainerTabbed)
 		{
 			((GuiContainerTabbed) myGui).drawTexture(x, y, resource);
@@ -118,19 +118,17 @@ public abstract class GuiTab
 
 	public int getHeight()
 	{
-
 		return currentHeight;
 	}
+
+    public int getWidth()
+    {
+        return currentWidth;
+    }
 
 	public abstract ResourceLocation getIcon();
 
 	public abstract String getTooltip();
-
-	public boolean handleMouseClicked(int x, int y, int mouseButton)
-	{
-
-		return false;
-	}
 
 	public boolean intersectsWith(int mouseX, int mouseY, int shiftX, int shiftY)
 	{

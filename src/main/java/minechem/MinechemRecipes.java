@@ -5,6 +5,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -2922,13 +2923,14 @@ public class MinechemRecipes
 
 	private void addDecomposerRecipesFromMolecules()
 	{
-		MoleculeEnum[] var1 = MoleculeEnum.molecules;
-		int var2 = var1.length;
-
-		for (int var3 = 0; var3 < var2; ++var3)
+//		List<MoleculeEnum> var1 = MoleculeEnum.molecules;
+//		int var2 = var1.size();
+//
+//		for (int var3 = 0; var3 < var2; ++var3)
+//		{
+//			MoleculeEnum var4 = var1.get(var3);
+		for (MoleculeEnum var4:MoleculeEnum.molecules.values())
 		{
-			MoleculeEnum var4 = var1[var3];
-
 			if (var4 != null)
 			{
 				ArrayList var5 = var4.components();
@@ -2942,12 +2944,13 @@ public class MinechemRecipes
 
 	private void addSynthesisRecipesFromMolecules()
 	{
-		MoleculeEnum[] molecules = MoleculeEnum.molecules;
+		//List<MoleculeEnum> molecules = MoleculeEnum.molecules;
 
-		for (int i = 0; i < molecules.length; ++i)
+//		for (int i = 0; i < molecules.size(); ++i)
+//		{
+//			MoleculeEnum molecule = molecules.get(i);
+		for (MoleculeEnum molecule:MoleculeEnum.molecules.values())
 		{
-
-			MoleculeEnum molecule = molecules[i];
 			if (molecule != null)
 			{
 				ArrayList components = molecule.components();
@@ -3290,7 +3293,7 @@ public class MinechemRecipes
 		{
 			this.oreDictionaryHandlers.add(new OreDictionaryIC2Handler());
 		}
-		if (Loader.isModLoaded("AppliedEnergistics"))
+		if (Loader.isModLoaded("appliedenergistics2"))
 		{
 			this.oreDictionaryHandlers.add(new OreDictionaryAppliedEnergisticsHandler());
 		}

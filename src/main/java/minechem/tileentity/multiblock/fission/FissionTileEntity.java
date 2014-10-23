@@ -65,11 +65,11 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 		{
 			if (inventory[kStartInput] != null)
 			{
-				ItemStack fissionResult = getFissionOutput();
-				if (fissionResult != null && (inventory[kOutput[0]] == null || (inventory[kOutput[0]].stackSize < 64 && fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage())))
+				if (inputIsFissionable())
 				{
 					if (useEnergy(getEnergyNeeded()))
 					{
+                        ItemStack fissionResult = getFissionOutput();
 						addToOutput(fissionResult);
 						removeInputs();
 					}
@@ -79,6 +79,18 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
 		}
 	}
+
+    public boolean inputIsFissionable()
+    {
+        ItemStack fissionResult = getFissionOutput();
+        if (fissionResult != null)
+        {
+            boolean sameItem = fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage();
+            boolean spaceInOutput = inventory[kOutput[0]].stackSize < 64 && sameItem;
+            return inventory[kOutput[0]] == null || spaceInOutput;
+        }
+        return false;
+    }
 
 	private void addToOutput(ItemStack fusionResult)
 	{

@@ -16,7 +16,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 	private enum EnumOrePrefix
 	{
-		block, oreNether, ore, ingot, nugget, dustDirty, dustSmall, dust, plate, gem
+		block, oreNether, ore, ingot, nugget, dustDirty, dustSmall, dust, plate, gem, crystal
 	}
 
 	private String[] supportedOres;
@@ -113,6 +113,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 				unregisterIngot(ore);
 				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT / 4, scaleCeil(ore.getComposition(), 0.25d));
 				break;
+            case crystal:
 			case gem:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_GEM, ore.getComposition());
