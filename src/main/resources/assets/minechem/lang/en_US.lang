@@ -487,6 +487,7 @@ molecule.sulfurDioxide=Sulfur Dioxide
 molecule.hydrogenSulfide=Hydrogen Sulfide
 molecule.sodiumBisulfate=Sodium Bisulfate
 molecule.sodiumSulfate=Sodium Sulfate
+molecule.dimethyltryptamine=Dimethyltryptamine
 
 fluid.aalc.name=Allyl Alcohol
 fluid.acetate.name=Acetate (ion)

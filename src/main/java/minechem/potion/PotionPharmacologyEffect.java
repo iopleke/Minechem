@@ -1,7 +1,5 @@
 package minechem.potion;
 
-import java.util.ArrayList;
-import java.util.List;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.utils.Constants;
 import net.minecraft.entity.EntityLivingBase;
@@ -10,6 +8,9 @@ import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PotionPharmacologyEffect
 {
@@ -64,13 +65,19 @@ public class PotionPharmacologyEffect
 			{
 				((EntityPlayer) entityPlayer).getFoodStats().addStats(1, .1F);
 			}
-		} else if (molecule == MoleculeEnum.psilocybin)
-		{
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
-					.getId(), Constants.TICKS_PER_SECOND * 10, 5));
-			entityPlayer.attackEntityFrom(DamageSource.generic, 2);
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision
-					.getId(), Constants.TICKS_PER_SECOND * 20, 5));
+		} else if (molecule == MoleculeEnum.psilocybin) {
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
+                    .getId(), Constants.TICKS_PER_SECOND * 10, 5));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision
+                    .getId(), Constants.TICKS_PER_SECOND * 20, 5));
+        } else if (molecule == MoleculeEnum.dimethyltryptamine)
+        {
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
+                    .getId(), Constants.TICKS_PER_SECOND * 30, 5));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision
+                    .getId(), Constants.TICKS_PER_SECOND * 60, 5));
 		} else if (molecule == MoleculeEnum.amphetamine)
 		{
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
