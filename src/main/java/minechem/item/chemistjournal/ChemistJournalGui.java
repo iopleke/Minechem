@@ -120,10 +120,10 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
     @Override
     protected void keyTyped(char character, int keyCode)
     {
-        // don't leave GUI with the open inventoryKey
-        if (keyCode != this.mc.gameSettings.keyBindInventory.getKeyCode())
+        // only leave GUI when ESC is pressed
+        if (keyCode == 1)
         {
-            super.keyTyped(character, keyCode);
+            this.mc.thePlayer.closeScreen();
         }
         searchBar.keyTyped(character, keyCode);
         populateItemList();
