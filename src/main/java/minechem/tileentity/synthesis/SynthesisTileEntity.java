@@ -266,9 +266,10 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 				int toRemove = amount;
 				while (toRemove > 0)
 				{
+					ItemStack result = getStackInSlot(slot).copy();
 					if (takeInputStacks())
 					{
-						toRemove--;
+						toRemove-=result.stackSize;
 					} else
 					{
 						if (amount == toRemove)
@@ -276,7 +277,6 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 							return null;
 						} else
 						{
-							ItemStack result = getStackInSlot(slot).copy();
 							result.stackSize = (amount - toRemove);
 							return result;
 						}

@@ -132,7 +132,8 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
 		}
 		return storageInventory;
 	}
-
+	
+	
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
 	{
@@ -199,4 +200,6 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
 		}
 		return stack;
 	}
+	
+	
 }
