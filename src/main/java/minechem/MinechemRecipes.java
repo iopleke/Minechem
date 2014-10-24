@@ -2889,6 +2889,10 @@ public class MinechemRecipes
 		{
 			new ItemStack(Items.paper), new ItemStack(Items.diamond)
 		});
+        GameRegistry.addRecipe(MinechemItemsRegistration.emptyTube, new Object[]
+        {
+                "   ", "P P", " P ", Character.valueOf('P'), blockThinGlass
+        });
 
 		GameRegistry.addRecipe(new ChemistJournalRecipeCloning());
 

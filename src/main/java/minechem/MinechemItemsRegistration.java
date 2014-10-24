@@ -30,6 +30,7 @@ public class MinechemItemsRegistration
 	public static ItemStack microscopeLens;
 	public static ItemStack minechempills;
 	public static Item polytool;
+    public static ItemStack emptyTube;
 
 	public static void init()
 	{
@@ -58,12 +59,12 @@ public class MinechemItemsRegistration
 		polytool = new PolytoolItem();
 		GameRegistry.registerItem(polytool, Minechem.ID + "Polytool");
 
+        emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
 		registerFluidContainers();
 	}
 
 	private static void registerFluidContainers()
-	{
-		ItemStack emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+    {
 		for (ElementEnum element : ElementEnum.elements.values())
 		{
 			if (element != null)
