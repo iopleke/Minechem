@@ -19,10 +19,9 @@ import static minechem.radiation.RadiationEnum.highlyRadioactive;
 import static minechem.radiation.RadiationEnum.radioactive;
 import static minechem.radiation.RadiationEnum.slightlyRadioactive;
 import static minechem.radiation.RadiationEnum.stable;
-
 import java.util.Hashtable;
+import java.util.Iterator;
 import java.util.Map;
-
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
@@ -242,5 +241,17 @@ public class ElementEnum extends MinechemChemicalType
 
 	public static ElementEnum getByID(int atomicNumber) {
 		return elements.get(atomicNumber);
+	}
+	
+	public static ElementEnum getByName(String name){
+		Iterator<ElementEnum> it=elements.values().iterator();
+		while(it.hasNext()){
+			ElementEnum element=it.next();
+			if (element.name.equals(name)){
+				return element;
+			}
+		}
+		
+		return null;
 	}
 }
