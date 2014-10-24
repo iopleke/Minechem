@@ -1,8 +1,7 @@
 package minechem.api;
 
 import java.lang.reflect.Array;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -43,32 +42,12 @@ public class ChemicalAPI
 		}
 
 		List<Object> chemicals = toChemicalsWithAmount(molecule);
+		Object roomstatus=getRoomStatus(roomStatus);
 
-		try
-		{
-			MinechemClassesAccess.classMoleculeEnum.getConstructor(String.class, int.class, float.class, float.class, float.class, float.class, float.class, float.class, MinechemClassesAccess.classChemicalRoomStateEnum, MinechemClassesAccess.classArrayPotionChemical).newInstance(name, id, colorRed, colorGreen, colorBlue, colorRed2, colorGreen2, colorBlue2, getRoomStatus(roomStatus), chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
-		} catch (InstantiationException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (InvocationTargetException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (NoSuchMethodException e)
-		{
-			e.printStackTrace();
-			return false;
-		} catch (SecurityException e)
-		{
+		try {
+			Method addMolecule=MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("addMolecule", String.class,int.class,float.class,float.class,float.class,float.class,float.class,float.class,MinechemClassesAccess.classChemicalRoomStateEnum,MinechemClassesAccess.classArrayPotionChemical);
+			addMolecule.invoke(null, name,id,colorRed,colorGreen,colorBlue,colorRed2,colorGreen2,colorBlue2,roomstatus,chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
+		} catch (Exception e) {
 			e.printStackTrace();
 			return false;
 		}
@@ -98,32 +77,17 @@ public class ChemicalAPI
 		}
 
 		List<Object> chemicals = toChemicalsWithAmount(molecule);
+		Object roomstatus=getRoomStatus(roomStatus);
 
-		try
-		{
-			MinechemClassesAccess.classMoleculeEnum.getConstructor(String.class, int.class, MinechemClassesAccess.classChemicalRoomStateEnum, MinechemClassesAccess.classArrayPotionChemical).newInstance(name, id, getRoomStatus(roomStatus), chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
-			return true;
-		} catch (InstantiationException e)
-		{
+		try {
+			Method addMolecule=MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("addMolecule", String.class,int.class,MinechemClassesAccess.classChemicalRoomStateEnum,MinechemClassesAccess.classArrayPotionChemical);
+			addMolecule.invoke(null, name,id,roomstatus,chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
+		} catch (Exception e) {
 			e.printStackTrace();
-		} catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		} catch (InvocationTargetException e)
-		{
-			e.printStackTrace();
-		} catch (NoSuchMethodException e)
-		{
-			e.printStackTrace();
-		} catch (SecurityException e)
-		{
-			e.printStackTrace();
+			return false;
 		}
 
-		return false;
+		return true;
 	}
 
 	/**
@@ -153,25 +117,7 @@ public class ChemicalAPI
 			Object output = MinechemClassesAccess.classChemicalFluidReactionOutput.getConstructor(List.class, float.class).newInstance(chemicals, explosionLevel);
 			((Map) MinechemClassesAccess.classChemicalFluidReactionHandler.getDeclaredField("reactionRules").get(null)).put(rule, output);
 			return true;
-		} catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		} catch (NoSuchFieldException e)
-		{
-			e.printStackTrace();
-		} catch (SecurityException e)
-		{
-			e.printStackTrace();
-		} catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		} catch (InvocationTargetException e)
-		{
-			e.printStackTrace();
-		} catch (NoSuchMethodException e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -215,36 +161,15 @@ public class ChemicalAPI
 	{
 		try
 		{
-			Field elementsField = MinechemClassesAccess.classElementEnum.getField("elements");
-			Object[] elements = (Object[]) elementsField.get(null);
-			for (Object element : elements)
-			{
-				if (element.toString().equals(name))
-				{
-					return element;
-				}
+			Method getByNameElement=MinechemClassesAccess.classElementEnum.getDeclaredMethod("getByName", String.class);
+			Object element=getByNameElement.invoke(null, name);
+			if (element!=null){
+				return element;
 			}
 
-			Field moleculesField = MinechemClassesAccess.classMoleculeEnum.getField("molecules");
-			Object[] molecules = (Object[]) moleculesField.get(null);
-			for (Object molecule : molecules)
-			{
-				if (molecule != null && molecule.toString().equals(name))
-				{
-					return molecule;
-				}
-			}
-		} catch (SecurityException e)
-		{
-			e.printStackTrace();
-		} catch (NoSuchFieldException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalAccessException e)
-		{
+			Method getByNameMolecule=MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("getByName", String.class);
+			return getByNameMolecule.invoke(null, name);
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
@@ -262,22 +187,7 @@ public class ChemicalAPI
 			{
 				return MinechemClassesAccess.classMolecule.getConstructor(MinechemClassesAccess.classMoleculeEnum, int.class).newInstance(chemical, amount);
 			}
-		} catch (InstantiationException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		} catch (InvocationTargetException e)
-		{
-			e.printStackTrace();
-		} catch (NoSuchMethodException e)
-		{
-			e.printStackTrace();
-		} catch (SecurityException e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
@@ -290,16 +200,7 @@ public class ChemicalAPI
 		try
 		{
 			return MinechemClassesAccess.classChemicalRoomStateEnum.getField(roomStatus).get(null);
-		} catch (IllegalArgumentException e)
-		{
-			e.printStackTrace();
-		} catch (IllegalAccessException e)
-		{
-			e.printStackTrace();
-		} catch (NoSuchFieldException e)
-		{
-			e.printStackTrace();
-		} catch (SecurityException e)
+		} catch (Exception e)
 		{
 			e.printStackTrace();
 		}
