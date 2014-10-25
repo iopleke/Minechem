@@ -1,12 +1,13 @@
 package minechem.potion;
 
-import java.util.HashMap;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
+
+import java.util.HashMap;
 
 public class PotionEnchantmentCoated extends Enchantment
 {

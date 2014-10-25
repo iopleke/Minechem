@@ -3,6 +3,7 @@ package minechem.gui;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementEnum;
+import minechem.reference.Reference;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -10,6 +11,9 @@ import net.minecraft.item.ItemStack;
 
 public class CreativeTabMinechem extends CreativeTabs
 {
+    public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Reference.NAME, 0);
+    public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Reference.NAME + ".Elements", 1);
+
 	private int tabIcon;
 
 	public CreativeTabMinechem(String tabName, int i)

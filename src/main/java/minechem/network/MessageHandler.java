@@ -5,18 +5,12 @@ import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import cpw.mods.fml.relauncher.Side;
-import minechem.Minechem;
-import minechem.network.message.ChemistJournalActiveItemMessage;
-import minechem.network.message.DecomposerUpdateMessage;
-import minechem.network.message.FissionUpdateMessage;
-import minechem.network.message.FusionUpdateMessage;
-import minechem.network.message.GhostBlockMessage;
-import minechem.network.message.PolytoolUpdateMessage;
-import minechem.network.message.SynthesisUpdateMessage;
+import minechem.network.message.*;
+import minechem.reference.Reference;
 
 public class MessageHandler implements IMessageHandler
 {
-	public static SimpleNetworkWrapper INSTANCE = new SimpleNetworkWrapper(Minechem.ID);
+	public static SimpleNetworkWrapper INSTANCE = new SimpleNetworkWrapper(Reference.ID);
 
 	public static void init()
 	{

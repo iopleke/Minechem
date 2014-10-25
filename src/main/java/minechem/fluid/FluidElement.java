@@ -1,9 +1,10 @@
 package minechem.fluid;
 
-import java.awt.Color;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementEnum;
 import net.minecraft.item.ItemStack;
+
+import java.awt.*;
 
 public class FluidElement extends MinechemFluid
 {

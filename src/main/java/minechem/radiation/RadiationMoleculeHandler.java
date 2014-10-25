@@ -1,11 +1,5 @@
 package minechem.radiation;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
@@ -20,6 +14,8 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.*;
 
 public class RadiationMoleculeHandler
 {

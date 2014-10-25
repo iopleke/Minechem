@@ -1,7 +1,7 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
@@ -10,7 +10,7 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiVerticalScrollBar extends Gui
 {
-	public static final ResourceLocation resourceLocationAllitems=new ResourceLocation(Reference.TEXTURE_MOD_ID + Reference.TEXTURE_GUI_DIR + "allitems.png");
+	public static final ResourceLocation resourceLocationAllitems=new ResourceLocation(Textures.TEXTURE_MOD_ID + Textures.TEXTURE_GUI_DIR + "allitems.png");
 
 	Minecraft mc;
 	IVerticalScrollContainer container;

@@ -1,12 +1,11 @@
 package minechem.oredictionary;
 
-import minechem.Minechem;
-import minechem.item.element.Element;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.utils.LogHelper;
 
 public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHandler
 {
@@ -109,7 +108,7 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
             SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzPearlSynthesisFormula);
 		} else
 		{
-			Minechem.LOGGER.info("Unknown type of AE2 item : " + oreName);
+			LogHelper.debug("Unknown type of AE2 item : " + oreName);
 		}
 	}
 }

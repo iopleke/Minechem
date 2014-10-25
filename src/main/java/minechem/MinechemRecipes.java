@@ -2,11 +2,6 @@ package minechem;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalRecipeCloning;
@@ -15,19 +10,9 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.oredictionary.OreDictionaryAppliedEnergisticsHandler;
-import minechem.oredictionary.OreDictionaryDefaultHandler;
-import minechem.oredictionary.OreDictionaryGregTechHandler;
-import minechem.oredictionary.OreDictionaryHandler;
-import minechem.oredictionary.OreDictionaryIC2Handler;
-import minechem.oredictionary.OreDictionaryMekanismHandler;
-import minechem.oredictionary.OreDictionaryUndergroundBiomesHandler;
+import minechem.oredictionary.*;
 import minechem.potion.PotionChemical;
-import minechem.tileentity.decomposer.DecomposerFluidRecipe;
-import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
-import minechem.tileentity.decomposer.DecomposerRecipe;
-import minechem.tileentity.decomposer.DecomposerRecipeChance;
-import minechem.tileentity.decomposer.DecomposerRecipeSelect;
+import minechem.tileentity.decomposer.*;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
 import net.minecraft.block.Block;
@@ -42,6 +27,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.Iterator;
 
 @SuppressWarnings("RedundantArrayCreation")
 public class MinechemRecipes

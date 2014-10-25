@@ -1,15 +1,15 @@
 package minechem.oredictionary;
 
+import minechem.MinechemRecipes;
+import minechem.potion.PotionChemical;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.utils.LogHelper;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
-import minechem.Minechem;
-import minechem.MinechemRecipes;
-import minechem.Settings;
-import minechem.potion.PotionChemical;
-import minechem.tileentity.decomposer.DecomposerRecipe;
-import minechem.tileentity.synthesis.SynthesisRecipe;
 
 public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 {
@@ -68,10 +68,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 	@Override
 	public void handle(String oreName)
 	{
-		if (Settings.DebugMode)
-		{
-			Minechem.LOGGER.info(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + oreName);
-		}
+        LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + oreName);
 
 		String[] tokens = this.parseOreName(oreName);
 		EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
@@ -118,12 +115,8 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_GEM, ore.getComposition());
 				break;
-
 			default:
-				if (Settings.DebugMode)
-				{
-					Minechem.LOGGER.warn(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
-				}
+                LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
 				break;
 		}
 

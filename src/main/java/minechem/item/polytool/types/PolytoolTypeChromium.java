@@ -1,6 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -9,6 +8,8 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+
+import java.util.Random;
 
 public class PolytoolTypeChromium extends PolytoolUpgradeType
 {

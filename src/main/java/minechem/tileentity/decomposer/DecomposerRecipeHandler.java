@@ -1,10 +1,11 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
 
 public class DecomposerRecipeHandler
 {

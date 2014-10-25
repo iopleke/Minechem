@@ -2,12 +2,9 @@ package minechem.item.element;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
+import minechem.gui.CreativeTabMinechem;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.IDescriptiveName;
 import minechem.item.MinechemChemicalType;
@@ -16,12 +13,8 @@ import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
-import minechem.utils.Constants;
-import minechem.utils.EnumColor;
-import minechem.utils.MinechemHelper;
-import minechem.utils.MinechemUtil;
-import minechem.utils.Reference;
-import minechem.utils.TimeHelper;
+import minechem.reference.Textures;
+import minechem.utils.*;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -38,6 +31,10 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 public class ElementItem extends Item
 {
 
@@ -48,7 +45,7 @@ public class ElementItem extends Item
 
 	public ElementItem()
 	{
-		setCreativeTab(Minechem.CREATIVE_TAB_ELEMENTS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ELEMENTS);
 		setUnlocalizedName("itemElement");
 		setHasSubtypes(true);
 		classificationIndexes.put(ElementClassificationEnum.nonmetal, 0);
@@ -125,22 +122,22 @@ public class ElementItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.FILLED_TESTTUBE_TEX);
-		gas[0] = ir.registerIcon(Reference.ELEMENT_GAS1_TEX);
-		gas[1] = ir.registerIcon(Reference.ELEMENT_GAS2_TEX);
-		gas[2] = ir.registerIcon(Reference.ELEMENT_GAS3_TEX);
-		gas[3] = ir.registerIcon(Reference.ELEMENT_GAS4_TEX);
-		gas[4] = ir.registerIcon(Reference.ELEMENT_GAS5_TEX);
-		gas[5] = ir.registerIcon(Reference.ELEMENT_GAS6_TEX);
-		gas[6] = ir.registerIcon(Reference.ELEMENT_GAS7_TEX);
-		liquid[0] = ir.registerIcon(Reference.ELEMENT_LIQUID1_TEX);
-		liquid[1] = ir.registerIcon(Reference.ELEMENT_LIQUID2_TEX);
-		liquid[2] = ir.registerIcon(Reference.ELEMENT_LIQUID3_TEX);
-		liquid[3] = ir.registerIcon(Reference.ELEMENT_LIQUID4_TEX);
-		liquid[4] = ir.registerIcon(Reference.ELEMENT_LIQUID5_TEX);
-		liquid[5] = ir.registerIcon(Reference.ELEMENT_LIQUID6_TEX);
-		liquid[6] = ir.registerIcon(Reference.ELEMENT_LIQUID7_TEX);
-		solid = ir.registerIcon(Reference.ELEMENT_SOLID_TEX);
+		itemIcon = ir.registerIcon(Textures.FILLED_TESTTUBE_TEX);
+		gas[0] = ir.registerIcon(Textures.ELEMENT_GAS1_TEX);
+		gas[1] = ir.registerIcon(Textures.ELEMENT_GAS2_TEX);
+		gas[2] = ir.registerIcon(Textures.ELEMENT_GAS3_TEX);
+		gas[3] = ir.registerIcon(Textures.ELEMENT_GAS4_TEX);
+		gas[4] = ir.registerIcon(Textures.ELEMENT_GAS5_TEX);
+		gas[5] = ir.registerIcon(Textures.ELEMENT_GAS6_TEX);
+		gas[6] = ir.registerIcon(Textures.ELEMENT_GAS7_TEX);
+		liquid[0] = ir.registerIcon(Textures.ELEMENT_LIQUID1_TEX);
+		liquid[1] = ir.registerIcon(Textures.ELEMENT_LIQUID2_TEX);
+		liquid[2] = ir.registerIcon(Textures.ELEMENT_LIQUID3_TEX);
+		liquid[3] = ir.registerIcon(Textures.ELEMENT_LIQUID4_TEX);
+		liquid[4] = ir.registerIcon(Textures.ELEMENT_LIQUID5_TEX);
+		liquid[5] = ir.registerIcon(Textures.ELEMENT_LIQUID6_TEX);
+		liquid[6] = ir.registerIcon(Textures.ELEMENT_LIQUID7_TEX);
+		solid = ir.registerIcon(Textures.ELEMENT_SOLID_TEX);
 	}
 
 	@Override

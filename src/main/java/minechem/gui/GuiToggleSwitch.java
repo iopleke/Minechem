@@ -1,12 +1,13 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import java.util.HashMap;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
+
+import java.util.HashMap;
 
 public abstract class GuiToggleSwitch
 {

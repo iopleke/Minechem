@@ -1,8 +1,9 @@
 package minechem.item.blueprint;
 
-import java.util.HashMap;
 import minechem.MinechemBlocksGeneration;
 import minechem.item.blueprint.BlueprintBlock.Type;
+
+import java.util.HashMap;
 
 public class BlueprintFusion extends MinechemBlueprint
 {

@@ -1,13 +1,7 @@
 package minechem.utils;
 
-import java.util.ArrayList;
-
 import minechem.item.ChemicalRoomStateEnum;
-import minechem.item.element.Element;
 import minechem.item.element.ElementClassificationEnum;
-import minechem.item.element.ElementEnum;
-import minechem.item.molecule.Molecule;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
 import minechem.tileentity.decomposer.DecomposerRecipe;
@@ -17,11 +11,12 @@ import minetweaker.api.item.IItemStack;
 import minetweaker.api.item.IngredientStack;
 import minetweaker.api.liquid.ILiquidStack;
 import minetweaker.api.oredict.IOreDictEntry;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
 
 public class InputHelper {
     public static ItemStack toStack(IItemStack iStack) {

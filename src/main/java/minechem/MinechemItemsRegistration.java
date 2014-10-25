@@ -11,8 +11,11 @@ import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.item.polytool.PolytoolItem;
+import minechem.reference.Reference;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -35,29 +38,29 @@ public class MinechemItemsRegistration
 	public static void init()
 	{
 		element = new ElementItem();
-		GameRegistry.registerItem(element, Minechem.ID + "Element");
+		GameRegistry.registerItem(element, Reference.ID + "Element");
 
 		molecule = new MoleculeItem();
-		GameRegistry.registerItem(molecule, Minechem.ID + "Molecule");
+		GameRegistry.registerItem(molecule, Reference.ID + "Molecule");
 
 		lens = new OpticalMicroscopeLens();
 		concaveLens = new ItemStack(lens, 1, 0);
 		convexLens = new ItemStack(lens, 1, 1);
 		microscopeLens = new ItemStack(lens, 1, 2);
 		projectorLens = new ItemStack(lens, 1, 3);
-		GameRegistry.registerItem(lens, Minechem.ID + "OpticalMicroscopeLens");
+		GameRegistry.registerItem(lens, Reference.ID + "OpticalMicroscopeLens");
 
 		atomicManipulator = new ItemAtomicManipulator();
-		GameRegistry.registerItem(atomicManipulator, Minechem.ID + "AtomicManipulator");
+		GameRegistry.registerItem(atomicManipulator, Reference.ID + "AtomicManipulator");
 
 		blueprint = new ItemBlueprint();
-		GameRegistry.registerItem(blueprint, Minechem.ID + "Blueprint");
+		GameRegistry.registerItem(blueprint, Reference.ID + "Blueprint");
 
 		journal = new ChemistJournalItem();
-		GameRegistry.registerItem(journal, Minechem.ID + "Journal");
+		GameRegistry.registerItem(journal, Reference.ID + "Journal");
 
 		polytool = new PolytoolItem();
-		GameRegistry.registerItem(polytool, Minechem.ID + "Polytool");
+		GameRegistry.registerItem(polytool, Reference.ID + "Polytool");
 
         emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
 		registerFluidContainers();
@@ -98,5 +101,14 @@ public class MinechemItemsRegistration
 		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
 		OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.ordinal()));
 	}
+
+    public static void addDungeonLoot()
+    {
+        ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+        ItemStack A = new ItemStack(blueprint, 1, 0);
+        ItemStack B = new ItemStack(blueprint, 1, 1);
+        ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
+        ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
+    }
 
 }

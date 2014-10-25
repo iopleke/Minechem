@@ -1,11 +1,12 @@
 package minechem.oredictionary;
 
-import java.util.Arrays;
-import java.util.List;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class OreDictionaryExtraUtilitiesHandler implements OreDictionaryHandler
 {

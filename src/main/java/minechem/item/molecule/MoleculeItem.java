@@ -2,19 +2,17 @@ package minechem.item.molecule;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
-import java.util.List;
-import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
+import minechem.gui.CreativeTabMinechem;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
+import minechem.reference.Textures;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
 import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -28,13 +26,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MoleculeItem extends Item
 {
 	public IIcon render_pass1, render_pass2, filledMolecule;
 
 	public MoleculeItem()
 	{
-		setCreativeTab(Minechem.CREATIVE_TAB_ELEMENTS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ELEMENTS);
 		setHasSubtypes(true);
 		setUnlocalizedName("itemMolecule");
 	}
@@ -49,10 +50,10 @@ public class MoleculeItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.FILLED_TESTTUBE_TEX);
-		render_pass1 = ir.registerIcon(Reference.MOLECULE_PASS1_TEX);
-		render_pass2 = ir.registerIcon(Reference.MOLECULE_PASS2_TEX);
-		filledMolecule = ir.registerIcon(Reference.FILLED_MOLECULE_TEX);
+		itemIcon = ir.registerIcon(Textures.FILLED_TESTTUBE_TEX);
+		render_pass1 = ir.registerIcon(Textures.MOLECULE_PASS1_TEX);
+		render_pass2 = ir.registerIcon(Textures.MOLECULE_PASS2_TEX);
+		filledMolecule = ir.registerIcon(Textures.FILLED_MOLECULE_TEX);
 	}
 
 	public ArrayList<ItemStack> getElements(ItemStack itemstack)

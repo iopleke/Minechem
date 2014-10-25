@@ -58,7 +58,7 @@ archivesBaseName = "Minechem"
 minecraft {
     version = "${config.version.minecraft}-${config.version.forge}"
 	
-    replaceIn "Minechem.java"
+    replaceIn "reference/Reference.java"
     replace "@MAJOR@", config.version.mod.major
     replace "@MINOR@", config.version.mod.minor
     replace "@REVIS@", config.version.mod.revis

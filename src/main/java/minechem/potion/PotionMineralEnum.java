@@ -1,9 +1,10 @@
 package minechem.potion;
 
-import java.util.ArrayList;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.util.StatCollector;
+
+import java.util.ArrayList;
 
 public enum PotionMineralEnum
 {

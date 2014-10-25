@@ -1,18 +1,17 @@
 package minechem.tileentity.blueprintprojector;
 
-import minechem.Minechem;
-import minechem.utils.Reference;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class BlueprintProjectorTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
-	private static final ResourceLocation resourceLocationProjectorModelOff = new ResourceLocation(Minechem.ID, Reference.PROJECTOR_MODEL_OFF);
-	private static final ResourceLocation resourceLocationProjectorModelOn = new ResourceLocation(Minechem.ID, Reference.PROJECTOR_MODEL_ON);
+	private static final ResourceLocation resourceLocationProjectorModelOff = new ResourceLocation(Reference.ID, Textures.PROJECTOR_MODEL_OFF);
+	private static final ResourceLocation resourceLocationProjectorModelOn = new ResourceLocation(Reference.ID, Textures.PROJECTOR_MODEL_ON);
 	BlueprintProjectorModel model;
 
 	public BlueprintProjectorTileEntityRenderer()

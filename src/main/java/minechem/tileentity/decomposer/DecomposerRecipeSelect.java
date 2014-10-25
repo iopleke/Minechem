@@ -1,8 +1,9 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class DecomposerRecipeSelect extends DecomposerRecipeChance
 {

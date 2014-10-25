@@ -1,7 +1,8 @@
 package minechem.api;
 
-import java.util.List;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 /**
  * To be implemented on any container that should stop elements or molecules from decaying

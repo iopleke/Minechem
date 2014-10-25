@@ -1,32 +1,18 @@
 package minechem.item.element;
 
-import static minechem.item.ChemicalRoomStateEnum.gas;
-import static minechem.item.ChemicalRoomStateEnum.liquid;
-import static minechem.item.ChemicalRoomStateEnum.solid;
-import static minechem.item.element.ElementClassificationEnum.actinide;
-import static minechem.item.element.ElementClassificationEnum.alkaliMetal;
-import static minechem.item.element.ElementClassificationEnum.alkalineEarthMetal;
-import static minechem.item.element.ElementClassificationEnum.halogen;
-import static minechem.item.element.ElementClassificationEnum.inertGas;
-import static minechem.item.element.ElementClassificationEnum.lanthanide;
-import static minechem.item.element.ElementClassificationEnum.nonmetal;
-import static minechem.item.element.ElementClassificationEnum.otherMetal;
-import static minechem.item.element.ElementClassificationEnum.semimetallic;
-import static minechem.item.element.ElementClassificationEnum.transitionMetal;
-import static minechem.radiation.RadiationEnum.extremelyRadioactive;
-import static minechem.radiation.RadiationEnum.hardlyRadioactive;
-import static minechem.radiation.RadiationEnum.highlyRadioactive;
-import static minechem.radiation.RadiationEnum.radioactive;
-import static minechem.radiation.RadiationEnum.slightlyRadioactive;
-import static minechem.radiation.RadiationEnum.stable;
-import java.util.Hashtable;
-import java.util.Iterator;
-import java.util.Map;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
 import minechem.radiation.RadiationEnum;
 import minechem.utils.MinechemHelper;
+
+import java.util.Hashtable;
+import java.util.Iterator;
+import java.util.Map;
+
+import static minechem.item.ChemicalRoomStateEnum.*;
+import static minechem.item.element.ElementClassificationEnum.*;
+import static minechem.radiation.RadiationEnum.*;
 
 public class ElementEnum extends MinechemChemicalType
 {

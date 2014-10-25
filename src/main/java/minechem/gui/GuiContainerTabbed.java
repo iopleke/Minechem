@@ -4,9 +4,6 @@ import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
 import cpw.mods.fml.common.Optional;
-import java.util.ArrayList;
-import java.util.List;
-
 import minechem.utils.Rect;
 import minechem.utils.SessionVars;
 import net.minecraft.client.gui.FontRenderer;
@@ -18,6 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler

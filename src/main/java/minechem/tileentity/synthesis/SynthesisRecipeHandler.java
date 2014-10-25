@@ -1,11 +1,12 @@
 package minechem.tileentity.synthesis;
 
-import java.util.ArrayList;
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class SynthesisRecipeHandler
 {

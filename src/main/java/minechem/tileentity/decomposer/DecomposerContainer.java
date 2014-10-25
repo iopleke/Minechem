@@ -1,7 +1,5 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
-import java.util.List;
 import minechem.Settings;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
@@ -11,6 +9,9 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DecomposerContainer extends Container implements IRadiationShield, INoDecay
 {

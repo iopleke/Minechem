@@ -1,10 +1,9 @@
 package minechem.tileentity.microscope;
 
-import cpw.mods.fml.common.Optional;
-import java.util.ArrayList;
-import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
@@ -13,18 +12,18 @@ import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+
 public class MicroscopeGui extends GuiContainerTabbed
 {
 
-	private static final ResourceLocation resourceLocationMicroscopeGUI = new ResourceLocation(Minechem.ID, Reference.MICROSCOPE_GUI);
+	private static final ResourceLocation resourceLocationMicroscopeGUI = new ResourceLocation(Reference.ID, Textures.MICROSCOPE_GUI);
 	int guiWidth = 176;
 	int guiHeight = 217;
 	int eyepieceX = 25;

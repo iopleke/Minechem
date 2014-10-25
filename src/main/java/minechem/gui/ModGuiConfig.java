@@ -1,8 +1,8 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.config.GuiConfig;
-import minechem.Minechem;
 import minechem.Settings;
+import minechem.reference.Reference;
 import net.minecraft.client.gui.GuiScreen;
 
 public class ModGuiConfig extends GuiConfig
@@ -11,7 +11,7 @@ public class ModGuiConfig extends GuiConfig
 	{
 		super(guiScreen,
 				Settings.getConfigElements(),
-				Minechem.ID,
+                Reference.ID,
 				false,
 				false,
 				GuiConfig.getAbridgedConfigPath(Settings.config.toString()));

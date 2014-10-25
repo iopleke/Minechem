@@ -1,7 +1,5 @@
 package minechem.radiation;
 
-import java.util.ArrayList;
-import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
@@ -17,6 +15,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class RadiationHandler
 {
