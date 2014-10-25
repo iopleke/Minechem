@@ -1,16 +1,17 @@
 package minechem.tileentity.decomposer;
 
+import minechem.Settings;
+import minechem.potion.PotionChemical;
+import minechem.utils.Compare;
+import minechem.utils.LogHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Random;
-import minechem.Minechem;
-import minechem.Settings;
-import minechem.potion.PotionChemical;
-import minechem.utils.Compare;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
@@ -264,10 +265,7 @@ public class DecomposerRecipe
 			{
 				if (Compare.stringSieve(itemStack.getUnlocalizedName()).contains((CharSequence) Compare.stringSieve(Settings.DecomposerBlacklist[i])))
 				{
-					if (Settings.DebugMode)
-					{
-						Minechem.LOGGER.info("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
-					}
+					LogHelper.debug("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
 					return true;
 				}
 			}

@@ -1,13 +1,7 @@
 package minechem.minetweaker;
 
-import java.util.ArrayList;
-
 import minechem.potion.PotionChemical;
-import minechem.tileentity.decomposer.DecomposerFluidRecipe;
-import minechem.tileentity.decomposer.DecomposerRecipe;
-import minechem.tileentity.decomposer.DecomposerRecipeChance;
-import minechem.tileentity.decomposer.DecomposerRecipeSelect;
-import minechem.tileentity.decomposer.DecomposerRecipeSuper;
+import minechem.tileentity.decomposer.*;
 import minechem.utils.InputHelper;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -18,6 +12,8 @@ import net.minecraftforge.fluids.FluidStack;
 import stanhebben.zenscript.annotations.Optional;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
 
 
 @ZenClass("mods.minechem.Decomposer")

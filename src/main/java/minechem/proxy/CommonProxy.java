@@ -3,17 +3,16 @@ package minechem.proxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.Minechem;
-import minechem.tick.ScheduledTickHandler;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
-import minechem.utils.Reference;
+import minechem.tick.ScheduledTickHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 
-public class CommonProxy implements Reference
+public class CommonProxy
 {
 	public static int RENDER_ID;
 
@@ -75,7 +74,9 @@ public class CommonProxy implements Reference
         return context.getServerHandler().playerEntity;
     }
     
-    public void onAddFluid(MinechemFluid fluid,MinechemFluidBlock block){
+    public void onAddFluid(MinechemFluid fluid,MinechemFluidBlock block)
+    {
     	
     }
+
 }

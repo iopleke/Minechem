@@ -2,11 +2,6 @@ package minechem.fluid.reaction;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.fluid.FluidHelper;
@@ -26,6 +21,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.*;
 
 public class ChemicalFluidReactionHandler
 {

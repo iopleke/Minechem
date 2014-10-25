@@ -2,16 +2,17 @@ package minechem.item.blueprint;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class ItemBlueprint extends Item
 {
@@ -25,7 +26,7 @@ public class ItemBlueprint extends Item
 	{
 		super();
 		setUnlocalizedName("itemBlueprint");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setHasSubtypes(true);
 	}
 
@@ -33,7 +34,7 @@ public class ItemBlueprint extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.BLUEPRINT_TEX);
+		itemIcon = ir.registerIcon(Textures.BLUEPRINT_TEX);
 	}
 
 	public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint)

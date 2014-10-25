@@ -3,8 +3,6 @@ package minechem.tileentity.synthesis;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
-import java.util.ArrayList;
-import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.network.MessageHandler;
@@ -20,6 +18,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SynthesisTileEntity extends MinechemTileEntityElectric implements ISidedInventory
 {

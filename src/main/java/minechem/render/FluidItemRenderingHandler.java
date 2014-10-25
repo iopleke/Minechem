@@ -1,6 +1,5 @@
 package minechem.render;
 
-import org.lwjgl.opengl.GL11;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
 import minechem.item.molecule.MoleculeEnum;
@@ -14,6 +13,7 @@ import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.fluids.BlockFluidBase;
 import net.minecraftforge.fluids.Fluid;
+import org.lwjgl.opengl.GL11;
 
 public class FluidItemRenderingHandler implements IItemRenderer{
 

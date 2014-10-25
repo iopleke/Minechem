@@ -1,7 +1,8 @@
 package minechem.utils;
 
-import java.util.HashMap;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.HashMap;
 
 public enum DirectionMultiplier
 {

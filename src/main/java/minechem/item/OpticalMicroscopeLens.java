@@ -2,15 +2,16 @@ package minechem.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-import minechem.Minechem;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+
+import java.util.List;
 
 public class OpticalMicroscopeLens extends Item
 {
@@ -25,7 +26,7 @@ public class OpticalMicroscopeLens extends Item
 	{
 		super();
 		setUnlocalizedName("opticalMicroscopeLens");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setHasSubtypes(true);
 	}
 
@@ -58,10 +59,10 @@ public class OpticalMicroscopeLens extends Item
 	public void registerIcons(IIconRegister ir)
 	{
 		this.opticalMicroscopeLens = new IIcon[4];
-		this.opticalMicroscopeLens[0] = ir.registerIcon(Reference.LENS1_TEX);
-		this.opticalMicroscopeLens[1] = ir.registerIcon(Reference.LENS2_TEX);
-		this.opticalMicroscopeLens[2] = ir.registerIcon(Reference.LENS3_TEX);
-		this.opticalMicroscopeLens[3] = ir.registerIcon(Reference.LENS4_TEX);
+		this.opticalMicroscopeLens[0] = ir.registerIcon(Textures.LENS1_TEX);
+		this.opticalMicroscopeLens[1] = ir.registerIcon(Textures.LENS2_TEX);
+		this.opticalMicroscopeLens[2] = ir.registerIcon(Textures.LENS3_TEX);
+		this.opticalMicroscopeLens[3] = ir.registerIcon(Textures.LENS4_TEX);
 	}
 
 }

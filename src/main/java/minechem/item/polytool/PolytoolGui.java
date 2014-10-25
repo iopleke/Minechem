@@ -1,9 +1,5 @@
 package minechem.item.polytool;
 
-import cpw.mods.fml.common.Optional;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 import minechem.MinechemItemsRegistration;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
@@ -12,11 +8,14 @@ import minechem.item.element.ElementGuiHelper;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 public class PolytoolGui extends GuiContainerTabbed
 {

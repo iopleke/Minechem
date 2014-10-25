@@ -1,12 +1,13 @@
 package minechem.container;
 
-import java.util.ArrayList;
-import java.util.List;
 import minechem.slot.SlotFake;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ContainerWithFakeSlots extends Container
 {

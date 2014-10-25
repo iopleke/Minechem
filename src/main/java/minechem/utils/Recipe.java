@@ -1,33 +1,33 @@
 package minechem.utils;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.item.crafting.*;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
+
 public class Recipe
 {
 	public static Map<String, Recipe> recipes;
-	@SuppressWarnings("unchecked")
-	public static Map<ItemStack, ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
-	public static Map<String, String> oreDictionary = new Hashtable<String,String>();
+	
+	public static Map<ItemStack, ItemStack> smelting;
+	public static Map<String, String> oreDictionary;
 	public ItemStack output;
 	public ItemStack[] inStacks;
 
+	@SuppressWarnings("unchecked")
 	public static void init()
 	{
 		recipes = new Hashtable<String, Recipe>();
-
+		smelting = FurnaceRecipes.smelting().getSmeltingList();
+		oreDictionary = new Hashtable<String,String>();
+		
 		for (Object recipe : CraftingManager.getInstance().getRecipeList())
 		{
 			if (recipe instanceof IRecipe)

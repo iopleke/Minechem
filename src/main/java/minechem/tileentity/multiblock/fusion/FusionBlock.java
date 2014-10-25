@@ -2,15 +2,13 @@ package minechem.tileentity.multiblock.fusion;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
 import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.multiblock.fission.FissionTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
-import minechem.utils.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -23,6 +21,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 public class FusionBlock extends BlockSimpleContainer
 {
 	private IIcon icon1, icon2;
@@ -30,7 +32,7 @@ public class FusionBlock extends BlockSimpleContainer
 	public FusionBlock()
 	{
 		super(Material.iron);
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setBlockName("fusionWall");
 	}
 
@@ -113,9 +115,9 @@ public class FusionBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
-		icon1 = ir.registerIcon(Reference.FUSION1_TEX);
-		icon2 = ir.registerIcon(Reference.FUSION2_TEX);
+		blockIcon = ir.registerIcon(Textures.DEFAULT_TEX);
+		icon1 = ir.registerIcon(Textures.FUSION1_TEX);
+		icon2 = ir.registerIcon(Textures.FUSION2_TEX);
 	}
 
 	@Override

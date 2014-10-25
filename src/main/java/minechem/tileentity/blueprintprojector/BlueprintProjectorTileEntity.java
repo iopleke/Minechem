@@ -1,6 +1,5 @@
 package minechem.tileentity.blueprintprojector;
 
-import java.util.HashMap;
 import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
 import minechem.item.blueprint.BlueprintBlock;
@@ -23,6 +22,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+
+import java.util.HashMap;
 
 public class BlueprintProjectorTileEntity extends MinechemTileEntity
 {

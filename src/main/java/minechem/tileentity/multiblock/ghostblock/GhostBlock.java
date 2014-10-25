@@ -3,7 +3,7 @@ package minechem.tileentity.multiblock.ghostblock;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.MinechemBlocksGeneration;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -49,9 +49,9 @@ public class GhostBlock extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Reference.DEFAULT_TEX);
-		icon1 = ir.registerIcon(Reference.BLUEPRINT1_TEX);
-		icon2 = ir.registerIcon(Reference.BLUEPRINT2_TEX);
+		blockIcon = ir.registerIcon(Textures.DEFAULT_TEX);
+		icon1 = ir.registerIcon(Textures.BLUEPRINT1_TEX);
+		icon2 = ir.registerIcon(Textures.BLUEPRINT2_TEX);
 	}
 
 	@Override

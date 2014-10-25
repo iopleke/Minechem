@@ -1,8 +1,9 @@
 package minechem.utils;
 
-import java.util.ArrayList;
 import minechem.tileentity.prefab.BoundedInventory;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class Transactor
 {

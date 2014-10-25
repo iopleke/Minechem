@@ -1,8 +1,6 @@
-package minechem.utils;
+package minechem.reference;
 
-import minechem.Minechem;
-
-public interface Reference
+public class Textures
 {
 	public static final String TEXTURE_DIR = "assets/minechem/textures/";
 	public static final String TEXTURE_GUI_DIR = "textures/gui/";
@@ -17,7 +15,7 @@ public interface Reference
 	public static final int SECOND_IN_TICKS = 20;
 
 	// Used for resourceLocations in 1.6
-	public static final String TEXTURE_MOD_ID = Minechem.ID + ":";
+	public static final String TEXTURE_MOD_ID = Reference.ID + ":";
 
 	public static final String POLYTOOL_TEX = TEXTURE_MOD_ID + "polytool";
 	public static final String ATOMIC_MANIPULATOR_TEX = TEXTURE_MOD_ID + "AtomicManipulator";

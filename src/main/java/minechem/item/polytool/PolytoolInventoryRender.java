@@ -1,12 +1,13 @@
 package minechem.item.polytool;
 
-import java.util.ArrayList;
 import minechem.item.element.ElementEnum;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
 
 public class PolytoolInventoryRender implements IItemRenderer
 {

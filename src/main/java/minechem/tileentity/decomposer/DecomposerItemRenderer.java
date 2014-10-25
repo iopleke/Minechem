@@ -1,9 +1,9 @@
 package minechem.tileentity.decomposer;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import minechem.Minechem;
 import minechem.item.ItemMinechemRenderer;
-import minechem.utils.Reference;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
@@ -21,7 +21,7 @@ public class DecomposerItemRenderer extends ItemMinechemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-		ResourceLocation texture = new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_ON);
+		ResourceLocation texture = new ResourceLocation(Reference.ID, Textures.DECOMPOSER_MODEL_ON);
 		GL11.glPushMatrix();
 		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
 		switch (type.ordinal())

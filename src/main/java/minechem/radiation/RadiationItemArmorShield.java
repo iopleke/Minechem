@@ -2,15 +2,16 @@ package minechem.radiation;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.List;
-import minechem.Minechem;
 import minechem.api.IRadiationShield;
-import minechem.utils.Reference;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
+
+import java.util.List;
 
 public class RadiationItemArmorShield extends ItemArmor implements IRadiationShield
 {
@@ -23,7 +24,7 @@ public class RadiationItemArmorShield extends ItemArmor implements IRadiationShi
 		super(ArmorMaterial.CHAIN, 2, part);
 		this.radiationShieldFactor = radiationShieldFactor;
 		this.setUnlocalizedName("itemArmorRadiationShield");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		textureFile = texture;
 	}
 
@@ -53,7 +54,7 @@ public class RadiationItemArmorShield extends ItemArmor implements IRadiationShi
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		return Reference.HAZMAT_TEX;
+		return Textures.HAZMAT_TEX;
 	}
 
 }
