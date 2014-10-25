@@ -3,6 +3,7 @@ package minechem.utils;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -16,15 +17,17 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 
 public class Recipe
 {
-	public static Map<String, Recipe> recipes = new Hashtable<String, Recipe>();
+	public static Map<String, Recipe> recipes;
 	@SuppressWarnings("unchecked")
 	public static Map<ItemStack, ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
-	public static Map<String, String> oreDictionary = new Hashtable<String, String>();
+	public static Map<String, String> oreDictionary = new Hashtable<String,String>();
 	public ItemStack output;
 	public ItemStack[] inStacks;
 
 	public static void init()
 	{
+		recipes = new Hashtable<String, Recipe>();
+
 		for (Object recipe : CraftingManager.getInstance().getRecipeList())
 		{
 			if (recipe instanceof IRecipe)

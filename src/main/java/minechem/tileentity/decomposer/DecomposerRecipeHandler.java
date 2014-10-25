@@ -34,6 +34,16 @@ public class DecomposerRecipeHandler
 			}
 		}
 	}
+	
+	public static void resetRecursiveRecipes()
+	{
+		for(String key:DecomposerRecipe.recipes.keySet())
+		{
+			if (DecomposerRecipe.get(key) instanceof DecomposerRecipeSuper)
+				DecomposerRecipe.remove(key);
+		}
+		
+	}
 
 	public DecomposerRecipe getRecipe(ItemStack input)
 	{
