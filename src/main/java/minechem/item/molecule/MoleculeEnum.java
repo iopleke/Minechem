@@ -1,5 +1,47 @@
 package minechem.item.molecule;
 
+import static minechem.item.ChemicalRoomStateEnum.gas;
+import static minechem.item.ChemicalRoomStateEnum.liquid;
+import static minechem.item.ChemicalRoomStateEnum.solid;
+import static minechem.item.element.ElementEnum.Al;
+import static minechem.item.element.ElementEnum.As;
+import static minechem.item.element.ElementEnum.Be;
+import static minechem.item.element.ElementEnum.C;
+import static minechem.item.element.ElementEnum.Ca;
+import static minechem.item.element.ElementEnum.Cl;
+import static minechem.item.element.ElementEnum.Co;
+import static minechem.item.element.ElementEnum.Cr;
+import static minechem.item.element.ElementEnum.Cs;
+import static minechem.item.element.ElementEnum.Cu;
+import static minechem.item.element.ElementEnum.F;
+import static minechem.item.element.ElementEnum.Fe;
+import static minechem.item.element.ElementEnum.Fr;
+import static minechem.item.element.ElementEnum.Ga;
+import static minechem.item.element.ElementEnum.H;
+import static minechem.item.element.ElementEnum.K;
+import static minechem.item.element.ElementEnum.Li;
+import static minechem.item.element.ElementEnum.Mg;
+import static minechem.item.element.ElementEnum.Mn;
+import static minechem.item.element.ElementEnum.N;
+import static minechem.item.element.ElementEnum.Na;
+import static minechem.item.element.ElementEnum.Ni;
+import static minechem.item.element.ElementEnum.O;
+import static minechem.item.element.ElementEnum.P;
+import static minechem.item.element.ElementEnum.Pt;
+import static minechem.item.element.ElementEnum.Ra;
+import static minechem.item.element.ElementEnum.Rb;
+import static minechem.item.element.ElementEnum.S;
+import static minechem.item.element.ElementEnum.Si;
+import static minechem.item.element.ElementEnum.Sr;
+import static minechem.item.element.ElementEnum.Ti;
+import static minechem.item.element.ElementEnum.Zn;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
+
 import minechem.MinechemItemsRegistration;
 import minechem.MinechemRecipes;
 import minechem.fluid.FluidHelper;
@@ -12,15 +54,10 @@ import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import net.minecraft.item.ItemStack;
 
-import java.util.*;
-
-import static minechem.item.ChemicalRoomStateEnum.*;
-import static minechem.item.element.ElementEnum.*;
-
 public class MoleculeEnum extends MinechemChemicalType
 {
 	public static Map<Integer,MoleculeEnum> molecules = new LinkedHashMap<Integer,MoleculeEnum>();
-	public static int baseMolecules = 172;
+	public static int baseMolecules = 171;
 
 	public static final MoleculeEnum cellulose = addMolecule("cellulose", 0, 0, 1, 0, 0, 0.25F, 0, solid, new Element(C, 6), new Element(H, 10), new Element(O, 5));
 	public static final MoleculeEnum water = addMolecule("water", 1, 0, 0, 1, 0, 0, 1, liquid, new Element(H, 2), new Element(O));
@@ -215,7 +252,6 @@ public class MoleculeEnum extends MinechemChemicalType
 	public static final MoleculeEnum hydrogenSulfide = addMolecule("hydrogenSulfide", 169, gas, new Element(H, 2), new Element(S));
 	public static final MoleculeEnum sodiumBisulfate = addMolecule("sodiumBisulfate", 170, solid, new Element(Na), new Element(H), new Molecule(sulfate));
 	public static final MoleculeEnum sodiumSulfate = addMolecule("sodiumSulfate", 171, solid, new Element(Na, 2), new Molecule(sulfate));
-    public static final MoleculeEnum dimethyltryptamine = addMolecule("dimethyltryptamine", 172, solid, new Element(C, 12), new Element(H, 16), new Element(N, 2));
 
 	private final String localizationKey;
 	private final ArrayList<PotionChemical> components;
