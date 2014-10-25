@@ -64,13 +64,18 @@ public class PotionPharmacologyEffect
 			{
 				((EntityPlayer) entityPlayer).getFoodStats().addStats(1, .1F);
 			}
-		} else if (molecule == MoleculeEnum.psilocybin)
-		{
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
-					.getId(), Constants.TICKS_PER_SECOND * 10, 5));
-			entityPlayer.attackEntityFrom(DamageSource.generic, 2);
-			entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision
-					.getId(), Constants.TICKS_PER_SECOND * 20, 5));
+		} else if (molecule == MoleculeEnum.psilocybin) {
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
+                    .getId(), Constants.TICKS_PER_SECOND * 10, 5));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision
+                    .getId(), Constants.TICKS_PER_SECOND * 20, 5));
+        } else if (molecule == MoleculeEnum.dimethyltryptamine) {
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion
+                    .getId(), Constants.TICKS_PER_SECOND * 30, 5));
+            entityPlayer.attackEntityFrom(DamageSource.generic, 2);
+            entityPlayer.addPotionEffect(new PotionEffect(Potion.nightVision
+                    .getId(), Constants.TICKS_PER_SECOND * 60, 5));
 		} else if (molecule == MoleculeEnum.amphetamine)
 		{
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion

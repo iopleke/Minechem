@@ -486,6 +486,7 @@ molecule.sulfurDioxide=二氧化硫
 molecule.hydrogenSulfide=硫化氢
 molecule.sodiumBisulfate=硫酸氢钠
 molecule.sodiumSulfate=硫酸钠
+molecule.dimethyltryptamine=二甲基色胺
 
 fluid.aalc.name=烯丙醇
 fluid.acetate.name=乙酸根(离子)
