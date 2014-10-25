@@ -3,7 +3,7 @@ package minechem.fluid;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Settings;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -36,8 +36,8 @@ public class FluidBlockElement extends MinechemFluidBlock
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		stillIcon = ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_still");
-		flowingIcon = ir.registerIcon(Reference.TEXTURE_MOD_ID + "fluid_flow");
+		stillIcon = ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_still");
+		flowingIcon = ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_flow");
 	}
 
 	@Override

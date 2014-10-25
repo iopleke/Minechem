@@ -1,29 +1,32 @@
 package minechem.item.chemistjournal;
 
-import java.util.ArrayList;
-import java.util.List;
-import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
 import minechem.gui.*;
 import minechem.network.MessageHandler;
 import minechem.network.message.ChemistJournalActiveItemMessage;
 import minechem.potion.PotionChemical;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
-import minechem.utils.*;
+import minechem.utils.Constants;
+import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
-	private static final ResourceLocation resourceLocationJournalGUI = new ResourceLocation(Minechem.ID, Reference.JOURNAL_GUI);
+	private static final ResourceLocation resourceLocationJournalGUI = new ResourceLocation(Reference.ID, Textures.JOURNAL_GUI);
 	private static final int SYNTHESIS_X = 197;
 	private static final int SYNTHESIS_Y = 121;
 	private static final int DECOMPOSER_X = 197;

@@ -1,7 +1,8 @@
 package minechem.fluid.reaction;
 
-import java.util.List;
 import minechem.item.MinechemChemicalType;
+
+import java.util.List;
 
 public class ChemicalFluidReactionOutput
 {

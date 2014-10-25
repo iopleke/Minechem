@@ -1,8 +1,8 @@
 package minechem.tileentity.decomposer;
 
-import minechem.Minechem;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import minechem.tileentity.decomposer.DecomposerTileEntity.State;
-import minechem.utils.Reference;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -11,8 +11,8 @@ import org.lwjgl.opengl.GL11;
 public class DecomposerTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
-	private static final ResourceLocation resourceLocationDecomposerModelOff = new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_OFF);
-	private static final ResourceLocation resourceLocationDecomposerModelOn = new ResourceLocation(Minechem.ID, Reference.DECOMPOSER_MODEL_ON);
+	private static final ResourceLocation resourceLocationDecomposerModelOff = new ResourceLocation(Reference.ID, Textures.DECOMPOSER_MODEL_OFF);
+	private static final ResourceLocation resourceLocationDecomposerModelOn = new ResourceLocation(Reference.ID, Textures.DECOMPOSER_MODEL_ON);
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float var8)

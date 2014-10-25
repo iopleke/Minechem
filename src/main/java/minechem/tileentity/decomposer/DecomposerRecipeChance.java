@@ -1,9 +1,10 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
-import java.util.Random;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class DecomposerRecipeChance extends DecomposerRecipe
 {

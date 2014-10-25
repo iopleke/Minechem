@@ -1,18 +1,15 @@
 package minechem.utils;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.CraftingManager;
-import net.minecraft.item.crafting.FurnaceRecipes;
-import net.minecraft.item.crafting.IRecipe;
-import net.minecraft.item.crafting.ShapedRecipes;
-import net.minecraft.item.crafting.ShapelessRecipes;
+import net.minecraft.item.crafting.*;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 
 public class Recipe
 {

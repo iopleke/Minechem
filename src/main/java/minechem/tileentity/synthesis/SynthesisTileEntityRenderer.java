@@ -1,16 +1,15 @@
 package minechem.tileentity.synthesis;
 
-import minechem.Minechem;
-import minechem.utils.Reference;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation resourceLocationSynthesisModel = new ResourceLocation(Minechem.ID, Reference.SYNTHESIS_MODEL);
+	private static final ResourceLocation resourceLocationSynthesisModel = new ResourceLocation(Reference.ID, Textures.SYNTHESIS_MODEL);
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)

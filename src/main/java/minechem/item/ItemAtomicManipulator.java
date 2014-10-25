@@ -2,8 +2,8 @@ package minechem.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.Minechem;
-import minechem.utils.Reference;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;
 
@@ -12,7 +12,7 @@ public class ItemAtomicManipulator extends Item
 
 	public ItemAtomicManipulator()
 	{
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setUnlocalizedName("itemAtomicManipulator");
 	}
 
@@ -20,7 +20,7 @@ public class ItemAtomicManipulator extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.ATOMIC_MANIPULATOR_TEX);
+		itemIcon = ir.registerIcon(Textures.ATOMIC_MANIPULATOR_TEX);
 	}
 
 }

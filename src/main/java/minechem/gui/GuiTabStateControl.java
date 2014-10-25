@@ -2,7 +2,7 @@ package minechem.gui;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.Minechem;
+import minechem.reference.Resources;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.gui.Gui;
@@ -13,11 +13,11 @@ public abstract class GuiTabStateControl extends GuiTab
 {
 	protected enum TabState
 	{
-		jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, Minechem.ICON_JAMMED),
-		noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, Minechem.ICON_NO_BOTTLES),
-		powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, Minechem.ICON_ENERGY),
-		unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, Minechem.ICON_NO_ENERGY),
-		norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"), 0xAA0000, Minechem.ICON_NO_RECIPE);
+		jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, Resources.ICON_JAMMED),
+		noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, Resources.ICON_NO_BOTTLES),
+		powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, Resources.ICON_ENERGY),
+		unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, Resources.ICON_NO_ENERGY),
+		norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"), 0xAA0000, Resources.ICON_NO_RECIPE);
 
 		public String tooltip;
 		public int color;

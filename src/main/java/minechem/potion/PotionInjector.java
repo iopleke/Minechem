@@ -1,10 +1,10 @@
 package minechem.potion;
 
+import minechem.utils.LogHelper;
+import net.minecraft.potion.Potion;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-import minechem.Minechem;
-import minechem.Settings;
-import net.minecraft.potion.Potion;
 
 public class PotionInjector
 {
@@ -38,11 +38,8 @@ public class PotionInjector
 			field.set(null, effectAray);
 		} catch (Exception e)
 		{
-			if (Settings.DebugMode)
-			{
-				Minechem.LOGGER.info("PotionInjector threw an exception:");
-				Minechem.LOGGER.info(e);
-			}
+            LogHelper.debug("PotionInjector threw an exception:");
+            LogHelper.debug(e);
 		}
 		atropineHigh = new PotionProvider(potionTotal, true, 0x00FF6E).setPotionName("Delirium")/*.setIconIndex(2, 1)*/;
 	}

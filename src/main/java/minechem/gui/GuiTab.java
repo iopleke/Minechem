@@ -1,9 +1,9 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import minechem.Minechem;
-import minechem.Settings;
-import minechem.utils.Reference;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
+import minechem.utils.LogHelper;
 import minechem.utils.SessionVars;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.audio.SoundHandler;
@@ -16,9 +16,9 @@ import org.lwjgl.opengl.GL11;
 public abstract class GuiTab
 {
 
-	private static final ResourceLocation resourceLocationTabRight = new ResourceLocation(Minechem.ID, Reference.TAB_RIGHT);
+	private static final ResourceLocation resourceLocationTabRight = new ResourceLocation(Reference.ID, Textures.TAB_RIGHT);
 
-	private static final ResourceLocation resourceLocationTabLeft = new ResourceLocation(Minechem.ID, Reference.TAB_LEFT);
+	private static final ResourceLocation resourceLocationTabLeft = new ResourceLocation(Reference.ID, Textures.TAB_LEFT);
 
 	public FontRenderer tabFontRenderer = FMLClientHandler.instance().getClient().fontRenderer;
 	public SoundHandler tabSoundManager = FMLClientHandler.instance().getClient().getSoundHandler();
@@ -108,12 +108,8 @@ public abstract class GuiTab
 			((GuiContainerTabbed) myGui).drawTexture(x, y, resource);
 		} else
 		{
-			if (Settings.DebugMode)
-			{
-				Minechem.LOGGER.info("Failed to draw tab icons on a Minechem gui that was not GuiContainerTabbed.");
-			}
+			LogHelper.debug("Failed to draw tab icons on a Minechem gui that was not GuiContainerTabbed.");
 		}
-
 	}
 
 	public int getHeight()

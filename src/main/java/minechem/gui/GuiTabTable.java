@@ -1,6 +1,6 @@
 package minechem.gui;
 
-import minechem.Minechem;
+import minechem.reference.Resources;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -38,7 +38,7 @@ public class GuiTabTable extends GuiTab
 	@Override
 	public ResourceLocation getIcon()
 	{
-		return Minechem.ICON_HELP;
+		return Resources.ICON_HELP;
 	}
 
 }

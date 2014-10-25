@@ -2,12 +2,11 @@ package minechem.item.chemistjournal;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
-import java.util.List;
 import minechem.Minechem;
+import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
+import minechem.reference.Textures;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -16,6 +15,9 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ChemistJournalItem extends Item
 {
@@ -27,7 +29,7 @@ public class ChemistJournalItem extends Item
 	public ChemistJournalItem()
 	{
 		setUnlocalizedName("itemChemistJournal");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 	}
 
 	@Override
@@ -166,7 +168,7 @@ public class ChemistJournalItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.CHEMIST_JOURNAL_TEX);
+		itemIcon = ir.registerIcon(Textures.CHEMIST_JOURNAL_TEX);
 	}
 
 }

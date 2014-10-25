@@ -1,7 +1,6 @@
 package minechem.tileentity.multiblock.fusion;
 
 import minechem.gui.GuiTabStateControl;
-import minechem.item.element.ElementItem;
 import net.minecraft.client.gui.Gui;
 
 public class FusionTabStateControl extends GuiTabStateControl

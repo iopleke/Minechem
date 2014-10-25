@@ -1,28 +1,27 @@
 package minechem.tileentity.blueprintprojector;
 
-import cpw.mods.fml.common.Optional;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
+
 public class BlueprintProjectorGui extends GuiContainerTabbed
 {
 
-	private static final ResourceLocation resourceLocationProjectorGUI = new ResourceLocation(Minechem.ID, Reference.PROJECTOR_GUI);
+	private static final ResourceLocation resourceLocationProjectorGUI = new ResourceLocation(Reference.ID, Textures.PROJECTOR_GUI);
 	BlueprintProjectorTileEntity projector;
 
 	public BlueprintProjectorGui(InventoryPlayer inventoryPlayer, BlueprintProjectorTileEntity projector)

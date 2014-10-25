@@ -1,7 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.Iterator;
-import java.util.List;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -10,6 +8,9 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class PolytoolTypeChlorine extends PolytoolUpgradeType
 {

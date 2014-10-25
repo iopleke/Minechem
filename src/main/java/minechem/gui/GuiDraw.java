@@ -1,9 +1,5 @@
 package minechem.gui;
 
-import java.awt.Dimension;
-import java.awt.Point;
-import java.util.Arrays;
-import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
@@ -14,6 +10,10 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
+
+import java.awt.*;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * Copied DIRECTLY from CodeChickenCore to avoid direct dependency. This is covered by the original license. Slightly modified to work with 1.7

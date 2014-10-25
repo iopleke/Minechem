@@ -1,6 +1,5 @@
 package minechem.utils;
 
-import java.util.Random;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
@@ -17,6 +16,8 @@ import net.minecraft.world.World;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.IFluidBlock;
+
+import java.util.Random;
 
 public final class MinechemUtil
 {

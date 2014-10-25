@@ -2,11 +2,11 @@ package minechem.tileentity.synthesis;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
+import minechem.gui.CreativeTabMinechem;
 import minechem.proxy.CommonProxy;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -15,6 +15,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
+import java.util.ArrayList;
 
 /**
  * Chemical Synthesizer block. Its associated TileEntitySynthesis's inventory inventory has many specialized slots, including some "ghost" slots whose contents don't really exist and shouldn't be able
@@ -27,7 +29,7 @@ public class SynthesisBlock extends BlockSimpleContainer
 	{
 		super(Material.iron);
 		setBlockName("chemicalSynthesizer");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 	}
 
 	@Override
@@ -84,7 +86,7 @@ public class SynthesisBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Reference.SYNTHESIS_TEX);
+		blockIcon = ir.registerIcon(Textures.SYNTHESIS_TEX);
 	}
 
 	@Override

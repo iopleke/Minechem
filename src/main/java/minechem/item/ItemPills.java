@@ -2,8 +2,8 @@ package minechem.item;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.Minechem;
-import minechem.utils.Reference;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemFood;
@@ -18,7 +18,7 @@ public class ItemPills extends ItemFood
 		setMaxDamage(0);
 		setMaxStackSize(32);
 		this.setUnlocalizedName("itempill");
-		this.setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		this.setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		this.setAlwaysEdible();
 	}
 
@@ -43,6 +43,6 @@ public class ItemPills extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.PILL_TEX);
+		itemIcon = ir.registerIcon(Textures.PILL_TEX);
 	}
 }

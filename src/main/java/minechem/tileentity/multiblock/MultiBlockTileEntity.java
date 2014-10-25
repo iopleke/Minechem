@@ -1,6 +1,5 @@
 package minechem.tileentity.multiblock;
 
-import java.util.HashMap;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
@@ -10,6 +9,8 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
+
+import java.util.HashMap;
 
 public abstract class MultiBlockTileEntity extends MinechemTileEntityElectric
 {

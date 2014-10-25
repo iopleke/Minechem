@@ -2,7 +2,6 @@ package minechem.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
-import minechem.gui.GuiContainerTabbed;
 
 public class NEIMinechemConfig implements IConfigureNEI
 {

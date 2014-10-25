@@ -1,13 +1,13 @@
 package minechem.tileentity.multiblock.ghostblock;
 
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.Minechem;
 import minechem.Settings;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.network.MessageHandler;
 import minechem.network.message.GhostBlockMessage;
 import minechem.tileentity.prefab.MinechemTileEntity;
+import minechem.utils.LogHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -63,10 +63,7 @@ public class GhostBlockTileEntity extends MinechemTileEntity
 			// this code has now failed
 			// it cannot be recovered
 			// snowflake on hot iron
-			if (Settings.DebugMode)
-			{
-				Minechem.LOGGER.info("Block generated an exception at: x" + this.xCoord + " y" + this.yCoord + " z" + this.zCoord);
-			}
+			LogHelper.debug("Block generated an exception at: x" + this.xCoord + " y" + this.yCoord + " z" + this.zCoord);
 		}
 		return null;
 	}

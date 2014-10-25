@@ -1,21 +1,18 @@
 package minechem.tileentity.multiblock.fusion;
 
-import cpw.mods.fml.common.Optional;
-import minechem.Minechem;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import minechem.utils.MinechemHelper;
-import minechem.utils.Reference;
-import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class FusionGui extends GuiContainerTabbed
 {
 
-	private static final ResourceLocation resourceLocationFissionGUI = new ResourceLocation(Minechem.ID, Reference.FUSION_GUI);
+	private static final ResourceLocation resourceLocationFissionGUI = new ResourceLocation(Reference.ID, Textures.FUSION_GUI);
 	static float increaseRate = .2F;
 	static float decreaseRate = .4F;
 

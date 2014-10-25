@@ -2,9 +2,9 @@ package minechem.tileentity.leadedchest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.Random;
 import minechem.Minechem;
-import minechem.utils.Reference;
+import minechem.gui.CreativeTabMinechem;
+import minechem.reference.Textures;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -19,6 +19,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public class LeadedChestBlock extends BlockContainer
 {
 	private static final Random rand=new Random();
@@ -26,7 +28,7 @@ public class LeadedChestBlock extends BlockContainer
 	public LeadedChestBlock()
 	{
 		super(Material.wood);
-		this.setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		this.setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		this.setHardness(2.0F);
 		this.setResistance(5.0F);
 		this.setBlockName("leadChest");
@@ -143,7 +145,7 @@ public class LeadedChestBlock extends BlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Reference.LEADEDCHEST_TEX);
+		blockIcon = ir.registerIcon(Textures.LEADEDCHEST_TEX);
 	}
 
 	@Override

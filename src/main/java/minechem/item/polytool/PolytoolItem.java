@@ -2,14 +2,12 @@ package minechem.item.polytool;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import minechem.Minechem;
+import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
@@ -24,6 +22,10 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 public class PolytoolItem extends ItemPickaxe
 {
 
@@ -33,7 +35,7 @@ public class PolytoolItem extends ItemPickaxe
 	{
 		super(ToolMaterial.IRON);
 		instance = this;
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setUnlocalizedName("Polytool");
 	}
 
@@ -96,7 +98,7 @@ public class PolytoolItem extends ItemPickaxe
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Reference.POLYTOOL_TEX);
+		itemIcon = ir.registerIcon(Textures.POLYTOOL_TEX);
 	}
 
 	@Override

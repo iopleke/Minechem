@@ -1,8 +1,5 @@
 package minechem.minetweaker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.InputHelper;
@@ -12,6 +9,9 @@ import minetweaker.api.item.IIngredient;
 import net.minecraft.item.ItemStack;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 @ZenClass("mods.minechem.Synthesiser")

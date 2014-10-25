@@ -2,13 +2,13 @@ package minechem.tileentity.blueprintprojector;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
+import minechem.gui.CreativeTabMinechem;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.proxy.CommonProxy;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -18,6 +18,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+
 public class BlueprintProjectorBlock extends BlockSimpleContainer
 {
 
@@ -25,7 +27,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
 	{
 		super(Material.iron);
 		setBlockName("blueprintProjector");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setLightLevel(0.7F);
 	}
 
@@ -92,7 +94,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Reference.BLUEPRINTPROJECTOR_TEX);
+		blockIcon = ir.registerIcon(Textures.BLUEPRINTPROJECTOR_TEX);
 	}
 
 	@Override

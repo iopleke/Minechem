@@ -1,6 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.ArrayList;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import minechem.utils.CoordTuple;
@@ -11,6 +10,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
 
 public class PolytoolTypeIron extends PolytoolUpgradeType
 {

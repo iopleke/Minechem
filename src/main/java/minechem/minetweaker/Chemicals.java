@@ -1,7 +1,5 @@
 package minechem.minetweaker;
 
-import java.util.ArrayList;
-
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.element.ElementClassificationEnum;
 import minechem.item.element.ElementEnum;
@@ -14,6 +12,8 @@ import minetweaker.MineTweakerAPI;
 import minetweaker.api.item.IIngredient;
 import stanhebben.zenscript.annotations.ZenClass;
 import stanhebben.zenscript.annotations.ZenMethod;
+
+import java.util.ArrayList;
 
 @ZenClass("mods.minechem.Chemicals")
 public class Chemicals {

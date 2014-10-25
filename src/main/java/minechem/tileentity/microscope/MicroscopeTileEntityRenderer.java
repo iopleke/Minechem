@@ -1,17 +1,16 @@
 package minechem.tileentity.microscope;
 
-import minechem.Minechem;
-import minechem.utils.Reference;
+import minechem.reference.Reference;
+import minechem.reference.Textures;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
 
 public class MicroscopeTileEntityRenderer extends TileEntitySpecialRenderer
 {
 
-	private static final ResourceLocation resourceLocationMicroscopeModel = new ResourceLocation(Minechem.ID, Reference.MICROSCOPE_MODEL);
+	private static final ResourceLocation resourceLocationMicroscopeModel = new ResourceLocation(Reference.ID, Textures.MICROSCOPE_MODEL);
 	MicroscopeModel microscopeModel;
 
 	public MicroscopeTileEntityRenderer()

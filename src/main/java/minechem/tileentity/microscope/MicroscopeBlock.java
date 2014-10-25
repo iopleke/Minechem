@@ -2,11 +2,11 @@ package minechem.tileentity.microscope;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
+import minechem.gui.CreativeTabMinechem;
 import minechem.proxy.CommonProxy;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
@@ -17,6 +17,8 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+
 public class MicroscopeBlock extends BlockSimpleContainer
 {
 	private IIcon front;
@@ -24,7 +26,7 @@ public class MicroscopeBlock extends BlockSimpleContainer
 	public MicroscopeBlock()
 	{
 		super(Material.iron);
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 		setBlockName("opticalMicroscope");
 		setLightLevel(0.5F);
 	}
@@ -74,8 +76,8 @@ public class MicroscopeBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Reference.MICROSCOPE_TEX);
-		front = ir.registerIcon(Reference.MICROSCOPE_FRONT_TEX);
+		blockIcon = ir.registerIcon(Textures.MICROSCOPE_TEX);
+		front = ir.registerIcon(Textures.MICROSCOPE_FRONT_TEX);
 	}
 
 	@Override

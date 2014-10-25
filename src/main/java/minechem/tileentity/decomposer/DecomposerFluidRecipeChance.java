@@ -1,10 +1,11 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
-import java.util.Random;
 import minechem.potion.PotionChemical;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class DecomposerFluidRecipeChance extends DecomposerFluidRecipe
 {

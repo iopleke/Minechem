@@ -1,10 +1,10 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.block.BlockSimpleContainer;
+import minechem.gui.CreativeTabMinechem;
 import minechem.proxy.CommonProxy;
-import minechem.utils.Reference;
+import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,13 +13,15 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 
+import java.util.ArrayList;
+
 public class DecomposerBlock extends BlockSimpleContainer
 {
 	public DecomposerBlock()
 	{
 		super(Material.iron);
 		setBlockName("chemicalDecomposer");
-		setCreativeTab(Minechem.CREATIVE_TAB_ITEMS);
+		setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
 	}
 
 	@Override
@@ -59,7 +61,7 @@ public class DecomposerBlock extends BlockSimpleContainer
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		this.blockIcon = ir.registerIcon(Reference.DECOMPOSER_TEX);
+		this.blockIcon = ir.registerIcon(Textures.DECOMPOSER_TEX);
 	}
 
 	@Override
