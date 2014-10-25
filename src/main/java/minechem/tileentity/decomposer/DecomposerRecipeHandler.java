@@ -42,7 +42,8 @@ public class DecomposerRecipeHandler
 			if (DecomposerRecipe.get(key) instanceof DecomposerRecipeSuper)
 				DecomposerRecipe.remove(key);
 		}
-		
+		Recipe.init();
+		recursiveRecipes();
 	}
 
 	public DecomposerRecipe getRecipe(ItemStack input)

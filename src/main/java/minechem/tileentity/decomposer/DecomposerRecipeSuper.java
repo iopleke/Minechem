@@ -36,16 +36,16 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					//decompRecipe.scaleOutput(input.stackSize);
 					if (decompRecipe instanceof DecomposerRecipeSelect)
 					{
-						addSelectRecipe((DecomposerRecipeSelect) decompRecipe, 1/this.input.stackSize);
+						addSelectRecipe((DecomposerRecipeSelect) decompRecipe, 1.0/this.input.stackSize);
 					} else if (decompRecipe instanceof DecomposerRecipeSuper)
 					{
-						addDecompRecipeSuper((DecomposerRecipeSuper) decompRecipe, 1/this.input.stackSize);
+						addDecompRecipeSuper((DecomposerRecipeSuper) decompRecipe, 1.0/this.input.stackSize);
 					} else if (decompRecipe instanceof DecomposerRecipeChance)
 					{
-						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(), ((DecomposerRecipeChance) decompRecipe).getChance(), new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())), 1/this.input.stackSize);
+						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(), ((DecomposerRecipeChance) decompRecipe).getChance(), new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())), 1.0/this.input.stackSize);
 					} else
 					{
-						addPotionChemical(decompRecipe.getOutput(),1/input.stackSize);
+						addPotionChemical(decompRecipe.getOutput(),1.0/this.input.stackSize);
 					}
 				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
 				{
@@ -55,7 +55,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					{
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output, recipe.inStacks, level + 1));
-						addDecompRecipeSuper(newSuper, 1/recipe.getOutStackSize());
+						addDecompRecipeSuper(newSuper, 1.0/this.input.stackSize);
 					}
 				}
 			}
