@@ -1,16 +1,16 @@
 package minechem.tileentity.decomposer;
 
+import minechem.Settings;
+import minechem.potion.PotionChemical;
+import minechem.utils.LogHelper;
+import minechem.utils.MinechemHelper;
+import minechem.utils.Recipe;
+import net.minecraft.item.ItemStack;
+
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
 import java.util.Random;
-
-import minechem.Minechem;
-import minechem.Settings;
-import minechem.potion.PotionChemical;
-import minechem.utils.MinechemHelper;
-import minechem.utils.Recipe;
-import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeSuper extends DecomposerRecipe
 {
@@ -21,10 +21,8 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	{
 		this.input = input;
 		this.input.stackSize=Math.max(1, this.input.stackSize);
-		if (Settings.DebugMode)
-		{
-			Minechem.LOGGER.info(input.toString());
-		}
+
+        LogHelper.debug(input.toString());
 		for (ItemStack component : components)
 		{
 			if (component != null && component.getItem() != null)
