@@ -57,7 +57,7 @@ import net.minecraft.item.ItemStack;
 public class MoleculeEnum extends MinechemChemicalType
 {
 	public static Map<Integer,MoleculeEnum> molecules = new LinkedHashMap<Integer,MoleculeEnum>();
-	public static int baseMolecules = 171;
+	public static int baseMolecules = 172;
 
 	public static final MoleculeEnum cellulose = addMolecule("cellulose", 0, 0, 1, 0, 0, 0.25F, 0, solid, new Element(C, 6), new Element(H, 10), new Element(O, 5));
 	public static final MoleculeEnum water = addMolecule("water", 1, 0, 0, 1, 0, 0, 1, liquid, new Element(H, 2), new Element(O));
@@ -252,6 +252,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	public static final MoleculeEnum hydrogenSulfide = addMolecule("hydrogenSulfide", 169, gas, new Element(H, 2), new Element(S));
 	public static final MoleculeEnum sodiumBisulfate = addMolecule("sodiumBisulfate", 170, solid, new Element(Na), new Element(H), new Molecule(sulfate));
 	public static final MoleculeEnum sodiumSulfate = addMolecule("sodiumSulfate", 171, solid, new Element(Na, 2), new Molecule(sulfate));
+    public static final MoleculeEnum dimethyltryptamine = addMolecule("dimethyltryptamine", 172, solid, new Element(C, 12), new Element(H, 16), new Element(N, 2));
 
 	private final String localizationKey;
 	private final ArrayList<PotionChemical> components;
