@@ -10,15 +10,18 @@ import net.minecraft.item.ItemStack;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Map;
+import java.util.Random;
 
 public class DecomposerRecipeSuper extends DecomposerRecipe
 {
-
-	public Map<DecomposerRecipeSelect, Integer> selectRecipes = new Hashtable<DecomposerRecipeSelect, Integer>();
+	static Random random = new Random();
+	public Map<DecomposerRecipeSelect, Double> selectRecipes = new Hashtable<DecomposerRecipeSelect, Double>();
 
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input;
+		this.input.stackSize=Math.max(1, this.input.stackSize);
+
         LogHelper.debug(input.toString());
 		for (ItemStack component : components)
 		{
@@ -31,16 +34,16 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					//decompRecipe.scaleOutput(input.stackSize);
 					if (decompRecipe instanceof DecomposerRecipeSelect)
 					{
-						addSelectRecipe((DecomposerRecipeSelect) decompRecipe, 1);
+						addSelectRecipe((DecomposerRecipeSelect) decompRecipe, 1.0/this.input.stackSize);
 					} else if (decompRecipe instanceof DecomposerRecipeSuper)
 					{
-						addDecompRecipeSuper((DecomposerRecipeSuper) decompRecipe);
+						addDecompRecipeSuper((DecomposerRecipeSuper) decompRecipe, 1.0/this.input.stackSize);
 					} else if (decompRecipe instanceof DecomposerRecipeChance)
 					{
-						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(), ((DecomposerRecipeChance) decompRecipe).getChance(), new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())), 1);
+						addSelectRecipe(new DecomposerRecipeSelect(decompRecipe.getInput(), ((DecomposerRecipeChance) decompRecipe).getChance(), new DecomposerRecipe(decompRecipe.getInput(), decompRecipe.getOutputRaw())), 1.0/this.input.stackSize);
 					} else
 					{
-						addPotionChemical(decompRecipe.getOutput());
+						addPotionChemical(decompRecipe.getOutput(),1.0/this.input.stackSize);
 					}
 				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
 				{
@@ -50,7 +53,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					{
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output, recipe.inStacks, level + 1));
-						addDecompRecipeSuper(newSuper);
+						addDecompRecipeSuper(newSuper, 1.0/this.input.stackSize);
 					}
 				}
 			}
@@ -65,33 +68,35 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, ArrayList<PotionChemical> chemicals)
 	{
 		this(input, components, 0);
-		addPotionChemical(chemicals);
+		addPotionChemical(chemicals,1);
 	}
 
-	private void addDecompRecipeSuper(DecomposerRecipeSuper recipeSuper)
+	private void addDecompRecipeSuper(DecomposerRecipeSuper recipeSuper, double amount)
 	{
-		addPotionChemical(recipeSuper.getGuaranteedOutput());
-		Map<DecomposerRecipeSelect, Integer> newSelectRecipes = recipeSuper.getSelectRecipes();
+		addPotionChemical(recipeSuper.getGuaranteedOutput(),amount);
+		Map<DecomposerRecipeSelect, Double> newSelectRecipes = recipeSuper.getSelectRecipes();
 		for (DecomposerRecipeSelect recipeSelect : newSelectRecipes.keySet())
 		{
-			addSelectRecipe(recipeSelect, newSelectRecipes.get(recipeSelect));
+			addSelectRecipe(recipeSelect, newSelectRecipes.get(recipeSelect) * amount);
 		}
 	}
 
-	private void addPotionChemical(ArrayList<PotionChemical> out)
+	private void addPotionChemical(ArrayList<PotionChemical> out, double amount)
 	{
 		if (out != null)
 		{
 			for (PotionChemical add : out)
 			{
+				PotionChemical addChem = add.copy();
+				addChem.amount*=amount;
 				super.addChemicals(add);
 			}
 		}
 	}
 
-	private void addSelectRecipe(DecomposerRecipeSelect recipe, int number)
+	private void addSelectRecipe(DecomposerRecipeSelect recipe, double number)
 	{
-		Integer current = this.selectRecipes.put(recipe, number);
+		Double current = this.selectRecipes.put(recipe, number);
 		if (current != null)
 		{
 			this.selectRecipes.put(recipe, current + number);
@@ -104,7 +109,14 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		ArrayList<PotionChemical> result = super.getOutput();
 		for (DecomposerRecipeSelect current : this.selectRecipes.keySet())
 		{
-			for (int i = 0; i < this.selectRecipes.get(current); i++)
+			int i;
+			for (i=0; i < this.selectRecipes.get(current); i++)
+			{
+				ArrayList<PotionChemical> partialResult = current.getOutput();
+				if (partialResult != null) result.addAll(partialResult);
+			}
+			double chance = this.selectRecipes.get(current)-i;
+			if (random.nextDouble()<chance)
 			{
 				ArrayList<PotionChemical> partialResult = current.getOutput();
 				if (partialResult != null) result.addAll(partialResult);
@@ -134,7 +146,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		return super.getOutput();
 	}
 
-	public Map<DecomposerRecipeSelect, Integer> getSelectRecipes()
+	public Map<DecomposerRecipeSelect, Double> getSelectRecipes()
 	{
 		return this.selectRecipes;
 	}
@@ -182,14 +194,14 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 
 	public float getChance()
 	{
-		int count = 0;
+		double count = 0;
 		float chances = 0;
-		for (Map.Entry<DecomposerRecipeSelect, Integer> entry : selectRecipes.entrySet())
+		for (Map.Entry<DecomposerRecipeSelect, Double> entry : selectRecipes.entrySet())
 		{
 			chances += entry.getKey().getChance();
 			count += entry.getValue();
 		}
-		return chances / count;
+		return chances / (float)count;
 	}
 
 	@Override

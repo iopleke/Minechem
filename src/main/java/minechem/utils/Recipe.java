@@ -1,5 +1,6 @@
 package minechem.utils;
 
+
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.*;
@@ -13,15 +14,20 @@ import java.util.Map;
 
 public class Recipe
 {
-	public static Map<String, Recipe> recipes = new Hashtable<String, Recipe>();
-	@SuppressWarnings("unchecked")
-	public static Map<ItemStack, ItemStack> smelting = FurnaceRecipes.smelting().getSmeltingList();
-	public static Map<String, String> oreDictionary = new Hashtable<String, String>();
+	public static Map<String, Recipe> recipes;
+	
+	public static Map<ItemStack, ItemStack> smelting;
+	public static Map<String, String> oreDictionary;
 	public ItemStack output;
 	public ItemStack[] inStacks;
 
+	@SuppressWarnings("unchecked")
 	public static void init()
 	{
+		recipes = new Hashtable<String, Recipe>();
+		smelting = FurnaceRecipes.smelting().getSmeltingList();
+		oreDictionary = new Hashtable<String,String>();
+		
 		for (Object recipe : CraftingManager.getInstance().getRecipeList())
 		{
 			if (recipe instanceof IRecipe)
