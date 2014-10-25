@@ -1,7 +1,14 @@
 package minechem.item.chemistjournal;
 
+import java.util.ArrayList;
+import java.util.List;
 import minechem.MinechemItemsRegistration;
-import minechem.gui.*;
+import minechem.gui.GuiContainerTabbed;
+import minechem.gui.GuiFakeSlot;
+import minechem.gui.GuiTextField;
+import minechem.gui.GuiVerticalScrollBar;
+import minechem.gui.IVerticalScrollContainer;
+import minechem.gui.ScissorHelper;
 import minechem.network.MessageHandler;
 import minechem.network.message.ChemistJournalActiveItemMessage;
 import minechem.potion.PotionChemical;
@@ -21,9 +28,6 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
 	private static final ResourceLocation resourceLocationJournalGUI = new ResourceLocation(Reference.ID, Textures.JOURNAL_GUI);
@@ -36,7 +40,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 	private static final int GUI_HEIGHT = 191;
 
 	GuiVerticalScrollBar scrollBar;
-    GuiTextField searchBar;
+	GuiTextField searchBar;
 	List<GuiFakeSlot> itemListSlots = new ArrayList<GuiFakeSlot>();
 	int listHeight;
 	GuiFakeSlot[] synthesisSlots = new GuiFakeSlot[9];
@@ -48,7 +52,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 	SynthesisRecipe currentSynthesisRecipe;
 	DecomposerRecipe currentDecomposerRecipe;
 	ItemStack journalStack;
-    List<ItemStack> itemList;
+	List<ItemStack> itemList;
 
 	public ChemistJournalGui(EntityPlayer entityPlayer)
 	{
@@ -63,10 +67,10 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		this.xSize = GUI_WIDTH;
 		this.ySize = GUI_HEIGHT;
 		scrollBar = new GuiVerticalScrollBar(this, 128, 14, 157, this.xSize, this.ySize);
-        searchBar = new GuiTextField(100, 12, 20, 14);
+		searchBar = new GuiTextField(100, 12, 20, 14);
 
-		itemList= MinechemItemsRegistration.journal.getItemList(this.journalStack);
-        populateItemList();
+		itemList = MinechemItemsRegistration.journal.getItemList(this.journalStack);
+		populateItemList();
 		// addTab(new TabTable(this));
 	}
 
@@ -74,31 +78,34 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 	{
 		int i = 0;
 		int j = 0;
-        itemListSlots.clear();
-		for (ItemStack itemstack : itemList)
+		itemListSlots.clear();
+		if (itemList != null)
 		{
-			if (!searchBar.getText().equals("") && itemstack != null && !(itemstack.getDisplayName().toLowerCase().contains(searchBar.getText())))
+			for (ItemStack itemstack : itemList)
 			{
-				continue;
-			}
-			int xPos = (i * 18) + 18;
-			int yPos = (j * 18) + 28;
-			GuiFakeSlot slot = new GuiFakeSlot(this, this.player);
-			slot.setXPos(xPos);
-			slot.setYPos(yPos);
-			slot.setItemStack(itemstack);
-			itemListSlots.add(slot);
-			if (++i == 6)
-			{
-				i = 0;
-				j++;
+				if (!searchBar.getText().equals("") && itemstack != null && !(itemstack.getDisplayName().toLowerCase().contains(searchBar.getText())))
+				{
+					continue;
+				}
+				int xPos = (i * 18) + 18;
+				int yPos = (j * 18) + 28;
+				GuiFakeSlot slot = new GuiFakeSlot(this, this.player);
+				slot.setXPos(xPos);
+				slot.setYPos(yPos);
+				slot.setItemStack(itemstack);
+				itemListSlots.add(slot);
+				if (++i == 6)
+				{
+					i = 0;
+					j++;
+				}
 			}
 		}
 		listHeight = j * 18;
-        if (itemListSlots.size() == 1)
-        {
-            showRecipesForStack(itemListSlots.get(0).getItemStack());
-        }
+		if (itemListSlots.size() == 1)
+		{
+			showRecipesForStack(itemListSlots.get(0).getItemStack());
+		}
 	}
 
 	@Override
@@ -120,19 +127,19 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		}
 	}
 
-    @Override
-    protected void keyTyped(char character, int keyCode)
-    {
-        // only leave GUI when ESC is pressed
-        if (keyCode == 1)
-        {
-            this.mc.thePlayer.closeScreen();
-        }
-        searchBar.keyTyped(character, keyCode);
-        populateItemList();
-    }
+	@Override
+	protected void keyTyped(char character, int keyCode)
+	{
+		// only leave GUI when ESC is pressed
+		if (keyCode == 1)
+		{
+			this.mc.thePlayer.closeScreen();
+		}
+		searchBar.keyTyped(character, keyCode);
+		populateItemList();
+	}
 
-    public void onSlotClick(GuiFakeSlot slot)
+	public void onSlotClick(GuiFakeSlot slot)
 	{
 		ItemStack itemstack = slot.getItemStack();
 		showRecipesForStack(itemstack);
@@ -257,7 +264,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		if (currentItemStack != null)
 		{
 			drawRecipeGrid();
-            drawRecipeGrid();
+			drawRecipeGrid();
 			drawText();
 			drawRecipeSlots(x, y);
 		} else
@@ -266,7 +273,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		}
 
 		scrollBar.draw();
-        searchBar.draw();
+		searchBar.draw();
 		drawSlots(x, y);
 		drawSlotTooltips();
 
@@ -274,7 +281,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		GL11.glPushMatrix();
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		GL11.glDisable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_BLEND);
+		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 
 		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
