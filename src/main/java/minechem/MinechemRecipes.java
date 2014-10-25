@@ -2494,13 +2494,13 @@ public class MinechemRecipes
 		ItemStack bars = new ItemStack(Blocks.iron_bars);
 		DecomposerRecipe.add(new DecomposerRecipe(bars, new PotionChemical[]
 		{
-			element(ElementEnum.Fe, 8),
-            element(ElementEnum.Fe, 8)
+			element(ElementEnum.Fe, 3),
+            element(ElementEnum.Fe, 3)
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(bars, false, COST_BLOCK, new PotionChemical[]
 		{
-                element(ElementEnum.Fe, 8),
-                element(ElementEnum.Fe, 8)
+                element(ElementEnum.Fe, 3),
+                element(ElementEnum.Fe, 3)
 		}));
 	}
 
