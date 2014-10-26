@@ -1,16 +1,12 @@
 package minechem.tileentity.synthesis;
 
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 {
-	private static final ResourceLocation resourceLocationSynthesisModel = new ResourceLocation(Reference.ID, Textures.SYNTHESIS_MODEL);
-
 	@Override
 	public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
 	{
@@ -34,7 +30,7 @@ public class SynthesisTileEntityRenderer extends TileEntitySpecialRenderer
 			GL11.glRotatef(facing * 90.0F, 0.0F, 1.0F, 0.0F);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			bindTexture(resourceLocationSynthesisModel);
+			bindTexture(Resources.Model.SYNTHESIS);
 			synthesis.model.render(0.0625F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();

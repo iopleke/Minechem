@@ -34,7 +34,7 @@ public class ItemBlueprint extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.BLUEPRINT_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.BLUEPRINT);
 	}
 
 	public static ItemStack createItemStackFromBlueprint(MinechemBlueprint blueprint)

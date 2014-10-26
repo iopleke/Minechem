@@ -5,12 +5,12 @@ import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementGuiHelper;
+import minechem.reference.Resources;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
@@ -19,7 +19,6 @@ import java.util.Random;
 
 public class PolytoolGui extends GuiContainerTabbed
 {
-	private static final ResourceLocation texture = new ResourceLocation("minechem", "textures/gui/polytool.png");
 	private static final ItemStack polytoolItem = new ItemStack(MinechemItemsRegistration.polytool);
 	private static final Random rand=new Random();
 	public ArrayList<ElementGuiHelper> elements = new ArrayList();
@@ -86,7 +85,7 @@ public class PolytoolGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		Minecraft.getMinecraft().getTextureManager().bindTexture(texture);
+		Minecraft.getMinecraft().getTextureManager().bindTexture(Resources.Gui.POLYTOOL);
 
 		drawTexturedModalRect(guiLeft, guiTop, 0, 0, xSize, ySize);
 		renders++;

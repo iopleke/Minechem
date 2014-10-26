@@ -50,10 +50,10 @@ public class MoleculeItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.FILLED_TESTTUBE_TEX);
-		render_pass1 = ir.registerIcon(Textures.MOLECULE_PASS1_TEX);
-		render_pass2 = ir.registerIcon(Textures.MOLECULE_PASS2_TEX);
-		filledMolecule = ir.registerIcon(Textures.FILLED_MOLECULE_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.FILLED_TESTTUBE);
+		render_pass1 = ir.registerIcon(Textures.IIcon.MOLECULE_PASS1);
+		render_pass2 = ir.registerIcon(Textures.IIcon.MOLECULE_PASS2);
+		filledMolecule = ir.registerIcon(Textures.IIcon.FILLED_MOLECULE);
 	}
 
 	public ArrayList<ItemStack> getElements(ItemStack itemstack)

@@ -4,13 +4,11 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.tileentity.decomposer.*;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -24,8 +22,6 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 {
 
 	private static final String MINECHEM_DECOMPOSER_RECIPES_ID = "minechem.decomposer";
-
-	private ResourceLocation texture = new ResourceLocation(Reference.ID, Textures.DECOMPOSER_GUI_NEI);
 
 	// GUI slot offsets, in GUI-relative pixel values.
 	private static final int INPUT_X_OFS = 75;
@@ -44,7 +40,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getGuiTexture()
 	{
-		return texture.toString();
+		return Resources.Gui.NEI_DECOMPOSER.toString();
 	}
 
 	@Override

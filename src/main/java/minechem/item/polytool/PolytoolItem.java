@@ -98,7 +98,7 @@ public class PolytoolItem extends ItemPickaxe
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.POLYTOOL_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.POLYTOOL);
 	}
 
 	@Override

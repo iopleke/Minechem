@@ -5,12 +5,10 @@ import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.HashMap;
@@ -20,8 +18,6 @@ import java.util.Map.Entry;
 
 public class BlueprintProjectorGui extends GuiContainerTabbed
 {
-
-	private static final ResourceLocation resourceLocationProjectorGUI = new ResourceLocation(Reference.ID, Textures.PROJECTOR_GUI);
 	BlueprintProjectorTileEntity projector;
 
 	public BlueprintProjectorGui(InventoryPlayer inventoryPlayer, BlueprintProjectorTileEntity projector)
@@ -36,7 +32,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(resourceLocationProjectorGUI);
+		this.mc.renderEngine.bindTexture(Resources.Gui.PROJECTOR);
 		;
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

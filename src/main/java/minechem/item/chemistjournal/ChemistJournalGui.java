@@ -12,8 +12,7 @@ import minechem.gui.ScissorHelper;
 import minechem.network.MessageHandler;
 import minechem.network.message.ChemistJournalActiveItemMessage;
 import minechem.potion.PotionChemical;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
@@ -24,13 +23,12 @@ import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalScrollContainer
 {
-	private static final ResourceLocation resourceLocationJournalGUI = new ResourceLocation(Reference.ID, Textures.JOURNAL_GUI);
+
 	private static final int SYNTHESIS_X = 197;
 	private static final int SYNTHESIS_Y = 121;
 	private static final int DECOMPOSER_X = 197;
@@ -257,7 +255,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		GL11.glPushMatrix();
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
+		this.mc.renderEngine.bindTexture(Resources.Gui.JOURNAL);
 		drawTexturedModalRect(0, 0, 0, 0, this.xSize / 2, this.ySize / 2);
 		GL11.glPopMatrix();
 
@@ -284,7 +282,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		GL11.glEnable(GL11.GL_BLEND);
 		GL11.glScalef(2.0F, 2.0F, 2.0F);
 
-		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
+		this.mc.renderEngine.bindTexture(Resources.Gui.JOURNAL);
 		drawTexturedModalRect(8 / 2, 164 / 2, 161 / 2, 192 / 2, 20 / 2, 20 / 2);
 		GL11.glPopMatrix();
 		GL11.glPopMatrix();
@@ -304,7 +302,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
 		GL11.glScalef(2.0F, 2.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(resourceLocationJournalGUI);
+		this.mc.renderEngine.bindTexture(Resources.Gui.JOURNAL);
 
 		drawTexturedModalRect(197 / 2, 41 / 2, 51 / 2, 192 / 2, 54 / 2, 54 / 2);
 		if (currentSynthesisRecipe != null && currentSynthesisRecipe.isShaped())

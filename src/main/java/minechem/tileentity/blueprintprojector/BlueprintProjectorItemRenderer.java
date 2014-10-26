@@ -2,15 +2,12 @@ package minechem.tileentity.blueprintprojector;
 
 import cpw.mods.fml.client.FMLClientHandler;
 import minechem.item.ItemMinechemRenderer;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class BlueprintProjectorItemRenderer extends ItemMinechemRenderer
 {
-
 	private BlueprintProjectorModel model;
 
 	public BlueprintProjectorItemRenderer()
@@ -21,9 +18,8 @@ public class BlueprintProjectorItemRenderer extends ItemMinechemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-		ResourceLocation texture = new ResourceLocation(Reference.ID, Textures.PROJECTOR_MODEL_OFF);
 		GL11.glPushMatrix();
-		FMLClientHandler.instance().getClient().renderEngine.bindTexture(texture);
+		FMLClientHandler.instance().getClient().renderEngine.bindTexture(Resources.Model.PROJECTOR_OFF);
 		switch (type.ordinal())
 		{
 			case 0:

@@ -16,11 +16,11 @@ public class FluidTextureStitchHandler
 			IIconRegister ir = event.map;
 			for (FluidElement fluidElement : FluidHelper.elements.values())
 			{
-				fluidElement.setIcons(ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_flow"));
+				fluidElement.setIcons(ir.registerIcon(Textures.IIcon.FUILD_STILL), ir.registerIcon(Textures.IIcon.FLUID_FLOW));
 			}
 			for (FluidChemical fluidChemical : FluidHelper.molecules.values())
 			{
-				fluidChemical.setIcons(ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_still"), ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_flow"));
+				fluidChemical.setIcons(ir.registerIcon(Textures.IIcon.FUILD_STILL), ir.registerIcon(Textures.IIcon.FLUID_FLOW));
 			}
 		}
 	}
