@@ -2,6 +2,8 @@ package minechem;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.ArrayList;
+import java.util.Iterator;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalRecipeCloning;
@@ -10,9 +12,19 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.oredictionary.*;
+import minechem.oredictionary.OreDictionaryAppliedEnergisticsHandler;
+import minechem.oredictionary.OreDictionaryDefaultHandler;
+import minechem.oredictionary.OreDictionaryGregTechHandler;
+import minechem.oredictionary.OreDictionaryHandler;
+import minechem.oredictionary.OreDictionaryIC2Handler;
+import minechem.oredictionary.OreDictionaryMekanismHandler;
+import minechem.oredictionary.OreDictionaryUndergroundBiomesHandler;
 import minechem.potion.PotionChemical;
-import minechem.tileentity.decomposer.*;
+import minechem.tileentity.decomposer.DecomposerFluidRecipe;
+import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeChance;
+import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
 import net.minecraft.block.Block;
@@ -27,9 +39,6 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-
-import java.util.ArrayList;
-import java.util.Iterator;
 
 @SuppressWarnings("RedundantArrayCreation")
 public class MinechemRecipes
@@ -408,9 +417,9 @@ public class MinechemRecipes
 				this.element(ElementEnum.Na), this.element(ElementEnum.Cl)
 			})
 		}));
-		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.cobblestone,16), true, COST_SMOOTH, new PotionChemical[]
+		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Blocks.cobblestone, 16), true, COST_SMOOTH, new PotionChemical[]
 		{
-			this.element(ElementEnum.Si,2), this.element(ElementEnum.O, 4), null
+			this.element(ElementEnum.Si, 2), this.element(ElementEnum.O, 4), null
 		}));
 
 		// Planks
@@ -2011,6 +2020,20 @@ public class MinechemRecipes
 			null, this.molecule(MoleculeEnum.cellulose), null, null, this.molecule(MoleculeEnum.cellulose), null, null, this.molecule(MoleculeEnum.cellulose), null
 		}));
 
+		// Book
+		ItemStack itemBook = new ItemStack(Items.book);
+		DecomposerRecipe.add(new DecomposerRecipeChance(itemBook, 0.75F, new PotionChemical[]
+		{
+			this.molecule(MoleculeEnum.cellulose, 3), this.molecule(MoleculeEnum.keratin)
+		}));
+
+		// Bookshelf
+		ItemStack blockBook = new ItemStack(Blocks.bookshelf);
+		DecomposerRecipe.add(new DecomposerRecipeChance(blockBook, 0.85F, new PotionChemical[]
+		{
+			this.molecule(MoleculeEnum.cellulose, 21), this.molecule(MoleculeEnum.keratin, 3),
+		}));
+
 		// Slimeball
 		ItemStack itemSlimeBall = new ItemStack(Items.slime_ball);
 		DecomposerRecipe.add(new DecomposerRecipeSelect(itemSlimeBall, 0.9F, new DecomposerRecipe[]
@@ -2483,12 +2506,12 @@ public class MinechemRecipes
 		DecomposerRecipe.add(new DecomposerRecipe(bars, new PotionChemical[]
 		{
 			element(ElementEnum.Fe, 3),
-            element(ElementEnum.Fe, 3)
+			element(ElementEnum.Fe, 3)
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(bars, false, COST_BLOCK, new PotionChemical[]
 		{
-                element(ElementEnum.Fe, 3),
-                element(ElementEnum.Fe, 3)
+			element(ElementEnum.Fe, 3),
+			element(ElementEnum.Fe, 3)
 		}));
 	}
 
@@ -2698,22 +2721,27 @@ public class MinechemRecipes
 			{
 				this.molecule(MoleculeEnum.asbestos, 2), this.molecule(MoleculeEnum.blackPigment)
 			}));
-			
+
 			Block glass = GameRegistry.findBlock("ThermalExpansion", "Glass");
 			Block frame = GameRegistry.findBlock("ThermalExpansion", "Frame");
 			Block light = GameRegistry.findBlock("ThermalExpansion", "Light");
 			ItemStack glassStack = new ItemStack(glass);
-			ItemStack lightFrameStack = new ItemStack(frame,1,9);
+			ItemStack lightFrameStack = new ItemStack(frame, 1, 9);
 			ItemStack lightStack = new ItemStack(light);
-			
-			DecomposerRecipe.add(new DecomposerRecipe(glassStack,new PotionChemical[] {
-					this.molecule(MoleculeEnum.magnesiumOxide, 8), this.molecule(MoleculeEnum.siliconOxide, 16), this.element(ElementEnum.Pb,8)	}));
-			DecomposerRecipe.add(new DecomposerRecipe(lightFrameStack,new PotionChemical[] {
-					this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.galliumarsenide, 1), this.molecule(MoleculeEnum.magnesiumOxide, 16), this.molecule(MoleculeEnum.siliconOxide, 32), this.element(ElementEnum.Pb,16), this.element(ElementEnum.Cu,16)}));
-			DecomposerRecipe.add(new DecomposerRecipe(lightStack,new PotionChemical[] {
-					this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.galliumarsenide, 1), this.molecule(MoleculeEnum.magnesiumOxide, 16), this.molecule(MoleculeEnum.siliconOxide, 32), this.element(ElementEnum.Pb,16), this.element(ElementEnum.Cu,16),this.element(ElementEnum.P, 4)}));
-			
-			
+
+			DecomposerRecipe.add(new DecomposerRecipe(glassStack, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.magnesiumOxide, 8), this.molecule(MoleculeEnum.siliconOxide, 16), this.element(ElementEnum.Pb, 8)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(lightFrameStack, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.galliumarsenide, 1), this.molecule(MoleculeEnum.magnesiumOxide, 16), this.molecule(MoleculeEnum.siliconOxide, 32), this.element(ElementEnum.Pb, 16), this.element(ElementEnum.Cu, 16)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(lightStack, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.galliumarsenide, 1), this.molecule(MoleculeEnum.magnesiumOxide, 16), this.molecule(MoleculeEnum.siliconOxide, 32), this.element(ElementEnum.Pb, 16), this.element(ElementEnum.Cu, 16), this.element(ElementEnum.P, 4)
+			}));
+
 		}
 
 		if (Loader.isModLoaded("ThermalFoundation"))
@@ -2794,81 +2822,112 @@ public class MinechemRecipes
 				this.element(ElementEnum.Sn, 8), this.element(ElementEnum.Ag, 4), this.element(ElementEnum.Pt, 4), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 8), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Pu), this.element(ElementEnum.C, 8), this.element(ElementEnum.S, 16)
 			}));
 		}
-		
+
 		//Redstone Arsenal
 		if (Loader.isModLoaded("RedstoneArsenal"))
 		{
 			Item alloy = GameRegistry.findItem("RedstoneArsenal", "material");
-			ItemStack blend = new ItemStack(alloy,1,0);
-			ItemStack ingot = new ItemStack(alloy,1,32);
-			ItemStack nugget = new ItemStack(alloy,1,64);
-			ItemStack gem = new ItemStack(alloy,1,96);
-			DecomposerRecipe.add(new DecomposerRecipe(blend,new PotionChemical[] {
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.Ag,8),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)}));
-			DecomposerRecipe.add(new DecomposerRecipe(ingot,new PotionChemical[] {
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.Ag,8),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)}));
-			DecomposerRecipe.add(new DecomposerRecipeSelect(nugget,0.11F,new DecomposerRecipe(new PotionChemical[] {
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.Ag,8),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)})));
-			DecomposerRecipe.add(new DecomposerRecipe(gem,new PotionChemical[] {
-					this.molecule(MoleculeEnum.fullrene,3),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)}));
+			ItemStack blend = new ItemStack(alloy, 1, 0);
+			ItemStack ingot = new ItemStack(alloy, 1, 32);
+			ItemStack nugget = new ItemStack(alloy, 1, 64);
+			ItemStack gem = new ItemStack(alloy, 1, 96);
+			DecomposerRecipe.add(new DecomposerRecipe(blend, new PotionChemical[]
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.Ag, 8), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(ingot, new PotionChemical[]
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.Ag, 8), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeSelect(nugget, 0.11F, new DecomposerRecipe(new PotionChemical[]
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.Ag, 8), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			})));
+			DecomposerRecipe.add(new DecomposerRecipe(gem, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(blend, false, COST_INGOT * 2, new PotionChemical[]
-					{
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.Ag,8),this.molecule(MoleculeEnum.iron3oxide,2), this.element(ElementEnum.Cu,2)					}));
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.Ag, 8), this.molecule(MoleculeEnum.iron3oxide, 2), this.element(ElementEnum.Cu, 2)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(ingot, false, COST_INGOT * 2, new PotionChemical[]
-					{
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.Ag,8),this.molecule(MoleculeEnum.iron3oxide,2), this.element(ElementEnum.Cu,2)					}));
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.Ag, 8), this.molecule(MoleculeEnum.iron3oxide, 2), this.element(ElementEnum.Cu, 2)
+			}));
 			SynthesisRecipe.add(new SynthesisRecipe(gem, false, COST_INGOT * 2, new PotionChemical[]
-					{
-					this.molecule(MoleculeEnum.fullrene,3),this.molecule(MoleculeEnum.iron3oxide,2), this.element(ElementEnum.Cu,2)
-					}));
+			{
+				this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.iron3oxide, 2), this.element(ElementEnum.Cu, 2)
+			}));
 		}
-		
+
 		//EnderIO
 		if (Loader.isModLoaded("EnderIO"))
 		{
 			Item alloy = GameRegistry.findItem("EnderIO", "itemAlloy");
-			ItemStack electricalSteel = new ItemStack(alloy,1,0);
-			ItemStack energeticAlloy = new ItemStack(alloy,1,1);
-			ItemStack vibrantAlloy = new ItemStack(alloy,1,2);
-			ItemStack redstoneAlloy = new ItemStack(alloy,1,3);
-			ItemStack conductiveIron = new ItemStack(alloy,1,4);
-			ItemStack pulsatingIron = new ItemStack(alloy,1,5);
-			ItemStack darkSteel = new ItemStack(alloy,1,6);
-			ItemStack soularium = new ItemStack(alloy,1,7);
-			DecomposerRecipe.add(new DecomposerRecipe(electricalSteel,new PotionChemical[] {
-					this.element(ElementEnum.Fe,8),this.element(ElementEnum.C,4),this.element(ElementEnum.Si,4)}));
-			DecomposerRecipe.add(new DecomposerRecipe(energeticAlloy,new PotionChemical[] {
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.P,1),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)}));
-			DecomposerRecipe.add(new DecomposerRecipe(vibrantAlloy,new PotionChemical[] {
-					this.element(ElementEnum.Au,8),this.element(ElementEnum.P,1),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu),this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 4)}));
-			DecomposerRecipe.add(new DecomposerRecipe(redstoneAlloy,new PotionChemical[] {
-					this.element(ElementEnum.Si,12),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)}));
-			DecomposerRecipe.add(new DecomposerRecipe(conductiveIron,new PotionChemical[] {
-					this.element(ElementEnum.Fe,12),this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)}));
-			DecomposerRecipe.add(new DecomposerRecipe(pulsatingIron,new PotionChemical[] {
-					this.element(ElementEnum.Fe,12),this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 6)}));
-			DecomposerRecipe.add(new DecomposerRecipe(darkSteel,new PotionChemical[] {
-					this.molecule(MoleculeEnum.magnesiumOxide, 4), this.molecule(MoleculeEnum.siliconOxide, 8), this.element(ElementEnum.Fe,8), this.element(ElementEnum.C,4)}));
-			DecomposerRecipe.add(new DecomposerRecipeSelect(soularium, 0.4F, new DecomposerRecipe[]{
-					new DecomposerRecipe(new PotionChemical[]{
-						this.element(ElementEnum.Pb, 3), this.element(ElementEnum.Be, 1), this.element(ElementEnum.Si, 2), this.element(ElementEnum.O),this.element(ElementEnum.Au,8)
-					}), new DecomposerRecipe(new PotionChemical[]{
-						this.element(ElementEnum.Pb, 1), this.element(ElementEnum.Si, 5), this.element(ElementEnum.O, 2),this.element(ElementEnum.Au,8)
-					}), new DecomposerRecipe(new PotionChemical[]{
-						this.element(ElementEnum.Si, 2), this.element(ElementEnum.O),this.element(ElementEnum.Au,8)
-					}), new DecomposerRecipe(new PotionChemical[]{
-						this.element(ElementEnum.Si, 6), this.element(ElementEnum.O, 2),this.element(ElementEnum.Au,8)
-					}), new DecomposerRecipe(new PotionChemical[]{
-						this.element(ElementEnum.Es, 1), this.element(ElementEnum.O, 2),this.element(ElementEnum.Au,8)
-					})}));
+			ItemStack electricalSteel = new ItemStack(alloy, 1, 0);
+			ItemStack energeticAlloy = new ItemStack(alloy, 1, 1);
+			ItemStack vibrantAlloy = new ItemStack(alloy, 1, 2);
+			ItemStack redstoneAlloy = new ItemStack(alloy, 1, 3);
+			ItemStack conductiveIron = new ItemStack(alloy, 1, 4);
+			ItemStack pulsatingIron = new ItemStack(alloy, 1, 5);
+			ItemStack darkSteel = new ItemStack(alloy, 1, 6);
+			ItemStack soularium = new ItemStack(alloy, 1, 7);
+			DecomposerRecipe.add(new DecomposerRecipe(electricalSteel, new PotionChemical[]
+			{
+				this.element(ElementEnum.Fe, 8), this.element(ElementEnum.C, 4), this.element(ElementEnum.Si, 4)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(energeticAlloy, new PotionChemical[]
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.P, 1), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(vibrantAlloy, new PotionChemical[]
+			{
+				this.element(ElementEnum.Au, 8), this.element(ElementEnum.P, 1), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 4)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(redstoneAlloy, new PotionChemical[]
+			{
+				this.element(ElementEnum.Si, 12), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(conductiveIron, new PotionChemical[]
+			{
+				this.element(ElementEnum.Fe, 12), this.molecule(MoleculeEnum.iron3oxide), this.element(ElementEnum.Cu)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(pulsatingIron, new PotionChemical[]
+			{
+				this.element(ElementEnum.Fe, 12), this.element(ElementEnum.Es), this.molecule(MoleculeEnum.calciumCarbonate, 6)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipe(darkSteel, new PotionChemical[]
+			{
+				this.molecule(MoleculeEnum.magnesiumOxide, 4), this.molecule(MoleculeEnum.siliconOxide, 8), this.element(ElementEnum.Fe, 8), this.element(ElementEnum.C, 4)
+			}));
+			DecomposerRecipe.add(new DecomposerRecipeSelect(soularium, 0.4F, new DecomposerRecipe[]
+			{
+				new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Pb, 3), this.element(ElementEnum.Be, 1), this.element(ElementEnum.Si, 2), this.element(ElementEnum.O), this.element(ElementEnum.Au, 8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Pb, 1), this.element(ElementEnum.Si, 5), this.element(ElementEnum.O, 2), this.element(ElementEnum.Au, 8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Si, 2), this.element(ElementEnum.O), this.element(ElementEnum.Au, 8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Si, 6), this.element(ElementEnum.O, 2), this.element(ElementEnum.Au, 8)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Es, 1), this.element(ElementEnum.O, 2), this.element(ElementEnum.Au, 8)
+				})
+			}));
 		}
-		
+
 		if (Loader.isModLoaded("appliedenergistics2"))
 		{
 			MoleculeEnum certusQuartzMolecule = MoleculeEnum.aluminiumPhosphate;
 			MoleculeEnum chargedCertusQuartzMolecule = MoleculeEnum.aluminumHypophosphite;
 			PotionChemical chargedCertusQuartzChemical = new Molecule(chargedCertusQuartzMolecule);
-			
+
 			PotionChemical[] chargedCertusQuartzDecompositionFormula = new PotionChemical[]
 			{
 				new Molecule(chargedCertusQuartzMolecule, 4)
@@ -2879,83 +2938,83 @@ public class MinechemRecipes
 				null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
 			};
 
-			
 			PotionChemical[] quartzGlassDecompositionFormula = new PotionChemical[]
 			{
-				new Molecule(certusQuartzMolecule, 5),new Molecule(MoleculeEnum.siliconDioxide,16)
+				new Molecule(certusQuartzMolecule, 5), new Molecule(MoleculeEnum.siliconDioxide, 16)
 			};
 
 			PotionChemical[] quartzGlassCrystalSynthesisFormula = new PotionChemical[]
 			{
-				new Molecule(certusQuartzMolecule),new Molecule(MoleculeEnum.siliconDioxide,4),new Molecule(certusQuartzMolecule),new Molecule(MoleculeEnum.siliconDioxide,4),new Molecule(certusQuartzMolecule),new Molecule(MoleculeEnum.siliconDioxide,4),new Molecule(certusQuartzMolecule),new Molecule(MoleculeEnum.siliconDioxide,4),new Molecule(certusQuartzMolecule)
+				new Molecule(certusQuartzMolecule), new Molecule(MoleculeEnum.siliconDioxide, 4), new Molecule(certusQuartzMolecule), new Molecule(MoleculeEnum.siliconDioxide, 4), new Molecule(certusQuartzMolecule), new Molecule(MoleculeEnum.siliconDioxide, 4), new Molecule(certusQuartzMolecule), new Molecule(MoleculeEnum.siliconDioxide, 4), new Molecule(certusQuartzMolecule)
 			};
 
-		    Item item = GameRegistry.findItem("appliedenergistics2","item.ItemMultiMaterial");
-		    Block skyStone = GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone");
-		    Block quartzGlass = GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzGlass");
-		    ItemStack charged = new ItemStack(item,1,1);
-		    ItemStack singularity = new ItemStack(item,1,47);
-		    ItemStack skystone = new ItemStack(skyStone);
-		    ItemStack quartzglass = new ItemStack(quartzGlass);
-		    
+			Item item = GameRegistry.findItem("appliedenergistics2", "item.ItemMultiMaterial");
+			Block skyStone = GameRegistry.findBlock("appliedenergistics2", "tile.BlockSkyStone");
+			Block quartzGlass = GameRegistry.findBlock("appliedenergistics2", "tile.BlockQuartzGlass");
+			ItemStack charged = new ItemStack(item, 1, 1);
+			ItemStack singularity = new ItemStack(item, 1, 47);
+			ItemStack skystone = new ItemStack(skyStone);
+			ItemStack quartzglass = new ItemStack(quartzGlass);
+
 			DecomposerRecipe.add(new DecomposerRecipe(charged, chargedCertusQuartzDecompositionFormula));
-	        SynthesisRecipe.add(new SynthesisRecipe(charged, true, 30000, chargedCertusQuartzCrystalSynthesisFormula));
-	
-	        DecomposerRecipe.add(new DecomposerRecipe(singularity, new PotionChemical[]{
-	        		this.element(ElementEnum.Fm,148),this.element(ElementEnum.Md,142),this.element(ElementEnum.No,133),this.element(ElementEnum.Lr,124),this.element(ElementEnum.Rf,107),this.element(ElementEnum.Db,104),this.element(ElementEnum.Sg,93),this.element(ElementEnum.Bh,81),this.element(ElementEnum.Hs,67),this.element(ElementEnum.Mt,54),this.element(ElementEnum.Ds,52),this.element(ElementEnum.Rg,37),this.element(ElementEnum.Cn,33),this.element(ElementEnum.Uut,22)
-	        }));
-	        
-	        DecomposerRecipe.add(new DecomposerRecipeSelect(skystone, 0.9F, new DecomposerRecipe[]
-	        		{
-	        			new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Si), this.element(ElementEnum.He)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Fe), this.element(ElementEnum.Xe)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Mg), this.element(ElementEnum.Ar)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Ti), this.element(ElementEnum.He)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Pb), this.element(ElementEnum.Ne)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Zn), this.element(ElementEnum.He)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Al), this.element(ElementEnum.He)
-	        			}),new DecomposerRecipe(new PotionChemical[]
-    	        			{
-	        				this.element(ElementEnum.Si), this.element(ElementEnum.Xe)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Fe), this.element(ElementEnum.Ar)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Mg), this.element(ElementEnum.Kr)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Ti), this.element(ElementEnum.Ne)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Pb), this.element(ElementEnum.Rn)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Zn), this.element(ElementEnum.Ne)
-	        			}), new DecomposerRecipe(new PotionChemical[]
-	        			{
-	        				this.element(ElementEnum.Al), this.element(ElementEnum.Ar)
-	        			})
-	        		}));
-	        
-	        DecomposerRecipe.add(new DecomposerRecipe(quartzglass, quartzGlassDecompositionFormula));
-	        SynthesisRecipe.add(new SynthesisRecipe(quartzglass, true, 30000, quartzGlassCrystalSynthesisFormula));
+			SynthesisRecipe.add(new SynthesisRecipe(charged, true, 30000, chargedCertusQuartzCrystalSynthesisFormula));
+
+			DecomposerRecipe.add(new DecomposerRecipe(singularity, new PotionChemical[]
+			{
+				this.element(ElementEnum.Fm, 148), this.element(ElementEnum.Md, 142), this.element(ElementEnum.No, 133), this.element(ElementEnum.Lr, 124), this.element(ElementEnum.Rf, 107), this.element(ElementEnum.Db, 104), this.element(ElementEnum.Sg, 93), this.element(ElementEnum.Bh, 81), this.element(ElementEnum.Hs, 67), this.element(ElementEnum.Mt, 54), this.element(ElementEnum.Ds, 52), this.element(ElementEnum.Rg, 37), this.element(ElementEnum.Cn, 33), this.element(ElementEnum.Uut, 22)
+			}));
+
+			DecomposerRecipe.add(new DecomposerRecipeSelect(skystone, 0.9F, new DecomposerRecipe[]
+			{
+				new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Si), this.element(ElementEnum.He)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Fe), this.element(ElementEnum.Xe)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Mg), this.element(ElementEnum.Ar)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Ti), this.element(ElementEnum.He)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Pb), this.element(ElementEnum.Ne)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Zn), this.element(ElementEnum.He)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Al), this.element(ElementEnum.He)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Si), this.element(ElementEnum.Xe)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Fe), this.element(ElementEnum.Ar)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Mg), this.element(ElementEnum.Kr)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Ti), this.element(ElementEnum.Ne)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Pb), this.element(ElementEnum.Rn)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Zn), this.element(ElementEnum.Ne)
+				}), new DecomposerRecipe(new PotionChemical[]
+				{
+					this.element(ElementEnum.Al), this.element(ElementEnum.Ar)
+				})
+			}));
+
+			DecomposerRecipe.add(new DecomposerRecipe(quartzglass, quartzGlassDecompositionFormula));
+			SynthesisRecipe.add(new SynthesisRecipe(quartzglass, true, 30000, quartzGlassCrystalSynthesisFormula));
 		}
-		
+
 		//RailCraft
 		if (Loader.isModLoaded("Railcraft"))
 		{
@@ -3056,10 +3115,10 @@ public class MinechemRecipes
 		{
 			new ItemStack(Items.paper), new ItemStack(Items.diamond)
 		});
-        GameRegistry.addRecipe(MinechemItemsRegistration.emptyTube, new Object[]
-        {
-                "   ", "P P", " P ", Character.valueOf('P'), blockThinGlass
-        });
+		GameRegistry.addRecipe(MinechemItemsRegistration.emptyTube, new Object[]
+		{
+			"   ", "P P", " P ", Character.valueOf('P'), blockThinGlass
+		});
 
 		GameRegistry.addRecipe(new ChemistJournalRecipeCloning());
 
@@ -3103,7 +3162,7 @@ public class MinechemRecipes
 //		for (int var3 = 0; var3 < var2; ++var3)
 //		{
 //			MoleculeEnum var4 = var1.get(var3);
-		for (MoleculeEnum var4:MoleculeEnum.molecules.values())
+		for (MoleculeEnum var4 : MoleculeEnum.molecules.values())
 		{
 			if (var4 != null)
 			{
@@ -3123,7 +3182,7 @@ public class MinechemRecipes
 //		for (int i = 0; i < molecules.size(); ++i)
 //		{
 //			MoleculeEnum molecule = molecules.get(i);
-		for (MoleculeEnum molecule:MoleculeEnum.molecules.values())
+		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
 			if (molecule != null)
 			{
