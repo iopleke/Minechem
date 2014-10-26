@@ -385,4 +385,9 @@ public class MinechemHelper
 		}
 		return null;
 	}
+
+    public static int getNumberOfDigits(int n)
+    {
+        return (int) (Math.log10(n) + 1);
+    }
 }
