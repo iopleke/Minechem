@@ -145,7 +145,7 @@ public class LeadedChestBlock extends BlockContainer
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Textures.LEADEDCHEST_TEX);
+		blockIcon = ir.registerIcon(Textures.IIcon.LEADEDCHEST);
 	}
 
 	@Override

@@ -37,8 +37,8 @@ public class FluidBlockChemical extends MinechemFluidBlock
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		stillIcon = ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_still");
-		flowingIcon = ir.registerIcon(Textures.TEXTURE_MOD_ID + "fluid_flow");
+		stillIcon = ir.registerIcon(Textures.IIcon.FUILD_STILL);
+		flowingIcon = ir.registerIcon(Textures.IIcon.FLUID_FLOW);
 	}
 
 	@Override

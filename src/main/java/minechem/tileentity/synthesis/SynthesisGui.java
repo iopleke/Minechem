@@ -2,17 +2,13 @@ package minechem.tileentity.synthesis;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class SynthesisGui extends GuiContainerTabbed
 {
-
-	private static final ResourceLocation resourceLocationSynthesisGUI = new ResourceLocation(Reference.ID, Textures.SYNTHESIS_GUI);
 	int guiWidth = 176;
 	int guiHeight = 187;
 
@@ -39,7 +35,7 @@ public class SynthesisGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(resourceLocationSynthesisGUI);
+		this.mc.renderEngine.bindTexture(Resources.Gui.SYNTHESIS);
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

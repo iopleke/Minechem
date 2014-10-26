@@ -20,7 +20,7 @@ public class ItemAtomicManipulator extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.ATOMIC_MANIPULATOR_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.ATOMIC_MANIPULATOR);
 	}
 
 }

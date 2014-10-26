@@ -59,10 +59,10 @@ public class OpticalMicroscopeLens extends Item
 	public void registerIcons(IIconRegister ir)
 	{
 		this.opticalMicroscopeLens = new IIcon[4];
-		this.opticalMicroscopeLens[0] = ir.registerIcon(Textures.LENS1_TEX);
-		this.opticalMicroscopeLens[1] = ir.registerIcon(Textures.LENS2_TEX);
-		this.opticalMicroscopeLens[2] = ir.registerIcon(Textures.LENS3_TEX);
-		this.opticalMicroscopeLens[3] = ir.registerIcon(Textures.LENS4_TEX);
+		this.opticalMicroscopeLens[0] = ir.registerIcon(Textures.IIcon.LENS1);
+		this.opticalMicroscopeLens[1] = ir.registerIcon(Textures.IIcon.LENS2);
+		this.opticalMicroscopeLens[2] = ir.registerIcon(Textures.IIcon.LENS3);
+		this.opticalMicroscopeLens[3] = ir.registerIcon(Textures.IIcon.LENS4);
 	}
 
 }

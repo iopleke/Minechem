@@ -2,21 +2,17 @@ package minechem.tileentity.leadedchest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import net.minecraft.block.Block;
 import net.minecraft.client.model.ModelChest;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
 @SideOnly(Side.CLIENT)
 public class LeadedChestTileEntityRenderer extends TileEntitySpecialRenderer
 {
-
-	private static final ResourceLocation resourceLocationLeadedChestModel = new ResourceLocation(Reference.ID, Textures.LEADED_CHEST_MODEL);
 	private final ModelChest leadedChestModel = new ModelChest();
 
 	public LeadedChestTileEntityRenderer()
@@ -48,7 +44,7 @@ public class LeadedChestTileEntityRenderer extends TileEntitySpecialRenderer
 
 		ModelChest var14 = this.leadedChestModel;
 
-		bindTexture(resourceLocationLeadedChestModel);
+		bindTexture(Resources.Model.LEADED_CHEST);
 
 		GL11.glPushMatrix();
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);

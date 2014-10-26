@@ -76,8 +76,8 @@ public class MicroscopeBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Textures.MICROSCOPE_TEX);
-		front = ir.registerIcon(Textures.MICROSCOPE_FRONT_TEX);
+		blockIcon = ir.registerIcon(Textures.IIcon.MICROSCOPE);
+		front = ir.registerIcon(Textures.IIcon.MICROSCOPE_FRONT);
 	}
 
 	@Override

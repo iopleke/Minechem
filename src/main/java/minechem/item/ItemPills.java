@@ -43,6 +43,6 @@ public class ItemPills extends ItemFood
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.PILL_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.PILL);
 	}
 }

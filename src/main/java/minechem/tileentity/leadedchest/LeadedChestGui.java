@@ -2,17 +2,13 @@ package minechem.tileentity.leadedchest;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class LeadedChestGui extends GuiContainerTabbed
 {
-
-	private static final ResourceLocation resourceLocationLeadedChestGUI = new ResourceLocation(Reference.ID, Textures.LEADED_CHEST_GUI);
 	int guiWidth = 176;
 	int guiHeight = 217;
 	LeadedChestTileEntity leadedchest;
@@ -38,7 +34,7 @@ public class LeadedChestGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(resourceLocationLeadedChestGUI);
+		this.mc.renderEngine.bindTexture(Resources.Gui.LEADED_CHEST);
 
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;

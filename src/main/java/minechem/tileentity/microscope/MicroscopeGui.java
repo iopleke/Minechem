@@ -2,8 +2,7 @@ package minechem.tileentity.microscope;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
@@ -15,15 +14,12 @@ import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 import java.util.ArrayList;
 
 public class MicroscopeGui extends GuiContainerTabbed
 {
-
-	private static final ResourceLocation resourceLocationMicroscopeGUI = new ResourceLocation(Reference.ID, Textures.MICROSCOPE_GUI);
 	int guiWidth = 176;
 	int guiHeight = 217;
 	int eyepieceX = 25;
@@ -88,7 +84,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		Minecraft.getMinecraft().renderEngine.bindTexture(resourceLocationMicroscopeGUI);
+		Minecraft.getMinecraft().renderEngine.bindTexture(Resources.Gui.MICROSCOPE);
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		zLevel = 0;

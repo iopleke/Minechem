@@ -5,14 +5,12 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.tileentity.synthesis.SynthesisGui;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -22,9 +20,6 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 {
 
 	private static final String MINECHEM_SYNTHESIS_RECIPES_ID = "minechem.synthesis";
-
-	// TODO: The Gui's class itself should really expose this.
-	private ResourceLocation texture = new ResourceLocation(Reference.ID, Textures.SYNTHESIS_GUI);
 
 	// GUI slot offsets, in GUI-relative pixel values.
 	private static final int INPUT_X_OFS = 57;
@@ -43,7 +38,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getGuiTexture()
 	{
-		return texture.toString();
+		return Resources.Gui.SYNTHESIS.toString();
 	}
 
 	@Override

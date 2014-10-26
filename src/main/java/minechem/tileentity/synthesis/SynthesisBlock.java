@@ -86,7 +86,7 @@ public class SynthesisBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Textures.SYNTHESIS_TEX);
+		blockIcon = ir.registerIcon(Textures.IIcon.SYNTHESIS);
 	}
 
 	@Override

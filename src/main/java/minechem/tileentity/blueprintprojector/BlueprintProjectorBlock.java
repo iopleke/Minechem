@@ -94,7 +94,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Textures.BLUEPRINTPROJECTOR_TEX);
+		blockIcon = ir.registerIcon(Textures.IIcon.BLUEPRINTPROJECTOR);
 	}
 
 	@Override

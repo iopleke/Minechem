@@ -1,16 +1,12 @@
 package minechem.tileentity.microscope;
 
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class MicroscopeTileEntityRenderer extends TileEntitySpecialRenderer
 {
-
-	private static final ResourceLocation resourceLocationMicroscopeModel = new ResourceLocation(Reference.ID, Textures.MICROSCOPE_MODEL);
 	MicroscopeModel microscopeModel;
 
 	public MicroscopeTileEntityRenderer()
@@ -30,7 +26,7 @@ public class MicroscopeTileEntityRenderer extends TileEntitySpecialRenderer
 			GL11.glRotatef((facing * 90.0F), 0.0F, 1.0F, 0.0F);
 			GL11.glEnable(GL11.GL_BLEND);
 			GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-			bindTexture(resourceLocationMicroscopeModel);
+			bindTexture(Resources.Model.MICROSCOPE);
 			microscopeModel.render(0.0625F);
 			GL11.glDisable(GL11.GL_BLEND);
 			GL11.glPopMatrix();

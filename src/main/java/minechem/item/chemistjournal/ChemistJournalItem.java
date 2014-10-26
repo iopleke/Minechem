@@ -168,7 +168,7 @@ public class ChemistJournalItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.CHEMIST_JOURNAL_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.CHEMIST_JOURNAL);
 	}
 
 }
