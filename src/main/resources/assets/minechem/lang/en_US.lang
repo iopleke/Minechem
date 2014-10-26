@@ -80,6 +80,7 @@ minechem.fusionstar.usesleft=%s Uses Left
 minechem.hour.abbr=hr
 minechem.min.abbr=m
 minechem.sec.abbr=s
+minechem.unstable=unstable
 minechem.FusionWall.name=Fusion Wall
 minechem.TungstenPlating.name=Tungsten Plating
 minechem.FusionCore.name=Fusion Core
