@@ -19,6 +19,6 @@ public class BlockUraniumOre extends Block
 	@Override
 	public void registerBlockIcons(IIconRegister iconRegister)
 	{
-		this.blockIcon = iconRegister.registerIcon(Textures.URANIUM_TEX);
+		this.blockIcon = iconRegister.registerIcon(Textures.IIcon.URANIUM);
 	}
 }

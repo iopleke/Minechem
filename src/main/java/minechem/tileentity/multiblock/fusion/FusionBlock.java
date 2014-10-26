@@ -115,9 +115,9 @@ public class FusionBlock extends BlockSimpleContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Textures.DEFAULT_TEX);
-		icon1 = ir.registerIcon(Textures.FUSION1_TEX);
-		icon2 = ir.registerIcon(Textures.FUSION2_TEX);
+		blockIcon = ir.registerIcon(Textures.IIcon.DEFAULT);
+		icon1 = ir.registerIcon(Textures.IIcon.FUSION1);
+		icon2 = ir.registerIcon(Textures.IIcon.FUSION2);
 	}
 
 	@Override

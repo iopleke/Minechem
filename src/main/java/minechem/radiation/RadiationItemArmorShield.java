@@ -54,7 +54,7 @@ public class RadiationItemArmorShield extends ItemArmor implements IRadiationShi
 	@Override
 	public String getArmorTexture(ItemStack stack, Entity entity, int slot, String type)
 	{
-		return Textures.HAZMAT_TEX;
+		return Textures.Model.HAZMAT;
 	}
 
 }

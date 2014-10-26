@@ -9,15 +9,10 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
-import minechem.gui.GuiTabHelp;
-import minechem.gui.GuiTabTable;
 import minechem.item.blueprint.MinechemBlueprint;
-import minechem.item.chemistjournal.ChemistJournalTab;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.minetweaker.Chemicals;
 import minechem.minetweaker.Decomposer;
@@ -30,13 +25,11 @@ import minechem.potion.PotionInjector;
 import minechem.proxy.CommonProxy;
 import minechem.reference.MetaData;
 import minechem.reference.Reference;
-import minechem.reference.Textures;
 import minechem.render.EffectsRenderer;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.LogHelper;
 import minechem.utils.Recipe;
 import minetweaker.MineTweakerAPI;
-import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -153,14 +146,6 @@ public class Minechem
         LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
 
         LogHelper.info("Minechem has loaded");
-	}
-
-	@SideOnly(Side.CLIENT)
-	public void textureHook(IIconRegister icon)
-	{
-		GuiTabHelp.helpIcon = icon.registerIcon(Textures.HELP_ICON);
-		GuiTabTable.helpIcon = icon.registerIcon(Textures.HELP_ICON);
-		ChemistJournalTab.helpIcon = icon.registerIcon(Textures.POWER_ICON);
 	}
 
 	@SubscribeEvent

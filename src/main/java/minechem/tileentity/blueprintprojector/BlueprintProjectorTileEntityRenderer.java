@@ -1,17 +1,12 @@
 package minechem.tileentity.blueprintprojector;
 
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class BlueprintProjectorTileEntityRenderer extends TileEntitySpecialRenderer
 {
-
-	private static final ResourceLocation resourceLocationProjectorModelOff = new ResourceLocation(Reference.ID, Textures.PROJECTOR_MODEL_OFF);
-	private static final ResourceLocation resourceLocationProjectorModelOn = new ResourceLocation(Reference.ID, Textures.PROJECTOR_MODEL_ON);
 	BlueprintProjectorModel model;
 
 	public BlueprintProjectorTileEntityRenderer()
@@ -33,11 +28,11 @@ public class BlueprintProjectorTileEntityRenderer extends TileEntitySpecialRende
 			if (blueprintProjector.hasBlueprint())
 			{
 
-				bindTexture(resourceLocationProjectorModelOn);
+				bindTexture(Resources.Model.PROJECTOR_ON);
 			} else
 			{
 
-				bindTexture(resourceLocationProjectorModelOff);
+				bindTexture(Resources.Model.PROJECTOR_OFF);
 			}
 			model.render(0.0625F);
 			GL11.glPopMatrix();

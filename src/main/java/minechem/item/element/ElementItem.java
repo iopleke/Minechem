@@ -122,22 +122,22 @@ public class ElementItem extends Item
 	@SideOnly(Side.CLIENT)
 	public void registerIcons(IIconRegister ir)
 	{
-		itemIcon = ir.registerIcon(Textures.FILLED_TESTTUBE_TEX);
-		gas[0] = ir.registerIcon(Textures.ELEMENT_GAS1_TEX);
-		gas[1] = ir.registerIcon(Textures.ELEMENT_GAS2_TEX);
-		gas[2] = ir.registerIcon(Textures.ELEMENT_GAS3_TEX);
-		gas[3] = ir.registerIcon(Textures.ELEMENT_GAS4_TEX);
-		gas[4] = ir.registerIcon(Textures.ELEMENT_GAS5_TEX);
-		gas[5] = ir.registerIcon(Textures.ELEMENT_GAS6_TEX);
-		gas[6] = ir.registerIcon(Textures.ELEMENT_GAS7_TEX);
-		liquid[0] = ir.registerIcon(Textures.ELEMENT_LIQUID1_TEX);
-		liquid[1] = ir.registerIcon(Textures.ELEMENT_LIQUID2_TEX);
-		liquid[2] = ir.registerIcon(Textures.ELEMENT_LIQUID3_TEX);
-		liquid[3] = ir.registerIcon(Textures.ELEMENT_LIQUID4_TEX);
-		liquid[4] = ir.registerIcon(Textures.ELEMENT_LIQUID5_TEX);
-		liquid[5] = ir.registerIcon(Textures.ELEMENT_LIQUID6_TEX);
-		liquid[6] = ir.registerIcon(Textures.ELEMENT_LIQUID7_TEX);
-		solid = ir.registerIcon(Textures.ELEMENT_SOLID_TEX);
+		itemIcon = ir.registerIcon(Textures.IIcon.FILLED_TESTTUBE);
+		gas[0] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS1);
+		gas[1] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS2);
+		gas[2] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS3);
+		gas[3] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS4);
+		gas[4] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS5);
+		gas[5] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS6);
+		gas[6] = ir.registerIcon(Textures.IIcon.ELEMENT_GAS7);
+		liquid[0] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID1);
+		liquid[1] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID2);
+		liquid[2] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID3);
+		liquid[3] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID4);
+		liquid[4] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID5);
+		liquid[5] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID6);
+		liquid[6] = ir.registerIcon(Textures.IIcon.ELEMENT_LIQUID7);
+		solid = ir.registerIcon(Textures.IIcon.ELEMENT_SOLID);
 	}
 
 	@Override

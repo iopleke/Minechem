@@ -61,7 +61,7 @@ public class DecomposerBlock extends BlockSimpleContainer
 	@Override
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		this.blockIcon = ir.registerIcon(Textures.DECOMPOSER_TEX);
+		this.blockIcon = ir.registerIcon(Textures.IIcon.DECOMPOSER);
 	}
 
 	@Override

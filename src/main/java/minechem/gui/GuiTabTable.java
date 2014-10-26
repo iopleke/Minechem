@@ -2,13 +2,10 @@ package minechem.gui;
 
 import minechem.reference.Resources;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiTabTable extends GuiTab
 {
-	public static IIcon helpIcon;
-
 	public GuiTabTable(Gui gui)
 	{
 		super(gui);
@@ -38,7 +35,7 @@ public class GuiTabTable extends GuiTab
 	@Override
 	public ResourceLocation getIcon()
 	{
-		return Resources.ICON_HELP;
+		return Resources.Icon.HELP;
 	}
 
 }

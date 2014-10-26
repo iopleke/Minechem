@@ -4,13 +4,10 @@ import minechem.gui.GuiTab;
 import minechem.gui.GuiTableOfElements;
 import minechem.reference.Resources;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 public class ChemistJournalTab extends GuiTab
 {
-	public static IIcon helpIcon;
-
 	public ChemistJournalTab(Gui gui)
 	{
 		super(gui);
@@ -42,7 +39,7 @@ public class ChemistJournalTab extends GuiTab
 	@Override
 	public ResourceLocation getIcon()
 	{
-		return Resources.ICON_HELP;
+		return Resources.Icon.HELP;
 	}
 
 }

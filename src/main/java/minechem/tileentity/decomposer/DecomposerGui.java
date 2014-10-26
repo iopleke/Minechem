@@ -2,11 +2,9 @@ package minechem.tileentity.decomposer;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
-import minechem.reference.Reference;
-import minechem.reference.Textures;
+import minechem.reference.Resources;
 import minechem.utils.MinechemHelper;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class DecomposerGui extends GuiContainerTabbed
@@ -18,7 +16,6 @@ public class DecomposerGui extends GuiContainerTabbed
 	int mouseY = 0;
 	int guiWidth = 176;
 	int guiHeight = 166;
-	public static ResourceLocation TEXTURE = new ResourceLocation(Reference.ID, Textures.DECOMPOSER_GUI);
 
 	public DecomposerGui(InventoryPlayer inventoryPlayer, DecomposerTileEntity decomposer)
 	{
@@ -44,7 +41,7 @@ public class DecomposerGui extends GuiContainerTabbed
 	{
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
-		this.mc.renderEngine.bindTexture(TEXTURE);
+		this.mc.renderEngine.bindTexture(Resources.Gui.DECOMPOSER);
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);

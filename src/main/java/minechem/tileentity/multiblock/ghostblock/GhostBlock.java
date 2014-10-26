@@ -49,9 +49,9 @@ public class GhostBlock extends BlockContainer
 	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister ir)
 	{
-		blockIcon = ir.registerIcon(Textures.DEFAULT_TEX);
-		icon1 = ir.registerIcon(Textures.BLUEPRINT1_TEX);
-		icon2 = ir.registerIcon(Textures.BLUEPRINT2_TEX);
+		blockIcon = ir.registerIcon(Textures.IIcon.DEFAULT);
+		icon1 = ir.registerIcon(Textures.IIcon.BLUEPRINT1);
+		icon2 = ir.registerIcon(Textures.IIcon.BLUEPRINT2);
 	}
 
 	@Override
