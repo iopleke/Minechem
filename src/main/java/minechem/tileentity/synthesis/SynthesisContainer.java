@@ -1,5 +1,7 @@
 package minechem.tileentity.synthesis;
 
+import java.util.ArrayList;
+import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
@@ -11,9 +13,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class SynthesisContainer extends ContainerWithFakeSlots implements IRadiationShield, INoDecay
 {
@@ -133,8 +132,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
 		}
 		return storageInventory;
 	}
-	
-	
+
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
 	{
@@ -201,6 +199,5 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
 		}
 		return stack;
 	}
-	
-	
+
 }

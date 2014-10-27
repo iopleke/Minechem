@@ -2,6 +2,7 @@ package minechem.tileentity.leadedchest;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.Random;
 import minechem.Minechem;
 import minechem.gui.CreativeTabMinechem;
 import minechem.reference.Textures;
@@ -19,12 +20,10 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class LeadedChestBlock extends BlockContainer
 {
-	private static final Random rand=new Random();
-	
+	private static final Random rand = new Random();
+
 	public LeadedChestBlock()
 	{
 		super(Material.wood);

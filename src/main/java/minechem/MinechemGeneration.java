@@ -1,12 +1,11 @@
 package minechem;
 
 import cpw.mods.fml.common.IWorldGenerator;
+import java.util.Random;
 import minechem.utils.LogHelper;
 import net.minecraft.world.World;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraft.world.gen.feature.WorldGenMinable;
-
-import java.util.Random;
 
 public class MinechemGeneration implements IWorldGenerator
 {
@@ -27,10 +26,10 @@ public class MinechemGeneration implements IWorldGenerator
 					int oreCount = random.nextInt(Settings.UraniumOreClusterSize + 10);
 
 					(new WorldGenMinable(MinechemBlocksGeneration.uranium, oreCount)).generate(world, random, firstBlockXCoord, firstBlockYCoord, firstBlockZCoord);
-                    LogHelper.debug("Minechem generated Uranium generated at:");
-                    LogHelper.debug("X :" + firstBlockXCoord);
-                    LogHelper.debug("Y :" + firstBlockYCoord);
-                    LogHelper.debug("Z :" + firstBlockZCoord);
+					LogHelper.debug("Minechem generated Uranium generated at:");
+					LogHelper.debug("X :" + firstBlockXCoord);
+					LogHelper.debug("Y :" + firstBlockYCoord);
+					LogHelper.debug("Z :" + firstBlockZCoord);
 				}
 			}
 

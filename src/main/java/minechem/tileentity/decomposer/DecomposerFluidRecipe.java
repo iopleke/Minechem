@@ -1,11 +1,10 @@
 package minechem.tileentity.decomposer;
 
+import java.util.ArrayList;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.ArrayList;
 
 public class DecomposerFluidRecipe extends DecomposerRecipe
 {
@@ -49,8 +48,8 @@ public class DecomposerFluidRecipe extends DecomposerRecipe
 	@Override
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
-        ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
-        result.addAll(this.output.values());
-        return result;
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		result.addAll(this.output.values());
+		return result;
 	}
 }

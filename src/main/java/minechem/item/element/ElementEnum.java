@@ -1,24 +1,38 @@
 package minechem.item.element;
 
-import minechem.fluid.FluidHelper;
-import minechem.item.ChemicalRoomStateEnum;
-import minechem.item.MinechemChemicalType;
-import minechem.radiation.RadiationEnum;
-import minechem.utils.MinechemHelper;
-
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.Map;
-
-import static minechem.item.ChemicalRoomStateEnum.*;
-import static minechem.item.element.ElementClassificationEnum.*;
-import static minechem.radiation.RadiationEnum.*;
+import minechem.fluid.FluidHelper;
+import minechem.item.ChemicalRoomStateEnum;
+import static minechem.item.ChemicalRoomStateEnum.gas;
+import static minechem.item.ChemicalRoomStateEnum.liquid;
+import static minechem.item.ChemicalRoomStateEnum.solid;
+import minechem.item.MinechemChemicalType;
+import static minechem.item.element.ElementClassificationEnum.actinide;
+import static minechem.item.element.ElementClassificationEnum.alkaliMetal;
+import static minechem.item.element.ElementClassificationEnum.alkalineEarthMetal;
+import static minechem.item.element.ElementClassificationEnum.halogen;
+import static minechem.item.element.ElementClassificationEnum.inertGas;
+import static minechem.item.element.ElementClassificationEnum.lanthanide;
+import static minechem.item.element.ElementClassificationEnum.nonmetal;
+import static minechem.item.element.ElementClassificationEnum.otherMetal;
+import static minechem.item.element.ElementClassificationEnum.semimetallic;
+import static minechem.item.element.ElementClassificationEnum.transitionMetal;
+import minechem.radiation.RadiationEnum;
+import static minechem.radiation.RadiationEnum.extremelyRadioactive;
+import static minechem.radiation.RadiationEnum.hardlyRadioactive;
+import static minechem.radiation.RadiationEnum.highlyRadioactive;
+import static minechem.radiation.RadiationEnum.radioactive;
+import static minechem.radiation.RadiationEnum.slightlyRadioactive;
+import static minechem.radiation.RadiationEnum.stable;
+import minechem.utils.MinechemHelper;
 
 public class ElementEnum extends MinechemChemicalType
 {
 
 	public static int heaviestMass = 0;
-	public static Map<Integer,ElementEnum> elements = new Hashtable<Integer,ElementEnum>();
+	public static Map<Integer, ElementEnum> elements = new Hashtable<Integer, ElementEnum>();
 
 	public static final ElementEnum H = addElement(0, "H", "Hydrogen", nonmetal, gas, stable);//Done
 	public static final ElementEnum He = addElement(1, "He", "Helium", inertGas, gas, stable);//Done
@@ -156,37 +170,39 @@ public class ElementEnum extends MinechemChemicalType
 		this.classification = classification;
 
 	}
-	
+
 	public static ElementEnum addElement(int id, String name, String descriptiveName, ElementClassificationEnum classification, ChemicalRoomStateEnum roomState, RadiationEnum radioactivity)
 	{
-		ElementEnum element = new ElementEnum(id, name,descriptiveName, classification,roomState,radioactivity);
+		ElementEnum element = new ElementEnum(id, name, descriptiveName, classification, roomState, radioactivity);
 		registerElement(element);
 		FluidHelper.registerElement(element);
 		return element;
 	}
-	
+
 	public static ElementEnum addElement(ElementEnum element)
 	{
 		registerElement(element);
 		FluidHelper.registerElement(element);
 		return element;
 	}
-	
+
 	public static void registerElement(ElementEnum element)
 	{
 		if (elements.get(element.id) != null)
 		{
 			throw new IllegalArgumentException("id " + element.id + " is used");
 		}
-		if (element.id>=heaviestMass)heaviestMass=element.id+1;
+		if (element.id >= heaviestMass)
+		{
+			heaviestMass = element.id + 1;
+		}
 		elements.put(element.id, element);
 	}
-	
+
 	public static void unregisterElement(ElementEnum element)
 	{
 		elements.remove(element.id);
 	}
-	
 
 	public ElementClassificationEnum classification()
 	{
@@ -219,25 +235,29 @@ public class ElementEnum extends MinechemChemicalType
 	{
 		return localizationKey;
 	}
-	
+
 	public String getLongName()
 	{
 		return descriptiveName;
 	}
 
-	public static ElementEnum getByID(int atomicNumber) {
+	public static ElementEnum getByID(int atomicNumber)
+	{
 		return elements.get(atomicNumber);
 	}
-	
-	public static ElementEnum getByName(String name){
-		Iterator<ElementEnum> it=elements.values().iterator();
-		while(it.hasNext()){
-			ElementEnum element=it.next();
-			if (element.name.equals(name)){
+
+	public static ElementEnum getByName(String name)
+	{
+		Iterator<ElementEnum> it = elements.values().iterator();
+		while (it.hasNext())
+		{
+			ElementEnum element = it.next();
+			if (element.name.equals(name))
+			{
 				return element;
 			}
 		}
-		
+
 		return null;
 	}
 }

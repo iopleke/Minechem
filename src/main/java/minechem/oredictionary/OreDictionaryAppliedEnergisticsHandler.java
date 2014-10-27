@@ -53,25 +53,25 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 		null, new Molecule(MoleculeEnum.galliumarsenide, 1), null, certusQuartzChemical, null, chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
 	};
 
-    private PotionChemical[] fluixQuartzDustDecompositionFormula = new PotionChemical[]
-    {
-            new Molecule(MoleculeEnum.galliumarsenide, 1), new Molecule(certusQuartzMolecule, 1), new Molecule(chargedCertusQuartzMolecule, 2)
-    };
+	private PotionChemical[] fluixQuartzDustDecompositionFormula = new PotionChemical[]
+	{
+		new Molecule(MoleculeEnum.galliumarsenide, 1), new Molecule(certusQuartzMolecule, 1), new Molecule(chargedCertusQuartzMolecule, 2)
+	};
 
-    private PotionChemical[] fluixQuartzDustSynthesisFormula = new PotionChemical[]
-    {
-            null, null, null, certusQuartzChemical, new Molecule(MoleculeEnum.galliumarsenide, 1), chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
-    };
+	private PotionChemical[] fluixQuartzDustSynthesisFormula = new PotionChemical[]
+	{
+		null, null, null, certusQuartzChemical, new Molecule(MoleculeEnum.galliumarsenide, 1), chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
+	};
 
-    private PotionChemical[] fluixQuartzPearlDecompositionFormula = new PotionChemical[]
-    {
-            new Molecule(MoleculeEnum.galliumarsenide, 2), certusQuartzChemical, new Molecule(chargedCertusQuartzMolecule, 2)
-    };
+	private PotionChemical[] fluixQuartzPearlDecompositionFormula = new PotionChemical[]
+	{
+		new Molecule(MoleculeEnum.galliumarsenide, 2), certusQuartzChemical, new Molecule(chargedCertusQuartzMolecule, 2)
+	};
 
-    private PotionChemical[] fluixQuartzPearlSynthesisFormula = new PotionChemical[]
-    {
-            null, new Molecule(MoleculeEnum.galliumarsenide, 1), null, certusQuartzChemical, new Molecule(MoleculeEnum.galliumarsenide, 1), chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
-    };
+	private PotionChemical[] fluixQuartzPearlSynthesisFormula = new PotionChemical[]
+	{
+		null, new Molecule(MoleculeEnum.galliumarsenide, 1), null, certusQuartzChemical, new Molecule(MoleculeEnum.galliumarsenide, 1), chargedCertusQuartzChemical, null, chargedCertusQuartzChemical, null
+	};
 
 	@Override
 	public boolean canHandle(String oreName)
@@ -91,21 +91,21 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 			DecomposerRecipe.createAndAddRecipeSafely(oreName, certusQuartzDecompositionFormula);
 			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, certusQuartzCrystalSynthesisFormula);
 		} else if (oreName.equals("crystalChargedCertusQuartz"))
-        {
-            DecomposerRecipe.createAndAddRecipeSafely(oreName, chargedCertusQuartzDecompositionFormula);
-            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, chargedCertusQuartzCrystalSynthesisFormula);
+		{
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, chargedCertusQuartzDecompositionFormula);
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, chargedCertusQuartzCrystalSynthesisFormula);
 		} else if (oreName.equals("crystalFluix"))
 		{
 			DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixCertusQuartzDecompositionFormula);
 			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzCrystalSynthesisFormula);
-        } else if (oreName.equals("dustFluix"))
-        {
-            DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixQuartzDustDecompositionFormula);
-            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzDustSynthesisFormula);
-        } else if (oreName.equals("pearlFluix"))
-        {
-            DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixQuartzPearlDecompositionFormula);
-            SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzPearlSynthesisFormula);
+		} else if (oreName.equals("dustFluix"))
+		{
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixQuartzDustDecompositionFormula);
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzDustSynthesisFormula);
+		} else if (oreName.equals("pearlFluix"))
+		{
+			DecomposerRecipe.createAndAddRecipeSafely(oreName, fluixQuartzPearlDecompositionFormula);
+			SynthesisRecipe.createAndAddRecipeSafely(oreName, true, 30000, fluixQuartzPearlSynthesisFormula);
 		} else
 		{
 			LogHelper.debug("Unknown type of AE2 item : " + oreName);

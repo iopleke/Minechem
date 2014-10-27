@@ -26,7 +26,7 @@ public class FusionGui extends GuiContainerTabbed
 		this.ySize = guiHeight;
 		this.storedEnergy = this.fusion.getEnergyStored();
 		this.maxEnergy = fusion.getMaxEnergyStored();
-        addTab(new FusionTabStateControl(this, fusion));
+		addTab(new FusionTabStateControl(this, fusion));
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
 	}
 
@@ -66,6 +66,5 @@ public class FusionGui extends GuiContainerTabbed
 	{
 		this.storedEnergy = this.fusion.getEnergyStored();
 	}
-
 
 }

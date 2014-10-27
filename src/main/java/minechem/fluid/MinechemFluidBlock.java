@@ -22,15 +22,18 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 		super(fluid, material);
 		setQuantaPerBlock(fluid.getQuanta());
 		unlocalizedName = fluid.getUnlocalizedName();
-		
-		if (fluid instanceof FluidElement){
-			isRadioactivity=((FluidElement) fluid).element.radioactivity()!=RadiationEnum.stable;
-		}else if (fluid instanceof FluidChemical){
-			isRadioactivity=((FluidChemical) fluid).molecule.radioactivity()!=RadiationEnum.stable;
-		}else{
-			isRadioactivity=false;
+
+		if (fluid instanceof FluidElement)
+		{
+			isRadioactivity = ((FluidElement) fluid).element.radioactivity() != RadiationEnum.stable;
+		} else if (fluid instanceof FluidChemical)
+		{
+			isRadioactivity = ((FluidChemical) fluid).molecule.radioactivity() != RadiationEnum.stable;
+		} else
+		{
+			isRadioactivity = false;
 		}
-		
+
 		isBlockContainer = true;
 	}
 
@@ -68,20 +71,22 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	}
 
 	@Override
-	public boolean hasTileEntity(int metadata){
-		return isRadioactivity&&metadata==0;
+	public boolean hasTileEntity(int metadata)
+	{
+		return isRadioactivity && metadata == 0;
 	}
-	
+
 	@Override
-	public TileEntity createNewTileEntity(World world, int metadata) {
-		return hasTileEntity(metadata)?new RadiationFluidTileEntity():null;
+	public TileEntity createNewTileEntity(World world, int metadata)
+	{
+		return hasTileEntity(metadata) ? new RadiationFluidTileEntity() : null;
 	}
-	
-    @Override
+
+	@Override
 	public boolean onBlockEventReceived(World world, int x, int y, int z, int eventID, int eventParameter)
-    {
-        super.onBlockEventReceived(world, x, y, z, eventID, eventParameter);
-        TileEntity tileentity = world.getTileEntity(x, y, z);
-        return tileentity != null ? tileentity.receiveClientEvent(eventID, eventParameter) : false;
-    }
+	{
+		super.onBlockEventReceived(world, x, y, z, eventID, eventParameter);
+		TileEntity tileentity = world.getTileEntity(x, y, z);
+		return tileentity != null ? tileentity.receiveClientEvent(eventID, eventParameter) : false;
+	}
 }

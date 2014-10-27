@@ -1,5 +1,9 @@
 package minechem.tileentity.decomposer;
 
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
+import java.util.Random;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
@@ -8,16 +12,11 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Random;
-
 public class DecomposerRecipe
 {
 	public static Map<String, DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
 
-	private static final Random rand=new Random();
+	private static final Random rand = new Random();
 	ItemStack input;
 	public Map<PotionChemical, PotionChemical> output = new Hashtable<PotionChemical, PotionChemical>();
 
@@ -183,47 +182,47 @@ public class DecomposerRecipe
 
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
-        ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
-        result.addAll(this.output.values());
-        return result;
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		result.addAll(this.output.values());
+		return result;
 	}
 
-    public ArrayList<PotionChemical> getPartialOutputRaw(int f)
-    {
-        ArrayList<PotionChemical> raw = getOutput();
-        ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
-        if (raw != null)
-        {
-            for (PotionChemical chem : raw)
-            {
-                try
-                {
-                    if (chem != null)
-                    {
-                        PotionChemical reduced = chem.copy();
-                        if (reduced != null)
-                        {
-                            reduced.amount = (int) Math.floor(chem.amount / f);
-                            if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f))
-                            {
-                                reduced.amount = 1;
-                            }
-                            result.add(reduced);
-                        }
-                    }
+	public ArrayList<PotionChemical> getPartialOutputRaw(int f)
+	{
+		ArrayList<PotionChemical> raw = getOutput();
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		if (raw != null)
+		{
+			for (PotionChemical chem : raw)
+			{
+				try
+				{
+					if (chem != null)
+					{
+						PotionChemical reduced = chem.copy();
+						if (reduced != null)
+						{
+							reduced.amount = (int) Math.floor(chem.amount / f);
+							if (reduced.amount == 0 && rand.nextFloat() > (chem.amount / f))
+							{
+								reduced.amount = 1;
+							}
+							result.add(reduced);
+						}
+					}
 
-                } catch (Exception e)
-                {
-                    // something has gone wrong
-                    // but we do not know quite why
-                    // debug code goes here
-                }
+				} catch (Exception e)
+				{
+					// something has gone wrong
+					// but we do not know quite why
+					// debug code goes here
+				}
 
-            }
-        }
+			}
+		}
 
-        return result;
-    }
+		return result;
+	}
 
 	public boolean isNull()
 	{

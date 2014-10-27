@@ -69,7 +69,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 				{
 					if (useEnergy(getEnergyNeeded()))
 					{
-                        ItemStack fissionResult = getFissionOutput();
+						ItemStack fissionResult = getFissionOutput();
 						addToOutput(fissionResult);
 						removeInputs();
 					}
@@ -80,17 +80,17 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 		}
 	}
 
-    public boolean inputIsFissionable()
-    {
-        ItemStack fissionResult = getFissionOutput();
-        if (fissionResult != null)
-        {
-            boolean sameItem = fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage();
-            boolean spaceInOutput = inventory[kOutput[0]].stackSize < 64 && sameItem;
-            return inventory[kOutput[0]] == null || spaceInOutput;
-        }
-        return false;
-    }
+	public boolean inputIsFissionable()
+	{
+		ItemStack fissionResult = getFissionOutput();
+		if (fissionResult != null)
+		{
+			boolean sameItem = fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage();
+			boolean spaceInOutput = inventory[kOutput[0]].stackSize < 64 && sameItem;
+			return inventory[kOutput[0]] == null || spaceInOutput;
+		}
+		return false;
+	}
 
 	private void addToOutput(ItemStack fusionResult)
 	{

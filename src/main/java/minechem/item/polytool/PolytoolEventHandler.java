@@ -1,6 +1,9 @@
 package minechem.item.polytool;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.MinechemHelper;
@@ -18,15 +21,11 @@ import net.minecraftforge.event.entity.living.LivingDropsEvent;
 import net.minecraftforge.event.entity.living.LivingHurtEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
-
 public class PolytoolEventHandler
 {
 
-	private static final Random random=new Random();
-	
+	private static final Random random = new Random();
+
 	public void addDrops(LivingDropsEvent event, ItemStack dropStack)
 	{
 		EntityItem entityitem = new EntityItem(event.entityLiving.worldObj, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ, dropStack);

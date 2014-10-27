@@ -1,8 +1,12 @@
 package minechem;
 
-import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.ModMetadata;
+import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
@@ -55,74 +59,75 @@ public class Minechem
 		INSTANCE = this;
 
 		// Load configuration.
-        LogHelper.debug("Loading configuration...");
+		LogHelper.debug("Loading configuration...");
 		Settings.init(event.getSuggestedConfigurationFile());
 		FMLCommonHandler.instance().bus().register(new Settings());
 
 		LogHelper.debug("Registering Packets...");
 		MessageHandler.init();
 
-        LogHelper.debug("Setting up ModMetaData");
-        metadata = MetaData.init(metadata);
+		LogHelper.debug("Setting up ModMetaData");
+		metadata = MetaData.init(metadata);
 
 		// Register items and blocks.
-        LogHelper.debug("Registering Items...");
+		LogHelper.debug("Registering Items...");
 		MinechemItemsRegistration.init();
 
-        LogHelper.debug("Registering Blocks...");
+		LogHelper.debug("Registering Blocks...");
 		MinechemBlocksGeneration.registerBlocks();
 
-        LogHelper.debug("Registering Blueprints...");
+		LogHelper.debug("Registering Blueprints...");
 		MinechemBlueprint.registerBlueprints();
-		
+
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-        LogHelper.debug("Registering Recipes...");
+		LogHelper.debug("Registering Recipes...");
 		MinechemRecipes.getInstance().RegisterRecipes();
 		MinechemRecipes.getInstance().registerFluidRecipies();
 
-        LogHelper.debug("Registering OreDict Compatability...");
+		LogHelper.debug("Registering OreDict Compatability...");
 		MinechemItemsRegistration.registerToOreDictionary();
 
-        LogHelper.debug("Registering Chemical Effects...");
+		LogHelper.debug("Registering Chemical Effects...");
 		MinecraftForge.EVENT_BUS.register(new PotionCoatingSubscribe());
 
-        LogHelper.debug("Registering Polytool Event Handler...");
+		LogHelper.debug("Registering Polytool Event Handler...");
 		MinecraftForge.EVENT_BUS.register(new PolytoolEventHandler());
 
-        LogHelper.debug("Registering Proxy Hooks...");
+		LogHelper.debug("Registering Proxy Hooks...");
 		PROXY.registerHooks();
 
-        LogHelper.debug("Activating Potion Injector...");
+		LogHelper.debug("Activating Potion Injector...");
 		PotionInjector.inject();
 
-        LogHelper.debug("Matching Pharmacology Effects to Chemicals...");
+		LogHelper.debug("Matching Pharmacology Effects to Chemicals...");
 		CraftingManager.getInstance().getRecipeList().add(new PotionCoatingRecipe());
 
-        LogHelper.debug("Registering Ore Generation...");
+		LogHelper.debug("Registering Ore Generation...");
 		GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
 
-        LogHelper.debug("Registering GUI and Container handlers...");
+		LogHelper.debug("Registering GUI and Container handlers...");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-        LogHelper.debug("Register Tick Events for chemical effects tracking...");
+		LogHelper.debug("Register Tick Events for chemical effects tracking...");
 		PROXY.registerTickHandlers();
 
-        LogHelper.debug("Registering ClientProxy Rendering Hooks...");
+		LogHelper.debug("Registering ClientProxy Rendering Hooks...");
 		PROXY.registerRenderers();
 
-        LogHelper.debug("Registering Mod Recipes...");
+		LogHelper.debug("Registering Mod Recipes...");
 		MinechemRecipes.getInstance().RegisterModRecipes();
 
-        LogHelper.debug("Registering Fluid Reactions...");
+		LogHelper.debug("Registering Fluid Reactions...");
 		FluidChemicalDispenser.init();
 		ChemicalFluidReactionHandler.initExplodableChemical();
-		
-		if (Loader.isModLoaded("MineTweaker3")) {
-            LogHelper.debug("Loading MineTweaker Classes...");
+
+		if (Loader.isModLoaded("MineTweaker3"))
+		{
+			LogHelper.debug("Loading MineTweaker Classes...");
 			MineTweakerAPI.registerClass(Chemicals.class);
 			MineTweakerAPI.registerClass(Decomposer.class);
 			MineTweakerAPI.registerClass(Synthesiser.class);
@@ -132,10 +137,10 @@ public class Minechem
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
-        LogHelper.debug("Adding blueprints to dungeon loot...");
+		LogHelper.debug("Adding blueprints to dungeon loot...");
 		MinechemItemsRegistration.addDungeonLoot();
 
-        LogHelper.debug("Activating Chemical Effect Layering (Coatings)...");
+		LogHelper.debug("Activating Chemical Effect Layering (Coatings)...");
 		PotionEnchantmentCoated.registerCoatings();
 
 		Long start = System.currentTimeMillis();
@@ -143,9 +148,9 @@ public class Minechem
 		MinechemRecipes.getInstance().registerOreDictOres();
 		Recipe.init();
 		DecomposerRecipeHandler.recursiveRecipes();
-        LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
+		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
 
-        LogHelper.info("Minechem has loaded");
+		LogHelper.info("Minechem has loaded");
 	}
 
 	@SubscribeEvent

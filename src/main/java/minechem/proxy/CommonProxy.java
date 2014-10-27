@@ -69,14 +69,14 @@ public class CommonProxy
 		return "";
 	}
 
-    public EntityPlayer getPlayer(MessageContext context)
-    {
-        return context.getServerHandler().playerEntity;
-    }
-    
-    public void onAddFluid(MinechemFluid fluid,MinechemFluidBlock block)
-    {
-    	
-    }
+	public EntityPlayer getPlayer(MessageContext context)
+	{
+		return context.getServerHandler().playerEntity;
+	}
+
+	public void onAddFluid(MinechemFluid fluid, MinechemFluidBlock block)
+	{
+
+	}
 
 }

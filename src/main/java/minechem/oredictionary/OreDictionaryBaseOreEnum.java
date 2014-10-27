@@ -46,7 +46,7 @@ public enum OreDictionaryBaseOreEnum
 	limestone("Limestone", new Molecule(MoleculeEnum.calciumCarbonate, 1)),
 	obsidian("Obsidian", new Molecule(MoleculeEnum.siliconDioxide, 16), new Molecule(MoleculeEnum.magnesiumOxide, 8)),
 	diamond("Diamond", new Molecule(MoleculeEnum.fullrene, 3)),
-    NetherQuartz("NetherQuartz", new Molecule(MoleculeEnum.aluminiumPhosphate));
+	NetherQuartz("NetherQuartz", new Molecule(MoleculeEnum.aluminiumPhosphate));
 
 	private String name;
 	private PotionChemical[] composition;

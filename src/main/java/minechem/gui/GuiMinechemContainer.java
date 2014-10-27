@@ -20,8 +20,8 @@ public abstract class GuiMinechemContainer extends GuiContainer
 
 	public GuiMinechemContainer(Container container)
 	{
-        super(container);
-        this.inventorySlots = container;
+		super(container);
+		this.inventorySlots = container;
 		this.fontRenderer = RenderManager.instance.getFontRenderer();
 	}
 
@@ -46,14 +46,14 @@ public abstract class GuiMinechemContainer extends GuiContainer
 		this.fontRenderer.drawStringWithShadow(creativeTab, mouseXOffset, mouseYOffset, -1);
 	}
 
-    public int getXSize()
-    {
-        return this.xSize;
-    }
+	public int getXSize()
+	{
+		return this.xSize;
+	}
 
-    public int getYSize()
-    {
-        return this.ySize;
-    }
+	public int getYSize()
+	{
+		return this.ySize;
+	}
 
 }

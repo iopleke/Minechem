@@ -1,15 +1,14 @@
 package minechem.oredictionary;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 import minechem.MinechemRecipes;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.LogHelper;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
 
 public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 {
@@ -68,7 +67,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 	@Override
 	public void handle(String oreName)
 	{
-        LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + oreName);
+		LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " registered : " + oreName);
 
 		String[] tokens = this.parseOreName(oreName);
 		EnumOrePrefix prefix = EnumOrePrefix.valueOf(tokens[0]);
@@ -110,13 +109,13 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 				unregisterIngot(ore);
 				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT / 4, scaleCeil(ore.getComposition(), 0.25d));
 				break;
-            case crystal:
+			case crystal:
 			case gem:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_GEM, ore.getComposition());
 				break;
 			default:
-                LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
+				LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
 				break;
 		}
 

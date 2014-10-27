@@ -33,7 +33,7 @@ public class MinechemItemsRegistration
 	public static ItemStack microscopeLens;
 	public static ItemStack minechempills;
 	public static Item polytool;
-    public static ItemStack emptyTube;
+	public static ItemStack emptyTube;
 
 	public static void init()
 	{
@@ -62,12 +62,12 @@ public class MinechemItemsRegistration
 		polytool = new PolytoolItem();
 		GameRegistry.registerItem(polytool, Reference.ID + "Polytool");
 
-        emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+		emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
 		registerFluidContainers();
 	}
 
 	private static void registerFluidContainers()
-    {
+	{
 		for (ElementEnum element : ElementEnum.elements.values())
 		{
 			if (element != null)
@@ -89,26 +89,26 @@ public class MinechemItemsRegistration
 
 	public static void registerToOreDictionary()
 	{
-        for (ElementEnum element : ElementEnum.elements.values())
-        {
-            OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
-        }
-        for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
-        {
-            OreDictionary.registerOre("molecule_" + molecule.name(), new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
-        }
+		for (ElementEnum element : ElementEnum.elements.values())
+		{
+			OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+		}
+		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
+		{
+			OreDictionary.registerOre("molecule_" + molecule.name(), new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
+		}
 		OreDictionary.registerOre("dustSaltpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.id()));
 		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
 		OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.ordinal()));
 	}
 
-    public static void addDungeonLoot()
-    {
-        ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
-        ItemStack A = new ItemStack(blueprint, 1, 0);
-        ItemStack B = new ItemStack(blueprint, 1, 1);
-        ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
-        ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
-    }
+	public static void addDungeonLoot()
+	{
+		ChestGenHooks ChestProvider = ChestGenHooks.getInfo(ChestGenHooks.DUNGEON_CHEST);
+		ItemStack A = new ItemStack(blueprint, 1, 0);
+		ItemStack B = new ItemStack(blueprint, 1, 1);
+		ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
+		ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
+	}
 
 }

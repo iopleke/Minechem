@@ -93,7 +93,7 @@ public class MinechemBlocksGeneration
 
 		// Tile Entity Proxy.
 		GameRegistry.registerTileEntity(TileEntityProxy.class, "minchem.tileEntityProxy");
-		
+
 		GameRegistry.registerTileEntity(RadiationFluidTileEntity.class, "minechem.tileEntityRadiationFluid");
 	}
 }

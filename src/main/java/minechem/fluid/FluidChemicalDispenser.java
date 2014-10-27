@@ -49,11 +49,12 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 
 				if (stack != null)
 				{
-					TileEntity tile=world.getTileEntity(x, y, z);
-					if (tile instanceof RadiationFluidTileEntity&&((RadiationFluidTileEntity) tile).info!=null){
+					TileEntity tile = world.getTileEntity(x, y, z);
+					if (tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
+					{
 						ElementItem.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
 					}
-					
+
 					TileEntity inventoryTile = blockSource.getBlockTileEntity();
 					if (inventoryTile instanceof IInventory)
 					{
@@ -68,17 +69,17 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 		} else
 		{
 			Block block = null;
-			RadiationEnum radioactivity=null;
+			RadiationEnum radioactivity = null;
 			if (itemStack.getItem() instanceof ElementItem)
 			{
-				ElementEnum element=ElementItem.getElement(itemStack);
+				ElementEnum element = ElementItem.getElement(itemStack);
 				block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(element));
-				radioactivity=element.radioactivity();
+				radioactivity = element.radioactivity();
 			} else if (itemStack.getItem() instanceof MoleculeItem)
 			{
-				MoleculeEnum molecule=MoleculeEnum.getById(itemStack.getItemDamage());
+				MoleculeEnum molecule = MoleculeEnum.getById(itemStack.getItemDamage());
 				block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(molecule));
-				radioactivity=molecule.radioactivity();
+				radioactivity = molecule.radioactivity();
 			}
 
 			if (!world.isAirBlock(x, y, z) && !world.getBlock(x, y, z).getMaterial().isSolid())
@@ -91,9 +92,10 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 			{
 				world.setBlock(x, y, z, block, 0, 3);
 				--itemStack.stackSize;
-				TileEntity tile=world.getTileEntity(x, y, z);
-				if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
-					((RadiationFluidTileEntity)tile).info=ElementItem.getRadiationInfo(itemStack, world);
+				TileEntity tile = world.getTileEntity(x, y, z);
+				if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+				{
+					((RadiationFluidTileEntity) tile).info = ElementItem.getRadiationInfo(itemStack, world);
 				}
 				ItemStack elementStack = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
 				TileEntity inventoryTile = blockSource.getBlockTileEntity();

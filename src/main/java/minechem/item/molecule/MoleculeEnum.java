@@ -1,25 +1,60 @@
 package minechem.item.molecule;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.Random;
 import minechem.MinechemItemsRegistration;
 import minechem.MinechemRecipes;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
+import static minechem.item.ChemicalRoomStateEnum.gas;
+import static minechem.item.ChemicalRoomStateEnum.liquid;
+import static minechem.item.ChemicalRoomStateEnum.solid;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.Element;
+import static minechem.item.element.ElementEnum.Al;
+import static minechem.item.element.ElementEnum.As;
+import static minechem.item.element.ElementEnum.Be;
+import static minechem.item.element.ElementEnum.C;
+import static minechem.item.element.ElementEnum.Ca;
+import static minechem.item.element.ElementEnum.Cl;
+import static minechem.item.element.ElementEnum.Co;
+import static minechem.item.element.ElementEnum.Cr;
+import static minechem.item.element.ElementEnum.Cs;
+import static minechem.item.element.ElementEnum.Cu;
+import static minechem.item.element.ElementEnum.F;
+import static minechem.item.element.ElementEnum.Fe;
+import static minechem.item.element.ElementEnum.Fr;
+import static minechem.item.element.ElementEnum.Ga;
+import static minechem.item.element.ElementEnum.H;
+import static minechem.item.element.ElementEnum.K;
+import static minechem.item.element.ElementEnum.Li;
+import static minechem.item.element.ElementEnum.Mg;
+import static minechem.item.element.ElementEnum.Mn;
+import static minechem.item.element.ElementEnum.N;
+import static minechem.item.element.ElementEnum.Na;
+import static minechem.item.element.ElementEnum.Ni;
+import static minechem.item.element.ElementEnum.O;
+import static minechem.item.element.ElementEnum.P;
+import static minechem.item.element.ElementEnum.Pt;
+import static minechem.item.element.ElementEnum.Ra;
+import static minechem.item.element.ElementEnum.Rb;
+import static minechem.item.element.ElementEnum.S;
+import static minechem.item.element.ElementEnum.Si;
+import static minechem.item.element.ElementEnum.Sr;
+import static minechem.item.element.ElementEnum.Ti;
+import static minechem.item.element.ElementEnum.Zn;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import net.minecraft.item.ItemStack;
 
-import java.util.*;
-
-import static minechem.item.ChemicalRoomStateEnum.*;
-import static minechem.item.element.ElementEnum.*;
-
 public class MoleculeEnum extends MinechemChemicalType
 {
-	public static Map<Integer,MoleculeEnum> molecules = new LinkedHashMap<Integer,MoleculeEnum>();
+	public static Map<Integer, MoleculeEnum> molecules = new LinkedHashMap<Integer, MoleculeEnum>();
 	public static int baseMolecules = 172;
 
 	public static final MoleculeEnum cellulose = addMolecule("cellulose", 0, 0, 1, 0, 0, 0.25F, 0, solid, new Element(C, 6), new Element(H, 10), new Element(O, 5));
@@ -215,7 +250,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	public static final MoleculeEnum hydrogenSulfide = addMolecule("hydrogenSulfide", 169, gas, new Element(H, 2), new Element(S));
 	public static final MoleculeEnum sodiumBisulfate = addMolecule("sodiumBisulfate", 170, solid, new Element(Na), new Element(H), new Molecule(sulfate));
 	public static final MoleculeEnum sodiumSulfate = addMolecule("sodiumSulfate", 171, solid, new Element(Na, 2), new Molecule(sulfate));
-    public static final MoleculeEnum dimethyltryptamine = addMolecule("dimethyltryptamine", 172, solid, new Element(C, 12), new Element(H, 16), new Element(N, 2));
+	public static final MoleculeEnum dimethyltryptamine = addMolecule("dimethyltryptamine", 172, solid, new Element(C, 12), new Element(H, 16), new Element(N, 2));
 
 	private final String localizationKey;
 	private final ArrayList<PotionChemical> components;
@@ -233,8 +268,8 @@ public class MoleculeEnum extends MinechemChemicalType
 	public MoleculeEnum(String name, int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, ChemicalRoomStateEnum roomState, PotionChemical... chemicals)
 	{
 		super(roomState, computeRadioactivity(chemicals));
-		
-		if (molecules!=null&&id<molecules.size()&&molecules.get(id) != null)
+
+		if (molecules != null && id < molecules.size() && molecules.get(id) != null)
 		{
 			throw new IllegalArgumentException("id " + id + " is used");
 		}
@@ -253,12 +288,12 @@ public class MoleculeEnum extends MinechemChemicalType
 		this.red2 = colorRed2;
 		this.green2 = colorGreen2;
 		this.blue2 = colorBlue2;
-		size=computSize();
+		size = computSize();
 	}
-	
+
 	public static MoleculeEnum addMolecule(String name, int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, ChemicalRoomStateEnum roomState, PotionChemical... chemicals)
 	{
-		MoleculeEnum molecule = new MoleculeEnum(name, id, colorRed,  colorGreen,colorBlue,colorRed2,colorGreen2,colorBlue2, roomState, chemicals);
+		MoleculeEnum molecule = new MoleculeEnum(name, id, colorRed, colorGreen, colorBlue, colorRed2, colorGreen2, colorBlue2, roomState, chemicals);
 		registerMolecule(molecule);
 		return molecule;
 	}
@@ -267,13 +302,13 @@ public class MoleculeEnum extends MinechemChemicalType
 	{
 		return addMolecule(name, id, getRandomColor(name.hashCode()), getRandomColor(name.hashCode() * 2), getRandomColor(name.hashCode() * 3), getRandomColor(name.hashCode() * 4), getRandomColor(name.hashCode() * 5), getRandomColor(name.hashCode() * 6), roomState, chemicals);
 	}
-	
+
 	public static void registerMolecule(MoleculeEnum molecule)
 	{
 		molecules.put(molecule.id(), molecule);
 		FluidHelper.registerMolecule(molecule);
 	}
-	
+
 	public static void registerMTMolecule(MoleculeEnum molecule)
 	{
 		molecules.put(molecule.id(), molecule);
@@ -283,14 +318,14 @@ public class MoleculeEnum extends MinechemChemicalType
 		DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
 		SynthesisRecipe.add(new SynthesisRecipe(var7, true, MinechemRecipes.COST_ITEM, var6));
 	}
-	
+
 	public static void unregisterMolecule(MoleculeEnum molecule)
 	{
 		molecules.remove(molecule.id());
 		DecomposerRecipe.remove(new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
 		SynthesisRecipe.remove(new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
 	}
-	
+
 	/**
 	 * Used to give random colors for elements so they don't have to be manually specified.
 	 */
@@ -304,8 +339,9 @@ public class MoleculeEnum extends MinechemChemicalType
 		Random random = new Random(seed);
 		return random.nextFloat();
 	}
-	
-	private int computSize(){
+
+	private int computSize()
+	{
 		int result = 0;
 
 		Iterator iter = this.components().iterator();
@@ -326,7 +362,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	{
 		return molecules.get(id);
 	}
-	
+
 	public static MoleculeEnum getByName(String name)
 	{
 		for (MoleculeEnum molecule : molecules.values())

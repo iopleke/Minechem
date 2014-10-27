@@ -11,7 +11,7 @@ public class ModGuiConfig extends GuiConfig
 	{
 		super(guiScreen,
 				Settings.getConfigElements(),
-                Reference.ID,
+				Reference.ID,
 				false,
 				false,
 				GuiConfig.getAbridgedConfigPath(Settings.config.toString()));

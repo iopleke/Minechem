@@ -38,7 +38,7 @@ public enum ChemicalRoomStateEnum implements IDescriptiveName
 	{
 		return descriptiveName;
 	}
-	
+
 	@Override
 	public String descriptiveName()
 	{

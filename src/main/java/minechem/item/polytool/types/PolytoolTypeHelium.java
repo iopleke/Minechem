@@ -1,5 +1,6 @@
 package minechem.item.polytool.types;
 
+import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -8,13 +9,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class PolytoolTypeHelium extends PolytoolUpgradeType
 {
 
-	private static final Random rand=new Random();
-	
+	private static final Random rand = new Random();
+
 	public PolytoolTypeHelium()
 	{
 		super();

@@ -42,12 +42,14 @@ public class ChemicalAPI
 		}
 
 		List<Object> chemicals = toChemicalsWithAmount(molecule);
-		Object roomstatus=getRoomStatus(roomStatus);
+		Object roomstatus = getRoomStatus(roomStatus);
 
-		try {
-			Method addMolecule=MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("addMolecule", String.class,int.class,float.class,float.class,float.class,float.class,float.class,float.class,MinechemClassesAccess.classChemicalRoomStateEnum,MinechemClassesAccess.classArrayPotionChemical);
-			addMolecule.invoke(null, name,id,colorRed,colorGreen,colorBlue,colorRed2,colorGreen2,colorBlue2,roomstatus,chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
-		} catch (Exception e) {
+		try
+		{
+			Method addMolecule = MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("addMolecule", String.class, int.class, float.class, float.class, float.class, float.class, float.class, float.class, MinechemClassesAccess.classChemicalRoomStateEnum, MinechemClassesAccess.classArrayPotionChemical);
+			addMolecule.invoke(null, name, id, colorRed, colorGreen, colorBlue, colorRed2, colorGreen2, colorBlue2, roomstatus, chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 			return false;
 		}
@@ -77,12 +79,14 @@ public class ChemicalAPI
 		}
 
 		List<Object> chemicals = toChemicalsWithAmount(molecule);
-		Object roomstatus=getRoomStatus(roomStatus);
+		Object roomstatus = getRoomStatus(roomStatus);
 
-		try {
-			Method addMolecule=MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("addMolecule", String.class,int.class,MinechemClassesAccess.classChemicalRoomStateEnum,MinechemClassesAccess.classArrayPotionChemical);
-			addMolecule.invoke(null, name,id,roomstatus,chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
-		} catch (Exception e) {
+		try
+		{
+			Method addMolecule = MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("addMolecule", String.class, int.class, MinechemClassesAccess.classChemicalRoomStateEnum, MinechemClassesAccess.classArrayPotionChemical);
+			addMolecule.invoke(null, name, id, roomstatus, chemicals.toArray((Object[]) Array.newInstance(MinechemClassesAccess.classPotionChemical, chemicals.size())));
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 			return false;
 		}
@@ -161,15 +165,17 @@ public class ChemicalAPI
 	{
 		try
 		{
-			Method getByNameElement=MinechemClassesAccess.classElementEnum.getDeclaredMethod("getByName", String.class);
-			Object element=getByNameElement.invoke(null, name);
-			if (element!=null){
+			Method getByNameElement = MinechemClassesAccess.classElementEnum.getDeclaredMethod("getByName", String.class);
+			Object element = getByNameElement.invoke(null, name);
+			if (element != null)
+			{
 				return element;
 			}
 
-			Method getByNameMolecule=MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("getByName", String.class);
+			Method getByNameMolecule = MinechemClassesAccess.classMoleculeEnum.getDeclaredMethod("getByName", String.class);
 			return getByNameMolecule.invoke(null, name);
-		} catch (Exception e) {
+		} catch (Exception e)
+		{
 			e.printStackTrace();
 		}
 

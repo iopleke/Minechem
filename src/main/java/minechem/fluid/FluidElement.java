@@ -1,10 +1,9 @@
 package minechem.fluid;
 
+import java.awt.Color;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.ElementEnum;
 import net.minecraft.item.ItemStack;
-
-import java.awt.*;
 
 public class FluidElement extends MinechemFluid
 {
@@ -16,7 +15,7 @@ public class FluidElement extends MinechemFluid
 	{
 		super(element.name(), element.roomState());
 		this.element = element;
-		color=computColor();
+		color = computColor();
 	}
 
 	@Override
@@ -30,8 +29,9 @@ public class FluidElement extends MinechemFluid
 	{
 		return color;
 	}
-	
-	private int computColor(){
+
+	private int computColor()
+	{
 		float red = 0.0F;
 		float blue = 0.0F;
 		float green = 0.0F;

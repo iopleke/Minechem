@@ -52,8 +52,8 @@ public abstract class GuiTab
 		GL11.glEnable(GL11.GL_ALPHA_TEST);
 		GL11.glEnable(GL11.GL_BLEND);
 
-        currentX = x;
-        currentY = y;
+		currentX = x;
+		currentY = y;
 
 		draw(x, y);
 
@@ -111,10 +111,10 @@ public abstract class GuiTab
 		return currentHeight;
 	}
 
-    public int getWidth()
-    {
-        return currentWidth;
-    }
+	public int getWidth()
+	{
+		return currentWidth;
+	}
 
 	public abstract ResourceLocation getIcon();
 

@@ -19,7 +19,7 @@ public enum ElementClassificationEnum implements IDescriptiveName
 	{
 		return descriptiveName;
 	}
-	
+
 	@Override
 	public String descriptiveName()
 	{

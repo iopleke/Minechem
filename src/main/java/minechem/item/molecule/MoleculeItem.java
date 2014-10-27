@@ -2,6 +2,8 @@ package minechem.item.molecule;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.ArrayList;
+import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
@@ -25,9 +27,6 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class MoleculeItem extends Item
 {
@@ -179,7 +178,7 @@ public class MoleculeItem extends Item
 	{
 		int itemDamage = itemstack.getItemDamage();
 		MoleculeEnum mol = MoleculeEnum.getById(itemDamage);
-		if (mol==null)
+		if (mol == null)
 		{
 			itemstack.setItemDamage(0);
 			mol = MoleculeEnum.getById(0);
@@ -298,10 +297,11 @@ public class MoleculeItem extends Item
 		{
 			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
-			RadiationEnum radioactivity=MoleculeEnum.molecules.get(itemStack.getItemDamage()).radioactivity();
-			TileEntity tile=world.getTileEntity(x, y, z);
-			if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
-				((RadiationFluidTileEntity)tile).info=ElementItem.getRadiationInfo(itemStack, world);
+			RadiationEnum radioactivity = MoleculeEnum.molecules.get(itemStack.getItemDamage()).radioactivity();
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+			{
+				((RadiationFluidTileEntity) tile).info = ElementItem.getRadiationInfo(itemStack, world);
 			}
 			if (player.capabilities.isCreativeMode)
 			{

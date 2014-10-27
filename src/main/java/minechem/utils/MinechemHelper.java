@@ -4,6 +4,10 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.server.FMLServerHandler;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
 import minechem.MinechemItemsRegistration;
 import minechem.item.element.Element;
 import minechem.item.element.ElementItem;
@@ -23,11 +27,6 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.common.util.ForgeDirection;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
 
 public class MinechemHelper
 {
@@ -55,8 +54,7 @@ public class MinechemHelper
 			if (localString.equals(""))
 			{
 				return key;
-			}
-			else
+			} else
 			{
 				localString = capitalizeFully(localString.replaceAll("molecule\\.", ""));
 			}
@@ -64,18 +62,20 @@ public class MinechemHelper
 		}
 		return key;
 	}
-	
+
 	public static String capitalizeFully(String input)
 	{
 		String[] splitString = input.split(" ");
-		String result ="";
-		for(int i = 0; i < splitString.length; i++) 
+		String result = "";
+		for (int i = 0; i < splitString.length; i++)
 		{
-		    char[] digit = splitString[i].toCharArray();
-		    digit[0] = Character.toUpperCase(digit[0]);
-		    for (int j=1;j<digit.length;j++)
-		    	digit[j]=Character.toLowerCase(digit[j]);
-		    result += new String(digit) + (i<splitString.length-1?" ":"");
+			char[] digit = splitString[i].toCharArray();
+			digit[0] = Character.toUpperCase(digit[0]);
+			for (int j = 1; j < digit.length; j++)
+			{
+				digit[j] = Character.toLowerCase(digit[j]);
+			}
+			result += new String(digit) + (i < splitString.length - 1 ? " " : "");
 		}
 		return result;
 	}
@@ -200,36 +200,35 @@ public class MinechemHelper
 		return stacks;
 	}
 
-    public static ArrayList<PotionChemical> pushTogetherChemicals(ArrayList<PotionChemical> list)
-    {
-        for (int i = list.size()-1; i >= 0; i--)
-        {
-            if (list.get(i) == null)
-            {
-                continue;
-            }
-            // spot for move
-            for (int j = 0; j < i; j++)
-            {
-                // empty spot
-                if (list.get(j) == null)
-                {
-                    list.set(j, list.get(i));
-                    list.set(j, null);
-                    break;
-                }
-                // same stack
-                else if (list.get(j).sameAs(list.get(i)))
-                {
-                    list.get(j).amount += list.get(i).amount;
-                    list.set(i, null);
-                    break;
-                }
-            }
-        }
-        list.removeAll(Collections.singleton(null));
-        return list;
-    }
+	public static ArrayList<PotionChemical> pushTogetherChemicals(ArrayList<PotionChemical> list)
+	{
+		for (int i = list.size() - 1; i >= 0; i--)
+		{
+			if (list.get(i) == null)
+			{
+				continue;
+			}
+			// spot for move
+			for (int j = 0; j < i; j++)
+			{
+				// empty spot
+				if (list.get(j) == null)
+				{
+					list.set(j, list.get(i));
+					list.set(j, null);
+					break;
+				} // same stack
+				else if (list.get(j).sameAs(list.get(i)))
+				{
+					list.get(j).amount += list.get(i).amount;
+					list.set(i, null);
+					break;
+				}
+			}
+		}
+		list.removeAll(Collections.singleton(null));
+		return list;
+	}
 
 	public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical)
 	{

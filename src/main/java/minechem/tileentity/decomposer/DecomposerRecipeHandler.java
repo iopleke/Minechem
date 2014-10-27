@@ -1,11 +1,10 @@
 package minechem.tileentity.decomposer;
 
+import java.util.ArrayList;
 import minechem.utils.MinechemHelper;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-
-import java.util.ArrayList;
 
 public class DecomposerRecipeHandler
 {
@@ -35,13 +34,15 @@ public class DecomposerRecipeHandler
 			}
 		}
 	}
-	
+
 	public static void resetRecursiveRecipes()
 	{
-		for(String key:DecomposerRecipe.recipes.keySet())
+		for (String key : DecomposerRecipe.recipes.keySet())
 		{
 			if (DecomposerRecipe.get(key) instanceof DecomposerRecipeSuper)
+			{
 				DecomposerRecipe.remove(key);
+			}
 		}
 		Recipe.init();
 		recursiveRecipes();

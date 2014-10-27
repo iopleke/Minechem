@@ -21,7 +21,7 @@ public class FissionGui extends GuiContainerTabbed
 	public FissionGui(InventoryPlayer inventoryPlayer, FissionTileEntity fission)
 	{
 		super(new FissionContainer(inventoryPlayer, fission));
-        addTab(new FissionTabStateControl(this, fission));
+		addTab(new FissionTabStateControl(this, fission));
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fission")));
 	}
 

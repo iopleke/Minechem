@@ -48,11 +48,11 @@ public class ClientProxy extends CommonProxy
 	public static IIcon sand;
 
 	public FluidItemRenderingHandler fluidItemRenderingHandler;
-	
+
 	@Override
 	public void registerRenderers()
 	{
-		RENDER_ID=RenderingRegistry.getNextAvailableRenderId();
+		RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 		MinechemFluidBlock.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
@@ -97,14 +97,16 @@ public class ClientProxy extends CommonProxy
 	{
 		return Minecraft.getMinecraft().thePlayer;
 	}
-    
-    @Override
-	public void onAddFluid(MinechemFluid fluid,MinechemFluidBlock block){
-    	super.onAddFluid(fluid, block);
-    	
-    	if (fluidItemRenderingHandler==null){
-    		fluidItemRenderingHandler=new FluidItemRenderingHandler();
-    	}
-    	MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(block),fluidItemRenderingHandler);
-    }
+
+	@Override
+	public void onAddFluid(MinechemFluid fluid, MinechemFluidBlock block)
+	{
+		super.onAddFluid(fluid, block);
+
+		if (fluidItemRenderingHandler == null)
+		{
+			fluidItemRenderingHandler = new FluidItemRenderingHandler();
+		}
+		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(block), fluidItemRenderingHandler);
+	}
 }

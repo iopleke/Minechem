@@ -11,8 +11,8 @@ import net.minecraft.item.ItemStack;
 
 public class CreativeTabMinechem extends CreativeTabs
 {
-    public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Reference.NAME, 0);
-    public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Reference.NAME + ".Elements", 1);
+	public static CreativeTabs CREATIVE_TAB_ITEMS = new CreativeTabMinechem(Reference.NAME, 0);
+	public static CreativeTabs CREATIVE_TAB_ELEMENTS = new CreativeTabMinechem(Reference.NAME + ".Elements", 1);
 
 	private int tabIcon;
 

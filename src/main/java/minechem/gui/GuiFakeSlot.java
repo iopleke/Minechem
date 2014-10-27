@@ -1,6 +1,7 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -8,8 +9,6 @@ import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
-
-import java.util.List;
 
 public class GuiFakeSlot extends Gui
 {
@@ -187,8 +186,8 @@ public class GuiFakeSlot extends Gui
 		GL11.glDisable(GL11.GL_DEPTH_TEST);
 		int color4 = 0x44000000;
 		drawGradientRect(0, 0, width, height, color4, color4);
-        GL11.glEnable(GL11.GL_LIGHTING);
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glEnable(GL11.GL_DEPTH_TEST);
 	}
 
 }

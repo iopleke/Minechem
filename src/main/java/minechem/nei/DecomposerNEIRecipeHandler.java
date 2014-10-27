@@ -1,22 +1,25 @@
 package minechem.nei;
 
+import static codechicken.lib.gui.GuiDraw.changeTexture;
+import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+import java.awt.Rectangle;
+import java.util.ArrayList;
+import java.util.List;
 import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
 import minechem.reference.Resources;
-import minechem.tileentity.decomposer.*;
+import minechem.tileentity.decomposer.DecomposerGui;
+import minechem.tileentity.decomposer.DecomposerRecipe;
+import minechem.tileentity.decomposer.DecomposerRecipeChance;
+import minechem.tileentity.decomposer.DecomposerRecipeHandler;
+import minechem.tileentity.decomposer.DecomposerRecipeSelect;
+import minechem.tileentity.decomposer.DecomposerRecipeSuper;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-
-import static codechicken.lib.gui.GuiDraw.changeTexture;
-import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 {
@@ -229,25 +232,25 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 
 		protected void setOutputs(List<ItemStack> outputs)
 		{
-            if (outputs != null && !outputs.isEmpty())
-            {
-                outputs = MinechemHelper.pushTogetherStacks(outputs);
-                output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
-                otherOutputs = new ArrayList<PositionedStack>();
-                if (outputs.size() > 1)
-                {
-                    int itemsPerLine = calcItemsPerLine(outputs);
-                    double scale = 8.5 / itemsPerLine;
-                    int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
-                    for (int idx = 1; idx < outputs.size(); idx++)
-                    {
-                        ItemStack o = outputs.get(idx);
-                        int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
-                        int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
-                        otherOutputs.add(new PositionedStack(o, x, y));
-                    }
-                }
-            }
+			if (outputs != null && !outputs.isEmpty())
+			{
+				outputs = MinechemHelper.pushTogetherStacks(outputs);
+				output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
+				otherOutputs = new ArrayList<PositionedStack>();
+				if (outputs.size() > 1)
+				{
+					int itemsPerLine = calcItemsPerLine(outputs);
+					double scale = 8.5 / itemsPerLine;
+					int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
+					for (int idx = 1; idx < outputs.size(); idx++)
+					{
+						ItemStack o = outputs.get(idx);
+						int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
+						int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
+						otherOutputs.add(new PositionedStack(o, x, y));
+					}
+				}
+			}
 		}
 
 		private int calcItemsPerLine(List<ItemStack> list)
@@ -271,7 +274,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			super(dr.getInput());
 			ArrayList<ItemStack> outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutput());
-            setOutputs(outputs);
+			setOutputs(outputs);
 		}
 	}
 
@@ -334,48 +337,51 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				}
 				ArrayList<DecomposerRecipe> possibleRecipes = decomposerRecipeSelect.getAllPossibleRecipes();
 				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(possibleRecipes.get(outputSetToShow).getOutput());
-                setOutputs(outputsToShow);
+				setOutputs(outputsToShow);
 			}
 		}
 	}
 
-    public class CachedDecomposerRecipeSuper extends CachedDecomposerRecipe
-    {
-        // Which tick to cycle at. This is initialized lazily, so
-        // the first output set is shown for the normal duration.
-        private long cycleAtTick;
+	public class CachedDecomposerRecipeSuper extends CachedDecomposerRecipe
+	{
+		// Which tick to cycle at. This is initialized lazily, so
+		// the first output set is shown for the normal duration.
+		private long cycleAtTick;
 
-        // The fractional chance [0, 1] that this recipe will yield any output.
-        private float chance;
+		// The fractional chance [0, 1] that this recipe will yield any output.
+		private float chance;
 
-        private DecomposerRecipeSuper decomposerRecipeSuper;
+		private DecomposerRecipeSuper decomposerRecipeSuper;
 
-        public CachedDecomposerRecipeSuper(DecomposerRecipeSuper dr)
-        {
-            super(dr);
-            cycleAtTick = -1;
-            decomposerRecipeSuper = dr;
-            chance = dr.getChance();
-        }
+		public CachedDecomposerRecipeSuper(DecomposerRecipeSuper dr)
+		{
+			super(dr);
+			cycleAtTick = -1;
+			decomposerRecipeSuper = dr;
+			chance = dr.getChance();
+		}
 
-        @Override
-        public void cycleOutput(long tick)
-        {
-            if(cycleAtTick == -1) cycleAtTick = tick + 20;
-            if (tick >= cycleAtTick)
-            {
-                cycleAtTick = tick + 20;
-                ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
-                setOutputs(outputsToShow);
-            }
-        }
+		@Override
+		public void cycleOutput(long tick)
+		{
+			if (cycleAtTick == -1)
+			{
+				cycleAtTick = tick + 20;
+			}
+			if (tick >= cycleAtTick)
+			{
+				cycleAtTick = tick + 20;
+				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
+				setOutputs(outputsToShow);
+			}
+		}
 
-        @Override
-        public float getChance()
-        {
-            return chance;
-        }
+		@Override
+		public float getChance()
+		{
+			return chance;
+		}
 
-    }
+	}
 
 }

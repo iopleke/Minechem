@@ -4,6 +4,8 @@ import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
 import cpw.mods.fml.common.Optional;
+import java.util.ArrayList;
+import java.util.List;
 import minechem.utils.Rect;
 import minechem.utils.SessionVars;
 import net.minecraft.client.gui.FontRenderer;
@@ -15,9 +17,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler
@@ -321,10 +320,10 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 				continue;
 			}
 			guiTab.drawTab(0, yPos);
-            yPos += guiTab.getHeight();
+			yPos += guiTab.getHeight();
 		}
 
-        yPos = 4;
+		yPos = 4;
 		for (GuiTab guiTab : tabListRight)
 		{
 
@@ -335,7 +334,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 			}
 
 			guiTab.drawTab(xSize, yPos);
-            yPos += guiTab.getHeight();
+			yPos += guiTab.getHeight();
 		}
 
 		GuiTab guiTab = getTabAtPosition(mX, mY);
@@ -414,33 +413,33 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 	}
 
 	@Optional.Method(modid = "NotEnoughItems")
-    @Override
-    public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack item)
-    {
-        return null;
-    }
+	@Override
+	public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack item)
+	{
+		return null;
+	}
 
-    @Optional.Method(modid = "NotEnoughItems")
-    @Override
-    public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
-    {
-        if (gui instanceof GuiContainerTabbed)
-        {
-            Rect item = new Rect(x, y, w, h);
-            GuiContainerTabbed container = (GuiContainerTabbed) gui;
-            for (GuiTab tab : tabListRight)
-            {
-                Rect tabRect = new Rect(tab.currentX + container.guiLeft, tab.currentY + container.guiTop, tab.currentWidth, tab.currentHeight);
-                if (item.intersectsWith(tabRect))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	@Optional.Method(modid = "NotEnoughItems")
+	@Override
+	public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
+	{
+		if (gui instanceof GuiContainerTabbed)
+		{
+			Rect item = new Rect(x, y, w, h);
+			GuiContainerTabbed container = (GuiContainerTabbed) gui;
+			for (GuiTab tab : tabListRight)
+			{
+				Rect tabRect = new Rect(tab.currentX + container.guiLeft, tab.currentY + container.guiTop, tab.currentWidth, tab.currentHeight);
+				if (item.intersectsWith(tabRect))
+				{
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
-    @Optional.Method(modid = "NotEnoughItems")
+	@Optional.Method(modid = "NotEnoughItems")
 	@Override
 	public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui)
 	{

@@ -2,6 +2,9 @@ package minechem.item.element;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
@@ -14,7 +17,11 @@ import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
-import minechem.utils.*;
+import minechem.utils.Constants;
+import minechem.utils.EnumColor;
+import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
+import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -30,10 +37,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import org.lwjgl.input.Keyboard;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class ElementItem extends Item
 {
@@ -74,7 +77,9 @@ public class ElementItem extends Item
 		int atomicNumber = itemstack.getItemDamage();
 		String longName = atomicNumber < ElementEnum.heaviestMass ? MinechemHelper.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName()) : MinechemHelper.getLocalString("element.empty");
 		if (longName.contains("Element."))
+		{
 			longName = ElementEnum.getByID(atomicNumber).getLongName();
+		}
 		return longName;
 	}
 
@@ -235,7 +240,7 @@ public class ElementItem extends Item
 	public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
 	{
 		list.add(new ItemStack(item, 1, ElementEnum.heaviestMass));
-		for (int id = 0; id<ElementEnum.heaviestMass;id++)
+		for (int id = 0; id < ElementEnum.heaviestMass; id++)
 		{
 			ElementEnum element = ElementEnum.getByID(id);
 			if (element != null)
@@ -330,11 +335,12 @@ public class ElementItem extends Item
 
 					if (stack != null)
 					{
-						TileEntity tile=world.getTileEntity(blockX, blockY, blockZ);
-						if (tile instanceof RadiationFluidTileEntity&&((RadiationFluidTileEntity) tile).info!=null){
+						TileEntity tile = world.getTileEntity(blockX, blockY, blockZ);
+						if (tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
+						{
 							setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
 						}
-						
+
 						world.setBlockToAir(blockX, blockY, blockZ);
 						return fillTube(itemStack, player, stack);
 					}
@@ -416,10 +422,11 @@ public class ElementItem extends Item
 		{
 			Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
-			RadiationEnum radioactivity=ElementEnum.elements.get(itemStack.getItemDamage()).radioactivity();
-			TileEntity tile=world.getTileEntity(x, y, z);
-			if (radioactivity!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity){
-				((RadiationFluidTileEntity)tile).info=getRadiationInfo(itemStack, world);
+			RadiationEnum radioactivity = ElementEnum.elements.get(itemStack.getItemDamage()).radioactivity();
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+			{
+				((RadiationFluidTileEntity) tile).info = getRadiationInfo(itemStack, world);
 			}
 			if (player.capabilities.isCreativeMode)
 			{

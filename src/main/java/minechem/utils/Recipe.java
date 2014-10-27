@@ -1,21 +1,23 @@
 package minechem.utils;
 
-
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.Map;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.crafting.*;
+import net.minecraft.item.crafting.CraftingManager;
+import net.minecraft.item.crafting.FurnaceRecipes;
+import net.minecraft.item.crafting.IRecipe;
+import net.minecraft.item.crafting.ShapedRecipes;
+import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-
 public class Recipe
 {
 	public static Map<String, Recipe> recipes;
-	
+
 	public static Map<ItemStack, ItemStack> smelting;
 	public static Map<String, String> oreDictionary;
 	public ItemStack output;
@@ -26,8 +28,8 @@ public class Recipe
 	{
 		recipes = new Hashtable<String, Recipe>();
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
-		oreDictionary = new Hashtable<String,String>();
-		
+		oreDictionary = new Hashtable<String, String>();
+
 		for (Object recipe : CraftingManager.getInstance().getRecipeList())
 		{
 			if (recipe instanceof IRecipe)
@@ -80,17 +82,17 @@ public class Recipe
 					String key = DecomposerRecipe.getKey(input);
 					if (components != null && key != null)
 					{
-                        boolean badRecipe = false;
-                        for (ItemStack component : components)
-                        {
-                            if (component != null && component.getItem() != null)
-                            {
-                                if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage())
-                                {
-                                    badRecipe = true;
-                                }
-                            }
-                        }
+						boolean badRecipe = false;
+						for (ItemStack component : components)
+						{
+							if (component != null && component.getItem() != null)
+							{
+								if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage())
+								{
+									badRecipe = true;
+								}
+							}
+						}
 						Recipe currRecipe = recipes.get(key);
 						if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
 						{
