@@ -5,20 +5,17 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import minechem.item.element.ElementEnum;
+import minechem.item.polytool.PolytoolItem;
 import minechem.item.polytool.PolytoolUpgradeType;
 import minechem.utils.CoordTuple;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.multiplayer.PlayerControllerMP;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import net.minecraft.network.play.client.C07PacketPlayerDigging;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.world.World;
-import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -74,16 +71,15 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
 		{
 			EntityPlayer player = (EntityPlayer)entityLiving;
 			ArrayList<CoordTuple> queue = new ArrayList<CoordTuple>(100);
+			float carbon=0;
+			for (Object upgrade:PolytoolItem.getUpgrades(itemStack))
+			{
+				if (((PolytoolUpgradeType)upgrade).getElement()==ElementEnum.C)
+					carbon=((PolytoolUpgradeType)upgrade).power;
+			}
 			int meta = world.getBlockMetadata(x1, y1, z1);
 			if (ores.containsKey(blockHash(id,meta)))
 			{
-	//			System.out.println("woop");
-	//			
-	//		}
-	//		if (id == Blocks.coal_ore || id == Blocks.diamond_ore || id == Blocks.emerald_ore || id == Blocks.gold_ore || id == Blocks.iron_ore || id == Blocks.lapis_ore || id == Blocks.quartz_ore
-	//				|| id == Blocks.redstone_ore || OreDictionary.getOreName(OreDictionary.getOreID(itemStack.getDisplayName())).contains("ore"))
-	//		{
-	
 				int toMine = (int) power;
 				queue.add(new CoordTuple(x1, y1, z1));
 				while (!queue.isEmpty())
@@ -97,7 +93,7 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
 						if (world.getBlock(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ) == id && world.getBlockMetadata(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ)==meta)
 						{
 							
-							breakExtraBlock(world,x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ,player,id,meta);
+							breakExtraBlock(world,x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ,player,id,meta,carbon);
 							queue.add(new CoordTuple(x + dir.offsetX, y + dir.offsetY, z + dir.offsetZ));
 							toMine--;
 							if (toMine <= 0)
@@ -130,7 +126,7 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
 		return "Mines deposits of ores";
 	}
 
-	protected void breakExtraBlock(World world, int x, int y, int z, EntityPlayer player, Block block, int meta) {
+	protected void breakExtraBlock(World world, int x, int y, int z, EntityPlayer player, Block block, int meta, float carbon) {
 		if (player.capabilities.isCreativeMode) {
 		    block.onBlockHarvested(world, x, y, z, meta, player);
 		    world.setBlockToAir(x, y, z);
@@ -141,11 +137,13 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
 		}
 		
 		if (!world.isRemote) {
+			int bonus = (block==Blocks.diamond_ore||block==Blocks.coal_ore)?(int) (world.rand.nextDouble() * Math.log(carbon))+1:1;
 		    block.onBlockHarvested(world, x,y,z, meta, player);
-		
+		    
 		    if(block.removedByPlayer(world, player, x,y,z, true))
 		    {
-		        block.harvestBlock(world, player, x,y,z, meta);
+		    	for (int i=0;i<bonus;i++)
+		    		block.harvestBlock(world, player, x,y,z, meta);
 		    }
 		
 		    EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
