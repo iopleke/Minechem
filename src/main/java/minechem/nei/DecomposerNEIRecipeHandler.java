@@ -26,8 +26,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	// GUI slot offsets, in GUI-relative pixel values.
 	private static final int INPUT_X_OFS = 75;
 	private static final int INPUT_Y_OFS = 5;
-	private static final int OUTPUT_X_OFS = 10;
-	private static final int OUTPUT_X_SCALE = 18;
+	private static final int OUTPUT_X_OFS = 5;
+	private static final int OUTPUT_Y_SCALE = 18;
 	private static final int OUTPUT_Y_OFS = 51;
 	private static final int INPUT_ARROW_Y_OFS = 20;
 
@@ -232,36 +232,30 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             if (outputs != null && !outputs.isEmpty())
             {
                 outputs = MinechemHelper.pushTogetherStacks(outputs);
-                output1 = new PositionedStack(outputs.get(0), OUTPUT_X_OFS, OUTPUT_Y_OFS);
+                int digits = MinechemHelper.getNumberOfDigits(outputs.get(0).stackSize);
+                int digitOffset = digits > 3 ? (digits - 3) * 5 : 0;
+                int x = OUTPUT_X_OFS + digitOffset;
+                output1 = new PositionedStack(outputs.get(0), x, OUTPUT_Y_OFS);
                 otherOutputs = new ArrayList<PositionedStack>();
                 if (outputs.size() > 1)
                 {
-                    int itemsPerLine = calcItemsPerLine(outputs);
-                    double scale = 8.5 / itemsPerLine;
-                    int output_x_scale = (int) Math.ceil(OUTPUT_X_SCALE * scale);
+                    int row = 0;
                     for (int idx = 1; idx < outputs.size(); idx++)
                     {
                         ItemStack o = outputs.get(idx);
-                        int x = OUTPUT_X_OFS + output_x_scale * (idx % itemsPerLine);
-                        int y = OUTPUT_Y_OFS + ((idx / itemsPerLine) * OUTPUT_X_SCALE);
+                        digits = MinechemHelper.getNumberOfDigits(o.stackSize);
+                        digitOffset = digits > 3 ? (digits - 3) * 5 : 0;
+                        x += digitOffset + OUTPUT_Y_SCALE + OUTPUT_X_OFS;
+                        if (x > 144)
+                        {
+                            x = OUTPUT_X_OFS + digitOffset;
+                            row++;
+                        }
+                        int y = OUTPUT_Y_OFS + (row * OUTPUT_Y_SCALE);
                         otherOutputs.add(new PositionedStack(o, x, y));
                     }
                 }
             }
-		}
-
-		private int calcItemsPerLine(List<ItemStack> list)
-		{
-			int highestStackSize = 0;
-			for (ItemStack stack : list)
-			{
-				if (highestStackSize < stack.stackSize)
-				{
-					highestStackSize = stack.stackSize;
-				}
-			}
-			int length = (int) (Math.log10(highestStackSize) + 1);
-			return 9 - length;
 		}
 	}
 
