@@ -12,6 +12,7 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.world.World;
@@ -136,7 +137,7 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
 		}
 		
 		if (!world.isRemote) {
-			int bonus = (int) (world.rand.nextDouble() * Math.log(carbon))+1;
+			int bonus = (block==Blocks.diamond_ore||block==Blocks.coal_ore)?(int) (world.rand.nextDouble() * Math.log(carbon))+1:1;
 		    block.onBlockHarvested(world, x,y,z, meta, player);
 		    
 		    if(block.removedByPlayer(world, player, x,y,z, true))
