@@ -60,7 +60,6 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 				}
 			}
 		}
-		System.out.println("done");
 	}
 
 	private void addDecompRecipe(DecomposerRecipe decompRecipe, double d) {
