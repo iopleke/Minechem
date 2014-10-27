@@ -18,6 +18,7 @@ import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.polytool.PolytoolEventHandler;
+import minechem.item.polytool.types.PolytoolTypeIron;
 import minechem.minetweaker.Chemicals;
 import minechem.minetweaker.Decomposer;
 import minechem.minetweaker.Synthesiser;
@@ -149,7 +150,9 @@ public class Minechem
 		Recipe.init();
 		DecomposerRecipeHandler.recursiveRecipes();
 		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
-
+		
+		PolytoolTypeIron.getOres();
+		
 		LogHelper.info("Minechem has loaded");
 	}
 
