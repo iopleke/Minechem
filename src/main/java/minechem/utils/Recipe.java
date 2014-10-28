@@ -26,6 +26,7 @@ public class Recipe
 
 	public static Map<ItemStack, ItemStack> smelting;
 	public static Map<String, String> oreDictionary;
+    public static List craftingRecipes;
 	public ItemStack output;
 	public ItemStack[] inStacks;
 
@@ -65,7 +66,7 @@ public class Recipe
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
 		oreDictionary = new Hashtable<String, String>();
 		
-		List craftingRecipes = CraftingManager.getInstance().getRecipeList();
+		craftingRecipes = CraftingManager.getInstance().getRecipeList();
 		if (Loader.isModLoaded("RotaryCraft"))
 			craftingRecipes.addAll(getRotaryRecipes());
 		for (Object recipe : craftingRecipes)
@@ -75,49 +76,10 @@ public class Recipe
 				if (((IRecipe) recipe).getRecipeOutput() != null)
 				{
 
-					ItemStack input = ((IRecipe) recipe).getRecipeOutput();
-					ItemStack[] components = null;
+					ItemStack output = ((IRecipe) recipe).getRecipeOutput();
+					ItemStack[] components = getComponents((IRecipe) recipe);
 
-					if (recipe instanceof ShapelessOreRecipe && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
-					{
-						ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
-						for (Object o : ((ShapelessOreRecipe) recipe).getInput())
-						{
-							if (o instanceof ItemStack)
-							{
-								inputs.add((ItemStack) o);
-							}
-						}
-						components = inputs.toArray(new ItemStack[inputs.size()]);
-					} else if (recipe instanceof ShapedOreRecipe)
-					{
-						ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
-						for (Object o : ((ShapedOreRecipe) recipe).getInput())
-						{
-
-							if (o instanceof ItemStack)
-							{
-								inputs.add((ItemStack) o);
-							} else if (o instanceof String)
-							{
-								inputs.add(OreDictionary.getOres((String) o).get(0));
-							} else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
-							{
-								//TODO: pick the most basic results out of oredict - I am not sure if vanilla is always listed first
-								inputs.add((ItemStack) ((ArrayList) o).get(0));
-							}
-						}
-						components = inputs.toArray(new ItemStack[inputs.size()]);
-
-					} else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
-					{
-						components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
-					} else if (recipe instanceof ShapedRecipes && ((ShapedRecipes) recipe).recipeItems instanceof ItemStack[])
-					{
-						components = ((ShapedRecipes) recipe).recipeItems;
-					}
-
-					String key = DecomposerRecipe.getKey(input);
+					String key = DecomposerRecipe.getKey(output);
 					if (components != null && key != null)
 					{
 						boolean badRecipe = false;
@@ -125,16 +87,16 @@ public class Recipe
 						{
 							if (component != null && component.getItem() != null)
 							{
-								if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage())
+								if (isItemEqual(output, component) || checkForLoop(output, component))
 								{
 									badRecipe = true;
 								}
 							}
 						}
 						Recipe currRecipe = recipes.get(key);
-						if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
+						if ((currRecipe == null || output.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
 						{
-							recipes.put(key, new Recipe(input, components));
+							recipes.put(key, new Recipe(output, components));
 						}
 					}
 				}
@@ -263,5 +225,89 @@ public class Recipe
 		}
 		return result.toString();
 	}
+
+    private static boolean checkForLoop(ItemStack output, ItemStack input)
+    {
+        List<IRecipe> recipeList = new ArrayList<IRecipe>();
+        for(Object o : CraftingManager.getInstance().getRecipeList())
+        {
+            if (o instanceof IRecipe)
+            {
+                if (isItemEqual(((IRecipe)o).getRecipeOutput(), input))
+                {
+                    recipeList.add((IRecipe) o);
+                }
+            }
+        }
+        for (IRecipe recipe : recipeList)
+        {
+            for (ItemStack component : getComponents(recipe))
+            {
+                if (isItemEqual(output, component))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if 2 itemStacks contain the same item including the itemDamage
+     * @param stack1
+     * @param stack2
+     * @return true when the 2 stack are the same. False in all other cases
+     */
+    public static boolean isItemEqual(ItemStack stack1, ItemStack stack2)
+    {
+        if (stack1 == null || stack2 == null) return false;
+        else return (stack1.isItemEqual(stack2) && stack1.getItemDamage() == stack2.getItemDamage());
+    }
+
+    private static ItemStack[] getComponents(IRecipe recipe)
+    {
+        ItemStack[] components = new ItemStack[0];
+
+        if (recipe instanceof ShapelessOreRecipe && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
+        {
+            ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
+            for (Object o : ((ShapelessOreRecipe) recipe).getInput())
+            {
+                if (o instanceof ItemStack)
+                {
+                    inputs.add((ItemStack) o);
+                }
+            }
+            components = inputs.toArray(new ItemStack[inputs.size()]);
+        } else if (recipe instanceof ShapedOreRecipe)
+        {
+            ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
+            for (Object o : ((ShapedOreRecipe) recipe).getInput())
+            {
+
+                if (o instanceof ItemStack)
+                {
+                    inputs.add((ItemStack) o);
+                } else if (o instanceof String)
+                {
+                    inputs.add(OreDictionary.getOres((String) o).get(0));
+                } else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
+                {
+                    //TODO: pick the most basic results out of oredict - I am not sure if vanilla is always listed first
+                    inputs.add((ItemStack) ((ArrayList) o).get(0));
+                }
+            }
+            components = inputs.toArray(new ItemStack[inputs.size()]);
+
+        } else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
+        {
+            components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
+        } else if (recipe instanceof ShapedRecipes && ((ShapedRecipes) recipe).recipeItems instanceof ItemStack[])
+        {
+            components = ((ShapedRecipes) recipe).recipeItems;
+        }
+
+        return components;
+    }
 
 }

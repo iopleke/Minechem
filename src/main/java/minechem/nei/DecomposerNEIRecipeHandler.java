@@ -6,8 +6,12 @@ import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import minechem.gui.GuiDraw;
+import minechem.item.element.ElementItem;
+import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
 import minechem.reference.Resources;
 import minechem.tileentity.decomposer.DecomposerGui;
@@ -139,8 +143,24 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				arecipes.add(cdr);
 			}
 		}
-
+        arecipes = sortList(arecipes);
 	}
+
+    private ArrayList<CachedRecipe> sortList(ArrayList<CachedRecipe> list)
+    {
+        ArrayList<BaseCachedDecomposerRecipe> drList = new ArrayList<BaseCachedDecomposerRecipe>();
+        for (CachedRecipe recipe : list)
+        {
+            drList.add((BaseCachedDecomposerRecipe)recipe);
+        }
+        Collections.sort(drList);
+        list.clear();
+        for (BaseCachedDecomposerRecipe recipe : drList)
+        {
+            list.add(recipe);
+        }
+        return list;
+    }
 
 	@Override
 	public void drawExtras(int recipeIdx)
@@ -150,7 +170,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		float chance = cdr.getChance();
 		if (chance < 1.0f)
 		{
-			String format = chance > 0.01F ? "%2.0f%%" : "%3.3f%%";
+			String format = chance > 0.09F ? "%2.0f%%" : "%.2f%%";
 			String chanceStr = String.format(format, chance * 100.0);
 			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr) - 5;
 			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS + 10, 8, false);
@@ -183,7 +203,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		}
 	}
 
-	public abstract class BaseCachedDecomposerRecipe extends TemplateRecipeHandler.CachedRecipe
+	public abstract class BaseCachedDecomposerRecipe extends TemplateRecipeHandler.CachedRecipe implements Comparable
 	{
 		// The recipe's input item.
 		protected PositionedStack input;
@@ -215,7 +235,47 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			return otherOutputs;
 		}
 
-		/**
+        @Override
+        public int compareTo(Object o)
+        {
+            if (o instanceof BaseCachedDecomposerRecipe)
+            {
+                BaseCachedDecomposerRecipe recipe = (BaseCachedDecomposerRecipe)o;
+                if (recipe.getOtherStacks().size() < this.getOtherStacks().size())
+                {
+                    return 1;
+                }
+                else if (recipe.getOtherStacks().size() > this.getOtherStacks().size())
+                {
+                    return -1;
+                }
+                else
+                {
+                    int countThis = 0;
+                    for (PositionedStack stack : this.getOtherStacks())
+                    {
+                       countThis += stack.item.stackSize;
+                    }
+
+                    int countOther = 0;
+                    for (PositionedStack stack : recipe.getOtherStacks())
+                    {
+                        countOther += stack.item.stackSize;
+                    }
+                    if (countOther < countThis)
+                    {
+                        return 1;
+                    }
+                    else if (countOther > countThis)
+                    {
+                        return -1;
+                    }
+                }
+            }
+            return 0;
+        }
+
+        /**
 		 * Returns the chance that this recipe yields any output. Chance is in [0, 1], with 1 (always return output) being the default.
 		 */
 		public float getChance()
@@ -249,7 +309,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 						digits = MinechemHelper.getNumberOfDigits(o.stackSize);
 						digitOffset = digits > 3 ? (digits - 3) * 5 : 0;
 						x += digitOffset + OUTPUT_Y_SCALE + OUTPUT_X_OFS;
-						if (x > 144)
+						if (x > 147)
 						{
 							x = OUTPUT_X_OFS + digitOffset;
 							row++;
@@ -267,7 +327,9 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		public CachedDecomposerRecipe(DecomposerRecipe dr)
 		{
 			super(dr.getInput());
-			ArrayList<ItemStack> outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutput());
+			ArrayList<ItemStack> outputs;
+            if (dr instanceof DecomposerRecipeSuper) outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutput());
+            else outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutputRaw());
 			setOutputs(outputs);
 		}
 	}
@@ -330,7 +392,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 					outputSetToShow = 0;
 				}
 				ArrayList<DecomposerRecipe> possibleRecipes = decomposerRecipeSelect.getAllPossibleRecipes();
-				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(possibleRecipes.get(outputSetToShow).getOutput());
+				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(possibleRecipes.get(outputSetToShow).getOutputRaw());
 				setOutputs(outputsToShow);
 			}
 		}
@@ -365,7 +427,11 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			if (tick >= cycleAtTick)
 			{
 				cycleAtTick = tick + 20;
-				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
+                ArrayList<ItemStack> outputsToShow;
+                do
+                {
+                    outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
+                } while (outputsToShow == null || outputsToShow.isEmpty());
 				setOutputs(outputsToShow);
 			}
 		}

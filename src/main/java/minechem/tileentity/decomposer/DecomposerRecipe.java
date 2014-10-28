@@ -271,4 +271,9 @@ public class DecomposerRecipe
 		}
 		return false;
 	}
+
+    public float getChance()
+    {
+        return 1.0F;
+    }
 }

@@ -46,7 +46,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 //						addPotionChemical(decompRecipe.getOutput(), 1.0 / input.stackSize);
 //					}
 					addDecompRecipe(decompRecipe,1.0 / input.stackSize);
-				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
+				} else if (!Recipe.isItemEqual(input, component))
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
@@ -219,34 +219,36 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	@Override
 	public boolean outputContains(PotionChemical potionChemical)
 	{
-		boolean contains;
-		contains = false;//super.outputContains(potionChemical);
-		if (!contains)
-		{
-			for (String key : recipes.keySet())
-			{
-				DecomposerRecipe dr = DecomposerRecipe.get(key);
-				if (dr==null)continue;
-				contains = dr.outputContains(potionChemical);
-				if (contains)
-				{
-					break;
-				}
-			}
-		}
+		boolean contains = false;
+        for (String key : recipes.keySet())
+        {
+            DecomposerRecipe dr = DecomposerRecipe.get(key);
+            System.out.println(key);
+            if (dr == null) continue;
+            contains = dr.outputContains(potionChemical);
+            if (contains)
+            {
+                break;
+            }
+        }
 		return contains;
 	}
 
+    @Override
 	public float getChance()
 	{
-		double count = 0;
-		float chances = 0;
+		double chances = 0;
+        int count = 0;
 		for (Map.Entry<String, Double> entry : recipes.entrySet())
 		{
-//			chances += entry.getKey().getChance();
-//			count += entry.getValue();
+			DecomposerRecipe dr = DecomposerRecipe.get(entry.getKey());
+            if (dr != null)
+            {
+                chances += dr.getChance() / entry.getValue();
+                count++;
+            }
 		}
-		return 0F;//chances / (float) count;
+		return (float)(chances / count);
 	}
 
 //	@Override
