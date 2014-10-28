@@ -72,13 +72,4 @@ public class DecomposerRecipeSelect extends DecomposerRecipeChance
 		}
 		return contains;
 	}
-
-	@Override
-	public void scaleOutput(float scale)
-	{
-		for (DecomposerRecipe recipe : possibleRecipes)
-		{
-			recipe.scaleOutput(scale);
-		}
-	}
 }
