@@ -1,8 +1,12 @@
 package minechem.utils;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 import java.util.Map;
+
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -13,6 +17,8 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 
 public class Recipe
 {
@@ -23,14 +29,46 @@ public class Recipe
 	public ItemStack output;
 	public ItemStack[] inStacks;
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@Optional.Method(modid = "RotaryCraft")
+	public static List getRotaryRecipes()
+	{
+		try {
+			Class worktable = Class.forName("Reika.RotaryCraft.Auxiliary.WorktableRecipes");
+			Method instance = worktable.getMethod("getInstance");
+			Method list = worktable.getMethod("getRecipeListCopy");
+			Class config = Class.forName("Reika.RotaryCraft.Registry.ConfigRegistry");
+			Method state = config.getMethod("getState");
+			boolean add = !(Boolean) state.invoke(Enum.valueOf(config, "TABLEMACHINES"));
+			if (add)
+				return (List) list.invoke(instance.invoke(null));
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SecurityException e) {
+			e.printStackTrace();
+		} catch (IllegalArgumentException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void init()
 	{
 		recipes = new Hashtable<String, Recipe>();
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
 		oreDictionary = new Hashtable<String, String>();
-
-		for (Object recipe : CraftingManager.getInstance().getRecipeList())
+		
+		List craftingRecipes = CraftingManager.getInstance().getRecipeList();
+		if (Loader.isModLoaded("RotaryCraft"))
+			craftingRecipes.addAll(getRotaryRecipes());
+		for (Object recipe : craftingRecipes)
 		{
 			if (recipe instanceof IRecipe)
 			{
