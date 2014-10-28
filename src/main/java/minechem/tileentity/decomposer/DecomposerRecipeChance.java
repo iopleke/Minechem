@@ -30,6 +30,7 @@ public class DecomposerRecipeChance extends DecomposerRecipe
 		}
 	}
 
+    @Override
 	public float getChance()
 	{
 		return chance;

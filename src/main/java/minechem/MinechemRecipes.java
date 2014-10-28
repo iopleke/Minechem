@@ -1704,6 +1704,13 @@ public class MinechemRecipes
 			this.molecule(MoleculeEnum.water, 8)
 		}));
 
+        //Ice Block
+        ItemStack blockIce = new ItemStack(Blocks.ice);
+        DecomposerRecipe.add(new DecomposerRecipe(blockIce, new PotionChemical[]
+        {
+                this.molecule(MoleculeEnum.water, 8)
+        }));
+
 		// Soul Sand
 		ItemStack blockSlowSand = new ItemStack(Blocks.soul_sand);
 		DecomposerRecipe.add(new DecomposerRecipeSelect(blockSlowSand, 0.2F, new DecomposerRecipe[]

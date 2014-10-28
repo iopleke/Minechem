@@ -248,14 +248,6 @@ public class DecomposerRecipe
 		return contains;
 	}
 
-	public void scaleOutput(float scale)
-	{
-		for (PotionChemical chemical : output.values())
-		{
-			chemical.amount = Math.round(chemical.amount / scale);
-		}
-	}
-
 	public static boolean isBlacklisted(ItemStack itemStack)
 	{
 		for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
@@ -271,4 +263,9 @@ public class DecomposerRecipe
 		}
 		return false;
 	}
+
+    public float getChance()
+    {
+        return 1.0F;
+    }
 }
