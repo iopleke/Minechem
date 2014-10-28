@@ -181,17 +181,15 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
     @Override
 	public float getChance()
 	{
-		double chances = 0;
-        int count = 0;
+		float chances = 1;
 		for (Map.Entry<String, Double> entry : recipes.entrySet())
 		{
 			DecomposerRecipe dr = DecomposerRecipe.get(entry.getKey());
             if (dr != null)
             {
-                chances += dr.getChance() / entry.getValue();
-                count++;
+                chances *= dr.getChance() / entry.getValue();
             }
 		}
-		return (float)(chances / count);
+		return chances;
 	}
 }

@@ -167,7 +167,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		float chance = cdr.getChance();
 		if (chance < 1.0f)
 		{
-			String format = chance > 0.09F ? "%2.0f%%" : "%.2f%%";
+			String format = chance > 0.09F ? "%2.0f%%" : "%.3f%%";
 			String chanceStr = String.format(format, chance * 100.0);
 			int xPos = INPUT_X_OFS - GuiDraw.getStringWidth(chanceStr) - 5;
 			GuiDraw.drawString(chanceStr, xPos, INPUT_ARROW_Y_OFS + 10, 8, false);
