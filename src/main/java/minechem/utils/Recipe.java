@@ -37,8 +37,11 @@ public class Recipe
 			Class worktable = Class.forName("Reika.RotaryCraft.Auxiliary.WorktableRecipes");
 			Method instance = worktable.getMethod("getInstance");
 			Method list = worktable.getMethod("getRecipeListCopy");
-			List result = (List) list.invoke(instance.invoke(null));
-			return result;
+			Class config = Class.forName("Reika.RotaryCraft.Registry.ConfigRegistry");
+			Method state = config.getMethod("getState");
+			boolean add = !(Boolean) state.invoke(Enum.valueOf(config, "TABLEMACHINES"));
+			if (add)
+				return (List) list.invoke(instance.invoke(null));
 		} catch (NoSuchMethodException e) {
 			e.printStackTrace();
 		} catch (SecurityException e) {
@@ -55,7 +58,7 @@ public class Recipe
 		return null;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public static void init()
 	{
 		recipes = new Hashtable<String, Recipe>();
