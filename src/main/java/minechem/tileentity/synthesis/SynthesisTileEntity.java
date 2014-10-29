@@ -712,7 +712,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 	{
-        if (canTakeOutputStack(false)) return false;
+        if (!canTakeOutputStack(false)) return false;
 		return Settings.AllowAutomation && canTakeOutputStack(true) && side == 0;
 	}
 }
