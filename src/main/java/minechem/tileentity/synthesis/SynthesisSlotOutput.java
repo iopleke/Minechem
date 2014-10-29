@@ -25,7 +25,7 @@ public class SynthesisSlotOutput extends Slot
 	@Override
 	public boolean canTakeStack(EntityPlayer par1EntityPlayer)
 	{
-		return synthesis.canTakeOutputStack();
+		return synthesis.canTakeOutputStack(false);
 	}
 
 	@Override
