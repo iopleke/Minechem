@@ -337,10 +337,6 @@ public class Recipe
 				result.put(check, MAXDEPTH);
 			}
 		}
-		if (entry.getKey().contains("abyssal"))
-		{
-			System.out.println("fuck railcraft");
-		}
 		value.clear();
 		Recipe minValue = null;
 		for (Recipe key : result.keySet())
