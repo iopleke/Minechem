@@ -74,7 +74,7 @@ public class MinechemItemsRegistration
 			if (element != null)
 			{
 				ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
-				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.elements.get(element), 125), tube);
+				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.elements.get(element), 125), tube, emptyTube);
 			}
 		}
 
@@ -83,7 +83,7 @@ public class MinechemItemsRegistration
 			if (molecule != null)
 			{
 				ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.molecules.get(molecule), 125), tube);
+				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.molecules.get(molecule), 125), tube, emptyTube);
 			}
 		}
 	}
