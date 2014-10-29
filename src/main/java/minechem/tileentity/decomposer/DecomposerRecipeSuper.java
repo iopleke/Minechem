@@ -13,9 +13,10 @@ import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeSuper extends DecomposerRecipe
 {
+
 	static Random random = new Random();
 	public Map<String, Double> recipes = new Hashtable<String, Double>();
-	
+
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
 		this.input = input.copy();
@@ -29,8 +30,8 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe != null)
 				{
-					addDecompRecipe(decompRecipe,1.0 / input.stackSize);
-				} else if (!Recipe.isItemEqual(input, component))
+					addDecompRecipe(decompRecipe, 1.0 / input.stackSize);
+				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
 				{
 					//Recursively generate recipe
 					Recipe recipe = Recipe.get(component);
@@ -45,11 +46,14 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		}
 	}
 
-	private void addDecompRecipe(DecomposerRecipe decompRecipe, double d) {
+	private void addDecompRecipe(DecomposerRecipe decompRecipe, double d)
+	{
 		String key = DecomposerRecipe.getKey(decompRecipe.input);
 		Double current = recipes.put(key, d);
-		if (current!=null)
-			recipes.put(key, d+current);
+		if (current != null)
+		{
+			recipes.put(key, d + current);
+		}
 	}
 
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components)
@@ -60,18 +64,16 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, ArrayList<PotionChemical> chemicals)
 	{
 		this(input, components, 0);
-		addPotionChemical(chemicals, 1);
+		addPotionChemical(chemicals);
 	}
 
-	private void addPotionChemical(ArrayList<PotionChemical> out, double amount)
+	private void addPotionChemical(ArrayList<PotionChemical> out)
 	{
 		if (out != null)
 		{
 			for (PotionChemical add : out)
 			{
-				PotionChemical addChem = add.copy();
-				addChem.amount *= amount;
-				super.addChemicals(addChem);
+				super.addChemicals(add);
 			}
 		}
 	}
@@ -79,15 +81,15 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	@Override
 	public ArrayList<PotionChemical> getOutput()
 	{
-		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		ArrayList<PotionChemical> result = super.getOutput();
 		for (String currentKey : this.recipes.keySet())
 		{
 			DecomposerRecipe current = DecomposerRecipe.get(currentKey);
-            LogHelper.debug(currentKey);
-			if (current!=null)
+			LogHelper.debug(currentKey);
+			if (current != null)
 			{
 				Double i = this.recipes.get(currentKey);
-				while (i>=1)
+				while (i >= 1)
 				{
 					ArrayList<PotionChemical> partialResult = current.getOutput();
 					if (partialResult != null)
@@ -103,7 +105,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					{
 						result.addAll(partialResult);
 					}
-				}		
+				}
 			}
 		}
 		return result;
@@ -112,12 +114,12 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	@Override
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
-		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		ArrayList<PotionChemical> result = super.getOutputRaw();
 		for (String currentKey : this.recipes.keySet())
 		{
 			DecomposerRecipe current = DecomposerRecipe.get(currentKey);
-            LogHelper.debug(currentKey);
-			if (current!=null)
+			LogHelper.debug(currentKey);
+			if (current != null)
 			{
 				for (int i = 0; i < this.recipes.get(currentKey); i++)
 				{
@@ -163,32 +165,38 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	@Override
 	public boolean outputContains(PotionChemical potionChemical)
 	{
-		boolean contains = false;
-        for (String key : recipes.keySet())
-        {
-            DecomposerRecipe dr = DecomposerRecipe.get(key);
-            LogHelper.debug(key);
-            if (dr == null) continue;
-            contains = dr.outputContains(potionChemical);
-            if (contains)
-            {
-                break;
-            }
-        }
+		boolean contains;
+		contains = super.outputContains(potionChemical);
+		if (!contains)
+		{
+			for (String key : recipes.keySet())
+			{
+				DecomposerRecipe dr = DecomposerRecipe.get(key);
+				if (dr == null)
+				{
+					continue;
+				}
+				contains = dr.outputContains(potionChemical);
+				if (contains)
+				{
+					break;
+				}
+			}
+		}
 		return contains;
 	}
 
-    @Override
+	@Override
 	public float getChance()
 	{
 		float chances = 1;
 		for (Map.Entry<String, Double> entry : recipes.entrySet())
 		{
 			DecomposerRecipe dr = DecomposerRecipe.get(entry.getKey());
-            if (dr != null)
-            {
-                chances *= dr.getChance() / entry.getValue();
-            }
+			if (dr != null)
+			{
+				chances *= dr.getChance() / entry.getValue();
+			}
 		}
 		return chances;
 	}
