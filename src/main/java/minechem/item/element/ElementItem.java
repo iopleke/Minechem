@@ -1,14 +1,10 @@
 package minechem.item.element;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.item.ChemicalRoomStateEnum;
@@ -42,10 +38,12 @@ import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
-import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidHandler;
 
 import org.lwjgl.input.Keyboard;
+
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class ElementItem extends Item
 {
@@ -387,6 +385,8 @@ public class ElementItem extends Item
 	{
 		boolean flag = itemStack.getItemDamage() == ElementEnum.heaviestMass;
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, flag);
+		if (itemStack.stackSize<8)
+			MinechemUtil.scanForMoreStacks(itemStack, player);
 		if (movingObjectPosition == null||itemStack.stackSize<8)
 		{
 			return itemStack;
@@ -444,15 +444,10 @@ public class ElementItem extends Item
 		if (player.capabilities.isCreativeMode)
 		{
 			return itemStack;
-		} else if ((itemStack.stackSize-=8) <= 0)
+		} 
+		else
 		{
-			return block;
-		} else
-		{
-			if (!player.inventory.addItemStackToInventory(block))
-			{
-				player.dropPlayerItemWithRandomChoice(block, false);
-			}
+			MinechemUtil.incPlayerInventory(itemStack, -8, player, block);
 		}
 		return itemStack;
 	}
@@ -481,15 +476,9 @@ public class ElementItem extends Item
 			if (player.capabilities.isCreativeMode)
 			{
 				return itemStack;
-			} else if ((itemStack.stackSize-=8) <= 0)
-			{
-				return new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass);
 			} else
 			{
-				if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass)))
-				{
-					player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass), false);
-				}
+				MinechemUtil.incPlayerInventory(itemStack, -8, player, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
 			}
 		}
 		return itemStack;
