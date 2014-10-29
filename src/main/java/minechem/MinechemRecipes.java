@@ -3208,29 +3208,6 @@ public class MinechemRecipes
 			{
 				this.element(ElementEnum.Ca, 5), this.molecule(MoleculeEnum.phosphate, 4), this.element(ElementEnum.Cl)
 			});
-		} else if (oreName.contains("ingotBronze"))
-		{
-			if (Loader.isModLoaded("Mekanism"))
-			{
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-				{
-					this.element(ElementEnum.Cu, 16), this.element(ElementEnum.Sn, 2)
-				});
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
-				{
-					this.element(ElementEnum.Cu, 16), this.element(ElementEnum.Sn, 2)
-				});
-			} else
-			{
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-				{
-					this.element(ElementEnum.Cu, 24), this.element(ElementEnum.Sn, 8)
-				});
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
-				{
-					this.element(ElementEnum.Cu, 24), this.element(ElementEnum.Sn, 8)
-				});
-			}
 		} else if (oreName.contains("plateSilicon"))
 		{
 			DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]

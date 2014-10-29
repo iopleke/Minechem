@@ -89,6 +89,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 			if (current != null)
 			{
 				Double i = this.recipes.get(currentKey);
+                LogHelper.debug(i);
 				while (i >= 1)
 				{
 					ArrayList<PotionChemical> partialResult = current.getOutput();
