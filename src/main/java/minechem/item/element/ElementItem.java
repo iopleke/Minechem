@@ -320,59 +320,58 @@ public class ElementItem extends Item
 	@Override
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		TileEntity te = world.getTileEntity(x, y, z);
+		boolean result = !world.isRemote;
 		if (te!=null && te instanceof IFluidHandler)
 		{
-//			if (!world.isRemote)
-//			{
-				if (stack.getItemDamage()!=ElementEnum.heaviestMass)
+			if (stack.getItemDamage()!=ElementEnum.heaviestMass)
+			{
+				int filled=0;
+				for (int i=0;i<6;i++)
 				{
-					int filled=0;
+					filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), false);
+					if (filled>0)
+					{
+						if (result)
+							((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), true);
+						incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+						return result;
+					}
+				}
+			}
+			else
+			{
+				FluidStack drained=null;
+				Fluid fluid = MinechemUtil.getFluid((IFluidHandler)te);
+				ElementEnum element = MinechemUtil.getElement(fluid);
+				if (element!=null)
+				{
 					for (int i=0;i<6;i++)
 					{
-						filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), false);
-						if (filled>0)
+						drained = ((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), false);
+						if (drained!=null && drained.amount>0)
 						{
-							((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), true);
-							stack.stackSize--;
-							if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass)))
-							{
-								player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass), false);
-							}
-							return true;
-						}
-					}
-				}
-				else
-				{
-					FluidStack drained=null;
-					Fluid fluid = MinechemUtil.getFluid((IFluidHandler)te);
-					ElementEnum element = MinechemUtil.getElement(fluid);
-					if (element!=null)
-					{
-						for (int i=0;i<6;i++)
-						{
-							drained = ((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), false);
-							if (drained!=null && drained.amount>0)
-							{
+							if (result)
 								((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), true);
-								stack.stackSize--;
-								if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal())))
-								{
-									player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()), false);
-								}
-								return true;
-							}
+							incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+							return result;
 						}
 					}
 				}
-//			}
-			return true;
+			}
+			return result;
 		}
 		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 		
 	}
 
-
+	public void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
+	{
+		current.stackSize+=inc;
+		if (!player.inventory.addItemStackToInventory(give))
+		{
+			player.dropPlayerItemWithRandomChoice(give, false);
+		}
+	}
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
