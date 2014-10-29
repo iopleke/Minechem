@@ -85,9 +85,10 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 		ItemStack fissionResult = getFissionOutput();
 		if (fissionResult != null)
 		{
+			if (inventory[kOutput[0]] == null) return true;
 			boolean sameItem = fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage();
 			boolean spaceInOutput = inventory[kOutput[0]].stackSize < 64 && sameItem;
-			return inventory[kOutput[0]] == null || spaceInOutput;
+			return spaceInOutput;
 		}
 		return false;
 	}
