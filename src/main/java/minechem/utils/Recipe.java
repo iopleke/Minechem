@@ -1,12 +1,14 @@
 package minechem.utils;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Map.Entry;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.CraftingManager;
@@ -17,24 +19,28 @@ import net.minecraft.item.crafting.ShapelessRecipes;
 import net.minecraftforge.oredict.OreDictionary;
 import net.minecraftforge.oredict.ShapedOreRecipe;
 import net.minecraftforge.oredict.ShapelessOreRecipe;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Optional;
 
 public class Recipe
 {
+
 	public static Map<String, Recipe> recipes;
 
 	public static Map<ItemStack, ItemStack> smelting;
 	public static Map<String, String> oreDictionary;
-    public static List craftingRecipes;
 	public ItemStack output;
 	public ItemStack[] inStacks;
+	private Integer depth;
+	private static final int MAXDEPTH = 20;
 
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+	@SuppressWarnings(
+			{
+				"unchecked", "rawtypes"
+			})
 	@Optional.Method(modid = "RotaryCraft")
 	public static List getRotaryRecipes()
 	{
-		try {
+		try
+		{
 			Class worktable = Class.forName("Reika.RotaryCraft.Auxiliary.WorktableRecipes");
 			Method instance = worktable.getMethod("getInstance");
 			Method list = worktable.getMethod("getRecipeListCopy");
@@ -42,33 +48,50 @@ public class Recipe
 			Method state = config.getMethod("getState");
 			boolean add = !(Boolean) state.invoke(Enum.valueOf(config, "TABLEMACHINES"));
 			if (add)
+			{
 				return (List) list.invoke(instance.invoke(null));
-		} catch (NoSuchMethodException e) {
+			}
+		} catch (NoSuchMethodException e)
+		{
 			e.printStackTrace();
-		} catch (SecurityException e) {
+		} catch (SecurityException e)
+		{
 			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
+		} catch (IllegalArgumentException e)
+		{
 			e.printStackTrace();
-		} catch (InvocationTargetException e) {
+		} catch (InvocationTargetException e)
+		{
 			e.printStackTrace();
-		} catch (IllegalAccessException e) {
+		} catch (IllegalAccessException e)
+		{
 			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
+		} catch (ClassNotFoundException e)
+		{
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
+
+	@SuppressWarnings(
+			{
+				"unchecked", "rawtypes"
+			})
 	public static void init()
 	{
+		Map<String, ArrayList<Recipe>> preCullRecipes = new Hashtable<String, ArrayList<Recipe>>();
 		recipes = new Hashtable<String, Recipe>();
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
 		oreDictionary = new Hashtable<String, String>();
-		
-		craftingRecipes = CraftingManager.getInstance().getRecipeList();
+		List craftingRecipes = CraftingManager.getInstance().getRecipeList();
 		if (Loader.isModLoaded("RotaryCraft"))
-			craftingRecipes.addAll(getRotaryRecipes());
+		{
+			List add = getRotaryRecipes();
+			if (add != null)
+			{
+				craftingRecipes.addAll(add);
+			}
+		}
 		for (Object recipe : craftingRecipes)
 		{
 			if (recipe instanceof IRecipe)
@@ -76,10 +99,48 @@ public class Recipe
 				if (((IRecipe) recipe).getRecipeOutput() != null)
 				{
 
-					ItemStack output = ((IRecipe) recipe).getRecipeOutput();
-					ItemStack[] components = getComponents((IRecipe) recipe);
+					ItemStack input = ((IRecipe) recipe).getRecipeOutput();
+					ItemStack[] components = null;
 
-					String key = DecomposerRecipe.getKey(output);
+					if (recipe instanceof ShapelessOreRecipe && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
+					{
+						ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
+						for (Object o : ((ShapelessOreRecipe) recipe).getInput())
+						{
+							if (o instanceof ItemStack)
+							{
+								inputs.add((ItemStack) o);
+							}
+						}
+						components = inputs.toArray(new ItemStack[inputs.size()]);
+					} else if (recipe instanceof ShapedOreRecipe)
+					{
+						ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
+						for (Object o : ((ShapedOreRecipe) recipe).getInput())
+						{
+
+							if (o instanceof ItemStack)
+							{
+								inputs.add((ItemStack) o);
+							} else if (o instanceof String)
+							{
+								inputs.add(OreDictionary.getOres((String) o).get(0));
+							} else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
+							{
+								inputs.add((ItemStack) ((ArrayList) o).get(0));
+							}
+						}
+						components = inputs.toArray(new ItemStack[inputs.size()]);
+
+					} else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
+					{
+						components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
+					} else if (recipe instanceof ShapedRecipes && ((ShapedRecipes) recipe).recipeItems instanceof ItemStack[])
+					{
+						components = ((ShapedRecipes) recipe).recipeItems;
+					}
+
+					String key = DecomposerRecipe.getKey(input);
 					if (components != null && key != null)
 					{
 						boolean badRecipe = false;
@@ -87,36 +148,42 @@ public class Recipe
 						{
 							if (component != null && component.getItem() != null)
 							{
-								if (isItemEqual(output, component) || checkForLoop(output, component))
+								if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage())
 								{
 									badRecipe = true;
 								}
 							}
 						}
-						Recipe currRecipe = recipes.get(key);
-						if ((currRecipe == null || output.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
-						{
-							recipes.put(key, new Recipe(output, components));
-						}
+						Recipe addRecipe = new Recipe(input, components);
+						addPreCullRecipe(key, addRecipe, preCullRecipes);
 					}
 				}
 			}
 		}
 		for (ItemStack input : smelting.keySet())
 		{
-			String key = DecomposerRecipe.getKey(input);
+			ItemStack output = smelting.get(input);
+			String key = DecomposerRecipe.getKey(output);
 			if (key != null)
 			{
-				Recipe currRecipe = recipes.get(key);
-				if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()))
+				Recipe addRecipe = new Recipe(output, new ItemStack[]
 				{
-					recipes.put(key, new Recipe(input, new ItemStack[]
-					{
-						smelting.get(DecomposerRecipe.getKey(input))
-					}));
-				}
+					input
+				});
+				addPreCullRecipe(key, addRecipe, preCullRecipes);
 			}
 		}
+
+		for (Map.Entry<String, ArrayList<Recipe>> entry : preCullRecipes.entrySet())
+		{
+			cullRecipes(entry, preCullRecipes);
+			if (entry.getValue().size() == 1)
+			{
+				Recipe addRecipe = entry.getValue().get(0);
+				recipes.put(entry.getKey(), addRecipe);
+			}
+		}
+
 		for (String name : OreDictionary.getOreNames())
 		{
 			ArrayList<ItemStack> oreDictStacks = OreDictionary.getOres(name);
@@ -139,6 +206,17 @@ public class Recipe
 				}
 			}
 		}
+	}
+
+	private static void addPreCullRecipe(String key, Recipe addRecipe, Map<String, ArrayList<Recipe>> preCullRecipes)
+	{
+		ArrayList<Recipe> recipeList = preCullRecipes.get(key);
+		if (recipeList == null)
+		{
+			recipeList = new ArrayList<Recipe>();
+		}
+		recipeList.add(addRecipe);
+		preCullRecipes.put(key, recipeList);
 	}
 
 	public Recipe(ItemStack outStack, ItemStack[] componentsParam)
@@ -226,88 +304,107 @@ public class Recipe
 		return result.toString();
 	}
 
-    private static boolean checkForLoop(ItemStack output, ItemStack input)
-    {
-        List<IRecipe> recipeList = new ArrayList<IRecipe>();
-        for(Object o : CraftingManager.getInstance().getRecipeList())
-        {
-            if (o instanceof IRecipe)
-            {
-                if (isItemEqual(((IRecipe)o).getRecipeOutput(), input))
-                {
-                    recipeList.add((IRecipe) o);
-                }
-            }
-        }
-        for (IRecipe recipe : recipeList)
-        {
-            for (ItemStack component : getComponents(recipe))
-            {
-                if (isItemEqual(output, component))
-                {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
+	private static void cullRecipes(Entry<String, ArrayList<Recipe>> entry, Map<String, ArrayList<Recipe>> preCullRecipes)
+	{
+		ArrayList<Recipe> value = entry.getValue();
+		if (DecomposerRecipe.get(entry.getKey()) != null)
+		{
+			value.clear();
+			entry.setValue(value);
+			return;
+		}
+		Map<Recipe, Integer> result = new Hashtable<Recipe, Integer>();
+		for (Recipe check : value)
+		{
+			int depth = 0;
+			if (check.inStacks != null && check.inStacks.length > 0)
+			{
+				for (ItemStack stack : check.inStacks)
+				{
+					if (stack != null)
+					{
+						String key = DecomposerRecipe.getKey(stack);
+						depth = Math.max(depth, getSize(key, 0, preCullRecipes));
+						if (depth >= MAXDEPTH)
+						{
+							break;
+						}
+					}
+				}
+				result.put(check, depth);
+			} else
+			{
+				result.put(check, MAXDEPTH);
+			}
+		}
+		if (entry.getKey().contains("abyssal"))
+		{
+			System.out.println("fuck railcraft");
+		}
+		value.clear();
+		Recipe minValue = null;
+		for (Recipe key : result.keySet())
+		{
+			if (minValue == null && result.get(key) < MAXDEPTH)
+			{
+				minValue = key;
+			} else if (minValue != null)
+			{
+				if (key.getOutStackSize() < minValue.getOutStackSize())
+				{
+					minValue = key;
+				} else if (key.getOutStackSize() == minValue.getOutStackSize() && result.get(key) < result.get(minValue))
+				{
+					minValue = key;
+				}
+			}
+		}
+		if (minValue != null)
+		{
+			value.add(minValue);
+		}
 
-    /**
-     * Check if 2 itemStacks contain the same item including the itemDamage
-     * @param stack1
-     * @param stack2
-     * @return true when the 2 stack are the same. False in all other cases
-     */
-    public static boolean isItemEqual(ItemStack stack1, ItemStack stack2)
-    {
-        if (stack1 == null || stack2 == null) return false;
-        else return (stack1.isItemEqual(stack2) && stack1.getItemDamage() == stack2.getItemDamage());
-    }
+		entry.setValue(value);
+	}
 
-    private static ItemStack[] getComponents(IRecipe recipe)
-    {
-        ItemStack[] components = new ItemStack[0];
-
-        if (recipe instanceof ShapelessOreRecipe && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
-        {
-            ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
-            for (Object o : ((ShapelessOreRecipe) recipe).getInput())
-            {
-                if (o instanceof ItemStack)
-                {
-                    inputs.add((ItemStack) o);
-                }
-            }
-            components = inputs.toArray(new ItemStack[inputs.size()]);
-        } else if (recipe instanceof ShapedOreRecipe)
-        {
-            ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
-            for (Object o : ((ShapedOreRecipe) recipe).getInput())
-            {
-
-                if (o instanceof ItemStack)
-                {
-                    inputs.add((ItemStack) o);
-                } else if (o instanceof String)
-                {
-                    inputs.add(OreDictionary.getOres((String) o).get(0));
-                } else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
-                {
-                    //TODO: pick the most basic results out of oredict - I am not sure if vanilla is always listed first
-                    inputs.add((ItemStack) ((ArrayList) o).get(0));
-                }
-            }
-            components = inputs.toArray(new ItemStack[inputs.size()]);
-
-        } else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
-        {
-            components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
-        } else if (recipe instanceof ShapedRecipes && ((ShapedRecipes) recipe).recipeItems instanceof ItemStack[])
-        {
-            components = ((ShapedRecipes) recipe).recipeItems;
-        }
-
-        return components;
-    }
+	private static int getSize(String key, int depth, Map<String, ArrayList<Recipe>> preCullRecipes)
+	{
+		if (depth > MAXDEPTH)
+		{
+			return depth;
+		}
+		if (DecomposerRecipe.get(key) != null)
+		{
+			return 0;
+		}
+		if (!preCullRecipes.containsKey(key))
+		{
+			return 1;
+		}
+		int result = 0;
+		for (Recipe recipe : preCullRecipes.get(key))
+		{
+			int thisDepth = 0;
+			for (ItemStack stack : recipe.inStacks)
+			{
+				if (stack != null)
+				{
+					String nextKey = DecomposerRecipe.getKey(stack);
+					int nextDepth = getSize(nextKey, depth + 1, preCullRecipes);
+					thisDepth = Math.max(thisDepth, nextDepth);
+					if (thisDepth > MAXDEPTH)
+					{
+						break;
+					}
+				}
+			}
+			result = Math.max(thisDepth, result);
+			if (result > MAXDEPTH)
+			{
+				break;
+			}
+		}
+		return result + 1;
+	}
 
 }
