@@ -2,10 +2,13 @@ package minechem.item.element;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import minechem.MinechemItemsRegistration;
+import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.item.ChemicalRoomStateEnum;
@@ -36,6 +39,12 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.FluidTankInfo;
+import net.minecraftforge.fluids.IFluidHandler;
+
 import org.lwjgl.input.Keyboard;
 
 public class ElementItem extends Item
@@ -307,13 +316,70 @@ public class ElementItem extends Item
 		element.setItemDamage(atomicMass - 1);
 		return initiateRadioactivity(element, world);
 	}
+	
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		TileEntity te = world.getTileEntity(x, y, z);
+		if (te!=null && te instanceof IFluidHandler)
+		{
+//			if (!world.isRemote)
+//			{
+				if (stack.getItemDamage()!=ElementEnum.heaviestMass)
+				{
+					int filled=0;
+					for (int i=0;i<6;i++)
+					{
+						filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), false);
+						if (filled>0)
+						{
+							((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), true);
+							stack.stackSize--;
+							if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass)))
+							{
+								player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass), false);
+							}
+							return true;
+						}
+					}
+				}
+				else
+				{
+					FluidStack drained=null;
+					Fluid fluid = MinechemUtil.getFluid((IFluidHandler)te);
+					ElementEnum element = MinechemUtil.getElement(fluid);
+					if (element!=null)
+					{
+						for (int i=0;i<6;i++)
+						{
+							drained = ((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), false);
+							if (drained!=null && drained.amount>0)
+							{
+								((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), true);
+								stack.stackSize--;
+								if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal())))
+								{
+									player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()), false);
+								}
+								return true;
+							}
+						}
+					}
+				}
+//			}
+			return true;
+		}
+		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+		
+	}
+
+
 
 	@Override
 	public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
 	{
 		boolean flag = itemStack.getItemDamage() == ElementEnum.heaviestMass;
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, flag);
-		if (movingObjectPosition == null)
+		if (movingObjectPosition == null||itemStack.stackSize<8)
 		{
 			return itemStack;
 		}
@@ -332,9 +398,10 @@ public class ElementItem extends Item
 				if (chemical != null && MinechemUtil.canDrain(world, block, blockX, blockY, blockZ))
 				{
 					ItemStack stack = MinechemUtil.createItemStack(chemical, 1);
-
+					
 					if (stack != null)
 					{
+						stack.stackSize=8;
 						TileEntity tile = world.getTileEntity(blockX, blockY, blockZ);
 						if (tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
 						{
@@ -342,41 +409,16 @@ public class ElementItem extends Item
 						}
 
 						world.setBlockToAir(blockX, blockY, blockZ);
+						world.removeTileEntity(blockX, blockY, blockZ);
 						return fillTube(itemStack, player, stack);
 					}
 				}
 			} else
 			{
-				if (movingObjectPosition.sideHit == 0)
-				{
-					--blockY;
-				}
-
-				if (movingObjectPosition.sideHit == 1)
-				{
-					++blockY;
-				}
-
-				if (movingObjectPosition.sideHit == 2)
-				{
-					--blockZ;
-				}
-
-				if (movingObjectPosition.sideHit == 3)
-				{
-					++blockZ;
-				}
-
-				if (movingObjectPosition.sideHit == 4)
-				{
-					--blockX;
-				}
-
-				if (movingObjectPosition.sideHit == 5)
-				{
-					++blockX;
-				}
-
+				ForgeDirection dir = ForgeDirection.getOrientation(movingObjectPosition.sideHit);
+				blockX+=dir.offsetX;
+				blockY+=dir.offsetY;
+				blockZ+=dir.offsetZ;
 				if (!player.canPlayerEdit(blockX, blockY, blockZ, movingObjectPosition.sideHit, itemStack))
 				{
 					return itemStack;
@@ -394,7 +436,7 @@ public class ElementItem extends Item
 		if (player.capabilities.isCreativeMode)
 		{
 			return itemStack;
-		} else if (--itemStack.stackSize <= 0)
+		} else if ((itemStack.stackSize-=8) <= 0)
 		{
 			return block;
 		} else
@@ -431,14 +473,14 @@ public class ElementItem extends Item
 			if (player.capabilities.isCreativeMode)
 			{
 				return itemStack;
-			} else if (--itemStack.stackSize <= 0)
+			} else if ((itemStack.stackSize-=8) <= 0)
 			{
-				return new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+				return new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass);
 			} else
 			{
-				if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass)))
+				if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass)))
 				{
-					player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass), false);
+					player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass), false);
 				}
 			}
 		}
