@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class MinechemItemsRegistration
@@ -73,7 +74,7 @@ public class MinechemItemsRegistration
 			if (element != null)
 			{
 				ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
-				FluidContainerRegistry.registerFluidContainer(FluidHelper.elements.get(element), tube, emptyTube);
+				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.elements.get(element), 125), tube);
 			}
 		}
 
@@ -82,7 +83,7 @@ public class MinechemItemsRegistration
 			if (molecule != null)
 			{
 				ItemStack tube = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-				FluidContainerRegistry.registerFluidContainer(FluidHelper.molecules.get(molecule), tube, emptyTube);
+				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.molecules.get(molecule), 125), tube);
 			}
 		}
 	}
