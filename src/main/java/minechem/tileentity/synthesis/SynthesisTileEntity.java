@@ -172,9 +172,9 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	/**
 	 * Determines if the player or automation is allowed to take the item from output slot.
 	 */
-	public boolean canTakeOutputStack()
+	public boolean canTakeOutputStack(boolean doTake)
 	{
-		boolean theState = inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(false);
+		boolean theState = inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(doTake);
 		return theState;
 	}
 
@@ -624,7 +624,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		initialStack.stackSize = 0;
 		outputs.add(initialStack);
 
-		while (canTakeOutputStack() && (amount > 0) && takeInputStacks())
+		while (canTakeOutputStack(false) && (amount > 0) && takeInputStacks())
 		{
 			ItemStack output = outputs.get(outputs.size() - 1);
 			if (output.stackSize + template.stackSize > output.getMaxStackSize())
@@ -712,6 +712,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 	{
-		return Settings.AllowAutomation && canTakeOutputStack() && side == 0;
+        if (canTakeOutputStack(false)) return false;
+		return Settings.AllowAutomation && canTakeOutputStack(true) && side == 0;
 	}
 }
