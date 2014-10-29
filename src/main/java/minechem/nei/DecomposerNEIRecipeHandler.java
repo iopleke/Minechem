@@ -438,11 +438,11 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			}
 		}
 
-		@Override
+		/*@Override
 		public float getChance()
 		{
 			return chance;
-		}
+		}*/
 
 	}
 
