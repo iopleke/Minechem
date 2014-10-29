@@ -1,22 +1,30 @@
 package minechem.utils;
 
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Random;
+
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
+import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidBlock;
+import net.minecraftforge.fluids.IFluidHandler;
 
 public final class MinechemUtil
 {
@@ -128,4 +136,51 @@ public final class MinechemUtil
 
 		return chemical;
 	}
+	
+	public static ElementEnum getElement(Fluid fluid)
+	{
+		for (Map.Entry<ElementEnum, FluidElement> entry:FluidHelper.elements.entrySet())
+		{
+			if (entry.getValue()==fluid)
+				return entry.getKey();
+		}
+		return null;
+	}
+	
+	public static MoleculeEnum getMolecule(Fluid fluid)
+	{
+		for (Entry<MoleculeEnum, FluidChemical> entry:FluidHelper.molecules.entrySet())
+		{
+			if (entry.getValue()==fluid)
+				return entry.getKey();
+		}
+		return null;
+	}
+	
+	public static Fluid getFluid(IFluidHandler te) {
+		FluidTankInfo[] tanks = null;
+		for (int i=0;i<6;i++)
+		{
+			tanks = te.getTankInfo(ForgeDirection.getOrientation(i));
+			if (tanks!=null)
+				break;
+		}
+		if (tanks!=null)
+			for (FluidTankInfo tank:tanks)
+			{
+				if (tank!=null&&tank.fluid!=null)
+					return tank.fluid.getFluid();
+			}
+		return null;
+	}
+	
+	public static void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
+	{
+		current.stackSize+=inc;
+		if (!player.inventory.addItemStackToInventory(give))
+		{
+			player.dropPlayerItemWithRandomChoice(give, false);
+		}
+	}
+	
 }

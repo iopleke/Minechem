@@ -29,13 +29,10 @@ public class Recipe
 	public static Map<String, String> oreDictionary;
 	public ItemStack output;
 	public ItemStack[] inStacks;
-	private Integer depth;
+
 	private static final int MAXDEPTH = 20;
 
-	@SuppressWarnings(
-			{
-				"unchecked", "rawtypes"
-			})
+	@SuppressWarnings({"unchecked", "rawtypes"})
 	@Optional.Method(modid = "RotaryCraft")
 	public static List getRotaryRecipes()
 	{
@@ -72,6 +69,38 @@ public class Recipe
 		}
 		return null;
 	}
+	
+	@SuppressWarnings({"unchecked", "rawtypes"})
+	@Optional.Method(modid = "Railcraft")
+	public static List getRailcraftRecipes()
+	{
+		try
+		{
+			Class rollingmachine = Class.forName("mods.railcraft.common.util.crafting.RollingMachineCraftingManager");
+			Method instance = rollingmachine.getMethod("getInstance");
+			Method list = rollingmachine.getMethod("getRecipeList");
+				return (List) list.invoke(instance.invoke(null));
+		} catch (NoSuchMethodException e)
+		{
+			e.printStackTrace();
+		} catch (SecurityException e)
+		{
+			e.printStackTrace();
+		} catch (IllegalArgumentException e)
+		{
+			e.printStackTrace();
+		} catch (InvocationTargetException e)
+		{
+			e.printStackTrace();
+		} catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		} catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 	@SuppressWarnings(
 			{
@@ -87,6 +116,14 @@ public class Recipe
 		if (Loader.isModLoaded("RotaryCraft"))
 		{
 			List add = getRotaryRecipes();
+			if (add != null)
+			{
+				craftingRecipes.addAll(add);
+			}
+		}
+		if (Loader.isModLoaded("Railcaft"))
+		{
+			List add = getRailcraftRecipes();
 			if (add != null)
 			{
 				craftingRecipes.addAll(add);
