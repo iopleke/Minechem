@@ -4,10 +4,12 @@ import static codechicken.lib.gui.GuiDraw.changeTexture;
 import static codechicken.lib.gui.GuiDraw.drawTexturedModalRect;
 import codechicken.nei.PositionedStack;
 import codechicken.nei.recipe.TemplateRecipeHandler;
+
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
 import minechem.gui.GuiDraw;
 import minechem.potion.PotionChemical;
 import minechem.reference.Resources;
@@ -18,8 +20,10 @@ import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.decomposer.DecomposerRecipeSuper;
 import minechem.utils.Compare;
+import minechem.utils.LogHelper;
 import minechem.utils.MinechemHelper;
 import net.minecraft.item.ItemStack;
+
 import org.lwjgl.opengl.GL11;
 
 public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
@@ -75,6 +79,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			// Add all decomposer recipes to local arecipes array.
 			for (DecomposerRecipe dr : DecomposerRecipe.recipes.values())
 			{
+				LogHelper.debug(dr.getInput().getDisplayName());
 				registerDecomposerRecipe(dr);
 			}
 		} else

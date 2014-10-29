@@ -2066,7 +2066,21 @@ public class MinechemRecipes
 		{
 			null, this.molecule(MoleculeEnum.cellulose), null, null, this.molecule(MoleculeEnum.cellulose), null, null, this.molecule(MoleculeEnum.cellulose), null
 		}));
-
+		
+		
+		//Compass
+		ItemStack itemCompass = new ItemStack(Items.compass);
+		DecomposerRecipe.add(new DecomposerRecipeSelect(itemCompass, 1.0F, new DecomposerRecipe[]{
+				new DecomposerRecipe(new PotionChemical[]{this.element(ElementEnum.Fe,64)}),
+				new DecomposerRecipe(new PotionChemical[]{this.element(ElementEnum.Fe,64),this.molecule(MoleculeEnum.iron3oxide)}),
+				new DecomposerRecipe(new PotionChemical[]{this.element(ElementEnum.Fe,64),this.molecule(MoleculeEnum.iron3oxide),this.element(ElementEnum.Cu)}),
+				new DecomposerRecipe(new PotionChemical[]{this.element(ElementEnum.Fe,64),this.element(ElementEnum.Cu)})
+		}));
+		
+		// Map
+		ItemStack itemMap = new ItemStack(Items.map);
+		DecomposerRecipe.add(new DecomposerRecipeSuper(itemMap, new ItemStack[]{itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemCompass}));
+		
 		// Book
 		ItemStack itemBook = new ItemStack(Items.book);
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemBook, 0.75F, new PotionChemical[]
