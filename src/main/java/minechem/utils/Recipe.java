@@ -3,6 +3,7 @@ package minechem.utils;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
@@ -23,11 +24,13 @@ import cpw.mods.fml.common.Optional;
 public class Recipe
 {
 	public static Map<String, Recipe> recipes;
-
+	private static Map<String, List<Recipe>> preCullRecipes = new Hashtable<String, List<Recipe>>();
 	public static Map<ItemStack, ItemStack> smelting;
 	public static Map<String, String> oreDictionary;
 	public ItemStack output;
 	public ItemStack[] inStacks;
+	private Integer depth;
+	private static final int MAXDEPTH = 20;
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	@Optional.Method(modid = "RotaryCraft")
@@ -64,10 +67,13 @@ public class Recipe
 		recipes = new Hashtable<String, Recipe>();
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
 		oreDictionary = new Hashtable<String, String>();
-		
 		List craftingRecipes = CraftingManager.getInstance().getRecipeList();
 		if (Loader.isModLoaded("RotaryCraft"))
-			craftingRecipes.addAll(getRotaryRecipes());
+		{
+			List add = getRotaryRecipes();
+			if (add!=null)
+				craftingRecipes.addAll(add);
+		}
 		for (Object recipe : craftingRecipes)
 		{
 			if (recipe instanceof IRecipe)
@@ -103,7 +109,6 @@ public class Recipe
 								inputs.add(OreDictionary.getOres((String) o).get(0));
 							} else if (o instanceof ArrayList && !((ArrayList) o).isEmpty())
 							{
-								//TODO: pick the most basic results out of oredict - I am not sure if vanilla is always listed first
 								inputs.add((ItemStack) ((ArrayList) o).get(0));
 							}
 						}
@@ -131,30 +136,68 @@ public class Recipe
 								}
 							}
 						}
-						Recipe currRecipe = recipes.get(key);
-						if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
-						{
-							recipes.put(key, new Recipe(input, components));
-						}
+						Recipe addRecipe = new Recipe(input, components);
+						List<Recipe> recipeList = preCullRecipes.get(key);
+						if (recipeList==null) recipeList = new ArrayList<Recipe>();
+						recipeList.add(addRecipe);
+						preCullRecipes.put(key, recipeList);
+//						Recipe currRecipe = recipes.get(key);
+//						if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()) && !badRecipe)
+//						{
+//							recipes.put(key, new Recipe(input, components));
+//						}
+						
 					}
 				}
 			}
 		}
 		for (ItemStack input : smelting.keySet())
 		{
-			String key = DecomposerRecipe.getKey(input);
+			ItemStack output = smelting.get(input);
+			String key = DecomposerRecipe.getKey(output);
 			if (key != null)
 			{
-				Recipe currRecipe = recipes.get(key);
-				if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()))
-				{
-					recipes.put(key, new Recipe(input, new ItemStack[]
-					{
-						smelting.get(DecomposerRecipe.getKey(input))
-					}));
-				}
+//				Recipe currRecipe = recipes.get(key);
+//				if ((currRecipe == null || input.stackSize < currRecipe.getOutStackSize()))
+//				{
+//					recipes.put(key, new Recipe(input, new ItemStack[]
+//					{
+//						smelting.get(DecomposerRecipe.getKey(input))
+//					}));
+//				}
+				List<Recipe> recipeList = preCullRecipes.get(key);
+				if (recipeList==null) recipeList = new ArrayList<Recipe>();
+				Recipe addRecipe = new Recipe(output, new ItemStack[]{input});
+				recipeList.add(addRecipe);
+				preCullRecipes.put(key, recipeList);
 			}
 		}
+		
+		for (String key:preCullRecipes.keySet())
+		{
+			List<Recipe> cullRecipe = preCullRecipes.get(key);
+			Recipe[] postCull = new Recipe[cullRecipe.size()];
+			int minDepth=-1;
+			int minOutput=-1;
+			for (int i=0;i<postCull.length;i++)
+			{
+				Recipe recipe = cullRecipe.get(i);
+				int depth = recipe.getDepth();
+				if (depth<MAXDEPTH)
+				{
+					postCull[i]=recipe;
+					if (minOutput<0||recipe.getOutStackSize()<=postCull[minOutput].getOutStackSize())
+					{
+						minOutput=i;
+						if (minDepth<0||depth<=postCull[minDepth].getDepth())
+							minDepth=i;
+					}
+				}
+			}
+			if (!(minDepth<0))
+				recipes.put(key, postCull[minDepth]);
+		}
+		
 		for (String name : OreDictionary.getOreNames())
 		{
 			ArrayList<ItemStack> oreDictStacks = OreDictionary.getOres(name);
@@ -264,4 +307,43 @@ public class Recipe
 		return result.toString();
 	}
 
+	private int getDepth()
+	{
+		if (this.depth==null) this.depth = getDepth(0);
+		return this.depth;
+	}
+	
+	private int getDepth(int prevDepth)
+	{
+		if (this.depth!=null) 
+			return this.depth;
+		if (prevDepth<MAXDEPTH&&this.inStacks.length>0)
+		{
+			for (ItemStack stack:this.inStacks)
+			{
+				String key=DecomposerRecipe.getKey(stack);
+				if (key!=null&&preCullRecipes.containsKey(key))
+				{
+					List<Recipe> nextRecipes = preCullRecipes.get(key);
+					int[] depths = new int[nextRecipes.size()];
+					for (int i=0;i<depths.length;i++)
+					{
+						depths[i] = nextRecipes.get(i).getDepth(prevDepth+1);
+					}
+					return this.depth=getMax(depths)+1;
+				}
+				return this.depth=0;
+			}
+		}
+		return this.depth=2*MAXDEPTH;
+	}
+	
+	private int getMax(int[] array)
+	{
+		int max=-1;
+		for (int val:array)
+			if (val>max && val<MAXDEPTH) max=val;
+		return max<0?MAXDEPTH:max;
+	}
+	
 }
