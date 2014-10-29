@@ -1,9 +1,8 @@
 package minechem.item.molecule;
 
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import java.util.List;
+
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
@@ -15,6 +14,7 @@ import minechem.radiation.RadiationFluidTileEntity;
 import minechem.reference.Textures;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -27,6 +27,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidHandler;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MoleculeItem extends Item
 {
@@ -174,6 +179,30 @@ public class MoleculeItem extends Item
 		}
 	}
 
+	
+	@Override
+	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
+		TileEntity te = world.getTileEntity(x, y, z);
+		boolean result = !world.isRemote;
+		if (te!=null && te instanceof IFluidHandler)
+		{
+			int filled=0;
+			for (int i=0;i<6;i++)
+			{
+				filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.molecules.get(getMolecule(stack)),125), false);
+				if (filled>0)
+				{
+					if (result)
+						((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.molecules.get(getMolecule(stack)),125), true);
+					MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+					return result;
+				}
+			}
+			return result;
+		}
+		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+	}
+	
 	public static MoleculeEnum getMolecule(ItemStack itemstack)
 	{
 		int itemDamage = itemstack.getItemDamage();
@@ -230,7 +259,7 @@ public class MoleculeItem extends Item
 		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
-		if (movingObjectPosition == null)
+		if (movingObjectPosition == null||itemStack.stackSize<8)
 		{
 			return itemStack;
 		}
@@ -241,36 +270,11 @@ public class MoleculeItem extends Item
 			int blockY = movingObjectPosition.blockY;
 			int blockZ = movingObjectPosition.blockZ;
 
-			if (movingObjectPosition.sideHit == 0)
-			{
-				--blockY;
-			}
-
-			if (movingObjectPosition.sideHit == 1)
-			{
-				++blockY;
-			}
-
-			if (movingObjectPosition.sideHit == 2)
-			{
-				--blockZ;
-			}
-
-			if (movingObjectPosition.sideHit == 3)
-			{
-				++blockZ;
-			}
-
-			if (movingObjectPosition.sideHit == 4)
-			{
-				--blockX;
-			}
-
-			if (movingObjectPosition.sideHit == 5)
-			{
-				++blockX;
-			}
-
+			ForgeDirection dir = ForgeDirection.getOrientation(movingObjectPosition.sideHit);
+			blockX+=dir.offsetX;
+			blockY+=dir.offsetY;
+			blockZ+=dir.offsetZ;
+			
 			if (!player.canPlayerEdit(blockX, blockY, blockZ, movingObjectPosition.sideHit, itemStack))
 			{
 				return itemStack;
@@ -306,14 +310,14 @@ public class MoleculeItem extends Item
 			if (player.capabilities.isCreativeMode)
 			{
 				return itemStack;
-			} else if (--itemStack.stackSize <= 0)
+			} else if ((itemStack.stackSize-=8) <= 0)
 			{
-				return new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+				return new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass);
 			} else
 			{
-				if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass)))
+				if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass)))
 				{
-					player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass), false);
+					player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass), false);
 				}
 			}
 		}

@@ -14,6 +14,7 @@ import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -171,6 +172,15 @@ public final class MinechemUtil
 					return tank.fluid.getFluid();
 			}
 		return null;
+	}
+	
+	public static void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
+	{
+		current.stackSize+=inc;
+		if (!player.inventory.addItemStackToInventory(give))
+		{
+			player.dropPlayerItemWithRandomChoice(give, false);
+		}
 	}
 	
 }

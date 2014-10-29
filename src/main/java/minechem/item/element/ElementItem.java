@@ -333,7 +333,7 @@ public class ElementItem extends Item
 					{
 						if (result)
 							((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), true);
-						incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+						MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
 						return result;
 					}
 				}
@@ -352,8 +352,26 @@ public class ElementItem extends Item
 						{
 							if (result)
 								((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), true);
-							incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+							MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
 							return result;
+						}
+					}
+				}
+				else
+				{
+					MoleculeEnum molecule = MinechemUtil.getMolecule(fluid);
+					if (molecule!=null)
+					{
+						for (int i=0;i<6;i++)
+						{
+							drained = ((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), false);
+							if (drained!=null && drained.amount>0)
+							{
+								if (result)
+									((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), true);
+								MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
+								return result;
+							}
 						}
 					}
 				}
@@ -362,15 +380,6 @@ public class ElementItem extends Item
 		}
 		return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
 		
-	}
-
-	public void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
-	{
-		current.stackSize+=inc;
-		if (!player.inventory.addItemStackToInventory(give))
-		{
-			player.dropPlayerItemWithRandomChoice(give, false);
-		}
 	}
 
 	@Override
