@@ -15,6 +15,7 @@ lib/1.6.4/
 ._*
 *.txt
 *.log
+*.json
 
 ## gradle
 /.gradle
