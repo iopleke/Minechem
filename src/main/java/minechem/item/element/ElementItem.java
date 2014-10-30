@@ -331,7 +331,8 @@ public class ElementItem extends Item
 					{
 						if (result)
 							((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)),125), true);
-						MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+                        if (!player.capabilities.isCreativeMode)
+						    MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
 						return result;
 					}
 				}
@@ -350,7 +351,8 @@ public class ElementItem extends Item
 						{
 							if (result)
 								((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), true);
-							MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+                            if (!player.capabilities.isCreativeMode)
+							    MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
 							return result;
 						}
 					}
@@ -367,7 +369,8 @@ public class ElementItem extends Item
 							{
 								if (result)
 									((IFluidHandler)te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid,125), true);
-								MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
+                                if (!player.capabilities.isCreativeMode)
+								    MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
 								return result;
 							}
 						}
