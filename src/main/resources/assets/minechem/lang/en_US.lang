@@ -62,6 +62,10 @@ config.uraniumoredensity=Uranium Ore Density
 config.worldgen.description=Configure how Minechem generates world features, like ore
 config.worldgen.ore.description=Should Minechem generate ore
 config.worldgen.ore.tooltip=Generate Ore
+config.power.energyPacketSize.description=Max RF/t consumption of Minechem machines
+config.recursiveDepth.description=Recipe Recursion Depth (higher for more complex recipes)
+config.decaySafeMachines.description=Enable Safe Machines
+onfig.fluideffects.description=Enable fluid Effects
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
