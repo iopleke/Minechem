@@ -13,19 +13,14 @@ public class MinechemFuelHandler implements IFuelHandler{
 	@Override
 	public int getBurnTime(ItemStack fuel) {
 		Integer result = fuels.get(getKey(fuel));
-		return result!=null?result*fuel.stackSize:0;
+		return result!=null?result:0;
 	}
 
 	private static String getKey(ItemStack itemStack)
 	{
 		if (itemStack != null && itemStack.getItem() != null)
 		{
-			ItemStack result = itemStack.copy();
-			if (result.toString().contains("null"))
-			{
-				return result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
-			}
-			return result.toString();
+			return itemStack.getItem().getUnlocalizedName(itemStack) + "@" + itemStack.getItemDamage();
 		}
 		return null;
 	}
