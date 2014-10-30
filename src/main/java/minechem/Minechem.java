@@ -21,6 +21,7 @@ import minechem.item.polytool.PolytoolEventHandler;
 import minechem.item.polytool.types.PolytoolTypeIron;
 import minechem.minetweaker.Chemicals;
 import minechem.minetweaker.Decomposer;
+import minechem.minetweaker.Fuels;
 import minechem.minetweaker.Synthesiser;
 import minechem.network.MessageHandler;
 import minechem.potion.PotionCoatingRecipe;
@@ -33,6 +34,7 @@ import minechem.reference.Reference;
 import minechem.render.EffectsRenderer;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.LogHelper;
+import minechem.utils.MinechemFuelHandler;
 import minechem.utils.Recipe;
 import minetweaker.MineTweakerAPI;
 import net.minecraft.item.crafting.CraftingManager;
@@ -79,7 +81,8 @@ public class Minechem
 
 		LogHelper.debug("Registering Blueprints...");
 		MinechemBlueprint.registerBlueprints();
-
+		
+		GameRegistry.registerFuelHandler(new MinechemFuelHandler());
 	}
 
 	@EventHandler
@@ -126,12 +129,16 @@ public class Minechem
 		FluidChemicalDispenser.init();
 		ChemicalFluidReactionHandler.initExplodableChemical();
 
+		LogHelper.debug("Registering Fuel Values...");
+		MinechemItemsRegistration.registerFuelValues();
+		
 		if (Loader.isModLoaded("MineTweaker3"))
 		{
 			LogHelper.debug("Loading MineTweaker Classes...");
 			MineTweakerAPI.registerClass(Chemicals.class);
 			MineTweakerAPI.registerClass(Decomposer.class);
 			MineTweakerAPI.registerClass(Synthesiser.class);
+			MineTweakerAPI.registerClass(Fuels.class);
 		}
 	}
 
