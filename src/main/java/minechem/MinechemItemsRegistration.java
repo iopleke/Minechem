@@ -116,6 +116,20 @@ public class MinechemItemsRegistration
 	public static void registerFuelValues()
 	{
 		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.C.ordinal()), 200);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.H.ordinal()), 100);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.S.ordinal()), 300);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.P.ordinal()), 250);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.cellulose.id()), 2000);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.meoh.id()), 500);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.ethanol.id()), 1100);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.aalc.id()), 800);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.propane.id()), 1400);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.toluene.id()), 2200);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.tnt.id()), 4000);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.isoprene.id()), 1800);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.butene.id()), 1600);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.memethacrylate.id()), 5700);
+
 	}
 
 }

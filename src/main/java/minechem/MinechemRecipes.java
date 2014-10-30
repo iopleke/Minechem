@@ -1857,9 +1857,12 @@ public class MinechemRecipes
 		ItemStack itemChar = new ItemStack(Items.coal, 1, 1);
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemChar, 0.82F, new PotionChemical[]
 		{
-			this.element(ElementEnum.C, 1)
+			this.element(ElementEnum.C, 8)
 		}));
-
+		SynthesisRecipe.add(new SynthesisRecipe(itemChar, false, COST_ITEM, new PotionChemical[]
+		{
+			this.element(ElementEnum.C, 4), this.element(ElementEnum.C, 4)
+		}));
 		// Diamond
 		ItemStack itemDiamond = new ItemStack(Items.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond, new PotionChemical[]
