@@ -12,6 +12,7 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.item.polytool.PolytoolItem;
 import minechem.reference.Reference;
+import minechem.utils.MinechemFuelHandler;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.WeightedRandomChestContent;
@@ -110,6 +111,11 @@ public class MinechemItemsRegistration
 		ItemStack B = new ItemStack(blueprint, 1, 1);
 		ChestProvider.addItem(new WeightedRandomChestContent(A, 10, 80, 1));
 		ChestProvider.addItem(new WeightedRandomChestContent(B, 10, 80, 1));
+	}
+	
+	public static void registerFuelValues()
+	{
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.C.ordinal()), 200);
 	}
 
 }

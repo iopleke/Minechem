@@ -259,6 +259,8 @@ public class MoleculeItem extends Item
 		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
+		if (itemStack.stackSize<8)
+			MinechemUtil.scanForMoreStacks(itemStack, player);
 		if (movingObjectPosition == null||itemStack.stackSize<8)
 		{
 			return itemStack;
@@ -310,15 +312,9 @@ public class MoleculeItem extends Item
 			if (player.capabilities.isCreativeMode)
 			{
 				return itemStack;
-			} else if ((itemStack.stackSize-=8) <= 0)
+			} else 
 			{
-				return new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass);
-			} else
-			{
-				if (!player.inventory.addItemStackToInventory(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass)))
-				{
-					player.dropPlayerItemWithRandomChoice(new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass), false);
-				}
+				MinechemUtil.incPlayerInventory(itemStack, -8, player, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
 			}
 		}
 		return itemStack;

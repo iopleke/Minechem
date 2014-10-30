@@ -1,6 +1,7 @@
 import mods.minechem.Decomposer;
 import mods.minechem.Synthesiser;
 import mods.minechem.Chemicals;
+import mods.minechem.Fuels;
 
 //###########Example Items#######################
 val redstone = <minecraft:redstone>;
@@ -33,6 +34,10 @@ val Au = <ore:element_Au>;
 //###########Synthesiser Functions################
 //Synthesiser.removeRecipe(glass);										-- Remove Recipe
 //Synthesiser.addRecipe([lead*10,ice*5],glass,false,100);				-- Add recipe ([inputs],output,shaped?, energy)
+
+//###########Fuel Functions#######################
+//Fuels.addFuel(H,200);													-- Add/Change Fuel (Item, burn time in ticks)
+//Fuels.removeFuel(Au);													-- Remove Fuel
 
 //############Input variables#####################
 //Element Types = "Non-metal","Inert gas","Halogen","Alkali metal","Alkaline Earth Metal","Metalloid","Other metal",

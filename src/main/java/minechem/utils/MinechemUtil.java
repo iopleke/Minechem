@@ -15,6 +15,7 @@ import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.block.Block;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -163,15 +164,35 @@ public final class MinechemUtil
 		{
 			tanks = te.getTankInfo(ForgeDirection.getOrientation(i));
 			if (tanks!=null)
-				break;
-		}
-		if (tanks!=null)
-			for (FluidTankInfo tank:tanks)
-			{
-				if (tank!=null&&tank.fluid!=null)
-					return tank.fluid.getFluid();
-			}
+				for (FluidTankInfo tank:tanks)
+				{
+					if (tank!=null&&tank.fluid!=null)
+						return tank.fluid.getFluid();
+				}
+		}	
 		return null;
+	}
+	
+	public static void scanForMoreStacks(ItemStack current, EntityPlayer player)
+	{
+		int getMore = 8-current.stackSize;
+		InventoryPlayer inventory = player.inventory;
+		int maxSlot = player.inventory.getSizeInventory()-4;
+		int slot=0;
+		do
+		{
+			if (slot!=inventory.currentItem)
+			{
+				ItemStack slotStack = inventory.getStackInSlot(slot);
+				if (slotStack!=null && slotStack.isItemEqual(current))
+				{
+					ItemStack addStack = inventory.decrStackSize(slot, getMore);
+					current.stackSize+=addStack.stackSize;
+					getMore-=addStack.stackSize;
+				}
+			}
+			slot++;
+		}while (getMore>0&&slot<maxSlot);
 	}
 	
 	public static void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
