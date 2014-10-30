@@ -385,9 +385,9 @@ public class ElementItem extends Item
 	{
 		boolean flag = itemStack.getItemDamage() == ElementEnum.heaviestMass;
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, flag);
-		if (itemStack.stackSize<8)
+		if (!player.capabilities.isCreativeMode&&itemStack.stackSize<8)
 			MinechemUtil.scanForMoreStacks(itemStack, player);
-		if (movingObjectPosition == null||itemStack.stackSize<8)
+		if (movingObjectPosition == null||(itemStack.stackSize<8&&!player.capabilities.isCreativeMode))
 		{
 			return itemStack;
 		}

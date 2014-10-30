@@ -259,9 +259,9 @@ public class MoleculeItem extends Item
 		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
-		if (itemStack.stackSize<8)
+		if (!player.capabilities.isCreativeMode&&itemStack.stackSize<8)
 			MinechemUtil.scanForMoreStacks(itemStack, player);
-		if (movingObjectPosition == null||itemStack.stackSize<8)
+		if (movingObjectPosition == null||(itemStack.stackSize<8&&!player.capabilities.isCreativeMode))
 		{
 			return itemStack;
 		}
