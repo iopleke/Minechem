@@ -1,0 +1,96 @@
+package minechem.item.bucket;
+
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import minechem.MinechemItemsRegistration;
+import minechem.fluid.FluidChemical;
+import minechem.fluid.FluidElement;
+import minechem.fluid.MinechemFluidBlock;
+import minechem.reference.Reference;
+import net.minecraft.block.Block;
+import net.minecraft.init.Items;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.World;
+import net.minecraftforge.event.entity.player.FillBucketEvent;
+import net.minecraftforge.fluids.FluidContainerRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MinechemBucketHandler
+{
+    private static MinechemBucketHandler instance;
+    private Map<MinechemFluidBlock, Item> buckets = new HashMap<MinechemFluidBlock, Item>();
+
+    public static MinechemBucketHandler getInstance()
+    {
+        if (instance == null)
+        {
+            instance = new MinechemBucketHandler();
+        }
+        return instance;
+    }
+
+    private MinechemBucketHandler()
+    {
+
+    }
+
+    @SubscribeEvent
+    public void onBucketFill(FillBucketEvent event) {
+        ItemStack result = fillCustomBucket(event.world, event.target);
+
+        if (result == null) {
+            return;
+        }
+
+        event.result = result;
+        event.setResult(Event.Result.ALLOW);
+    }
+
+    private ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
+        Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
+
+        Item bucket = buckets.get(block);
+
+        if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
+            world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
+            return new ItemStack(bucket);
+        } else {
+            return null;
+        }
+    }
+
+    public void registerCustomMinechemBucket(MinechemFluidBlock block, String prefix)
+    {
+        if (buckets.get(block) != null) return;
+
+        Item bucket = new MinechemBucketItem(block, -block.getBlockColor());//TODO: fix color
+        GameRegistry.registerItem(bucket, Reference.ID + "Bucket." + prefix + block.getFluid().getName());
+        FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
+        ItemStack tube = null;
+        if (block.getFluid() instanceof FluidElement)
+        {
+            tube = new ItemStack(MinechemItemsRegistration.element, 1, ((FluidElement) block.getFluid()).element.ordinal());
+        }
+        else if (block.getFluid() instanceof FluidChemical)
+        {
+            tube = new ItemStack(MinechemItemsRegistration.molecule, 1, ((FluidChemical) block.getFluid()).molecule.id());
+        }
+        if (tube != null)
+        {
+            GameRegistry.addRecipe(new ItemStack(bucket), new Object[]
+            {
+                    "TTT", "TBT", "TTT", Character.valueOf('T'), tube, Character.valueOf('B'), new ItemStack(Items.bucket)
+            });
+
+            tube.stackSize = 8;
+            GameRegistry.addShapelessRecipe(tube, new ItemStack(bucket));
+        }
+        buckets.put(block, bucket);
+    }
+
+}

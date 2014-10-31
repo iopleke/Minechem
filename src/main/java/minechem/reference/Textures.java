@@ -49,6 +49,8 @@ public class Textures
 		public static final String URANIUM = PREFIX + "uraniumOre";
 		public static final String FUILD_STILL = PREFIX + "fluid_still";
 		public static final String FLUID_FLOW = PREFIX + "fluid_flow";
+        public static final String BUCKET_EMPTY = PREFIX + "bucketEmpty";
+        public static final String BUCKET_CONTENT = PREFIX + "bucketContent";
 	}
 
 	public static final class Gui
@@ -74,7 +76,7 @@ public class Textures
 		public static final String DECOMPOSER_NEI = GUI_DIR + "ChemicalDecomposerGUINEI.png";
 	}
 
-	public static class Model
+	public static final class Model
 	{
 		private static final String MODEL_DIR = "textures/model/";
 
