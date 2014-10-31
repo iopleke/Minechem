@@ -24,10 +24,7 @@ import minechem.minetweaker.Decomposer;
 import minechem.minetweaker.Fuels;
 import minechem.minetweaker.Synthesiser;
 import minechem.network.MessageHandler;
-import minechem.potion.PotionCoatingRecipe;
-import minechem.potion.PotionCoatingSubscribe;
-import minechem.potion.PotionEnchantmentCoated;
-import minechem.potion.PotionInjector;
+import minechem.potion.*;
 import minechem.proxy.CommonProxy;
 import minechem.reference.MetaData;
 import minechem.reference.Reference;
@@ -109,6 +106,9 @@ public class Minechem
 
 		LogHelper.debug("Matching Pharmacology Effects to Chemicals...");
 		CraftingManager.getInstance().getRecipeList().add(new PotionCoatingRecipe());
+
+        LogHelper.debug("Registering FoodSpiking Recipes...");
+        CraftingManager.getInstance().getRecipeList().add(new PotionSpikingRecipe());
 
 		LogHelper.debug("Registering Ore Generation...");
 		GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);

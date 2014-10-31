@@ -14,8 +14,13 @@ import net.minecraft.world.World;
 public class PotionPharmacologyEffect
 {
 
+    /**
+     * Used to test if molecule has an effect
+     * @param toTest the molecule
+     * @return true if the molecule has an effect
+     */
 	public static boolean givesEffect(MoleculeEnum toTest)
-	{ // This for the swords?
+	{
 		MoleculeEnum[] possibles =
 		{
 			MoleculeEnum.water, MoleculeEnum.starch, MoleculeEnum.xylitol, MoleculeEnum.sucrose, MoleculeEnum.psilocybin, MoleculeEnum.amphetamine, MoleculeEnum.methamphetamine, MoleculeEnum.mycotoxin, MoleculeEnum.ethanol, MoleculeEnum.cyanide,
