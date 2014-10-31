@@ -20,6 +20,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -184,7 +185,7 @@ public class MoleculeItem extends Item
 	public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ) {
 		TileEntity te = world.getTileEntity(x, y, z);
 		boolean result = !world.isRemote;
-		if (te!=null && te instanceof IFluidHandler)
+		if (te != null && te instanceof IFluidHandler  && !player.isSneaking() && !(te instanceof IInventory))
 		{
 			int filled=0;
 			for (int i=0;i<6;i++)
