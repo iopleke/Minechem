@@ -35,20 +35,24 @@ public class ScheduledTickHandler
 	{
 		ItemStack currentItem = entityPlayer.inventory.getCurrentItem();
 		if (isPlayerEating(entityPlayer) && currentItem != null && currentItem.getTagCompound() != null)
-		{
-			NBTTagCompound stackTag = currentItem.getTagCompound();
-			boolean isPoisoned = stackTag.getBoolean("minechem.isPoisoned");
-			int effectType = stackTag.getInteger("minechem.effectType");
-			MoleculeEnum molecule = MoleculeEnum.getById(effectType);
-			if (isPoisoned)
-			{
-				if (Settings.FoodSpiking)
-				{
-					PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
-				}
-				entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
-			}
-		}
+        {
+            NBTTagCompound stackTag = currentItem.getTagCompound();
+            boolean isPoisoned = stackTag.getBoolean("minechem.isPoisoned");
+            int[] effectTypes = stackTag.getIntArray("minechem.effectTypes");
+            if (isPoisoned)
+            {
+                for (int effectType : effectTypes)
+                {
+                    MoleculeEnum molecule = MoleculeEnum.getById(effectType);
+                    if (Settings.FoodSpiking)
+                    {
+                        PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
+                    }
+                    currentItem.onFoodEaten(entityPlayer.getEntityWorld(), entityPlayer);
+                    entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
+                }
+            }
+        }
 	}
 
 	private boolean isPlayerEating(EntityPlayer player)

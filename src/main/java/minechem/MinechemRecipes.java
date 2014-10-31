@@ -38,7 +38,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemFood;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -3039,36 +3038,9 @@ public class MinechemRecipes
 
 		GameRegistry.addRecipe(new ChemistJournalRecipeCloning());
 
-		//
 		this.addDecomposerRecipesFromMolecules();
 		this.addSynthesisRecipesFromMolecules();
 		this.addUnusedSynthesisRecipes();
-		if (Settings.FoodSpiking)
-		{
-			this.registerPoisonRecipes(MoleculeEnum.mycotoxin);
-			this.registerPoisonRecipes(MoleculeEnum.sucrose);
-			this.registerPoisonRecipes(MoleculeEnum.psilocybin);
-			this.registerPoisonRecipes(MoleculeEnum.methamphetamine);
-			this.registerPoisonRecipes(MoleculeEnum.amphetamine);
-			this.registerPoisonRecipes(MoleculeEnum.pantherine);
-			this.registerPoisonRecipes(MoleculeEnum.ethanol);
-			this.registerPoisonRecipes(MoleculeEnum.penicillin);
-			this.registerPoisonRecipes(MoleculeEnum.testosterone);
-			this.registerPoisonRecipes(MoleculeEnum.xanax);
-			this.registerPoisonRecipes(MoleculeEnum.mescaline);
-			this.registerPoisonRecipes(MoleculeEnum.asprin);
-			this.registerPoisonRecipes(MoleculeEnum.sulfuricAcid);
-			this.registerPoisonRecipes(MoleculeEnum.tetrodotoxin);
-			this.registerPoisonRecipes(MoleculeEnum.pal2);
-			this.registerPoisonRecipes(MoleculeEnum.nodularin);
-			this.registerPoisonRecipes(MoleculeEnum.thc);
-			this.registerPoisonRecipes(MoleculeEnum.radchlor); // Whoa, oh, oh, oh, I'm radioactive, radioactive
-			this.registerPoisonRecipes(MoleculeEnum.cocaine);
-			this.registerPoisonRecipes(MoleculeEnum.cocainehcl);
-			this.registerPoisonRecipes(MoleculeEnum.theobromine);
-			this.registerPoisonRecipes(MoleculeEnum.caulerpenyne);
-			this.registerPoisonRecipes(MoleculeEnum.latropine);
-		}
 	}
 
 	private void addDecomposerRecipesFromMolecules()
@@ -3170,36 +3142,6 @@ public class MinechemRecipes
 			return false;
 		}
 		return true;
-	}
-
-	private ItemStack createPoisonedItemStack(Item item, int count, MoleculeEnum molecule)
-	{
-		ItemStack moleculeForShapelessRecipe = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-		ItemStack var5 = new ItemStack(item, 1, count);
-		ItemStack var6 = new ItemStack(item, 1, count);
-		NBTTagCompound var7 = new NBTTagCompound();
-		var7.setBoolean("minechem.isPoisoned", true);
-		var7.setInteger("minechem.effectType", molecule.id());
-		var6.setTagCompound(var7);
-		GameRegistry.addShapelessRecipe(var6, new Object[]
-		{
-			moleculeForShapelessRecipe, var5
-		});
-		return var6;
-	}
-
-	private void registerPoisonRecipes(MoleculeEnum molecule)
-	{
-		Iterator<Item> it = Item.itemRegistry.iterator();
-
-		while (it.hasNext())
-		{
-			Item item = it.next();
-			if (item != null && item instanceof ItemFood)
-			{
-				this.createPoisonedItemStack(item, 0, molecule);
-			}
-		}
 	}
 
 	private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
