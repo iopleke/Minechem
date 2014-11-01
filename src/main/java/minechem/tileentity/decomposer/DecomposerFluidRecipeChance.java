@@ -45,6 +45,7 @@ public class DecomposerFluidRecipeChance extends DecomposerFluidRecipe
 		}
 	}
 
+	@Override
 	public float getChance()
 	{
 		return chance;

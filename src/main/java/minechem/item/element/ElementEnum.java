@@ -1,7 +1,7 @@
 package minechem.item.element;
 
+import java.util.HashMap;
 import java.util.Hashtable;
-import java.util.Iterator;
 import java.util.Map;
 import minechem.fluid.FluidHelper;
 import minechem.item.ChemicalRoomStateEnum;
@@ -33,6 +33,7 @@ public class ElementEnum extends MinechemChemicalType
 
 	public static int heaviestMass = 0;
 	public static Map<Integer, ElementEnum> elements = new Hashtable<Integer, ElementEnum>();
+	public static Map<String, ElementEnum> nameToElements = new HashMap<String, ElementEnum>();
 
 	public static final ElementEnum H = addElement(0, "H", "Hydrogen", nonmetal, gas, stable);//Done
 	public static final ElementEnum He = addElement(1, "He", "Helium", inertGas, gas, stable);//Done
@@ -188,20 +189,25 @@ public class ElementEnum extends MinechemChemicalType
 
 	public static void registerElement(ElementEnum element)
 	{
-		if (elements.get(element.id) != null)
+		if (elements.containsKey(element.id))
 		{
 			throw new IllegalArgumentException("id " + element.id + " is used");
+		}
+		if (nameToElements.containsKey(element.name())){
+			throw new IllegalArgumentException("name" + element.name() + " is used");
 		}
 		if (element.id >= heaviestMass)
 		{
 			heaviestMass = element.id + 1;
 		}
 		elements.put(element.id, element);
+		nameToElements.put(element.name(), element);
 	}
 
 	public static void unregisterElement(ElementEnum element)
 	{
 		elements.remove(element.id);
+		nameToElements.remove(element.name());
 	}
 
 	public ElementClassificationEnum classification()
@@ -248,16 +254,6 @@ public class ElementEnum extends MinechemChemicalType
 
 	public static ElementEnum getByName(String name)
 	{
-		Iterator<ElementEnum> it = elements.values().iterator();
-		while (it.hasNext())
-		{
-			ElementEnum element = it.next();
-			if (element.name.equals(name))
-			{
-				return element;
-			}
-		}
-
-		return null;
+		return nameToElements.get(name);
 	}
 }

@@ -1,6 +1,7 @@
 package minechem.item.molecule;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -55,6 +56,7 @@ import net.minecraft.item.ItemStack;
 public class MoleculeEnum extends MinechemChemicalType
 {
 	public static Map<Integer, MoleculeEnum> molecules = new LinkedHashMap<Integer, MoleculeEnum>();
+	public static Map<String, MoleculeEnum> nameToMolecules = new HashMap<String, MoleculeEnum>();
 	public static int baseMolecules = 172;
 
 	public static final MoleculeEnum cellulose = addMolecule("cellulose", 0, 0, 1, 0, 0, 0.25F, 0, solid, new Element(C, 6), new Element(H, 10), new Element(O, 5));
@@ -269,11 +271,6 @@ public class MoleculeEnum extends MinechemChemicalType
 	{
 		super(roomState, computeRadioactivity(chemicals));
 
-		if (molecules != null && id < molecules.size() && molecules.get(id) != null)
-		{
-			throw new IllegalArgumentException("id " + id + " is used");
-		}
-
 		this.id = id;
 		this.name = name;
 		this.components = new ArrayList<PotionChemical>();
@@ -305,13 +302,13 @@ public class MoleculeEnum extends MinechemChemicalType
 
 	public static void registerMolecule(MoleculeEnum molecule)
 	{
-		molecules.put(molecule.id(), molecule);
+		addMapping(molecule);
 		FluidHelper.registerMolecule(molecule);
 	}
 
 	public static void registerMTMolecule(MoleculeEnum molecule)
 	{
-		molecules.put(molecule.id(), molecule);
+		addMapping(molecule);
 		ArrayList<PotionChemical> var5 = molecule.components();
 		PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
 		ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
@@ -321,7 +318,7 @@ public class MoleculeEnum extends MinechemChemicalType
 
 	public static void unregisterMolecule(MoleculeEnum molecule)
 	{
-		molecules.remove(molecule.id());
+		removeMapping(molecule);
 		DecomposerRecipe.remove(new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
 		SynthesisRecipe.remove(new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
 	}
@@ -365,14 +362,7 @@ public class MoleculeEnum extends MinechemChemicalType
 
 	public static MoleculeEnum getByName(String name)
 	{
-		for (MoleculeEnum molecule : molecules.values())
-		{
-			if (molecule != null && molecule.name.equalsIgnoreCase(name))
-			{
-				return molecule;
-			}
-		}
-		return null;
+		return nameToMolecules.get(name);
 	}
 
 	public int id()
@@ -423,5 +413,21 @@ public class MoleculeEnum extends MinechemChemicalType
 	public String getUnlocalizedName()
 	{
 		return localizationKey;
+	}
+	
+	private static void addMapping(MoleculeEnum molecule){
+		if (molecules.containsKey(molecule.id())){
+			throw new IllegalArgumentException("id "+molecule.id()+" is used");
+		}
+		if (nameToMolecules.containsKey(molecule.name())){
+			throw new IllegalArgumentException("name "+molecule.name()+" is used");
+		}
+		molecules.put(molecule.id(), molecule);
+		nameToMolecules.put(molecule.name(), molecule);
+	}
+	
+	private static void removeMapping(MoleculeEnum molecule){
+		molecules.remove(molecule.id());
+		nameToMolecules.remove(molecule.name());
 	}
 }
