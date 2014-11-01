@@ -10,6 +10,7 @@ import minechem.radiation.RadiationHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
 public class ScheduledTickHandler
 {
@@ -17,26 +18,19 @@ public class ScheduledTickHandler
 	@SubscribeEvent
 	public void tick(TickEvent.PlayerTickEvent event)
 	{
-		if (event.side == Side.SERVER)
+		if (event.side == Side.SERVER && event.phase == TickEvent.Phase.START)
 		{
-			if (event.phase == TickEvent.Phase.START)
-			{
-				EntityPlayer player = event.player;
-				RadiationHandler.getInstance().update(player);
-			} else if (event.phase == TickEvent.Phase.END)
-			{
-				EntityPlayer player = event.player;
-				checkForPoison(player);
-			}
+            EntityPlayer player = event.player;
+            RadiationHandler.getInstance().update(player);
 		}
 	}
 
-	private void checkForPoison(EntityPlayer entityPlayer)
-	{
-		ItemStack currentItem = entityPlayer.inventory.getCurrentItem();
-		if (isPlayerEating(entityPlayer) && currentItem != null && currentItem.getTagCompound() != null)
+    @SubscribeEvent
+    public void checkForPoison(PlayerUseItemEvent.Finish event)
+    {
+        if (event.item != null && event.item.getTagCompound() != null && Settings.FoodSpiking)
         {
-            NBTTagCompound stackTag = currentItem.getTagCompound();
+            NBTTagCompound stackTag = event.item.getTagCompound();
             boolean isPoisoned = stackTag.getBoolean("minechem.isPoisoned");
             int[] effectTypes = stackTag.getIntArray("minechem.effectTypes");
             if (isPoisoned)
@@ -44,20 +38,10 @@ public class ScheduledTickHandler
                 for (int effectType : effectTypes)
                 {
                     MoleculeEnum molecule = MoleculeEnum.getById(effectType);
-                    if (Settings.FoodSpiking)
-                    {
-                        PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
-                    }
-                    currentItem.onFoodEaten(entityPlayer.getEntityWorld(), entityPlayer);
-                    entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
+                    PotionPharmacologyEffect.triggerPlayerEffect(molecule, event.entityPlayer);
                 }
             }
         }
-	}
-
-	private boolean isPlayerEating(EntityPlayer player)
-	{
-		return (player.getDataWatcher().getWatchableObjectByte(0) & 1 << 4) != 0;
-	}
+    }
 
 }

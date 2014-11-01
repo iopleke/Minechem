@@ -11,6 +11,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy
 {
@@ -24,6 +25,7 @@ public class CommonProxy
 	public void registerTickHandlers()
 	{
 		FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
+        MinecraftForge.EVENT_BUS.register(new ScheduledTickHandler());
 		FMLCommonHandler.instance().bus().register(new ChemicalFluidReactionHandler());
 		FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
 	}
