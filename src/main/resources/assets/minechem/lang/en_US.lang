@@ -65,7 +65,7 @@ config.worldgen.ore.tooltip=Generate Ore
 config.power.energyPacketSize.description=Max RF/t consumption of Minechem machines
 config.recursiveDepth.description=Recipe Recursion Depth (higher for more complex recipes)
 config.decaySafeMachines.description=Enable Safe Machines
-onfig.fluideffects.description=Enable fluid Effects
+config.fluideffects.description=Enable fluid Effects
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
