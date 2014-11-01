@@ -475,7 +475,6 @@ public class ElementItem extends Item
 					itemStack.stackSize-=8;
 				}else{
 					int needs=8-itemStack.stackSize;
-					itemStack.stackSize=0;
 					Set<ItemStack> otherItemsStacks=MinechemUtil.findItemStacks(player.inventory, itemStack.getItem(), itemStack.getItemDamage());
 					otherItemsStacks.remove(itemStack);
 					int free=0;
@@ -487,6 +486,7 @@ public class ElementItem extends Item
 					if (free<needs){
 						return itemStack;
 					}
+					itemStack.stackSize=0;
 					
 					Iterator<ItemStack> it=otherItemsStacks.iterator();
 					while (it.hasNext()) {
