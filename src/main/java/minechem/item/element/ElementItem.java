@@ -388,9 +388,7 @@ public class ElementItem extends Item
 	{
 		boolean flag = itemStack.getItemDamage() == ElementEnum.heaviestMass;
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, flag);
-		if (!player.capabilities.isCreativeMode&&itemStack.stackSize<8)
-			MinechemUtil.scanForMoreStacks(itemStack, player);
-		if (movingObjectPosition == null||(itemStack.stackSize<8&&!player.capabilities.isCreativeMode))
+		if (movingObjectPosition == null||player.capabilities.isCreativeMode)
 		{
 			return itemStack;
 		}
@@ -468,7 +466,9 @@ public class ElementItem extends Item
 
 		if (world.isAirBlock(x, y, z))
 		{
-			RadiationEnum radioactivity = ElementEnum.elements.get(itemStack.getItemDamage()).radioactivity();
+			RadiationInfo radioactivity = getRadiationInfo(itemStack, world);
+			long worldtime=world.getTotalWorldTime();
+			long leftTime=radioactivity.radioactivity.getLife()-(worldtime-radioactivity.decayStarted);
 
 			if (!player.capabilities.isCreativeMode){
 				if (itemStack.stackSize>=8){
@@ -491,17 +491,27 @@ public class ElementItem extends Item
 					Iterator<ItemStack> it=otherItemsStacks.iterator();
 					while (it.hasNext()) {
 						ItemStack stack = it.next();
-						RadiationEnum anotherRadiation=getRadioactivity(stack);
-						if (anotherRadiation.getLife()<radioactivity.getLife()){
+						RadiationInfo anotherRadiation=getRadiationInfo(stack, world);
+						long anotherLeft=anotherRadiation.radioactivity.getLife()-(worldtime-anotherRadiation.decayStarted);
+						if (anotherLeft<leftTime){
 							radioactivity=anotherRadiation;
+							leftTime=anotherLeft;
 						}
+						
 						if (stack.stackSize>=needs){
 							stack.stackSize-=needs;
 							needs=0;
-							break;
 						}else{
 							needs-=stack.stackSize;
 							stack.stackSize=0;
+						}
+						
+						if (stack.stackSize<=0){
+							MinechemUtil.removeStackInInventory(player.inventory, stack);
+						}
+						
+						if (needs==0){
+							break;
 						}
 					}
 				}
@@ -512,9 +522,9 @@ public class ElementItem extends Item
 			Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
 			TileEntity tile = world.getTileEntity(x, y, z);
-			if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+			if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)
 			{
-				((RadiationFluidTileEntity) tile).info = getRadiationInfo(itemStack, world);
+				((RadiationFluidTileEntity) tile).info = radioactivity;
 			}
 		}
 		return itemStack;

@@ -1,13 +1,15 @@
 package minechem.fluid;
 
+import java.util.Iterator;
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
-import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
+import minechem.radiation.RadiationInfo;
 import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockDispenser;
@@ -37,6 +39,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 		int x = blockSource.getXInt() + enumfacing.getFrontOffsetX();
 		int y = blockSource.getYInt() + enumfacing.getFrontOffsetY();
 		int z = blockSource.getZInt() + enumfacing.getFrontOffsetZ();
+		TileEntity inventoryTile = blockSource.getBlockTileEntity();
 
 		if (itemStack.getItem() instanceof ElementItem && itemStack.getItemDamage() >= ElementEnum.heaviestMass)
 		{
@@ -45,66 +48,191 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 
 			if (chemical != null && MinechemUtil.canDrain(world, frontBlock, x, y, z))
 			{
-				ItemStack stack = MinechemUtil.createItemStack(chemical, 1);
+				ItemStack stack = MinechemUtil.createItemStack(chemical, 8);
 
 				if (stack != null)
 				{
+					if (itemStack.stackSize>=8){
+						itemStack.stackSize-=8;
+					}else{
+						if (inventoryTile instanceof IInventory){
+							int needs=8-itemStack.stackSize;
+							IInventory inventory=(IInventory) inventoryTile;
+							Set<ItemStack> otherTubes=MinechemUtil.findItemStacks(inventory, MinechemItemsRegistration.element, ElementEnum.heaviestMass);
+							int free=0;
+							otherTubes.remove(itemStack);
+							Iterator<ItemStack> it2=otherTubes.iterator();
+							while (it2.hasNext()) {
+								ItemStack emptyStack = it2.next();
+								free+=emptyStack.stackSize;
+							}
+							if (free<needs){
+								return itemStack;
+							}
+							itemStack.stackSize=0;
+							
+							Iterator<ItemStack> it=otherTubes.iterator();
+							while (it.hasNext()) {
+								ItemStack emptyStack = it.next();
+								if (emptyStack.stackSize>=needs){
+									emptyStack.stackSize-=needs;
+									needs=0;
+								}else{
+									needs-=emptyStack.stackSize;
+									emptyStack.stackSize=0;
+								}
+								
+								if (emptyStack.stackSize<=0){
+									MinechemUtil.removeStackInInventory(inventory, emptyStack);
+								}
+								
+								if (needs==0){
+									break;
+								}
+							}
+						}
+					}
+					
 					TileEntity tile = world.getTileEntity(x, y, z);
 					if (tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
 					{
 						ElementItem.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
 					}
-
-					TileEntity inventoryTile = blockSource.getBlockTileEntity();
+					world.setBlockToAir(x, y, z);
+					
 					if (inventoryTile instanceof IInventory)
 					{
 						stack = MinechemUtil.addItemToInventory((IInventory) inventoryTile, stack);
 					}
 					MinechemUtil.throwItemStack(world, stack, x, y, z);
-
-					--itemStack.stackSize;
-					world.setBlockToAir(x, y, z);
 				}
 			}
 		} else
 		{
-			Block block = null;
-			RadiationEnum radioactivity = null;
+			IInventory inventory;
+			Block block;
+			if (inventoryTile instanceof IInventory){
+				inventory=(IInventory) inventoryTile;
+			}else{
+				return itemStack;
+			}
 			if (itemStack.getItem() instanceof ElementItem)
 			{
 				ElementEnum element = ElementItem.getElement(itemStack);
 				block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(element));
-				radioactivity = element.radioactivity();
 			} else if (itemStack.getItem() instanceof MoleculeItem)
 			{
 				MoleculeEnum molecule = MoleculeEnum.getById(itemStack.getItemDamage());
 				block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(molecule));
-				radioactivity = molecule.radioactivity();
+			}else{
+				return itemStack;
 			}
-
+			
 			if (!world.isAirBlock(x, y, z) && !world.getBlock(x, y, z).getMaterial().isSolid())
 			{
 				world.func_147480_a(x, y, z, true);
 				world.setBlockToAir(x, y, z);
 			}
 
-			if (world.isAirBlock(x, y, z) && block != null)
+			if (world.isAirBlock(x, y, z))
 			{
+				RadiationInfo radioactivity = ElementItem.getRadiationInfo(itemStack, world);
+				long worldtime=world.getTotalWorldTime();
+				long leftTime=radioactivity.radioactivity.getLife()-(worldtime-radioactivity.decayStarted);
+
+					if (itemStack.stackSize>=8){
+						itemStack.stackSize-=8;
+					}else{
+						int needs=8-itemStack.stackSize;
+						itemStack.stackSize=0;
+						Set<ItemStack> otherItemsStacks=MinechemUtil.findItemStacks(inventory, itemStack.getItem(), itemStack.getItemDamage());
+						otherItemsStacks.remove(itemStack);
+						int free=0;
+						Iterator<ItemStack> it2=otherItemsStacks.iterator();
+						while (it2.hasNext()) {
+							ItemStack stack = it2.next();
+							free+=stack.stackSize;
+						}
+						if (free<needs){
+							return itemStack;
+						}
+						
+						Iterator<ItemStack> it=otherItemsStacks.iterator();
+						while (it.hasNext()) {
+							ItemStack stack = it.next();
+							RadiationInfo anotherRadiation=ElementItem.getRadiationInfo(stack, world);
+							long anotherLeft=anotherRadiation.radioactivity.getLife()-(worldtime-anotherRadiation.decayStarted);
+							if (anotherLeft<leftTime){
+								radioactivity=anotherRadiation;
+								leftTime=anotherLeft;
+							}
+							
+							if (stack.stackSize>=needs){
+								stack.stackSize-=needs;
+								needs=0;
+							}else{
+								needs-=stack.stackSize;
+								stack.stackSize=0;
+							}
+							
+							if (stack.stackSize<=0){
+								MinechemUtil.removeStackInInventory(inventory, stack);
+							}
+							
+							if (needs==0){
+								break;
+							}
+						}
+					}
+					ItemStack empties=MinechemUtil.addItemToInventory(inventory, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
+					MinechemUtil.throwItemStack(world, empties, x, y, z);
+				
 				world.setBlock(x, y, z, block, 0, 3);
-				--itemStack.stackSize;
 				TileEntity tile = world.getTileEntity(x, y, z);
-				if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+				if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)
 				{
-					((RadiationFluidTileEntity) tile).info = ElementItem.getRadiationInfo(itemStack, world);
+					((RadiationFluidTileEntity) tile).info = radioactivity;
 				}
-				ItemStack elementStack = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-				TileEntity inventoryTile = blockSource.getBlockTileEntity();
-				if (inventoryTile instanceof IInventory)
-				{
-					elementStack = MinechemUtil.addItemToInventory((IInventory) inventoryTile, elementStack);
-				}
-				MinechemUtil.throwItemStack(world, elementStack, x, y, z);
 			}
+			return itemStack;
+			
+//			Block block = null;
+//			RadiationEnum radioactivity = null;
+//			if (itemStack.getItem() instanceof ElementItem)
+//			{
+//				ElementEnum element = ElementItem.getElement(itemStack);
+//				block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(element));
+//				radioactivity = element.radioactivity();
+//			} else if (itemStack.getItem() instanceof MoleculeItem)
+//			{
+//				MoleculeEnum molecule = MoleculeEnum.getById(itemStack.getItemDamage());
+//				block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(molecule));
+//				radioactivity = molecule.radioactivity();
+//			}
+//
+//			if (!world.isAirBlock(x, y, z) && !world.getBlock(x, y, z).getMaterial().isSolid())
+//			{
+//				world.func_147480_a(x, y, z, true);
+//				world.setBlockToAir(x, y, z);
+//			}
+//
+//			if (world.isAirBlock(x, y, z) && block != null)
+//			{
+//				world.setBlock(x, y, z, block, 0, 3);
+//				--itemStack.stackSize;
+//				TileEntity tile = world.getTileEntity(x, y, z);
+//				if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+//				{
+//					((RadiationFluidTileEntity) tile).info = ElementItem.getRadiationInfo(itemStack, world);
+//				}
+//				ItemStack elementStack = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+//				TileEntity inventoryTile = blockSource.getBlockTileEntity();
+//				if (inventoryTile instanceof IInventory)
+//				{
+//					elementStack = MinechemUtil.addItemToInventory((IInventory) inventoryTile, elementStack);
+//				}
+//				MinechemUtil.throwItemStack(world, elementStack, x, y, z);
+//			}
 		}
 
 		return itemStack;

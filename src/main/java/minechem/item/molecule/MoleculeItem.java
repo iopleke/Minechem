@@ -12,6 +12,7 @@ import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
+import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
@@ -262,9 +263,7 @@ public class MoleculeItem extends Item
 		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
-		if (!player.capabilities.isCreativeMode&&itemStack.stackSize<8)
-			MinechemUtil.scanForMoreStacks(itemStack, player);
-		if (movingObjectPosition == null||(itemStack.stackSize<8&&!player.capabilities.isCreativeMode))
+		if (movingObjectPosition == null||player.capabilities.isCreativeMode)
 		{
 			return itemStack;
 		}
@@ -304,7 +303,9 @@ public class MoleculeItem extends Item
 
 		if (world.isAirBlock(x, y, z))
 		{
-			RadiationEnum radioactivity = MoleculeEnum.molecules.get(itemStack.getItemDamage()).radioactivity();
+			RadiationInfo radioactivity = ElementItem.getRadiationInfo(itemStack, world);
+			long worldtime=world.getTotalWorldTime();
+			long leftTime=radioactivity.radioactivity.getLife()-(worldtime-radioactivity.decayStarted);
 
 			if (!player.capabilities.isCreativeMode){
 				if (itemStack.stackSize>=8){
@@ -327,17 +328,27 @@ public class MoleculeItem extends Item
 					Iterator<ItemStack> it=otherItemsStacks.iterator();
 					while (it.hasNext()) {
 						ItemStack stack = it.next();
-						RadiationEnum anotherRadiation=ElementItem.getRadioactivity(stack);
-						if (anotherRadiation.getLife()<radioactivity.getLife()){
+						RadiationInfo anotherRadiation=ElementItem.getRadiationInfo(stack, world);
+						long anotherLeft=anotherRadiation.radioactivity.getLife()-(worldtime-anotherRadiation.decayStarted);
+						if (anotherLeft<leftTime){
 							radioactivity=anotherRadiation;
+							leftTime=anotherLeft;
 						}
+						
 						if (stack.stackSize>=needs){
 							stack.stackSize-=needs;
 							needs=0;
-							break;
 						}else{
 							needs-=stack.stackSize;
 							stack.stackSize=0;
+						}
+						
+						if (stack.stackSize<=0){
+							MinechemUtil.removeStackInInventory(player.inventory, stack);
+						}
+						
+						if (needs==0){
+							break;
 						}
 					}
 				}
@@ -348,9 +359,9 @@ public class MoleculeItem extends Item
 			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeEnum.molecules.get(itemStack.getItemDamage())));
 			world.setBlock(x, y, z, block, 0, 3);
 			TileEntity tile = world.getTileEntity(x, y, z);
-			if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
+			if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)
 			{
-				((RadiationFluidTileEntity) tile).info = ElementItem.getRadiationInfo(itemStack, world);
+				((RadiationFluidTileEntity) tile).info = radioactivity;
 			}
 		}
 		return itemStack;

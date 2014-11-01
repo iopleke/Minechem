@@ -95,10 +95,10 @@ public final class MinechemUtil
 		ItemStack itemStack = null;
 		if (chemical instanceof ElementEnum)
 		{
-			itemStack = ElementItem.createStackOf(ElementEnum.getByID(((ElementEnum) chemical).ordinal()), 1);
+			itemStack = ElementItem.createStackOf(ElementEnum.getByID(((ElementEnum) chemical).ordinal()), amount);
 		} else if (chemical instanceof MoleculeEnum)
 		{
-			itemStack = new ItemStack(MinechemItemsRegistration.molecule, 1, ((MoleculeEnum) chemical).id());
+			itemStack = new ItemStack(MinechemItemsRegistration.molecule, amount, ((MoleculeEnum) chemical).id());
 		}
 		return itemStack;
 	}
@@ -210,11 +210,21 @@ public final class MinechemUtil
 		Set<ItemStack> stacks=new HashSet<ItemStack>();
 		for (int i=0;i<inventory.getSizeInventory();i++){
 			ItemStack stack=inventory.getStackInSlot(i);
-			if (stack.getItem()==item&&stack.getItemDamage()==damage){
+			if (stack!=null&&stack.getItem()==item&&stack.getItemDamage()==damage){
 				stacks.add(stack);
 			}
 		}
 		
 		return stacks;
+	}
+	
+	public static void removeStackInInventory(IInventory inventory,ItemStack stack){
+		for (int i=0;i<inventory.getSizeInventory();i++){
+			if (stack==inventory.getStackInSlot(i)){	//don't change == to equals()
+				inventory.setInventorySlotContents(i, null);
+				break;
+			}
+		}
+		System.err.println("x");
 	}
 }
