@@ -225,6 +225,5 @@ public final class MinechemUtil
 				break;
 			}
 		}
-		System.err.println("x");
 	}
 }
