@@ -1,7 +1,6 @@
 package minechem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
-import minechem.fluid.FluidBlockChemical;
 import minechem.fluid.FluidHelper;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.item.ItemAtomicManipulator;

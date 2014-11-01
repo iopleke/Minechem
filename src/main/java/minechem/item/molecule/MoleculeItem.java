@@ -1,8 +1,9 @@
 package minechem.item.molecule;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
@@ -11,6 +12,7 @@ import minechem.item.element.ElementItem;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
+import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
@@ -261,9 +263,7 @@ public class MoleculeItem extends Item
 		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
-		if (!player.capabilities.isCreativeMode&&itemStack.stackSize<8)
-			MinechemUtil.scanForMoreStacks(itemStack, player);
-		if (movingObjectPosition == null||(itemStack.stackSize<8&&!player.capabilities.isCreativeMode))
+		if (movingObjectPosition == null||player.capabilities.isCreativeMode)
 		{
 			return itemStack;
 		}
@@ -303,20 +303,65 @@ public class MoleculeItem extends Item
 
 		if (world.isAirBlock(x, y, z))
 		{
-			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
-			world.setBlock(x, y, z, block, 0, 3);
-			RadiationEnum radioactivity = MoleculeEnum.molecules.get(itemStack.getItemDamage()).radioactivity();
-			TileEntity tile = world.getTileEntity(x, y, z);
-			if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
-			{
-				((RadiationFluidTileEntity) tile).info = ElementItem.getRadiationInfo(itemStack, world);
+			RadiationInfo radioactivity = ElementItem.getRadiationInfo(itemStack, world);
+			long worldtime=world.getTotalWorldTime();
+			long leftTime=radioactivity.radioactivity.getLife()-(worldtime-radioactivity.decayStarted);
+
+			if (!player.capabilities.isCreativeMode){
+				if (itemStack.stackSize>=8){
+					itemStack.stackSize-=8;
+				}else{
+					int needs=8-itemStack.stackSize;
+					Set<ItemStack> otherItemsStacks=MinechemUtil.findItemStacks(player.inventory, itemStack.getItem(), itemStack.getItemDamage());
+					otherItemsStacks.remove(itemStack);
+					int free=0;
+					Iterator<ItemStack> it2=otherItemsStacks.iterator();
+					while (it2.hasNext()) {
+						ItemStack stack = it2.next();
+						free+=stack.stackSize;
+					}
+					if (free<needs){
+						return itemStack;
+					}
+					itemStack.stackSize=0;
+					
+					Iterator<ItemStack> it=otherItemsStacks.iterator();
+					while (it.hasNext()) {
+						ItemStack stack = it.next();
+						RadiationInfo anotherRadiation=ElementItem.getRadiationInfo(stack, world);
+						long anotherLeft=anotherRadiation.radioactivity.getLife()-(worldtime-anotherRadiation.decayStarted);
+						if (anotherLeft<leftTime){
+							radioactivity=anotherRadiation;
+							leftTime=anotherLeft;
+						}
+						
+						if (stack.stackSize>=needs){
+							stack.stackSize-=needs;
+							needs=0;
+						}else{
+							needs-=stack.stackSize;
+							stack.stackSize=0;
+						}
+						
+						if (stack.stackSize<=0){
+							MinechemUtil.removeStackInInventory(player.inventory, stack);
+						}
+						
+						if (needs==0){
+							break;
+						}
+					}
+				}
+				ItemStack empties=MinechemUtil.addItemToInventory(player.inventory, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
+				MinechemUtil.throwItemStack(world, empties, x, y, z);
 			}
-			if (player.capabilities.isCreativeMode)
+			
+			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeEnum.molecules.get(itemStack.getItemDamage())));
+			world.setBlock(x, y, z, block, 0, 3);
+			TileEntity tile = world.getTileEntity(x, y, z);
+			if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)
 			{
-				return itemStack;
-			} else 
-			{
-				MinechemUtil.incPlayerInventory(itemStack, -8, player, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
+				((RadiationFluidTileEntity) tile).info = radioactivity;
 			}
 		}
 		return itemStack;

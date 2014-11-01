@@ -127,7 +127,7 @@ public class Minechem
 
 		LogHelper.debug("Registering Fluid Reactions...");
 		FluidChemicalDispenser.init();
-		ChemicalFluidReactionHandler.initExplodableChemical();
+		ChemicalFluidReactionHandler.initReaction();
 
 		LogHelper.debug("Registering Fuel Values...");
 		MinechemItemsRegistration.registerFuelValues();
