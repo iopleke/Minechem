@@ -48,9 +48,9 @@ public class ScheduledTickHandler
                     {
                         PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
                     }
-                    currentItem.onFoodEaten(entityPlayer.getEntityWorld(), entityPlayer);
-                    entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
                 }
+                currentItem.onFoodEaten(entityPlayer.getEntityWorld(), entityPlayer);
+                entityPlayer.inventory.decrStackSize(entityPlayer.inventory.currentItem, 1);
             }
         }
 	}
