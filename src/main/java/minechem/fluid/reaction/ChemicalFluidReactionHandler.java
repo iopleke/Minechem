@@ -16,7 +16,6 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
@@ -39,55 +38,53 @@ public class ChemicalFluidReactionHandler
 
 		World world = event.world;
 
-		for (Object p : world.playerEntities)
-		{
-			EntityPlayer player = (EntityPlayer) p;
-			double rangeToCheck = 32.0D;
-
-			List<EntityItem> itemList = world.getEntitiesWithinAABB(EntityItem.class, player.boundingBox.expand(rangeToCheck, rangeToCheck, rangeToCheck));
-			for (EntityItem entityItem : itemList)
-			{
-				ItemStack itemStack = entityItem.getEntityItem();
-				Item item = itemStack.getItem();
-				MinechemChemicalType chemicalA = null;
-				if (item == MinechemItemsRegistration.element)
-				{
-					chemicalA = ElementItem.getElement(itemStack);
-				} else if (item == MinechemItemsRegistration.molecule)
-				{
-					chemicalA = MoleculeItem.getMolecule(itemStack);
-				}
-
-				if (chemicalA != null && world.isMaterialInBB(entityItem.boundingBox, Material.water))
-				{
-					int x = MathHelper.floor_double(entityItem.posX);
-					int y = MathHelper.floor_double(entityItem.posY);
-					int z = MathHelper.floor_double(entityItem.posZ);
-					Block block = world.getBlock(x, y, z);
-					MinechemChemicalType chemicalB = MinechemUtil.getChemical(block);
-
-					if (chemicalB != null)
-					{
-						ChemicalFluidReactionRule rule = new ChemicalFluidReactionRule(chemicalA, chemicalB);
-						if (reactionRules.containsKey(rule))
-						{
-							explosionReaction(world, entityItem, x, y, z, rule, !(MinechemUtil.canDrain(world, block, x, y, z)));
-							itemStack.stackSize--;
-							if (itemStack.stackSize <= 0)
-							{
-								world.removeEntity(entityItem);
-							} else
-							{
-								entityItem.setEntityItemStack(itemStack);
-							}
-						}
-					}
-
-				}
+		for (Object entity:world.loadedEntityList){
+			if (entity instanceof EntityItem){
+				checkEntityItem(world,(EntityItem) entity);
 			}
 		}
 	}
 
+	public void checkEntityItem(World world,EntityItem entityItem){
+		ItemStack itemStack = entityItem.getEntityItem();
+		Item item = itemStack.getItem();
+		MinechemChemicalType chemicalA = null;
+		if (item == MinechemItemsRegistration.element)
+		{
+			chemicalA = ElementItem.getElement(itemStack);
+		} else if (item == MinechemItemsRegistration.molecule)
+		{
+			chemicalA = MoleculeItem.getMolecule(itemStack);
+		}
+
+		if (chemicalA != null && world.isMaterialInBB(entityItem.boundingBox, Material.water))
+		{
+			int x = MathHelper.floor_double(entityItem.posX);
+			int y = MathHelper.floor_double(entityItem.posY);
+			int z = MathHelper.floor_double(entityItem.posZ);
+			Block block = world.getBlock(x, y, z);
+			MinechemChemicalType chemicalB = MinechemUtil.getChemical(block);
+
+			if (chemicalB != null)
+			{
+				ChemicalFluidReactionRule rule = new ChemicalFluidReactionRule(chemicalA, chemicalB);
+				if (reactionRules.containsKey(rule))
+				{
+					explosionReaction(world, entityItem, x, y, z, rule, !(MinechemUtil.canDrain(world, block, x, y, z)));
+					itemStack.stackSize--;
+					if (itemStack.stackSize <= 0)
+					{
+						world.removeEntity(entityItem);
+					} else
+					{
+						entityItem.setEntityItemStack(itemStack);
+					}
+				}
+			}
+
+		}
+	}
+	
 	public static void initExplodableChemical()
 	{
 		// TODO Add more reaction rules -yushijinhun
