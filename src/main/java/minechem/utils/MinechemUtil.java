@@ -1,9 +1,10 @@
 package minechem.utils;
 
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
-
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
@@ -18,6 +19,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -204,4 +206,15 @@ public final class MinechemUtil
 		}
 	}
 	
+	public static Set<ItemStack> findItemStacks(IInventory inventory,Item item,int damage){
+		Set<ItemStack> stacks=new HashSet<ItemStack>();
+		for (int i=0;i<inventory.getSizeInventory();i++){
+			ItemStack stack=inventory.getStackInSlot(i);
+			if (stack.getItem()==item&&stack.getItemDamage()==damage){
+				stacks.add(stack);
+			}
+		}
+		
+		return stacks;
+	}
 }

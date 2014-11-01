@@ -1,9 +1,10 @@
 package minechem.item.element;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
@@ -40,9 +41,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
-
 import org.lwjgl.input.Keyboard;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -469,20 +468,53 @@ public class ElementItem extends Item
 
 		if (world.isAirBlock(x, y, z))
 		{
+			RadiationEnum radioactivity = ElementEnum.elements.get(itemStack.getItemDamage()).radioactivity();
+
+			if (!player.capabilities.isCreativeMode){
+				if (itemStack.stackSize>=8){
+					itemStack.stackSize-=8;
+				}else{
+					int needs=8-itemStack.stackSize;
+					itemStack.stackSize=0;
+					Set<ItemStack> otherItemsStacks=MinechemUtil.findItemStacks(player.inventory, itemStack.getItem(), itemStack.getItemDamage());
+					otherItemsStacks.remove(itemStack);
+					int free=0;
+					Iterator<ItemStack> it2=otherItemsStacks.iterator();
+					while (it2.hasNext()) {
+						ItemStack stack = it2.next();
+						free+=stack.stackSize;
+					}
+					if (free<needs){
+						return itemStack;
+					}
+					
+					Iterator<ItemStack> it=otherItemsStacks.iterator();
+					while (it.hasNext()) {
+						ItemStack stack = it.next();
+						RadiationEnum anotherRadiation=getRadioactivity(stack);
+						if (anotherRadiation.getLife()<radioactivity.getLife()){
+							radioactivity=anotherRadiation;
+						}
+						if (stack.stackSize>=needs){
+							stack.stackSize-=needs;
+							needs=0;
+							break;
+						}else{
+							needs-=stack.stackSize;
+							stack.stackSize=0;
+						}
+					}
+				}
+				ItemStack empties=MinechemUtil.addItemToInventory(player.inventory, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
+				MinechemUtil.throwItemStack(world, empties, x, y, z);
+			}
+			
 			Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
-			RadiationEnum radioactivity = ElementEnum.elements.get(itemStack.getItemDamage()).radioactivity();
 			TileEntity tile = world.getTileEntity(x, y, z);
 			if (radioactivity != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity)
 			{
 				((RadiationFluidTileEntity) tile).info = getRadiationInfo(itemStack, world);
-			}
-			if (player.capabilities.isCreativeMode)
-			{
-				return itemStack;
-			} else
-			{
-				MinechemUtil.incPlayerInventory(itemStack, -8, player, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
 			}
 		}
 		return itemStack;
