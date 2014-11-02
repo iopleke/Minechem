@@ -263,7 +263,7 @@ public class MoleculeItem extends Item
 		player.setItemInUse(itemStack, getMaxItemUseDuration(itemStack));
 
 		MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, false);
-		if (movingObjectPosition == null||player.capabilities.isCreativeMode)
+		if (movingObjectPosition == null || player.isSneaking())
 		{
 			return itemStack;
 		}
@@ -308,46 +308,56 @@ public class MoleculeItem extends Item
 			long leftTime=radioactivity.radioactivity.getLife()-(worldtime-radioactivity.decayStarted);
 
 			if (!player.capabilities.isCreativeMode){
-				if (itemStack.stackSize>=8){
+				if (itemStack.stackSize>=8)
+                {
 					itemStack.stackSize-=8;
-				}else{
+				} else
+                {
 					int needs=8-itemStack.stackSize;
 					Set<ItemStack> otherItemsStacks=MinechemUtil.findItemStacks(player.inventory, itemStack.getItem(), itemStack.getItemDamage());
 					otherItemsStacks.remove(itemStack);
 					int free=0;
 					Iterator<ItemStack> it2=otherItemsStacks.iterator();
-					while (it2.hasNext()) {
+					while (it2.hasNext())
+                    {
 						ItemStack stack = it2.next();
 						free+=stack.stackSize;
 					}
-					if (free<needs){
+					if (free<needs)
+                    {
 						return itemStack;
 					}
 					itemStack.stackSize=0;
 					
 					Iterator<ItemStack> it=otherItemsStacks.iterator();
-					while (it.hasNext()) {
+					while (it.hasNext())
+                    {
 						ItemStack stack = it.next();
 						RadiationInfo anotherRadiation=ElementItem.getRadiationInfo(stack, world);
 						long anotherLeft=anotherRadiation.radioactivity.getLife()-(worldtime-anotherRadiation.decayStarted);
-						if (anotherLeft<leftTime){
+						if (anotherLeft<leftTime)
+                        {
 							radioactivity=anotherRadiation;
 							leftTime=anotherLeft;
 						}
 						
-						if (stack.stackSize>=needs){
+						if (stack.stackSize>=needs)
+                        {
 							stack.stackSize-=needs;
 							needs=0;
-						}else{
+						}else
+                        {
 							needs-=stack.stackSize;
 							stack.stackSize=0;
 						}
 						
-						if (stack.stackSize<=0){
+						if (stack.stackSize<=0)
+                        {
 							MinechemUtil.removeStackInInventory(player.inventory, stack);
 						}
 						
-						if (needs==0){
+						if (needs==0)
+                        {
 							break;
 						}
 					}
