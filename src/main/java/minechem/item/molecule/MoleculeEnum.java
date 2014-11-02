@@ -259,6 +259,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	private final int id;
 	private final String name;
 	private final int size;
+	private final String formula;
 	public float red;
 	public float green;
 	public float blue;
@@ -286,6 +287,7 @@ public class MoleculeEnum extends MinechemChemicalType
 		this.green2 = colorGreen2;
 		this.blue2 = colorBlue2;
 		size = computSize();
+		formula=computFormula();
 	}
 
 	public static MoleculeEnum addMolecule(String name, int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, ChemicalRoomStateEnum roomState, PotionChemical... chemicals)
@@ -429,5 +431,42 @@ public class MoleculeEnum extends MinechemChemicalType
 	private static void removeMapping(MoleculeEnum molecule){
 		molecules.remove(molecule.id());
 		nameToMolecules.remove(molecule.name());
+	}
+	
+	public String getFormula(){
+		return formula;
+	}
+	
+	private String computFormula()
+	{
+		String formula = "";
+		for (PotionChemical component : components)
+		{
+			if (component instanceof Element)
+			{
+				formula += ((Element) component).element.name();
+				if (component.amount > 1)
+				{
+					formula += component.amount;
+				}
+			} else if (component instanceof Molecule)
+			{
+				if (component.amount > 1)
+				{
+					formula += "(";
+				}
+				formula += ((Molecule) component).molecule.getFormula();
+				if (component.amount > 1)
+				{
+					formula += ")" + component.amount;
+				}
+			}
+		}
+		return formula;
+	}
+	
+	public static void init()
+	{
+		
 	}
 }

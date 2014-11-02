@@ -1,5 +1,6 @@
 itemGroup.Minechem=Minechem
 itemGroup.Minechem.Elements=Minechem Elements
+itemGroup.Minechem.buckets=Minechem Buckets
 language.name=English
 language.region=US
 language.code=en_US
@@ -111,6 +112,7 @@ item.itemChemistJournal.name=Chemist's Journal
 item.name.blueprintFusion=Fusion Chamber Blueprint
 item.name.blueprintFission=Fission Chamber Blueprint
 item.name.chemistryUpgrade=Chemistry Turtle Module
+item.minechemBucket.name=Chemical Bucket
 
 element.property.solid=Solid
 element.property.gas=Gaseous

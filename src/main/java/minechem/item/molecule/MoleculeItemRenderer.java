@@ -1,5 +1,6 @@
 package minechem.item.molecule;
 
+import minechem.render.RenderingUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
@@ -85,11 +86,11 @@ public class MoleculeItemRenderer implements IItemRenderer
 	{
 		MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
 		GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
-		drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass1);
+		RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass1);
 		GL11.glColor3f(molecule.red2, molecule.green2, molecule.blue2);
-		drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass2);
+		RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass2);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		drawTexturedRectUV(type, 0, 0, 0, 16, 16, testtube);
+		RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, testtube);
 	}
 
 	private void renderItemInEquipped(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)
@@ -112,33 +113,11 @@ public class MoleculeItemRenderer implements IItemRenderer
 		MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
 		GL11.glPushMatrix();
 		GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
-		drawTextureIn3D(pass1);
+		RenderingUtil.drawTextureIn3D(pass1);
 		GL11.glColor3f(molecule.red2, molecule.green2, molecule.blue2);
-		drawTextureIn3D(pass2);
+		RenderingUtil.drawTextureIn3D(pass2);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		drawTextureIn3D(testtube);
+		RenderingUtil.drawTextureIn3D(testtube);
 		GL11.glPopMatrix();
 	}
-
-	private void drawTextureIn3D(IIcon texture)
-	{
-		Tessellator tesselator = Tessellator.instance;
-		float scale = 0.7F;
-		GL11.glPushMatrix();
-		GL11.glScalef(scale, scale, scale);
-		ItemRenderer.renderItemIn2D(tesselator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(), texture.getIconWidth(), texture.getIconHeight(), .0625F);
-		GL11.glPopMatrix();
-	}
-
-	private void drawTexturedRectUV(ItemRenderType type, float x, float y, float z, float w, float h, IIcon icon)
-	{
-		Tessellator tesselator = Tessellator.instance;
-		tesselator.startDrawingQuads();
-		tesselator.addVertexWithUV(x, y + h, z, icon.getMinU(), icon.getMaxV());
-		tesselator.addVertexWithUV(x + w, y + h, z, icon.getMaxU(), icon.getMaxV());
-		tesselator.addVertexWithUV(x + w, y, z, icon.getMaxU(), icon.getMinV());
-		tesselator.addVertexWithUV(x, y, z, icon.getMinU(), icon.getMinV());
-		tesselator.draw();
-	}
-
 }

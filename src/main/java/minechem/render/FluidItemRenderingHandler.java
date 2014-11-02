@@ -53,45 +53,10 @@ public class FluidItemRenderingHandler implements IItemRenderer
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
 	{
-//		GL11.glEnable(GL11.GL_BLEND);
 		Fluid fluid = ((BlockFluidBase) ((ItemBlock) item.getItem()).field_150939_a).getFluid();
 		if (fluid instanceof FluidElement)
 		{
-			switch (((FluidElement) fluid).element.classification())
-			{
-				case actinide:
-					GL11.glColor3f(1.0F, 0.0F, 0.0F);
-					break;
-				case alkaliMetal:
-					GL11.glColor3f(0.0F, 1.0F, 0.0F);
-					break;
-				case alkalineEarthMetal:
-					GL11.glColor3f(0.0F, 0.0F, 1.0F);
-					break;
-				case halogen:
-					GL11.glColor3f(1.0F, 1.0F, 0.0F);
-					break;
-				case inertGas:
-					GL11.glColor3f(0.0F, 1.0F, 1.0F);
-					break;
-				case lanthanide:
-					GL11.glColor3f(1.0F, 0.0F, 1.0F);
-					break;
-				case nonmetal:
-					GL11.glColor3f(1.0F, 0.5F, 0.0F);
-					break;
-				case otherMetal:
-					GL11.glColor3f(0.5F, 1.0F, 0.0F);
-					break;
-				case semimetallic:
-					GL11.glColor3f(0.0F, 1.0F, 0.5F);
-					break;
-				case transitionMetal:
-					GL11.glColor3f(0.0F, 0.5F, 1.0F);
-					break;
-				default:
-					break;
-			}
+			RenderingUtil.setColorForElement(((FluidElement) fluid).element);
 		} else if (fluid instanceof FluidChemical)
 		{
 			MoleculeEnum molecule = ((FluidChemical) fluid).molecule;
@@ -102,7 +67,7 @@ public class FluidItemRenderingHandler implements IItemRenderer
 		switch (type)
 		{
 			case INVENTORY:
-				drawTexturedRectUV(0, 0, 0, 16, 16, icon);
+				RenderingUtil.drawTexturedRectUV(0, 0, 0, 16, 16, icon);
 				break;
 			case EQUIPPED:
 				ItemRenderer.renderItemIn2D(Tessellator.instance, icon.getMaxU(), icon.getMinV(), icon.getMinU(), icon.getMaxV(), icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
@@ -127,31 +92,10 @@ public class FluidItemRenderingHandler implements IItemRenderer
 		}
 	}
 
-	private void drawTexturedRectUV(float x, float y, float z, float w, float h, IIcon icon)
-	{
-		Tessellator tesselator = Tessellator.instance;
-		tesselator.startDrawingQuads();
-		tesselator.addVertexWithUV(x, y + h, z, icon.getMinU(), icon.getMaxV());
-		tesselator.addVertexWithUV(x + w, y + h, z, icon.getMaxU(), icon.getMaxV());
-		tesselator.addVertexWithUV(x + w, y, z, icon.getMaxU(), icon.getMinV());
-		tesselator.addVertexWithUV(x, y, z, icon.getMinU(), icon.getMinV());
-		tesselator.draw();
-	}
-
 	private void renderItemAsEntity(ItemStack itemStack, IIcon icon)
 	{
-		drawTextureIn3D(icon);
+		RenderingUtil.drawTextureIn3D(icon);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		drawTextureIn3D(icon);
-	}
-
-	private void drawTextureIn3D(IIcon texture)
-	{
-		Tessellator tesselator = Tessellator.instance;
-		float scale = 0.7F;
-		GL11.glPushMatrix();
-		GL11.glScalef(scale, scale, scale);
-		ItemRenderer.renderItemIn2D(tesselator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(), texture.getIconWidth(), texture.getIconHeight(), .05F);
-		GL11.glPopMatrix();
+		RenderingUtil.drawTextureIn3D(icon);
 	}
 }

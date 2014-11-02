@@ -11,6 +11,7 @@ import minechem.gui.CreativeTabMinechem;
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.IDescriptiveName;
 import minechem.item.MinechemChemicalType;
+import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolHelper;
 import minechem.radiation.RadiationEnum;
@@ -116,6 +117,8 @@ public class ElementItem extends Item
 				return RadiationEnum.stable;
 			}
 			return MoleculeEnum.molecules.get(id).radioactivity();
+		}else if (item instanceof MinechemBucketItem){
+			return ((MinechemBucketItem) item).chemical.radioactivity();
 		}
 		return RadiationEnum.stable;
 	}

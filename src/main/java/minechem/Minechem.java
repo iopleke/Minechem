@@ -17,6 +17,8 @@ import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
 import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.element.ElementEnum;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolEventHandler;
 import minechem.item.polytool.types.PolytoolTypeIron;
 import minechem.minetweaker.Chemicals;
@@ -75,6 +77,10 @@ public class Minechem
 
 		LogHelper.debug("Registering Blocks...");
 		MinechemBlocksGeneration.registerBlocks();
+		
+		LogHelper.debug("Registering Elements & Molecules...");
+		ElementEnum.init();
+		MoleculeEnum.init();
 
 		LogHelper.debug("Registering Blueprints...");
 		MinechemBlueprint.registerBlueprints();
@@ -112,6 +118,9 @@ public class Minechem
 
 		LogHelper.debug("Registering Ore Generation...");
 		GameRegistry.registerWorldGenerator(new MinechemGeneration(), 0);
+		
+		LogHelper.debug("Registering Fluid Containers...");
+		MinechemItemsRegistration.registerFluidContainers();
 
 		LogHelper.debug("Registering GUI and Container handlers...");
 		NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());

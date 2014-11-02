@@ -122,22 +122,27 @@ public final class MinechemUtil
 		if (block instanceof IFluidBlock)
 		{
 			Fluid fluid = ((IFluidBlock) block).getFluid();
-			if (fluid instanceof FluidElement)
-			{
-				chemical = ((FluidElement) fluid).element;
-			} else if (fluid instanceof FluidChemical)
-			{
-				chemical = ((FluidChemical) fluid).molecule;
-			} else if (fluid == FluidRegistry.WATER)
-			{
-				chemical = MoleculeEnum.water;
-			}
+			chemical = getChemical(fluid);
 		} else if (block == Blocks.water || block == Blocks.flowing_water)
 		{
 			chemical = MoleculeEnum.water;
 		}
 
 		return chemical;
+	}
+	
+	public static MinechemChemicalType getChemical(Fluid fluid){
+		if (fluid instanceof FluidElement)
+		{
+			return ((FluidElement) fluid).element;
+		} else if (fluid instanceof FluidChemical)
+		{
+			return ((FluidChemical) fluid).molecule;
+		} else if (fluid == FluidRegistry.WATER)
+		{
+			return MoleculeEnum.water;
+		}
+		return null;
 	}
 	
 	public static ElementEnum getElement(Fluid fluid)
@@ -225,5 +230,20 @@ public final class MinechemUtil
 				break;
 			}
 		}
+	}
+
+	public static String subscriptNumbers(String string)
+	{
+		string = string.replace('0', '\u2080');
+		string = string.replace('1', '\u2081');
+		string = string.replace('2', '\u2082');
+		string = string.replace('3', '\u2083');
+		string = string.replace('4', '\u2084');
+		string = string.replace('5', '\u2085');
+		string = string.replace('6', '\u2086');
+		string = string.replace('7', '\u2087');
+		string = string.replace('8', '\u2088');
+		string = string.replace('9', '\u2089');
+		return string;
 	}
 }

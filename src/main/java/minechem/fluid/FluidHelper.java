@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import minechem.Minechem;
+import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
 
@@ -23,6 +24,7 @@ public class FluidHelper
 		elementsBlocks.put(fluid, new FluidBlockElement(fluid));
 		GameRegistry.registerBlock(elementsBlocks.get(fluid), fluid.getUnlocalizedName());
 		Minechem.PROXY.onAddFluid(fluid, elementsBlocks.get(fluid));
+		MinechemBucketHandler.getInstance().registerCustomMinechemBucket(elementsBlocks.get(fluid),element, "element.");
 	}
 
 	public static void registerMolecule(MoleculeEnum molecule)
@@ -32,5 +34,6 @@ public class FluidHelper
 		moleculeBlocks.put(fluid, new FluidBlockChemical(fluid));
 		GameRegistry.registerBlock(moleculeBlocks.get(fluid), fluid.getUnlocalizedName());
 		Minechem.PROXY.onAddFluid(fluid, moleculeBlocks.get(fluid));
+		MinechemBucketHandler.getInstance().registerCustomMinechemBucket(moleculeBlocks.get(fluid),molecule, "molecule.");
 	}
 }

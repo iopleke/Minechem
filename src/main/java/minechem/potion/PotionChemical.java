@@ -1,6 +1,6 @@
 package minechem.potion;
 
-public class PotionChemical
+public class PotionChemical implements Cloneable
 {
 
 	public int amount;
@@ -20,4 +20,8 @@ public class PotionChemical
 		return false;
 	}
 
+	@Override
+	public PotionChemical clone(){
+		return copy();
+	}
 }

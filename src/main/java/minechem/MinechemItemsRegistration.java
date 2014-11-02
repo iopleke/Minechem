@@ -2,11 +2,9 @@ package minechem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.fluid.FluidHelper;
-import minechem.fluid.MinechemFluidBlock;
 import minechem.item.ItemAtomicManipulator;
 import minechem.item.OpticalMicroscopeLens;
 import minechem.item.blueprint.ItemBlueprint;
-import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.chemistjournal.ChemistJournalItem;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -67,11 +65,9 @@ public class MinechemItemsRegistration
 		GameRegistry.registerItem(polytool, Reference.ID + "Polytool");
 
 		emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-		registerFluidContainers();
-        registerCustomBuckets();
 	}
 
-	private static void registerFluidContainers()
+	public static void registerFluidContainers()
 	{
 		for (ElementEnum element : ElementEnum.elements.values())
 		{
@@ -91,18 +87,6 @@ public class MinechemItemsRegistration
 			}
 		}
 	}
-
-    private static void registerCustomBuckets()
-    {
-        for(MinechemFluidBlock block : FluidHelper.elementsBlocks.values())
-        {
-            MinechemBucketHandler.getInstance().registerCustomMinechemBucket(block, "element.");
-        }
-        for(MinechemFluidBlock block : FluidHelper.moleculeBlocks.values())
-        {
-            MinechemBucketHandler.getInstance().registerCustomMinechemBucket(block, "molecule.");
-        }
-    }
 
 	public static void registerToOreDictionary()
 	{
