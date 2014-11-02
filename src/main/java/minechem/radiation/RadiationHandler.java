@@ -3,6 +3,11 @@ package minechem.radiation;
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
+import minechem.fluid.FluidHelper;
+import minechem.item.MinechemChemicalType;
+import minechem.item.bucket.MinechemBucketHandler;
+import minechem.item.bucket.MinechemBucketItem;
+import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
 import minechem.utils.MinechemHelper;
@@ -15,7 +20,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,7 +67,7 @@ public class RadiationHandler
 		{
 			for (ItemStack itemstack : itemstacks)
 			{
-				if (itemstack != null && itemstack.getItem() == MinechemItemsRegistration.element && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+				if (itemstack != null && (itemstack.getItem() == MinechemItemsRegistration.molecule || itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() instanceof MinechemBucketItem) && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
 				{
 					RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
 					radiationInfo.decayStarted += player.worldObj.getTotalWorldTime() - radiationInfo.lastDecayUpdate;
@@ -100,6 +104,8 @@ public class RadiationHandler
 				} else if (item == MinechemItemsRegistration.molecule)
 				{
 					radiation = MoleculeItem.getMolecule(itemstack).radioactivity();
+				}else if (item instanceof MinechemBucketItem){
+					radiation=((MinechemBucketItem) item).chemical.radioactivity();
 				}
 
 				if (radiation != null && radiation != RadiationEnum.stable)
@@ -205,6 +211,14 @@ public class RadiationHandler
 			} else if (item == MinechemItemsRegistration.molecule)
 			{
 				radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMolecule(world, element, inventory, x, y, z);
+			} else if (item instanceof MinechemBucketItem){
+				MinechemChemicalType type=((MinechemBucketItem) item).chemical;
+				if (type instanceof ElementEnum){
+					element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementEnum.getByID(((ElementEnum) type).ordinal()-1)))));
+					radiationInfo = ElementItem.initiateRadioactivity(element, world);
+				}else{
+					radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeBucket(world, element, inventory, x, y, z);
+				}
 			}
 			ElementItem.setRadiationInfo(radiationInfo, element);
 			return damage;

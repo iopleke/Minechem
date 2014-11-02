@@ -1,6 +1,9 @@
 package minechem.radiation;
 
 import minechem.MinechemItemsRegistration;
+import minechem.fluid.FluidHelper;
+import minechem.item.bucket.MinechemBucketHandler;
+import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -14,7 +17,6 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
-
 import java.util.*;
 
 public class RadiationMoleculeHandler
@@ -40,6 +42,34 @@ public class RadiationMoleculeHandler
 		decayedMoleculesCache = new SoftHashMap<MoleculeEnum, PotionChemical[]>();
 		decayedMoleculesPre = new SoftHashMap<MoleculeEnum, PotionChemical[]>();
 		initDecayedMoleculesPre();
+	}
+	
+	public RadiationInfo handleRadiationMoleculeBucket(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z){
+		PotionChemical[] decayedChemicals = getDecayedMolecule((MoleculeEnum) ((MinechemBucketItem)itemStack.getItem()).chemical);
+		for (int i = 0; i < decayedChemicals.length; i++)
+		{
+			decayedChemicals[i].amount *= 8*itemStack.stackSize;
+		}
+		ItemStack[] items = toItemStacks(decayedChemicals);
+		for (int i = 1; i < items.length; i++)
+		{
+			ItemStack stack = MinechemUtil.addItemToInventory(inventory, items[i]);
+			if (stack != null)
+			{
+				MinechemUtil.throwItemStack(world, itemStack, x, y, z);
+			}
+		}
+		
+		Item item=items[0].getItem();
+		if (item instanceof MoleculeItem){
+			itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeItem.getMolecule(items[0])))));
+		}else if (item instanceof ElementItem){
+			itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(items[0])))));
+		}
+		itemStack.stackSize = (items[0].stackSize/8);
+		itemStack.setTagCompound(items[0].stackTagCompound);
+
+		return ElementItem.initiateRadioactivity(itemStack, world);
 	}
 
 	public RadiationInfo handleRadiationMolecule(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
@@ -77,7 +107,7 @@ public class RadiationMoleculeHandler
 		PotionChemical[] chemicals = decayedMoleculesPre.get(molecule);
 		if (chemicals != null)
 		{
-			return chemicals;
+			return copyOf(chemicals);
 		}
 
 		chemicals = decayedMoleculesCache.get(molecule);
@@ -87,7 +117,7 @@ public class RadiationMoleculeHandler
 			chemicals = potionChemicalsSet.toArray(new PotionChemical[potionChemicalsSet.size()]);
 			decayedMoleculesCache.put(molecule, chemicals);
 		}
-		return chemicals;
+		return copyOf(chemicals);
 	}
 
 	private ItemStack[] toItemStacks(PotionChemical[] chemicalsArray)
@@ -149,6 +179,11 @@ public class RadiationMoleculeHandler
 	{
 		List<PotionChemical> chemicals = molecule.components();
 		Set<PotionChemical> outChemicals = new HashSet<PotionChemical>();
+		
+		if (molecule.radioactivity()==RadiationEnum.stable){
+			outChemicals.add(new Molecule(molecule));
+			return outChemicals;
+		}
 
 		Iterator<PotionChemical> it = chemicals.iterator();
 		while (it.hasNext())
@@ -183,5 +218,13 @@ public class RadiationMoleculeHandler
 		}
 
 		return outChemicals;
+	}
+	
+	private PotionChemical[] copyOf(PotionChemical[] a){
+		PotionChemical[] b=new PotionChemical[a.length];
+		for (int i=0;i<b.length;i++){
+			b[i]=a[i].clone();
+		}
+		return b;
 	}
 }

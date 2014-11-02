@@ -7,13 +7,16 @@ import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
 import minechem.gui.CreativeTabMinechem;
 import minechem.item.MinechemChemicalType;
+import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
+import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import minechem.utils.MinechemUtil;
+import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -54,6 +57,42 @@ public class MinechemBucketItem extends ItemBucket
 	public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool){
 		list.add(Constants.TEXT_MODIFIER + "9" + getFillLocalizedName());
 		list.add(Constants.TEXT_MODIFIER + "9" + MinechemUtil.subscriptNumbers(getFormula(itemstack)));
+		
+		String radioactivityColor;
+		RadiationEnum radioactivity = ElementItem.getRadioactivity(itemstack);
+		switch (radioactivity)
+		{
+			case stable:
+				radioactivityColor = Constants.TEXT_MODIFIER + "7";
+				break;
+			case hardlyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "a";
+				break;
+			case slightlyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "2";
+				break;
+			case radioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "e";
+				break;
+			case highlyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "6";
+				break;
+			case extremelyRadioactive:
+				radioactivityColor = Constants.TEXT_MODIFIER + "4";
+				break;
+			default:
+				radioactivityColor = "";
+				break;
+		}
+
+		String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
+		String timeLeft = "";
+		if (ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
+		{
+			long worldTime = player.worldObj.getTotalWorldTime();
+			timeLeft = TimeHelper.getTimeFromTicks(ElementItem.getRadioactivity(itemstack).getLife() - (worldTime - itemstack.getTagCompound().getLong("decayStart")));
+		}
+		list.add(radioactivityColor + radioactiveName + (timeLeft.equals("") ? "" : " (" + timeLeft + ")"));
 	}
     
 	private String getFillLocalizedName(){
