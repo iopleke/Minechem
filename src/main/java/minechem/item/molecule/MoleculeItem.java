@@ -1,6 +1,5 @@
 package minechem.item.molecule;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
@@ -63,66 +62,16 @@ public class MoleculeItem extends Item
 		filledMolecule = ir.registerIcon(Textures.IIcon.FILLED_MOLECULE);
 	}
 
-	public ArrayList<ItemStack> getElements(ItemStack itemstack)
-	{
-		MoleculeEnum molecule = MoleculeEnum.getById(itemstack.getItemDamage());
-		return MinechemHelper.convertChemicalsIntoItemStacks(molecule.components());
-	}
-
 	@Override
 	public String getUnlocalizedName(ItemStack par1ItemStack)
 	{
 		return getUnlocalizedName() + "." + getMolecule(par1ItemStack).name();
 	}
 
-	public String getFormula(ItemStack itemstack)
-	{
-		ArrayList<ItemStack> components = getElements(itemstack);
-		String formula = "";
-		for (ItemStack component : components)
-		{
-			if (component.getItem() instanceof ElementItem)
-			{
-				formula += ElementItem.getShortName(component);
-				if (component.stackSize > 1)
-				{
-					formula += component.stackSize;
-				}
-			} else if (component.getItem() instanceof MoleculeItem)
-			{
-				if (component.stackSize > 1)
-				{
-					formula += "(";
-				}
-				formula += getFormula(component);
-				if (component.stackSize > 1)
-				{
-					formula += ")" + component.stackSize;
-				}
-			}
-		}
-		return formula;
-	}
-
 	public String getFormulaWithSubscript(ItemStack itemstack)
 	{
-		String formula = getFormula(itemstack);
-		return subscriptNumbers(formula);
-	}
-
-	private static String subscriptNumbers(String string)
-	{
-		string = string.replace('0', '\u2080');
-		string = string.replace('1', '\u2081');
-		string = string.replace('2', '\u2082');
-		string = string.replace('3', '\u2083');
-		string = string.replace('4', '\u2084');
-		string = string.replace('5', '\u2085');
-		string = string.replace('6', '\u2086');
-		string = string.replace('7', '\u2087');
-		string = string.replace('8', '\u2088');
-		string = string.replace('9', '\u2089');
-		return string;
+		String formula = getMolecule(itemstack).getFormula();
+		return MinechemUtil.subscriptNumbers(formula);
 	}
 
 	@Override
