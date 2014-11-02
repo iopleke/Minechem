@@ -4,11 +4,8 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Minechem;
-import minechem.MinechemItemsRegistration;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
-import minechem.item.element.ElementEnum;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -69,28 +66,10 @@ public class MinechemBucketHandler
     {
         if (buckets.get(block) != null) return;
 
-        MinechemBucketItem bucket = new MinechemBucketItem(block, block.getFluid());
+        MinechemBucketItem bucket = new MinechemBucketItem(block, block.getFluid(),type);
         GameRegistry.registerItem(bucket, Reference.ID + "Bucket." + prefix + block.getFluid().getName());
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
-        ItemStack tube = null;
-        if (type instanceof ElementEnum)
-        {
-            tube = new ItemStack(MinechemItemsRegistration.element, 1, ((ElementEnum) type).ordinal());
-        }
-        else if (type instanceof MoleculeEnum)
-        {
-            tube = new ItemStack(MinechemItemsRegistration.molecule, 1, ((MoleculeEnum) type).id());
-        }
-        if (tube != null)
-        {
-            GameRegistry.addRecipe(new ItemStack(bucket), new Object[]
-            {
-                    "TTT", "TBT", "TTT", Character.valueOf('T'), tube, Character.valueOf('B'), new ItemStack(Items.bucket)
-            });
-
-            tube.stackSize = 8;
-            GameRegistry.addShapelessRecipe(tube, new ItemStack(bucket));
-        }
+        GameRegistry.addRecipe(new MinechemBucketRecipe(bucket, type));
         buckets.put(block, bucket);
         Minechem.PROXY.onAddBucket(bucket);
     }

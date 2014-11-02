@@ -2,7 +2,7 @@ package minechem.radiation;
 
 import net.minecraft.item.ItemStack;
 
-public class RadiationInfo
+public class RadiationInfo implements Cloneable
 {
 	public long decayStarted;
 	public long lastDecayUpdate;
@@ -32,5 +32,10 @@ public class RadiationInfo
 	public boolean isRadioactive()
 	{
 		return this.radioactivity != RadiationEnum.stable;
+	}
+	
+	@Override
+	public RadiationInfo clone(){
+		return new RadiationInfo(itemstack.copy(), decayStarted, lastDecayUpdate, dimensionID, radioactivity);
 	}
 }

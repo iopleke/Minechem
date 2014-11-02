@@ -8,7 +8,6 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionPharmacologyEffect;
 import minechem.radiation.RadiationHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
