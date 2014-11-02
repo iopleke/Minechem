@@ -122,22 +122,27 @@ public final class MinechemUtil
 		if (block instanceof IFluidBlock)
 		{
 			Fluid fluid = ((IFluidBlock) block).getFluid();
-			if (fluid instanceof FluidElement)
-			{
-				chemical = ((FluidElement) fluid).element;
-			} else if (fluid instanceof FluidChemical)
-			{
-				chemical = ((FluidChemical) fluid).molecule;
-			} else if (fluid == FluidRegistry.WATER)
-			{
-				chemical = MoleculeEnum.water;
-			}
+			chemical = getChemical(fluid);
 		} else if (block == Blocks.water || block == Blocks.flowing_water)
 		{
 			chemical = MoleculeEnum.water;
 		}
 
 		return chemical;
+	}
+	
+	public static MinechemChemicalType getChemical(Fluid fluid){
+		if (fluid instanceof FluidElement)
+		{
+			return ((FluidElement) fluid).element;
+		} else if (fluid instanceof FluidChemical)
+		{
+			return ((FluidChemical) fluid).molecule;
+		} else if (fluid == FluidRegistry.WATER)
+		{
+			return MoleculeEnum.water;
+		}
+		return null;
 	}
 	
 	public static ElementEnum getElement(Fluid fluid)

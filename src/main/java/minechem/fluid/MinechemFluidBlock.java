@@ -67,7 +67,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 
 	private boolean checkToExplode(World world, int dx, int dy, int dz, int sx, int sy, int sz)
 	{
-		return ChemicalFluidReactionHandler.checkToExplode(this, world.getBlock(dx, dy, dz), world, dx, dy, dz, sx, sy, sz);
+		return ChemicalFluidReactionHandler.checkToReact(this, world.getBlock(dx, dy, dz), world, dx, dy, dz, sx, sy, sz);
 	}
 
 	@Override

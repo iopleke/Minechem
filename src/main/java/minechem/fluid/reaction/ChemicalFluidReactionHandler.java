@@ -2,14 +2,12 @@ package minechem.fluid.reaction;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
-import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
+import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.ElementEnum;
-import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.item.molecule.MoleculeItem;
 import minechem.utils.CoordTuple;
 import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
@@ -20,7 +18,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
-
 import java.util.*;
 
 public class ChemicalFluidReactionHandler
@@ -49,12 +46,8 @@ public class ChemicalFluidReactionHandler
 		ItemStack itemStack = entityItem.getEntityItem();
 		Item item = itemStack.getItem();
 		MinechemChemicalType chemicalA = null;
-		if (item == MinechemItemsRegistration.element)
-		{
-			chemicalA = ElementItem.getElement(itemStack);
-		} else if (item == MinechemItemsRegistration.molecule)
-		{
-			chemicalA = MoleculeItem.getMolecule(itemStack);
+		if (item instanceof MinechemBucketItem){
+			chemicalA=MinechemUtil.getChemical(((MinechemBucketItem) item).fluid);
 		}
 
 		if (chemicalA != null && world.isMaterialInBB(entityItem.boundingBox, Material.water))
@@ -70,7 +63,7 @@ public class ChemicalFluidReactionHandler
 				ChemicalFluidReactionRule rule = new ChemicalFluidReactionRule(chemicalA, chemicalB);
 				if (reactionRules.containsKey(rule))
 				{
-					explosionReaction(world, entityItem, x, y, z, rule, !(MinechemUtil.canDrain(world, block, x, y, z)));
+					chemicalReaction(world, entityItem, x, y, z, rule, !(MinechemUtil.canDrain(world, block, x, y, z)));
 					itemStack.stackSize--;
 					if (itemStack.stackSize <= 0)
 					{
@@ -173,7 +166,7 @@ public class ChemicalFluidReactionHandler
 		reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.salt, MoleculeEnum.sodiumBisulfate), new ChemicalFluidReactionOutput(list, 0.1f));
 	}
 
-	private static void explosionReaction(World world, Entity entity, int x, int y, int z, ChemicalFluidReactionRule rule, boolean popFlowingFluid)
+	private static void chemicalReaction(World world, Entity entity, int x, int y, int z, ChemicalFluidReactionRule rule, boolean popFlowingFluid)
 	{
 		ChemicalFluidReactionOutput output = reactionRules.get(rule);
 		if (output == null)
@@ -230,7 +223,7 @@ public class ChemicalFluidReactionHandler
 			{
 				if (!popFlowingFluid)
 				{
-					ItemStack itemStack = MinechemUtil.createItemStack(chemical, 1);
+					ItemStack itemStack = MinechemUtil.createItemStack(chemical, 8);
 					MinechemUtil.throwItemStack(world, itemStack, x, y, z);
 				}
 			} else if (!(popFlowingFluid && !hasFlowingStatus))
@@ -259,7 +252,7 @@ public class ChemicalFluidReactionHandler
 		}
 	}
 
-	public static boolean checkToExplode(Block source, Block destination, World world, int destinationX, int destinationY, int destinationZ, int sourceX, int sourceY, int sourceZ)
+	public static boolean checkToReact(Block source, Block destination, World world, int destinationX, int destinationY, int destinationZ, int sourceX, int sourceY, int sourceZ)
 	{
 		MinechemChemicalType chemicalA = MinechemUtil.getChemical(source);
 		MinechemChemicalType chemicalB = MinechemUtil.getChemical(destination);
@@ -272,7 +265,7 @@ public class ChemicalFluidReactionHandler
 				boolean flag = !(MinechemUtil.canDrain(world, source, sourceX, sourceY, sourceZ) && MinechemUtil.canDrain(world, destination, destinationX, destinationY, destinationZ));
 				world.setBlockToAir(sourceX, sourceY, sourceZ);
 				world.setBlockToAir(destinationX, destinationY, destinationZ);
-				explosionReaction(world, null, destinationX, destinationY, destinationZ, rule, flag);
+				chemicalReaction(world, null, destinationX, destinationY, destinationZ, rule, flag);
 				return true;
 			}
 		}
