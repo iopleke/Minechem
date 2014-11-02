@@ -18,9 +18,9 @@ public class FluidTextureStitchHandler
 			{
 				fluidElement.setIcons(ir.registerIcon(Textures.IIcon.FUILD_STILL), ir.registerIcon(Textures.IIcon.FLUID_FLOW));
 			}
-			for (FluidChemical fluidChemical : FluidHelper.molecules.values())
+			for (FluidMolecule fluidMolecule : FluidHelper.molecules.values())
 			{
-				fluidChemical.setIcons(ir.registerIcon(Textures.IIcon.FUILD_STILL), ir.registerIcon(Textures.IIcon.FLUID_FLOW));
+				fluidMolecule.setIcons(ir.registerIcon(Textures.IIcon.FUILD_STILL), ir.registerIcon(Textures.IIcon.FLUID_FLOW));
 			}
 		}
 	}

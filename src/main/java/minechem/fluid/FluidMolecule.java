@@ -5,13 +5,13 @@ import minechem.MinechemItemsRegistration;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.item.ItemStack;
 
-public class FluidChemical extends MinechemFluid
+public class FluidMolecule extends MinechemFluid
 {
 
 	public final MoleculeEnum molecule;
 	private final int color;
 
-	public FluidChemical(MoleculeEnum molecule)
+	public FluidMolecule(MoleculeEnum molecule)
 	{
 		super(molecule.name(), molecule.roomState());
 		this.molecule = molecule;

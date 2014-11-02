@@ -15,6 +15,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -38,10 +39,12 @@ public class MinechemBucketHandler
     }
 
     @SubscribeEvent
-    public void onBucketFill(FillBucketEvent event) {
+    public void onBucketFill(FillBucketEvent event)
+    {
         ItemStack result = fillCustomBucket(event.world, event.target);
 
-        if (result == null) {
+        if (result == null)
+        {
             return;
         }
 
@@ -49,24 +52,27 @@ public class MinechemBucketHandler
         event.setResult(Event.Result.ALLOW);
     }
 
-    private ItemStack fillCustomBucket(World world, MovingObjectPosition pos) {
+    private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
+    {
         Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
 
         Item bucket = buckets.get(block);
 
-        if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0) {
+        if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
+        {
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
             return new ItemStack(bucket);
-        } else {
+        } else
+        {
             return null;
         }
     }
 
-    public void registerCustomMinechemBucket(MinechemFluidBlock block,MinechemChemicalType type, String prefix)
+    public void registerCustomMinechemBucket(MinechemFluidBlock block, MinechemChemicalType type, String prefix)
     {
         if (buckets.get(block) != null) return;
 
-        MinechemBucketItem bucket = new MinechemBucketItem(block, block.getFluid(),type);
+        MinechemBucketItem bucket = new MinechemBucketItem(block, block.getFluid(), type);
         GameRegistry.registerItem(bucket, Reference.ID + "Bucket." + prefix + block.getFluid().getName());
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
         GameRegistry.addRecipe(new MinechemBucketRecipe(bucket, type));

@@ -26,9 +26,9 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 		if (fluid instanceof FluidElement)
 		{
 			isRadioactivity = ((FluidElement) fluid).element.radioactivity() != RadiationEnum.stable;
-		} else if (fluid instanceof FluidChemical)
+		} else if (fluid instanceof FluidMolecule)
 		{
-			isRadioactivity = ((FluidChemical) fluid).molecule.radioactivity() != RadiationEnum.stable;
+			isRadioactivity = ((FluidMolecule) fluid).molecule.radioactivity() != RadiationEnum.stable;
 		} else
 		{
 			isRadioactivity = false;

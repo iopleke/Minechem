@@ -96,7 +96,7 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
 					TileEntity tile = world.getTileEntity(x, y, z);
 					if (tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
 					{
-						ElementItem.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
+                        RadiationInfo.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
 					}
 					world.setBlockToAir(x, y, z);
 					

@@ -1,6 +1,6 @@
 package minechem.render;
 
-import minechem.fluid.FluidChemical;
+import minechem.fluid.FluidMolecule;
 import minechem.fluid.FluidElement;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.client.Minecraft;
@@ -57,9 +57,9 @@ public class FluidItemRenderingHandler implements IItemRenderer
 		if (fluid instanceof FluidElement)
 		{
 			RenderingUtil.setColorForElement(((FluidElement) fluid).element);
-		} else if (fluid instanceof FluidChemical)
+		} else if (fluid instanceof FluidMolecule)
 		{
-			MoleculeEnum molecule = ((FluidChemical) fluid).molecule;
+			MoleculeEnum molecule = ((FluidMolecule) fluid).molecule;
 			GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
 		}
 		IIcon icon = ((ItemBlock) item.getItem()).field_150939_a.getBlockTextureFromSide(0);
