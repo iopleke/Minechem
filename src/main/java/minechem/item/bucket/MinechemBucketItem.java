@@ -21,7 +21,7 @@ public class MinechemBucketItem extends ItemBucket
     public MinechemBucketItem(Block block, Fluid fluid)
     {
         super(block);
-        setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
+        setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_BUCKETS);
         setContainerItem(Items.bucket);
         setUnlocalizedName("minechemBucket");
         this.fluid = fluid;

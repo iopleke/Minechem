@@ -23,7 +23,7 @@ import java.util.Map;
 public class MinechemBucketHandler
 {
     private static MinechemBucketHandler instance;
-    private Map<MinechemFluidBlock, Item> buckets = new HashMap<MinechemFluidBlock, Item>();
+    public Map<MinechemFluidBlock, Item> buckets = new HashMap<MinechemFluidBlock, Item>();
 
     public static MinechemBucketHandler getInstance()
     {
