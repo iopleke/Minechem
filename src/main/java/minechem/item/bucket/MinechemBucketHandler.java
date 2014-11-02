@@ -3,6 +3,7 @@ package minechem.item.bucket;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidChemical;
 import minechem.fluid.FluidElement;
@@ -16,7 +17,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,7 +68,7 @@ public class MinechemBucketHandler
     {
         if (buckets.get(block) != null) return;
 
-        Item bucket = new MinechemBucketItem(block, -block.getBlockColor());//TODO: fix color
+        MinechemBucketItem bucket = new MinechemBucketItem(block, block.getFluid());
         GameRegistry.registerItem(bucket, Reference.ID + "Bucket." + prefix + block.getFluid().getName());
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
         ItemStack tube = null;
@@ -89,6 +89,7 @@ public class MinechemBucketHandler
 
             tube.stackSize = 8;
             GameRegistry.addShapelessRecipe(tube, new ItemStack(bucket));
+            Minechem.PROXY.onAddBucket(bucket);
         }
         buckets.put(block, bucket);
     }

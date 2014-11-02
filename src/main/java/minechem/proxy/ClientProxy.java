@@ -9,6 +9,8 @@ import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidTextureStitchHandler;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
+import minechem.item.bucket.MinechemBucketItem;
+import minechem.item.bucket.MinechemBucketRenderer;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
 import minechem.render.ChemicalFluidBlockRenderingHandler;
@@ -48,6 +50,7 @@ public class ClientProxy extends CommonProxy
 	public static IIcon sand;
 
 	public FluidItemRenderingHandler fluidItemRenderingHandler;
+	public MinechemBucketRenderer bucketItemRenderer;
 
 	@Override
 	public void registerRenderers()
@@ -108,5 +111,15 @@ public class ClientProxy extends CommonProxy
 			fluidItemRenderingHandler = new FluidItemRenderingHandler();
 		}
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(block), fluidItemRenderingHandler);
+	}
+	
+	@Override
+	public void onAddBucket(MinechemBucketItem item)
+	{
+		if (bucketItemRenderer==null)
+		{
+			bucketItemRenderer=new MinechemBucketRenderer();
+		}
+		MinecraftForgeClient.registerItemRenderer(item, bucketItemRenderer);
 	}
 }

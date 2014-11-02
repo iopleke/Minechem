@@ -1,6 +1,7 @@
 package minechem.item.element;
 
 import minechem.item.ChemicalRoomStateEnum;
+import minechem.render.RenderingUtil;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -106,10 +107,10 @@ public class ElementItemRenderer implements IItemRenderer
 	private void renderItemInInventory(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
 	{
 		String shortName = ElementItem.getShortName(itemstack);
-		setColorForElement(element);
-		drawTexturedRectUV(0, 0, 0, 16, 16, contents);
+		RenderingUtil.setColorForElement(element);
+		RenderingUtil.drawTexturedRectUV(0, 0, 0, 16, 16, contents);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		drawTexturedRectUV(0, 0, 0, 16, 16, testtube);
+		RenderingUtil.drawTexturedRectUV(0, 0, 0, 16, 16, testtube);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 		fontRenderer.drawString(shortName, 1, 2, 0x000000);
@@ -122,7 +123,7 @@ public class ElementItemRenderer implements IItemRenderer
 		 * 0, 16, 16, contents); GL11.glColor3f(1.0F, 1.0F, 1.0F); for (float i = 0.0F; i < 1.0F; i += .1F) { drawTexturedRectUV(0, 0, i, 16, 16, testtube); } GL11.glPopMatrix(); */
 
 		Tessellator tessellator = Tessellator.instance;
-		setColorForElement(element);
+		RenderingUtil.setColorForElement(element);
 		ItemRenderer.renderItemIn2D(tessellator, contents.getMaxU(), contents.getMinV(), contents.getMinU(), contents.getMaxV(), contents.getIconWidth(), contents.getIconHeight(), 0.0625F);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		ItemRenderer.renderItemIn2D(tessellator, testtube.getMaxU(), testtube.getMinV(), testtube.getMinU(), testtube.getMaxV(), testtube.getIconWidth(), testtube.getIconHeight(), 0.0625F);
@@ -131,70 +132,11 @@ public class ElementItemRenderer implements IItemRenderer
 	private void renderItemAsEntity(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
 	{
 		GL11.glPushMatrix();
-		setColorForElement(element);
-		drawTextureIn3D(contents);
+		RenderingUtil.setColorForElement(element);
+		RenderingUtil.drawTextureIn3D(contents);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		drawTextureIn3D(testtube);
+		RenderingUtil.drawTextureIn3D(testtube);
 		GL11.glPopMatrix();
 	}
 
-	private void drawTextureIn3D(IIcon texture)
-	{
-		Tessellator tesselator = Tessellator.instance;
-		float scale = 0.7F;
-		GL11.glPushMatrix();
-		GL11.glScalef(scale, scale, scale);
-		ItemRenderer.renderItemIn2D(tesselator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(), texture.getIconWidth(), texture.getIconHeight(), .05F);
-		GL11.glPopMatrix();
-	}
-
-	private void drawTexturedRectUV(float x, float y, float z, int w, int h, IIcon icon)
-	{
-		Tessellator tesselator = Tessellator.instance;
-		tesselator.startDrawingQuads();
-		tesselator.addVertexWithUV(x, y + h, z, icon.getMinU(), icon.getMaxV());
-		tesselator.addVertexWithUV(x + w, y + h, z, icon.getMaxU(), icon.getMaxV());
-		tesselator.addVertexWithUV(x + w, y, z, icon.getMaxU(), icon.getMinV());
-		tesselator.addVertexWithUV(x, y, z, icon.getMinU(), icon.getMinV());
-		tesselator.draw();
-	}
-
-	private void setColorForElement(ElementEnum element)
-	{
-		switch (element.classification())
-		{
-			case actinide:
-				GL11.glColor3f(1.0F, 0.0F, 0.0F);
-				break;
-			case alkaliMetal:
-				GL11.glColor3f(0.0F, 1.0F, 0.0F);
-				break;
-			case alkalineEarthMetal:
-				GL11.glColor3f(0.0F, 0.0F, 1.0F);
-				break;
-			case halogen:
-				GL11.glColor3f(1.0F, 1.0F, 0.0F);
-				break;
-			case inertGas:
-				GL11.glColor3f(0.0F, 1.0F, 1.0F);
-				break;
-			case lanthanide:
-				GL11.glColor3f(1.0F, 0.0F, 1.0F);
-				break;
-			case nonmetal:
-				GL11.glColor3f(1.0F, 0.5F, 0.0F);
-				break;
-			case otherMetal:
-				GL11.glColor3f(0.5F, 1.0F, 0.0F);
-				break;
-			case semimetallic:
-				GL11.glColor3f(0.0F, 1.0F, 0.5F);
-				break;
-			case transitionMetal:
-				GL11.glColor3f(0.0F, 0.5F, 1.0F);
-				break;
-			default:
-				break;
-		}
-	}
 }

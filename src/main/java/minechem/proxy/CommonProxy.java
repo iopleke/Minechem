@@ -6,6 +6,7 @@ import minechem.Minechem;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
+import minechem.item.bucket.MinechemBucketItem;
 import minechem.tick.ScheduledTickHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -81,4 +82,8 @@ public class CommonProxy
 
 	}
 
+	public void onAddBucket(MinechemBucketItem item)
+	{
+		
+	}
 }

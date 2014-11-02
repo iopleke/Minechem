@@ -8,23 +8,23 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemBucket;
-import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraftforge.fluids.Fluid;
 
 public class MinechemBucketItem extends ItemBucket
 {
     @SideOnly(Side.CLIENT)
-    private IIcon[] icons;
+    public IIcon[] icons;
 
-    private int contentColor;
+    public final Fluid fluid;
 
-    public MinechemBucketItem(Block block, int contentColor)
+    public MinechemBucketItem(Block block, Fluid fluid)
     {
         super(block);
         setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
         setContainerItem(Items.bucket);
         setUnlocalizedName("minechemBucket");
-        this.contentColor = contentColor;
+        this.fluid = fluid;
     }
 
     @Override
@@ -34,30 +34,5 @@ public class MinechemBucketItem extends ItemBucket
         icons = new IIcon[2];
         icons[0] = ir.registerIcon(Textures.IIcon.BUCKET_EMPTY);
         icons[1] = ir.registerIcon(Textures.IIcon.BUCKET_CONTENT);
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public IIcon getIconFromDamageForRenderPass(int i, int j) {
-        if (j > 0 && contentColor >= 0)
-            return icons[1];
-        else
-            return icons[0];
-    }
-
-    // Return true to enable second pass for contentColor
-    @SideOnly(Side.CLIENT)
-    @Override
-    public boolean requiresMultipleRenderPasses() {
-        return true;
-    }
-
-    @SideOnly(Side.CLIENT)
-    @Override
-    public int getColorFromItemStack(ItemStack itemstack, int j) {
-        if (j > 0 && contentColor >= 0)
-            return contentColor;
-        else
-            return 0xffffff;
     }
 }
