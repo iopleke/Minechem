@@ -15,19 +15,19 @@ import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-public class FluidBlockChemical extends MinechemFluidBlock
+public class FluidBlockMolecule extends MinechemFluidBlock
 {
 	@SideOnly(Side.CLIENT)
 	protected IIcon stillIcon;
 	@SideOnly(Side.CLIENT)
 	protected IIcon flowingIcon;
 
-	public FluidBlockChemical(MinechemFluid fluid, Material material)
+	public FluidBlockMolecule(MinechemFluid fluid, Material material)
 	{
 		super(fluid, material);
 	}
 
-	public FluidBlockChemical(MinechemFluid fluid)
+	public FluidBlockMolecule(MinechemFluid fluid)
 	{
 		super(fluid, Material.water);
 		this.setBlockName(fluidName);
@@ -68,11 +68,11 @@ public class FluidBlockChemical extends MinechemFluidBlock
 	@Override
 	public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
 	{
-		if (entity instanceof EntityLivingBase && Settings.fluidEffects && getFluid() instanceof FluidChemical)
+		if (entity instanceof EntityLivingBase && Settings.fluidEffects && getFluid() instanceof FluidMolecule)
 		{
-			PotionPharmacologyEffect.triggerPlayerEffect(((FluidChemical) getFluid()).molecule, (EntityLivingBase) entity);
+			PotionPharmacologyEffect.triggerPlayerEffect(((FluidMolecule) getFluid()).molecule, (EntityLivingBase) entity);
 
-			int power = ((FluidChemical) getFluid()).molecule.radioactivity().ordinal();
+			int power = ((FluidMolecule) getFluid()).molecule.radioactivity().ordinal();
 			if (power > 0)
 			{
 				((EntityLivingBase) entity).addPotionEffect(new PotionEffect(Potion.poison.getId(), 10, power - 1));

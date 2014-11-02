@@ -14,21 +14,19 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntityProvider
 {
 	private final boolean isRadioactivity;
-	private final String unlocalizedName;
 	public static int RENDER_ID;
 
 	public MinechemFluidBlock(MinechemFluid fluid, Material material)
 	{
 		super(fluid, material);
 		setQuantaPerBlock(fluid.getQuanta());
-		unlocalizedName = fluid.getUnlocalizedName();
 
 		if (fluid instanceof FluidElement)
 		{
 			isRadioactivity = ((FluidElement) fluid).element.radioactivity() != RadiationEnum.stable;
-		} else if (fluid instanceof FluidChemical)
+		} else if (fluid instanceof FluidMolecule)
 		{
-			isRadioactivity = ((FluidChemical) fluid).molecule.radioactivity() != RadiationEnum.stable;
+			isRadioactivity = ((FluidMolecule) fluid).molecule.radioactivity() != RadiationEnum.stable;
 		} else
 		{
 			isRadioactivity = false;
@@ -40,10 +38,10 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	@Override
 	public String getUnlocalizedName()
 	{
-		return unlocalizedName;
+		return "fluid." + fluidName;
 	}
 
-	@Override
+    @Override
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborBlock)
 	{
 		super.onNeighborBlockChange(world, x, y, z, neighborBlock);

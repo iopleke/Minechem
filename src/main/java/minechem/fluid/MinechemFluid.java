@@ -1,9 +1,11 @@
 package minechem.fluid;
 
 import minechem.item.ChemicalRoomStateEnum;
+import minechem.item.MinechemChemicalType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
+import net.minecraftforge.fluids.FluidStack;
 
 abstract public class MinechemFluid extends Fluid
 {
@@ -32,4 +34,11 @@ abstract public class MinechemFluid extends Fluid
 
 	abstract public ItemStack getOutputStack();
 
+    abstract public MinechemChemicalType getChemical();
+
+    @Override
+    public String getUnlocalizedName()
+    {
+        return super.getUnlocalizedName() + ".name";
+    }
 }

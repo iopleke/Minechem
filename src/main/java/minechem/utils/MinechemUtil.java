@@ -6,7 +6,7 @@ import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidChemical;
+import minechem.fluid.FluidMolecule;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
@@ -135,9 +135,9 @@ public final class MinechemUtil
 		if (fluid instanceof FluidElement)
 		{
 			return ((FluidElement) fluid).element;
-		} else if (fluid instanceof FluidChemical)
+		} else if (fluid instanceof FluidMolecule)
 		{
-			return ((FluidChemical) fluid).molecule;
+			return ((FluidMolecule) fluid).molecule;
 		} else if (fluid == FluidRegistry.WATER)
 		{
 			return MoleculeEnum.water;
@@ -157,7 +157,7 @@ public final class MinechemUtil
 	
 	public static MoleculeEnum getMolecule(Fluid fluid)
 	{
-		for (Entry<MoleculeEnum, FluidChemical> entry:FluidHelper.molecules.entrySet())
+		for (Entry<MoleculeEnum, FluidMolecule> entry:FluidHelper.molecules.entrySet())
 		{
 			if (entry.getValue()==fluid)
 				return entry.getKey();

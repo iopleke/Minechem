@@ -34,21 +34,12 @@ import minechem.tileentity.synthesis.SynthesisTileEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
-import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
-	public static IIcon clay;
-	public static IIcon coal;
-	public static IIcon concentrated;
-	public static IIcon seed;
-	public static IIcon split;
-
-	public static IIcon sand;
-
 	public FluidItemRenderingHandler fluidItemRenderingHandler;
 	public MinechemBucketRenderer bucketItemRenderer;
 
@@ -117,9 +108,9 @@ public class ClientProxy extends CommonProxy
 	public void onAddBucket(MinechemBucketItem item)
 	{
 		super.onAddBucket(item);
-		if (bucketItemRenderer==null)
+		if (bucketItemRenderer == null)
 		{
-			bucketItemRenderer=new MinechemBucketRenderer();
+			bucketItemRenderer = new MinechemBucketRenderer();
 		}
 		MinecraftForgeClient.registerItemRenderer(item, bucketItemRenderer);
 	}

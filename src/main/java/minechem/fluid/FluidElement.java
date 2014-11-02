@@ -2,6 +2,7 @@ package minechem.fluid;
 
 import java.awt.Color;
 import minechem.MinechemItemsRegistration;
+import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import net.minecraft.item.ItemStack;
 
@@ -24,7 +25,13 @@ public class FluidElement extends MinechemFluid
 		return new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
 	}
 
-	@Override
+    @Override
+    public MinechemChemicalType getChemical()
+    {
+        return element;
+    }
+
+    @Override
 	public int getColor()
 	{
 		return color;

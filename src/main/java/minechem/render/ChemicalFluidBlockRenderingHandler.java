@@ -28,7 +28,7 @@ public class ChemicalFluidBlockRenderingHandler extends RenderBlockFluid
 	public void checkToRender(IBlockAccess world, int x, int y, int z, int side, RenderBlocks renderer, Block rendererBlock)
 	{
 		Block block = world.getBlock(x, y, z);
-		if (block.getRenderType() == 4)
+		if (block.getRenderType() == MinechemFluidBlock.RENDER_ID)
 		{
 			Tessellator tessellator = Tessellator.instance;
 			int l = block.colorMultiplier(world, x, y, z);

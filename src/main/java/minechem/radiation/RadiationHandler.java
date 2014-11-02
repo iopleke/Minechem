@@ -67,12 +67,12 @@ public class RadiationHandler
 		{
 			for (ItemStack itemstack : itemstacks)
 			{
-				if (itemstack != null && (itemstack.getItem() == MinechemItemsRegistration.molecule || itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() instanceof MinechemBucketItem) && ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable)
+				if (itemstack != null && (itemstack.getItem() == MinechemItemsRegistration.molecule || itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() instanceof MinechemBucketItem) && RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable)
 				{
 					RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
 					radiationInfo.decayStarted += player.worldObj.getTotalWorldTime() - radiationInfo.lastDecayUpdate;
 					radiationInfo.lastDecayUpdate = player.worldObj.getTotalWorldTime();
-					ElementItem.setRadiationInfo(radiationInfo, itemstack);
+                    RadiationInfo.setRadiationInfo(radiationInfo, itemstack);
 				}
 			}
 		}
@@ -100,7 +100,7 @@ public class RadiationHandler
 				Item item = itemstack.getItem();
 				if (item == MinechemItemsRegistration.element)
 				{
-					radiation = ElementItem.getRadioactivity(itemstack);
+					radiation = RadiationInfo.getRadioactivity(itemstack);
 				} else if (item == MinechemItemsRegistration.molecule)
 				{
 					radiation = MoleculeItem.getMolecule(itemstack).radioactivity();
@@ -188,7 +188,7 @@ public class RadiationHandler
 		if (dimensionID != radiationInfo.dimensionID && radiationInfo.isRadioactive())
 		{
 			radiationInfo.dimensionID = dimensionID;
-			ElementItem.setRadiationInfo(radiationInfo, element);
+            RadiationInfo.setRadiationInfo(radiationInfo, element);
 			return 0;
 		} else
 		{
@@ -220,10 +220,10 @@ public class RadiationHandler
 					radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeBucket(world, element, inventory, x, y, z);
 				}
 			}
-			ElementItem.setRadiationInfo(radiationInfo, element);
+            RadiationInfo.setRadiationInfo(radiationInfo, element);
 			return damage;
 		}
-		ElementItem.setRadiationInfo(radiationInfo, element);
+        RadiationInfo.setRadiationInfo(radiationInfo, element);
 		return 0;
 	}
 

@@ -81,7 +81,7 @@ public class MoleculeItem extends Item
 		list.add("\u00A79" + getFormulaWithSubscript(itemstack));
 
 		String radioactivityColor;
-		RadiationEnum radioactivity = ElementItem.getRadioactivity(itemstack);
+		RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
 		switch (radioactivity)
 		{
 			case stable:
@@ -109,10 +109,10 @@ public class MoleculeItem extends Item
 
 		String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
 		String timeLeft = "";
-		if (ElementItem.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
+		if (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
 		{
 			long worldTime = player.worldObj.getTotalWorldTime();
-			timeLeft = TimeHelper.getTimeFromTicks(ElementItem.getRadioactivity(itemstack).getLife() - (worldTime - itemstack.getTagCompound().getLong("decayStart")));
+			timeLeft = TimeHelper.getTimeFromTicks(RadiationInfo.getRadioactivity(itemstack).getLife() - (worldTime - itemstack.getTagCompound().getLong("decayStart")));
 		}
 		list.add(radioactivityColor + radioactiveName + (timeLeft.equals("") ? "" : " (" + timeLeft + ")"));
 		list.add(getRoomState(itemstack));
@@ -331,4 +331,14 @@ public class MoleculeItem extends Item
 		int id = itemstack.getItemDamage();
 		return (MoleculeEnum.molecules.get(id) == null) ? "null" : MoleculeEnum.molecules.get(id).roomState().descriptiveName();
 	}
+
+    @Override
+    public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        super.onCreated(itemStack, world, player);
+        if (RadiationInfo.getRadioactivity(itemStack) != RadiationEnum.stable && itemStack.stackTagCompound == null)
+        {
+            RadiationInfo.setRadiationInfo(new RadiationInfo(itemStack, world.getTotalWorldTime(), world.getTotalWorldTime(), world.provider.dimensionId, RadiationInfo.getRadioactivity(itemStack)), itemStack);
+        }
+    }
 }

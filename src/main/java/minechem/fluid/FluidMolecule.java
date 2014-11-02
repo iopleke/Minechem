@@ -2,20 +2,21 @@ package minechem.fluid;
 
 import java.awt.Color;
 import minechem.MinechemItemsRegistration;
+import minechem.item.MinechemChemicalType;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.item.ItemStack;
 
-public class FluidChemical extends MinechemFluid
+public class FluidMolecule extends MinechemFluid
 {
 
 	public final MoleculeEnum molecule;
 	private final int color;
 
-	public FluidChemical(MoleculeEnum molecule)
+	public FluidMolecule(MoleculeEnum molecule)
 	{
 		super(molecule.name(), molecule.roomState());
 		this.molecule = molecule;
-		color = computColor();
+		color = computeColor();
 	}
 
 	@Override
@@ -24,13 +25,19 @@ public class FluidChemical extends MinechemFluid
 		return new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
 	}
 
-	@Override
+    @Override
+    public MinechemChemicalType getChemical()
+    {
+        return molecule;
+    }
+
+    @Override
 	public int getColor()
 	{
 		return color;
 	}
 
-	private int computColor()
+	private int computeColor()
 	{
 		int red = (int) (molecule.red * 255);
 		int green = (int) (molecule.green * 255);
