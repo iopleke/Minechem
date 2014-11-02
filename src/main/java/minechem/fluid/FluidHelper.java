@@ -24,7 +24,7 @@ public class FluidHelper
 		elementsBlocks.put(fluid, new FluidBlockElement(fluid));
 		GameRegistry.registerBlock(elementsBlocks.get(fluid), fluid.getUnlocalizedName());
 		Minechem.PROXY.onAddFluid(fluid, elementsBlocks.get(fluid));
-		MinechemBucketHandler.getInstance().registerCustomMinechemBucket(elementsBlocks.get(fluid), "element.");
+		MinechemBucketHandler.getInstance().registerCustomMinechemBucket(elementsBlocks.get(fluid),element, "element.");
 	}
 
 	public static void registerMolecule(MoleculeEnum molecule)
@@ -34,6 +34,6 @@ public class FluidHelper
 		moleculeBlocks.put(fluid, new FluidBlockChemical(fluid));
 		GameRegistry.registerBlock(moleculeBlocks.get(fluid), fluid.getUnlocalizedName());
 		Minechem.PROXY.onAddFluid(fluid, moleculeBlocks.get(fluid));
-		MinechemBucketHandler.getInstance().registerCustomMinechemBucket(moleculeBlocks.get(fluid), "molecule.");
+		MinechemBucketHandler.getInstance().registerCustomMinechemBucket(moleculeBlocks.get(fluid),molecule, "molecule.");
 	}
 }

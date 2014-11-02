@@ -5,9 +5,10 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Minechem;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidChemical;
-import minechem.fluid.FluidElement;
 import minechem.fluid.MinechemFluidBlock;
+import minechem.item.MinechemChemicalType;
+import minechem.item.element.ElementEnum;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.reference.Reference;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
@@ -64,7 +65,7 @@ public class MinechemBucketHandler
         }
     }
 
-    public void registerCustomMinechemBucket(MinechemFluidBlock block, String prefix)
+    public void registerCustomMinechemBucket(MinechemFluidBlock block,MinechemChemicalType type, String prefix)
     {
         if (buckets.get(block) != null) return;
 
@@ -72,13 +73,13 @@ public class MinechemBucketHandler
         GameRegistry.registerItem(bucket, Reference.ID + "Bucket." + prefix + block.getFluid().getName());
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
         ItemStack tube = null;
-        if (block.getFluid() instanceof FluidElement)
+        if (type instanceof ElementEnum)
         {
-            tube = new ItemStack(MinechemItemsRegistration.element, 1, ((FluidElement) block.getFluid()).element.ordinal());
+            tube = new ItemStack(MinechemItemsRegistration.element, 1, ((ElementEnum) type).ordinal());
         }
-        else if (block.getFluid() instanceof FluidChemical)
+        else if (type instanceof MoleculeEnum)
         {
-            tube = new ItemStack(MinechemItemsRegistration.molecule, 1, ((FluidChemical) block.getFluid()).molecule.id());
+            tube = new ItemStack(MinechemItemsRegistration.molecule, 1, ((MoleculeEnum) type).id());
         }
         if (tube != null)
         {
@@ -89,9 +90,9 @@ public class MinechemBucketHandler
 
             tube.stackSize = 8;
             GameRegistry.addShapelessRecipe(tube, new ItemStack(bucket));
-            Minechem.PROXY.onAddBucket(bucket);
         }
         buckets.put(block, bucket);
+        Minechem.PROXY.onAddBucket(bucket);
     }
 
 }

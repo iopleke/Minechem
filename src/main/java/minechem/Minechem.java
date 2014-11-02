@@ -70,10 +70,6 @@ public class Minechem
 
 		LogHelper.debug("Setting up ModMetaData");
 		metadata = MetaData.init(metadata);
-		
-		LogHelper.debug("Registering Elements & Molecules...");
-		ElementEnum.init();
-		MoleculeEnum.init();
 
 		// Register items and blocks.
 		LogHelper.debug("Registering Items...");
@@ -81,6 +77,10 @@ public class Minechem
 
 		LogHelper.debug("Registering Blocks...");
 		MinechemBlocksGeneration.registerBlocks();
+		
+		LogHelper.debug("Registering Elements & Molecules...");
+		ElementEnum.init();
+		MoleculeEnum.init();
 
 		LogHelper.debug("Registering Blueprints...");
 		MinechemBlueprint.registerBlueprints();

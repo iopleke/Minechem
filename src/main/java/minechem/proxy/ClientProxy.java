@@ -116,6 +116,7 @@ public class ClientProxy extends CommonProxy
 	@Override
 	public void onAddBucket(MinechemBucketItem item)
 	{
+		super.onAddBucket(item);
 		if (bucketItemRenderer==null)
 		{
 			bucketItemRenderer=new MinechemBucketRenderer();
