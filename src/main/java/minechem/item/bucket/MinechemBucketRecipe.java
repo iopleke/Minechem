@@ -14,21 +14,14 @@ import net.minecraft.world.World;
 
 public class MinechemBucketRecipe implements IRecipe
 {
-
-    public final MinechemBucketItem output;
-    public final MinechemChemicalType chemicalType;
-
-    public MinechemBucketRecipe(MinechemBucketItem output, MinechemChemicalType chemicalType)
-    {
-        this.output = output;
-        this.chemicalType = chemicalType;
-    }
+    private MinechemChemicalType type;
 
     @Override
     public boolean matches(InventoryCrafting inv, World world)
     {
         int chemicals = 0;
         boolean hasBucket = false;
+        type = null;
         for (int i = 0; i < inv.getSizeInventory(); i++)
         {
             ItemStack stack = inv.getStackInSlot(i);
@@ -59,7 +52,9 @@ public class MinechemBucketRecipe implements IRecipe
                 return false;
             }
 
-            if (anotherType == chemicalType)
+            if (type == null) type = anotherType;
+
+            if (anotherType == type)
             {
                 chemicals++;
             } else
@@ -74,7 +69,7 @@ public class MinechemBucketRecipe implements IRecipe
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inv)
     {
-        if (chemicalType.radioactivity() == RadiationEnum.stable)
+        if (type.radioactivity() == RadiationEnum.stable)
         {
             return getRecipeOutput();
         }
@@ -126,7 +121,8 @@ public class MinechemBucketRecipe implements IRecipe
     @Override
     public ItemStack getRecipeOutput()
     {
-        return new ItemStack(output, 1);
+        if (type != null) return new ItemStack(MinechemBucketHandler.getInstance().getBucket(type), 1);
+        else return null;
     }
 
 }

@@ -231,7 +231,7 @@ public class MinechemBucketItem extends ItemBucket
     public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
     {
         super.onCreated(itemStack, world, player);
-        if (RadiationInfo.getRadioactivity(itemStack) != RadiationEnum.stable)
+        if (RadiationInfo.getRadioactivity(itemStack) != RadiationEnum.stable && itemStack.stackTagCompound == null)
         {
             RadiationInfo.setRadiationInfo(new RadiationInfo(itemStack, world.getTotalWorldTime(), world.getTotalWorldTime(), world.provider.dimensionId, RadiationInfo.getRadioactivity(itemStack)), itemStack);
         }

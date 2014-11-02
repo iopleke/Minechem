@@ -331,4 +331,14 @@ public class MoleculeItem extends Item
 		int id = itemstack.getItemDamage();
 		return (MoleculeEnum.molecules.get(id) == null) ? "null" : MoleculeEnum.molecules.get(id).roomState().descriptiveName();
 	}
+
+    @Override
+    public void onCreated(ItemStack itemStack, World world, EntityPlayer player)
+    {
+        super.onCreated(itemStack, world, player);
+        if (RadiationInfo.getRadioactivity(itemStack) != RadiationEnum.stable && itemStack.stackTagCompound == null)
+        {
+            RadiationInfo.setRadiationInfo(new RadiationInfo(itemStack, world.getTotalWorldTime(), world.getTotalWorldTime(), world.provider.dimensionId, RadiationInfo.getRadioactivity(itemStack)), itemStack);
+        }
+    }
 }

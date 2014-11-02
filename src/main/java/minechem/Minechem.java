@@ -17,6 +17,7 @@ import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
 import minechem.item.blueprint.MinechemBlueprint;
+import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.polytool.PolytoolEventHandler;
@@ -93,7 +94,8 @@ public class Minechem
 	{
 		LogHelper.debug("Registering Recipes...");
 		MinechemRecipes.getInstance().RegisterRecipes();
-		MinechemRecipes.getInstance().registerFluidRecipies();
+		MinechemRecipes.getInstance().registerFluidRecipes();
+        MinechemBucketHandler.getInstance().registerBucketRecipes();
 
 		LogHelper.debug("Registering OreDict Compatability...");
 		MinechemItemsRegistration.registerToOreDictionary();
@@ -161,12 +163,13 @@ public class Minechem
 		PotionEnchantmentCoated.registerCoatings();
 
 		Long start = System.currentTimeMillis();
-		LogHelper.info("Registering other Mod Recipes");
+		LogHelper.info("Registering other Mod Recipes...");
 		MinechemRecipes.getInstance().registerOreDictOres();
 		Recipe.init();
 		DecomposerRecipeHandler.recursiveRecipes();
 		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
-		
+
+        LogHelper.debug("Registering Mod Ores for PolyTool...");
 		PolytoolTypeIron.getOres();
 		
 		LogHelper.info("Minechem has loaded");

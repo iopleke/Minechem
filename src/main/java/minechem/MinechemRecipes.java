@@ -89,7 +89,7 @@ public class MinechemRecipes
 		return recipes;
 	}
 
-	public void registerFluidRecipies()
+	public void registerFluidRecipes()
 	{
 		// Fluids
 		int fluidPerIngot = INGOT_AMOUNT;
@@ -1973,6 +1973,14 @@ public class MinechemRecipes
 		{
 			this.molecule(MoleculeEnum.cellulose, 12)
 		}));
+
+        // Bucket
+        ItemStack itemBucket = new ItemStack(Items.water_bucket);
+        DecomposerRecipe.add(new DecomposerRecipe(itemBucket, this.element(ElementEnum.Fe, 48)));
+        SynthesisRecipe.add(new SynthesisRecipe(itemBucket, true, COST_FOOD, new PotionChemical[]
+        {
+                null, null, null, this.element(ElementEnum.Fe, 16), null, this.element(ElementEnum.Fe, 16), null, this.element(ElementEnum.Fe, 16), null
+        }));
 
 		// Water Bucket
 		ItemStack itemBucketWater = new ItemStack(Items.water_bucket);
