@@ -430,4 +430,9 @@ public class MoleculeEnum extends MinechemChemicalType
 		molecules.remove(molecule.id());
 		nameToMolecules.remove(molecule.name());
 	}
+	
+	public static void init()
+	{
+		
+	}
 }

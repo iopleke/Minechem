@@ -256,4 +256,9 @@ public class ElementEnum extends MinechemChemicalType
 	{
 		return nameToElements.get(name);
 	}
+	
+	public static void init()
+	{
+		
+	}
 }
