@@ -82,6 +82,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				LogHelper.debug(dr.getInput().getDisplayName());
 				registerDecomposerRecipe(dr);
 			}
+            arecipes = sortList(arecipes);
 		} else
 		{
 			super.loadCraftingRecipes(outputId, results);
@@ -110,6 +111,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				registerDecomposerRecipe(dr);
 			}
 		}
+        arecipes = sortList(arecipes);
 	}
 
 	@Override
@@ -121,6 +123,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			registerDecomposerRecipe(dr);
 		}
+        arecipes = sortList(arecipes);
 	}
 
 	@Override
@@ -145,7 +148,6 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 				arecipes.add(cdr);
 			}
 		}
-        arecipes = sortList(arecipes);
 	}
 
     private ArrayList<CachedRecipe> sortList(ArrayList<CachedRecipe> list)
@@ -243,6 +245,15 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             if (o instanceof BaseCachedDecomposerRecipe)
             {
                 BaseCachedDecomposerRecipe recipe = (BaseCachedDecomposerRecipe)o;
+                if (recipe instanceof CachedDecomposerRecipeSuper && !(this instanceof CachedDecomposerRecipeSuper))
+                {
+                    return -1;
+                }
+                else if (!(recipe instanceof CachedDecomposerRecipeSuper) && this instanceof CachedDecomposerRecipeSuper)
+                {
+                    return 1;
+                }
+
                 if (recipe.getOtherStacks().size() < this.getOtherStacks().size())
                 {
                     return 1;
@@ -254,16 +265,19 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
                 else
                 {
                     int countThis = 0;
+                    if (getResult() != null) countThis += getResult().item.stackSize;
                     for (PositionedStack stack : this.getOtherStacks())
                     {
                        countThis += stack.item.stackSize;
                     }
 
                     int countOther = 0;
+                    if (getResult() != null) countOther += getResult().item.stackSize;
                     for (PositionedStack stack : recipe.getOtherStacks())
                     {
                         countOther += stack.item.stackSize;
                     }
+
                     if (countOther < countThis)
                     {
                         return 1;
