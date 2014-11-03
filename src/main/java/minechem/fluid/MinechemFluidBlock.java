@@ -38,7 +38,8 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	@Override
 	public String getUnlocalizedName()
 	{
-		return "fluid." + fluidName;
+        String fluidUnlocalizedName = getFluid().getUnlocalizedName();
+		return fluidUnlocalizedName.substring(0, fluidUnlocalizedName.length()-5);// Splits off ".name"
 	}
 
     @Override
@@ -60,7 +61,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	@Override
 	public int getRenderType()
 	{
-		return RENDER_ID;
+		return super.getRenderType();
 	}
 
 	private boolean checkToExplode(World world, int dx, int dy, int dz, int sx, int sy, int sz)

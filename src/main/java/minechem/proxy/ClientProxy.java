@@ -63,7 +63,7 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
 
-		RenderingRegistry.registerBlockHandler(MinechemFluidBlock.RENDER_ID, new ChemicalFluidBlockRenderingHandler());
+		//RenderingRegistry.registerBlockHandler(MinechemFluidBlock.RENDER_ID, new ChemicalFluidBlockRenderingHandler());
 	}
 
 	@Override
