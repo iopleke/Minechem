@@ -61,7 +61,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	@Override
 	public int getRenderType()
 	{
-		return super.getRenderType();
+		return RENDER_ID;
 	}
 
 	private boolean checkToExplode(World world, int dx, int dy, int dz, int sx, int sy, int sz)

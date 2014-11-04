@@ -47,7 +47,6 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderers()
 	{
 		RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-		MinechemFluidBlock.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
@@ -62,8 +61,6 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
-
-		//RenderingRegistry.registerBlockHandler(MinechemFluidBlock.RENDER_ID, new ChemicalFluidBlockRenderingHandler());
 	}
 
 	@Override
