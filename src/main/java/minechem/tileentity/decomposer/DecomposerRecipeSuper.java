@@ -85,11 +85,10 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		for (String currentKey : this.recipes.keySet())
 		{
 			DecomposerRecipe current = DecomposerRecipe.get(currentKey);
-			LogHelper.debug(currentKey);
 			if (current != null)
 			{
 				Double i = this.recipes.get(currentKey);
-                LogHelper.debug(i);
+                LogHelper.debug("getOutput :" + currentKey + " chance: " + i);
 				while (i >= 1)
 				{
 					ArrayList<PotionChemical> partialResult = current.getOutput();
@@ -119,7 +118,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		for (String currentKey : this.recipes.keySet())
 		{
 			DecomposerRecipe current = DecomposerRecipe.get(currentKey);
-			LogHelper.debug(currentKey);
+			LogHelper.debug("getOutputRaw: " + currentKey);
 			if (current != null)
 			{
 				for (int i = 0; i < this.recipes.get(currentKey); i++)
@@ -173,6 +172,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 			for (String key : recipes.keySet())
 			{
 				DecomposerRecipe dr = DecomposerRecipe.get(key);
+                LogHelper.debug("outputContains: " + key);
 				if (dr == null)
 				{
 					continue;
