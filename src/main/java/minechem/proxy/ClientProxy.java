@@ -13,7 +13,6 @@ import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.bucket.MinechemBucketRenderer;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
-import minechem.render.ChemicalFluidBlockRenderingHandler;
 import minechem.render.FluidItemRenderingHandler;
 import minechem.sound.MinechemSoundEvent;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
@@ -47,7 +46,6 @@ public class ClientProxy extends CommonProxy
 	public void registerRenderers()
 	{
 		RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-		MinechemFluidBlock.RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
 		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
@@ -62,8 +60,6 @@ public class ClientProxy extends CommonProxy
 		ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
 		ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
-
-		//RenderingRegistry.registerBlockHandler(MinechemFluidBlock.RENDER_ID, new ChemicalFluidBlockRenderingHandler());
 	}
 
 	@Override

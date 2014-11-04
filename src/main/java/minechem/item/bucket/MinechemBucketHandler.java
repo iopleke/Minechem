@@ -1,10 +1,7 @@
 package minechem.item.bucket;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Minechem;
-import minechem.MinechemItemsRegistration;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
@@ -15,14 +12,8 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
 import minechem.reference.Reference;
 import minechem.tileentity.decomposer.DecomposerRecipe;
-import minechem.tileentity.decomposer.DecomposerRecipeSuper;
-import net.minecraft.block.Block;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MovingObjectPosition;
-import net.minecraft.world.World;
-import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
 
 import java.util.ArrayList;
@@ -64,36 +55,6 @@ public class MinechemBucketHandler
         return null;
     }
 
-    @SubscribeEvent
-    public void onBucketFill(FillBucketEvent event)
-    {
-        ItemStack result = fillCustomBucket(event.world, event.target);
-
-        if (result == null)
-        {
-            return;
-        }
-
-        event.result = result;
-        event.setResult(Event.Result.ALLOW);
-    }
-
-    private ItemStack fillCustomBucket(World world, MovingObjectPosition pos)
-    {
-        Block block = world.getBlock(pos.blockX, pos.blockY, pos.blockZ);
-
-        Item bucket = buckets.get(block);
-
-        if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
-        {
-            world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-            return new ItemStack(bucket);
-        } else
-        {
-            return null;
-        }
-    }
-
     public void registerCustomMinechemBucket(MinechemFluidBlock block, MinechemChemicalType type, String prefix)
     {
         if (buckets.get(block) != null) return;
@@ -119,12 +80,9 @@ public class MinechemBucketHandler
     private void registerBucketDecomposerRecipe(ItemStack itemStack, MinechemChemicalType type)
     {
         ArrayList<PotionChemical> tubes = new ArrayList<PotionChemical>();
+        tubes.add(new Element(ElementEnum.Fe, 48));
         if (type instanceof ElementEnum) tubes.add(new Element((ElementEnum) type, 8));
         else if (type instanceof MoleculeEnum) tubes.add(new Molecule((MoleculeEnum) type, 8));
-
-        if (tubes != null)
-        {
-            DecomposerRecipe.add(new DecomposerRecipeSuper(itemStack, new ItemStack[]{new ItemStack(Items.iron_ingot, 3)}, tubes));
-        }
+        DecomposerRecipe.add(new DecomposerRecipe(itemStack, tubes));
     }
 }
