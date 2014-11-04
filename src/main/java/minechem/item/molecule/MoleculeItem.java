@@ -21,6 +21,7 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.Item;
@@ -315,7 +316,8 @@ public class MoleculeItem extends Item
 				MinechemUtil.throwItemStack(world, empties, x, y, z);
 			}
 			
-			Block block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeEnum.molecules.get(itemStack.getItemDamage())));
+			Block block = Blocks.flowing_water;
+            if (getMolecule(itemStack) != MoleculeEnum.water) block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
 			world.setBlock(x, y, z, block, 0, 3);
 			TileEntity tile = world.getTileEntity(x, y, z);
 			if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)

@@ -293,7 +293,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	public static MoleculeEnum addMolecule(String name, int id, float colorRed, float colorGreen, float colorBlue, float colorRed2, float colorGreen2, float colorBlue2, ChemicalRoomStateEnum roomState, PotionChemical... chemicals)
 	{
 		MoleculeEnum molecule = new MoleculeEnum(name, id, colorRed, colorGreen, colorBlue, colorRed2, colorGreen2, colorBlue2, roomState, chemicals);
-		registerMolecule(molecule);
+        registerMolecule(molecule);
 		return molecule;
 	}
 
@@ -305,7 +305,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	public static void registerMolecule(MoleculeEnum molecule)
 	{
 		addMapping(molecule);
-		FluidHelper.registerMolecule(molecule);
+		if (!molecule.name.equals("water")) FluidHelper.registerMolecule(molecule);
 	}
 
 	public static void registerMTMolecule(MoleculeEnum molecule)
