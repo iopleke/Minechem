@@ -14,7 +14,6 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntityProvider
 {
 	private final boolean isRadioactivity;
-	public static int RENDER_ID;
 
 	public MinechemFluidBlock(MinechemFluid fluid, Material material)
 	{
@@ -56,12 +55,6 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 			checkToExplode(world, x, y - 1, z, x, y, z);
 			checkToExplode(world, x, y, z - 1, x, y, z);
 		}
-	}
-
-	@Override
-	public int getRenderType()
-	{
-		return RENDER_ID;
 	}
 
 	private boolean checkToExplode(World world, int dx, int dy, int dz, int sx, int sy, int sz)
