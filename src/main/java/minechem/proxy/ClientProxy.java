@@ -13,7 +13,6 @@ import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.bucket.MinechemBucketRenderer;
 import minechem.item.element.ElementItemRenderer;
 import minechem.item.molecule.MoleculeItemRenderer;
-import minechem.render.ChemicalFluidBlockRenderingHandler;
 import minechem.render.FluidItemRenderingHandler;
 import minechem.sound.MinechemSoundEvent;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorItemRenderer;
