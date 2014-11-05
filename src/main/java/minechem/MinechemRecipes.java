@@ -2436,6 +2436,9 @@ public class MinechemRecipes
 			element(ElementEnum.Fe, 3),
 			element(ElementEnum.Fe, 3)
 		}));
+		
+		//Uranium Ore
+		DecomposerRecipe.createAndAddRecipeSafely("oreUranium", new Element(ElementEnum.U, 48));
 	}
 
 	public void RegisterModRecipes()

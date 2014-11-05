@@ -1,14 +1,20 @@
 package minechem.utils;
 
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
+import java.util.regex.Pattern;
+
+import cpw.mods.fml.common.registry.GameData;
 import minechem.MinechemItemsRegistration;
-import minechem.fluid.FluidMolecule;
+import minechem.Settings;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
+import minechem.fluid.FluidMolecule;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -28,6 +34,7 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidHandler;
+import net.minecraftforge.oredict.OreDictionary;
 
 public final class MinechemUtil
 {
@@ -246,4 +253,86 @@ public final class MinechemUtil
 		string = string.replace('9', '\u2089');
 		return string;
 	}
+	
+	public static void addDisabledStacks(String[] stringInputs, ArrayList<ItemStack> decomposerBlacklist, ArrayList<String> ids)
+	{
+		for (String string:stringInputs)
+		{
+			if (string==null || string.equals("")) continue;
+			String[] splitString = string.split(":");
+			ArrayList<String> wildcardMatch=new ArrayList<String>();
+			if (splitString.length<2||splitString.length>3)
+			{
+				LogHelper.debug(string + " is an invalid blacklist input");
+				continue;
+			}
+			if (splitString[0].equals("ore"))
+			{
+				String itemID = splitString[1];
+				if (itemID.contains("*"))itemID=itemID.replaceAll("\\*", ".*");
+				Pattern itemPattern = Pattern.compile(itemID,Pattern.CASE_INSENSITIVE);
+				for (String item:OreDictionary.getOreNames()){
+					if (itemPattern.matcher(item).matches()) wildcardMatch.add(item);
+				}
+				if (wildcardMatch.isEmpty())
+				{
+					LogHelper.debug(splitString[1]+ " has no matches in the OreDictionary");
+					continue;
+				}
+				for (String key:wildcardMatch)
+				{
+					decomposerBlacklist.addAll(OreDictionary.getOres(key));
+				}
+			}
+			else
+			{
+				int meta;
+				try{
+					meta = splitString.length==3?Integer.valueOf(splitString[2]):Short.MAX_VALUE;
+				}catch (NumberFormatException e)
+				{
+					if (splitString[2].equals("*"))
+						meta=Short.MAX_VALUE;
+					else
+					{
+						LogHelper.debug(splitString[2] + " is an invalid damage value - defaulting to all values");
+						meta=Short.MAX_VALUE;
+					}
+				}
+				String itemID = splitString[0]+":"+splitString[1];
+				if (itemID.contains("*"))itemID=itemID.replaceAll("\\*", ".*");
+				Pattern itemPattern = Pattern.compile(itemID,Pattern.CASE_INSENSITIVE);
+				for (String item:ids){
+					if (itemPattern.matcher(item).matches()) wildcardMatch.add(item);
+				}
+				if (wildcardMatch.isEmpty())
+				{
+					LogHelper.debug(string+ " has no matches in the ItemRegistry");
+					continue;
+				}
+				for (String key:wildcardMatch)
+				{
+					Object disable = GameData.getItemRegistry().getObject(key);
+					if (disable instanceof Item)
+						decomposerBlacklist.add(new ItemStack(((Item)disable),1,meta));
+					else if (disable instanceof Block)
+						decomposerBlacklist.add(new ItemStack(((Block)disable),1,meta));
+				}
+			}
+		}
+	}
+
+	public static void populateBlacklists()
+	{
+		Settings.decomposerBlacklist = new ArrayList<ItemStack>();
+		Settings.synthesisBlacklist = new ArrayList<ItemStack>();
+		
+		ArrayList<String> registeredItems=new ArrayList<String>();
+		for (Object key:GameData.getItemRegistry().getKeys()){
+			registeredItems.add((String) key);
+		}
+		addDisabledStacks(Settings.DecomposerBlacklist,Settings.decomposerBlacklist,registeredItems);
+		addDisabledStacks(Settings.SynthesisMachineBlacklist,Settings.synthesisBlacklist,registeredItems);
+	}
+
 }

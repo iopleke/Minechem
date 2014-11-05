@@ -2,8 +2,10 @@ package minechem.minetweaker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.InputHelper;
 import minetweaker.IUndoableAction;
 import minetweaker.MineTweakerAPI;
@@ -46,13 +48,10 @@ public class Synthesiser
 		ArrayList<ItemStack> toRemove = InputHelper.getInputs(input);
 		for (ItemStack remove : toRemove)
 		{
-			ArrayList<SynthesisRecipe> recipes = SynthesisRecipe.search(remove);
-			if (recipes != null)
+			SynthesisRecipe recipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(remove);
+			if (recipe != null)
 			{
-				for (SynthesisRecipe recipe : recipes)
-				{
-					MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
-				}
+				MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
 			}
 		}
 	}

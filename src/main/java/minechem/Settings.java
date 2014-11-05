@@ -1,16 +1,18 @@
 package minechem;
 
-import cpw.mods.fml.client.config.IConfigElement;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import minechem.reference.Reference;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import cpw.mods.fml.client.config.IConfigElement;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Settings
 {
@@ -75,7 +77,9 @@ public class Settings
 	public static String[] SynthesisMachineBlacklist =
 	{
 	};
-
+	public static ArrayList<ItemStack> decomposerBlacklist;
+	public static ArrayList<ItemStack> synthesisBlacklist;
+	
 	public static void init(File configFile)
 	{
 		if (config == null)
@@ -195,37 +199,27 @@ public class Settings
 
 		prop = config.get("blacklist", "decomposition", new String[]
 		{
-			"dirt",
-			"gravel"
+			"minecra*:dirt",
+			"minecraft:wool:4",
+			"ore:ore*",
+			"mekanism:*"
 		});
 		prop.setLanguageKey("config.blacklist.decomposition.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.decomposition.example");
 		DecomposerBlacklist = prop.getStringList();
-		for (int i = 0; i < DecomposerBlacklist.length; i++)
-		{
-			if (DecomposerBlacklist[i].equals(""))
-			{
-				DecomposerBlacklist[i] = null;
-			}
-		}
+		
 		configList.add(prop.getName());
 
 		prop = config.get("blacklist", "synthesis", new String[]
 		{
-			"diamond",
-			"emerald",
-			"dragon_egg"
+			"minecraft:diamond",
+			"ore:ingotIron",
+			"*:dragon_egg"
 		});
 		prop.setLanguageKey("config.blacklist.synthesis.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.synthesis.example");
 		SynthesisMachineBlacklist = prop.getStringList();
-		for (int i = 0; i < SynthesisMachineBlacklist.length; i++)
-		{
-			if (SynthesisMachineBlacklist[i].equals(""))
-			{
-				SynthesisMachineBlacklist[i] = null;
-			}
-		}
+		
 		configList.add(prop.getName());
 
 		prop = config.get("power", "enable", Settings.powerUseEnabled);
