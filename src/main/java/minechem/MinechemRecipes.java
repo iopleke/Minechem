@@ -2351,78 +2351,71 @@ public class MinechemRecipes
 		ItemStack itemRecordStrad = new ItemStack(Items.record_strad);
 		ItemStack itemRecordWard = new ItemStack(Items.record_ward);
 		ItemStack itemRecordChirp = new ItemStack(Items.record_chirp);
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecord13, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordCat, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordFar, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordMall, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordMellohi, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordStal, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordStrad, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordWard, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
-		DecomposerRecipe.add(new DecomposerRecipe(itemRecordChirp, new PotionChemical[]
-		{
-			moleculePolyvinylChloride
-		}));
+        ItemStack itemRecord11 = new ItemStack(Items.record_11);
+        ItemStack itemRecordWait = new ItemStack(Items.record_wait);
+        ItemStack itemRecordBlocks = new ItemStack(Items.record_blocks);
+
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecord13, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordCat, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordFar, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordMall, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordMellohi, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordStal, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordStrad, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordWard, moleculePolyvinylChloride, moleculePolyvinylChloride));
+		DecomposerRecipe.add(new DecomposerRecipe(itemRecordChirp, moleculePolyvinylChloride, moleculePolyvinylChloride));
+        DecomposerRecipe.add(new DecomposerRecipe(itemRecord11, moleculePolyvinylChloride, moleculePolyvinylChloride));
+        DecomposerRecipe.add(new DecomposerRecipe(itemRecordWait, moleculePolyvinylChloride, moleculePolyvinylChloride));
+        DecomposerRecipe.add(new DecomposerRecipe(itemRecordBlocks, moleculePolyvinylChloride, moleculePolyvinylChloride));
+
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecord13, true, COST_GEM, new PotionChemical[]
 		{
-			moleculePolyvinylChloride, null, null, null, null, null, null, null, null
+			moleculePolyvinylChloride, moleculePolyvinylChloride, null, null, null, null, null, null, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordCat, true, COST_GEM, new PotionChemical[]
 		{
-			null, moleculePolyvinylChloride, null, null, null, null, null, null, null
+			null, moleculePolyvinylChloride, moleculePolyvinylChloride, null, null, null, null, null, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordFar, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, moleculePolyvinylChloride, null, null, null, null, null, null
+			null, null, moleculePolyvinylChloride, moleculePolyvinylChloride, null, null, null, null, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordMall, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, null, moleculePolyvinylChloride, null, null, null, null, null
+			null, null, null, moleculePolyvinylChloride, moleculePolyvinylChloride, null, null, null, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordMellohi, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, null, null, moleculePolyvinylChloride, null, null, null, null
+			null, null, null, null, moleculePolyvinylChloride, moleculePolyvinylChloride, null, null, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordStal, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, null, null, null, moleculePolyvinylChloride, null, null, null
+			null, null, null, null, null, moleculePolyvinylChloride, moleculePolyvinylChloride, null, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordStrad, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, null, null, null, null, moleculePolyvinylChloride, null, null
+			null, null, null, null, null, null, moleculePolyvinylChloride, moleculePolyvinylChloride, null
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordWard, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, null, null, null, null, null, moleculePolyvinylChloride, null
+			null, null, null, null, null, null, null, moleculePolyvinylChloride, moleculePolyvinylChloride
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(itemRecordChirp, true, COST_GEM, new PotionChemical[]
 		{
-			null, null, null, null, null, null, null, null, moleculePolyvinylChloride
+                moleculePolyvinylChloride, null, null, null, null, null, null, null, moleculePolyvinylChloride
 		}));
+        SynthesisRecipe.add(new SynthesisRecipe(itemRecord11, true, COST_GEM, new PotionChemical[]
+        {
+                moleculePolyvinylChloride, null, null, null, moleculePolyvinylChloride, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(itemRecordWait, true, COST_GEM, new PotionChemical[]
+        {
+                moleculePolyvinylChloride, null, null, moleculePolyvinylChloride, null, null, null, null, null
+        }));
+        SynthesisRecipe.add(new SynthesisRecipe(itemRecordBlocks, true, COST_GEM, new PotionChemical[]
+        {
+                moleculePolyvinylChloride, null, null, null, null, moleculePolyvinylChloride, null, null, null
+        }));
 
 		//Ironbars
 		ItemStack bars = new ItemStack(Blocks.iron_bars);
