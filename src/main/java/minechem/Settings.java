@@ -200,36 +200,26 @@ public class Settings
 		prop = config.get("blacklist", "decomposition", new String[]
 		{
 			"minecra*:dirt",
-			"minecraft:wool:4"
+			"minecraft:wool:4",
+			"ore:ore*",
+			"mekanism:*"
 		});
 		prop.setLanguageKey("config.blacklist.decomposition.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.decomposition.example");
 		DecomposerBlacklist = prop.getStringList();
-		for (int i = 0; i < DecomposerBlacklist.length; i++)
-		{
-			if (DecomposerBlacklist[i].equals(""))
-			{
-				DecomposerBlacklist[i] = null;
-			}
-		}
+		
 		configList.add(prop.getName());
 
 		prop = config.get("blacklist", "synthesis", new String[]
 		{
 			"minecraft:diamond",
-			"minecraft:emerald",
+			"ore:ingotIron",
 			"*:dragon_egg"
 		});
 		prop.setLanguageKey("config.blacklist.synthesis.tooltip").setRequiresMcRestart(true);
 		prop.comment = StatCollector.translateToLocal("config.blacklist.synthesis.example");
 		SynthesisMachineBlacklist = prop.getStringList();
-		for (int i = 0; i < SynthesisMachineBlacklist.length; i++)
-		{
-			if (SynthesisMachineBlacklist[i].equals(""))
-			{
-				SynthesisMachineBlacklist[i] = null;
-			}
-		}
+		
 		configList.add(prop.getName());
 
 		prop = config.get("power", "enable", Settings.powerUseEnabled);

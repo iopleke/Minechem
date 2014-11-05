@@ -248,25 +248,10 @@ public class DecomposerRecipe
 		return contains;
 	}
 
-//	public static boolean isBlacklisted(ItemStack itemStack)
-//	{
-//		for (int i = 0; i < Settings.DecomposerBlacklist.length; i++)
-//		{
-//			if (itemStack.getUnlocalizedName() != null && Settings.DecomposerBlacklist[i] != null)
-//			{
-//				if (Compare.stringSieve(itemStack.getUnlocalizedName()).contains((CharSequence) Compare.stringSieve(Settings.DecomposerBlacklist[i])))
-//				{
-//					LogHelper.debug("Decomposer recipe for '" + Settings.DecomposerBlacklist[i] + "' has been blacklisted");
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
 	public static boolean isBlacklisted(ItemStack itemStack)
 	{
 		for (ItemStack stack:Settings.decomposerBlacklist)
-			if (stack.isItemEqual(itemStack)) return true;
+			if (stack.getItem()==itemStack.getItem()&&(stack.getItemDamage()==Short.MAX_VALUE||stack.getItemDamage()==itemStack.getItemDamage())) return true;
 		return false;
 	}
 

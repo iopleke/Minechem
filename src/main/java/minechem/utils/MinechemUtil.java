@@ -288,11 +288,16 @@ public final class MinechemUtil
 			{
 				int meta;
 				try{
-					meta = splitString.length==3?Integer.valueOf(splitString[2]):0;
+					meta = splitString.length==3?Integer.valueOf(splitString[2]):Short.MAX_VALUE;
 				}catch (NumberFormatException e)
 				{
-					LogHelper.debug(splitString[2] + " is an invalid damage value - defaulting to 0");
-					meta=0;
+					if (splitString[2].equals("*"))
+						meta=Short.MAX_VALUE;
+					else
+					{
+						LogHelper.debug(splitString[2] + " is an invalid damage value - defaulting to all values");
+						meta=Short.MAX_VALUE;
+					}
 				}
 				String itemID = splitString[0]+":"+splitString[1];
 				if (itemID.contains("*"))itemID=itemID.replaceAll("\\*", ".*");

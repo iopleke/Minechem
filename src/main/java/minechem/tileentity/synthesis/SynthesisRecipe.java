@@ -162,27 +162,11 @@ public class SynthesisRecipe
 
 		return var1;
 	}
-
-//	public static boolean isBlacklisted(ItemStack itemStack)
-//	{
-//		for (int i = 0; i < Settings.SynthesisMachineBlacklist.length; i++)
-//		{
-//			if (itemStack.getUnlocalizedName() != null && Settings.SynthesisMachineBlacklist[i] != null)
-//			{
-//				if (Compare.stringSieve(itemStack.getUnlocalizedName()).contains((CharSequence) Compare.stringSieve(Settings.SynthesisMachineBlacklist[i])))
-//				{
-//					LogHelper.debug("Decomposer recipe for '" + Settings.SynthesisMachineBlacklist[i] + "' has been blacklisted");
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
 	
 	public static boolean isBlacklisted(ItemStack itemStack)
 	{
 		for (ItemStack stack:Settings.synthesisBlacklist)
-			if (stack.isItemEqual(itemStack)) return true;
+			if (stack.getItem()==itemStack.getItem()&&(stack.getItemDamage()==Short.MAX_VALUE||stack.getItemDamage()==itemStack.getItemDamage())) return true;
 		return false;
 	}
 

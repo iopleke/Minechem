@@ -81,7 +81,6 @@ public class MinechemBlocksGeneration
 		uranium = new BlockUraniumOre();
 		GameRegistry.registerBlock(uranium, uranium.getUnlocalizedName());
 		OreDictionary.registerOre("oreUranium", new ItemStack(uranium));
-		DecomposerRecipe.createAndAddRecipeSafely("oreUranium", new Element(ElementEnum.U, 48));
 
 		// Leaded Chest (for storing radioactive isotopes).
 		leadChest = new LeadedChestBlock();
