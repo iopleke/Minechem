@@ -72,7 +72,7 @@ public class MicroscopeRenderGUIItem extends RenderItem
 			GL11.glPopMatrix();
 		}
 
-        if (itemStack == inventoryPlayer.getItemStack())
+        if (itemStack == inventoryPlayer.getItemStack() && microscopeGui.isMouseInMicroscope())
         {
             GL11.glPushMatrix();
             setScissor(microscopeGui.eyepieceX, microscopeGui.eyepieceY, 52, 52);
@@ -80,23 +80,11 @@ public class MicroscopeRenderGUIItem extends RenderItem
             int renderY = y;
             GL11.glTranslatef(renderX, renderY, 0.0F);
             GL11.glScalef(3.0F, 3.0F, 1.0F);
-            GL11.glTranslatef(-renderX - 5.3F, -renderY - 5.3F, 2.0F);
+            GL11.glTranslatef(-renderX - 5.3F, -renderY - 5.3F, 600F);
             super.renderItemAndEffectIntoGUI(fontRenderer, textureManager, itemStack, renderX, renderY);
             stopScissor();
             GL11.glPopMatrix();
         }
 
-		if (itemStack != microscopeContainer.getSlot(0).getStack())
-		{
-			if (itemStack == inventoryPlayer.getItemStack())
-			{
-				this.zLevel = 40.0F;
-			} else
-			{
-				this.zLevel = 50F;
-			}
-
-			super.renderItemAndEffectIntoGUI(fontRenderer, textureManager, itemStack, x, y);
-		}
 	}
 }

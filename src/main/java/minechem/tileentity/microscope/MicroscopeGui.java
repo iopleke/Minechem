@@ -33,6 +33,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 	protected MicroscopeTileEntity microscope;
 	MicroscopeGuiSwitch recipeSwitch;
 	private boolean isShapedRecipe;
+    private RenderItem renderItem;
 
 	public MicroscopeGui(InventoryPlayer inventoryPlayer, MicroscopeTileEntity microscope)
 	{
@@ -41,7 +42,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		this.microscope = microscope;
 		this.xSize = guiWidth;
 		this.ySize = guiHeight;
-		this.itemRender = new MicroscopeRenderGUIItem(this);
+		this.renderItem = new MicroscopeRenderGUIItem(this);
 		this.recipeSwitch = new MicroscopeGuiSwitch(this);
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.microscope")));
 	}
@@ -158,7 +159,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		if (!recipeSwitch.isMoverOver())
 		{
 			String cost = String.format("%d Energy", recipe.energyCost());
-			fontRendererObj.drawString(cost, x + 108, y + 85, 0x000000);
+			fontRendererObj.drawString(cost, x + 100, y + 85, 0x000000);
 		}
 	}
 
@@ -234,6 +235,7 @@ public class MicroscopeGui extends GuiContainerTabbed
     public void drawScreen(int par1, int par2, float par3)
     {
         super.drawScreen(par1, par2, par3);
-        itemRender.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), microscope.getStackInSlot(0), par1, par2);
+        renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), microscope.getStackInSlot(0), par1, par2);
+        renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), inventoryPlayer.getItemStack(), par1, par2);
     }
 }
