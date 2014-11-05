@@ -13,6 +13,8 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import dan200.computercraft.api.ComputerCraftAPI;
+import minechem.computercraft.MinechemTurtleUpgrade;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
@@ -144,6 +146,9 @@ public class Minechem
 			MineTweakerAPI.registerClass(Synthesiser.class);
 			MineTweakerAPI.registerClass(Fuels.class);
 		}
+		
+		if (Loader.isModLoaded("ComputerCraft"))
+			ComputerCraftAPI.registerTurtleUpgrade(new MinechemTurtleUpgrade(30883));
 	}
 
 	@EventHandler

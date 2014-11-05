@@ -3,10 +3,13 @@ package minechem.tileentity.synthesis;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
+
 import java.util.ArrayList;
 import java.util.List;
+
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
+import minechem.item.molecule.MoleculeEnum;
 import minechem.network.MessageHandler;
 import minechem.network.message.SynthesisUpdateMessage;
 import minechem.tileentity.prefab.BoundedInventory;
@@ -714,5 +717,9 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	{
         if (!canTakeOutputStack(false)) return false;
 		return Settings.AllowAutomation && canTakeOutputStack(true) && side == 0;
+	}
+
+	public String getState() {
+		return canTakeOutputStack(false)?"Active":inventory[kOutput[0]] == null?"No Recipe": !hasEnoughPowerForCurrentRecipe()?"No Power":"Not Enough Ingredients";
 	}
 }
