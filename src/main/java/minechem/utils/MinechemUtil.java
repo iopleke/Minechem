@@ -258,6 +258,7 @@ public final class MinechemUtil
 	{
 		for (String string:stringInputs)
 		{
+			if (string==null || string.equals("")) continue;
 			String[] splitString = string.split(":");
 			ArrayList<String> wildcardMatch=new ArrayList<String>();
 			if (splitString.length<2||splitString.length>3)
