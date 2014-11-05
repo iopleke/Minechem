@@ -14,6 +14,7 @@ import net.minecraft.item.ItemStack;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
@@ -195,12 +196,11 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 			{
 				// Just put input elements into first slots, starting at
 				// upper left.
-				ArrayList inputChemicals = sr.getShapelessRecipe();
+				PotionChemical[] inputChemicals = sr.getShapelessRecipe();
 				int xSlot = 0;
 				int ySlot = 0;
-				for (Object o : inputChemicals)
+				for (PotionChemical c : inputChemicals)
 				{
-					PotionChemical c = (PotionChemical) o;
 					ItemStack inputItem = MinechemHelper.chemicalToItemStack(c, c.amount);
 					inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + xSlot * INPUT_X_SCALE, INPUT_Y_OFS + ySlot * INPUT_Y_SCALE));
 					xSlot++;

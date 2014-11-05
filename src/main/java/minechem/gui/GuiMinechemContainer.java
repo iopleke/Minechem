@@ -11,11 +11,6 @@ import net.minecraft.inventory.Container;
 @SideOnly(Side.CLIENT)
 public abstract class GuiMinechemContainer extends GuiContainer
 {
-	/**
-	 * Stacks renderer. Icons, stack size, health, etc...
-	 */
-	protected static RenderItem vanillaItemRenderer = new RenderItem();
-	public RenderItem itemRenderer = vanillaItemRenderer;
 	private final FontRenderer fontRenderer;
 
 	public GuiMinechemContainer(Container container)
@@ -55,5 +50,15 @@ public abstract class GuiMinechemContainer extends GuiContainer
 	{
 		return this.ySize;
 	}
+
+    public int getGuiTop()
+    {
+        return guiTop;
+    }
+
+    public int getGuiLeft()
+    {
+        return guiLeft;
+    }
 
 }

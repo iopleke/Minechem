@@ -170,7 +170,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
 	public void showSynthesisRecipe(SynthesisRecipe recipe)
 	{
-		ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
+		ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.isShaped() ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
 		showIngredients(ingredients, synthesisSlots, SYNTHESIS_X, SYNTHESIS_Y);
 	}
 

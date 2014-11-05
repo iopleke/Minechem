@@ -7,6 +7,7 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class SynthesisRecipeHandler
 {
@@ -20,14 +21,7 @@ public class SynthesisRecipeHandler
 
 	public SynthesisRecipe getRecipeFromOutput(ItemStack output)
 	{
-		for (SynthesisRecipe recipe : SynthesisRecipe.recipes.values())
-		{
-			if (Compare.stacksAreSameKind(output, recipe.getOutput()))
-			{
-				return recipe;
-			}
-		}
-		return null;
+		return SynthesisRecipe.recipes.get(SynthesisRecipe.getKey(output));
 	}
 
 	public SynthesisRecipe getRecipeFromInput(ItemStack[] input)
@@ -61,7 +55,7 @@ public class SynthesisRecipeHandler
 	private boolean itemStacksMatchesShapelessRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor)
 	{
 		ArrayList<ItemStack> stacksList = new ArrayList<ItemStack>();
-		ArrayList<ItemStack> shapelessRecipe = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getShapelessRecipe());
+		ArrayList<ItemStack> shapelessRecipe = MinechemHelper.convertChemicalsIntoItemStacks(new ArrayList<PotionChemical>(Arrays.asList(recipe.getShapelessRecipe())));
 		for (ItemStack itemstack : stacks)
 		{
 			if (itemstack != null)

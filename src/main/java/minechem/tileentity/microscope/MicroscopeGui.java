@@ -12,6 +12,7 @@ import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -32,6 +33,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 	protected MicroscopeTileEntity microscope;
 	MicroscopeGuiSwitch recipeSwitch;
 	private boolean isShapedRecipe;
+    private RenderItem renderItem;
 
 	public MicroscopeGui(InventoryPlayer inventoryPlayer, MicroscopeTileEntity microscope)
 	{
@@ -40,7 +42,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		this.microscope = microscope;
 		this.xSize = guiWidth;
 		this.ySize = guiHeight;
-		this.itemRenderer = new MicroscopeRenderGUIItem(this);
+		this.renderItem = new MicroscopeRenderGUIItem(this);
 		this.recipeSwitch = new MicroscopeGuiSwitch(this);
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.microscope")));
 	}
@@ -138,17 +140,18 @@ public class MicroscopeGui extends GuiContainerTabbed
 	private void drawSynthesisRecipeMatrix(SynthesisRecipe recipe, int x, int y)
 	{
 		isShapedRecipe = recipe.isShaped();
-		ItemStack[] shapedRecipe = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
+		ItemStack[] shapedRecipe = MinechemHelper.convertChemicalArrayIntoItemStackArray(this.isShapedRecipe ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
 		int slot = 2;
-		for (ItemStack itemstack : shapedRecipe)
-		{
-			this.inventorySlots.putStackInSlot(slot, itemstack);
-			slot++;
-			if (slot >= 11)
-			{
-				break;
-			}
-		}
+        for (ItemStack itemstack : shapedRecipe)
+        {
+            this.inventorySlots.putStackInSlot(slot, itemstack);
+            slot++;
+            if (slot >= 11)
+            {
+                break;
+
+            }
+        }
 	}
 
 	private void drawSynthesisRecipeCost(SynthesisRecipe recipe, int x, int y)
@@ -156,7 +159,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		if (!recipeSwitch.isMoverOver())
 		{
 			String cost = String.format("%d Energy", recipe.energyCost());
-			fontRendererObj.drawString(cost, x + 108, y + 85, 0x000000);
+			fontRendererObj.drawString(cost, x + 100, y + 85, 0x000000);
 		}
 	}
 
@@ -228,4 +231,11 @@ public class MicroscopeGui extends GuiContainerTabbed
 		this.recipeSwitch.mouseClicked(x, y, mouseButton);
 	}
 
+    @Override
+    public void drawScreen(int par1, int par2, float par3)
+    {
+        super.drawScreen(par1, par2, par3);
+        renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), microscope.getStackInSlot(0), par1, par2);
+        renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), inventoryPlayer.getItemStack(), par1, par2);
+    }
 }
