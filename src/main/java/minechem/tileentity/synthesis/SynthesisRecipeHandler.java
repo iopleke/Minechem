@@ -88,22 +88,15 @@ public class SynthesisRecipeHandler
 		PotionChemical[] chemicals = recipe.getShapedRecipe();
 		for (int i = 0; i < chemicals.length; i++)
 		{
-			if (stacks[i] == null && chemicals[i] != null)
+			if (stacks[i] == null && chemicals[i] == null)
 			{
-				return false;
-			}
-			if (chemicals[i] == null && stacks[i] != null)
-			{
-				return false;
+				continue;
 			}
 			if (stacks[i] == null || chemicals[i] == null)
 			{
-				continue;
+				return false;
 			}
-			if (MinechemHelper.itemStackMatchesChemical(stacks[i], chemicals[i], factor))
-			{
-				continue;
-			} else
+			if (!MinechemHelper.itemStackMatchesChemical(stacks[i], chemicals[i], factor))
 			{
 				return false;
 			}
