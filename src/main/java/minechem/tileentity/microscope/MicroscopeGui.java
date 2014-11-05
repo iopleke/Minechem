@@ -12,6 +12,7 @@ import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.Constants;
 import minechem.utils.MinechemHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -40,7 +41,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		this.microscope = microscope;
 		this.xSize = guiWidth;
 		this.ySize = guiHeight;
-		this.itemRenderer = new MicroscopeRenderGUIItem(this);
+		this.itemRender = new MicroscopeRenderGUIItem(this);
 		this.recipeSwitch = new MicroscopeGuiSwitch(this);
 		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.microscope")));
 	}
@@ -138,17 +139,18 @@ public class MicroscopeGui extends GuiContainerTabbed
 	private void drawSynthesisRecipeMatrix(SynthesisRecipe recipe, int x, int y)
 	{
 		isShapedRecipe = recipe.isShaped();
-		ItemStack[] shapedRecipe = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
+		ItemStack[] shapedRecipe = MinechemHelper.convertChemicalArrayIntoItemStackArray(this.isShapedRecipe ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
 		int slot = 2;
-		for (ItemStack itemstack : shapedRecipe)
-		{
-			this.inventorySlots.putStackInSlot(slot, itemstack);
-			slot++;
-			if (slot >= 11)
-			{
-				break;
-			}
-		}
+        for (ItemStack itemstack : shapedRecipe)
+        {
+            this.inventorySlots.putStackInSlot(slot, itemstack);
+            slot++;
+            if (slot >= 11)
+            {
+                break;
+
+            }
+        }
 	}
 
 	private void drawSynthesisRecipeCost(SynthesisRecipe recipe, int x, int y)
@@ -228,4 +230,10 @@ public class MicroscopeGui extends GuiContainerTabbed
 		this.recipeSwitch.mouseClicked(x, y, mouseButton);
 	}
 
+    @Override
+    public void drawScreen(int par1, int par2, float par3)
+    {
+        super.drawScreen(par1, par2, par3);
+        itemRender.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), microscope.getStackInSlot(0), par1, par2);
+    }
 }

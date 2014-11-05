@@ -4,6 +4,7 @@ import cpw.mods.fml.client.FMLClientHandler;
 import java.util.List;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
+import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
@@ -12,21 +13,17 @@ import org.lwjgl.opengl.GL11;
 
 public class GuiFakeSlot extends Gui
 {
-
-	private static RenderItem renderItem = new RenderItem();
-
-	Minecraft mc;
-	GuiContainerTabbed parentContainer;
-	EntityPlayer player;
-	int parentWidth;
-	int parentHeight;
-	int xPos;
-	int yPos;
-	int xOffset = 0;
-	int yOffset = 0;
-	int width = 16;
-	int height = 16;
-	ItemStack itemstack;
+	private Minecraft mc;
+    private GuiContainerTabbed parentContainer;
+    private EntityPlayer player;
+    private int parentWidth, parentHeight;
+    private int xPos, yPos;
+    private int xOffset = 0;
+    private int yOffset = 0;
+    private int width = 16;
+    private int height = 16;
+    private ItemStack itemstack;
+    private static RenderItem renderItem = new RenderItem();
 
 	public GuiFakeSlot(GuiContainerTabbed parentContainer, EntityPlayer player)
 	{
