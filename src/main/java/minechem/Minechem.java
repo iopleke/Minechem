@@ -35,6 +35,7 @@ import minechem.render.EffectsRenderer;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.LogHelper;
 import minechem.utils.MinechemFuelHandler;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
 import minetweaker.MineTweakerAPI;
 import net.minecraft.item.crafting.CraftingManager;
@@ -92,11 +93,6 @@ public class Minechem
 	@EventHandler
 	public void init(FMLInitializationEvent event)
 	{
-		LogHelper.debug("Registering Recipes...");
-		MinechemRecipes.getInstance().RegisterRecipes();
-		MinechemRecipes.getInstance().registerFluidRecipes();
-        MinechemBucketHandler.getInstance().registerBucketRecipes();
-
 		LogHelper.debug("Registering OreDict Compatability...");
 		MinechemItemsRegistration.registerToOreDictionary();
 
@@ -133,9 +129,6 @@ public class Minechem
 		LogHelper.debug("Registering ClientProxy Rendering Hooks...");
 		PROXY.registerRenderers();
 
-		LogHelper.debug("Registering Mod Recipes...");
-		MinechemRecipes.getInstance().RegisterModRecipes();
-
 		LogHelper.debug("Registering Fluid Reactions...");
 		FluidChemicalDispenser.init();
 		ChemicalFluidReactionHandler.initReaction();
@@ -156,6 +149,16 @@ public class Minechem
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event)
 	{
+		MinechemUtil.populateBlacklists();
+		
+		LogHelper.debug("Registering Recipes...");
+		MinechemRecipes.getInstance().RegisterRecipes();
+		MinechemRecipes.getInstance().registerFluidRecipes();
+        MinechemBucketHandler.getInstance().registerBucketRecipes();
+        
+        LogHelper.debug("Registering Mod Recipes...");
+		MinechemRecipes.getInstance().RegisterModRecipes();
+		
 		LogHelper.debug("Adding blueprints to dungeon loot...");
 		MinechemItemsRegistration.addDungeonLoot();
 
