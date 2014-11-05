@@ -1,16 +1,18 @@
 package minechem;
 
-import cpw.mods.fml.client.config.IConfigElement;
-import cpw.mods.fml.client.event.ConfigChangedEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import minechem.reference.Reference;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.common.config.Property;
+import cpw.mods.fml.client.config.IConfigElement;
+import cpw.mods.fml.client.event.ConfigChangedEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 public class Settings
 {
@@ -75,7 +77,9 @@ public class Settings
 	public static String[] SynthesisMachineBlacklist =
 	{
 	};
-
+	public static ArrayList<ItemStack> decomposerBlacklist;
+	public static ArrayList<ItemStack> synthesisBlacklist;
+	
 	public static void init(File configFile)
 	{
 		if (config == null)
