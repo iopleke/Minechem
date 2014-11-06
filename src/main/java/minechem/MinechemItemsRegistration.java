@@ -24,6 +24,7 @@ import net.minecraftforge.oredict.OreDictionary;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import dan200.computercraft.api.ComputerCraftAPI;
+import dan200.computercraft.api.turtle.ITurtleUpgrade;
 
 public class MinechemItemsRegistration
 {
@@ -40,7 +41,8 @@ public class MinechemItemsRegistration
 	public static ItemStack minechempills;
 	public static Item polytool;
 	public static ItemStack emptyTube;
-	public static MinechemTurtleUpgrade turtleUpgrade = null;
+	
+	public static Object turtleUpgrade = null;
 
 	public static void init()
 	{
@@ -73,7 +75,7 @@ public class MinechemItemsRegistration
 		
 		if (Loader.isModLoaded("ComputerCraft"))
 		{
-			ComputerCraftAPI.registerTurtleUpgrade(turtleUpgrade=new MinechemTurtleUpgrade(342));
+			ComputerCraftAPI.registerTurtleUpgrade((MinechemTurtleUpgrade) (turtleUpgrade=new MinechemTurtleUpgrade(342)));
 		}
 	}
 
