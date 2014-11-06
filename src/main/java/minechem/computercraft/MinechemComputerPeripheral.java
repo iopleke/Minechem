@@ -1,13 +1,15 @@
 package minechem.computercraft;
 
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.MinechemItemsRegistration;
 import minechem.computercraft.lua.LuaMethod;
+import minechem.item.element.Element;
 import minechem.item.element.ElementItem;
+import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
@@ -17,35 +19,41 @@ import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.microscope.MicroscopeTileEntity;
 import minechem.tileentity.synthesis.SynthesisRecipe;
+import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import minechem.utils.TimeHelper;
 import net.minecraft.init.Items;
-import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.registry.GameRegistry;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 
-public class MinechemComputerPeripheral extends TileEntity implements IPeripheral {
+
+public class MinechemComputerPeripheral extends TileEntity implements IPeripheral
+{
 	private ITurtleAccess turtle;
-	private ArrayList<ItemStack> known = new ArrayList<ItemStack>();
+	private ArrayList<ItemStack> known;
 	private static final ArrayList<LuaMethod> luaMethods = new ArrayList<LuaMethod>();
 	
 	public MinechemComputerPeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
+		this.known = new ArrayList<ItemStack>();
 		if (luaMethods.isEmpty()) addLuaMethods();
 	}
 
-	@Override
-	public String getType() {
-		return null;
-	}
+    @Override
+    public String getType()
+    {
+        return "chemical";
+    }
 
 	@Override
 	public String[] getMethodNames() {
@@ -55,9 +63,6 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			result[i++]=method.getMethodName();
 		return result;
 	}
-
-	
-	//DON'T LOOK AT THIS - IT'S HIDEOUS! complete rewrite coming after dinner
 	
     protected void addLuaMethods()
     {
@@ -72,7 +77,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 						result[i++]=method.getMethodName()+method.getArgs();
 					return result;
 				}else {
-                    throw new IllegalArgumentException("getMethods does not take any arguments");
+                    throw new LuaException("getMethods does not take any arguments");
 				}
 			}
     		@Override
@@ -98,9 +103,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 							}
 						}
 					}
-					throw new IllegalArgumentException("Invalid Method Name - do not include brackets");
+					throw new LuaException("Invalid Method Name - do not include brackets");
 				}else {
-                    throw new IllegalArgumentException("getDetails takes a single argument");
+                    throw new LuaException("getDetails takes a single argument");
 				}
 			}
     		
@@ -131,9 +136,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -176,9 +181,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -220,9 +225,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -234,8 +239,8 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
             	if (Compare.isStackAnElement(current))
         		{
         			HashMap<String,Object> chemMap = new HashMap<String,Object>();
-        			chemMap.put("Chemical",current.getDisplayName());
-        			chemMap.put("Amount",1);
+        			chemMap.put("chemical",current.getDisplayName());
+        			chemMap.put("quantity",1);
         			map.put(1, chemMap);
         			return map;
         		}
@@ -247,8 +252,8 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
         			{
         				PotionChemical chemical = chemicals.get(i);
         				HashMap<String,Object> chemMap = new HashMap<String,Object>();
-        				chemMap.put("Chemical",MinechemHelper.getChemicalName(chemical));
-        				chemMap.put("Amount",chemical.amount);
+        				chemMap.put("chemical",MinechemHelper.getChemicalName(chemical));
+        				chemMap.put("quantity",chemical.amount);
         				map.put(i+1, chemMap);
         			}
         			return map;
@@ -283,9 +288,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -326,9 +331,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -337,11 +342,11 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				ItemStack current = turtle.getInventory().getStackInSlot(slot);
 				if (Compare.isStackAnElement(current))
 				{
-					return ElementItem.getElement(current).radioactivity().name();
+					return ElementItem.getElement(current).radioactivity().toString();
 				}
 				else if (Compare.isStackAMolecule(current))
 				{
-					return MoleculeItem.getMolecule(current).radioactivity().name();
+					return MoleculeItem.getMolecule(current).radioactivity().toString();
 				}
 				return null;
 			}
@@ -373,9 +378,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -417,9 +422,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     	}
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -451,9 +456,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                     		return new Object[]{result};
                 	}
                 	else 
-                		throw new IllegalArgumentException("Invalid Slot Number.");
+                		throw new LuaException("Invalid Slot Number.");
                 } else {
-                    throw new IllegalArgumentException("Maximum 1 argument for slot number.");
+                    throw new LuaException("Maximum 1 argument for slot number.");
                 }
 				return null;
             }
@@ -467,9 +472,9 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				ItemStack book = getBook(slot);
 				if (book!=null)
 				{
-					return download(book);
+					return download(book,slot);
 				}
-				throw new IllegalArgumentException("Invalid Stack - not a journal or a book");
+				throw new LuaException("Invalid Stack - not a journal or a book");
 			}
 			
 			private String upload(ItemStack journal)
@@ -494,8 +499,11 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				int added = addItems.size();
 				return "Loaded "+added+" recipe"+(added!=1?"s":"");
 			}
-			
 			private String download(ItemStack journal)
+			{
+				return download(journal,-1);
+			}
+			private String download(ItemStack journal, int slot)
 			{
 				if (journal.getItem()==Items.book)
 					journal = new ItemStack(MinechemItemsRegistration.journal);
@@ -521,6 +529,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 					MinechemItemsRegistration.journal.addItemStackToJournal(item, journal, turtle.getWorld());
 				}
 				int added = addItems.size();
+				if (!(slot<0)) turtle.getInventory().setInventorySlotContents(slot, journal);
 				return "Saved "+added+" recipe"+(added!=1?"s":"");
 			}
 			
@@ -551,7 +560,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
                 else if(args.length == 1)
                 	dir = getDirForString((String)args[0], turtle);
                 if (dir==null)
-                	throw new IllegalArgumentException("Invalid Arguments");
+                	throw new LuaException("Invalid Arguments");
                 TileEntity te = turtle.getWorld().getTileEntity(turtle.getPosition().posX+dir.offsetX, turtle.getPosition().posY+dir.offsetY, turtle.getPosition().posZ+dir.offsetZ);
                 if (te!=null)
                 {
@@ -604,13 +613,162 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
+    	luaMethods.add(new LuaMethod("getSynthesisRecipe"){
+            @Override
+            public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
+                if(args.length == 1||args.length == 2) {
+                	String UUID = (String)args[0];
+                	Integer metadata = args.length==2?getInt(args[1]):0;
+                	if (metadata==null||metadata<0)metadata=0;
+                	for (ItemStack current:known)
+                	{
+                		if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID)&&current.getItemDamage()==metadata)
+                		{
+                			SynthesisRecipe output = SynthesisRecipeHandler.instance.getRecipeFromOutput(current);
+                			if (output!=null)
+                				return new Object[]{synthesisRecipeToMap(output)};
+                			else
+                				return new Object[]{"No Synthesiser recipe exists for "+UUID+":"+metadata};
+                		}
+                	}
+                	return new Object[]{UUID+":"+metadata+ " is unknown."};
+                } else {
+                    throw new LuaException("Invalid arguments");
+                }
+            }
+
+			@Override
+			public String getArgs() {
+				return "(name,?metadata)";
+			}
+			
+			@Override
+			public String[] getDetails() {
+				return new String[]{super.getDetails()[0],"Args: Item Name and optional metadata, default 0","Returns: Synthesiser Recipes in table form"};
+			}
+        });
+    	
+    	luaMethods.add(new LuaMethod("getSynthesisRecipes"){
+            @Override
+            public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
+                if(args.length == 0) {
+                	int i=1;
+                	HashMap<Number,Object> result = new HashMap<Number,Object>();
+                	for (ItemStack current:known)
+                	{
+            			SynthesisRecipe output = SynthesisRecipeHandler.instance.getRecipeFromOutput(current);
+            			if (output!=null)
+            				result.put(i++,synthesisRecipeToMap(output));
+                	}
+                	return new Object[]{result};
+                } else {
+                    throw new LuaException("getSynthesisRecipes does not take any arguments");
+                }
+            }
+
+			@Override
+			public String getArgs() {
+				return "()";
+			}
+			
+			@Override
+			public String[] getDetails() {
+				return new String[]{super.getDetails()[0],"Returns: All Synthesiser Recipes in table form"};
+			}
+        });
+    	
+    	luaMethods.add(new LuaMethod("setRecipe"){
+            @Override
+            public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
+                ForgeDirection dir=null;
+            	if(args.length > 0 && args.length < 4)
+            	{
+            		String UUID = null;
+            		dir = getDirForString((String)args[0], turtle);
+	                if (dir==null && args.length<3)
+	                {
+	                	UUID = (String)args[0];
+	                	dir = getDirForString("front",turtle);
+	                }
+	                else if (dir==null)
+	                	throw new LuaException("Invalid Arguments");
+	                
+	                TileEntity te = turtle.getWorld().getTileEntity(turtle.getPosition().posX+dir.offsetX, turtle.getPosition().posY+dir.offsetY, turtle.getPosition().posZ+dir.offsetZ);
+	                if (te instanceof SynthesisTileEntity)
+	                {
+		                Integer metadata = getInt(args[args.length-1]);
+		                if (metadata==null||metadata<0)metadata=0;
+		                if (UUID==null) UUID = (String)args[1];
+		                for (ItemStack current:known)
+	                	{
+	                		if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID)&&current.getItemDamage()==metadata)
+	                		{
+	                			SynthesisRecipe output = SynthesisRecipeHandler.instance.getRecipeFromOutput(current);
+	                			if (output!=null)
+	                			{
+	                				((SynthesisTileEntity)te).setRecipe(output);
+	                				return new Object[]{true};
+	                			}
+	                			else
+	                				return new Object[]{false};
+	                		}
+	                	}
+	                }
+            	}
+
+				return new Object[]{false};
+            }
+
+			@Override
+			public String getArgs() {
+				return "(?Direction,name,?metadata)";
+			}
+			
+			@Override
+			public String[] getDetails() {
+				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Arg: Item name","Arg: Optional metadata, defaults to 0","Returns: boolean success"};
+			}
+        });
     }
 	
+    private HashMap<String, Object> synthesisRecipeToMap(SynthesisRecipe recipe)
+    {
+    	HashMap<String,Object> result = new HashMap<String,Object>();
+    	result.put("output", stackToMap(recipe.getOutput()));
+    	result.put("shaped", recipe.isShaped());
+    	result.put("energyCost", recipe.energyCost());
+    	HashMap<Number,Object> inputs = new HashMap<Number,Object>();
+    	PotionChemical[] recipeInputs = recipe.isShaped()?recipe.getShapedRecipe():recipe.getShapelessRecipe();
+    	int i=1;
+    	for (PotionChemical chemical:recipeInputs)
+		{
+			if (chemical!=null)
+			{
+				HashMap<String,Object> input = new HashMap<String,Object>();
+				if (chemical instanceof Element)
+				{
+					input.put("element",((Element)chemical).element.getLongName());
+					input.put("quantity", chemical.amount);
+				}
+				else if (chemical instanceof Molecule)
+				{
+					input.put("element",((Molecule)chemical).molecule.name());
+					input.put("quantity", chemical.amount);
+				}
+				inputs.put(i++, input);
+			}		
+    	}
+    	result.put("ingredients", inputs);
+    	return result;
+    }
+    
+    
+    
     private HashMap<String,Object> stackToMap(ItemStack stack)
     {
     	HashMap<String,Object> result = new HashMap<String,Object>();
-    	result.put("Item Name", stack.getDisplayName());
-    	result.put("Item", GameRegistry.findUniqueIdentifierFor(stack.getItem())+":"+stack.getItemDamage());
+    	result.put("name", GameRegistry.findUniqueIdentifierFor(stack.getItem()).toString());
+    	result.put("metadata", stack.getItemDamage());
     	return result;
     }
     
@@ -660,171 +818,31 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
     	return null;
     }
     
+    @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public Object[] callMethod(IComputerAccess computer, ILuaContext context,int method, Object[] arguments) throws LuaException,InterruptedException {
-		return luaMethods.get(method).call(computer, context, arguments);
-
-//		case 8: //"storeSynthesisRecipe",
-//			if (te!=null && te instanceof SynthesisTileEntity)
-//			{
-//				SynthesisRecipe recipe = ((SynthesisTileEntity)te).getCurrentRecipe();
-//				if (recipe!=null)
-//				{
-//					recipes.add(recipe);
-//					return new Object[]{true};
-//				}
-//			}
-//			return new Object[]{false};
-//		case 9: //"getSynthesisRecipe",
-//			if (arguments.length == 1 && arguments[0] instanceof Double) 
-//			{
-//				recipeIndex = ((Number) arguments[0]).intValue();
-//				if (recipeIndex<recipes.size() && recipeIndex>=0)
-//				{
-//					HashMap<String,Object> recipeMap = new HashMap<String,Object>();
-//					recipeMap.put("Output", recipes.get(recipeIndex).getOutput().getDisplayName());
-//					recipeMap.put("Quantity",recipes.get(recipeIndex).getOutput().stackSize);
-//					return new Object[]{recipeMap};
-//				}
-//				return new Object[] {"Invalid Argument"};
-//			}
-//			else if (arguments.length == 0)
-//			{
-//				recipeIndex = 1;
-//				for (SynthesisRecipe recipe:recipes)
-//				{
-//					HashMap<String,Object> recipeMap = new HashMap<String,Object>();
-//					recipeMap.put("Output", recipe.getOutput().getDisplayName());
-//					recipeMap.put("Quantity",recipe.getOutput().stackSize);
-//					map.put(String.valueOf(recipeIndex++), recipeMap);
-//				}
-//			}
-//			return new Object[]{map};
-//		case 10: //"clearSynthesisRecipe",
-//			if (arguments.length == 1 && arguments[0] instanceof Double) 
-//			{
-//				recipeIndex = ((Number) arguments[0]).intValue();
-//				if (recipeIndex<recipes.size() && recipeIndex>=0)
-//				{
-//					recipes.remove(recipeIndex);
-//					return new Object[]{true};
-//				}
-//			}
-//			else if (arguments.length == 1 && arguments[0] instanceof String)
-//			{
-//				if (((String)arguments[0]).equals("all")) 
-//				{
-//					recipes.clear();
-//					return new Object[]{true};
-//				}
-//			}
-//			else if (arguments.length == 0)
-//			{
-//				if (te!=null && te instanceof SynthesisTileEntity)
-//				{
-//					((SynthesisTileEntity)te).clearRecipeMatrix();
-//					return new Object[]{true};
-//				}
-//			}
-//			return new Object[]{false};
-//		case 11: //"placeSynthesisRecipe",
-//			if (arguments.length == 1 && arguments[0] instanceof Double) recipeIndex = ((Number) arguments[0]).intValue();
-//			else recipeIndex=0;
-//			if (recipeIndex<recipes.size() && recipeIndex>=0)
-//			{
-//				if (te!=null && te instanceof SynthesisTileEntity)
-//				{
-//					((SynthesisTileEntity)te).setRecipe(recipes.get(recipeIndex));
-//					return new Object[]{true};
-//				}
-//			}
-//			return new Object[]{false};
-////		case 12: //"takeOutput",
-//////			if (te!=null && te instanceof SynthesisTileEntity)
-//////			{
-//////				if (((SynthesisTileEntity)te).canExtractItem(0, null, 0))
-//////				{
-//////					SynthesisRecipe recipe = ((SynthesisTileEntity)te).getCurrentRecipe();
-//////					if (canTake(recipe.getOutput()))
-//////					{
-//////						((SynthesisTileEntity)te).canTakeOutputStack(true);
-//////						return new Object[]{true};
-//////					}
-//////				}
-//////			}
-//////			else if (te!=null && te instanceof DecomposerTileEntity)
-//////			{
-//////				return new Object[]{"Decomposer handling is unimplemented currently, sorry"};
-//////			}
-////			return new Object[]{false};
-////		case 13: //"putInput",
-//////			if (te!=null && te instanceof SynthesisTileEntity)
-//////			{
-//////				if (Compare.isStackAChemical(current))
-//////				{
-//////					
-//////				}
-//////				if (((SynthesisTileEntity)te).canInsertItem(slot, itemstack, side)
-//////				
-//////			}
-//////			else if (te!=null && te instanceof DecomposerTileEntity)
-//////			{
-//////				return new Object[]{"Decomposer handling is unimplemented currently, sorry"};
-//////			}
-////			return new Object[]{false};
-//		case 12: //"getMachineState"
-//			if (te!=null && te instanceof SynthesisTileEntity)
-//			{
-//				return new Object[]{((SynthesisTileEntity)te).getState()};
-//			}
-//			if (te!=null && te instanceof DecomposerTileEntity)
-//			{
-//				return new Object[]{((DecomposerTileEntity)te).getState().name()};
-//			}
-//			break;
-//		}
-//		return null;
+    	return luaMethods.get(method).call(computer, context, arguments);
 	}
 
-	private boolean canPut(ItemStack stack, ISidedInventory inventory)
-	{
-		int size = inventory.getSizeInventory();
-		
-		return false;
-	}
-	
-	private boolean canTake(ItemStack stack)
-	{
-		for (int i=0;i<turtle.getInventory().getSizeInventory();i++)
-		{
-			ItemStack thisStack = turtle.getInventory().getStackInSlot(i);
-			if (thisStack == null)
-			{
-				thisStack=stack;
-				return true;
-			}
-			else if (thisStack.isItemEqual(stack)&&thisStack.stackSize+stack.stackSize<=thisStack.getMaxStackSize())
-			{
-				thisStack.stackSize+=stack.stackSize;
-				return true;
-			}
-		}
-		return false;
-	}
-	
-	@Override
-	public void attach(IComputerAccess computer) {
-		
-	}
 
-	@Override
-	public void detach(IComputerAccess computer) {
-		
-	}
+    @Optional.Method(modid = "ComputerCraft")
+    @Override
+    public void attach(IComputerAccess computer)
+    {
 
-	@Override
-	public boolean equals(IPeripheral other) {
-		return false;
-	}
+    }
 
+    @Optional.Method(modid = "ComputerCraft")
+    @Override
+    public void detach(IComputerAccess computer)
+    {
+
+    }
+
+    @Optional.Method(modid = "ComputerCraft")
+    @Override
+    public boolean equals(IPeripheral other)
+    {
+        return false;
+    }
 }

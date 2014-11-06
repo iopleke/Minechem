@@ -35,9 +35,9 @@ public abstract class LuaMethod implements ILuaMethod{
         if (side.equals("back"))
         	return ForgeDirection.getOrientation(ForgeDirection.OPPOSITES[turtle.getDirection()]);
         if (side.equals("left"))
-        	return ForgeDirection.getOrientation(ForgeDirection.ROTATION_MATRIX[1][turtle.getDirection()]);
-        if (side.equals("right"))
         	return ForgeDirection.getOrientation(ForgeDirection.ROTATION_MATRIX[0][turtle.getDirection()]);
+        if (side.equals("right"))
+        	return ForgeDirection.getOrientation(ForgeDirection.ROTATION_MATRIX[1][turtle.getDirection()]);
         throw new IllegalArgumentException("Side can only be top, bottom, front, back, left or right!");
     }
 }

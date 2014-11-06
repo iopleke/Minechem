@@ -8,6 +8,7 @@ import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
 import minechem.utils.LogHelper;
+import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -62,17 +63,9 @@ public class DecomposerRecipe
 
 	public static String getKey(ItemStack itemStack)
 	{
-		if (itemStack != null && itemStack.getItem() != null)
-		{
-			ItemStack result = itemStack.copy();
-			result.stackSize = 1;
-			if (result.toString().contains("null"))
-			{
-				return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
-			}
-			return result.toString();
-		}
-		return null;
+		String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
+        if (itemStack.getItem() instanceof ItemRecord) unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
+        return unlocalizedName + "@" + itemStack.getItemDamage();
 	}
 
 	public static String getKey(FluidStack fluidStack)

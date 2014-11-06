@@ -464,7 +464,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		}
 
 		// One of the most important features in Minechem is the ability to recombine decomposed molecules and elements into items again.
-		List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(currentRecipe.getShapelessRecipe());
+		ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(currentRecipe.getShapelessRecipe());
 		ItemStack[] storage = storageInventory.copyInventoryToArray();
 		for (ItemStack ingredient : ingredients)
 		{
