@@ -63,9 +63,14 @@ public class DecomposerRecipe
 
 	public static String getKey(ItemStack itemStack)
 	{
-		String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
-        if (itemStack.getItem() instanceof ItemRecord) unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
-        return unlocalizedName + "@" + itemStack.getItemDamage();
+		if (itemStack != null && itemStack.getItem() != null)
+		{
+			String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
+			if (itemStack.getItem() instanceof ItemRecord)
+				unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
+			return unlocalizedName + "@" + itemStack.getItemDamage();
+		}
+		return null;
 	}
 
 	public static String getKey(FluidStack fluidStack)
