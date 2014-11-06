@@ -46,7 +46,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 {
 	private ITurtleAccess turtle;
 	private ArrayList<ItemStack> known;
-	private static final ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
+	private ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
 
 	public MinechemComputerPeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
