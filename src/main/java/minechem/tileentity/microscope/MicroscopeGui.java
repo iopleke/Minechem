@@ -62,13 +62,13 @@ public class MicroscopeGui extends GuiContainerTabbed
 
 	private void drawMicroscopeOverlay()
 	{
-		zLevel = 401;
+		this.zLevel = 600F;
 		drawTexturedModalRect(eyepieceX, eyepieceY, 176, 0, 54, 54);
 	}
 
 	private void drawUnshapedOverlay()
 	{
-		zLevel = 0;
+		this.zLevel = 0;
 		drawTexturedModalRect(97, 26, 176, 70, 54, 54);
 	}
 
@@ -90,7 +90,6 @@ public class MicroscopeGui extends GuiContainerTabbed
 		int x = (width - guiWidth) / 2;
 		int y = (height - guiHeight) / 2;
 		zLevel = 0;
-
 		GL11.glPushMatrix();
 		GL11.glTranslatef(x, y, 0.0F);
 		drawTexturedModalRect(0, 0, 0, 0, guiWidth, guiHeight);
@@ -234,7 +233,7 @@ public class MicroscopeGui extends GuiContainerTabbed
     @Override
     public void drawScreen(int par1, int par2, float par3)
     {
-        super.drawScreen(par1, par2, par3);
+		super.drawScreen(par1, par2, par3);
         renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), microscope.getStackInSlot(0), par1, par2);
         renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), inventoryPlayer.getItemStack(), par1, par2);
     }

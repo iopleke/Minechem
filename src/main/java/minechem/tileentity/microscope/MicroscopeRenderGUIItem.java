@@ -3,6 +3,7 @@ package minechem.tileentity.microscope;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.ScaledResolution;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -57,6 +58,8 @@ public class MicroscopeRenderGUIItem extends RenderItem
 			return;
 		}
 
+		RenderHelper.enableGUIStandardItemLighting();
+
 		Slot slot = microscopeContainer.getSlot(0);
 		if (slot.getStack() != null)
 		{
@@ -80,11 +83,10 @@ public class MicroscopeRenderGUIItem extends RenderItem
             int renderY = y;
             GL11.glTranslatef(renderX, renderY, 0.0F);
             GL11.glScalef(3.0F, 3.0F, 1.0F);
-            GL11.glTranslatef(-renderX - 5.3F, -renderY - 5.3F, 600F);
+            GL11.glTranslatef(-renderX - 5.3F, -renderY - 5.3F, 540F);
             super.renderItemAndEffectIntoGUI(fontRenderer, textureManager, itemStack, renderX, renderY);
             stopScissor();
             GL11.glPopMatrix();
         }
-
 	}
 }
