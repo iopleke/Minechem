@@ -40,6 +40,6 @@ public abstract class LuaMethod implements ILuaMethod{
         	return ForgeDirection.getOrientation(ForgeDirection.ROTATION_MATRIX[0][turtle.getDirection()]);
         if (side.equals("right"))
         	return ForgeDirection.getOrientation(ForgeDirection.ROTATION_MATRIX[1][turtle.getDirection()]);
-        throw new IllegalArgumentException("Side can only be top, bottom, front, back, left or right!");
+        return null;
     }
 }
