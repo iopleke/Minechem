@@ -1,8 +1,10 @@
 package minechem.computercraft.lua;
 
+import cpw.mods.fml.common.Optional;
 import net.minecraftforge.common.util.ForgeDirection;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 
+@Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleAccess", modid = "ComputerCraft")
 public abstract class LuaMethod implements ILuaMethod{
     private final String methodName;
 
@@ -24,7 +26,7 @@ public abstract class LuaMethod implements ILuaMethod{
     public String[] getDetails() {
     	return new String[]{methodName+getArgs()};
     }
-    
+    @Optional.Method(modid = "ComputerCraft")
     protected ForgeDirection getDirForString(String side, ITurtleAccess turtle){
         if (side.equals("top"))
         	return ForgeDirection.UP;

@@ -36,25 +36,32 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 
-
-public class MinechemComputerPeripheral extends TileEntity implements IPeripheral
+@Optional.InterfaceList({
+    @Optional.Interface(iface = "dan200.computercraft.api.lua.ILuaContext", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.lua.LuaException", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IComputerAccess", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleAccess", modid = "ComputerCraft")})
+public class MinechemComputerPeripheral implements IPeripheral
 {
 	private ITurtleAccess turtle;
 	private ArrayList<ItemStack> known;
 	private static final ArrayList<LuaMethod> luaMethods = new ArrayList<LuaMethod>();
-	
+
 	public MinechemComputerPeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
 		this.known = new ArrayList<ItemStack>();
 		if (luaMethods.isEmpty()) addLuaMethods();
 	}
-
+	
+	@Optional.Method(modid = "ComputerCraft")
     @Override
     public String getType()
     {
         return "chemical";
     }
-
+	
+    @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public String[] getMethodNames() {
 		String[] result = new String[luaMethods.size()];
@@ -64,6 +71,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 		return result;
 	}
 	
+	@Optional.Method(modid = "ComputerCraft")
     protected void addLuaMethods()
     {
     	luaMethods.add(new LuaMethod("getMethods"){
@@ -463,7 +471,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				return null;
             }
 
-			private String sync(int slot) {
+			private String sync(int slot) throws LuaException {
 				ItemStack journal = getJournal(slot);
 				if (journal!=null)
 				{
@@ -729,6 +737,10 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Arg: Item name","Arg: Optional metadata, defaults to 0","Returns: boolean success"};
 			}
         });
+    	
+    	//luaMethods.add(new LuaMethod("getState"){
+    		
+    	//luaMethods.add(new LuaMethod("setRecipe"){
     }
 	
     private HashMap<String, Object> synthesisRecipeToMap(SynthesisRecipe recipe)

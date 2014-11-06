@@ -146,9 +146,7 @@ public class Minechem
 			MineTweakerAPI.registerClass(Synthesiser.class);
 			MineTweakerAPI.registerClass(Fuels.class);
 		}
-		
-		if (Loader.isModLoaded("ComputerCraft"))
-			ComputerCraftAPI.registerTurtleUpgrade(new MinechemTurtleUpgrade(30883));
+	
 	}
 
 	@EventHandler
