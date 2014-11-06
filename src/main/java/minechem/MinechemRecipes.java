@@ -3130,6 +3130,8 @@ public class MinechemRecipes
 
 	public boolean shouldCreateSynthesis(ItemStack item)
 	{
+		if (item.getItem() == Items.stick)
+			return false;
 		if (item.getItem() instanceof ItemBlock)
 		{
 			return shouldCreateSynthesis((ItemBlock) item.getItem());

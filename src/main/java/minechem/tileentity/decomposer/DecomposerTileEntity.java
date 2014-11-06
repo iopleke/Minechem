@@ -661,6 +661,11 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		return MessageHandler.INSTANCE.getPacketFrom(new DecomposerUpdateMessage(this));
 	}
 
+	public String getStateString()
+	{
+		return (activeStack == null || DecomposerRecipe.get(activeStack)==null)?"No Recipe":energyToDecompose()?"Active":"No Power";
+	}
+	
 	/**
 	 * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
 	 */

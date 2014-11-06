@@ -36,44 +36,54 @@ import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 
-
-public class MinechemComputerPeripheral extends TileEntity implements IPeripheral
+@Optional.InterfaceList({
+    @Optional.Interface(iface = "dan200.computercraft.api.lua.ILuaContext", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.lua.LuaException", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IComputerAccess", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleAccess", modid = "ComputerCraft")})
+public class MinechemComputerPeripheral implements IPeripheral
 {
 	private ITurtleAccess turtle;
-	private ArrayList<ItemStack> known;
-	private static final ArrayList<LuaMethod> luaMethods = new ArrayList<LuaMethod>();
-	
+	//private ArrayList<ItemStack> known;
+	private ArrayList<String> known;
+	private ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
+
 	public MinechemComputerPeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
-		this.known = new ArrayList<ItemStack>();
-		if (luaMethods.isEmpty()) addLuaMethods();
+		//this.known = new ArrayList<ItemStack>();
+		this.known = new ArrayList<String>();
+		if (methods.isEmpty()) addLuaMethods();
 	}
-
+	
+	@Optional.Method(modid = "ComputerCraft")
     @Override
     public String getType()
     {
         return "chemical";
     }
-
+	
+    @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public String[] getMethodNames() {
-		String[] result = new String[luaMethods.size()];
+		String[] result = new String[methods.size()];
 		int i=0;
-		for (LuaMethod method:luaMethods)
+		for (LuaMethod method:methods)
 			result[i++]=method.getMethodName();
 		return result;
 	}
 	
+	@Optional.Method(modid = "ComputerCraft")
     protected void addLuaMethods()
     {
-    	luaMethods.add(new LuaMethod("getMethods"){
+    	methods.add(new LuaMethod("getMethods"){
 
 			@Override
 			public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException {
 				if(args.length == 0) {
-					String[] result = new String[luaMethods.size()];
+					String[] result = new String[methods.size()];
 					int i=0;
-					for (LuaMethod method:luaMethods)
+					for (LuaMethod method:methods)
 						result[i++]=method.getMethodName()+method.getArgs();
 					return result;
 				}else {
@@ -86,7 +96,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
     		}
     	});
     	
-    	luaMethods.add(new LuaMethod("getDetails"){
+    	methods.add(new LuaMethod("getDetails"){
 
 			@Override
 			public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException {
@@ -95,7 +105,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 					String methodName =(String)args[0];
 					if (methodName!=null)
 					{
-						for (LuaMethod method:luaMethods)
+						for (LuaMethod method:methods)
 						{
 							if (method.getMethodName().equalsIgnoreCase(methodName))
 							{
@@ -120,7 +130,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
     	});
     	
-    	luaMethods.add(new LuaMethod("getChemicalName"){
+    	methods.add(new LuaMethod("getChemicalName"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -165,7 +175,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
             
         });
     	
-    	luaMethods.add(new LuaMethod("getChemicalFormula"){
+    	methods.add(new LuaMethod("getChemicalFormula"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -209,7 +219,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getChemicalsAsTable"){
+    	methods.add(new LuaMethod("getChemicalsAsTable"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -272,7 +282,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getAtomicMass"){
+    	methods.add(new LuaMethod("getAtomicMass"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -315,7 +325,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getRadioactivity"){
+    	methods.add(new LuaMethod("getRadioactivity"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -362,7 +372,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getDecayTimeInTicks"){
+    	methods.add(new LuaMethod("getDecayTimeInTicks"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -396,7 +406,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getDecayTime"){
+    	methods.add(new LuaMethod("getDecayTime"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -440,18 +450,18 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("syncJournal"){
+    	methods.add(new LuaMethod("syncJournal"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
-                	String result = sync(turtle.getSelectedSlot());
+                	String result = sync(turtle.getSelectedSlot(),computer);
                 	if (result!=null)
                 			return new Object[]{result};
                 } else if(args.length == 1) {
                 	Integer slot = getInt(args[0]);
                 	if (validateInteger(slot,turtle.getInventory().getSizeInventory()))
                 	{
-                		String result = sync(slot);
+                		String result = sync(slot,computer);
                     	if (result!=null)
                     		return new Object[]{result};
                 	}
@@ -463,72 +473,53 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				return null;
             }
 
-			private String sync(int slot) {
+			private String sync(int slot, IComputerAccess computer) throws LuaException {
 				ItemStack journal = getJournal(slot);
 				if (journal!=null)
 				{
-					return upload(journal)+" - "+download(journal);
+					return upload(journal)+" - "+download(journal,computer);
 				}
 				ItemStack book = getBook(slot);
 				if (book!=null)
 				{
-					return download(book,slot);
+					return download(book,slot,computer);
 				}
 				throw new LuaException("Invalid Stack - not a journal or a book");
 			}
 			
 			private String upload(ItemStack journal)
 			{
-				List<ItemStack> journalItems=MinechemItemsRegistration.journal.getItemList(journal);
-				if (journalItems==null) journalItems=new ArrayList<ItemStack>();
-				ArrayList<ItemStack> addItems=new ArrayList<ItemStack>();
-				for (ItemStack journalItem:journalItems)
-				{
-					boolean knownItem = false;
-					for (ItemStack currentItem:known)
-					{
-						if (journalItem.isItemEqual(currentItem))
-						{
-							knownItem = true;
-							break;
-						}
-					}
-					if (!knownItem) addItems.add(journalItem);
-				}
+				List<String> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
+				if (journalItems==null) journalItems=new ArrayList<String>();
+				ArrayList<String> addItems=new ArrayList<String>();
+				addItems.addAll(journalItems);
+				addItems.removeAll(known);
 				known.addAll(addItems);
 				int added = addItems.size();
 				return "Loaded "+added+" recipe"+(added!=1?"s":"");
 			}
-			private String download(ItemStack journal)
+			private String download(ItemStack journal, IComputerAccess computer)
 			{
-				return download(journal,-1);
+				return download(journal,-1,computer);
 			}
-			private String download(ItemStack journal, int slot)
+			private String download(ItemStack journal, int slot, IComputerAccess computer)
 			{
 				if (journal.getItem()==Items.book)
 					journal = new ItemStack(MinechemItemsRegistration.journal);
 				
-				List<ItemStack> journalItems=MinechemItemsRegistration.journal.getItemList(journal);
-				if (journalItems==null) journalItems=new ArrayList<ItemStack>();
-				ArrayList<ItemStack> addItems=new ArrayList<ItemStack>();
-				for (ItemStack currentItem:known)
-				{
-					boolean knownItem = false;
-					for (ItemStack journalItem:journalItems)
-					{
-						if (journalItem.isItemEqual(currentItem))
-						{
-							knownItem = true;
-							break;
-						}
-					}
-					if (!knownItem) addItems.add(currentItem);
-				}
-				for (ItemStack item:addItems)
+				List<String> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
+				if (journalItems==null) journalItems=new ArrayList<String>();
+				ArrayList<String> addItems=new ArrayList<String>();
+				addItems.addAll(known);
+				addItems.removeAll(journalItems);
+				
+				for (ItemStack item:keyListToStacks(addItems))
 				{
 					MinechemItemsRegistration.journal.addItemStackToJournal(item, journal, turtle.getWorld());
 				}
 				int added = addItems.size();
+				String owner = journal.stackTagCompound.getString("owner");
+				if (owner.equals("")) journal.stackTagCompound.setString("owner", "Chemistry Turtle "+computer.getID());
 				if (!(slot<0)) turtle.getInventory().setInventorySlotContents(slot, journal);
 				return "Saved "+added+" recipe"+(added!=1?"s":"");
 			}
@@ -551,7 +542,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("readRecipe"){
+    	methods.add(new LuaMethod("readRecipe"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 ForgeDirection dir=null;
@@ -609,18 +600,18 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			
 			@Override
 			public String[] getDetails() {
-				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Returns: Recipe read"};
+				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Returns: Confirmtion String, Recipe read"};
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getSynthesisRecipe"){
+    	methods.add(new LuaMethod("getSynthesisRecipe"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 1||args.length == 2) {
                 	String UUID = (String)args[0];
                 	Integer metadata = args.length==2?getInt(args[1]):0;
                 	if (metadata==null||metadata<0)metadata=0;
-                	for (ItemStack current:known)
+                	for (ItemStack current:keyListToStacks(known))
                 	{
                 		if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID)&&current.getItemDamage()==metadata)
                 		{
@@ -648,13 +639,13 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getSynthesisRecipes"){
+    	methods.add(new LuaMethod("getSynthesisRecipes"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
                 	int i=1;
                 	HashMap<Number,Object> result = new HashMap<Number,Object>();
-                	for (ItemStack current:known)
+                	for (ItemStack current:keyListToStacks(known))
                 	{
             			SynthesisRecipe output = SynthesisRecipeHandler.instance.getRecipeFromOutput(current);
             			if (output!=null)
@@ -677,7 +668,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("setRecipe"){
+    	methods.add(new LuaMethod("setRecipe"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 ForgeDirection dir=null;
@@ -699,7 +690,7 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 		                Integer metadata = getInt(args[args.length-1]);
 		                if (metadata==null||metadata<0)metadata=0;
 		                if (UUID==null) UUID = (String)args[1];
-		                for (ItemStack current:known)
+		                for (ItemStack current:keyListToStacks(known))
 	                	{
 	                		if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID)&&current.getItemDamage()==metadata)
 	                		{
@@ -729,6 +720,154 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
 				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Arg: Item name","Arg: Optional metadata, defaults to 0","Returns: boolean success"};
 			}
         });
+    	
+    	methods.add(new LuaMethod("setMicroscope"){
+            @Override
+            public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
+                ForgeDirection dir=null;
+                Integer slot = null;
+            	switch(args.length)
+            	{
+            	case 0:
+            		slot = turtle.getSelectedSlot();
+                	dir = getDirForString("front",turtle);
+                	break;
+            	case 1:
+            		dir = getDirForString((String)args[0], turtle);
+            		if (dir==null && args.length==1)
+	                {
+	                	slot = getInt(args[0]);
+	                	slot=validateInteger(slot,turtle.getInventory().getSizeInventory())?slot:null;
+	                	dir = getDirForString("front",turtle);
+	                }
+            		break;
+            	case 2:
+            		dir = getDirForString((String)args[0], turtle);
+            		slot = getInt(args[0]);
+                	slot = validateInteger(slot,turtle.getInventory().getSizeInventory())?slot:null;
+            	default:
+            	}
+            	if (dir==null||slot==null)
+	                throw new LuaException("Invalid Arguments");
+            	ItemStack current = turtle.getInventory().getStackInSlot(slot);
+                TileEntity te = turtle.getWorld().getTileEntity(turtle.getPosition().posX+dir.offsetX, turtle.getPosition().posY+dir.offsetY, turtle.getPosition().posZ+dir.offsetZ);
+                if (te instanceof MicroscopeTileEntity)
+                {
+	                ItemStack microStack = ((MicroscopeTileEntity)te).getStackInSlot(0);
+	                if (microStack==null && current==null)
+	                	return new Object[]{false};
+	                else if(microStack==null)
+	                {
+	                	((MicroscopeTileEntity)te).setInventorySlotContents(0,turtle.getInventory().decrStackSize(slot, 1));
+	                	return new Object[]{true};
+	                }
+	                else if (current==null)
+	                {
+	                	turtle.getInventory().setInventorySlotContents(slot, ((MicroscopeTileEntity)te).decrStackSize(0, 1));
+	                	return new Object[]{true};
+	                }
+	                else if (current.isItemEqual(microStack))
+	                {
+	                	if (current.stackSize<current.getMaxStackSize())
+	                	{
+		                	((MicroscopeTileEntity)te).decrStackSize(0, 1);
+		                	current.stackSize++;
+	                	}
+	                }
+                }
+                return new Object[]{false};
+            }
+
+			@Override
+			public String getArgs() {
+				return "(?Direction,?slot)";
+			}
+			
+			@Override
+			public String[] getDetails() {
+				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Arg: Optional slot number, defaults to current","Returns: boolean success"};
+			}
+        });
+
+    	methods.add(new LuaMethod("getState"){
+    		@Override
+            public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
+                ForgeDirection dir=ForgeDirection.getOrientation(turtle.getDirection());
+            	if(args.length < 2)
+            	{
+            		if (args.length==1)
+            		{
+	            		dir = getDirForString((String)args[0], turtle);
+		                if (dir==null)
+		                	throw new LuaException("Invalid Arguments");
+            		}
+	                TileEntity te = turtle.getWorld().getTileEntity(turtle.getPosition().posX+dir.offsetX, turtle.getPosition().posY+dir.offsetY, turtle.getPosition().posZ+dir.offsetZ);
+	                if (te instanceof SynthesisTileEntity)
+	                {
+		                return new Object[]{((SynthesisTileEntity)te).getState()};
+	                }
+	                else if (te instanceof DecomposerTileEntity)
+	                {
+		                return new Object[]{((DecomposerTileEntity)te).getStateString()};
+	                }
+	                throw new LuaException("Invalid TileEntity");
+            	}
+            	throw new LuaException("Invalid Arguments");
+            }
+
+			@Override
+			public String getArgs() {
+				return "(?Direction)";
+			}
+			
+			@Override
+			public String[] getDetails() {
+				return new String[]{super.getDetails()[0],"Arg: Optional Direction, defaults to front","Returns: Machine state"};
+			}
+        });
+    	
+    }
+	
+	protected boolean addStackToKnown(ItemStack add) {
+		String addString = SynthesisRecipe.getKey(add);
+		for (String key:known)
+    	{
+    		if (key.equals(addString)) return false;
+    	}
+    	known.add(addString);
+    	return true;
+	}
+
+	private ArrayList<String> stackListToKeys(List<ItemStack> stacks)
+    {
+		if (stacks==null) return null;
+    	ArrayList<String> result = new ArrayList<String>();
+    	for (ItemStack stack:stacks)
+    		if (stack!=null)
+        		result.add(DecomposerRecipe.getKey(stack));
+    	return result;
+    }
+    
+    private ArrayList<ItemStack> keyListToStacks(List<String> keys)
+    {
+    	ArrayList<ItemStack> result = new ArrayList<ItemStack>();
+    	for (String key:keys)
+    	{
+    		if (key!=null)
+    		{
+    			ItemStack add=null;
+    			DecomposerRecipe decomp = DecomposerRecipe.get(key);
+    			if (decomp!=null) add=decomp.getInput();
+    			else
+    			{
+    				SynthesisRecipe synth = SynthesisRecipe.get(key);
+        			if (synth!=null) add=synth.getOutput();
+    			}
+    			if (add!=null)
+    				result.add(add);
+    		}
+    	}
+    	return result;
     }
 	
     private HashMap<String, Object> synthesisRecipeToMap(SynthesisRecipe recipe)
@@ -772,16 +911,6 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
     	return result;
     }
     
-    private boolean addStackToKnown(ItemStack stack)
-    {
-    	for (ItemStack oldStack:known)
-    	{
-    		if (oldStack.isItemEqual(stack)) return false;
-    	}
-    	known.add(stack);
-    	return true;
-    }
-    
     private ItemStack getJournal(int slot)
     {
     	ItemStack result = turtle.getInventory().getStackInSlot(slot);
@@ -821,7 +950,8 @@ public class MinechemComputerPeripheral extends TileEntity implements IPeriphera
     @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public Object[] callMethod(IComputerAccess computer, ILuaContext context,int method, Object[] arguments) throws LuaException,InterruptedException {
-    	return luaMethods.get(method).call(computer, context, arguments);
+    	System.out.println(computer.getID());
+    	return methods.get(method).call(computer, context, arguments);
 	}
 
 

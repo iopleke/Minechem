@@ -90,7 +90,7 @@ public class SynthesisRecipeHandler
 			{
 				return false;
 			}
-			if (!MinechemHelper.itemStackMatchesChemical(stacks[i], chemicals[i], factor))
+			if (!MinechemHelper.itemStackMatchesChemical(stacks[i], chemicals[i], factor) || stacks[i].stackSize!=chemicals[i].amount)
 			{
 				return false;
 			}
