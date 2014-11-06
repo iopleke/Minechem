@@ -5,6 +5,7 @@ import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -161,6 +162,10 @@ public class SynthesisRecipe
 		for (ItemStack stack:Settings.synthesisBlacklist)
 			if (stack.getItem()==itemStack.getItem()&&(stack.getItemDamage()==Short.MAX_VALUE||stack.getItemDamage()==itemStack.getItemDamage())) return true;
 		return false;
+	}
+
+	public static SynthesisRecipe get(String key) {
+		return recipes.get(key);
 	}
 
 }

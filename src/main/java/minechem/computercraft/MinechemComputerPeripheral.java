@@ -487,64 +487,6 @@ public class MinechemComputerPeripheral implements IPeripheral
 				throw new LuaException("Invalid Stack - not a journal or a book");
 			}
 			
-//			private String upload(ItemStack journal)
-//			{
-//				List<ItemStack> journalItems=MinechemItemsRegistration.journal.getItemList(journal);
-//				if (journalItems==null) journalItems=new ArrayList<ItemStack>();
-//				ArrayList<ItemStack> addItems=new ArrayList<ItemStack>();
-//				for (ItemStack journalItem:journalItems)
-//				{
-//					boolean knownItem = false;
-//					for (ItemStack currentItem:known)
-//					{
-//						if (journalItem.isItemEqual(currentItem))
-//						{
-//							knownItem = true;
-//							break;
-//						}
-//					}
-//					if (!knownItem) addItems.add(journalItem);
-//				}
-//				known.addAll(addItems);
-//				int added = addItems.size();
-//				return "Loaded "+added+" recipe"+(added!=1?"s":"");
-//			}
-//			private String download(ItemStack journal, IComputerAccess computer)
-//			{
-//				return download(journal,-1,computer);
-//			}
-//			private String download(ItemStack journal, int slot, IComputerAccess computer)
-//			{
-//				if (journal.getItem()==Items.book)
-//					journal = new ItemStack(MinechemItemsRegistration.journal);
-//				
-//				List<ItemStack> journalItems=MinechemItemsRegistration.journal.getItemList(journal);
-//				if (journalItems==null) journalItems=new ArrayList<ItemStack>();
-//				ArrayList<ItemStack> addItems=new ArrayList<ItemStack>();
-//				for (ItemStack currentItem:known)
-//				{
-//					boolean knownItem = false;
-//					for (ItemStack journalItem:journalItems)
-//					{
-//						if (journalItem.isItemEqual(currentItem))
-//						{
-//							knownItem = true;
-//							break;
-//						}
-//					}
-//					if (!knownItem) addItems.add(currentItem);
-//				}
-//				for (ItemStack item:addItems)
-//				{
-//					MinechemItemsRegistration.journal.addItemStackToJournal(item, journal, turtle.getWorld());
-//				}
-//				int added = addItems.size();
-//				String owner = journal.stackTagCompound.getString("owner");
-//				if (owner.equals("")) journal.stackTagCompound.setString("owner", "Chemistry Turtle "+computer.getID());
-//				if (!(slot<0)) turtle.getInventory().setInventorySlotContents(slot, journal);
-//				return "Saved "+added+" recipe"+(added!=1?"s":"");
-//			}
-			
 			private String upload(ItemStack journal)
 			{
 				List<String> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
