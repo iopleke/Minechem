@@ -81,7 +81,7 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade {
     
     @Optional.Method(modid = "ComputerCraft")
     public void addTurtlesToCreative(List subItems) {
-		for (int i = 0; i <= 3; i++) {
+		for (int i = 0; i < 3; i++) {
 			ItemStack turtle = GameRegistry.findItemStack("ComputerCraft", "CC-TurtleExpanded", 1);
 			ItemStack advancedTurtle = GameRegistry.findItemStack("ComputerCraft", "CC-TurtleAdvanced", 1);
 			if (turtle != null)

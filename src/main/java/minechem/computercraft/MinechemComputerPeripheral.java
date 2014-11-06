@@ -46,12 +46,12 @@ public class MinechemComputerPeripheral implements IPeripheral
 {
 	private ITurtleAccess turtle;
 	private ArrayList<ItemStack> known;
-	private static final ArrayList<LuaMethod> luaMethods = new ArrayList<LuaMethod>();
+	private static final ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
 
 	public MinechemComputerPeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
 		this.known = new ArrayList<ItemStack>();
-		if (luaMethods.isEmpty()) addLuaMethods();
+		if (methods.isEmpty()) addLuaMethods();
 	}
 	
 	@Optional.Method(modid = "ComputerCraft")
@@ -64,9 +64,9 @@ public class MinechemComputerPeripheral implements IPeripheral
     @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public String[] getMethodNames() {
-		String[] result = new String[luaMethods.size()];
+		String[] result = new String[methods.size()];
 		int i=0;
-		for (LuaMethod method:luaMethods)
+		for (LuaMethod method:methods)
 			result[i++]=method.getMethodName();
 		return result;
 	}
@@ -74,14 +74,14 @@ public class MinechemComputerPeripheral implements IPeripheral
 	@Optional.Method(modid = "ComputerCraft")
     protected void addLuaMethods()
     {
-    	luaMethods.add(new LuaMethod("getMethods"){
+    	methods.add(new LuaMethod("getMethods"){
 
 			@Override
 			public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException {
 				if(args.length == 0) {
-					String[] result = new String[luaMethods.size()];
+					String[] result = new String[methods.size()];
 					int i=0;
-					for (LuaMethod method:luaMethods)
+					for (LuaMethod method:methods)
 						result[i++]=method.getMethodName()+method.getArgs();
 					return result;
 				}else {
@@ -94,7 +94,7 @@ public class MinechemComputerPeripheral implements IPeripheral
     		}
     	});
     	
-    	luaMethods.add(new LuaMethod("getDetails"){
+    	methods.add(new LuaMethod("getDetails"){
 
 			@Override
 			public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException {
@@ -103,7 +103,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 					String methodName =(String)args[0];
 					if (methodName!=null)
 					{
-						for (LuaMethod method:luaMethods)
+						for (LuaMethod method:methods)
 						{
 							if (method.getMethodName().equalsIgnoreCase(methodName))
 							{
@@ -128,7 +128,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
     	});
     	
-    	luaMethods.add(new LuaMethod("getChemicalName"){
+    	methods.add(new LuaMethod("getChemicalName"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -173,7 +173,7 @@ public class MinechemComputerPeripheral implements IPeripheral
             
         });
     	
-    	luaMethods.add(new LuaMethod("getChemicalFormula"){
+    	methods.add(new LuaMethod("getChemicalFormula"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -217,7 +217,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getChemicalsAsTable"){
+    	methods.add(new LuaMethod("getChemicalsAsTable"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -280,7 +280,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getAtomicMass"){
+    	methods.add(new LuaMethod("getAtomicMass"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -323,7 +323,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getRadioactivity"){
+    	methods.add(new LuaMethod("getRadioactivity"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -370,7 +370,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getDecayTimeInTicks"){
+    	methods.add(new LuaMethod("getDecayTimeInTicks"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -404,7 +404,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getDecayTime"){
+    	methods.add(new LuaMethod("getDecayTime"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -448,7 +448,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("syncJournal"){
+    	methods.add(new LuaMethod("syncJournal"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -559,7 +559,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("readRecipe"){
+    	methods.add(new LuaMethod("readRecipe"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 ForgeDirection dir=null;
@@ -621,7 +621,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getSynthesisRecipe"){
+    	methods.add(new LuaMethod("getSynthesisRecipe"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 1||args.length == 2) {
@@ -656,7 +656,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("getSynthesisRecipes"){
+    	methods.add(new LuaMethod("getSynthesisRecipes"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 if(args.length == 0) {
@@ -685,7 +685,7 @@ public class MinechemComputerPeripheral implements IPeripheral
 			}
         });
     	
-    	luaMethods.add(new LuaMethod("setRecipe"){
+    	methods.add(new LuaMethod("setRecipe"){
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException{
                 ForgeDirection dir=null;
@@ -833,7 +833,8 @@ public class MinechemComputerPeripheral implements IPeripheral
     @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public Object[] callMethod(IComputerAccess computer, ILuaContext context,int method, Object[] arguments) throws LuaException,InterruptedException {
-    	return luaMethods.get(method).call(computer, context, arguments);
+    	System.out.println(computer.getID());
+    	return methods.get(method).call(computer, context, arguments);
 	}
 
 
