@@ -1,6 +1,5 @@
 package minechem.computercraft;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemBlocksGeneration;
@@ -33,7 +32,8 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade {
 	public MinechemTurtleUpgrade(int upgradeID) {
 		this.upgradeID = upgradeID;
 	}
-
+	
+	@Optional.Method(modid = "ComputerCraft")
 	@Override
 	public int getUpgradeID() {
 		return upgradeID;
@@ -50,6 +50,7 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade {
 		return TurtleUpgradeType.Peripheral;
 	}
 
+    @Optional.Method(modid = "ComputerCraft")
 	@Override
 	public ItemStack getCraftingItem() {
 		return new ItemStack(MinechemItemsRegistration.atomicManipulator);
