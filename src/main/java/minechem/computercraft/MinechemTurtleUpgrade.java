@@ -72,5 +72,4 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade {
 	@Override
 	public void update(ITurtleAccess turtle, TurtleSide side) {
 	}
-
 }

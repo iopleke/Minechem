@@ -15,7 +15,7 @@ public class SynthesisRecipe
 	public static Map<String, SynthesisRecipe> recipes = new HashMap<String, SynthesisRecipe>();
 	private ItemStack output;
 	private PotionChemical[] shapedRecipe;
-	private ArrayList<PotionChemical> unshapedRecipe;
+	private ArrayList<PotionChemical> unshapedRecipe = new ArrayList<PotionChemical>();
 	private int energyCost;
 	private boolean isShaped;
 
