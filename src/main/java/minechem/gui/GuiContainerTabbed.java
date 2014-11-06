@@ -50,7 +50,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
 	public static boolean drawBorders;
 
-	public int zLevel = 3;
+	private int _zLevel = 3;
 
 	public void drawTexture(int x, int y, ResourceLocation resource)
 	{
@@ -60,10 +60,10 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		Tessellator tessellator = Tessellator.instance;
 		tessellator.startDrawingQuads();
-		tessellator.addVertexWithUV(x + 0, y + h, this.zLevel, 0D, 1D);
-		tessellator.addVertexWithUV(x + w, y + h, this.zLevel, 1D, 1D);
-		tessellator.addVertexWithUV(x + w, y + 0, this.zLevel, 1D, 0D);
-		tessellator.addVertexWithUV(x + 0, y + 0, this.zLevel, 0D, 0D);
+		tessellator.addVertexWithUV(x + 0, y + h, this._zLevel, 0D, 1D);
+		tessellator.addVertexWithUV(x + w, y + h, this._zLevel, 1D, 1D);
+		tessellator.addVertexWithUV(x + w, y + 0, this._zLevel, 1D, 0D);
+		tessellator.addVertexWithUV(x + 0, y + 0, this._zLevel, 0D, 0D);
 		tessellator.draw();
 	}
 

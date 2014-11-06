@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.OpenGlHelper;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
@@ -124,10 +125,11 @@ public class GuiFakeSlot extends Gui
 
 	private void drawItemStack(ItemStack itemstack)
 	{
+		//TODO: Fix lightling issues for blocks
+		// GL11.glDisable(GL11.GL_LIGHTING);// over exposed
+		// GL11.glEnable(GL11.GL_LIGHTING);// under exposed
 		this.zLevel = 100.0F;
 		renderItem.zLevel = 100.0F;
-		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240 / 1.0F, 240 / 1.0F);
 		renderItem.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, 0, 0);
 		renderItem.renderItemOverlayIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, 0, 0);
 		this.zLevel = 0.0F;

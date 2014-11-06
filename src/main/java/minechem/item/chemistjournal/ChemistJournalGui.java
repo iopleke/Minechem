@@ -361,12 +361,12 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 	private void drawSlots(int x, int y)
 	{
 		GL11.glPushMatrix();
-		ScissorHelper.startScissor(mc, x + 9, y + 7, 140, 176);
+		ScissorHelper.startScissor(mc, x + 9, y + 26, 140, 176);
 		int ypos = (int) ((listHeight - 150) * scrollBar.getScrollValue());
-		GL11.glTranslatef(0, -ypos, 0);
+		GL11.glTranslatef(0, ypos, 0);
 		for (GuiFakeSlot slot : itemListSlots)
 		{
-			slot.setYOffset(-ypos);
+			slot.setYOffset(ypos);
 			slot.draw();
 		}
 		ScissorHelper.endScissor();
@@ -421,7 +421,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		int j = this.height - Mouse.getEventY() * this.height / this.mc.displayHeight - 1;
 		mouseX = i - (width - xSize) / 2;
 		mouseY = j - (height - ySize) / 2;
-		if (isScrollBarActive() && scrollBar.pointInScrollBar(mouseX, mouseY))
+		if (isScrollBarActive())
 		{
 			scrollBar.handleMouseInput();
 		}
