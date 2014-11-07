@@ -21,33 +21,29 @@ public class MinechemBucketRenderer implements IItemRenderer
     @Override
     public boolean handleRenderType(ItemStack itemstack, ItemRenderType type)
     {
-        if (type == ItemRenderType.INVENTORY)
+        switch (type)
         {
-            return true;
+            case ENTITY:
+            case EQUIPPED:
+            case EQUIPPED_FIRST_PERSON:
+            case INVENTORY:
+                return true;
+            default:
+                return false;
         }
-        if (type == ItemRenderType.EQUIPPED)
-        {
-            return true;
-        }
-        if (type == ItemRenderType.ENTITY)
-        {
-            return true;
-        }
-        return false;
     }
 
     @Override
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack itemstack, ItemRendererHelper helper)
     {
-        if (helper == ItemRendererHelper.ENTITY_BOBBING)
+        switch (helper)
         {
-            return true;
+            case ENTITY_BOBBING:
+            case ENTITY_ROTATION:
+                return true;
+            default:
+                return false;
         }
-        if (helper == ItemRendererHelper.ENTITY_ROTATION)
-        {
-            return true;
-        }
-        return false;
     }
 
     @Override
@@ -79,6 +75,7 @@ public class MinechemBucketRenderer implements IItemRenderer
                     renderItemAsEntity(bucket, pass, fluid);
                 }
                 break;
+            case EQUIPPED_FIRST_PERSON:
             case EQUIPPED:
                 Tessellator tessellator = Tessellator.instance;
                 ItemRenderer.renderItemIn2D(tessellator, bucket.getMaxU(), bucket.getMinV(), bucket.getMinU(), bucket.getMaxV(), bucket.getIconWidth(), bucket.getIconHeight(), 0.0625F);
