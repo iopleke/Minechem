@@ -139,7 +139,7 @@ public class Settings
 		
 		prop = config.get(Configuration.CATEGORY_GENERAL, "advancedTurtleAI", Settings.advancedTurtleAI);
 		prop.comment = StatCollector.translateToLocal("config.advancedTurtleAI.description");
-		prop.setLanguageKey("config.debugmode");
+		prop.setLanguageKey("config.advancedTurtleAI");
 		advancedTurtleAI = prop.getBoolean();
 		configList.add(prop.getName());
 

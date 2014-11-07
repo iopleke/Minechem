@@ -125,9 +125,8 @@ public class GuiFakeSlot extends Gui
 
 	private void drawItemStack(ItemStack itemstack)
 	{
-		//TODO: Fix lightling issues for blocks
-		// GL11.glDisable(GL11.GL_LIGHTING);// over exposed
-		// GL11.glEnable(GL11.GL_LIGHTING);// under exposed
+		GL11.glDisable(GL11.GL_LIGHTING);
+		RenderHelper.enableGUIStandardItemLighting();
 		this.zLevel = 100.0F;
 		renderItem.zLevel = 100.0F;
 		renderItem.renderItemAndEffectIntoGUI(mc.fontRenderer, mc.renderEngine, itemstack, 0, 0);
