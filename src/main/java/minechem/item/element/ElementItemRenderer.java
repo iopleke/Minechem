@@ -23,33 +23,30 @@ public class ElementItemRenderer implements IItemRenderer
 		{
 			return false;
 		}
-		if (type == ItemRenderType.INVENTORY)
+
+		switch (type)
 		{
-			return true;
+			case ENTITY:
+			case EQUIPPED:
+			case EQUIPPED_FIRST_PERSON:
+			case INVENTORY:
+				return true;
+			default:
+				return false;
 		}
-		if (type == ItemRenderType.EQUIPPED)
-		{
-			return true;
-		}
-		if (type == ItemRenderType.ENTITY)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
 	{
-		if (helper == ItemRendererHelper.ENTITY_BOBBING)
+		switch (helper)
 		{
-			return true;
+			case ENTITY_BOBBING:
+			case ENTITY_ROTATION:
+				return true;
+			default:
+				return false;
 		}
-		if (helper == ItemRendererHelper.ENTITY_ROTATION)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -76,32 +73,34 @@ public class ElementItemRenderer implements IItemRenderer
 		{
 			contentsTex = item.solid;
 		}
-		if (type == ItemRenderType.INVENTORY)
+		switch (type)
 		{
-			renderItemInInventory(itemstack, element, testtube, contentsTex);
-		} else if (type == ItemRenderType.EQUIPPED)
-		{
-			renderItemInEquipped(itemstack, element, testtube, contentsTex);
-		} else
-		{
-			EntityItem entityItem = (EntityItem) data[1];
-			if (entityItem.worldObj == null)
-			{
-				float angle = (Minecraft.getSystemTime() % 8000L) / 8000.0F * 360.0F;
-				GL11.glPushMatrix();
-				GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
-				GL11.glTranslatef(-0.2F, -0.5F, 0.0F);
-				renderItemAsEntity(itemstack, element, testtube, contentsTex);
-				GL11.glPopMatrix();
-			} else
-			{
-				renderItemAsEntity(itemstack, element, testtube, contentsTex);
-			}
+			case INVENTORY:
+				renderItemInInventory(itemstack, element, testtube, contentsTex);
+				break;
+			case EQUIPPED_FIRST_PERSON:
+			case EQUIPPED:
+				renderItemInEquipped(itemstack, element, testtube, contentsTex);
+				break;
+			case ENTITY:
+				EntityItem entityItem = (EntityItem) data[1];
+				if (entityItem.worldObj == null)
+				{
+					float angle = (Minecraft.getSystemTime() % 8000L) / 8000.0F * 360.0F;
+					GL11.glPushMatrix();
+					GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
+					GL11.glTranslatef(-0.2F, -0.5F, 0.0F);
+					renderItemAsEntity(itemstack, element, testtube, contentsTex);
+					GL11.glPopMatrix();
+				} else
+				{
+					renderItemAsEntity(itemstack, element, testtube, contentsTex);
+				}
+				break;
+			default:
+				break;
 		}
 
-		GL11.glDisable(GL11.GL_BLEND);
-		GL11.glDisable(GL11.GL_ALPHA_TEST);
-		GL11.glEnable(GL11.GL_LIGHTING);
 	}
 
 	private void renderItemInInventory(ItemStack itemstack, ElementEnum element, IIcon testtube, IIcon contents)
