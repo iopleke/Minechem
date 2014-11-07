@@ -5,6 +5,7 @@ import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.radiation.RadiationEnum;
+import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
@@ -37,6 +38,17 @@ public class MinechemBucketReverseRecipe implements IRecipe
                 if (type == bucket.chemical) count++;
                 else return false;
             }
+            else if (itemStack.getItem() == Items.water_bucket)
+            {
+                if (type == null)
+                {
+                    type = MoleculeEnum.water;
+                    bucketStack = itemStack;
+                }
+
+                if (type == MoleculeEnum.water) count++;
+                else return false;
+            }
             else
             {
                 return false;
@@ -64,6 +76,7 @@ public class MinechemBucketReverseRecipe implements IRecipe
     @Override
     public ItemStack getRecipeOutput()
     {
+        if (type == MoleculeEnum.water) return new ItemStack(MinechemItemsRegistration.molecule, 8, MoleculeEnum.water.id());
         if (type instanceof ElementEnum) return new ItemStack(MinechemItemsRegistration.element, 8, ((ElementEnum) type).ordinal());
         else if (type instanceof MoleculeEnum) return new ItemStack(MinechemItemsRegistration.molecule, 8, ((MoleculeEnum) type).id());
         return null;

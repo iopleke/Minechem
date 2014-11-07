@@ -121,7 +121,8 @@ public class MinechemBucketRecipe implements IRecipe
     @Override
     public ItemStack getRecipeOutput()
     {
-        if (type != null) return new ItemStack(MinechemBucketHandler.getInstance().getBucket(type), 1);
+        if (type != null && type.getUnlocalizedName().equals("molecule.water")) return new ItemStack(Items.water_bucket);
+        else if (type != null) return new ItemStack(MinechemBucketHandler.getInstance().getBucket(type), 1);
         else return null;
     }
 
