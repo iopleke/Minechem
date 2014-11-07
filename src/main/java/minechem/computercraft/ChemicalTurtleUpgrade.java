@@ -9,9 +9,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 import dan200.computercraft.api.turtle.ITurtleUpgrade;
@@ -57,9 +60,10 @@ public class ChemicalTurtleUpgrade implements ITurtleUpgrade{
     @Optional.Method(modid = "ComputerCraft")
     @Override
 	public IPeripheral createPeripheral(ITurtleAccess turtle, TurtleSide side) {
-    	int size = peripherals.size();
-    	peripherals.add(new ChemicalTurtlePeripheral(turtle));
-		return peripherals.get(size);
+    	ChemicalTurtlePeripheral peripheral = new ChemicalTurtlePeripheral(turtle);
+    	peripherals.add(peripheral);
+		MinecraftForge.EVENT_BUS.register(peripheral);
+		return peripheral;
 	}
 
     @Optional.Method(modid = "ComputerCraft")
@@ -88,10 +92,10 @@ public class ChemicalTurtleUpgrade implements ITurtleUpgrade{
 
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(TextureStitchEvent e) {
 		if (e.map.getTextureType() == 0) icon = e.map.registerIcon("minechem:chemicalTurtleUpgrade");
-	}	
-    
+	}		
     
     @Optional.Method(modid = "ComputerCraft")
     public void addTurtlesToCreative(List subItems) {
@@ -115,4 +119,6 @@ public class ChemicalTurtleUpgrade implements ITurtleUpgrade{
 			}
 		}
 	}
+    
+    
 }

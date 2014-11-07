@@ -13,9 +13,9 @@ import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
+import minechem.radiation.RadiationDecayEvent;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationHandler;
-import minechem.radiation.RadiationHandler.DecayEvent;
 import minechem.radiation.RadiationInfo;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
@@ -28,10 +28,12 @@ import minechem.utils.MinechemHelper;
 import minechem.utils.TimeHelper;
 import minechem.utils.WorldTimer;
 import net.minecraft.init.Items;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
@@ -47,8 +49,8 @@ import dan200.computercraft.api.turtle.ITurtleAccess;
     @Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleAccess", modid = "ComputerCraft")})
 public class ChemicalTurtlePeripheral implements IPeripheral
 {
-	private ITurtleAccess turtle;
-	private IComputerAccess computer;
+	private ITurtleAccess turtle = null;
+	private IComputerAccess computer = null;
 	private WorldTimer timer = new WorldTimer(20);
 	private ArrayList<String> known;
 	private ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
@@ -982,26 +984,42 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     
     public void update() {
 		if(timer.update(turtle.getWorld()) && this.computer != null) {
-			List<ItemStack> inventory = getTurtleInventory();
-			List<DecayEvent> decayEvents = RadiationHandler.getInstance().updateRadiationOnItems(turtle.getWorld(), turtle, turtle.getInventory(), inventory);
-			postDecayEvents(decayEvents);
+			List<ItemStack> inventory = getTurtleInventoryList();
+			RadiationHandler.getInstance().updateRadiationOnItems(turtle.getWorld(), turtle, turtle.getInventory(), inventory);
 		}
 	}
     
-    private void postDecayEvents(List<DecayEvent> decayEvents) {
-    	
-		for(DecayEvent event : decayEvents) {
-			Object[] data = {
-					event.before.getDisplayName(),
-					event.after.getDisplayName(),
-					event.damage
-			};
+    public IInventory getTurtleInventory()
+    {
+    	if (turtle!=null)
+    		return turtle.getInventory();
+    	return null;
+    }
+    
+    @Optional.Method(modid = "ComputerCraft")
+    public void postDecayEvent(String before, String after, Integer damage)
+    {
+    	if (this.computer!=null)
+    	{
+	    	Object[] data = {before,after,damage};
 			this.computer.queueEvent("onDecay", data);
+    	}
+    }
+    
+    @SubscribeEvent
+    @Optional.Method(modid = "ComputerCraft")
+    public void onDecayEvent(RadiationDecayEvent e)
+    {
+    	System.out.println("getEvent");
+    	if (this.computer!=null && this.turtle!=null && getTurtleInventory()==e.getInventory())
+		{
+			postDecayEvent(e.getBefore().getDisplayName(),e.getAfter().getDisplayName(),e.getDamage());
 		}
-	}
+
+    }
 	
-	public List<ItemStack> getTurtleInventory() {
-		List<ItemStack> inventory = new ArrayList();
+	public List<ItemStack> getTurtleInventoryList() {
+		List<ItemStack> inventory = new ArrayList<ItemStack>();
 		for(int slot = 0; slot < turtle.getInventory().getSizeInventory(); slot++) {
 			ItemStack stack = turtle.getInventory().getStackInSlot(slot);
 			if(stack != null)
