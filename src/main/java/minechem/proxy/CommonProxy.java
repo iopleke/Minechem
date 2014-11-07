@@ -6,6 +6,7 @@ import minechem.Minechem;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
+import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.tick.ScheduledTickHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,6 +30,7 @@ public class CommonProxy
         MinecraftForge.EVENT_BUS.register(new ScheduledTickHandler());
 		FMLCommonHandler.instance().bus().register(new ChemicalFluidReactionHandler());
 		FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
+		MinecraftForge.EVENT_BUS.register(MinechemBucketHandler.getInstance());
 	}
 
 	public World getClientWorld()
