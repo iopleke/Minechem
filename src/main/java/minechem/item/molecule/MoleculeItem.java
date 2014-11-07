@@ -31,6 +31,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -142,11 +143,13 @@ public class MoleculeItem extends Item
 			int filled=0;
 			for (int i=0;i<6;i++)
 			{
-				filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.molecules.get(getMolecule(stack)),125), false);
+				FluidStack fluidStack = new FluidStack(FluidRegistry.WATER, 125);
+				if (getMolecule(stack) != MoleculeEnum.water) fluidStack = new FluidStack(FluidHelper.molecules.get(getMolecule(stack)), 125);
+				filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), fluidStack , false);
 				if (filled>0)
 				{
 					if (result)
-						((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.molecules.get(getMolecule(stack)), 125), true);
+						((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), fluidStack, true);
 					if (!player.capabilities.isCreativeMode)
 						MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
 					return result;
