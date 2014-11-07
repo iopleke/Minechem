@@ -672,6 +672,7 @@ fluid.hydrogenSulfide.name=Hydrogen Sulfide
 fluid.sodiumBisulfate.name=Sodium Bisulfate
 fluid.sodiumSulfate.name=Sodium Sulfate
 fluid.calcicPyroxene.name=Calcic Pyroxene
+fluid.dimethyltryptamine.name=Dimethyltryptamine
 
 fluid.Ac.name=Actinium
 fluid.Ag.name=Silver

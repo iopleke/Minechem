@@ -32,6 +32,7 @@ import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 import org.lwjgl.input.Keyboard;
@@ -321,6 +322,7 @@ public class ElementItem extends Item
                 } else
                 {
                     MoleculeEnum molecule = MinechemUtil.getMolecule(fluid);
+                    if (fluid == FluidRegistry.WATER) molecule = MoleculeEnum.water;
                     if (molecule != null)
                     {
                         for (int i = 0; i < 6; i++)
@@ -329,7 +331,7 @@ public class ElementItem extends Item
                             if (drained != null && drained.amount > 0)
                             {
                                 if (result)
-                                    ((IFluidHandler) te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), true);
+                                  ((IFluidHandler) te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), true);
                                 if (!player.capabilities.isCreativeMode)
                                     MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
                                 return result;
