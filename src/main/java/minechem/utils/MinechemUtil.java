@@ -211,7 +211,23 @@ public final class MinechemUtil
 	
 	public static void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
 	{
-		current.stackSize+=inc;
+		if (inc < 0) current.splitStack(-inc);
+		else if (inc > 0)
+		{
+			if (current.stackSize + inc <= current.getMaxStackSize()) current.stackSize += inc;
+			else
+			{
+				int added = current.getMaxStackSize() - current.stackSize;
+				current.stackSize = current.getMaxStackSize();
+				ItemStack extraStack = current.copy();
+				extraStack.stackSize = inc - added;
+				if (!player.inventory.addItemStackToInventory(extraStack))
+				{
+					player.dropPlayerItemWithRandomChoice(extraStack, false);
+				}
+			}
+		}
+
 		if (!player.inventory.addItemStackToInventory(give))
 		{
 			player.dropPlayerItemWithRandomChoice(give, false);

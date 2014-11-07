@@ -146,9 +146,9 @@ public class MoleculeItem extends Item
 				if (filled>0)
 				{
 					if (result)
-						((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.molecules.get(getMolecule(stack)),125), true);
-                    if (!player.capabilities.isCreativeMode)
-					    MinechemUtil.incPlayerInventory(stack,-1,player,new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+						((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.molecules.get(getMolecule(stack)), 125), true);
+					if (!player.capabilities.isCreativeMode)
+						MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
 					return result;
 				}
 			}
