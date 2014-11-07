@@ -297,7 +297,7 @@ public class ElementItem extends Item
                             ((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)), 125), true);
                         if (!player.capabilities.isCreativeMode)
                             MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
-                        return result;
+                        return result || stack.stackSize <= 0;
                     }
                 }
             } else
