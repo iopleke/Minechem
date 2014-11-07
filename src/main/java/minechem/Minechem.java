@@ -1,5 +1,6 @@
 package minechem;
 
+import minechem.computercraft.MinechemCCItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;

@@ -67,6 +67,7 @@ config.power.energyPacketSize.description=Max RF/t consumption of Minechem machi
 config.recursiveDepth.description=Recipe Recursion Depth (higher for more complex recipes)
 config.decaySafeMachines.description=Enable Safe Machines
 config.fluideffects.description=Enable fluid Effects
+config.advancedTurtleAI.description=Make your turtles smarter - they probably won't try to take over the world
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest

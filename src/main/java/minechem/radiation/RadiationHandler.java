@@ -1,5 +1,8 @@
 package minechem.radiation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
@@ -20,25 +23,24 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import java.util.ArrayList;
-import java.util.List;
+import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import dan200.computercraft.api.turtle.ITurtleAccess;
 
 public class RadiationHandler
 {
 
-	private static RadiationHandler instace = new RadiationHandler();
+	private static RadiationHandler instance = new RadiationHandler();
 
 	public static RadiationHandler getInstance()
 	{
-		return instace == null ? new RadiationHandler() : instace;
+		return instance == null ? new RadiationHandler() : instance;
 	}
-
-	public class DecayEvent
+	
+	public RadiationHandler()
 	{
-		public ItemStack before;
-		public ItemStack after;
-		public int damage;
-		public long time;
+		MinecraftForge.EVENT_BUS.register(this);
 	}
 
 	public void update(EntityPlayer player)
@@ -83,17 +85,29 @@ public class RadiationHandler
 		}
 	}
 
+	@Optional.Method(modid = "ComputerCraft")
+	public void updateRadiationOnItems(World world, ITurtleAccess turtle, IInventory inventory, List<ItemStack> itemstacks)
+	{
+		updateRadiationOnItems(world, inventory, itemstacks, null, null, turtle.getPosition().posX, turtle.getPosition().posY, turtle.getPosition().posZ);
+
+	}
+	
 	private void updateContainer(EntityPlayer player, Container container, IInventory inventory)
 	{
 		List<ItemStack> itemstacks = container.getInventory();
 		updateRadiationOnItems(player.worldObj, player, container, inventory, itemstacks);
 	}
 
-	private List<DecayEvent> updateRadiationOnItems(World world, EntityPlayer player, Container container, IInventory inventory, List<ItemStack> itemstacks)
+	private void updateRadiationOnItems(World world, EntityPlayer player, Container container, IInventory inventory, List<ItemStack> itemstacks)
 	{
-		List<DecayEvent> events = new ArrayList<DecayEvent>();
-		for (ItemStack itemstack : itemstacks)
+		updateRadiationOnItems(world, inventory, itemstacks, player, container, player.posX, player.posY, player.posZ);
+	}
+	
+	private void updateRadiationOnItems(World world, IInventory inventory, List<ItemStack> itemstacks, EntityPlayer player, Container container, double posX, double posY, double posZ)
+	{
+		for (int i=0;i< itemstacks.size();i++)
 		{
+			ItemStack itemstack = itemstacks.get(i);
 			if (itemstack != null)
 			{
 				RadiationEnum radiation = null;
@@ -110,24 +124,22 @@ public class RadiationHandler
 
 				if (radiation != null && radiation != RadiationEnum.stable)
 				{
-					DecayEvent decayEvent = new DecayEvent();
-					decayEvent.time = world.getTotalWorldTime() - ElementItem.getRadiationInfo(itemstack, world).decayStarted;
-					decayEvent.before = itemstack.copy();
-					decayEvent.damage = updateRadiation(world, itemstack, inventory, player.posX, player.posY, player.posZ);
-					decayEvent.after = itemstack.copy();
-					if (decayEvent.damage > 0)
+					Long time = world.getTotalWorldTime() - ElementItem.getRadiationInfo(itemstack, world).decayStarted;
+					ItemStack before = itemstack.copy();
+					int damage = updateRadiation(world, itemstack, inventory, posX, posY, posZ);
+					ItemStack after = itemstack.copy();
+					if (damage > 0)
 					{
-						events.add(decayEvent);
-					}
-					if (decayEvent.damage > 0 && container != null)
-					{
-						applyRadiationDamage(player, container, decayEvent.damage);
-						printRadiationDamageToChat(player, decayEvent);
+						IInventory decayInventory = (container==null)?inventory:container.getSlot(i).inventory; 
+						MinecraftForge.EVENT_BUS.post(new RadiationDecayEvent(decayInventory,damage,time,before,after,player));
+						if (container != null && player!=null)
+						{
+							applyRadiationDamage(player, container, damage);
+						}
 					}
 				}
 			}
 		}
-		return events;
 	}
 
 	private void applyRadiationDamage(EntityPlayer player, Container container, int damage)
@@ -159,13 +171,18 @@ public class RadiationHandler
 		player.attackEntityFrom(DamageSource.generic, damage);
 	}
 
-	private void printRadiationDamageToChat(EntityPlayer player, DecayEvent decayEvent)
+	
+	@SubscribeEvent
+	public void onDecayEvent(RadiationDecayEvent e)
 	{
-		String nameBeforeDecay = getLongName(decayEvent.before);
-		String nameAfterDecay = getLongName(decayEvent.after);
-		String time = TimeHelper.getTimeFromTicks(decayEvent.time);
-		String message = String.format("Radiation Warning: Element %s decayed into %s after %s.", nameBeforeDecay, nameAfterDecay, time);
-		player.addChatMessage(new ChatComponentText(message));
+		if (e.getPlayer()!=null)
+		{
+			String nameBeforeDecay = getLongName(e.getBefore());
+			String nameAfterDecay = getLongName(e.getAfter());
+			String time = TimeHelper.getTimeFromTicks(e.getTime());
+			String message = String.format("Radiation Warning: Element %s decayed into %s after %s.", nameBeforeDecay, nameAfterDecay, time);
+			e.getPlayer().addChatMessage(new ChatComponentText(message));
+		}
 	}
 
 	private String getLongName(ItemStack stack)

@@ -45,6 +45,9 @@ public class Settings
 
 	// Depth of recursive recipe gen
 	public static int recursiveDepth = 10;
+	
+	//Renames ChemicalTurtles to "Jenkins"
+	public static boolean advancedTurtleAI = false;
 
 	// Disabling of enchants, spikes and fluidEffects
 	public static boolean FoodSpiking = true;
@@ -132,6 +135,12 @@ public class Settings
 		prop.comment = StatCollector.translateToLocal("config.debugmode.description");
 		prop.setLanguageKey("config.debugmode");
 		DebugMode = prop.getBoolean();
+		configList.add(prop.getName());
+		
+		prop = config.get(Configuration.CATEGORY_GENERAL, "advancedTurtleAI", Settings.advancedTurtleAI);
+		prop.comment = StatCollector.translateToLocal("config.advancedTurtleAI.description");
+		prop.setLanguageKey("config.debugmode");
+		advancedTurtleAI = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get(Configuration.CATEGORY_GENERAL, "updateRadius", Settings.UpdateRadius);

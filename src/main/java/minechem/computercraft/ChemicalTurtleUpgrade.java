@@ -1,16 +1,20 @@
 package minechem.computercraft;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.turtle.ITurtleAccess;
 import dan200.computercraft.api.turtle.ITurtleUpgrade;
@@ -21,11 +25,12 @@ import dan200.computercraft.api.turtle.TurtleVerb;
 
 
 @Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleUpgrade", modid = "ComputerCraft")
-public class MinechemTurtleUpgrade implements ITurtleUpgrade{
+public class ChemicalTurtleUpgrade implements ITurtleUpgrade{
 	private int upgradeID;
 	public IIcon icon;
+	private static ArrayList<ChemicalTurtlePeripheral> peripherals = new ArrayList<ChemicalTurtlePeripheral>();
 	
-	public MinechemTurtleUpgrade(int upgradeID) {
+	public ChemicalTurtleUpgrade(int upgradeID) {
 		this.upgradeID = upgradeID;
 	}
 
@@ -37,7 +42,7 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade{
 	@Optional.Method(modid = "ComputerCraft")
 	@Override
 	public String getUnlocalisedAdjective() {
-		return "Chemical";
+		return Settings.advancedTurtleAI?"Jenkins":"Chemical";
 	}
 
     @Optional.Method(modid = "ComputerCraft")
@@ -55,8 +60,10 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade{
     @Optional.Method(modid = "ComputerCraft")
     @Override
 	public IPeripheral createPeripheral(ITurtleAccess turtle, TurtleSide side) {
-    	
-		return new MinechemComputerPeripheral(turtle);
+    	ChemicalTurtlePeripheral peripheral = new ChemicalTurtlePeripheral(turtle);
+    	peripherals.add(peripheral);
+		MinecraftForge.EVENT_BUS.register(peripheral);
+		return peripheral;
 	}
 
     @Optional.Method(modid = "ComputerCraft")
@@ -74,14 +81,21 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade{
     @Optional.Method(modid = "ComputerCraft")
     @Override
 	public void update(ITurtleAccess turtle, TurtleSide side) {
+    	if (peripherals != null) {
+			for (ChemicalTurtlePeripheral peripheral : peripherals) {
+				if (peripheral != null) {
+					peripheral.update();
+				}
+			}		
+		} 
 	}
 
 
 	@SubscribeEvent
+	@SideOnly(Side.CLIENT)
 	public void registerIcons(TextureStitchEvent e) {
 		if (e.map.getTextureType() == 0) icon = e.map.registerIcon("minechem:chemicalTurtleUpgrade");
-	}	
-    
+	}		
     
     @Optional.Method(modid = "ComputerCraft")
     public void addTurtlesToCreative(List subItems) {
@@ -105,4 +119,6 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade{
 			}
 		}
 	}
+    
+    
 }

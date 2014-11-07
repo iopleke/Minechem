@@ -2,9 +2,9 @@ package minechem.item;
 
 import java.util.List;
 
-import minechem.MinechemCCItemsRegistration;
 import minechem.MinechemItemsRegistration;
-import minechem.computercraft.MinechemTurtleUpgrade;
+import minechem.computercraft.MinechemCCItemsRegistration;
+import minechem.computercraft.ChemicalTurtleUpgrade;
 import minechem.gui.CreativeTabMinechem;
 import minechem.reference.Textures;
 import net.minecraft.client.renderer.texture.IIconRegister;
