@@ -89,7 +89,6 @@ public class MinechemBucketRenderer implements IItemRenderer
                 break;
             default:
                 break;
-
         }
     }
 
