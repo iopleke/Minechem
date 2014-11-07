@@ -1,6 +1,6 @@
 package minechem;
 
-import minechem.computercraft.MinechemTurtleUpgrade;
+
 import minechem.fluid.FluidHelper;
 import minechem.item.ItemAtomicManipulator;
 import minechem.item.OpticalMicroscopeLens;
@@ -21,10 +21,12 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
-import dan200.computercraft.api.ComputerCraftAPI;
 
+@Optional.InterfaceList({
+    @Optional.Interface(iface = "dan200.computercraft.api.ComputerCraftAPI", modid = "ComputerCraft"),
+    @Optional.Interface(iface = "minechem.computercraft.MinechemTurtleUpgrade", modid = "ComputerCraft")})
 public class MinechemItemsRegistration
 {
 	public static ElementItem element;
@@ -40,8 +42,6 @@ public class MinechemItemsRegistration
 	public static ItemStack minechempills;
 	public static Item polytool;
 	public static ItemStack emptyTube;
-	
-	public static MinechemTurtleUpgrade turtleUpgrade = null;
 
 	public static void init()
 	{
@@ -71,11 +71,6 @@ public class MinechemItemsRegistration
 		GameRegistry.registerItem(polytool, Reference.ID + "Polytool");
 
 		emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
-		
-		if (Loader.isModLoaded("ComputerCraft"))
-		{
-			ComputerCraftAPI.registerTurtleUpgrade(turtleUpgrade=new MinechemTurtleUpgrade(342));
-		}
 	}
 
 	public static void registerFluidContainers()

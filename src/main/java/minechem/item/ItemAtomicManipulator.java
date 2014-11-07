@@ -2,6 +2,7 @@ package minechem.item;
 
 import java.util.List;
 
+import minechem.MinechemCCItemsRegistration;
 import minechem.MinechemItemsRegistration;
 import minechem.computercraft.MinechemTurtleUpgrade;
 import minechem.gui.CreativeTabMinechem;
@@ -11,6 +12,7 @@ import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -36,7 +38,7 @@ public class ItemAtomicManipulator extends Item
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List subItems) {
 		subItems.add(new ItemStack(item, 1, 0));
-		if (MinechemItemsRegistration.turtleUpgrade!=null) ((MinechemTurtleUpgrade) MinechemItemsRegistration.turtleUpgrade).addTurtlesToCreative(subItems);
+		if (Loader.isModLoaded("ComputerCraft")) MinechemCCItemsRegistration.chemicalUpgrade.addTurtlesToCreative(subItems);
 	}
 	
 	public IIcon getIcon()
