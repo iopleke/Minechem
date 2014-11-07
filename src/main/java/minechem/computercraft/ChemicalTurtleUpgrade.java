@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
@@ -38,7 +39,7 @@ public class ChemicalTurtleUpgrade implements ITurtleUpgrade{
 	@Optional.Method(modid = "ComputerCraft")
 	@Override
 	public String getUnlocalisedAdjective() {
-		return "Chemical";
+		return Settings.advancedTurtleAI?"Jenkins":"Chemical";
 	}
 
     @Optional.Method(modid = "ComputerCraft")
