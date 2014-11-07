@@ -14,6 +14,8 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
+import minechem.radiation.RadiationHandler;
+import minechem.radiation.RadiationHandler.DecayEvent;
 import minechem.radiation.RadiationInfo;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
@@ -24,6 +26,7 @@ import minechem.tileentity.synthesis.SynthesisTileEntity;
 import minechem.utils.Compare;
 import minechem.utils.MinechemHelper;
 import minechem.utils.TimeHelper;
+import minechem.utils.WorldTimer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -42,14 +45,15 @@ import dan200.computercraft.api.turtle.ITurtleAccess;
     @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IComputerAccess", modid = "ComputerCraft"),
     @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = "ComputerCraft"),
     @Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleAccess", modid = "ComputerCraft")})
-public class MinechemComputerPeripheral implements IPeripheral
+public class ChemicalTurtlePeripheral implements IPeripheral
 {
 	private ITurtleAccess turtle;
-	//private ArrayList<ItemStack> known;
+	private IComputerAccess computer;
+	private WorldTimer timer = new WorldTimer(20);
 	private ArrayList<String> known;
 	private ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
 
-	public MinechemComputerPeripheral(ITurtleAccess turtle) {
+	public ChemicalTurtlePeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
 		//this.known = new ArrayList<ItemStack>();
 		this.known = new ArrayList<String>();
@@ -959,14 +963,14 @@ public class MinechemComputerPeripheral implements IPeripheral
     @Override
     public void attach(IComputerAccess computer)
     {
-
+    	this.computer=computer;
     }
 
     @Optional.Method(modid = "ComputerCraft")
     @Override
     public void detach(IComputerAccess computer)
     {
-
+    	this.computer=null;
     }
 
     @Optional.Method(modid = "ComputerCraft")
@@ -975,4 +979,34 @@ public class MinechemComputerPeripheral implements IPeripheral
     {
         return false;
     }
+    
+    public void update() {
+		if(timer.update(turtle.getWorld()) && this.computer != null) {
+			List<ItemStack> inventory = getTurtleInventory();
+			List<DecayEvent> decayEvents = RadiationHandler.getInstance().updateRadiationOnItems(turtle.getWorld(), turtle, turtle.getInventory(), inventory);
+			postDecayEvents(decayEvents);
+		}
+	}
+    
+    private void postDecayEvents(List<DecayEvent> decayEvents) {
+    	
+		for(DecayEvent event : decayEvents) {
+			Object[] data = {
+					event.before.getDisplayName(),
+					event.after.getDisplayName(),
+					event.damage
+			};
+			this.computer.queueEvent("onDecay", data);
+		}
+	}
+	
+	public List<ItemStack> getTurtleInventory() {
+		List<ItemStack> inventory = new ArrayList();
+		for(int slot = 0; slot < turtle.getInventory().getSizeInventory(); slot++) {
+			ItemStack stack = turtle.getInventory().getStackInSlot(slot);
+			if(stack != null)
+				inventory.add(stack);
+		}
+		return inventory;
+	}
 }

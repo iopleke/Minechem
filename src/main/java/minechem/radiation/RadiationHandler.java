@@ -1,5 +1,8 @@
 package minechem.radiation;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
@@ -20,8 +23,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
-import java.util.ArrayList;
-import java.util.List;
+import cpw.mods.fml.common.Optional;
+import dan200.computercraft.api.turtle.ITurtleAccess;
 
 public class RadiationHandler
 {
@@ -123,6 +126,43 @@ public class RadiationHandler
 					{
 						applyRadiationDamage(player, container, decayEvent.damage);
 						printRadiationDamageToChat(player, decayEvent);
+					}
+				}
+			}
+		}
+		return events;
+	}
+	
+	@Optional.Method(modid = "ComputerCraft")
+	public List<DecayEvent> updateRadiationOnItems(World world, ITurtleAccess turtle, IInventory inventory, List<ItemStack> itemstacks)
+	{
+		List<DecayEvent> events = new ArrayList<DecayEvent>();
+		for (ItemStack itemstack : itemstacks)
+		{
+			if (itemstack != null)
+			{
+				RadiationEnum radiation = null;
+				Item item = itemstack.getItem();
+				if (item == MinechemItemsRegistration.element)
+				{
+					radiation = RadiationInfo.getRadioactivity(itemstack);
+				} else if (item == MinechemItemsRegistration.molecule)
+				{
+					radiation = MoleculeItem.getMolecule(itemstack).radioactivity();
+				}else if (item instanceof MinechemBucketItem){
+					radiation=((MinechemBucketItem) item).chemical.radioactivity();
+				}
+
+				if (radiation != null && radiation != RadiationEnum.stable)
+				{
+					DecayEvent decayEvent = new DecayEvent();
+					decayEvent.time = world.getTotalWorldTime() - ElementItem.getRadiationInfo(itemstack, world).decayStarted;
+					decayEvent.before = itemstack.copy();
+					decayEvent.damage = updateRadiation(world, itemstack, inventory, turtle.getPosition().posX, turtle.getPosition().posY, turtle.getPosition().posZ);
+					decayEvent.after = itemstack.copy();
+					if (decayEvent.damage > 0)
+					{
+						events.add(decayEvent);
 					}
 				}
 			}

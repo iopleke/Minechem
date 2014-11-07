@@ -1,8 +1,8 @@
 package minechem.computercraft;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import minechem.MinechemBlocksGeneration;
 import minechem.MinechemItemsRegistration;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -21,11 +21,12 @@ import dan200.computercraft.api.turtle.TurtleVerb;
 
 
 @Optional.Interface(iface = "dan200.computercraft.api.turtle.ITurtleUpgrade", modid = "ComputerCraft")
-public class MinechemTurtleUpgrade implements ITurtleUpgrade{
+public class ChemicalTurtleUpgrade implements ITurtleUpgrade{
 	private int upgradeID;
 	public IIcon icon;
+	private static ArrayList<ChemicalTurtlePeripheral> peripherals = new ArrayList<ChemicalTurtlePeripheral>();
 	
-	public MinechemTurtleUpgrade(int upgradeID) {
+	public ChemicalTurtleUpgrade(int upgradeID) {
 		this.upgradeID = upgradeID;
 	}
 
@@ -55,8 +56,9 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade{
     @Optional.Method(modid = "ComputerCraft")
     @Override
 	public IPeripheral createPeripheral(ITurtleAccess turtle, TurtleSide side) {
-    	
-		return new MinechemComputerPeripheral(turtle);
+    	int size = peripherals.size();
+    	peripherals.add(new ChemicalTurtlePeripheral(turtle));
+		return peripherals.get(size);
 	}
 
     @Optional.Method(modid = "ComputerCraft")
@@ -74,6 +76,13 @@ public class MinechemTurtleUpgrade implements ITurtleUpgrade{
     @Optional.Method(modid = "ComputerCraft")
     @Override
 	public void update(ITurtleAccess turtle, TurtleSide side) {
+    	if (peripherals != null) {
+			for (ChemicalTurtlePeripheral peripheral : peripherals) {
+				if (peripheral != null) {
+					peripheral.update();
+				}
+			}		
+		} 
 	}
 
 
