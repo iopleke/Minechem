@@ -558,7 +558,8 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		if (activeItem != null)
 		{
 			SynthesisRecipe recipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(activeItem);
-			setRecipe(recipe);
+			if (recipe!=null)
+				setRecipe(recipe);
 		}
 	}
 
