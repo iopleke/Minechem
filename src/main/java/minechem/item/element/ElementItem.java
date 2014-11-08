@@ -79,7 +79,8 @@ public class ElementItem extends Item
         String longName = atomicNumber < ElementEnum.heaviestMass ? MinechemHelper.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName()) : MinechemHelper.getLocalString("element.empty");
         if (longName.contains("Element."))
         {
-            longName = ElementEnum.getByID(atomicNumber).getLongName();
+            ElementEnum element = ElementEnum.getByID(atomicNumber);
+            if (element!=null) longName=element.getLongName();
         }
         return longName;
     }

@@ -5,6 +5,7 @@ import minechem.MinechemItemsRegistration;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 
 public class FluidElement extends MinechemFluid
 {
@@ -30,6 +31,12 @@ public class FluidElement extends MinechemFluid
     {
         return element;
     }
+
+	@Override
+	public int getColor(FluidStack stack)
+	{
+		return stack.getFluid().getColor();
+	}
 
     @Override
 	public int getColor()

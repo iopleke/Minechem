@@ -227,7 +227,7 @@ public class MoleculeEnum extends MinechemChemicalType
 
 	// AE2
 	public static final MoleculeEnum hypophosphite = addMolecule("hypophosphite", 154, solid, new Element(H, 2), new Element(P, 1), new Element(O, 2));
-	public static final MoleculeEnum aluminumHypophosphite = addMolecule("aluminumHypophosphite", 155, solid, new Element(Al, 1), new Molecule(hypophosphite, 3));
+	public static final MoleculeEnum aluminiumHypophosphite = addMolecule("aluminiumHypophosphite", 155, solid, new Element(Al, 1), new Molecule(hypophosphite, 3));
 
 	// More things for Underground Biomes
 	public static final MoleculeEnum omphacite = addMolecule("omphacite", 156, solid, new Element(Ca, 1), new Element(Al, 1), new Element(Si, 2), new Element(O, 6));
