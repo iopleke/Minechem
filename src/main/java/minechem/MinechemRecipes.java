@@ -2844,7 +2844,7 @@ public class MinechemRecipes
 		if (Loader.isModLoaded("appliedenergistics2"))
 		{
 			MoleculeEnum certusQuartzMolecule = MoleculeEnum.aluminiumPhosphate;
-			MoleculeEnum chargedCertusQuartzMolecule = MoleculeEnum.aluminumHypophosphite;
+			MoleculeEnum chargedCertusQuartzMolecule = MoleculeEnum.aluminiumHypophosphite;
 			PotionChemical chargedCertusQuartzChemical = new Molecule(chargedCertusQuartzMolecule);
 
 			PotionChemical[] chargedCertusQuartzDecompositionFormula = new PotionChemical[]

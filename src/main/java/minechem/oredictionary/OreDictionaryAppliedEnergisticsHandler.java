@@ -14,7 +14,7 @@ public class OreDictionaryAppliedEnergisticsHandler implements OreDictionaryHand
 
 	private PotionChemical certusQuartzChemical = new Molecule(certusQuartzMolecule);
 
-	private MoleculeEnum chargedCertusQuartzMolecule = MoleculeEnum.aluminumHypophosphite;
+	private MoleculeEnum chargedCertusQuartzMolecule = MoleculeEnum.aluminiumHypophosphite;
 
 	private PotionChemical chargedCertusQuartzChemical = new Molecule(chargedCertusQuartzMolecule);
 
