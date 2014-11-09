@@ -10,7 +10,7 @@ public class FusionTabStateControl extends GuiTabStateControl
 	public FusionTabStateControl(Gui gui, FusionTileEntity fusion)
 	{
 		super(gui);
-		this.tileEntity = (FusionTileEntity) fusion;
+		this.tileEntity = fusion;
 		this.state = TabState.norecipe;
 	}
 

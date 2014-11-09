@@ -6,8 +6,6 @@ import java.util.Map;
 import java.util.Random;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
-import minechem.utils.Compare;
-import minechem.utils.LogHelper;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;

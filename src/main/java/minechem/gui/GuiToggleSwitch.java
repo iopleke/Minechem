@@ -1,7 +1,7 @@
 package minechem.gui;
 
 import cpw.mods.fml.client.FMLClientHandler;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -42,7 +42,7 @@ public abstract class GuiToggleSwitch
 		renderEngine.bindTexture(texture);
 		ToggleButton button = buttons.get(state);
 		drawTexturedModalRect(x, y, button.u, button.v, width, height);
-		String tooltip = MinechemHelper.getLocalString(button.tooltip);
+		String tooltip = MinechemUtil.getLocalString(button.tooltip);
 		int cx = (container.width - container.getXSize()) / 2;
 		int cy = (container.height - container.getYSize()) / 2;
 		int tooltipWidth = mc.fontRenderer.getStringWidth(tooltip);

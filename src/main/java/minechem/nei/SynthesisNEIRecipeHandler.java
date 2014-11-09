@@ -9,12 +9,11 @@ import minechem.reference.Resources;
 import minechem.tileentity.synthesis.SynthesisGui;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.item.ItemStack;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
@@ -33,7 +32,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getRecipeName()
 	{
-		return MinechemHelper.getLocalString("gui.title.synthesis");
+		return MinechemUtil.getLocalString("gui.title.synthesis");
 	}
 
 	@Override
@@ -94,7 +93,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			return;
 		}
-		PotionChemical ingredientChemical = MinechemHelper.itemStackToChemical(ingredient);
+		PotionChemical ingredientChemical = MinechemUtil.itemStackToChemical(ingredient);
 		if (ingredientChemical == null)
 		{
 			return;
@@ -182,7 +181,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 				{
 					if (c != null)
 					{
-						ItemStack inputItem = MinechemHelper.chemicalToItemStack(c, c.amount);
+						ItemStack inputItem = MinechemUtil.chemicalToItemStack(c, c.amount);
 						inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + xSlot * INPUT_X_SCALE, INPUT_Y_OFS + ySlot * INPUT_Y_SCALE));
 					}
 					xSlot++;
@@ -201,7 +200,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 				int ySlot = 0;
 				for (PotionChemical c : inputChemicals)
 				{
-					ItemStack inputItem = MinechemHelper.chemicalToItemStack(c, c.amount);
+					ItemStack inputItem = MinechemUtil.chemicalToItemStack(c, c.amount);
 					inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + xSlot * INPUT_X_SCALE, INPUT_Y_OFS + ySlot * INPUT_Y_SCALE));
 					xSlot++;
 					if (xSlot > 2)

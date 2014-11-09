@@ -9,13 +9,12 @@ import java.util.List;
 
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
-import minechem.item.molecule.MoleculeEnum;
 import minechem.network.MessageHandler;
 import minechem.network.message.SynthesisUpdateMessage;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.Compare;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Transactor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -407,7 +406,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	{
 		super.readFromNBT(nbt);
 		NBTTagList inventoryTagList = nbt.getTagList("inventory", Constants.NBT.TAG_COMPOUND);
-		inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
+		inventory = MinechemUtil.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
 	}
 
 	@Override
@@ -465,7 +464,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		}
 
 		// One of the most important features in Minechem is the ability to recombine decomposed molecules and elements into items again.
-		ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(currentRecipe.getShapelessRecipe());
+		ItemStack[] ingredients = MinechemUtil.convertChemicalArrayIntoItemStackArray(currentRecipe.getShapelessRecipe());
 		ItemStack[] storage = storageInventory.copyInventoryToArray();
 		for (ItemStack ingredient : ingredients)
 		{
@@ -517,7 +516,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	public void writeToNBT(NBTTagCompound nbt)
 	{
 		super.writeToNBT(nbt);
-		NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
+		NBTTagList inventoryTagList = MinechemUtil.writeItemStackArrayToTagList(inventory);
 		nbt.setTag("inventory", inventoryTagList);
 	}
 
@@ -664,7 +663,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 		if (recipe != null)
 		{
-			ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
+			ItemStack[] ingredients = MinechemUtil.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
 			for (int i = 0; i < Math.min(kRecipe.length, ingredients.length); i++)
 			{
 				inventory[kRecipe[i]] = ingredients[i];

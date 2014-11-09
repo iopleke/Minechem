@@ -6,7 +6,7 @@ import minechem.gui.GuiTabHelp;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
@@ -24,7 +24,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
 	{
 		super(new BlueprintProjectorContainer(inventoryPlayer, projector));
 		this.projector = projector;
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.projector")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.projector")));
 	}
 
 	@Override

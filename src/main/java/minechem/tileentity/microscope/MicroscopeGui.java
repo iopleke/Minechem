@@ -10,7 +10,7 @@ import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.Constants;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -44,7 +44,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		this.ySize = guiHeight;
 		this.renderItem = new MicroscopeRenderGUIItem(this);
 		this.recipeSwitch = new MicroscopeGuiSwitch(this);
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.microscope")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.microscope")));
 	}
 
 	public boolean isMouseInMicroscope()
@@ -76,7 +76,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		super.drawGuiContainerForegroundLayer(par1, par2);
-		String info = MinechemHelper.getLocalString("gui.title.microscope");
+		String info = MinechemUtil.getLocalString("gui.title.microscope");
 		int infoWidth = fontRendererObj.getStringWidth(info);
 		fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
 	}
@@ -139,7 +139,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 	private void drawSynthesisRecipeMatrix(SynthesisRecipe recipe, int x, int y)
 	{
 		isShapedRecipe = recipe.isShaped();
-		ItemStack[] shapedRecipe = MinechemHelper.convertChemicalArrayIntoItemStackArray(this.isShapedRecipe ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
+		ItemStack[] shapedRecipe = MinechemUtil.convertChemicalArrayIntoItemStackArray(this.isShapedRecipe ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
 		int slot = 2;
         for (ItemStack itemstack : shapedRecipe)
         {
@@ -167,7 +167,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 		DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(inputstack);
 		if (recipe != null)
 		{
-			ArrayList<ItemStack> output = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutputRaw());
+			ArrayList<ItemStack> output = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutputRaw());
 			if (recipe instanceof DecomposerRecipeSelect)
 			{
 				drawDecomposerRecipeSelectMatrix(((DecomposerRecipeSelect) recipe).getAllPossibleRecipes(), x, y);
@@ -208,7 +208,7 @@ public class MicroscopeGui extends GuiContainerTabbed
 
 		slideShowTimer++;
 		DecomposerRecipe recipe = recipes.get(currentSlide);
-		ArrayList<ItemStack> output = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutputRaw());
+		ArrayList<ItemStack> output = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutputRaw());
 		drawDecomposerRecipeMatrix(output, x, y);
 	}
 

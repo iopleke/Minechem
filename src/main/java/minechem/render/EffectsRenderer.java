@@ -19,7 +19,7 @@ public class EffectsRenderer
 //        if (mc.isSingleplayer())
 //        {
 		EntityPlayer player = mc.thePlayer;
-		if (player instanceof EntityPlayer && player.isPotionActive(PotionInjector.atropineHigh))
+		if (player!=null && player.isPotionActive(PotionInjector.atropineHigh))
 		{
 			PotionEffect DHigh = player.getActivePotionEffect(PotionInjector.atropineHigh);
 			int Multiplier = DHigh.getAmplifier();

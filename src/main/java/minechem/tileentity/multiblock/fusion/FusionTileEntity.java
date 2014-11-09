@@ -9,7 +9,7 @@ import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.FusionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -132,7 +132,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 		fusedResult = nbtTagCompound.getInteger("fusedResult");
 		canProcess = nbtTagCompound.getBoolean("canProcess");
 		inventory = new ItemStack[getSizeInventory()];
-		MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND), inventory);
+		MinechemUtil.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", Constants.NBT.TAG_COMPOUND), inventory);
 	}
 
 	private void removeInputs()
@@ -202,7 +202,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 		super.writeToNBT(nbtTagCompound);
 		nbtTagCompound.setInteger("fusedResult", fusedResult);
 		nbtTagCompound.setBoolean("canProcess", canProcess);
-		NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
+		NBTTagList inventoryTagList = MinechemUtil.writeItemStackArrayToTagList(inventory);
 		nbtTagCompound.setTag("inventory", inventoryTagList);
 	}
 

@@ -20,7 +20,7 @@ import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.utils.Constants;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.input.Mouse;
@@ -170,7 +170,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
 	public void showSynthesisRecipe(SynthesisRecipe recipe)
 	{
-		ItemStack[] ingredients = MinechemHelper.convertChemicalArrayIntoItemStackArray(recipe.isShaped() ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
+		ItemStack[] ingredients = MinechemUtil.convertChemicalArrayIntoItemStackArray(recipe.isShaped() ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
 		showIngredients(ingredients, synthesisSlots, SYNTHESIS_X, SYNTHESIS_Y);
 	}
 
@@ -183,7 +183,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 			return;
 		}
 
-		List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutputRaw());
+		List<ItemStack> ingredients = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutputRaw());
 		ItemStack[] ingredientArray = ingredients.toArray(new ItemStack[9]);
 		showIngredients(ingredientArray, decomposerSlots, DECOMPOSER_X, DECOMPOSER_Y);
 	}
@@ -203,7 +203,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		if (slideShowTimer == 0)
 		{
 			ArrayList<PotionChemical> potionChemicals = recipes.get(currentSlide).getOutputRaw();
-			List<ItemStack> ingredients = MinechemHelper.convertChemicalsIntoItemStacks(potionChemicals);
+			List<ItemStack> ingredients = MinechemUtil.convertChemicalsIntoItemStacks(potionChemicals);
 			ItemStack[] ingredientArray = ingredients.toArray(new ItemStack[9]);
 			showIngredients(ingredientArray, decomposerSlots, DECOMPOSER_X, DECOMPOSER_Y);
 		}
@@ -326,7 +326,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 			itemname = itemname.substring(0, 18).trim() + "...";
 		}
 		fontRendererObj.drawString(itemname, 175, 10, 0x0000FF);
-		fontRendererObj.drawString(MinechemHelper.getLocalString("gui.journal.decomposer"), 175, 20, 0x884400);
+		fontRendererObj.drawString(MinechemUtil.getLocalString("gui.journal.decomposer"), 175, 20, 0x884400);
 
 		float chance = 100;
 		if (currentDecomposerRecipe != null && currentDecomposerRecipe instanceof DecomposerRecipeChance)
@@ -339,7 +339,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 			fontRendererObj.drawString(String.format("%.1f%% chance", chance), 175, 30, 0x555555);
 		}
 
-		fontRendererObj.drawString(MinechemHelper.getLocalString("gui.journal.synthesis"), 175, 100, 0x884400);
+		fontRendererObj.drawString(MinechemUtil.getLocalString("gui.journal.synthesis"), 175, 100, 0x884400);
 		if (currentSynthesisRecipe != null)
 		{
 			int energyCost = currentSynthesisRecipe.energyCost();
@@ -349,8 +349,8 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 
 	private void drawHelp()
 	{
-		fontRendererObj.drawString(MinechemHelper.getLocalString("item.itemChemistJournal.name"), 180, 18, 0xFF000000);
-		String help = MinechemHelper.getLocalString("help.journal");
+		fontRendererObj.drawString(MinechemUtil.getLocalString("item.itemChemistJournal.name"), 180, 18, 0xFF000000);
+		String help = MinechemUtil.getLocalString("help.journal");
 		GL11.glPushMatrix();
 		float scale = 0.5F;
 		GL11.glScalef(scale, scale, 1);

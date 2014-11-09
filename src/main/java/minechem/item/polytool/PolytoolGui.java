@@ -9,7 +9,7 @@ import minechem.gui.GuiTabHelp;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementGuiHelper;
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -51,7 +51,7 @@ public class PolytoolGui extends GuiContainerTabbed
 
 			}
 		}
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.polytool")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.polytool")));
 
 	}
 
@@ -98,35 +98,35 @@ public class PolytoolGui extends GuiContainerTabbed
 		drawItemStack(polytoolItem, 80, 42, "");
 		String localizedName;
 
-		localizedName = MinechemHelper.getLocalString("gui.polytool.sword");
+		localizedName = MinechemUtil.getLocalString("gui.polytool.sword");
 		if (localizedName.isEmpty() || localizedName == "gui.polytool.sword")
 		{
 			localizedName = "Sword";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
 
-		localizedName = MinechemHelper.getLocalString("gui.polytool.ores");
+		localizedName = MinechemUtil.getLocalString("gui.polytool.ores");
 		if (localizedName.isEmpty() || localizedName == "gui.polytool.ores")
 		{
 			localizedName = "Ores";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
 
-		localizedName = MinechemHelper.getLocalString("gui.polytool.stone");
+		localizedName = MinechemUtil.getLocalString("gui.polytool.stone");
 		if (localizedName.isEmpty() || localizedName == "gui.polytool.stone")
 		{
 			localizedName = "Stone";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);
 
-		localizedName = MinechemHelper.getLocalString("gui.polytool.axe");
+		localizedName = MinechemUtil.getLocalString("gui.polytool.axe");
 		if (localizedName.isEmpty() || localizedName == "gui.polytool.axe")
 		{
 			localizedName = "Axe";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getAxeStr(polytool), guiLeft + 10, guiTop + 110, 0x404040);
 
-		localizedName = MinechemHelper.getLocalString("gui.polytool.shovel");
+		localizedName = MinechemUtil.getLocalString("gui.polytool.shovel");
 		if (localizedName.isEmpty() || localizedName == "gui.polytool.shovel")
 		{
 			localizedName = "Shovel";

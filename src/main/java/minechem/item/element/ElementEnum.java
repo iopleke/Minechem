@@ -26,7 +26,7 @@ import static minechem.radiation.RadiationEnum.highlyRadioactive;
 import static minechem.radiation.RadiationEnum.radioactive;
 import static minechem.radiation.RadiationEnum.slightlyRadioactive;
 import static minechem.radiation.RadiationEnum.stable;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 
 public class ElementEnum extends MinechemChemicalType
 {
@@ -166,7 +166,7 @@ public class ElementEnum extends MinechemChemicalType
 		this.id = id;
 
 		this.name = name;
-		this.descriptiveName = MinechemHelper.capitalizeFully(descriptiveName);
+		this.descriptiveName = MinechemUtil.capitalizeFully(descriptiveName);
 		this.localizationKey = "element." + name;
 		this.classification = classification;
 

@@ -2,13 +2,10 @@ package minechem;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.block.BlockUraniumOre;
-import minechem.item.element.Element;
-import minechem.item.element.ElementEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorBlock;
 import minechem.tileentity.blueprintprojector.BlueprintProjectorTileEntity;
 import minechem.tileentity.decomposer.DecomposerBlock;
-import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import minechem.tileentity.leadedchest.LeadedChestBlock;
 import minechem.tileentity.leadedchest.LeadedChestTileEntity;

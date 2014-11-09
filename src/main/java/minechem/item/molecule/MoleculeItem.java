@@ -14,7 +14,6 @@ import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
 import minechem.utils.Constants;
-import minechem.utils.MinechemHelper;
 import minechem.utils.MinechemUtil;
 import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
@@ -51,7 +50,7 @@ public class MoleculeItem extends Item
 	@Override
 	public String getItemStackDisplayName(ItemStack itemStack)
 	{
-		return MinechemHelper.getLocalString(getMolecule(itemStack).getUnlocalizedName());
+		return MinechemUtil.getLocalString(getMolecule(itemStack).getUnlocalizedName());
 	}
 
 	@Override
@@ -109,7 +108,7 @@ public class MoleculeItem extends Item
 				break;
 		}
 
-		String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
+		String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
 		String timeLeft = "";
 		if (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
 		{

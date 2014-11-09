@@ -45,7 +45,7 @@ public class Chemicals
 			throw new IllegalArgumentException(name + " is already registered as a molecule");
 		}
 		ArrayList<PotionChemical> chem = InputHelper.getChemicals(chemicals);
-		PotionChemical[] chemical = (PotionChemical[]) chem.toArray(new PotionChemical[chem.size()]);
+		PotionChemical[] chemical = chem.toArray(new PotionChemical[chem.size()]);
 		MineTweakerAPI.apply(new AddMoleculeAction(name, id, state, chemical));
 	}
 

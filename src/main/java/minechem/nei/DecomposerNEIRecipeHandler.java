@@ -21,7 +21,7 @@ import minechem.tileentity.decomposer.DecomposerRecipeSelect;
 import minechem.tileentity.decomposer.DecomposerRecipeSuper;
 import minechem.utils.Compare;
 import minechem.utils.LogHelper;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.item.ItemStack;
 
 import org.lwjgl.opengl.GL11;
@@ -42,7 +42,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public String getRecipeName()
 	{
-		return MinechemHelper.getLocalString("gui.title.decomposer");
+		return MinechemUtil.getLocalString("gui.title.decomposer");
 	}
 
 	@Override
@@ -99,7 +99,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			return;
 		}
 		// Add all decomposer recipes that can yield the result.
-		PotionChemical resultChemical = MinechemHelper.itemStackToChemical(result);
+		PotionChemical resultChemical = MinechemUtil.itemStackToChemical(result);
 		if (resultChemical == null)
 		{
 			return;
@@ -310,8 +310,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			if (outputs != null && !outputs.isEmpty())
 			{
-				outputs = MinechemHelper.pushTogetherStacks(outputs);
-				int digits = MinechemHelper.getNumberOfDigits(outputs.get(0).stackSize);
+				outputs = MinechemUtil.pushTogetherStacks(outputs);
+				int digits = MinechemUtil.getNumberOfDigits(outputs.get(0).stackSize);
 				int digitOffset = digits > 3 ? (digits - 3) * 5 : 0;
 				int x = OUTPUT_X_OFS + digitOffset;
 				output1 = new PositionedStack(outputs.get(0), x, OUTPUT_Y_OFS);
@@ -322,7 +322,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 					for (int idx = 1; idx < outputs.size(); idx++)
 					{
 						ItemStack o = outputs.get(idx);
-						digits = MinechemHelper.getNumberOfDigits(o.stackSize);
+						digits = MinechemUtil.getNumberOfDigits(o.stackSize);
 						digitOffset = digits > 3 ? (digits - 3) * 5 : 0;
 						x += digitOffset + OUTPUT_Y_SCALE + OUTPUT_X_OFS;
 						if (x > 147)
@@ -344,8 +344,8 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 		{
 			super(dr.getInput());
 			ArrayList<ItemStack> outputs;
-            if (dr instanceof DecomposerRecipeSuper) outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutput());
-            else outputs = MinechemHelper.convertChemicalsIntoItemStacks(dr.getOutputRaw());
+            if (dr instanceof DecomposerRecipeSuper) outputs = MinechemUtil.convertChemicalsIntoItemStacks(dr.getOutput());
+            else outputs = MinechemUtil.convertChemicalsIntoItemStacks(dr.getOutputRaw());
 			setOutputs(outputs);
 		}
 	}
@@ -408,7 +408,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 					outputSetToShow = 0;
 				}
 				ArrayList<DecomposerRecipe> possibleRecipes = decomposerRecipeSelect.getAllPossibleRecipes();
-				ArrayList<ItemStack> outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(possibleRecipes.get(outputSetToShow).getOutputRaw());
+				ArrayList<ItemStack> outputsToShow = MinechemUtil.convertChemicalsIntoItemStacks(possibleRecipes.get(outputSetToShow).getOutputRaw());
 				setOutputs(outputsToShow);
 			}
 		}
@@ -446,7 +446,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
                 ArrayList<ItemStack> outputsToShow;
                 do
                 {
-                    outputsToShow = MinechemHelper.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
+                    outputsToShow = MinechemUtil.convertChemicalsIntoItemStacks(decomposerRecipeSuper.getOutput());
                 } while (outputsToShow == null || outputsToShow.isEmpty());
 				setOutputs(outputsToShow);
 			}

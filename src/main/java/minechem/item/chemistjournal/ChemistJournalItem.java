@@ -6,7 +6,7 @@ import minechem.Minechem;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
 import minechem.reference.Textures;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -72,7 +72,7 @@ public class ChemistJournalItem extends Item
 
 			// Load owned by tag from the book which should be last user to use the book.
 			String owner = stackTag.getString(JOURNAL_OWNER_TAG);
-			String ownerTag = MinechemHelper.getLocalString("minechem.owner.tag");
+			String ownerTag = MinechemUtil.getLocalString("minechem.owner.tag");
 			if (ownerTag.isEmpty() || ownerTag == "minechem.owner.tag")
 			{
 				list.add("Owner: " + owner);
@@ -121,7 +121,7 @@ public class ChemistJournalItem extends Item
 			NBTTagList taglist = tag.getTagList(ITEMS_TAG_NAME, Constants.NBT.TAG_COMPOUND);
 			if (taglist != null)
 			{
-				return MinechemHelper.readTagListToItemStackList(taglist);
+				return MinechemUtil.readTagListToItemStackList(taglist);
 			}
 		}
 		return null;
@@ -142,7 +142,7 @@ public class ChemistJournalItem extends Item
 			taglist = new NBTTagList();
 		}
 
-		ArrayList<ItemStack> itemArrayList = MinechemHelper.readTagListToItemStackList(taglist);
+		ArrayList<ItemStack> itemArrayList = MinechemUtil.readTagListToItemStackList(taglist);
 		if (!hasDiscovered(itemArrayList, itemstack))
 		{
 			taglist.appendTag(itemstack.writeToNBT(new NBTTagCompound()));

@@ -7,7 +7,7 @@ import java.util.Random;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.LogHelper;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 
@@ -124,7 +124,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 				for (int i = 0; i < this.recipes.get(currentKey); i++)
 				{
 					ArrayList<PotionChemical> partialResult = current.getOutputRaw();
-					partialResult = MinechemHelper.pushTogetherChemicals(partialResult);
+					partialResult = MinechemUtil.pushTogetherChemicals(partialResult);
 					if (partialResult != null)
 					{
 						result.addAll(partialResult);
@@ -132,7 +132,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 				}
 			}
 		}
-		return MinechemHelper.pushTogetherChemicals(result);
+		return MinechemUtil.pushTogetherChemicals(result);
 	}
 
 	public ArrayList<PotionChemical> getGuaranteedOutput()

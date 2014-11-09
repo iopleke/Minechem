@@ -172,7 +172,7 @@ public class Recipe
 					} else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
 					{
 						components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
-					} else if (recipe instanceof ShapedRecipes && ((ShapedRecipes) recipe).recipeItems instanceof ItemStack[])
+					} else if (recipe instanceof ShapedRecipes)
 					{
 						components = ((ShapedRecipes) recipe).recipeItems;
 					}

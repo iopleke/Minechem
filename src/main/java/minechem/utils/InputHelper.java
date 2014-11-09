@@ -66,7 +66,7 @@ public class InputHelper
 
 	public static FluidStack[] toFluids(IIngredient[] input)
 	{
-		return toFluids((IItemStack[]) input);
+		return toFluids(input);
 	}
 
 	public static FluidStack[] toFluids(ILiquidStack[] iStack)
@@ -108,7 +108,7 @@ public class InputHelper
 		{
 			ItemStack result = OreDictionary.getOres(((IOreDictEntry) input).getName()).get(0).copy();
 			result.stackSize = ((IOreDictEntry) input).getAmount();
-			if (MinechemHelper.itemStackToChemical(result) != null)
+			if (MinechemUtil.itemStackToChemical(result) != null)
 			{
 				return null;
 			}
@@ -117,14 +117,14 @@ public class InputHelper
 		{
 			ItemStack result = toStack(((IngredientStack) input).getItems().get(0));
 			result.stackSize = ((IngredientStack) input).getAmount();
-			if (MinechemHelper.itemStackToChemical(result) != null)
+			if (MinechemUtil.itemStackToChemical(result) != null)
 			{
 				return null;
 			}
 			return result;
 		} else if (input instanceof IItemStack)
 		{
-			if (MinechemHelper.itemStackToChemical(toStack((IItemStack) input)) != null)
+			if (MinechemUtil.itemStackToChemical(toStack((IItemStack) input)) != null)
 			{
 				return null;
 			}
@@ -196,7 +196,7 @@ public class InputHelper
 				{
 					ItemStack result = toStack((IItemStack) in);
 					result.stackSize = Math.max(1, ((IngredientStack) ingredient).getAmount());
-					PotionChemical chemical = MinechemHelper.itemStackToChemical(result);
+					PotionChemical chemical = MinechemUtil.itemStackToChemical(result);
 					if (chemical != null)
 					{
 						return chemical;
@@ -212,7 +212,7 @@ public class InputHelper
 			{
 				ItemStack result = res.copy();
 				result.stackSize = ((IOreDictEntry) ingredient).getAmount();
-				PotionChemical chemical = MinechemHelper.itemStackToChemical(result);
+				PotionChemical chemical = MinechemUtil.itemStackToChemical(result);
 				if (chemical != null)
 				{
 					return chemical;
@@ -221,7 +221,7 @@ public class InputHelper
 
 		} else if (ingredient instanceof IItemStack)
 		{
-			return MinechemHelper.itemStackToChemical(toStack((IItemStack) ingredient));
+			return MinechemUtil.itemStackToChemical(toStack((IItemStack) ingredient));
 		}
 		return null;
 	}

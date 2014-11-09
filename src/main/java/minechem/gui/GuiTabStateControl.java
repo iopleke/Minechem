@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.reference.Resources;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -13,11 +13,11 @@ public abstract class GuiTabStateControl extends GuiTab
 {
 	protected enum TabState
 	{
-		jammed(MinechemHelper.getLocalString("tab.tooltip.jammed"), 0xAA0000, Resources.Icon.JAMMED),
-		noBottles(MinechemHelper.getLocalString("tab.tooltip.nobottles"), 0xAA0000, Resources.Icon.NO_BOTTLES),
-		powered(MinechemHelper.getLocalString("tab.tooltip.powered"), 0x00CC00, Resources.Icon.ENERGY),
-		unpowered(MinechemHelper.getLocalString("tab.tooltip.unpowered"), 0xAA0000, Resources.Icon.NO_ENERGY),
-		norecipe(MinechemHelper.getLocalString("tab.tooltip.norecipe"), 0xAA0000, Resources.Icon.NO_RECIPE);
+		jammed(MinechemUtil.getLocalString("tab.tooltip.jammed"), 0xAA0000, Resources.Icon.JAMMED),
+		noBottles(MinechemUtil.getLocalString("tab.tooltip.nobottles"), 0xAA0000, Resources.Icon.NO_BOTTLES),
+		powered(MinechemUtil.getLocalString("tab.tooltip.powered"), 0x00CC00, Resources.Icon.ENERGY),
+		unpowered(MinechemUtil.getLocalString("tab.tooltip.unpowered"), 0xAA0000, Resources.Icon.NO_ENERGY),
+		norecipe(MinechemUtil.getLocalString("tab.tooltip.norecipe"), 0xAA0000, Resources.Icon.NO_RECIPE);
 
 		public String tooltip;
 		public int color;
@@ -63,15 +63,15 @@ public abstract class GuiTabStateControl extends GuiTab
 		}
 
 		// State
-		fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString(this.state.tooltip), x + 22, y + 10, headerColour);
+		fontRenderer.drawStringWithShadow(MinechemUtil.getLocalString(this.state.tooltip), x + 22, y + 10, headerColour);
 
 		// Amount of power stored.
-		fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.stored") + ":", x + 5, y + 30, subheaderColour);
+		fontRenderer.drawStringWithShadow(MinechemUtil.getLocalString("tab.title.stored") + ":", x + 5, y + 30, subheaderColour);
 		String print = String.valueOf(tileEntity.getEnergyStored()) + " RF ("
 				+ String.valueOf(tileEntity.getPowerRemainingScaled(100)) + "%)";
 		fontRenderer.drawString(print, x + 5, y + 40, textColour);
 
-		fontRenderer.drawStringWithShadow(MinechemHelper.getLocalString("tab.title.activationEnergy"), x + 5, y + 60, subheaderColour);
+		fontRenderer.drawStringWithShadow(MinechemUtil.getLocalString("tab.title.activationEnergy"), x + 5, y + 60, subheaderColour);
 		fontRenderer.drawString(String.valueOf(tileEntity.getEnergyNeeded()) + " RF", x + 5, y + 70, textColour);
 	}
 

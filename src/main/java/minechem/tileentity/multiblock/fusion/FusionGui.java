@@ -3,7 +3,7 @@ package minechem.tileentity.multiblock.fusion;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
@@ -27,14 +27,14 @@ public class FusionGui extends GuiContainerTabbed
 		this.storedEnergy = this.fusion.getEnergyStored();
 		this.maxEnergy = fusion.getMaxEnergyStored();
 		addTab(new FusionTabStateControl(this, fusion));
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fusion")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.fusion")));
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		super.drawGuiContainerForegroundLayer(par1, par2);
-		String info = MinechemHelper.getLocalString("block.fusionReactor.name");
+		String info = MinechemUtil.getLocalString("block.fusionReactor.name");
 		int infoWidth = fontRendererObj.getStringWidth(info);
 		fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
 	}

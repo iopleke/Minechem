@@ -3,7 +3,7 @@ package minechem.tileentity.synthesis;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
@@ -18,14 +18,14 @@ public class SynthesisGui extends GuiContainerTabbed
 		this.xSize = guiWidth;
 		this.ySize = guiHeight;
 		addTab(new SynthesisTabStateControl(this, synthesis));
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.synthesis")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.synthesis")));
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		super.drawGuiContainerForegroundLayer(par1, par2);
-		String info = MinechemHelper.getLocalString("gui.title.synthesis");
+		String info = MinechemUtil.getLocalString("gui.title.synthesis");
 		int infoWidth = fontRendererObj.getStringWidth(info);
 		fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
 	}

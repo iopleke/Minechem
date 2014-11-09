@@ -3,7 +3,7 @@ package minechem.tileentity.leadedchest;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
@@ -17,14 +17,14 @@ public class LeadedChestGui extends GuiContainerTabbed
 	{
 		super(new LeadedChestContainer(inventoryPlayer, leadedChest));
 		this.leadedchest = leadedChest;
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.leadChest")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.leadChest")));
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		super.drawGuiContainerForegroundLayer(par1, par2);
-		String info = MinechemHelper.getLocalString("gui.title.leadedchest");
+		String info = MinechemUtil.getLocalString("gui.title.leadedchest");
 		int infoWidth = this.fontRendererObj.getStringWidth(info);
 		this.fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
 	}

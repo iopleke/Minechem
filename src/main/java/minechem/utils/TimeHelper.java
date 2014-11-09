@@ -6,12 +6,12 @@ public class TimeHelper
 	{
 		if (ticks < 0)
 		{
-			return MinechemHelper.getLocalString("minechem.unstable");
+			return MinechemUtil.getLocalString("minechem.unstable");
 		}
 		String timeLeft = "";
-		String hourabbr = MinechemHelper.getLocalString("minechem.hour.abbr");
-		String minabbr = MinechemHelper.getLocalString("minechem.min.abbr");
-		String secabbr = MinechemHelper.getLocalString("minechem.sec.abbr");
+		String hourabbr = MinechemUtil.getLocalString("minechem.hour.abbr");
+		String minabbr = MinechemUtil.getLocalString("minechem.min.abbr");
+		String secabbr = MinechemUtil.getLocalString("minechem.sec.abbr");
 
 		if (ticks < Constants.TICKS_PER_DAY)
 		{

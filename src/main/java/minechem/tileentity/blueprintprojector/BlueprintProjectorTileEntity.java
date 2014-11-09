@@ -14,7 +14,7 @@ import minechem.tileentity.prefab.MinechemTileEntity;
 import minechem.tileentity.prefab.TileEntityProxy;
 import minechem.utils.LocalPosition;
 import minechem.utils.LocalPosition.Pos3;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
@@ -54,7 +54,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 	private void projectBlueprint()
 	{
 		int facing = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		ForgeDirection direction = MinechemHelper.getDirectionFromFacing(facing);
+		ForgeDirection direction = MinechemUtil.getDirectionFromFacing(facing);
 		LocalPosition position = new LocalPosition(xCoord, yCoord, zCoord, direction);
 		position.moveForwards(blueprint.zSize + 1);
 		position.moveLeft(Math.floor(blueprint.xSize / 2));
@@ -239,7 +239,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 			return;
 		}
 		int facing = worldObj.getBlockMetadata(xCoord, yCoord, zCoord);
-		ForgeDirection direction = MinechemHelper.getDirectionFromFacing(facing);
+		ForgeDirection direction = MinechemUtil.getDirectionFromFacing(facing);
 		LocalPosition position = new LocalPosition(xCoord, yCoord, zCoord, direction);
 		position.moveForwards(blueprint.zSize + 1);
 		position.moveLeft(Math.floor(blueprint.xSize / 2));

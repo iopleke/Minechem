@@ -2,7 +2,7 @@ package minechem.tileentity.synthesis;
 
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 
@@ -55,7 +55,7 @@ public class SynthesisRecipeHandler
 	private boolean itemStacksMatchesShapelessRecipe(ItemStack[] stacks, SynthesisRecipe recipe, int factor)
 	{
 		ArrayList<ItemStack> stacksList = new ArrayList<ItemStack>();
-		ArrayList<ItemStack> shapelessRecipe = MinechemHelper.convertChemicalsIntoItemStacks(new ArrayList<PotionChemical>(Arrays.asList(recipe.getShapelessRecipe())));
+		ArrayList<ItemStack> shapelessRecipe = MinechemUtil.convertChemicalsIntoItemStacks(new ArrayList<PotionChemical>(Arrays.asList(recipe.getShapelessRecipe())));
 		for (ItemStack itemstack : stacks)
 		{
 			if (itemstack != null)
@@ -90,7 +90,7 @@ public class SynthesisRecipeHandler
 			{
 				return false;
 			}
-			if (!MinechemHelper.itemStackMatchesChemical(stacks[i], chemicals[i], factor) || stacks[i].stackSize!=chemicals[i].amount)
+			if (!MinechemUtil.itemStackMatchesChemical(stacks[i], chemicals[i], factor) || stacks[i].stackSize!=chemicals[i].amount)
 			{
 				return false;
 			}

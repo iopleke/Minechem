@@ -5,7 +5,7 @@
 // - ZeuX
 package minechem.tileentity.synthesis;
 
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 
@@ -160,7 +160,7 @@ public class SynthesisModel extends ModelBase
 		{
 			float time = end - start;
 			float horizontalTimer = timer - start;
-			float newX = MinechemHelper.translateValue(horizontalTimer, 0.0F, time, xStart, xEnd);
+			float newX = MinechemUtil.translateValue(horizontalTimer, 0.0F, time, xStart, xEnd);
 			toparm.rotationPointX = newX;
 			bottomarm.rotationPointX = newX;
 		}
@@ -172,7 +172,7 @@ public class SynthesisModel extends ModelBase
 		{
 			float time = end - start;
 			float verticalTimer = timer - start;
-			float newY = MinechemHelper.translateValue(verticalTimer, 0.0F, time, yStart, yEnd);
+			float newY = MinechemUtil.translateValue(verticalTimer, 0.0F, time, yStart, yEnd);
 			bottomarm.rotationPointY = newY;
 		}
 	}
