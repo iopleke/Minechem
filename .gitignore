@@ -22,7 +22,7 @@ natives/
 .gradle/
 build/
 gradle/
-gradlew/
+gradlew
 out/
 output/
 run/
