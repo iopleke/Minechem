@@ -70,13 +70,13 @@ public class ElementItem extends Item
     public static String getShortName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).name() : MinechemHelper.getLocalString("element.empty");
+        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).name() : MinechemUtil.getLocalString("element.empty");
     }
 
     public static String getLongName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        String longName = atomicNumber < ElementEnum.heaviestMass ? MinechemHelper.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName()) : MinechemHelper.getLocalString("element.empty");
+        String longName = atomicNumber < ElementEnum.heaviestMass ? MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName()) : MinechemUtil.getLocalString("element.empty");
         if (longName.contains("Element."))
         {
             ElementEnum element = ElementEnum.getByID(atomicNumber);
@@ -88,13 +88,13 @@ public class ElementItem extends Item
     public static String getClassification(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).classification().descriptiveName() : MinechemHelper.getLocalString("element.empty");
+        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).classification().descriptiveName() : MinechemUtil.getLocalString("element.empty");
     }
 
     public static String getRoomState(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).roomState().descriptiveName() : MinechemHelper.getLocalString("element.empty");
+        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).roomState().descriptiveName() : MinechemUtil.getLocalString("element.empty");
     }
 
     public static ElementEnum getElement(ItemStack itemstack)
@@ -179,7 +179,7 @@ public class ElementItem extends Item
                 break;
         }
 
-        String radioactiveName = MinechemHelper.getLocalString("element.property." + radioactivity.name());
+        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
         String timeLeft = "";
         if (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
         {
@@ -207,7 +207,7 @@ public class ElementItem extends Item
 
             } else
             {
-                list.add(EnumColor.DARK_GREEN + MinechemHelper.getLocalString("polytool.information"));
+                list.add(EnumColor.DARK_GREEN + MinechemUtil.getLocalString("polytool.information"));
             }
         }
 

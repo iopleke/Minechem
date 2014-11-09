@@ -312,7 +312,7 @@ public class MoleculeEnum extends MinechemChemicalType
 	{
 		addMapping(molecule);
 		ArrayList<PotionChemical> var5 = molecule.components();
-		PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
+		PotionChemical[] var6 = var5.toArray(new PotionChemical[var5.size()]);
 		ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
 		DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
 		SynthesisRecipe.add(new SynthesisRecipe(var7, true, MinechemRecipes.COST_ITEM, var6));

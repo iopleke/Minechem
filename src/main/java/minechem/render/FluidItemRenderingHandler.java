@@ -21,33 +21,29 @@ public class FluidItemRenderingHandler implements IItemRenderer
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
 	{
-		if (type == ItemRenderType.INVENTORY)
+		switch(type)
 		{
-			return true;
+			case ENTITY:
+			case EQUIPPED:
+			case EQUIPPED_FIRST_PERSON:
+			case INVENTORY:
+				return true;
+			default:
+				return false;
 		}
-		if (type == ItemRenderType.EQUIPPED)
-		{
-			return true;
-		}
-		if (type == ItemRenderType.ENTITY)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
 	{
-		if (helper == ItemRendererHelper.ENTITY_BOBBING)
+		switch (helper)
 		{
-			return true;
+			case ENTITY_BOBBING:
+			case ENTITY_ROTATION:
+				return true;
+			default:
+				return false;
 		}
-		if (helper == ItemRendererHelper.ENTITY_ROTATION)
-		{
-			return true;
-		}
-		return false;
 	}
 
 	@Override
@@ -69,6 +65,7 @@ public class FluidItemRenderingHandler implements IItemRenderer
 			case INVENTORY:
 				RenderingUtil.drawTexturedRectUV(0, 0, 0, 16, 16, icon);
 				break;
+			case EQUIPPED_FIRST_PERSON:
 			case EQUIPPED:
 				ItemRenderer.renderItemIn2D(Tessellator.instance, icon.getMaxU(), icon.getMinV(), icon.getMinU(), icon.getMaxV(), icon.getIconWidth(), icon.getIconHeight(), 0.0625F);
 				break;

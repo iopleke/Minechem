@@ -4,7 +4,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.gui.CreativeTabMinechem;
 import minechem.reference.Textures;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
@@ -41,7 +41,7 @@ public class OpticalMicroscopeLens extends Item
 	public String getItemStackDisplayName(ItemStack itemStack)
 	{
 		int metadata = itemStack.getItemDamage();
-		return MinechemHelper.getLocalString(descriptiveNames[metadata]);
+		return MinechemUtil.getLocalString(descriptiveNames[metadata]);
 	}
 
 	@Override

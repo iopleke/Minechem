@@ -7,7 +7,6 @@ import minechem.MinechemItemsRegistration;
 import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.ElementEnum;
-import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.item.ItemStack;
 import cpw.mods.fml.common.IFuelHandler;

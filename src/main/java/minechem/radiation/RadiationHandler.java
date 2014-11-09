@@ -13,7 +13,7 @@ import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.TimeHelper;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
@@ -193,7 +193,7 @@ public class RadiationHandler
 			return ElementItem.getLongName(stack);
 		} else if (item == MinechemItemsRegistration.molecule)
 		{
-			return MinechemHelper.getLocalString(MoleculeItem.getMolecule(stack).getUnlocalizedName());
+			return MinechemUtil.getLocalString(MoleculeItem.getMolecule(stack).getUnlocalizedName());
 		}
 		return "null";
 	}

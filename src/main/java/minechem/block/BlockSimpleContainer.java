@@ -1,21 +1,17 @@
 package minechem.block;
 
+import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 import java.util.ArrayList;
-import java.util.Random;
 
 public abstract class BlockSimpleContainer extends BlockContainer
 {
-
-	private static final Random random = new Random();
 
 	protected BlockSimpleContainer(Material material)
 	{
@@ -36,28 +32,7 @@ public abstract class BlockSimpleContainer extends BlockContainer
 			addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
 			for (ItemStack itemstack : droppedStacks)
 			{
-				float randomX = random.nextFloat() * 0.8F + 0.1F;
-				float randomY = random.nextFloat() * 0.8F + 0.1F;
-				float randomZ = random.nextFloat() * 0.8F + 0.1F;
-				while (itemstack.stackSize > 0)
-				{
-					int randomN = random.nextInt(21) + 10;
-					if (randomN > itemstack.stackSize)
-					{
-						randomN = itemstack.stackSize;
-					}
-					itemstack.stackSize -= randomN;
-					ItemStack droppedStack = new ItemStack(itemstack.getItem(), randomN, itemstack.getItemDamage());
-					// Copy NBT tag data, needed to preserve Chemist Journal
-					// contents (for example).
-					if (itemstack.hasTagCompound())
-					{
-						droppedStack.setTagCompound((NBTTagCompound) itemstack.getTagCompound().copy());
-					}
-
-					EntityItem droppedEntityItem = new EntityItem(world, x + randomX, y + randomY, z + randomZ, droppedStack);
-					world.spawnEntityInWorld(droppedEntityItem);
-				}
+				MinechemUtil.throwItemStack(world, itemstack, x, y, z);
 			}
 			super.breakBlock(world, x, y, z, block, metaData);
 		}

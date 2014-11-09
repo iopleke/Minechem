@@ -174,7 +174,7 @@ public class ChemicalFluidReactionHandler
 			return;
 		}
 
-		if (output.explosionLevel != Float.NaN)
+		if (!Float.isNaN(output.explosionLevel))
 		{
 			world.createExplosion(null, x, y, z, output.explosionLevel, true);
 		}

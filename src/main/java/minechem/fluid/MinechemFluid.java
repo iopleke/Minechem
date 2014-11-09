@@ -5,7 +5,6 @@ import minechem.item.MinechemChemicalType;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
-import net.minecraftforge.fluids.FluidStack;
 
 abstract public class MinechemFluid extends Fluid
 {

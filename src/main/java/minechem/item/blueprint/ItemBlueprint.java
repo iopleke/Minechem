@@ -5,7 +5,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minechem.MinechemItemsRegistration;
 import minechem.gui.CreativeTabMinechem;
 import minechem.reference.Textures;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -70,7 +70,7 @@ public class ItemBlueprint extends Item
 	public String getItemStackDisplayName(ItemStack itemstack)
 	{
 		int metadata = itemstack.getItemDamage();
-		return MinechemHelper.getLocalString(names[metadata]);
+		return MinechemUtil.getLocalString(names[metadata]);
 	}
 
 	@Override

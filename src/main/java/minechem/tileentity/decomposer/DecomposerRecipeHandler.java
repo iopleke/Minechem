@@ -1,7 +1,7 @@
 package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -63,7 +63,7 @@ public class DecomposerRecipeHandler
 		DecomposerRecipe recipe = getRecipe(input);
 		if (recipe != null)
 		{
-			ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(recipe.getOutput());
+			ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutput());
 			return stacks;
 		}
 		return null;
@@ -75,7 +75,7 @@ public class DecomposerRecipeHandler
 		if (fluidRecipe != null)
 		{
 
-			ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());
+			ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());
 			return stacks;
 		}
 		return null;

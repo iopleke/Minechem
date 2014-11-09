@@ -9,7 +9,7 @@ import minechem.network.MessageHandler;
 import minechem.network.message.FissionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
 import minechem.tileentity.prefab.BoundedInventory;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.SafeTimeTracker;
 import minechem.utils.Transactor;
 import net.minecraft.entity.player.EntityPlayer;
@@ -202,7 +202,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 	public void writeToNBT(NBTTagCompound nbtTagCompound)
 	{
 		super.writeToNBT(nbtTagCompound);
-		NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
+		NBTTagList inventoryTagList = MinechemUtil.writeItemStackArrayToTagList(inventory);
 		nbtTagCompound.setTag("inventory", inventoryTagList);
 	}
 
@@ -211,7 +211,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 	{
 		super.readFromNBT(nbtTagCompound);
 		inventory = new ItemStack[getSizeInventory()];
-		MinechemHelper.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND), inventory);
+		MinechemUtil.readTagListToItemStackArray(nbtTagCompound.getTagList("inventory", net.minecraftforge.common.util.Constants.NBT.TAG_COMPOUND), inventory);
 	}
 
 	@Override

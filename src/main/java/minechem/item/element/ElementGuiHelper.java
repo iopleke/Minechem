@@ -1,7 +1,6 @@
 package minechem.item.element;
 
 import minechem.item.polytool.PolytoolGui;
-import net.minecraft.item.ItemStack;
 
 public class ElementGuiHelper
 {
@@ -22,7 +21,7 @@ public class ElementGuiHelper
 		radians += .01;
 		double rad = radians;
 		// if(ticks>120){
-		gui.drawItemStack((ItemStack) ElementItem.createStackOf(element, 1), (int) (80 + Math.sin(rad) * dist), (int) (42 + Math.cos(rad) * dist), "");
+		gui.drawItemStack(ElementItem.createStackOf(element, 1), (int) (80 + Math.sin(rad) * dist), (int) (42 + Math.cos(rad) * dist), "");
 		/* }else{ radians+=.04; int originX=88; int originY=50; int targetX=(int) (originX+(Math.sin(radians)*dist)); int targetY=(int) (originY+(Math.cos(radians)*dist));
 		 *
 		 * int progressX=(int) (originX+((ticks/120)*(targetX-originX))); int progressY=(int) (originY+((ticks/120)*(targetY-originY))); gui.drawItemStack((ItemStack) ItemElement.createStackOf(element,1), progressX, progressX, ""); } */

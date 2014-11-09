@@ -10,7 +10,7 @@ import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.Compare;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Transactor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
@@ -242,7 +242,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 				ArrayList<PotionChemical> output = recipe.getOutput();
 				if (output != null)
 				{
-					ArrayList<ItemStack> stacks = MinechemHelper.convertChemicalsIntoItemStacks(output);
+					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(output);
 					placeStacksInBuffer(stacks);
 				}
 			}
@@ -524,8 +524,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 		NBTTagList buffer = nbt.getTagList("buffer", Constants.NBT.TAG_COMPOUND);
 
-		outputBuffer = MinechemHelper.readTagListToItemStackList(buffer);
-		inventory = MinechemHelper.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
+		outputBuffer = MinechemUtil.readTagListToItemStackList(buffer);
+		inventory = MinechemUtil.readTagListToItemStackArray(inventoryTagList, new ItemStack[getSizeInventory()]);
 
 		if (nbt.getTag("activeStack") != null)
 		{
@@ -636,9 +636,9 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 		super.writeToNBT(nbt);
 
-		NBTTagList inventoryTagList = MinechemHelper.writeItemStackArrayToTagList(inventory);
+		NBTTagList inventoryTagList = MinechemUtil.writeItemStackArrayToTagList(inventory);
 
-		NBTTagList buffer = MinechemHelper.writeItemStackListToTagList(outputBuffer);
+		NBTTagList buffer = MinechemUtil.writeItemStackListToTagList(outputBuffer);
 
 		nbt.setTag("inventory", inventoryTagList);
 

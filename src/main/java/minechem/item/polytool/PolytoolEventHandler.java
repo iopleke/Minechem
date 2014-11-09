@@ -6,7 +6,7 @@ import java.util.Iterator;
 import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityEnderman;
@@ -106,7 +106,7 @@ public class PolytoolEventHandler
 							while (item.stackSize > 0)
 							{
 								// Always avoid chances
-								ArrayList items = MinechemHelper.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).getOutput());
+								ArrayList items = MinechemUtil.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).getOutput());
 
 								// ArrayList items=DecomposerRecipeHandler.instance.getRecipeOutputForInput(item);
 								if (items != null)

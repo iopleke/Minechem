@@ -24,7 +24,7 @@ import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
 import minechem.utils.Compare;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import minechem.utils.TimeHelper;
 import minechem.utils.WorldTimer;
 import net.minecraft.init.Items;
@@ -268,7 +268,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
         			{
         				PotionChemical chemical = chemicals.get(i);
         				HashMap<String,Object> chemMap = new HashMap<String,Object>();
-        				chemMap.put("chemical",MinechemHelper.getChemicalName(chemical));
+        				chemMap.put("chemical",MinechemUtil.getChemicalName(chemical));
         				chemMap.put("quantity",chemical.amount);
         				map.put(i+1, chemMap);
         			}

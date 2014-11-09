@@ -3,7 +3,7 @@ package minechem.tileentity.multiblock.fission;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import org.lwjgl.opengl.GL11;
@@ -22,14 +22,14 @@ public class FissionGui extends GuiContainerTabbed
 	{
 		super(new FissionContainer(inventoryPlayer, fission));
 		addTab(new FissionTabStateControl(this, fission));
-		addTab(new GuiTabHelp(this, MinechemHelper.getLocalString("help.fission")));
+		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.fission")));
 	}
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int par1, int par2)
 	{
 		super.drawGuiContainerForegroundLayer(par1, par2);
-		String info = MinechemHelper.getLocalString("block.fissionReactor.name");
+		String info = MinechemUtil.getLocalString("block.fissionReactor.name");
 		int infoWidth = fontRendererObj.getStringWidth(info);
 		fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
 	}

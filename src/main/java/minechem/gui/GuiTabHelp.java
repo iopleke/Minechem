@@ -1,7 +1,7 @@
 package minechem.gui;
 
 import minechem.reference.Resources;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
@@ -16,7 +16,7 @@ public class GuiTabHelp extends GuiTab
 		this.helpString = helpString;
 		this.maxWidth = 120;
 		this.stringWidth = this.maxWidth - 10;
-		this.maxHeight = MinechemHelper.getSplitStringHeight(fontRenderer, helpString, this.stringWidth) + 20;
+		this.maxHeight = MinechemUtil.getSplitStringHeight(fontRenderer, helpString, this.stringWidth) + 20;
 		this.overlayColor = 0x88BBBB;
 	}
 
@@ -37,7 +37,7 @@ public class GuiTabHelp extends GuiTab
 	{
 		if (!isOpen())
 		{
-			String localizedTooltip = MinechemHelper.getLocalString("tab.tooltip.help");
+			String localizedTooltip = MinechemUtil.getLocalString("tab.tooltip.help");
 			if (localizedTooltip == "tab.tooltip.help" || localizedTooltip.isEmpty())
 			{
 				return "Help";

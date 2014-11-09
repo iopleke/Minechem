@@ -2,7 +2,7 @@ package minechem.item.element;
 
 import minechem.item.ChemicalRoomStateEnum;
 import minechem.render.RenderingUtil;
-import minechem.utils.MinechemHelper;
+import minechem.utils.MinechemUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;
@@ -62,7 +62,7 @@ public class ElementItemRenderer implements IItemRenderer
 		ElementEnum element = ElementItem.getElement(itemstack);
 		float duration = 1500;
 		float t = (int) (Minecraft.getSystemTime() % duration);
-		int frame = (int) MinechemHelper.translateValue(t, 0, duration, 0, 7);
+		int frame = (int) MinechemUtil.translateValue(t, 0, duration, 0, 7);
 		if (element.roomState() == ChemicalRoomStateEnum.gas)
 		{
 			contentsTex = item.gas[frame];
