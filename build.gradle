@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         mavenCentral()
+		jcenter()
         maven {
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
@@ -12,7 +13,8 @@ buildscript {
         }
     }
     dependencies {
-	classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
+		classpath 'de.undercouch:gradle-download-task:1.1'
     }
 }
 
@@ -21,9 +23,10 @@ apply plugin: 'forge'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
+apply plugin: 'download-task'
 
 ext.buildProps = file "build.properties"
- 
+
 buildProps.withReader {
     def prop = new Properties()
     prop.load(it)
@@ -45,7 +48,7 @@ repositories {
     }
 }
 
-dependencies {    
+dependencies {
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
@@ -57,12 +60,12 @@ archivesBaseName = "Minechem"
 
 minecraft {
     version = "${config.version.minecraft}-${config.version.forge}"
-	
+
     replaceIn "reference/Reference.java"
     replace "@MAJOR@", config.version.mod.major
     replace "@MINOR@", config.version.mod.minor
     replace "@REVIS@", config.version.mod.revis
-	
+
     if (System.getenv("BUILD_NUMBER") != null) {
         replace "@BUILD@", System.getenv("BUILD_NUMBER")
     }
@@ -78,18 +81,18 @@ processResources {
 
 allprojects {
     version = "${config.version.minecraft}-${config.version.mod.major}.${config.version.mod.minor}.${config.version.mod.revis}"
-    
+
     if (System.getenv("BUILD_NUMBER") != null) {
         version += ".${System.getenv("BUILD_NUMBER")}"
     } else {
         version += "-ManuallyBuilt"
     }
-    
+
     jar {
         dependsOn ":copyBuildXml"
         destinationDir = file (rootProject.getRootDir().getPath() + '/output')
     }
-	
+
     publishing {
         publications {
             mavenJava(MavenPublication) {
@@ -103,21 +106,51 @@ allprojects {
         }
     }
 }
- 
+
 task copyBuildXml(type: Copy) {
     from 'build.properties'
     into 'output'
 }
- 
+
 task apiZip(type: Zip) {
     classifier = 'api'
     from sourceSets*.allSource
     include 'minechem/api/**'
     destinationDir = file 'output'
 }
-	
+
+import de.undercouch.gradle.tasks.download.Download
+
+task getLibraries {
+	def libsFolder = new File('lib')
+	if (!libsFolder.isDirectory() ) {
+		libsFolder.mkdirs()
+	}
+
+	def ccSource = 'http://minecraft.curseforge.com/mc-mods/67504-computercraft/files/2216236/download'
+	def ccDest = new File('lib', 'ComputerCraft1.65.jar')
+
+
+	if(!ccDest.exists() ){
+		download {
+			src ccSource
+			dest ccDest
+		}
+	}
+
+	def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-1.7.10-3.0.9B.jar'
+	def mtDest = new File('lib', 'MineTweaker3-Dev-1.7.10-3.0.9.jar')
+
+	if(!mtDest.exists() ){
+		download {
+			src mtSource
+			dest mtDest
+		}
+	}
+}
+
 artifacts {
     archives apiZip
 }
 
-build.dependsOn "apiZip", "copyBuildXml"
+build.dependsOn "apiZip", "copyBuildXml", "getLibraries"
