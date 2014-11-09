@@ -261,32 +261,35 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		{
 			clearRecipeMatrix();
 		}
+
 		if (this.inventory[slot] != null)
 		{
 			ItemStack itemstack;
 			if (slot == kOutput[0])
 			{
 				int toRemove = amount;
+				ItemStack result = getStackInSlot(slot).copy();
 				while (toRemove > 0)
 				{
-					ItemStack result = getStackInSlot(slot).copy();
+
 					if (takeInputStacks())
 					{
-						toRemove -= result.stackSize;
+						toRemove -= 1;
 					} else
 					{
-						if (amount == toRemove)
-						{
-							return null;
-						} else
-						{
-							result.stackSize = (amount - toRemove);
-							return result;
-						}
+						result.stackSize = amount - toRemove;
+						return result;
+					}
+
+					if (toRemove < 1)
+					{
+						result.stackSize = amount;
+						return result;
 					}
 				}
+				return null;
 			}
-			if (this.inventory[slot].stackSize <= amount)
+			else if (this.inventory[slot].stackSize <= amount)
 			{
 				itemstack = this.inventory[slot];
 				this.inventory[slot] = null;
@@ -300,10 +303,8 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 				}
 				return itemstack;
 			}
-		} else
-		{
-			return null;
 		}
+		return null;
 	}
 
 	/**
@@ -426,16 +427,13 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		{
 			if (itemstack == null)
 			{
-				this.decrStackSize(slot, getStackInSlot(slot).stackSize);
+				this.decrStackSize(slot, 1);
 				return;
 			}
 			if (getStackInSlot(slot).getItem() == itemstack.getItem())
 			{
-				if (getStackInSlot(slot).stackSize > itemstack.stackSize)
-				{
-					this.decrStackSize(slot, getStackInSlot(slot).stackSize - itemstack.stackSize);
-					return;
-				}
+				this.decrStackSize(slot, itemstack.stackSize);
+				return;
 			}
 		}
 
@@ -703,20 +701,13 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
 	{
-		if (Settings.AllowAutomation && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule))
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+		return Settings.AllowAutomation && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule);
 	}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 	{
-        if (!canTakeOutputStack(false)) return false;
-		return Settings.AllowAutomation && canTakeOutputStack(true) && side == 0;
+		return Settings.AllowAutomation && canTakeOutputStack(false) && side == 0;
 	}
 
 	public String getState() {
