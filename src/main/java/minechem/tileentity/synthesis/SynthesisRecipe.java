@@ -98,15 +98,12 @@ public class SynthesisRecipe
         this.isShaped = isShaped;
         this.energyCost = energyCost;
         if (isShaped) this.shapedRecipe = recipe;
-        else
-        {
-            this.unshapedRecipe = new ArrayList<PotionChemical>();
-            for (PotionChemical chemical : recipe)
-            {
-                if (chemical != null)
-                    unshapedRecipe.add(chemical);
-            }
-        }
+		this.unshapedRecipe = new ArrayList<PotionChemical>();
+		for (PotionChemical chemical : recipe)
+		{
+			if (chemical != null)
+				unshapedRecipe.add(chemical);
+		}
     }
 
     public SynthesisRecipe(ItemStack output, boolean shaped, int energyCost, ArrayList<PotionChemical> recipe)
@@ -115,7 +112,7 @@ public class SynthesisRecipe
         this.isShaped = shaped;
         this.energyCost = energyCost;
         if (shaped) this.shapedRecipe = recipe.toArray(new PotionChemical[recipe.size()]);
-        else this.unshapedRecipe = recipe;
+        this.unshapedRecipe = recipe;
     }
 
 	public ItemStack getOutput()
