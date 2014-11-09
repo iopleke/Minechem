@@ -9,15 +9,21 @@ import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
+import minechem.item.element.ElementItem;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PotionChemical;
+import minechem.radiation.RadiationEnum;
+import minechem.radiation.RadiationFluidTileEntity;
+import minechem.radiation.RadiationHandler;
+import minechem.radiation.RadiationInfo;
 import minechem.reference.Reference;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.block.Block;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
@@ -68,8 +74,15 @@ public class MinechemBucketHandler
 
         if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
         {
+            ItemStack stack=new ItemStack(bucket);
+            TileEntity tile=world.getTileEntity(pos.blockX, pos.blockY, pos.blockZ);
+            RadiationEnum radiation=((MinechemBucketItem)bucket).chemical.radioactivity();
+            if (tile!=null&&radiation!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity&&((RadiationFluidTileEntity)tile).info!=null)
+            {
+            	RadiationInfo.setRadiationInfo(((RadiationFluidTileEntity)tile).info, stack);
+            }
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
-            return new ItemStack(bucket);
+            return stack;
         } else
         {
             return null;
