@@ -375,6 +375,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	 */
 	public boolean hasEnoughPowerForCurrentRecipe()
 	{
+		if (!Settings.powerUseEnabled) return true;
 		if (this.currentRecipe != null)
 		{
 			return canAffordRecipe(this.currentRecipe);
@@ -558,12 +559,14 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		if (activeItem != null)
 		{
 			SynthesisRecipe recipe = SynthesisRecipeHandler.instance.getRecipeFromOutput(activeItem);
-			setRecipe(recipe);
+			if (recipe!=null)
+				setRecipe(recipe);
 		}
 	}
 
 	private boolean takeStackFromStorage(ItemStack ingredient, ItemStack[] storage)
 	{
+		if (ingredient==null) return true;
 		int ingredientAmountLeft = ingredient.stackSize;
 		for (int slot = 0; slot < storage.length; slot++)
 		{
