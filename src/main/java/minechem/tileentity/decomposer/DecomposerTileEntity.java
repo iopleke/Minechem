@@ -242,7 +242,12 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 				ArrayList<PotionChemical> output = recipe.getOutput();
 				if (output != null)
 				{
-					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(output);
+					double mult = 1.0D;
+					if (inputStack.getTagCompound().hasKey("damage",3))
+						mult-=((double)inputStack.getTagCompound().getInteger("damage"))/100D;
+					else if (inputStack.getTagCompound().hasKey("broken", 1))
+						if (inputStack.getTagCompound().getBoolean("broken")) mult = 0D;
+					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(getBrokenOutput(output,mult));
 					placeStacksInBuffer(stacks);
 				}
 			}
@@ -253,6 +258,20 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			// silently this fails
 		}
 
+	}
+
+	private ArrayList<PotionChemical> getBrokenOutput(ArrayList<PotionChemical> output, double mult)
+	{
+		if (mult==1) return output;
+		if (mult==0) return new ArrayList<PotionChemical>();
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		for (PotionChemical chemical: output)
+		{
+			PotionChemical addChemical = chemical.copy();
+			addChemical.amount*=mult;
+			result.add(addChemical);
+		}
+		return result;
 	}
 
 	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack)
