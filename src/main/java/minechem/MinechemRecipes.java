@@ -2444,7 +2444,7 @@ public class MinechemRecipes
 		DecomposerRecipe.createAndAddRecipeSafely("ingotSilver", this.element(ElementEnum.Ag, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotLead", this.element(ElementEnum.Pb, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotPlatinum", this.element(ElementEnum.Pt, 16));
-		DecomposerRecipe.createAndAddRecipeSafely("ingotAluminium", this.element(ElementEnum.Au, 16));
+		DecomposerRecipe.createAndAddRecipeSafely("ingotAluminium", this.element(ElementEnum.Al, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotMagnesium", this.element(ElementEnum.Mg, 16));
 		DecomposerRecipe.createAndAddRecipeSafely("ingotSteel", new PotionChemical[]
 		{

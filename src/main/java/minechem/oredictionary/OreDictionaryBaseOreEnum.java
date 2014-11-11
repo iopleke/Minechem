@@ -9,13 +9,14 @@ import minechem.potion.PotionChemical;
 public enum OreDictionaryBaseOreEnum
 {
 	iron("Copper", new Element(ElementEnum.Fe, 16)),
-	gold("Tin", new Element(ElementEnum.Au, 16)),
+	gold("Gold", new Element(ElementEnum.Au, 16)),
 	copper("Copper", new Element(ElementEnum.Cu, 16)),
 	tin("Tin", new Element(ElementEnum.Sn, 16)),
 	silver("Silver", new Element(ElementEnum.Ag, 16)),
 	aluminum("Aluminum", new Element(ElementEnum.Al, 16)),
+	aluminium("Aluminium", new Element(ElementEnum.Al, 16)),
 	titanium("Titanium", new Element(ElementEnum.Ti, 16)),
-	chrome("Chrome", new Element(ElementEnum.Al, 16)),
+	chrome("Chrome", new Element(ElementEnum.Cr, 16)),
 	tungsten("Tungsten", new Element(ElementEnum.W, 16)),
 	lead("Lead", new Element(ElementEnum.Pb, 16)),
 	zinc("Zinc", new Element(ElementEnum.Zn, 16)),
