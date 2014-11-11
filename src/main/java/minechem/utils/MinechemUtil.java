@@ -359,7 +359,9 @@ public final class MinechemUtil
 	{
 		Settings.decomposerBlacklist = new ArrayList<ItemStack>();
 		Settings.synthesisBlacklist = new ArrayList<ItemStack>();
-		
+
+		Settings.decomposerBlacklist.add(MinechemItemsRegistration.emptyTube);
+
 		ArrayList<String> registeredItems=new ArrayList<String>();
 		for (Object key:GameData.getItemRegistry().getKeys()){
 			registeredItems.add((String) key);
