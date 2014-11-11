@@ -83,9 +83,9 @@ public class MinechemBucketRenderer implements IItemRenderer
                 ItemRenderer.renderItemIn2D(tessellator, pass.getMaxU(), pass.getMinV(), pass.getMinU(), pass.getMaxV(), pass.getIconWidth(), pass.getIconHeight(), 0.0625F);
                 break;
             case INVENTORY:
-                RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, bucket);
+                RenderingUtil.drawTexturedRectUV(type, 0, 0, 5, 16, 16, bucket);
                 colorFluid(fluid);
-                RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass);
+                RenderingUtil.drawTexturedRectUV(type, 0, 0, 5, 16, 16, pass);
                 break;
             default:
                 break;
