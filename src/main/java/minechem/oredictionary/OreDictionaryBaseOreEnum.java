@@ -8,7 +8,7 @@ import minechem.potion.PotionChemical;
 
 public enum OreDictionaryBaseOreEnum
 {
-	iron("Copper", new Element(ElementEnum.Fe, 16)),
+	iron("Iron", new Element(ElementEnum.Fe, 16)),
 	gold("Gold", new Element(ElementEnum.Au, 16)),
 	copper("Copper", new Element(ElementEnum.Cu, 16)),
 	tin("Tin", new Element(ElementEnum.Sn, 16)),
