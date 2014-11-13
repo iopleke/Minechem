@@ -111,7 +111,7 @@ public class SynthesisRecipe
         this.output = output;
         this.isShaped = shaped;
         this.energyCost = energyCost;
-        if (shaped) this.shapedRecipe = recipe.toArray(new PotionChemical[recipe.size()]);
+        this.shapedRecipe = recipe.toArray(new PotionChemical[recipe.size()]);
         this.unshapedRecipe = recipe;
     }
 
