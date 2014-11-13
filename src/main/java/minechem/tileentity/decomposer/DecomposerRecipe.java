@@ -4,6 +4,7 @@ import java.util.*;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Settings;
+import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
@@ -23,7 +24,7 @@ public class DecomposerRecipe
 	{
 		if (recipe.input != null && recipe.input.getItem() != null)
 		{
-			if (isBlacklisted(recipe.input))
+			if (isBlacklisted(recipe.input) || (recipe.input.getItem() instanceof IDecomposerControl && ((IDecomposerControl)recipe.input.getItem()).getDecomposerMultiplier(recipe.input)==0))
 			{
 				return null;
 			}

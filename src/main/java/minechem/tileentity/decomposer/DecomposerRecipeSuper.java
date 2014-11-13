@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.Map;
 import java.util.Random;
 import minechem.Settings;
+import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
 import minechem.utils.LogHelper;
 import minechem.utils.MinechemUtil;
@@ -27,6 +28,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		{
 			if (component != null && component.getItem() != null)
 			{
+				if (component.getItem() instanceof IDecomposerControl && ((IDecomposerControl)component.getItem()).getDecomposerMultiplier(component) == 0) continue;
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe != null)
 				{
