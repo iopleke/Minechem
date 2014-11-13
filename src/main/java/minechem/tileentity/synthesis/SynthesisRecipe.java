@@ -1,5 +1,6 @@
 package minechem.tileentity.synthesis;
 
+import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemRecord;
@@ -87,9 +88,7 @@ public class SynthesisRecipe
 
 	public static String getKey(ItemStack itemStack)
 	{
-        String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
-        if (itemStack.getItem() instanceof ItemRecord) unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
-		return unlocalizedName + "@" + itemStack.getItemDamage();
+		return GameRegistry.findUniqueIdentifierFor(itemStack.getItem()).toString()+ "@" + itemStack.getItemDamage();
 	}
 
     public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... recipe)

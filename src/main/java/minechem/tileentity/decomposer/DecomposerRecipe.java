@@ -1,9 +1,8 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+
+import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemRecord;
@@ -13,11 +12,11 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
-	public static Map<String, DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
+	public static Map<String, DecomposerRecipe> recipes = new LinkedHashMap<String, DecomposerRecipe>();
 
 	private static final Random rand = new Random();
 	ItemStack input;
-	public Map<PotionChemical, PotionChemical> output = new Hashtable<PotionChemical, PotionChemical>();
+	public Map<PotionChemical, PotionChemical> output = new LinkedHashMap<PotionChemical, PotionChemical>();
 
 	//TODO:Add blacklist support for fluids
 	public static DecomposerRecipe add(DecomposerRecipe recipe)
@@ -63,10 +62,7 @@ public class DecomposerRecipe
 	{
 		if (itemStack != null && itemStack.getItem() != null)
 		{
-			String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
-			if (itemStack.getItem() instanceof ItemRecord)
-				unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
-			return unlocalizedName + "@" + itemStack.getItemDamage();
+			return GameRegistry.findUniqueIdentifierFor(itemStack.getItem()).toString()+ "@" + itemStack.getItemDamage();
 		}
 		return null;
 	}
