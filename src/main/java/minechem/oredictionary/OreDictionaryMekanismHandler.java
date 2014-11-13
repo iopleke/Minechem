@@ -14,12 +14,10 @@ public class OreDictionaryMekanismHandler implements OreDictionaryHandler
 	private static final int OSNIUM = 0;
 	private static final int COPPER = 1;
 	private static final int TIN = 2;
-	private static final int BRONZE = 3;
-	private static final int STEEL = 4;
 
 	private String[] blockTypes = new String[]
 	{
-		"OsniumOre", "CopperOre", "TinOre", "Bronze", "Steel"
+		"Osnium", "Copper", "Tin"
 	};
 
 	private List<String> blockList = Arrays.asList(blockTypes);
@@ -50,17 +48,7 @@ public class OreDictionaryMekanismHandler implements OreDictionaryHandler
 				{
 					new Element(ElementEnum.Sn, 16)
 				});
-			case BRONZE
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-				{
-					new Element(ElementEnum.Cu, 12), new Element(ElementEnum.Sn, 4)
-				});
-			case STEEL
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-				{
-					new Element(ElementEnum.Fe, 14), new Element(ElementEnum.C, 2)
-				});
-		}
+		}	
 	}
 
 }
