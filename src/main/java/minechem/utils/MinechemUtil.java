@@ -524,7 +524,7 @@ public final class MinechemUtil
 
 	public static ItemStack[] convertChemicalArrayIntoItemStackArray(PotionChemical[] chemicals)
 	{
-        if (chemicals == null) return null;
+        if (chemicals == null) return new ItemStack[0];
 
 		ItemStack[] stacks = new ItemStack[chemicals.length];
 		for (int i = 0; i < chemicals.length; i++)

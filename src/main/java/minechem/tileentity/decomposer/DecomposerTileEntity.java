@@ -4,6 +4,7 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import minechem.Settings;
+import minechem.api.IDecomposerControl;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
@@ -242,12 +243,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 				ArrayList<PotionChemical> output = recipe.getOutput();
 				if (output != null)
 				{
-					double mult = 1.0D;
-					if (inputStack.getTagCompound().hasKey("damage",3))
-						mult-=((double)inputStack.getTagCompound().getInteger("damage"))/100D;
-					else if (inputStack.getTagCompound().hasKey("broken", 1))
-						if (inputStack.getTagCompound().getBoolean("broken")) mult = 0D;
-					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(getBrokenOutput(output,mult));
+					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(getBrokenOutput(output,getDecompositionMultiplier(inputStack)));
 					placeStacksInBuffer(stacks);
 				}
 			}
@@ -260,10 +256,20 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	}
 
+	private double getDecompositionMultiplier(ItemStack stack)
+	{
+		if (stack.getItem() instanceof IDecomposerControl) return ((IDecomposerControl)stack.getItem()).getDecomposerMultiplier(stack);
+		else if (stack.getTagCompound().hasKey("damage",3))
+			return 1-((double)stack.getTagCompound().getInteger("damage"))/100D;
+		else if (stack.getTagCompound().hasKey("broken", 1))
+			return stack.getTagCompound().getBoolean("broken")?0.0D:1.0D;
+		return 1.0D;
+	}
+
 	private ArrayList<PotionChemical> getBrokenOutput(ArrayList<PotionChemical> output, double mult)
 	{
 		if (mult==1) return output;
-		if (mult==0) return new ArrayList<PotionChemical>();
+		if (mult<=0) return new ArrayList<PotionChemical>();
 		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
 		for (PotionChemical chemical: output)
 		{
