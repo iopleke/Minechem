@@ -63,7 +63,9 @@ public class DecomposerRecipe
 	{
 		if (itemStack != null && itemStack.getItem() != null)
 		{
-			return GameRegistry.findUniqueIdentifierFor(itemStack.getItem()).toString()+ "@" + itemStack.getItemDamage();
+			GameRegistry.UniqueIdentifier key = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
+			if (key!=null) return key.toString()+ "@" + itemStack.getItemDamage();
+			return itemStack.getItem().getUnlocalizedName(itemStack) +"@" + itemStack.getItemDamage();
 		}
 		return null;
 	}

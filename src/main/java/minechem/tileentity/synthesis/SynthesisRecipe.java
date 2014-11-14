@@ -88,7 +88,13 @@ public class SynthesisRecipe
 
 	public static String getKey(ItemStack itemStack)
 	{
-		return GameRegistry.findUniqueIdentifierFor(itemStack.getItem()).toString()+ "@" + itemStack.getItemDamage();
+		if (itemStack != null && itemStack.getItem() != null)
+		{
+			GameRegistry.UniqueIdentifier key = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
+			if (key!=null) return key.toString()+ "@" + itemStack.getItemDamage();
+			return itemStack.getItem().getUnlocalizedName(itemStack)+ "@" + itemStack.getItemDamage();
+		}
+		return null;
 	}
 
     public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... recipe)
