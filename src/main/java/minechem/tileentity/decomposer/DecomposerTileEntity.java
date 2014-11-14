@@ -259,6 +259,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	private double getDecompositionMultiplier(ItemStack stack)
 	{
 		if (stack.getItem() instanceof IDecomposerControl) return ((IDecomposerControl)stack.getItem()).getDecomposerMultiplier(stack);
+		else if (!stack.hasTagCompound()) return 1.0D;
 		else if (stack.getTagCompound().hasKey("damage",3))
 			return 1-((double)stack.getTagCompound().getInteger("damage"))/100D;
 		else if (stack.getTagCompound().hasKey("broken", 1))
