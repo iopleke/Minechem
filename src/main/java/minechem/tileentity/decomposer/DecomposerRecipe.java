@@ -66,8 +66,12 @@ public class DecomposerRecipe
 		{
 			LogHelper.debug(itemStack.toString());
 			GameRegistry.UniqueIdentifier key = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
-			LogHelper.debug(key.toString());
-			if (key!=null) return key.toString()+ "@" + itemStack.getItemDamage();
+			if (key!=null)
+			{
+				LogHelper.debug(key.toString()+ "@" + itemStack.getItemDamage());
+				return key.toString()+ "@" + itemStack.getItemDamage();
+			}
+			LogHelper.debug(itemStack.getItem().getUnlocalizedName(itemStack) +"@" + itemStack.getItemDamage());
 			return itemStack.getItem().getUnlocalizedName(itemStack) +"@" + itemStack.getItemDamage();
 		}
 		return null;
