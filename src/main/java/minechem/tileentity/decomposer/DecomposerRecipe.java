@@ -2,12 +2,11 @@ package minechem.tileentity.decomposer;
 
 import java.util.*;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Settings;
 import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
 import minechem.utils.LogHelper;
-import net.minecraft.item.ItemRecord;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -65,14 +64,7 @@ public class DecomposerRecipe
 		if (itemStack != null && itemStack.getItem() != null)
 		{
 			LogHelper.debug(itemStack.toString());
-			GameRegistry.UniqueIdentifier key = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
-			if (key!=null)
-			{
-				LogHelper.debug(key.toString()+ "@" + itemStack.getItemDamage());
-				return key.toString()+ "@" + itemStack.getItemDamage();
-			}
-			LogHelper.debug(itemStack.getItem().getUnlocalizedName(itemStack) +"@" + itemStack.getItemDamage());
-			return itemStack.getItem().getUnlocalizedName(itemStack) +"@" + itemStack.getItemDamage();
+			return Item.getIdFromItem(itemStack.getItem()) + ":" + itemStack.getItemDamage();
 		}
 		return null;
 	}
