@@ -1,9 +1,9 @@
 package minechem.tileentity.synthesis;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
-import net.minecraft.item.ItemRecord;
+import minechem.utils.LogHelper;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -90,9 +90,8 @@ public class SynthesisRecipe
 	{
 		if (itemStack != null && itemStack.getItem() != null)
 		{
-			GameRegistry.UniqueIdentifier key = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
-			if (key!=null) return key.toString()+ "@" + itemStack.getItemDamage();
-			return itemStack.getItem().getUnlocalizedName(itemStack)+ "@" + itemStack.getItemDamage();
+			LogHelper.debug(itemStack.toString());
+			return Item.getIdFromItem(itemStack.getItem()) + ":" + itemStack.getItemDamage();
 		}
 		return null;
 	}
