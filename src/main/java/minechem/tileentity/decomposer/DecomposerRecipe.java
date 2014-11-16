@@ -6,6 +6,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Settings;
 import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
+import minechem.utils.LogHelper;
 import net.minecraft.item.ItemRecord;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -63,7 +64,9 @@ public class DecomposerRecipe
 	{
 		if (itemStack != null && itemStack.getItem() != null)
 		{
+			LogHelper.debug(itemStack.toString());
 			GameRegistry.UniqueIdentifier key = GameRegistry.findUniqueIdentifierFor(itemStack.getItem());
+			LogHelper.debug(key.toString());
 			if (key!=null) return key.toString()+ "@" + itemStack.getItemDamage();
 			return itemStack.getItem().getUnlocalizedName(itemStack) +"@" + itemStack.getItemDamage();
 		}
