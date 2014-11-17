@@ -386,6 +386,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			if (getStackInSlot(inputSlots[0]) != null)
 			{
 				activeStack = decrStackSize(inputSlots[0], 1);
+				bufferChanged = true;
 			} else
 			{
 				return null;
