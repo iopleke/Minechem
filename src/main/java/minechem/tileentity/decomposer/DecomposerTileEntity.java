@@ -662,9 +662,10 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	public void updateStateHandler()
 	{
-		if (state!=oldState)
+		if (state!=oldState || oldEnergyStored != getEnergyStored())
 		{
 			oldState=state;
+			oldEnergyStored = getEnergyStored();
 			// Notify minecraft that the inventory items in this machine have changed.
 			DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
 			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));

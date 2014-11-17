@@ -134,8 +134,6 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	 */
 	private final Transactor journalTransactor = new Transactor(journalInventory, 1);
 
-	private int oldEnergyStored = 0;
-
 	public SynthesisTileEntity()
 	{
 		super(Settings.maxSynthesizerStorage);
@@ -516,7 +514,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	{
 		if (!Settings.powerUseEnabled) return;
 		int energyStored = getEnergyStored();
-		if (oldEnergyStored!=energyStored && (oldEnergyStored==0|| energyStored ==0))
+		if (oldEnergyStored!=energyStored)
 		{
 			oldEnergyStored = energyStored;
 			SynthesisUpdateMessage message = new SynthesisUpdateMessage(this);
