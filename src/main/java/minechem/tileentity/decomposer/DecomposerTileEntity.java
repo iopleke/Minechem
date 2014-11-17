@@ -104,6 +104,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 * Holds the current state of our machine. Valid States: IDLE, ACTIVE, FINISHED, JAMMED
 	 */
 	public State state = State.idle;
+	public State oldState = State.idle;
+	public boolean bufferChanged = false;
 
 	public DecomposerTileEntity()
 	{
@@ -167,8 +169,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	private boolean energyToDecompose()
 	{
-
-		if (this.getEnergyStored() >= Settings.costDecomposition)
+		if (this.getEnergyStored() >= Settings.costDecomposition || !Settings.powerUseEnabled)
 		{
 			return true;
 		}
@@ -308,7 +309,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 				{
 					outputBuffer.remove(outputStack);
 				}
-
+				bufferChanged = true;
 				return State.active;
 			} else
 			{
@@ -385,6 +386,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			if (getStackInSlot(inputSlots[0]) != null)
 			{
 				activeStack = decrStackSize(inputSlots[0], 1);
+				bufferChanged = true;
 			} else
 			{
 				return null;
@@ -637,7 +639,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 		// Determines the current state of the machine.
 		state = determineOperationalState();
-		if ((state == State.idle || state == State.finished) && canDecomposeInput() && energyToDecompose())
+		if ((state == State.idle || state == State.finished) && energyToDecompose() && canDecomposeInput())
 		{
 			// Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
 			activeStack = null;
@@ -650,11 +652,23 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			activeStack = null;
 			state = State.idle;
 		}
+		if (bufferChanged || state!=oldState)
+		{
+			this.markDirty();
+			bufferChanged=false;
+		}
+		updateStateHandler();
+	}
 
-		// Notify minecraft that the inventory items in this machine have changed.
-		DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
-		MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
-		this.markDirty();
+	public void updateStateHandler()
+	{
+		if (state!=oldState)
+		{
+			oldState=state;
+			// Notify minecraft that the inventory items in this machine have changed.
+			DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
+			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+		}
 	}
 
 	@Override

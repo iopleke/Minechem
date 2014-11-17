@@ -1,5 +1,6 @@
 package minechem;
 
+import cpw.mods.fml.common.event.*;
 import minechem.computercraft.MinechemCCItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
@@ -40,9 +41,6 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
@@ -165,22 +163,12 @@ public class Minechem
 		MinechemRecipes.getInstance().RegisterRecipes();
 		MinechemRecipes.getInstance().registerFluidRecipes();
         MinechemBucketHandler.getInstance().registerBucketRecipes();
-        
-        LogHelper.debug("Registering Mod Recipes...");
-		MinechemRecipes.getInstance().RegisterModRecipes();
 		
 		LogHelper.debug("Adding blueprints to dungeon loot...");
 		MinechemItemsRegistration.addDungeonLoot();
 
 		LogHelper.debug("Activating Chemical Effect Layering (Coatings)...");
 		PotionEnchantmentCoated.registerCoatings();
-
-		Long start = System.currentTimeMillis();
-		LogHelper.info("Registering other Mod Recipes...");
-		MinechemRecipes.getInstance().registerOreDictOres();
-		Recipe.init();
-		DecomposerRecipeHandler.recursiveRecipes();
-		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
 
         LogHelper.debug("Registering Mod Ores for PolyTool...");
 		PolytoolTypeIron.getOres();
@@ -192,5 +180,19 @@ public class Minechem
 	public void onPreRender(RenderGameOverlayEvent.Pre e)
 	{
 		EffectsRenderer.renderEffects();
+	}
+
+	@EventHandler
+	public void onServerStarting(FMLServerStartingEvent event)
+	{
+		LogHelper.debug("Registering Mod Recipes...");
+		MinechemRecipes.getInstance().RegisterModRecipes();
+
+		Long start = System.currentTimeMillis();
+		LogHelper.info("Registering other Mod Recipes...");
+		MinechemRecipes.getInstance().registerOreDictOres();
+		Recipe.init();
+		DecomposerRecipeHandler.recursiveRecipes();
+		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
 	}
 }
