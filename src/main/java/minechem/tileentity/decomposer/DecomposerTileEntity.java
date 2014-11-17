@@ -105,6 +105,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 */
 	public State state = State.idle;
 	public State oldState = State.idle;
+	public boolean bufferChanged = false;
 
 	public DecomposerTileEntity()
 	{
@@ -308,7 +309,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 				{
 					outputBuffer.remove(outputStack);
 				}
-
+				bufferChanged = true;
 				return State.active;
 			} else
 			{
@@ -650,8 +651,12 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			activeStack = null;
 			state = State.idle;
 		}
+		if (bufferChanged || state!=oldState)
+		{
+			this.markDirty();
+			bufferChanged=false;
+		}
 		updateStateHandler();
-		this.markDirty();
 	}
 
 	public void updateStateHandler()
