@@ -102,6 +102,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	 * Wrapper for 'ghost' inventory items that show recipe from Chemist Journal.
 	 */
 	private final BoundedInventory recipeMatrix = new BoundedInventory(this, kRecipe);
+	private ItemStack[] oldRecipeArray = new ItemStack[9];
 
 	/**
 	 * Wrapper for crafting matrix items that make up recipe for synthesis machine.
@@ -132,6 +133,8 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	 * Wrapper for moving items in and out of the Chemist's Journal slot.
 	 */
 	private final Transactor journalTransactor = new Transactor(journalInventory, 1);
+
+	private int oldEnergyStored = 0;
 
 	public SynthesisTileEntity()
 	{
@@ -490,8 +493,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 		if (!worldObj.isRemote)
 		{
-			SynthesisUpdateMessage message = new SynthesisUpdateMessage(this);
-			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+			updateHandler();
 		}
 		// Forces the output slot to only take a single item preventing stacking.
 		if (currentRecipe != null && inventory[kOutput[0]] == null)
@@ -499,7 +501,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 			inventory[kOutput[0]] = currentRecipe.getOutput().copy();
 		} else
 		{
-			this.validate();
+			updateRecipe();
 		}
 	}
 
@@ -508,6 +510,31 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	{
 		super.validate();
 		getRecipeResult();
+	}
+
+	public void updateHandler()
+	{
+		if (!Settings.powerUseEnabled) return;
+		int energyStored = getEnergyStored();
+		if (oldEnergyStored!=energyStored && (oldEnergyStored==0|| energyStored ==0))
+		{
+			oldEnergyStored = energyStored;
+			SynthesisUpdateMessage message = new SynthesisUpdateMessage(this);
+			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+		}
+	}
+
+	public void updateRecipe()
+	{
+		for (int i=0;i<oldRecipeArray.length;i++)
+		{
+			if (!ItemStack.areItemStacksEqual(recipeMatrix.getStackInSlot(i),oldRecipeArray[i]))
+			{
+				oldRecipeArray = recipeMatrix.copyInventoryToArray();
+				getRecipeResult();
+				return;
+			}
+		}
 	}
 
 	@Override
@@ -696,7 +723,6 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		{
 			return SynthesisTileEntity.kOutput;
 		}
-
 		return SynthesisTileEntity.kStorage;
 	}
 

@@ -168,8 +168,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	private boolean energyToDecompose()
 	{
-
-		if (this.getEnergyStored() >= Settings.costDecomposition)
+		if (this.getEnergyStored() >= Settings.costDecomposition || !Settings.powerUseEnabled)
 		{
 			return true;
 		}
@@ -638,7 +637,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 		// Determines the current state of the machine.
 		state = determineOperationalState();
-		if ((state == State.idle || state == State.finished) && canDecomposeInput() && energyToDecompose())
+		if ((state == State.idle || state == State.finished) && energyToDecompose() && canDecomposeInput())
 		{
 			// Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
 			activeStack = null;
