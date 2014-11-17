@@ -121,11 +121,6 @@ public class BoundedInventory implements IInventory
 		_inv.markDirty();
 	}
 
-//    @Override
-//    public void onInventoryChanged()
-//    {
-//        _inv.
-//    }
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player)
 	{

@@ -104,6 +104,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 * Holds the current state of our machine. Valid States: IDLE, ACTIVE, FINISHED, JAMMED
 	 */
 	public State state = State.idle;
+	public State oldState = State.idle;
 
 	public DecomposerTileEntity()
 	{
@@ -650,11 +651,19 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			activeStack = null;
 			state = State.idle;
 		}
-
-		// Notify minecraft that the inventory items in this machine have changed.
-		DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
-		MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+		updateStateHandler();
 		this.markDirty();
+	}
+
+	public void updateStateHandler()
+	{
+		if (state!=oldState)
+		{
+			oldState=state;
+			// Notify minecraft that the inventory items in this machine have changed.
+			DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
+			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+		}
 	}
 
 	@Override
