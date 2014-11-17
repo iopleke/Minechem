@@ -28,6 +28,7 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 	 * Amount of energy stored
 	 */
 	private int energyStored;
+	protected int oldEnergyStored;
 
 	public MinechemTileEntityElectric(int maxEnergy)
 	{
