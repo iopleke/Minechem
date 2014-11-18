@@ -1,6 +1,15 @@
 package minechem;
 
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.computercraft.MinechemCCItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
@@ -16,11 +25,7 @@ import minechem.minetweaker.Decomposer;
 import minechem.minetweaker.Fuels;
 import minechem.minetweaker.Synthesiser;
 import minechem.network.MessageHandler;
-import minechem.potion.PotionCoatingRecipe;
-import minechem.potion.PotionCoatingSubscribe;
-import minechem.potion.PotionEnchantmentCoated;
-import minechem.potion.PotionInjector;
-import minechem.potion.PotionSpikingRecipe;
+import minechem.potion.*;
 import minechem.proxy.CommonProxy;
 import minechem.reference.MetaData;
 import minechem.reference.Reference;
@@ -34,16 +39,6 @@ import minetweaker.MineTweakerAPI;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:RotaryCraft;after:ReactorCraft;after:ElectriCraft")
 public class Minechem
@@ -64,7 +59,6 @@ public class Minechem
 	{
 		// Register instance.
 		INSTANCE = this;
-
 		// Load configuration.
 		LogHelper.debug("Loading configuration...");
 		Settings.init(event.getSuggestedConfigurationFile());
@@ -183,7 +177,7 @@ public class Minechem
 	}
 
 	@EventHandler
-	public void onServerStarting(FMLServerStartingEvent event)
+	public void onLoadComplete(FMLLoadCompleteEvent event)
 	{
 		LogHelper.debug("Registering Mod Recipes...");
 		MinechemRecipes.getInstance().RegisterModRecipes();

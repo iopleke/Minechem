@@ -4,10 +4,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
@@ -23,7 +20,7 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class Recipe
 {
 
-	public static Map<String, Recipe> recipes;
+	public static Map<MapKey, Recipe> recipes;
 
 	public static Map<ItemStack, ItemStack> smelting;
 	public static Map<String, String> oreDictionary;
@@ -108,8 +105,8 @@ public class Recipe
 			})
 	public static void init()
 	{
-		Map<String, ArrayList<Recipe>> preCullRecipes = new Hashtable<String, ArrayList<Recipe>>();
-		recipes = new Hashtable<String, Recipe>();
+		Map<MapKey, ArrayList<Recipe>> preCullRecipes = new Hashtable<MapKey, ArrayList<Recipe>>();
+		recipes = new LinkedHashMap<MapKey, Recipe>();
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
 		oreDictionary = new Hashtable<String, String>();
 		List craftingRecipes = CraftingManager.getInstance().getRecipeList();
@@ -177,7 +174,7 @@ public class Recipe
 						components = ((ShapedRecipes) recipe).recipeItems;
 					}
 
-					String key = DecomposerRecipe.getKey(input);
+					MapKey key = DecomposerRecipe.getKey(input);
 					if (components != null && key != null)
 					{
 						boolean badRecipe = false;
@@ -200,7 +197,7 @@ public class Recipe
 		for (ItemStack input : smelting.keySet())
 		{
 			ItemStack output = smelting.get(input);
-			String key = DecomposerRecipe.getKey(output);
+			MapKey key = DecomposerRecipe.getKey(output);
 			if (key != null)
 			{
 				Recipe addRecipe = new Recipe(output, new ItemStack[]
@@ -211,7 +208,7 @@ public class Recipe
 			}
 		}
 
-		for (Map.Entry<String, ArrayList<Recipe>> entry : preCullRecipes.entrySet())
+		for (Map.Entry<MapKey, ArrayList<Recipe>> entry : preCullRecipes.entrySet())
 		{
 			cullRecipes(entry, preCullRecipes);
 			if (entry.getValue().size() == 1)
@@ -245,7 +242,7 @@ public class Recipe
 		}
 	}
 
-	private static void addPreCullRecipe(String key, Recipe addRecipe, Map<String, ArrayList<Recipe>> preCullRecipes)
+	private static void addPreCullRecipe(MapKey key, Recipe addRecipe, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
 	{
 		ArrayList<Recipe> recipeList = preCullRecipes.get(key);
 		if (recipeList == null)
@@ -307,17 +304,13 @@ public class Recipe
 
 	public static Recipe get(ItemStack output)
 	{
-		if (output != null)
-		{
-			if (output.getItem() != null)
-			{
-				String key = getKey(output);
-				if (key != null)
-				{
-					return get(key);
-				}
-			}
-		}
+		return get(new MapKey(output));
+	}
+
+	public static Recipe get(MapKey key)
+	{
+		if (recipes.containsKey(key))
+			return recipes.get(key);
 		return null;
 	}
 
@@ -326,22 +319,7 @@ public class Recipe
 		return recipes.get(string);
 	}
 
-	public String getKey()
-	{
-		ItemStack result = output.copy();
-		result.stackSize = 1;
-		if (result.getItemDamage() == Short.MAX_VALUE)
-		{
-			result.setItemDamage(0);
-		}
-		if (result.toString().contains("null"))
-		{
-			return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
-		}
-		return result.toString();
-	}
-
-	private static void cullRecipes(Entry<String, ArrayList<Recipe>> entry, Map<String, ArrayList<Recipe>> preCullRecipes)
+	private static void cullRecipes(Entry<MapKey, ArrayList<Recipe>> entry, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
 	{
 		ArrayList<Recipe> value = entry.getValue();
 		if (DecomposerRecipe.get(entry.getKey()) != null)
@@ -360,7 +338,7 @@ public class Recipe
 				{
 					if (stack != null)
 					{
-						String key = DecomposerRecipe.getKey(stack);
+						MapKey key = DecomposerRecipe.getKey(stack);
 						depth = Math.max(depth, getSize(key, 0, preCullRecipes));
 						if (depth >= MAXDEPTH)
 						{
@@ -400,7 +378,7 @@ public class Recipe
 		entry.setValue(value);
 	}
 
-	private static int getSize(String key, int depth, Map<String, ArrayList<Recipe>> preCullRecipes)
+	private static int getSize(MapKey key, int depth, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
 	{
 		if (depth > MAXDEPTH)
 		{
@@ -422,7 +400,7 @@ public class Recipe
 			{
 				if (stack != null)
 				{
-					String nextKey = DecomposerRecipe.getKey(stack);
+					MapKey nextKey = DecomposerRecipe.getKey(stack);
 					int nextDepth = getSize(nextKey, depth + 1, preCullRecipes);
 					thisDepth = Math.max(thisDepth, nextDepth);
 					if (thisDepth > MAXDEPTH)
