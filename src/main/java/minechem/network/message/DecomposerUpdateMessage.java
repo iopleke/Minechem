@@ -1,9 +1,12 @@
 package minechem.network.message;
 
 import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.server.FMLServerHandler;
 import io.netty.buffer.ByteBuf;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import net.minecraft.tileentity.TileEntity;
@@ -72,7 +75,9 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
 	@Override
 	public IMessage onMessage(DecomposerUpdateMessage message, MessageContext ctx)
 	{
-		TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.posX, message.posY, message.posZ);
+		TileEntity tileEntity;
+		if (ctx.side == Side.CLIENT) tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.posX, message.posY, message.posZ);
+		else tileEntity = FMLCommonHandler.instance().getMinecraftServerInstance().getEntityWorld().getTileEntity(message.posX, message.posY, message.posZ);
 		if (tileEntity instanceof DecomposerTileEntity)
 		{
 			((DecomposerTileEntity) tileEntity).syncEnergyValue(message.energyStored);

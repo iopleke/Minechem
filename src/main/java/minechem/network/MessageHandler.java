@@ -11,16 +11,18 @@ import minechem.reference.Reference;
 public class MessageHandler implements IMessageHandler
 {
 	public static SimpleNetworkWrapper INSTANCE = new SimpleNetworkWrapper(Reference.ID);
+	public static int id = 0;
 
 	public static void init()
 	{
-		INSTANCE.registerMessage(SynthesisUpdateMessage.class, SynthesisUpdateMessage.class, 0, Side.CLIENT);
-		INSTANCE.registerMessage(DecomposerUpdateMessage.class, DecomposerUpdateMessage.class, 1, Side.CLIENT);
-		INSTANCE.registerMessage(PolytoolUpdateMessage.class, PolytoolUpdateMessage.class, 2, Side.CLIENT);
-		INSTANCE.registerMessage(GhostBlockMessage.class, GhostBlockMessage.class, 3, Side.CLIENT);
-		INSTANCE.registerMessage(ChemistJournalActiveItemMessage.class, ChemistJournalActiveItemMessage.class, 4, Side.SERVER);
-		INSTANCE.registerMessage(FissionUpdateMessage.class, FissionUpdateMessage.class, 5, Side.CLIENT);
-		INSTANCE.registerMessage(FusionUpdateMessage.class, FusionUpdateMessage.class, 6, Side.CLIENT);
+		INSTANCE.registerMessage(SynthesisUpdateMessage.class, SynthesisUpdateMessage.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(DecomposerUpdateMessage.class, DecomposerUpdateMessage.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(DecomposerUpdateMessage.class, DecomposerUpdateMessage.class, id++, Side.SERVER);
+		INSTANCE.registerMessage(PolytoolUpdateMessage.class, PolytoolUpdateMessage.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(GhostBlockMessage.class, GhostBlockMessage.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(ChemistJournalActiveItemMessage.class, ChemistJournalActiveItemMessage.class, id++, Side.SERVER);
+		INSTANCE.registerMessage(FissionUpdateMessage.class, FissionUpdateMessage.class, id++, Side.CLIENT);
+		INSTANCE.registerMessage(FusionUpdateMessage.class, FusionUpdateMessage.class, id++, Side.CLIENT);
 	}
 
 	@Override

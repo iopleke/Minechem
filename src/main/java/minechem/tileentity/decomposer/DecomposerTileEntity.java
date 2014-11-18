@@ -715,7 +715,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	public void dumpFluid()
 	{
 		this.tank = null;
-		tankUpdate = true;
+		if (worldObj.isRemote) MessageHandler.INSTANCE.sendToServer(new DecomposerUpdateMessage(this));
 	}
 
 	/**
