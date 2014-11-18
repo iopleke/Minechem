@@ -65,15 +65,6 @@ public class DecomposerRecipe
 		return recipes.remove(key);
 	}
 
-//	public static String getKey(ItemStack itemStack)
-//	{
-//		if (itemStack != null && itemStack.getItem() != null)
-//		{
-//			LogHelper.debug(itemStack.toString());
-//			return Item.getIdFromItem(itemStack.getItem()) + ":" + itemStack.getItemDamage();
-//		}
-//		return null;
-//	}
 	public static MapKey getKey(ItemStack itemStack)
 	{
 		return new MapKey(itemStack);
@@ -81,35 +72,16 @@ public class DecomposerRecipe
 
 	public static MapKey getKey(FluidStack fluidStack)
 	{
-//		if (fluidStack != null && fluidStack.getFluid() != null)
-//		{
-//			FluidStack result = fluidStack.copy();
-//			result.amount = 1;
-//			return result.toString();
-//		}
-//		return null;
 		return new MapKey(fluidStack);
 	}
 
 	public static DecomposerRecipe get(ItemStack item)
 	{
-//		String key = getKey(item);
-//		if (key != null)
-//		{
-//			return get(key);
-//		}
-//		return null;
 		return get(getKey(item));
 	}
 
 	public static DecomposerRecipe get(FluidStack item)
 	{
-//		String key = getKey(item);
-//		if (key != null)
-//		{
-//			return get(key);
-//		}
-//		return null;
 		return get(getKey(item));
 	}
 
