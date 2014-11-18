@@ -3,6 +3,7 @@ package minechem.tileentity.synthesis;
 import minechem.Settings;
 import minechem.potion.PotionChemical;
 import minechem.utils.LogHelper;
+import minechem.utils.MapKey;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 public class SynthesisRecipe
 {
-	public static Map<String, SynthesisRecipe> recipes = new HashMap<String, SynthesisRecipe>();
+	public static Map<MapKey, SynthesisRecipe> recipes = new HashMap<MapKey, SynthesisRecipe>();
 	private ItemStack output;
 	private PotionChemical[] shapedRecipe;
 	private ArrayList<PotionChemical> unshapedRecipe = new ArrayList<PotionChemical>();
@@ -29,7 +30,7 @@ public class SynthesisRecipe
 			{
 				return null;
 			}
-			recipes.put(getKey(recipe.output), recipe);
+			recipes.put(new MapKey(recipe.output), recipe);
 		}
 
 		return recipe;
@@ -86,14 +87,9 @@ public class SynthesisRecipe
 
 	}
 
-	public static String getKey(ItemStack itemStack)
+	public static MapKey getKey(ItemStack itemStack)
 	{
-		if (itemStack != null && itemStack.getItem() != null)
-		{
-			LogHelper.debug(itemStack.toString());
-			return Item.getIdFromItem(itemStack.getItem()) + ":" + itemStack.getItemDamage();
-		}
-		return null;
+		return new MapKey(itemStack);
 	}
 
     public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... recipe)
@@ -165,7 +161,7 @@ public class SynthesisRecipe
 		return false;
 	}
 
-	public static SynthesisRecipe get(String key) {
+	public static SynthesisRecipe get(MapKey key) {
 		return recipes.get(key);
 	}
 

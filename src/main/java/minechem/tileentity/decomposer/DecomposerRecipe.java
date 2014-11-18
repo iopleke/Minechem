@@ -6,6 +6,7 @@ import minechem.Settings;
 import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
 import minechem.utils.LogHelper;
+import minechem.utils.MapKey;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
@@ -13,11 +14,11 @@ import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
-	public static Map<String, DecomposerRecipe> recipes = new LinkedHashMap<String, DecomposerRecipe>();
+	public static Map<MapKey, DecomposerRecipe> recipes = new LinkedHashMap<MapKey, DecomposerRecipe>();
 
 	private static final Random rand = new Random();
 	ItemStack input;
-	public Map<PotionChemical, PotionChemical> output = new LinkedHashMap<PotionChemical, PotionChemical>();
+	public Map<MapKey, PotionChemical> output = new LinkedHashMap<MapKey, PotionChemical>();
 
 	//TODO:Add blacklist support for fluids
 	public static DecomposerRecipe add(DecomposerRecipe recipe)
@@ -59,45 +60,62 @@ public class DecomposerRecipe
 		return null;
 	}
 
-	public static String getKey(ItemStack itemStack)
+	public static DecomposerRecipe remove(MapKey key)
 	{
-		if (itemStack != null && itemStack.getItem() != null)
-		{
-			LogHelper.debug(itemStack.toString());
-			return Item.getIdFromItem(itemStack.getItem()) + ":" + itemStack.getItemDamage();
-		}
-		return null;
+		return recipes.remove(key);
 	}
 
-	public static String getKey(FluidStack fluidStack)
+//	public static String getKey(ItemStack itemStack)
+//	{
+//		if (itemStack != null && itemStack.getItem() != null)
+//		{
+//			LogHelper.debug(itemStack.toString());
+//			return Item.getIdFromItem(itemStack.getItem()) + ":" + itemStack.getItemDamage();
+//		}
+//		return null;
+//	}
+	public static MapKey getKey(ItemStack itemStack)
 	{
-		if (fluidStack != null && fluidStack.getFluid() != null)
-		{
-			FluidStack result = fluidStack.copy();
-			result.amount = 1;
-			return result.toString();
-		}
-		return null;
+		return new MapKey(itemStack);
+	}
+
+	public static MapKey getKey(FluidStack fluidStack)
+	{
+//		if (fluidStack != null && fluidStack.getFluid() != null)
+//		{
+//			FluidStack result = fluidStack.copy();
+//			result.amount = 1;
+//			return result.toString();
+//		}
+//		return null;
+		return new MapKey(fluidStack);
 	}
 
 	public static DecomposerRecipe get(ItemStack item)
 	{
-		String key = getKey(item);
-		if (key != null)
-		{
-			return get(key);
-		}
-		return null;
+//		String key = getKey(item);
+//		if (key != null)
+//		{
+//			return get(key);
+//		}
+//		return null;
+		return get(getKey(item));
 	}
 
 	public static DecomposerRecipe get(FluidStack item)
 	{
-		String key = getKey(item);
-		if (key != null)
-		{
-			return get(key);
-		}
-		return null;
+//		String key = getKey(item);
+//		if (key != null)
+//		{
+//			return get(key);
+//		}
+//		return null;
+		return get(getKey(item));
+	}
+
+	public static DecomposerRecipe get(MapKey key)
+	{
+		return recipes.get(key);
 	}
 
 	public static void removeRecipeSafely(String item)
@@ -127,11 +145,11 @@ public class DecomposerRecipe
 		this.input = input;
 		for (PotionChemical potionChemical : chemicals)
 		{
-			PotionChemical current = this.output.put(getPotionKey(potionChemical), potionChemical);
+			PotionChemical current = this.output.put(new MapKey(potionChemical), potionChemical);
 			if (current != null)
 			{
 				current.amount += potionChemical.amount;
-				this.output.put(getPotionKey(potionChemical), potionChemical);
+				this.output.put(new MapKey(potionChemical), potionChemical);
 			}
 		}
 	}
@@ -145,13 +163,13 @@ public class DecomposerRecipe
 	{
 		for (PotionChemical potionChemical : chemicals)
 		{
-			PotionChemical current = this.output.get(getPotionKey(potionChemical));
+			PotionChemical current = this.output.get(new MapKey(potionChemical));
 			if (current != null)
 			{
 				current.amount += potionChemical.amount;
 				continue;
 			}
-			this.output.put(getPotionKey(potionChemical), potionChemical);
+			this.output.put(new MapKey(potionChemical), potionChemical);
 		}
 	}
 

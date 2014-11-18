@@ -23,10 +23,7 @@ import minechem.tileentity.microscope.MicroscopeTileEntity;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
 import minechem.tileentity.synthesis.SynthesisTileEntity;
-import minechem.utils.Compare;
-import minechem.utils.MinechemUtil;
-import minechem.utils.TimeHelper;
-import minechem.utils.WorldTimer;
+import minechem.utils.*;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -52,13 +49,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
 	private ITurtleAccess turtle = null;
 	private IComputerAccess computer = null;
 	private WorldTimer timer = new WorldTimer(20);
-	private ArrayList<String> known;
+	private ArrayList<MapKey> known;
 	private ArrayList<LuaMethod> methods = new ArrayList<LuaMethod>();
 
 	public ChemicalTurtlePeripheral(ITurtleAccess turtle) {
 		this.turtle = turtle;
 		//this.known = new ArrayList<ItemStack>();
-		this.known = new ArrayList<String>();
+		this.known = new ArrayList<MapKey>();
 		if (methods.isEmpty()) addLuaMethods();
 	}
 	
@@ -495,9 +492,9 @@ public class ChemicalTurtlePeripheral implements IPeripheral
 			
 			private String upload(ItemStack journal)
 			{
-				List<String> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
-				if (journalItems==null) journalItems=new ArrayList<String>();
-				ArrayList<String> addItems=new ArrayList<String>();
+				List<MapKey> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
+				if (journalItems==null) journalItems=new ArrayList<MapKey>();
+				ArrayList<MapKey> addItems=new ArrayList<MapKey>();
 				addItems.addAll(journalItems);
 				addItems.removeAll(known);
 				known.addAll(addItems);
@@ -513,9 +510,9 @@ public class ChemicalTurtlePeripheral implements IPeripheral
 				if (journal.getItem()==Items.book)
 					journal = new ItemStack(MinechemItemsRegistration.journal);
 				
-				List<String> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
-				if (journalItems==null) journalItems=new ArrayList<String>();
-				ArrayList<String> addItems=new ArrayList<String>();
+				List<MapKey> journalItems=stackListToKeys(MinechemItemsRegistration.journal.getItemList(journal));
+				if (journalItems==null) journalItems=new ArrayList<MapKey>();
+				ArrayList<MapKey> addItems=new ArrayList<MapKey>();
 				addItems.addAll(known);
 				addItems.removeAll(journalItems);
 				
@@ -835,8 +832,8 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     }
 	
 	protected boolean addStackToKnown(ItemStack add) {
-		String addString = SynthesisRecipe.getKey(add);
-		for (String key:known)
+		MapKey addString = DecomposerRecipe.getKey(add);
+		for (MapKey key:known)
     	{
     		if (key.equals(addString)) return false;
     	}
@@ -844,20 +841,20 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     	return true;
 	}
 
-	private ArrayList<String> stackListToKeys(List<ItemStack> stacks)
+	private ArrayList<MapKey> stackListToKeys(List<ItemStack> stacks)
     {
 		if (stacks==null) return null;
-    	ArrayList<String> result = new ArrayList<String>();
+    	ArrayList<MapKey> result = new ArrayList<MapKey>();
     	for (ItemStack stack:stacks)
     		if (stack!=null)
         		result.add(DecomposerRecipe.getKey(stack));
     	return result;
     }
     
-    private ArrayList<ItemStack> keyListToStacks(List<String> keys)
+    private ArrayList<ItemStack> keyListToStacks(List<MapKey> keys)
     {
     	ArrayList<ItemStack> result = new ArrayList<ItemStack>();
-    	for (String key:keys)
+    	for (MapKey key:keys)
     	{
     		if (key!=null)
     		{

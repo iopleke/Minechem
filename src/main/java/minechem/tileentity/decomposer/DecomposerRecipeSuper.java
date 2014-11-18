@@ -8,6 +8,7 @@ import minechem.Settings;
 import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
 import minechem.utils.LogHelper;
+import minechem.utils.MapKey;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
@@ -16,7 +17,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 {
 
 	static Random random = new Random();
-	public Map<String, Double> recipes = new Hashtable<String, Double>();
+	public Map<MapKey, Double> recipes = new Hashtable<MapKey, Double>();
 
 	public DecomposerRecipeSuper(ItemStack input, ItemStack[] components, int level)
 	{
@@ -50,7 +51,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 
 	private void addDecompRecipe(DecomposerRecipe decompRecipe, double d)
 	{
-		String key = DecomposerRecipe.getKey(decompRecipe.input);
+		MapKey key = DecomposerRecipe.getKey(decompRecipe.input);
 		Double current = recipes.put(key, d);
 		if (current != null)
 		{
@@ -84,7 +85,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	public ArrayList<PotionChemical> getOutput()
 	{
 		ArrayList<PotionChemical> result = super.getOutput();
-		for (String currentKey : this.recipes.keySet())
+		for (MapKey currentKey : this.recipes.keySet())
 		{
 			DecomposerRecipe current = DecomposerRecipe.get(currentKey);
 			if (current != null)
@@ -117,7 +118,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	public ArrayList<PotionChemical> getOutputRaw()
 	{
 		ArrayList<PotionChemical> result = super.getOutputRaw();
-		for (String currentKey : this.recipes.keySet())
+		for (MapKey currentKey : this.recipes.keySet())
 		{
 			DecomposerRecipe current = DecomposerRecipe.get(currentKey);
 			LogHelper.debug("getOutputRaw: " + currentKey);
@@ -171,7 +172,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 		contains = super.outputContains(potionChemical);
 		if (!contains)
 		{
-			for (String key : recipes.keySet())
+			for (MapKey key : recipes.keySet())
 			{
 				DecomposerRecipe dr = DecomposerRecipe.get(key);
                 LogHelper.debug("outputContains: " + key);
@@ -193,7 +194,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	public float getChance()
 	{
 		float chances = 1;
-		for (Map.Entry<String, Double> entry : recipes.entrySet())
+		for (Map.Entry<MapKey, Double> entry : recipes.entrySet())
 		{
 			DecomposerRecipe dr = DecomposerRecipe.get(entry.getKey());
 			if (dr != null)
