@@ -1,6 +1,7 @@
 package minechem.tileentity.decomposer;
 
 import minechem.gui.GuiContainerTabbed;
+import minechem.gui.GuiFluidTank;
 import minechem.gui.GuiTabHelp;
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
@@ -9,22 +10,18 @@ import org.lwjgl.opengl.GL11;
 
 public class DecomposerGui extends GuiContainerTabbed
 {
-
-	public static DecomposerTileEntity ENTITY;
-	InventoryPlayer PLAYER_INVENTORY;
-	int mouseX = 0;
-	int mouseY = 0;
+	private DecomposerTileEntity decomposer;
+	private GuiFluidTank guiFluidTank;
 	int guiWidth = 176;
 	int guiHeight = 166;
 
 	public DecomposerGui(InventoryPlayer inventoryPlayer, DecomposerTileEntity decomposer)
 	{
 		super(new DecomposerContainer(inventoryPlayer, decomposer));
-		DecomposerGui.ENTITY = decomposer;
-		this.PLAYER_INVENTORY = inventoryPlayer;
+		this.decomposer = decomposer;
 		addTab(new DecomposerTabStateControl(this, decomposer));
 		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.decomposer")));
-
+		guiFluidTank = new GuiFluidTank(decomposer.capacity, 18, 16);
 	}
 
 	@Override
@@ -34,6 +31,8 @@ public class DecomposerGui extends GuiContainerTabbed
 		String info = MinechemUtil.getLocalString("gui.title.decomposer");
 		int infoWidth = fontRendererObj.getStringWidth(info);
 		fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
+
+		guiFluidTank.drawTooltip(mouseX, mouseY, decomposer.tank);
 	}
 
 	@Override
@@ -46,6 +45,7 @@ public class DecomposerGui extends GuiContainerTabbed
 		int y = (height - guiHeight) / 2;
 		drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 
+		guiFluidTank.draw(x, y, decomposer.tank);
 	}
 
 }

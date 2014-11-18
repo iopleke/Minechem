@@ -74,6 +74,7 @@ public class Textures
 		public static final String POLYTOOL = GUI_DIR + "polytool.png";
 		public static final String FISSION = GUI_DIR + "FissionGUI.png";
 		public static final String DECOMPOSER_NEI = GUI_DIR + "ChemicalDecomposerGUINEI.png";
+		public static final String TANK = GUI_DIR + "fluidtank.png";
 	}
 
 	public static final class Model

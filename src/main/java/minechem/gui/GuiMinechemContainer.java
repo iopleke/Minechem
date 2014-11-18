@@ -26,6 +26,7 @@ public abstract class GuiMinechemContainer extends GuiContainer
 		int mouseYOffset = mouseY - 12;
 		byte eight = 8;
 		int var9 = -267386864;
+		this.zLevel = 300.0F;
 		this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 4, mouseXOffset + tabNameWidth + 3, mouseYOffset - 3, var9, var9);
 		this.drawGradientRect(mouseXOffset - 3, mouseYOffset + eight + 3, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 4, var9, var9);
 		this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 3, var9, var9);
@@ -38,6 +39,7 @@ public abstract class GuiMinechemContainer extends GuiContainer
 		this.drawGradientRect(mouseXOffset - 3, mouseYOffset - 3, mouseXOffset + tabNameWidth + 3, mouseYOffset - 3 + 1, var10, var10);
 		this.drawGradientRect(mouseXOffset - 3, mouseYOffset + eight + 2, mouseXOffset + tabNameWidth + 3, mouseYOffset + eight + 3, var11, var11);
 		this.fontRenderer.drawStringWithShadow(creativeTab, mouseXOffset, mouseYOffset, -1);
+		this.zLevel = 0.0F;
 	}
 
 	public int getXSize()

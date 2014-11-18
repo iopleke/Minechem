@@ -18,7 +18,7 @@ public class MapKey{
 
     public MapKey(FluidStack stack)
     {
-        hashcode = stack.getFluid().hashCode() ^ stack.amount;
+        hashcode = stack.getFluid().hashCode();
     }
 
     public MapKey(PotionChemical chemical)
