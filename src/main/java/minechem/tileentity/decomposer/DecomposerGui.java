@@ -5,6 +5,7 @@ import minechem.gui.GuiFluidTank;
 import minechem.gui.GuiTabHelp;
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.entity.player.InventoryPlayer;
 import org.lwjgl.opengl.GL11;
 
@@ -12,6 +13,7 @@ public class DecomposerGui extends GuiContainerTabbed
 {
 	private DecomposerTileEntity decomposer;
 	private GuiFluidTank guiFluidTank;
+	private GuiButton dumpButton;
 	int guiWidth = 176;
 	int guiHeight = 166;
 
@@ -22,6 +24,7 @@ public class DecomposerGui extends GuiContainerTabbed
 		addTab(new DecomposerTabStateControl(this, decomposer));
 		addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.decomposer")));
 		guiFluidTank = new GuiFluidTank(decomposer.capacity, 18, 16);
+		dumpButton = new GuiButton(0, 20, 5, 12, 12, "x");
 	}
 
 	@Override
@@ -33,6 +36,17 @@ public class DecomposerGui extends GuiContainerTabbed
 		fontRendererObj.drawString(info, (guiWidth - infoWidth) / 2, 5, 0x000000);
 
 		guiFluidTank.drawTooltip(mouseX, mouseY, decomposer.tank);
+		dumpButton.drawButton(mc, mouseX, mouseY);
+
+		if (mouseInButton(mouseX, mouseY)) drawTooltip("Dump Fluid");
+	}
+
+	@Override
+	protected void mouseClicked(int x, int y, int mouseButton)
+	{
+		super.mouseClicked(x, y, mouseButton);
+		if (mouseInButton(mouseX, mouseY))
+			decomposer.dumpFluid();
 	}
 
 	@Override
@@ -46,6 +60,11 @@ public class DecomposerGui extends GuiContainerTabbed
 		drawTexturedModalRect(x, y, 0, 0, guiWidth, guiHeight);
 
 		guiFluidTank.draw(x, y, decomposer.tank);
+	}
+
+	private boolean mouseInButton(int x, int y)
+	{
+		return x >= dumpButton.xPosition && x < dumpButton.xPosition + dumpButton.width && y >= dumpButton.yPosition && y < dumpButton.yPosition + dumpButton.height;
 	}
 
 }

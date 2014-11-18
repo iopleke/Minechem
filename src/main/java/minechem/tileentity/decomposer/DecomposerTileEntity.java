@@ -711,7 +711,13 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 		return (activeStack == null || DecomposerRecipe.get(activeStack)==null)?"No Recipe":energyToDecompose()?"Active":"No Power";
 	}
-	
+
+	public void dumpFluid()
+	{
+		this.tank = null;
+		tankUpdate = true;
+	}
+
 	/**
 	 * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
 	 */
