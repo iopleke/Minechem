@@ -3140,11 +3140,7 @@ public class MinechemRecipes
 	public boolean shouldCreateSynthesis(ItemBlock block)
 	{
 		// check if the block is an oreBlock
-		if (block.field_150939_a instanceof BlockOre)
-		{
-			return false;
-		}
-		return true;
+		return !(block.field_150939_a instanceof BlockOre);
 	}
 
 	private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;

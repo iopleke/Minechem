@@ -57,11 +57,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 	@Override
 	public boolean canHandle(String oreName)
 	{
-		if (this.parseOreName(oreName) != null)
-		{
-			return true;
-		}
-		return false;
+		return this.parseOreName(oreName) != null;
 	}
 
 	@Override
@@ -161,11 +157,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 	private boolean haveSeen(OreDictionaryBaseOreEnum ore, EnumOrePrefix prefix)
 	{
-		if (this.seenOres.containsKey(ore) && this.seenOres.get(ore).contains(prefix))
-		{
-			return true;
-		}
-		return false;
+		return this.seenOres.containsKey(ore) && this.seenOres.get(ore).contains(prefix);
 	}
 
 	private void seen(OreDictionaryBaseOreEnum ore, EnumOrePrefix prefix)

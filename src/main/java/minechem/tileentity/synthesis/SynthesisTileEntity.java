@@ -177,8 +177,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	 */
 	public boolean canTakeOutputStack(boolean doTake)
 	{
-		boolean theState = inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(doTake);
-		return theState;
+		return inventory[kOutput[0]] != null && hasEnoughPowerForCurrentRecipe() && takeStacksFromStorage(doTake);
 	}
 
 	/**

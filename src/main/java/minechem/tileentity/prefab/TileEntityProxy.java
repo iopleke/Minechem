@@ -235,13 +235,7 @@ public class TileEntityProxy extends MinechemTileEntityElectric implements ISide
 	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
 	{
 		// Cannot insert items into reactor with automation disabled.
-		if (Settings.AllowAutomation && isItemValidForSlot(slot, itemstack))
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+		return Settings.AllowAutomation && isItemValidForSlot(slot, itemstack);
 	}
 
 	@Override
@@ -249,11 +243,7 @@ public class TileEntityProxy extends MinechemTileEntityElectric implements ISide
 	{
 		// Cannot extract items from reactor with automation disabled.
 		// Can only extract from the bottom.
-		if (Settings.AllowAutomation && side == 0 && slot == 2)
-		{
-			return true;
-		}
-		return false;
+		return Settings.AllowAutomation && side == 0 && slot == 2;
 	}
 
 	@Override

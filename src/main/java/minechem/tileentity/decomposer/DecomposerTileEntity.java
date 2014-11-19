@@ -177,11 +177,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	private boolean energyToDecompose()
 	{
-		if (this.getEnergyStored() >= Settings.costDecomposition || !Settings.powerUseEnabled)
-		{
-			return true;
-		}
-		return false;
+		return this.getEnergyStored() >= Settings.costDecomposition || !Settings.powerUseEnabled;
 	}
 
 	@Override
@@ -210,8 +206,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			return false;
 		} else
 		{
-			boolean hasRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
-			return hasRecipe;
+			return DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
 		}
 	}
 

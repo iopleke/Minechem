@@ -16,8 +16,6 @@ public class PotionMineral extends PotionChemical
 		return new PotionMineral(mineral, amount);
 	}
 
-	;
-
     public PotionMineral(PotionMineralEnum mineral)
 	{
 		super(1);

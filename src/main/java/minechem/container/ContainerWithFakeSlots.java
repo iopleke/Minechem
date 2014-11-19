@@ -73,8 +73,7 @@ public class ContainerWithFakeSlots extends Container
 		ItemStack stackInSlot = slot.inventory.getStackInSlot(slot.slotNumber);
 		if (stackInSlot != null)
 		{
-			int newStackSize = Math.min(stackInSlot.stackSize + amount, slot.inventory.getInventoryStackLimit());
-			stackInSlot.stackSize = newStackSize;
+			stackInSlot.stackSize = Math.min(stackInSlot.stackSize + amount, slot.inventory.getInventoryStackLimit());
 		} else
 		{
 			ItemStack copyStack = stackOnMouse.copy();

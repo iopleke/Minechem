@@ -54,8 +54,7 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
 	private ItemStack takeBlueprintFromProjector(BlueprintProjectorTileEntity projector)
 	{
 		MinechemBlueprint blueprint = projector.takeBlueprint();
-		ItemStack blueprintItem = ItemBlueprint.createItemStackFromBlueprint(blueprint);
-		return blueprintItem;
+		return ItemBlueprint.createItemStackFromBlueprint(blueprint);
 	}
 
 	@Override
