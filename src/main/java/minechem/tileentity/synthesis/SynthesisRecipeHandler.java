@@ -2,6 +2,7 @@ package minechem.tileentity.synthesis;
 
 import minechem.potion.PotionChemical;
 import minechem.utils.Compare;
+import minechem.utils.MapKey;
 import minechem.utils.MinechemUtil;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -21,7 +22,9 @@ public class SynthesisRecipeHandler
 
 	public SynthesisRecipe getRecipeFromOutput(ItemStack output)
 	{
-		return SynthesisRecipe.recipes.get(SynthesisRecipe.getKey(output));
+		MapKey key = MapKey.getKey(output);
+		if (key==null) return null;
+		return SynthesisRecipe.recipes.get(key);
 	}
 
 	public SynthesisRecipe getRecipeFromInput(ItemStack[] input)

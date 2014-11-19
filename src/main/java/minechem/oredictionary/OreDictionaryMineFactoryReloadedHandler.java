@@ -14,13 +14,7 @@ public class OreDictionaryMineFactoryReloadedHandler implements
 	@Override
 	public boolean canHandle(String oreName)
 	{
-		if (oreName.equals("itemRawRubber") || oreName.equals("itemRubber") || oreName.equals("fertilizerOrganic"))
-		{
-			return true;
-		} else
-		{
-			return false;
-		}
+		return oreName.equals("itemRawRubber") || oreName.equals("itemRubber") || oreName.equals("fertilizerOrganic");
 	}
 
 	@Override

@@ -2,9 +2,7 @@ package minechem.tileentity.synthesis;
 
 import minechem.Settings;
 import minechem.potion.PotionChemical;
-import minechem.utils.LogHelper;
 import minechem.utils.MapKey;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -30,7 +28,8 @@ public class SynthesisRecipe
 			{
 				return null;
 			}
-			recipes.put(new MapKey(recipe.output), recipe);
+			MapKey key = MapKey.getKey(recipe.output);
+			if (key!=null) recipes.put(key, recipe);
 		}
 
 		return recipe;
@@ -50,7 +49,7 @@ public class SynthesisRecipe
 
 		for (SynthesisRecipe recipe : recipes)
 		{
-			SynthesisRecipe.recipes.remove(getKey(recipe.output));
+			SynthesisRecipe.recipes.remove(MapKey.getKey(recipe.output));
 		}
 	}
 
@@ -85,11 +84,6 @@ public class SynthesisRecipe
 
 		return results;
 
-	}
-
-	public static MapKey getKey(ItemStack itemStack)
-	{
-		return new MapKey(itemStack);
 	}
 
     public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... recipe)
@@ -138,7 +132,7 @@ public class SynthesisRecipe
 
 	public PotionChemical[] getShapelessRecipe()
 	{
-		return this.unshapedRecipe.toArray(new PotionChemical[0]);
+		return this.unshapedRecipe.toArray(new PotionChemical[unshapedRecipe.size()]);
 	}
 
 	public int getIngredientCount()

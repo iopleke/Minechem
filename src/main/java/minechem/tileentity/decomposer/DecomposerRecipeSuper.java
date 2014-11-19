@@ -51,11 +51,12 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 
 	private void addDecompRecipe(DecomposerRecipe decompRecipe, double d)
 	{
-		MapKey key = DecomposerRecipe.getKey(decompRecipe.input);
-		Double current = recipes.put(key, d);
-		if (current != null)
-		{
-			recipes.put(key, d + current);
+		MapKey key = MapKey.getKey(decompRecipe.input);
+		if (key!=null) {
+			Double current = recipes.put(key, d);
+			if (current != null) {
+				recipes.put(key, d + current);
+			}
 		}
 	}
 
@@ -146,11 +147,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 	@Override
 	public boolean isNull()
 	{
-		if (super.getOutput() == null && this.recipes == null)
-		{
-			return true;
-		}
-		return false;
+		return (super.getOutput() == null || this.recipes == null);
 	}
 
 	@Override

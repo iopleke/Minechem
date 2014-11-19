@@ -87,7 +87,7 @@ public class InputHelper
 			for (ItemStack inStack : OreDictionary.getOres(((IOreDictEntry) input).getName()))
 			{
 				ItemStack result = inStack.copy();
-				result.stackSize = ((IOreDictEntry) input).getAmount();
+				result.stackSize = input.getAmount();
 				toAdd.add(result);
 			}
 
@@ -107,7 +107,7 @@ public class InputHelper
 		if (input instanceof IOreDictEntry)
 		{
 			ItemStack result = OreDictionary.getOres(((IOreDictEntry) input).getName()).get(0).copy();
-			result.stackSize = ((IOreDictEntry) input).getAmount();
+			result.stackSize = input.getAmount();
 			if (MinechemUtil.itemStackToChemical(result) != null)
 			{
 				return null;
@@ -115,8 +115,8 @@ public class InputHelper
 			return result;
 		} else if (input instanceof IngredientStack)
 		{
-			ItemStack result = toStack(((IngredientStack) input).getItems().get(0));
-			result.stackSize = ((IngredientStack) input).getAmount();
+			ItemStack result = toStack(input.getItems().get(0));
+			result.stackSize = input.getAmount();
 			if (MinechemUtil.itemStackToChemical(result) != null)
 			{
 				return null;
@@ -142,12 +142,12 @@ public class InputHelper
 		if (input instanceof IOreDictEntry)
 		{
 			ItemStack result = OreDictionary.getOres(((IOreDictEntry) input).getName()).get(0).copy();
-			result.stackSize = ((IOreDictEntry) input).getAmount();
+			result.stackSize = input.getAmount();
 			return result;
 		} else if (input instanceof IngredientStack)
 		{
-			ItemStack result = toStack(((IngredientStack) input).getItems().get(0));
-			result.stackSize = ((IngredientStack) input).getAmount();
+			ItemStack result = toStack(input.getItems().get(0));
+			result.stackSize = input.getAmount();
 			return result;
 		} else if (input instanceof IItemStack)
 		{
@@ -190,12 +190,12 @@ public class InputHelper
 	{
 		if (ingredient instanceof IngredientStack)
 		{
-			for (IIngredient in : ((IngredientStack) ingredient).getItems())
+			for (IIngredient in : ingredient.getItems())
 			{
 				if (in instanceof IItemStack)
 				{
 					ItemStack result = toStack((IItemStack) in);
-					result.stackSize = Math.max(1, ((IngredientStack) ingredient).getAmount());
+					result.stackSize = Math.max(1, ingredient.getAmount());
 					PotionChemical chemical = MinechemUtil.itemStackToChemical(result);
 					if (chemical != null)
 					{
@@ -211,7 +211,7 @@ public class InputHelper
 			for (ItemStack res : results)
 			{
 				ItemStack result = res.copy();
-				result.stackSize = ((IOreDictEntry) ingredient).getAmount();
+				result.stackSize = ingredient.getAmount();
 				PotionChemical chemical = MinechemUtil.itemStackToChemical(result);
 				if (chemical != null)
 				{

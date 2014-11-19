@@ -65,8 +65,7 @@ public class DecomposerRecipeHandler
 		DecomposerRecipe recipe = getRecipe(input);
 		if (recipe != null)
 		{
-			ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutput());
-			return stacks;
+			return MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutput());
 		}
 		return null;
 	}
@@ -76,9 +75,7 @@ public class DecomposerRecipeHandler
 		DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) DecomposerRecipe.get(input);
 		if (fluidRecipe != null)
 		{
-
-			ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());
-			return stacks;
+			return MinechemUtil.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());
 		}
 		return null;
 	}

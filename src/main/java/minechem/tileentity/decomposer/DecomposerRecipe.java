@@ -29,17 +29,12 @@ public class DecomposerRecipe
 			{
 				return null;
 			}
-			recipes.put(getKey(recipe.input), recipe);
+			recipes.put(MapKey.getKey(recipe.input), recipe);
 		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
-			recipes.put(getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
+			recipes.put(MapKey.getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
 		}
 		return recipe;
-	}
-
-	public static DecomposerRecipe get(String string)
-	{
-		return recipes.get(string);
 	}
 
 	public static DecomposerRecipe remove(String string)
@@ -53,9 +48,10 @@ public class DecomposerRecipe
 
 	public static DecomposerRecipe remove(ItemStack itemStack)
 	{
-		if (recipes.containsKey(getKey(itemStack)))
+		MapKey key = MapKey.getKey(itemStack);
+		if (key!=null&&recipes.containsKey(key))
 		{
-			return recipes.remove(getKey(itemStack));
+			return recipes.remove(key);
 		}
 		return null;
 	}
@@ -65,24 +61,16 @@ public class DecomposerRecipe
 		return recipes.remove(key);
 	}
 
-	public static MapKey getKey(ItemStack itemStack)
+	public static DecomposerRecipe get(ItemStack itemStack)
 	{
-		return new MapKey(itemStack);
+		if (itemStack==null || itemStack.getItem()==null) return null;
+		return get(MapKey.getKey(itemStack));
 	}
 
-	public static MapKey getKey(FluidStack fluidStack)
+	public static DecomposerRecipe get(FluidStack fluidStack)
 	{
-		return new MapKey(fluidStack);
-	}
-
-	public static DecomposerRecipe get(ItemStack item)
-	{
-		return get(getKey(item));
-	}
-
-	public static DecomposerRecipe get(FluidStack item)
-	{
-		return get(getKey(item));
+		if (fluidStack==null) return null;
+		return get(MapKey.getKey(fluidStack));
 	}
 
 	public static DecomposerRecipe get(MapKey key)
@@ -155,13 +143,6 @@ public class DecomposerRecipe
 		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
 		result.addAll(this.output.values());
 		return result;
-	}
-
-	public static PotionChemical getPotionKey(PotionChemical potion)
-	{
-		PotionChemical key = potion.copy();
-		key.amount = 1;
-		return key;
 	}
 
 	public ArrayList<PotionChemical> getOutputRaw()

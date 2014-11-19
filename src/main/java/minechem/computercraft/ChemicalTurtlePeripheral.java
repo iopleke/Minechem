@@ -832,7 +832,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     }
 	
 	protected boolean addStackToKnown(ItemStack add) {
-		MapKey addString = DecomposerRecipe.getKey(add);
+		MapKey addString = MapKey.getKey(add);
 		for (MapKey key:known)
     	{
     		if (key.equals(addString)) return false;
@@ -847,7 +847,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     	ArrayList<MapKey> result = new ArrayList<MapKey>();
     	for (ItemStack stack:stacks)
     		if (stack!=null)
-        		result.add(DecomposerRecipe.getKey(stack));
+        		result.add(MapKey.getKey(stack));
     	return result;
     }
     
@@ -925,8 +925,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     
     private boolean validateInteger(Integer input, int max)
     {
-    	if (input==null) return false;
-    	if (input>=max) return false;
+    	if (input==null || input>=max) return false;
     	return true;
     }
     

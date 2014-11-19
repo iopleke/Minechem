@@ -43,4 +43,15 @@ public class MapKey{
         return hashcode;
     }
 
+    public static MapKey getKey(ItemStack stack)
+    {
+        if (stack==null || stack.getItem() == null) return null;
+        return new MapKey(stack);
+    }
+
+    public static MapKey getKey(FluidStack stack)
+    {
+        if (stack==null) return null;
+        return new MapKey(stack);
+    }
 }

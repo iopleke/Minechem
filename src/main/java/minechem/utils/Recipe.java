@@ -174,7 +174,7 @@ public class Recipe
 						components = ((ShapedRecipes) recipe).recipeItems;
 					}
 
-					MapKey key = DecomposerRecipe.getKey(input);
+					MapKey key = MapKey.getKey(input);
 					if (components != null && key != null)
 					{
 						boolean badRecipe = false;
@@ -197,7 +197,7 @@ public class Recipe
 		for (ItemStack input : smelting.keySet())
 		{
 			ItemStack output = smelting.get(input);
-			MapKey key = DecomposerRecipe.getKey(output);
+			MapKey key = MapKey.getKey(output);
 			if (key != null)
 			{
 				Recipe addRecipe = new Recipe(output, new ItemStack[]
@@ -223,7 +223,7 @@ public class Recipe
 			ArrayList<ItemStack> oreDictStacks = OreDictionary.getOres(name);
 			for (ItemStack thisStack : oreDictStacks)
 			{
-				String key = getKey(thisStack);
+				MapKey key = MapKey.getKey(thisStack);
 				if (key != null && DecomposerRecipe.get(key) != null)
 				{
 					for (ItemStack dictStack : oreDictStacks)
@@ -233,7 +233,7 @@ public class Recipe
 							String fromKey = getKey(dictStack);
 							if (fromKey != null)
 							{
-								oreDictionary.put(fromKey, key);
+								//oreDictionary.put(fromKey, key);
 							}
 						}
 					}
@@ -338,7 +338,7 @@ public class Recipe
 				{
 					if (stack != null)
 					{
-						MapKey key = DecomposerRecipe.getKey(stack);
+						MapKey key = MapKey.getKey(stack);
 						depth = Math.max(depth, getSize(key, 0, preCullRecipes));
 						if (depth >= MAXDEPTH)
 						{
@@ -400,7 +400,7 @@ public class Recipe
 			{
 				if (stack != null)
 				{
-					MapKey nextKey = DecomposerRecipe.getKey(stack);
+					MapKey nextKey = MapKey.getKey(stack);
 					int nextDepth = getSize(nextKey, depth + 1, preCullRecipes);
 					thisDepth = Math.max(thisDepth, nextDepth);
 					if (thisDepth > MAXDEPTH)
