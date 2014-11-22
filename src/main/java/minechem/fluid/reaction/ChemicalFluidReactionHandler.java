@@ -36,9 +36,11 @@ public class ChemicalFluidReactionHandler
 		}
 
 		World world = event.world;
+		List entities=new ArrayList();
+		entities.addAll(world.loadedEntityList);
 
-		for (Object entity:world.loadedEntityList){
-			if (entity instanceof EntityItem){
+		for (Object entity:entities){
+			if (entity instanceof EntityItem&&world.loadedEntityList.contains(entity)){
 				checkEntityItem(world,(EntityItem) entity);
 			}
 		}
