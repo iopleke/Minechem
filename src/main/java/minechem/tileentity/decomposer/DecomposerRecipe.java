@@ -27,10 +27,12 @@ public class DecomposerRecipe
 			{
 				return null;
 			}
-			recipes.put(MapKey.getKey(recipe.input), recipe);
+			if (recipes.get(MapKey.getKey(recipe.input)) == null)
+				recipes.put(MapKey.getKey(recipe.input), recipe);
 		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
-			recipes.put(MapKey.getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
+			if (recipes.get(MapKey.getKey(((DecomposerFluidRecipe) recipe).inputFluid)) == null)
+				recipes.put(MapKey.getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
 		}
 		return recipe;
 	}
