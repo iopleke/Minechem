@@ -5,9 +5,7 @@ import java.util.*;
 import minechem.Settings;
 import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
-import minechem.utils.LogHelper;
 import minechem.utils.MapKey;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -100,18 +98,10 @@ public class DecomposerRecipe
 		this.input = input;
 	}
 
-	public DecomposerRecipe(ItemStack input, ArrayList<PotionChemical> chemicals)
+	public DecomposerRecipe(ItemStack input, List<PotionChemical> chemicals)
 	{
+		this(chemicals.toArray(new PotionChemical[chemicals.size()]));
 		this.input = input;
-		for (PotionChemical potionChemical : chemicals)
-		{
-			PotionChemical current = this.output.put(new MapKey(potionChemical), potionChemical);
-			if (current != null)
-			{
-				current.amount += potionChemical.amount;
-				this.output.put(new MapKey(potionChemical), potionChemical);
-			}
-		}
 	}
 
 	public DecomposerRecipe(PotionChemical... chemicals)
@@ -129,7 +119,7 @@ public class DecomposerRecipe
 				current.amount += potionChemical.amount;
 				continue;
 			}
-			this.output.put(new MapKey(potionChemical), potionChemical);
+			this.output.put(new MapKey(potionChemical), potionChemical.copy());
 		}
 	}
 

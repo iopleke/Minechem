@@ -3046,20 +3046,12 @@ public class MinechemRecipes
 
 	private void addDecomposerRecipesFromMolecules()
 	{
-//		List<MoleculeEnum> var1 = MoleculeEnum.molecules;
-//		int var2 = var1.size();
-//
-//		for (int var3 = 0; var3 < var2; ++var3)
-//		{
-//			MoleculeEnum var4 = var1.get(var3);
-		for (MoleculeEnum var4 : MoleculeEnum.molecules.values())
+		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
-			if (var4 != null)
+			if (molecule != null)
 			{
-				ArrayList var5 = var4.components();
-				PotionChemical[] var6 = (PotionChemical[]) var5.toArray(new PotionChemical[var5.size()]);
-				ItemStack var7 = new ItemStack(MinechemItemsRegistration.molecule, 1, var4.id());
-				DecomposerRecipe.add(new DecomposerRecipe(var7, var6));
+				ItemStack itemStack = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
+				DecomposerRecipe.add(new DecomposerRecipe(itemStack, molecule.components()));
 			}
 		}
 
@@ -3067,18 +3059,12 @@ public class MinechemRecipes
 
 	private void addSynthesisRecipesFromMolecules()
 	{
-		//List<MoleculeEnum> molecules = MoleculeEnum.molecules;
-
-//		for (int i = 0; i < molecules.size(); ++i)
-//		{
-//			MoleculeEnum molecule = molecules.get(i);
 		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
 			if (molecule != null)
 			{
-				ArrayList components = molecule.components();
 				ItemStack moleculeItemStack = new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-				SynthesisRecipe.add(new SynthesisRecipe(moleculeItemStack, false, COST_ITEM, components));
+				SynthesisRecipe.add(new SynthesisRecipe(moleculeItemStack, false, COST_ITEM, molecule.components()));
 			}
 		}
 
