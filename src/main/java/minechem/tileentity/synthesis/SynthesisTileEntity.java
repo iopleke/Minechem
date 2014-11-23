@@ -685,7 +685,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 		if (recipe != null)
 		{
-			ItemStack[] ingredients = MinechemUtil.convertChemicalArrayIntoItemStackArray(recipe.getShapedRecipe());
+			ItemStack[] ingredients = MinechemUtil.convertChemicalArrayIntoItemStackArray(recipe.isShaped() ? recipe.getShapedRecipe() : recipe.getShapelessRecipe());
 			for (int i = 0; i < Math.min(kRecipe.length, ingredients.length); i++)
 			{
 				inventory[kRecipe[i]] = ingredients[i];
