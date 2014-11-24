@@ -1863,8 +1863,13 @@ public class MinechemRecipes
 		ItemStack itemDiamond = new ItemStack(Items.diamond);
 		DecomposerRecipe.add(new DecomposerRecipe(itemDiamond, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.fullrene, 4)
+			this.molecule(MoleculeEnum.fullrene, 3)
 		}));
+		SynthesisRecipe.add(new SynthesisRecipe(itemDiamond, true, COST_GEM, new PotionChemical[]
+		{
+				null, null, null, null, this.molecule(MoleculeEnum.fullrene, 3), null, null, null, null
+		}));
+
 
 		// Polytool
 		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(MinechemItemsRegistration.polytool), true, COST_STAR, new PotionChemical[]
