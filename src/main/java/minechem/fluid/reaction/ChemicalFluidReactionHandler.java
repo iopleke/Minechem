@@ -14,10 +14,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import java.util.*;
 
 public class ChemicalFluidReactionHandler
@@ -34,9 +36,11 @@ public class ChemicalFluidReactionHandler
 		}
 
 		World world = event.world;
+		List entities=new ArrayList();
+		entities.addAll(world.loadedEntityList);
 
-		for (Object entity:world.loadedEntityList){
-			if (entity instanceof EntityItem){
+		for (Object entity:entities){
+			if (entity instanceof EntityItem&&world.loadedEntityList.contains(entity)){
 				checkEntityItem(world,(EntityItem) entity);
 			}
 		}
@@ -72,6 +76,7 @@ public class ChemicalFluidReactionHandler
 					{
 						entityItem.setEntityItemStack(itemStack);
 					}
+					MinechemUtil.throwItemStack(world, new ItemStack(Items.bucket), x, y, z);
 				}
 			}
 

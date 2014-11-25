@@ -2,12 +2,16 @@ package minechem.fluid;
 
 import minechem.Settings;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
+import minechem.item.MinechemChemicalType;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
+import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.EnumFacing;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.BlockFluidClassic;
 
@@ -48,18 +52,42 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 
 		if (Settings.reactionFluidMeetFluid)
 		{
-			checkToExplode(world, x + 1, y, z, x, y, z);
-			checkToExplode(world, x, y + 1, z, x, y, z);
-			checkToExplode(world, x, y, z + 1, x, y, z);
-			checkToExplode(world, x - 1, y, z, x, y, z);
-			checkToExplode(world, x, y - 1, z, x, y, z);
-			checkToExplode(world, x, y, z - 1, x, y, z);
+			for (EnumFacing face:EnumFacing.values()){
+				if (checkToReact(world, x+face.getFrontOffsetX(), y+face.getFrontOffsetX(), z+face.getFrontOffsetX(), x, y, z)){
+					return;
+				}
+			}
 		}
+		
+		checkToExplode(world, x, y, z);
 	}
 
-	private boolean checkToExplode(World world, int dx, int dy, int dz, int sx, int sy, int sz)
+	private boolean checkToReact(World world, int dx, int dy, int dz, int sx, int sy, int sz)
 	{
 		return ChemicalFluidReactionHandler.checkToReact(this, world.getBlock(dx, dy, dz), world, dx, dy, dz, sx, sy, sz);
+	}
+	
+	private void checkToExplode(World world,int x,int y,int z){
+		MinechemChemicalType type=MinechemUtil.getChemical(this);
+		float level=ExplosiveFluidHandler.getInstance().getExplosiveFluid(type);
+		if (Float.isNaN(level)){
+			return;
+		}
+		
+		boolean flag=false;
+		for (EnumFacing face:EnumFacing.values()){
+			if (ExplosiveFluidHandler.getInstance().existingFireSource(world.getBlock(x+face.getFrontOffsetX(), y+face.getFrontOffsetY(), z+face.getFrontOffsetZ()))){
+				flag=true;
+				break;
+			}
+		}
+		if (!flag){
+			return;
+		}
+		
+		world.func_147480_a(x, y, z, true);
+		world.setBlockToAir(x, y, z);
+		world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosiveFluid(type), true);
 	}
 
 	@Override
@@ -80,5 +108,12 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 		super.onBlockEventReceived(world, x, y, z, eventID, eventParameter);
 		TileEntity tileentity = world.getTileEntity(x, y, z);
 		return tileentity != null ? tileentity.receiveClientEvent(eventID, eventParameter) : false;
+	}
+	
+	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
+		MinechemChemicalType type=MinechemUtil.getChemical(this);
+		world.func_147480_a(x, y, z, true);
+		world.setBlockToAir(x, y, z);
+		world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosiveFluid(type), true);
 	}
 }
