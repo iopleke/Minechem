@@ -1,3 +1,8 @@
+## Edits of this file MUST be in their own commit ##
+## Whenever possible, use wildcards to keep this clean ##
+## Alphabetize, or else ##
+## Put your edits in the proper section, or I'll grouch at you ##
+
 ## General housekeeping
 *.bat
 *.class
