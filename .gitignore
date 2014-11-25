@@ -32,6 +32,9 @@ out/
 output/
 run/
 
+## sublime
+*.sublime*
+
 ## eclipse
 .classpath
 .metadata/
