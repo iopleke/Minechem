@@ -260,7 +260,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
         		if (Compare.isStackAMolecule(current))
         		{
         			MoleculeEnum molecule = MoleculeItem.getMolecule(current);
-        			ArrayList<PotionChemical> chemicals = molecule.getChemicals();
+        			ArrayList<PotionChemical> chemicals = molecule.components();
         			for (int i=0;i<chemicals.size();i++)
         			{
         				PotionChemical chemical = chemicals.get(i);
