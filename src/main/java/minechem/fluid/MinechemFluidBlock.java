@@ -1,7 +1,10 @@
 package minechem.fluid;
 
+import java.util.Random;
+
 import minechem.Settings;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
+import minechem.item.ChemicalRoomStateEnum;
 import minechem.item.MinechemChemicalType;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
@@ -18,6 +21,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntityProvider
 {
 	private final boolean isRadioactivity;
+	private final boolean solid;
 
 	public MinechemFluidBlock(MinechemFluid fluid, Material material)
 	{
@@ -36,6 +40,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 		}
 
 		isBlockContainer = true;
+		solid=fluid.getChemical().roomState()==ChemicalRoomStateEnum.solid;
 	}
 
 	@Override
@@ -49,6 +54,10 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborBlock)
 	{
 		super.onNeighborBlockChange(world, x, y, z, neighborBlock);
+		
+		if (world.isRemote){
+			return;
+		}
 
 		if (Settings.reactionFluidMeetFluid)
 		{
@@ -111,9 +120,20 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	}
 	
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
+		if (world.isRemote){
+			return;
+		}
+		
 		MinechemChemicalType type=MinechemUtil.getChemical(this);
 		world.func_147480_a(x, y, z, true);
 		world.setBlockToAir(x, y, z);
 		world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosiveFluid(type), true);
 	}
+	
+    @Override
+    public void updateTick(World world, int x, int y, int z, Random rand) {
+    	if (!solid){
+    		super.updateTick(world, x, y, z, rand);
+    	}
+    }
 }
