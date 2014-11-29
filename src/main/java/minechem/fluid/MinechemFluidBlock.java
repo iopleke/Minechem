@@ -54,7 +54,10 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 	public void onNeighborBlockChange(World world, int x, int y, int z, Block neighborBlock)
 	{
 		super.onNeighborBlockChange(world, x, y, z, neighborBlock);
-		
+		checkStatus(world, x, y, z);
+	}
+
+    public void checkStatus(World world, int x, int y, int z){
 		if (world.isRemote){
 			return;
 		}
@@ -62,15 +65,15 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 		if (Settings.reactionFluidMeetFluid)
 		{
 			for (EnumFacing face:EnumFacing.values()){
-				if (checkToReact(world, x+face.getFrontOffsetX(), y+face.getFrontOffsetX(), z+face.getFrontOffsetX(), x, y, z)){
+				if (checkToReact(world, x+face.getFrontOffsetX(), y+face.getFrontOffsetY(), z+face.getFrontOffsetZ(), x, y, z)){
 					return;
 				}
 			}
 		}
 		
 		checkToExplode(world, x, y, z);
-	}
-
+    }
+    
 	private boolean checkToReact(World world, int dx, int dy, int dz, int sx, int sy, int sz)
 	{
 		return ChemicalFluidReactionHandler.checkToReact(this, world.getBlock(dx, dy, dz), world, dx, dy, dz, sx, sy, sz);
@@ -119,6 +122,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 		return tileentity != null ? tileentity.receiveClientEvent(eventID, eventParameter) : false;
 	}
 	
+	@Override
 	public void onBlockDestroyedByExplosion(World world, int x, int y, int z, Explosion explosion) {
 		if (world.isRemote){
 			return;
@@ -135,5 +139,12 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
     	if (!solid){
     		super.updateTick(world, x, y, z, rand);
     	}
+    	checkStatus(world, x, y, z);
+    }
+    
+    @Override
+	public void onBlockAdded(World world, int x, int y, int z) {
+    	super.onBlockAdded(world, x, y, z);
+    	checkStatus(world, x, y, z);
     }
 }
