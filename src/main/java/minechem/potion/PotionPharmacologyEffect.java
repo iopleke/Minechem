@@ -122,7 +122,7 @@ public class PotionPharmacologyEffect
 				cureAllPotions(world, (EntityPlayer) entityPlayer);
 			}
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration
-					.getId(), Constants.TICKS_PER_MINUTE * 5, 1));
+					.getId(), Constants.TICKS_PER_SECOND * 5, 1));
 		} else if (molecule == MoleculeEnum.testosterone)
 		{
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost
