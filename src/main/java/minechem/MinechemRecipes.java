@@ -2068,6 +2068,17 @@ public class MinechemRecipes
 			this.molecule(MoleculeEnum.sucrose), this.element(ElementEnum.H, 2), this.element(ElementEnum.O)
 		}));
 
+		// Vines
+		ItemStack itemVine = new ItemStack(Blocks.vine);
+		DecomposerRecipe.add(new DecomposerRecipe(itemVine, new PotionChemical[]
+		{
+			this.molecule(MoleculeEnum.cellulose, 6)
+		}));
+		SynthesisRecipe.add(new SynthesisRecipe(itemVine, true, COST_GRASS, new PotionChemical[]
+		{
+			this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose), this.molecule(MoleculeEnum.cellulose), null, this.molecule(MoleculeEnum.cellulose)
+		}));
+
 		// Paper
 		ItemStack itemPaper = new ItemStack(Items.paper);
 		DecomposerRecipe.add(new DecomposerRecipeChance(itemPaper, 0.25F, new PotionChemical[]
