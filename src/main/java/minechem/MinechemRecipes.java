@@ -1978,7 +1978,7 @@ public class MinechemRecipes
 		}));
 
         // Bucket
-        ItemStack itemBucket = new ItemStack(Items.water_bucket);
+        ItemStack itemBucket = new ItemStack(Items.bucket);
         DecomposerRecipe.add(new DecomposerRecipe(itemBucket, this.element(ElementEnum.Fe, 48)));
         SynthesisRecipe.add(new SynthesisRecipe(itemBucket, true, COST_FOOD, new PotionChemical[]
         {
