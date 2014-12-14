@@ -220,7 +220,7 @@ public class RadiationHandler
 		long lifeTime = currentTime - radiationInfo.decayStarted - radiationInfo.radioactivity.getLife();
 		if (lifeTime > 0)
 		{
-			int damage = radiationInfo.radioactivity.getDamage();
+			int damage = radiationInfo.radioactivity.getDamage()*element.stackSize;
 			Item item = element.getItem();
 			if (item == MinechemItemsRegistration.element)
 			{
