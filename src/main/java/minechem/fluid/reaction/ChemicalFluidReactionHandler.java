@@ -14,10 +14,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.item.EntityItem;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+
 import java.util.*;
 
 public class ChemicalFluidReactionHandler
@@ -28,25 +30,27 @@ public class ChemicalFluidReactionHandler
 	@SubscribeEvent
 	public void tick(TickEvent.WorldTickEvent event)
 	{
-		if (!Settings.reactionItemMeetFluid)
-		{
-			return;
-		}
-
-		World world = event.world;
-
-		for (Object entity:world.loadedEntityList){
-			if (entity instanceof EntityItem){
-				checkEntityItem(world,(EntityItem) entity);
-			}
-		}
+		if (Settings.reactionItemMeetFluid)
+        {
+            World world = event.world;
+            List<Object> entities = new ArrayList<Object>(world.loadedEntityList);
+            for (Object entity : entities)
+            {
+                if (entity instanceof EntityItem)
+                {
+                    checkEntityItem(world, (EntityItem) entity);
+                }
+            }
+        }
 	}
 
-	public void checkEntityItem(World world,EntityItem entityItem){
+	public void checkEntityItem(World world,EntityItem entityItem)
+    {
 		ItemStack itemStack = entityItem.getEntityItem();
 		Item item = itemStack.getItem();
 		MinechemChemicalType chemicalA = null;
-		if (item instanceof MinechemBucketItem){
+		if (item instanceof MinechemBucketItem)
+        {
 			chemicalA=MinechemUtil.getChemical(((MinechemBucketItem) item).fluid);
 		}
 
@@ -72,6 +76,7 @@ public class ChemicalFluidReactionHandler
 					{
 						entityItem.setEntityItemStack(itemStack);
 					}
+					MinechemUtil.throwItemStack(world, new ItemStack(Items.bucket), x, y, z);
 				}
 			}
 

@@ -29,7 +29,8 @@ public class SynthesisRecipe
 				return null;
 			}
 			MapKey key = MapKey.getKey(recipe.output);
-			if (key!=null) recipes.put(key, recipe);
+			if (key!=null && recipes.get(key) == null)
+				recipes.put(key, recipe);
 		}
 
 		return recipe;

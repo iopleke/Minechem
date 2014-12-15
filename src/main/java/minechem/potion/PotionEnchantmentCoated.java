@@ -1,6 +1,7 @@
 package minechem.potion;
 
 import minechem.item.molecule.MoleculeEnum;
+import minechem.utils.MinechemUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
@@ -67,13 +68,13 @@ public class PotionEnchantmentCoated extends Enchantment
 	@Override
 	public String getTranslatedName(int level)
 	{
-		String enchantedName = this.chemical.name() + " " + StatCollector.translateToLocal("enchantment.level." + level);
+		String enchantedName = StatCollector.translateToLocal("enchantment.level." + level);
 		if (StatCollector.canTranslate("minechem.enchantment.coated"))
 		{
-			return StatCollector.translateToLocalFormatted("minechem.enchantment.coated", enchantedName);
+			return MinechemUtil.getLocalString(chemical.getUnlocalizedName()) + " " + StatCollector.translateToLocalFormatted("minechem.enchantment.coated", enchantedName);
 		} else
 		{
-			return enchantedName + " Coated";
+			return MinechemUtil.getLocalString(chemical.getUnlocalizedName()) + " " + enchantedName + " Coated";
 		}
 	}
 

@@ -12,6 +12,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.computercraft.MinechemCCItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
+import minechem.fluid.MinechemBucketReceiver;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -166,6 +167,9 @@ public class Minechem
 
         LogHelper.debug("Registering Mod Ores for PolyTool...");
 		PolytoolTypeIron.getOres();
+		
+		LogHelper.debug("Overriding bucket dispenser...");
+		MinechemBucketReceiver.init();
 		
 		LogHelper.info("Minechem has loaded");
 	}

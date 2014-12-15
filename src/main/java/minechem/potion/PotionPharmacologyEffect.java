@@ -122,7 +122,7 @@ public class PotionPharmacologyEffect
 				cureAllPotions(world, (EntityPlayer) entityPlayer);
 			}
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.regeneration
-					.getId(), Constants.TICKS_PER_MINUTE * 5, 1));
+					.getId(), Constants.TICKS_PER_SECOND * 5, 1));
 		} else if (molecule == MoleculeEnum.testosterone)
 		{
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.damageBoost
@@ -249,9 +249,9 @@ public class PotionPharmacologyEffect
 				((EntityPlayer) entityPlayer).getFoodStats().addStats(2, .1F);
 			}
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.digSpeed
-					.getId(), Constants.TICKS_PER_SECOND * 120, 3));
+					.getId(), Constants.TICKS_PER_SECOND * 20, 1));
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.jump.getId(),
-					Constants.TICKS_PER_SECOND * 120, 3));
+					Constants.TICKS_PER_SECOND * 20, 1));
 		} else if (molecule == MoleculeEnum.cocaine)
 		{
 			entityPlayer.addPotionEffect(new PotionEffect(Potion.confusion

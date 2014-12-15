@@ -4,6 +4,7 @@ import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Minechem;
+import minechem.fluid.MinechemBucketDispenser;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
@@ -18,6 +19,7 @@ import minechem.radiation.RadiationInfo;
 import minechem.reference.Reference;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.block.Block;
+import net.minecraft.block.BlockDispenser;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -112,6 +114,7 @@ public class MinechemBucketHandler
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
         buckets.put(block, bucket);
         Minechem.PROXY.onAddBucket(bucket);
+        BlockDispenser.dispenseBehaviorRegistry.putObject(bucket,MinechemBucketDispenser.dispenser);
     }
 
     public void registerBucketRecipes()
