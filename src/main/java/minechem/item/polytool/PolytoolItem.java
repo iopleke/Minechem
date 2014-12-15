@@ -161,7 +161,7 @@ public class PolytoolItem extends ItemPickaxe
 		NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_COMPOUND);
 		for (int i = 0; i < list.tagCount(); i++)
 		{
-			if (list.getCompoundTagAt(i).getInteger("Element") == type.getElement().ordinal())
+			if (list.getCompoundTagAt(i).getInteger("Element") == type.getElement().atomicNumber())
 			{
 				list.getCompoundTagAt(i).setFloat("Power", list.getCompoundTagAt(i).getFloat("Power") + type.power);
 
@@ -169,7 +169,7 @@ public class PolytoolItem extends ItemPickaxe
 			}
 		}
 		compound.setFloat("Power", type.power);
-		compound.setInteger("Element", type.getElement().ordinal());
+		compound.setInteger("Element", type.getElement().atomicNumber());
 		list.appendTag(compound);
 
 	}
@@ -208,7 +208,7 @@ public class PolytoolItem extends ItemPickaxe
 		while (iter.hasNext())
 		{
 			PolytoolUpgradeType next = (PolytoolUpgradeType) iter.next();
-			if (next.getElement().ordinal() == element.ordinal())
+			if (next.getElement().atomicNumber() == element.atomicNumber())
 			{
 
 				return next.power;

@@ -39,7 +39,7 @@ public class CreativeTabMinechem extends CreativeTabs
 			case 0:
 				return new ItemStack(MinechemBlocksGeneration.microscope);
 			case 1:
-				return new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.U.ordinal());
+				return new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.U.atomicNumber());
 			case 2:
 				return new ItemStack(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementEnum.U))), 1);
 			default:

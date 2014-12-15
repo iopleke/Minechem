@@ -170,7 +170,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		else if (tank != null)
 		{
 			recipe = DecomposerRecipe.get(tank);
-			if (((DecomposerFluidRecipe)recipe).inputFluid.amount > tank.amount) return false;
+			if (recipe != null && ((DecomposerFluidRecipe)recipe).inputFluid.amount > tank.amount) return false;
 		}
 		return (recipe != null);
 	}

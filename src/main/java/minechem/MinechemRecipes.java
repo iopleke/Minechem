@@ -3034,7 +3034,7 @@ public class MinechemRecipes
 		});
 		GameRegistry.addRecipe(new ItemStack(MinechemBlocksGeneration.leadChest), new Object[]
 		{
-			"LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Pb.ordinal()), Character.valueOf('C'), new ItemStack(Blocks.chest)
+			"LLL", "LCL", "LLL", Character.valueOf('L'), new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Pb.atomicNumber()), Character.valueOf('C'), new ItemStack(Blocks.chest)
 		});
 		GameRegistry.addShapelessRecipe(new ItemStack(MinechemItemsRegistration.journal), new Object[]
 		{

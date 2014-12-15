@@ -22,7 +22,7 @@ public class PolytoolUpdateMessage implements IMessage, IMessageHandler<Polytool
 
 	public PolytoolUpdateMessage(PolytoolUpgradeType type)
 	{
-		this.element = type.getElement().ordinal();
+		this.element = type.getElement().atomicNumber();
 		this.power = type.power;
 	}
 

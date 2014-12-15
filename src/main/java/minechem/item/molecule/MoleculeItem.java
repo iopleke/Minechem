@@ -150,7 +150,7 @@ public class MoleculeItem extends Item
 					if (result)
 						((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), fluidStack, true);
 					if (!player.capabilities.isCreativeMode)
-						MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+						MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, 0));
 					return result || stack.stackSize <= 0;
 				}
 			}
@@ -314,7 +314,7 @@ public class MoleculeItem extends Item
 						}
 					}
 				}
-				ItemStack empties=MinechemUtil.addItemToInventory(player.inventory, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
+				ItemStack empties=MinechemUtil.addItemToInventory(player.inventory, new ItemStack(MinechemItemsRegistration.element, 8, 0));
 				MinechemUtil.throwItemStack(world, empties, x, y, z);
 			}
 			
