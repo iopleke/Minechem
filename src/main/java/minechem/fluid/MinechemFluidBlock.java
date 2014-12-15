@@ -11,7 +11,9 @@ import minechem.radiation.RadiationFluidTileEntity;
 import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.block.material.MapColor;
 import net.minecraft.block.material.Material;
+import net.minecraft.block.material.MaterialLiquid;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.Explosion;
@@ -21,6 +23,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntityProvider
 {
 	private final boolean isRadioactivity;
+	protected static final Material materialFluidBlock = new MaterialLiquid(MapColor.waterColor);
 	private final boolean solid;
 
 	public MinechemFluidBlock(MinechemFluid fluid, Material material)
