@@ -28,7 +28,7 @@ public class FluidBlockElement extends MinechemFluidBlock
 
 	public FluidBlockElement(MinechemFluid fluid)
 	{
-		super(fluid, Material.water);
+		super(fluid, materialFluidBlock);
 		this.setBlockName(fluidName);
 	}
 
