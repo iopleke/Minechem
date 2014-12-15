@@ -139,7 +139,7 @@ public class RadiationMoleculeHandler
 			if (chemical instanceof Element)
 			{
 				thisType = MinechemItemsRegistration.element;
-				thisDamage = ((Element) chemical).element.ordinal();
+				thisDamage = ((Element) chemical).element.atomicNumber();
 			} else if (chemical instanceof Molecule)
 			{
 				thisType = MinechemItemsRegistration.molecule;
@@ -185,29 +185,25 @@ public class RadiationMoleculeHandler
 			return outChemicals;
 		}
 
-		Iterator<PotionChemical> it = chemicals.iterator();
-		while (it.hasNext())
+		for (PotionChemical chemical1 : chemicals)
 		{
-			PotionChemical chemical = it.next().copy();
+			PotionChemical chemical = chemical1.copy();
 
 			if (chemical instanceof Element)
 			{
 				Element element = (Element) chemical;
 				if (element.element.radioactivity() != RadiationEnum.stable)
 				{
-					element.element = ElementEnum.getByID(element.element.ordinal() - 1);
-				} else if (chemical instanceof Molecule)
+					element.element = ElementEnum.getByID(element.element.atomicNumber());
+				}
+			} else if (chemical instanceof Molecule)
+			{
+				Molecule molecule2 = (Molecule) chemical;
+				if (molecule2.molecule.radioactivity() != RadiationEnum.stable)
 				{
-					Molecule molecule2 = (Molecule) chemical;
-					if (molecule2.molecule.radioactivity() != RadiationEnum.stable)
-					{
-						PotionChemical[] chemicals2 = getDecayedMolecule(molecule2.molecule);
-						for (PotionChemical chemical2 : chemicals2)
-						{
-							outChemicals.add(chemical2);
-						}
-						chemical = null;
-					}
+					PotionChemical[] chemicals2 = getDecayedMolecule(molecule2.molecule);
+					Collections.addAll(outChemicals, chemicals2);
+					chemical = null;
 				}
 			}
 

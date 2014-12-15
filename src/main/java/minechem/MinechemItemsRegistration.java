@@ -1,6 +1,5 @@
 package minechem;
 
-
 import minechem.fluid.FluidHelper;
 import minechem.item.ItemAtomicManipulator;
 import minechem.item.OpticalMicroscopeLens;
@@ -21,12 +20,8 @@ import net.minecraftforge.fluids.FluidContainerRegistry;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
-import cpw.mods.fml.common.Optional;
 import cpw.mods.fml.common.registry.GameRegistry;
 
-@Optional.InterfaceList({
-    @Optional.Interface(iface = "dan200.computercraft.api.ComputerCraftAPI", modid = "ComputerCraft"),
-    @Optional.Interface(iface = "minechem.computercraft.MinechemTurtleUpgrade", modid = "ComputerCraft")})
 public class MinechemItemsRegistration
 {
 	public static ElementItem element;
@@ -70,7 +65,7 @@ public class MinechemItemsRegistration
 		polytool = new PolytoolItem();
 		GameRegistry.registerItem(polytool, Reference.ID + "Polytool");
 
-		emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass);
+		emptyTube = new ItemStack(MinechemItemsRegistration.element, 1, 0);
 	}
 
 	public static void registerFluidContainers()
@@ -79,7 +74,7 @@ public class MinechemItemsRegistration
 		{
 			if (element != null)
 			{
-				ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
+				ItemStack tube = new ItemStack(MinechemItemsRegistration.element, 1, element.atomicNumber());
 				FluidContainerRegistry.registerFluidContainer(new FluidStack(FluidHelper.elements.get(element), 125), tube, emptyTube);
 			}
 		}
@@ -100,7 +95,7 @@ public class MinechemItemsRegistration
 	{
 		for (ElementEnum element : ElementEnum.elements.values())
 		{
-			OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+			OreDictionary.registerOre("element_" + element.name(), new ItemStack(MinechemItemsRegistration.element, 1, element.atomicNumber()));
 		}
 		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
@@ -108,7 +103,7 @@ public class MinechemItemsRegistration
 		}
 		OreDictionary.registerOre("dustSaltpeter", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.potassiumNitrate.id()));
 		OreDictionary.registerOre("dustSalt", new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.salt.id()));
-		OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.ordinal()));
+		OreDictionary.registerOre("quicksilver", new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.Hg.atomicNumber()));
 	}
 
 	public static void addDungeonLoot()
@@ -122,10 +117,10 @@ public class MinechemItemsRegistration
 	
 	public static void registerFuelValues()
 	{
-		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.C.ordinal()), 200);
-		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.H.ordinal()), 100);
-		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.S.ordinal()), 300);
-		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.P.ordinal()), 250);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.C.atomicNumber()), 200);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.H.atomicNumber()), 100);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.S.atomicNumber()), 300);
+		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.P.atomicNumber()), 250);
 		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.cellulose.id()), 2000);
 		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.meoh.id()), 500);
 		MinechemFuelHandler.addFuel(new ItemStack(MinechemItemsRegistration.molecule, 1, MoleculeEnum.ethanol.id()), 1100);

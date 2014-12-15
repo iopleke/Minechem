@@ -70,17 +70,17 @@ public class ElementItem extends Item
     public static String getShortName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).name() : MinechemUtil.getLocalString("element.empty");
+        return atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty"):  ElementEnum.getByID(atomicNumber).name();
     }
 
     public static String getLongName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        String longName = atomicNumber < ElementEnum.heaviestMass ? MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName()) : MinechemUtil.getLocalString("element.empty");
+        String longName = atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty"):  MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName());
         if (longName.contains("Element."))
         {
             ElementEnum element = ElementEnum.getByID(atomicNumber);
-            if (element!=null) longName=element.getLongName();
+            if (element != null) longName = element.getLongName();
         }
         return longName;
     }
@@ -88,18 +88,18 @@ public class ElementItem extends Item
     public static String getClassification(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).classification().descriptiveName() : MinechemUtil.getLocalString("element.empty");
+        return atomicNumber != 0 ? ElementEnum.getByID(atomicNumber).classification().descriptiveName() : MinechemUtil.getLocalString("element.empty");
     }
 
     public static String getRoomState(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber < ElementEnum.heaviestMass ? ElementEnum.getByID(atomicNumber).roomState().descriptiveName() : MinechemUtil.getLocalString("element.empty");
+        return atomicNumber != 0 ? ElementEnum.getByID(atomicNumber).roomState().descriptiveName() : MinechemUtil.getLocalString("element.empty");
     }
 
     public static ElementEnum getElement(ItemStack itemstack)
     {
-        return itemstack.getItemDamage() < ElementEnum.heaviestMass ? ElementEnum.getByID(itemstack.getItemDamage()) : null;
+        return itemstack.getItemDamage() != 0 ? ElementEnum.getByID(itemstack.getItemDamage()) : null;
     }
 
     public static void attackEntityWithRadiationDamage(ItemStack itemstack, int damage, Entity entity)
@@ -145,12 +145,12 @@ public class ElementItem extends Item
     @SideOnly(Side.CLIENT)
     public void addInformation(ItemStack itemstack, EntityPlayer player, List list, boolean bool)
     {
-        if (itemstack.getItemDamage() == ElementEnum.heaviestMass)
+        if (itemstack.getItemDamage() == 0)
         {
             return;
         }
 
-        list.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage() + 1) + ")");
+        list.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage()) + ")");
 
         String radioactivityColor;
         RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
@@ -223,20 +223,14 @@ public class ElementItem extends Item
     @SideOnly(Side.CLIENT)
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
     {
-        list.add(new ItemStack(item, 1, ElementEnum.heaviestMass));
-        for (int id = 0; id < ElementEnum.heaviestMass; id++)
-        {
-            ElementEnum element = ElementEnum.getByID(id);
-            if (element != null)
-            {
-                list.add(new ItemStack(item, 1, id));
-            }
-        }
+        list.add(new ItemStack(item, 1, 0));
+        for (int i = 1; i < ElementEnum.heaviestMass; i++)
+            list.add(new ItemStack(item, 1, ElementEnum.getByID(i).atomicNumber()));
     }
 
     public static ItemStack createStackOf(ElementEnum element, int amount)
     {
-        return new ItemStack(MinechemItemsRegistration.element, amount, element.ordinal());
+        return new ItemStack(MinechemItemsRegistration.element, amount, element.atomicNumber());
     }
 
     public static RadiationInfo getRadiationInfo(ItemStack element, World world)
@@ -286,7 +280,7 @@ public class ElementItem extends Item
         boolean result = !world.isRemote;
         if (te != null && te instanceof IFluidHandler && !player.isSneaking() && !(te instanceof IInventory))
         {
-            if (stack.getItemDamage() != ElementEnum.heaviestMass)
+            if (stack.getItemDamage() != 0)
             {
                 int filled = 0;
                 for (int i = 0; i < 6; i++)
@@ -297,7 +291,7 @@ public class ElementItem extends Item
                         if (result)
                             ((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)), 125), true);
                         if (!player.capabilities.isCreativeMode)
-                            MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, ElementEnum.heaviestMass));
+                            MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, 0));
                         return result || stack.stackSize <= 0;
                     }
                 }
@@ -316,7 +310,7 @@ public class ElementItem extends Item
                             if (result)
                                 ((IFluidHandler) te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), true);
                             if (!player.capabilities.isCreativeMode)
-                                MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal()));
+                                MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, element.atomicNumber()));
                             return result;
                         }
                     }
@@ -350,7 +344,7 @@ public class ElementItem extends Item
     @Override
     public ItemStack onItemRightClick(ItemStack itemStack, World world, EntityPlayer player)
     {
-        boolean flag = itemStack.getItemDamage() == ElementEnum.heaviestMass;
+        boolean flag = itemStack.getItemDamage() == 0;
         MovingObjectPosition movingObjectPosition = this.getMovingObjectPositionFromPlayer(world, player, flag);
         if (movingObjectPosition == null)
         {
@@ -489,7 +483,7 @@ public class ElementItem extends Item
                         }
                     }
                 }
-                ItemStack empties = MinechemUtil.addItemToInventory(player.inventory, new ItemStack(MinechemItemsRegistration.element, 8, ElementEnum.heaviestMass));
+                ItemStack empties = MinechemUtil.addItemToInventory(player.inventory, new ItemStack(MinechemItemsRegistration.element, 8, 0));
                 MinechemUtil.throwItemStack(world, empties, x, y, z);
             }
 
