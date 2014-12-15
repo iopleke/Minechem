@@ -20,10 +20,9 @@ import net.minecraftforge.oredict.ShapelessOreRecipe;
 public class Recipe
 {
 
-	public static Map<MapKey, Recipe> recipes;
+	public static Map<MapKey, Recipe> recipes = new LinkedHashMap<MapKey, Recipe>();
 
 	public static Map<ItemStack, ItemStack> smelting;
-	public static Map<String, String> oreDictionary;
 	public ItemStack output;
 	public ItemStack[] inStacks;
 
@@ -108,7 +107,6 @@ public class Recipe
 		Map<MapKey, ArrayList<Recipe>> preCullRecipes = new Hashtable<MapKey, ArrayList<Recipe>>();
 		recipes = new LinkedHashMap<MapKey, Recipe>();
 		smelting = FurnaceRecipes.smelting().getSmeltingList();
-		oreDictionary = new Hashtable<String, String>();
 		List craftingRecipes = CraftingManager.getInstance().getRecipeList();
 		if (Loader.isModLoaded("RotaryCraft"))
 		{
@@ -215,29 +213,6 @@ public class Recipe
 			{
 				Recipe addRecipe = entry.getValue().get(0);
 				recipes.put(entry.getKey(), addRecipe);
-			}
-		}
-
-		for (String name : OreDictionary.getOreNames())
-		{
-			ArrayList<ItemStack> oreDictStacks = OreDictionary.getOres(name);
-			for (ItemStack thisStack : oreDictStacks)
-			{
-				MapKey key = MapKey.getKey(thisStack);
-				if (key != null && DecomposerRecipe.get(key) != null)
-				{
-					for (ItemStack dictStack : oreDictStacks)
-					{
-						if (!dictStack.equals(thisStack))
-						{
-							String fromKey = getKey(dictStack);
-							if (fromKey != null)
-							{
-								//oreDictionary.put(fromKey, key);
-							}
-						}
-					}
-				}
 			}
 		}
 	}
