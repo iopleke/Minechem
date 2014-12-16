@@ -16,7 +16,7 @@ abstract public class MinechemFluid extends Fluid
 		super(fluidName);
 		setGaseous(roomstatus.isGas());
 		setViscosity(roomstatus.getViscosity());
-		setDensity(roomstatus.isGas() ? -10 : 10);
+		setDensity(roomstatus.isGas() ? -10 : roomstatus == ChemicalRoomStateEnum.solid?0 : 10);
 		setQuanta(roomstatus.getQuanta());
 		FluidRegistry.registerFluid(this);
 	}
