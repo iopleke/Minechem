@@ -224,8 +224,11 @@ public class ElementItem extends Item
     public void getSubItems(Item item, CreativeTabs creativeTabs, List list)
     {
         list.add(new ItemStack(item, 1, 0));
-        for (int i = 1; i < ElementEnum.heaviestMass; i++)
-            list.add(new ItemStack(item, 1, ElementEnum.getByID(i).atomicNumber()));
+        for (int i = 1; i <= ElementEnum.heaviestMass; i++)
+        {
+            if (ElementEnum.getByID(i) == null) continue;
+            list.add(new ItemStack(item, 1, i));
+        }
     }
 
     public static ItemStack createStackOf(ElementEnum element, int amount)
