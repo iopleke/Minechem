@@ -21,7 +21,6 @@ public class Chemicals
 	@ZenMethod
 	public static void addElement(int id, String name, String descriptiveName, String classification, String roomState, String radioactivity)
 	{
-		id--;
 		if (id < 0)
 		{
 			throw new IllegalArgumentException(id + " is invalid");
