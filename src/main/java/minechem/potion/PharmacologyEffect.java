@@ -30,6 +30,12 @@ public abstract class PharmacologyEffect
             if (entityLivingBase instanceof EntityPlayer)
                 ((EntityPlayer) entityLivingBase).getFoodStats().addStats(level, saturation);
         }
+
+        @Override
+        public String toString()
+        {
+            return "FoodEffect: level=" + level + " saturation" + saturation;
+        }
     }
 
     public static class Burn extends PharmacologyEffect
@@ -45,6 +51,12 @@ public abstract class PharmacologyEffect
         public void applyEffect(EntityLivingBase entityLivingBase)
         {
             entityLivingBase.setFire(duration);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "BurnEffect: duration=" + duration;
         }
     }
 
@@ -79,6 +91,12 @@ public abstract class PharmacologyEffect
             else
                 entityLivingBase.removePotionEffect(potionId);
         }
+
+        @Override
+        public String toString()
+        {
+            return "CureEffect: cures=" + (potionId == -1 ? "all" : PotionHelper.getPotionNameById(potionId));
+        }
     }
 
     public static class Damage extends PharmacologyEffect
@@ -94,6 +112,12 @@ public abstract class PharmacologyEffect
         public void applyEffect(EntityLivingBase entityLivingBase)
         {
             entityLivingBase.attackEntityFrom(DamageSource.generic, damage);
+        }
+
+        @Override
+        public String toString()
+        {
+            return "DamageEffect: damage=" + damage;
         }
     }
 
@@ -129,6 +153,12 @@ public abstract class PharmacologyEffect
         public void applyEffect(EntityLivingBase entityLivingBase)
         {
             entityLivingBase.addPotionEffect(new PotionEffect(potionId, duration * Constants.TICKS_PER_SECOND, power));
+        }
+
+        @Override
+        public String toString()
+        {
+            return "PotionEffect: potion=" + PotionHelper.getPotionNameById(potionId) + " duration=" + duration + " power=" + power;
         }
     }
 }

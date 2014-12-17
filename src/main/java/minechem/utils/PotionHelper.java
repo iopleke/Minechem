@@ -16,6 +16,12 @@ public class PotionHelper
         return potionMap.get(name.toLowerCase());
     }
 
+    public static String getPotionNameById(int id)
+    {
+        Potion potion = Potion.potionTypes[id];
+        return potion == null ? "" : potion.getName();
+    }
+
     private static void registerPotions()
     {
         for (Potion potion : Potion.potionTypes)
