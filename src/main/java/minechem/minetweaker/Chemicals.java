@@ -91,7 +91,7 @@ public class Chemicals
 	}
 
 	@ZenMethod
-	public static void removeEffects(IIngredient ingredient)
+	public static void removeMoleculeEffects(IIngredient ingredient)
 	{
 		PotionChemical chemical = InputHelper.getChemical(ingredient);
 		if (!(chemical instanceof Molecule)) throw new IllegalArgumentException("Ingredient is not a molecule");
