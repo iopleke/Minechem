@@ -26,7 +26,7 @@ public class PotionEnchantmentCoated extends Enchantment
 
 	public void applyEffect(EntityLivingBase entity)
 	{
-		PotionPharmacologyEffect.triggerPlayerEffect(this.chemical, entity);
+		PharmacologyEffectRegistry.applyEffect(this.chemical, entity);
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class PotionEnchantmentCoated extends Enchantment
 	{
 		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
-			if (molecule != null && PotionPharmacologyEffect.givesEffect(molecule))
+			if (molecule != null && PharmacologyEffectRegistry.hasEffect(molecule))
 			{
 				for (int i = 0; i < Enchantment.enchantmentsList.length; i++)
 				{

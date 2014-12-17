@@ -29,7 +29,7 @@ public class PotionCoatingRecipe implements IRecipe
 						ItemStack s2 = inv.getStackInSlot(j);
 						if (s2 != null && s2.getItem() instanceof MoleculeItem)
 						{
-							if (PotionPharmacologyEffect.givesEffect(MoleculeEnum.getById(s2.getItemDamage())))
+							if (PharmacologyEffectRegistry.hasEffect(MoleculeEnum.getById(s2.getItemDamage())))
 							{
 								return true;
 							}
@@ -52,7 +52,7 @@ public class PotionCoatingRecipe implements IRecipe
 				for (int j = 0; j < inv.getSizeInventory(); j++)
 				{
 					ItemStack s2 = inv.getStackInSlot(j);
-					if (s2 != null && s2.getItem() instanceof MoleculeItem && PotionPharmacologyEffect.givesEffect(MoleculeEnum.getById(s2.getItemDamage())))
+					if (s2 != null && s2.getItem() instanceof MoleculeItem && PharmacologyEffectRegistry.hasEffect(MoleculeEnum.getById(s2.getItemDamage())))
 					{
 						NBTTagList l = s2.getEnchantmentTagList();
 						int level = 0;

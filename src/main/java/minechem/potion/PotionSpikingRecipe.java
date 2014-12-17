@@ -29,7 +29,7 @@ public class PotionSpikingRecipe implements IRecipe
                         ItemStack s2 = inv.getStackInSlot(j);
                         if (s2 != null && s2.getItem() instanceof MoleculeItem)
                         {
-                            if (PotionPharmacologyEffect.givesEffect(MoleculeEnum.getById(s2.getItemDamage())))
+                            if (PharmacologyEffectRegistry.hasEffect(MoleculeEnum.getById(s2.getItemDamage())))
                             {
                                 return true;
                             }
@@ -52,7 +52,7 @@ public class PotionSpikingRecipe implements IRecipe
                 for (int j = 0; j < inv.getSizeInventory(); j++)
                 {
                     ItemStack moleculeStack = inv.getStackInSlot(j);
-                    if (moleculeStack != null && moleculeStack.getItem() instanceof MoleculeItem && PotionPharmacologyEffect.givesEffect(MoleculeEnum.getById(moleculeStack.getItemDamage())))
+                    if (moleculeStack != null && moleculeStack.getItem() instanceof MoleculeItem && PharmacologyEffectRegistry.hasEffect(MoleculeEnum.getById(moleculeStack.getItemDamage())))
                     {
                         ItemStack result = foodItem.copy();
                         result.stackSize = 1;
@@ -67,10 +67,7 @@ public class PotionSpikingRecipe implements IRecipe
                         {
                             int[] arrayOld = result.stackTagCompound.getIntArray("minechem.effectTypes");
                             int[] arrayNew = new int[arrayOld.length+1];
-                            for (int index = 0; index < arrayOld.length; index++)
-                            {
-                                arrayNew[index] = arrayOld[index];
-                            }
+                            System.arraycopy(arrayOld, 0, arrayNew, 0, arrayOld.length);
                             arrayNew[arrayOld.length] = MoleculeItem.getMolecule(moleculeStack).id();
                             result.stackTagCompound.setIntArray("minechem.effectTypes", arrayNew);
                         }

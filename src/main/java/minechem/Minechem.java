@@ -162,6 +162,9 @@ public class Minechem
 		LogHelper.debug("Adding blueprints to dungeon loot...");
 		MinechemItemsRegistration.addDungeonLoot();
 
+		LogHelper.debug("Adding effects to molecules...");
+		PharmacologyEffectRegistry.init();
+
 		LogHelper.debug("Activating Chemical Effect Layering (Coatings)...");
 		PotionEnchantmentCoated.registerCoatings();
 

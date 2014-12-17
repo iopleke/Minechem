@@ -5,7 +5,7 @@ import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import minechem.Settings;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.potion.PotionPharmacologyEffect;
+import minechem.potion.PharmacologyEffectRegistry;
 import minechem.radiation.RadiationHandler;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -37,7 +37,7 @@ public class ScheduledTickHandler
                 for (int effectType : effectTypes)
                 {
                     MoleculeEnum molecule = MoleculeEnum.getById(effectType);
-                    PotionPharmacologyEffect.triggerPlayerEffect(molecule, event.entityPlayer);
+                    PharmacologyEffectRegistry.applyEffect(molecule, event.entityPlayer);
                 }
             }
         }

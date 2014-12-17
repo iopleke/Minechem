@@ -3,7 +3,7 @@ package minechem.fluid;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Settings;
-import minechem.potion.PotionPharmacologyEffect;
+import minechem.potion.PharmacologyEffectRegistry;
 import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -70,7 +70,7 @@ public class FluidBlockMolecule extends MinechemFluidBlock
 	{
 		if (entity instanceof EntityLivingBase && Settings.fluidEffects && getFluid() instanceof FluidMolecule)
 		{
-			PotionPharmacologyEffect.triggerPlayerEffect(((FluidMolecule) getFluid()).molecule, (EntityLivingBase) entity);
+			PharmacologyEffectRegistry.applyEffect(((FluidMolecule) getFluid()).molecule, (EntityLivingBase) entity);
 
 			int power = ((FluidMolecule) getFluid()).molecule.radioactivity().ordinal();
 			if (power > 0)
