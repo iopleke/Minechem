@@ -6,9 +6,8 @@ import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
-import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
-import minechem.potion.PotionPharmacologyEffect;
+import minechem.potion.PharmacologyEffectRegistry;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
@@ -204,7 +203,7 @@ public class MoleculeItem extends Item
 		}
 
 		MoleculeEnum molecule = getMolecule(itemStack);
-		PotionPharmacologyEffect.triggerPlayerEffect(molecule, entityPlayer);
+		PharmacologyEffectRegistry.applyEffect(molecule, entityPlayer);
 		world.playSoundAtEntity(entityPlayer, "random.burp", 0.5F, world.rand.nextFloat() * 0.1F + 0.9F); // Thanks mDiyo!
 		return itemStack;
 	}
