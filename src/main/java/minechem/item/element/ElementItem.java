@@ -3,6 +3,7 @@ package minechem.item.element;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.MinechemItemsRegistration;
+import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
 import minechem.gui.CreativeTabMinechem;
 import minechem.item.ChemicalRoomStateEnum;
@@ -152,32 +153,9 @@ public class ElementItem extends Item
 
         list.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage()) + ")");
 
-        String radioactivityColor;
+
         RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
-        switch (radioactivity)
-        {
-            case stable:
-                radioactivityColor = Constants.TEXT_MODIFIER + "7";
-                break;
-            case hardlyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "a";
-                break;
-            case slightlyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "2";
-                break;
-            case radioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "e";
-                break;
-            case highlyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "6";
-                break;
-            case extremelyRadioactive:
-                radioactivityColor = Constants.TEXT_MODIFIER + "4";
-                break;
-            default:
-                radioactivityColor = "";
-                break;
-        }
+        String radioactivityColor = radioactivity.getColour();
 
         String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
         String timeLeft = "";
@@ -203,11 +181,11 @@ public class ElementItem extends Item
                     localizedDesc = polytoolDesc;
                 }
 
-                list.add(EnumColor.AQUA + localizedDesc);
+                list.add(EnumColour.AQUA + localizedDesc);
 
             } else
             {
-                list.add(EnumColor.DARK_GREEN + MinechemUtil.getLocalString("polytool.information"));
+                list.add(EnumColour.DARK_GREEN + MinechemUtil.getLocalString("polytool.information"));
             }
         }
 
@@ -288,7 +266,10 @@ public class ElementItem extends Item
                 int filled = 0;
                 for (int i = 0; i < 6; i++)
                 {
-                    filled = ((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)), 125), false);
+                    FluidElement fluid = FluidHelper.elements.get(getElement(stack));
+                    if (fluid==null)
+                        return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+                    filled = ((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), false);
                     if (filled > 0)
                     {
                         if (result)
@@ -341,7 +322,6 @@ public class ElementItem extends Item
             return result;
         }
         return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-
     }
 
     @Override

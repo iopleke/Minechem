@@ -1,6 +1,8 @@
 package minechem.potion;
 
 import minechem.utils.Constants;
+import minechem.utils.EnumColour;
+import minechem.utils.MinechemUtil;
 import minechem.utils.PotionHelper;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
@@ -11,7 +13,19 @@ import java.util.ArrayList;
 
 public abstract class PharmacologyEffect
 {
+    private String colour;
+
+    PharmacologyEffect(EnumColour colour)
+    {
+        this.colour = colour.toString();
+    }
+
     public abstract void applyEffect(EntityLivingBase entityLivingBase);
+
+    public String getColour()
+    {
+        return colour;
+    }
 
     public static class Food extends PharmacologyEffect
     {
@@ -20,6 +34,7 @@ public abstract class PharmacologyEffect
 
         public Food(int level, float saturation)
         {
+            super(EnumColour.DARK_GREEN);
             this.level = level;
             this.saturation = saturation;
         }
@@ -34,7 +49,18 @@ public abstract class PharmacologyEffect
         @Override
         public String toString()
         {
-            return "FoodEffect: level=" + level + " saturation" + saturation;
+            return "Food Effect: " + level + ", Saturation: " + saturation;
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (obj instanceof Food)
+            {
+                Food other = (Food)obj;
+                if (other.level == this.level && other.saturation==this.saturation) return true;
+            }
+            return false;
         }
     }
 
@@ -44,6 +70,7 @@ public abstract class PharmacologyEffect
 
         public Burn(int duration)
         {
+            super(EnumColour.RED);
             this.duration = duration;
         }
 
@@ -56,7 +83,18 @@ public abstract class PharmacologyEffect
         @Override
         public String toString()
         {
-            return "BurnEffect: duration=" + duration;
+            return "Burn Effect: " + duration + " s";
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (obj instanceof Burn)
+            {
+                Burn other = (Burn)obj;
+                if (other.duration == this.duration) return true;
+            }
+            return false;
         }
     }
 
@@ -66,11 +104,12 @@ public abstract class PharmacologyEffect
 
         public Cure()
         {
-            this.potionId = -1;
+            this(-1);
         }
 
         public Cure(int potionId)
         {
+            super(EnumColour.AQUA);
             this.potionId = potionId;
         }
 
@@ -95,7 +134,18 @@ public abstract class PharmacologyEffect
         @Override
         public String toString()
         {
-            return "CureEffect: cures=" + (potionId == -1 ? "all" : PotionHelper.getPotionNameById(potionId));
+            return "Cure Effect: " + (potionId == -1 ? "all" : MinechemUtil.getLocalString(PotionHelper.getPotionNameById(potionId)));
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (obj instanceof Cure)
+            {
+                Cure other = (Cure)obj;
+                if (other.potionId == this.potionId) return true;
+            }
+            return false;
         }
     }
 
@@ -105,6 +155,7 @@ public abstract class PharmacologyEffect
 
         public Damage(float damage)
         {
+            super(EnumColour.ORANGE);
             this.damage = damage;
         }
 
@@ -117,7 +168,19 @@ public abstract class PharmacologyEffect
         @Override
         public String toString()
         {
-            return "DamageEffect: damage=" + damage;
+            float print = damage/2;
+            return "Damage Effect: " + print + " heart"+(print==1?"":"s");
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (obj instanceof Damage)
+            {
+                Damage other = (Damage)obj;
+                if (other.damage == this.damage) return true;
+            }
+            return false;
         }
     }
 
@@ -144,6 +207,7 @@ public abstract class PharmacologyEffect
 
         public Potion(int potionId, int power, int duration)
         {
+            super(EnumColour.PURPLE);
             this.duration = duration;
             this.potionId = potionId;
             this.power = power;
@@ -158,7 +222,18 @@ public abstract class PharmacologyEffect
         @Override
         public String toString()
         {
-            return "PotionEffect: potion=" + PotionHelper.getPotionNameById(potionId) + " duration=" + duration + " power=" + power;
+            return "Potion Effect: " + MinechemUtil.getLocalString(PotionHelper.getPotionNameById(potionId)) + ", Duration: " + duration + ", Power: " + power;
+        }
+
+        @Override
+        public boolean equals(Object obj)
+        {
+            if (obj instanceof Potion)
+            {
+                Potion other = (Potion)obj;
+                if (other.duration==this.duration && other.potionId==this.potionId && other.power==this.power) return true;
+            }
+            return false;
         }
     }
 }

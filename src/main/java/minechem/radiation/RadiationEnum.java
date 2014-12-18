@@ -5,20 +5,22 @@ import minechem.utils.Constants;
 
 public enum RadiationEnum
 {
-	stable(0, 0),
-	hardlyRadioactive(Constants.TICKS_PER_DAY, 1),
-	slightlyRadioactive(Constants.TICKS_PER_HOUR * 12, 2),
-	radioactive(Constants.TICKS_PER_HOUR * 6, 6),
-	highlyRadioactive(Constants.TICKS_PER_HOUR * 3, 8),
-	extremelyRadioactive(Constants.TICKS_PER_HOUR, 16);
+	stable(0, 0, "7"),
+	hardlyRadioactive(Constants.TICKS_PER_DAY, 1, "a"),
+	slightlyRadioactive(Constants.TICKS_PER_HOUR * 12, 2,"2"),
+	radioactive(Constants.TICKS_PER_HOUR * 6, 6,"e"),
+	highlyRadioactive(Constants.TICKS_PER_HOUR * 3, 8,"6"),
+	extremelyRadioactive(Constants.TICKS_PER_HOUR, 16, "4");
 
 	private long life;
 	private int damage;
+	private String colour;
 
-	private RadiationEnum(int life, int damage)
+	private RadiationEnum(int life, int damage, String colour)
 	{
 		this.life = life;
 		this.damage = damage;
+		this.colour = Constants.TEXT_MODIFIER + colour;
 	}
 
 	public long getLife()
@@ -29,5 +31,10 @@ public enum RadiationEnum
 	public int getDamage()
 	{
 		return this.damage;
+	}
+
+	public String getColour()
+	{
+		return colour;
 	}
 }
