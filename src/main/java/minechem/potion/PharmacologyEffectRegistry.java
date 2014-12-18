@@ -14,17 +14,20 @@ public class PharmacologyEffectRegistry
         List<PharmacologyEffect> list = effects.get(molecule);
         if (list == null)
             list = new LinkedList<PharmacologyEffect>();
+        for (PharmacologyEffect existingEffect:list)
+        {
+            if (existingEffect.equals(effect)) return;
+        }
         list.add(effect);
         effects.put(molecule, list);
     }
 
     public static void addEffects(MoleculeEnum molecule, List<PharmacologyEffect> toAdd)
     {
-        List<PharmacologyEffect> list = effects.get(molecule);
-        if (list == null)
-            list = new LinkedList<PharmacologyEffect>();
-        list.addAll(toAdd);
-        effects.put(molecule, list);
+        for (PharmacologyEffect effect:toAdd)
+        {
+            addEffect(molecule,effect);
+        }
     }
 
     public static void addEffect(List<MoleculeEnum> molecules, PharmacologyEffect effect)
@@ -36,6 +39,11 @@ public class PharmacologyEffectRegistry
     public static boolean hasEffect(MoleculeEnum molecule)
     {
         return effects.containsKey(molecule);
+    }
+
+    public static List<PharmacologyEffect> getEffects(MoleculeEnum molecule)
+    {
+        return effects.get(molecule);
     }
 
     public static void applyEffect(MoleculeEnum molecule, EntityLivingBase entityLivingBase)

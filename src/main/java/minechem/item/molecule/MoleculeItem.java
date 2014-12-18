@@ -4,15 +4,20 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import minechem.MinechemItemsRegistration;
+import minechem.Settings;
 import minechem.fluid.FluidHelper;
+import minechem.fluid.FluidMolecule;
 import minechem.gui.CreativeTabMinechem;
 import minechem.item.element.ElementItem;
+import minechem.item.polytool.PolytoolHelper;
+import minechem.potion.PharmacologyEffect;
 import minechem.potion.PharmacologyEffectRegistry;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
 import minechem.utils.Constants;
+import minechem.utils.EnumColour;
 import minechem.utils.MinechemUtil;
 import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
@@ -27,6 +32,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidRegistry;
@@ -34,6 +40,7 @@ import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import org.lwjgl.input.Keyboard;
 
 public class MoleculeItem extends Item
 {
@@ -80,32 +87,8 @@ public class MoleculeItem extends Item
 	{
 		list.add("\u00A79" + getFormulaWithSubscript(itemstack));
 
-		String radioactivityColor;
 		RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
-		switch (radioactivity)
-		{
-			case stable:
-				radioactivityColor = Constants.TEXT_MODIFIER + "7";
-				break;
-			case hardlyRadioactive:
-				radioactivityColor = Constants.TEXT_MODIFIER + "a";
-				break;
-			case slightlyRadioactive:
-				radioactivityColor = Constants.TEXT_MODIFIER + "2";
-				break;
-			case radioactive:
-				radioactivityColor = Constants.TEXT_MODIFIER + "e";
-				break;
-			case highlyRadioactive:
-				radioactivityColor = Constants.TEXT_MODIFIER + "6";
-				break;
-			case extremelyRadioactive:
-				radioactivityColor = Constants.TEXT_MODIFIER + "4";
-				break;
-			default:
-				radioactivityColor = "";
-				break;
-		}
+		String radioactivityColor = radioactivity.getColour();
 
 		String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
 		String timeLeft = "";
@@ -116,6 +99,26 @@ public class MoleculeItem extends Item
 		}
 		list.add(radioactivityColor + radioactiveName + (timeLeft.equals("") ? "" : " (" + timeLeft + ")"));
 		list.add(getRoomState(itemstack));
+		MoleculeEnum molecule = MoleculeEnum.getById(itemstack.getItemDamage());
+		if (PharmacologyEffectRegistry.hasEffect(molecule) && Settings.displayMoleculeEffects)
+		{
+
+			if (PolytoolHelper.getTypeFromElement(ElementItem.getElement(itemstack), 1) != null)
+			{
+				// Polytool Detail
+				if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT) || Keyboard.isKeyDown(Keyboard.KEY_RSHIFT))
+				{
+					for (PharmacologyEffect effect:PharmacologyEffectRegistry.getEffects(molecule))
+					{
+						list.add(effect.getColour()+effect.toString());
+					}
+
+				} else
+				{
+					list.add(EnumColour.DARK_GREEN + MinechemUtil.getLocalString("effect.information"));
+				}
+			}
+		}
 	}
 
 	@Override
@@ -142,7 +145,14 @@ public class MoleculeItem extends Item
 			for (int i=0;i<6;i++)
 			{
 				FluidStack fluidStack = new FluidStack(FluidRegistry.WATER, 125);
-				if (getMolecule(stack) != MoleculeEnum.water) fluidStack = new FluidStack(FluidHelper.molecules.get(getMolecule(stack)), 125);
+				if (getMolecule(stack) != MoleculeEnum.water)
+				{
+					FluidMolecule fluid = FluidHelper.molecules.get(getMolecule(stack));
+					if (fluid==null)
+						return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+					fluidStack = new FluidStack(fluid, 125);
+
+				}
 				filled = ((IFluidHandler)te).fill(ForgeDirection.getOrientation(i), fluidStack , false);
 				if (filled>0)
 				{

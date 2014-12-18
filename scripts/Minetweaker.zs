@@ -21,20 +21,19 @@ val Au = <ore:element_Au>;
 //Chemicals.addElement(atomicNumber,Symbol,Full Name,Element Type,Room State,Radioactivity);
 //Chemicals.addMolecule("hilburnium awesomeus",180,"Solid",[He*3,ethanol*11,H*5,Au*5]);
 //Chemicals.addMolecule(name,id,Room State,[Array of components]);
-//Chemicals.removeMoleculeEffects(water)                                -- Removes all effects for given molecule
+//Chemicals.removeMoleculeEffects(water);                                -- Removes all effects for given molecule
 //Chemicals.removeMoleculeEffects(molecule);
 
-//Chemicals.addMoleculeEffect(molecule,"type",... params);              -- Params between [] are optional
-//Chemicals.addMoleculeEffect(water,"damage",1);                        -- Adds a damage effect to a molecule
-//Chemicals.addMoleculeEffect(molecule,"damage",damageValue);
-//Chemicals.addMoleculeEffect(water,"food",1,0.1);                      -- Adds a food value to a molecule
-//Chemicals.addMoleculeEffect(molecule,"food",foodLevel,saturation);
-//Chemicals.addMoleculeEffect(water,"potion","poison",20,1);            -- Adds a potion effect to a molecule
-//Chemicals.addMoleculeEffect(molecule,"potion","potionName",duration in s, [powerLevel] default is zero);
-//Chemicals.addMoleculeEffect(water,"burn",5);                          -- Adds a burn effect to a molecule
-//Chemicals.addMoleculeEffect(molecule,"burn",burnTime);
-//Chemicals.addMoleculeEffect(water,"cure","confusion");                -- Adds a cure effect to a molecule
-//Chemicals.addMoleculeEffect(molecule,"cure",["potionName"] default is cure all);
+//Chemicals.addDamageEffect(water,5);                                   -- Adds a damage effect to a molecule
+//Chemicals.addDamageEffect(molecule,damageValue);
+//Chemicals.addFoodEffect(water,1,0.1);                                 -- Adds a food value to a molecule
+//Chemicals.addFoodEffect(molecule,foodLevel,saturation);
+//Chemicals.addPotionEffect(water,"poison",20,1);                       -- Adds a potion effect to a molecule
+//Chemicals.addPotionEffect(molecule,"potionName",duration in s, [powerLevel] default is zero);
+//Chemicals.addBurnEffect(water,5);                                     -- Adds a burn effect to a molecule
+//Chemicals.addBurnEffect(molecule,burnTime);
+//Chemicals.addCureEffect(water,"confusion");                           -- Adds a cure effect to a molecule
+//Chemicals.addCureEffect(molecule,["potionName"] default is cure all);
 
 //###########Decomposer Functions#################  
 //Decomposer.removeRecipe(ice);                            				-- Remove Ore Dict or Item recipe

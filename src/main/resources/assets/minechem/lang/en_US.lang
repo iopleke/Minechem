@@ -68,6 +68,8 @@ config.recursiveDepth.description=Recipe Recursion Depth (higher for more comple
 config.decaySafeMachines.description=Enable Safe Machines
 config.fluideffects.description=Enable fluid Effects
 config.advancedTurtleAI.description=Make your turtles smarter - they probably won't try to take over the world
+config.moleculeEffects.description=Add Molecule Effects to the item tooltip
+
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.leadedchest=Leaded Chest
@@ -151,6 +153,8 @@ element.classification.Non-metal=Non-metal
 element.classification.Other metal=Other Metal
 element.classification.Solid=Solid
 element.classification.Transition metal=Transition Metal
+
+effect.information=SHIFT to show effect information
 
 polytool.information=SHIFT to show polytool information
 polytool.description.Ag=Extra damage vs Endermen

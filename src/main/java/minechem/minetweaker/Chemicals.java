@@ -56,38 +56,58 @@ public class Chemicals
 	}
 
 	@ZenMethod
-	public static void addMoleculeEffect(IIngredient ingredient, String type, Object... args)
+	public static void addCureEffect(IIngredient ingredient)
+	{
+		PharmacologyEffect effect = new PharmacologyEffect.Cure();
+		addEffect(ingredient, effect);
+	}
+
+	@ZenMethod
+	public static void addCureEffect(IIngredient ingredient, String string)
+	{
+		PharmacologyEffect effect = new PharmacologyEffect.Cure(string);
+		addEffect(ingredient, effect);
+	}
+
+	@ZenMethod
+	public static void addDamageEffect(IIngredient ingredient, double damage)
+	{
+		PharmacologyEffect effect = new PharmacologyEffect.Damage((float)damage);
+		addEffect(ingredient,effect);
+	}
+
+	@ZenMethod
+	public static void addFoodEffect(IIngredient ingredient, int level, double saturation)
+	{
+		PharmacologyEffect effect = new PharmacologyEffect.Food(level,(float)saturation);
+		addEffect(ingredient,effect);
+	}
+
+	@ZenMethod
+	public static void addBurnEffect(IIngredient ingredient, int time)
+	{
+		PharmacologyEffect effect = new PharmacologyEffect.Burn(time);
+		addEffect(ingredient,effect);
+	}
+
+	@ZenMethod
+	public static void addPotionEffect(IIngredient ingredient, String potion, int time)
+	{
+		addPotionEffect(ingredient, potion, time, 0);
+	}
+
+	@ZenMethod
+	public static void addPotionEffect(IIngredient ingredient, String potion, int time, int level)
+	{
+		PharmacologyEffect effect = new PharmacologyEffect.Potion(potion, level, time);
+		addEffect(ingredient,effect);
+	}
+
+	private static void addEffect(IIngredient ingredient, PharmacologyEffect effect)
 	{
 		PotionChemical chemical = InputHelper.getChemical(ingredient);
 		if (!(chemical instanceof Molecule)) throw new IllegalArgumentException("Ingredient is not a molecule");
-		PharmacologyEffect effect;
-		if (type.equalsIgnoreCase("cure"))
-		{
-			if (args.length == 0) effect = new PharmacologyEffect.Cure();
-			else if (args.length == 1) effect = new PharmacologyEffect.Cure((String)args[0]);
-			else throw new IllegalArgumentException("For cure use the potion name as last param");
-		} else if (type.equalsIgnoreCase("potion"))
-		{
-			if (args.length == 2) effect = new PharmacologyEffect.Potion((String)args[0], (Integer)args[1]);
-			else if (args.length == 3) effect = new PharmacologyEffect.Potion((String)args[0], (Integer)args[1], (Integer)args[2]);
-			else throw new IllegalArgumentException("For potion use the potion name, duration, (optional level)");
-		} else if (type.equalsIgnoreCase("damage"))
-		{
-			if (args.length == 1) effect = new PharmacologyEffect.Damage((Float)args[0]);
-			else throw new IllegalArgumentException("For damage use a damage value (float) as last param");
-		} else if (type.equalsIgnoreCase("burn"))
-		{
-			if (args.length == 1) effect = new PharmacologyEffect.Burn((Integer)args[0]);
-			else throw new IllegalArgumentException("For burn use a time in sec (int) as last param");
-		} else if (type.equalsIgnoreCase("food"))
-		{
-			if (args.length == 2) effect = new PharmacologyEffect.Food((Integer)args[0], (Float)args[2]);
-			else throw new IllegalArgumentException("For food use the foodLevel (int) and the saturationLevel (float)");
-		} else
-		{
-			throw new IllegalArgumentException(type + " is not a valid type");
-		}
-		MineTweakerAPI.apply(new AddMoleculeEffectAction(((Molecule) chemical).molecule, effect));
+		MineTweakerAPI.apply(new AddMoleculeEffectAction(((Molecule)chemical).molecule, effect));
 	}
 
 	@ZenMethod
