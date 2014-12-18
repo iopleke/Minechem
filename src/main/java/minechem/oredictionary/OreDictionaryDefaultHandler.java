@@ -92,7 +92,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 			case dust:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				unregisterIngot(ore);
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT, ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, true, MinechemRecipes.COST_INGOT, startAtRow(2, ore.getComposition()));
 				break;
 			case dustDirty:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 0.75d));
