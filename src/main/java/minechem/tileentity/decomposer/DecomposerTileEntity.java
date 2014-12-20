@@ -5,17 +5,14 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import minechem.Settings;
 import minechem.api.IDecomposerControl;
-import minechem.minetweaker.Decomposer;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.Compare;
-import minechem.utils.LogHelper;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Transactor;
-import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ISidedInventory;
@@ -26,7 +23,6 @@ import net.minecraft.network.Packet;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
-
 import java.util.ArrayList;
 
 public class DecomposerTileEntity extends MinechemTileEntityElectric implements ISidedInventory, IFluidHandler
@@ -251,7 +247,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		if (stack.getItem() instanceof IDecomposerControl) return ((IDecomposerControl)stack.getItem()).getDecomposerMultiplier(stack);
 		else if (!stack.hasTagCompound()) return 1.0D;
 		else if (stack.getTagCompound().hasKey("damage",3))
-			return 1-((double)stack.getTagCompound().getInteger("damage"))/100D;
+			return 1-(stack.getTagCompound().getInteger("damage"))/100D;
 		else if (stack.getTagCompound().hasKey("broken", 1))
 			return stack.getTagCompound().getBoolean("broken")?0.0D:1.0D;
 		return 1.0D;

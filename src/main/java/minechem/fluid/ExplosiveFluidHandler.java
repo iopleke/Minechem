@@ -8,7 +8,6 @@ import java.util.Set;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import minechem.item.MinechemChemicalType;
-import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.utils.LogHelper;
 

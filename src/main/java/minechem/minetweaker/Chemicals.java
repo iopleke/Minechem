@@ -1,8 +1,6 @@
 package minechem.minetweaker;
 
 import java.util.ArrayList;
-import java.util.IllegalFormatConversionException;
-import java.util.IllegalFormatException;
 import java.util.List;
 
 import minechem.item.ChemicalRoomStateEnum;

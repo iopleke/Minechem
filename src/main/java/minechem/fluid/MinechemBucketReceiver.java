@@ -1,7 +1,5 @@
 package minechem.fluid;
 
-import java.lang.reflect.Field;
-
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.radiation.RadiationEnum;

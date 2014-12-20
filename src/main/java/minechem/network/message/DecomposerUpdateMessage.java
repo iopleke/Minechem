@@ -6,7 +6,6 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.server.FMLServerHandler;
 import io.netty.buffer.ByteBuf;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import net.minecraft.tileentity.TileEntity;

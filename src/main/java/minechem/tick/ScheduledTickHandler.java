@@ -1,14 +1,19 @@
 package minechem.tick;
 
+import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.TickEvent;
 import cpw.mods.fml.relauncher.Side;
 import minechem.Settings;
+import minechem.fluid.MinechemFluidBlock;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.potion.PharmacologyEffectRegistry;
 import minechem.radiation.RadiationHandler;
+import net.minecraft.entity.passive.EntityWaterMob;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.MathHelper;
+import net.minecraftforge.event.entity.living.LivingSpawnEvent;
 import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 
 public class ScheduledTickHandler
@@ -43,4 +48,10 @@ public class ScheduledTickHandler
         }
     }
 
+	@SubscribeEvent
+	public void tick(LivingSpawnEvent.CheckSpawn event){
+		if (event.entityLiving instanceof EntityWaterMob&&event.world.getBlock(MathHelper.floor_double(event.x), MathHelper.floor_double(event.y), MathHelper.floor_double(event.z)) instanceof MinechemFluidBlock){
+			event.setResult(Event.Result.DENY);
+		}
+	}
 }
