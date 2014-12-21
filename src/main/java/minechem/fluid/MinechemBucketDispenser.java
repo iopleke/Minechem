@@ -1,6 +1,5 @@
 package minechem.fluid;
 
-import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
@@ -10,7 +9,6 @@ import net.minecraft.block.BlockDispenser;
 import net.minecraft.dispenser.IBehaviorDispenseItem;
 import net.minecraft.dispenser.IBlockSource;
 import net.minecraft.init.Items;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;

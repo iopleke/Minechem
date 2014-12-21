@@ -29,7 +29,7 @@ public class FluidBlockMolecule extends MinechemFluidBlock
 
 	public FluidBlockMolecule(MinechemFluid fluid)
 	{
-		super(fluid, materialFluidBlock);
+		super(fluid, Material.water);
 		this.setBlockName(fluidName);
 	}
 
