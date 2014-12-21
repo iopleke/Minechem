@@ -48,8 +48,8 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 	{
 		if (inventory[output] == null)
 		{
-			inventory[output] = new ItemStack(MinechemItemsRegistration.element, 1, fusedResult - 1);
-		} else if (inventory[output].getItemDamage() == fusedResult - 1)
+			inventory[output] = new ItemStack(MinechemItemsRegistration.element, 1, fusedResult);
+		} else if (inventory[output].getItemDamage() == fusedResult)
 		{
 			inventory[output].stackSize++;
 		} else
@@ -86,7 +86,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 		{
 			if (inventory[inputLeft].getItem() instanceof ElementItem && inventory[inputRight].getItem() instanceof ElementItem)
 			{
-				fusedResult = inventory[inputLeft].getItemDamage() + inventory[inputRight].getItemDamage() + 2;
+				fusedResult = inventory[inputLeft].getItemDamage() + inventory[inputRight].getItemDamage();
 				return (fusedResult <= ElementEnum.heaviestMass);
 			}
 		}
@@ -189,7 +189,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 		if (inventory[output] == null)
 		{
 			return true;
-		} else if (inventory[output].getItemDamage() == fusedResult - 1)
+		} else if (inventory[output].getItemDamage() == fusedResult)
 		{
 			return inventory[output].stackSize < 64;
 		}
@@ -211,7 +211,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 	{
 		if (inventory[inputLeft] != null && inventory[inputRight] != null && this.inputsCanBeFused())
 		{
-			return (inventory[inputLeft].getItemDamage() + inventory[inputRight].getItemDamage() + 2) * Settings.fusionMultiplier;
+			return (inventory[inputLeft].getItemDamage() + inventory[inputRight].getItemDamage()) * Settings.fusionMultiplier;
 		}
 		return 0;
 	}
