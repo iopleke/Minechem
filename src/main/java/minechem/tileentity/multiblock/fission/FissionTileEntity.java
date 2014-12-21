@@ -129,11 +129,11 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 	{
 		if (hasInputs())
 		{
-			int mass = inventory[kInput[0]].getItemDamage() + 1;
+			int mass = inventory[kInput[0]].getItemDamage();
 			int newMass = mass / 2;
 			if (newMass > 0)
 			{
-				return new ItemStack(MinechemItemsRegistration.element, 2, newMass - 1);
+				return new ItemStack(MinechemItemsRegistration.element, 2, newMass);
 			} else
 			{
 				return null;
@@ -271,7 +271,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 	{
 		if (inventory[0] != null)
 		{
-			return (1 + inventory[0].getItemDamage()) * Settings.fissionMultiplier;
+			return (inventory[0].getItemDamage()) * Settings.fissionMultiplier;
 		}
 		return 0;
 	}
