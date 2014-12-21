@@ -87,8 +87,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 		{
 			if (inventory[kOutput[0]] == null) return true;
 			boolean sameItem = fissionResult.getItem() == inventory[kOutput[0]].getItem() && fissionResult.getItemDamage() == inventory[kOutput[0]].getItemDamage();
-			boolean spaceInOutput = inventory[kOutput[0]].stackSize < 64 && sameItem;
-			return spaceInOutput;
+			return inventory[kOutput[0]].stackSize < 64 && sameItem;
 		}
 		return false;
 	}
@@ -127,13 +126,13 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 
 	private ItemStack getFissionOutput()
 	{
-		if (hasInputs())
+		if (inventory[kInput[0]] != null && inventory[kInput[0]].getItem() instanceof ElementItem && inventory[kInput[0]].getItemDamage() > 0)
 		{
-			int mass = inventory[kInput[0]].getItemDamage() + 1;
+			int mass = ElementItem.getElement(inventory[kInput[0]]).atomicNumber();
 			int newMass = mass / 2;
 			if (newMass > 0)
 			{
-				return new ItemStack(MinechemItemsRegistration.element, 2, newMass - 1);
+				return new ItemStack(MinechemItemsRegistration.element, 2, newMass);
 			} else
 			{
 				return null;
@@ -142,11 +141,6 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 		{
 			return null;
 		}
-	}
-
-	private boolean hasInputs()
-	{
-		return inventory[kInput[0]] != null;
 	}
 
 	@Override
@@ -271,7 +265,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 	{
 		if (inventory[0] != null)
 		{
-			return (1 + inventory[0].getItemDamage()) * Settings.fissionMultiplier;
+			return (inventory[0].getItemDamage()) * Settings.fissionMultiplier;
 		}
 		return 0;
 	}
