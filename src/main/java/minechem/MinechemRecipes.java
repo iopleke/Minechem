@@ -1594,8 +1594,9 @@ public class MinechemRecipes
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(blockDiamond, true, COST_GEMBLOCK, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4),
-			this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4)
+			this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3),
+			this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3),
+			this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3)
 		}));
 
 		// Pressure Plate
