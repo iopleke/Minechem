@@ -1590,7 +1590,7 @@ public class MinechemRecipes
 		ItemStack blockDiamond = new ItemStack(Blocks.diamond_block);
 		DecomposerRecipe.add(new DecomposerRecipe(blockDiamond, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.fullrene, 36)
+			this.molecule(MoleculeEnum.fullrene, 27)
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(blockDiamond, true, COST_GEMBLOCK, new PotionChemical[]
 		{
