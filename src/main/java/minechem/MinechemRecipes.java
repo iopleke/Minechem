@@ -1697,7 +1697,11 @@ public class MinechemRecipes
 		ItemStack itemPotion = new ItemStack(Items.potionitem, 1, 0);
 		DecomposerRecipe.add(new DecomposerRecipe(itemPotion, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.water, 8)
+			this.molecule(MoleculeEnum.water, 5), this.molecule(MoleculeEnum.siliconDioxide, 16)
+		}));
+		SynthesisRecipe.add(new SynthesisRecipe(itemPotion, true, COST_ITEM,new PotionChemical[]
+		{
+			null, this.molecule(MoleculeEnum.siliconDioxide, 4), null, this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.water, 5), this.molecule(MoleculeEnum.siliconDioxide, 4), null, this.molecule(MoleculeEnum.siliconDioxide, 4), null
 		}));
 
         //Ice Block
