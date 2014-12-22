@@ -2,7 +2,9 @@ package minechem.utils;
 
 import java.util.ArrayList;
 import minechem.item.ChemicalRoomStateEnum;
+import minechem.item.element.Element;
 import minechem.item.element.ElementClassificationEnum;
+import minechem.item.element.ElementEnum;
 import minechem.potion.PotionChemical;
 import minechem.radiation.RadiationEnum;
 import minechem.tileentity.decomposer.DecomposerRecipe;

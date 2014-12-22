@@ -73,6 +73,9 @@ public class Settings
 	public static boolean reactionItemMeetFluid = true;
 	public static boolean reactionFluidMeetFluid = true;
 
+	// NEI support
+	public static boolean supportNEI = true;
+
 	//Blacklisting
 	public static String[] DecomposerBlacklist =
 	{
@@ -211,6 +214,12 @@ public class Settings
 		prop.comment = StatCollector.translateToLocal("config.reactionFluidMeetFluid.description");
 		prop.setLanguageKey("config.reactionFluidMeetFluid");
 		reactionFluidMeetFluid = prop.getBoolean();
+		configList.add(prop.getName());
+
+		prop = config.get(Configuration.CATEGORY_GENERAL, "supportNEI", Settings.reactionFluidMeetFluid);
+		prop.comment = StatCollector.translateToLocal("config.supportNEI.description");
+		prop.setLanguageKey("config.supportNEI");
+		supportNEI = prop.getBoolean();
 		configList.add(prop.getName());
 
 		prop = config.get("blacklist", "decomposition", new String[]

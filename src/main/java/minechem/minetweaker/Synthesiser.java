@@ -29,8 +29,8 @@ public class Synthesiser
 			if (chem != null)
 			{
 				someValue = true;
+				break;
 			}
-			break;
 		}
 		if (someValue)
 		{

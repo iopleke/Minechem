@@ -409,7 +409,8 @@ public class ElementItem extends Item
             RadiationInfo radioactivity = getRadiationInfo(itemStack, world);
             long worldtime = world.getTotalWorldTime();
             long leftTime = radioactivity.radioactivity.getLife() - (worldtime - radioactivity.decayStarted);
-
+            Fluid fluid = FluidHelper.elements.get(getElement(itemStack));
+            if (fluid == null) return itemStack;
             if (!player.capabilities.isCreativeMode)
             {
                 if (itemStack.stackSize >= 8)
@@ -470,7 +471,7 @@ public class ElementItem extends Item
                 MinechemUtil.throwItemStack(world, empties, x, y, z);
             }
 
-            Block block = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(getElement(itemStack)));
+            Block block = FluidHelper.elementsBlocks.get(fluid);
             world.setBlock(x, y, z, block, 0, 3);
             TileEntity tile = world.getTileEntity(x, y, z);
             if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)

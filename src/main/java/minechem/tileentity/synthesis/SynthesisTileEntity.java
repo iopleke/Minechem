@@ -273,7 +273,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 					if (takeInputStacks())
 					{
-						toRemove -= 1;
+						toRemove -= amount;
 					} else
 					{
 						result.stackSize = amount - toRemove;
@@ -282,7 +282,6 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 
 					if (toRemove < 1)
 					{
-						result.stackSize = amount;
 						return result;
 					}
 				}
@@ -632,7 +631,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 			template = outputStack.copy();
 			if (template.stackSize == 0)
 			{
-				template.stackSize = 1;
+				template.stackSize = getCurrentRecipe().getOutput().stackSize;
 			}
 		}
 		return template;
@@ -651,7 +650,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 		initialStack.stackSize = 0;
 		outputs.add(initialStack);
 
-		while (canTakeOutputStack(false) && (amount > 0) && takeInputStacks())
+		while (canTakeOutputStack(false) && (amount >= template.stackSize) && takeInputStacks())
 		{
 			ItemStack output = outputs.get(outputs.size() - 1);
 			if (output.stackSize + template.stackSize > output.getMaxStackSize())
@@ -670,7 +669,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 			}
 
 			this.markDirty();
-			amount--;
+			amount-=template.stackSize;
 		}
 
 		return outputs;
@@ -726,13 +725,13 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
 	@Override
 	public boolean canInsertItem(int slot, ItemStack itemstack, int side)
 	{
-		return Settings.AllowAutomation && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule);
+		return Settings.AllowAutomation && slot>0 && side > 0 && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule);
 	}
 
 	@Override
 	public boolean canExtractItem(int slot, ItemStack itemstack, int side)
 	{
-		return Settings.AllowAutomation && canTakeOutputStack(false) && side == 0;
+		return Settings.AllowAutomation && side == 0 && slot == 0 && canTakeOutputStack(false);
 	}
 
 	public String getState() {
