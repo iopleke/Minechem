@@ -4,16 +4,20 @@ import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import minechem.Settings;
+import minechem.api.IDecomposerControl;
+import minechem.minetweaker.Decomposer;
 import minechem.network.MessageHandler;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
 import minechem.tileentity.prefab.MinechemTileEntityElectric;
 import minechem.utils.Compare;
+import minechem.utils.LogHelper;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Transactor;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -24,7 +28,6 @@ import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.*;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 public class DecomposerTileEntity extends MinechemTileEntityElectric implements ISidedInventory, IFluidHandler
 {
@@ -52,7 +55,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	/**
 	 * Holds a reference to all known fluids that are stored inside of the machine currently and being decomposed.
 	 */
-	ArrayList<FluidStack> fluids = new ArrayList<FluidStack>();
+	public FluidStack tank = null;
+	public int capacity = 5000; // holds 5 buckets
 
 	/**
 	 * Wrapper for input inventory functions.
@@ -103,6 +107,12 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	 * Holds the current state of our machine. Valid States: IDLE, ACTIVE, FINISHED, JAMMED
 	 */
 	public State state = State.idle;
+	public State oldState = State.idle;
+
+	// Used for updates
+	public boolean bufferChanged = false;
+	public boolean tankUpdate = false;
+	private static ItemStack cheatTankStack = new ItemStack(Blocks.air);
 
 	public DecomposerTileEntity()
 	{
@@ -155,23 +165,19 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	private boolean canDecomposeInput()
 	{
 		ItemStack inputStack = getStackInSlot(inputSlots[0]);
-		if (inputStack == null)
+		DecomposerRecipe recipe = null;
+		if (inputStack != null) recipe = DecomposerRecipe.get(inputStack);
+		else if (tank != null)
 		{
-			return false;
+			recipe = DecomposerRecipe.get(tank);
+			if (recipe != null && ((DecomposerFluidRecipe)recipe).inputFluid.amount > tank.amount) return false;
 		}
-
-		DecomposerRecipe recipe = getRecipeFromItemStack(inputStack);
 		return (recipe != null);
 	}
 
 	private boolean energyToDecompose()
 	{
-
-		if (this.getEnergyStored() >= Settings.costDecomposition)
-		{
-			return true;
-		}
-		return false;
+		return this.getEnergyStored() >= Settings.costDecomposition || !Settings.powerUseEnabled;
 	}
 
 	@Override
@@ -200,25 +206,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			return false;
 		} else
 		{
-			boolean hasRecipe = DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
-			return hasRecipe;
+			return DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
 		}
-	}
-
-	/**
-	 * Determines if there are any open slots in the output slots by looping through them.
-	 */
-	private boolean canUnjam()
-	{
-		for (int slot : outputSlots)
-		{
-			if (getStackInSlot(slot) == null)
-			{
-				return true;
-			}
-		}
-
-		return false;
 	}
 
 	@Override
@@ -235,14 +224,16 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 		try
 		{
 			ItemStack inputStack = getActiveStack();
-			DecomposerRecipe recipe = getRecipeFromItemStack(inputStack);
+			DecomposerRecipe recipe;
+			if (inputStack == cheatTankStack) recipe = DecomposerRecipe.get(tank);
+			else recipe = DecomposerRecipe.get(inputStack);
 
 			if (recipe != null && this.useEnergy(getEnergyNeeded()))
 			{
 				ArrayList<PotionChemical> output = recipe.getOutput();
 				if (output != null)
 				{
-					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(output);
+					ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(getBrokenOutput(output,getDecompositionMultiplier(inputStack)));
 					placeStacksInBuffer(stacks);
 				}
 			}
@@ -255,14 +246,27 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
 	}
 
-	private DecomposerRecipe getRecipeFromItemStack(ItemStack itemStack)
+	private double getDecompositionMultiplier(ItemStack stack)
 	{
-		Fluid fluid = FluidRegistry.lookupFluidForBlock(Block.getBlockFromItem(itemStack.getItem()));
-		FluidStack fluidStack = (fluid != null) ? new FluidStack(fluid, 1000) : null;
-		DecomposerRecipe result = DecomposerRecipeHandler.instance.getRecipe(itemStack);
-		if (fluidStack != null)
+		if (stack.getItem() instanceof IDecomposerControl) return ((IDecomposerControl)stack.getItem()).getDecomposerMultiplier(stack);
+		else if (!stack.hasTagCompound()) return 1.0D;
+		else if (stack.getTagCompound().hasKey("damage",3))
+			return 1-((double)stack.getTagCompound().getInteger("damage"))/100D;
+		else if (stack.getTagCompound().hasKey("broken", 1))
+			return stack.getTagCompound().getBoolean("broken")?0.0D:1.0D;
+		return 1.0D;
+	}
+
+	private ArrayList<PotionChemical> getBrokenOutput(ArrayList<PotionChemical> output, double mult)
+	{
+		if (mult==1) return output;
+		if (mult<=0) return new ArrayList<PotionChemical>();
+		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
+		for (PotionChemical chemical: output)
 		{
-			result = DecomposerRecipeHandler.instance.getRecipe(fluidStack);
+			PotionChemical addChemical = chemical.copy();
+			addChemical.amount*=mult;
+			result.add(addChemical);
 		}
 		return result;
 	}
@@ -282,7 +286,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 				{
 					outputBuffer.remove(outputStack);
 				}
-
+				bufferChanged = true;
 				return State.active;
 			} else
 			{
@@ -295,13 +299,33 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	@Override
 	public FluidStack drain(ForgeDirection from, FluidStack resource, boolean doDrain)
 	{
-		return null;
+		if (resource == null || tank == null || resource.amount <= 0 || !tank.isFluidEqual(resource))
+			return null;
+
+		if (!doDrain)
+			return new FluidStack(tank.fluidID, Math.min(tank.amount, resource.amount));
+
+		int drained = Math.min(tank.amount, resource.amount);
+		tankUpdate = true;
+
+		tank.amount -= drained;
+		return new FluidStack(tank.fluidID, drained);
 	}
 
 	@Override
 	public FluidStack drain(ForgeDirection from, int maxDrain, boolean doDrain)
 	{
-		return null;
+		if (tank == null || maxDrain <= 0)
+			return null;
+
+		if (!doDrain)
+			return new FluidStack(tank.fluidID, Math.min(tank.amount, maxDrain));
+
+		int drained = Math.min(tank.amount, maxDrain);
+		tankUpdate = true;
+
+		tank.amount -= drained;
+		return new FluidStack(tank.fluidID, drained);
 	}
 
 	/**
@@ -310,32 +334,35 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	@Override
 	public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
 	{
-		Iterator iter = fluids.iterator();
-		int maxFill = resource.amount;
+		if (resource == null || (tank != null && !tank.isFluidEqual(resource)))
+			return 0;
 
 		if (!doFill)
 		{
-			return resource.amount;
+			if (tank == null)
+				return Math.min(capacity, resource.amount);
+
+			if (!tank.isFluidEqual(resource))
+				return 0;
+
+			return Math.min(capacity - tank.amount, resource.amount);
 		}
 
-		while (iter.hasNext() && resource.amount > 0)
+		int maxFill;
+		tankUpdate = true;
+
+		if (tank == null)
 		{
-			FluidStack fluid = (FluidStack) iter.next();
-
-			if (fluid.isFluidEqual(resource))
-			{
-				int amount = Math.min(resource.amount, fluid.amount);
-
-				resource.amount -= amount;
-				fluid.amount += amount;
-			}
+			maxFill = Math.min(capacity, resource.amount);
+			tank = new FluidStack(resource.fluidID, maxFill);
+			return maxFill;
 		}
 
-		if (resource.amount > 0)
-		{
-			fluids.add(resource);
-		}
+		if (!tank.isFluidEqual(resource))
+			return 0;
 
+		maxFill = Math.min(capacity - tank.amount, resource.amount);
+		tank.amount += maxFill;
 		return maxFill;
 	}
 
@@ -359,6 +386,20 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			if (getStackInSlot(inputSlots[0]) != null)
 			{
 				activeStack = decrStackSize(inputSlots[0], 1);
+				bufferChanged = true;
+			} else if (tank != null)
+			{
+				DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) DecomposerRecipe.get(tank);
+				if (fluidRecipe != null)
+				{
+					if (tank.amount >= fluidRecipe.inputFluid.amount)
+					{
+						tank.amount -= fluidRecipe.inputFluid.amount;
+						tankUpdate = true;
+						activeStack = cheatTankStack;
+						return cheatTankStack;
+					}
+				}
 			} else
 			{
 				return null;
@@ -401,14 +442,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	@Override
 	public FluidTankInfo[] getTankInfo(ForgeDirection from)
 	{
-		FluidTankInfo[] result = new FluidTankInfo[fluids.size() + 1];
-
-		for (int i = 0; i < fluids.size(); i++)
-		{
-			result[i] = new FluidTankInfo(fluids.get(i), 100000);
-		}
-
-		result[result.length - 1] = new FluidTankInfo(null, 10000);
+		FluidTankInfo[] result = new FluidTankInfo[1];
+		result[0] = new FluidTankInfo(tank, capacity);
 		return result;
 	}
 
@@ -532,6 +567,12 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			NBTTagCompound activeStackCompound = (NBTTagCompound) nbt.getTag("activeStack");
 			activeStack = ItemStack.loadItemStackFromNBT(activeStackCompound);
 		}
+
+		if (nbt.hasKey("tank"))
+			tank = FluidStack.loadFluidStackFromNBT(nbt.getCompoundTag("tank"));
+		else
+			tank = null;
+
 		state = State.values()[nbt.getByte("state")];
 	}
 
@@ -587,31 +628,9 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			return;
 		}
 
-		// Determine if we can decompose the object in the input slot while in a powered and idle state.
-		if (this.inputInventory.getStackInSlot(0) == null && state == State.idle)
-		{
-			for (int i = 0; i < fluids.size(); i++)
-			{
-				FluidStack input = fluids.get(i);
-
-				//Minechem.LOGGER.info(input.toString());
-				DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) DecomposerRecipe.get(input);
-				if (fluidRecipe != null)
-				{
-
-					if (fluids.get(i).amount >= fluidRecipe.inputFluid.amount)
-					{
-						// The decomposed itemStack that makes up what was once a fluid if there is enough of it to be converted into decomposed item version.
-						this.setInventorySlotContents(this.kInputSlot, new ItemStack(fluidRecipe.inputFluid.getFluid().getBlock(), 1, 0));
-						fluids.get(i).amount -= fluidRecipe.inputFluid.amount;
-					}
-				}
-			}
-		}
-
 		// Determines the current state of the machine.
 		state = determineOperationalState();
-		if ((state == State.idle || state == State.finished) && canDecomposeInput() && energyToDecompose())
+		if ((state == State.idle || state == State.finished) && energyToDecompose() && canDecomposeInput())
 		{
 			// Determines if machine has nothing to process or finished processing and has ability to decompose items in the input slot.
 			activeStack = null;
@@ -624,11 +643,26 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			activeStack = null;
 			state = State.idle;
 		}
+		if (bufferChanged || state!=oldState)
+		{
+			this.markDirty();
+			bufferChanged=false;
+		}
+		updateStateHandler();
+	}
 
-		// Notify minecraft that the inventory items in this machine have changed.
-		DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
-		MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
-		this.markDirty();
+	public void updateStateHandler()
+	{
+		if (state!=oldState || oldEnergyStored != getEnergyStored() || tankUpdate)
+		{
+			oldState=state;
+			oldEnergyStored = getEnergyStored();
+
+			tankUpdate = false;
+			// Notify minecraft that the inventory items in this machine have changed.
+			DecomposerUpdateMessage message = new DecomposerUpdateMessage(this);
+			MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(worldObj.provider.dimensionId, this.xCoord, this.yCoord, this.zCoord, Settings.UpdateRadius));
+		}
 	}
 
 	@Override
@@ -651,6 +685,13 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 			nbt.setTag("activeStack", activeStackCompound);
 		}
 
+		if (tank != null)
+		{
+			NBTTagCompound tankTag = new NBTTagCompound();
+			tank.writeToNBT(tankTag);
+			nbt.setTag("tank", tankTag);
+		}
+
 		nbt.setByte("state", (byte) state.ordinal());
 	}
 
@@ -665,7 +706,13 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 		return (activeStack == null || DecomposerRecipe.get(activeStack)==null)?"No Recipe":energyToDecompose()?"Active":"No Power";
 	}
-	
+
+	public void dumpFluid()
+	{
+		this.tank = null;
+		if (worldObj.isRemote) MessageHandler.INSTANCE.sendToServer(new DecomposerUpdateMessage(this));
+	}
+
 	/**
 	 * Enumeration of states that the decomposer can be in. Allows for easier understanding of code and interaction with user.
 	 */

@@ -19,10 +19,8 @@ public class ElementItemRenderer implements IItemRenderer
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type)
 	{
-		if (item.getItemDamage() == ElementEnum.heaviestMass)
-		{
+		if (item.getItemDamage() == 0)
 			return false;
-		}
 
 		switch (type)
 		{
@@ -107,9 +105,9 @@ public class ElementItemRenderer implements IItemRenderer
 	{
 		String shortName = ElementItem.getShortName(itemstack);
 		RenderingUtil.setColorForElement(element);
-		RenderingUtil.drawTexturedRectUV(0, 0, 0, 16, 16, contents);
+		RenderingUtil.drawTexturedRectUV(0, 0, 5, 16, 16, contents);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		RenderingUtil.drawTexturedRectUV(0, 0, 0, 16, 16, testtube);
+		RenderingUtil.drawTexturedRectUV(0, 0, 5, 16, 16, testtube);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
 		fontRenderer.drawString(shortName, 1, 2, 0x000000);

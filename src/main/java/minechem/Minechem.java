@@ -1,7 +1,18 @@
 package minechem;
 
+import cpw.mods.fml.common.*;
+import cpw.mods.fml.common.Mod.EventHandler;
+import cpw.mods.fml.common.Mod.Instance;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.computercraft.MinechemCCItemsRegistration;
 import minechem.fluid.FluidChemicalDispenser;
+import minechem.fluid.MinechemBucketReceiver;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.gui.GuiHandler;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -15,11 +26,7 @@ import minechem.minetweaker.Decomposer;
 import minechem.minetweaker.Fuels;
 import minechem.minetweaker.Synthesiser;
 import minechem.network.MessageHandler;
-import minechem.potion.PotionCoatingRecipe;
-import minechem.potion.PotionCoatingSubscribe;
-import minechem.potion.PotionEnchantmentCoated;
-import minechem.potion.PotionInjector;
-import minechem.potion.PotionSpikingRecipe;
+import minechem.potion.*;
 import minechem.proxy.CommonProxy;
 import minechem.reference.MetaData;
 import minechem.reference.Reference;
@@ -33,21 +40,8 @@ import minetweaker.MineTweakerAPI;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
-import cpw.mods.fml.common.Mod.EventHandler;
-import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.network.NetworkRegistry;
-import cpw.mods.fml.common.registry.GameRegistry;
 
-@Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,);after:RotaryCraft;after:ReactorCraft;after:ElectriCraft")
+@Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
 {
 	// Instancing
@@ -66,7 +60,6 @@ public class Minechem
 	{
 		// Register instance.
 		INSTANCE = this;
-
 		// Load configuration.
 		LogHelper.debug("Loading configuration...");
 		Settings.init(event.getSuggestedConfigurationFile());
@@ -165,25 +158,21 @@ public class Minechem
 		MinechemRecipes.getInstance().RegisterRecipes();
 		MinechemRecipes.getInstance().registerFluidRecipes();
         MinechemBucketHandler.getInstance().registerBucketRecipes();
-        
-        LogHelper.debug("Registering Mod Recipes...");
-		MinechemRecipes.getInstance().RegisterModRecipes();
 		
 		LogHelper.debug("Adding blueprints to dungeon loot...");
 		MinechemItemsRegistration.addDungeonLoot();
 
+		LogHelper.debug("Adding effects to molecules...");
+		PharmacologyEffectRegistry.init();
+
 		LogHelper.debug("Activating Chemical Effect Layering (Coatings)...");
 		PotionEnchantmentCoated.registerCoatings();
 
-		Long start = System.currentTimeMillis();
-		LogHelper.info("Registering other Mod Recipes...");
-		MinechemRecipes.getInstance().registerOreDictOres();
-		Recipe.init();
-		DecomposerRecipeHandler.recursiveRecipes();
-		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
-
         LogHelper.debug("Registering Mod Ores for PolyTool...");
 		PolytoolTypeIron.getOres();
+		
+		LogHelper.debug("Overriding bucket dispenser...");
+		MinechemBucketReceiver.init();
 		
 		LogHelper.info("Minechem has loaded");
 	}
@@ -192,5 +181,19 @@ public class Minechem
 	public void onPreRender(RenderGameOverlayEvent.Pre e)
 	{
 		EffectsRenderer.renderEffects();
+	}
+
+	@EventHandler
+	public void onLoadComplete(FMLLoadCompleteEvent event)
+	{
+		LogHelper.debug("Registering Mod Recipes...");
+		MinechemRecipes.getInstance().RegisterModRecipes();
+
+		Long start = System.currentTimeMillis();
+		LogHelper.info("Registering other Mod Recipes...");
+		MinechemRecipes.getInstance().registerOreDictOres();
+		Recipe.init();
+		DecomposerRecipeHandler.recursiveRecipes();
+		LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
 	}
 }

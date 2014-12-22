@@ -24,7 +24,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
 	protected static enum SlotColor
 	{
-		BLUE, RED, YELLOW, ORANGE, GREEN, PURPLE;
+		BLUE, RED, YELLOW, ORANGE, GREEN, PURPLE
 	}
 
 	protected static enum SlotType

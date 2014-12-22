@@ -469,8 +469,4 @@ public class MoleculeEnum extends MinechemChemicalType
 	{
 		
 	}
-
-	public ArrayList<PotionChemical> getChemicals() {
-		return components;
-	}
 }

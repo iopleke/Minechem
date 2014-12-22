@@ -33,7 +33,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 
 		this.mc.renderEngine.bindTexture(Resources.Gui.PROJECTOR);
-		;
+
 		int x = (width - xSize) / 2;
 		int y = (height - ySize) / 2;
 		drawTexturedModalRect(x, y, 0, 0, xSize, ySize);

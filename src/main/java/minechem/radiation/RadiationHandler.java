@@ -220,7 +220,7 @@ public class RadiationHandler
 		long lifeTime = currentTime - radiationInfo.decayStarted - radiationInfo.radioactivity.getLife();
 		if (lifeTime > 0)
 		{
-			int damage = radiationInfo.radioactivity.getDamage();
+			int damage = radiationInfo.radioactivity.getDamage()*element.stackSize;
 			Item item = element.getItem();
 			if (item == MinechemItemsRegistration.element)
 			{
@@ -231,7 +231,7 @@ public class RadiationHandler
 			} else if (item instanceof MinechemBucketItem){
 				MinechemChemicalType type=((MinechemBucketItem) item).chemical;
 				if (type instanceof ElementEnum){
-					element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementEnum.getByID(((ElementEnum) type).ordinal()-1)))));
+					element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementEnum.getByID(((ElementEnum) type).atomicNumber())))));
 					radiationInfo = ElementItem.initiateRadioactivity(element, world);
 				}else{
 					radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeBucket(world, element, inventory, x, y, z);

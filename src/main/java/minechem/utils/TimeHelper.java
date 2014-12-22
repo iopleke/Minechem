@@ -36,10 +36,10 @@ public class TimeHelper
 			{
 				if (minabbr.isEmpty() || minabbr == "minechem.min.abbr")
 				{
-					timeLeft = timeLeft + mins + "m ";
+					timeLeft = timeLeft + mins + "m";
 				} else
 				{
-					timeLeft = timeLeft + mins + minabbr + " ";
+					timeLeft = timeLeft + mins + minabbr;
 				}
 			}
 		}
@@ -49,6 +49,9 @@ public class TimeHelper
 			ticks = ticks - (Constants.TICKS_PER_SECOND * secs);
 			if (secs > 0)
 			{
+				if (!timeLeft.equals("")){
+					timeLeft += " ";
+				}
 				if (secabbr.isEmpty() || secabbr == "minechem.sec.abbr")
 				{
 					timeLeft = timeLeft + secs + "s";

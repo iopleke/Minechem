@@ -1,6 +1,8 @@
 package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
+
+import minechem.utils.MapKey;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
 import net.minecraft.item.ItemStack;
@@ -17,7 +19,7 @@ public class DecomposerRecipeHandler
 
 	public static void recursiveRecipes()
 	{
-		for (String key : Recipe.recipes.keySet())
+		for (MapKey key : Recipe.recipes.keySet())
 		{
 			if (!DecomposerRecipe.recipes.containsKey(key))
 			{
@@ -26,7 +28,7 @@ public class DecomposerRecipeHandler
 			}
 		}
 		//Culls null recipes (used for recursion but breaks stuff if left in)
-		for (String key : DecomposerRecipe.recipes.keySet())
+		for (MapKey key : DecomposerRecipe.recipes.keySet())
 		{
 			if (DecomposerRecipe.get(key).isNull())
 			{
@@ -37,7 +39,7 @@ public class DecomposerRecipeHandler
 
 	public static void resetRecursiveRecipes()
 	{
-		for (String key : DecomposerRecipe.recipes.keySet())
+		for (MapKey key : DecomposerRecipe.recipes.keySet())
 		{
 			if (DecomposerRecipe.get(key) instanceof DecomposerRecipeSuper)
 			{
@@ -63,8 +65,7 @@ public class DecomposerRecipeHandler
 		DecomposerRecipe recipe = getRecipe(input);
 		if (recipe != null)
 		{
-			ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutput());
-			return stacks;
+			return MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutput());
 		}
 		return null;
 	}
@@ -74,9 +75,7 @@ public class DecomposerRecipeHandler
 		DecomposerFluidRecipe fluidRecipe = (DecomposerFluidRecipe) DecomposerRecipe.get(input);
 		if (fluidRecipe != null)
 		{
-
-			ArrayList<ItemStack> stacks = MinechemUtil.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());
-			return stacks;
+			return MinechemUtil.convertChemicalsIntoItemStacks(fluidRecipe.getOutput());
 		}
 		return null;
 	}

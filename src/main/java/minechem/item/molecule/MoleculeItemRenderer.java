@@ -87,11 +87,11 @@ public class MoleculeItemRenderer implements IItemRenderer
 	{
 		MoleculeEnum molecule = MoleculeItem.getMolecule(itemstack);
 		GL11.glColor3f(molecule.red, molecule.green, molecule.blue);
-		RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass1);
+		RenderingUtil.drawTexturedRectUV(type, 0, 0, 5, 16, 16, pass1);
 		GL11.glColor3f(molecule.red2, molecule.green2, molecule.blue2);
-		RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, pass2);
+		RenderingUtil.drawTexturedRectUV(type, 0, 0, 5, 16, 16, pass2);
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
-		RenderingUtil.drawTexturedRectUV(type, 0, 0, 0, 16, 16, testtube);
+		RenderingUtil.drawTexturedRectUV(type, 0, 0, 5, 16, 16, testtube);
 	}
 
 	private void renderItemInEquipped(ItemRenderType type, ItemStack itemstack, IIcon testtube, IIcon pass1, IIcon pass2)

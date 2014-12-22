@@ -2,7 +2,7 @@ package minechem.tileentity.synthesis;
 
 import minechem.Settings;
 import minechem.potion.PotionChemical;
-import net.minecraft.item.ItemRecord;
+import minechem.utils.MapKey;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class SynthesisRecipe
 {
-	public static Map<String, SynthesisRecipe> recipes = new HashMap<String, SynthesisRecipe>();
+	public static Map<MapKey, SynthesisRecipe> recipes = new HashMap<MapKey, SynthesisRecipe>();
 	private ItemStack output;
 	private PotionChemical[] shapedRecipe;
 	private ArrayList<PotionChemical> unshapedRecipe = new ArrayList<PotionChemical>();
@@ -28,7 +28,9 @@ public class SynthesisRecipe
 			{
 				return null;
 			}
-			recipes.put(getKey(recipe.output), recipe);
+			MapKey key = MapKey.getKey(recipe.output);
+			if (key!=null && recipes.get(key) == null)
+				recipes.put(key, recipe);
 		}
 
 		return recipe;
@@ -48,7 +50,7 @@ public class SynthesisRecipe
 
 		for (SynthesisRecipe recipe : recipes)
 		{
-			SynthesisRecipe.recipes.remove(getKey(recipe.output));
+			SynthesisRecipe.recipes.remove(MapKey.getKey(recipe.output));
 		}
 	}
 
@@ -85,13 +87,6 @@ public class SynthesisRecipe
 
 	}
 
-	public static String getKey(ItemStack itemStack)
-	{
-        String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
-        if (itemStack.getItem() instanceof ItemRecord) unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
-		return unlocalizedName + "@" + itemStack.getItemDamage();
-	}
-
     public SynthesisRecipe(ItemStack output, boolean isShaped, int energyCost, PotionChemical... recipe)
     {
         this.output = output;
@@ -111,7 +106,7 @@ public class SynthesisRecipe
         this.output = output;
         this.isShaped = shaped;
         this.energyCost = energyCost;
-        if (shaped) this.shapedRecipe = recipe.toArray(new PotionChemical[recipe.size()]);
+        this.shapedRecipe = recipe.toArray(new PotionChemical[recipe.size()]);
         this.unshapedRecipe = recipe;
     }
 
@@ -138,7 +133,7 @@ public class SynthesisRecipe
 
 	public PotionChemical[] getShapelessRecipe()
 	{
-		return this.unshapedRecipe.toArray(new PotionChemical[0]);
+		return this.unshapedRecipe.toArray(new PotionChemical[unshapedRecipe.size()]);
 	}
 
 	public int getIngredientCount()
@@ -161,7 +156,7 @@ public class SynthesisRecipe
 		return false;
 	}
 
-	public static SynthesisRecipe get(String key) {
+	public static SynthesisRecipe get(MapKey key) {
 		return recipes.get(key);
 	}
 

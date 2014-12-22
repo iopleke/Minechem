@@ -36,6 +36,7 @@ public class Resources
 		public static final ResourceLocation MICROSCOPE = new ResourceLocation(Reference.ID, Textures.Gui.MICROSCOPE);
 		public static final ResourceLocation FISSION = new ResourceLocation(Reference.ID, Textures.Gui.FISSION);
 		public static final ResourceLocation FUSION = new ResourceLocation(Reference.ID, Textures.Gui.FUSION);
+		public static final ResourceLocation TANK = new ResourceLocation(Reference.ID, Textures.Gui.TANK);
 	}
 
 	public static final class Model

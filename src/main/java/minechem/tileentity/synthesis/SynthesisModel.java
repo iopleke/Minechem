@@ -172,8 +172,7 @@ public class SynthesisModel extends ModelBase
 		{
 			float time = end - start;
 			float verticalTimer = timer - start;
-			float newY = MinechemUtil.translateValue(verticalTimer, 0.0F, time, yStart, yEnd);
-			bottomarm.rotationPointY = newY;
+			bottomarm.rotationPointY = MinechemUtil.translateValue(verticalTimer, 0.0F, time, yStart, yEnd);
 		}
 	}
 

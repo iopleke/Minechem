@@ -8,6 +8,7 @@ import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.util.ResourceLocation;
 
 import java.util.HashMap;
+import org.lwjgl.opengl.GL11;
 
 public abstract class GuiToggleSwitch
 {
@@ -49,7 +50,9 @@ public abstract class GuiToggleSwitch
 
 		if (isMoverOver())
 		{
+            GL11.glDisable(GL11.GL_DEPTH_TEST);
 			container.drawHoveringText(tooltip, cx + 77 - (tooltipWidth / 2), cy + 100);
+            GL11.glEnable(GL11.GL_DEPTH_TEST);
 		}
 	}
 

@@ -1,44 +1,40 @@
 package minechem.tileentity.decomposer;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.Map;
-import java.util.Random;
+import java.util.*;
+
 import minechem.Settings;
+import minechem.api.IDecomposerControl;
 import minechem.potion.PotionChemical;
-import net.minecraft.item.ItemRecord;
+import minechem.utils.MapKey;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
 public class DecomposerRecipe
 {
-	public static Map<String, DecomposerRecipe> recipes = new Hashtable<String, DecomposerRecipe>();
+	public static Map<MapKey, DecomposerRecipe> recipes = new LinkedHashMap<MapKey, DecomposerRecipe>();
 
 	private static final Random rand = new Random();
 	ItemStack input;
-	public Map<PotionChemical, PotionChemical> output = new Hashtable<PotionChemical, PotionChemical>();
+	public Map<MapKey, PotionChemical> output = new LinkedHashMap<MapKey, PotionChemical>();
 
 	//TODO:Add blacklist support for fluids
 	public static DecomposerRecipe add(DecomposerRecipe recipe)
 	{
 		if (recipe.input != null && recipe.input.getItem() != null)
 		{
-			if (isBlacklisted(recipe.input))
+			if (isBlacklisted(recipe.input) || (recipe.input.getItem() instanceof IDecomposerControl && ((IDecomposerControl)recipe.input.getItem()).getDecomposerMultiplier(recipe.input)==0))
 			{
 				return null;
 			}
-			recipes.put(getKey(recipe.input), recipe);
+			if (recipes.get(MapKey.getKey(recipe.input)) == null)
+				recipes.put(MapKey.getKey(recipe.input), recipe);
 		} else if (recipe instanceof DecomposerFluidRecipe && ((DecomposerFluidRecipe) recipe).inputFluid != null)
 		{
-			recipes.put(getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
+			if (recipes.get(MapKey.getKey(((DecomposerFluidRecipe) recipe).inputFluid)) == null)
+				recipes.put(MapKey.getKey(((DecomposerFluidRecipe) recipe).inputFluid), recipe);
 		}
 		return recipe;
-	}
-
-	public static DecomposerRecipe get(String string)
-	{
-		return recipes.get(string);
 	}
 
 	public static DecomposerRecipe remove(String string)
@@ -52,54 +48,34 @@ public class DecomposerRecipe
 
 	public static DecomposerRecipe remove(ItemStack itemStack)
 	{
-		if (recipes.containsKey(getKey(itemStack)))
+		MapKey key = MapKey.getKey(itemStack);
+		if (key!=null&&recipes.containsKey(key))
 		{
-			return recipes.remove(getKey(itemStack));
+			return recipes.remove(key);
 		}
 		return null;
 	}
 
-	public static String getKey(ItemStack itemStack)
+	public static DecomposerRecipe remove(MapKey key)
 	{
-		if (itemStack != null && itemStack.getItem() != null)
-		{
-			String unlocalizedName = itemStack.getItem().getUnlocalizedName(itemStack);
-			if (itemStack.getItem() instanceof ItemRecord)
-				unlocalizedName += ((ItemRecord) itemStack.getItem()).recordName;
-			return unlocalizedName + "@" + itemStack.getItemDamage();
-		}
-		return null;
+		return recipes.remove(key);
 	}
 
-	public static String getKey(FluidStack fluidStack)
+	public static DecomposerRecipe get(ItemStack itemStack)
 	{
-		if (fluidStack != null && fluidStack.getFluid() != null)
-		{
-			FluidStack result = fluidStack.copy();
-			result.amount = 1;
-			return result.toString();
-		}
-		return null;
+		if (itemStack==null || itemStack.getItem()==null) return null;
+		return get(MapKey.getKey(itemStack));
 	}
 
-	public static DecomposerRecipe get(ItemStack item)
+	public static DecomposerRecipe get(FluidStack fluidStack)
 	{
-		String key = getKey(item);
-		if (key != null)
-		{
-			return get(key);
-		}
-		return null;
+		if (fluidStack==null) return null;
+		return get(MapKey.getKey(fluidStack));
 	}
 
-	public static DecomposerRecipe get(FluidStack item)
+	public static DecomposerRecipe get(MapKey key)
 	{
-		String key = getKey(item);
-		if (key != null)
-		{
-			return get(key);
-		}
-		return null;
+		return recipes.get(key);
 	}
 
 	public static void removeRecipeSafely(String item)
@@ -124,18 +100,10 @@ public class DecomposerRecipe
 		this.input = input;
 	}
 
-	public DecomposerRecipe(ItemStack input, ArrayList<PotionChemical> chemicals)
+	public DecomposerRecipe(ItemStack input, List<PotionChemical> chemicals)
 	{
+		this(chemicals.toArray(new PotionChemical[chemicals.size()]));
 		this.input = input;
-		for (PotionChemical potionChemical : chemicals)
-		{
-			PotionChemical current = this.output.put(getPotionKey(potionChemical), potionChemical);
-			if (current != null)
-			{
-				current.amount += potionChemical.amount;
-				this.output.put(getPotionKey(potionChemical), potionChemical);
-			}
-		}
 	}
 
 	public DecomposerRecipe(PotionChemical... chemicals)
@@ -147,13 +115,13 @@ public class DecomposerRecipe
 	{
 		for (PotionChemical potionChemical : chemicals)
 		{
-			PotionChemical current = this.output.get(getPotionKey(potionChemical));
+			PotionChemical current = this.output.get(new MapKey(potionChemical));
 			if (current != null)
 			{
 				current.amount += potionChemical.amount;
 				continue;
 			}
-			this.output.put(getPotionKey(potionChemical), potionChemical);
+			this.output.put(new MapKey(potionChemical), potionChemical.copy());
 		}
 	}
 
@@ -167,13 +135,6 @@ public class DecomposerRecipe
 		ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
 		result.addAll(this.output.values());
 		return result;
-	}
-
-	public static PotionChemical getPotionKey(PotionChemical potion)
-	{
-		PotionChemical key = potion.copy();
-		key.amount = 1;
-		return key;
 	}
 
 	public ArrayList<PotionChemical> getOutputRaw()

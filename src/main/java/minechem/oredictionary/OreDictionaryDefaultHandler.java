@@ -57,11 +57,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 	@Override
 	public boolean canHandle(String oreName)
 	{
-		if (this.parseOreName(oreName) != null)
-		{
-			return true;
-		}
-		return false;
+		return this.parseOreName(oreName) != null;
 	}
 
 	@Override
@@ -96,7 +92,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 			case dust:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
 				unregisterIngot(ore);
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_INGOT, ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, true, MinechemRecipes.COST_INGOT, startAtRow(2, ore.getComposition()));
 				break;
 			case dustDirty:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, scaleFloor(ore.getComposition(), 0.75d));
@@ -112,7 +108,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 			case crystal:
 			case gem:
 				DecomposerRecipe.createAndAddRecipeSafely(oreName, ore.getComposition());
-				SynthesisRecipe.createAndAddRecipeSafely(oreName, false, MinechemRecipes.COST_GEM, ore.getComposition());
+				SynthesisRecipe.createAndAddRecipeSafely(oreName, true, MinechemRecipes.COST_GEM, startAtRow(2, ore.getComposition()));
 				break;
 			default:
 				LogHelper.debug(OreDictionaryDefaultHandler.class.getSimpleName() + " : Invalid ore dictionary type.");
@@ -120,6 +116,19 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 		}
 
 		seen(ore, prefix);
+	}
+
+	private PotionChemical[] startAtRow(int row, PotionChemical[] composition)
+	{
+		PotionChemical[] array = new PotionChemical[9];
+		int j = 0;
+		for (int i = (row * 3) -1; i < array.length; i++)
+		{
+			array[i] = composition[j];
+			if (++j >= composition.length)
+				break;
+		}
+		return array;
 	}
 
 	private void unregisterIngot(OreDictionaryBaseOreEnum ore)
@@ -161,11 +170,7 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
 
 	private boolean haveSeen(OreDictionaryBaseOreEnum ore, EnumOrePrefix prefix)
 	{
-		if (this.seenOres.containsKey(ore) && this.seenOres.get(ore).contains(prefix))
-		{
-			return true;
-		}
-		return false;
+		return this.seenOres.containsKey(ore) && this.seenOres.get(ore).contains(prefix);
 	}
 
 	private void seen(OreDictionaryBaseOreEnum ore, EnumOrePrefix prefix)

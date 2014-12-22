@@ -19,8 +19,6 @@ public class Molecule extends PotionChemical
 		return new Molecule(molecule, amount);
 	}
 
-	;
-
     public Molecule(MoleculeEnum molecule)
 	{
 		super(1);

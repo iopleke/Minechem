@@ -23,7 +23,7 @@ public class FluidElement extends MinechemFluid
 	@Override
 	public ItemStack getOutputStack()
 	{
-		return new ItemStack(MinechemItemsRegistration.element, 1, element.ordinal());
+		return new ItemStack(MinechemItemsRegistration.element, 1, element.atomicNumber());
 	}
 
     @Override

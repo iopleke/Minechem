@@ -33,7 +33,7 @@ public class MinechemFuelHandler implements IFuelHandler
                 MinechemChemicalType chemical = ((MinechemBucketItem) itemStack.getItem()).chemical;
                 if (chemical instanceof ElementEnum)
                 {
-                    itemStack =  new ItemStack(MinechemItemsRegistration.element, 1, ((ElementEnum) chemical).ordinal());
+                    itemStack =  new ItemStack(MinechemItemsRegistration.element, 1, ((ElementEnum) chemical).atomicNumber());
                 }
                 else if (chemical instanceof MoleculeEnum)
                 {

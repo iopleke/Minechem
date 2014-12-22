@@ -77,7 +77,7 @@ public class MinechemBucketReverseRecipe implements IRecipe
     public ItemStack getRecipeOutput()
     {
         if (type == MoleculeEnum.water) return new ItemStack(MinechemItemsRegistration.molecule, 8, MoleculeEnum.water.id());
-        if (type instanceof ElementEnum) return new ItemStack(MinechemItemsRegistration.element, 8, ((ElementEnum) type).ordinal());
+        if (type instanceof ElementEnum) return new ItemStack(MinechemItemsRegistration.element, 8, ((ElementEnum) type).atomicNumber());
         else if (type instanceof MoleculeEnum) return new ItemStack(MinechemItemsRegistration.molecule, 8, ((MoleculeEnum) type).id());
         return null;
     }

@@ -1,6 +1,7 @@
 package minechem.potion;
 
 import minechem.item.molecule.MoleculeEnum;
+import minechem.utils.MinechemUtil;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnumEnchantmentType;
 import net.minecraft.entity.EntityLivingBase;
@@ -25,7 +26,7 @@ public class PotionEnchantmentCoated extends Enchantment
 
 	public void applyEffect(EntityLivingBase entity)
 	{
-		PotionPharmacologyEffect.triggerPlayerEffect(this.chemical, entity);
+		PharmacologyEffectRegistry.applyEffect(this.chemical, entity);
 	}
 
 	/**
@@ -67,13 +68,13 @@ public class PotionEnchantmentCoated extends Enchantment
 	@Override
 	public String getTranslatedName(int level)
 	{
-		String enchantedName = this.chemical.name() + " " + StatCollector.translateToLocal("enchantment.level." + level);
+		String enchantedName = StatCollector.translateToLocal("enchantment.level." + level);
 		if (StatCollector.canTranslate("minechem.enchantment.coated"))
 		{
-			return StatCollector.translateToLocalFormatted("minechem.enchantment.coated", enchantedName);
+			return MinechemUtil.getLocalString(chemical.getUnlocalizedName()) + " " + StatCollector.translateToLocalFormatted("minechem.enchantment.coated", enchantedName);
 		} else
 		{
-			return enchantedName + " Coated";
+			return MinechemUtil.getLocalString(chemical.getUnlocalizedName()) + " " + enchantedName + " Coated";
 		}
 	}
 
@@ -81,7 +82,7 @@ public class PotionEnchantmentCoated extends Enchantment
 	{
 		for (MoleculeEnum molecule : MoleculeEnum.molecules.values())
 		{
-			if (molecule != null && PotionPharmacologyEffect.givesEffect(molecule))
+			if (molecule != null && PharmacologyEffectRegistry.hasEffect(molecule))
 			{
 				for (int i = 0; i < Enchantment.enchantmentsList.length; i++)
 				{

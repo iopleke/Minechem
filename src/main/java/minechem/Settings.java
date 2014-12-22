@@ -82,7 +82,9 @@ public class Settings
 	};
 	public static ArrayList<ItemStack> decomposerBlacklist;
 	public static ArrayList<ItemStack> synthesisBlacklist;
-	
+
+	public static boolean displayMoleculeEffects;
+
 	public static void init(File configFile)
 	{
 		if (config == null)
@@ -110,6 +112,11 @@ public class Settings
 		config.addCustomCategoryComment("blacklist", StatCollector.translateToLocal("config.blacklist.description"));
 		config.addCustomCategoryComment("power", StatCollector.translateToLocal("config.power.description"));
 		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
+
+		prop = config.get(Configuration.CATEGORY_GENERAL, "displayMoleculeEffects", Settings.displayMoleculeEffects);
+		prop.comment = StatCollector.translateToLocal("config.moleculeEffects.description");
+		displayMoleculeEffects = prop.getBoolean();
+		configList.add(prop.getName());
 
 		prop = config.get("worldgen", "generateOre", Settings.generateOre);
 		prop.comment = StatCollector.translateToLocal("config.worldgen.ore.description");
