@@ -2057,11 +2057,11 @@ public class MinechemRecipes
 
 		// Clay
 		ItemStack itemClayBall = new ItemStack(Items.clay_ball);
-		DecomposerRecipe.add(new DecomposerRecipeChance(itemClayBall, 0.3F, new PotionChemical[]
+		DecomposerRecipe.add(new DecomposerRecipeChance(itemClayBall, 0.5F, new PotionChemical[]
 		{
 			this.molecule(MoleculeEnum.kaolinite)
 		}));
-		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.clay_ball, 12), false, COST_ITEM, new PotionChemical[]
+		SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(Items.clay_ball, 2), false, COST_ITEM, new PotionChemical[]
 		{
 			this.molecule(MoleculeEnum.kaolinite)
 		}));
