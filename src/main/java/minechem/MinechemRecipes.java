@@ -2108,20 +2108,16 @@ public class MinechemRecipes
 		// Map
 		ItemStack itemMap = new ItemStack(Items.map);
 		DecomposerRecipe.add(new DecomposerRecipeSuper(itemMap, new ItemStack[]{itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemPaper,itemCompass}));
-		
+
 		// Book
 		ItemStack itemBook = new ItemStack(Items.book);
-		DecomposerRecipe.add(new DecomposerRecipeChance(itemBook, 0.75F, new PotionChemical[]
-		{
-			this.molecule(MoleculeEnum.cellulose, 3), this.molecule(MoleculeEnum.keratin)
-		}));
+		DecomposerRecipe.add(new DecomposerRecipeSuper(itemBook, new ItemStack[]{itemPaper,itemPaper,itemPaper,itemLeather}));
 
 		// Bookshelf
 		ItemStack blockBook = new ItemStack(Blocks.bookshelf);
-		DecomposerRecipe.add(new DecomposerRecipeChance(blockBook, 0.85F, new PotionChemical[]
-		{
-			this.molecule(MoleculeEnum.cellulose, 21), this.molecule(MoleculeEnum.keratin, 3),
-		}));
+		DecomposerRecipe.add(new DecomposerRecipeSuper(blockBook, new ItemStack[]{blockBirchWoodPlanks,blockBirchWoodPlanks,blockBirchWoodPlanks,
+				itemBook,itemBook,itemBook,
+				blockBirchWoodPlanks,blockBirchWoodPlanks,blockBirchWoodPlanks}));
 
 		// Slimeball
 		ItemStack itemSlimeBall = new ItemStack(Items.slime_ball);
