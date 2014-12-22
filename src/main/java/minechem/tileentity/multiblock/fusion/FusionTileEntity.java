@@ -88,8 +88,7 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 			{
 				int left = inventory[inputLeft].getItemDamage();
 				int right = inventory[inputRight].getItemDamage();
-				fusedResult = left+right;
-				return (left>0 && right>0 && fusedResult < ElementEnum.heaviestMass);
+				return (left>0 && right>0 && ElementEnum.getByID(left+right)!=null);
 			}
 		}
 		return false;
