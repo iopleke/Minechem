@@ -1590,12 +1590,13 @@ public class MinechemRecipes
 		ItemStack blockDiamond = new ItemStack(Blocks.diamond_block);
 		DecomposerRecipe.add(new DecomposerRecipe(blockDiamond, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.fullrene, 36)
+			this.molecule(MoleculeEnum.fullrene, 27)
 		}));
 		SynthesisRecipe.add(new SynthesisRecipe(blockDiamond, true, COST_GEMBLOCK, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4),
-			this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4), this.molecule(MoleculeEnum.fullrene, 4)
+			this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3),
+			this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3),
+			this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3), this.molecule(MoleculeEnum.fullrene, 3)
 		}));
 
 		// Pressure Plate
@@ -1697,7 +1698,11 @@ public class MinechemRecipes
 		ItemStack itemPotion = new ItemStack(Items.potionitem, 1, 0);
 		DecomposerRecipe.add(new DecomposerRecipe(itemPotion, new PotionChemical[]
 		{
-			this.molecule(MoleculeEnum.water, 8)
+			this.molecule(MoleculeEnum.water, 5), this.molecule(MoleculeEnum.siliconDioxide, 16)
+		}));
+		SynthesisRecipe.add(new SynthesisRecipe(itemPotion, true, COST_ITEM,new PotionChemical[]
+		{
+			null, this.molecule(MoleculeEnum.siliconDioxide, 4), null, this.molecule(MoleculeEnum.siliconDioxide, 4), this.molecule(MoleculeEnum.water, 5), this.molecule(MoleculeEnum.siliconDioxide, 4), null, this.molecule(MoleculeEnum.siliconDioxide, 4), null
 		}));
 
         //Ice Block

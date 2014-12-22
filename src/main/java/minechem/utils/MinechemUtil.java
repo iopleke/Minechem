@@ -535,8 +535,11 @@ public final class MinechemUtil
 		return stacks;
 	}
 
-	public static ArrayList<PotionChemical> pushTogetherChemicals(ArrayList<PotionChemical> list)
+	public static ArrayList<PotionChemical> pushTogetherChemicals(ArrayList<PotionChemical> oldList)
 	{
+		ArrayList<PotionChemical> list = new ArrayList<PotionChemical>();
+		for (PotionChemical chemical : oldList)
+			list.add(chemical.copy());
 		for (int i = list.size() - 1; i >= 0; i--)
 		{
 			if (list.get(i) == null)
