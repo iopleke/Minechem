@@ -12,7 +12,7 @@ val water = <minechem:minechemMolecule:1>;
 val ethanol = <minechem:minechemMolecule:62>;
 val phosgene = <minechem:minechemMolecule:91>;
 val hilburnium = <minechem:minechemMolecule:180>;
-val H = <minechem:minechemElement:0>;
+val H = <minechem:minechemElement:1>;
 val He = <ore:element_He>;
 val Au = <ore:element_Au>;
 
@@ -21,18 +21,18 @@ val Au = <ore:element_Au>;
 //Chemicals.addElement(atomicNumber,Symbol,Full Name,Element Type,Room State,Radioactivity);
 //Chemicals.addMolecule("hilburnium awesomeus",180,"Solid",[He*3,ethanol*11,H*5,Au*5]);
 //Chemicals.addMolecule(name,id,Room State,[Array of components]);
-//Chemicals.removeMoleculeEffects(water);                                -- Removes all effects for given molecule
+//Chemicals.removeMoleculeEffects(water);                                //-- Removes all effects for given molecule
 //Chemicals.removeMoleculeEffects(molecule);
 
-//Chemicals.addDamageEffect(water,5);                                   -- Adds a damage effect to a molecule
+//Chemicals.addDamageEffect(water,5);                        //-- Adds a damage effect to a molecule
 //Chemicals.addDamageEffect(molecule,damageValue);
-//Chemicals.addFoodEffect(water,1,0.1);                                 -- Adds a food value to a molecule
+//Chemicals.addFoodEffect(water,1,0.1);                      //-- Adds a food value to a molecule
 //Chemicals.addFoodEffect(molecule,foodLevel,saturation);
-//Chemicals.addPotionEffect(water,"poison",20,1);                       -- Adds a potion effect to a molecule
+//Chemicals.addPotionEffect(water,"poison",20,1);            //-- Adds a potion effect to a molecule
 //Chemicals.addPotionEffect(molecule,"potionName",duration in s, [powerLevel] default is zero);
-//Chemicals.addBurnEffect(water,5);                                     -- Adds a burn effect to a molecule
+//Chemicals.addBurnEffect(water,5);                          //-- Adds a burn effect to a molecule
 //Chemicals.addBurnEffect(molecule,burnTime);
-//Chemicals.addCureEffect(water,"confusion");                           -- Adds a cure effect to a molecule
+//Chemicals.addCureEffect(water,"confusion");                //-- Adds a cure effect to a molecule
 //Chemicals.addCureEffect(molecule,["potionName"] default is cure all);
 
 //###########Decomposer Functions#################  
@@ -46,7 +46,7 @@ val Au = <ore:element_Au>;
 
 //###########Synthesiser Functions################
 //Synthesiser.removeRecipe(glass);										-- Remove Recipe
-//Synthesiser.addRecipe([lead*10,ice*5],glass,false,100);				-- Add recipe ([inputs],output,shaped?, energy)
+//Synthesiser.addRecipe([Au*10,H*5],glass,true,100);				//-- Add recipe ([inputs],output,shaped?, energy)
 
 //###########Fuel Functions#######################
 //Fuels.addFuel(H,200);													-- Add/Change Fuel (Item, burn time in ticks)

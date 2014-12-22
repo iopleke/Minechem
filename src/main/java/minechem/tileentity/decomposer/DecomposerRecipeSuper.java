@@ -11,11 +11,13 @@ import minechem.utils.LogHelper;
 import minechem.utils.MapKey;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
 public class DecomposerRecipeSuper extends DecomposerRecipe
 {
-
+//TODO seems to be overcounting the output chance of the stained glasspane recipe (0.4375 instead of 0.375) investigate when have time
 	static Random random = new Random();
 	public Map<MapKey, Double> recipes = new Hashtable<MapKey, Double>();
 
