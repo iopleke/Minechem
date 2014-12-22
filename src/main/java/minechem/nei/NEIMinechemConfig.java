@@ -2,6 +2,7 @@ package minechem.nei;
 
 import codechicken.nei.api.API;
 import codechicken.nei.api.IConfigureNEI;
+import minechem.Settings;
 
 public class NEIMinechemConfig implements IConfigureNEI
 {
@@ -21,13 +22,16 @@ public class NEIMinechemConfig implements IConfigureNEI
 	@Override
 	public void loadConfig()
 	{
-		DecomposerNEIRecipeHandler decomposerRecipeHandler = new DecomposerNEIRecipeHandler();
-		API.registerRecipeHandler(decomposerRecipeHandler);
-		API.registerUsageHandler(decomposerRecipeHandler);
+		if (Settings.supportNEI)
+		{
+			DecomposerNEIRecipeHandler decomposerRecipeHandler = new DecomposerNEIRecipeHandler();
+			API.registerRecipeHandler(decomposerRecipeHandler);
+			API.registerUsageHandler(decomposerRecipeHandler);
 
-		SynthesisNEIRecipeHandler synthesisRecipeHandler = new SynthesisNEIRecipeHandler();
-		API.registerRecipeHandler(synthesisRecipeHandler);
-		API.registerUsageHandler(synthesisRecipeHandler);
+			SynthesisNEIRecipeHandler synthesisRecipeHandler = new SynthesisNEIRecipeHandler();
+			API.registerRecipeHandler(synthesisRecipeHandler);
+			API.registerUsageHandler(synthesisRecipeHandler);
+		}
 	}
 
 }

@@ -69,6 +69,8 @@ config.decaySafeMachines.description=Enable Safe Machines
 config.fluideffects.description=Enable fluid Effects
 config.advancedTurtleAI.description=Make your turtles smarter - they probably won't try to take over the world
 config.moleculeEffects.description=Add Molecule Effects to the item tooltip
+config.supportNEI.description=NEI Support
+config.supportNEI.description=Turn NEI support on or off
 
 
 gui.title.decomposer=Chemical Decomposer
