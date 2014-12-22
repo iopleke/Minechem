@@ -35,6 +35,7 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
+import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
@@ -267,7 +268,9 @@ public class MoleculeItem extends Item
 			RadiationInfo radioactivity = ElementItem.getRadiationInfo(itemStack, world);
 			long worldtime=world.getTotalWorldTime();
 			long leftTime=radioactivity.radioactivity.getLife()-(worldtime-radioactivity.decayStarted);
-
+			MoleculeEnum molecule = getMolecule(itemStack);
+			Fluid fluid = FluidHelper.molecules.get(molecule);
+			if (fluid==null) return itemStack;
 			if (!player.capabilities.isCreativeMode){
 				if (itemStack.stackSize>=8)
                 {
@@ -328,7 +331,7 @@ public class MoleculeItem extends Item
 			}
 			
 			Block block = Blocks.flowing_water;
-            if (getMolecule(itemStack) != MoleculeEnum.water) block = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(getMolecule(itemStack)));
+            if (getMolecule(itemStack) != MoleculeEnum.water) block = FluidHelper.moleculeBlocks.get(fluid);
 			world.setBlock(x, y, z, block, 0, 3);
 			TileEntity tile = world.getTileEntity(x, y, z);
 			if (radioactivity.isRadioactive() && tile instanceof RadiationFluidTileEntity)

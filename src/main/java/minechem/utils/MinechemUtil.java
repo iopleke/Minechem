@@ -694,6 +694,7 @@ public final class MinechemUtil
 	{
 		if (Compare.isStackAnElement(itemstack))
 		{
+			if (itemstack.getItemDamage() == 0) return null;
 			return new Element(ElementItem.getElement(itemstack), itemstack.stackSize);
 		} else if (Compare.isStackAMolecule(itemstack))
 		{

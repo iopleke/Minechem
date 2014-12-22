@@ -186,8 +186,11 @@ public class Recipe
 								}
 							}
 						}
-						Recipe addRecipe = new Recipe(input, components);
-						addPreCullRecipe(key, addRecipe, preCullRecipes);
+						if (!badRecipe)
+						{
+							Recipe addRecipe = new Recipe(input, components);
+							addPreCullRecipe(key, addRecipe, preCullRecipes);
+						}
 					}
 				}
 			}
