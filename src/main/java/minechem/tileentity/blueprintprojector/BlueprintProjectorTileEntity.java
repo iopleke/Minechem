@@ -17,7 +17,6 @@ import minechem.utils.LocalPosition.Pos3;
 import minechem.utils.MinechemUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
@@ -196,7 +195,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 			return MultiBlockStatusEnum.CORRECT;
 		} else if (structureID == air)
 		{
-			if (block == Blocks.air)
+			if (block.isAir(worldObj,x,y,z))
 			{
 				return MultiBlockStatusEnum.CORRECT;
 			} else
@@ -207,7 +206,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 		{
 			HashMap<Integer, BlueprintBlock> lut = blueprint.getBlockLookup();
 			BlueprintBlock blueprintBlock = lut.get(structureID);
-			if (block == Blocks.air)
+			if (block.isAir(worldObj,x,y,z))
 			{
 				createGhostBlock(worldPos.x, worldPos.y, worldPos.z, structureID);
 				return MultiBlockStatusEnum.INCORRECT;
