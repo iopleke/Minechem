@@ -14,13 +14,7 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.oredictionary.OreDictionaryAppliedEnergisticsHandler;
-import minechem.oredictionary.OreDictionaryDefaultHandler;
-import minechem.oredictionary.OreDictionaryGregTechHandler;
-import minechem.oredictionary.OreDictionaryHandler;
-import minechem.oredictionary.OreDictionaryIC2Handler;
-import minechem.oredictionary.OreDictionaryMekanismHandler;
-import minechem.oredictionary.OreDictionaryUndergroundBiomesHandler;
+import minechem.oredictionary.*;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerFluidRecipe;
 import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
@@ -37,6 +31,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -3150,6 +3145,11 @@ public class MinechemRecipes
 
 	private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
 
+	public static ArrayList<OreDictionaryHandler> getOreDictionaryHandlers()
+	{
+		return recipes.oreDictionaryHandlers;
+	}
+
 	public void registerOreDictOres()
 	{
 		RegisterHandlers();
@@ -3157,6 +3157,7 @@ public class MinechemRecipes
 		{
 			registerOre(oreName);
 		}
+		MinecraftForge.EVENT_BUS.register(new OreEventHandler()); //To catch any weird ones that register afterwards
 	}
 
 	public void registerOre(String oreName)
