@@ -35,7 +35,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 				DecomposerRecipe decompRecipe = DecomposerRecipe.get(component);
 				if (decompRecipe != null)
 				{
-					addDecompRecipe(decompRecipe, 1.0 / input.stackSize);
+					addDecompRecipe(decompRecipe, 1.0D / Math.max(input.stackSize, 1));
 				} else if (!component.isItemEqual(input) || !(component.getItemDamage() == input.getItemDamage()))
 				{
 					//Recursively generate recipe
@@ -44,7 +44,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
 					{
 						DecomposerRecipeSuper newSuper;
 						DecomposerRecipe.add(newSuper = new DecomposerRecipeSuper(recipe.output, recipe.inStacks, level + 1));
-						addDecompRecipe(newSuper, 1.0 / recipe.getOutStackSize());
+						addDecompRecipe(newSuper, 1.0D / recipe.getOutStackSize());
 					}
 				}
 			}
