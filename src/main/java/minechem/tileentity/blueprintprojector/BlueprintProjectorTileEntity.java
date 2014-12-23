@@ -196,7 +196,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 			return MultiBlockStatusEnum.CORRECT;
 		} else if (structureID == air)
 		{
-			if (block == Blocks.air)
+			if (block.isAir(worldObj,x,y,z))
 			{
 				return MultiBlockStatusEnum.CORRECT;
 			} else
@@ -207,7 +207,7 @@ public class BlueprintProjectorTileEntity extends MinechemTileEntity
 		{
 			HashMap<Integer, BlueprintBlock> lut = blueprint.getBlockLookup();
 			BlueprintBlock blueprintBlock = lut.get(structureID);
-			if (block == Blocks.air)
+			if (block.isAir(worldObj,x,y,z))
 			{
 				createGhostBlock(worldPos.x, worldPos.y, worldPos.z, structureID);
 				return MultiBlockStatusEnum.INCORRECT;
