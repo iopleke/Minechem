@@ -39,7 +39,7 @@ public class PolytoolEventHandler
 		// Again, there must be a better way to do this
 		if (event.entityPlayer.inventory.getCurrentItem() != null && event.entityPlayer.inventory.getCurrentItem().getItem() instanceof PolytoolItem)
 		{
-			event.newSpeed = ((PolytoolItem) event.entityPlayer.inventory.getCurrentItem().getItem()).func_150893_a(event.entityPlayer.inventory.getCurrentItem(), event.block);
+			event.newSpeed = event.entityPlayer.inventory.getCurrentItem().getItem().func_150893_a(event.entityPlayer.inventory.getCurrentItem(), event.block);
 		}
 	}
 

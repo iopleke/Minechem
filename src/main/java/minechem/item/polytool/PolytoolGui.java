@@ -99,35 +99,35 @@ public class PolytoolGui extends GuiContainerTabbed
 		String localizedName;
 
 		localizedName = MinechemUtil.getLocalString("gui.polytool.sword");
-		if (localizedName.isEmpty() || localizedName == "gui.polytool.sword")
+		if (localizedName.isEmpty() || localizedName.equals("gui.polytool.sword"))
 		{
 			localizedName = "Sword";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getSwordStr(polytool), guiLeft + 10, guiTop + 80, 0x404040);
 
 		localizedName = MinechemUtil.getLocalString("gui.polytool.ores");
-		if (localizedName.isEmpty() || localizedName == "gui.polytool.ores")
+		if (localizedName.isEmpty() || localizedName.equals("gui.polytool.ores"))
 		{
 			localizedName = "Ores";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getPickaxeStr(polytool), guiLeft + 10, guiTop + 90, 0x404040);
 
 		localizedName = MinechemUtil.getLocalString("gui.polytool.stone");
-		if (localizedName.isEmpty() || localizedName == "gui.polytool.stone")
+		if (localizedName.isEmpty() || localizedName.equals("gui.polytool.stone"))
 		{
 			localizedName = "Stone";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getStoneStr(polytool), guiLeft + 10, guiTop + 100, 0x404040);
 
 		localizedName = MinechemUtil.getLocalString("gui.polytool.axe");
-		if (localizedName.isEmpty() || localizedName == "gui.polytool.axe")
+		if (localizedName.isEmpty() || localizedName.equals("gui.polytool.axe"))
 		{
 			localizedName = "Axe";
 		}
 		fontRendererObj.drawString(localizedName + ": " + PolytoolItem.instance.getAxeStr(polytool), guiLeft + 10, guiTop + 110, 0x404040);
 
 		localizedName = MinechemUtil.getLocalString("gui.polytool.shovel");
-		if (localizedName.isEmpty() || localizedName == "gui.polytool.shovel")
+		if (localizedName.isEmpty() || localizedName.equals("gui.polytool.shovel"))
 		{
 			localizedName = "Shovel";
 		}

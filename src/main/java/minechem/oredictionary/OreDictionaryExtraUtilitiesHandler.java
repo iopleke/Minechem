@@ -33,16 +33,10 @@ public class OreDictionaryExtraUtilitiesHandler implements OreDictionaryHandler
 		switch (blockList.indexOf(oreName))
 		{
 			case BURNT_QUARTZ:
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-				{
-					new Molecule(MoleculeEnum.siliconDioxide, 4), new Molecule(MoleculeEnum.arsenicOxide, 1),
-					new Molecule(MoleculeEnum.galliumOxide, 1)
-				});
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, new Molecule(MoleculeEnum.siliconDioxide, 4), new Molecule(MoleculeEnum.arsenicOxide, 1),
+						new Molecule(MoleculeEnum.galliumOxide, 1));
 			case ICE_STONE:
-				DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
-				{
-					new Molecule(MoleculeEnum.water, 4)
-				});
+				DecomposerRecipe.createAndAddRecipeSafely(oreName, new Molecule(MoleculeEnum.water, 4));
 		}
 	}
 

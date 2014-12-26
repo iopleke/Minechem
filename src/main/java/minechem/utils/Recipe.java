@@ -25,6 +25,7 @@ public class Recipe
 	public static Map<ItemStack, ItemStack> smelting;
 	public ItemStack output;
 	public ItemStack[] inStacks;
+	private int depth;
 
 	private static final int MAXDEPTH = 20;
 
@@ -72,9 +73,9 @@ public class Recipe
 	{
 		try
 		{
-			Class rollingmachine = Class.forName("mods.railcraft.common.util.crafting.RollingMachineCraftingManager");
-			Method instance = rollingmachine.getMethod("getInstance");
-			Method list = rollingmachine.getMethod("getRecipeList");
+			Class rollingMachine = Class.forName("mods.railcraft.common.util.crafting.RollingMachineCraftingManager");
+			Method instance = rollingMachine.getMethod("getInstance");
+			Method list = rollingMachine.getMethod("getRecipeList");
 				return (List) list.invoke(instance.invoke(null));
 		} catch (NoSuchMethodException e)
 		{
@@ -132,6 +133,7 @@ public class Recipe
 				{
 
 					ItemStack input = ((IRecipe) recipe).getRecipeOutput();
+					LogHelper.debug("Adding recipe for " + input.toString());
 					ItemStack[] components = null;
 
 					if (recipe instanceof ShapelessOreRecipe && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
@@ -175,12 +177,12 @@ public class Recipe
 					MapKey key = MapKey.getKey(input);
 					if (components != null && key != null)
 					{
-						boolean badRecipe = false;
+						boolean badRecipe = input.stackSize>0;
 						for (ItemStack component : components)
 						{
 							if (component != null && component.getItem() != null)
 							{
-								if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage())
+								if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage() || component.stackSize<1)
 								{
 									badRecipe = true;
 								}
@@ -198,6 +200,7 @@ public class Recipe
 		for (ItemStack input : smelting.keySet())
 		{
 			ItemStack output = smelting.get(input);
+			if (invalidStack(input)  || invalidStack(output)) continue;
 			MapKey key = MapKey.getKey(output);
 			if (key != null)
 			{
@@ -205,19 +208,28 @@ public class Recipe
 				{
 					input
 				});
+				LogHelper.debug("Adding Smelting recipe for " + output.toString());
 				addPreCullRecipe(key, addRecipe, preCullRecipes);
 			}
 		}
 
 		for (Map.Entry<MapKey, ArrayList<Recipe>> entry : preCullRecipes.entrySet())
 		{
-			cullRecipes(entry, preCullRecipes);
+			if (entry.getValue()!=null && entry.getValue().size()>0)
+				LogHelper.debug("Culling recipe for " + entry.getValue().get(0).output.toString());
+			int depth = cullRecipes(entry, preCullRecipes);
 			if (entry.getValue().size() == 1)
 			{
 				Recipe addRecipe = entry.getValue().get(0);
+				addRecipe.depth = depth;
 				recipes.put(entry.getKey(), addRecipe);
 			}
 		}
+	}
+
+	private static boolean invalidStack(ItemStack stack)
+	{
+		return stack == null || stack.getItem() == null || stack.stackSize < 1 || stack.getItemDamage() < 0;
 	}
 
 	private static void addPreCullRecipe(MapKey key, Recipe addRecipe, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
@@ -240,7 +252,7 @@ public class Recipe
 		{
 			if (itemStack != null && itemStack.getItem() != null)
 			{
-				if (itemStack.getItemDamage() == Short.MAX_VALUE)
+				if (itemStack.getItemDamage() == OreDictionary.WILDCARD_VALUE)
 				{
 					components[i] = new ItemStack(itemStack.getItem(), itemStack.stackSize, 0);
 				} else
@@ -261,25 +273,6 @@ public class Recipe
 		return output.stackSize;
 	}
 
-	public static String getKey(ItemStack output)
-	{
-		if (output != null)
-		{
-			ItemStack result = output.copy();
-			result.stackSize = 1;
-			if (result.getItemDamage() == Short.MAX_VALUE)
-			{
-				result.setItemDamage(0);
-			}
-			if (result.toString().contains("null"))
-			{
-				return result.stackSize + "x" + result.getItem().getUnlocalizedName(result) + "@" + result.getItemDamage();
-			}
-			return result.toString();
-		}
-		return null;
-	}
-
 	public static Recipe get(ItemStack output)
 	{
 		return get(new MapKey(output));
@@ -297,14 +290,15 @@ public class Recipe
 		return recipes.get(string);
 	}
 
-	private static void cullRecipes(Entry<MapKey, ArrayList<Recipe>> entry, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
+	private static int cullRecipes(Entry<MapKey, ArrayList<Recipe>> entry, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
 	{
+		int returnVal = 0;
 		ArrayList<Recipe> value = entry.getValue();
 		if (DecomposerRecipe.get(entry.getKey()) != null)
 		{
 			value.clear();
 			entry.setValue(value);
-			return;
+			return 0;
 		}
 		Map<Recipe, Integer> result = new Hashtable<Recipe, Integer>();
 		for (Recipe check : value)
@@ -350,10 +344,11 @@ public class Recipe
 		}
 		if (minValue != null)
 		{
+			returnVal = result.get(minValue);
 			value.add(minValue);
 		}
-
 		entry.setValue(value);
+		return returnVal;
 	}
 
 	private static int getSize(MapKey key, int depth, Map<MapKey, ArrayList<Recipe>> preCullRecipes)
@@ -366,10 +361,15 @@ public class Recipe
 		{
 			return 0;
 		}
-		if (!preCullRecipes.containsKey(key))
+		if (!preCullRecipes.containsKey(key) || preCullRecipes.get(key).size() < 1)
 		{
 			return 1;
 		}
+		if (recipes.containsKey(key))
+		{
+			return recipes.get(key).depth;
+		}
+		LogHelper.debug("Depth: "+depth+", stack: "+preCullRecipes.get(key).get(0).output.toString());
 		int result = 0;
 		for (Recipe recipe : preCullRecipes.get(key))
 		{

@@ -73,7 +73,7 @@ public class ChemistJournalItem extends Item
 			// Load owned by tag from the book which should be last user to use the book.
 			String owner = stackTag.getString(JOURNAL_OWNER_TAG);
 			String ownerTag = MinechemUtil.getLocalString("minechem.owner.tag");
-			if (ownerTag.isEmpty() || ownerTag == "minechem.owner.tag")
+			if (ownerTag.isEmpty() || ownerTag.equals("minechem.owner.tag"))
 			{
 				list.add("Owner: " + owner);
 			} else

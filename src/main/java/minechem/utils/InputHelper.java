@@ -66,11 +66,6 @@ public class InputHelper
 		}
 	}
 
-	public static FluidStack[] toFluids(IIngredient[] input)
-	{
-		return toFluids(input);
-	}
-
 	public static FluidStack[] toFluids(ILiquidStack[] iStack)
 	{
 		FluidStack[] stack = new FluidStack[iStack.length];

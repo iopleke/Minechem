@@ -925,9 +925,8 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     
     private boolean validateInteger(Integer input, int max)
     {
-    	if (input==null || input>=max) return false;
-    	return true;
-    }
+		return !(input == null || input >= max);
+	}
     
     private Integer getInt(Object arg)
     {

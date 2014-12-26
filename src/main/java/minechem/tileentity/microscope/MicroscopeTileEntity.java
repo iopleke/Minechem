@@ -166,14 +166,6 @@ public class MicroscopeTileEntity extends MinechemTileEntity implements IInvento
 	@Override
 	public boolean isItemValidForSlot(int i, ItemStack itemstack)
 	{
-		if (i == kInput[0])
-		{
-			return true;
-		}
-		if (i == kJournal[0] && itemstack.getItem() == MinechemItemsRegistration.journal)
-		{
-			return true;
-		}
-		return false;
+		return i == kInput[0] || (i == kJournal[0] && itemstack.getItem() == MinechemItemsRegistration.journal);
 	}
 }

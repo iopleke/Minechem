@@ -2954,17 +2954,7 @@ public class MinechemRecipes
 			Block post = GameRegistry.findBlock("Railcraft", "tile.railcraft.post");
 			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPost), this.element(ElementEnum.Fe, 5)));
 			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPlatform), this.element(ElementEnum.Fe, 5)));
-			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]
-			{
-			}));
-		}
-
-		//Mekanism
-		if (Loader.isModLoaded("Mekanism"))
-		{
-//			System.out.println(GameData.getItemRegistry().getKeys().toString());
-//			System.out.println(GameData.getBlockRegistry().getKeys().toString());
-			//Item ingotOsmium = GameRegistry.findItem(modId, name)
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]{}));
 		}
 	}
 

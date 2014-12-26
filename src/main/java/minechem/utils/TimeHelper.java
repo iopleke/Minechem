@@ -19,7 +19,7 @@ public class TimeHelper
 			ticks = ticks - (Constants.TICKS_PER_HOUR * hrs);
 			if (hrs > 0)
 			{
-				if (hourabbr.isEmpty() || hourabbr == "minechem.hour.abbr")
+				if (hourabbr.isEmpty() || hourabbr.equals("minechem.hour.abbr"))
 				{
 					timeLeft = hrs + "hr ";
 				} else
@@ -34,7 +34,7 @@ public class TimeHelper
 			ticks = ticks - (Constants.TICKS_PER_MINUTE * mins);
 			if (mins > 0)
 			{
-				if (minabbr.isEmpty() || minabbr == "minechem.min.abbr")
+				if (minabbr.isEmpty() || minabbr.equals("minechem.min.abbr"))
 				{
 					timeLeft = timeLeft + mins + "m";
 				} else
@@ -52,7 +52,7 @@ public class TimeHelper
 				if (!timeLeft.equals("")){
 					timeLeft += " ";
 				}
-				if (secabbr.isEmpty() || secabbr == "minechem.sec.abbr")
+				if (secabbr.isEmpty() || secabbr.equals("minechem.sec.abbr"))
 				{
 					timeLeft = timeLeft + secs + "s";
 				} else

@@ -74,7 +74,6 @@ public class BlueprintProjectorBlock extends BlockSimpleContainer
 				itemStacks.add(takeBlueprintFromProjector(projector));
 			}
 		}
-		return;
 	}
 
 	@Override

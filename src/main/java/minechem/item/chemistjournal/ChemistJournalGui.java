@@ -331,7 +331,7 @@ public class ChemistJournalGui extends GuiContainerTabbed implements IVerticalSc
 		float chance = 100;
 		if (currentDecomposerRecipe != null && currentDecomposerRecipe instanceof DecomposerRecipeChance)
 		{
-			chance = ((DecomposerRecipeChance) currentDecomposerRecipe).getChance();
+			chance = currentDecomposerRecipe.getChance();
 			chance *= 100.0F;
 		}
 		if (currentDecomposerRecipe != null)

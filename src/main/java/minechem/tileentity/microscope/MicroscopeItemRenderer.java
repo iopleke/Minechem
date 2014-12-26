@@ -46,20 +46,7 @@ public class MicroscopeItemRenderer extends ItemMinechemRenderer
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
 	{
-		if (helper == ItemRendererHelper.INVENTORY_BLOCK)
-		{
-			return true;
-		}
-		if (helper == ItemRendererHelper.ENTITY_BOBBING)
-		{
-			return true;
-		}
-		if (helper == ItemRendererHelper.ENTITY_ROTATION)
-		{
-			return true;
-		}
-
-		return false;
+		return helper == ItemRendererHelper.INVENTORY_BLOCK || helper == ItemRendererHelper.ENTITY_BOBBING || helper == ItemRendererHelper.ENTITY_ROTATION;
 	}
 
 	@Override

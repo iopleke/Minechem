@@ -45,7 +45,7 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 	public void loadTransferRects()
 	{
 		// Use the right-arrow pointing at the output.
-		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(OUTPUT_X_OFS - 16, OUTPUT_Y_OFS, 14, 16), MINECHEM_SYNTHESIS_RECIPES_ID, new Object[0]));
+		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(OUTPUT_X_OFS - 16, OUTPUT_Y_OFS, 14, 16), MINECHEM_SYNTHESIS_RECIPES_ID));
 	}
 
 	@Override
