@@ -2486,7 +2486,7 @@ public class MinechemRecipes
 		SynthesisRecipe.createAndAddRecipeSafely("ingotSilver", false, COST_INGOT, this.element(ElementEnum.Ag, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotLead", false, COST_INGOT, this.element(ElementEnum.Pb, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotPlatinum", false, COST_INGOT, this.element(ElementEnum.Pt, 16));
-		SynthesisRecipe.createAndAddRecipeSafely("ingotAluminium", false, COST_INGOT, this.element(ElementEnum.Au, 16));
+		SynthesisRecipe.createAndAddRecipeSafely("ingotAluminium", false, COST_INGOT, this.element(ElementEnum.Al, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotMagnesium", false, COST_INGOT, this.element(ElementEnum.Mg, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotSteel", false, COST_INGOT, new PotionChemical[]
 		{
