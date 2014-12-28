@@ -172,12 +172,8 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer entityPlayer)
 	{
-		if (!completeStructure)
-		{
-			return false;
-		}
+		return completeStructure;
 
-		return true;
 	}
 
 	@Override

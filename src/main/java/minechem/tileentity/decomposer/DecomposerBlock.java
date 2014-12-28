@@ -55,7 +55,6 @@ public class DecomposerBlock extends BlockSimpleContainer
 				itemStacks.add(itemstack);
 			}
 		}
-		return;
 	}
 
 	@Override

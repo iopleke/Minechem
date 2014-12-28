@@ -463,12 +463,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 	{
 
 		//Minechem.LOGGER.info(fluid.toString());
-		if (DecomposerRecipe.get(new FluidStack(fluid, 1)) != null)
-		{
-			return true;
-		}
+		return DecomposerRecipe.get(new FluidStack(fluid, 1)) != null;
 
-		return false;
 	}
 
 	@Override

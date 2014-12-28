@@ -74,11 +74,7 @@ public abstract class GuiToggleSwitch
 	{
 		mouseX = container.getMouseX();
 		mouseY = container.getMouseY();
-		if (mouseX > this.x && mouseX < this.x + width && mouseY > this.y && mouseY < this.y + height)
-		{
-			return true;
-		}
-		return false;
+		return mouseX > this.x && mouseX < this.x + width && mouseY > this.y && mouseY < this.y + height;
 	}
 
 	public int getState()

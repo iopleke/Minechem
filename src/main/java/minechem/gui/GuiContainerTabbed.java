@@ -29,12 +29,12 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
 	protected static enum SlotType
 	{
-		SINGLE, OUTPUT, DOUBLEOUTPUT;
+		SINGLE, OUTPUT, DOUBLEOUTPUT
 	}
 
 	protected static enum SlotRender
 	{
-		TOP, BOTTOM, FULL;
+		TOP, BOTTOM, FULL
 	}
 
 	protected static int SCALE_ENERGY = 42;

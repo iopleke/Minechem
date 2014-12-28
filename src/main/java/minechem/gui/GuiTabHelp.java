@@ -38,7 +38,7 @@ public class GuiTabHelp extends GuiTab
 		if (!isOpen())
 		{
 			String localizedTooltip = MinechemUtil.getLocalString("tab.tooltip.help");
-			if (localizedTooltip == "tab.tooltip.help" || localizedTooltip.isEmpty())
+			if (localizedTooltip.equals("tab.tooltip.help") || localizedTooltip.isEmpty())
 			{
 				return "Help";
 			} else

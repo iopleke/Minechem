@@ -68,7 +68,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 	@Override
 	public void loadTransferRects()
 	{
-		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 30), MINECHEM_DECOMPOSER_RECIPES_ID, new Object[0]));
+		transferRects.add(new TemplateRecipeHandler.RecipeTransferRect(new Rectangle(INPUT_X_OFS, INPUT_ARROW_Y_OFS, 16, 30), MINECHEM_DECOMPOSER_RECIPES_ID));
 	}
 
 	@Override

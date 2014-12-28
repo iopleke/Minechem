@@ -20,7 +20,6 @@ public class GuiTabTable extends GuiTab
 		if (!isFullyOpened())
 		{
 			drawIcon(x + 2, y + 3);
-			return;
 		}
 
 	}

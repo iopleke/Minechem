@@ -69,7 +69,6 @@ public class MicroscopeBlock extends BlockSimpleContainer
 				itemStacks.add(itemstack);
 			}
 		}
-		return;
 	}
 
 	@Override

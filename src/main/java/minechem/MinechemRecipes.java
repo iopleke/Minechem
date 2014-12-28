@@ -14,13 +14,7 @@ import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
-import minechem.oredictionary.OreDictionaryAppliedEnergisticsHandler;
-import minechem.oredictionary.OreDictionaryDefaultHandler;
-import minechem.oredictionary.OreDictionaryGregTechHandler;
-import minechem.oredictionary.OreDictionaryHandler;
-import minechem.oredictionary.OreDictionaryIC2Handler;
-import minechem.oredictionary.OreDictionaryMekanismHandler;
-import minechem.oredictionary.OreDictionaryUndergroundBiomesHandler;
+import minechem.oredictionary.*;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.decomposer.DecomposerFluidRecipe;
 import minechem.tileentity.decomposer.DecomposerFluidRecipeSelect;
@@ -37,6 +31,7 @@ import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
@@ -2491,7 +2486,7 @@ public class MinechemRecipes
 		SynthesisRecipe.createAndAddRecipeSafely("ingotSilver", false, COST_INGOT, this.element(ElementEnum.Ag, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotLead", false, COST_INGOT, this.element(ElementEnum.Pb, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotPlatinum", false, COST_INGOT, this.element(ElementEnum.Pt, 16));
-		SynthesisRecipe.createAndAddRecipeSafely("ingotAluminium", false, COST_INGOT, this.element(ElementEnum.Au, 16));
+		SynthesisRecipe.createAndAddRecipeSafely("ingotAluminium", false, COST_INGOT, this.element(ElementEnum.Al, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotMagnesium", false, COST_INGOT, this.element(ElementEnum.Mg, 16));
 		SynthesisRecipe.createAndAddRecipeSafely("ingotSteel", false, COST_INGOT, new PotionChemical[]
 		{
@@ -2959,17 +2954,7 @@ public class MinechemRecipes
 			Block post = GameRegistry.findBlock("Railcraft", "tile.railcraft.post");
 			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPost), this.element(ElementEnum.Fe, 5)));
 			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(metalPlatform), this.element(ElementEnum.Fe, 5)));
-			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]
-			{
-			}));
-		}
-
-		//Mekanism
-		if (Loader.isModLoaded("Mekanism"))
-		{
-//			System.out.println(GameData.getItemRegistry().getKeys().toString());
-//			System.out.println(GameData.getBlockRegistry().getKeys().toString());
-			//Item ingotOsmium = GameRegistry.findItem(modId, name)
+			DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(post), new PotionChemical[]{}));
 		}
 	}
 
@@ -3150,6 +3135,11 @@ public class MinechemRecipes
 
 	private ArrayList<OreDictionaryHandler> oreDictionaryHandlers;
 
+	public static ArrayList<OreDictionaryHandler> getOreDictionaryHandlers()
+	{
+		return recipes.oreDictionaryHandlers;
+	}
+
 	public void registerOreDictOres()
 	{
 		RegisterHandlers();
@@ -3157,6 +3147,7 @@ public class MinechemRecipes
 		{
 			registerOre(oreName);
 		}
+		MinecraftForge.EVENT_BUS.register(new OreEventHandler()); //To catch any weird ones that register afterwards
 	}
 
 	public void registerOre(String oreName)

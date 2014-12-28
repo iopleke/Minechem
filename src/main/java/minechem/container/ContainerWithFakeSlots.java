@@ -183,7 +183,7 @@ public class ContainerWithFakeSlots extends Container
 						if (mouseButton == 0)
 						{
 							entityPlayer.dropPlayerItemWithRandomChoice(inventoryplayer.getItemStack(), true);
-							inventoryplayer.setItemStack((ItemStack)null);
+							inventoryplayer.setItemStack(null);
 						}
 
 						if (mouseButton == 1)
@@ -192,7 +192,7 @@ public class ContainerWithFakeSlots extends Container
 
 							if (inventoryplayer.getItemStack().stackSize == 0)
 							{
-								inventoryplayer.setItemStack((ItemStack)null);
+								inventoryplayer.setItemStack(null);
 							}
 						}
 					}
@@ -259,7 +259,7 @@ public class ContainerWithFakeSlots extends Container
 
 								if (itemstack4.stackSize == 0)
 								{
-									inventoryplayer.setItemStack((ItemStack)null);
+									inventoryplayer.setItemStack(null);
 								}
 							}
 						}
@@ -273,7 +273,7 @@ public class ContainerWithFakeSlots extends Container
 
 								if (itemstack3.stackSize == 0)
 								{
-									slot2.putStack((ItemStack)null);
+									slot2.putStack(null);
 								}
 
 								slot2.onPickupFromSlot(entityPlayer, inventoryplayer.getItemStack());
@@ -298,7 +298,7 @@ public class ContainerWithFakeSlots extends Container
 
 									if (itemstack4.stackSize == 0)
 									{
-										inventoryplayer.setItemStack((ItemStack)null);
+										inventoryplayer.setItemStack(null);
 									}
 
 									itemstack3.stackSize += l1;
@@ -320,7 +320,7 @@ public class ContainerWithFakeSlots extends Container
 
 									if (itemstack3.stackSize == 0)
 									{
-										slot2.putStack((ItemStack)null);
+										slot2.putStack(null);
 									}
 
 									slot2.onPickupFromSlot(entityPlayer, inventoryplayer.getItemStack());
@@ -359,7 +359,7 @@ public class ContainerWithFakeSlots extends Container
 							{
 								inventoryplayer.addItemStackToInventory(itemstack3);
 								slot2.decrStackSize(itemstack5.stackSize);
-								slot2.putStack((ItemStack)null);
+								slot2.putStack(null);
 								slot2.onPickupFromSlot(entityPlayer, itemstack5);
 							}
 						}
@@ -372,7 +372,7 @@ public class ContainerWithFakeSlots extends Container
 					}
 					else if (!slot2.getHasStack() && itemstack3 != null && slot2.isItemValid(itemstack3))
 					{
-						inventoryplayer.setInventorySlotContents(mouseButton, (ItemStack)null);
+						inventoryplayer.setInventorySlotContents(mouseButton, null);
 						slot2.putStack(itemstack3);
 					}
 				}
@@ -423,7 +423,7 @@ public class ContainerWithFakeSlots extends Container
 
 								if (itemstack2.stackSize <= 0)
 								{
-									slot3.putStack((ItemStack)null);
+									slot3.putStack(null);
 								}
 
 								slot3.onPickupFromSlot(entityPlayer, itemstack2);

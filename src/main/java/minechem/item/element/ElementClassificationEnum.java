@@ -24,7 +24,7 @@ public enum ElementClassificationEnum implements IDescriptiveName
 	public String descriptiveName()
 	{
 		String localizedName = StatCollector.translateToLocal("element.classification." + descriptiveName);
-		if (!localizedName.isEmpty() || localizedName != "element.classification." + descriptiveName)
+		if (!localizedName.isEmpty() || !localizedName.equals("element.classification." + descriptiveName))
 		{
 			return localizedName;
 		}
