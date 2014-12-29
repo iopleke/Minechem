@@ -129,10 +129,9 @@ public class Recipe
 		{
 			if (recipe instanceof IRecipe)
 			{
-				if (((IRecipe) recipe).getRecipeOutput() != null)
+				ItemStack input = ((IRecipe) recipe).getRecipeOutput();
+				if (!invalidStack(input))
 				{
-
-					ItemStack input = ((IRecipe) recipe).getRecipeOutput();
 					LogHelper.debug("Adding recipe for " + input.toString());
 					ItemStack[] components = null;
 
