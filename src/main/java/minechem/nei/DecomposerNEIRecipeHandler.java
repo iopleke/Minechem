@@ -79,7 +79,9 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
 			// Add all decomposer recipes to local arecipes array.
 			for (DecomposerRecipe dr : DecomposerRecipe.recipes.values())
 			{
-				LogHelper.debug(dr.getInput().getDisplayName());
+				ItemStack input = dr.getInput().copy();
+				if (input.getItemDamage() == Short.MAX_VALUE) input.setItemDamage(0); // Handle OreDict wildcard
+				LogHelper.debug(input.getDisplayName());
 				registerDecomposerRecipe(dr);
 			}
             arecipes = sortList(arecipes);
