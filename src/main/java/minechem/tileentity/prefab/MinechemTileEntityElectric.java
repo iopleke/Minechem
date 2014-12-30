@@ -131,9 +131,9 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
 		return true;
 	}
 
-	public int getPowerRemainingScaled(int scale)
+	public int getPowerRemainingScaled(double scale)
 	{
-		return (this.energyStored * scale) / MAX_ENERGY_STORED;
+		return (int)(this.energyStored * (scale / MAX_ENERGY_STORED));
 	}
 
 	@Override
