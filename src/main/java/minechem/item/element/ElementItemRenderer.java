@@ -1,10 +1,10 @@
 package minechem.item.element;
 
 import minechem.item.ChemicalRoomStateEnum;
+import minechem.render.FontRendererWithZLevel;
 import minechem.render.RenderingUtil;
 import minechem.utils.MinechemUtil;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.entity.item.EntityItem;
@@ -109,7 +109,7 @@ public class ElementItemRenderer implements IItemRenderer
 		GL11.glColor3f(1.0F, 1.0F, 1.0F);
 		RenderingUtil.drawTexturedRectUV(0, 0, 5, 16, 16, testtube);
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-		FontRenderer fontRenderer = Minecraft.getMinecraft().fontRenderer;
+		FontRendererWithZLevel fontRenderer = FontRendererWithZLevel.getFontRenderer(16);
 		fontRenderer.drawString(shortName, 1, 2, 0x000000);
 		fontRenderer.drawString(shortName, 1, 1, 0xEEEEEE);
 	}
