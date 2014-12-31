@@ -14,35 +14,15 @@ import cpw.mods.fml.common.IFuelHandler;
 public class MinechemFuelHandler implements IFuelHandler
 {
 
-	private static Map<String, Integer> fuels = new LinkedHashMap<String,Integer>();
+	private static Map<MapKey, Integer> fuels = new LinkedHashMap<MapKey,Integer>();
 	
 	@Override
 	public int getBurnTime(ItemStack fuel)
     {
-		Integer result = fuels.get(getKey(fuel));
-        int times = isBucket(fuel) ? 8 : 1;
-		return result != null ? result * times : 0;
-	}
-
-	private static String getKey(ItemStack itemStack)
-	{
-		if (itemStack != null && itemStack.getItem() != null)
-		{
-            if (itemStack.getItem() instanceof MinechemBucketItem)
-            {
-                MinechemChemicalType chemical = ((MinechemBucketItem) itemStack.getItem()).chemical;
-                if (chemical instanceof ElementEnum)
-                {
-                    itemStack =  new ItemStack(MinechemItemsRegistration.element, 1, ((ElementEnum) chemical).atomicNumber());
-                }
-                else if (chemical instanceof MoleculeEnum)
-                {
-                    itemStack =  new ItemStack(MinechemItemsRegistration.molecule, 1, ((MoleculeEnum) chemical).id());
-                }
-            }
-			return itemStack.getItem().getUnlocalizedName(itemStack) + "@" + itemStack.getItemDamage();
-		}
-		return null;
+		Integer result = fuels.get(new MapKey(fuel));
+		if (result == null) return 0;
+        int mult = isBucket(fuel) ? 8 : 1;
+		return result * mult;
 	}
 
     private static boolean isBucket(ItemStack itemStack)
@@ -58,7 +38,7 @@ public class MinechemFuelHandler implements IFuelHandler
 	{
 		if (value > 0)
 		{
-			Integer result = fuels.put(getKey(itemStack), value);
+			Integer result = fuels.put(new MapKey(itemStack), value);
 			return result != null ? result : 0;
 		}
 		return 0;
@@ -66,7 +46,7 @@ public class MinechemFuelHandler implements IFuelHandler
 	
 	public static int removeFuel(ItemStack itemStack)
 	{
-		String key = getKey(itemStack);
+		MapKey key = new MapKey(itemStack);
 		if (fuels.containsKey(key))
 		{
 			Integer result = fuels.remove(key);
