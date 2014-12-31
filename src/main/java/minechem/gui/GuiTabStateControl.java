@@ -68,7 +68,7 @@ public abstract class GuiTabStateControl extends GuiTab
 		// Amount of power stored.
 		fontRenderer.drawStringWithShadow(MinechemUtil.getLocalString("tab.title.stored") + ":", x + 5, y + 30, subheaderColour);
 		String print = String.valueOf(tileEntity.getEnergyStored()) + " RF ("
-				+ String.valueOf(tileEntity.getPowerRemainingScaled(100)) + "%)";
+				+ String.valueOf(tileEntity.getPowerRemainingScaled(100D)) + "%)";
 		fontRenderer.drawString(print, x + 5, y + 40, textColour);
 
 		fontRenderer.drawStringWithShadow(MinechemUtil.getLocalString("tab.title.activationEnergy"), x + 5, y + 60, subheaderColour);
