@@ -766,6 +766,11 @@ public final class MinechemUtil
         return (int) (Math.log10(n) + 1);
     }
 
+    /*
+     * Opens passed in URL, MUST check
+     * FMLClientHandler.instance().getClient(),mc.gameSettings.chatLinksPrompt
+     * before using.
+     */
     public static void openURL(String url)
     {
         try
