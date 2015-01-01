@@ -1,4 +1,9 @@
 {
-   "projector": {"category": "master","sounds": [{"name": "projector","stream": false}]},
-   "photoBioReactor": {"category": "master","sounds": [{"name": "photoBioReactor","stream": false}]}
+    "projector": {
+        "category": "master",
+        "sounds": [{
+                "name": "projector",
+                "stream": false
+            }]
+    }
 }
