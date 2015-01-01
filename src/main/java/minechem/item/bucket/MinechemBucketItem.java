@@ -85,7 +85,7 @@ public class MinechemBucketItem extends ItemBucket
                 break;
         }
 
-        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
+        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name(), true);
         String timeLeft = "";
         if (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
         {
@@ -99,10 +99,10 @@ public class MinechemBucketItem extends ItemBucket
     {
         if (fluid instanceof FluidElement)
         {
-            return MinechemUtil.getLocalString(((FluidElement) fluid).element.getUnlocalizedName());
+            return MinechemUtil.getLocalString(((FluidElement) fluid).element.getUnlocalizedName(), true);
         } else if (fluid instanceof FluidMolecule)
         {
-            return MinechemUtil.getLocalString(((FluidMolecule) fluid).molecule.getUnlocalizedName());
+            return MinechemUtil.getLocalString(((FluidMolecule) fluid).molecule.getUnlocalizedName(), true);
         }
         return fluid.getLocalizedName(null);
     }

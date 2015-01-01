@@ -101,9 +101,12 @@ public class DecomposerRecipe
 
     public static void createAndAddRecipeSafely(String item, PotionChemical... chemicals)
     {
-        for (ItemStack i : OreDictionary.getOres(item))
+        if (chemicals.length > 0)
         {
-            DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), chemicals));
+            for (ItemStack i : OreDictionary.getOres(item))
+            {
+                DecomposerRecipe.add(new DecomposerRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), chemicals));
+            }
         }
     }
 

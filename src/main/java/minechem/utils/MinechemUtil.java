@@ -426,20 +426,18 @@ public final class MinechemUtil
         float valueScaled = (value - leftMin) / leftRange;
         return rightMin + (valueScaled * rightRange);
     }
-
+    
     public static String getLocalString(String key)
+    {
+        return getLocalString(key ,false);
+    }
+
+    public static String getLocalString(String key, boolean capitalize)
     {
         if (FMLCommonHandler.instance().getSide() == Side.CLIENT)
         {
             String localString = StatCollector.translateToLocal(key);
-            if (localString.equals(""))
-            {
-                return key;
-            } else
-            {
-                localString = capitalizeFully(localString.replaceAll("molecule\\.", ""));
-            }
-            return localString;
+            return capitalize ? capitalizeFully(localString.replaceAll("molecule\\.", "")) : localString;
         }
         return key;
     }
@@ -726,10 +724,10 @@ public final class MinechemUtil
     {
         if (potionChemical instanceof Element)
         {
-            return getLocalString(((Element) potionChemical).element.name());
+            return getLocalString(((Element) potionChemical).element.name(), true);
         } else
         {
-            return getLocalString(((Molecule) potionChemical).molecule.name());
+            return getLocalString(((Molecule) potionChemical).molecule.name(), true);
         }
     }
 
