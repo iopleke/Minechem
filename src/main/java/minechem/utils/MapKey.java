@@ -6,8 +6,8 @@ import minechem.potion.PotionChemical;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 
-
-public class MapKey{
+public class MapKey
+{
 
     int hashcode;
 
@@ -24,16 +24,21 @@ public class MapKey{
     public MapKey(PotionChemical chemical)
     {
         if (chemical instanceof Element)
-            hashcode = ((Element)chemical).element.hashCode();
-        else if (chemical instanceof Molecule)
-            hashcode = ((Molecule)chemical).molecule.hashCode();
+        {
+            hashcode = ((Element) chemical).element.hashCode();
+        } else if (chemical instanceof Molecule)
+        {
+            hashcode = ((Molecule) chemical).molecule.hashCode();
+        }
     }
 
     @Override
     public boolean equals(Object o)
     {
         if (o instanceof MapKey)
+        {
             return hashcode == ((MapKey) o).hashcode;
+        }
         return false;
     }
 
@@ -45,13 +50,19 @@ public class MapKey{
 
     public static MapKey getKey(ItemStack stack)
     {
-        if (stack==null || stack.getItem() == null) return null;
+        if (stack == null || stack.getItem() == null)
+        {
+            return null;
+        }
         return new MapKey(stack);
     }
 
     public static MapKey getKey(FluidStack stack)
     {
-        if (stack==null) return null;
+        if (stack == null)
+        {
+            return null;
+        }
         return new MapKey(stack);
     }
 }

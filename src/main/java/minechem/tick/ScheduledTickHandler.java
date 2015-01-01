@@ -14,15 +14,15 @@ import net.minecraftforge.event.entity.player.PlayerUseItemEvent;
 public class ScheduledTickHandler
 {
 
-	@SubscribeEvent
-	public void tick(TickEvent.PlayerTickEvent event)
-	{
-		if (event.side == Side.SERVER && event.phase == TickEvent.Phase.START)
-		{
+    @SubscribeEvent
+    public void tick(TickEvent.PlayerTickEvent event)
+    {
+        if (event.side == Side.SERVER && event.phase == TickEvent.Phase.START)
+        {
             EntityPlayer player = event.player;
             RadiationHandler.getInstance().update(player);
-		}
-	}
+        }
+    }
 
     @SubscribeEvent
     public void checkForPoison(PlayerUseItemEvent.Finish event)

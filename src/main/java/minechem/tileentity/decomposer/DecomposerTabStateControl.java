@@ -7,30 +7,30 @@ import net.minecraft.client.gui.Gui;
 
 public class DecomposerTabStateControl extends GuiTabStateControl
 {
-	public DecomposerTabStateControl(Gui gui, DecomposerTileEntity decomposer)
-	{
-		super(gui);
-		this.tileEntity = decomposer;
-	}
+    public DecomposerTabStateControl(Gui gui, DecomposerTileEntity decomposer)
+    {
+        super(gui);
+        this.tileEntity = decomposer;
+    }
 
-	@Override
-	public void update()
-	{
-		super.update();
-		DecomposerTileEntity decomposer = (DecomposerTileEntity) this.tileEntity;
-		State state = decomposer.getState();
-		if (!Settings.powerUseEnabled || decomposer.getEnergyStored() > Settings.costDecomposition)
-		{
-			this.state = TabState.powered;
-		} else if (state == State.jammed)
-		{
-			this.state = TabState.jammed;
-		} else
-		{
-			this.state = TabState.unpowered;
-		}
+    @Override
+    public void update()
+    {
+        super.update();
+        DecomposerTileEntity decomposer = (DecomposerTileEntity) this.tileEntity;
+        State state = decomposer.getState();
+        if (!Settings.powerUseEnabled || decomposer.getEnergyStored() > Settings.costDecomposition)
+        {
+            this.state = TabState.powered;
+        } else if (state == State.jammed)
+        {
+            this.state = TabState.jammed;
+        } else
+        {
+            this.state = TabState.unpowered;
+        }
 
-		this.overlayColor = this.state.color;
-	}
+        this.overlayColor = this.state.color;
+    }
 
 }

@@ -24,7 +24,10 @@ public class MinechemBucketReverseRecipe implements IRecipe
         for (int i = 0; i < inv.getSizeInventory(); i++)
         {
             ItemStack itemStack = inv.getStackInSlot(i);
-            if (itemStack == null) continue;
+            if (itemStack == null)
+            {
+                continue;
+            }
 
             if (itemStack.getItem() instanceof MinechemBucketItem)
             {
@@ -35,10 +38,14 @@ public class MinechemBucketReverseRecipe implements IRecipe
                     bucketStack = itemStack;
                 }
 
-                if (type == bucket.chemical) count++;
-                else return false;
-            }
-            else if (itemStack.getItem() == Items.water_bucket)
+                if (type == bucket.chemical)
+                {
+                    count++;
+                } else
+                {
+                    return false;
+                }
+            } else if (itemStack.getItem() == Items.water_bucket)
             {
                 if (type == null)
                 {
@@ -46,10 +53,14 @@ public class MinechemBucketReverseRecipe implements IRecipe
                     bucketStack = itemStack;
                 }
 
-                if (type == MoleculeEnum.water) count++;
-                else return false;
-            }
-            else
+                if (type == MoleculeEnum.water)
+                {
+                    count++;
+                } else
+                {
+                    return false;
+                }
+            } else
             {
                 return false;
             }
@@ -60,7 +71,10 @@ public class MinechemBucketReverseRecipe implements IRecipe
     @Override
     public ItemStack getCraftingResult(InventoryCrafting inv)
     {
-        if (type.radioactivity() == RadiationEnum.stable) return getRecipeOutput();
+        if (type.radioactivity() == RadiationEnum.stable)
+        {
+            return getRecipeOutput();
+        }
 
         ItemStack output = getRecipeOutput();
         output.stackTagCompound = bucketStack.stackTagCompound;
@@ -76,9 +90,17 @@ public class MinechemBucketReverseRecipe implements IRecipe
     @Override
     public ItemStack getRecipeOutput()
     {
-        if (type == MoleculeEnum.water) return new ItemStack(MinechemItemsRegistration.molecule, 8, MoleculeEnum.water.id());
-        if (type instanceof ElementEnum) return new ItemStack(MinechemItemsRegistration.element, 8, ((ElementEnum) type).atomicNumber());
-        else if (type instanceof MoleculeEnum) return new ItemStack(MinechemItemsRegistration.molecule, 8, ((MoleculeEnum) type).id());
+        if (type == MoleculeEnum.water)
+        {
+            return new ItemStack(MinechemItemsRegistration.molecule, 8, MoleculeEnum.water.id());
+        }
+        if (type instanceof ElementEnum)
+        {
+            return new ItemStack(MinechemItemsRegistration.element, 8, ((ElementEnum) type).atomicNumber());
+        } else if (type instanceof MoleculeEnum)
+        {
+            return new ItemStack(MinechemItemsRegistration.molecule, 8, ((MoleculeEnum) type).id());
+        }
         return null;
     }
 }

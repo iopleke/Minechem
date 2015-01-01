@@ -3,6 +3,9 @@ package minechem.item.bucket;
 import cpw.mods.fml.common.eventhandler.Event;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import minechem.Minechem;
 import minechem.fluid.MinechemBucketDispenser;
 import minechem.fluid.MinechemFluid;
@@ -28,10 +31,6 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class MinechemBucketHandler
 {
@@ -74,12 +73,12 @@ public class MinechemBucketHandler
 
         if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
         {
-            ItemStack stack=new ItemStack(bucket);
-            TileEntity tile=world.getTileEntity(pos.blockX, pos.blockY, pos.blockZ);
-            RadiationEnum radiation=((MinechemBucketItem)bucket).chemical.radioactivity();
-            if (tile!=null&&radiation!=RadiationEnum.stable&&tile instanceof RadiationFluidTileEntity&&((RadiationFluidTileEntity)tile).info!=null)
+            ItemStack stack = new ItemStack(bucket);
+            TileEntity tile = world.getTileEntity(pos.blockX, pos.blockY, pos.blockZ);
+            RadiationEnum radiation = ((MinechemBucketItem) bucket).chemical.radioactivity();
+            if (tile != null && radiation != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
             {
-            	RadiationInfo.setRadiationInfo(((RadiationFluidTileEntity)tile).info, stack);
+                RadiationInfo.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
             }
             world.setBlockToAir(pos.blockX, pos.blockY, pos.blockZ);
             return stack;
@@ -98,7 +97,10 @@ public class MinechemBucketHandler
                 if (block.getFluid() instanceof MinechemFluid)
                 {
                     MinechemChemicalType blockType = ((MinechemFluid) block.getFluid()).getChemical();
-                    if (type == blockType) return buckets.get(block);
+                    if (type == blockType)
+                    {
+                        return buckets.get(block);
+                    }
                 }
             }
         }
@@ -107,14 +109,17 @@ public class MinechemBucketHandler
 
     public void registerCustomMinechemBucket(MinechemFluidBlock block, MinechemChemicalType type, String prefix)
     {
-        if (buckets.get(block) != null) return;
+        if (buckets.get(block) != null)
+        {
+            return;
+        }
 
         MinechemBucketItem bucket = new MinechemBucketItem(block, block.getFluid(), type);
         GameRegistry.registerItem(bucket, Reference.ID + "Bucket." + prefix + block.getFluid().getName());
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
         buckets.put(block, bucket);
         Minechem.PROXY.onAddBucket(bucket);
-        BlockDispenser.dispenseBehaviorRegistry.putObject(bucket,MinechemBucketDispenser.dispenser);
+        BlockDispenser.dispenseBehaviorRegistry.putObject(bucket, MinechemBucketDispenser.dispenser);
     }
 
     public void registerBucketRecipes()
@@ -132,8 +137,13 @@ public class MinechemBucketHandler
     {
         ArrayList<PotionChemical> tubes = new ArrayList<PotionChemical>();
         tubes.add(new Element(ElementEnum.Fe, 48));
-        if (type instanceof ElementEnum) tubes.add(new Element((ElementEnum) type, 8));
-        else if (type instanceof MoleculeEnum) tubes.add(new Molecule((MoleculeEnum) type, 8));
+        if (type instanceof ElementEnum)
+        {
+            tubes.add(new Element((ElementEnum) type, 8));
+        } else if (type instanceof MoleculeEnum)
+        {
+            tubes.add(new Molecule((MoleculeEnum) type, 8));
+        }
         DecomposerRecipe.add(new DecomposerRecipe(itemStack, tubes));
     }
 }

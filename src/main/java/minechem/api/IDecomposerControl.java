@@ -1,6 +1,7 @@
 package minechem.api;
 
 import net.minecraft.item.ItemStack;
+
 /**
  * To be implemented on any items that should return a non-standard amount of resources when decomposed
  *

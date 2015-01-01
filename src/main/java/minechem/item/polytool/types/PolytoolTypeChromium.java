@@ -13,57 +13,57 @@ import net.minecraft.world.World;
 public class PolytoolTypeChromium extends PolytoolUpgradeType
 {
 
-	private static final Random rand = new Random();
+    private static final Random rand = new Random();
 
-	public PolytoolTypeChromium()
-	{
-		super();
-	}
+    public PolytoolTypeChromium()
+    {
+        super();
+    }
 
-	@Override
-	public float getStrVsBlock(ItemStack itemStack, Block block)
-	{
+    @Override
+    public float getStrVsBlock(ItemStack itemStack, Block block)
+    {
 
-		return 0;
-	}
+        return 0;
+    }
 
-	@Override
-	public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-	{
-	}
+    @Override
+    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+    {
+    }
 
-	@Override
-	public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
-	{
-		if (!world.isRemote && rand.nextInt(10) < power)
-		{
-			if (block == Blocks.wool)
-			{
-				world.setBlockToAir(x, y, z);
+    @Override
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
+    {
+        if (!world.isRemote && rand.nextInt(10) < power)
+        {
+            if (block == Blocks.wool)
+            {
+                world.setBlockToAir(x, y, z);
 
-				world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Blocks.wool, 1, rand.nextInt(15))));
-			}
-		}
+                world.spawnEntityInWorld(new EntityItem(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), new ItemStack(Blocks.wool, 1, rand.nextInt(15))));
+            }
+        }
 
-	}
+    }
 
-	@Override
-	public ElementEnum getElement()
-	{
+    @Override
+    public ElementEnum getElement()
+    {
 
-		return ElementEnum.Cr;
-	}
+        return ElementEnum.Cr;
+    }
 
-	@Override
-	public void onTick()
-	{
-	}
+    @Override
+    public void onTick()
+    {
+    }
 
-	@Override
-	public String getDescription()
-	{
+    @Override
+    public String getDescription()
+    {
 
-		return "Chance to change color of wool when mined";
-	}
+        return "Chance to change color of wool when mined";
+    }
 
 }

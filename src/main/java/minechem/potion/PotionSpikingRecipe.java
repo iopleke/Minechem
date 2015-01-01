@@ -60,21 +60,25 @@ public class PotionSpikingRecipe implements IRecipe
                         {
                             NBTTagCompound tagCompound = new NBTTagCompound();
                             tagCompound.setBoolean("minechem.isPoisoned", true);
-                            tagCompound.setIntArray("minechem.effectTypes", new int[] {MoleculeItem.getMolecule(moleculeStack).id()});
+                            tagCompound.setIntArray("minechem.effectTypes", new int[]
+                            {
+                                MoleculeItem.getMolecule(moleculeStack).id()
+                            });
                             result.setTagCompound(tagCompound);
-                        }
-                        else if (result.stackTagCompound.hasKey("minechem.isPoisoned")) // has been poisoned before
+                        } else if (result.stackTagCompound.hasKey("minechem.isPoisoned")) // has been poisoned before
                         {
                             int[] arrayOld = result.stackTagCompound.getIntArray("minechem.effectTypes");
-                            int[] arrayNew = new int[arrayOld.length+1];
+                            int[] arrayNew = new int[arrayOld.length + 1];
                             System.arraycopy(arrayOld, 0, arrayNew, 0, arrayOld.length);
                             arrayNew[arrayOld.length] = MoleculeItem.getMolecule(moleculeStack).id();
                             result.stackTagCompound.setIntArray("minechem.effectTypes", arrayNew);
-                        }
-                        else // has NBT but no poison
+                        } else // has NBT but no poison
                         {
                             result.stackTagCompound.setBoolean("minechem.isPoisoned", true);
-                            result.stackTagCompound.setIntArray("minechem.effectTypes", new int[] {MoleculeItem.getMolecule(moleculeStack).id()});
+                            result.stackTagCompound.setIntArray("minechem.effectTypes", new int[]
+                            {
+                                MoleculeItem.getMolecule(moleculeStack).id()
+                            });
                         }
                         this.result = result.copy();
                         return result;

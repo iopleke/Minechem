@@ -9,18 +9,18 @@ import org.lwjgl.opengl.GL12;
 public class LeadedChestItemRenderer extends ItemMinechemRenderer
 {
 
-	LeadedChestTileEntity leadedChest;
+    LeadedChestTileEntity leadedChest;
 
-	public LeadedChestItemRenderer()
-	{
-		this.leadedChest = new LeadedChestTileEntity();
-	}
+    public LeadedChestItemRenderer()
+    {
+        this.leadedChest = new LeadedChestTileEntity();
+    }
 
-	@Override
-	public void renderItem(ItemRenderType type, ItemStack item, Object... data)
-	{
-		TileEntityRendererDispatcher.instance.renderTileEntityAt(this.leadedChest, 0.0D, 0.0D, 0.0D, 0.0F);
+    @Override
+    public void renderItem(ItemRenderType type, ItemStack item, Object... data)
+    {
+        TileEntityRendererDispatcher.instance.renderTileEntityAt(this.leadedChest, 0.0D, 0.0D, 0.0D, 0.0F);
 
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-	}
+        GL11.glEnable(GL12.GL_RESCALE_NORMAL);
+    }
 }

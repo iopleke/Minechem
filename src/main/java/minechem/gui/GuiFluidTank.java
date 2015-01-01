@@ -1,19 +1,17 @@
 package minechem.gui;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 import minechem.reference.Resources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 public class GuiFluidTank extends Gui
 {
@@ -61,7 +59,10 @@ public class GuiFluidTank extends Gui
 
     public void drawTooltip(int x, int y, FluidStack fluidStack)
     {
-        if (!mouseInTank(x, y)) return;
+        if (!mouseInTank(x, y))
+        {
+            return;
+        }
 
         List<String> description = new ArrayList<String>();
 

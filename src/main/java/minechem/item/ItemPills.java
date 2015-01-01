@@ -12,37 +12,37 @@ import net.minecraft.world.World;
 
 public class ItemPills extends ItemFood
 {
-	public ItemPills(int id, int heal)
-	{
-		super(heal, 0.4F, false);
-		setMaxDamage(0);
-		setMaxStackSize(32);
-		this.setUnlocalizedName("itempill");
-		this.setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
-		this.setAlwaysEdible();
-	}
+    public ItemPills(int id, int heal)
+    {
+        super(heal, 0.4F, false);
+        setMaxDamage(0);
+        setMaxStackSize(32);
+        this.setUnlocalizedName("itempill");
+        this.setCreativeTab(CreativeTabMinechem.CREATIVE_TAB_ITEMS);
+        this.setAlwaysEdible();
+    }
 
-	@Override
-	public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
-	{
-		if (player.canEat(true))
-		{
-			player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
-		}
+    @Override
+    public ItemStack onItemRightClick(ItemStack par1ItemStack, World par2World, EntityPlayer player)
+    {
+        if (player.canEat(true))
+        {
+            player.setItemInUse(par1ItemStack, this.getMaxItemUseDuration(par1ItemStack));
+        }
 
-		return par1ItemStack;
-	}
+        return par1ItemStack;
+    }
 
-	@Override
-	public int getMaxItemUseDuration(ItemStack itemstack)
-	{
-		return 15;
-	}
+    @Override
+    public int getMaxItemUseDuration(ItemStack itemstack)
+    {
+        return 15;
+    }
 
-	@Override
-	@SideOnly(Side.CLIENT)
-	public void registerIcons(IIconRegister ir)
-	{
-		itemIcon = ir.registerIcon(Textures.IIcon.PILL);
-	}
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister ir)
+    {
+        itemIcon = ir.registerIcon(Textures.IIcon.PILL);
+    }
 }

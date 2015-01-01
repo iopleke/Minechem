@@ -39,75 +39,75 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class ClientProxy extends CommonProxy
 {
-	public FluidItemRenderingHandler fluidItemRenderingHandler;
-	public MinechemBucketRenderer bucketItemRenderer;
+    public FluidItemRenderingHandler fluidItemRenderingHandler;
+    public MinechemBucketRenderer bucketItemRenderer;
 
-	@Override
-	public void registerRenderers()
-	{
-		RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+    @Override
+    public void registerRenderers()
+    {
+        RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
 
-		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.microscope), new MicroscopeItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.decomposer), new DecomposerItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.synthesis), new SynthesisItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.blueprintProjector), new BlueprintProjectorItemRenderer());
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.leadChest), new LeadedChestItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.element, new ElementItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(MinechemItemsRegistration.molecule, new MoleculeItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.microscope), new MicroscopeItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.decomposer), new DecomposerItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.synthesis), new SynthesisItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.blueprintProjector), new BlueprintProjectorItemRenderer());
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(MinechemBlocksGeneration.leadChest), new LeadedChestItemRenderer());
 
-		ClientRegistry.bindTileEntitySpecialRenderer(MicroscopeTileEntity.class, new MicroscopeTileEntityRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
-		ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
-	}
+        ClientRegistry.bindTileEntitySpecialRenderer(MicroscopeTileEntity.class, new MicroscopeTileEntityRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(DecomposerTileEntity.class, new DecomposerTileEntityRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(SynthesisTileEntity.class, new SynthesisTileEntityRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(BlueprintProjectorTileEntity.class, new BlueprintProjectorTileEntityRenderer());
+        ClientRegistry.bindTileEntitySpecialRenderer(LeadedChestTileEntity.class, new LeadedChestTileEntityRenderer());
+    }
 
-	@Override
-	public void registerHooks()
-	{
-		MinecraftForge.EVENT_BUS.register(new MinechemSoundEvent());
-		MinecraftForge.EVENT_BUS.register(new FluidTextureStitchHandler());
-	}
+    @Override
+    public void registerHooks()
+    {
+        MinecraftForge.EVENT_BUS.register(new MinechemSoundEvent());
+        MinecraftForge.EVENT_BUS.register(new FluidTextureStitchHandler());
+    }
 
-	@Override
-	public World getClientWorld()
-	{
-		return FMLClientHandler.instance().getClient().theWorld;
-	}
+    @Override
+    public World getClientWorld()
+    {
+        return FMLClientHandler.instance().getClient().theWorld;
+    }
 
-	@Override
-	public void registerTickHandlers()
-	{
-		super.registerTickHandlers();
+    @Override
+    public void registerTickHandlers()
+    {
+        super.registerTickHandlers();
 
-	}
+    }
 
-	@Override
-	public EntityPlayer getPlayer(MessageContext context)
-	{
-		return Minecraft.getMinecraft().thePlayer;
-	}
+    @Override
+    public EntityPlayer getPlayer(MessageContext context)
+    {
+        return Minecraft.getMinecraft().thePlayer;
+    }
 
-	@Override
-	public void onAddFluid(MinechemFluid fluid, MinechemFluidBlock block)
-	{
-		super.onAddFluid(fluid, block);
+    @Override
+    public void onAddFluid(MinechemFluid fluid, MinechemFluidBlock block)
+    {
+        super.onAddFluid(fluid, block);
 
-		if (fluidItemRenderingHandler == null)
-		{
-			fluidItemRenderingHandler = new FluidItemRenderingHandler();
-		}
-		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(block), fluidItemRenderingHandler);
-	}
-	
-	@Override
-	public void onAddBucket(MinechemBucketItem item)
-	{
-		super.onAddBucket(item);
-		if (bucketItemRenderer == null)
-		{
-			bucketItemRenderer = new MinechemBucketRenderer();
-		}
-		MinecraftForgeClient.registerItemRenderer(item, bucketItemRenderer);
-	}
+        if (fluidItemRenderingHandler == null)
+        {
+            fluidItemRenderingHandler = new FluidItemRenderingHandler();
+        }
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(block), fluidItemRenderingHandler);
+    }
+
+    @Override
+    public void onAddBucket(MinechemBucketItem item)
+    {
+        super.onAddBucket(item);
+        if (bucketItemRenderer == null)
+        {
+            bucketItemRenderer = new MinechemBucketRenderer();
+        }
+        MinecraftForgeClient.registerItemRenderer(item, bucketItemRenderer);
+    }
 }

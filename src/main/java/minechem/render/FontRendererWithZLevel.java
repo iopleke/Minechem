@@ -2,6 +2,11 @@ package minechem.render;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Random;
+import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -11,12 +16,6 @@ import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Random;
-
 @SideOnly(Side.CLIENT)
 public class FontRendererWithZLevel implements IResourceManagerReloadListener
 {
@@ -24,7 +23,10 @@ public class FontRendererWithZLevel implements IResourceManagerReloadListener
 
     public static FontRendererWithZLevel getFontRenderer(float zLevel)
     {
-        if (fontRendererWithZLevel == null) fontRendererWithZLevel = new FontRendererWithZLevel();
+        if (fontRendererWithZLevel == null)
+        {
+            fontRendererWithZLevel = new FontRendererWithZLevel();
+        }
         return fontRendererWithZLevel.setZLevel(zLevel);
     }
 
@@ -52,8 +54,7 @@ public class FontRendererWithZLevel implements IResourceManagerReloadListener
      */
     private byte[] glyphWidth = new byte[65536];
     /**
-     * Array of RGB triplets defining the 16 standard chat colors followed by 16 darker version of the same colors for
-     * drop shadows.
+     * Array of RGB triplets defining the 16 standard chat colors followed by 16 darker version of the same colors for drop shadows.
      */
     private int[] colorCode = new int[32];
     /**
@@ -149,7 +150,7 @@ public class FontRendererWithZLevel implements IResourceManagerReloadListener
         }
 
         this.readGlyphSizes();
-        ((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(this);
+        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(this);
     }
 
     public void onResourceManagerReload(IResourceManager p_110549_1_)
@@ -306,7 +307,6 @@ public class FontRendererWithZLevel implements IResourceManagerReloadListener
 
         return l;
     }
-
 
     /**
      * Render a single line string at the current (posX,posY) and update posX

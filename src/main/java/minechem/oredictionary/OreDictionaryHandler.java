@@ -2,7 +2,7 @@ package minechem.oredictionary;
 
 public interface OreDictionaryHandler
 {
-	boolean canHandle(String oreName);
+    boolean canHandle(String oreName);
 
-	void handle(String oreName);
+    void handle(String oreName);
 }

@@ -1,5 +1,6 @@
 package minechem.potion;
 
+import java.util.ArrayList;
 import minechem.utils.Constants;
 import minechem.utils.EnumColour;
 import minechem.utils.MinechemUtil;
@@ -8,8 +9,6 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.DamageSource;
-
-import java.util.ArrayList;
 
 public abstract class PharmacologyEffect
 {
@@ -43,7 +42,9 @@ public abstract class PharmacologyEffect
         public void applyEffect(EntityLivingBase entityLivingBase)
         {
             if (entityLivingBase instanceof EntityPlayer)
+            {
                 ((EntityPlayer) entityLivingBase).getFoodStats().addStats(level, saturation);
+            }
         }
 
         @Override
@@ -57,8 +58,11 @@ public abstract class PharmacologyEffect
         {
             if (obj instanceof Food)
             {
-                Food other = (Food)obj;
-                if (other.level == this.level && other.saturation==this.saturation) return true;
+                Food other = (Food) obj;
+                if (other.level == this.level && other.saturation == this.saturation)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -91,8 +95,11 @@ public abstract class PharmacologyEffect
         {
             if (obj instanceof Burn)
             {
-                Burn other = (Burn)obj;
-                if (other.duration == this.duration) return true;
+                Burn other = (Burn) obj;
+                if (other.duration == this.duration)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -125,10 +132,13 @@ public abstract class PharmacologyEffect
             if (potionId == -1)
             {
                 for (PotionEffect potionEffect : new ArrayList<PotionEffect>(entityLivingBase.getActivePotionEffects()))
+                {
                     entityLivingBase.removePotionEffect(potionEffect.getPotionID());
-            }
-            else
+                }
+            } else
+            {
                 entityLivingBase.removePotionEffect(potionId);
+            }
         }
 
         @Override
@@ -142,8 +152,11 @@ public abstract class PharmacologyEffect
         {
             if (obj instanceof Cure)
             {
-                Cure other = (Cure)obj;
-                if (other.potionId == this.potionId) return true;
+                Cure other = (Cure) obj;
+                if (other.potionId == this.potionId)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -168,8 +181,8 @@ public abstract class PharmacologyEffect
         @Override
         public String toString()
         {
-            float print = damage/2;
-            return "Damage Effect: " + print + " heart"+(print==1?"":"s");
+            float print = damage / 2;
+            return "Damage Effect: " + print + " heart" + (print == 1 ? "" : "s");
         }
 
         @Override
@@ -177,8 +190,11 @@ public abstract class PharmacologyEffect
         {
             if (obj instanceof Damage)
             {
-                Damage other = (Damage)obj;
-                if (other.damage == this.damage) return true;
+                Damage other = (Damage) obj;
+                if (other.damage == this.damage)
+                {
+                    return true;
+                }
             }
             return false;
         }
@@ -230,8 +246,11 @@ public abstract class PharmacologyEffect
         {
             if (obj instanceof Potion)
             {
-                Potion other = (Potion)obj;
-                if (other.duration==this.duration && other.potionId==this.potionId && other.power==this.power) return true;
+                Potion other = (Potion) obj;
+                if (other.duration == this.duration && other.potionId == this.potionId && other.power == this.power)
+                {
+                    return true;
+                }
             }
             return false;
         }

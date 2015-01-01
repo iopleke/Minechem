@@ -9,21 +9,21 @@ import net.minecraft.item.ItemStack;
 public class FluidMolecule extends MinechemFluid
 {
 
-	public final MoleculeEnum molecule;
-	private final int color;
+    public final MoleculeEnum molecule;
+    private final int color;
 
-	public FluidMolecule(MoleculeEnum molecule)
-	{
-		super(molecule.name(), molecule.roomState());
-		this.molecule = molecule;
-		color = computeColor();
-	}
+    public FluidMolecule(MoleculeEnum molecule)
+    {
+        super(molecule.name(), molecule.roomState());
+        this.molecule = molecule;
+        color = computeColor();
+    }
 
-	@Override
-	public ItemStack getOutputStack()
-	{
-		return new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
-	}
+    @Override
+    public ItemStack getOutputStack()
+    {
+        return new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id());
+    }
 
     @Override
     public MinechemChemicalType getChemical()
@@ -32,16 +32,16 @@ public class FluidMolecule extends MinechemFluid
     }
 
     @Override
-	public int getColor()
-	{
-		return color;
-	}
+    public int getColor()
+    {
+        return color;
+    }
 
-	private int computeColor()
-	{
-		int red = (int) (molecule.red * 255);
-		int green = (int) (molecule.green * 255);
-		int blue = (int) (molecule.blue * 255);
-		return new Color(red, green, blue).getRGB();
-	}
+    private int computeColor()
+    {
+        int red = (int) (molecule.red * 255);
+        int green = (int) (molecule.green * 255);
+        int blue = (int) (molecule.blue * 255);
+        return new Color(red, green, blue).getRGB();
+    }
 }

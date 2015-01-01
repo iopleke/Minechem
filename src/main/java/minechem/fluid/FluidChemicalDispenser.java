@@ -1,5 +1,6 @@
 package minechem.fluid;
 
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
@@ -18,8 +19,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.world.World;
-
-import java.util.Set;
 
 public class FluidChemicalDispenser implements IBehaviorDispenseItem
 {
@@ -65,7 +64,9 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
                             int free = 0;
                             otherTubes.remove(itemStack);
                             for (ItemStack emptyStack : otherTubes)
+                            {
                                 free += emptyStack.stackSize;
+                            }
                             if (free < needs)
                             {
                                 return itemStack;
@@ -158,7 +159,9 @@ public class FluidChemicalDispenser implements IBehaviorDispenseItem
                     otherItemsStacks.remove(itemStack);
                     int free = 0;
                     for (ItemStack stack : otherItemsStacks)
+                    {
                         free += stack.stackSize;
+                    }
                     if (free < needs)
                     {
                         return itemStack;

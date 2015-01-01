@@ -8,15 +8,15 @@ import net.minecraft.item.ItemStack;
 public class SlotBlueprint extends Slot
 {
 
-	public SlotBlueprint(IInventory par1iInventory, int par2, int par3, int par4)
-	{
-		super(par1iInventory, par2, par3, par4);
-	}
+    public SlotBlueprint(IInventory par1iInventory, int par2, int par3, int par4)
+    {
+        super(par1iInventory, par2, par3, par4);
+    }
 
-	@Override
-	public boolean isItemValid(ItemStack itemstack)
-	{
-		return (itemstack.getItem() == MinechemItemsRegistration.blueprint);
-	}
+    @Override
+    public boolean isItemValid(ItemStack itemstack)
+    {
+        return (itemstack.getItem() == MinechemItemsRegistration.blueprint);
+    }
 
 }

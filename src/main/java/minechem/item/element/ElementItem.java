@@ -2,6 +2,11 @@ package minechem.item.element;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidHelper;
@@ -15,7 +20,10 @@ import minechem.radiation.RadiationEnum;
 import minechem.radiation.RadiationFluidTileEntity;
 import minechem.radiation.RadiationInfo;
 import minechem.reference.Textures;
-import minechem.utils.*;
+import minechem.utils.Constants;
+import minechem.utils.EnumColour;
+import minechem.utils.MinechemUtil;
+import minechem.utils.TimeHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
@@ -37,8 +45,6 @@ import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidHandler;
 import org.lwjgl.input.Keyboard;
-
-import java.util.*;
 
 public class ElementItem extends Item
 {
@@ -71,17 +77,20 @@ public class ElementItem extends Item
     public static String getShortName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        return atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty"):  ElementEnum.getByID(atomicNumber).name();
+        return atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty") : ElementEnum.getByID(atomicNumber).name();
     }
 
     public static String getLongName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        String longName = atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty"):  MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName());
+        String longName = atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty") : MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName());
         if (longName.contains("Element."))
         {
             ElementEnum element = ElementEnum.getByID(atomicNumber);
-            if (element != null) longName = element.getLongName();
+            if (element != null)
+            {
+                longName = element.getLongName();
+            }
         }
         return longName;
     }
@@ -153,7 +162,6 @@ public class ElementItem extends Item
 
         list.add(Constants.TEXT_MODIFIER + "9" + getShortName(itemstack) + " (" + (itemstack.getItemDamage()) + ")");
 
-
         RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
         String radioactivityColor = radioactivity.getColour();
 
@@ -204,7 +212,10 @@ public class ElementItem extends Item
         list.add(new ItemStack(item, 1, 0));
         for (int i = 1; i <= ElementEnum.heaviestMass; i++)
         {
-            if (ElementEnum.getByID(i) == null) continue;
+            if (ElementEnum.getByID(i) == null)
+            {
+                continue;
+            }
             list.add(new ItemStack(item, 1, i));
         }
     }
@@ -267,15 +278,21 @@ public class ElementItem extends Item
                 for (int i = 0; i < 6; i++)
                 {
                     FluidElement fluid = FluidHelper.elements.get(getElement(stack));
-                    if (fluid==null)
+                    if (fluid == null)
+                    {
                         return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+                    }
                     filled = ((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), false);
                     if (filled > 0)
                     {
                         if (result)
+                        {
                             ((IFluidHandler) te).fill(ForgeDirection.getOrientation(i), new FluidStack(FluidHelper.elements.get(getElement(stack)), 125), true);
+                        }
                         if (!player.capabilities.isCreativeMode)
+                        {
                             MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, 0));
+                        }
                         return result || stack.stackSize <= 0;
                     }
                 }
@@ -292,16 +309,23 @@ public class ElementItem extends Item
                         if (drained != null && drained.amount > 0)
                         {
                             if (result)
+                            {
                                 ((IFluidHandler) te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), true);
+                            }
                             if (!player.capabilities.isCreativeMode)
+                            {
                                 MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.element, 1, element.atomicNumber()));
+                            }
                             return result;
                         }
                     }
                 } else
                 {
                     MoleculeEnum molecule = MinechemUtil.getMolecule(fluid);
-                    if (fluid == FluidRegistry.WATER) molecule = MoleculeEnum.water;
+                    if (fluid == FluidRegistry.WATER)
+                    {
+                        molecule = MoleculeEnum.water;
+                    }
                     if (molecule != null)
                     {
                         for (int i = 0; i < 6; i++)
@@ -310,9 +334,13 @@ public class ElementItem extends Item
                             if (drained != null && drained.amount > 0)
                             {
                                 if (result)
-                                  ((IFluidHandler) te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), true);
+                                {
+                                    ((IFluidHandler) te).drain(ForgeDirection.getOrientation(i), new FluidStack(fluid, 125), true);
+                                }
                                 if (!player.capabilities.isCreativeMode)
+                                {
                                     MinechemUtil.incPlayerInventory(stack, -1, player, new ItemStack(MinechemItemsRegistration.molecule, 1, molecule.id()));
+                                }
                                 return result;
                             }
                         }
@@ -410,7 +438,10 @@ public class ElementItem extends Item
             long worldtime = world.getTotalWorldTime();
             long leftTime = radioactivity.radioactivity.getLife() - (worldtime - radioactivity.decayStarted);
             Fluid fluid = FluidHelper.elements.get(getElement(itemStack));
-            if (fluid == null) return itemStack;
+            if (fluid == null)
+            {
+                return itemStack;
+            }
             if (!player.capabilities.isCreativeMode)
             {
                 if (itemStack.stackSize >= 8)

@@ -4,49 +4,49 @@ import net.minecraft.util.StatCollector;
 
 public enum ChemicalRoomStateEnum implements IDescriptiveName
 {
-	liquid("Liquid", false, 1000, 8), solid("Solid", false, 1200, 1), gas("Gaseous", true, 400, 8);
+    liquid("Liquid", false, 1000, 8), solid("Solid", false, 1200, 1), gas("Gaseous", true, 400, 8);
 
-	private final boolean isGas;
-	private final int viscosity;
-	private final String descriptiveName;
-	private final int quanta;
+    private final boolean isGas;
+    private final int viscosity;
+    private final String descriptiveName;
+    private final int quanta;
 
-	ChemicalRoomStateEnum(String descriptiveName, boolean isGas, int viscosity, int quanta)
-	{
-		this.isGas = isGas;
-		this.viscosity = viscosity;
-		this.descriptiveName = descriptiveName;
-		this.quanta = quanta;
-	}
+    ChemicalRoomStateEnum(String descriptiveName, boolean isGas, int viscosity, int quanta)
+    {
+        this.isGas = isGas;
+        this.viscosity = viscosity;
+        this.descriptiveName = descriptiveName;
+        this.quanta = quanta;
+    }
 
-	public boolean isGas()
-	{
-		return isGas;
-	}
+    public boolean isGas()
+    {
+        return isGas;
+    }
 
-	public int getViscosity()
-	{
-		return viscosity;
-	}
+    public int getViscosity()
+    {
+        return viscosity;
+    }
 
-	public int getQuanta()
-	{
-		return quanta;
-	}
+    public int getQuanta()
+    {
+        return quanta;
+    }
 
-	public String stateName()
-	{
-		return descriptiveName;
-	}
+    public String stateName()
+    {
+        return descriptiveName;
+    }
 
-	@Override
-	public String descriptiveName()
-	{
-		String localizedName = StatCollector.translateToLocal("element.classification." + descriptiveName);
-		if (!localizedName.isEmpty() || !localizedName.equals("element.classification." + descriptiveName))
-		{
-			return localizedName;
-		}
-		return descriptiveName;
-	}
+    @Override
+    public String descriptiveName()
+    {
+        String localizedName = StatCollector.translateToLocal("element.classification." + descriptiveName);
+        if (!localizedName.isEmpty() || !localizedName.equals("element.classification." + descriptiveName))
+        {
+            return localizedName;
+        }
+        return descriptiveName;
+    }
 }

@@ -10,51 +10,51 @@ import net.minecraft.tileentity.TileEntity;
 
 public class FissionUpdateMessage implements IMessage, IMessageHandler<FissionUpdateMessage, IMessage>
 {
-	private int posX, posY, posZ;
-	private int energyStored;
+    private int posX, posY, posZ;
+    private int energyStored;
 
-	public FissionUpdateMessage()
-	{
+    public FissionUpdateMessage()
+    {
 
-	}
+    }
 
-	public FissionUpdateMessage(FissionTileEntity tile)
-	{
-		this.posX = tile.xCoord;
-		this.posY = tile.yCoord;
-		this.posZ = tile.zCoord;
+    public FissionUpdateMessage(FissionTileEntity tile)
+    {
+        this.posX = tile.xCoord;
+        this.posY = tile.yCoord;
+        this.posZ = tile.zCoord;
 
-		this.energyStored = tile.getEnergyStored();
-	}
+        this.energyStored = tile.getEnergyStored();
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		this.posX = buf.readInt();
-		this.posY = buf.readInt();
-		this.posZ = buf.readInt();
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.posX = buf.readInt();
+        this.posY = buf.readInt();
+        this.posZ = buf.readInt();
 
-		this.energyStored = buf.readInt();
-	}
+        this.energyStored = buf.readInt();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.posX);
-		buf.writeInt(this.posY);
-		buf.writeInt(this.posZ);
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.posX);
+        buf.writeInt(this.posY);
+        buf.writeInt(this.posZ);
 
-		buf.writeInt(this.energyStored);
-	}
+        buf.writeInt(this.energyStored);
+    }
 
-	@Override
-	public IMessage onMessage(FissionUpdateMessage message, MessageContext ctx)
-	{
-		TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.posX, message.posY, message.posZ);
-		if (tileEntity instanceof FissionTileEntity)
-		{
-			((FissionTileEntity) tileEntity).syncEnergyValue(message.energyStored);
-		}
-		return null;
-	}
+    @Override
+    public IMessage onMessage(FissionUpdateMessage message, MessageContext ctx)
+    {
+        TileEntity tileEntity = FMLClientHandler.instance().getClient().theWorld.getTileEntity(message.posX, message.posY, message.posZ);
+        if (tileEntity instanceof FissionTileEntity)
+        {
+            ((FissionTileEntity) tileEntity).syncEnergyValue(message.energyStored);
+        }
+        return null;
+    }
 }

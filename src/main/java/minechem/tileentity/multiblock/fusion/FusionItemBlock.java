@@ -7,28 +7,28 @@ import net.minecraft.item.ItemStack;
 public class FusionItemBlock extends ItemBlock
 {
 
-	private static final String[] names =
-	{
-		"FusionWall", "TungstenPlating", "FusionCore"
-	};
+    private static final String[] names =
+    {
+        "FusionWall", "TungstenPlating", "FusionCore"
+    };
 
-	public FusionItemBlock(Block block)
-	{
-		//TODO: Find matching block
-		super(block);
-		setHasSubtypes(true);
-		setUnlocalizedName("itemBlockFusion");
-	}
+    public FusionItemBlock(Block block)
+    {
+        //TODO: Find matching block
+        super(block);
+        setHasSubtypes(true);
+        setUnlocalizedName("itemBlockFusion");
+    }
 
-	@Override
-	public int getMetadata(int damageValue)
-	{
-		return damageValue;
-	}
+    @Override
+    public int getMetadata(int damageValue)
+    {
+        return damageValue;
+    }
 
-	@Override
-	public String getUnlocalizedName(ItemStack itemstack)
-	{
-		return "minechem." + names[itemstack.getItemDamage()];
-	}
+    @Override
+    public String getUnlocalizedName(ItemStack itemstack)
+    {
+        return "minechem." + names[itemstack.getItemDamage()];
+    }
 }

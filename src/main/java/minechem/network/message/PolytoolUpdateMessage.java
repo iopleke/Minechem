@@ -12,41 +12,41 @@ import net.minecraft.client.Minecraft;
 
 public class PolytoolUpdateMessage implements IMessage, IMessageHandler<PolytoolUpdateMessage, IMessage>
 {
-	private int element;
-	private float power;
+    private int element;
+    private float power;
 
-	public PolytoolUpdateMessage()
-	{
+    public PolytoolUpdateMessage()
+    {
 
-	}
+    }
 
-	public PolytoolUpdateMessage(PolytoolUpgradeType type)
-	{
-		this.element = type.getElement().atomicNumber();
-		this.power = type.power;
-	}
+    public PolytoolUpdateMessage(PolytoolUpgradeType type)
+    {
+        this.element = type.getElement().atomicNumber();
+        this.power = type.power;
+    }
 
-	@Override
-	public void fromBytes(ByteBuf buf)
-	{
-		this.element = buf.readInt();
-		this.power = buf.readFloat();
-	}
+    @Override
+    public void fromBytes(ByteBuf buf)
+    {
+        this.element = buf.readInt();
+        this.power = buf.readFloat();
+    }
 
-	@Override
-	public void toBytes(ByteBuf buf)
-	{
-		buf.writeInt(this.element);
-		buf.writeFloat(this.power);
-	}
+    @Override
+    public void toBytes(ByteBuf buf)
+    {
+        buf.writeInt(this.element);
+        buf.writeFloat(this.power);
+    }
 
-	@Override
-	public IMessage onMessage(PolytoolUpdateMessage message, MessageContext ctx)
-	{
-		if (Minecraft.getMinecraft().currentScreen instanceof PolytoolGui)
-		{
-			((PolytoolGui) Minecraft.getMinecraft().currentScreen).addUpgrade(PolytoolHelper.getTypeFromElement(ElementEnum.getByID(message.element), message.power));
-		}
-		return null;
-	}
+    @Override
+    public IMessage onMessage(PolytoolUpdateMessage message, MessageContext ctx)
+    {
+        if (Minecraft.getMinecraft().currentScreen instanceof PolytoolGui)
+        {
+            ((PolytoolGui) Minecraft.getMinecraft().currentScreen).addUpgrade(PolytoolHelper.getTypeFromElement(ElementEnum.getByID(message.element), message.power));
+        }
+        return null;
+    }
 }

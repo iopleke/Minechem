@@ -34,171 +34,171 @@ import net.minecraft.world.World;
 public class GuiHandler implements IGuiHandler
 {
 
-	public static final int GUI_ID_TILEENTITY = 0;
-	public static final int GUI_ID_JOURNAL = 1;
-	public static final int GUI_TABLE = 2;
+    public static final int GUI_ID_TILEENTITY = 0;
+    public static final int GUI_ID_JOURNAL = 1;
+    public static final int GUI_TABLE = 2;
 
-	public static final int GUI_ID_POLYTOOL = 3;
+    public static final int GUI_ID_POLYTOOL = 3;
 
-	@Override
-	public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-	{
-		if (ID == GUI_ID_JOURNAL)
-		{
-			return getServerGuiElementForJournal(player, world);
-		}
-		if (ID == GUI_ID_POLYTOOL)
-		{
-			return getServerGuiElementForPolytool(player, world);
-		}
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
-		if (tileEntity instanceof DecomposerTileEntity)
-		{
-			return new DecomposerContainer(player.inventory, (DecomposerTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof LeadedChestTileEntity)
-		{
-			return new LeadedChestContainer(player.inventory, (LeadedChestTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof MicroscopeTileEntity)
-		{
-			return new MicroscopeContainer(player.inventory, (MicroscopeTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof SynthesisTileEntity)
-		{
-			return new SynthesisContainer(player.inventory, (SynthesisTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof FusionTileEntity)
-		{
-			return new FusionContainer(player.inventory, (FusionTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof FissionTileEntity)
-		{
-			return new FissionContainer(player.inventory, (FissionTileEntity) tileEntity);
-		}
+    @Override
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
+        if (ID == GUI_ID_JOURNAL)
+        {
+            return getServerGuiElementForJournal(player, world);
+        }
+        if (ID == GUI_ID_POLYTOOL)
+        {
+            return getServerGuiElementForPolytool(player, world);
+        }
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (tileEntity instanceof DecomposerTileEntity)
+        {
+            return new DecomposerContainer(player.inventory, (DecomposerTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof LeadedChestTileEntity)
+        {
+            return new LeadedChestContainer(player.inventory, (LeadedChestTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof MicroscopeTileEntity)
+        {
+            return new MicroscopeContainer(player.inventory, (MicroscopeTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof SynthesisTileEntity)
+        {
+            return new SynthesisContainer(player.inventory, (SynthesisTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof FusionTileEntity)
+        {
+            return new FusionContainer(player.inventory, (FusionTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof FissionTileEntity)
+        {
+            return new FissionContainer(player.inventory, (FissionTileEntity) tileEntity);
+        }
 
-		if (tileEntity instanceof TileEntityProxy)
-		{
-			return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
-		}
+        if (tileEntity instanceof TileEntityProxy)
+        {
+            return getServerGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        }
 
-		if (tileEntity instanceof BlueprintProjectorTileEntity)
-		{
-			return new BlueprintProjectorContainer(player.inventory, (BlueprintProjectorTileEntity) tileEntity);
-		}
-		return null;
-	}
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
+        {
+            return new BlueprintProjectorContainer(player.inventory, (BlueprintProjectorTileEntity) tileEntity);
+        }
+        return null;
+    }
 
-	private Object getServerGuiElementForPolytool(EntityPlayer player, World world)
-	{
+    private Object getServerGuiElementForPolytool(EntityPlayer player, World world)
+    {
 
-		return new PolytoolContainer(player);
-	}
+        return new PolytoolContainer(player);
+    }
 
-	public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
-	{
-		TileEntity tileEntity = proxy.getManager();
-		if (tileEntity instanceof FusionTileEntity)
-		{
-			return new FusionContainer(player.inventory, (FusionTileEntity) tileEntity);
-		}
+    public Object getServerGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
+    {
+        TileEntity tileEntity = proxy.getManager();
+        if (tileEntity instanceof FusionTileEntity)
+        {
+            return new FusionContainer(player.inventory, (FusionTileEntity) tileEntity);
+        }
 
-		if (tileEntity instanceof FissionTileEntity)
-		{
-			return new FissionContainer(player.inventory, (FissionTileEntity) tileEntity);
-		}
-		return null;
-	}
+        if (tileEntity instanceof FissionTileEntity)
+        {
+            return new FissionContainer(player.inventory, (FissionTileEntity) tileEntity);
+        }
+        return null;
+    }
 
-	public Object getServerGuiElementForJournal(EntityPlayer entityPlayer, World world)
-	{
-		return new ChemistJournalContainer(entityPlayer.inventory);
-	}
+    public Object getServerGuiElementForJournal(EntityPlayer entityPlayer, World world)
+    {
+        return new ChemistJournalContainer(entityPlayer.inventory);
+    }
 
-	@Override
-	public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
-	{
-		if (ID == GUI_ID_JOURNAL)
-		{
-			return getClientGuiElementForJournal(player, world);
-		}
+    @Override
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    {
+        if (ID == GUI_ID_JOURNAL)
+        {
+            return getClientGuiElementForJournal(player, world);
+        }
 
-		if (ID == GUI_TABLE)
-		{
-			return getClientGuiForJournal(player, world);
-		}
+        if (ID == GUI_TABLE)
+        {
+            return getClientGuiForJournal(player, world);
+        }
 
-		if (ID == GUI_ID_POLYTOOL)
-		{
-			return getClientGuiForPolytool(player, world);
-		}
+        if (ID == GUI_ID_POLYTOOL)
+        {
+            return getClientGuiForPolytool(player, world);
+        }
 
-		TileEntity tileEntity = world.getTileEntity(x, y, z);
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
 
-		if (tileEntity instanceof DecomposerTileEntity)
-		{
-			return new DecomposerGui(player.inventory, (DecomposerTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof LeadedChestTileEntity)
-		{
-			return new LeadedChestGui(player.inventory, (LeadedChestTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof MicroscopeTileEntity)
-		{
-			return new MicroscopeGui(player.inventory, (MicroscopeTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof SynthesisTileEntity)
-		{
-			return new SynthesisGui(player.inventory, (SynthesisTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof FusionTileEntity)
-		{
-			return new FusionGui(player.inventory, (FusionTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof TileEntityProxy)
-		{
-			return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
-		}
-		if (tileEntity instanceof BlueprintProjectorTileEntity)
-		{
-			return new BlueprintProjectorGui(player.inventory, (BlueprintProjectorTileEntity) tileEntity);
-		}
-		if (tileEntity instanceof FissionTileEntity)
-		{
-			return new FissionGui(player.inventory, (FissionTileEntity) tileEntity);
-		}
-		return null;
-	}
+        if (tileEntity instanceof DecomposerTileEntity)
+        {
+            return new DecomposerGui(player.inventory, (DecomposerTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof LeadedChestTileEntity)
+        {
+            return new LeadedChestGui(player.inventory, (LeadedChestTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof MicroscopeTileEntity)
+        {
+            return new MicroscopeGui(player.inventory, (MicroscopeTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof SynthesisTileEntity)
+        {
+            return new SynthesisGui(player.inventory, (SynthesisTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof FusionTileEntity)
+        {
+            return new FusionGui(player.inventory, (FusionTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof TileEntityProxy)
+        {
+            return getClientGuiElementFromProxy((TileEntityProxy) tileEntity, player);
+        }
+        if (tileEntity instanceof BlueprintProjectorTileEntity)
+        {
+            return new BlueprintProjectorGui(player.inventory, (BlueprintProjectorTileEntity) tileEntity);
+        }
+        if (tileEntity instanceof FissionTileEntity)
+        {
+            return new FissionGui(player.inventory, (FissionTileEntity) tileEntity);
+        }
+        return null;
+    }
 
-	private PolytoolGui getClientGuiForPolytool(EntityPlayer player, World world)
-	{
+    private PolytoolGui getClientGuiForPolytool(EntityPlayer player, World world)
+    {
 
-		return new PolytoolGui(new PolytoolContainer(player));
-	}
+        return new PolytoolGui(new PolytoolContainer(player));
+    }
 
-	public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
-	{
-		TileEntity tileEntity = proxy.getManager();
-		if (tileEntity instanceof FusionTileEntity)
-		{
-			return new FusionGui(player.inventory, (FusionTileEntity) tileEntity);
-		}
+    public Object getClientGuiElementFromProxy(TileEntityProxy proxy, EntityPlayer player)
+    {
+        TileEntity tileEntity = proxy.getManager();
+        if (tileEntity instanceof FusionTileEntity)
+        {
+            return new FusionGui(player.inventory, (FusionTileEntity) tileEntity);
+        }
 
-		if (tileEntity instanceof FissionTileEntity)
-		{
-			return new FissionGui(player.inventory, (FissionTileEntity) tileEntity);
-		}
-		return null;
-	}
+        if (tileEntity instanceof FissionTileEntity)
+        {
+            return new FissionGui(player.inventory, (FissionTileEntity) tileEntity);
+        }
+        return null;
+    }
 
-	public Object getClientGuiElementForJournal(EntityPlayer player, World world)
-	{
-		return new ChemistJournalGui(player);
-	}
+    public Object getClientGuiElementForJournal(EntityPlayer player, World world)
+    {
+        return new ChemistJournalGui(player);
+    }
 
-	public Object getClientGuiForJournal(EntityPlayer player, World world)
-	{
-		return new GuiTableOfElements(player);
-	}
+    public Object getClientGuiForJournal(EntityPlayer player, World world)
+    {
+        return new GuiTableOfElements(player);
+    }
 
 }

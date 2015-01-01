@@ -1,9 +1,12 @@
 package minechem.potion;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.entity.EntityLivingBase;
-
-import java.util.*;
 
 public class PharmacologyEffectRegistry
 {
@@ -13,10 +16,15 @@ public class PharmacologyEffectRegistry
     {
         List<PharmacologyEffect> list = effects.get(molecule);
         if (list == null)
-            list = new LinkedList<PharmacologyEffect>();
-        for (PharmacologyEffect existingEffect:list)
         {
-            if (existingEffect.equals(effect)) return;
+            list = new LinkedList<PharmacologyEffect>();
+        }
+        for (PharmacologyEffect existingEffect : list)
+        {
+            if (existingEffect.equals(effect))
+            {
+                return;
+            }
         }
         list.add(effect);
         effects.put(molecule, list);
@@ -24,16 +32,18 @@ public class PharmacologyEffectRegistry
 
     public static void addEffects(MoleculeEnum molecule, List<PharmacologyEffect> toAdd)
     {
-        for (PharmacologyEffect effect:toAdd)
+        for (PharmacologyEffect effect : toAdd)
         {
-            addEffect(molecule,effect);
+            addEffect(molecule, effect);
         }
     }
 
     public static void addEffect(List<MoleculeEnum> molecules, PharmacologyEffect effect)
     {
         for (MoleculeEnum molecule : molecules)
+        {
             addEffect(molecule, effect);
+        }
     }
 
     public static boolean hasEffect(MoleculeEnum molecule)
@@ -51,7 +61,9 @@ public class PharmacologyEffectRegistry
         if (hasEffect(molecule))
         {
             for (PharmacologyEffect effect : effects.get(molecule))
+            {
                 effect.applyEffect(entityLivingBase);
+            }
         }
     }
 
@@ -65,7 +77,9 @@ public class PharmacologyEffectRegistry
     public static void removeEffect(MoleculeEnum molecule, PharmacologyEffect effect)
     {
         if (hasEffect(molecule))
+        {
             effects.get(molecule).remove(effect);
+        }
     }
 
     public static void init()
@@ -107,7 +121,7 @@ public class PharmacologyEffectRegistry
         addEffect(MoleculeEnum.asprin, new PharmacologyEffect.Potion("regeneration", 2, 1));
         addEffect(Arrays.asList(MoleculeEnum.phosgene, MoleculeEnum.aalc, MoleculeEnum.sulfuricAcid, MoleculeEnum.buli), new PharmacologyEffect.Burn(2));
         addEffect(MoleculeEnum.tetrodotoxin, new PharmacologyEffect.Potion("moveSlowdown", 5, 8));
-        addEffect(MoleculeEnum.tetrodotoxin,  new PharmacologyEffect.Potion("weakness", 2, 1));
+        addEffect(MoleculeEnum.tetrodotoxin, new PharmacologyEffect.Potion("weakness", 2, 1));
         addEffect(MoleculeEnum.fingolimod, new PharmacologyEffect.Potion("damageBoost", 60, 1));
         addEffect(MoleculeEnum.fingolimod, new PharmacologyEffect.Potion("moveSpeed", 60, 1));
         addEffect(MoleculeEnum.fingolimod, new PharmacologyEffect.Potion("regeneration", 60, 1));
@@ -124,7 +138,7 @@ public class PharmacologyEffectRegistry
         addEffect(MoleculeEnum.pal2, new PharmacologyEffect.Potion("wither", 5));
         addEffect(MoleculeEnum.theobromine, new PharmacologyEffect.Potion("digSpeed", 30, 10));
         addEffect(MoleculeEnum.theobromine, new PharmacologyEffect.Potion("moveSpeed", 30, 10));
-        addEffect(MoleculeEnum.retinol, new PharmacologyEffect.Potion("nightVision", 30 ,5));
+        addEffect(MoleculeEnum.retinol, new PharmacologyEffect.Potion("nightVision", 30, 5));
         List<MoleculeEnum> aminoAcids = Arrays.asList(MoleculeEnum.glycine, MoleculeEnum.alinine,
                 MoleculeEnum.arginine, MoleculeEnum.proline, MoleculeEnum.leucine,
                 MoleculeEnum.isoleucine, MoleculeEnum.cysteine, MoleculeEnum.valine,
@@ -134,14 +148,14 @@ public class PharmacologyEffectRegistry
         addEffect(aminoAcids, new PharmacologyEffect.Food(2, .1F));
         addEffect(aminoAcids, new PharmacologyEffect.Potion("digSpeed", 20, 1));
         addEffect(aminoAcids, new PharmacologyEffect.Potion("jump", 20, 1));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("confusion", 120 ,5));
+        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("confusion", 120, 5));
         addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Damage(4));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("nightVision", 120 ,5));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("moveSpeed", 120 ,12));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("confusion", 60 ,5));
+        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("nightVision", 120, 5));
+        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("moveSpeed", 120, 12));
+        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("confusion", 60, 5));
         addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Damage(4));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("nightVision", 60 ,5));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("moveSpeed", 60 ,10));
+        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("nightVision", 60, 5));
+        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("moveSpeed", 60, 10));
         addEffect(MoleculeEnum.metblue, new PharmacologyEffect.Cure());
         addEffect(MoleculeEnum.metblue, new PharmacologyEffect.Potion("regeneration", 30, 4));
         addEffect(MoleculeEnum.metblue, new PharmacologyEffect.Potion("weakness", 30, 4));

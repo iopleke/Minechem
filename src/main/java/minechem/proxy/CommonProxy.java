@@ -17,75 +17,75 @@ import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy
 {
-	public static int RENDER_ID;
+    public static int RENDER_ID;
 
-	public void registerRenderers()
-	{
+    public void registerRenderers()
+    {
 
-	}
+    }
 
-	public void registerTickHandlers()
-	{
-		FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
+    public void registerTickHandlers()
+    {
+        FMLCommonHandler.instance().bus().register(new ScheduledTickHandler());
         MinecraftForge.EVENT_BUS.register(new ScheduledTickHandler());
-		FMLCommonHandler.instance().bus().register(new ChemicalFluidReactionHandler());
-		FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
-		MinecraftForge.EVENT_BUS.register(MinechemBucketHandler.getInstance());
-	}
+        FMLCommonHandler.instance().bus().register(new ChemicalFluidReactionHandler());
+        FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(MinechemBucketHandler.getInstance());
+    }
 
-	public World getClientWorld()
-	{
-		return null;
-	}
+    public World getClientWorld()
+    {
+        return null;
+    }
 
-	public void registerHooks()
-	{
-	}
+    public void registerHooks()
+    {
+    }
 
-	public EntityPlayer findEntityPlayerByName(String name)
-	{
+    public EntityPlayer findEntityPlayerByName(String name)
+    {
 
-		EntityPlayer player;
-		player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
+        EntityPlayer player;
+        player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
 
-		if (player != null)
-		{
-			return player;
-		}
+        if (player != null)
+        {
+            return player;
+        }
 
-		return null;
-	}
+        return null;
+    }
 
-	public String getCurrentLanguage()
-	{
-		return null;
-	}
+    public String getCurrentLanguage()
+    {
+        return null;
+    }
 
-	public void addName(Object obj, String s)
-	{
-	}
+    public void addName(Object obj, String s)
+    {
+    }
 
-	public void addLocalization(String s1, String string)
-	{
-	}
+    public void addLocalization(String s1, String string)
+    {
+    }
 
-	public String getItemDisplayName(ItemStack newStack)
-	{
-		return "";
-	}
+    public String getItemDisplayName(ItemStack newStack)
+    {
+        return "";
+    }
 
-	public EntityPlayer getPlayer(MessageContext context)
-	{
-		return context.getServerHandler().playerEntity;
-	}
+    public EntityPlayer getPlayer(MessageContext context)
+    {
+        return context.getServerHandler().playerEntity;
+    }
 
-	public void onAddFluid(MinechemFluid fluid, MinechemFluidBlock block)
-	{
+    public void onAddFluid(MinechemFluid fluid, MinechemFluidBlock block)
+    {
 
-	}
+    }
 
-	public void onAddBucket(MinechemBucketItem item)
-	{
-		
-	}
+    public void onAddBucket(MinechemBucketItem item)
+    {
+
+    }
 }

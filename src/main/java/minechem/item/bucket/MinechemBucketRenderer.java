@@ -14,7 +14,6 @@ import net.minecraftforge.client.IItemRenderer;
 import net.minecraftforge.fluids.Fluid;
 import org.lwjgl.opengl.GL11;
 
-
 public class MinechemBucketRenderer implements IItemRenderer
 {
 
