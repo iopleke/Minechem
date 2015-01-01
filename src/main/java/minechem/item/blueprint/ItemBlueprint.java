@@ -69,7 +69,7 @@ public class ItemBlueprint extends Item
     public String getItemStackDisplayName(ItemStack itemstack)
     {
         int metadata = itemstack.getItemDamage();
-        return MinechemUtil.getLocalString(names[metadata]);
+        return MinechemUtil.getLocalString(names[metadata], true);
     }
 
     @Override

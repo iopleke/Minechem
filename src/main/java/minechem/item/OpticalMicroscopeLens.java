@@ -40,7 +40,7 @@ public class OpticalMicroscopeLens extends Item
     public String getItemStackDisplayName(ItemStack itemStack)
     {
         int metadata = itemStack.getItemDamage();
-        return MinechemUtil.getLocalString(descriptiveNames[metadata]);
+        return MinechemUtil.getLocalString(descriptiveNames[metadata], true);
     }
 
     @Override

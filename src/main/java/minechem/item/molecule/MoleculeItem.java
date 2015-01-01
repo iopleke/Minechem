@@ -55,7 +55,7 @@ public class MoleculeItem extends Item
     @Override
     public String getItemStackDisplayName(ItemStack itemStack)
     {
-        return MinechemUtil.getLocalString(getMolecule(itemStack).getUnlocalizedName());
+        return MinechemUtil.getLocalString(getMolecule(itemStack).getUnlocalizedName(), true);
     }
 
     @Override
@@ -89,7 +89,7 @@ public class MoleculeItem extends Item
         RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
         String radioactivityColor = radioactivity.getColour();
 
-        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
+        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name(), true);
         String timeLeft = "";
         if (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
         {
@@ -114,7 +114,7 @@ public class MoleculeItem extends Item
 
                 } else
                 {
-                    list.add(EnumColour.DARK_GREEN + MinechemUtil.getLocalString("effect.information"));
+                    list.add(EnumColour.DARK_GREEN + MinechemUtil.getLocalString("effect.information", true));
                 }
             }
         }

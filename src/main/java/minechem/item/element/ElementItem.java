@@ -83,7 +83,7 @@ public class ElementItem extends Item
     public static String getLongName(ItemStack itemstack)
     {
         int atomicNumber = itemstack.getItemDamage();
-        String longName = atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty") : MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName());
+        String longName = atomicNumber == 0 ? MinechemUtil.getLocalString("element.empty") : MinechemUtil.getLocalString(ElementEnum.getByID(atomicNumber).getUnlocalizedName(), true);
         if (longName.contains("Element."))
         {
             ElementEnum element = ElementEnum.getByID(atomicNumber);
@@ -165,7 +165,7 @@ public class ElementItem extends Item
         RadiationEnum radioactivity = RadiationInfo.getRadioactivity(itemstack);
         String radioactivityColor = radioactivity.getColour();
 
-        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name());
+        String radioactiveName = MinechemUtil.getLocalString("element.property." + radioactivity.name(), true);
         String timeLeft = "";
         if (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable && itemstack.getTagCompound() != null)
         {

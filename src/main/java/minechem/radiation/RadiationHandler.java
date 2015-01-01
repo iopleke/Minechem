@@ -192,7 +192,7 @@ public class RadiationHandler
             return ElementItem.getLongName(stack);
         } else if (item == MinechemItemsRegistration.molecule)
         {
-            return MinechemUtil.getLocalString(MoleculeItem.getMolecule(stack).getUnlocalizedName());
+            return MinechemUtil.getLocalString(MoleculeItem.getMolecule(stack).getUnlocalizedName(), true);
         }
         return "null";
     }
