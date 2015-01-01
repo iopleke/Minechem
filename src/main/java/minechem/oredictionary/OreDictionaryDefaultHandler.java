@@ -164,7 +164,10 @@ public class OreDictionaryDefaultHandler implements OreDictionaryHandler
         {
             PotionChemical newChem = chem.copy();
             newChem.amount = (int) Math.floor(chem.amount * factor);
-            if (newChem.amount > 0) newComposition.add(newChem);
+            if (newChem.amount > 0)
+            {
+                newComposition.add(newChem);
+            }
         }
 
         return newComposition.toArray(new PotionChemical[newComposition.size()]);

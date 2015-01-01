@@ -42,7 +42,9 @@ public class DecomposerGui extends GuiContainerTabbed
         GL11.glDisable(GL11.GL_BLEND);
 
         if (mouseInButton(mouseX, mouseY))
+        {
             drawHoveringText(MinechemUtil.getLocalString("gui.title.decomposer.dump"), mouseX, mouseY);
+        }
     }
 
     @Override

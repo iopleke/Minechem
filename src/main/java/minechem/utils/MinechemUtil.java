@@ -426,10 +426,10 @@ public final class MinechemUtil
         float valueScaled = (value - leftMin) / leftRange;
         return rightMin + (valueScaled * rightRange);
     }
-    
+
     public static String getLocalString(String key)
     {
-        return getLocalString(key ,false);
+        return getLocalString(key, false);
     }
 
     public static String getLocalString(String key, boolean capitalize)

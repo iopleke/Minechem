@@ -94,13 +94,15 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     public void drawScreen(int mX, int mY, float par3)
     {
         super.drawScreen(mX, mY, par3);
-        
+
         GuiTab guiTab = getTabAtPosition(mouseX, mouseY);
         if (guiTab != null)
         {
             String tooltip = guiTab.getTooltip();
             if (tooltip != null)
+            {
                 drawHoveringText(tooltip, mX, mY);
+            }
         }
     }
 
