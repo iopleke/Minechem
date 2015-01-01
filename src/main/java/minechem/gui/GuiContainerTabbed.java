@@ -20,15 +20,12 @@ import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler, GuiYesNoCallback
 {
-    private static final Logger logger = LogManager.getLogger();
     private String clickedURI;
 
     protected static enum SlotColor
