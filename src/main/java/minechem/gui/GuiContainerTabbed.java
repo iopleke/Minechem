@@ -56,7 +56,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 
     public static boolean drawBorders;
 
-    private int _zLevel = 3;
+    private final int _zLevel = 3;
 
     public void drawTexture(int x, int y, ResourceLocation resource)
     {
