@@ -53,7 +53,7 @@ public class GuiTabPatreon extends GuiTab
             String localizedTooltip = MinechemUtil.getLocalString("tab.tooltip.patreon");
             if (localizedTooltip.equals("tab.tooltip.patreon") || localizedTooltip.isEmpty())
             {
-                return "Supporting Minechem";
+                return "Support Minechem";
             } else
             {
                 return localizedTooltip;
