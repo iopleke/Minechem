@@ -142,8 +142,10 @@ tab.title.usage=Usage
 tab.title.maxUsage=Max Usage
 tab.title.stored=Stored
 tab.title.activationEnergy=Energy per item
-tab.patreon=Enjoy playing Minechem? Support @jakimfett on Patreon!
-tab.tooltip.patreon=Support Minechem
+tab.patreon.firstline=Thanks for playing Minechem!
+tab.patreon.secondline=If you like the mod, please consider supporting me on Patreon!
+tab.patreon.linktext=Visit Patreon
+tab.tooltip.patreon=Supporting Minechem
 
 element.classification.Actinide=Actinide
 element.classification.Alkali metal=Alkali Metal

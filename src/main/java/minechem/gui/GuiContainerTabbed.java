@@ -3,14 +3,12 @@ package minechem.gui;
 import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
-import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.List;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Rect;
 import minechem.utils.SessionVars;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiConfirmOpenLink;
 import net.minecraft.client.gui.GuiYesNoCallback;
@@ -265,7 +263,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
     @Override
     protected void mouseClicked(int x, int y, int mouseButton)
     {
-
         super.mouseClicked(x, y, mouseButton);
 
         GuiTab guiTab = getTabAtPosition(mouseX, mouseY);
@@ -296,20 +293,21 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
             {
                 GuiTabPatreon patreonTab = (GuiTabPatreon) guiTab;
 
-//                if (patreonTab.isLinkAtPosition(x, y))
-//                {
-                Minecraft mc = FMLClientHandler.instance().getClient();
-                this.clickedURI = patreonTab.link;
-                if (this.mc.gameSettings.chatLinksPrompt)
+                if (patreonTab.isFullyOpened())
                 {
-                    this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, this.clickedURI, 0, false));
-                } else
-                {
-                    MinechemUtil.openURL(patreonTab.link);
+                    if (patreonTab.isLinkAtOffsetPosition(x - this.guiLeft, y - this.guiTop))
+                    {
+                        this.clickedURI = patreonTab.link;
+                        if (this.mc.gameSettings.chatLinksPrompt)
+                        {
+                            this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, this.clickedURI, 0, false));
+                        } else
+                        {
+                            MinechemUtil.openURL(patreonTab.link);
+                        }
+                        return;
+                    }
                 }
-
-//                }
-                return;
             }
             guiTab.toggleOpen();
         }

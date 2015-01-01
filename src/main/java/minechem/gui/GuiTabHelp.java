@@ -2,7 +2,6 @@ package minechem.gui;
 
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.util.ResourceLocation;
 
 public class GuiTabHelp extends GuiTab
@@ -10,7 +9,7 @@ public class GuiTabHelp extends GuiTab
     String helpString;
     int stringWidth;
 
-    public GuiTabHelp(Gui gui, String helpString)
+    public GuiTabHelp(GuiContainerTabbed gui, String helpString)
     {
         super(gui);
         this.helpString = helpString;
