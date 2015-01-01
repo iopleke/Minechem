@@ -20,7 +20,7 @@ public class GuiTabPatreon extends GuiTab
     {
         super(gui);
         this.helpString = MinechemUtil.getLocalString("tab.patreon");
-        this.link = "http://www.patreon.com/jakimfett";
+        this.link = "http://jakimfett.com/patreon";
         this.linkText = "Patreon";
         this.maxWidth = 120;
         this.stringWidth = this.maxWidth - 10;
