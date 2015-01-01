@@ -2,6 +2,7 @@ package minechem.tileentity.multiblock.fusion;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabPatreon;
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -28,6 +29,7 @@ public class FusionGui extends GuiContainerTabbed
         this.maxEnergy = fusion.getMaxEnergyStored();
         addTab(new FusionTabStateControl(this, fusion));
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.fusion")));
+        addTab(new GuiTabPatreon(this));
     }
 
     @Override

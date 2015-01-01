@@ -2,6 +2,7 @@ package minechem.tileentity.leadedchest;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabPatreon;
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -18,6 +19,7 @@ public class LeadedChestGui extends GuiContainerTabbed
         super(new LeadedChestContainer(inventoryPlayer, leadedChest));
         this.leadedchest = leadedChest;
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.leadChest")));
+        addTab(new GuiTabPatreon(this));
     }
 
     @Override

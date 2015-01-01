@@ -3,6 +3,7 @@ package minechem.tileentity.microscope;
 import java.util.ArrayList;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabPatreon;
 import minechem.reference.Resources;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeChance;
@@ -32,7 +33,7 @@ public class MicroscopeGui extends GuiContainerTabbed
     protected MicroscopeTileEntity microscope;
     MicroscopeGuiSwitch recipeSwitch;
     private boolean isShapedRecipe;
-    private RenderItem renderItem;
+    private final RenderItem renderItem;
 
     public MicroscopeGui(InventoryPlayer inventoryPlayer, MicroscopeTileEntity microscope)
     {
@@ -44,12 +45,13 @@ public class MicroscopeGui extends GuiContainerTabbed
         this.renderItem = new MicroscopeRenderGUIItem(this);
         this.recipeSwitch = new MicroscopeGuiSwitch(this);
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.microscope")));
+        addTab(new GuiTabPatreon(this));
     }
 
     public boolean isMouseInMicroscope()
     {
-        int mouseX = getMouseX();
-        int mouseY = getMouseY();
+        mouseX = getMouseX();
+        mouseY = getMouseY();
         int x = (width - guiWidth) / 2;
         int y = (height - guiHeight) / 2;
         x += eyepieceX;

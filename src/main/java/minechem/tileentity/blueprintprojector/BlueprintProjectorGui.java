@@ -7,6 +7,7 @@ import java.util.Map.Entry;
 import minechem.MinechemItemsRegistration;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabPatreon;
 import minechem.item.blueprint.BlueprintBlock;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.reference.Resources;
@@ -24,6 +25,7 @@ public class BlueprintProjectorGui extends GuiContainerTabbed
         super(new BlueprintProjectorContainer(inventoryPlayer, projector));
         this.projector = projector;
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.projector")));
+        addTab(new GuiTabPatreon(this));
     }
 
     @Override

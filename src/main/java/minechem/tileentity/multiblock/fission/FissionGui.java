@@ -2,6 +2,7 @@ package minechem.tileentity.multiblock.fission;
 
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabPatreon;
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -23,6 +24,7 @@ public class FissionGui extends GuiContainerTabbed
         super(new FissionContainer(inventoryPlayer, fission));
         addTab(new FissionTabStateControl(this, fission));
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.fission")));
+        addTab(new GuiTabPatreon(this));
     }
 
     @Override
