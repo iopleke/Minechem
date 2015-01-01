@@ -5,6 +5,7 @@ import cpw.mods.fml.common.registry.GameData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import cpw.mods.fml.server.FMLServerHandler;
+import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
@@ -763,5 +764,24 @@ public final class MinechemUtil
     public static int getNumberOfDigits(int n)
     {
         return (int) (Math.log10(n) + 1);
+    }
+
+    public static void openURL(String url)
+    {
+        try
+        {
+            Class oclass = Class.forName("java.awt.Desktop");
+            Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
+            oclass.getMethod("browse", new Class[]
+            {
+                URI.class
+            }).invoke(object, new Object[]
+            {
+                new URI(url)
+            });
+        } catch (Throwable throwable)
+        {
+            LogHelper.debug("Couldn\'t open link: " + url);
+        }
     }
 }

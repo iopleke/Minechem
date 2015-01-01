@@ -11,6 +11,7 @@ public class Resources
         public static final ResourceLocation ENERGY = new ResourceLocation(Reference.ID, Textures.Icon.POWER);
         public static final ResourceLocation FULL_ENERGY = new ResourceLocation(Reference.ID, Textures.Icon.FULL_POWER);
         public static final ResourceLocation HELP = new ResourceLocation(Reference.ID, Textures.Icon.HELP);
+        public static final ResourceLocation PATREON = new ResourceLocation(Reference.ID, Textures.Icon.PATREON);
         public static final ResourceLocation JAMMED = new ResourceLocation(Reference.ID, Textures.Icon.JAMMED);
         public static final ResourceLocation NO_BOTTLES = new ResourceLocation(Reference.ID, Textures.Icon.NO_BOTTLES);
         public static final ResourceLocation NO_RECIPE = new ResourceLocation(Reference.ID, Textures.Icon.NO_RECIPE);

@@ -3,6 +3,7 @@ package minechem.tileentity.decomposer;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiFluidTank;
 import minechem.gui.GuiTabHelp;
+import minechem.gui.GuiTabPatreon;
 import minechem.reference.Resources;
 import minechem.utils.MinechemUtil;
 import net.minecraft.client.gui.GuiButton;
@@ -23,6 +24,7 @@ public class DecomposerGui extends GuiContainerTabbed
         this.decomposer = decomposer;
         addTab(new DecomposerTabStateControl(this, decomposer));
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.decomposer")));
+        addTab(new GuiTabPatreon(this));
         guiFluidTank = new GuiFluidTank(decomposer.capacity, 18, 16);
         dumpButton = new GuiButton(0, 20, 5, 12, 12, "x");
     }

@@ -3,24 +3,32 @@ package minechem.gui;
 import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.Optional;
 import java.util.ArrayList;
 import java.util.List;
+import minechem.utils.MinechemUtil;
 import minechem.utils.Rect;
 import minechem.utils.SessionVars;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.gui.GuiConfirmOpenLink;
+import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
-public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler
+public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler, GuiYesNoCallback
 {
+    private static final Logger logger = LogManager.getLogger();
 
     protected static enum SlotColor
     {
@@ -274,6 +282,24 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
                         other.toggleOpen();
                     }
                 }
+            }
+            if (guiTab instanceof GuiTabPatreon)
+            {
+                GuiTabPatreon patreonTab = (GuiTabPatreon) guiTab;
+
+//                if (patreonTab.isLinkAtPosition(x, y))
+//                {
+                Minecraft mc = FMLClientHandler.instance().getClient();
+                if (this.mc.gameSettings.chatLinksPrompt)
+                {
+                    this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, patreonTab.link, 0, false));
+                } else
+                {
+                    MinechemUtil.openURL(patreonTab.link);
+                }
+
+//                }
+                return;
             }
             guiTab.toggleOpen();
         }

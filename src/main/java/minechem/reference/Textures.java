@@ -101,6 +101,7 @@ public class Textures
         public static final String NO_RECIPE = ICON_DIR + "i_noRecipe.png";
         public static final String POWER = ICON_DIR + "i_power.png";
         public static final String HELP = ICON_DIR + "i_help.png";
+        public static final String PATREON = ICON_DIR + "i_patreon.png";
         public static final String FULL_POWER = ICON_DIR + "i_fullEower.png";
         public static final String JAMMED = ICON_DIR + "i_jammed.png";
         public static final String NO_BOTTLES = ICON_DIR + "i_noBottles.png";
