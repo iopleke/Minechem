@@ -84,10 +84,24 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glDisable(GL11.GL_DEPTH_TEST);
 
-        drawTabs(mouseX, mouseY);
+        drawTabs();
 
         GL11.glEnable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_DEPTH_TEST);
+    }
+
+    @Override
+    public void drawScreen(int mX, int mY, float par3)
+    {
+        super.drawScreen(mX, mY, par3);
+        
+        GuiTab guiTab = getTabAtPosition(mouseX, mouseY);
+        if (guiTab != null)
+        {
+            String tooltip = guiTab.getTooltip();
+            if (tooltip != null)
+                drawHoveringText(tooltip, mX, mY);
+        }
     }
 
     /* DRAW FUNCTIONS */
@@ -232,11 +246,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         drawTexturedModalRect(x - 8, y - 2, offsetX, offsetY, sizeX, sizeY);
     }
 
-    protected void drawTooltip(String tooltip)
-    {
-        drawHoveringText(tooltip, mouseX, mouseY);
-    }
-
     /* UTILITY FUNCTIONS */
     protected int getCenteredOffset(String string)
     {
@@ -346,7 +355,7 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         }
     }
 
-    protected void drawTabs(int mX, int mY)
+    protected void drawTabs()
     {
 
         int yPos = 4;
@@ -376,16 +385,6 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
             guiTab.drawTab(xSize, yPos);
             yPos += guiTab.getHeight();
         }
-
-        GuiTab guiTab = getTabAtPosition(mX, mY);
-        if (guiTab != null)
-        {
-            String tooltip = guiTab.getTooltip();
-            if (tooltip != null)
-            {
-                drawTooltip(tooltip);
-            }
-        }
     }
 
     protected GuiTab getTabAtPosition(int mX, int mY)
@@ -394,9 +393,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         int xShift = 0;
         int yShift = 4;
 
-        for (int i = 0; i < tabListLeft.size(); ++i)
+        for (GuiTab guiTab : tabListLeft)
         {
-            GuiTab guiTab = tabListLeft.get(i);
             if (!guiTab.isVisible())
             {
                 continue;
@@ -414,9 +412,8 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
         xShift = xSize;
         yShift = 4;
 
-        for (int i = 0; i < tabListRight.size(); ++i)
+        for (GuiTab guiTab : tabListRight)
         {
-            GuiTab guiTab = tabListRight.get(i);
             if (!guiTab.isVisible())
             {
                 continue;

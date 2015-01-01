@@ -74,6 +74,7 @@ config.supportNEI.description=Turn NEI support on or off
 
 
 gui.title.decomposer=Chemical Decomposer
+gui.title.decomposer.dump=Dump Fluid
 gui.title.leadedchest=Leaded Chest
 gui.title.microscope=Microscope
 gui.title.synthesis=Chemical Synthesis Machine

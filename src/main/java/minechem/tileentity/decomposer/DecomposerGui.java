@@ -39,11 +39,10 @@ public class DecomposerGui extends GuiContainerTabbed
 
         guiFluidTank.drawTooltip(mouseX, mouseY, decomposer.tank);
         dumpButton.drawButton(mc, mouseX, mouseY);
+        GL11.glDisable(GL11.GL_BLEND);
 
         if (mouseInButton(mouseX, mouseY))
-        {
-            drawTooltip("Dump Fluid");
-        }
+            drawHoveringText(MinechemUtil.getLocalString("gui.title.decomposer.dump"), mouseX, mouseY);
     }
 
     @Override
