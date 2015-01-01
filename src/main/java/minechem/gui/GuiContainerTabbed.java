@@ -29,6 +29,7 @@ import org.lwjgl.opengl.GL11;
 public abstract class GuiContainerTabbed extends GuiMinechemContainer implements INEIGuiHandler, GuiYesNoCallback
 {
     private static final Logger logger = LogManager.getLogger();
+    private String clickedURI;
 
     protected static enum SlotColor
     {
@@ -290,9 +291,10 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
 //                if (patreonTab.isLinkAtPosition(x, y))
 //                {
                 Minecraft mc = FMLClientHandler.instance().getClient();
+                this.clickedURI = patreonTab.link;
                 if (this.mc.gameSettings.chatLinksPrompt)
                 {
-                    this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, patreonTab.link, 0, false));
+                    this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, this.clickedURI, 0, false));
                 } else
                 {
                     MinechemUtil.openURL(patreonTab.link);
@@ -302,6 +304,21 @@ public abstract class GuiContainerTabbed extends GuiMinechemContainer implements
                 return;
             }
             guiTab.toggleOpen();
+        }
+    }
+
+    @Override
+    public void confirmClicked(boolean confirm, int id)
+    {
+        if (id == 0)
+        {
+            if (confirm)
+            {
+                MinechemUtil.openURL(this.clickedURI);
+            }
+
+            this.clickedURI = null;
+            this.mc.displayGuiScreen(this);
         }
     }
 
