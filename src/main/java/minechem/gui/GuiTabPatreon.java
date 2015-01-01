@@ -30,7 +30,7 @@ public class GuiTabPatreon extends GuiTab
         this.maxWidth = 120;
         this.stringWidth = this.maxWidth - 10;
         this.maxHeight = MinechemUtil.getSplitStringHeight(fontRenderer, helpString, this.stringWidth) + 20;
-        this.overlayColor = 0x88BBBB;
+        this.overlayColor = 0xFFFFFF;
     }
 
     @Override
