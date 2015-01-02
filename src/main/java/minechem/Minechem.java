@@ -52,6 +52,19 @@ import java.util.List;
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
 {
+    public static boolean isCoFHAAPILoaded;
+
+    Minechem()
+    {
+        try
+        {
+            Class.forName("cofh.api.energy.IEnergyHandler");
+            isCoFHAAPILoaded = true;
+        }catch(ClassNotFoundException e)
+        {
+            isCoFHAAPILoaded = false;
+        }
+    }
     // Instancing
     @Instance(value = Reference.ID)
     public static Minechem INSTANCE;
@@ -95,7 +108,7 @@ public class Minechem
 
         GameRegistry.registerFuelHandler(new MinechemFuelHandler());
 
-        setDonationURL();
+        if (Loader.isModLoaded("OpenBlocks"))setDonationURL();
     }
 
     @EventHandler
