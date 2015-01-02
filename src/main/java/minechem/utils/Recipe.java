@@ -186,15 +186,12 @@ public class Recipe
                     MapKey key = MapKey.getKey(input);
                     if (components != null && key != null)
                     {
-                        boolean badRecipe = input.stackSize > 0;
+                        boolean badRecipe = false;
                         for (ItemStack component : components)
                         {
-                            if (component != null && component.getItem() != null)
+                            if (component != null && (component.getItem() == null || component.isItemEqual(input) || component.stackSize < 1))
                             {
-                                if (component.isItemEqual(input) && component.getItemDamage() == input.getItemDamage() || component.stackSize < 1)
-                                {
-                                    badRecipe = true;
-                                }
+                                badRecipe = true;
                             }
                         }
                         if (!badRecipe)
