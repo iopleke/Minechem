@@ -215,7 +215,7 @@ public class Minechem
             Class donationManager = Class.forName("openblocks.common.DonationURLManager");
             Method instance = donationManager.getMethod("instance");
             Method url = donationManager.getMethod("addUrl");
-            url.invoke(instance.invoke(null),Reference.ID,"http://www.patreon.com/jakimfett");
+            url.invoke(instance.invoke(null),Reference.ID,"http://jakimfett.com/patreon/");
         } catch (Exception e)
         {
             e.printStackTrace();
