@@ -54,17 +54,6 @@ public class Minechem
 {
     public static boolean isCoFHAAPILoaded;
 
-    Minechem()
-    {
-        try
-        {
-            Class.forName("cofh.api.energy.IEnergyHandler");
-            isCoFHAAPILoaded = true;
-        }catch(ClassNotFoundException e)
-        {
-            isCoFHAAPILoaded = false;
-        }
-    }
     // Instancing
     @Instance(value = Reference.ID)
     public static Minechem INSTANCE;
@@ -81,6 +70,16 @@ public class Minechem
     {
         // Register instance.
         INSTANCE = this;
+
+        try
+        {
+            Class.forName("cofh.api.energy.IEnergyHandler");
+            isCoFHAAPILoaded = true;
+        }catch(Exception e)
+        {
+            isCoFHAAPILoaded = false;
+        }
+
         // Load configuration.
         LogHelper.debug("Loading configuration...");
         Settings.init(event.getSuggestedConfigurationFile());
