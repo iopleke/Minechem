@@ -249,7 +249,7 @@ public class Settings
         prop = config.get("power", "enable", Settings.powerUseEnabled);
         prop.comment = StatCollector.translateToLocal("config.power.enable.description");
         prop.setLanguageKey("config.power.enable.name").setRequiresMcRestart(true);
-        powerUseEnabled = prop.getBoolean();
+        powerUseEnabled = prop.getBoolean() && Minechem.isCoFHAAPILoaded;
         configList.add(prop.getName());
 
         prop = config.get("power", "maxDecomposerStorage", Settings.maxDecomposerStorage);
