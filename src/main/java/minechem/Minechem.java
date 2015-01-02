@@ -1,12 +1,8 @@
 package minechem;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.Loader;
-import cpw.mods.fml.common.Mod;
+import cpw.mods.fml.common.*;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
-import cpw.mods.fml.common.ModMetadata;
-import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLLoadCompleteEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -49,6 +45,9 @@ import minetweaker.MineTweakerAPI;
 import net.minecraft.item.crafting.CraftingManager;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.common.MinecraftForge;
+
+import java.lang.reflect.Method;
+import java.util.List;
 
 @Mod(modid = Reference.ID, name = Reference.NAME, version = Reference.VERSION_FULL, useMetadata = false, guiFactory = "minechem.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
@@ -95,6 +94,8 @@ public class Minechem
         MinechemBlueprint.registerBlueprints();
 
         GameRegistry.registerFuelHandler(new MinechemFuelHandler());
+
+        setDonationURL();
     }
 
     @EventHandler
@@ -204,5 +205,20 @@ public class Minechem
         Recipe.init();
         DecomposerRecipeHandler.recursiveRecipes();
         LogHelper.info((System.currentTimeMillis() - start) + "ms spent registering Recipes");
+    }
+
+    @Optional.Method(modid = "OpenBlocks")
+    public static void setDonationURL()
+    {
+        try
+        {
+            Class donationManager = Class.forName("openblocks.common.DonationURLManager");
+            Method instance = donationManager.getMethod("instance");
+            Method url = donationManager.getMethod("addUrl");
+            url.invoke(instance.invoke(null),Reference.ID,"http://www.patreon.com/jakimfett");
+        } catch (Exception e)
+        {
+            e.printStackTrace();
+        }
     }
 }
