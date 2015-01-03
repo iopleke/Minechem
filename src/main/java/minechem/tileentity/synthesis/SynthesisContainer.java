@@ -35,13 +35,13 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
         {
             for (int j = 0; j < 9; j++)
             {
-                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 105 + i * 18));
+                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 123 + i * 18));
             }
         }
 
         for (int i = 0; i < 9; i++)
         {
-            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 163));
+            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 181));
         }
     }
 
@@ -61,10 +61,13 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     private void bindStorageSlots()
     {
         int slot = 0;
-        for (int col = 0; col < 9; col++)
+        for (int row = 0; row < 2; row++)
         {
-            addSlotToContainer(new SlotChemical(synthesis, SynthesisTileEntity.kStartStorage + slot, 8 + (col * 18), 84));
-            slot++;
+            for (int col = 0; col < 9; col++)
+            {
+                addSlotToContainer(new SlotChemical(synthesis, SynthesisTileEntity.kStartStorage + slot, 8 + (col * 18), 84 + (row * 18)));
+                slot++;
+            }
         }
     }
 
@@ -101,7 +104,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     public List<ItemStack> getPlayerInventory()
     {
         List<ItemStack> playerInventory = new ArrayList<ItemStack>();
-        for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+        for (int slot = SynthesisTileEntity.kStartJournal+1; slot < this.inventorySlots.size(); slot++)
         {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
@@ -122,7 +125,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     public List<ItemStack> getStorageInventory()
     {
         List<ItemStack> storageInventory = new ArrayList<ItemStack>();
-        for (int slot = 0; slot < 27; slot++)
+        for (int slot = 0; slot <= SynthesisTileEntity.kStartJournal; slot++)
         {
             ItemStack stack = getSlot(slot).getStack();
             if (stack != null)
