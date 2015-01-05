@@ -350,6 +350,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
         tankUpdate = true;
 
         tank.amount -= drained;
+        if (tank.amount==0) tank=null;
         return new FluidStack(tank.fluidID, drained);
     }
 

@@ -4,6 +4,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import minechem.fluid.FluidHelper;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalRecipeCloning;
@@ -232,6 +234,18 @@ public class MinechemRecipes
                     this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate)
                 });
         registerMFRFluidRecipes();
+
+        if (Settings.decomposeChemicalFluids)
+        {
+            for (ElementEnum element : FluidHelper.elements.keySet())
+            {
+                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.elements.get(element),125),new Element(element,1)));
+            }
+            for (MoleculeEnum molecule : FluidHelper.molecules.keySet())
+            {
+                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.molecules.get(molecule),125),molecule.componentsArray()));
+            }
+        }
     }
 
     private void registerMFRFluidRecipes()

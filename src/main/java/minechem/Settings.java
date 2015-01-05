@@ -87,6 +87,8 @@ public class Settings
 
     public static boolean displayMoleculeEffects;
 
+    public static boolean decomposeChemicalFluids = true;
+
     public static void init(File configFile)
     {
         if (config == null)
@@ -308,6 +310,11 @@ public class Settings
         prop.comment = StatCollector.translateToLocal("config.power.fusion.max.description");
         prop.setLanguageKey("config.power.fusion.max.name");
         maxFusionStorage = prop.getInt();
+        configList.add(prop.getName());
+
+        prop = config.get("blacklist", "decomposeFluidChemicals", Settings.decomposeChemicalFluids);
+        prop.comment = StatCollector.translateToLocal("config.decomposeFluidChemicals");
+        Settings.decomposeChemicalFluids = prop.getBoolean();
         configList.add(prop.getName());
 
         if (config.hasChanged())
