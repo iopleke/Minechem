@@ -2486,6 +2486,7 @@ public class MinechemRecipes
     public void RegisterModRecipes()
     {
         //OreDict stuff
+        DecomposerRecipe.createAndAddRecipeSafely("dustSalt", new Element(ElementEnum.Na), new Element(ElementEnum.Cl));
         DecomposerRecipe.createAndAddRecipeSafely("logWood", new Molecule(MoleculeEnum.cellulose, 8));
         DecomposerRecipe.createAndAddRecipeSafely("plankWood", new Molecule(MoleculeEnum.cellulose, 2));
         DecomposerRecipe.createAndAddRecipeSafely("ingotIron", this.element(ElementEnum.Fe, 16));

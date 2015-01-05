@@ -36,11 +36,14 @@ public class DecomposerContainer extends Container implements IRadiationShield, 
     {
         int x = 8;
         int y = 62;
-        int j = 0;
-        for (int i = 1; i < 10; i++)
+        int slot = 0;
+        for (int i = 0; i < 2; i++)
         {
-            addSlotToContainer(new SlotOutput(decomposer, i, x + (j * 18), y));
-            j++;
+            for (int j = 0; j < 9; j++)
+            {
+                addSlotToContainer(new SlotOutput(decomposer, decomposer.kOutputSlotStart + slot, x + (j * 18), y + (i * 18)));
+                slot++;
+            }
         }
     }
 
@@ -50,13 +53,13 @@ public class DecomposerContainer extends Container implements IRadiationShield, 
         {
             for (int j = 0; j < 9; j++)
             {
-                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 84 + i * 18));
+                addSlotToContainer(new Slot(inventoryPlayer, j + i * 9 + 9, 8 + j * 18, 102 + i * 18));
             }
         }
 
         for (int i = 0; i < 9; i++)
         {
-            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
+            addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 160));
         }
     }
 
@@ -137,7 +140,7 @@ public class DecomposerContainer extends Container implements IRadiationShield, 
         } else
         {
             List<ItemStack> storageInventory = new ArrayList<ItemStack>();
-            for (int slot = 0; slot < 27; slot++)
+            for (int slot = 0; slot <= decomposer.kOutputSlotEnd; slot++)
             {
                 ItemStack stack = getSlot(slot).getStack();
                 if (stack != null)
@@ -167,7 +170,7 @@ public class DecomposerContainer extends Container implements IRadiationShield, 
         } else
         {
             List<ItemStack> playerInventory = new ArrayList<ItemStack>();
-            for (int slot = 27; slot < this.inventorySlots.size(); slot++)
+            for (int slot = decomposer.kOutputSlotEnd+1; slot < this.inventorySlots.size(); slot++)
             {
                 ItemStack stack = getSlot(slot).getStack();
                 if (stack != null)

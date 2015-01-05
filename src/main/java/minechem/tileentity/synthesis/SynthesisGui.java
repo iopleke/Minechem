@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 public class SynthesisGui extends GuiContainerTabbed
 {
     int guiWidth = 176;
-    int guiHeight = 187;
+    int guiHeight = 205;
 
     public SynthesisGui(InventoryPlayer inventoryPlayer, SynthesisTileEntity synthesis)
     {
