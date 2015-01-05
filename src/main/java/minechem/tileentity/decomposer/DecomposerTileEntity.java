@@ -360,6 +360,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
     {
+        if (tank!=null && tank.amount==0) tank=null;
         if (resource == null || (tank != null && !tank.isFluidEqual(resource)))
         {
             return 0;

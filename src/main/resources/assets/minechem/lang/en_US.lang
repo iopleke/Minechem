@@ -507,6 +507,7 @@ molecule.hydrogenSulfide=Hydrogen Sulfide
 molecule.sodiumBisulfate=Sodium Bisulfate
 molecule.sodiumSulfate=Sodium Sulfate
 molecule.dimethyltryptamine=Dimethyltryptamine
+molecule.oleicAcid=Oleic Acid
 
 fluid.aalc.name=Allyl Alcohol
 fluid.acetate.name=Acetate (ion)

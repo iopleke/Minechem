@@ -258,6 +258,10 @@ public class MinechemRecipes
         {
             this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.theobromine, 1)
         });
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("milk", BUCKET_AMOUNT, new PotionChemical[]
+        {
+                this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.oleicAcid,1)
+        });
         // If someone figures out compositions for the other fluids, add them here.
     }
 
