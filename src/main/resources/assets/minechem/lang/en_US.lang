@@ -71,7 +71,7 @@ config.advancedTurtleAI.description=Make your turtles smarter - they probably wo
 config.moleculeEffects.description=Add Molecule Effects to the item tooltip
 config.supportNEI.description=NEI Support
 config.supportNEI.description=Turn NEI support on or off
-
+config.decomposeFluidChemicals=Add Decomposer Recipes for Chemical Fluids
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.decomposer.dump=Dump Fluid

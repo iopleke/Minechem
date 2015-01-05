@@ -477,4 +477,9 @@ public class MoleculeEnum extends MinechemChemicalType
     {
 
     }
+
+    public PotionChemical[] componentsArray()
+    {
+        return components.toArray(new PotionChemical[components.size()]);
+    }
 }
