@@ -132,4 +132,11 @@ task getLibraries(type: Download) {
     }
 }
 
-build.dependsOn "getLibraries"
+task apiZip(type: Zip) {
+    classifier = 'api'
+    from sourceSets*.allSource
+    include 'minechem/api/**'
+    destinationDir = file 'output'
+}
+
+build.dependsOn "apiZip", "getLibraries"
