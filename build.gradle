@@ -87,9 +87,6 @@ allprojects {
 
     jar {
         destinationDir = file (rootProject.getRootDir().getPath() + '/output')
-        manifest {
-            attributes 'FMLAT': 'minechem_at.cfg'
-        }
     }
 
     publishing {
