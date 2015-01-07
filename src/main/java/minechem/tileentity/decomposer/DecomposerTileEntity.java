@@ -43,7 +43,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
      */
     public static final int[] outputSlots =
     {
-        1, 2, 3, 4, 5, 6, 7, 8, 9
+        1, 2, 3, 4, 5, 6, 7, 8, 9,
+        10, 11, 12, 13, 14, 15, 16, 17, 18
     };
 
     /**
@@ -75,7 +76,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
     /**
      * Number of ending output slot.
      */
-    public final int kOutputSlotEnd = 9;
+    public final int kOutputSlotEnd = 18;
 
     /**
      * Number of starting output slot.
@@ -205,13 +206,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
     @Override
     public boolean canInsertItem(int i, ItemStack itemstack, int j)
     {
-        if (itemstack == null)
-        {
-            return false;
-        } else
-        {
-            return DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
-        }
+        return itemstack != null && DecomposerRecipeHandler.instance.getRecipe(itemstack) != null;
     }
 
     @Override
@@ -355,6 +350,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
         tankUpdate = true;
 
         tank.amount -= drained;
+        if (tank.amount==0) tank=null;
         return new FluidStack(tank.fluidID, drained);
     }
 
@@ -364,6 +360,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
     @Override
     public int fill(ForgeDirection from, FluidStack resource, boolean doFill)
     {
+        if (tank!=null && tank.amount==0) tank=null;
         if (resource == null || (tank != null && !tank.isFluidEqual(resource)))
         {
             return 0;
@@ -455,7 +452,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
     @Override
     public int getSizeInventory()
     {
-        return 10;
+        return 19;
     }
 
     public int[] getSizeInventorySide(int side)

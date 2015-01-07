@@ -27,7 +27,7 @@ public class Decomposer
      *
      * @param input as input stack
      * @param chance	chance of output (Optional)
-     * @param outputs as Ingredient stack array
+     * @param multiOutputs as Ingredient stack array
      */
     @ZenMethod
     public static void addRecipe(IIngredient input, @Optional double chance, IIngredient[]... multiOutputs)

@@ -16,11 +16,13 @@ public class DecomposerGui extends GuiContainerTabbed
     private GuiFluidTank guiFluidTank;
     private GuiButton dumpButton;
     int guiWidth = 176;
-    int guiHeight = 166;
+    int guiHeight = 186;
 
     public DecomposerGui(InventoryPlayer inventoryPlayer, DecomposerTileEntity decomposer)
     {
         super(new DecomposerContainer(inventoryPlayer, decomposer));
+        this.xSize = guiWidth;
+        this.ySize = guiHeight;
         this.decomposer = decomposer;
         addTab(new DecomposerTabStateControl(this, decomposer));
         addTab(new GuiTabHelp(this, MinechemUtil.getLocalString("help.decomposer")));

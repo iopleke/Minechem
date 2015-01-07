@@ -254,6 +254,8 @@ public class MoleculeEnum extends MinechemChemicalType
     public static final MoleculeEnum sodiumSulfate = addMolecule("sodiumSulfate", 171, solid, new Element(Na, 2), new Molecule(sulfate));
     public static final MoleculeEnum dimethyltryptamine = addMolecule("dimethyltryptamine", 172, solid, new Element(C, 12), new Element(H, 16), new Element(N, 2));
 
+    public static final MoleculeEnum oleicAcid = addMolecule("oleicAcid", 173, solid, new Element(C,18), new Element(H,34), new Element(O,2));
+
     private final String localizationKey;
     private final ArrayList<PotionChemical> components;
     private final int id;
@@ -476,5 +478,10 @@ public class MoleculeEnum extends MinechemChemicalType
     public static void init()
     {
 
+    }
+
+    public PotionChemical[] componentsArray()
+    {
+        return components.toArray(new PotionChemical[components.size()]);
     }
 }

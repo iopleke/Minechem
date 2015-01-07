@@ -45,7 +45,8 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
      */
     public static final int[] kStorage =
     {
-        10, 11, 12, 13, 14, 15, 16, 17, 18
+        10, 11, 12, 13, 14, 15, 16, 17, 18,
+        19, 20, 21, 22, 23, 24, 25, 26, 27
     };
 
     /**
@@ -94,7 +95,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
     /**
      * Slot number for Chemist's Journal which can activate needed synthesis recipe on crafting matrix.
      */
-    public static final int kStartJournal = 19;
+    public static final int kStartJournal = 28;
 
     /**
      * Wrapper for 'ghost' inventory items that show recipe from Chemist Journal.
@@ -363,7 +364,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
     @Override
     public int getSizeInventory()
     {
-        return 20;
+        return 29;
     }
 
     /**

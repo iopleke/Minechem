@@ -1,7 +1,6 @@
 package minechem.tileentity.prefab;
 
-import cofh.api.energy.IEnergyHandler;
-import cofh.api.energy.IEnergyStorage;
+import cofh.api.energy.*;
 import cpw.mods.fml.common.Optional;
 import minechem.Settings;
 import net.minecraft.nbt.NBTTagCompound;
@@ -17,7 +16,7 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
     /**
      * Determines amount of energy we are allowed to input into the machine with a given update.
      */
-    private static int MAX_ENERGY_RECIEVED = Settings.energyPacketSize;
+    private static int MAX_ENERGY_RECEIVED = Settings.energyPacketSize;
 
     /**
      * Determines total amount of energy that this machine can store.
@@ -41,7 +40,7 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
     @Override
     public int receiveEnergy(int maxReceive, boolean simulate)
     {
-        int received = (maxReceive <= MAX_ENERGY_RECIEVED ? maxReceive : MAX_ENERGY_RECIEVED);
+        int received = (maxReceive <= MAX_ENERGY_RECEIVED ? maxReceive : MAX_ENERGY_RECEIVED);
         received = (energyStored + received > MAX_ENERGY_STORED ? MAX_ENERGY_STORED - energyStored : received);
         if (!simulate)
         {

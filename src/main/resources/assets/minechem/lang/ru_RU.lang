@@ -74,6 +74,7 @@ config.supportNEI.description=Включает или выключает под�
 
 
 gui.title.decomposer=Химический разложитель
+gui.title.decomposer.dump=Слить жидкость
 gui.title.leadedchest=Освинцованный сундук
 gui.title.microscope=Микроскоп
 gui.title.synthesis=Механизм химического синтеза
@@ -141,6 +142,10 @@ tab.title.usage=Потребление
 tab.title.maxUsage=Макс. потребление
 tab.title.stored=Хранится
 tab.title.activationEnergy=Энергия за предмет
+tab.patreon.firstline=Спасибо за то, что играете в  Minechem!
+tab.patreon.secondline=Если Вам нравится мод, пожалуйста, подумайте о поддержке автора на Patreon!
+tab.patreon.linktext=Посетить Patreon
+tab.tooltip.patreon=Поддержка Minechem
 
 element.classification.Actinide=Актиноид
 element.classification.Alkali metal=Щелочной металл

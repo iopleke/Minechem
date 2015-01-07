@@ -4,6 +4,8 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import minechem.fluid.FluidHelper;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
 import minechem.item.chemistjournal.ChemistJournalRecipeCloning;
@@ -232,6 +234,18 @@ public class MinechemRecipes
                     this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate)
                 });
         registerMFRFluidRecipes();
+
+        if (Settings.decomposeChemicalFluids)
+        {
+            for (ElementEnum element : FluidHelper.elements.keySet())
+            {
+                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.elements.get(element),125),new Element(element,1)));
+            }
+            for (MoleculeEnum molecule : FluidHelper.molecules.keySet())
+            {
+                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.molecules.get(molecule),125),molecule.componentsArray()));
+            }
+        }
     }
 
     private void registerMFRFluidRecipes()
@@ -243,6 +257,10 @@ public class MinechemRecipes
         DecomposerFluidRecipe.createAndAddFluidRecipeSafely("chocolatemilk", BUCKET_AMOUNT, new PotionChemical[]
         {
             this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.theobromine, 1)
+        });
+        DecomposerFluidRecipe.createAndAddFluidRecipeSafely("milk", BUCKET_AMOUNT, new PotionChemical[]
+        {
+                this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.oleicAcid,1)
         });
         // If someone figures out compositions for the other fluids, add them here.
     }
@@ -2472,6 +2490,7 @@ public class MinechemRecipes
     public void RegisterModRecipes()
     {
         //OreDict stuff
+        DecomposerRecipe.createAndAddRecipeSafely("dustSalt", new Element(ElementEnum.Na), new Element(ElementEnum.Cl));
         DecomposerRecipe.createAndAddRecipeSafely("logWood", new Molecule(MoleculeEnum.cellulose, 8));
         DecomposerRecipe.createAndAddRecipeSafely("plankWood", new Molecule(MoleculeEnum.cellulose, 2));
         DecomposerRecipe.createAndAddRecipeSafely("ingotIron", this.element(ElementEnum.Fe, 16));
