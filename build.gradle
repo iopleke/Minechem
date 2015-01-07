@@ -53,7 +53,8 @@ dependencies {
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
-	compile fileTree(dir: 'lib', include: '*.jar')
+    compile fileTree(dir: 'lib', include: '*.jar')
+    compile fileTree(dir: 'lib', include: '*.zip')
 }
 
 group = "minechem"
@@ -149,6 +150,16 @@ task getLibraries {
 		download {
 			src mtSource
 			dest mtDest
+		}
+	}
+
+	def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2221836/download'
+	def cofhDest = new File('lib', 'CoFHLib-1.7.10-1.0.0B8-34-API.zip')
+
+	if(!cofhDest.exists() ){
+		download {
+			src cofhSource
+			dest cofhDest
 		}
 	}
 }
