@@ -1,9 +1,0 @@
-{
-    "projector": {
-        "category": "master",
-        "sounds": [{
-                "name": "projector",
-                "stream": false
-            }]
-    }
-}
