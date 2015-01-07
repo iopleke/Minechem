@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
 		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-		classpath 'de.undercouch:gradle-download-task:1.1'
+		classpath 'de.undercouch:gradle-download-task:1.2'
 		classpath "org.scala-lang:scala-library:2.11.1"
     }
 }
@@ -24,7 +24,7 @@ apply plugin: 'forge'
 apply plugin: 'idea'
 apply plugin: 'maven'
 apply plugin: 'maven-publish'
-apply plugin: 'download-task'
+apply plugin: 'de.undercouch.download'
 
 ext.buildProps = file "build.properties"
 
