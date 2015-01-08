@@ -16,7 +16,7 @@
 *.txt
 *.xml
 .cache
-lib/
+libs/
 natives/
 
 ## Because Macs
