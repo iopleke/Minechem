@@ -54,7 +54,7 @@ dependencies {
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.cc.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cc.core}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cc.lib}", ext: 'jar', classifier: "dev"
-	compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC${config.version.minecraft}-1.4.+", ext: 'jar', classifier: "api"
+	compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC${config.version.minecraft}-${config.version.oc.api}-dev", ext: 'jar', classifier: "api"
     compile fileTree(dir: 'libs', include: '*.jar')
     compile fileTree(dir: 'libs', include: '*.zip')
 }
@@ -117,7 +117,7 @@ task getLibraries {
     }
 	
 	def ccSource = 'http://minecraft.curseforge.com/mc-mods/67504-computercraft/files/2216236/download'
-	def ccDest = new File('lib', 'ComputerCraft-1.65.jar')
+	def ccDest = new File('libs', 'ComputerCraft-1.65.jar')
 
 
 	if(!ccDest.exists() ){
