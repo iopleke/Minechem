@@ -10,6 +10,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import minechem.handler.ElementHandler;
 import minechem.handler.GuiHandler;
 import minechem.handler.MessageHandler;
 import minechem.helper.LogHelper;
@@ -34,6 +35,8 @@ public class Minechem
 
 	@SidedProxy(clientSide = "minechem.proxy.client.ClientProxy", serverSide = "minechem.proxy.CommonProxy")
 	public static CommonProxy PROXY;
+
+	public static ElementHandler elementHandler;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event)
@@ -79,6 +82,10 @@ public class Minechem
 
 		LogHelper.debug("Registering ClientProxy Rendering Hooks...");
 		PROXY.registerRenderers();
+
+		LogHelper.debug("Attempting to load JSON file");
+		elementHandler = new ElementHandler();
+		elementHandler.init();
 
 	}
 

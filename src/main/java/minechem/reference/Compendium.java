@@ -95,6 +95,12 @@ public class Compendium
 		}
 	}
 
+	public static final class Config
+	{
+		public static final String elementsDataJson = "elementData.json";
+		public static final String elementsDataJsonSource = "data/elementsData.json";
+	}
+
 	public static final class Color
 	{
 
