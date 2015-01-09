@@ -21,8 +21,9 @@ public class FileHelper
 	public static void copyFromJar(Class<?> classFromJar, String fileSource, String fileDestination)
 	{
 		LogHelper.debug("Copying file " + fileSource + " from jar");
-		File destination = new File(fileDestination);
+
 		URL source = classFromJar.getResource("/assets/minechem/" + fileSource);
+		File destination = new File("config/minechem/" + fileDestination);
 
 		try
 		{
