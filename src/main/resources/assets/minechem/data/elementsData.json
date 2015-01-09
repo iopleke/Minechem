@@ -5,5 +5,33 @@
 		"form":"gas",
 		"mohs":"null",
 		"neutrons":"0"
+	},
+	"2": {
+		"longName": "Helium",
+		"shortName": "He",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"2"
+	},
+	"3": {
+		"longName": "Lithium",
+		"shortName": "Li",
+		"form":"solid",
+		"mohs":"0.6",
+		"neutrons":"3"
+	},
+	"4": {
+		"longName": "Beryllium",
+		"shortName": "Be",
+		"form":"solid",
+		"mohs":"5.5",
+		"neutrons":"5"
+	},
+	"5": {
+		"longName": "Boron",
+		"shortName": "He",
+		"form":"solid",
+		"mohs":"9.5",
+		"neutrons":"6"
 	}
 }
