@@ -25,7 +25,7 @@ public class Config
 		if (config == null)
 		{
 
-			config = new Configuration(new File("config/minechem/Minechem.cfg"));
+			config = new Configuration(new File(Compendium.Config.configPrefix + "Minechem.cfg"));
 			loadConfig();
 		}
 	}
