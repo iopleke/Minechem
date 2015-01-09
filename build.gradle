@@ -127,8 +127,8 @@ task getLibraries {
 		}
 	}
 	
-    def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-1.7.10-3.0.9B.jar'
-    def mtDest = new File('libs', 'MineTweaker3-Dev-1.7.10-3.0.9.jar')
+    def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-Dev-1.7.10-3.0.9C.jar'
+    def mtDest = new File('libs', 'MineTweaker3-Dev-1.7.10-3.0.9C.jar')
 
     if(!mtDest.exists() ){
         download {
