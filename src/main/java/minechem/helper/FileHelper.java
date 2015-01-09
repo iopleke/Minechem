@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import minechem.Config;
+import minechem.reference.Compendium;
 import org.apache.commons.io.FileUtils;
 
 /**
@@ -22,8 +23,8 @@ public class FileHelper
 	{
 		LogHelper.debug("Copying file " + fileSource + " from jar");
 
-		URL source = classFromJar.getResource("/assets/minechem/" + fileSource);
-		File destination = new File("config/minechem/" + fileDestination);
+		URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
+		File destination = new File(Compendium.Config.configPrefix + fileDestination);
 
 		try
 		{

@@ -97,6 +97,8 @@ public class Compendium
 
 	public static final class Config
 	{
+		public static final String configPrefix = "config/minechem";
+		public static final String assetPrefix = "/assets/minechem/";
 		public static final String elementsDataJson = "elementData.json";
 		public static final String elementsDataJsonSource = "data/elementsData.json";
 	}
