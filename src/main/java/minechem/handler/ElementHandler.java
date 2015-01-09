@@ -12,7 +12,7 @@ public class ElementHandler
 {
 	public void init()
 	{
-		File elementsDataFile = new File(Compendium.Config.elementsDataJson);
+		File elementsDataFile = new File(Compendium.Config.configPrefix + Compendium.Config.elementsDataJson);
 
 		if (!elementsDataFile.isFile())
 		{
@@ -20,12 +20,10 @@ public class ElementHandler
 		}
 
 		// Get the file again
-		elementsDataFile = new File(Compendium.Config.elementsDataJson);
+		elementsDataFile = new File(Compendium.Config.configPrefix + Compendium.Config.elementsDataJson);
 		if (elementsDataFile.isFile())
 		{
 			LogHelper.debug("JSON file exists");
 		}
-
 	}
-
 }
