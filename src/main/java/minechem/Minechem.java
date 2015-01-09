@@ -53,7 +53,7 @@ public class Minechem
 
 		// Load configuration.
 		LogHelper.debug("Loading configuration...");
-		Config.init(event.getSuggestedConfigurationFile());
+		Config.init();
 		FMLCommonHandler.instance().bus().register(new Config());
 
 		LogHelper.debug("Registering Packets...");

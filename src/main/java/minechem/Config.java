@@ -14,52 +14,54 @@ import net.minecraftforge.common.config.Property;
 
 public class Config
 {
-    public static Configuration config;
+	public static Configuration config;
 
-    // turns on extra logging printouts
-    public static boolean debugMode = true;
+	// turns on extra logging printouts
+	public static boolean debugMode = true;
 
-    public static void init(File configFile)
-    {
-        if (config == null)
-        {
-            config = new Configuration(configFile);
-            loadConfig();
-        }
-    }
+	public static void init()
+	{
 
-    @SubscribeEvent
-    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-    {
-        if (event.modID.equalsIgnoreCase(Compendium.Naming.id))
-        {
-            loadConfig();
-        }
-    }
+		if (config == null)
+		{
 
-    private static void loadConfig()
-    {
-        Property prop;
-        List<String> configList = new ArrayList<String>();
+			config = new Configuration(new File("config/minechem/Minechem.cfg"));
+			loadConfig();
+		}
+	}
 
-        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
+	@SubscribeEvent
+	public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+	{
+		if (event.modID.equalsIgnoreCase(Compendium.Naming.id))
+		{
+			loadConfig();
+		}
+	}
 
-        prop = config.get(Configuration.CATEGORY_GENERAL, "debugMode", Config.debugMode);
-        prop.comment = StatCollector.translateToLocal("config.debugMode");
-        prop.setLanguageKey("config.debugMode.tooltip");
-        debugMode = prop.getBoolean();
-        configList.add(prop.getName());
+	private static void loadConfig()
+	{
+		Property prop;
+		List<String> configList = new ArrayList<String>();
 
-        if (config.hasChanged())
-        {
-            config.save();
-        }
-    }
+		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
 
-    public static List<IConfigElement> getConfigElements()
-    {
-        List<IConfigElement> list = new ArrayList<IConfigElement>();
-        list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
-        return list;
-    }
+		prop = config.get(Configuration.CATEGORY_GENERAL, "debugMode", Config.debugMode);
+		prop.comment = StatCollector.translateToLocal("config.debugMode");
+		prop.setLanguageKey("config.debugMode.tooltip");
+		debugMode = prop.getBoolean();
+		configList.add(prop.getName());
+
+		if (config.hasChanged())
+		{
+			config.save();
+		}
+	}
+
+	public static List<IConfigElement> getConfigElements()
+	{
+		List<IConfigElement> list = new ArrayList<IConfigElement>();
+		list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
+		return list;
+	}
 }
