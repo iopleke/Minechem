@@ -34,4 +34,53 @@
 		"mohs":"9.5",
 		"neutrons":"6"
 	}
+	"6": {
+		"longName": "Carbon",
+		"shortName": "C",
+		"form":"solid",
+		"mohs":"1.5",
+		"neutrons":"6"
+	}
+	"7": {
+		"longName": "Nitrogen",
+		"shortName": "N",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"7"
+	}
+	"8": {
+		"longName": "Oxygen",
+		"shortName": "O",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"8"
+	}
+	"9": {
+		"longName": "Fluorine",
+		"shortName": "F",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"10"
+	}
+	"10": {
+		"longName": "Neon",
+		"shortName": "Ne",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"10"
+	}
+	"11": {
+		"longName": "Sodium",
+		"shortName": "Na",
+		"form":"solid",
+		"mohs":"0.5",
+		"neutrons":"12"
+	}
+	"12": {
+		"longName": "Magnesium",
+		"shortName": "Mg",
+		"form":"solid",
+		"mohs":"2.5",
+		"neutrons":"12"
+	}
 }
