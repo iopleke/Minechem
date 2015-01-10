@@ -83,4 +83,60 @@
 		"mohs":"2.5",
 		"neutrons":"12"
 	}
+	"13": {
+		"longName": "Aluminium",
+		"shortName": "Al",
+		"form":"solid",
+		"mohs":"2.75",
+		"neutrons":"14"
+	}
+	"14": {
+		"longName": "Silicon",
+		"shortName": "Si",
+		"form":"solid",
+		"mohs":"7",
+		"neutrons":"14"
+	}
+	"15": {
+		"longName": "Phosphorus",
+		"shortName": "P",
+		"form":"solid",
+		"mohs":"5",
+		"neutrons":"16"
+	}
+	"16": {
+		"longName": "Sulfur",
+		"shortName": "S",
+		"form":"solid",
+		"mohs":"2",
+		"neutrons":"16"
+	}
+	"17": {
+		"longName": "Chlorine",
+		"shortName": "Cl",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"18"
+	}
+	"18": {
+		"longName": "Argon",
+		"shortName": "Ar",
+		"form":"gas",
+		"mohs":"null",
+		"neutrons":"22"
+	}
+	"19": {
+		"longName": "Potassium",
+		"shortName": "K",
+		"form":"solid",
+		"mohs":"0.6",
+		"neutrons":"20"
+	}
+	"20": {
+		"longName": "Calcium",
+		"shortName": "Ca",
+		"form":"solid",
+		"mohs":"2",
+		"neutrons":"24"
+	}
 }
