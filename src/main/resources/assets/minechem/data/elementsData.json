@@ -118,5 +118,11 @@
         "shortName": "Ca",
         "form": "solid",
         "neutrons": "24"
+    },
+    "21": {
+        "longName": "Scandium",
+        "shortName": "Sc",
+        "form": "solid",
+        "neutrons": "24"
     }
 }
