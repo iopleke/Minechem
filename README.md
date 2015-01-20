@@ -1,5 +1,5 @@
 ![](http://jakimfett.com/minechem_alchemy_banner.jpg)
-Minechem 5
+Minechem 6
 =========
 
 [Minechem](http://www.minechemmod.com/) is a mod about chemistry. Items can be broken down into compounds and base elements using the decomposer. With base elements, a bit of research, and the chemical synthesis machine, you can assemble materials and different compounds. Don't like the base elements you have? Split elements using the Fission reactor, or combine elements using the Fusion reactor.
@@ -12,4 +12,4 @@ By default machines will need power when [CoFHCore](http://www.curse.com/mc-mods
 The list of contributors can be found on the [website](http://www.minechemmod.com/index.php/docs/11-contributors)
 
 ## License
-Minechem 5.0.5 and higher are licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
+Minechem 6.x.x and higher are licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
