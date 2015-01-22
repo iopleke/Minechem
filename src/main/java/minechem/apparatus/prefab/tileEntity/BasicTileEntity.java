@@ -1,4 +1,4 @@
-package minechem.apparatus;
+package minechem.apparatus.prefab.tileEntity;
 
 /**
  * Defines basic properties for TileEntities

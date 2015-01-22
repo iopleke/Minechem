@@ -1,4 +1,4 @@
-package minechem.apparatus;
+package minechem.apparatus.prefab.block;
 
 import minechem.reference.Compendium;
 import minechem.registry.CreativeTabRegistry;

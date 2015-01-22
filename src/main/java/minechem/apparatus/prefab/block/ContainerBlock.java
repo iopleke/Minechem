@@ -1,4 +1,4 @@
-package minechem.apparatus;
+package minechem.apparatus.prefab.block;
 
 import java.util.ArrayList;
 import minechem.helper.ItemHelper;
