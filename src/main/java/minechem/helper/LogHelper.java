@@ -45,4 +45,25 @@ public class LogHelper
 	{
 		log(Level.INFO, obj);
 	}
+	
+	/**
+	 * Used for logging an exception
+	 * 
+	 * @param obj object to log
+	 * @param exception exception to log
+	 * @param level level of the log
+	 */
+	public static void exception(Object obj, Throwable exception, Level level){
+		FMLLog.log(Compendium.Naming.id, level, exception, String.valueOf(obj));
+	}
+
+	/**
+	 * Used for logging an exception
+	 * 
+	 * @param exception exception to log
+	 * @param level level of the log
+	 */
+	public static void exception(Throwable exception, Level level){
+		FMLLog.log(Compendium.Naming.id, level, exception, exception.toString());
+	}
 }

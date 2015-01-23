@@ -5,7 +5,9 @@ import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
+import org.apache.logging.log4j.Level;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
 import minechem.reference.Compendium;
@@ -30,10 +32,11 @@ public class ElementHandler
         {
             LogHelper.debug("JSON file exists");
 
+            JsonReader jReader=null;
             try
             {
 
-                JsonReader jReader = new JsonReader(new InputStreamReader(new FileInputStream(elementsDataFile)));
+                jReader = new JsonReader(new InputStreamReader(new FileInputStream(elementsDataFile)));
 
                 JsonParser parser = new JsonParser();
 
@@ -52,6 +55,18 @@ public class ElementHandler
             } catch (Exception e)
             {
                 throw new RuntimeException(e);
+            } finally
+            {
+            	if (jReader!=null)
+            	{
+            		try
+            		{
+						jReader.close();
+					} catch (IOException e)
+            		{
+						LogHelper.exception(e, Level.WARN);
+					}
+            	}
             }
         }
     }
