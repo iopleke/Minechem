@@ -19,6 +19,9 @@ public class Config
 	// turns on extra logging printouts
 	public static boolean debugMode = true;
 
+	// turns on to copy the newest elements list from jar
+	public static boolean useDefaultElements = true;
+	
 	public static void init()
 	{
 
@@ -50,6 +53,12 @@ public class Config
 		prop.comment = StatCollector.translateToLocal("config.debugMode");
 		prop.setLanguageKey("config.debugMode.tooltip");
 		debugMode = prop.getBoolean();
+		configList.add(prop.getName());
+
+		prop = config.get(Configuration.CATEGORY_GENERAL, "useDefaultElements", Config.useDefaultElements);
+		prop.comment = StatCollector.translateToLocal("config.useDefaultElements");
+		prop.setLanguageKey("config.useDefaultElements.tooltip");
+		useDefaultElements = prop.getBoolean();
 		configList.add(prop.getName());
 
 		if (config.hasChanged())

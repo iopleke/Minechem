@@ -8,6 +8,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import org.apache.logging.log4j.Level;
+import minechem.Config;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
 import minechem.reference.Compendium;
@@ -21,7 +22,7 @@ public class ElementHandler
     {
         File elementsDataFile = new File(Compendium.Config.configPrefix + Compendium.Config.elementsDataJson);
 
-        if (!elementsDataFile.isFile())
+        if (Config.useDefaultElements||!elementsDataFile.isFile())
         {
             FileHelper.copyFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource, Compendium.Config.elementsDataJson);
         }
