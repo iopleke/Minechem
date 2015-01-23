@@ -4,27 +4,15 @@ import minechem.reference.Compendium;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
 
-public class CreativeTabRegistry extends CreativeTabs
+public class CreativeTabRegistry
 {
-    public static CreativeTabs TAB_PRIMARY = new CreativeTabRegistry(Compendium.Naming.name, 0);
-
-    public CreativeTabRegistry(String tabName, int i)
+    public static CreativeTabs TAB_PRIMARY = new CreativeTabs(Compendium.Naming.name)
     {
-        super(tabName);
-    }
-
-    @Override
-    public Item getTabIconItem()
-    {
-        return null;
-    }
-
-    @Override
-    public ItemStack getIconItemStack()
-    {
-        return new ItemStack(Items.fermented_spider_eye);
-
-    }
+        @Override
+        public Item getTabIconItem()
+        {
+            return Items.fermented_spider_eye;
+        }
+    };
 }
