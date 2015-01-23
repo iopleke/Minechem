@@ -16,6 +16,10 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
 {
     private ItemStack[] inventory;
 
+    public BasicTileEntity(int inventorySize) {
+    	inventory=new ItemStack[inventorySize];
+	}
+
     @Override
     public void closeInventory()
     {
