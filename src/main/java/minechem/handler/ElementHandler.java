@@ -53,22 +53,17 @@ public class ElementHandler
 
                 }
                 LogHelper.debug("Total of " + count + " elements loaded");
-            } catch (Exception e)
-            {
-                throw new RuntimeException(e);
-            } finally
-            {
-            	if (jReader!=null)
-            	{
-            		try
-            		{
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			} finally {
+				if (jReader != null) {
+					try {
 						jReader.close();
-					} catch (IOException e)
-            		{
+					} catch (IOException e) {
 						LogHelper.exception(e, Level.WARN);
 					}
-            	}
-            }
+				}
+			}
         }
     }
 }

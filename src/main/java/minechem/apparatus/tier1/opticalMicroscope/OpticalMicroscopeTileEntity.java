@@ -7,7 +7,7 @@ public class OpticalMicroscopeTileEntity extends BasicTileEntity
 {
 
     public OpticalMicroscopeTileEntity() {
-		super(0);
+		super(1);
 	}
 
 	@Override
