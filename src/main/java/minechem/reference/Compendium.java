@@ -52,7 +52,7 @@ public class Compendium
 
     public static final class Texture
     {
-        private static final String modelTextureDirectory = "textures/model/";
+        public static final String modelTexturePrefix = "textures/model/";
 
         public static final class IIcon
         {
@@ -71,7 +71,7 @@ public class Compendium
 
         public static final class Model
         {
-            public static final String microscope = modelTextureDirectory + "OpticalMicroscopeModel.png";
+            public static final String microscope = Compendium.Texture.modelTexturePrefix + "OpticalMicroscopeModel.png";
         }
     }
 
