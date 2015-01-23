@@ -1,6 +1,7 @@
 package minechem.apparatus.prefab.block;
 
 import java.util.ArrayList;
+import minechem.Minechem;
 import minechem.helper.ItemHelper;
 import minechem.reference.Compendium;
 import minechem.registry.CreativeTabRegistry;
@@ -13,8 +14,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 /*
- * Defines basic properties of a simple block, such as the creative tab, the
- * texture location, and the block name
+ * Defines basic properties of a simple block, such as the creative tab, the texture location, and the block name
  *
  * @author jakimfett
  */
@@ -50,12 +50,6 @@ public abstract class ContainerBlock extends BlockContainer
 
     }
 
-    @Override
-    public abstract TileEntity createNewTileEntity(World world, int meta);
-
-    @Override
-    public abstract boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ);
-
     public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
 
     @Override
@@ -73,5 +67,38 @@ public abstract class ContainerBlock extends BlockContainer
             super.breakBlock(world, x, y, z, block, metaData);
         }
 
+    }
+
+    @Override
+    public abstract TileEntity createNewTileEntity(World world, int meta);
+
+    /**
+     * Open the GUI on block activation
+     *
+     * @param world  the game world object
+     * @param x      the x coordinate of the block being activated
+     * @param y      the y coordinate of the block being activated
+     * @param z      the z coordinate of the block being activated
+     * @param player the entityplayer object
+     * @param side   which side was hit
+     * @param hitX   on the side that was hit, the x coordinate
+     * @param hitY   on the side that was hit, the y coordinate
+     * @param hitZ   on the side that was hit, the z coordinate
+     * @return boolean does the block get activated
+     */
+    @Override
+    public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
+    {
+        TileEntity tileEntity = world.getTileEntity(x, y, z);
+        if (tileEntity != null && !player.isSneaking())
+        {
+            if (!world.isRemote)
+            {
+                player.openGui(Minechem.INSTANCE, 0, world, x, y, z);
+            }
+            return true;
+        }
+
+        return false;
     }
 }
