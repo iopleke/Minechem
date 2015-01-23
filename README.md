@@ -1,5 +1,5 @@
 ![](http://jakimfett.com/minechem_alchemy_banner.jpg)
-Minechem 5
+Minechem v6
 =========
 
 [Minechem](http://jakimfett.github.io/Minechem) is a mod about chemistry. Items can be broken down into compounds and base elements using the decomposer, and then re-assembled into different things with the chemical synthesis machine.
@@ -12,4 +12,4 @@ For the most up-to-date information, please visit the [official Minechem site](h
 The list of contributors can be found on the [website](http://www.minechemmod.com/index.php/docs/11-contributors)
 
 ## License
-Minechem 5.0.5 and higher are licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
+Minechem v5.0.5 and higher are licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
