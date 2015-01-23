@@ -2,6 +2,7 @@ package minechem.reference;
 
 import cpw.mods.fml.common.ModMetadata;
 import java.util.Arrays;
+import net.minecraft.util.ResourceLocation;
 
 /*
  * A compendium of all constants for the mod, such as the modID and ResourceLocations, as well as more general things like color codes
@@ -51,6 +52,7 @@ public class Compendium
 
     public static final class Texture
     {
+        private static final String modelTextureDirectory = "textures/model/";
 
         public static final class IIcon
         {
@@ -69,7 +71,7 @@ public class Compendium
 
         public static final class Model
         {
-
+            public static final String microscope = modelTextureDirectory + "OpticalMicroscopeModel.png";
         }
     }
 
@@ -87,7 +89,7 @@ public class Compendium
 
         public static final class Model
         {
-
+            public static final ResourceLocation microscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.microscope);
         }
 
         public static final class Tab
