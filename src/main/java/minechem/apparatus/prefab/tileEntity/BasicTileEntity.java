@@ -4,7 +4,10 @@ import codechicken.lib.inventory.InventoryUtils;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.common.util.Constants;
 
 /**
  * Defines basic properties for TileEntities
@@ -143,4 +146,48 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public abstract void updateEntity();
 
+    /**
+     * Read saved values from NBT
+     *
+     * @param nbttagcompound
+     */
+    @Override
+    public void readFromNBT(NBTTagCompound nbttagcompound)
+    {
+        super.readFromNBT(nbttagcompound);
+
+        NBTTagList nbttaglist = nbttagcompound.getTagList(getInventoryName() + "Inventory", Constants.NBT.TAG_COMPOUND);
+
+        for (int i = 0; i < inventory.length; i++)
+        {
+            inventory[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
+        }
+
+    }
+
+    /**
+     * Save data to NBT
+     *
+     * @param nbttagcompound
+     */
+    @Override
+    public void writeToNBT(NBTTagCompound nbttagcompound)
+    {
+        super.writeToNBT(nbttagcompound);
+        NBTTagList nbttaglist = new NBTTagList();
+
+        for (ItemStack stack : inventory)
+        {
+            if (stack != null)
+            {
+                NBTTagCompound nbttagcompound1 = new NBTTagCompound();
+                stack.writeToNBT(nbttagcompound1);
+                nbttaglist.appendTag(nbttagcompound1);
+            } else
+            {
+                nbttaglist.appendTag(new NBTTagCompound());
+            }
+        }
+        nbttagcompound.setTag(getInventoryName() + "Inventory", nbttaglist);
+    }
 }
