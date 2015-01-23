@@ -8,4 +8,4 @@ Minechem v6
 For the most up-to-date information, please visit the [official Minechem site](http://jakimfett.github.io/Minechem).
 
 **License**  
-Minechem v5.0.5 and higher are licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
+Minechem is licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
