@@ -1,7 +1,6 @@
 package minechem.apparatus.prefab.block;
 
 import java.util.ArrayList;
-
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
 import minechem.proxy.CommonProxy;
@@ -53,10 +52,28 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     }
 
-    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {};
-    
-    public boolean dropInventory(){
-    	return true;
+    public ArrayList addStacksDroppedOnBlockBreak(TileEntity tileEntity)
+    {
+        ArrayList<ItemStack> stacksToDrop = new ArrayList<ItemStack>();
+
+        if (tileEntity instanceof IInventory)
+        {
+            IInventory inventory = (IInventory) tileEntity;
+            for (int i = 0; i < inventory.getSizeInventory(); i++)
+            {
+                ItemStack stack = inventory.getStackInSlot(i);
+                if (stack != null)
+                {
+                    stacksToDrop.add(stack);
+                }
+            }
+        }
+        return stacksToDrop;
+    }
+
+    public boolean dropInventory()
+    {
+        return true;
     }
 
     @Override
@@ -65,28 +82,17 @@ public abstract class BasicBlockContainer extends BlockContainer
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity != null)
         {
-            ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
-            
-            if (dropInventory()){
-            	if (tileEntity instanceof IInventory){
-            		IInventory inventory=(IInventory) tileEntity;
-            		for (int i=0;i<inventory.getSizeInventory();i++){
-            			ItemStack stack=inventory.getStackInSlot(i);
-            			if (stack!=null){
-            				droppedStacks.add(stack);
-            			}
-            		}
-            	}
-            }
-            
-            addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
-            for (ItemStack itemstack : droppedStacks)
+            if (dropInventory())
             {
-                ItemHelper.throwItemStack(world, itemstack, x, y, z);
+                ArrayList<ItemStack> droppedStacks = addStacksDroppedOnBlockBreak(tileEntity);
+
+                for (ItemStack itemstack : droppedStacks)
+                {
+                    ItemHelper.throwItemStack(world, itemstack, x, y, z);
+                }
             }
             super.breakBlock(world, x, y, z, block, metaData);
         }
-
     }
 
     @Override
