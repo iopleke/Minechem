@@ -16,10 +16,10 @@ public class Element
     private static final String SUB_SHELL_STRING = "spdfg";																					//Super Powered Dog Fights God
 
     public final int atomicNumber;
-    public final String fullName;
-    public final String shortName;
     public final String form;
+    public final String fullName;
     public final int neutrons;
+    public final String shortName;
 
     private int valenceElectronCount;
     private String valenceSubshellIdentifier;
@@ -28,10 +28,10 @@ public class Element
      * Basic data storage object for elements
      *
      * @param atomicNumber the element's atomic number and proton count
-     * @param fullName the full name, eg "Gold"
-     * @param shortName the abbreviation, eg "Au"
-     * @param form solid, liquid, gas, or plasma
-     * @param neutrons the number of neutrons in the element's nucleus
+     * @param fullName     the full name, eg "Gold"
+     * @param shortName    the abbreviation, eg "Au"
+     * @param form         solid, liquid, gas, or plasma
+     * @param neutrons     the number of neutrons in the element's nucleus
      */
     public Element(int atomicNumber, String fullName, String shortName, String form, int neutrons)
     {
@@ -41,28 +41,6 @@ public class Element
         this.form = form;
         this.neutrons = neutrons;
         this.calculateValenceShells();
-    }
-
-    /**
-     * Set all valence shell data
-     *
-     * @param valenceElectronCount default number of electrons in the valence shell
-     * @param valenceSubshellIdentifier identifier for the valence shell
-     */
-    public void setValenceShell(int valenceElectronCount, String valenceSubshellIdentifier)
-    {
-        this.valenceElectronCount = valenceElectronCount;
-        this.valenceSubshellIdentifier = valenceSubshellIdentifier;
-    }
-
-    public int getValenceElectronCount()
-    {
-        return this.valenceElectronCount;
-    }
-
-    public String getValenceSubshellIdentifier()
-    {
-        return this.valenceSubshellIdentifier;
     }
 
     /**
@@ -80,5 +58,27 @@ public class Element
             electronCount -= SUB_SHELL_ELECTRONS[subShell];
         }
         setValenceShell(SUB_SHELL_ELECTRONS[subShell] + electronCount, SHELL_ORDER.group(0));
+    }
+
+    public int getValenceElectronCount()
+    {
+        return this.valenceElectronCount;
+    }
+
+    public String getValenceSubshellIdentifier()
+    {
+        return this.valenceSubshellIdentifier;
+    }
+
+    /**
+     * Set all valence shell data
+     *
+     * @param valenceElectronCount      default number of electrons in the valence shell
+     * @param valenceSubshellIdentifier identifier for the valence shell
+     */
+    public void setValenceShell(int valenceElectronCount, String valenceSubshellIdentifier)
+    {
+        this.valenceElectronCount = valenceElectronCount;
+        this.valenceSubshellIdentifier = valenceSubshellIdentifier;
     }
 }

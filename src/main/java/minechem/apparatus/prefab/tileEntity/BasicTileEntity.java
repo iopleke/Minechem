@@ -16,9 +16,10 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
 {
     private ItemStack[] inventory;
 
-    public BasicTileEntity(int inventorySize) {
-    	inventory=new ItemStack[inventorySize];
-	}
+    public BasicTileEntity(int inventorySize)
+    {
+        inventory = new ItemStack[inventorySize];
+    }
 
     @Override
     public void closeInventory()
@@ -135,22 +136,6 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     }
 
     /**
-     * Set the inventory slot to a given itemstack
-     *
-     * @param slot  which slot should the itemstack go into
-     * @param stack the stack to put into the slot
-     */
-    @Override
-    public void setInventorySlotContents(int slot, ItemStack stack)
-    {
-        inventory[slot] = stack;
-        markDirty();
-    }
-
-    @Override
-    public abstract void updateEntity();
-
-    /**
      * Read saved values from NBT
      *
      * @param nbttagcompound
@@ -168,6 +153,22 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
         }
 
     }
+
+    /**
+     * Set the inventory slot to a given itemstack
+     *
+     * @param slot  which slot should the itemstack go into
+     * @param stack the stack to put into the slot
+     */
+    @Override
+    public void setInventorySlotContents(int slot, ItemStack stack)
+    {
+        inventory[slot] = stack;
+        markDirty();
+    }
+
+    @Override
+    public abstract void updateEntity();
 
     /**
      * Save data to NBT

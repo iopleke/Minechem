@@ -12,21 +12,6 @@ public class CommonProxy
 {
     public static int RENDER_ID;
 
-    public void registerRenderers()
-    {
-
-    }
-
-    public void registerTickHandlers()
-    {
-        FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
-    }
-
-    public World getClientWorld()
-    {
-        return null;
-    }
-
     public EntityPlayer findEntityPlayerByName(String name)
     {
 
@@ -38,6 +23,11 @@ public class CommonProxy
             return player;
         }
 
+        return null;
+    }
+
+    public World getClientWorld()
+    {
         return null;
     }
 
@@ -54,5 +44,15 @@ public class CommonProxy
     public EntityPlayer getPlayer(MessageContext context)
     {
         return context.getServerHandler().playerEntity;
+    }
+
+    public void registerRenderers()
+    {
+
+    }
+
+    public void registerTickHandlers()
+    {
+        FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
     }
 }

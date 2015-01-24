@@ -8,6 +8,12 @@ import net.minecraft.client.gui.GuiScreen;
 public class GuiFactory implements IModGuiFactory
 {
     @Override
+    public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
+    {
+        return null;
+    }
+
+    @Override
     public void initialize(Minecraft minecraftInstance)
     {
 
@@ -21,12 +27,6 @@ public class GuiFactory implements IModGuiFactory
 
     @Override
     public Set<RuntimeOptionCategoryElement> runtimeGuiCategories()
-    {
-        return null;
-    }
-
-    @Override
-    public RuntimeOptionGuiHandler getHandlerFor(RuntimeOptionCategoryElement element)
     {
         return null;
     }
