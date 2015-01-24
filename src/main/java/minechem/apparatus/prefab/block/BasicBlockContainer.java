@@ -3,6 +3,7 @@ package minechem.apparatus.prefab.block;
 import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
+import minechem.proxy.CommonProxy;
 import minechem.reference.Compendium;
 import minechem.registry.CreativeTabRegistry;
 import net.minecraft.block.Block;
@@ -18,10 +19,10 @@ import net.minecraft.world.World;
  *
  * @author jakimfett
  */
-public abstract class ContainerBlock extends BlockContainer
+public abstract class BasicBlockContainer extends BlockContainer
 {
 
-    public ContainerBlock()
+    public BasicBlockContainer()
     {
         super(Material.grass);
         setBlockName(Compendium.Naming.name + " Basic Block");
@@ -30,7 +31,7 @@ public abstract class ContainerBlock extends BlockContainer
         textureName = Compendium.Naming.id + ":basicBlockIcon";
     }
 
-    public ContainerBlock(String blockName)
+    public BasicBlockContainer(String blockName)
     {
         super(Material.grass);
         setBlockName(blockName);
@@ -40,13 +41,13 @@ public abstract class ContainerBlock extends BlockContainer
 
     }
 
-    public ContainerBlock(String blockName, Material material, Block.SoundType sound)
+    public BasicBlockContainer(String blockName, Material material, Block.SoundType sound)
     {
         super(material);
         setBlockName(blockName);
         setStepSound(sound);
         setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
-        textureName = Compendium.Naming.id + ":" + blockName + "Icon";
+        textureName = Compendium.Texture.prefix + blockName + "Icon";
 
     }
 
@@ -99,6 +100,24 @@ public abstract class ContainerBlock extends BlockContainer
             return true;
         }
 
+        return false;
+    }
+
+    @Override
+    public boolean renderAsNormalBlock()
+    {
+        return false;
+    }
+
+    @Override
+    public int getRenderType()
+    {
+        return CommonProxy.RENDER_ID;
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
         return false;
     }
 }
