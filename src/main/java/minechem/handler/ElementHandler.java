@@ -39,18 +39,16 @@ public class ElementHandler
 
                 JsonObject elementsObject = parser.parse(jReader).getAsJsonObject();
                 int count = 1;
-
-                LogHelper.debug("JSON Object:");
                 while (elementsObject.has(Integer.toString(count)))
                 {
-
-                    JsonObject element = elementsObject.get(Integer.toString(count)).getAsJsonObject();
-                    LogHelper.debug("Atomic Number: " + count);
-                    LogHelper.debug("Element name: " + element.get("longName"));
-                    LogHelper.debug("Element abbreviation: " + element.get("shortName"));
+//                    JsonObject element = elementsObject.get(Integer.toString(count)).getAsJsonObject();
+//                    LogHelper.debug("Atomic Number: " + count);
+//                    LogHelper.debug("Element name: " + element.get("longName"));
+//                    LogHelper.debug("Element abbreviation: " + element.get("shortName"));
                     count++;
 
                 }
+                LogHelper.debug("Total of " + count + " elements loaded");
             } catch (Exception e)
             {
                 throw new RuntimeException(e);
