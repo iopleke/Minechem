@@ -13,6 +13,6 @@ public class BlockRegistry
     {
         opticalMicroscope = new OpticalMicroscopeBlock();
         GameRegistry.registerBlock(opticalMicroscope, opticalMicroscope.getUnlocalizedName());
-        GameRegistry.registerTileEntity(OpticalMicroscopeTileEntity.class, Compendium.Naming.opticalMicroscope + "TE");
+        GameRegistry.registerTileEntity(OpticalMicroscopeTileEntity.class, Compendium.Naming.opticalMicroscope + "TileEntity");
     }
 }
