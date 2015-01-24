@@ -24,7 +24,7 @@ public abstract class BasicContainer extends Container
      *
      * @param inventoryPlayer the player's inventory
      */
-    private void bindPlayerInventory(InventoryPlayer inventoryPlayer)
+    protected void bindPlayerInventory(InventoryPlayer inventoryPlayer)
     {
         for (int i = 0; i < 3; i++)
         {

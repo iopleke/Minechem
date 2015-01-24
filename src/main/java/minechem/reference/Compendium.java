@@ -66,13 +66,15 @@ public class Compendium
 
         public static final class GUI
         {
+            private static final String prefix = "textures/gui/";
+            public static final ResourceLocation opticalMicroscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.prefix + "opticalMicroscope.png");
 
         }
 
         public static final class Model
         {
             public static final String prefix = "textures/models/";
-            public static final String microscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
+            public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
         }
     }
 
@@ -90,7 +92,7 @@ public class Compendium
 
         public static final class Model
         {
-            public static final ResourceLocation microscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.microscope);
+            public static final ResourceLocation microscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.opticalMicroscope);
         }
 
         public static final class Tab

@@ -1,6 +1,8 @@
 package minechem.handler;
 
 import cpw.mods.fml.common.network.IGuiHandler;
+import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeContainer;
+import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeGUI;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -28,7 +30,7 @@ public class GuiHandler implements IGuiHandler
             // use instanceof to return the correct container object
             if (tileEntity instanceof OpticalMicroscopeTileEntity)
             {
-
+                return new OpticalMicroscopeContainer(player.inventory, (OpticalMicroscopeTileEntity) tileEntity);
             }
         }
         return null;
@@ -54,7 +56,7 @@ public class GuiHandler implements IGuiHandler
             // use instanceof to return the correct GUI object
             if (tileEntity instanceof OpticalMicroscopeTileEntity)
             {
-
+                return new OpticalMicroscopeGUI(player.inventory, (OpticalMicroscopeTileEntity) tileEntity);
             }
         }
         return null;
