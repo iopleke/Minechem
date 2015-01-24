@@ -18,16 +18,6 @@ import net.minecraftforge.client.MinecraftForgeClient;
 public class ClientProxy extends CommonProxy
 {
     @Override
-    public void registerRenderers()
-    {
-        RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
-        OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new OpticalMicroscopeTileEntityRenderer();
-        ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, opticalMicroscopeRenderer);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), new BasicItemRenderer(opticalMicroscopeRenderer, new OpticalMicroscopeTileEntity()));
-
-    }
-
-    @Override
     public World getClientWorld()
     {
         return FMLClientHandler.instance().getClient().theWorld;
@@ -37,5 +27,15 @@ public class ClientProxy extends CommonProxy
     public EntityPlayer getPlayer(MessageContext context)
     {
         return Minecraft.getMinecraft().thePlayer;
+    }
+
+    @Override
+    public void registerRenderers()
+    {
+        RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+        OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new OpticalMicroscopeTileEntityRenderer();
+        ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, opticalMicroscopeRenderer);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), new BasicItemRenderer(opticalMicroscopeRenderer, new OpticalMicroscopeTileEntity()));
+
     }
 }

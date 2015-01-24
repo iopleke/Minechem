@@ -14,54 +14,63 @@ import net.minecraftforge.common.config.Property;
 
 public class Config
 {
-	public static Configuration config;
+    public static Configuration config;
 
-	// turns on extra logging printouts
-	public static boolean debugMode = true;
+    // turns on extra logging printouts
+    public static boolean debugMode = true;
 
-	public static void init()
-	{
+    // turns on to copy the newest elements list from jar
+    public static boolean useDefaultElements = true;
 
-		if (config == null)
-		{
+    public static List<IConfigElement> getConfigElements()
+    {
+        List<IConfigElement> list = new ArrayList<IConfigElement>();
+        list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
+        return list;
+    }
 
-			config = new Configuration(new File(Compendium.Config.configPrefix + "Minechem.cfg"));
-			loadConfig();
-		}
-	}
+    public static void init()
+    {
 
-	@SubscribeEvent
-	public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
-	{
-		if (event.modID.equalsIgnoreCase(Compendium.Naming.id))
-		{
-			loadConfig();
-		}
-	}
+        if (config == null)
+        {
 
-	private static void loadConfig()
-	{
-		Property prop;
-		List<String> configList = new ArrayList<String>();
+            config = new Configuration(new File(Compendium.Config.configPrefix + "Minechem.cfg"));
+            loadConfig();
+        }
+    }
 
-		config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
+    private static void loadConfig()
+    {
+        Property prop;
+        List<String> configList = new ArrayList<String>();
 
-		prop = config.get(Configuration.CATEGORY_GENERAL, "debugMode", Config.debugMode);
-		prop.comment = StatCollector.translateToLocal("config.debugMode");
-		prop.setLanguageKey("config.debugMode.tooltip");
-		debugMode = prop.getBoolean();
-		configList.add(prop.getName());
+        config.addCustomCategoryComment(Configuration.CATEGORY_GENERAL, StatCollector.translateToLocal("config.general.description"));
 
-		if (config.hasChanged())
-		{
-			config.save();
-		}
-	}
+        prop = config.get(Configuration.CATEGORY_GENERAL, "debugMode", Config.debugMode);
+        prop.comment = StatCollector.translateToLocal("config.debugMode");
+        prop.setLanguageKey("config.debugMode.tooltip");
+        debugMode = prop.getBoolean();
+        configList.add(prop.getName());
 
-	public static List<IConfigElement> getConfigElements()
-	{
-		List<IConfigElement> list = new ArrayList<IConfigElement>();
-		list.addAll(new ConfigElement(config.getCategory(Configuration.CATEGORY_GENERAL)).getChildElements());
-		return list;
-	}
+        prop = config.get(Configuration.CATEGORY_GENERAL, "useDefaultElements", Config.useDefaultElements);
+        prop.comment = StatCollector.translateToLocal("config.useDefaultElements");
+        prop.setLanguageKey("config.useDefaultElements.tooltip");
+        useDefaultElements = prop.getBoolean();
+        configList.add(prop.getName());
+
+        if (config.hasChanged())
+        {
+            config.save();
+        }
+    }
+
+    @SubscribeEvent
+    public void onConfigChangedEvent(ConfigChangedEvent.OnConfigChangedEvent event)
+    {
+        if (event.modID.equalsIgnoreCase(Compendium.Naming.id))
+        {
+            loadConfig();
+        }
+    }
 }

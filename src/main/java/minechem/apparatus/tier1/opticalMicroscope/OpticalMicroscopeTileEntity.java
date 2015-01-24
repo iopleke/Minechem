@@ -6,6 +6,11 @@ import minechem.reference.Compendium;
 public class OpticalMicroscopeTileEntity extends BasicTileEntity
 {
 
+    public OpticalMicroscopeTileEntity()
+    {
+        super(1);
+    }
+
     @Override
     public String getInventoryName()
     {

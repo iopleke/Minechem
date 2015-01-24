@@ -19,18 +19,18 @@ public class GuiHandler implements IGuiHandler
      * @param x      World x coordinate
      * @param y      World y coordinate
      * @param z      World z coordinate
-     * @return Container object for the TileEntity
+     * @return GUI object for the TileEntity
      */
     @Override
-    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity != null)
         {
-            // use instanceof to return the correct container object
+            // use instanceof to return the correct GUI object
             if (tileEntity instanceof OpticalMicroscopeTileEntity)
             {
-                return new OpticalMicroscopeContainer(player.inventory, (OpticalMicroscopeTileEntity) tileEntity);
+                return new OpticalMicroscopeGUI(player.inventory, (OpticalMicroscopeTileEntity) tileEntity);
             }
         }
         return null;
@@ -45,18 +45,18 @@ public class GuiHandler implements IGuiHandler
      * @param x      World x coordinate
      * @param y      World y coordinate
      * @param z      World z coordinate
-     * @return GUI object for the TileEntity
+     * @return Container object for the TileEntity
      */
     @Override
-    public Object getClientGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
+    public Object getServerGuiElement(int ID, EntityPlayer player, World world, int x, int y, int z)
     {
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity != null)
         {
-            // use instanceof to return the correct GUI object
+            // use instanceof to return the correct container object
             if (tileEntity instanceof OpticalMicroscopeTileEntity)
             {
-                return new OpticalMicroscopeGUI(player.inventory, (OpticalMicroscopeTileEntity) tileEntity);
+                return new OpticalMicroscopeContainer(player.inventory, (OpticalMicroscopeTileEntity) tileEntity);
             }
         }
         return null;
