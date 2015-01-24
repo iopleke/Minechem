@@ -1,6 +1,7 @@
 package minechem.apparatus.prefab.block;
 
 import java.util.ArrayList;
+
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
 import minechem.proxy.CommonProxy;
@@ -10,11 +11,12 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-/*
+/**
  * Defines basic properties of a simple block, such as the creative tab, the texture location, and the block name
  *
  * @author jakimfett
@@ -51,7 +53,11 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     }
 
-    public abstract void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks);
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {};
+    
+    public boolean dropInventory(){
+    	return true;
+    }
 
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
@@ -60,6 +66,19 @@ public abstract class BasicBlockContainer extends BlockContainer
         if (tileEntity != null)
         {
             ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
+            
+            if (dropInventory()){
+            	if (tileEntity instanceof IInventory){
+            		IInventory inventory=(IInventory) tileEntity;
+            		for (int i=0;i<inventory.getSizeInventory();i++){
+            			ItemStack stack=inventory.getStackInSlot(i);
+            			if (stack!=null){
+            				droppedStacks.add(stack);
+            			}
+            		}
+            	}
+            }
+            
             addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
             for (ItemStack itemstack : droppedStacks)
             {
