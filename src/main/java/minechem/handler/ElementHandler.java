@@ -23,22 +23,22 @@ import minechem.reference.Compendium;
  */
 public class ElementHandler
 {
-    public void init()
-    {
-    	if (Config.useDefaultElements){
-    		InputStream stream=null;
-    		try{
-    			stream=FileHelper.getInputStreamFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource);
-    			readFromStream(stream);
-    		} finally {
-    			if (stream!=null){
-    				try {
+	public void init()
+	{
+		if (Config.useDefaultElements){
+			InputStream stream=null;
+			try{
+				stream=FileHelper.getInputStreamFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource);
+				readFromStream(stream);
+			} finally {
+				if (stream!=null){
+					try {
 						stream.close();
 					} catch (IOException e) {
 						LogHelper.exception("Cannot close stream!", e, Level.WARN);
 					}
-    			}
-    		}
+				}
+			}
 		} else {
 			File elementsDataFile = new File(Compendium.Config.configPrefix + Compendium.Config.elementsDataJson);
 
@@ -57,14 +57,14 @@ public class ElementHandler
 				} catch (FileNotFoundException e) {
 					throw new RuntimeException(e);
 				} finally {
-	    			if (stream!=null){
-	    				try {
+					if (stream!=null){
+						try {
 							stream.close();
 						} catch (IOException e) {
 							LogHelper.exception("Cannot close stream!", e, Level.WARN);
 						}
-	    			}
-	    		}
+					}
+				}
 			}
 		}
 	}
