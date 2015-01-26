@@ -1,6 +1,5 @@
 package minechem.apparatus.prefab.renderer;
 
-import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.client.IItemRenderer;
@@ -8,10 +7,10 @@ import org.lwjgl.opengl.GL11;
 
 public class BasicItemRenderer implements IItemRenderer
 {
-    TileEntitySpecialRenderer tesr;
+    BasicTileEntityRenderer tesr;
     private final TileEntity tileEntity;
 
-    public BasicItemRenderer(TileEntitySpecialRenderer tesr, TileEntity tileEntity)
+    public BasicItemRenderer(BasicTileEntityRenderer tesr, TileEntity tileEntity)
     {
         this.tesr = tesr;
         this.tileEntity = tileEntity;
@@ -28,9 +27,9 @@ public class BasicItemRenderer implements IItemRenderer
     {
         if (type == IItemRenderer.ItemRenderType.ENTITY)
         {
-            GL11.glTranslatef(-0.5F, 0.0F, -0.5F);
+            GL11.glTranslatef(-0.5F, -0.0F, -0.5F);
         }
-        this.tesr.renderTileEntityAt(this.tileEntity, 0.0D, 0.0D, 0.0D, 0.0625F);
+        tesr.renderTileEntityAt(this.tileEntity, 0.0D, -(tesr.yOffset / 3), 0.0D, 0.0625F);
     }
 
     @Override
