@@ -108,6 +108,15 @@ allprojects {
     }
 }
 
+sourceSets {
+    main {
+        resources {
+            exclude '**/xcf/*'
+            exclude 'resources/assets/minechem/xcf'
+        }
+    }
+}
+
 import de.undercouch.gradle.tasks.download.Download
 
 task getLibraries {
