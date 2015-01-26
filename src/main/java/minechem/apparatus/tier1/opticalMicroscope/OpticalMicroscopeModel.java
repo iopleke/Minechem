@@ -1,9 +1,9 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
-import net.minecraft.client.model.ModelBase;
+import minechem.apparatus.prefab.model.BasicModel;
 import net.minecraft.client.model.ModelRenderer;
 
-public class OpticalMicroscopeModel extends ModelBase
+public class OpticalMicroscopeModel extends BasicModel
 {
     ModelRenderer a;
     ModelRenderer b;
@@ -46,11 +46,6 @@ public class OpticalMicroscopeModel extends ModelBase
     ModelRenderer wheel4;
 
     public OpticalMicroscopeModel()
-    {
-        this(0.0f);
-    }
-
-    public OpticalMicroscopeModel(float scale)
     {
         base1 = new ModelRenderer(this, 1, 9);
         base1.setTextureSize(128, 64);
@@ -210,6 +205,7 @@ public class OpticalMicroscopeModel extends ModelBase
         wheel4.setRotationPoint(1.499999F, -0.9999981F, -8F);
     }
 
+    @Override
     public void render(float rotation)
     {
         base1.rotateAngleX = 0F;
@@ -406,7 +402,5 @@ public class OpticalMicroscopeModel extends ModelBase
         wheel4.rotateAngleY = -1.570796F;
         wheel4.rotateAngleZ = 0F;
         wheel4.renderWithRotation(rotation);
-
     }
-
 }
