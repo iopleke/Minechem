@@ -12,6 +12,7 @@ public class OpticalMicroscopeBlock extends BasicBlockContainer
     public OpticalMicroscopeBlock()
     {
         super(Compendium.Naming.opticalMicroscope, Material.iron, Block.soundTypeMetal);
+        setBlockBounds(0.2F, 0F, 0.2F, 0.8F, 1.0F, 0.8F);
     }
 
     @Override
