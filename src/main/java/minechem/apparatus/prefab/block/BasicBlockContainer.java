@@ -1,7 +1,6 @@
 package minechem.apparatus.prefab.block;
 
 import java.util.ArrayList;
-
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
 import minechem.proxy.CommonProxy;
@@ -10,10 +9,12 @@ import minechem.registry.CreativeTabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /**
@@ -53,10 +54,8 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     }
 
-    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks) {};
-    
-    public boolean dropInventory(){
-    	return true;
+    public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
+    {
     }
 
     @Override
@@ -66,19 +65,23 @@ public abstract class BasicBlockContainer extends BlockContainer
         if (tileEntity != null)
         {
             ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
-            
-            if (dropInventory()){
-            	if (tileEntity instanceof IInventory){
-            		IInventory inventory=(IInventory) tileEntity;
-            		for (int i=0;i<inventory.getSizeInventory();i++){
-            			ItemStack stack=inventory.getStackInSlot(i);
-            			if (stack!=null){
-            				droppedStacks.add(stack);
-            			}
-            		}
-            	}
+
+            if (dropInventory())
+            {
+                if (tileEntity instanceof IInventory)
+                {
+                    IInventory inventory = (IInventory) tileEntity;
+                    for (int i = 0; i < inventory.getSizeInventory(); i++)
+                    {
+                        ItemStack stack = inventory.getStackInSlot(i);
+                        if (stack != null)
+                        {
+                            droppedStacks.add(stack);
+                        }
+                    }
+                }
             }
-            
+
             addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
             for (ItemStack itemstack : droppedStacks)
             {
@@ -91,6 +94,23 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     @Override
     public abstract TileEntity createNewTileEntity(World world, int meta);
+
+    public boolean dropInventory()
+    {
+        return true;
+    }
+
+    @Override
+    public int getRenderType()
+    {
+        return CommonProxy.RENDER_ID;
+    }
+
+    @Override
+    public boolean isOpaqueCube()
+    {
+        return false;
+    }
 
     /**
      * Open the GUI on block activation
@@ -123,19 +143,15 @@ public abstract class BasicBlockContainer extends BlockContainer
     }
 
     @Override
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is)
+    {
+        super.onBlockPlacedBy(world, x, y, z, el, is);
+        int facing = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        world.setBlockMetadataWithNotify(x, y, z, facing, 2);
+    }
+
+    @Override
     public boolean renderAsNormalBlock()
-    {
-        return false;
-    }
-
-    @Override
-    public int getRenderType()
-    {
-        return CommonProxy.RENDER_ID;
-    }
-
-    @Override
-    public boolean isOpaqueCube()
     {
         return false;
     }
