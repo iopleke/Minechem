@@ -12,10 +12,12 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
     protected BasicModel model;
     protected float rotation;
     protected ResourceLocation texture;
+    private double xOffset;
 
     protected float xScale;
     protected double yOffset;
     protected float yScale;
+    private double zOffset;
     protected float zScale;
 
     public BasicTileEntityRenderer()
@@ -33,14 +35,7 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
     {
         setScale(scale);
         setRotation(rotation);
-        setOffset(1.5D);
-    }
-
-    public BasicTileEntityRenderer(float scale, float rotation, double yOffset)
-    {
-        setScale(scale);
-        setRotation(rotation);
-        setOffset(yOffset);
+        setOffset(0.5D, 1.5D, 0.5D);
     }
 
     @Override
@@ -49,7 +44,7 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
         if (tileEntity instanceof BasicTileEntity)
         {
             GL11.glPushMatrix();
-            GL11.glTranslated(x + 0.5D, y + yOffset, z + 0.5D);
+            GL11.glTranslated(x + xOffset, y + yOffset, z + zOffset);
             GL11.glRotatef(180f, 0f, 0f, 1f);
             GL11.glRotatef((tileEntity.blockMetadata * 90.0F), 0.0F, 1.0F, 0.0F);
             GL11.glEnable(GL11.GL_BLEND);
@@ -62,9 +57,12 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
         }
     }
 
-    public final void setOffset(double yOffset)
+    public final void setOffset(double xOffset, double yOffset, double zOffset)
     {
+        // @TODO - make this work with rotated model via metadata
+        this.xOffset = xOffset;
         this.yOffset = yOffset;
+        this.zOffset = zOffset;
     }
 
     private void setRotation(float rotation)
@@ -74,6 +72,7 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
 
     public final void setScale(float scale)
     {
+        // @TODO - make this work with rotated model via metadata
         this.xScale = scale;
         this.yScale = scale;
         this.zScale = scale;
