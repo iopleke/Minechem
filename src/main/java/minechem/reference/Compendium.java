@@ -73,12 +73,12 @@ public class Compendium
     {
         public static final class Icon
         {
-
+            public static final ResourceLocation patreon = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Icon.patreon);
         }
 
         public static final class GUI
         {
-
+            public static final ResourceLocation opticalMicroscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.opticalMicroscope);
         }
 
         public static final class Model
@@ -88,7 +88,8 @@ public class Compendium
 
         public static final class Tab
         {
-
+            public static final ResourceLocation right = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.tab_right);
+            public static final ResourceLocation left = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.tab_left);
         }
     }
 
@@ -104,12 +105,17 @@ public class Compendium
         public static final class Icon
         {
 
+            private static final String prefix = "textures/icons/";
+            public static final String patreon = Compendium.Texture.Icon.prefix + "patreon.png";
         }
 
         public static final class GUI
         {
             private static final String prefix = "textures/gui/";
-            public static final ResourceLocation opticalMicroscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.prefix + "opticalMicroscope.png");
+
+            public static final String tab_left = Compendium.Texture.GUI.prefix + "tab_left.png";
+            public static final String tab_right = Compendium.Texture.GUI.prefix + "tab_right.png";
+            public static final String opticalMicroscope = Compendium.Texture.GUI.prefix + "opticalMicroscope.png";
 
         }
 
