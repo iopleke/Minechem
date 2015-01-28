@@ -20,7 +20,7 @@ public class OpticalMicroscopeGUI extends GuiContainer
     @Override
     protected void drawGuiContainerBackgroundLayer(float opacity, int mousex, int mousey)
     {
-        this.mc.renderEngine.bindTexture(Compendium.Texture.GUI.opticalMicroscope);
+        this.mc.renderEngine.bindTexture(Compendium.Resource.GUI.opticalMicroscope);
         int x = (width - xSize) / 2;
         int y = (height - ySize) / 2;
         drawTexturedModalRect(x, y, 0, 0, xSize, ySize);
