@@ -44,9 +44,9 @@ repositories {
         name 'FMP'
         artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
     }
-	maven { 
-		// OpenComputers maven repo			
-		url = "http://maven.cil.li/" 
+	maven {
+		// OpenComputers maven repo
+		url = "http://maven.cil.li/"
 	}
 }
 
@@ -124,7 +124,7 @@ task getLibraries {
     if (!libsFolder.isDirectory() ) {
         libsFolder.mkdirs()
     }
-	
+
 	def ccSource = 'http://minecraft.curseforge.com/mc-mods/67504-computercraft/files/2216236/download'
 	def ccDest = new File('libs', 'ComputerCraft-1.65.jar')
 
@@ -135,7 +135,7 @@ task getLibraries {
 			dest ccDest
 		}
 	}
-	
+
     def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-Dev-1.7.10-3.0.9C.jar'
     def mtDest = new File('libs', 'MineTweaker3-Dev-1.7.10-3.0.9C.jar')
 
@@ -146,8 +146,8 @@ task getLibraries {
         }
     }
 
-    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2221836/download'
-    def cofhDest = new File('libs', 'CoFHLib-1.7.10-1.0.0B8-34-API.zip')
+    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2225609/download'
+    def cofhDest = new File('libs', 'CoFHLib-1.7.10-1.0.0B9-68-dev.jar')
 
     if(!cofhDest.exists() ){
         download {
