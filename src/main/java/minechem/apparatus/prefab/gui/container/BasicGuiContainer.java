@@ -1,7 +1,7 @@
 package minechem.apparatus.prefab.gui.container;
 
-import cofh.core.gui.element.TabInfo;
 import cofh.lib.gui.GuiBase;
+import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.Container;
@@ -29,8 +29,7 @@ public class BasicGuiContainer extends GuiBase
     public void initGui()
     {
         super.initGui();
-        TabInfo infoTab = new TabInfo(this, 0, "This is a test");
-        addTab(infoTab);
+        addTab(new PatreonGuiTab(this));
     }
 
     @Override
