@@ -3,8 +3,12 @@ package minechem.apparatus.prefab.gui.tab;
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cofh.lib.util.helpers.MathHelper;
+
+import java.awt.Color;
 import java.util.List;
+
 import minechem.helper.LocalizationHelper;
+
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -30,6 +34,7 @@ public abstract class BasicGuiTab extends TabBase
     public BasicGuiTab(GuiBase gui, String tabText, int side)
     {
         super(gui, side);
+        textColor = Color.WHITE.getRGB();
         maxWidth = 120;
         maxHeight = 92;
         this.tabText = getFontRenderer().listFormattedStringToWidth(tabText, this.maxWidth - 16);
@@ -51,7 +56,7 @@ public abstract class BasicGuiTab extends TabBase
                 getFontRenderer().drawStringWithShadow(getTitle(), posXOffset() + 18, this.posY + 6, this.headerColor);
                 for (int i = this.firstLine; i < this.firstLine + this.numLines; i++)
                 {
-                    getFontRenderer().drawString((String) this.tabText.get(i), posXOffset() + 2, this.posY + 20 + (i - this.firstLine) * getFontRenderer().FONT_HEIGHT, this.textColor);
+                    getFontRenderer().drawString((String) this.tabText.get(i), posXOffset() + 2, this.posY + 20 + (i - this.firstLine) * getFontRenderer().FONT_HEIGHT, this.textColor, true);
                 }
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             }
