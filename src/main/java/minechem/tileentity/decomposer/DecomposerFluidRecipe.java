@@ -2,6 +2,7 @@ package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
 import minechem.potion.PotionChemical;
+import minechem.utils.MapKey;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -51,5 +52,11 @@ public class DecomposerFluidRecipe extends DecomposerRecipe
         ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
         result.addAll(this.output.values());
         return result;
+    }
+
+    @Override
+    public MapKey getKey()
+    {
+        return new MapKey(inputFluid);
     }
 }

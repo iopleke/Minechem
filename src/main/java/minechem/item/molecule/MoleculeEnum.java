@@ -208,7 +208,6 @@ public class MoleculeEnum extends MinechemChemicalType
     public static final MoleculeEnum proline = addMolecule("proline", 139, solid, new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 2));
     public static final MoleculeEnum leucine = addMolecule("leucine", 140, solid, new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2));
     public static final MoleculeEnum tryptophan = addMolecule("tryptophan", 141, solid, new Element(C, 11), new Element(H, 12), new Element(N, 2), new Element(O, 2));
-    public static final MoleculeEnum aspartate = addMolecule("aspartate", 142, solid, new Element(C, 4), new Element(H, 7), new Element(N), new Element(O, 4));
     public static final MoleculeEnum isoleucine = addMolecule("isoleucine", 143, solid, new Element(C, 6), new Element(H, 13), new Element(N), new Element(O, 2));
     public static final MoleculeEnum glutamates = addMolecule("glutamates", 144, solid, new Element(C, 5), new Element(H, 9), new Element(N), new Element(O, 4));
     public static final MoleculeEnum asparagine = addMolecule("asparagine", 145, solid, new Element(C, 4), new Element(H, 8), new Element(N, 2), new Element(O, 3));

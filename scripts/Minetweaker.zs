@@ -5,7 +5,7 @@ import mods.minechem.Fuels;
 
 //###########Example Items#######################
 val redstone = <minecraft:redstone>;
-val water = <fluid:water>;
+val liquidWater = <liquid:water>;
 val ice = <minecraft:ice>;
 val lead = <ore:ingotLead>;
 val glass = <minecraft:glass>;
@@ -38,7 +38,7 @@ val Au = <ore:element_Au>;
 
 //###########Decomposer Functions#################  
 //Decomposer.removeRecipe(ice);                            				-- Remove Ore Dict or Item recipe
-//Decomposer.removeFluid(liquidWater*1000)								-- Remove Fluid Recipe
+//Decomposer.removeRecipe(liquidWater*1000);							-- Remove Fluid Recipe
 //Decomposer.addRecipe(redstone,0.5,[[H*64, He]]); 						-- Add recipe (chance optional) - Item or Ore Dict input
 //Decomposer.addRecipe(ice,0.5,[[H*5, water*10],[H*20, water*5]]);		-- Add multi-output recipe (chance optional)
 //Decomposer.addRecipe(glass,[lead*10,ice*5,H])							-- Add decomposition for crafting recipe output,[inputs]
