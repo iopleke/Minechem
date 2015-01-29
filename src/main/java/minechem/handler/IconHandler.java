@@ -36,7 +36,7 @@ public class IconHandler
             if (paramPre.map.getTextureType() == 1)
             {
                 IconHandler.addIcon("default", Compendium.Naming.id + ":default", paramPre.map);
-                IconHandler.addIcon("IconInformation", Compendium.Naming.id + ":patreon", paramPre.map);
+                IconHandler.addIcon("patreon", Compendium.Naming.id + ":patreon", paramPre.map);
             }
         }
     }
