@@ -1,4 +1,4 @@
-package minechem.apparatus.prefab.container;
+package minechem.apparatus.prefab.gui.container;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;

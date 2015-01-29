@@ -1,6 +1,6 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
-import minechem.apparatus.prefab.container.BasicContainer;
+import minechem.apparatus.prefab.gui.container.BasicContainer;
 import net.minecraft.entity.player.InventoryPlayer;
 
 public class OpticalMicroscopeContainer extends BasicContainer
