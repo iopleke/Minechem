@@ -5,6 +5,7 @@ import mods.minechem.Fuels;
 
 //###########Example Items#######################
 val redstone = <minecraft:redstone>;
+val water = <fluid:water>;
 val ice = <minecraft:ice>;
 val lead = <ore:ingotLead>;
 val glass = <minecraft:glass>;
