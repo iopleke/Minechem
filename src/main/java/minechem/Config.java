@@ -19,6 +19,8 @@ public class Config
     // turns on extra logging printouts
     public static boolean debugMode = true;
 
+    public static boolean enablePatreon = true;
+
     // turns on to copy the newest elements list from jar
     public static boolean useDefaultElements = true;
 
@@ -57,6 +59,12 @@ public class Config
         prop.comment = StatCollector.translateToLocal("config.useDefaultElements");
         prop.setLanguageKey("config.useDefaultElements.tooltip");
         useDefaultElements = prop.getBoolean();
+        configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "enablePatreon", Config.enablePatreon);
+        prop.comment = StatCollector.translateToLocal("config.enablePatreon");
+        prop.setLanguageKey("config.enablePatreon.tooltip");
+        enablePatreon = prop.getBoolean();
         configList.add(prop.getName());
 
         if (config.hasChanged())
