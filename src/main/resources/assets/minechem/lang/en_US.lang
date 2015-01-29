@@ -9,3 +9,8 @@ config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode
 config.useDefaultElements=Turns on to read the newest elements list from jar
 config.useDefaultElements.tooltip=Use Default Elements
+
+tab.patreon.text=Thanks for playing Minechem! If you like the mod, please consider supporting me on Patreon!
+tab.patreon.linkText=Visit Patreon
+tab.patreon.headerText=Patreon
+tab.patreon.tooltip=Supporting Minechem
