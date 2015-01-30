@@ -19,6 +19,7 @@ public class PatreonGuiTab extends BasicGuiTab
     private int linkY;
 
     public static boolean enable = Config.enablePatreon;
+    // TODO: @jakimfett what are all these unused default values?
     public static int defaultSide = 0;
     public static int defaultHeaderColor = 14797103;
     public static int defaultSubHeaderColor = 11186104;

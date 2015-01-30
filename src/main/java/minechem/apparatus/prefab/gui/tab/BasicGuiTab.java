@@ -37,15 +37,7 @@ public abstract class BasicGuiTab extends TabBase
         this.tabText = getFontRenderer().listFormattedStringToWidth(tabText, this.maxWidth - 16);
         this.numLines = Math.min(this.tabText.size(), (this.maxHeight - 24) / getFontRenderer().FONT_HEIGHT);
         this.maxFirstLine = (this.tabText.size() - this.numLines);
-
-        if (side == LEFT)
-        {
-            this.texture = Compendium.Resource.Tab.left;
-        } else
-        {
-            this.texture = Compendium.Resource.Tab.right;
-        }
-
+        this.texture = side == LEFT ? Compendium.Resource.Tab.left : Compendium.Resource.Tab.right;
     }
 
     @Override
@@ -61,7 +53,7 @@ public abstract class BasicGuiTab extends TabBase
                 getFontRenderer().drawStringWithShadow(getTitle(), posXOffset() + 18, this.posY + 6, this.headerColor);
                 for (int i = this.firstLine; i < this.firstLine + this.numLines; i++)
                 {
-                    getFontRenderer().drawString((String) this.tabText.get(i), posXOffset() + 2, this.posY + 20 + (i - this.firstLine) * getFontRenderer().FONT_HEIGHT, this.textColor, true);
+                    getFontRenderer().drawString(this.tabText.get(i), posXOffset() + 2, this.posY + 20 + (i - this.firstLine) * getFontRenderer().FONT_HEIGHT, this.textColor, true);
                 }
                 GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
             }
