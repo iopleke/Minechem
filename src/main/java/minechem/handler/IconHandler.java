@@ -13,6 +13,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
  */
 public class IconHandler
 {
+    // TODO: @jakimfett why are you using a THashMap?
     private static TMap<String, IIcon> icons = new THashMap();
 
     public static void addIcon(String iconName, String iconPath, IIconRegister iconRegistry)
