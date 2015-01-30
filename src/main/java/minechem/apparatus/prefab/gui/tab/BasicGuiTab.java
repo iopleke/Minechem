@@ -33,7 +33,6 @@ public abstract class BasicGuiTab extends TabBase
     {
         super(gui, side);
         textColor = Color.WHITE.getRGB();
-        maxWidth = 120;
         maxHeight = 92;
         this.tabText = getFontRenderer().listFormattedStringToWidth(tabText, this.maxWidth - 16);
         this.numLines = Math.min(this.tabText.size(), (this.maxHeight - 24) / getFontRenderer().FONT_HEIGHT);
