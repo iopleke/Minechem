@@ -3,12 +3,10 @@ package minechem.apparatus.prefab.gui.tab;
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cofh.lib.util.helpers.MathHelper;
-
 import java.awt.Color;
 import java.util.List;
-
 import minechem.helper.LocalizationHelper;
-
+import minechem.reference.Compendium;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -40,6 +38,14 @@ public abstract class BasicGuiTab extends TabBase
         this.tabText = getFontRenderer().listFormattedStringToWidth(tabText, this.maxWidth - 16);
         this.numLines = Math.min(this.tabText.size(), (this.maxHeight - 24) / getFontRenderer().FONT_HEIGHT);
         this.maxFirstLine = (this.tabText.size() - this.numLines);
+
+        if (side == LEFT)
+        {
+            this.texture = Compendium.Resource.Tab.left;
+        } else
+        {
+            this.texture = Compendium.Resource.Tab.right;
+        }
 
     }
 
