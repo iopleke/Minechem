@@ -113,8 +113,8 @@ public class Compendium
         {
             private static final String prefix = "textures/gui/";
 
-            public static final String tab_left = Compendium.Texture.GUI.prefix + "tab_left.png";
-            public static final String tab_right = Compendium.Texture.GUI.prefix + "tab_right.png";
+            public static final String tab_left = Compendium.Texture.GUI.prefix + "tabLeft.png";
+            public static final String tab_right = Compendium.Texture.GUI.prefix + "tabRight.png";
             public static final String opticalMicroscope = Compendium.Texture.GUI.prefix + "opticalMicroscope.png";
 
         }

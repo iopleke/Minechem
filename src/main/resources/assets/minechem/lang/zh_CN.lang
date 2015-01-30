@@ -9,3 +9,10 @@ config.debugMode=开启以显示额外的日志记录
 config.debugMode.tooltip=调试模式
 config.useDefaultElements=开启则从JAR文件中读取最新的元素列表
 config.useDefaultElements.tooltip=使用默认的元素
+config.enablePatreon=开启以在GUI中显示Patreon选项
+config.enablePatreon.tooltip=启用Patreon
+
+tab.patreon.text=感谢使用Minechem！如果你喜欢这个模组，请考虑在Patreon上支持我！
+tab.patreon.linkText=查看Patreon
+tab.patreon.headerText=Patreon
+tab.patreon.tooltip=支持Minechem

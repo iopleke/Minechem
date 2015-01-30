@@ -19,6 +19,7 @@ public class Config
     // turns on extra logging printouts
     public static boolean debugMode = true;
 
+    // turns on to show Patreon tab in GUI
     public static boolean enablePatreon = true;
 
     // turns on to copy the newest elements list from jar
