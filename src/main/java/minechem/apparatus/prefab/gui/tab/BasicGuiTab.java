@@ -3,8 +3,9 @@ package minechem.apparatus.prefab.gui.tab;
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cofh.lib.util.helpers.MathHelper;
-import java.awt.Color;
 import java.util.List;
+
+import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.reference.Compendium;
 import org.lwjgl.opengl.GL11;
@@ -32,7 +33,7 @@ public abstract class BasicGuiTab extends TabBase
     public BasicGuiTab(GuiBase gui, String tabText, int side)
     {
         super(gui, side);
-        textColor = Color.WHITE.getRGB();
+        textColor = ColourHelper.WHITE;
         maxHeight = 92;
         this.tabText = getFontRenderer().listFormattedStringToWidth(tabText, this.maxWidth - 16);
         this.numLines = Math.min(this.tabText.size(), (this.maxHeight - 24) / getFontRenderer().FONT_HEIGHT);

@@ -1,9 +1,9 @@
 package minechem.apparatus.prefab.gui.tab;
 
 import static codechicken.lib.gui.GuiDraw.fontRenderer;
-import java.awt.Color;
 import minechem.Config;
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
+import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.helper.StringHelper;
 
@@ -29,7 +29,7 @@ public class PatreonGuiTab extends BasicGuiTab
     public PatreonGuiTab(BasicGuiContainer gui)
     {
         super(gui, LocalizationHelper.getLocalString("tab.patreon.text"), 0);
-        this.backgroundColor = Color.CYAN.getRGB();
+        this.backgroundColor = ColourHelper.RGB(35, 45, 50);// TODO: Find a good color
         this.enabled = Config.enablePatreon;
         this.link = "http://jakimfett.com/patreon";
         this.linkText = LocalizationHelper.getLocalString("tab.patreon.linktext");
