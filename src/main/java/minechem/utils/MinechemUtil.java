@@ -449,6 +449,7 @@ public final class MinechemUtil
         for (int i = 0; i < splitString.length; i++)
         {
             char[] digit = splitString[i].toCharArray();
+            if (digit.length<1) continue;
             digit[0] = Character.toUpperCase(digit[0]);
             for (int j = 1; j < digit.length; j++)
             {

@@ -134,22 +134,12 @@ public class Decomposer
     }
 
     @ZenMethod
-    public static void removeRecipe(@Optional IIngredient input, @Optional ILiquidStack fluid)
+    public static void removeRecipe(IIngredient input)
     {
-        if (input != null)
-        {
-            ArrayList<ItemStack> toRemove = InputHelper.getInputs(input);
+        ArrayList<ItemStack> toRemove = InputHelper.getInputs(input);
 
-            for (ItemStack recipe : toRemove)
-            {
-                if (DecomposerRecipe.get(recipe) != null)
-                {
-                    MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
-                }
-            }
-        } else if (fluid != null)
+        for (ItemStack recipe : toRemove)
         {
-            FluidStack recipe = InputHelper.toFluid(fluid);
             if (DecomposerRecipe.get(recipe) != null)
             {
                 MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
@@ -157,12 +147,12 @@ public class Decomposer
         }
     }
 
-//	@ZenMethod
-//	public static void removeRecipe(ILiquidStack input) {
-//		FluidStack recipe = InputHelper.toFluid(input);
-//		if (DecomposerRecipe.get(recipe)!=null)
-//			MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
-//	}
+	@ZenMethod
+	public static void removeRecipe(ILiquidStack input) {
+		FluidStack recipe = InputHelper.toFluid(input);
+		if (DecomposerRecipe.get(recipe)!=null)
+			MineTweakerAPI.apply(new RemoveRecipeAction(recipe));
+	}
     // ######################
     // ### Action classes ###
     // ######################
@@ -210,7 +200,7 @@ public class Decomposer
         @Override
         public void undo()
         {
-            DecomposerRecipe.remove(recipe.getInput());
+            DecomposerRecipe.remove(recipe.getKey());
         }
 
         @Override
@@ -249,7 +239,7 @@ public class Decomposer
         @Override
         public void apply()
         {
-            DecomposerRecipe.remove(recipe.getInput());
+            DecomposerRecipe.remove(recipe.getKey());
         }
 
         @Override

@@ -146,6 +146,11 @@ public class DecomposerRecipe
         return this.input;
     }
 
+    public MapKey getKey()
+    {
+        return new MapKey(this.getInput());
+    }
+
     public ArrayList<PotionChemical> getOutput()
     {
         ArrayList<PotionChemical> result = new ArrayList<PotionChemical>();
