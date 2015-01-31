@@ -31,6 +31,10 @@ public class NEIMinechemConfig implements IConfigureNEI
             SynthesisNEIRecipeHandler synthesisRecipeHandler = new SynthesisNEIRecipeHandler();
             API.registerRecipeHandler(synthesisRecipeHandler);
             API.registerUsageHandler(synthesisRecipeHandler);
+            
+            ChemicalBucketNEIRecipeHandler chemicalBucketNEIRecipeHandler = new ChemicalBucketNEIRecipeHandler();
+            API.registerRecipeHandler(chemicalBucketNEIRecipeHandler);
+            API.registerUsageHandler(chemicalBucketNEIRecipeHandler);
         }
     }
 
