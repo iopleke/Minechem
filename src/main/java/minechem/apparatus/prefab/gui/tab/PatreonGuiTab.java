@@ -29,7 +29,7 @@ public class PatreonGuiTab extends BasicGuiTab
     public PatreonGuiTab(BasicGuiContainer gui)
     {
         super(gui, LocalizationHelper.getLocalString("tab.patreon.text"), 0);
-        this.backgroundColor = ColourHelper.RGB(35, 45, 50);// TODO: Find a good color
+        this.backgroundColor = ColourHelper.CYAN;// I like cyan.
         this.enabled = Config.enablePatreon;
         this.link = "http://jakimfett.com/patreon";
         this.linkText = LocalizationHelper.getLocalString("tab.patreon.linktext");
