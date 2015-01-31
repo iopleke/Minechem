@@ -1,5 +1,7 @@
 package minechem.apparatus.prefab.gui.container;
 
+import java.util.List;
+
 import cofh.lib.gui.GuiBase;
 import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
@@ -7,6 +9,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.Container;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Mouse;
 
 /**
@@ -37,5 +40,12 @@ public class BasicGuiContainer extends GuiBase
     {
         Mouse.setGrabbed(false);
         return IconHandler.getIcon(paramString);
+    }
+
+    @Override
+    public void drawTooltip(List<String> paramList)
+    {
+        drawTooltipHoveringText(paramList, mouseX, mouseY, fontRendererObj);
+        this.tooltip.clear();
     }
 }
