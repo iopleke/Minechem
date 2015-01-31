@@ -1,30 +1,28 @@
 package minechem.apparatus.prefab.gui.tab;
 
 import static codechicken.lib.gui.GuiDraw.fontRenderer;
+import java.awt.Color;
+import java.util.Arrays;
+import java.util.List;
 import minechem.Config;
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
 import minechem.helper.ColourHelper;
+import minechem.helper.HTTPHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.helper.StringHelper;
 
-/**
- *
- * @author jakimfett
- */
 public class PatreonGuiTab extends BasicGuiTab
 {
-    String link;
-    String linkText;
-    private int linkX;
-    private int linkY;
-
-    public static boolean enable = Config.enablePatreon;
-    // TODO: @jakimfett what are all these unused default values?
-    public static int defaultSide = 0;
+    public static int defaultBackgroundColor = 5592405;
     public static int defaultHeaderColor = 14797103;
+    public static int defaultSide = 0;
     public static int defaultSubHeaderColor = 11186104;
     public static int defaultTextColor = 16777215;
-    public static int defaultBackgroundColor = 5592405;
+    public static boolean enable = Config.enablePatreon;
+    String link;
+    int linkColor;
+    String linkText;
+    List<String> linkTextList;
 
     public PatreonGuiTab(BasicGuiContainer gui)
     {
@@ -32,9 +30,29 @@ public class PatreonGuiTab extends BasicGuiTab
         this.backgroundColor = ColourHelper.CYAN;// I like cyan.
         this.enabled = Config.enablePatreon;
         this.link = "http://jakimfett.com/patreon";
-        this.linkText = LocalizationHelper.getLocalString("tab.patreon.linktext");
+        this.linkText = LocalizationHelper.getLocalString("tab.patreon.linkText");
         this.tabTitle = "tab.patreon.headerText";
         this.tabTooltip = "tab.patreon.tooltip";
+        this.linkColor = Color.ORANGE.getRGB();
+        this.linkTextList = Arrays.asList(link);
+    }
+
+    @Override
+    public void draw()
+    {
+        super.draw();
+        if (isEnabled())
+        {
+            if (isFullyOpened())
+            {
+                getFontRenderer().drawString(linkText, getLinkX(), getLinkY(), linkColor, true);
+
+                if (isLinkAtOffsetPosition(gui.getMouseX(), gui.getMouseY()))
+                {
+                    gui.drawTooltip(linkTextList);
+                }
+            }
+        }
     }
 
     @Override
@@ -43,16 +61,25 @@ public class PatreonGuiTab extends BasicGuiTab
         return "patreon";
     }
 
+    public int getLinkX()
+    {
+        return posXOffset();
+    }
+
+    public int getLinkY()
+    {
+        return getPosY() + maxHeight - StringHelper.getSplitStringHeight(fontRenderer, linkText, fontRenderer.getStringWidth(linkText)) - 5;
+    }
+
     public boolean isLinkAtOffsetPosition(int mouseX, int mouseY)
     {
-
-        if (mouseX >= linkX)
+        if (mouseX >= getLinkX())
         {
-            if (mouseX <= linkX + fontRenderer.getStringWidth(linkText))
+            if (mouseX <= getLinkX() + fontRenderer.getStringWidth(linkText))
             {
-                if (mouseY >= linkY)
+                if (mouseY >= getLinkY())
                 {
-                    if (mouseY <= linkY + StringHelper.getSplitStringHeight(fontRenderer, linkText, fontRenderer.getStringWidth(linkText)))
+                    if (mouseY <= getLinkY() + StringHelper.getSplitStringHeight(fontRenderer, linkText, fontRenderer.getStringWidth(linkText)))
                     {
                         return true;
                     }
@@ -60,5 +87,17 @@ public class PatreonGuiTab extends BasicGuiTab
             }
         }
         return false;
+    }
+
+    @Override
+    public boolean onMousePressed(int x, int y, int z)
+    {
+        if (isEnabled() && isFullyOpened() && isLinkAtOffsetPosition(x, y))
+        {
+            HTTPHelper.openURL(link);
+            return false;
+        }
+
+        return super.onMousePressed(x, y, z);
     }
 }
