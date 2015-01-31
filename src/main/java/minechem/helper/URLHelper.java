@@ -10,7 +10,7 @@ import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNoCallback;
 import cpw.mods.fml.client.FMLClientHandler;
 
-public class HTTPHelper
+public class URLHelper
 {
 
     private static class OpenURLCallback implements GuiYesNoCallback
@@ -31,7 +31,7 @@ public class HTTPHelper
             {
                 if (confirm)
                 {
-                    HTTPHelper.openURL(url);
+                    URLHelper.openURL(url);
                 }
 
                 FMLClientHandler.instance().getClient().displayGuiScreen(gui);
@@ -44,7 +44,7 @@ public class HTTPHelper
      * Open a link in browse.
      * 
      * @param url the URL
-     * @deprecated please use {@link HTTPHelper#tipToOpenURL(String, GuiScreen)}
+     * @deprecated please use {@link URLHelper#tipToOpenURL(String, GuiScreen)}
      */
     @Deprecated
     public static void openURL(String url)
@@ -85,7 +85,7 @@ public class HTTPHelper
             FMLClientHandler.instance().getClient().displayGuiScreen(confirmOpenLink);
         } else
         {
-            HTTPHelper.openURL(url);
+            URLHelper.openURL(url);
         }
     }
 }
