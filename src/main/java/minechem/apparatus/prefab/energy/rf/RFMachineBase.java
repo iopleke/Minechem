@@ -1,4 +1,4 @@
-package minechem.apparatus.prefab.tileEntity.energy;
+package minechem.apparatus.prefab.energy.rf;
 
 import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.common.Optional;

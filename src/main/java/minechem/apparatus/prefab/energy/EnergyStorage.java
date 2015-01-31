@@ -1,4 +1,4 @@
-package minechem.apparatus.prefab.storage;
+package minechem.apparatus.prefab.energy;
 
 import minechem.helper.MathHelper;
 import net.minecraft.nbt.NBTTagCompound;

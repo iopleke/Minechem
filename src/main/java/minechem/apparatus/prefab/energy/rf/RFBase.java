@@ -1,6 +1,6 @@
-package minechem.apparatus.prefab.tileEntity.energy;
+package minechem.apparatus.prefab.energy.rf;
 
-import minechem.apparatus.prefab.storage.EnergyStorage;
+import minechem.apparatus.prefab.energy.EnergyStorage;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 
