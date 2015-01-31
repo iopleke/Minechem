@@ -3,10 +3,10 @@ package minechem.apparatus.prefab.gui.container;
 import codechicken.nei.VisiblityData;
 import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
+
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cpw.mods.fml.common.Optional;
-import minechem.apparatus.prefab.gui.tab.BasicGuiTab;
 import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
 import minechem.helper.GuiIntersectHelper;
@@ -16,6 +16,7 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+
 import org.lwjgl.input.Mouse;
 
 import java.util.List;
@@ -27,9 +28,9 @@ import java.util.List;
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
 {
-    protected IIcon tabIcon;
-    protected IIconRegister register;
     protected ResourceLocation backgroundTexture;
+    protected IIconRegister register;
+    protected IIcon tabIcon;
 
     public BasicGuiContainer(Container container)
     {
@@ -38,10 +39,10 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     }
 
     @Override
-    public void initGui()
+    public void drawTooltip(List<String> paramList)
     {
-        super.initGui();
-        addTab(new PatreonGuiTab(this));
+        drawTooltipHoveringText(paramList, mouseX, mouseY, fontRendererObj);
+        this.tooltip.clear();
     }
 
     @Override
@@ -51,37 +52,27 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
         return IconHandler.getIcon(paramString);
     }
 
-    //##########################################
-    //INEIGuiHandler
-    //##########################################
-    @Optional.Method(modid = "NotEnoughItems")
-    @Override
-    public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData visiblityData)
-    {
-        return visiblityData;
-    }
-    
-    @Optional.Method(modid = "NotEnoughItems")
-    @Override
-    public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack item)
-    {
-        return null;
-    }
-    
     @Optional.Method(modid = "NotEnoughItems")
     @Override
     public List<TaggedInventoryArea> getInventoryAreas(GuiContainer gui)
     {
         return null;
     }
-    
+
+    @Optional.Method(modid = "NotEnoughItems")
+    @Override
+    public Iterable<Integer> getItemSpawnSlots(GuiContainer gui, ItemStack item)
+    {
+        return null;
+    }
+
     @Optional.Method(modid = "NotEnoughItems")
     @Override
     public boolean handleDragNDrop(GuiContainer gui, int mouseX, int mouseY, ItemStack draggedStack, int button)
     {
         return false;
     }
-    
+
     @Optional.Method(modid = "NotEnoughItems")
     @Override
     public boolean hideItemPanelSlot(GuiContainer gui, int x, int y, int w, int h)
@@ -100,5 +91,19 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
             }
         }
         return false;
+    }
+
+    @Override
+    public void initGui()
+    {
+        super.initGui();
+        addTab(new PatreonGuiTab(this));
+    }
+
+    @Optional.Method(modid = "NotEnoughItems")
+    @Override
+    public VisiblityData modifyVisiblity(GuiContainer gui, VisiblityData visiblityData)
+    {
+        return visiblityData;
     }
 }
