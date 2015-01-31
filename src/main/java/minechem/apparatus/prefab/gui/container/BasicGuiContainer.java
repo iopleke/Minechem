@@ -11,8 +11,6 @@ import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
 import minechem.helper.GuiIntersectHelper;
 import minechem.helper.HTTPHelper;
-import net.minecraft.client.gui.GuiConfirmOpenLink;
-import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.Container;
@@ -26,10 +24,9 @@ import org.lwjgl.input.Mouse;
  * @author jakimfett
  */
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
-public class BasicGuiContainer extends GuiBase implements INEIGuiHandler, GuiYesNoCallback
+public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
 {
     protected ResourceLocation backgroundTexture;
-    private String clickedURI;
     protected IIconRegister register;
     protected IIcon tabIcon;
 
@@ -37,21 +34,6 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler, GuiYes
     {
         super(container);
 
-    }
-
-    @Override
-    public void confirmClicked(boolean confirm, int id)
-    {
-        if (id == 0)
-        {
-            if (confirm)
-            {
-                HTTPHelper.openURL(this.clickedURI);
-            }
-
-            this.clickedURI = null;
-            this.mc.displayGuiScreen(this);
-        }
     }
 
     @Override
@@ -137,15 +119,7 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler, GuiYes
             {
                 if (patreonTab.isLinkAtOffsetPosition(x - this.guiLeft, y - this.guiTop))
                 {
-                    this.clickedURI = patreonTab.getLink();
-                    if (this.mc.gameSettings.chatLinksPrompt)
-                    {
-                        this.mc.displayGuiScreen(new GuiConfirmOpenLink(this, this.clickedURI, 0, false));
-                    } else
-                    {
-                        HTTPHelper.openURL(this.clickedURI);
-                    }
-                    return;
+                    HTTPHelper.tipToOpenURL(patreonTab.getLink(), this);
                 }
             }
         }
