@@ -27,31 +27,31 @@ public class HTTPHelper
         } catch (ClassNotFoundException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("ClassNotFoundException, caused by: " + e.getLocalizedMessage());
         } catch (NoSuchMethodException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("NoSuchMethodException, caused by: " + e.getLocalizedMessage());
         } catch (SecurityException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("SecurityException, caused by: " + e.getLocalizedMessage());
         } catch (IllegalAccessException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("IllegalAccessException, caused by: " + e.getLocalizedMessage());
         } catch (IllegalArgumentException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("IllegalArgumentException, caused by: " + e.getLocalizedMessage());
         } catch (InvocationTargetException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("InvocationTargetException, caused by: " + e.getLocalizedMessage());
         } catch (URISyntaxException e)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
-            LogHelper.debug("Caused by: " + e.getLocalizedMessage());
+            LogHelper.debug("URISyntaxException, caused by: " + e.getLocalizedMessage());
         }
     }
 }
