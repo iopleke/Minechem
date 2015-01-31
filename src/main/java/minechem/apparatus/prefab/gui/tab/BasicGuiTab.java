@@ -4,7 +4,6 @@ import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cofh.lib.util.helpers.MathHelper;
 import java.util.List;
-
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.reference.Compendium;
@@ -111,6 +110,19 @@ public abstract class BasicGuiTab extends TabBase
     public boolean isEnabled()
     {
         return this.enabled;
+    }
+
+    @Override
+    public boolean isFullyOpened()
+    {
+        if (this.currentWidth >= this.maxWidth)
+        {
+            if (this.currentHeight >= this.maxHeight)
+            {
+                return true;
+            }
+        }
+        return this.fullyOpen;
     }
 
 }
