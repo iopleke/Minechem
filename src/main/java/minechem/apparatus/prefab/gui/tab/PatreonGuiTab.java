@@ -7,9 +7,9 @@ import java.util.List;
 import minechem.Config;
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
 import minechem.helper.ColourHelper;
-import minechem.helper.HTTPHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.helper.StringHelper;
+import org.lwjgl.input.Mouse;
 
 public class PatreonGuiTab extends BasicGuiTab
 {
@@ -71,8 +71,14 @@ public class PatreonGuiTab extends BasicGuiTab
         return getPosY() + maxHeight - StringHelper.getSplitStringHeight(fontRenderer, linkText, fontRenderer.getStringWidth(linkText)) - 5;
     }
 
+    public String getLink()
+    {
+        return link;
+    }
+
     public boolean isLinkAtOffsetPosition(int mouseX, int mouseY)
     {
+        Mouse.setGrabbed(false);
         if (mouseX >= getLinkX())
         {
             if (mouseX <= getLinkX() + fontRenderer.getStringWidth(linkText))
@@ -87,17 +93,5 @@ public class PatreonGuiTab extends BasicGuiTab
             }
         }
         return false;
-    }
-
-    @Override
-    public boolean onMousePressed(int x, int y, int z)
-    {
-        if (isEnabled() && isFullyOpened() && isLinkAtOffsetPosition(x, y))
-        {
-            HTTPHelper.openURL(link);
-            return false;
-        }
-
-        return super.onMousePressed(x, y, z);
     }
 }
