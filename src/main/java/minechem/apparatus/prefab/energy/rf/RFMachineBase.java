@@ -9,9 +9,9 @@ public class RFMachineBase extends RFBase implements IEnergyReceiver
 {
     @Optional.Method(modid = "CoFHAPI|energy")
     @Override
-    public int receiveEnergy(ForgeDirection forgeDirection, int amount, boolean doInsert)
+    public boolean canConnectEnergy(ForgeDirection forgeDirection)
     {
-        return this.energy.inputEnergy(amount, doInsert);
+        return true;
     }
 
     @Optional.Method(modid = "CoFHAPI|energy")
@@ -30,8 +30,8 @@ public class RFMachineBase extends RFBase implements IEnergyReceiver
 
     @Optional.Method(modid = "CoFHAPI|energy")
     @Override
-    public boolean canConnectEnergy(ForgeDirection forgeDirection)
+    public int receiveEnergy(ForgeDirection forgeDirection, int amount, boolean doInsert)
     {
-        return true;
+        return this.energy.inputEnergy(amount, doInsert);
     }
 }

@@ -9,6 +9,13 @@ public class RFGeneratorBase extends RFBase implements IEnergyProvider
 {
     @Optional.Method(modid = "CoFHAPI|energy")
     @Override
+    public boolean canConnectEnergy(ForgeDirection forgeDirection)
+    {
+        return true;
+    }
+
+    @Optional.Method(modid = "CoFHAPI|energy")
+    @Override
     public int extractEnergy(ForgeDirection forgeDirection, int amount, boolean doExtract)
     {
         return this.energy.extractEnergy(amount, doExtract);
@@ -26,12 +33,5 @@ public class RFGeneratorBase extends RFBase implements IEnergyProvider
     public int getMaxEnergyStored(ForgeDirection forgeDirection)
     {
         return this.energy.getCapacity();
-    }
-
-    @Optional.Method(modid = "CoFHAPI|energy")
-    @Override
-    public boolean canConnectEnergy(ForgeDirection forgeDirection)
-    {
-        return true;
     }
 }

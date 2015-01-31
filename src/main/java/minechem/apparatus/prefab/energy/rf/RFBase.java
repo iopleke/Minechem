@@ -33,21 +33,14 @@ public abstract class RFBase extends TileEntity
         return this.energy.consumeEnergy(amount);
     }
 
-    public boolean hasEnergy(int amount)
-    {
-        return this.energy.hasEnergy(amount);
-    }
-
     public boolean generateEnergy(int amount)
     {
         return this.energy.generateEnergy(amount);
     }
 
-    @Override
-    public void writeToNBT(NBTTagCompound tagCompound)
+    public boolean hasEnergy(int amount)
     {
-        super.writeToNBT(tagCompound);
-        energy.writeToNBT(tagCompound);
+        return this.energy.hasEnergy(amount);
     }
 
     @Override
@@ -55,5 +48,12 @@ public abstract class RFBase extends TileEntity
     {
         super.readFromNBT(tagCompound);
         energy.readFromNBT(tagCompound);
+    }
+
+    @Override
+    public void writeToNBT(NBTTagCompound tagCompound)
+    {
+        super.writeToNBT(tagCompound);
+        energy.writeToNBT(tagCompound);
     }
 }
