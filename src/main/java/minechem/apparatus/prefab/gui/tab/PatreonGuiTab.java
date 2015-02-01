@@ -9,6 +9,7 @@ import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.helper.StringHelper;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 public class PatreonGuiTab extends BasicGuiTab
 {
@@ -50,6 +51,9 @@ public class PatreonGuiTab extends BasicGuiTab
                 {
                     gui.drawTooltip(linkTextList);
                 }
+
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glDisable(GL11.GL_LIGHTING);
             }
         }
     }
