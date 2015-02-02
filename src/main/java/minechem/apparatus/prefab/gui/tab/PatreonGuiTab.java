@@ -1,7 +1,6 @@
 package minechem.apparatus.prefab.gui.tab;
 
 import static codechicken.lib.gui.GuiDraw.fontRenderer;
-import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 import minechem.Config;
@@ -10,6 +9,7 @@ import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.helper.StringHelper;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.GL11;
 
 public class PatreonGuiTab extends BasicGuiTab
 {
@@ -19,10 +19,10 @@ public class PatreonGuiTab extends BasicGuiTab
     public static int defaultSubHeaderColor = 11186104;
     public static int defaultTextColor = 16777215;
     public static boolean enable = Config.enablePatreon;
-    String link;
-    int linkColor;
-    String linkText;
-    List<String> linkTextList;
+    private String link;
+    private int linkColor;
+    private String linkText;
+    private List<String> linkTextList;
 
     public PatreonGuiTab(BasicGuiContainer gui)
     {
@@ -33,7 +33,7 @@ public class PatreonGuiTab extends BasicGuiTab
         this.linkText = LocalizationHelper.getLocalString("tab.patreon.linkText");
         this.tabTitle = "tab.patreon.headerText";
         this.tabTooltip = "tab.patreon.tooltip";
-        this.linkColor = Color.ORANGE.getRGB();
+        this.linkColor = ColourHelper.YELLOW;
         this.linkTextList = Arrays.asList(link);
     }
 
@@ -51,6 +51,9 @@ public class PatreonGuiTab extends BasicGuiTab
                 {
                     gui.drawTooltip(linkTextList);
                 }
+
+                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+                GL11.glDisable(GL11.GL_LIGHTING);
             }
         }
     }
