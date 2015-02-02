@@ -15,8 +15,8 @@ public class URLHelper
 
     private static class OpenURLCallback implements GuiYesNoCallback
     {
-        private String url;
         private GuiScreen gui;
+        private String url;
 
         public OpenURLCallback(String url, GuiScreen gui)
         {
@@ -71,19 +71,17 @@ public class URLHelper
 
     public static void openURL(String url, GuiScreen gui)
     {
-        if (!allowLinks())
+        if (allowLinks())
         {
-            return;
-        }
-
-        if (promptOnChatLinks())
-        {
-            OpenURLCallback callback = new OpenURLCallback(url, gui);
-            GuiConfirmOpenLink confirmOpenLink = new GuiConfirmOpenLink(callback, url, 0, false);
-            FMLClientHandler.instance().getClient().displayGuiScreen(confirmOpenLink);
-        } else
-        {
-            URLHelper.openURL(url);
+            if (promptOnChatLinks())
+            {
+                OpenURLCallback callback = new OpenURLCallback(url, gui);
+                GuiConfirmOpenLink confirmOpenLink = new GuiConfirmOpenLink(callback, url, 0, false);
+                FMLClientHandler.instance().getClient().displayGuiScreen(confirmOpenLink);
+            } else
+            {
+                URLHelper.openURL(url);
+            }
         }
     }
 }
