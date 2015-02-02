@@ -8,7 +8,6 @@ import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.helper.StringHelper;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 public class PatreonGuiTab extends BasicGuiTab
@@ -81,7 +80,6 @@ public class PatreonGuiTab extends BasicGuiTab
 
     public boolean isLinkAtOffsetPosition(int mouseX, int mouseY)
     {
-        Mouse.setGrabbed(false);
         if (mouseX >= getLinkX())
         {
             if (mouseX <= getLinkX() + fontRenderer.getStringWidth(linkText))
