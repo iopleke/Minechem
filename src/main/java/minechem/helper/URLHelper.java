@@ -1,14 +1,14 @@
 package minechem.helper;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import org.apache.logging.log4j.Level;
 import net.minecraft.client.gui.GuiConfirmOpenLink;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNoCallback;
-import cpw.mods.fml.client.FMLClientHandler;
+import org.apache.logging.log4j.Level;
 
 public class URLHelper
 {
@@ -42,43 +42,41 @@ public class URLHelper
 
     /**
      * Open a link in browse.
-     * 
+     *
      * @param url the URL
-     * @deprecated please use {@link URLHelper#tipToOpenURL(String, GuiScreen)}
      */
-    @Deprecated
-    public static void openURL(String url)
+    private static void openURL(String url)
     {
         try
         {
             Desktop.getDesktop().browse(new URI(url));
         } catch (IOException e)
         {
-            LogHelper.exception("Cannot open URL:"+url, e, Level.WARN);
+            LogHelper.exception("Cannot open URL:" + url, e, Level.WARN);
         } catch (URISyntaxException e)
         {
-            LogHelper.exception("Cannot open URL:"+url, e, Level.WARN);
+            LogHelper.exception("Cannot open URL:" + url, e, Level.WARN);
         }
     }
 
-    public static boolean isChatLinksPrompt()
+    public static boolean promptOnChatLinks()
     {
         return FMLClientHandler.instance().getClient().gameSettings.chatLinksPrompt;
     }
 
-    public static boolean canOpenURL()
+    public static boolean allowLinks()
     {
         return FMLClientHandler.instance().getClient().gameSettings.chatLinks;
     }
 
-    public static void tipToOpenURL(String url, GuiScreen gui)
+    public static void openURL(String url, GuiScreen gui)
     {
-        if (!canOpenURL())
+        if (!allowLinks())
         {
             return;
         }
 
-        if (isChatLinksPrompt())
+        if (promptOnChatLinks())
         {
             OpenURLCallback callback = new OpenURLCallback(url, gui);
             GuiConfirmOpenLink confirmOpenLink = new GuiConfirmOpenLink(callback, url, 0, false);

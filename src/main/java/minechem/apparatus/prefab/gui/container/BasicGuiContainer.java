@@ -117,7 +117,7 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
             {
                 if (patreonTab.isLinkAtOffsetPosition(x - this.guiLeft, y - this.guiTop))
                 {
-                    URLHelper.tipToOpenURL(patreonTab.getLink(), this);
+                    URLHelper.openURL(patreonTab.getLink(), this);
                     // return here so the machine tab doesn't get closed
                     return;
                 }
