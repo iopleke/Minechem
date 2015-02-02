@@ -16,6 +16,7 @@
 *.xml
 .cache
 libs/
+libs_sources/
 natives/
 
 ## Because Macs
