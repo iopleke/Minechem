@@ -6,6 +6,9 @@ import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 
+/**
+ * Basic container abstract class for extending
+ */
 public abstract class BasicContainer extends Container
 {
     /**
@@ -41,28 +44,39 @@ public abstract class BasicContainer extends Container
         return true;
     }
 
+    /**
+     * Shift click transfer mechanic
+     *
+     * @param player     the player object
+     * @param slotNumber which slot
+     * @return itemstack from the slot
+     */
     @Override
     public ItemStack transferStackInSlot(EntityPlayer player, int slotNumber)
     {
-        Slot slot=(Slot) inventorySlots.get(slotNumber);
-        ItemStack stack=slot.getStack();
-        
-        if (stack!=null&&slot.getHasStack()){
-            if (slotNumber<player.inventory.mainInventory.length){
-                if (!mergeItemStack(stack, player.inventory.mainInventory.length, inventorySlots.size(), true)){
+        Slot slot = (Slot) inventorySlots.get(slotNumber);
+        ItemStack stack = slot.getStack();
+
+        if (stack != null && slot.getHasStack())
+        {
+            if (slotNumber < player.inventory.mainInventory.length)
+            {
+                if (!mergeItemStack(stack, player.inventory.mainInventory.length, inventorySlots.size(), true))
+                {
                     return null;
                 }
-            }else{
-                if (!mergeItemStack(stack, 0, player.inventory.mainInventory.length, true)){
+            } else
+            {
+                if (!mergeItemStack(stack, 0, player.inventory.mainInventory.length, true))
+                {
                     return null;
                 }
             }
-            
+
             if (stack.stackSize == 0)
             {
-                slot.putStack((ItemStack)null);
-            }
-            else
+                slot.putStack((ItemStack) null);
+            } else
             {
                 slot.onSlotChanged();
             }
