@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Level;
 /**
  * Clickable link helper class, respecting user settings
  */
-public class URLHelper
+public class LinkHelper
 {
 
     /**
@@ -49,7 +49,7 @@ public class URLHelper
             {
                 if (confirm)
                 {
-                    URLHelper.openLink(url);
+                    LinkHelper.openLink(url);
                 }
 
                 FMLClientHandler.instance().getClient().displayGuiScreen(gui);
@@ -113,7 +113,7 @@ public class URLHelper
                 FMLClientHandler.instance().getClient().displayGuiScreen(confirmOpenLink);
             } else
             {
-                URLHelper.openLink(link);
+                LinkHelper.openLink(link);
             }
         }
     }

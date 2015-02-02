@@ -10,7 +10,7 @@ import java.util.List;
 import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
 import minechem.helper.GuiIntersectHelper;
-import minechem.helper.URLHelper;
+import minechem.helper.LinkHelper;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.inventory.Container;
@@ -117,7 +117,7 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
             {
                 if (patreonTab.isLinkAtOffsetPosition(x - this.guiLeft, y - this.guiTop))
                 {
-                    URLHelper.openLink(patreonTab.getLink(), this);
+                    LinkHelper.openLink(patreonTab.getLink(), this);
                     // return here so the machine tab doesn't get closed
                     return;
                 }
