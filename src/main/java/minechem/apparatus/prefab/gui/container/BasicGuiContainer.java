@@ -17,7 +17,6 @@ import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import org.lwjgl.input.Mouse;
 
 /**
  *
@@ -46,7 +45,6 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     @Override
     public IIcon getIcon(String paramString)
     {
-        Mouse.setGrabbed(false);
         return IconHandler.getIcon(paramString);
     }
 
@@ -110,7 +108,7 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     {
 
         TabBase guiTab = getTabAtPosition(mouseX, mouseY);
-        Mouse.setGrabbed(false);
+
         if (guiTab instanceof PatreonGuiTab)
         {
             PatreonGuiTab patreonTab = (PatreonGuiTab) guiTab;
