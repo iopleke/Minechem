@@ -13,8 +13,7 @@ public class CreativeTabRegistry
     public static CreativeTabs TAB_PRIMARY = new CreativeTab(Compendium.Naming.name, Items.fermented_spider_eye);
 
     /**
-     * Better implementation of the CreativeTab which allows {@link net.minecraft.item.ItemStack} to be passed
-     * Thus making it possible to add metaData to the Item
+     * Better implementation of the CreativeTab which allows {@link net.minecraft.item.ItemStack} to be passed Thus making it possible to add metaData to the Item
      */
     private static class CreativeTab extends CreativeTabs
     {

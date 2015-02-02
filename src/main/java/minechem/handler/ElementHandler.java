@@ -29,7 +29,8 @@ public class ElementHandler
             {
                 stream = FileHelper.getInputStreamFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource);
                 readFromStream(stream);
-            } finally
+            }
+            finally
             {
                 if (stream != null)
                 {
@@ -65,7 +66,8 @@ public class ElementHandler
                 } catch (FileNotFoundException e)
                 {
                     throw new RuntimeException(e);
-                } finally
+                }
+                finally
                 {
                     if (stream != null)
                     {
