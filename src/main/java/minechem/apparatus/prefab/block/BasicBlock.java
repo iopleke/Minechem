@@ -7,23 +7,24 @@ import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 
 /*
- * Defines basic properties of a simple block, such as the creative tab, the
- * texture location, and the block name
- *
- * @author jakimfett
+ * Extendable class for simple non-container blocks
  */
 public abstract class BasicBlock extends Block
 {
 
+    /**
+     * Unnamed blocks are given a default name
+     */
     public BasicBlock()
     {
-        super(Material.grass);
-        setBlockName(Compendium.Naming.name + " Basic Block");
-        setStepSound(Block.soundTypeGrass);
-        setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
-        textureName = Compendium.Naming.id + ":basicBlockIcon";
+        this(Compendium.Naming.name + " Basic Block");
     }
 
+    /**
+     * Create a basic block with a given name
+     *
+     * @param blockName unlocalized name of the block
+     */
     public BasicBlock(String blockName)
     {
         super(Material.grass);
@@ -34,6 +35,11 @@ public abstract class BasicBlock extends Block
 
     }
 
+    /**
+     * Register the block icon from the texture name
+     *
+     * @param iconRegister
+     */
     @Override
     public void registerBlockIcons(IIconRegister iconRegister)
     {

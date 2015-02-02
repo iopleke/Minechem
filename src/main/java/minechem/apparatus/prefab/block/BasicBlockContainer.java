@@ -18,32 +18,36 @@ import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
 
 /**
- * Defines basic properties of a simple block, such as the creative tab, the texture location, and the block name
- *
- * @author jakimfett
+ * Extendable class for simple container blocks
  */
 public abstract class BasicBlockContainer extends BlockContainer
 {
 
+    /**
+     * Unnamed blocks are given a default name
+     */
     public BasicBlockContainer()
     {
-        super(Material.grass);
-        setBlockName(Compendium.Naming.name + " Basic Block");
-        setStepSound(Block.soundTypeGrass);
-        setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
-        textureName = Compendium.Naming.id + ":basicBlockIcon";
+        this(Compendium.Naming.name + " Basic Block");
     }
 
+    /**
+     * Create a basic block with a given name
+     *
+     * @param blockName unlocalized name of the block
+     */
     public BasicBlockContainer(String blockName)
     {
-        super(Material.grass);
-        setBlockName(blockName);
-        setStepSound(Block.soundTypeGrass);
-        setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
-        textureName = Compendium.Naming.id + ":" + blockName + "Icon";
-
+        this(blockName, Material.grass, Block.soundTypeGrass);
     }
 
+    /**
+     * Create a basic block with a given name, material, and sound
+     *
+     * @param blockName unlocalized name of the block
+     * @param material  Material type
+     * @param sound     Block sound type
+     */
     public BasicBlockContainer(String blockName, Material material, Block.SoundType sound)
     {
         super(material);
@@ -54,58 +58,98 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     }
 
+    /**
+     * Define what stacks get dropped when the block is broken, defaults to nothing
+     *
+     * @param tileEntity
+     * @param itemStacks
+     */
     public void addStacksDroppedOnBlockBreak(TileEntity tileEntity, ArrayList<ItemStack> itemStacks)
     {
     }
 
+    /**
+     * Called when the block is broken
+     *
+     * @param world    the world object
+     * @param x        world X coordinate of broken block
+     * @param y        world Y coordinate of broken block
+     * @param z        world Z coordinate of broken block
+     * @param block    the block being broken
+     * @param metaData block metadata value
+     */
     @Override
     public void breakBlock(World world, int x, int y, int z, Block block, int metaData)
     {
-        TileEntity tileEntity = world.getTileEntity(x, y, z);
-        if (tileEntity != null)
+        if (block instanceof BasicBlockContainer)
         {
-            ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
-
-            if (dropInventory())
+            TileEntity tileEntity = world.getTileEntity(x, y, z);
+            if (tileEntity != null)
             {
-                if (tileEntity instanceof IInventory)
+                ArrayList<ItemStack> droppedStacks = new ArrayList<ItemStack>();
+
+                if (dropInventory())
                 {
-                    IInventory inventory = (IInventory) tileEntity;
-                    for (int i = 0; i < inventory.getSizeInventory(); i++)
+                    if (tileEntity instanceof IInventory)
                     {
-                        ItemStack stack = inventory.getStackInSlot(i);
-                        if (stack != null)
+                        IInventory inventory = (IInventory) tileEntity;
+                        for (int i = 0; i < inventory.getSizeInventory(); i++)
                         {
-                            droppedStacks.add(stack);
+                            ItemStack stack = inventory.getStackInSlot(i);
+                            if (stack != null)
+                            {
+                                droppedStacks.add(stack);
+                            }
                         }
                     }
                 }
-            }
 
-            addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
-            for (ItemStack itemstack : droppedStacks)
-            {
-                ItemHelper.throwItemStack(world, itemstack, x, y, z);
+                addStacksDroppedOnBlockBreak(tileEntity, droppedStacks);
+                for (ItemStack itemstack : droppedStacks)
+                {
+                    ItemHelper.throwItemStack(world, itemstack, x, y, z);
+                }
+                super.breakBlock(world, x, y, z, block, metaData);
             }
-            super.breakBlock(world, x, y, z, block, metaData);
         }
-
     }
 
+    /**
+     * Abstract method, to be overridden by child classes
+     *
+     * @param world the world object
+     * @param meta  block metadata
+     * @return the newly created TileEntity
+     */
     @Override
     public abstract TileEntity createNewTileEntity(World world, int meta);
 
+    /**
+     * Override to allow inventory dropping to be toggled
+     *
+     * @return boolean true
+     */
     public boolean dropInventory()
     {
         return true;
     }
 
+    /**
+     * Get the render type
+     *
+     * @return render ID from the CommonProxy
+     */
     @Override
     public int getRenderType()
     {
         return CommonProxy.RENDER_ID;
     }
 
+    /**
+     * Disable opaque cube rendering
+     *
+     * @return false
+     */
     @Override
     public boolean isOpaqueCube()
     {
@@ -142,14 +186,29 @@ public abstract class BasicBlockContainer extends BlockContainer
         return false;
     }
 
+    /**
+     * Set block metadata for model rotation
+     *
+     * @param world        the world object
+     * @param x            world X coordinate of placed block
+     * @param y            world Y coordinate of placed block
+     * @param z            world Z coordinate of placed block
+     * @param livingEntity the entity that placed the block
+     * @param itemStack    ItemStack object used to place the block
+     */
     @Override
-    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase el, ItemStack is)
+    public void onBlockPlacedBy(World world, int x, int y, int z, EntityLivingBase livingEntity, ItemStack itemStack)
     {
-        super.onBlockPlacedBy(world, x, y, z, el, is);
-        int facing = MathHelper.floor_double(el.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
+        super.onBlockPlacedBy(world, x, y, z, livingEntity, itemStack);
+        int facing = MathHelper.floor_double(livingEntity.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
         world.setBlockMetadataWithNotify(x, y, z, facing, 2);
     }
 
+    /**
+     * Disable normal block rendering
+     *
+     * @return false
+     */
     @Override
     public boolean renderAsNormalBlock()
     {
