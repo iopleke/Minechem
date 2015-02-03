@@ -2,6 +2,8 @@ package minechem.minetweaker;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import minechem.potion.PotionChemical;
 import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.tileentity.synthesis.SynthesisRecipeHandler;
@@ -21,15 +23,23 @@ public class Synthesiser
     public static void addRecipe(IIngredient[] inputs, IIngredient outputStack, boolean shaped, int energy)
     {
         boolean someValue = false;
-        PotionChemical[] input = InputHelper.getArray(InputHelper.getChemicals(inputs));
-        PotionChemical[] inputFixed = Arrays.copyOf(input, 9);
-        for (PotionChemical chem : inputFixed)
+        PotionChemical[] inputFixed = new PotionChemical[9];
+        if (shaped)
         {
-            if (chem != null)
+            for (int i = 0; i < inputFixed.length && i < inputs.length; i++)
             {
-                someValue = true;
-                break;
+                if (inputs[i] != null)
+                {
+                    inputFixed[i] = InputHelper.getChemical(inputs[i]);
+                    if (inputFixed[i] != null) someValue = true;
+                }
             }
+        }
+        else
+        {
+            List<PotionChemical> input = InputHelper.getChemicals(inputs);
+            inputFixed = Arrays.copyOf(input.toArray(new PotionChemical[0]),9);
+            someValue = !input.isEmpty();
         }
         if (someValue)
         {
