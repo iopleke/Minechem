@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import minechem.Settings;
 import minechem.api.IDecomposerControl;
 import minechem.network.MessageHandler;
+import minechem.network.message.DecomposerDumpFluidMessage;
 import minechem.network.message.DecomposerUpdateMessage;
 import minechem.potion.PotionChemical;
 import minechem.tileentity.prefab.BoundedInventory;
@@ -746,7 +747,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
         this.tank = null;
         if (worldObj.isRemote)
         {
-            MessageHandler.INSTANCE.sendToServer(new DecomposerUpdateMessage(this));
+            MessageHandler.INSTANCE.sendToServer(new DecomposerDumpFluidMessage(this));
         }
     }
 
