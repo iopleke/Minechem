@@ -7,6 +7,7 @@ import net.minecraft.tileentity.TileEntity;
 
 /**
  * Basic message for {@link net.minecraft.tileentity.TileEntity}
+ * T represents the {@link net.minecraft.tileentity.TileEntity}
  */
 public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage implements IMessage
 {
@@ -39,9 +40,15 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
         buf.writeInt(this.posY);
         buf.writeInt(this.posZ);
     }
-    
+
+    /**
+     * Gets the TileEntity
+     * @param ctx
+     * @return can be null
+     */
     public T getTileEntity(MessageContext ctx)
     {
-        return (T)getWorld(ctx).getTileEntity(this.posX, this.posY, this.posY);
+        TileEntity tileEntity = getWorld(ctx).getTileEntity(this.posX, this.posY, this.posY);
+        return tileEntity == null ? null : (T)tileEntity;
     }
 }
