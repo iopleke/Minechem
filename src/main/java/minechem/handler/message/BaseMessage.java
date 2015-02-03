@@ -14,15 +14,17 @@ import net.minecraft.world.World;
  */
 public abstract class BaseMessage implements IMessage
 {
+    /**
+     * Constructor needed for reflection
+     */
     public BaseMessage()
     {
-        // Needed for reflection
     }
 
     /**
      * Get the World from the MessageContext
      * @param ctx
-     * @return
+     * @return the current World
      */
     public World getWorld(MessageContext ctx)
     {
@@ -32,7 +34,7 @@ public abstract class BaseMessage implements IMessage
     /**
      * Get the EntityPlayer from the MessageContext
      * @param ctx
-     * @return
+     * @return the current EntityPlayer
      */
     public EntityPlayer getPlayer(MessageContext ctx)
     {

@@ -12,19 +12,31 @@ import net.minecraft.tileentity.TileEntity;
 public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage implements IMessage
 {
     private int posX, posY, posZ;
-    
+
+    /**
+     * Constructor needed for reflection
+     */
     public BaseTEMessage()
     {
-        // Needed for reflection        
     }
-    
+
+    /**
+     * Basic Constructor using the TileEntity
+     * Use super(myTE); in subClasses
+     * @param entity
+     */
     public BaseTEMessage(T entity)
     {
         this.posX = entity.xCoord;
         this.posY = entity.yCoord;
         this.posZ = entity.zCoord;
     }
-    
+
+    /**
+     * Read values from ByteBuf
+     * Use super(buf); in subClasses
+     * @param buf
+     */
     @Override
     public void fromBytes(ByteBuf buf)
     {
@@ -33,6 +45,11 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
         this.posZ = buf.readInt();
     }
 
+    /**
+     * Write values to ByteBuf
+     * Use super(buf); in subClasses
+     * @param buf
+     */
     @Override
     public void toBytes(ByteBuf buf)
     {
