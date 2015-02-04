@@ -6,12 +6,9 @@ import minechem.Settings;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
 
-@Optional.InterfaceList(
-        {
-            @Optional.Interface(iface = "cofh.api.energy.IEnergyStorage", modid = "CoFHAPI|energy"),
-            @Optional.Interface(iface = "cofh.api.energy.IEnergyHandler", modid = "CoFHAPI|energy")
-        })
-public abstract class MinechemTileEntityElectric extends MinechemTileEntity implements IEnergyStorage, IEnergyHandler
+
+@Optional.Interface(iface = "cofh.api.energy.IEnergyReceiver", modid = "CoFHAPI|energy")
+public abstract class MinechemTileEntityElectric extends MinechemTileEntity implements IEnergyReceiver
 {
     /**
      * Determines amount of energy we are allowed to input into the machine with a given update.
@@ -37,7 +34,6 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
     }
 
     @Optional.Method(modid = "CoFHAPI|energy")
-    @Override
     public int receiveEnergy(int maxReceive, boolean simulate)
     {
         int received = (maxReceive <= MAX_ENERGY_RECEIVED ? maxReceive : MAX_ENERGY_RECEIVED);
@@ -60,20 +56,11 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
         }
     }
 
-    @Optional.Method(modid = "CoFHAPI|energy")
-    @Override
-    public int extractEnergy(int maxExtract, boolean simulate)
-    {
-        return 0;
-    }
-
-    @Override
     public int getEnergyStored()
     {
         return energyStored;
     }
 
-    @Override
     public int getMaxEnergyStored()
     {
         return MAX_ENERGY_STORED;
@@ -91,13 +78,6 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
     public int receiveEnergy(ForgeDirection from, int maxReceive, boolean simulate)
     {
         return receiveEnergy(maxReceive, simulate);
-    }
-
-    @Optional.Method(modid = "CoFHAPI|energy")
-    @Override
-    public int extractEnergy(ForgeDirection from, int maxExtract, boolean simulate)
-    {
-        return extractEnergy(maxExtract, simulate);
     }
 
     @Optional.Method(modid = "CoFHAPI|energy")
