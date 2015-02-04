@@ -1,30 +1,34 @@
 package minechem.apparatus.prefab.energy.rf;
 
 import minechem.apparatus.prefab.energy.EnergyStorage;
+import minechem.apparatus.prefab.tileEntity.BasicTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 
-public abstract class RFBase extends TileEntity
+public abstract class RFBase extends BasicTileEntity
 {
     protected EnergyStorage energy;
 
-    public RFBase()
+    public RFBase(int inventorySize)
     {
+        super(inventorySize);
         energy = new EnergyStorage();
     }
 
-    public RFBase(int capacity)
+    public RFBase(int inventorySize, int capacity)
     {
+        super(inventorySize);
         energy = new EnergyStorage(capacity);
     }
 
-    public RFBase(int capacity, int maxTransfer)
+    public RFBase(int inventorySize, int capacity, int maxTransfer)
     {
+        super(inventorySize);
         energy = new EnergyStorage(capacity, maxTransfer);
     }
 
-    public RFBase(int capacity, int maxInput, int maxOutput)
+    public RFBase(int inventorySize, int capacity, int maxInput, int maxOutput)
     {
+        super(inventorySize);
         energy = new EnergyStorage(capacity, maxInput, maxOutput);
     }
 

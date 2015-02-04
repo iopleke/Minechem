@@ -16,12 +16,13 @@ public class LogHelper
      * Used for logging when debug is turned on in the config
      *
      * @param obj object to log
+     * @param args parameters to the message
      */
-    public static void debug(Object obj)
+    public static void debug(Object obj, Object... args)
     {
         if (Config.debugMode)
         {
-            log(Level.INFO, obj);
+            log(Level.INFO, obj, args);
         }
     }
 
@@ -31,10 +32,11 @@ public class LogHelper
      * @param obj       object to log
      * @param exception exception to log
      * @param level     level of the log
+     * @param args parameters to the message
      */
-    public static void exception(Object obj, Throwable exception, Level level)
+    public static void exception(Object obj, Throwable exception, Level level, Object... args)
     {
-        FMLLog.log(Compendium.Naming.id, level, exception, String.valueOf(obj));
+        FMLLog.log(Compendium.Naming.id, level, exception, String.valueOf(obj), args);
     }
 
     /**
@@ -52,10 +54,11 @@ public class LogHelper
      * Used for logging in any case
      *
      * @param obj object to log
+     * @param args parameters to the message
      */
-    public static void info(Object obj)
+    public static void info(Object obj, Object... args)
     {
-        log(Level.INFO, obj);
+        log(Level.INFO, obj, args);
     }
 
     /**
@@ -63,9 +66,10 @@ public class LogHelper
      *
      * @param level Level of the log
      * @param obj   object to log
+     * @param args parameters to the message
      */
-    public static void log(Level level, Object obj)
+    public static void log(Level level, Object obj, Object... args)
     {
-        FMLLog.log(Compendium.Naming.id, level, String.valueOf(obj));
+        FMLLog.log(Compendium.Naming.id, level, String.valueOf(obj), args);
     }
 }

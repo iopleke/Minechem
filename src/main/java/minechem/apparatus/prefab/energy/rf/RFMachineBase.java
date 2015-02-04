@@ -5,8 +5,28 @@ import cpw.mods.fml.common.Optional;
 import net.minecraftforge.common.util.ForgeDirection;
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyReceiver", modid = "CoFHAPI|energy")
-public class RFMachineBase extends RFBase implements IEnergyReceiver
+public abstract class RFMachineBase extends RFBase implements IEnergyReceiver
 {
+    public RFMachineBase(int inventorySize, int capacity, int maxInput, int maxOutput)
+    {
+        super(inventorySize, capacity, maxInput, maxOutput);
+    }
+
+    public RFMachineBase(int inventorySize, int capacity, int maxTransfer)
+    {
+        super(inventorySize, capacity, maxTransfer);
+    }
+
+    public RFMachineBase(int inventorySize, int capacity)
+    {
+        super(inventorySize, capacity);
+    }
+
+    public RFMachineBase(int inventorySize)
+    {
+        super(inventorySize);
+    }
+
     @Optional.Method(modid = "CoFHAPI|energy")
     @Override
     public boolean canConnectEnergy(ForgeDirection forgeDirection)

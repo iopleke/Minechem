@@ -35,12 +35,12 @@ public class ColourHelper
         return ((color >> 24) & 255) / 255.0F;
     }
 
-    public static int RGB(int r, int g, int b)
+    public static int getRGB(int r, int g, int b)
     {
-        return RGBA(r, g, b, 255);
+        return getRGBA(r, g, b, 255);
     }
 
-    public static int RGBA(int r, int g, int b, int a)
+    public static int getRGBA(int r, int g, int b, int a)
     {
         return (a << 24) | ((r & 255) << 16) | ((g & 255) << 8) | ((b & 255));
     }

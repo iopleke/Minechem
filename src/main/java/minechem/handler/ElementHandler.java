@@ -102,6 +102,6 @@ public class ElementHandler
             // element.get("shortName"));
             count++;
         }
-        LogHelper.debug("Total of " + count + " elements loaded");
+        LogHelper.debug("Total of %d elements loaded", count);
     }
 }
