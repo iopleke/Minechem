@@ -33,7 +33,6 @@ public abstract class MinechemTileEntityElectric extends MinechemTileEntity impl
         energyStored = 0;
     }
 
-    @Optional.Method(modid = "CoFHAPI|energy")
     public int receiveEnergy(int maxReceive, boolean simulate)
     {
         int received = (maxReceive <= MAX_ENERGY_RECEIVED ? maxReceive : MAX_ENERGY_RECEIVED);
