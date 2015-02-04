@@ -69,10 +69,10 @@ public class LinkHelper
             Desktop.getDesktop().browse(new URI(link));
         } catch (IOException e)
         {
-            LogHelper.exception("Cannot open URL:" + link, e, Level.WARN);
+            LogHelper.exception("Cannot open URL: %s", e, Level.WARN, link);
         } catch (URISyntaxException e)
         {
-            LogHelper.exception("Cannot open URL:" + link, e, Level.WARN);
+            LogHelper.exception("Cannot open URL: %s", e, Level.WARN, link);
         }
     }
 

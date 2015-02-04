@@ -23,7 +23,7 @@ public class FileHelper
      */
     public static void copyFromJar(Class<?> classFromJar, String fileSource, String fileDestination)
     {
-        LogHelper.debug("Copying file " + fileSource + " from jar");
+        LogHelper.debug("Copying file %s from jar", fileSource);
 
         URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
         File destination = new File(Compendium.Config.configPrefix + fileDestination);
@@ -52,7 +52,7 @@ public class FileHelper
      */
     public static InputStream getInputStreamFromJar(Class<?> classFromJar, String file)
     {
-        LogHelper.debug("Reading file " + file + " from jar");
+        LogHelper.debug("Reading file %s from jar", file);
         URL url = classFromJar.getResource(Compendium.Config.assetPrefix + file);
         try
         {
