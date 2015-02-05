@@ -17,6 +17,7 @@ import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
 import minechem.reference.Compendium;
 import minechem.registry.BlockRegistry;
+import minechem.registry.CreativeTabRegistry;
 import minechem.registry.ItemRegistry;
 import minechem.registry.RecipeRegistry;
 import net.minecraftforge.common.MinecraftForge;
@@ -72,6 +73,9 @@ public class Minechem
 
         LogHelper.debug("Registering Blocks...");
         BlockRegistry.init();
+
+        LogHelper.debug("Registering CreativeTabs...");
+        CreativeTabRegistry.init();
 
         // Register the proxy with the eventhandler
         LogHelper.debug("Registering proxies...");
