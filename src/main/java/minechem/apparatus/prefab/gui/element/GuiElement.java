@@ -1,20 +1,31 @@
 package minechem.apparatus.prefab.gui.element;
 
-import minechem.reference.Compendium;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
+/**
+ * Base class for GuiElements
+ * Holds methods that can be useful when making GuiElements
+ * @author way2muchnoise
+ */
 public abstract class GuiElement extends Gui
 {
+    /**
+     * Shorthand for binding a Resource
+     * @param resource the ResourceLocation
+     */
     protected void bindTexture(ResourceLocation resource)
     {
         Minecraft.getMinecraft().renderEngine.bindTexture(resource);
     }
-    
+
+    /**
+     * Shorthand for getting the {@link net.minecraft.client.Minecraft} {@link net.minecraft.client.gui.FontRenderer}
+     * @return the main MinecraftFontRenderer
+     */
     protected FontRenderer getFontRenderer()
     {
         return Minecraft.getMinecraft().fontRenderer;

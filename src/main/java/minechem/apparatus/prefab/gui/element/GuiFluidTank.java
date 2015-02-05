@@ -15,6 +15,8 @@ import java.util.List;
 
 /**
  * A tank to display in a GUI
+ * TODO: when there is an Object for a tank bind the tank directly to this Object
+ * @author way2muchnoise
  */
 public class GuiFluidTank extends GuiElement
 {
@@ -65,17 +67,17 @@ public class GuiFluidTank extends GuiElement
 
     /**
      * Draw the tank holding given
-     * @param x
-     * @param y
-     * @param fluidStack
+     * @param guiLeft x origin for drawing
+     * @param guiTop y origin for drawing
+     * @param fluidStack fluid to draw
      */
-    public void draw(int x, int y, FluidStack fluidStack)
+    public void draw(int guiLeft, int guiTop, FluidStack fluidStack)
     {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor3f(ColourHelper.getRed(colour), ColourHelper.getGreen(colour), ColourHelper.getBlue(colour));
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-        drawTexturedModalRect(x + posX, y + posY, 0, 0, 18, 39, width, height);
+        drawTexturedModalRect(guiLeft + posX, guiTop + posY, 0, 0, 18, 39, width, height);
         
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
@@ -88,33 +90,33 @@ public class GuiFluidTank extends GuiElement
 
             IIcon fluidIcon = fluidStack.getFluid().getStillIcon();
             // Top left corner
-            drawTexturedModelRectFromIcon(x + posX + 1, y + posY + 2, fluidIcon, iconWidthRemainder, iconHeightRemainder);
+            drawTexturedModelRectFromIcon(guiLeft + posX + 1, guiTop + posY + 2, fluidIcon, iconWidthRemainder, iconHeightRemainder);
             for (int i = 0; i <= (width - 4) / 16; i++)
             {
                 // Top right only draw when more then 1 pass is needed
-                if (i > 0) drawTexturedModelRectFromIcon(x + posX + 1 + (i-1) * 16 + iconWidthRemainder, y + posY + 2 , fluidIcon, 16, iconHeightRemainder);
+                if (i > 0) drawTexturedModelRectFromIcon(guiLeft + posX + 1 + (i-1) * 16 + iconWidthRemainder, guiTop + posY + 2 , fluidIcon, 16, iconHeightRemainder);
                 for (int ii = 0; ii < (height - 6) / 16; ii++)
                 {
                     // Bottom right only draw when more then 1 pass is needed
-                    if (i > 0) drawTexturedModelRectFromIcon(x + posX + 1 + (i-1) * 16 + iconWidthRemainder, y + posY + 2 + ii * 16 + iconHeightRemainder , fluidIcon, 16, 16);
+                    if (i > 0) drawTexturedModelRectFromIcon(guiLeft + posX + 1 + (i-1) * 16 + iconWidthRemainder, guiTop + posY + 2 + ii * 16 + iconHeightRemainder , fluidIcon, 16, 16);
                     // Bottom left
-                    drawTexturedModelRectFromIcon(x + posX + 1, y + posY + 2 + ii * 16 + iconHeightRemainder, fluidIcon, iconWidthRemainder, 16);
+                    drawTexturedModelRectFromIcon(guiLeft + posX + 1, guiTop + posY + 2 + ii * 16 + iconHeightRemainder, fluidIcon, iconWidthRemainder, 16);
                 }
             }
 
             bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-            drawTexturedModalRect(x + posX + 2, y + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / capacity))), width-3, height-2 - ((int) ((height-1) * ((float) fluidStack.amount / capacity))));
+            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / capacity))), width-3, height-2 - ((int) ((height-1) * ((float) fluidStack.amount / capacity))));
         }
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-        drawTexturedModalRect(x + posX + 1, y + posY + 1, 19, 1, 16, 37, width-2, height-2);
+        drawTexturedModalRect(guiLeft + posX + 1, guiTop + posY + 1, 19, 1, 16, 37, width-2, height-2);
 
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
-    public void drawTooltip(int x, int y, FluidStack fluidStack)
+    public void drawTooltip(int mouseX, int mouseY, FluidStack fluidStack)
     {
-        if (!mouseInTank(x, y))
+        if (!mouseInTank(mouseX, mouseY))
         {
             return;
         }
@@ -134,7 +136,7 @@ public class GuiFluidTank extends GuiElement
                 description.add(amountToText);
             }
         }
-        drawHoveringText(description, x, y, getFontRenderer());
+        drawHoveringText(description, mouseX, mouseY, getFontRenderer());
     }
 
     private boolean mouseInTank(int x, int y)
