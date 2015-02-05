@@ -19,8 +19,7 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 /**
- *
- * @author jakimfett
+ * Basic GUI container class for extending
  */
 @Optional.Interface(iface = "codechicken.nei.api.INEIGuiHandler", modid = "NotEnoughItems")
 public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
