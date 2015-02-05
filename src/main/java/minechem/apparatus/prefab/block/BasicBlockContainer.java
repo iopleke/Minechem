@@ -53,8 +53,8 @@ public abstract class BasicBlockContainer extends BlockContainer
         super(material);
         setBlockName(blockName);
         setStepSound(sound);
+        setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
         textureName = Compendium.Texture.prefix + blockName + "Icon";
-
     }
 
     /**
