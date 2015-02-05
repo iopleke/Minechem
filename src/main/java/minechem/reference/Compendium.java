@@ -67,6 +67,7 @@ public class Compendium
         public static final String id = "minechem";
         public static final String name = "Minechem";
         public static final String opticalMicroscope = "opticalMicroscope";
+        public static final String electrolysis = "electrolysis";
     }
 
     public static final class Resource
@@ -84,6 +85,7 @@ public class Compendium
         public static final class Model
         {
             public static final ResourceLocation microscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.opticalMicroscope);
+            public static final ResourceLocation electrolysis = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.electrolysis);
         }
 
         public static final class Tab
@@ -123,6 +125,7 @@ public class Compendium
         {
             public static final String prefix = "textures/models/";
             public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
+            public static final String electrolysis = Compendium.Texture.Model.prefix + "electrolysis.png";
         }
     }
 
