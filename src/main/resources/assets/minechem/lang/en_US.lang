@@ -18,11 +18,11 @@ help.polytool=The PolyTool is a multi-purpose tool that can be upgraded with cer
 
 config.allowautomation.description=Allow automation of Minechem machines
 config.allowautomation=Allow Automation
-config.blacklist.decomposition.example=Items the decomposer can't decompose.
+config.blacklist.decomposition.example=Blacklist decomposition of specific things. Examples "*:diamond", "minecraft:dragon_egg", "mekanism:*", "ore:ore*"
 config.blacklist.decomposition.tooltip=Decomposer Blacklist
-config.blacklist.description=Blacklisting for item/block recipes. One entry per line. Names are case insensitive. Uses unlocalized names.
+config.blacklist.description=Blacklisting for item/block recipes. Format is "mod:itemOrBlock". Target oreDict entries with "ore:oreName". One entry per line. Names are case insensitive. Uses unlocalized names. Uses asterisk as a wildcard.
 config.blacklist.name=blacklist
-config.blacklist.synthesis.example=Items that can't be synthesized.
+config.blacklist.synthesis.example=Blacklist synthesis of specific things. Examples "*:diamond", "minecraft:dragon_egg", "mekanism:*", "ore:ore*"
 config.blacklist.synthesis.tooltip=Synthesis Blacklist
 config.debugmode.description=Print debug info to the console
 config.debugmode=Debug Mode
