@@ -1,5 +1,6 @@
 package minechem.apparatus.prefab.tileEntity;
 
+import minechem.apparatus.prefab.peripheral.TilePeripheralBase;
 import minechem.apparatus.prefab.tileEntity.storageTypes.BasicInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
@@ -12,12 +13,13 @@ import net.minecraftforge.common.util.Constants;
 /**
  * Defines basic properties for TileEntities
  */
-public abstract class BasicInventoryTileEntity extends TileEntity implements IInventory
+public abstract class BasicInventoryTileEntity extends TilePeripheralBase implements IInventory
 {
     private BasicInventory inventory;
 
-    public BasicInventoryTileEntity(int inventorySize)
+    public BasicInventoryTileEntity(String name, int inventorySize)
     {
+        super(name);
         inventory = new BasicInventory(inventorySize);
     }
 

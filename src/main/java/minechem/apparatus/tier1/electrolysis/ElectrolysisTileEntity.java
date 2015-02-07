@@ -8,7 +8,7 @@ public class ElectrolysisTileEntity extends BasicInventoryTileEntity
 
     public ElectrolysisTileEntity()
     {
-        super(2);
+        super(Compendium.Naming.electrolysis,2);
     }
 
     @Override

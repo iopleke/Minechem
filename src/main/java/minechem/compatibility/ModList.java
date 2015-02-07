@@ -1,0 +1,78 @@
+package minechem.compatibility;
+
+
+import cpw.mods.fml.common.Loader;
+import minechem.compatibility.computercraft.ComputerCraftCompat;
+import minechem.reference.Mods;
+
+/**
+ * Example Enum Implementation of ModCompat to automatically register compatibility modules
+ */
+public enum ModList
+{
+    computercraft(Mods.COMPUTERCRAFT, "ComputerCraft", new ComputerCraftCompat()),
+    opencomputers(Mods.OPENCOMPUTERS, "OpenComputers");
+
+    private final String modId;
+    private final String modName;
+    private final CompatBase compatClass;
+    private final boolean loaded;
+
+    ModList(CompatBase compatClass)
+    {
+        this("minecraft", "Minecraft", compatClass, true);
+    }
+
+    ModList(String modId, CompatBase compatClass)
+    {
+        this(modId, modId, compatClass);
+    }
+
+    ModList(String modId)
+    {
+        this(modId, modId, null, Loader.isModLoaded(modId));
+    }
+
+    ModList(String modId, String modName)
+    {
+        this(modId, modName, null, Loader.isModLoaded(modId));
+    }
+
+    ModList(String modId, String modName, CompatBase compatClass)
+    {
+        this(modId, modName, compatClass, Loader.isModLoaded(modId));
+    }
+
+    ModList(String modId, String modName, CompatBase compatClass, boolean loaded)
+    {
+        this.modId = modId;
+        this.modName = modName;
+        this.compatClass = compatClass;
+        this.loaded = loaded;
+    }
+
+    public String getModId()
+    {
+        return modId;
+    }
+
+    public String getModName()
+    {
+        return modName;
+    }
+
+    public boolean isLoaded()
+    {
+        return loaded;
+    }
+
+    private void load()
+    {
+        compatClass.load(this);
+    }
+
+    public static void loadCompatibility()
+    {
+        for (ModList mod:values()) mod.load();
+    }
+}
