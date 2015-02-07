@@ -24,13 +24,13 @@ public class PatreonGuiTab extends BasicGuiTab
     public PatreonGuiTab(BasicGuiContainer gui)
     {
         super(gui, LocalizationHelper.getLocalString("tab.patreon.text"), 0);
-        this.backgroundColor = Compendium.Color.TrueColor.CYAN;// I like cyan.
+        this.backgroundColor = Compendium.Color.TrueColor.cyan;// I like cyan.
         this.enabled = Config.enablePatreon;
         this.link = "http://jakimfett.com/patreon";
         this.linkText = LocalizationHelper.getLocalString("tab.patreon.linkText");
         this.tabTitle = "tab.patreon.headerText";
         this.tabTooltip = "tab.patreon.tooltip";
-        this.linkColor = Compendium.Color.TrueColor.YELLOW;
+        this.linkColor = Compendium.Color.TrueColor.yellow;
     }
 
     @Override
