@@ -1,7 +1,6 @@
 package minechem.apparatus.prefab.gui.tab;
 
 import static codechicken.lib.gui.GuiDraw.fontRenderer;
-import java.util.Arrays;
 import java.util.List;
 import minechem.Config;
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
@@ -21,7 +20,6 @@ public class PatreonGuiTab extends BasicGuiTab
     private String link;
     private int linkColor;
     private String linkText;
-    private List<String> linkTextList;
 
     public PatreonGuiTab(BasicGuiContainer gui)
     {
@@ -33,27 +31,25 @@ public class PatreonGuiTab extends BasicGuiTab
         this.tabTitle = "tab.patreon.headerText";
         this.tabTooltip = "tab.patreon.tooltip";
         this.linkColor = ColourHelper.YELLOW;
-        this.linkTextList = Arrays.asList(link);
     }
 
     @Override
     public void draw()
     {
         super.draw();
-        if (isEnabled())
+        if (isEnabled() && isFullyOpened())
         {
-            if (isFullyOpened())
-            {
-                getFontRenderer().drawString(linkText, getLinkX(), getLinkY(), linkColor, true);
+            getFontRenderer().drawStringWithShadow(linkText, getLinkX(), getLinkY(), linkColor);
+            GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+        }
+    }
 
-                if (isLinkAtOffsetPosition(gui.getMouseX(), gui.getMouseY()))
-                {
-                    gui.drawTooltip(linkTextList);
-                }
-
-                GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-                GL11.glDisable(GL11.GL_LIGHTING);
-            }
+    @Override
+    public void addTooltip(List<String> tooltip)
+    {
+        if (isEnabled() && isFullyOpened() && isLinkAtOffsetPosition(gui.getMouseX(), gui.getMouseY()))
+        {
+            tooltip.add(link);
         }
     }
 

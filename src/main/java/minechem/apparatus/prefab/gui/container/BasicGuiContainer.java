@@ -35,13 +35,6 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     }
 
     @Override
-    public void drawTooltip(List<String> paramList)
-    {
-        drawTooltipHoveringText(paramList, mouseX, mouseY, fontRendererObj);
-        this.tooltip.clear();
-    }
-
-    @Override
     public IIcon getIcon(String paramString)
     {
         return IconHandler.getIcon(paramString);
