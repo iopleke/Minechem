@@ -4,6 +4,7 @@ language.region=CN
 language.code=zh_CN
 
 tile.opticalMicroscope.name=显微镜
+tile.electrolysis.name=电解器
 
 config.debugMode=开启以显示额外的日志记录
 config.debugMode.tooltip=调试模式

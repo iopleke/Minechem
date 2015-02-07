@@ -4,6 +4,7 @@ language.region=US
 language.code=en_US
 
 tile.opticalMicroscope.name=Optical Microscope
+tile.electrolysis.name=Electrolysis
 
 config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode
