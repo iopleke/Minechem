@@ -54,7 +54,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
      */
     public static final int[] kJournal =
     {
-        19
+        28
     };
 
     /**
