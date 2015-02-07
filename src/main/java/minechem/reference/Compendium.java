@@ -68,6 +68,7 @@ public class Compendium
         public static final String name = "Minechem";
         public static final String opticalMicroscope = "opticalMicroscope";
         public static final String electrolysis = "electrolysis";
+        public static final String journal = "journal";
     }
 
     public static final class Resource
