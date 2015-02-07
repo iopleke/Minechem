@@ -1,4 +1,4 @@
-package minechem.reference;
+package minechem;
 
 import cpw.mods.fml.common.ModMetadata;
 import java.util.Arrays;

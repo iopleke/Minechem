@@ -15,7 +15,7 @@ import java.util.Set;
 import minechem.Config;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import minechem.registry.ElementRegistry;
 import org.apache.logging.log4j.Level;
 

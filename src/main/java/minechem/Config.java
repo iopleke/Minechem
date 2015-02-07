@@ -6,7 +6,6 @@ import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-import minechem.reference.Compendium;
 import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;

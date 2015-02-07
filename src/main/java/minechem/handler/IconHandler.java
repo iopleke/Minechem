@@ -2,7 +2,7 @@ package minechem.handler;
 
 import gnu.trove.map.TMap;
 import gnu.trove.map.hash.THashMap;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;

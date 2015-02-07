@@ -2,7 +2,7 @@ package minechem.proxy.client.gui;
 
 import cpw.mods.fml.client.config.GuiConfig;
 import minechem.Config;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import net.minecraft.client.gui.GuiScreen;
 
 public class GuiModConfig extends GuiConfig

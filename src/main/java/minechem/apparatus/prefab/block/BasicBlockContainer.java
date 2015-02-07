@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
 import minechem.proxy.CommonProxy;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import minechem.registry.CreativeTabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;

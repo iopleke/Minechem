@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;

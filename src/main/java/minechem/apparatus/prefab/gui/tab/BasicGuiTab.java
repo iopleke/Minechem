@@ -6,7 +6,7 @@ import cofh.lib.util.helpers.MathHelper;
 import java.util.List;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import org.lwjgl.opengl.GL11;
 
 /**
