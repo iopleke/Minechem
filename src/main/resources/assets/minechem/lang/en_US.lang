@@ -3,11 +3,10 @@ language.name=English
 language.region=US
 language.code=en_US
 
-tile.opticalMicroscope.name=Optical Microscope
-tile.electrolysisMachine.name=Electrolysis Machine
-
 gui.element.tank.empty=Empty
-gui.element.tank.mB=mB
+
+tile.electrolysis.name=Electrolysis Apparatus
+tile.opticalMicroscope.name=Optical Microscope
 
 config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode

@@ -161,10 +161,16 @@ public abstract class BasicInventoryTileEntity extends TileEntity implements IIn
 
     }
 
+    /**
+     * Set the inventory slot to a given itemstack
+     *
+     * @param slot  which slot should the itemstack go into
+     * @param stack the stack to put into the slot
+     */
     @Override
-    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
+    public void setInventorySlotContents(int slot, ItemStack stack)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        inventory.setInventorySlotContents(slot, stack);
     }
 
     @Override
