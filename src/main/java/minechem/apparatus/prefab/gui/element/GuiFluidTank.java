@@ -8,44 +8,45 @@ import minechem.reference.Compendium;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
 import org.lwjgl.opengl.GL11;
 
 /**
- * A tank to display in a GUI TODO: when there is an Object for a tank bind the tank directly to this Object
+ * A tank to display in a GUI
  *
  * @author way2muchnoise
  */
 public class GuiFluidTank extends GuiElement
 {
-    private int capacity;
+    private IFluidTank tank;
     private int colour;
 
     /**
      * Make a take with given properties
      *
-     * @param capacity
+     * @param tank
      * @param posX
      * @param posY
      * @param width
      * @param height
      */
-    public GuiFluidTank(int capacity, int posX, int posY, int width, int height)
+    public GuiFluidTank(IFluidTank tank, int posX, int posY, int width, int height)
     {
         super(posX, posY, width, height);
-        this.capacity = capacity;
+        this.tank = tank;
         this.colour = ColourHelper.BLUE;
     }
 
     /**
      * Make a tank using the default width and height
      *
-     * @param capacity tank size
+     * @param tank
      * @param posX
      * @param posY
      */
-    public GuiFluidTank(int capacity, int posX, int posY)
+    public GuiFluidTank(IFluidTank tank, int posX, int posY)
     {
-        this(capacity, posX, posY, 18, 39);
+        this(tank, posX, posY, 18, 39);
     }
 
     /**
@@ -67,7 +68,8 @@ public class GuiFluidTank extends GuiElement
      * @param guiTop     y origin for drawing
      * @param fluidStack fluid to draw
      */
-    public void draw(int guiLeft, int guiTop, FluidStack fluidStack)
+    @Override
+    public void draw(int guiLeft, int guiTop)
     {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor3f(ColourHelper.getRed(colour), ColourHelper.getGreen(colour), ColourHelper.getBlue(colour));
@@ -79,6 +81,7 @@ public class GuiFluidTank extends GuiElement
 
         int iconHeightRemainder = (height - 4) % 16;
         int iconWidthRemainder = (width - 2) % 16;
+        FluidStack fluidStack = tank.getFluid();
 
         if (fluidStack != null && fluidStack.amount > 0)
         {
@@ -107,7 +110,7 @@ public class GuiFluidTank extends GuiElement
             }
 
             bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / capacity))), width - 3, height - 2 - ((int) ((height - 1) * ((float) fluidStack.amount / capacity))));
+            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / tank.getCapacity()))), width - 3, height - 2 - ((int) ((height - 1) * ((float) fluidStack.amount / tank.getCapacity()))));
         }
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
@@ -116,7 +119,7 @@ public class GuiFluidTank extends GuiElement
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
-    public void drawTooltip(int mouseX, int mouseY, FluidStack fluidStack)
+    public void drawTooltip(int mouseX, int mouseY)
     {
         if (!mouseInTank(mouseX, mouseY))
         {
@@ -124,6 +127,7 @@ public class GuiFluidTank extends GuiElement
         }
 
         List<String> description = new ArrayList<String>();
+        FluidStack fluidStack = tank.getFluid();
 
         if (fluidStack == null || fluidStack.getFluid() == null)
         {
@@ -144,12 +148,5 @@ public class GuiFluidTank extends GuiElement
     private boolean mouseInTank(int x, int y)
     {
         return x >= this.posX && x < this.posX + width - 2 && y >= this.posY && y < this.posY + height - 2;
-    }
-
-    @Override
-    public void draw(int guiLeft, int guiTop)
-    {
-        // TODO Auto-generated method stub
-        
     }
 }
