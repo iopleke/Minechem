@@ -1,7 +1,7 @@
 package minechem.apparatus.prefab.renderer;
 
 import minechem.apparatus.prefab.model.BasicModel;
-import minechem.apparatus.prefab.tileEntity.BasicTileEntity;
+import minechem.apparatus.prefab.tileEntity.BasicInventoryTileEntity;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -41,7 +41,7 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
     @Override
     public void renderTileEntityAt(TileEntity tileEntity, double x, double y, double z, float scale)
     {
-        if (tileEntity instanceof BasicTileEntity)
+        if (tileEntity instanceof BasicInventoryTileEntity)
         {
             GL11.glPushMatrix();
             GL11.glTranslated(x + xOffset, y + yOffset, z + zOffset);

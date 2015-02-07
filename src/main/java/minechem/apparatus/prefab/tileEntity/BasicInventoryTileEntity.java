@@ -1,6 +1,6 @@
 package minechem.apparatus.prefab.tileEntity;
 
-import codechicken.lib.inventory.InventoryUtils;
+import minechem.apparatus.prefab.tileEntity.storageTypes.BasicInventory;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
@@ -12,13 +12,13 @@ import net.minecraftforge.common.util.Constants;
 /**
  * Defines basic properties for TileEntities
  */
-public abstract class BasicTileEntity extends TileEntity implements IInventory
+public abstract class BasicInventoryTileEntity extends TileEntity implements IInventory
 {
-    private ItemStack[] inventory;
+    private BasicInventory inventory;
 
-    public BasicTileEntity(int inventorySize)
+    public BasicInventoryTileEntity(int inventorySize)
     {
-        inventory = new ItemStack[inventorySize];
+        inventory = new BasicInventory(inventorySize);
     }
 
     @Override
@@ -36,7 +36,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public ItemStack decrStackSize(int slot, int amount)
     {
-        return InventoryUtils.decrStackSize(this, slot, amount);
+        return inventory.decrStackSize(slot, amount);
     }
 
     /**
@@ -45,7 +45,10 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
      * @return String the unlocalized inventory name
      */
     @Override
-    public abstract String getInventoryName();
+    public String getInventoryName()
+    {
+        return inventory.getInventoryName();
+    }
 
     /**
      * Get the stack size limit for the inventory, override if necessary
@@ -55,7 +58,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public int getInventoryStackLimit()
     {
-        return 64;
+        return inventory.getInventoryStackLimit();
     }
 
     /**
@@ -66,7 +69,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public int getSizeInventory()
     {
-        return inventory.length;
+        return inventory.getSizeInventory();
     }
 
     /**
@@ -78,7 +81,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public ItemStack getStackInSlot(int slot)
     {
-        return inventory[slot];
+        return inventory.getStackInSlot(slot);
     }
 
     /**
@@ -90,7 +93,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public ItemStack getStackInSlotOnClosing(int slot)
     {
-        return InventoryUtils.getStackInSlotOnClosing(this, slot);
+        return inventory.getStackInSlot(slot);
     }
 
     /**
@@ -101,7 +104,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public boolean hasCustomInventoryName()
     {
-        return false;
+        return inventory.hasCustomInventoryName();
     }
 
     /**
@@ -114,7 +117,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public boolean isItemValidForSlot(int slot, ItemStack stack)
     {
-        return true;
+        return inventory.isItemValidForSlot(slot, stack);
     }
 
     /**
@@ -126,8 +129,12 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     @Override
     public boolean isUseableByPlayer(EntityPlayer entityPlayer)
     {
-        double dist = entityPlayer.getDistanceSq(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D);
-        return worldObj.getTileEntity(xCoord, yCoord, zCoord) != this ? false : dist <= 64.0D;
+        return inventory.isUseableByPlayer(entityPlayer, xCoord, yCoord, zCoord);
+    }
+
+    @Override
+    public void markDirty()
+    {
     }
 
     @Override
@@ -145,26 +152,19 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
     {
         super.readFromNBT(nbttagcompound);
 
-        NBTTagList nbttaglist = nbttagcompound.getTagList(getInventoryName() + "Inventory", Constants.NBT.TAG_COMPOUND);
+        NBTTagList nbttaglist = nbttagcompound.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
 
-        for (int i = 0; i < inventory.length; i++)
+        for (int i = 0; i < inventory.getInventory().length; i++)
         {
-            inventory[i] = ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i));
+            inventory.setInventorySlotContents(i, ItemStack.loadItemStackFromNBT(nbttaglist.getCompoundTagAt(i)));
         }
 
     }
 
-    /**
-     * Set the inventory slot to a given itemstack
-     *
-     * @param slot  which slot should the itemstack go into
-     * @param stack the stack to put into the slot
-     */
     @Override
-    public void setInventorySlotContents(int slot, ItemStack stack)
+    public void setInventorySlotContents(int p_70299_1_, ItemStack p_70299_2_)
     {
-        inventory[slot] = stack;
-        markDirty();
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
@@ -181,7 +181,7 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
         super.writeToNBT(nbttagcompound);
         NBTTagList nbttaglist = new NBTTagList();
 
-        for (ItemStack stack : inventory)
+        for (ItemStack stack : inventory.getInventory())
         {
             if (stack != null)
             {
@@ -193,6 +193,6 @@ public abstract class BasicTileEntity extends TileEntity implements IInventory
                 nbttaglist.appendTag(new NBTTagCompound());
             }
         }
-        nbttagcompound.setTag(getInventoryName() + "Inventory", nbttaglist);
+        nbttagcompound.setTag(inventory.getInventoryName(), nbttaglist);
     }
 }
