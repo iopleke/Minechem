@@ -1,6 +1,6 @@
 package minechem.apparatus.prefab.tileEntity.storageTypes;
 
-import minechem.reference.NBTTags;
+import minechem.Compendium;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class Timer
@@ -31,28 +31,28 @@ public class Timer
 
     public NBTTagCompound writeToNBT(NBTTagCompound tagCompound)
     {
-        tagCompound.setTag(NBTTags.TIMER, writeToNBT());
+        tagCompound.setTag(Compendium.NBTTags.timer, writeToNBT());
         return tagCompound;
     }
 
     public NBTTagCompound writeToNBT()
     {
         NBTTagCompound timer = new NBTTagCompound();
-        timer.setInteger(NBTTags.COUNT, this.counter);
-        timer.setInteger(NBTTags.RESET, this.reset);
+        timer.setInteger(Compendium.NBTTags.count, this.counter);
+        timer.setInteger(Compendium.NBTTags.reset, this.reset);
         return timer;
     }
 
     public static Timer nbtToTimer(NBTTagCompound compound)
     {
         NBTTagCompound timer = compound;
-        if (compound.hasKey(NBTTags.TIMER, NBTTags.TAG_COMPOUND))
+        if (compound.hasKey(Compendium.NBTTags.timer, Compendium.NBTTags.tagCompound))
         {
-            timer = compound.getCompoundTag(NBTTags.TIMER);
+            timer = compound.getCompoundTag(Compendium.NBTTags.timer);
         }
-        if (timer.hasKey(NBTTags.COUNT) && timer.hasKey(NBTTags.RESET))
+        if (timer.hasKey(Compendium.NBTTags.count) && timer.hasKey(Compendium.NBTTags.reset))
         {
-            return new Timer(timer.getInteger(NBTTags.RESET), timer.getInteger(NBTTags.COUNT));
+            return new Timer(timer.getInteger(Compendium.NBTTags.reset), timer.getInteger(Compendium.NBTTags.count));
         }
         return null;
     }

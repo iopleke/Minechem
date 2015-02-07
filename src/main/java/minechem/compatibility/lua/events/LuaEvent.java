@@ -3,9 +3,9 @@ package minechem.compatibility.lua.events;
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import li.cil.oc.api.machine.Context;
+import minechem.Compendium;
 import minechem.apparatus.prefab.peripheral.TilePeripheralBase;
 import minechem.compatibility.ModList;
-import minechem.reference.Mods;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class LuaEvent
@@ -35,7 +35,7 @@ public abstract class LuaEvent
         }
     }
 
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public void computerCraftAnnounce(TilePeripheralBase te, Object... message)
     {
         for (Object computer : te.getComputers())
@@ -44,7 +44,7 @@ public abstract class LuaEvent
         }
     }
 
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public void openComputersAnnounce(TilePeripheralBase te, Object... message)
     {
         for (Object context : te.getContext())

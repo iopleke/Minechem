@@ -2,7 +2,7 @@ package minechem.compatibility.lua.methods.liquids;
 
 import java.util.HashMap;
 import java.util.Map;
-import minechem.reference.NBTTags;
+import minechem.Compendium;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.fluids.FluidTankInfo;
@@ -52,9 +52,9 @@ public class LuaGetTankInfo extends LuaFluidMethod
     public static Map<String, Object> getTankMap(FluidTankInfo tank)
     {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put(NBTTags.FLUID, tank.fluid.getFluid().getName());
-        result.put(NBTTags.AMOUNT, tank.fluid.amount);
-        result.put(NBTTags.CAPACITY, tank.capacity);
+        result.put(Compendium.NBTTags.fluid, tank.fluid.getFluid().getName());
+        result.put(Compendium.NBTTags.amount, tank.fluid.amount);
+        result.put(Compendium.NBTTags.capacity, tank.capacity);
         return result;
     }
 }

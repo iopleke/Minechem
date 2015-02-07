@@ -20,19 +20,20 @@ import li.cil.oc.api.network.ManagedPeripheral;
 import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
+import minechem.Compendium;
+import minechem.Compendium.Naming.Mods;
 import minechem.compatibility.ModList;
 import minechem.compatibility.lua.events.checked.CheckEvent;
 import minechem.compatibility.lua.methods.LuaMethod;
-import minechem.reference.Mods;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 @Optional.InterfaceList(
         {
-            @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = Mods.COMPUTERCRAFT),
-            @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OPENCOMPUTERS),
-            @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Mods.OPENCOMPUTERS)
+            @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = Compendium.Naming.Mods.computerCraft),
+            @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Compendium.Naming.Mods.openComputers),
+            @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Compendium.Naming.Mods.openComputers)
         })
 public abstract class TilePeripheralBase extends TileEntity implements ManagedPeripheral, Environment, IPeripheral
 {
@@ -154,14 +155,14 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
 
     //####################ComputerCraft####################
     @Override
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public String[] getMethodNames()
     {
         return this.getMethods();
     }
 
     @Override
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public Object[] callMethod(IComputerAccess iComputerAccess, ILuaContext iLuaContext, int i, Object[] objects) throws LuaException, InterruptedException
     {
         try
@@ -174,27 +175,27 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     @Override
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public void attach(IComputerAccess iComputerAccess)
     {
         computers.add(iComputerAccess);
     }
 
     @Override
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public void detach(IComputerAccess iComputerAccess)
     {
         computers.remove(iComputerAccess);
     }
 
     @Override
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public boolean equals(IPeripheral iPeripheral)
     {
         return false;
     }
 
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public Set<Object> getComputers()
     {
         return computers;
@@ -207,14 +208,14 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public String[] methods()
     {
         return this.getMethods();
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public Object[] invoke(String method, Context context, Arguments args) throws Exception
     {
         Object[] objs = new Object[args.count()];
@@ -226,7 +227,7 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public final void onChunkUnload()
     {
         super.onChunkUnload();
@@ -241,7 +242,7 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public final void invalidate()
     {
         super.invalidate();
@@ -252,32 +253,32 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
         this.onInvalidateOrUnload(worldObj, xCoord, yCoord, zCoord, true);
     }
 
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     protected void onInvalidateOrUnload(World world, int x, int y, int z, boolean invalid)
     {
     }
 
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     private Node createNode()
     {
         return Network.newNode(this, Visibility.Network).withComponent(this.getType(), this.getOCNetworkVisibility()).create();
     }
 
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     protected Visibility getOCNetworkVisibility()
     {
         return Visibility.Network;
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public Node node()
     {
         return (Node) node;
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public void onConnect(Node node)
     {
         if (node.host() instanceof Context)
@@ -287,7 +288,7 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public void onDisconnect(Node node)
     {
         if (node.host() instanceof Context)
@@ -297,12 +298,12 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     @Override
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public void onMessage(Message message)
     {
     }
 
-    @Optional.Method(modid = Mods.OPENCOMPUTERS)
+    @Optional.Method(modid = Compendium.Naming.Mods.openComputers)
     public Set<Object> getContext()
     {
         return context;

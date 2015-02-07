@@ -4,12 +4,12 @@ import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.ComputerCraftAPI;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import dan200.computercraft.api.peripheral.IPeripheralProvider;
+import minechem.Compendium;
 import minechem.apparatus.prefab.peripheral.TilePeripheralBase;
-import minechem.reference.Mods;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-@Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheralProvider", modid = Mods.COMPUTERCRAFT)
+@Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheralProvider", modid = Compendium.Naming.Mods.computerCraft)
 public class PeripheralProvider implements IPeripheralProvider
 {
     public static void register()
@@ -18,7 +18,7 @@ public class PeripheralProvider implements IPeripheralProvider
     }
 
     @Override
-    @Optional.Method(modid = Mods.COMPUTERCRAFT)
+    @Optional.Method(modid = Compendium.Naming.Mods.computerCraft)
     public IPeripheral getPeripheral(World world, int x, int y, int z, int side)
     {
         TileEntity te = world.getTileEntity(x, y, z);

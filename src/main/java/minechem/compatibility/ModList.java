@@ -1,16 +1,16 @@
 package minechem.compatibility;
 
 import cpw.mods.fml.common.Loader;
+import minechem.Compendium;
 import minechem.compatibility.computercraft.ComputerCraftCompat;
-import minechem.reference.Mods;
 
 /**
  * Example Enum Implementation of ModCompat to automatically register compatibility modules
  */
 public enum ModList
 {
-    computercraft(Mods.COMPUTERCRAFT, "ComputerCraft", new ComputerCraftCompat()),
-    opencomputers(Mods.OPENCOMPUTERS, "OpenComputers");
+    computercraft(Compendium.Naming.Mods.computerCraft, "ComputerCraft", new ComputerCraftCompat()),
+    opencomputers(Compendium.Naming.Mods.openComputers, "OpenComputers");
 
     private final String modId;
     private final String modName;

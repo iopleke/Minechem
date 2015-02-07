@@ -3,7 +3,7 @@ package minechem.compatibility.lua;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import minechem.reference.NBTTags;
+import minechem.Compendium;
 import net.minecraft.item.ItemStack;
 
 public class LuaParser
@@ -22,12 +22,12 @@ public class LuaParser
             {
                 return null;
             }
-            result.put(NBTTags.ITEM, id.toString());
-            result.put(NBTTags.AMOUNT, stack.stackSize);
-            result.put(NBTTags.DAMAGE, stack.getItemDamage());
+            result.put(Compendium.NBTTags.item, id.toString());
+            result.put(Compendium.NBTTags.amount, stack.stackSize);
+            result.put(Compendium.NBTTags.damage, stack.getItemDamage());
             if (stack.hasTagCompound())
             {
-                result.put(NBTTags.NBT, stack.getTagCompound().toString());
+                result.put(Compendium.NBTTags.nbt, stack.getTagCompound().toString());
             }
             return result;
         }
