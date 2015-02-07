@@ -21,6 +21,14 @@ public abstract class GuiElement extends Gui
     protected int width;
     protected int height;
 
+    /**
+     * Create a element
+     * 
+     * @param posX the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY the y pos of the element (origin is the left-top of the parent gui)
+     * @param width the width of the element
+     * @param height the height of the element
+     */
     public GuiElement(int posX, int posY, int width, int height)
     {
         this.posX = posX;
@@ -29,6 +37,12 @@ public abstract class GuiElement extends Gui
         this.height = height;
     }
 
+    /**
+     * Draw the element at the given location
+     * 
+     * @param guiLeft the absolute x pos of the parent gui
+     * @param guiTop the absolute y pos of the parent gui
+     */
     public abstract void draw(int guiLeft, int guiTop);
 
     /**
@@ -42,7 +56,8 @@ public abstract class GuiElement extends Gui
     }
 
     /**
-     * Shorthand for getting the {@link net.minecraft.client.Minecraft} {@link net.minecraft.client.gui.FontRenderer}
+     * Shorthand for getting the {@link net.minecraft.client.Minecraft}
+     * {@link net.minecraft.client.gui.FontRenderer}
      *
      * @return the main MinecraftFontRenderer
      */
@@ -54,14 +69,14 @@ public abstract class GuiElement extends Gui
     /**
      * Draws a textured rectangle at the current zLevel.
      *
-     * @param x            x pos
-     * @param y            y pos
-     * @param u            u pos of texture
-     * @param v            v pos of texture
-     * @param actualWidth  width of texture
+     * @param x x pos
+     * @param y y pos
+     * @param u u pos of texture
+     * @param v v pos of texture
+     * @param actualWidth width of texture
      * @param actualHeight height of texture
-     * @param drawWidth    width to draw on
-     * @param drawHeight   height to draw on
+     * @param drawWidth width to draw on
+     * @param drawHeight height to draw on
      */
     protected void drawTexturedModalRect(int x, int y, int u, int v, int actualWidth, int actualHeight, int drawWidth, int drawHeight)
     {
@@ -76,6 +91,14 @@ public abstract class GuiElement extends Gui
         tessellator.draw();
     }
 
+    /**
+     * Draw a tooltip at the given location
+     * 
+     * @param tooltip strings of the tooltip
+     * @param x x pos
+     * @param y y pos
+     * @param fontrenderer FontRenderer to draw
+     */
     protected void drawHoveringText(List<String> tooltip, int x, int y, FontRenderer fontrenderer)
     {
         if (!tooltip.isEmpty())
@@ -84,26 +107,26 @@ public abstract class GuiElement extends Gui
             GL11.glDisable(GL11.GL_LIGHTING);
             GL11.glDisable(GL11.GL_DEPTH_TEST);
             int k = 0;
-    
+
             for (String line : tooltip)
             {
                 int l = fontrenderer.getStringWidth(line);
-    
+
                 if (l > k)
                 {
                     k = l;
                 }
             }
-    
+
             int i1 = x + 12;
             int j1 = y - 12;
             int k1 = 8;
-    
+
             if (tooltip.size() > 1)
             {
                 k1 += 2 + (tooltip.size() - 1) * 10;
             }
-    
+
             this.zLevel = 300.0F;
             int l1 = -267386864;
             this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
@@ -117,20 +140,20 @@ public abstract class GuiElement extends Gui
             this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
             this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
             this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
-    
+
             for (int k2 = 0; k2 < tooltip.size(); ++k2)
             {
                 String s1 = tooltip.get(k2);
                 fontrenderer.drawStringWithShadow(s1, i1, j1, -1);
-    
+
                 if (k2 == 0)
                 {
                     j1 += 2;
                 }
-    
+
                 j1 += 10;
             }
-    
+
             this.zLevel = 0.0F;
             GL11.glEnable(GL11.GL_LIGHTING);
             GL11.glEnable(GL11.GL_DEPTH_TEST);

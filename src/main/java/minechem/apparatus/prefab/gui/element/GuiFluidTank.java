@@ -25,11 +25,11 @@ public class GuiFluidTank extends GuiElement
     /**
      * Make a take with given properties
      *
-     * @param tank
-     * @param posX
-     * @param posY
-     * @param width
-     * @param height
+     * @param tank the tank to display
+     * @param posX the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY the y pos of the element (origin is the left-top of the parent gui)
+     * @param width the width of the element
+     * @param height the height of the element
      */
     public GuiFluidTank(IFluidTank tank, int posX, int posY, int width, int height)
     {
@@ -41,9 +41,9 @@ public class GuiFluidTank extends GuiElement
     /**
      * Make a tank using the default width and height
      *
-     * @param tank
-     * @param posX
-     * @param posY
+     * @param tank the tank to display
+     * @param posX the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY the y pos of the element (origin is the left-top of the parent gui)
      */
     public GuiFluidTank(IFluidTank tank, int posX, int posY)
     {
@@ -56,7 +56,7 @@ public class GuiFluidTank extends GuiElement
      * @param colour in Integer form
      * @return the GuiFluidTank
      */
-    public GuiElement setColour(int colour)
+    public GuiFluidTank setColour(int colour)
     {
         this.colour = colour;
         return this;
@@ -110,7 +110,7 @@ public class GuiFluidTank extends GuiElement
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
         drawTexturedModalRect(guiLeft + posX + 1, guiTop + posY + 1, 19, 1, 16, 37, width - 2, height - 2);
 
-        drawTooltip(Mouse.getX()-guiLeft, Mouse.getY()-guiTop);
+        drawTooltip(Mouse.getX() - guiLeft, Mouse.getY() - guiTop);
 
         GL11.glEnable(GL11.GL_LIGHTING);
     }
