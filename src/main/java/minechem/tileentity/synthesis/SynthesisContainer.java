@@ -157,11 +157,11 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
                 return null;
             } else if (slot >= synthesis.getSizeInventory() && slot < inventorySlots.size() && (stackInSlot.getItem() == MinechemItemsRegistration.element || stackInSlot.getItem() == MinechemItemsRegistration.molecule))
             {
-                if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage, false))
+                if (!mergeItemStack(stackInSlot, SynthesisTileEntity.kStartStorage, SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kStorage.length, false))
                 {
                     return null;
                 }
-            } else if (slot >= SynthesisTileEntity.kStartStorage && slot < SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kSizeStorage)
+            } else if (slot >= SynthesisTileEntity.kStartStorage && slot < SynthesisTileEntity.kStartStorage + SynthesisTileEntity.kStorage.length)
             {
                 if (!mergeItemStack(stackInSlot, synthesis.getSizeInventory(), inventorySlots.size(), true))
                 {

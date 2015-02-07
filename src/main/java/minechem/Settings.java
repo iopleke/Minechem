@@ -225,10 +225,7 @@ public class Settings
 
         prop = config.get("blacklist", "decomposition", new String[]
         {
-            "minecra*:dirt",
-            "minecraft:wool:4",
-            "ore:ore*",
-            "mekanism:*"
+            "minecraft:dirt"
         });
         prop.setLanguageKey("config.blacklist.decomposition.tooltip").setRequiresMcRestart(true);
         prop.comment = StatCollector.translateToLocal("config.blacklist.decomposition.example");
@@ -239,7 +236,7 @@ public class Settings
         prop = config.get("blacklist", "synthesis", new String[]
         {
             "minecraft:diamond",
-            "ore:ingotIron",
+            "ore:ore*",
             "*:dragon_egg"
         });
         prop.setLanguageKey("config.blacklist.synthesis.tooltip").setRequiresMcRestart(true);
