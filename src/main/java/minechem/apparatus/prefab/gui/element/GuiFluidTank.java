@@ -9,6 +9,7 @@ import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.fluids.IFluidTank;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -61,13 +62,6 @@ public class GuiFluidTank extends GuiElement
         return this;
     }
 
-    /**
-     * Draw the tank holding given
-     *
-     * @param guiLeft    x origin for drawing
-     * @param guiTop     y origin for drawing
-     * @param fluidStack fluid to draw
-     */
     @Override
     public void draw(int guiLeft, int guiTop)
     {
@@ -115,6 +109,8 @@ public class GuiFluidTank extends GuiElement
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
         drawTexturedModalRect(guiLeft + posX + 1, guiTop + posY + 1, 19, 1, 16, 37, width - 2, height - 2);
+
+        drawTooltip(Mouse.getX()-guiLeft, Mouse.getY()-guiTop);
 
         GL11.glEnable(GL11.GL_LIGHTING);
     }
