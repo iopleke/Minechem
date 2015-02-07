@@ -80,7 +80,7 @@ public class Compendium
         public static final class GUI
         {
             public static final ResourceLocation opticalMicroscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.opticalMicroscope);
-            
+
             public static final class Element
             {
                 public static final ResourceLocation fluidTank = new ResourceLocation(Compendium.Naming.id, Texture.GUI.Element.fluidTank);

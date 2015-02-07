@@ -1,9 +1,8 @@
 package minechem.registry;
 
-import minechem.element.Element;
-
 import java.util.Map;
 import java.util.TreeMap;
+import minechem.element.Element;
 
 public class ElementRegistry
 {
@@ -12,14 +11,18 @@ public class ElementRegistry
 
     /**
      * Get the registry
+     *
      * @return
      */
     public static ElementRegistry getInstance()
     {
-        if (instance == null) instance = new ElementRegistry();
+        if (instance == null)
+        {
+            instance = new ElementRegistry();
+        }
         return instance;
     }
-    
+
     private ElementRegistry()
     {
         elementMap = new TreeMap<Integer, Element>();
@@ -27,6 +30,7 @@ public class ElementRegistry
 
     /**
      * Register an element
+     *
      * @param element
      */
     public void registerElement(Element element)
@@ -37,6 +41,7 @@ public class ElementRegistry
 
     /**
      * Register an element using construction inputs
+     *
      * @param atomicNumber
      * @param fullName
      * @param shortName
@@ -50,6 +55,7 @@ public class ElementRegistry
 
     /**
      * Get an element by atomicNumber
+     *
      * @param atomicNumber
      * @return can return null
      */

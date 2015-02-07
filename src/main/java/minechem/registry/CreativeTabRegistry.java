@@ -5,7 +5,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 import minechem.reference.Compendium;
 import net.minecraft.block.Block;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 
@@ -14,8 +13,7 @@ public class CreativeTabRegistry
     public static CreativeTab TAB_PRIMARY = new CreativeTab(Compendium.Naming.name);
 
     /**
-     * Must be inited after the Blocks and Items
-     * If you want to used modded Items or Blocks
+     * Must be inited after the Blocks and Items If you want to used modded Items or Blocks
      */
     public static void init()
     {
@@ -74,7 +72,7 @@ public class CreativeTabRegistry
             super(label);
             this.iconItemStack = iconItemStack;
         }
-        
+
         public CreativeTab(String label)
         {
             super(label);

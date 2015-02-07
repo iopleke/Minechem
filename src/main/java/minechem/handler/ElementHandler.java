@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Set;
-
 import minechem.Config;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
@@ -98,7 +97,10 @@ public class ElementHandler
         int count = 0;
         for (Map.Entry<String, JsonElement> elementEntry : elementsSet)
         {
-            if (!elementEntry.getValue().isJsonObject()) continue;
+            if (!elementEntry.getValue().isJsonObject())
+            {
+                continue;
+            }
             JsonObject elementObject = elementEntry.getValue().getAsJsonObject();
             ElementRegistry.getInstance().registerElement(
                 Integer.parseInt(elementEntry.getKey()),

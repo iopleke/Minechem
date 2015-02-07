@@ -1,5 +1,7 @@
 package minechem.apparatus.prefab.gui.element;
 
+import java.util.ArrayList;
+import java.util.List;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.reference.Compendium;
@@ -10,12 +12,9 @@ import net.minecraftforge.fluids.FluidStack;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
- * A tank to display in a GUI
- * TODO: when there is an Object for a tank bind the tank directly to this Object
+ * A tank to display in a GUI TODO: when there is an Object for a tank bind the tank directly to this Object
+ *
  * @author way2muchnoise
  */
 public class GuiFluidTank extends GuiElement
@@ -27,6 +26,7 @@ public class GuiFluidTank extends GuiElement
 
     /**
      * Make a take with given properties
+     *
      * @param capacity
      * @param posX
      * @param posY
@@ -45,6 +45,7 @@ public class GuiFluidTank extends GuiElement
 
     /**
      * Make a tank using the default width and height
+     *
      * @param capacity tank size
      * @param posX
      * @param posY
@@ -56,6 +57,7 @@ public class GuiFluidTank extends GuiElement
 
     /**
      * Set the colour of the line around the tank
+     *
      * @param colour in Integer form
      * @return the GuiFluidTank
      */
@@ -67,8 +69,9 @@ public class GuiFluidTank extends GuiElement
 
     /**
      * Draw the tank holding given
-     * @param guiLeft x origin for drawing
-     * @param guiTop y origin for drawing
+     *
+     * @param guiLeft    x origin for drawing
+     * @param guiTop     y origin for drawing
      * @param fluidStack fluid to draw
      */
     public void draw(int guiLeft, int guiTop, FluidStack fluidStack)
@@ -78,7 +81,7 @@ public class GuiFluidTank extends GuiElement
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
         drawTexturedModalRect(guiLeft + posX, guiTop + posY, 0, 0, 18, 39, width, height);
-        
+
         GL11.glColor3f(1.0F, 1.0F, 1.0F);
 
         int iconHeightRemainder = (height - 4) % 16;
@@ -94,22 +97,28 @@ public class GuiFluidTank extends GuiElement
             for (int i = 0; i <= (width - 4) / 16; i++)
             {
                 // Top right only draw when more then 1 pass is needed
-                if (i > 0) drawTexturedModelRectFromIcon(guiLeft + posX + 1 + (i-1) * 16 + iconWidthRemainder, guiTop + posY + 2 , fluidIcon, 16, iconHeightRemainder);
+                if (i > 0)
+                {
+                    drawTexturedModelRectFromIcon(guiLeft + posX + 1 + (i - 1) * 16 + iconWidthRemainder, guiTop + posY + 2, fluidIcon, 16, iconHeightRemainder);
+                }
                 for (int ii = 0; ii < (height - 6) / 16; ii++)
                 {
                     // Bottom right only draw when more then 1 pass is needed
-                    if (i > 0) drawTexturedModelRectFromIcon(guiLeft + posX + 1 + (i-1) * 16 + iconWidthRemainder, guiTop + posY + 2 + ii * 16 + iconHeightRemainder , fluidIcon, 16, 16);
+                    if (i > 0)
+                    {
+                        drawTexturedModelRectFromIcon(guiLeft + posX + 1 + (i - 1) * 16 + iconWidthRemainder, guiTop + posY + 2 + ii * 16 + iconHeightRemainder, fluidIcon, 16, 16);
+                    }
                     // Bottom left
                     drawTexturedModelRectFromIcon(guiLeft + posX + 1, guiTop + posY + 2 + ii * 16 + iconHeightRemainder, fluidIcon, iconWidthRemainder, 16);
                 }
             }
 
             bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / capacity))), width-3, height-2 - ((int) ((height-1) * ((float) fluidStack.amount / capacity))));
+            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / capacity))), width - 3, height - 2 - ((int) ((height - 1) * ((float) fluidStack.amount / capacity))));
         }
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-        drawTexturedModalRect(guiLeft + posX + 1, guiTop + posY + 1, 19, 1, 16, 37, width-2, height-2);
+        drawTexturedModalRect(guiLeft + posX + 1, guiTop + posY + 1, 19, 1, 16, 37, width - 2, height - 2);
 
         GL11.glEnable(GL11.GL_LIGHTING);
     }
@@ -141,7 +150,7 @@ public class GuiFluidTank extends GuiElement
 
     private boolean mouseInTank(int x, int y)
     {
-        return x >= this.posX && x < this.posX + width -2 && y >= this.posY && y < this.posY + height-2;
+        return x >= this.posX && x < this.posX + width - 2 && y >= this.posY && y < this.posY + height - 2;
     }
 
     protected void drawHoveringText(List<String> tooltip, int x, int y, FontRenderer fontrenderer)
