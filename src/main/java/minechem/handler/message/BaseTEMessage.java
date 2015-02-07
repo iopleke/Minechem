@@ -6,8 +6,7 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.tileentity.TileEntity;
 
 /**
- * Basic message for {@link net.minecraft.tileentity.TileEntity}
- * T represents the {@link net.minecraft.tileentity.TileEntity}
+ * Basic message for {@link net.minecraft.tileentity.TileEntity} T represents the {@link net.minecraft.tileentity.TileEntity}
  */
 public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage implements IMessage
 {
@@ -21,8 +20,8 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
     }
 
     /**
-     * Basic Constructor using the TileEntity
-     * Use super(myTE); in subClasses
+     * Basic Constructor using the TileEntity Use super(myTE); in subClasses
+     *
      * @param entity
      */
     public BaseTEMessage(T entity)
@@ -33,8 +32,8 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
     }
 
     /**
-     * Read values from ByteBuf
-     * Use super(buf); in subClasses
+     * Read values from ByteBuf Use super(buf); in subClasses
+     *
      * @param buf
      */
     @Override
@@ -46,8 +45,8 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
     }
 
     /**
-     * Write values to ByteBuf
-     * Use super(buf); in subClasses
+     * Write values to ByteBuf Use super(buf); in subClasses
+     *
      * @param buf
      */
     @Override
@@ -60,12 +59,13 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
 
     /**
      * Gets the TileEntity
+     *
      * @param ctx
      * @return can be null
      */
     public T getTileEntity(MessageContext ctx)
     {
         TileEntity tileEntity = getWorld(ctx).getTileEntity(this.posX, this.posY, this.posY);
-        return tileEntity == null ? null : (T)tileEntity;
+        return tileEntity == null ? null : (T) tileEntity;
     }
 }

@@ -6,7 +6,7 @@ import net.minecraft.util.StatCollector;
 
 /**
  *
- * @author jakimfett
+ *
  */
 public class LocalizationHelper
 {

@@ -9,7 +9,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
 
 /**
  *
- * @author jakimfett
+ *
  */
 public class IconHandler
 {

@@ -2,7 +2,7 @@ package minechem.helper;
 
 /**
  *
- * @author jakimfett
+ *
  */
 public class GuiIntersectHelper
 {

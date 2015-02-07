@@ -7,7 +7,7 @@ import net.minecraft.entity.player.InventoryPlayer;
 
 /**
  *
- * @author jakimfett
+ *
  */
 public class OpticalMicroscopeGUI extends BasicGuiContainer
 {

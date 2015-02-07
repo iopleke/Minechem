@@ -9,8 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.world.World;
 
 /**
- * Base class for Messages this place should be used for common {@link cpw.mods.fml.common.network.simpleimpl.IMessage} methods
- * You do need to implement {@link cpw.mods.fml.common.network.simpleimpl.IMessageHandler}
+ * Base class for Messages this place should be used for common {@link cpw.mods.fml.common.network.simpleimpl.IMessage} methods You do need to implement
+ * {@link cpw.mods.fml.common.network.simpleimpl.IMessageHandler}
  */
 public abstract class BaseMessage implements IMessage
 {
@@ -23,6 +23,7 @@ public abstract class BaseMessage implements IMessage
 
     /**
      * Get the World from the MessageContext
+     *
      * @param ctx
      * @return the current World
      */
@@ -33,6 +34,7 @@ public abstract class BaseMessage implements IMessage
 
     /**
      * Get the EntityPlayer from the MessageContext
+     *
      * @param ctx
      * @return the current EntityPlayer
      */

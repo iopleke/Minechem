@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 
 /**
  *
- * @author jakimfett
+ *
  */
 public abstract class BasicGuiTab extends TabBase
 {
