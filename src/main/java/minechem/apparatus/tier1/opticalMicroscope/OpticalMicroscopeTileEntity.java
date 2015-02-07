@@ -8,7 +8,7 @@ public class OpticalMicroscopeTileEntity extends BasicInventoryTileEntity
 
     public OpticalMicroscopeTileEntity()
     {
-        super(1);
+        super(Compendium.Naming.opticalMicroscope,1);
     }
 
     @Override
