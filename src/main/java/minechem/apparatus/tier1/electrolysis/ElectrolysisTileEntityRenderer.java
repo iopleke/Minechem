@@ -1,7 +1,7 @@
 package minechem.apparatus.tier1.electrolysis;
 
 import minechem.apparatus.prefab.renderer.BasicTileEntityRenderer;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 
 public class ElectrolysisTileEntityRenderer extends BasicTileEntityRenderer
 {

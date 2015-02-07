@@ -1,7 +1,7 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
 import minechem.apparatus.prefab.block.BasicBlockContainer;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.tileentity.TileEntity;

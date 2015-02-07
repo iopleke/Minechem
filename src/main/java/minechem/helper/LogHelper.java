@@ -2,7 +2,7 @@ package minechem.helper;
 
 import cpw.mods.fml.common.FMLLog;
 import minechem.Config;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import org.apache.logging.log4j.Level;
 
 /**

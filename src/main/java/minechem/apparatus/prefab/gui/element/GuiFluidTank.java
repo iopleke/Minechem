@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
@@ -35,7 +35,7 @@ public class GuiFluidTank extends GuiElement
     {
         super(posX, posY, width, height);
         this.tank = tank;
-        this.colour = ColourHelper.BLUE;
+        this.colour = Compendium.Color.TrueColor.blue;
     }
 
     /**
