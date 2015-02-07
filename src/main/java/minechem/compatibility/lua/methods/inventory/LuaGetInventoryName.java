@@ -13,6 +13,9 @@ public class LuaGetInventoryName extends LuaInventoryMethod
     @Override
     public Object[] action(TileEntity te, Object[] args) throws Exception
     {
-        return new Object[]{((IInventory)te).getInventoryName()};
+        return new Object[]
+        {
+            ((IInventory) te).getInventoryName()
+        };
     }
 }

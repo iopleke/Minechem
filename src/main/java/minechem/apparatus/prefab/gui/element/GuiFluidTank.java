@@ -35,7 +35,7 @@ public class GuiFluidTank extends GuiElement
     {
         super(posX, posY, width, height);
         this.tank = tank;
-        this.colour = ColourHelper.BLUE;
+        this.colour = Compendium.Color.TrueColor.BLUE;
     }
 
     /**

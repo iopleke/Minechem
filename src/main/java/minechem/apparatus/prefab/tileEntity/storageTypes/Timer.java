@@ -46,9 +46,14 @@ public class Timer
     public static Timer nbtToTimer(NBTTagCompound compound)
     {
         NBTTagCompound timer = compound;
-        if (compound.hasKey(NBTTags.TIMER, NBTTags.TAG_COMPOUND)) timer = compound.getCompoundTag(NBTTags.TIMER);
+        if (compound.hasKey(NBTTags.TIMER, NBTTags.TAG_COMPOUND))
+        {
+            timer = compound.getCompoundTag(NBTTags.TIMER);
+        }
         if (timer.hasKey(NBTTags.COUNT) && timer.hasKey(NBTTags.RESET))
+        {
             return new Timer(timer.getInteger(NBTTags.RESET), timer.getInteger(NBTTags.COUNT));
+        }
         return null;
     }
 

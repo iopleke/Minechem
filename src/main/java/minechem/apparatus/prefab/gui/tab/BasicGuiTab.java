@@ -32,7 +32,7 @@ public abstract class BasicGuiTab extends TabBase
     public BasicGuiTab(GuiBase gui, String tabText, int side)
     {
         super(gui, side);
-        textColor = ColourHelper.WHITE;
+        textColor = Compendium.Color.TrueColor.WHITE;
         maxHeight = 92;
         this.tabText = getFontRenderer().listFormattedStringToWidth(tabText, this.maxWidth - 16);
         this.numLines = Math.min(this.tabText.size(), (this.maxHeight - 24) / getFontRenderer().FONT_HEIGHT);

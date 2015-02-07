@@ -16,7 +16,10 @@ public abstract class TriggerEvent<T extends Event> extends LuaEvent
     @SubscribeEvent
     public void eventListener(T event)
     {
-        if (applies(event)) announce(event);
+        if (applies(event))
+        {
+            announce(event);
+        }
     }
 
     public abstract void announce(T event);

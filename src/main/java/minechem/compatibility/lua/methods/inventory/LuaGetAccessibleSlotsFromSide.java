@@ -15,7 +15,10 @@ public class LuaGetAccessibleSlotsFromSide extends LuaMethod
     @Override
     public Object[] action(TileEntity te, Object[] args) throws Exception
     {
-        return new Object[]{LuaParser.toLua(((ISidedInventory)te).getAccessibleSlotsFromSide(((Number)args[0]).intValue()))};
+        return new Object[]
+        {
+            LuaParser.toLua(((ISidedInventory) te).getAccessibleSlotsFromSide(((Number) args[0]).intValue()))
+        };
     }
 
     @Override

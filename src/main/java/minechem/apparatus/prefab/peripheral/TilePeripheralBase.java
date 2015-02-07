@@ -1,15 +1,25 @@
 package minechem.apparatus.prefab.peripheral;
 
-
 import cpw.mods.fml.common.Optional;
 import dan200.computercraft.api.lua.ILuaContext;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import li.cil.oc.api.Network;
 import li.cil.oc.api.machine.Arguments;
 import li.cil.oc.api.machine.Context;
-import li.cil.oc.api.network.*;
+import li.cil.oc.api.network.Component;
+import li.cil.oc.api.network.Environment;
+import li.cil.oc.api.network.ManagedPeripheral;
+import li.cil.oc.api.network.Message;
+import li.cil.oc.api.network.Node;
+import li.cil.oc.api.network.Visibility;
 import minechem.compatibility.ModList;
 import minechem.compatibility.lua.events.checked.CheckEvent;
 import minechem.compatibility.lua.methods.LuaMethod;
@@ -18,14 +28,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-import java.util.*;
-
-
-@Optional.InterfaceList({
-        @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = Mods.COMPUTERCRAFT),
-        @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OPENCOMPUTERS),
-        @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Mods.OPENCOMPUTERS)
-})
+@Optional.InterfaceList(
+        {
+            @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = Mods.COMPUTERCRAFT),
+            @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Mods.OPENCOMPUTERS),
+            @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Mods.OPENCOMPUTERS)
+        })
 public abstract class TilePeripheralBase extends TileEntity implements ManagedPeripheral, Environment, IPeripheral
 {
     protected final String name;
@@ -47,8 +55,14 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     public void updateEntity()
     {
         super.updateEntity();
-        if (!worldObj.isRemote) serverUpdate();
-        if (initialize) init();
+        if (!worldObj.isRemote)
+        {
+            serverUpdate();
+        }
+        if (initialize)
+        {
+            init();
+        }
     }
 
     /**
@@ -58,8 +72,10 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     {
         if (ModList.opencomputers.isLoaded())
         {
-            if (node instanceof Component && ((Component)node).network() == null)
+            if (node instanceof Component && ((Component) node).network() == null)
+            {
                 Network.joinOrCreateNetwork(this);
+            }
         }
         initialize = false;
     }
@@ -71,7 +87,10 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     {
         for (CheckEvent event : events)
         {
-            if (event.checkEvent(this)) event.triggerEvent(this);
+            if (event.checkEvent(this))
+            {
+                event.triggerEvent(this);
+            }
         }
     }
 
@@ -82,7 +101,9 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
         if (ModList.opencomputers.isLoaded())
         {
             if (node instanceof Component)
-                ((Component)node).load(compound);
+            {
+                ((Component) node).load(compound);
+            }
         }
     }
 
@@ -93,12 +114,13 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
         if (ModList.opencomputers.isLoaded())
         {
             if (node instanceof Component)
-                ((Component)node).save(compound);
+            {
+                ((Component) node).save(compound);
+            }
         }
     }
 
     //####################Peripheral Stuff################
-
     public String[] getMethods()
     {
         return methodNames.keySet().toArray(new String[methodNames.size()]);
@@ -131,7 +153,6 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     //####################ComputerCraft####################
-
     @Override
     @Optional.Method(modid = Mods.COMPUTERCRAFT)
     public String[] getMethodNames()
@@ -180,7 +201,6 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     }
 
     //####################OpenComputers####################
-
     public String getComponentName()
     {
         return this.getType();
@@ -213,7 +233,9 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
         if (ModList.opencomputers.isLoaded())
         {
             if (node instanceof Component)
-                ((Component)node).remove();
+            {
+                ((Component) node).remove();
+            }
         }
         this.onInvalidateOrUnload(worldObj, xCoord, yCoord, zCoord, false);
     }
@@ -224,7 +246,9 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     {
         super.invalidate();
         if (node instanceof Component)
-            ((Component)node).remove();
+        {
+            ((Component) node).remove();
+        }
         this.onInvalidateOrUnload(worldObj, xCoord, yCoord, zCoord, true);
     }
 
@@ -249,7 +273,7 @@ public abstract class TilePeripheralBase extends TileEntity implements ManagedPe
     @Optional.Method(modid = Mods.OPENCOMPUTERS)
     public Node node()
     {
-        return (Node)node;
+        return (Node) node;
     }
 
     @Override

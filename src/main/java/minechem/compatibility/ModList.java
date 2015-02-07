@@ -1,6 +1,5 @@
 package minechem.compatibility;
 
-
 import cpw.mods.fml.common.Loader;
 import minechem.compatibility.computercraft.ComputerCraftCompat;
 import minechem.reference.Mods;
@@ -73,6 +72,9 @@ public enum ModList
 
     public static void loadCompatibility()
     {
-        for (ModList mod:values()) mod.load();
+        for (ModList mod : values())
+        {
+            mod.load();
+        }
     }
 }

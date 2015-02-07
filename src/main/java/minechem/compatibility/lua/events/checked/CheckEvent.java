@@ -1,6 +1,5 @@
 package minechem.compatibility.lua.events.checked;
 
-
 import minechem.apparatus.prefab.peripheral.TilePeripheralBase;
 import minechem.compatibility.lua.events.LuaEvent;
 

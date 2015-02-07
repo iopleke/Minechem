@@ -24,7 +24,7 @@ public class PeripheralProvider implements IPeripheralProvider
         TileEntity te = world.getTileEntity(x, y, z);
         if (te instanceof TilePeripheralBase)
         {
-            return (IPeripheral)te;
+            return (IPeripheral) te;
         }
         return null;
     }

@@ -36,7 +36,10 @@ public abstract class LuaMethod
 
     public Object[] call(TileEntity te, Object[] args) throws Exception
     {
-        if (applies(te) && validArgs(args)) return action(te, args);
+        if (applies(te) && validArgs(args))
+        {
+            return action(te, args);
+        }
         return new Object[0];
     }
 
@@ -61,10 +64,16 @@ public abstract class LuaMethod
 
     public boolean validArgs(Object[] args)
     {
-        if (args == null || args.length < minArgs || args.length > maxArgs) return false;
+        if (args == null || args.length < minArgs || args.length > maxArgs)
+        {
+            return false;
+        }
         for (int i = 0; i < args.length && i < classes.length; i++)
         {
-            if (!classes[i].isInstance(args[i])) return false;
+            if (!classes[i].isInstance(args[i]))
+            {
+                return false;
+            }
         }
         return true;
     }

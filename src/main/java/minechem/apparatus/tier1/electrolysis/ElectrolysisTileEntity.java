@@ -1,14 +1,14 @@
 package minechem.apparatus.tier1.electrolysis;
 
-import minechem.apparatus.prefab.tileEntity.BasicInventoryTileEntity;
 import minechem.Compendium;
+import minechem.apparatus.prefab.tileEntity.BasicInventoryTileEntity;
 
 public class ElectrolysisTileEntity extends BasicInventoryTileEntity
 {
 
     public ElectrolysisTileEntity()
     {
-        super(Compendium.Naming.electrolysis,2);
+        super(Compendium.Naming.electrolysis, 2);
     }
 
     @Override
