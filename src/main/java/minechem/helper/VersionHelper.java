@@ -1,8 +1,7 @@
-package minechem.compatibility;
+package minechem.helper;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
-
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,7 +29,10 @@ public class VersionHelper
             String[] split = version.split(deliminator);
             for (int i = 0; i < split.length && i < versionInt.length; i++)
             {
-                if (compareStringInt(split[i], versionInt[i])) return false;
+                if (compareStringInt(split[i], versionInt[i]))
+                {
+                    return false;
+                }
             }
             return true;
         }
@@ -64,7 +66,10 @@ public class VersionHelper
             {
                 for (int i = 0; i < comparators.length && i < match.groupCount(); i++)
                 {
-                    if (compareStringInt(match.group(i), comparators[i])) return false;
+                    if (compareStringInt(match.group(i), comparators[i]))
+                    {
+                        return false;
+                    }
                 }
                 return true;
             }
@@ -91,7 +96,10 @@ public class VersionHelper
     {
         try
         {
-            if (Integer.valueOf(string) >= val) return true;
+            if (Integer.valueOf(string) >= val)
+            {
+                return true;
+            }
         } catch (Exception e)
         {
         }
