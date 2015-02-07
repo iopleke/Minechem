@@ -7,10 +7,10 @@ import net.minecraft.inventory.Slot;
 public class OpticalMicroscopeContainer extends BasicContainer
 {
     /**
-     * Container object for the workbench
+     * Container object for the opticalMicroscope
      *
      * @param inventoryPlayer   the player's inventory
-     * @param opticalMicroscope the bench TileEntity
+     * @param opticalMicroscope the microscope TileEntity
      */
     public OpticalMicroscopeContainer(InventoryPlayer inventoryPlayer, OpticalMicroscopeTileEntity opticalMicroscope)
     {

@@ -1,5 +1,7 @@
 package minechem.element;
 
+import minechem.helper.LogHelper;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +10,11 @@ import java.util.regex.Pattern;
  */
 public class Element
 {
+    public static enum Form
+    {
+        solid, liquid, gas, plasma
+    }
+    
     private static final Matcher SHELL_ORDER = Pattern.compile("\\d+([a-z])").matcher("1s2s2p3s3p4s3d4p5s4d5p6s4f5d6p7s5f6d7p8s5g6f7d8p9s"); //Handles up to atomic number 170
     private static final int[] SUB_SHELL_ELECTRONS = new int[]
     {
@@ -16,7 +23,7 @@ public class Element
     private static final String SUB_SHELL_STRING = "spdfg";																					//Super Powered Dog Fights God
 
     public final int atomicNumber;
-    public final String form;
+    public final Form form;
     public final String fullName;
     public final int neutrons;
     public final String shortName;
@@ -38,7 +45,7 @@ public class Element
         this.atomicNumber = atomicNumber;
         this.fullName = fullName;
         this.shortName = shortName;
-        this.form = form;
+        this.form = Form.valueOf(form);
         this.neutrons = neutrons;
         this.calculateValenceShells();
     }
@@ -80,5 +87,23 @@ public class Element
     {
         this.valenceElectronCount = valenceElectronCount;
         this.valenceSubshellIdentifier = valenceSubshellIdentifier;
+    }
+
+    /**
+     * Write element to the FML Log
+     */
+    public void log()
+    {
+        LogHelper.debug("Atomic Number: " + this.atomicNumber);
+        LogHelper.debug("Element name: " + this.fullName);
+        LogHelper.debug("Element abbreviation: " + this.shortName);
+        LogHelper.debug("Form: " + this.form);
+        LogHelper.debug("Neutrons: " + this.neutrons);
+    }
+
+    @Override
+    public String toString()
+    {
+        return this.shortName;
     }
 }
