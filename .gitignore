@@ -10,11 +10,13 @@
 *.ipr
 *.iws
 *.log
+*.pdf
 *.py
 *.sh
 *.txt
-*.pdf
 .cache
+build.xml
+lib/
 libs/
 libs_sources/
 natives/
