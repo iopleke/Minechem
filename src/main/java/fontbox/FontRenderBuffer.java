@@ -42,10 +42,10 @@ public class FontRenderBuffer
             GL11.glNewList(cx, GL11.GL_COMPILE);
             GL11.glPushMatrix();
             drawTexturedRectUV(0, 0, glyph.width, glyph.height, glyph.ux
-                * (1f / metric.fontImageWidth), glyph.vy
-                * (1f / metric.fontImageHeight), glyph.width
-                * (1f / metric.fontImageWidth), glyph.height
-                * (1f / metric.fontImageHeight), 1.0);
+                    * (1f / metric.fontImageWidth), glyph.vy
+                    * (1f / metric.fontImageHeight), glyph.width
+                    * (1f / metric.fontImageWidth), glyph.height
+                    * (1f / metric.fontImageHeight), 1.0);
             GL11.glPopMatrix();
             GL11.glEndList();
             charmap.put(metricData.getKey(), cx++);
@@ -71,7 +71,7 @@ public class FontRenderBuffer
     }
 
     private void drawTexturedRectUV(double x, double y, double w, double h,
-        double u, double v, double us, double vs, double zLevel)
+            double u, double v, double us, double vs, double zLevel)
     {
         Tessellator tess = Tessellator.instance;
         GL11.glPushMatrix();

@@ -1,128 +1,128 @@
 {
-    "1": {
-        "longName": "Hydrogen",
-        "shortName": "H",
-        "form": "gas",
-        "neutrons": "0"
-    },
-    "2": {
-        "longName": "Helium",
-        "shortName": "He",
-        "form": "gas",
-        "neutrons": "2"
-    },
-    "3": {
-        "longName": "Lithium",
-        "shortName": "Li",
-        "form": "solid",
-        "neutrons": "4"
-    },
-    "4": {
-        "longName": "Beryllium",
-        "shortName": "Be",
-        "form": "solid",
-        "neutrons": "5"
-    },
-    "5": {
-        "longName": "Boron",
-        "shortName": "B",
-        "form": "solid",
-        "neutrons": "6"
-    },
-    "6": {
-        "longName": "Carbon",
-        "shortName": "C",
-        "form": "solid",
-        "neutrons": "6"
-    },
-    "7": {
-        "longName": "Nitrogen",
-        "shortName": "N",
-        "form": "gas",
-        "neutrons": "7"
-    },
-    "8": {
-        "longName": "Oxygen",
-        "shortName": "O",
-        "form": "gas",
-        "neutrons": "8"
-    },
-    "9": {
-        "longName": "Fluorine",
-        "shortName": "F",
-        "form": "gas",
-        "neutrons": "10"
-    },
-    "10": {
-        "longName": "Neon",
-        "shortName": "Ne",
-        "form": "gas",
-        "neutrons": "10"
-    },
-    "11": {
-        "longName": "Sodium",
-        "shortName": "Na",
-        "form": "solid",
-        "neutrons": "12"
-    },
-    "12": {
-        "longName": "Magnesium",
-        "shortName": "Mg",
-        "form": "solid",
-        "neutrons": "12"
-    },
-    "13": {
-        "longName": "Aluminium",
-        "shortName": "Al",
-        "form": "solid",
-        "neutrons": "14"
-    },
-    "14": {
-        "longName": "Silicon",
-        "shortName": "Si",
-        "form": "solid",
-        "neutrons": "14"
-    },
-    "15": {
-        "longName": "Phosphorus",
-        "shortName": "P",
-        "form": "solid",
-        "neutrons": "16"
-    },
-    "16": {
-        "longName": "Sulfur",
-        "shortName": "S",
-        "form": "solid",
-        "neutrons": "16"
-    },
-    "17": {
-        "longName": "Chlorine",
-        "shortName": "Cl",
-        "form": "gas",
-        "neutrons": "18"
-    },
-    "18": {
-        "longName": "Argon",
-        "shortName": "Ar",
-        "form": "gas",
-        "neutrons": "22"
-    },
-    "19": {
-        "longName": "Potassium",
-        "shortName": "K",
-        "form": "solid",
-        "neutrons": "20"
-    },
-    "20": {
-        "longName": "Calcium",
-        "shortName": "Ca",
-        "form": "solid",
-        "neutrons": "24"
-    },
-    "21": {
-        "longName": "Scandium",
-        "shortName": "Sc",
-        "form": "solid",
-        "neutrons": "24"
-    }
+	"1": {
+		"longName": "Hydrogen",
+		"shortName": "H",
+		"form": "gas",
+		"neutrons": "0"
+	},
+	"2": {
+		"longName": "Helium",
+		"shortName": "He",
+		"form": "gas",
+		"neutrons": "2"
+	},
+	"3": {
+		"longName": "Lithium",
+		"shortName": "Li",
+		"form": "solid",
+		"neutrons": "4"
+	},
+	"4": {
+		"longName": "Beryllium",
+		"shortName": "Be",
+		"form": "solid",
+		"neutrons": "5"
+	},
+	"5": {
+		"longName": "Boron",
+		"shortName": "B",
+		"form": "solid",
+		"neutrons": "6"
+	},
+	"6": {
+		"longName": "Carbon",
+		"shortName": "C",
+		"form": "solid",
+		"neutrons": "6"
+	},
+	"7": {
+		"longName": "Nitrogen",
+		"shortName": "N",
+		"form": "gas",
+		"neutrons": "7"
+	},
+	"8": {
+		"longName": "Oxygen",
+		"shortName": "O",
+		"form": "gas",
+		"neutrons": "8"
+	},
+	"9": {
+		"longName": "Fluorine",
+		"shortName": "F",
+		"form": "gas",
+		"neutrons": "10"
+	},
+	"10": {
+		"longName": "Neon",
+		"shortName": "Ne",
+		"form": "gas",
+		"neutrons": "10"
+	},
+	"11": {
+		"longName": "Sodium",
+		"shortName": "Na",
+		"form": "solid",
+		"neutrons": "12"
+	},
+	"12": {
+		"longName": "Magnesium",
+		"shortName": "Mg",
+		"form": "solid",
+		"neutrons": "12"
+	},
+	"13": {
+		"longName": "Aluminium",
+		"shortName": "Al",
+		"form": "solid",
+		"neutrons": "14"
+	},
+	"14": {
+		"longName": "Silicon",
+		"shortName": "Si",
+		"form": "solid",
+		"neutrons": "14"
+	},
+	"15": {
+		"longName": "Phosphorus",
+		"shortName": "P",
+		"form": "solid",
+		"neutrons": "16"
+	},
+	"16": {
+		"longName": "Sulfur",
+		"shortName": "S",
+		"form": "solid",
+		"neutrons": "16"
+	},
+	"17": {
+		"longName": "Chlorine",
+		"shortName": "Cl",
+		"form": "gas",
+		"neutrons": "18"
+	},
+	"18": {
+		"longName": "Argon",
+		"shortName": "Ar",
+		"form": "gas",
+		"neutrons": "22"
+	},
+	"19": {
+		"longName": "Potassium",
+		"shortName": "K",
+		"form": "solid",
+		"neutrons": "20"
+	},
+	"20": {
+		"longName": "Calcium",
+		"shortName": "Ca",
+		"form": "solid",
+		"neutrons": "24"
+	},
+	"21": {
+		"longName": "Scandium",
+		"shortName": "Sc",
+		"form": "solid",
+		"neutrons": "24"
+	}
 }

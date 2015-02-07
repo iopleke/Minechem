@@ -51,7 +51,7 @@ public class FontMetric
     public final float fontImageHeight;
 
     public FontMetric(ResourceLocation fontImageName, int fontImageWidth,
-        int fontImageHeight, ResourceLocation fontMetricName)
+            int fontImageHeight, ResourceLocation fontMetricName)
     {
         this.fontImageName = fontImageName;
         this.fontImageWidth = (float) fontImageWidth;
@@ -69,14 +69,14 @@ public class FontMetric
         try
         {
             IResource metricResource = Minecraft.getMinecraft()
-                .getResourceManager().getResource(fontMetricName);
+                    .getResourceManager().getResource(fontMetricName);
             InputStream stream = metricResource.getInputStream();
             if (stream == null)
             {
                 throw new IOException("Could not open font metric file.");
             }
             DocumentBuilderFactory factory = DocumentBuilderFactory
-                .newInstance();
+                    .newInstance();
             DocumentBuilder builder = factory.newDocumentBuilder();
             Document doc = builder.parse(stream);
             Element metrics = doc.getDocumentElement();
@@ -86,11 +86,11 @@ public class FontMetric
             {
                 Element character = (Element) list_character.item(i);
                 int charcode = Integer.parseInt(character.getAttributes()
-                    .getNamedItem("key").getNodeValue());
+                        .getNamedItem("key").getNodeValue());
                 if (0 > charcode || charcode > 255)
                 {
                     throw new FontException(String.format(
-                        "Unsupported character code %s", charcode));
+                            "Unsupported character code %s", charcode));
                 }
                 int w = -1, h = -1, u = -1, v = -1;
                 NodeList character_properties = character.getChildNodes();
@@ -104,7 +104,7 @@ public class FontMetric
                     Element elem = (Element) property;
                     String name = elem.getNodeName().toLowerCase();
                     int val = Integer.parseInt(elem.getFirstChild()
-                        .getNodeValue());
+                            .getNodeValue());
                     if (name.equals("width"))
                     {
                         w = val;
@@ -120,14 +120,14 @@ public class FontMetric
                     } else
                     {
                         throw new FontException(String.format(
-                            "Unexpected metric command %s", name));
+                                "Unexpected metric command %s", name));
                     }
                 }
                 if (w == -1 || h == -1 || u == -1 || v == -1)
                 {
                     throw new FontException(String.format(
-                        "Invalid metric properties set for key %s",
-                        charcode));
+                            "Invalid metric properties set for key %s",
+                            charcode));
                 }
                 glyphs.put(charcode, new GlyphMetric(w, h, u, v));
             }

@@ -25,10 +25,10 @@ public class GuiFluidTank extends GuiElement
     /**
      * Make a take with given properties
      *
-     * @param tank the tank to display
-     * @param posX the x pos of the element (origin is the left-top of the parent gui)
-     * @param posY the y pos of the element (origin is the left-top of the parent gui)
-     * @param width the width of the element
+     * @param tank   the tank to display
+     * @param posX   the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY   the y pos of the element (origin is the left-top of the parent gui)
+     * @param width  the width of the element
      * @param height the height of the element
      */
     public GuiFluidTank(IFluidTank tank, int posX, int posY, int width, int height)

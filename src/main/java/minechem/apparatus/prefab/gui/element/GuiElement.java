@@ -1,13 +1,13 @@
 package minechem.apparatus.prefab.gui.element;
 
 import java.util.List;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.ResourceLocation;
+import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 
 /**
  * Base class for GuiElements Holds methods that can be useful when making GuiElements
@@ -23,10 +23,10 @@ public abstract class GuiElement extends Gui
 
     /**
      * Create a element
-     * 
-     * @param posX the x pos of the element (origin is the left-top of the parent gui)
-     * @param posY the y pos of the element (origin is the left-top of the parent gui)
-     * @param width the width of the element
+     *
+     * @param posX   the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY   the y pos of the element (origin is the left-top of the parent gui)
+     * @param width  the width of the element
      * @param height the height of the element
      */
     public GuiElement(int posX, int posY, int width, int height)
@@ -39,9 +39,9 @@ public abstract class GuiElement extends Gui
 
     /**
      * Draw the element at the given location
-     * 
+     *
      * @param guiLeft the absolute x pos of the parent gui
-     * @param guiTop the absolute y pos of the parent gui
+     * @param guiTop  the absolute y pos of the parent gui
      */
     public abstract void draw(int guiLeft, int guiTop);
 
@@ -69,14 +69,14 @@ public abstract class GuiElement extends Gui
     /**
      * Draws a textured rectangle at the current zLevel.
      *
-     * @param x x pos
-     * @param y y pos
-     * @param u u pos of texture
-     * @param v v pos of texture
-     * @param actualWidth width of texture
+     * @param x            x pos
+     * @param y            y pos
+     * @param u            u pos of texture
+     * @param v            v pos of texture
+     * @param actualWidth  width of texture
      * @param actualHeight height of texture
-     * @param drawWidth width to draw on
-     * @param drawHeight height to draw on
+     * @param drawWidth    width to draw on
+     * @param drawHeight   height to draw on
      */
     protected void drawTexturedModalRect(int x, int y, int u, int v, int actualWidth, int actualHeight, int drawWidth, int drawHeight)
     {
@@ -93,10 +93,10 @@ public abstract class GuiElement extends Gui
 
     /**
      * Draw a tooltip at the given location
-     * 
-     * @param tooltip strings of the tooltip
-     * @param x x pos
-     * @param y y pos
+     *
+     * @param tooltip      strings of the tooltip
+     * @param x            x pos
+     * @param y            y pos
      * @param fontrenderer FontRenderer to draw
      */
     protected void drawHoveringText(List<String> tooltip, int x, int y, FontRenderer fontrenderer)
