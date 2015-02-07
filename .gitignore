@@ -13,7 +13,6 @@
 *.py
 *.sh
 *.txt
-*.xml
 *.pdf
 .cache
 libs/
