@@ -247,6 +247,39 @@ public class Compendium
         public static final String minor = "@MINOR@";
         public static final String build = "@BUILD@";
         public static final String full = major + "." + minor + "." + build;
+    }
 
+    public class NBTTags
+    {
+        public static final int tagEnd = 0;
+        public static final int tagByte = 1;
+        public static final int tagShort = 2;
+        public static final int tagInt = 3;
+        public static final int tagLong = 4;
+        public static final int tagFloat = 5;
+        public static final int tagDouble = 6;
+        public static final int tagByteArray = 7;
+        public static final int tagString = 8;
+        public static final int tagList = 9;
+        public static final int tagCompound = 10;
+        public static final int tagIntArray = 11;
+
+        public static final String slot = "slot";
+        public static final String stack = "stack";
+        public static final String inventory = "inventory";
+        public static final String timer = "timer";
+        public static final String count = "count";
+        public static final String reset = "reset";
+        public static final String fluid = "fluid";
+        public static final String fluidNull = "fluid_null";
+        public static final String amount = "amount";
+        public static final String capacity = "capacity";
+        public static final String name = "name";
+        public static final String x = "xCoord";
+        public static final String y = "xCoord";
+        public static final String z = "zCoord";
+        public static final String nbt = "nbt";
+        public static final String item = "item";
+        public static final String damage = "damage";
     }
 }
