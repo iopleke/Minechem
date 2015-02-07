@@ -89,6 +89,87 @@ public class Compendium
         public static final String opticalMicroscope = "opticalMicroscope";
         public static final String electrolysis = "electrolysis";
         public static final String journal = "journal";
+
+        public class Mods
+        {
+            public static final String ae = "AppliedEnergistics";
+            public static final String ae2 = "appliedenergistics2";
+            public static final String armorStatusHUD = "ArmorStatusHUD";
+            public static final String arsMagica2 = "arsmagica2";
+            public static final String biblioCraft = "BiblioCraft";
+            public static final String billund = "Billund";
+            public static final String biomesOPlenty = "BiomesOPlenty";
+            public static final String blockBreaker = "BlockBreaker";
+            public static final String bloodMagic = "AWWayofTime";
+            public static final String bluePower = "bluepower";
+            public static final String bigReactors = "BigReactors";
+            public static final String buildCraftBuilders = "BuildCraft|Builders";
+            public static final String buildCraftCore = "BuildCraft|Core";
+            public static final String buildCraftEnergy = "BuildCraft|Energy";
+            public static final String buildCraftFactory = "BuildCraft|Factory";
+            public static final String buildCraftSilicon = "BuildCraft|Factory";
+            public static final String buildCraftTransport = "BuildCraft|Transport";
+            public static final String chickenChunks = "ChickenChunks";
+            public static final String chromatiCraft = "ChromatiCraft";
+            public static final String computerCraft = "ComputerCraft";
+            public static final String computerCraftTurtle = "CCTurtle";
+            public static final String CoFHCore = "CoFHCore";
+            public static final String crystalWing = "CrystalWing";
+            public static final String directionHUD = "DirectionHUD";
+            public static final String denseOres = "denseores";
+            public static final String enderStorage = "EnderStorage";
+            public static final String extraBees = "ExtraBees";
+            public static final String extraBiomesXL = "ExtrabiomesXL";
+            public static final String extraTrees = "ExtraTrees";
+            public static final String extraUtilities = "ExtraUtilities";
+            public static final String electriCraft = "ElectriCraft";
+            public static final String expandedRedstone = "ExpandedRedstone";
+            public static final String floatingRuins = "FloatingRuins";
+            public static final String forestry = "Forestry";
+            public static final String gravityGun = "GraviGun";
+            public static final String gregTech = "gregtech";
+            public static final String hatStand = "HatStand";
+            public static final String hats = "Hats";
+            public static final String ic2 = "IC2";
+            public static final String ingameInfo = "IngameInfo";
+            public static final String magicBees = "MagicBees";
+            public static final String magicCrops = "magicalcrops";
+            public static final String modularPowerSuits = "powersuits";
+            public static final String minefactoryReloaded = "MineFactoryReloaded";
+            public static final String minecraftMultiPart = "McMultipart";
+            public static final String mystCraft = "Mystcraft";
+            public static final String metalurgy = "Metallurgy";
+            public static final String mobProperties = "MobProperties";
+            public static final String netherOres = "NetherOres";
+            public static final String openBlocks = "OpenBlocks";
+            public static final String openPeripheral = "OpenPeripheral";
+            public static final String openPeripheralCore = "OpenPeripheralCore";
+            public static final String openComputers = "OpenComputers";
+            public static final String portalGun = "PortalGun";
+            public static final String pneumaticCraft = "PneumaticCraft";
+            public static final String projectRed = "ProjRed|Core";
+            public static final String projectRedTransmission = "ProjRed|Transmission";
+            public static final String railCraft = "Railcraft";
+            public static final String routerReborn = "RouterReborn";
+            public static final String reactorCraft = "ReactorCraft";
+            public static final String rotaryCraft = "RotaryCraft";
+            public static final String scCraft = "SGCraft";
+            public static final String startingInventory = "StartingInventory";
+            public static final String statusEffectHUD = "StatusEffectHUD";
+            public static final String stevesCarts = "StevesCarts";
+            public static final String stevesFactoryManager = "StevesFactoryManager";
+            public static final String tinkersConstruct = "TConstruct";
+            public static final String tinkersMechworks = "TMechworks";
+            public static final String thaumcraft = "Thaumcraft";
+            public static final String thermalExpansion = "ThermalExpansion";
+            public static final String thermalFoundation = "ThermalFoundation";
+            public static final String translocator = "Translocator";
+            public static final String treeCapitator = "TreeCapitator";
+            public static final String wirelessRedstoneCBE = "WR-CBE|Core";
+            public static final String worldStateCheckPoints = "WorldStateCheckpoints";
+            public static final String flansMod = "FlansMod";
+        }
+
     }
 
     public static final class Resource
