@@ -20,7 +20,7 @@ public class LayoutCalculator
     {
         // Calculate some required properties
         int effectiveWidth = page.page_width - page.margin_left
-            - page.margin_right;
+                - page.margin_right;
         int effectiveHeight = page.getFreeHeight();
 
         int width_new_line = 0, width_new_word = 0;
@@ -50,7 +50,7 @@ public class LayoutCalculator
                 {
                     // Find out if there is enough space to push this word
                     int new_width_nl = width_new_line + width_new_word
-                        + page.min_space_size;
+                            + page.min_space_size;
                     if (effectiveWidth >= new_width_nl)
                     {
                         // Yes, there is enough space, add the word
@@ -88,7 +88,7 @@ public class LayoutCalculator
         {
             // Find out if there is enough space to push this word
             int new_width_nl = width_new_line + width_new_word
-                + page.min_space_size;
+                    + page.min_space_size;
             if (effectiveWidth >= new_width_nl)
             {
                 // Yes, there is enough space, add the word
@@ -158,7 +158,7 @@ public class LayoutCalculator
         if (words.size() > 0)
         {
             int extra_px_per_space = (int) Math.floor(space_remain
-                / words.size());
+                    / words.size());
             if (width_new_line > extra_px_per_space)
             {
                 space_width = page.min_space_size + extra_px_per_space;
@@ -189,14 +189,14 @@ public class LayoutCalculator
      * @return The page results
      */
     public PageBox[] boxParagraph(FontMetric metric, String text, int width,
-        int height, int margin_l, int margin_r, int min_sp, int min_lhs)
-        throws IOException
+            int height, int margin_l, int margin_r, int min_sp, int min_lhs)
+            throws IOException
     {
         StackedPushbackStringReader reader = new StackedPushbackStringReader(
-            text);
+                text);
         ArrayList<PageBox> pages = new ArrayList<PageBox>();
         PageBox currentPage = new PageBox(width, height, margin_l, margin_r,
-            min_sp, min_lhs);
+                min_sp, min_lhs);
         boolean flag = false;
         while (reader.available() > 0)
         {
@@ -205,7 +205,7 @@ public class LayoutCalculator
             {
                 pages.add(currentPage);
                 currentPage = new PageBox(width, height, margin_l, margin_r,
-                    min_sp, min_lhs);
+                        min_sp, min_lhs);
             }
         }
         if (!flag)

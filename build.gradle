@@ -1,167 +1,167 @@
 buildscript {
-    repositories {
-        mavenCentral()
-        jcenter()
-        maven {
-            name = "forge"
-            url = "http://files.minecraftforge.net/maven"
-        }
-        maven {
-            // Add maven repo for SpecialSource
-            name = "sonatype"
-            url = "https://oss.sonatype.org/content/repositories/snapshots/"
-        }
-    }
-    dependencies {
-        classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-        classpath 'de.undercouch:gradle-download-task:1.2'
-    }
+repositories {
+mavenCentral()
+		jcenter()
+		maven {
+		name = "forge"
+				url = "http://files.minecraftforge.net/maven"
+		}
+maven {
+// Add maven repo for SpecialSource
+		name = "sonatype"
+		url = "https://oss.sonatype.org/content/repositories/snapshots/"
+		}
+}
+dependencies {
+classpath 'net.minecraftforge.gradle:ForgeGradle:1.2 - SNAPSHOT'
+		classpath 'de.undercouch:gradle - download - task:1.2'
+		}
 }
 
 apply plugin: 'forge'
-apply plugin: 'maven'
-apply plugin: 'maven-publish'
-apply plugin: 'de.undercouch.download'
+		apply plugin: 'maven'
+		apply plugin: 'maven - publish'
+		apply plugin: 'de.undercouch.download'
 
-ext.buildProps = file "build.properties"
+		ext.buildProps = file "build.properties"
 
-buildProps.withReader {
-    def prop = new Properties()
-    prop.load(it)
-    ext.config = new ConfigSlurper().parse prop
-}
+		buildProps.withReader {
+		def prop = new Properties()
+				prop.load(it)
+				ext.config = new ConfigSlurper().parse prop
+		}
 
 repositories {
-    maven {
-        name = "forge"
-        url = "http://files.minecraftforge.net/maven"
-    }
-    maven { // the repo from which to get NEI and stuff
-        name 'CB Repo'
-        url "http://chickenbones.net/maven"
-    }
-    ivy {
-        name 'FMP'
-        artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
-    }
-	maven {
-		// OpenComputers maven repo
+maven {
+name = "forge"
+		url = "http://files.minecraftforge.net/maven"
+		}
+maven { // the repo from which to get NEI and stuff
+		name 'CB Repo'
+		url "http://chickenbones.net/maven"
+		}
+ivy {
+name 'FMP'
+		artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
+		}
+maven {
+// OpenComputers maven repo
 		url = "http://maven.cil.li/"
-	}
+		}
 }
 
 dependencies {
-    compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.cc.nei}", ext: 'jar', classifier: "dev"
-    compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cc.core}", ext: 'jar', classifier: "dev"
-    compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cc.lib}", ext: 'jar', classifier: "dev"
-	compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC${config.version.minecraft}-${config.version.oc.api}-dev", ext: 'jar', classifier: "api"
-    compile fileTree(dir: 'libs', include: '*.jar')
-    compile fileTree(dir: 'libs', include: '*.zip')
+compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.cc.nei}", ext: 'jar', classifier: "dev"
+		compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cc.core}", ext: 'jar', classifier: "dev"
+		compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cc.lib}", ext: 'jar', classifier: "dev"
+		compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC${config.version.minecraft}-${config.version.oc.api}-dev", ext: 'jar', classifier: "api"
+		compile fileTree(dir: 'libs', include: '*.jar')
+		compile fileTree(dir: 'libs', include: '*.zip')
 }
 
 group = "minechem"
-archivesBaseName = "Minechem"
+		archivesBaseName = "Minechem"
 
-minecraft {
-    version = "${config.version.minecraft}-${config.version.forge}"
+		minecraft {
+		version = "${config.version.minecraft}-${config.version.forge}"
 
-    replace "@MAJOR@", config.version.mod.major
-    replace "@MINOR@", config.version.mod.minor
+				replace "@MAJOR@", config.version.mod.major
+				replace "@MINOR@", config.version.mod.minor
 
-    if (System.getenv("BUILD_NUMBER") != null) {
-        replace "@BUILD@", System.getenv("BUILD_NUMBER")
-    }
-    else
-    {
-        replace "@BUILD@", "ManuallyBuilt"
-    }
-}
+				if (System.getenv("BUILD_NUMBER") != null) {
+				replace "@BUILD@", System.getenv("BUILD_NUMBER")
+				}
+		else
+		{
+		replace "@BUILD@", "ManuallyBuilt"
+		}
+		}
 
 processResources {
-    from 'build.properties'
+from 'build.properties'
 }
 
 allprojects {
-    version = "${config.version.minecraft}-${config.version.mod.major}.${config.version.mod.minor}"
+version = "${config.version.minecraft}-${config.version.mod.major}.${config.version.mod.minor}"
 
-    if (System.getenv("BUILD_NUMBER") != null) {
-        version += ".${System.getenv("BUILD_NUMBER")}"
-    } else {
-        version += "-ManuallyBuilt"
-    }
+		if (System.getenv("BUILD_NUMBER") != null) {
+		version += ".${System.getenv("BUILD_NUMBER")}"
+		} else {
+version += "-ManuallyBuilt"
+		}
 
-    jar {
-        destinationDir = file (rootProject.getRootDir().getPath() + '/output')
-    }
+jar {
+destinationDir = file (rootProject.getRootDir().getPath() + '/output')
+		}
 
-    publishing {
-        publications {
-            mavenJava(MavenPublication) {
-                artifact jar
-            }
-        }
-        repositories {
-            maven {
-                url "file://var/www/maven"
-            }
-        }
-    }
+publishing {
+publications {
+mavenJava(MavenPublication) {
+artifact jar
+		}
+}
+repositories {
+maven {
+url "file://var/www/maven"
+		}
+}
+}
 }
 
 sourceSets {
-    main {
-        resources {
-            exclude '**/xcf/*'
-            exclude 'resources/assets/minechem/xcf'
-        }
-    }
+main {
+resources {
+exclude '**/xcf/*'
+		exclude 'resources/assets/minechem/xcf'
+		}
+}
 }
 
 import de.undercouch.gradle.tasks.download.Download
 
-task getLibraries {
-    def libsFolder = new File('libs')
-    if (!libsFolder.isDirectory() ) {
-        libsFolder.mkdirs()
-    }
+		task getLibraries {
+		def libsFolder = new File('libs')
+				if (!libsFolder.isDirectory() ) {
+				libsFolder.mkdirs()
+				}
 
-	def ccSource = 'http://minecraft.curseforge.com/mc-mods/67504-computercraft/files/2216236/download'
-	def ccDest = new File('libs', 'ComputerCraft-1.65.jar')
+		def ccSource = 'http://minecraft.curseforge.com/mc - mods/67504 - computercraft/files/2216236/download'
+				def ccDest = new File('libs', 'ComputerCraft - 1.65.jar')
 
 
-	if(!ccDest.exists() ){
-		download {
-			src ccSource
-			dest ccDest
+				if(!ccDest.exists() ){
+				download {
+				src ccSource
+						dest ccDest
+				}
+				}
+
+		def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3 - Dev - 1.7.10 - 3.0.9C.jar'
+				def mtDest = new File('libs', 'MineTweaker3 - Dev - 1.7.10 - 3.0.9C.jar')
+
+				if(!mtDest.exists() ){
+				download {
+				src mtSource
+						dest mtDest
+				}
+				}
+
+		def cofhSource = 'http://minecraft.curseforge.com/mc - mods/220333 - cofhlib/files/2225609/download'
+				def cofhDest = new File('libs', 'CoFHLib - 1.7.10 - 1.0.0B9 - 68 - dev.jar')
+
+				if(!cofhDest.exists() ){
+				download {
+				src cofhSource
+						dest cofhDest
+				}
+				}
 		}
-	}
-
-    def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-Dev-1.7.10-3.0.9C.jar'
-    def mtDest = new File('libs', 'MineTweaker3-Dev-1.7.10-3.0.9C.jar')
-
-    if(!mtDest.exists() ){
-        download {
-            src mtSource
-            dest mtDest
-        }
-    }
-
-    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2225609/download'
-    def cofhDest = new File('libs', 'CoFHLib-1.7.10-1.0.0B9-68-dev.jar')
-
-    if(!cofhDest.exists() ){
-        download {
-            src cofhSource
-            dest cofhDest
-        }
-    }
-}
 
 task apiZip(type: Zip) {
-    classifier = 'api'
-    from sourceSets*.allSource
-    include 'minechem/api/**'
-    destinationDir = file 'output'
+classifier = 'api'
+		from sourceSets*.allSource
+		include 'minechem/api/**'
+		destinationDir = file 'output'
 }
 
 build.dependsOn "apiZip", "getLibraries"

@@ -33,8 +33,7 @@ public class ElementHandler
             {
                 stream = FileHelper.getInputStreamFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource);
                 readFromStream(stream);
-            }
-            finally
+            } finally
             {
                 if (stream != null)
                 {
@@ -70,8 +69,7 @@ public class ElementHandler
                 } catch (FileNotFoundException e)
                 {
                     throw new RuntimeException(e);
-                }
-                finally
+                } finally
                 {
                     if (stream != null)
                     {
@@ -103,11 +101,11 @@ public class ElementHandler
             }
             JsonObject elementObject = elementEntry.getValue().getAsJsonObject();
             ElementRegistry.getInstance().registerElement(
-                Integer.parseInt(elementEntry.getKey()),
-                elementObject.get("longName").getAsString(),
-                elementObject.get("shortName").getAsString(),
-                elementObject.get("form").getAsString(),
-                Integer.parseInt(elementObject.get("neutrons").getAsString())
+                    Integer.parseInt(elementEntry.getKey()),
+                    elementObject.get("longName").getAsString(),
+                    elementObject.get("shortName").getAsString(),
+                    elementObject.get("form").getAsString(),
+                    Integer.parseInt(elementObject.get("neutrons").getAsString())
             );
             count++;
         }
