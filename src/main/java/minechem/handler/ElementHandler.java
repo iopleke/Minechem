@@ -4,9 +4,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,74 +16,25 @@ import minechem.Compendium;
 import minechem.registry.ElementRegistry;
 import org.apache.logging.log4j.Level;
 
-/**
- *
- */
 public class ElementHandler
 {
-    public void init()
+    public static void init()
     {
-        if (Config.useDefaultElements)
+        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, Compendium.Config.elementsDataJson, Config.useDefaultElements);
+        readFromStream(inputStream);
+        if (inputStream != null)
         {
-            InputStream stream = null;
             try
             {
-                stream = FileHelper.getInputStreamFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource);
-                readFromStream(stream);
-            } finally
+                inputStream.close();
+            } catch (IOException e)
             {
-                if (stream != null)
-                {
-                    try
-                    {
-                        stream.close();
-                    } catch (IOException e)
-                    {
-                        LogHelper.exception("Cannot close stream!", e, Level.WARN);
-                    }
-                }
-            }
-        } else
-        {
-            File elementsDataFile = new File(Compendium.Config.configPrefix + Compendium.Config.elementsDataJson);
-
-            if (!elementsDataFile.isFile())
-            {
-                FileHelper.copyFromJar(ElementHandler.class, Compendium.Config.elementsDataJsonSource, Compendium.Config.elementsDataJson);
-
-                // If the file was copied, get the file again
-                elementsDataFile = new File(Compendium.Config.configPrefix + Compendium.Config.elementsDataJson);
-            }
-
-            if (elementsDataFile.isFile())
-            {
-                LogHelper.debug("JSON file exists");
-                InputStream stream = null;
-                try
-                {
-                    stream = new FileInputStream(elementsDataFile);
-                    readFromStream(stream);
-                } catch (FileNotFoundException e)
-                {
-                    throw new RuntimeException(e);
-                } finally
-                {
-                    if (stream != null)
-                    {
-                        try
-                        {
-                            stream.close();
-                        } catch (IOException e)
-                        {
-                            LogHelper.exception("Cannot close stream!", e, Level.WARN);
-                        }
-                    }
-                }
+                LogHelper.exception("Cannot close stream!", e, Level.WARN);
             }
         }
     }
 
-    public void readFromStream(InputStream stream)
+    private static void readFromStream(InputStream stream)
     {
         JsonReader jReader = new JsonReader(new InputStreamReader(stream));
         JsonParser parser = new JsonParser();
