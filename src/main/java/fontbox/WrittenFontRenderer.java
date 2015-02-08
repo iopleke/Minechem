@@ -23,11 +23,11 @@ public class WrittenFontRenderer
      * @param debug  If the draw is debug enabled.
      */
     public void renderPages(FontMetric metric, FontRenderBuffer buffer,
-            PageBox page, float ox, float oy, float z, boolean debug)
+        PageBox page, float ox, float oy, float z, boolean debug)
     {
         float x = 0, y = 0;
         Minecraft.getMinecraft().getTextureManager()
-                .bindTexture(metric.fontImageName);
+            .bindTexture(metric.fontImageName);
         GL11.glPushMatrix();
         GL11.glTranslatef(ox, oy, z);
         GL11.glEnable(GL11.GL_BLEND);

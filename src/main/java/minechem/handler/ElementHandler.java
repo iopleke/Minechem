@@ -9,10 +9,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Map;
 import java.util.Set;
+import minechem.Compendium;
 import minechem.Config;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
-import minechem.Compendium;
 import minechem.registry.ElementRegistry;
 import org.apache.logging.log4j.Level;
 
@@ -49,11 +49,11 @@ public class ElementHandler
             }
             JsonObject elementObject = elementEntry.getValue().getAsJsonObject();
             ElementRegistry.getInstance().registerElement(
-                    Integer.parseInt(elementEntry.getKey()),
-                    elementObject.get("longName").getAsString(),
-                    elementObject.get("shortName").getAsString(),
-                    elementObject.get("form").getAsString(),
-                    Integer.parseInt(elementObject.get("neutrons").getAsString())
+                Integer.parseInt(elementEntry.getKey()),
+                elementObject.get("longName").getAsString(),
+                elementObject.get("shortName").getAsString(),
+                elementObject.get("form").getAsString(),
+                Integer.parseInt(elementObject.get("neutrons").getAsString())
             );
             count++;
         }

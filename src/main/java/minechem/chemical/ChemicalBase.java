@@ -1,9 +1,8 @@
 package minechem.chemical;
 
 /**
- * The base for chemicals
- * This class will hold all functions that will shared by the {@link minechem.chemical.Element} and {@link minechem.chemical.Molecule}
- * This way they can be handled as being the same
+ * The base for chemicals This class will hold all functions that will shared by the {@link minechem.chemical.Element} and {@link minechem.chemical.Molecule} This way they can be handled as being the
+ * same
  */
 public abstract class ChemicalBase
 {
@@ -14,7 +13,7 @@ public abstract class ChemicalBase
 
     public final Form form;// TODO: this should become a temperature so that the state can be defined on that maybe?
     public final String fullName;
-    
+
     public ChemicalBase(String fullName, String form)
     {
         this.fullName = fullName;
@@ -28,6 +27,7 @@ public abstract class ChemicalBase
 
     /**
      * Get the short name for the {@link minechem.chemical.ChemicalBase}
+     *
      * @return a short String representation
      */
     public abstract String getFormula();

@@ -1,10 +1,13 @@
 package minechem.helper;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
-import minechem.Config;
 import minechem.Compendium;
-import minechem.handler.ElementHandler;
+import minechem.Config;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 
@@ -66,9 +69,10 @@ public class FileHelper
 
     /**
      * Get a JSON file from the default data location
+     *
      * @param classFromJar the class that makes the call
-     * @param file the file name
-     * @param alwaysCopy set ot true to always make a fresh copy
+     * @param file         the file name
+     * @param alwaysCopy   set ot true to always make a fresh copy
      * @return the requested JSON file in an InputStream. Throws IOException if something goes wrong
      */
     public static InputStream getJsonFile(Class<?> classFromJar, String file, boolean alwaysCopy)

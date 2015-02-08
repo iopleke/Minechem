@@ -4,16 +4,17 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.util.Map;
+import java.util.Set;
 import minechem.Compendium;
 import minechem.Config;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
 import minechem.registry.MoleculeRegistry;
 import org.apache.logging.log4j.Level;
-
-import java.io.*;
-import java.util.Map;
-import java.util.Set;
 
 public class MoleculeHandler
 {
@@ -48,10 +49,10 @@ public class MoleculeHandler
             }
             JsonObject elementObject = moleculeEntry.getValue().getAsJsonObject();
             MoleculeRegistry.getInstance().registerMolecule(
-                    moleculeEntry.getKey(),
-                    elementObject.get("form").getAsString(),
-                    elementObject.get("formula").getAsString()
-                    );
+                moleculeEntry.getKey(),
+                elementObject.get("form").getAsString(),
+                elementObject.get("formula").getAsString()
+            );
             count++;
         }
         LogHelper.info("Total of " + count + " molecules registered");

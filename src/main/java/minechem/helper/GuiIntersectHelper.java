@@ -19,8 +19,8 @@ public class GuiIntersectHelper
     public boolean intersectsWith(GuiIntersectHelper other)
     {
         return other.width + other.x > this.x
-                && other.x < this.x + this.width
-                && other.y + other.height > y
-                && other.y < this.y + this.height;
+            && other.x < this.x + this.width
+            && other.y + other.height > y
+            && other.y < this.y + this.height;
     }
 }

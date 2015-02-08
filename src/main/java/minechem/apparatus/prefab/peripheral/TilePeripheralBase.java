@@ -21,7 +21,6 @@ import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import minechem.Compendium;
-import minechem.Compendium.Naming.Mods;
 import minechem.compatibility.ModList;
 import minechem.compatibility.lua.events.checked.CheckEvent;
 import minechem.compatibility.lua.methods.LuaMethod;
@@ -30,11 +29,11 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 @Optional.InterfaceList(
-        {
-            @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = Compendium.Naming.Mods.computerCraft),
-            @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Compendium.Naming.Mods.openComputers),
-            @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Compendium.Naming.Mods.openComputers)
-        })
+    {
+        @Optional.Interface(iface = "dan200.computercraft.api.peripheral.IPeripheral", modid = Compendium.Naming.Mods.computerCraft),
+        @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Compendium.Naming.Mods.openComputers),
+        @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Compendium.Naming.Mods.openComputers)
+    })
 public abstract class TilePeripheralBase extends TileEntity implements ManagedPeripheral, Environment, IPeripheral
 {
     protected final String name;

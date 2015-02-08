@@ -5,12 +5,13 @@ import java.util.LinkedList;
 
 /**
  * This class will hold one Chemical structure
+ *
  * @author way2muchnoise
  */
 public class ChemicalStructure
 {
     private LinkedList<ChemicalBaseSet> internalStructure;
-    
+
     public ChemicalStructure()
     {
         this.internalStructure = new LinkedList<ChemicalBaseSet>();
@@ -24,24 +25,29 @@ public class ChemicalStructure
 
     /**
      * Add a {@link minechem.chemical.ChemicalBase} with given count to the structure
+     *
      * @param chemicalBase the chemical
-     * @param count the amount must be 1 or more otherwise it will throw a IllegalArgumentException
+     * @param count        the amount must be 1 or more otherwise it will throw a IllegalArgumentException
      */
     public void add(ChemicalBase chemicalBase, int count)
     {
-        if (count < 1) throw new IllegalArgumentException("Count can't be less than zero");
+        if (count < 1)
+        {
+            throw new IllegalArgumentException("Count can't be less than zero");
+        }
         this.internalStructure.add(new ChemicalBaseSet(chemicalBase, count));
     }
 
     /**
      * Add a {@link minechem.chemical.ChemicalBase} to the structure, the count will be one
+     *
      * @param chemicalBase the chemical
      */
     public void add(ChemicalBase chemicalBase)
     {
         add(chemicalBase, 1);
     }
-    
+
     public void addAll(ChemicalBaseSet... chemicalBaseSets)
     {
         internalStructure.addAll(Arrays.asList(chemicalBaseSets));
@@ -54,6 +60,7 @@ public class ChemicalStructure
 
     /**
      * Generates the formula for the {@link minechem.chemical.ChemicalStructure }
+     *
      * @return
      */
     public String getFormula()
@@ -62,10 +69,19 @@ public class ChemicalStructure
         for (ChemicalBaseSet chemicalBaseSet : internalStructure)
         {
             boolean molecule = chemicalBaseSet.chemical instanceof Molecule;
-            if (molecule) formula += "(";
+            if (molecule)
+            {
+                formula += "(";
+            }
             formula += chemicalBaseSet.chemical.getFormula();
-            if (molecule) formula += ")";
-            if (chemicalBaseSet.count > 1) formula += chemicalBaseSet.count;
+            if (molecule)
+            {
+                formula += ")";
+            }
+            if (chemicalBaseSet.count > 1)
+            {
+                formula += chemicalBaseSet.count;
+            }
         }
         return formula;
     }
@@ -91,6 +107,7 @@ public class ChemicalStructure
 
         /**
          * Get the {@link minechem.chemical.ChemicalBase}
+         *
          * @return
          */
         public ChemicalBase getChemical()
@@ -100,6 +117,7 @@ public class ChemicalStructure
 
         /**
          * Get the amount of the give {@link minechem.chemical.ChemicalBase}
+         *
          * @return
          */
         public int getCount()

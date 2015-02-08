@@ -1,22 +1,24 @@
 package minechem.registry;
 
-import minechem.chemical.Molecule;
-
 import java.util.Map;
 import java.util.TreeMap;
+import minechem.chemical.Molecule;
 
 public class MoleculeRegistry
 {
     private Map<String, Molecule> formulaMoleculeMap;
     private Map<String, Molecule> nameMoleculeMap;
     private static MoleculeRegistry instance;
-    
+
     public static MoleculeRegistry getInstance()
     {
-        if (instance == null) instance = new MoleculeRegistry();
+        if (instance == null)
+        {
+            instance = new MoleculeRegistry();
+        }
         return instance;
     }
-    
+
     private MoleculeRegistry()
     {
         this.formulaMoleculeMap = new TreeMap<String, Molecule>();
@@ -38,9 +40,9 @@ public class MoleculeRegistry
     /**
      * Register a molecule using construction inputs
      *
-     * @param fullName      the full name eg. 'water'
-     * @param form          solid, liquid, gas, or plasma
-     * @param formula       the formula eg. 'H2O'
+     * @param fullName the full name eg. 'water'
+     * @param form     solid, liquid, gas, or plasma
+     * @param formula  the formula eg. 'H2O'
      */
     public void registerMolecule(String fullName, String form, String formula)
     {
@@ -68,5 +70,5 @@ public class MoleculeRegistry
     {
         return formulaMoleculeMap.get(formula);
     }
-    
+
 }
