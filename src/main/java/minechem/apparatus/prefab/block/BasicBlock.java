@@ -1,6 +1,6 @@
 package minechem.apparatus.prefab.block;
 
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import minechem.registry.CreativeTabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

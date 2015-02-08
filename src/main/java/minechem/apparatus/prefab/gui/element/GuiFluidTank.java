@@ -4,55 +4,50 @@ import java.util.ArrayList;
 import java.util.List;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
-import minechem.reference.Compendium;
-import net.minecraft.client.gui.FontRenderer;
+import minechem.Compendium;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.fluids.IFluidTank;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
 
 /**
- * A tank to display in a GUI TODO: when there is an Object for a tank bind the tank directly to this Object
+ * A tank to display in a GUI
  *
  * @author way2muchnoise
  */
 public class GuiFluidTank extends GuiElement
 {
-    private int capacity;
-    private int posX, posY;
-    private int width, height;
+    private IFluidTank tank;
     private int colour;
 
     /**
      * Make a take with given properties
      *
-     * @param capacity
-     * @param posX
-     * @param posY
-     * @param width
-     * @param height
+     * @param tank   the tank to display
+     * @param posX   the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY   the y pos of the element (origin is the left-top of the parent gui)
+     * @param width  the width of the element
+     * @param height the height of the element
      */
-    public GuiFluidTank(int capacity, int posX, int posY, int width, int height)
+    public GuiFluidTank(IFluidTank tank, int posX, int posY, int width, int height)
     {
-        this.posX = posX;
-        this.posY = posY;
-        this.capacity = capacity;
-        this.width = width;
-        this.height = height;
-        this.colour = ColourHelper.BLUE;
+        super(posX, posY, width, height);
+        this.tank = tank;
+        this.colour = Compendium.Color.TrueColor.blue;
     }
 
     /**
      * Make a tank using the default width and height
      *
-     * @param capacity tank size
-     * @param posX
-     * @param posY
+     * @param tank the tank to display
+     * @param posX the x pos of the element (origin is the left-top of the parent gui)
+     * @param posY the y pos of the element (origin is the left-top of the parent gui)
      */
-    public GuiFluidTank(int capacity, int posX, int posY)
+    public GuiFluidTank(IFluidTank tank, int posX, int posY)
     {
-        this(capacity, posX, posY, 18, 39);
+        this(tank, posX, posY, 18, 39);
     }
 
     /**
@@ -67,14 +62,8 @@ public class GuiFluidTank extends GuiElement
         return this;
     }
 
-    /**
-     * Draw the tank holding given
-     *
-     * @param guiLeft    x origin for drawing
-     * @param guiTop     y origin for drawing
-     * @param fluidStack fluid to draw
-     */
-    public void draw(int guiLeft, int guiTop, FluidStack fluidStack)
+    @Override
+    public void draw(int guiLeft, int guiTop)
     {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glColor3f(ColourHelper.getRed(colour), ColourHelper.getGreen(colour), ColourHelper.getBlue(colour));
@@ -86,6 +75,7 @@ public class GuiFluidTank extends GuiElement
 
         int iconHeightRemainder = (height - 4) % 16;
         int iconWidthRemainder = (width - 2) % 16;
+        FluidStack fluidStack = tank.getFluid();
 
         if (fluidStack != null && fluidStack.amount > 0)
         {
@@ -114,16 +104,18 @@ public class GuiFluidTank extends GuiElement
             }
 
             bindTexture(Compendium.Resource.GUI.Element.fluidTank);
-            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / capacity))), width - 3, height - 2 - ((int) ((height - 1) * ((float) fluidStack.amount / capacity))));
+            drawTexturedModalRect(guiLeft + posX + 2, guiTop + posY + 1, 1, 1, 15, 37 - ((int) ((38) * ((float) fluidStack.amount / tank.getCapacity()))), width - 3, height - 2 - ((int) ((height - 1) * ((float) fluidStack.amount / tank.getCapacity()))));
         }
 
         bindTexture(Compendium.Resource.GUI.Element.fluidTank);
         drawTexturedModalRect(guiLeft + posX + 1, guiTop + posY + 1, 19, 1, 16, 37, width - 2, height - 2);
 
+        drawTooltip(Mouse.getX() - guiLeft, Mouse.getY() - guiTop);
+
         GL11.glEnable(GL11.GL_LIGHTING);
     }
 
-    public void drawTooltip(int mouseX, int mouseY, FluidStack fluidStack)
+    public void drawTooltip(int mouseX, int mouseY)
     {
         if (!mouseInTank(mouseX, mouseY))
         {
@@ -131,6 +123,7 @@ public class GuiFluidTank extends GuiElement
         }
 
         List<String> description = new ArrayList<String>();
+        FluidStack fluidStack = tank.getFluid();
 
         if (fluidStack == null || fluidStack.getFluid() == null)
         {
@@ -151,67 +144,5 @@ public class GuiFluidTank extends GuiElement
     private boolean mouseInTank(int x, int y)
     {
         return x >= this.posX && x < this.posX + width - 2 && y >= this.posY && y < this.posY + height - 2;
-    }
-
-    protected void drawHoveringText(List<String> tooltip, int x, int y, FontRenderer fontrenderer)
-    {
-        if (!tooltip.isEmpty())
-        {
-            GL11.glDisable(GL12.GL_RESCALE_NORMAL);
-            GL11.glDisable(GL11.GL_LIGHTING);
-            GL11.glDisable(GL11.GL_DEPTH_TEST);
-            int k = 0;
-
-            for (String line : tooltip)
-            {
-                int l = fontrenderer.getStringWidth(line);
-
-                if (l > k)
-                {
-                    k = l;
-                }
-            }
-
-            int i1 = x + 12;
-            int j1 = y - 12;
-            int k1 = 8;
-
-            if (tooltip.size() > 1)
-            {
-                k1 += 2 + (tooltip.size() - 1) * 10;
-            }
-
-            this.zLevel = 300.0F;
-            int l1 = -267386864;
-            this.drawGradientRect(i1 - 3, j1 - 4, i1 + k + 3, j1 - 3, l1, l1);
-            this.drawGradientRect(i1 - 3, j1 + k1 + 3, i1 + k + 3, j1 + k1 + 4, l1, l1);
-            this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 + k1 + 3, l1, l1);
-            this.drawGradientRect(i1 - 4, j1 - 3, i1 - 3, j1 + k1 + 3, l1, l1);
-            this.drawGradientRect(i1 + k + 3, j1 - 3, i1 + k + 4, j1 + k1 + 3, l1, l1);
-            int i2 = 1347420415;
-            int j2 = (i2 & 16711422) >> 1 | i2 & -16777216;
-            this.drawGradientRect(i1 - 3, j1 - 3 + 1, i1 - 3 + 1, j1 + k1 + 3 - 1, i2, j2);
-            this.drawGradientRect(i1 + k + 2, j1 - 3 + 1, i1 + k + 3, j1 + k1 + 3 - 1, i2, j2);
-            this.drawGradientRect(i1 - 3, j1 - 3, i1 + k + 3, j1 - 3 + 1, i2, i2);
-            this.drawGradientRect(i1 - 3, j1 + k1 + 2, i1 + k + 3, j1 + k1 + 3, j2, j2);
-
-            for (int k2 = 0; k2 < tooltip.size(); ++k2)
-            {
-                String s1 = tooltip.get(k2);
-                fontrenderer.drawStringWithShadow(s1, i1, j1, -1);
-
-                if (k2 == 0)
-                {
-                    j1 += 2;
-                }
-
-                j1 += 10;
-            }
-
-            this.zLevel = 0.0F;
-            GL11.glEnable(GL11.GL_LIGHTING);
-            GL11.glEnable(GL11.GL_DEPTH_TEST);
-            GL11.glEnable(GL12.GL_RESCALE_NORMAL);
-        }
     }
 }

@@ -2,7 +2,7 @@ package minechem.item.prefab;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import minechem.registry.CreativeTabRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.item.Item;

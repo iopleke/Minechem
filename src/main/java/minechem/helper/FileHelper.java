@@ -1,11 +1,13 @@
 package minechem.helper;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+import minechem.Compendium;
 import minechem.Config;
-import minechem.reference.Compendium;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 
@@ -63,5 +65,41 @@ public class FileHelper
             LogHelper.info("This is a bug, please report it to the mod author!");
             throw new RuntimeException(e);
         }
+    }
+
+    /**
+     * Get a JSON file from the default data location
+     *
+     * @param classFromJar the class that makes the call
+     * @param file         the file name
+     * @param alwaysCopy   set ot true to always make a fresh copy
+     * @return the requested JSON file in an InputStream. Throws IOException if something goes wrong
+     */
+    public static InputStream getJsonFile(Class<?> classFromJar, String file, boolean alwaysCopy)
+    {
+        File dataFile = new File(Compendium.Config.configPrefix + file);
+
+        if (!dataFile.isFile() || alwaysCopy)
+        {
+            FileHelper.copyFromJar(classFromJar, Compendium.Config.dataJsonPrefix + file, file);
+
+            // If the file was copied, get the file again
+            dataFile = new File(Compendium.Config.configPrefix + file);
+        }
+
+        if (dataFile.isFile())
+        {
+            LogHelper.debug("JSON file exists");
+            InputStream stream = null;
+            try
+            {
+                stream = new FileInputStream(dataFile);
+            } catch (FileNotFoundException e)
+            {
+                throw new RuntimeException(e);
+            }
+            return stream;
+        }
+        throw new RuntimeException(); // this should never be reached
     }
 }

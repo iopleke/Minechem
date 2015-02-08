@@ -65,7 +65,7 @@ public abstract class BaseTEMessage<T extends TileEntity> extends BaseMessage im
      */
     public T getTileEntity(MessageContext ctx)
     {
-        TileEntity tileEntity = getWorld(ctx).getTileEntity(this.posX, this.posY, this.posY);
+        TileEntity tileEntity = getWorld(ctx).getTileEntity(this.posX, this.posY, this.posZ);
         return tileEntity == null ? null : (T) tileEntity;
     }
 }

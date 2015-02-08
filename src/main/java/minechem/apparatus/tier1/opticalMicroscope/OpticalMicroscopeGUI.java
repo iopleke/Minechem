@@ -2,7 +2,7 @@ package minechem.apparatus.tier1.opticalMicroscope;
 
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
 import minechem.helper.LocalizationHelper;
-import minechem.reference.Compendium;
+import minechem.Compendium;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.InventoryPlayer;
 
