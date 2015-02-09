@@ -22,6 +22,8 @@ public abstract class WrapperItem extends BasicItem
 
     public abstract void setWrappedItemStack(ItemStack wrapper, ItemStack stack);
 
+    public abstract boolean isWrappable(ItemStack stack);
+
     public Item getWrappedItem(ItemStack wrapper)
     {
         return getWrappedItemStack(wrapper).getItem();

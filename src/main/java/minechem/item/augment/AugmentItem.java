@@ -21,4 +21,10 @@ public class AugmentItem extends WrapperItem
         if (!wrapper.hasTagCompound()) wrapper.setTagCompound(new NBTTagCompound());
         wrapper.getTagCompound().setTag(wrappedItem,stack.writeToNBT(new NBTTagCompound()));
     }
+
+    @Override
+    public boolean isWrappable(ItemStack stack)
+    {
+        return stack.getItem().isItemTool(stack) && !(stack.getItem() instanceof WrapperItem);
+    }
 }
