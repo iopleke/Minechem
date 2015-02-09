@@ -18,16 +18,34 @@ import java.util.Set;
 public abstract class WrapperItem extends BasicItem
 {
 
-    public abstract ItemStack getWrappedItemStack(ItemStack wrapper);
-
+    /**
+     * @param wrapper ItemStack
+     * @param stack ItemStack to be wrapped
+     */
     public abstract void setWrappedItemStack(ItemStack wrapper, ItemStack stack);
 
-    public abstract boolean isWrappable(ItemStack stack);
+    /**
+     * @param wrapper Wrapped ItemStack
+     * @return ItemStack contained
+     */
+    public abstract ItemStack getWrappedItemStack(ItemStack wrapper);
 
+    /**
+     * @param wrapper Wrapped ItemStack
+     * @return Item contained
+     */
     public Item getWrappedItem(ItemStack wrapper)
     {
         return getWrappedItemStack(wrapper).getItem();
     }
+
+    /**
+     * @param stack ItemStack to be wrapped
+     * @return true if ItemStack is valid
+     */
+    public abstract boolean isWrappable(ItemStack stack);
+
+    //##################Everything below here is simply a wrapped form of the ItemStack sensitive methods in Item#######################
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase)
@@ -51,6 +69,12 @@ public abstract class WrapperItem extends BasicItem
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
         return getWrappedItem(stack).onEntitySwing(entityLiving, getWrappedItemStack(stack));
+    }
+
+    @Override
+    public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase)
+    {
+        return getWrappedItem(stack).itemInteractionForEntity(getWrappedItemStack(stack), player, entityLivingBase);
     }
 
     @Override
