@@ -59,13 +59,18 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
     }
 
     @Override
-    public int[] getAccessibleSlotsFromSide(int var1)
+    public int[] getAccessibleSlotsFromSide(int side)
     {
-        int[] slots =
+        switch(side/2)
         {
-            FusionTileEntity.inputLeft, FusionTileEntity.inputRight, FusionTileEntity.output
-        };
-        return slots;
+            case 0:
+                return new int[]{output};
+            case 1:
+                return new int[]{inputLeft};
+            case 2:
+                return new int[]{inputRight};
+        }
+        return new int[0];
     }
 
     @Override
@@ -117,15 +122,11 @@ public class FusionTileEntity extends MultiBlockTileEntity implements ISidedInve
 
     @Override
     public void openInventory()
-    {
-
-    }
+    {}
 
     @Override
     public void closeInventory()
-    {
-
-    }
+    {}
 
     @Override
     public void readFromNBT(NBTTagCompound nbtTagCompound)
