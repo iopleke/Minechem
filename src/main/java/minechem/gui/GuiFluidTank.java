@@ -7,7 +7,6 @@ import minechem.reference.Resources;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
-import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.fluids.FluidStack;
@@ -67,7 +66,7 @@ public class GuiFluidTank extends Gui
 
         List<String> description = new ArrayList<String>();
 
-        if (fluidStack == null || fluidStack.getFluid() == null)
+        if (fluidStack == null || fluidStack.amount==0 || fluidStack.getFluid() == null)
         {
             description.add("Empty");
         } else

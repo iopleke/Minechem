@@ -8,10 +8,7 @@ import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.FissionUpdateMessage;
 import minechem.tileentity.multiblock.MultiBlockTileEntity;
-import minechem.tileentity.prefab.BoundedInventory;
 import minechem.utils.MinechemUtil;
-import minechem.utils.SafeTimeTracker;
-import minechem.utils.Transactor;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
@@ -30,26 +27,12 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         2
     };
 
-    private final BoundedInventory inputInventory;
-    private final BoundedInventory outputInventory;
-    private Transactor inputTransactor;
-    private Transactor outputTransactor;
     public static int kStartInput = 0;
-    public static int kStartOutput = 2;
-    public static int kSizeInput = 1;
-    public static int kSizeOutput = 1;
-    SafeTimeTracker energyUpdateTracker = new SafeTimeTracker();
-    boolean shouldSendUpdatePacket;
 
     public FissionTileEntity()
     {
         super(Settings.maxFissionStorage);
         inventory = new ItemStack[getSizeInventory()];
-        inputInventory = new BoundedInventory(this, kInput);
-        outputInventory = new BoundedInventory(this, kOutput);
-        inputTransactor = new Transactor(inputInventory);
-        outputTransactor = new Transactor(outputInventory);
-        this.inventory = new ItemStack[this.getSizeInventory()];
         setBlueprint(new BlueprintFission());
     }
 
@@ -115,16 +98,6 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
     private void removeInputs()
     {
         decrStackSize(kInput[0], 1);
-    }
-
-    private boolean canFuse(ItemStack fusionResult)
-    {
-        ItemStack itemInOutput = inventory[kOutput[0]];
-        if (itemInOutput != null)
-        {
-            return itemInOutput.stackSize < getInventoryStackLimit() && itemInOutput.isItemEqual(fusionResult);
-        }
-        return true;
     }
 
     private ItemStack getFissionOutput()
@@ -222,17 +195,6 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
             }
         }
         return false;
-    }
-
-    public int[] getSizeInventorySide(int side)
-    {
-        switch (side)
-        {
-            case 0:
-                return kOutput;
-            default:
-                return kInput;
-        }
     }
 
     @Override
