@@ -2523,7 +2523,7 @@ public class MinechemRecipes
             this.element(ElementEnum.Fe, 10), this.element(ElementEnum.Ni, 6)
         });
 
-        SynthesisRecipe.createAndAddRecipeSafely("ingotIron", false, COST_INGOT, this.element(ElementEnum.Fe));
+        SynthesisRecipe.createAndAddRecipeSafely("ingotIron", false, COST_INGOT, this.element(ElementEnum.Fe, 16));
         SynthesisRecipe.createAndAddRecipeSafely("ingotGold", false, COST_INGOT, this.element(ElementEnum.Au, 16));
         SynthesisRecipe.createAndAddRecipeSafely("ingotCopper", false, COST_INGOT, this.element(ElementEnum.Cu, 16));
         SynthesisRecipe.createAndAddRecipeSafely("ingotTin", false, COST_INGOT, this.element(ElementEnum.Sn, 16));
