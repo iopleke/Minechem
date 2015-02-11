@@ -86,7 +86,7 @@ public class Settings
     public static ArrayList<ItemStack> decomposerBlacklist;
     public static ArrayList<ItemStack> synthesisBlacklist;
 
-    public static boolean displayMoleculeEffects;
+    public static boolean displayMoleculeEffects = true;
 
     public static boolean decomposeChemicalFluids = true;
 
@@ -120,6 +120,7 @@ public class Settings
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "displayMoleculeEffects", Settings.displayMoleculeEffects);
         prop.comment = StatCollector.translateToLocal("config.moleculeEffects.description");
+        prop.setLanguageKey("config.moleculeEffects.name");
         displayMoleculeEffects = prop.getBoolean();
         configList.add(prop.getName());
 
@@ -151,7 +152,7 @@ public class Settings
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "advancedTurtleAI", Settings.advancedTurtleAI);
         prop.comment = StatCollector.translateToLocal("config.advancedTurtleAI.description");
-        prop.setLanguageKey("config.advancedTurtleAI");
+        prop.setLanguageKey("config.advancedTurtleAI.name");
         advancedTurtleAI = prop.getBoolean();
         configList.add(prop.getName());
 
@@ -183,7 +184,7 @@ public class Settings
         prop = config.get(Configuration.CATEGORY_GENERAL, "halfLifeMultiplier", Settings.UpdateRadius);
         prop.setMinValue(1).setMaxValue(200);
         prop.comment = StatCollector.translateToLocal("config.halfLifeMultiplier.description");
-        prop.setLanguageKey("config.halfLifeMultiplier");
+        prop.setLanguageKey("config.halfLifeMultiplier.name");
         halfLifeMultiplier = prop.getInt();
         configList.add(prop.getName());
 
@@ -196,7 +197,7 @@ public class Settings
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "decaySafeMachines", Settings.SwordEffects);
         prop.comment = StatCollector.translateToLocal("config.decaySafeMachines.description");
-        prop.setLanguageKey("config.decaySafeMachines");
+        prop.setLanguageKey("config.decaySafeMachines.name");
         decaySafeMachines = prop.getBoolean();
         configList.add(prop.getName());
 
@@ -208,7 +209,7 @@ public class Settings
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "fluidEffects", Settings.SwordEffects);
         prop.comment = StatCollector.translateToLocal("config.fluideffects.description");
-        prop.setLanguageKey("config.fluideffects");
+        prop.setLanguageKey("config.fluideffects.name");
         fluidEffects = prop.getBoolean();
         configList.add(prop.getName());
 
@@ -226,7 +227,7 @@ public class Settings
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "supportNEI", Settings.reactionFluidMeetFluid);
         prop.comment = StatCollector.translateToLocal("config.supportNEI.description");
-        prop.setLanguageKey("config.supportNEI");
+        prop.setLanguageKey("config.supportNEI.name");
         supportNEI = prop.getBoolean();
         configList.add(prop.getName());
 
@@ -317,7 +318,8 @@ public class Settings
         configList.add(prop.getName());
 
         prop = config.get("blacklist", "decomposeFluidChemicals", Settings.decomposeChemicalFluids);
-        prop.comment = StatCollector.translateToLocal("config.decomposeFluidChemicals");
+        prop.comment = StatCollector.translateToLocal("config.decomposeFluidChemicals.description");
+        prop.setLanguageKey("config.decomposeFluidChemicals.name");
         Settings.decomposeChemicalFluids = prop.getBoolean();
         configList.add(prop.getName());
 
