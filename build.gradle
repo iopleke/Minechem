@@ -153,15 +153,15 @@ task getLibraries {
 		}
 	}
 
-	def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2221836/download'
-	def cofhDest = new File('lib', 'CoFHLib-1.7.10-1.0.0B8-34-API.zip')
+        def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2225609/download'
+        def cofhDest = new File('lib', 'CoFHLib-1.7.10-1.0.0B9-68-dev.jar')
 
-	if(!cofhDest.exists() ){
-		download {
-			src cofhSource
-			dest cofhDest
-		}
-	}
+        if(!cofhDest.exists() ){
+            download {
+                src cofhSource
+                dest cofhDest
+            }
+        }
 }
 
 artifacts {
