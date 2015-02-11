@@ -48,11 +48,12 @@ public class Settings
     //Renames ChemicalTurtles to "Jenkins"
     public static boolean advancedTurtleAI = false;
 
-    // Disabling of enchants, spikes and fluidEffects
+    // Disabling of enchants, food spiking, etc
     public static boolean FoodSpiking = true;
     public static boolean SwordEffects = true;
     public static boolean fluidEffects = true;
     public static boolean decaySafeMachines = false;
+    public static boolean recreationalChemicalEffects = true;
 
     // Power usage
     public static boolean powerUseEnabled = true;
@@ -197,6 +198,12 @@ public class Settings
         prop.comment = StatCollector.translateToLocal("config.decaySafeMachines.description");
         prop.setLanguageKey("config.decaySafeMachines");
         decaySafeMachines = prop.getBoolean();
+        configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "recreationalChemicalEffects", Settings.recreationalChemicalEffects);
+        prop.comment = StatCollector.translateToLocal("config.recreationalChemicalEffects.description");
+        prop.setLanguageKey("config.recreationalChemicalEffects");
+        recreationalChemicalEffects = prop.getBoolean();
         configList.add(prop.getName());
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "fluidEffects", Settings.SwordEffects);

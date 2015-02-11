@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import minechem.Settings;
 import minechem.item.molecule.MoleculeEnum;
 import net.minecraft.entity.EntityLivingBase;
 
@@ -89,18 +90,6 @@ public class PharmacologyEffectRegistry
         addEffect(MoleculeEnum.xylitol, new PharmacologyEffect.Food(6, .2F));
         addEffect(MoleculeEnum.sucrose, new PharmacologyEffect.Potion("moveSpeed", 1, 20));
         addEffect(MoleculeEnum.sucrose, new PharmacologyEffect.Food(1, .1F));
-        addEffect(MoleculeEnum.psilocybin, new PharmacologyEffect.Potion("confusion", 5, 10));
-        addEffect(MoleculeEnum.psilocybin, new PharmacologyEffect.Damage(2));
-        addEffect(MoleculeEnum.psilocybin, new PharmacologyEffect.Potion("nightVision", 5, 20));
-        addEffect(MoleculeEnum.dimethyltryptamine, new PharmacologyEffect.Potion("confusion", 5, 30));
-        addEffect(MoleculeEnum.dimethyltryptamine, new PharmacologyEffect.Damage(2));
-        addEffect(MoleculeEnum.dimethyltryptamine, new PharmacologyEffect.Potion("nightVision", 5, 60));
-        addEffect(MoleculeEnum.amphetamine, new PharmacologyEffect.Potion("confusion", 5, 20));
-        addEffect(MoleculeEnum.amphetamine, new PharmacologyEffect.Damage(4));
-        addEffect(MoleculeEnum.amphetamine, new PharmacologyEffect.Potion("moveSpeed", 15, 30));
-        addEffect(MoleculeEnum.methamphetamine, new PharmacologyEffect.Potion("confusion", 5, 40));
-        addEffect(MoleculeEnum.methamphetamine, new PharmacologyEffect.Damage(4));
-        addEffect(MoleculeEnum.methamphetamine, new PharmacologyEffect.Potion("moveSpeed", 7, 60));
         addEffect(MoleculeEnum.mycotoxin, new PharmacologyEffect.Potion("wither", 7, 8));
         addEffect(MoleculeEnum.mycotoxin, new PharmacologyEffect.Potion("weakness", 1, 12));
         addEffect(MoleculeEnum.ethanol, new PharmacologyEffect.Potion("confusion", 5, 30));
@@ -126,10 +115,6 @@ public class PharmacologyEffectRegistry
         addEffect(MoleculeEnum.fingolimod, new PharmacologyEffect.Potion("moveSpeed", 1, 60));
         addEffect(MoleculeEnum.fingolimod, new PharmacologyEffect.Potion("regeneration", 1, 60));
         addEffect(MoleculeEnum.fingolimod, new PharmacologyEffect.Potion("hunger", 1, 300));
-        addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("regeneration", 1, 60));
-        addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("confusion", 5, 60));
-        addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("moveSlowDown", 3, 60));
-        addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("hunger", 20, 120));
         addEffect(MoleculeEnum.nodularin, new PharmacologyEffect.Potion("poison", 3, 30));
         addEffect(MoleculeEnum.nodularin, new PharmacologyEffect.Potion("hunger", 3, 60));
         addEffect(MoleculeEnum.hist, new PharmacologyEffect.Cure());
@@ -140,22 +125,43 @@ public class PharmacologyEffectRegistry
         addEffect(MoleculeEnum.theobromine, new PharmacologyEffect.Potion("moveSpeed", 10, 30));
         addEffect(MoleculeEnum.retinol, new PharmacologyEffect.Potion("nightVision", 5, 30));
         List<MoleculeEnum> aminoAcids = Arrays.asList(MoleculeEnum.glycine, MoleculeEnum.alinine,
-                MoleculeEnum.arginine, MoleculeEnum.proline, MoleculeEnum.leucine,
-                MoleculeEnum.isoleucine, MoleculeEnum.cysteine, MoleculeEnum.valine,
-                MoleculeEnum.threonine, MoleculeEnum.histidine, MoleculeEnum.methionine,
-                MoleculeEnum.tyrosine, MoleculeEnum.asparagine, MoleculeEnum.asparticAcid,
-                MoleculeEnum.phenylalanine, MoleculeEnum.serine);
+            MoleculeEnum.arginine, MoleculeEnum.proline, MoleculeEnum.leucine,
+            MoleculeEnum.isoleucine, MoleculeEnum.cysteine, MoleculeEnum.valine,
+            MoleculeEnum.threonine, MoleculeEnum.histidine, MoleculeEnum.methionine,
+            MoleculeEnum.tyrosine, MoleculeEnum.asparagine, MoleculeEnum.asparticAcid,
+            MoleculeEnum.phenylalanine, MoleculeEnum.serine);
         addEffect(aminoAcids, new PharmacologyEffect.Food(2, .1F));
         addEffect(aminoAcids, new PharmacologyEffect.Potion("digSpeed", 1, 20));
         addEffect(aminoAcids, new PharmacologyEffect.Potion("jump", 1, 20));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("confusion", 5, 120));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Damage(4));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("nightVision", 5, 120));
-        addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("moveSpeed", 12, 120));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("confusion", 5, 60));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Damage(4));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("nightVision", 5, 60));
-        addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("moveSpeed", 10, 60));
+
+        if (Settings.recreationalChemicalEffects)
+        {
+            addEffect(MoleculeEnum.amphetamine, new PharmacologyEffect.Damage(4));
+            addEffect(MoleculeEnum.amphetamine, new PharmacologyEffect.Potion("confusion", 5, 20));
+            addEffect(MoleculeEnum.amphetamine, new PharmacologyEffect.Potion("moveSpeed", 15, 30));
+            addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Damage(4));
+            addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("confusion", 5, 120));
+            addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("moveSpeed", 12, 120));
+            addEffect(MoleculeEnum.cocaine, new PharmacologyEffect.Potion("nightVision", 5, 120));
+            addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Damage(4));
+            addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("confusion", 5, 60));
+            addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("moveSpeed", 10, 60));
+            addEffect(MoleculeEnum.cocainehcl, new PharmacologyEffect.Potion("nightVision", 5, 60));
+            addEffect(MoleculeEnum.dimethyltryptamine, new PharmacologyEffect.Damage(2));
+            addEffect(MoleculeEnum.dimethyltryptamine, new PharmacologyEffect.Potion("confusion", 5, 30));
+            addEffect(MoleculeEnum.dimethyltryptamine, new PharmacologyEffect.Potion("nightVision", 5, 60));
+            addEffect(MoleculeEnum.methamphetamine, new PharmacologyEffect.Damage(4));
+            addEffect(MoleculeEnum.methamphetamine, new PharmacologyEffect.Potion("confusion", 5, 40));
+            addEffect(MoleculeEnum.methamphetamine, new PharmacologyEffect.Potion("moveSpeed", 7, 60));
+            addEffect(MoleculeEnum.psilocybin, new PharmacologyEffect.Damage(2));
+            addEffect(MoleculeEnum.psilocybin, new PharmacologyEffect.Potion("confusion", 5, 10));
+            addEffect(MoleculeEnum.psilocybin, new PharmacologyEffect.Potion("nightVision", 5, 20));
+            addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("confusion", 5, 60));
+            addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("hunger", 20, 120));
+            addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("moveSlowDown", 3, 60));
+            addEffect(MoleculeEnum.thc, new PharmacologyEffect.Potion("regeneration", 1, 60));
+        }
+
         addEffect(MoleculeEnum.metblue, new PharmacologyEffect.Cure());
         addEffect(MoleculeEnum.metblue, new PharmacologyEffect.Potion("regeneration", 4, 30));
         addEffect(MoleculeEnum.metblue, new PharmacologyEffect.Potion("weakness", 4, 30));

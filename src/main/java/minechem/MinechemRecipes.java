@@ -4,7 +4,6 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import minechem.fluid.FluidHelper;
 import minechem.item.blueprint.ItemBlueprint;
 import minechem.item.blueprint.MinechemBlueprint;
@@ -226,24 +225,24 @@ public class MinechemRecipes
             this.element(ElementEnum.Ag, 8), this.element(ElementEnum.Au, 8)
         });
         DecomposerFluidRecipe.createAndAddFluidRecipeSafely(
-                "ender",
-                threeQuarterFluidPerIngot,
-                new PotionChemical[]
-                {
-                    this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.element(ElementEnum.Es),
-                    this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate)
-                });
+            "ender",
+            threeQuarterFluidPerIngot,
+            new PotionChemical[]
+            {
+                this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.element(ElementEnum.Es),
+                this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate), this.molecule(MoleculeEnum.calciumCarbonate)
+            });
         registerMFRFluidRecipes();
 
         if (Settings.decomposeChemicalFluids)
         {
             for (ElementEnum element : FluidHelper.elements.keySet())
             {
-                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.elements.get(element),125),new Element(element,1)));
+                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.elements.get(element), 125), new Element(element, 1)));
             }
             for (MoleculeEnum molecule : FluidHelper.molecules.keySet())
             {
-                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.molecules.get(molecule),125),molecule.componentsArray()));
+                DecomposerFluidRecipe.add(new DecomposerFluidRecipe(new FluidStack(FluidHelper.molecules.get(molecule), 125), molecule.componentsArray()));
             }
         }
     }
@@ -260,7 +259,7 @@ public class MinechemRecipes
         });
         DecomposerFluidRecipe.createAndAddFluidRecipeSafely("milk", BUCKET_AMOUNT, new PotionChemical[]
         {
-                this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.oleicAcid,1)
+            this.element(ElementEnum.Ca, 4), this.molecule(MoleculeEnum.oleicAcid, 1)
         });
         // If someone figures out compositions for the other fluids, add them here.
     }
@@ -1545,10 +1544,13 @@ public class MinechemRecipes
         // Mushrooms
         ItemStack blockMushroomBrown = new ItemStack(Blocks.brown_mushroom);
         ItemStack blockMushroomRed = new ItemStack(Blocks.red_mushroom);
-        DecomposerRecipe.add(new DecomposerRecipe(blockMushroomBrown, new PotionChemical[]
+        if (Settings.recreationalChemicalEffects)
         {
-            this.molecule(MoleculeEnum.psilocybin), this.molecule(MoleculeEnum.water, 2)
-        }));
+            DecomposerRecipe.add(new DecomposerRecipe(blockMushroomBrown, new PotionChemical[]
+            {
+                this.molecule(MoleculeEnum.psilocybin), this.molecule(MoleculeEnum.water, 2)
+            }));
+        }
         DecomposerRecipe.add(new DecomposerRecipe(blockMushroomRed, new PotionChemical[]
         {
             this.molecule(MoleculeEnum.pantherine), this.molecule(MoleculeEnum.water, 2)
@@ -2294,12 +2296,15 @@ public class MinechemRecipes
             this.element(ElementEnum.Yb), this.element(ElementEnum.Yb), this.element(ElementEnum.No), null, this.element(ElementEnum.Yb, 2), this.element(ElementEnum.No, 2), null, this.element(ElementEnum.No), null
         }));
 
-        // Nether Wart
-        ItemStack itemNetherStalkSeeds = new ItemStack(Items.nether_wart);
-        DecomposerRecipe.add(new DecomposerRecipeChance(itemNetherStalkSeeds, 0.5F, new PotionChemical[]
+        if (Settings.recreationalChemicalEffects)
         {
-            this.molecule(MoleculeEnum.cocainehcl)
-        }));
+            // Nether Wart
+            ItemStack itemNetherStalkSeeds = new ItemStack(Items.nether_wart);
+            DecomposerRecipe.add(new DecomposerRecipeChance(itemNetherStalkSeeds, 0.5F, new PotionChemical[]
+            {
+                this.molecule(MoleculeEnum.cocainehcl)
+            }));
+        }
 
         // Spider Eye
         ItemStack itemSpiderEye = new ItemStack(Items.spider_eye);
@@ -3292,14 +3297,17 @@ public class MinechemRecipes
             });
         } else if (oreName.contains("cropDuskberry"))
         {
-            DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
+            if (Settings.recreationalChemicalEffects)
             {
-                this.molecule(MoleculeEnum.psilocybin), this.element(ElementEnum.S, 2)
-            });
-            SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
-            {
-                this.molecule(MoleculeEnum.psilocybin), this.element(ElementEnum.S, 2)
-            });
+                DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
+                {
+                    this.molecule(MoleculeEnum.psilocybin), this.element(ElementEnum.S, 2)
+                });
+                SynthesisRecipe.createAndAddRecipeSafely(oreName, false, 1000, new PotionChemical[]
+                {
+                    this.molecule(MoleculeEnum.psilocybin), this.element(ElementEnum.S, 2)
+                });
+            }
         } else if (oreName.contains("cropSkyberry"))
         {
             DecomposerRecipe.createAndAddRecipeSafely(oreName, new PotionChemical[]
