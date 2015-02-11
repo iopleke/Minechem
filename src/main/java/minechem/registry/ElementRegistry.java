@@ -2,11 +2,12 @@ package minechem.registry;
 
 import java.util.Map;
 import java.util.TreeMap;
-import minechem.element.Element;
+import minechem.chemical.Element;
 
 public class ElementRegistry
 {
-    private Map<Integer, Element> elementMap;
+    private Map<Integer, Element> atomicElementMap;
+    private Map<String, Element> abbrElementMap;
     private static ElementRegistry instance;
 
     /**
@@ -25,7 +26,8 @@ public class ElementRegistry
 
     private ElementRegistry()
     {
-        elementMap = new TreeMap<Integer, Element>();
+        atomicElementMap = new TreeMap<Integer, Element>();
+        abbrElementMap = new TreeMap<String, Element>();
     }
 
     /**
@@ -35,18 +37,19 @@ public class ElementRegistry
      */
     public void registerElement(Element element)
     {
-        elementMap.put(element.atomicNumber, element);
-        element.log();
+        atomicElementMap.put(element.atomicNumber, element);
+        abbrElementMap.put(element.shortName, element);
+        element.log();// TODO: make this debug only later
     }
 
     /**
      * Register an element using construction inputs
      *
-     * @param atomicNumber
-     * @param fullName
-     * @param shortName
-     * @param form
-     * @param neutrons
+     * @param atomicNumber the element's atomic number and proton count
+     * @param fullName     the full name, eg "Gold"
+     * @param shortName    the abbreviation, eg "Au"
+     * @param form         solid, liquid, gas, or plasma
+     * @param neutrons     the number of neutrons in the element's nucleus
      */
     public void registerElement(int atomicNumber, String fullName, String shortName, String form, int neutrons)
     {
@@ -61,6 +64,17 @@ public class ElementRegistry
      */
     public Element getElement(int atomicNumber)
     {
-        return elementMap.get(atomicNumber);
+        return atomicElementMap.get(atomicNumber);
+    }
+
+    /**
+     * Get an element by abbreviation
+     *
+     * @param abbr the abbreviation for the Element
+     * @return can return null
+     */
+    public Element getElement(String abbr)
+    {
+        return abbrElementMap.get(abbr);
     }
 }

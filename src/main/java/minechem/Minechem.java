@@ -13,6 +13,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.handler.ElementHandler;
 import minechem.handler.GuiHandler;
 import minechem.handler.MessageHandler;
+import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
@@ -91,10 +92,11 @@ public class Minechem
         LogHelper.debug("Registering ClientProxy Rendering Hooks...");
         proxy.registerRenderers();
 
-        LogHelper.debug("Attempting to load JSON file");
-        elementHandler = new ElementHandler();
-        elementHandler.init();
+        LogHelper.debug("Registering Elements...");
+        ElementHandler.init();
 
+        LogHelper.debug("Registering Molecules...");
+        MoleculeHandler.init();
     }
 
     @EventHandler

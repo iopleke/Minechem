@@ -40,9 +40,7 @@ public class VersionHelper
     }
 
     /**
-     * Advanced mod version comparison - for when a simple deliminator does not fully describe the version String.
-     * Example Use: Mod CoFHCore version B7+
-     * <code>
+     * Advanced mod version comparison - for when a simple deliminator does not fully describe the version String. Example Use: Mod CoFHCore version B7+      <code>
      * //Pattern no Comparator
      * Pattern pattern = Pattern.compile("1\\.7\\.10R3\\.0\\.0B(?:\d{2,}|[7-9])"); - the group on the end is a non-capturing group accepting any 2 digit number or 7-9
      * if (isModVersionAccepted(Mods.COFHCORE,pattern))...

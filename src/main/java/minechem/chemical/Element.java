@@ -1,4 +1,4 @@
-package minechem.element;
+package minechem.chemical;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -7,13 +7,8 @@ import minechem.helper.LogHelper;
 /**
  * Data object for elements
  */
-public class Element
+public class Element extends ChemicalBase
 {
-    public static enum Form
-    {
-        solid, liquid, gas, plasma
-    }
-
     private static final Matcher SHELL_ORDER = Pattern.compile("\\d+([a-z])").matcher("1s2s2p3s3p4s3d4p5s4d5p6s4f5d6p7s5f6d7p8s5g6f7d8p9s"); //Handles up to atomic number 170
     private static final int[] SUB_SHELL_ELECTRONS = new int[]
     {
@@ -22,8 +17,6 @@ public class Element
     private static final String SUB_SHELL_STRING = "spdfg";																					//Super Powered Dog Fights God
 
     public final int atomicNumber;
-    public final Form form;
-    public final String fullName;
     public final int neutrons;
     public final String shortName;
 
@@ -41,11 +34,10 @@ public class Element
      */
     public Element(int atomicNumber, String fullName, String shortName, String form, int neutrons)
     {
+        super(fullName, form);
         this.atomicNumber = atomicNumber;
-        this.fullName = fullName;
-        this.shortName = shortName;
-        this.form = Form.valueOf(form);
         this.neutrons = neutrons;
+        this.shortName = shortName;
         this.calculateValenceShells();
     }
 
@@ -91,6 +83,7 @@ public class Element
     /**
      * Write element to the FML Log
      */
+    @Override
     public void log()
     {
         LogHelper.debug("Atomic Number: " + this.atomicNumber);
@@ -101,7 +94,7 @@ public class Element
     }
 
     @Override
-    public String toString()
+    public String getFormula()
     {
         return this.shortName;
     }

@@ -3,10 +3,7 @@ package minechem.helper;
 /**
  * Helper class for RGB color values
  *
- * getRed/getBlue/getGreen returns the RGB from a TrueColor value
- * eg:
- * getBlue(Compendium.TrueColor.green) returns 0.0F
- * getGreen(Compendium.TrueColor.green) returns 1.0F
+ * getRed/getBlue/getGreen returns the RGB from a TrueColor value eg: getBlue(Compendium.TrueColor.green) returns 0.0F getGreen(Compendium.TrueColor.green) returns 1.0F
  * getRed(Compendium.TrueColor.green) returns 0.0F
  */
 public class ColourHelper

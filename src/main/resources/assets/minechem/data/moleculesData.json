@@ -1,0 +1,10 @@
+{
+    "water": {
+        "formula": "H2O",
+        "form": "liquid"
+    },
+    "hydroxide": {
+        "formula": "OH",
+        "form": "liquid"
+    }
+}

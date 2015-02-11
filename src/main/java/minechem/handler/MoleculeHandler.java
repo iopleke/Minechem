@@ -13,14 +13,14 @@ import minechem.Compendium;
 import minechem.Config;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
-import minechem.registry.ElementRegistry;
+import minechem.registry.MoleculeRegistry;
 import org.apache.logging.log4j.Level;
 
-public class ElementHandler
+public class MoleculeHandler
 {
     public static void init()
     {
-        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, Compendium.Config.elementsDataJson, Config.useDefaultElements);
+        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, Compendium.Config.moleculesDataJson, Config.useDefaultMolecules);
         readFromStream(inputStream);
         if (inputStream != null)
         {
@@ -39,24 +39,22 @@ public class ElementHandler
         JsonReader jReader = new JsonReader(new InputStreamReader(stream));
         JsonParser parser = new JsonParser();
 
-        Set<Map.Entry<String, JsonElement>> elementsSet = parser.parse(jReader).getAsJsonObject().entrySet();
+        Set<Map.Entry<String, JsonElement>> moleculeSet = parser.parse(jReader).getAsJsonObject().entrySet();
         int count = 0;
-        for (Map.Entry<String, JsonElement> elementEntry : elementsSet)
+        for (Map.Entry<String, JsonElement> moleculeEntry : moleculeSet)
         {
-            if (!elementEntry.getValue().isJsonObject())
+            if (!moleculeEntry.getValue().isJsonObject())
             {
                 continue;
             }
-            JsonObject elementObject = elementEntry.getValue().getAsJsonObject();
-            ElementRegistry.getInstance().registerElement(
-                Integer.parseInt(elementEntry.getKey()),
-                elementObject.get("longName").getAsString(),
-                elementObject.get("shortName").getAsString(),
+            JsonObject elementObject = moleculeEntry.getValue().getAsJsonObject();
+            MoleculeRegistry.getInstance().registerMolecule(
+                moleculeEntry.getKey(),
                 elementObject.get("form").getAsString(),
-                Integer.parseInt(elementObject.get("neutrons").getAsString())
+                elementObject.get("formula").getAsString()
             );
             count++;
         }
-        LogHelper.info("Total of " + count + " elements registered");
+        LogHelper.info("Total of " + count + " molecules registered");
     }
 }

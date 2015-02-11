@@ -23,6 +23,8 @@ public class Config
 
     // turns on to copy the newest elements list from jar
     public static boolean useDefaultElements = true;
+    // turns on to copy the newest molecules list from jar
+    public static boolean useDefaultMolecules = true;
 
     public static List<IConfigElement> getConfigElements()
     {
@@ -59,6 +61,12 @@ public class Config
         prop.comment = StatCollector.translateToLocal("config.useDefaultElements");
         prop.setLanguageKey("config.useDefaultElements.tooltip");
         useDefaultElements = prop.getBoolean();
+        configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "useDefaultMolecules", Config.useDefaultMolecules);
+        prop.comment = StatCollector.translateToLocal("config.useDefaultMolecules");
+        prop.setLanguageKey("config.useDefaultMolecules.tooltip");
+        useDefaultMolecules = prop.getBoolean();
         configList.add(prop.getName());
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "enablePatreon", Config.enablePatreon);
