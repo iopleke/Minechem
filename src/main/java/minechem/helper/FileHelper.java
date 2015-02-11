@@ -1,5 +1,6 @@
 package minechem.helper;
 
+import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -72,34 +73,31 @@ public class FileHelper
      *
      * @param classFromJar the class that makes the call
      * @param file         the file name
-     * @param alwaysCopy   set ot true to always make a fresh copy
+     * @param useDefault   set to true to read from jar
      * @return the requested JSON file in an InputStream. Throws IOException if something goes wrong
      */
-    public static InputStream getJsonFile(Class<?> classFromJar, String file, boolean alwaysCopy)
+    public static InputStream getJsonFile(Class<?> classFromJar, String file, boolean useDefault)
     {
-        File dataFile = new File(Compendium.Config.configPrefix + file);
-
-        if (!dataFile.isFile() || alwaysCopy)
+        if (useDefault)
         {
-            FileHelper.copyFromJar(classFromJar, Compendium.Config.dataJsonPrefix + file, file);
-
-            // If the file was copied, get the file again
-            dataFile = new File(Compendium.Config.configPrefix + file);
-        }
-
-        if (dataFile.isFile())
+            return new BufferedInputStream(getInputStreamFromJar(classFromJar, Compendium.Config.dataJsonPrefix + file));
+        } else
         {
-            LogHelper.debug("JSON file exists");
-            InputStream stream = null;
+            File dataFile = new File(Compendium.Config.configPrefix + file);
+            if (!dataFile.exists())
+            {
+                FileHelper.copyFromJar(classFromJar, Compendium.Config.dataJsonPrefix + file, file);
+                // the file was copied, so get it again
+                dataFile = new File(Compendium.Config.configPrefix + file);
+            }
+
             try
             {
-                stream = new FileInputStream(dataFile);
+                return new BufferedInputStream(new FileInputStream(dataFile));
             } catch (FileNotFoundException e)
             {
                 throw new RuntimeException(e);
             }
-            return stream;
         }
-        throw new RuntimeException(); // this should never be reached
     }
 }
