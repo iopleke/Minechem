@@ -1,15 +1,20 @@
-package minechem.item.augment.chemicals;
+package minechem.item.augment.augments;
 
 import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
-public interface IChemicalAugment
+public interface IAugment
 {
+    String getKey();
+
+    IAugment setLevel(int level);
+
     boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase);
 
     /**
@@ -89,7 +94,7 @@ public interface IChemicalAugment
     /**
      * @return Attribute Modifiers to the base tools attributes.
      */
-    Multimap getAttributeModifiers();
+    Multimap<String, AttributeModifier> getAttributeModifiers();
 
     /**
      * @return float value between 0 and 1 indicating probability of damage being applied to the tool
