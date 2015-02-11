@@ -2,7 +2,6 @@ package minechem.chemical;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import minechem.helper.LogHelper;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
 
@@ -43,13 +42,14 @@ public class Molecule extends ChemicalBase
     }
 
     @Override
-    public void log()
+    public String getDebugInfo()
     {
-        LogHelper.debug("Molecule name: " + this.fullName);
-        LogHelper.debug("Molecule structure: " + this.getFormula());
-        LogHelper.debug("Melting point: " + this.meltingPoint);
-        LogHelper.debug("Boiling point: " + this.boilingPoint);
-        LogHelper.debug("Temp: " + this.temp);
+        return fullName + 
+                "[structure: " +getFormula()+
+                ", meltingPoint: "+meltingPoint+
+                ", boilingPoint: "+boilingPoint+
+                ", temp: "+temp+
+                "]";
     }
 
     @Override

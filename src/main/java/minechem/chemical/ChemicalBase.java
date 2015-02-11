@@ -47,10 +47,7 @@ public abstract class ChemicalBase
         this(fullName, meltingPoint, boilingPoint, 200);
     }
 
-    /**
-     * Used for logging the {@link minechem.chemical.ChemicalBase} to the {@link cpw.mods.fml.common.FMLLog}
-     */
-    public abstract void log();
+    public abstract String getDebugInfo();
 
     /**
      * Get the short name for the {@link minechem.chemical.ChemicalBase}

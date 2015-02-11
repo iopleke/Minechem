@@ -3,6 +3,7 @@ package minechem.registry;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Molecule;
+import minechem.helper.LogHelper;
 
 public class MoleculeRegistry
 {
@@ -34,7 +35,7 @@ public class MoleculeRegistry
     {
         formulaMoleculeMap.put(molecule.getFormula(), molecule);
         nameMoleculeMap.put(molecule.fullName.toLowerCase(), molecule);
-        molecule.log();// TODO: make this debug only later
+        LogHelper.debug("Molecule registered: " + molecule.getDebugInfo());
     }
 
     /**

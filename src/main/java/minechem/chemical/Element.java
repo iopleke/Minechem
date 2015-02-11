@@ -2,7 +2,6 @@ package minechem.chemical;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import minechem.helper.LogHelper;
 
 /**
  * Data object for elements
@@ -85,19 +84,17 @@ public class Element extends ChemicalBase
         this.valenceSubshellIdentifier = valenceSubshellIdentifier;
     }
 
-    /**
-     * Write element to the FML Log
-     */
     @Override
-    public void log()
+    public String getDebugInfo()
     {
-        LogHelper.debug("Atomic Number: " + this.atomicNumber);
-        LogHelper.debug("Element name: " + this.fullName);
-        LogHelper.debug("Element abbreviation: " + this.shortName);
-        LogHelper.debug("Neutrons: " + this.neutrons);
-        LogHelper.debug("Melting point: " + this.meltingPoint);
-        LogHelper.debug("Boiling point: " + this.boilingPoint);
-        LogHelper.debug("Temp: " + this.temp);
+        return fullName + 
+                "[abbreviation: " +shortName+
+                ", atomicNumber: "+atomicNumber+
+                ", neutrons: "+neutrons+
+                ", meltingPoint: "+meltingPoint+
+                ", boilingPoint: "+boilingPoint+
+                ", temp: "+temp+
+                "]";
     }
 
     @Override

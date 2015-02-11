@@ -3,6 +3,7 @@ package minechem.registry;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Element;
+import minechem.helper.LogHelper;
 
 public class ElementRegistry
 {
@@ -39,7 +40,7 @@ public class ElementRegistry
     {
         atomicElementMap.put(element.atomicNumber, element);
         abbrElementMap.put(element.shortName, element);
-        element.log();// TODO: make this debug only later
+        LogHelper.debug("Element registered: " + element.getDebugInfo());
     }
 
     /**
