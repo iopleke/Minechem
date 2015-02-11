@@ -48,12 +48,25 @@ public class ElementHandler
                 continue;
             }
             JsonObject elementObject = elementEntry.getValue().getAsJsonObject();
+
+            JsonElement tempObject = elementObject.get("temp");
+            int temp;
+            if (tempObject == null)
+            {
+                temp = 200;
+            } else
+            {
+                temp = Integer.parseInt(tempObject.getAsString());
+            }
+
             ElementRegistry.getInstance().registerElement(
                 Integer.parseInt(elementEntry.getKey()),
                 elementObject.get("longName").getAsString(),
                 elementObject.get("shortName").getAsString(),
-                elementObject.get("form").getAsString(),
-                Integer.parseInt(elementObject.get("neutrons").getAsString())
+                Integer.parseInt(elementObject.get("neutrons").getAsString()),
+                Integer.parseInt(elementObject.get("meltingPoint").getAsString()),
+                Integer.parseInt(elementObject.get("boilingPoint").getAsString()),
+                temp
             );
             count++;
         }

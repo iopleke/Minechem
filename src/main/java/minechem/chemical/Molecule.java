@@ -21,15 +21,25 @@ public class Molecule extends ChemicalBase
      * @param formula  the formula eg. 'H2O'
      * @return can throw an IllegalArgumentException
      */
-    public static Molecule parseMolecule(String fullName, String form, String formula)
+    public static Molecule parseMolecule(String fullName, String formula, int meltingPoint, int boilingPoint, int temp)
     {
-        return new Molecule(fullName, form, parseStructure(formula));
+        return new Molecule(fullName, parseStructure(formula), meltingPoint, boilingPoint, temp);
+    }
+    
+    public static Molecule parseMolecule(String fullName, String formula, int meltingPoint, int boilingPoint)
+    {
+        return new Molecule(fullName, parseStructure(formula), meltingPoint, boilingPoint);
     }
 
-    private Molecule(String fullName, String form, ChemicalStructure structure)
+    public Molecule(String fullName, ChemicalStructure structure, int meltingPoint, int boilingPoint, int temp)
     {
-        super(fullName, form);
+        super(fullName, meltingPoint, boilingPoint, temp);
         this.structure = structure;
+    }
+
+    public Molecule(String fullName, ChemicalStructure structure, int meltingPoint, int boilingPoint)
+    {
+        this(fullName, structure, meltingPoint, boilingPoint, 200);
     }
 
     @Override
@@ -37,7 +47,9 @@ public class Molecule extends ChemicalBase
     {
         LogHelper.debug("Molecule name: " + this.fullName);
         LogHelper.debug("Molecule structure: " + this.getFormula());
-        LogHelper.debug("Form: " + this.form);
+        LogHelper.debug("Melting point: " + this.meltingPoint);
+        LogHelper.debug("Boiling point: " + this.boilingPoint);
+        LogHelper.debug("Temp: " + this.temp);
     }
 
     @Override

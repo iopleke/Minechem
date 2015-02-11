@@ -32,13 +32,18 @@ public class Element extends ChemicalBase
      * @param form         solid, liquid, gas, or plasma
      * @param neutrons     the number of neutrons in the element's nucleus
      */
-    public Element(int atomicNumber, String fullName, String shortName, String form, int neutrons)
+    public Element(int atomicNumber, String fullName, String shortName, int neutrons, int meltingPoint, int boilingPoint, int temp)
     {
-        super(fullName, form);
+        super(fullName, meltingPoint, boilingPoint, temp);
         this.atomicNumber = atomicNumber;
         this.neutrons = neutrons;
         this.shortName = shortName;
         this.calculateValenceShells();
+    }
+
+    public Element(int atomicNumber, String fullName, String shortName, int neutrons, int meltingPoint, int boilingPoint)
+    {
+        this(atomicNumber, fullName, shortName, neutrons, meltingPoint, boilingPoint, 200);
     }
 
     /**
@@ -89,8 +94,10 @@ public class Element extends ChemicalBase
         LogHelper.debug("Atomic Number: " + this.atomicNumber);
         LogHelper.debug("Element name: " + this.fullName);
         LogHelper.debug("Element abbreviation: " + this.shortName);
-        LogHelper.debug("Form: " + this.form);
         LogHelper.debug("Neutrons: " + this.neutrons);
+        LogHelper.debug("Melting point: " + this.meltingPoint);
+        LogHelper.debug("Boiling point: " + this.boilingPoint);
+        LogHelper.debug("Temp: " + this.temp);
     }
 
     @Override

@@ -44,9 +44,14 @@ public class MoleculeRegistry
      * @param form     solid, liquid, gas, or plasma
      * @param formula  the formula eg. 'H2O'
      */
-    public void registerMolecule(String fullName, String form, String formula)
+    public void registerMolecule(String fullName, String formula, int meltingPoint, int boilingPoint, int temp)
     {
-        registerMolecule(Molecule.parseMolecule(fullName, form, formula));
+        registerMolecule(Molecule.parseMolecule(fullName, formula, meltingPoint, boilingPoint, temp));
+    }
+    
+    public void registerMolecule(String fullName, String formula, int meltingPoint, int boilingPoint)
+    {
+        registerMolecule(Molecule.parseMolecule(fullName, formula, meltingPoint, boilingPoint));
     }
 
     /**
