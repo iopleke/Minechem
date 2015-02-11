@@ -12,7 +12,7 @@ public abstract class ChemicalBase
     }
 
     /**
-     * mcTemp = (int)(celsiusTemp*10)
+     * mcTemp = floor(celsiusTemp*10.0)
      */
     public final int temp;
     public final int meltingPoint;

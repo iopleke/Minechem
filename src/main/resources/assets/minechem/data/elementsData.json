@@ -2,127 +2,148 @@
 	"1": {
 		"longName": "Hydrogen",
 		"shortName": "H",
-		"form": "gas",
+		"meltingPoint": "-2591",
+		"boilingPoint": "-2529",
 		"neutrons": "0"
 	},
 	"2": {
 		"longName": "Helium",
 		"shortName": "He",
-		"form": "gas",
+		"meltingPoint": "-2722",
+		"boilingPoint": "-2689",
 		"neutrons": "2"
 	},
 	"3": {
 		"longName": "Lithium",
 		"shortName": "Li",
-		"form": "solid",
+		"meltingPoint": "1805",
+		"boilingPoint": "13420",
 		"neutrons": "4"
 	},
 	"4": {
 		"longName": "Beryllium",
 		"shortName": "Be",
-		"form": "solid",
+		"meltingPoint": "12780",
+		"boilingPoint": "24700",
 		"neutrons": "5"
 	},
 	"5": {
 		"longName": "Boron",
 		"shortName": "B",
-		"form": "solid",
+		"meltingPoint": "20760",
+		"boilingPoint": "39270",
 		"neutrons": "6"
 	},
 	"6": {
 		"longName": "Carbon",
 		"shortName": "C",
-		"form": "solid",
+		"meltingPoint": "36420",
+		"boilingPoint": "36420",
 		"neutrons": "6"
 	},
 	"7": {
 		"longName": "Nitrogen",
 		"shortName": "N",
-		"form": "gas",
+		"meltingPoint": "-2100",
+		"boilingPoint": "-1958",
 		"neutrons": "7"
 	},
 	"8": {
 		"longName": "Oxygen",
 		"shortName": "O",
-		"form": "gas",
+		"meltingPoint": "-2188",
+		"boilingPoint": "-1830",
 		"neutrons": "8"
 	},
 	"9": {
 		"longName": "Fluorine",
 		"shortName": "F",
-		"form": "gas",
+		"meltingPoint": "-2196",
+		"boilingPoint": "-1881",
 		"neutrons": "10"
 	},
 	"10": {
 		"longName": "Neon",
 		"shortName": "Ne",
-		"form": "gas",
+		"meltingPoint": "-2486",
+		"boilingPoint": "-2460",
 		"neutrons": "10"
 	},
 	"11": {
 		"longName": "Sodium",
 		"shortName": "Na",
-		"form": "solid",
+		"meltingPoint": "977",
+		"boilingPoint": "8830",
 		"neutrons": "12"
 	},
 	"12": {
 		"longName": "Magnesium",
 		"shortName": "Mg",
-		"form": "solid",
+		"meltingPoint": "6500",
+		"boilingPoint": "10910",
 		"neutrons": "12"
 	},
 	"13": {
 		"longName": "Aluminium",
 		"shortName": "Al",
-		"form": "solid",
+		"meltingPoint": "6603",
+		"boilingPoint": "25190",
 		"neutrons": "14"
 	},
 	"14": {
 		"longName": "Silicon",
 		"shortName": "Si",
-		"form": "solid",
+		"meltingPoint": "14140",
+		"boilingPoint": "32650",
 		"neutrons": "14"
 	},
 	"15": {
 		"longName": "Phosphorus",
 		"shortName": "P",
-		"form": "solid",
+		"meltingPoint": "442",
+		"boilingPoint": "2805",
 		"neutrons": "16"
 	},
 	"16": {
 		"longName": "Sulfur",
 		"shortName": "S",
-		"form": "solid",
+		"meltingPoint": "1152",
+		"boilingPoint": "4446",
 		"neutrons": "16"
 	},
 	"17": {
 		"longName": "Chlorine",
 		"shortName": "Cl",
-		"form": "gas",
+		"meltingPoint": "-1015",
+		"boilingPoint": "-340",
 		"neutrons": "18"
 	},
 	"18": {
 		"longName": "Argon",
 		"shortName": "Ar",
-		"form": "gas",
+		"meltingPoint": "-1894",
+		"boilingPoint": "-1859",
 		"neutrons": "22"
 	},
 	"19": {
 		"longName": "Potassium",
 		"shortName": "K",
-		"form": "solid",
+		"meltingPoint": "634",
+		"boilingPoint": "7590",
 		"neutrons": "20"
 	},
 	"20": {
 		"longName": "Calcium",
 		"shortName": "Ca",
-		"form": "solid",
+		"meltingPoint": "8420",
+		"boilingPoint": "14840",
 		"neutrons": "24"
 	},
 	"21": {
 		"longName": "Scandium",
 		"shortName": "Sc",
-		"form": "solid",
+		"meltingPoint": "15410",
+		"boilingPoint": "28360",
 		"neutrons": "24"
 	}
 }
