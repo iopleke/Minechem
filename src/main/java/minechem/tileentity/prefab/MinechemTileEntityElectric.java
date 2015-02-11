@@ -1,11 +1,10 @@
 package minechem.tileentity.prefab;
 
-import cofh.api.energy.*;
+import cofh.api.energy.IEnergyReceiver;
 import cpw.mods.fml.common.Optional;
 import minechem.Settings;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.common.util.ForgeDirection;
-
 
 @Optional.Interface(iface = "cofh.api.energy.IEnergyReceiver", modid = "CoFHAPI|energy")
 public abstract class MinechemTileEntityElectric extends MinechemTileEntity implements IEnergyReceiver
