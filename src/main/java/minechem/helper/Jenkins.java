@@ -25,12 +25,12 @@ public class Jenkins
      * @param s eg. 'H', 'H2O', 'hydrogen', 'water'
      * @return the element or molecule that matches given abbreviation or full name
      */
-    public static ChemicalBase get(String s)
+    public static <T extends ChemicalBase> T get(String s)
     {
         ChemicalBase chemicalBase = ElementRegistry.getInstance().getElement(s);
         if (chemicalBase == null) chemicalBase = ElementRegistry.getInstance().getElementByName(s);
         if (chemicalBase == null) chemicalBase = MoleculeRegistry.getInstance().getMoleculeByFormula(s);
         if (chemicalBase == null) chemicalBase = MoleculeRegistry.getInstance().getMoleculeByName(s);
-        return chemicalBase;
+        return (T)chemicalBase;
     }
 }
