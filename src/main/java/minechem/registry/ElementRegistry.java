@@ -41,7 +41,7 @@ public class ElementRegistry
     {
         atomicElementMap.put(element.atomicNumber, element);
         abbrElementMap.put(element.shortName, element);
-        nameElementMap.put(element.fullName, element);
+        nameElementMap.put(element.fullName.toLowerCase(), element);
         element.log();// TODO: make this debug only later
     }
 
@@ -89,6 +89,6 @@ public class ElementRegistry
      */
     public Element getElementByName(String fullName)
     {
-        return nameElementMap.get(fullName);
+        return nameElementMap.get(fullName.toLowerCase());
     }
 }
