@@ -12,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 public class JournalGUI extends GuiScreen
 {
     private PageBox[] pageIndex;
+    private int displayPage;
 
     /**
      *
@@ -19,7 +20,8 @@ public class JournalGUI extends GuiScreen
      */
     public JournalGUI(String playerName)
     {
-
+        pageIndex = new PageBox[2];
+        displayPage = 0;
     }
 
     @Override
@@ -27,7 +29,13 @@ public class JournalGUI extends GuiScreen
     {
         super.drawScreen(mouseX, mouseY, unused);
         GL11.glPushMatrix();
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
+        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
+
         drawJournalBackground();
+        drawFoldedPages();
+
         GL11.glPopMatrix();
     }
 
@@ -39,9 +47,21 @@ public class JournalGUI extends GuiScreen
 
     public void drawJournalBackground()
     {
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
-        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
         GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 256, 188);
+    }
+
+    public void drawFoldedPages()
+    {
+
+        if (pageIndex.length > 1 && displayPage > 0)
+        {
+            // Draw folded page on the left
+            GuiDraw.drawTexturedModalRect(5, 163, 0, 188, 21, 21);
+        }
+        if (pageIndex.length > 1 && displayPage < pageIndex.length)
+        {
+            // Draw folded page on the right
+            GuiDraw.drawTexturedModalRect(230, 160, 21, 188, 21, 21);
+        }
     }
 }
