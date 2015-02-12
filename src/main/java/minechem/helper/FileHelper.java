@@ -119,9 +119,8 @@ public class FileHelper
         try
         {
             URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
-            source.openStream();
-            return true;
-        } catch (IOException e)
+            return source != null;
+        } catch (NullPointerException e)
         {
             return false;
         }

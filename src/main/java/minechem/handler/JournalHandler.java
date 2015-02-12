@@ -11,6 +11,8 @@ import minechem.Minechem;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
 import minechem.registry.ResearchRegistry;
+import net.minecraft.client.resources.IResourceManager;
+import net.minecraft.client.resources.IResourceManagerReloadListener;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 
@@ -56,7 +58,11 @@ public class JournalHandler
             throw new RuntimeException(e);
         }
     }
-    
+
+    /**
+     * Read pages for given lang
+     * @param lang the lang code eg. "en_US" defaults to en_US if given lang does not exist
+     */
     public static void init(String lang)
     {
         if(!FileHelper.doesFileExistInJar(JournalHandler.class, Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + lang + ".json")) lang = "en_US";

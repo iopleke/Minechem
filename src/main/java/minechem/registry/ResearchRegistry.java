@@ -22,7 +22,13 @@ public class ResearchRegistry
         playerResearchMap = new TreeMap<UUID, Set<String>>();
         researchPageMap = new TreeMap<String, JournalPage>();
     }
-    
+
+    /**
+     * Adds research with given key to the player
+     * if key does not exist nothing happens 
+     * @param playerUUID the players UUID
+     * @param pageName the page name
+     */
     public void addResearch(UUID playerUUID, String pageName)
     {
         if (researchPageMap.get(pageName.toLowerCase()) == null) return;
@@ -31,12 +37,34 @@ public class ResearchRegistry
         pages.add(pageName);
         playerResearchMap.put(playerUUID, pages);
     }
-    
-    public void addResearchPage(String pageName, String title, String content)
+
+    /**
+     * Adds research with given key to the player
+     * if key does not exist nothing happens
+     * @param player the player entity
+     * @param pageName the page name
+     */
+    public void addResearch(EntityPlayer player, String pageName)
     {
-        researchPageMap.put(pageName.toLowerCase(), new JournalPage(title, content));
+        addResearch(player.getUniqueID(), pageName);
     }
 
+    /**
+     * Adds a new page to the registry
+     * @param pageName the page name
+     * @param title the page title
+     * @param content the page content
+     */
+    public void addResearchPage(String pageName, String title, String content)
+    {
+        addResearchPage(pageName, new JournalPage(title, content));
+    }
+
+    /**
+     *  Adds a new page to the registry
+     * @param pageName the page name
+     * @param page the JournalPage object
+     */
     public void addResearchPage(String pageName, JournalPage page)
     {
         researchPageMap.put(pageName.toLowerCase(), page);

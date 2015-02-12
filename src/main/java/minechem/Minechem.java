@@ -15,7 +15,8 @@ import minechem.registry.BlockRegistry;
 import minechem.registry.CreativeTabRegistry;
 import minechem.registry.ItemRegistry;
 import minechem.registry.RecipeRegistry;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
 
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
@@ -81,6 +82,9 @@ public class Minechem
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        LogHelper.debug("Registering Recipes...");
+        RecipeRegistry.getInstance().init();
+        
         LogHelper.debug("Registering GUI and Container handlers...");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
@@ -100,8 +104,8 @@ public class Minechem
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        LogHelper.debug("Registering Recipes...");
-        RecipeRegistry.getInstance().init();
+        LogHelper.debug("Registering Resource Reload Listener...");
+        ((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
 
         LogHelper.info("Minechem has loaded");
     }
