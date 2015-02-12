@@ -2,7 +2,6 @@ package minechem.chemical;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import minechem.helper.LogHelper;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
 
@@ -21,23 +20,36 @@ public class Molecule extends ChemicalBase
      * @param formula  the formula eg. 'H2O'
      * @return can throw an IllegalArgumentException
      */
-    public static Molecule parseMolecule(String fullName, String form, String formula)
+    public static Molecule parseMolecule(String fullName, String formula, int meltingPoint, int boilingPoint, int temp)
     {
-        return new Molecule(fullName, form, parseStructure(formula));
+        return new Molecule(fullName, parseStructure(formula), meltingPoint, boilingPoint, temp);
+    }
+    
+    public static Molecule parseMolecule(String fullName, String formula, int meltingPoint, int boilingPoint)
+    {
+        return new Molecule(fullName, parseStructure(formula), meltingPoint, boilingPoint);
     }
 
-    private Molecule(String fullName, String form, ChemicalStructure structure)
+    public Molecule(String fullName, ChemicalStructure structure, int meltingPoint, int boilingPoint, int temp)
     {
-        super(fullName, form);
+        super(fullName, meltingPoint, boilingPoint, temp);
         this.structure = structure;
     }
 
-    @Override
-    public void log()
+    public Molecule(String fullName, ChemicalStructure structure, int meltingPoint, int boilingPoint)
     {
-        LogHelper.debug("Molecule name: " + this.fullName);
-        LogHelper.debug("Molecule structure: " + this.getFormula());
-        LogHelper.debug("Form: " + this.form);
+        this(fullName, structure, meltingPoint, boilingPoint, 200);
+    }
+
+    @Override
+    public String getDebugInfo()
+    {
+        return fullName + 
+                "[structure: " +getFormula()+
+                ", meltingPoint: "+meltingPoint+
+                ", boilingPoint: "+boilingPoint+
+                ", temp: "+temp+
+                "]";
     }
 
     @Override

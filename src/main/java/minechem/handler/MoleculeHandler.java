@@ -48,10 +48,23 @@ public class MoleculeHandler
                 continue;
             }
             JsonObject elementObject = moleculeEntry.getValue().getAsJsonObject();
+
+            JsonElement tempObject = elementObject.get("temp");
+            int temp;
+            if (tempObject == null)
+            {
+                temp = 200;
+            } else
+            {
+                temp = Integer.parseInt(tempObject.getAsString());
+            }
+
             MoleculeRegistry.getInstance().registerMolecule(
                 moleculeEntry.getKey(),
-                elementObject.get("form").getAsString(),
-                elementObject.get("formula").getAsString()
+                elementObject.get("formula").getAsString(),
+                Integer.parseInt(elementObject.get("meltingPoint").getAsString()),
+                Integer.parseInt(elementObject.get("boilingPoint").getAsString()),
+                temp
             );
             count++;
         }

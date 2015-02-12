@@ -3,6 +3,7 @@ package minechem.registry;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Element;
+import minechem.helper.LogHelper;
 
 public class ElementRegistry
 {
@@ -39,7 +40,7 @@ public class ElementRegistry
     {
         atomicElementMap.put(element.atomicNumber, element);
         abbrElementMap.put(element.shortName, element);
-        element.log();// TODO: make this debug only later
+        LogHelper.debug("Element registered: " + element.getDebugInfo());
     }
 
     /**
@@ -51,9 +52,14 @@ public class ElementRegistry
      * @param form         solid, liquid, gas, or plasma
      * @param neutrons     the number of neutrons in the element's nucleus
      */
-    public void registerElement(int atomicNumber, String fullName, String shortName, String form, int neutrons)
+    public void registerElement(int atomicNumber, String fullName, String shortName, int neutrons, int meltingPoint, int boilingPoint, int temp)
     {
-        registerElement(new Element(atomicNumber, fullName, shortName, form, neutrons));
+        registerElement(new Element(atomicNumber, fullName, shortName, neutrons, meltingPoint, boilingPoint, temp));
+    }
+    
+    public void registerElement(int atomicNumber, String fullName, String shortName, int neutrons, int meltingPoint, int boilingPoint)
+    {
+        registerElement(new Element(atomicNumber, fullName, shortName, neutrons, meltingPoint, boilingPoint));
     }
 
     /**

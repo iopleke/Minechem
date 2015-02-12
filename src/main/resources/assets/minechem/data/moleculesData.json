@@ -1,10 +1,12 @@
 {
     "water": {
         "formula": "H2O",
-        "form": "liquid"
+        "meltingPoint": "0",
+        "boilingPoint": "1000"
     },
     "hydroxide": {
         "formula": "OH",
-        "form": "liquid"
+        "meltingPoint": "0",
+        "boilingPoint": "1000"
     }
 }

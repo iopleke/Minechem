@@ -3,6 +3,7 @@ package minechem.registry;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Molecule;
+import minechem.helper.LogHelper;
 
 public class MoleculeRegistry
 {
@@ -34,7 +35,7 @@ public class MoleculeRegistry
     {
         formulaMoleculeMap.put(molecule.getFormula(), molecule);
         nameMoleculeMap.put(molecule.fullName.toLowerCase(), molecule);
-        molecule.log();// TODO: make this debug only later
+        LogHelper.debug("Molecule registered: " + molecule.getDebugInfo());
     }
 
     /**
@@ -44,9 +45,14 @@ public class MoleculeRegistry
      * @param form     solid, liquid, gas, or plasma
      * @param formula  the formula eg. 'H2O'
      */
-    public void registerMolecule(String fullName, String form, String formula)
+    public void registerMolecule(String fullName, String formula, int meltingPoint, int boilingPoint, int temp)
     {
-        registerMolecule(Molecule.parseMolecule(fullName, form, formula));
+        registerMolecule(Molecule.parseMolecule(fullName, formula, meltingPoint, boilingPoint, temp));
+    }
+    
+    public void registerMolecule(String fullName, String formula, int meltingPoint, int boilingPoint)
+    {
+        registerMolecule(Molecule.parseMolecule(fullName, formula, meltingPoint, boilingPoint));
     }
 
     /**
