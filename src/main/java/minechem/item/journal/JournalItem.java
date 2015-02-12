@@ -24,7 +24,7 @@ public class JournalItem extends BasicItem
     @SideOnly(Side.CLIENT)
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
-        Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(player.getPersistentID()));
+        Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(player.getUniqueID()));
         return stack;
     }
 }

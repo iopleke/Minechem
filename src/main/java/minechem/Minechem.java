@@ -72,9 +72,9 @@ public class Minechem
         LogHelper.debug("Registering CreativeTabs...");
         CreativeTabRegistry.init();
 
-        // Register the proxy with the eventhandler
-        LogHelper.debug("Registering proxies...");
-        MinecraftForge.EVENT_BUS.register(proxy);
+        // Register Event Handlers
+        LogHelper.debug("Registering Event Handlers...");
+        proxy.registerEventHandlers();
 
     }
 

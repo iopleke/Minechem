@@ -3,12 +3,14 @@ package minechem.proxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.Minechem;
+import minechem.handler.WorldHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
 
 public class CommonProxy
 {
@@ -57,9 +59,9 @@ public class CommonProxy
 
     }
 
-    public void registerTickHandlers()
+    public void registerEventHandlers()
     {
-        FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(new WorldHandler());
     }
 
     public String getCurrentSaveDir()

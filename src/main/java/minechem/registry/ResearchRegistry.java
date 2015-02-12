@@ -1,6 +1,7 @@
 package minechem.registry;
 
 import minechem.item.journal.JournalPage;
+import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.*;
 
@@ -41,8 +42,38 @@ public class ResearchRegistry
         researchPageMap.put(pageName.toLowerCase(), page);
     }
 
+    /**
+     * Gets the whole player research map
+     * used when saving to the json
+     * @return
+     */
     public Map<UUID, Set<String>> getPlayerResearchMap()
     {
         return playerResearchMap;
+    }
+
+    /**
+     * Get all research for given {@link java.util.UUID}
+     * @param playerUUID
+     * @return
+     */
+    public Set<JournalPage> getResearchFor(UUID playerUUID)
+    {
+        Set<JournalPage> pages = new LinkedHashSet<JournalPage>();
+        Set<String> pageKeys = playerResearchMap.get(playerUUID);
+        if (pageKeys == null) return pages;
+        for (String key : pageKeys)
+            pages.add(researchPageMap.get("key"));
+        return pages;
+    }
+
+    /**
+     * Get all research for a given {@link net.minecraft.entity.player.EntityPlayer} 
+     * @param player
+     * @return
+     */
+    public Set<JournalPage> getResearchFor(EntityPlayer player)
+    {
+        return getResearchFor(player.getUniqueID());
     }
 }
