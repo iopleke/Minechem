@@ -18,9 +18,10 @@ public class JournalGUI extends GuiScreen
 
     /**
      *
-     * @param playerUUID the player UUID
+     * @param knowledgeKeys a array with all knowledgeKeys of the pages to display
+     * @param authors a list of authors
      */
-    public JournalGUI(UUID playerUUID)
+    public JournalGUI(String[] knowledgeKeys, String[] authors)
     {
         pageIndex = new PageBox[2];
         displayPage = 0;
