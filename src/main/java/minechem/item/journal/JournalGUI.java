@@ -1,5 +1,6 @@
 package minechem.item.journal;
 
+import codechicken.lib.gui.GuiDraw;
 import fontbox.PageBox;
 import minechem.Compendium;
 import net.minecraft.client.gui.GuiScreen;
@@ -26,8 +27,8 @@ public class JournalGUI extends GuiScreen
     {
         super.drawScreen(mouseX, mouseY, unused);
         GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        this.mc.getTextureManager().bindTexture(Compendium.Resource.GUI.journal);
+        drawJournalBackground();
+        GL11.glPopMatrix();
     }
 
     @Override
@@ -36,4 +37,11 @@ public class JournalGUI extends GuiScreen
         return false;
     }
 
+    public void drawJournalBackground()
+    {
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
+        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
+        GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 256, 188);
+    }
 }
