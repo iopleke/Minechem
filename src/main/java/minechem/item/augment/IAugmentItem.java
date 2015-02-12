@@ -1,9 +1,8 @@
 package minechem.item.augment;
 
+import java.util.Map;
 import minechem.item.augment.augments.IAugment;
 import net.minecraft.item.ItemStack;
-
-import java.util.Map;
 
 public interface IAugmentItem
 {
@@ -16,13 +15,11 @@ public interface IAugmentItem
     Map<IAugment, Integer> getAugments(ItemStack item);
 
     /**
-     * Set {@link minechem.item.augment.augments.IAugment} on Item
-     *
-     * @param item      ItemStack to add augment to
-     * @param augment   Augment to add
-     * @param level     Augment level
+     * @param item
+     * @param augment
+     * @return true if item has specified augment
      */
-    void setAugment(ItemStack item, IAugment augment, int level);
+    boolean hasAugment(ItemStack item, IAugment augment);
 
     /**
      * Removes a specified Augment from the ItemStack
@@ -34,9 +31,11 @@ public interface IAugmentItem
     boolean removeAugment(ItemStack item, IAugment augment);
 
     /**
-     * @param item
-     * @param augment
-     * @return true if item has specified augment
+     * Set {@link minechem.item.augment.augments.IAugment} on Item
+     *
+     * @param item    ItemStack to add augment to
+     * @param augment Augment to add
+     * @param level   Augment level
      */
-    boolean hasAugment(ItemStack item, IAugment augment);
+    void setAugment(ItemStack item, IAugment augment, int level);
 }
