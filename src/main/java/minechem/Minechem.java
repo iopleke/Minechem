@@ -6,14 +6,9 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.handler.ElementHandler;
-import minechem.handler.GuiHandler;
-import minechem.handler.MessageHandler;
-import minechem.handler.MoleculeHandler;
+import minechem.handler.*;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
@@ -97,6 +92,9 @@ public class Minechem
 
         LogHelper.debug("Registering Molecules...");
         MoleculeHandler.init();
+
+        LogHelper.debug("Registering Journal Pages...");
+        JournalHandler.init(proxy.getCurrentLanguage());
     }
 
     @EventHandler
@@ -106,5 +104,17 @@ public class Minechem
         RecipeRegistry.getInstance().init();
 
         LogHelper.info("Minechem has loaded");
+    }
+
+    @EventHandler
+    public void onServerStarted(FMLServerStartedEvent event)
+    {
+        JournalHandler.readPlayerResearch();
+    }
+
+    @EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event)
+    {
+        JournalHandler.saveResearch();
     }
 }

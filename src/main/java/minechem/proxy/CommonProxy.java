@@ -3,10 +3,12 @@ package minechem.proxy;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.Minechem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
+import net.minecraftforge.common.DimensionManager;
 
 public class CommonProxy
 {
@@ -31,9 +33,13 @@ public class CommonProxy
         return null;
     }
 
+    /**
+     *Get the current lang code
+     * @return eg. 'en_US'
+     */
     public String getCurrentLanguage()
     {
-        return null;
+        return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
     }
 
     public String getItemDisplayName(ItemStack newStack)
@@ -54,5 +60,10 @@ public class CommonProxy
     public void registerTickHandlers()
     {
         FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
+    }
+
+    public String getCurrentSaveDir()
+    {
+        return DimensionManager.getCurrentSaveRootDirectory().getAbsolutePath().replace(".\\", "") + "\\";
     }
 }

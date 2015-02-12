@@ -6,6 +6,8 @@ import minechem.Compendium;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.opengl.GL11;
 
+import java.util.UUID;
+
 /**
  *
  */
@@ -16,9 +18,9 @@ public class JournalGUI extends GuiScreen
 
     /**
      *
-     * @param playerName need to use UUID if possible, using displayname for now
+     * @param playerUUID the player UUID
      */
-    public JournalGUI(String playerName)
+    public JournalGUI(UUID playerUUID)
     {
         pageIndex = new PageBox[2];
         displayPage = 0;
