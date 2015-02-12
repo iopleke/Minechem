@@ -8,6 +8,7 @@ public class ElementRegistry
 {
     private Map<Integer, Element> atomicElementMap;
     private Map<String, Element> abbrElementMap;
+    private Map<String, Element> nameElementMap;
     private static ElementRegistry instance;
 
     /**
@@ -28,6 +29,7 @@ public class ElementRegistry
     {
         atomicElementMap = new TreeMap<Integer, Element>();
         abbrElementMap = new TreeMap<String, Element>();
+        nameElementMap = new TreeMap<String, Element>();
     }
 
     /**
@@ -39,6 +41,7 @@ public class ElementRegistry
     {
         atomicElementMap.put(element.atomicNumber, element);
         abbrElementMap.put(element.shortName, element);
+        nameElementMap.put(element.fullName, element);
         element.log();// TODO: make this debug only later
     }
 
@@ -76,5 +79,16 @@ public class ElementRegistry
     public Element getElement(String abbr)
     {
         return abbrElementMap.get(abbr);
+    }
+
+    /**
+     * Get an element by full name
+     *
+     * @param fullName the full name for the Element
+     * @return can return null
+     */
+    public Element getElementByName(String fullName)
+    {
+        return nameElementMap.get(fullName);
     }
 }
