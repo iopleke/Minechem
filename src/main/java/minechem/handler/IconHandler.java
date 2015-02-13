@@ -1,11 +1,12 @@
 package minechem.handler;
 
-import gnu.trove.map.TMap;
-import gnu.trove.map.hash.THashMap;
 import minechem.Compendium;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  *
@@ -13,8 +14,7 @@ import net.minecraftforge.client.event.TextureStitchEvent;
  */
 public class IconHandler
 {
-    // TODO: @jakimfett why are you using a THashMap?
-    private static TMap<String, IIcon> icons = new THashMap();
+    private static Map<String, IIcon> icons = new TreeMap<String, IIcon>();
 
     public static void addIcon(String iconName, String iconPath, IIconRegister iconRegistry)
     {
@@ -25,9 +25,9 @@ public class IconHandler
     {
         if (icons.containsKey(iconName))
         {
-            return (IIcon) icons.get(iconName);
+            return icons.get(iconName);
         }
-        return (IIcon) icons.get("default");
+        return icons.get("default");
     }
 
     public static void registerIcons(TextureStitchEvent.Pre paramPre)
