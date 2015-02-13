@@ -76,7 +76,7 @@ public class JournalHandler
 
         if (!FileHelper.doesFileExistInJar(JournalHandler.class, fileDestSource[0]))
         {
-            lang = "en_US";
+            fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + "en_US" + ".json";
         }
         InputStream inputStream = FileHelper.getJsonFile(JournalHandler.class, fileDestSource, Config.useDefaultResearchPages);
         readFromStream(inputStream);
