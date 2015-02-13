@@ -6,6 +6,7 @@ import minechem.Compendium;
 import minechem.helper.FontBoxHelper;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.client.gui.GuiScreen;
+import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -133,5 +134,41 @@ public class JournalGUI extends GuiScreen
                 currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
             }
         }
+    }
+
+    /**
+     *
+     * @param c
+     * @param keycode
+     */
+    @Override
+    protected void keyTyped(char c, int keycode)
+    {
+        if (keycode == Keyboard.KEY_LEFT)
+        {
+            if (displayPage > 0)
+            {
+                displayPage--;
+                if (displayPage > 0)
+                {
+                    displayPage--;
+                }
+            }
+        }
+        if (keycode == Keyboard.KEY_RIGHT)
+        {
+            if (displayPage < pageIndex.length)
+            {
+                displayPage++;
+                if (displayPage < pageIndex.length)
+                {
+                    displayPage++;
+                }
+            }
+        }
+
+        loadPage(displayPage);
+        super.keyTyped(c, keycode);
+
     }
 }
