@@ -58,6 +58,8 @@ public class Compendium
         public static final String dataJsonPrefix = "data/";
         public static final String elementsDataJson = "elementsData.json";
         public static final String moleculesDataJson = "moleculesData.json";
+        public static final String researchPagesJsonPrefix = "researchPages/";
+        public static final String playerResearchData = "minechem/researchData.json";
     }
 
     public static final class MetaData
@@ -87,6 +89,7 @@ public class Compendium
     {
         public static final String id = "minechem";
         public static final String name = "Minechem";
+        public static final String fontBox = "fontbox";
         public static final String opticalMicroscope = "opticalMicroscope";
         public static final String electrolysis = "electrolysis";
         public static final String journal = "journal";
@@ -202,6 +205,12 @@ public class Compendium
             public static final ResourceLocation right = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.tab_right);
             public static final ResourceLocation left = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.tab_left);
         }
+
+        public static final class Font
+        {
+            public static final ResourceLocation danielFont = new ResourceLocation(Compendium.Naming.fontBox, Compendium.Texture.Font.danielFont);
+            public static final ResourceLocation danielMetrics = new ResourceLocation(Compendium.Naming.fontBox, Compendium.Texture.Font.danielMetrics);
+        }
     }
 
     public static final class Texture
@@ -241,6 +250,13 @@ public class Compendium
             public static final String prefix = "textures/models/";
             public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
             public static final String electrolysis = Compendium.Texture.Model.prefix + "electrolysis.png";
+        }
+
+        public static final class Font
+        {
+            public static final String prefix = "textures/fonts/";
+            public static final String danielFont = Compendium.Texture.Font.prefix + "daniel.png";
+            public static final String danielMetrics = Compendium.Texture.Font.prefix + "daniel.metrics.xml";
         }
     }
 

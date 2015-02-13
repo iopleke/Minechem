@@ -1,0 +1,18 @@
+{
+    "hydrogen": {
+        "title": "Hydrogen (H)",
+        "content": "I have discovered a gas which I shall call 'Hydrogen'. It is lighter than air, but an escaped whiff of it made my torch flare alarmingly. I should use caution around open flames."
+    },
+    "helium": {
+        "title": "Helium (He)",
+        "content": "This gas I shall call Helium. It is lighter than air, and almost completely inert."
+    },
+    "lithium": {
+        "title": "Lithium (Li)",
+        "content": "When I touched this metal with my bare hand, it burned me. Further testing showed that it has a rather violent reaction with water. I shall call it Lithium."
+    },
+    "beryllium": {
+        "title": "Beryllium (Be)",
+        "content": "I've discovered a lightweight metal with excellent strength and thermal transfer properties. I'll call it Beryllium."
+    }
+}

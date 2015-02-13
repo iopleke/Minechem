@@ -32,6 +32,13 @@ public abstract class ChemicalBase
      */
     public abstract String getFormula();
 
+    /**
+     * Shorthand for checking if it is an element or not so that instanceof is not needed
+     *
+     * @return true if it is an element
+     */
+    public abstract boolean isElement();
+
     @Override
     public String toString()
     {

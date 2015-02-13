@@ -1,6 +1,5 @@
 package minechem.item.augment.augments;
 
-
 import com.google.common.collect.Multimap;
 import minechem.Compendium;
 import minechem.item.augment.AugmentedItem;
@@ -227,9 +226,7 @@ public abstract class AugmentBase implements IAugment
     }
 
     /**
-     * Called when the player Left Clicks (attacks) an entity.
-     * Processed before damage is done, if return value is true further processing is canceled
-     * and the entity is not attacked.
+     * Called when the player Left Clicks (attacks) an entity. Processed before damage is done, if return value is true further processing is canceled and the entity is not attacked.
      *
      * @param stack  The Item being used
      * @param player The player that is attacking

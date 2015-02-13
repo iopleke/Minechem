@@ -1,11 +1,10 @@
 package minechem.item.augment;
 
+import com.google.common.collect.Multimap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
-
-import com.google.common.collect.Multimap;
 import minechem.Compendium;
 import minechem.item.augment.augments.IAugment;
 import minechem.item.prefab.WrapperItem;
@@ -182,7 +181,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase)
     {
         boolean result = super.onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase, entry.getValue());
         }
@@ -193,8 +192,11 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onDroppedByPlayer(ItemStack stack, EntityPlayer player)
     {
         boolean result = super.onDroppedByPlayer(stack, player);
-        if (result) return true;
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        if (result)
+        {
+            return true;
+        }
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onDroppedByPlayer(stack, player, entry.getValue());
         }
@@ -205,7 +207,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onEntityItemUpdate(EntityItem entityItem)
     {
         boolean result = super.onEntityItemUpdate(entityItem);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(entityItem.getEntityItem()).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(entityItem.getEntityItem()).entrySet())
         {
             result |= entry.getKey().onEntityItemUpdate(entityItem.getEntityItem(), entityItem, entry.getValue());
         }
@@ -216,8 +218,11 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
         boolean result = super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-        if (result) return true;
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        if (result)
+        {
+            return true;
+        }
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ, entry.getValue());
         }
@@ -228,8 +233,11 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
         boolean result = super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
-        if (result) return true;
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        if (result)
+        {
+            return true;
+        }
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ, entry.getValue());
         }
@@ -240,8 +248,11 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
         boolean result = super.onEntitySwing(entityLiving, stack);
-        if (result) return true;
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        if (result)
+        {
+            return true;
+        }
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onEntitySwing(stack, entityLiving, entry.getValue());
         }
@@ -252,7 +263,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase)
     {
         boolean result = super.itemInteractionForEntity(stack, player, entityLivingBase);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().itemInteractionForEntity(stack, player, entityLivingBase, entry.getValue());
         }
@@ -263,8 +274,11 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {
         boolean result = super.onLeftClickEntity(stack, player, entity);
-        if (result) return true;
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        if (result)
+        {
+            return true;
+        }
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onLeftClickEntity(stack, player, entity, entry.getValue());
         }
@@ -275,7 +289,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         ItemStack result = super.onItemRightClick(stack, world, player);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result = entry.getKey().onItemRightClick(stack, world, player, entry.getValue());
         }
@@ -286,7 +300,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
     {
         ItemStack result = super.onEaten(stack, world, player);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result = entry.getKey().onEaten(stack, world, player, entry.getValue());
         }
@@ -297,7 +311,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool)
     {
         super.onUpdate(stack, world, entity, slot, bool);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             entry.getKey().onUpdate(stack, world, entity, slot, bool, entry.getValue());
         }
@@ -307,7 +321,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
     {
         super.onUsingTick(stack, player, count);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             entry.getKey().onUsingTick(stack, player, count, entry.getValue());
         }
@@ -317,7 +331,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public float getDigSpeed(ItemStack itemstack, Block block, int metadata)
     {
         float result = super.getDigSpeed(itemstack, block, metadata);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(itemstack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(itemstack).entrySet())
         {
             result = entry.getKey().getModifiedDigSpeed(itemstack, result, block, metadata, entry.getValue());
         }
@@ -327,8 +341,8 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public int getHarvestLevel(ItemStack stack, String toolClass)
     {
-        int result =  super.getHarvestLevel(stack, toolClass);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        int result = super.getHarvestLevel(stack, toolClass);
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result += entry.getKey().getHarvestLevelModifier(stack, toolClass, entry.getValue());
         }
@@ -339,7 +353,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public Multimap getAttributeModifiers(ItemStack stack)
     {
         Multimap result = super.getAttributeModifiers(stack);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result.putAll(entry.getKey().getAttributeModifiers(stack, entry.getValue()));
         }
@@ -349,20 +363,23 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public void setDamage(ItemStack stack, int damage)
     {
-        for (Map.Entry<IAugment,Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            if (rand.nextFloat()<entry.getKey().setDamageChance(stack, entry.getValue())) return;
+            if (rand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue()))
+            {
+                return;
+            }
         }
         super.setDamage(stack, damage);
     }
 
     @Override
-    public int getEntityLifespan(ItemStack item, World world)
+    public int getEntityLifespan(ItemStack stack, World world)
     {
-        int lifespan = super.getEntityLifespan(item,world);
-        for (Map.Entry<IAugment,Integer> entry : getAugments(item).entrySet())
+        int lifespan = super.getEntityLifespan(stack, world);
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            lifespan += entry.getKey().getEntityLifespanModifier(item, entry.getValue());
+            lifespan += entry.getKey().getEntityLifespanModifier(stack, entry.getValue());
         }
         return lifespan;
     }

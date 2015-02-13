@@ -25,6 +25,8 @@ public class Config
     public static boolean useDefaultElements = true;
     // turns on to copy the newest molecules list from jar
     public static boolean useDefaultMolecules = true;
+    // turns on to copy the newest researchPages list from jar
+    public static boolean useDefaultResearchPages = true;
 
     public static List<IConfigElement> getConfigElements()
     {
@@ -38,7 +40,6 @@ public class Config
 
         if (config == null)
         {
-
             config = new Configuration(new File(Compendium.Config.configPrefix + "Minechem.cfg"));
             loadConfig();
         }
@@ -67,6 +68,12 @@ public class Config
         prop.comment = StatCollector.translateToLocal("config.useDefaultMolecules");
         prop.setLanguageKey("config.useDefaultMolecules.tooltip");
         useDefaultMolecules = prop.getBoolean();
+        configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "useDefaultResearchPages", Config.useDefaultResearchPages);
+        prop.comment = StatCollector.translateToLocal("config.useDefaultResearchPages");
+        prop.setLanguageKey("config.useDefaultResearchPages.tooltip");
+        useDefaultResearchPages = prop.getBoolean();
         configList.add(prop.getName());
 
         prop = config.get(Configuration.CATEGORY_GENERAL, "enablePatreon", Config.enablePatreon);

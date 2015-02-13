@@ -20,7 +20,10 @@ public class MoleculeHandler
 {
     public static void init()
     {
-        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, Compendium.Config.moleculesDataJson, Config.useDefaultMolecules);
+        String[] fileDestSource = new String[2];
+        fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.moleculesDataJson;
+        fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.moleculesDataJson;
+        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, fileDestSource, Config.useDefaultMolecules);
         readFromStream(inputStream);
         if (inputStream != null)
         {

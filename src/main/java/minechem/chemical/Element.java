@@ -94,6 +94,12 @@ public class Element extends ChemicalBase
     }
 
     @Override
+    public boolean isElement()
+    {
+        return true;
+    }
+
+    @Override
     public String getFormula()
     {
         return this.shortName;

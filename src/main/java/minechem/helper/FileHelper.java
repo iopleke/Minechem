@@ -28,7 +28,7 @@ public class FileHelper
         LogHelper.debug("Copying file " + fileSource + " from jar");
 
         URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
-        File destination = new File(Compendium.Config.configPrefix + fileDestination);
+        File destination = new File(fileDestination);
 
         try
         {
@@ -71,20 +71,20 @@ public class FileHelper
      * Get a JSON file from the default data location
      *
      * @param classFromJar the class that makes the call
-     * @param file         the file name
+     * @param file         String[2] array, 0 is source, 1 is destination
      * @param alwaysCopy   set ot true to always make a fresh copy
      * @return the requested JSON file in an InputStream. Throws IOException if something goes wrong
      */
-    public static InputStream getJsonFile(Class<?> classFromJar, String file, boolean alwaysCopy)
+    public static InputStream getJsonFile(Class<?> classFromJar, String[] file, boolean alwaysCopy)
     {
-        File dataFile = new File(Compendium.Config.configPrefix + file);
+        File dataFile = new File(file[1]);
 
         if (!dataFile.isFile() || alwaysCopy)
         {
-            FileHelper.copyFromJar(classFromJar, Compendium.Config.dataJsonPrefix + file, file);
+            FileHelper.copyFromJar(classFromJar, file[0], file[1]);
 
             // If the file was copied, get the file again
-            dataFile = new File(Compendium.Config.configPrefix + file);
+            dataFile = new File(file[1]);
         }
 
         if (dataFile.isFile())
@@ -101,5 +101,59 @@ public class FileHelper
             return stream;
         }
         throw new RuntimeException(); // this should never be reached
+    }
+
+    /**
+     * Check if file exits in the jar
+     *
+     * @param classFromJar
+     * @param fileSource
+     * @return
+     */
+    public static boolean doesFileExistInJar(Class<?> classFromJar, String fileSource)
+    {
+        try
+        {
+            URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
+            return source != null;
+        } catch (NullPointerException e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Check if file exits in the config folder
+     *
+     * @param file
+     * @return
+     */
+    public static boolean doesFileExist(String file)
+    {
+        try
+        {
+            new FileInputStream(FileUtils.getFile(file));
+            return true;
+        } catch (FileNotFoundException e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Get a file from the config folder
+     *
+     * @param file the fileName
+     * @return
+     */
+    public static FileInputStream getFile(String file)
+    {
+        try
+        {
+            return new FileInputStream(FileUtils.getFile(file));
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
