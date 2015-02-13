@@ -4,6 +4,8 @@ language.region=US
 language.code=en_US
 
 gui.element.tank.empty=Empty
+gui.journal.writtenBy=Written By
+gui.journal.index=Index
 
 tile.electrolysis.name=Electrolysis Apparatus
 tile.opticalMicroscope.name=Optical Microscope
