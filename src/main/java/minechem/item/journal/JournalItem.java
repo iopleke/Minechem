@@ -118,6 +118,13 @@ public class JournalItem extends BasicItem
         return null;
     }
 
+    /**
+     * Writes the tooltip with author info
+     * @param itemStack the ItemStack
+     * @param player the player
+     * @param lines lines to print
+     * @param bool dunno ?
+     */
     @Override
     public void addInformation(ItemStack itemStack, EntityPlayer player, List lines, boolean bool)
     {

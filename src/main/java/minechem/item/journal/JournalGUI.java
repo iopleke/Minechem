@@ -61,6 +61,9 @@ public class JournalGUI extends GuiScreen
         GL11.glPopMatrix();
     }
 
+    /**
+     * Draw the actual page content
+     */
     private void drawPages()
     {
         FontBoxHelper.renderPageBox(currentPages[0], 10, 30, zLevel);
@@ -97,6 +100,7 @@ public class JournalGUI extends GuiScreen
 
     /**
      * Loads the given page pair
+     * Where page 0 is the author list
      * @param displayPage will show the pair eg. 1 -> 0, 1; 1 -> 0, 1; 2 -> 2, 3; ...
      */
     private void loadPage(int displayPage)
