@@ -78,7 +78,7 @@ public class ResearchRegistry
      */
     public JournalPage getResearchPage(String pageName)
     {
-        return researchPageMap.get(pageName);
+        return researchPageMap.get(pageName.toLowerCase());
     }
 
     /**
