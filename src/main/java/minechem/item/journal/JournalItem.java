@@ -33,7 +33,10 @@ public class JournalItem extends BasicItem
     {
         if (player.isSneaking())
         {
-            ResearchRegistry.getInstance().addResearch(player, "Hydrogen");
+            ResearchRegistry.getInstance().addResearch(player, "hydrogen");
+            ResearchRegistry.getInstance().addResearch(player, "helium");
+            ResearchRegistry.getInstance().addResearch(player, "lithium");
+            ResearchRegistry.getInstance().addResearch(player, "beryllium");
             writeKnowledge(stack, player);
         } else
         {
