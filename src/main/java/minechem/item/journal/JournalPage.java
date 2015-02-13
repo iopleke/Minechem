@@ -5,9 +5,11 @@ public class JournalPage
     public final String title;
     public final String content;
 
-    /***
+    /**
+     * *
      * Creates a new JournalPage
-     * @param title page title
+     *
+     * @param title   page title
      * @param content page content
      */
     public JournalPage(String title, String content)

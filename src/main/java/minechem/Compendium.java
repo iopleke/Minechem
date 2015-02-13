@@ -205,7 +205,7 @@ public class Compendium
             public static final ResourceLocation right = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.tab_right);
             public static final ResourceLocation left = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.tab_left);
         }
-        
+
         public static final class Font
         {
             public static final ResourceLocation danielFont = new ResourceLocation(Compendium.Naming.fontBox, Compendium.Texture.Font.danielFont);
@@ -251,7 +251,7 @@ public class Compendium
             public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
             public static final String electrolysis = Compendium.Texture.Model.prefix + "electrolysis.png";
         }
-        
+
         public static final class Font
         {
             public static final String prefix = "textures/fonts/";

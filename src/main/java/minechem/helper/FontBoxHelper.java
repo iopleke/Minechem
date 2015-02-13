@@ -1,12 +1,16 @@
 package minechem.helper;
 
-import fontbox.*;
+import fontbox.FontException;
+import fontbox.FontMetric;
+import fontbox.FontRenderBuffer;
+import fontbox.LayoutCalculator;
+import fontbox.PageBox;
+import fontbox.WrittenFontRenderer;
 import fontbox.io.StackedPushbackStringReader;
+import java.io.IOException;
 import minechem.Compendium;
 import minechem.Config;
 import org.apache.logging.log4j.Level;
-
-import java.io.IOException;
 
 public class FontBoxHelper
 {
@@ -18,7 +22,7 @@ public class FontBoxHelper
     /**
      * Sets up all static data
      */
-    static 
+    static
     {
         fontMetricDaniel = new FontMetric(Compendium.Resource.Font.danielFont, 418, 242, Compendium.Resource.Font.danielMetrics);
         try
@@ -32,9 +36,9 @@ public class FontBoxHelper
     }
 
     /**
-     * Adds line to a {@link fontbox.PageBox}
-     * TODO: fix this the value reference makes it derp
-     * @param text the text to add
+     * Adds line to a {@link fontbox.PageBox} TODO: fix this the value reference makes it derp
+     *
+     * @param text    the text to add
      * @param pageBox the pageBox to add to
      */
     public static void boxLine(String text, PageBox pageBox)
@@ -50,6 +54,7 @@ public class FontBoxHelper
 
     /**
      * Renders a given {@link fontbox.PageBox} at given position
+     *
      * @param pageBox
      * @param x
      * @param y
@@ -57,18 +62,19 @@ public class FontBoxHelper
      */
     public static void renderPageBox(PageBox pageBox, float x, float y, float z)
     {
-        writtenFontRenderer.renderPages(fontMetricDaniel, fontRenderBufferDaniel, pageBox, x, y , z, Config.debugMode);
+        writtenFontRenderer.renderPages(fontMetricDaniel, fontRenderBufferDaniel, pageBox, x, y, z, Config.debugMode);
     }
 
     /**
      * Creates a {@link fontbox.PageBox} with the text as content
-     * @param text content
+     *
+     * @param text     content
      * @param width
      * @param height
      * @param margin_l left margin
      * @param margin_r right margin
-     * @param min_sp minimum space size
-     * @param min_lhs minimum font size
+     * @param min_sp   minimum space size
+     * @param min_lhs  minimum font size
      * @return the PageBox with content
      */
     public static PageBox boxText(String text, int width, int height, int margin_l, int margin_r, int min_sp, int min_lhs)

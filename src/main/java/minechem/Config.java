@@ -69,7 +69,7 @@ public class Config
         prop.setLanguageKey("config.useDefaultMolecules.tooltip");
         useDefaultMolecules = prop.getBoolean();
         configList.add(prop.getName());
-        
+
         prop = config.get(Configuration.CATEGORY_GENERAL, "useDefaultResearchPages", Config.useDefaultResearchPages);
         prop.comment = StatCollector.translateToLocal("config.useDefaultResearchPages");
         prop.setLanguageKey("config.useDefaultResearchPages.tooltip");

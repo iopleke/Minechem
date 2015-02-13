@@ -1,8 +1,6 @@
 package minechem.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import minechem.Minechem;
 import minechem.handler.WorldHandler;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -36,7 +34,8 @@ public class CommonProxy
     }
 
     /**
-     *Get the current lang code
+     * Get the current lang code
+     *
      * @return eg. 'en_US'
      */
     public String getCurrentLanguage()
@@ -66,6 +65,6 @@ public class CommonProxy
 
     public String getCurrentSaveDir()
     {
-        return DimensionManager.getCurrentSaveRootDirectory().getAbsolutePath().replace(".\\", "") + "\\";
+        return DimensionManager.getCurrentSaveRootDirectory().getAbsolutePath();
     }
 }

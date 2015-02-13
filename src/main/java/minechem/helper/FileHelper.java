@@ -6,12 +6,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
-
-import cpw.mods.fml.common.Loader;
 import minechem.Compendium;
 import minechem.Config;
-import minechem.Minechem;
-import net.minecraft.client.Minecraft;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 
@@ -32,7 +28,7 @@ public class FileHelper
         LogHelper.debug("Copying file " + fileSource + " from jar");
 
         URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
-        File destination = new File(Compendium.Config.configPrefix + fileDestination);
+        File destination = new File(fileDestination);
 
         try
         {
@@ -75,20 +71,20 @@ public class FileHelper
      * Get a JSON file from the default data location
      *
      * @param classFromJar the class that makes the call
-     * @param file         the file name
+     * @param file         String[2] array, 0 is source, 1 is destination
      * @param alwaysCopy   set ot true to always make a fresh copy
      * @return the requested JSON file in an InputStream. Throws IOException if something goes wrong
      */
-    public static InputStream getJsonFile(Class<?> classFromJar, String file, boolean alwaysCopy)
+    public static InputStream getJsonFile(Class<?> classFromJar, String[] file, boolean alwaysCopy)
     {
-        File dataFile = new File(Compendium.Config.configPrefix + file);
+        File dataFile = new File(file[1]);
 
         if (!dataFile.isFile() || alwaysCopy)
         {
-            FileHelper.copyFromJar(classFromJar, Compendium.Config.dataJsonPrefix + file, file);
+            FileHelper.copyFromJar(classFromJar, file[0], file[1]);
 
             // If the file was copied, get the file again
-            dataFile = new File(Compendium.Config.configPrefix + file);
+            dataFile = new File(file[1]);
         }
 
         if (dataFile.isFile())
@@ -108,8 +104,8 @@ public class FileHelper
     }
 
     /**
-     * Check if file exits in the jar 
-     *  
+     * Check if file exits in the jar
+     *
      * @param classFromJar
      * @param fileSource
      * @return
@@ -132,29 +128,11 @@ public class FileHelper
      * @param file
      * @return
      */
-    public static boolean doesFileExistInConfig(String file)
+    public static boolean doesFileExist(String file)
     {
         try
         {
-            new FileInputStream(FileUtils.getFile(Compendium.Config.configPrefix  + file));
-            return true;
-        } catch (FileNotFoundException e)
-        {
-            return false;
-        }
-    }
-
-    /**
-     * Check if file exits in the current world folder
-     *
-     * @param file
-     * @return
-     */
-    public static boolean doesFileExistInCurrentSaveDir(String file)
-    {
-        try
-        {
-            new FileInputStream(FileUtils.getFile(Minechem.proxy.getCurrentSaveDir() + file));
+            new FileInputStream(FileUtils.getFile(file));
             return true;
         } catch (FileNotFoundException e)
         {
@@ -164,30 +142,15 @@ public class FileHelper
 
     /**
      * Get a file from the config folder
+     *
      * @param file the fileName
      * @return
      */
-    public static FileInputStream getFileFromConfig(String file)
+    public static FileInputStream getFile(String file)
     {
         try
         {
-            return new FileInputStream(FileUtils.getFile(Compendium.Config.configPrefix + file));
-        } catch (FileNotFoundException e)
-        {
-            throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Get a file from the current world folder
-     * @param file the fileName
-     * @return
-     */
-    public static FileInputStream getFileFromCurrentSaveDir(String file)
-    {
-        try
-        {
-            return new FileInputStream(FileUtils.getFile(Minechem.proxy.getCurrentSaveDir() + file));
+            return new FileInputStream(FileUtils.getFile(file));
         } catch (FileNotFoundException e)
         {
             throw new RuntimeException(e);

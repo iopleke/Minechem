@@ -6,9 +6,18 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.*;
+import cpw.mods.fml.common.event.FMLInitializationEvent;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerStartedEvent;
+import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.handler.*;
+import minechem.handler.ElementHandler;
+import minechem.handler.GuiHandler;
+import minechem.handler.JournalHandler;
+import minechem.handler.MessageHandler;
+import minechem.handler.MoleculeHandler;
+import minechem.handler.ResourceReloadListener;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
@@ -84,7 +93,7 @@ public class Minechem
     {
         LogHelper.debug("Registering Recipes...");
         RecipeRegistry.getInstance().init();
-        
+
         LogHelper.debug("Registering GUI and Container handlers...");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
@@ -105,7 +114,7 @@ public class Minechem
     public void postInit(FMLPostInitializationEvent event)
     {
         LogHelper.debug("Registering Resource Reload Listener...");
-        ((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
+        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
 
         LogHelper.info("Minechem has loaded");
     }

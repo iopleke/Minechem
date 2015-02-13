@@ -34,6 +34,7 @@ public abstract class ChemicalBase
 
     /**
      * Shorthand for checking if it is an element or not so that instanceof is not needed
+     *
      * @return true if it is an element
      */
     public abstract boolean isElement();

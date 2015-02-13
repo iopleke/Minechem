@@ -29,7 +29,7 @@ public class ClientProxy extends CommonProxy
     {
         return FMLClientHandler.instance().getClient().theWorld;
     }
-    
+
     @Override
     public EntityPlayer getPlayer(MessageContext context)
     {

@@ -19,7 +19,7 @@ public class JournalGUI extends GuiScreen
     private String[] authorList;
 
     /**
-     * FontBox values 
+     * FontBox values
      */
     private int pageWidth = 230;
     private int pageHeight = 800;
@@ -33,7 +33,7 @@ public class JournalGUI extends GuiScreen
     /**
      *
      * @param knowledgeKeys a array with all knowledgeKeys of the pages to display
-     * @param authors a list of authors
+     * @param authors       a list of authors
      */
     public JournalGUI(String[] knowledgeKeys, String[] authors)
     {
@@ -51,7 +51,7 @@ public class JournalGUI extends GuiScreen
         super.drawScreen(mouseX, mouseY, unused);
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glTranslatef(width / 2 - 128,height / 2 - 94, 0.0f);
+        GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
         GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
 
         drawJournalBackground();
@@ -99,33 +99,38 @@ public class JournalGUI extends GuiScreen
     }
 
     /**
-     * Loads the given page pair
-     * Where page 0 is the author list
+     * Loads the given page pair Where page 0 is the author list
+     *
      * @param displayPage will show the pair eg. 1 -> 0, 1; 1 -> 0, 1; 2 -> 2, 3; ...
      */
     private void loadPage(int displayPage)
     {
-        if (displayPage % 2 != 0) displayPage -= 1;
-        currentPages[0] = FontBoxHelper.boxText("", pageWidth, pageHeight , margin_l, margin_r, space, fontSize);
-        currentTitles[0] = FontBoxHelper.boxText("", titleWidth, titleHeight , margin_l, margin_r, space, fontSize);
-        currentPages[1] = FontBoxHelper.boxText("", pageWidth, pageHeight , margin_l, margin_r, space, fontSize);
-        currentTitles[1] = FontBoxHelper.boxText("", titleWidth, titleHeight , margin_l, margin_r, space, fontSize);
+        if (displayPage % 2 != 0)
+        {
+            displayPage -= 1;
+        }
+        currentPages[0] = FontBoxHelper.boxText("", pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
+        currentTitles[0] = FontBoxHelper.boxText("", titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
+        currentPages[1] = FontBoxHelper.boxText("", pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
+        currentTitles[1] = FontBoxHelper.boxText("", titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
         if (displayPage == 0)
         {
             String sAuthors = "";
             for (String author : authorList)
+            {
                 sAuthors += "- " + author + "\n";
-            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageWidth, pageHeight , margin_l, margin_r, space, fontSize);
-            currentTitles[0] = FontBoxHelper.boxText("Written by:", titleWidth, titleHeight , margin_l, margin_r, space, fontSize);
+            }
+            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
+            currentTitles[0] = FontBoxHelper.boxText("Written by:", titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
         }
         if (pageIndex.length > 0)
         {
-            currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage].content, pageWidth, pageHeight , margin_l, margin_r, space, fontSize);
-            currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage].title, titleWidth, titleHeight , margin_l, margin_r, space, fontSize);
+            currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage].content, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
+            currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage].title, titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
             if (displayPage != 0)
             {
-                currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage-1].content, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
-                currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage-1].title, titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
+                currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 1].content, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
+                currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
             }
         }
     }

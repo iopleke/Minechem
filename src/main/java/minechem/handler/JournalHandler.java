@@ -5,21 +5,23 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
 import minechem.Compendium;
 import minechem.Config;
 import minechem.Minechem;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
 import minechem.registry.ResearchRegistry;
-import net.minecraft.client.resources.IResourceManager;
-import net.minecraft.client.resources.IResourceManagerReloadListener;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
-
-import java.io.*;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
 
 public class JournalHandler
 {
@@ -30,7 +32,7 @@ public class JournalHandler
     {
         try
         {
-            OutputStream outputStream = FileUtils.openOutputStream(new File(Minechem.proxy.getCurrentSaveDir() + Compendium.Config.playerResearchData));
+            OutputStream outputStream = FileUtils.openOutputStream(new File(Minechem.proxy.getCurrentSaveDir() + "/data/" + Compendium.Config.playerResearchData));
             JsonWriter jWriter = new JsonWriter(new OutputStreamWriter(outputStream));
             jWriter.setIndent("    ");
             jWriter.beginObject();
@@ -40,7 +42,9 @@ public class JournalHandler
                 //jWriter.name("displayName").value(); TODO: maybe find a way to add this for readability
                 jWriter.name("research").beginArray();
                 for (String research : entry.getValue())
+                {
                     jWriter.value(research);
+                }
                 jWriter.endArray();
                 jWriter.endObject();
             }
@@ -61,12 +65,20 @@ public class JournalHandler
 
     /**
      * Read pages for given lang
+     *
      * @param lang the lang code eg. "en_US" defaults to en_US if given lang does not exist
      */
     public static void init(String lang)
     {
-        if(!FileHelper.doesFileExistInJar(JournalHandler.class, Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + lang + ".json")) lang = "en_US";
-        InputStream inputStream = FileHelper.getJsonFile(JournalHandler.class, Compendium.Config.researchPagesJsonPrefix + lang + ".json", Config.useDefaultResearchPages);
+        String[] fileDestSource = new String[2];
+        fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + lang + ".json";
+        fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + lang + ".json";
+
+        if (!FileHelper.doesFileExistInJar(JournalHandler.class, fileDestSource[0]))
+        {
+            lang = "en_US";
+        }
+        InputStream inputStream = FileHelper.getJsonFile(JournalHandler.class, fileDestSource, Config.useDefaultResearchPages);
         readFromStream(inputStream);
         if (inputStream != null)
         {
@@ -85,9 +97,10 @@ public class JournalHandler
      */
     public static void readPlayerResearch()
     {
-        if(FileHelper.doesFileExistInCurrentSaveDir(Compendium.Config.playerResearchData))
+        String fileName = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.playerResearchData;
+        if (FileHelper.doesFileExist(fileName))
         {
-            InputStream inputStream = FileHelper.getFileFromCurrentSaveDir(Compendium.Config.playerResearchData);
+            InputStream inputStream = FileHelper.getFile(fileName);
             readPlayerResearch(inputStream);
         }
     }
@@ -109,8 +122,8 @@ public class JournalHandler
             for (JsonElement research : playerObject.getAsJsonArray("research"))
             {
                 ResearchRegistry.getInstance().addResearch(
-                        UUID.fromString(playerEntry.getKey()),
-                        research.getAsString()
+                    UUID.fromString(playerEntry.getKey()),
+                    research.getAsString()
                 );
             }
             count++;
@@ -133,9 +146,9 @@ public class JournalHandler
             }
             JsonObject pageObject = pageEntry.getValue().getAsJsonObject();
             ResearchRegistry.getInstance().addResearchPage(
-                    pageEntry.getKey(),
-                    pageObject.get("title").getAsString(),
-                    pageObject.get("content").getAsString()
+                pageEntry.getKey(),
+                pageObject.get("title").getAsString(),
+                pageObject.get("content").getAsString()
             );
             count++;
         }
