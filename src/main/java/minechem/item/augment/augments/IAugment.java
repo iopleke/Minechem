@@ -14,12 +14,30 @@ public interface IAugment
 {
     String getKey();
 
+    /**
+     * @param stack
+     * @param level
+     * @return max Level of damage can be applied
+     */
+    int getUsableLevel(ItemStack stack, int level);
+
+    /**
+     * @param stack
+     * @param level
+     * @return int level of augment applied
+     */
+    int consumeAugment(ItemStack stack, int level);
+
+
+    /**
+     * @return true to make the block drop
+     */
     boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level);
 
     /**
      * @return false to cancel drop
      */
-    boolean onDroppedByPlayer(ItemStack item, EntityPlayer player, int level);
+    boolean onDroppedByPlayer(ItemStack stack, EntityPlayer player, int level);
 
     /**
      * Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner
@@ -28,7 +46,7 @@ public interface IAugment
      * @param entityItem The entity Item
      * @return Return true to skip any further update code.
      */
-    boolean onEntityItemUpdate(EntityItem entityItem, int level);
+    boolean onEntityItemUpdate(ItemStack stack, EntityItem entityItem, int level);
 
     /**
      * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
@@ -48,7 +66,7 @@ public interface IAugment
      * @param stack The Item stack
      * @return True to cancel any further processing by EntityLiving
      */
-    boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack, int level);
+    boolean onEntitySwing(ItemStack stack, EntityLivingBase entityLiving, int level);
 
     /**
      * Returns true if the item can be used on the given entity, e.g. shears on sheep.
@@ -91,26 +109,26 @@ public interface IAugment
      * @param prevDigSpeed unmodified dig speed
      * @return
      */
-    float getModifiedDigSpeed(float prevDigSpeed, Block block, int metadata, int level);
+    float getModifiedDigSpeed(ItemStack stack, float prevDigSpeed, Block block, int metadata, int level);
 
     /**
      * @param toolClass
      * @return modifier to tool level
      */
-    int getHarvestLevelModifier(String toolClass, int level);
+    int getHarvestLevelModifier(ItemStack stack, String toolClass, int level);
 
     /**
      * @return Attribute Modifiers to the base tools attributes.
      */
-    Multimap<String, AttributeModifier> getAttributeModifiers(int level);
+    Multimap<String, AttributeModifier> getAttributeModifiers(ItemStack stack, int level);
 
     /**
      * @return float value between 0 and 1 indicating probability of damage not being applied to the tool
      */
-    float setDamageChance(int level);
+    float setDamageChance(ItemStack stack, int level);
 
     /**
      * @return int modifier to EntityItem lifespan (base 6000)
      */
-    int getEntityLifespanModifier(int level);
+    int getEntityLifespanModifier(ItemStack stack, int level);
 }

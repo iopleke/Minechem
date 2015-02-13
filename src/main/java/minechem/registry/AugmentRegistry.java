@@ -2,11 +2,22 @@ package minechem.registry;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import minechem.collections.ItemStackMap;
+import minechem.item.augment.IAugmentItem;
+import minechem.item.augment.augments.AugmentTnt;
 import minechem.item.augment.augments.IAugment;
+import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.Fluid;
+import net.minecraftforge.fluids.IFluidContainerItem;
 
 public class AugmentRegistry
 {
-    private static Map<String, IAugment> chemicalAugmentMap = new HashMap<String, IAugment>();
+    private static Map<String, IAugment> augmentKeyMap = new HashMap<String, IAugment>();
+    private static Map<Fluid, IAugment> fluidAugmentMap = new HashMap<Fluid, IAugment>();
+    private static ItemStackMap<IAugment> itemStackAugmentMap = new ItemStackMap<IAugment>(true);
 
     /**
      * Returns the augment for an unlocalized item name
@@ -16,7 +27,25 @@ public class AugmentRegistry
      */
     public static IAugment getAugment(String name)
     {
-        return chemicalAugmentMap.get(name);
+        return augmentKeyMap.get(name);
+    }
+
+    public static IAugment getAugment(ItemStack augmentItem)
+    {
+        if (augmentItem == null) return null;
+        Item item = augmentItem.getItem();
+        if (item instanceof IFluidContainerItem)
+        {
+            return fluidAugmentMap.get(((IFluidContainerItem)item).getFluid(augmentItem));
+        }
+        else if (item instanceof IAugmentItem)
+        {
+            return getAugment(((IAugmentItem)item).getAugmentKey(augmentItem));
+        }
+        else
+        {
+            return itemStackAugmentMap.get(augmentItem);
+        }
     }
 
     /**
@@ -26,12 +55,32 @@ public class AugmentRegistry
      */
     public static void registerAugment(IAugment augment)
     {
-        if (!chemicalAugmentMap.containsKey(augment.getKey()))
+        if (!augmentKeyMap.containsKey(augment.getKey()))
         {
-            chemicalAugmentMap.put(augment.getKey(), augment);
-        } else
+            augmentKeyMap.put(augment.getKey(), augment);
+        }
+    }
+
+    /**
+     * Register an augment
+     *
+     * @param augment
+     */
+    public static void registerAugment(Fluid fluid, IAugment augment)
+    {
+        if (!fluidAugmentMap.containsKey(fluid))
         {
-            throw new IllegalArgumentException("Chemical Augment is already Registered");
+            registerAugment(augment);
+            fluidAugmentMap.put(fluid,augment);
+        }
+    }
+
+    public static void registerAugment(ItemStack stack, IAugment augment)
+    {
+        if (!itemStackAugmentMap.containsKey(stack))
+        {
+            registerAugment(augment);
+            itemStackAugmentMap.put(stack,augment);
         }
     }
 
@@ -43,6 +92,11 @@ public class AugmentRegistry
      */
     public static boolean unregisterAugment(String name)
     {
-        return chemicalAugmentMap.remove(name) != null;
+        return augmentKeyMap.remove(name) != null;
+    }
+
+    public static void init()
+    {
+        registerAugment(new ItemStack(Blocks.tnt),new AugmentTnt());
     }
 }
