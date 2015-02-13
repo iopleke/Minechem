@@ -6,21 +6,17 @@ import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.SidedProxy;
-import cpw.mods.fml.common.event.FMLInitializationEvent;
-import cpw.mods.fml.common.event.FMLPostInitializationEvent;
-import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.*;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.handler.ElementHandler;
-import minechem.handler.GuiHandler;
-import minechem.handler.MessageHandler;
-import minechem.handler.MoleculeHandler;
+import minechem.handler.*;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
 import minechem.registry.CreativeTabRegistry;
 import minechem.registry.ItemRegistry;
 import minechem.registry.RecipeRegistry;
-import net.minecraftforge.common.MinecraftForge;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
 
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
@@ -77,15 +73,18 @@ public class Minechem
         LogHelper.debug("Registering CreativeTabs...");
         CreativeTabRegistry.init();
 
-        // Register the proxy with the eventhandler
-        LogHelper.debug("Registering proxies...");
-        MinecraftForge.EVENT_BUS.register(proxy);
+        // Register Event Handlers
+        LogHelper.debug("Registering Event Handlers...");
+        proxy.registerEventHandlers();
 
     }
 
     @EventHandler
     public void init(FMLInitializationEvent event)
     {
+        LogHelper.debug("Registering Recipes...");
+        RecipeRegistry.getInstance().init();
+        
         LogHelper.debug("Registering GUI and Container handlers...");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
@@ -97,14 +96,29 @@ public class Minechem
 
         LogHelper.debug("Registering Molecules...");
         MoleculeHandler.init();
+
+        LogHelper.debug("Registering Journal Pages...");
+        JournalHandler.init(proxy.getCurrentLanguage());
     }
 
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        LogHelper.debug("Registering Recipes...");
-        RecipeRegistry.getInstance().init();
+        LogHelper.debug("Registering Resource Reload Listener...");
+        ((IReloadableResourceManager)Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
 
         LogHelper.info("Minechem has loaded");
+    }
+
+    @EventHandler
+    public void onServerStarted(FMLServerStartedEvent event)
+    {
+        JournalHandler.readPlayerResearch();
+    }
+
+    @EventHandler
+    public void onServerStopping(FMLServerStoppingEvent event)
+    {
+        JournalHandler.saveResearch();
     }
 }

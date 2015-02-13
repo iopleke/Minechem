@@ -6,8 +6,12 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
+
+import cpw.mods.fml.common.Loader;
 import minechem.Compendium;
 import minechem.Config;
+import minechem.Minechem;
+import net.minecraft.client.Minecraft;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 
@@ -101,5 +105,92 @@ public class FileHelper
             return stream;
         }
         throw new RuntimeException(); // this should never be reached
+    }
+
+    /**
+     * Check if file exits in the jar 
+     *  
+     * @param classFromJar
+     * @param fileSource
+     * @return
+     */
+    public static boolean doesFileExistInJar(Class<?> classFromJar, String fileSource)
+    {
+        try
+        {
+            URL source = classFromJar.getResource(Compendium.Config.assetPrefix + fileSource);
+            return source != null;
+        } catch (NullPointerException e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Check if file exits in the config folder
+     *
+     * @param file
+     * @return
+     */
+    public static boolean doesFileExistInConfig(String file)
+    {
+        try
+        {
+            new FileInputStream(FileUtils.getFile(Compendium.Config.configPrefix  + file));
+            return true;
+        } catch (FileNotFoundException e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Check if file exits in the current world folder
+     *
+     * @param file
+     * @return
+     */
+    public static boolean doesFileExistInCurrentSaveDir(String file)
+    {
+        try
+        {
+            new FileInputStream(FileUtils.getFile(Minechem.proxy.getCurrentSaveDir() + file));
+            return true;
+        } catch (FileNotFoundException e)
+        {
+            return false;
+        }
+    }
+
+    /**
+     * Get a file from the config folder
+     * @param file the fileName
+     * @return
+     */
+    public static FileInputStream getFileFromConfig(String file)
+    {
+        try
+        {
+            return new FileInputStream(FileUtils.getFile(Compendium.Config.configPrefix + file));
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
+    }
+
+    /**
+     * Get a file from the current world folder
+     * @param file the fileName
+     * @return
+     */
+    public static FileInputStream getFileFromCurrentSaveDir(String file)
+    {
+        try
+        {
+            return new FileInputStream(FileUtils.getFile(Minechem.proxy.getCurrentSaveDir() + file));
+        } catch (FileNotFoundException e)
+        {
+            throw new RuntimeException(e);
+        }
     }
 }
