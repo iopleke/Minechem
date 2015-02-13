@@ -22,8 +22,7 @@ public interface IAugment
     boolean onDroppedByPlayer(ItemStack item, EntityPlayer player, int level);
 
     /**
-     * Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner
-     * control over the update of the item without having to write a subclass.
+     * Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner control over the update of the item without having to write a subclass.
      *
      * @param entityItem The entity Item
      * @return Return true to skip any further update code.
@@ -31,8 +30,7 @@ public interface IAugment
     boolean onEntityItemUpdate(EntityItem entityItem, int level);
 
     /**
-     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
-     * True if something happen and false if it don't.
+     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return True if something happen and false if it don't.
      */
     boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level);
 
@@ -45,7 +43,7 @@ public interface IAugment
      * Called when a entity tries to play the 'swing' animation.
      *
      * @param entityLiving The entity swinging the item.
-     * @param stack The Item stack
+     * @param stack        The Item stack
      * @return True to cancel any further processing by EntityLiving
      */
     boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack, int level);
@@ -56,11 +54,9 @@ public interface IAugment
     boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase, int level);
 
     /**
-     * Called when the player Left Clicks (attacks) an entity.
-     * Processed before damage is done, if return value is true further processing is canceled
-     * and the entity is not attacked.
+     * Called when the player Left Clicks (attacks) an entity. Processed before damage is done, if return value is true further processing is canceled and the entity is not attacked.
      *
-     * @param stack The Item being used
+     * @param stack  The Item being used
      * @param player The player that is attacking
      * @param entity The entity being attacked
      * @return True to cancel the rest of the interaction.
@@ -81,9 +77,10 @@ public interface IAugment
 
     /**
      * Called each tick while using an item.
-     * @param stack The Item being used
+     *
+     * @param stack  The Item being used
      * @param player The Player using the item
-     * @param count The amount of time in tick the item has been used for continuously
+     * @param count  The amount of time in tick the item has been used for continuously
      */
     void onUsingTick(ItemStack stack, EntityPlayer player, int count, int level);
 

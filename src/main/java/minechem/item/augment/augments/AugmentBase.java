@@ -1,6 +1,5 @@
 package minechem.item.augment.augments;
 
-
 import com.google.common.collect.Multimap;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -45,8 +44,7 @@ public abstract class AugmentBase implements IAugment
     }
 
     /**
-     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
-     * True if something happen and false if it don't.
+     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return True if something happen and false if it don't.
      *
      * @param stack
      * @param player
@@ -115,9 +113,7 @@ public abstract class AugmentBase implements IAugment
     }
 
     /**
-     * Called when the player Left Clicks (attacks) an entity.
-     * Processed before damage is done, if return value is true further processing is canceled
-     * and the entity is not attacked.
+     * Called when the player Left Clicks (attacks) an entity. Processed before damage is done, if return value is true further processing is canceled and the entity is not attacked.
      *
      * @param stack  The Item being used
      * @param player The player that is attacking
