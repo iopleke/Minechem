@@ -5,49 +5,39 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
 public interface IAugment
 {
-    /**
-     * @return Attribute Modifiers to the base tools attributes.
-     */
-    Multimap<String, AttributeModifier> getAttributeModifiers();
-
-    /**
-     * @return int modifier to EntityItem lifespan (base 6000)
-     */
-    int getEntityLifespanModifier();
-
-    /**
-     * @param toolClass
-     * @return modifier to tool level
-     */
-    int getHarvestLevelModifier(String toolClass);
-
     String getKey();
 
-    /**
-     * @param prevDigSpeed unmodified dig speed
-     * @return
-     */
-    float getModifiedDigSpeed(float prevDigSpeed);
-
-    /**
-     * Returns true if the item can be used on the given entity, e.g. shears on sheep.
-     */
-    boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase);
-
-    boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase);
+    boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level);
 
     /**
      * @return false to cancel drop
      */
-    boolean onDroppedByPlayer(ItemStack item, EntityPlayer player);
+    boolean onDroppedByPlayer(ItemStack item, EntityPlayer player, int level);
 
-    ItemStack onEaten(ItemStack stack, World world, EntityPlayer player);
+    /**
+     * Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner control over the update of the item without having to write a subclass.
+     *
+     * @param entityItem The entity Item
+     * @return Return true to skip any further update code.
+     */
+    boolean onEntityItemUpdate(EntityItem entityItem, int level);
+
+    /**
+     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return True if something happen and false if it don't.
+     */
+    boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level);
+
+    /**
+     * @return true to prevent further processing
+     */
+    boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level);
 
     /**
      * Called when a entity tries to play the 'swing' animation.
@@ -56,22 +46,12 @@ public interface IAugment
      * @param stack        The Item stack
      * @return True to cancel any further processing by EntityLiving
      */
-    boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack);
+    boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack, int level);
 
     /**
-     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     * Returns true if the item can be used on the given entity, e.g. shears on sheep.
      */
-    ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player);
-
-    /**
-     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return True if something happen and false if it don't.
-     */
-    boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ);
-
-    /**
-     * @return true to prevent further processing
-     */
-    boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ);
+    boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase, int level);
 
     /**
      * Called when the player Left Clicks (attacks) an entity. Processed before damage is done, if return value is true further processing is canceled and the entity is not attacked.
@@ -81,12 +61,19 @@ public interface IAugment
      * @param entity The entity being attacked
      * @return True to cancel the rest of the interaction.
      */
-    boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity);
+    boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity, int level);
+
+    /**
+     * Called whenever this item is equipped and the right mouse button is pressed. Args: itemStack, world, entityPlayer
+     */
+    ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player, int level);
+
+    ItemStack onEaten(ItemStack stack, World world, EntityPlayer player, int level);
 
     /**
      * Called each tick as long the item is on a player inventory.
      */
-    void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool);
+    void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool, int level);
 
     /**
      * Called each tick while using an item.
@@ -95,12 +82,32 @@ public interface IAugment
      * @param player The Player using the item
      * @param count  The amount of time in tick the item has been used for continuously
      */
-    void onUsingTick(ItemStack stack, EntityPlayer player, int count);
+    void onUsingTick(ItemStack stack, EntityPlayer player, int count, int level);
 
     /**
-     * @return float value between 0 and 1 indicating probability of damage being applied to the tool
+     * @param prevDigSpeed unmodified dig speed
+     * @return
      */
-    float setDamageChance();
+    float getModifiedDigSpeed(float prevDigSpeed, Block block, int metadata, int level);
 
-    IAugment setLevel(int level);
+    /**
+     * @param toolClass
+     * @return modifier to tool level
+     */
+    int getHarvestLevelModifier(String toolClass, int level);
+
+    /**
+     * @return Attribute Modifiers to the base tools attributes.
+     */
+    Multimap<String, AttributeModifier> getAttributeModifiers(int level);
+
+    /**
+     * @return float value between 0 and 1 indicating probability of damage not being applied to the tool
+     */
+    float setDamageChance(int level);
+
+    /**
+     * @return int modifier to EntityItem lifespan (base 6000)
+     */
+    int getEntityLifespanModifier(int level);
 }
