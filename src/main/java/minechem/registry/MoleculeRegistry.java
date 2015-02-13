@@ -57,7 +57,7 @@ public class MoleculeRegistry
      */
     public Molecule getMoleculeByName(String name)
     {
-        return nameMoleculeMap.get(name);
+        return nameMoleculeMap.get(name.toLowerCase());
     }
 
     /**

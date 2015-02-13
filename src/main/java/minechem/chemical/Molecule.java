@@ -41,6 +41,12 @@ public class Molecule extends ChemicalBase
     }
 
     @Override
+    public boolean isElement()
+    {
+        return false;
+    }
+
+    @Override
     public String getFormula()
     {
         return structure.getFormula();

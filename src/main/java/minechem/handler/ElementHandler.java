@@ -20,7 +20,11 @@ public class ElementHandler
 {
     public static void init()
     {
-        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, Compendium.Config.elementsDataJson, Config.useDefaultElements);
+
+        String[] fileDestSource = new String[2];
+        fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.elementsDataJson;
+        fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.elementsDataJson;
+        InputStream inputStream = FileHelper.getJsonFile(MoleculeHandler.class, fileDestSource, Config.useDefaultElements);
         readFromStream(inputStream);
         if (inputStream != null)
         {
