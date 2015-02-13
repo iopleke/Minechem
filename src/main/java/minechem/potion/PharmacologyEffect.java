@@ -133,7 +133,8 @@ public abstract class PharmacologyEffect
             {
                 for (PotionEffect potionEffect : new ArrayList<PotionEffect>(entityLivingBase.getActivePotionEffects()))
                 {
-                    entityLivingBase.removePotionEffect(potionEffect.getPotionID());
+                    if (potionEffect.getCurativeItems().size() > 0)
+                        entityLivingBase.removePotionEffect(potionEffect.getPotionID());
                 }
             } else
             {
