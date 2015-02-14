@@ -230,7 +230,7 @@ public abstract class WrapperItem extends BasicItem
     {
         ItemStack wrapped = getWrappedItemStack(stack);
         if (wrapped == null) return super.hitEntity(stack, target, user);
-        boolean result = wrapped.getItem().hitEntity(stack, target, user);
+        boolean result = wrapped.getItem().hitEntity(wrapped, target, user);
         setDamage(stack, wrapped.getItemDamage());
         if (stack.stackSize<1 && user instanceof EntityPlayer) ((EntityPlayer)user).destroyCurrentEquippedItem();
         return result;
