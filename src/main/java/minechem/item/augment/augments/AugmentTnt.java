@@ -21,7 +21,7 @@ public class AugmentTnt extends AugmentBase
         if (!world.isRemote)
         {
             consumeAugment(stack, level);
-            world.createExplosion(entityLivingBase, x + 0.5F, y + 0.5F, z + 0.5F, (level + 3), true);
+            world.createExplosion(null, x + 0.5F, y + 0.5F, z + 0.5F, (level + 3), true);
         }
         return false;
     }
@@ -32,7 +32,7 @@ public class AugmentTnt extends AugmentBase
         if (!player.worldObj.isRemote)
         {
             consumeAugment(stack, level);
-            player.worldObj.createExplosion(entity, entity.posX, entity.posY+entity.height/2, entity.posZ, (level + 1), false);
+            player.worldObj.createExplosion(null, entity.posX, entity.posY+entity.height/2, entity.posZ, (level + 1), false);
         }
         return false;
     }

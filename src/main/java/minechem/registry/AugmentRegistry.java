@@ -5,6 +5,7 @@ import java.util.Map;
 
 import minechem.collections.ItemStackMap;
 import minechem.item.augment.IAugmentItem;
+import minechem.item.augment.augments.AugmentLight;
 import minechem.item.augment.augments.AugmentTnt;
 import minechem.item.augment.augments.IAugment;
 import net.minecraft.init.Blocks;
@@ -98,5 +99,6 @@ public class AugmentRegistry
     public static void init()
     {
         registerAugment(new ItemStack(Blocks.tnt),new AugmentTnt());
+        registerAugment(new ItemStack(Blocks.glowstone),new AugmentLight());
     }
 }

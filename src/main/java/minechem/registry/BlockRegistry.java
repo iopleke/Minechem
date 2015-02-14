@@ -6,11 +6,14 @@ import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntity;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeBlock;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import minechem.Compendium;
+import minechem.blocks.BlockLight;
+import net.minecraft.block.Block;
 
 public class BlockRegistry
 {
     public static OpticalMicroscopeBlock opticalMicroscope;
     public static ElectrolysisBlock electrolysisBlock;
+    public static BlockLight blockLight;
 
     public static void init()
     {
@@ -21,5 +24,8 @@ public class BlockRegistry
         electrolysisBlock = new ElectrolysisBlock();
         GameRegistry.registerBlock(electrolysisBlock, electrolysisBlock.getUnlocalizedName());
         GameRegistry.registerTileEntity(ElectrolysisTileEntity.class, Compendium.Naming.electrolysis + "TileEntity");
+
+        blockLight = new BlockLight();
+        GameRegistry.registerBlock(blockLight,blockLight.getLocalizedName());
     }
 }
