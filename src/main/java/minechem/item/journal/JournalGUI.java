@@ -41,6 +41,14 @@ public class JournalGUI extends GuiScreen
         loadPage(displayPage);
     }
 
+    private void decrementPage()
+    {
+        if (displayPage > 0)
+        {
+            displayPage--;
+        }
+    }
+
     @Override
     public boolean doesGuiPauseGame()
     {
@@ -93,6 +101,14 @@ public class JournalGUI extends GuiScreen
         GL11.glPopMatrix();
     }
 
+    private void incrementPage()
+    {
+        if (displayPage < pageIndex.length - 1)
+        {
+            displayPage++;
+        }
+    }
+
     /**
      *
      * @param c
@@ -103,21 +119,13 @@ public class JournalGUI extends GuiScreen
     {
         if (keycode == Keyboard.KEY_LEFT)
         {
-            if (displayPage > 0)
-            {
-                displayPage--;
-                if (displayPage > 0)
-                {
-                    displayPage--;
-                }
-            }
+            decrementPage();
+            decrementPage();
         }
         if (keycode == Keyboard.KEY_RIGHT)
         {
-            if (displayPage < pageIndex.length - 1)
-            {
-                displayPage += 2;
-            }
+            incrementPage();
+            incrementPage();
         }
 
         loadPage(displayPage);
