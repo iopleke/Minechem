@@ -103,7 +103,7 @@ public class JournalGUI extends GuiScreen
 
     private void incrementPage()
     {
-        if (displayPage < pageIndex.length - 1)
+        if (displayPage < pageIndex.length)
         {
             displayPage++;
         }
