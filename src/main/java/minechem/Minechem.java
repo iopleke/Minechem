@@ -20,12 +20,10 @@ import minechem.handler.MoleculeHandler;
 import minechem.handler.ResourceReloadListener;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
-import minechem.registry.BlockRegistry;
-import minechem.registry.CreativeTabRegistry;
-import minechem.registry.ItemRegistry;
-import minechem.registry.RecipeRegistry;
+import minechem.registry.*;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
+
 
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
@@ -78,6 +76,9 @@ public class Minechem
 
         LogHelper.debug("Registering Blocks...");
         BlockRegistry.init();
+
+        LogHelper.debug("Registering Augments...");
+        AugmentRegistry.init();
 
         LogHelper.debug("Registering CreativeTabs...");
         CreativeTabRegistry.init();

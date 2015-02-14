@@ -2,6 +2,7 @@ package minechem.item.augment;
 
 import com.google.common.collect.Multimap;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import minechem.Compendium;
@@ -17,13 +18,19 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class AugmentItem extends WrapperItem implements IAugmentItem
+public class AugmentedItem extends WrapperItem implements IAugmentedItem
 {
     public static final String augmentList = "augments";
-    public static final String wrappedItem = "item";
+    public static final String level = "level";
     public static final Random rand = new Random(System.currentTimeMillis());
+
+    public AugmentedItem()
+    {
+        super("augmented");
+    }
 
     @Override
     public boolean isWrappable(ItemStack stack)
@@ -36,7 +43,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
     {
         if (wrapper.hasTagCompound())
         {
-            return ItemStack.loadItemStackFromNBT(wrapper.getTagCompound().getCompoundTag(wrappedItem));
+            return ItemStack.loadItemStackFromNBT(wrapper.getTagCompound().getCompoundTag(Compendium.NBTTags.item));
         }
         return null;
     }
@@ -48,13 +55,21 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         {
             wrapper.setTagCompound(new NBTTagCompound());
         }
-        wrapper.getTagCompound().setTag(wrappedItem, stack.writeToNBT(new NBTTagCompound()));
+        wrapper.getTagCompound().setTag(Compendium.NBTTags.item, stack.writeToNBT(new NBTTagCompound()));
     }
+
+    //#############################Augmented Item Stuff##########################################################
 
     @Override
     public boolean hasAugment(ItemStack item, IAugment augment)
     {
-        return item.hasTagCompound() && item.getTagCompound().hasKey(augment.getKey(), Compendium.NBTTags.tagByte);
+        return item.hasTagCompound() && item.getTagCompound().hasKey(augment.getKey(), Compendium.NBTTags.tagCompound);
+    }
+
+    @Override
+    public boolean canHaveAugment(ItemStack item, IAugment augment)
+    {
+        return this.getWrappedItemStack(item)!=null && !this.hasAugment(item, augment);
     }
 
     @Override
@@ -67,7 +82,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
             for (int i = 0; i < augments.tagCount(); i++)
             {
                 String key = augments.getStringTagAt(i);
-                result.put(AugmentRegistry.getAugment(key), stack.getTagCompound().getInteger(key));
+                result.put(AugmentRegistry.getAugment(key), (int)stack.getTagCompound().getCompoundTag(key).getByte(level));
             }
         }
         return result;
@@ -99,35 +114,73 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         return false;
     }
 
+    /**
+     * Set {@link minechem.item.augment.augments.IAugment} on Item
+     *
+     * @param item        ItemStack to add augment to
+     * @param augmentItem Augment to add
+     */
     @Override
-    public void setAugment(ItemStack item, IAugment augment, int level)
+    public boolean setAugment(ItemStack item, ItemStack augmentItem)
     {
+        IAugment augment = AugmentRegistry.getAugment(augmentItem);
+        if (augment == null) return false;
         if (!item.hasTagCompound())
         {
             item.setTagCompound(new NBTTagCompound());
         }
         NBTTagCompound tagCompound = item.getTagCompound();
         String augmentKey = augment.getKey();
-        if (tagCompound.hasKey(augmentKey))
-        {
-            tagCompound.setByte(augmentKey, (byte) level);
-        } else
+        if (!tagCompound.hasKey(augmentKey, Compendium.NBTTags.tagCompound))
         {
             NBTTagList augments = tagCompound.getTagList(augmentList, Compendium.NBTTags.tagString);
             augments.appendTag(new NBTTagString(augmentKey));
-            tagCompound.setByte(augmentKey, (byte) level);
-            tagCompound.setTag(augmentList, augments);
+            tagCompound.setTag(augmentList,augments);
+            NBTTagCompound augmentTag = new NBTTagCompound();
+            augmentTag.setTag(Compendium.NBTTags.item,augmentItem.writeToNBT(new NBTTagCompound()));
+            augmentTag.setByte(this.level, (byte)0);
+            tagCompound.setTag(augmentKey,augmentTag);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean setAugmentLevel(ItemStack item, IAugment augment, int level)
+    {
+        String augmentKey = augment.getKey();
+        if (item.getTagCompound().hasKey(augmentKey, Compendium.NBTTags.tagCompound))
+        {
+            item.getTagCompound().getCompoundTag(augmentKey).setByte(this.level, (byte)level);
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
+    {
+        super.addInformation(stack, player, list, bool);
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
+        {
+            list.add(StatCollector.translateToLocal("augment."+entry.getKey().getKey())+ ": "+ entry.getKey().getUsableLevel(stack,entry.getValue()));
         }
     }
+
+    @Override
+    public String getItemStackDisplayName(ItemStack stack)
+    {
+        ItemStack wrapped = getWrappedItemStack(stack);
+        if (wrapped != null) return wrapped.getItem().getItemStackDisplayName(wrapped);
+        return super.getItemStackDisplayName(stack);
+    }
+
+    //################################Augment Effect Stuff####################################
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase)
     {
         boolean result = super.onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase);
-        if (result)
-        {
-            return true;
-        }
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
             result |= entry.getKey().onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase, entry.getValue());
@@ -136,16 +189,16 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
     }
 
     @Override
-    public boolean onDroppedByPlayer(ItemStack item, EntityPlayer player)
+    public boolean onDroppedByPlayer(ItemStack stack, EntityPlayer player)
     {
-        boolean result = super.onDroppedByPlayer(item, player);
+        boolean result = super.onDroppedByPlayer(stack, player);
         if (result)
         {
             return true;
         }
-        for (Map.Entry<IAugment, Integer> entry : getAugments(item).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            result |= entry.getKey().onDroppedByPlayer(item, player, entry.getValue());
+            result |= entry.getKey().onDroppedByPlayer(stack, player, entry.getValue());
         }
         return result;
     }
@@ -156,7 +209,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         boolean result = super.onEntityItemUpdate(entityItem);
         for (Map.Entry<IAugment, Integer> entry : getAugments(entityItem.getEntityItem()).entrySet())
         {
-            result |= entry.getKey().onEntityItemUpdate(entityItem, entry.getValue());
+            result |= entry.getKey().onEntityItemUpdate(entityItem.getEntityItem(), entityItem, entry.getValue());
         }
         return result;
     }
@@ -201,7 +254,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         }
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            result |= entry.getKey().onEntitySwing(entityLiving, stack, entry.getValue());
+            result |= entry.getKey().onEntitySwing(stack, entityLiving, entry.getValue());
         }
         return result;
     }
@@ -280,7 +333,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         float result = super.getDigSpeed(itemstack, block, metadata);
         for (Map.Entry<IAugment, Integer> entry : getAugments(itemstack).entrySet())
         {
-            result = entry.getKey().getModifiedDigSpeed(result, block, metadata, entry.getValue());
+            result = entry.getKey().getModifiedDigSpeed(itemstack, result, block, metadata, entry.getValue());
         }
         return result;
     }
@@ -291,7 +344,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         int result = super.getHarvestLevel(stack, toolClass);
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            result += entry.getKey().getHarvestLevelModifier(toolClass, entry.getValue());
+            result += entry.getKey().getHarvestLevelModifier(stack, toolClass, entry.getValue());
         }
         return result;
     }
@@ -302,7 +355,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
         Multimap result = super.getAttributeModifiers(stack);
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            result.putAll(entry.getKey().getAttributeModifiers(entry.getValue()));
+            result.putAll(entry.getKey().getAttributeModifiers(stack, entry.getValue()));
         }
         return result;
     }
@@ -312,7 +365,7 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
     {
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            if (rand.nextFloat() < entry.getKey().setDamageChance(entry.getValue()))
+            if (rand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue()))
             {
                 return;
             }
@@ -321,12 +374,12 @@ public class AugmentItem extends WrapperItem implements IAugmentItem
     }
 
     @Override
-    public int getEntityLifespan(ItemStack item, World world)
+    public int getEntityLifespan(ItemStack stack, World world)
     {
-        int lifespan = super.getEntityLifespan(item, world);
-        for (Map.Entry<IAugment, Integer> entry : getAugments(item).entrySet())
+        int lifespan = super.getEntityLifespan(stack, world);
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            lifespan += entry.getKey().getEntityLifespanModifier(entry.getValue());
+            lifespan += entry.getKey().getEntityLifespanModifier(stack, entry.getValue());
         }
         return lifespan;
     }
