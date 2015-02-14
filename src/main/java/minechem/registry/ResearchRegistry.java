@@ -109,7 +109,18 @@ public class ResearchRegistry
         {
             pages[i] = getResearchPage(pageNames[i]);
         }
-        return ArrayHelper.removeNulls(pages, JournalPage.class);
+
+        pages = ArrayHelper.removeNulls(pages, JournalPage.class);
+
+        if (pages.length % 2 != 0)
+        {
+            JournalPage[] expandedPages = new JournalPage[pages.length + 1];
+            System.arraycopy(pages, 0, expandedPages, 0, pages.length);
+            expandedPages[pages.length] = getResearchPage("blank");
+
+            return expandedPages;
+        }
+        return pages;
     }
 
     /**

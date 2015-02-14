@@ -4,6 +4,8 @@ import codechicken.lib.gui.GuiDraw;
 import fontbox.PageBox;
 import minechem.Compendium;
 import minechem.helper.FontBoxHelper;
+import minechem.helper.LocalizationHelper;
+import minechem.helper.LogHelper;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -17,19 +19,12 @@ public class JournalGUI extends GuiScreen
     private String[] authorList;
     private PageBox[] currentPages, currentTitles;
     private int displayPage; // the left page
-    private int fontSize = 1;
-
-    private int margin_l = 5;
-    private int margin_r = 5;
-    private int pageHeight = 800;
     private JournalPage[] pageIndex;
-    /**
-     * FontBox values
-     */
-    private int pageWidth = 230;
-    private int space = 1;
-    private int titleHeight = 100;
-    private int titleWidth = 230;
+
+    private FontBoxHelper.PageBoxMetrics pageMetrics;
+    private FontBoxHelper.PageBoxMetrics titleMetrics;
+
+    private boolean pageChanged = false;
 
     /**
      *
@@ -42,8 +37,19 @@ public class JournalGUI extends GuiScreen
         authorList = authors;
         currentPages = new PageBox[2];
         currentTitles = new PageBox[2];
+        pageMetrics = new FontBoxHelper.PageBoxMetrics(220, 800, 5, 0, 5, 30);
+        titleMetrics = new FontBoxHelper.PageBoxMetrics(230, 100, 5, 0, 5, 30);
         displayPage = 0;
-        loadPage(displayPage);
+        markDirty();
+    }
+
+    private void decrementPage()
+    {
+        if (displayPage > 0)
+        {
+            displayPage--;
+            markDirty();
+        }
     }
 
     @Override
@@ -59,7 +65,7 @@ public class JournalGUI extends GuiScreen
             // Draw folded page on the left
             GuiDraw.drawTexturedModalRect(5, 163, 0, 188, 21, 21);
         }
-        if (displayPage + 2 < pageIndex.length)
+        if (displayPage < pageIndex.length)
         {
             // Draw folded page on the right
             GuiDraw.drawTexturedModalRect(230, 160, 21, 188, 21, 21);
@@ -86,6 +92,13 @@ public class JournalGUI extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float unused)
     {
         super.drawScreen(mouseX, mouseY, unused);
+
+        if (isDirty())
+        {
+            loadPage(displayPage);
+            markClean();
+        }
+
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
@@ -98,6 +111,20 @@ public class JournalGUI extends GuiScreen
         GL11.glPopMatrix();
     }
 
+    private void incrementPage()
+    {
+        if (displayPage < pageIndex.length)
+        {
+            displayPage++;
+            markDirty();
+        }
+    }
+
+    private boolean isDirty()
+    {
+        return pageChanged;
+    }
+
     /**
      *
      * @param c
@@ -106,36 +133,84 @@ public class JournalGUI extends GuiScreen
     @Override
     protected void keyTyped(char c, int keycode)
     {
-        if (keycode == Keyboard.KEY_LEFT)
+        if (keycode == Keyboard.KEY_LEFT || keycode == Keyboard.KEY_DOWN)
         {
-            if (displayPage > 0)
-            {
-                displayPage--;
-                if (displayPage > 0)
-                {
-                    displayPage--;
-                }
-            }
+            decrementPage();
+            decrementPage();
         }
-        if (keycode == Keyboard.KEY_RIGHT)
+        if (keycode == Keyboard.KEY_RIGHT || keycode == Keyboard.KEY_UP)
         {
-            if (displayPage < pageIndex.length - 1)
-            {
-                displayPage++;
-                if (displayPage < pageIndex.length - 1)
-                {
-                    displayPage++;
-                }
-            }
+            incrementPage();
+            incrementPage();
         }
 
         loadPage(displayPage);
         super.keyTyped(c, keycode);
+    }
 
+    private void markClean()
+    {
+        pageChanged = false;
+    }
+
+    private void markDirty()
+    {
+        pageChanged = true;
+    }
+
+    @Override
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
+    {
+
+        // TODO: make clicking respect GUI resizing
+        if (wasRightTabClicked(mouseX, mouseY, mouseButton))
+        {
+            incrementPage();
+            incrementPage();
+        }
+
+        if (wasLeftTabClicked(mouseX, mouseY, mouseButton))
+        {
+            decrementPage();
+            decrementPage();
+        }
+
+        LogHelper.info("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+    }
+
+    private boolean wasRightTabClicked(int mouseX, int mouseY, int mouseButton)
+    {
+        if (mouseButton == 0)
+        {
+            if (mouseX >= 316 && mouseX <= 335)
+            {
+                if (mouseY >= 188 && mouseY <= 204)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean wasLeftTabClicked(int mouseX, int mouseY, int mouseButton)
+    {
+        if (mouseButton == 0)
+        {
+            if (mouseX >= 91 && mouseX <= 110)
+            {
+                if (mouseY >= 190 && mouseY <= 209)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
-     * Loads the given page pair Where page 0 is the author list
+     * Loads the given page pair Where page 0 is the author list Page 0 is the authors page, page 1 is the Index The following pages will be the actual content
      *
      * @param displayPage will show the pair eg. 1 -> 0, 1; 1 -> 0, 1; 2 -> 2, 3; ...
      */
@@ -145,28 +220,34 @@ public class JournalGUI extends GuiScreen
         {
             displayPage -= 1;
         }
-        currentPages[0] = FontBoxHelper.boxText("", pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
-        currentTitles[0] = FontBoxHelper.boxText("", titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
-        currentPages[1] = FontBoxHelper.boxText("", pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
-        currentTitles[1] = FontBoxHelper.boxText("", titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
-        if (displayPage == 0)
+        currentPages[0] = FontBoxHelper.boxText("", pageMetrics);
+        currentTitles[0] = FontBoxHelper.boxText("", titleMetrics);
+        currentPages[1] = FontBoxHelper.boxText("", pageMetrics);
+        currentTitles[1] = FontBoxHelper.boxText("", titleMetrics);
+        if (displayPage < 2)
         {
             String sAuthors = "";
             for (String author : authorList)
             {
                 sAuthors += "- " + author + "\n";
             }
-            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
-            currentTitles[0] = FontBoxHelper.boxText("Written by:", titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
-        }
-        if (pageIndex.length > 0)
-        {
-            currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage].content, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
-            currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage].title, titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
-            if (displayPage != 0)
+            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageMetrics);
+            currentTitles[0] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":", titleMetrics);
+            String sIndex = "";
+            for (JournalPage page : pageIndex)
             {
-                currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 1].content, pageWidth, pageHeight, margin_l, margin_r, space, fontSize);
-                currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleWidth, titleHeight, margin_l, margin_r, space, fontSize);
+                sIndex += page + "\n";
+            }
+            currentPages[1] = FontBoxHelper.boxText(sIndex, pageMetrics);
+            currentTitles[1] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.index"), titleMetrics);
+        } else
+        {
+            currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].content, pageMetrics);
+            currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].title, titleMetrics);
+            if (displayPage - 1 < pageIndex.length)
+            {
+                currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].content, pageMetrics);
+                currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleMetrics);
             }
         }
     }

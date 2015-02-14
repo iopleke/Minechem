@@ -1,4 +1,8 @@
 {
+    "blank": {
+        "title": "",
+        "content": "This page intentionally left blank."
+    },
     "hydrogen": {
         "title": "Hydrogen (H)",
         "content": "I have discovered a gas which I shall call 'Hydrogen'. It is lighter than air, but an escaped whiff of it made my torch flare alarmingly. I should use caution around open flames."
