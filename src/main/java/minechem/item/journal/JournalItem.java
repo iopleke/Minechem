@@ -6,6 +6,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import minechem.helper.ArrayHelper;
+import minechem.helper.LocalizationHelper;
 import minechem.item.prefab.BasicItem;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.client.Minecraft;
@@ -153,7 +154,7 @@ public class JournalItem extends BasicItem
         {
             return;
         }
-        lines.add("Written by:");
+        lines.add(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":");
         for (String author : authors)
         {
             lines.add("- " + author);

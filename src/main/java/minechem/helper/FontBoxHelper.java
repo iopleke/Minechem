@@ -35,6 +35,23 @@ public class FontBoxHelper
         fontRenderBufferDaniel = new FontRenderBuffer(fontMetricDaniel);
     }
 
+    public static class PageBoxMetrics
+    {
+        private int height, width;
+        private int margin_l, margin_r;
+        private int min_space, min_lineHeight;
+
+        public PageBoxMetrics(int width, int height, int margin_l, int margin_r, int min_space, int min_lineHeight)
+        {
+            this.width = width;
+            this.height = height;
+            this.margin_l = margin_l;
+            this.margin_r = margin_r;
+            this.min_space = min_space;
+            this.min_lineHeight = min_lineHeight;
+        }
+    }
+
     /**
      * Adds line to a {@link fontbox.PageBox} TODO: fix this the value reference makes it derp
      *
@@ -87,5 +104,17 @@ public class FontBoxHelper
             LogHelper.exception("Something went wrong during the boxing of the text", e, Level.WARN);
         }
         return null;
+    }
+
+    /**
+     * Creates a {@link fontbox.PageBox} with the text as content
+     *
+     * @param text           the content
+     * @param pageBoxMetrics metrics object for the pageBox
+     * @return
+     */
+    public static PageBox boxText(String text, PageBoxMetrics pageBoxMetrics)
+    {
+        return boxText(text, pageBoxMetrics.width, pageBoxMetrics.height, pageBoxMetrics.margin_l, pageBoxMetrics.margin_r, pageBoxMetrics.min_space, pageBoxMetrics.min_lineHeight);
     }
 }
