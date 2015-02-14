@@ -24,6 +24,8 @@ public class JournalGUI extends GuiScreen
     private FontBoxHelper.PageBoxMetrics pageMetrics;
     private FontBoxHelper.PageBoxMetrics titleMetrics;
 
+    private boolean pageChanged = false;
+
     /**
      *
      * @param knowledgeKeys a array with all knowledgeKeys of the pages to display
@@ -38,7 +40,7 @@ public class JournalGUI extends GuiScreen
         pageMetrics = new FontBoxHelper.PageBoxMetrics(220, 800, 5, 0, 5, 30);
         titleMetrics = new FontBoxHelper.PageBoxMetrics(230, 100, 5, 0, 5, 30);
         displayPage = 0;
-        loadPage(displayPage);
+        markDirty();
     }
 
     private void decrementPage()
@@ -46,6 +48,7 @@ public class JournalGUI extends GuiScreen
         if (displayPage > 0)
         {
             displayPage--;
+            markDirty();
         }
     }
 
@@ -89,6 +92,13 @@ public class JournalGUI extends GuiScreen
     public void drawScreen(int mouseX, int mouseY, float unused)
     {
         super.drawScreen(mouseX, mouseY, unused);
+
+        if (isDirty())
+        {
+            loadPage(displayPage);
+            markClean();
+        }
+
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
@@ -106,7 +116,13 @@ public class JournalGUI extends GuiScreen
         if (displayPage < pageIndex.length)
         {
             displayPage++;
+            markDirty();
         }
+    }
+
+    private boolean isDirty()
+    {
+        return pageChanged;
     }
 
     /**
@@ -132,12 +148,65 @@ public class JournalGUI extends GuiScreen
         super.keyTyped(c, keycode);
     }
 
+    private void markClean()
+    {
+        pageChanged = false;
+    }
+
+    private void markDirty()
+    {
+        pageChanged = true;
+    }
+
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
     {
-        // TODO: make clicking possible
+
+        // TODO: make clicking respect GUI resizing
+        if (wasRightTabClicked(mouseX, mouseY, mouseButton))
+        {
+            incrementPage();
+            incrementPage();
+        }
+
+        if (wasLeftTabClicked(mouseX, mouseY, mouseButton))
+        {
+            decrementPage();
+            decrementPage();
+        }
+
         LogHelper.info("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
         super.mouseClicked(mouseX, mouseY, mouseButton);
+    }
+
+    private boolean wasRightTabClicked(int mouseX, int mouseY, int mouseButton)
+    {
+        if (mouseButton == 0)
+        {
+            if (mouseX >= 316 && mouseX <= 335)
+            {
+                if (mouseY >= 188 && mouseY <= 204)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private boolean wasLeftTabClicked(int mouseX, int mouseY, int mouseButton)
+    {
+        if (mouseButton == 0)
+        {
+            if (mouseX >= 91 && mouseX <= 110)
+            {
+                if (mouseY >= 190 && mouseY <= 209)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 
     /**
