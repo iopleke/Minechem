@@ -34,13 +34,13 @@ public class FontBoxHelper
         }
         fontRenderBufferDaniel = new FontRenderBuffer(fontMetricDaniel);
     }
-    
+
     public static class PageBoxMetrics
     {
         private int height, width;
         private int margin_l, margin_r;
         private int min_space, min_lineHeight;
-        
+
         public PageBoxMetrics(int width, int height, int margin_l, int margin_r, int min_space, int min_lineHeight)
         {
             this.width = width;
@@ -109,7 +109,7 @@ public class FontBoxHelper
     /**
      * Creates a {@link fontbox.PageBox} with the text as content
      *
-     * @param text the content
+     * @param text           the content
      * @param pageBoxMetrics metrics object for the pageBox
      * @return
      */

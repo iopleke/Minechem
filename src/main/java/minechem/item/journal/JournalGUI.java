@@ -20,7 +20,7 @@ public class JournalGUI extends GuiScreen
     private PageBox[] currentPages, currentTitles;
     private int displayPage; // the left page
     private JournalPage[] pageIndex;
-    
+
     private FontBoxHelper.PageBoxMetrics pageMetrics;
     private FontBoxHelper.PageBoxMetrics titleMetrics;
 
@@ -133,9 +133,8 @@ public class JournalGUI extends GuiScreen
     }
 
     /**
-     * Loads the given page pair Where page 0 is the author list
-     * Page 0 is the authors page, page 1 is the Index
-     * The following pages will be the actual content
+     * Loads the given page pair Where page 0 is the author list Page 0 is the authors page, page 1 is the Index The following pages will be the actual content
+     *
      * @param displayPage will show the pair eg. 1 -> 0, 1; 1 -> 0, 1; 2 -> 2, 3; ...
      */
     private void loadPage(int displayPage)
@@ -164,8 +163,7 @@ public class JournalGUI extends GuiScreen
             }
             currentPages[1] = FontBoxHelper.boxText(sIndex, pageMetrics);
             currentTitles[1] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.index"), titleMetrics);
-        }
-        else
+        } else
         {
             currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].content, pageMetrics);
             currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].title, titleMetrics);
