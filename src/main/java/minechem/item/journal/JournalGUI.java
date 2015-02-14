@@ -133,12 +133,12 @@ public class JournalGUI extends GuiScreen
     @Override
     protected void keyTyped(char c, int keycode)
     {
-        if (keycode == Keyboard.KEY_LEFT)
+        if (keycode == Keyboard.KEY_LEFT || keycode == Keyboard.KEY_DOWN)
         {
             decrementPage();
             decrementPage();
         }
-        if (keycode == Keyboard.KEY_RIGHT)
+        if (keycode == Keyboard.KEY_RIGHT || keycode == Keyboard.KEY_UP)
         {
             incrementPage();
             incrementPage();
