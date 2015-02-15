@@ -16,9 +16,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import java.util.Random;
+
 public abstract class AugmentBase implements IAugment
 {
     private final String key;
+    public static final Random rand = new Random(System.currentTimeMillis());
 
     public AugmentBase(String key)
     {
@@ -114,7 +117,7 @@ public abstract class AugmentBase implements IAugment
      */
     public int getVolumeConsumed(int level)
     {
-        return level * 10;
+        return level * 10 + 5;
     }
 
     /**
@@ -123,7 +126,7 @@ public abstract class AugmentBase implements IAugment
      */
     public int getDamageDone(int level)
     {
-        return level;
+        return level + 1;
     }
 
     @Override
@@ -350,5 +353,11 @@ public abstract class AugmentBase implements IAugment
     public int getEntityLifespanModifier(ItemStack stack, int level)
     {
         return 0;
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level)
+    {
+        return false;
     }
 }

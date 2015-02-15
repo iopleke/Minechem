@@ -1,6 +1,5 @@
 package minechem.item.augment.augments;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minechem.registry.BlockRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
@@ -35,7 +34,7 @@ public class AugmentLight extends AugmentBase
         x+=dir.offsetX;
         y+=dir.offsetY;
         z+=dir.offsetZ;
-        if (!world.isRemote && world.getBlockLightValue(x, y, z) < level + 8)
+        if (!world.isRemote && world.getBlockLightValue(x, y, z) < level + 6)
         {
             if (world.isAirBlock(x,y,z))
             {
