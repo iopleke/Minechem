@@ -20,6 +20,7 @@ public class JournalGUI extends GuiScreen
     private PageBox[] currentPages, currentTitles;
     private int displayPage; // the left page
     private JournalPage[] pageIndex;
+    private int top, left;
 
     private FontBoxHelper.PageBoxMetrics pageMetrics;
     private FontBoxHelper.PageBoxMetrics titleMetrics;
@@ -101,7 +102,7 @@ public class JournalGUI extends GuiScreen
 
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glTranslatef(width / 2 - 128, height / 2 - 94, 0.0f);
+        GL11.glTranslatef(left = width / 2 - 128,top = height / 2 - 94, 0.0f);
         GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
 
         drawJournalBackground();
@@ -161,8 +162,8 @@ public class JournalGUI extends GuiScreen
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
     {
-
-        // TODO: make clicking respect GUI resizing
+        mouseX -= left;
+        mouseY -= top;
         if (wasRightTabClicked(mouseX, mouseY, mouseButton))
         {
             incrementPage();
@@ -183,9 +184,9 @@ public class JournalGUI extends GuiScreen
     {
         if (mouseButton == 0)
         {
-            if (mouseX >= 316 && mouseX <= 335)
+            if (mouseX >= 230 && mouseX <= 230 + 21)
             {
-                if (mouseY >= 188 && mouseY <= 204)
+                if (mouseY >= 160 && mouseY <= 160 + 21)
                 {
                     return true;
                 }
@@ -198,9 +199,9 @@ public class JournalGUI extends GuiScreen
     {
         if (mouseButton == 0)
         {
-            if (mouseX >= 91 && mouseX <= 110)
+            if (mouseX >= 5 && mouseX <= 5 + 21)
             {
-                if (mouseY >= 190 && mouseY <= 209)
+                if (mouseY >= 163 && mouseY <= 163 + 21)
                 {
                     return true;
                 }
