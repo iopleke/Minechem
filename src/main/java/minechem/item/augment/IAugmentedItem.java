@@ -41,4 +41,6 @@ public interface IAugmentedItem
     boolean setAugment(ItemStack item, ItemStack augmentItem);
 
     boolean setAugmentLevel(ItemStack item, IAugment augment, int level);
+
+    int getAugmentLevel(ItemStack item, IAugment augment);
 }

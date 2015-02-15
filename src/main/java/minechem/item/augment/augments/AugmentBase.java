@@ -48,6 +48,13 @@ public abstract class AugmentBase implements IAugment
         return dischargeAugment(augmentItem, level, false);
     }
 
+
+    @Override
+    public int getMaxLevel()
+    {
+        return 5;
+    }
+
     /**
      * @param stack
      * @param level

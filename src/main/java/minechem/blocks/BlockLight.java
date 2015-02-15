@@ -3,11 +3,11 @@ package minechem.blocks;
 import minechem.Compendium;
 import minechem.apparatus.prefab.block.SpecialRenderBlock;
 import net.minecraft.block.material.Material;
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
@@ -78,8 +78,13 @@ public class BlockLight extends SpecialRenderBlock
     }
 
     @Override
-    public float getExplosionResistance(Entity p_149638_1_)
+    public boolean canHarvestBlock(EntityPlayer player, int meta)
     {
-        return super.getExplosionResistance(p_149638_1_);
+        return false;
+    }
+
+    @Override
+    public void onBlockExploded(World world, int x, int y, int z, Explosion explosion)
+    {
     }
 }

@@ -158,6 +158,12 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     }
 
     @Override
+    public int getAugmentLevel(ItemStack item, IAugment augment)
+    {
+        return hasAugment(item, augment)? item.getTagCompound().getCompoundTag(augment.getKey()).getByte(this.level) : -1;
+    }
+
+    @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
     {
         super.addInformation(stack, player, list, bool);
@@ -165,14 +171,6 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
         {
             list.add(StatCollector.translateToLocal("augment."+entry.getKey().getKey())+ ": "+ entry.getKey().getUsableLevel(stack,entry.getValue()));
         }
-    }
-
-    @Override
-    public String getItemStackDisplayName(ItemStack stack)
-    {
-        ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped != null) return wrapped.getItem().getItemStackDisplayName(wrapped);
-        return super.getItemStackDisplayName(stack);
     }
 
     //################################Augment Effect Stuff####################################

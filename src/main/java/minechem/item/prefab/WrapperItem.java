@@ -51,6 +51,15 @@ public abstract class WrapperItem extends BasicItem
      */
     public abstract void setWrappedItemStack(ItemStack wrapper, ItemStack stack);
 
+
+    @Override
+    public String getItemStackDisplayName(ItemStack stack)
+    {
+        ItemStack wrapped = getWrappedItemStack(stack);
+        if (wrapped != null) return wrapped.getItem().getItemStackDisplayName(wrapped);
+        return super.getItemStackDisplayName(stack);
+    }
+
     @Override
     public Multimap getAttributeModifiers(ItemStack stack)
     {

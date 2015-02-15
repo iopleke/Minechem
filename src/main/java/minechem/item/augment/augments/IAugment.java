@@ -28,6 +28,7 @@ public interface IAugment
      */
     int consumeAugment(ItemStack stack, int level);
 
+    int getMaxLevel();
 
     /**
      * @return true to make the block drop
