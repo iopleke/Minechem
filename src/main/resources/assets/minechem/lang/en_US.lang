@@ -25,3 +25,9 @@ tab.patreon.text=Thanks for playing Minechem! If you like the mod, please consid
 tab.patreon.linkText=Visit Patreon
 tab.patreon.headerText=Patreon
 tab.patreon.tooltip=Supporting Minechem
+
+achievement.minechem.item.journal=Start learning
+achievement.minechem.item.journal.desc=The journal is your gate to all the Minechem knowledge
+
+achievement.minechem.element=Discovered %s
+achievement.minechem.element.desc=Discover %s to unlock

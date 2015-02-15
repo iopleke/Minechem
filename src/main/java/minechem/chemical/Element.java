@@ -7,7 +7,7 @@ import minechem.helper.LogHelper;
 /**
  * Data object for elements
  */
-public class Element extends ChemicalBase
+public class Element extends ChemicalBase implements Comparable<Element>
 {
     private static final Matcher SHELL_ORDER = Pattern.compile("\\d+([a-z])").matcher("1s2s2p3s3p4s3d4p5s4d5p6s4f5d6p7s5f6d7p8s5g6f7d8p9s"); //Handles up to atomic number 170
     private static final int[] SUB_SHELL_ELECTRONS = new int[]
@@ -103,5 +103,11 @@ public class Element extends ChemicalBase
     public String getFormula()
     {
         return this.shortName;
+    }
+
+    @Override
+    public int compareTo(Element other)
+    {
+        return Integer.compare(this.atomicNumber, other.atomicNumber);
     }
 }

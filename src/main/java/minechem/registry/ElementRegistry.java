@@ -1,5 +1,6 @@
 package minechem.registry;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Element;
@@ -90,5 +91,10 @@ public class ElementRegistry
     public Element getElementByName(String fullName)
     {
         return nameElementMap.get(fullName.toLowerCase());
+    }
+
+    public Collection<Element> getElements()
+    {
+        return atomicElementMap.values();
     }
 }
