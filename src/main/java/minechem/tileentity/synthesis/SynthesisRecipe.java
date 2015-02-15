@@ -39,9 +39,14 @@ public class SynthesisRecipe
 
     public static void createAndAddRecipeSafely(String item, boolean shaped, int energyCost, PotionChemical... chemicals)
     {
-        for (ItemStack i : OreDictionary.getOres(item))
+        ArrayList<ItemStack> oreDictEntries = OreDictionary.getOres(item);
+        int entry = 0;
+        for (Iterator<ItemStack> itr = oreDictEntries.iterator(); itr.hasNext() && entry<8; entry++)
         {
-            SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(i.getItem(), 1, i.getItemDamage()), shaped, energyCost, chemicals));
+            PotionChemical[] val = new PotionChemical[9];
+            for (int i = 0; i<chemicals.length; i++) val[(i+entry)%9] = chemicals[i];
+            ItemStack ore = itr.next();
+            SynthesisRecipe.add(new SynthesisRecipe(new ItemStack(ore.getItem(), 1, ore.getItemDamage()), true, energyCost, val));
         }
     }
 
