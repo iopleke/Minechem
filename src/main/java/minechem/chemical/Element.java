@@ -14,11 +14,17 @@ public class Element extends ChemicalBase implements Comparable<Element>
     {
         2, 6, 10, 14, 18
     };
-    private static final String SUB_SHELL_STRING = "spdfg";																					//Super Powered Dog Fights God
+    private static final String SUB_SHELL_STRING = "spdfg"; //Super Powered Dog Fights God
+
+    public static enum Type
+    {
+        alkaliMetal, alkalineEarth, transitionMetal, basicMetal, semiMetal, nonMetal, halogen, nobleGas, lanthanide, actinide
+    }
 
     public final int atomicNumber;
     public final int neutrons;
     public final String shortName;
+    public final Type type;
 
     private int valenceElectronCount;
     private String valenceSubshellIdentifier;
@@ -30,12 +36,14 @@ public class Element extends ChemicalBase implements Comparable<Element>
      * @param fullName     the full name, eg "Gold"
      * @param shortName    the abbreviation, eg "Au"
      * @param form         solid, liquid, gas, or plasma
+     * @param type         alkaliMetal, alkalineEarth, transitionMetal, basicMetal, semiMetal, nonMetal, halogen, nobleGas, lanthanide or actinide
      * @param neutrons     the number of neutrons in the element's nucleus
      */
-    public Element(int atomicNumber, String fullName, String shortName, String form, int neutrons)
+    public Element(int atomicNumber, String fullName, String shortName, String form, String type, int neutrons)
     {
         super(fullName, form);
         this.atomicNumber = atomicNumber;
+        this.type = Type.valueOf(type);
         this.neutrons = neutrons;
         this.shortName = shortName;
         this.calculateValenceShells();

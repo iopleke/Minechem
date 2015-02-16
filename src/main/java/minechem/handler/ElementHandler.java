@@ -57,6 +57,7 @@ public class ElementHandler
                 elementObject.get("longName").getAsString(),
                 elementObject.get("shortName").getAsString(),
                 elementObject.get("form").getAsString(),
+                elementObject.get("type").getAsString(),
                 Integer.parseInt(elementObject.get("neutrons").getAsString())
             );
             count++;

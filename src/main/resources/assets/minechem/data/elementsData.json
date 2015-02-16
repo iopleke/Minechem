@@ -3,126 +3,147 @@
 		"longName": "Hydrogen",
 		"shortName": "H",
 		"form": "gas",
+        "type": "nonMetal",
 		"neutrons": "0"
 	},
 	"2": {
 		"longName": "Helium",
 		"shortName": "He",
 		"form": "gas",
+        "type": "nobleGas",
 		"neutrons": "2"
 	},
 	"3": {
 		"longName": "Lithium",
 		"shortName": "Li",
 		"form": "solid",
+        "type": "alkaliMetal",
 		"neutrons": "4"
 	},
 	"4": {
 		"longName": "Beryllium",
 		"shortName": "Be",
 		"form": "solid",
+        "type": "alkalineEarth",
 		"neutrons": "5"
 	},
 	"5": {
 		"longName": "Boron",
 		"shortName": "B",
 		"form": "solid",
+        "type": "semiMetal",
 		"neutrons": "6"
 	},
 	"6": {
 		"longName": "Carbon",
 		"shortName": "C",
 		"form": "solid",
+        "type": "nonMetal",
 		"neutrons": "6"
 	},
 	"7": {
 		"longName": "Nitrogen",
 		"shortName": "N",
 		"form": "gas",
+        "type": "nonMetal",
 		"neutrons": "7"
 	},
 	"8": {
 		"longName": "Oxygen",
 		"shortName": "O",
 		"form": "gas",
+        "type": "nonMetal",
 		"neutrons": "8"
 	},
 	"9": {
 		"longName": "Fluorine",
 		"shortName": "F",
 		"form": "gas",
+        "type": "halogen",
 		"neutrons": "10"
 	},
 	"10": {
 		"longName": "Neon",
 		"shortName": "Ne",
 		"form": "gas",
+        "type": "nobleGas",
 		"neutrons": "10"
 	},
 	"11": {
 		"longName": "Sodium",
 		"shortName": "Na",
 		"form": "solid",
+        "type": "alkaliMetal",
 		"neutrons": "12"
 	},
 	"12": {
 		"longName": "Magnesium",
 		"shortName": "Mg",
 		"form": "solid",
+        "type": "alkalineEarth",
 		"neutrons": "12"
 	},
 	"13": {
 		"longName": "Aluminium",
 		"shortName": "Al",
 		"form": "solid",
+        "type": "basicMetal",
 		"neutrons": "14"
 	},
 	"14": {
 		"longName": "Silicon",
 		"shortName": "Si",
 		"form": "solid",
+        "type": "semiMetal",
 		"neutrons": "14"
 	},
 	"15": {
 		"longName": "Phosphorus",
 		"shortName": "P",
 		"form": "solid",
+        "type": "nonMetal",
 		"neutrons": "16"
 	},
 	"16": {
 		"longName": "Sulfur",
 		"shortName": "S",
 		"form": "solid",
+        "type": "nonMetal",
 		"neutrons": "16"
 	},
 	"17": {
 		"longName": "Chlorine",
 		"shortName": "Cl",
 		"form": "gas",
+        "type": "halogen",
 		"neutrons": "18"
 	},
 	"18": {
 		"longName": "Argon",
 		"shortName": "Ar",
 		"form": "gas",
+        "type": "nobleGas",
 		"neutrons": "22"
 	},
 	"19": {
 		"longName": "Potassium",
 		"shortName": "K",
 		"form": "solid",
+        "type": "alkaliMetal",
 		"neutrons": "20"
 	},
 	"20": {
 		"longName": "Calcium",
 		"shortName": "Ca",
 		"form": "solid",
+        "type": "alkalineEarth",
 		"neutrons": "24"
 	},
 	"21": {
 		"longName": "Scandium",
 		"shortName": "Sc",
 		"form": "solid",
+        "type": "transitionMetal",
 		"neutrons": "24"
 	}
 }
