@@ -28,6 +28,7 @@ public interface IAugment
      */
     int consumeAugment(ItemStack stack, int level);
 
+    int getMaxLevel();
 
     /**
      * @return true to make the block drop
@@ -128,4 +129,6 @@ public interface IAugment
      * @return int modifier to EntityItem lifespan (base 6000)
      */
     int getEntityLifespanModifier(ItemStack stack, int level);
+
+    boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level);
 }
