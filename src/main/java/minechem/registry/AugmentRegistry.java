@@ -5,10 +5,7 @@ import java.util.Map;
 
 import minechem.collections.ItemStackMap;
 import minechem.item.augment.IAugmentItem;
-import minechem.item.augment.augments.AugmentFlint;
-import minechem.item.augment.augments.AugmentLight;
-import minechem.item.augment.augments.AugmentTnt;
-import minechem.item.augment.augments.IAugment;
+import minechem.item.augment.augments.*;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -103,5 +100,6 @@ public class AugmentRegistry
         registerAugment(new ItemStack(Blocks.tnt),new AugmentTnt());
         registerAugment(new ItemStack(Blocks.glowstone),new AugmentLight());
         registerAugment(new ItemStack(Items.flint_and_steel),new AugmentFlint());
+        registerAugment(new ItemStack(Items.redstone),new AugmentRedstone());
     }
 }
