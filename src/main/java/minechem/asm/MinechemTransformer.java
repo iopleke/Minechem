@@ -40,7 +40,7 @@ public class MinechemTransformer implements IClassTransformer
     
     private enum Method
     {
-        GUI_DRAW("func_146552_b", "(IIF)V", InstructionNode.INIT);
+        GUI_DRAW("func_146552_b", "(IIF)V", InstructionNode.INIT, InstructionNode.DISABLE);
         
         private final String name, args;
         private InstructionNode[] instructions;
@@ -81,8 +81,8 @@ public class MinechemTransformer implements IClassTransformer
         private static InsnList createRenderHook()
         {
             InsnList insnList = new InsnList();
-            insnList.insert(new VarInsnNode(Opcodes.FLOAD, 36));
             insnList.insert(new VarInsnNode(Opcodes.ALOAD, 35));
+            insnList.insert(new VarInsnNode(Opcodes.FLOAD, 36));
             insnList.insert(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "recolourAchievement", "(Lnet/minecraft/stats/Achievement;F)V", false));
             return insnList;
         }
@@ -113,18 +113,13 @@ public class MinechemTransformer implements IClassTransformer
     public byte[] transform(String name, String transformedName, byte[] bytes)
     {
         Class clazz = classMap.get(name);
-        if (clazz!=null)
+        if (clazz != null)
         {
-            switch (clazz)
-            {
-                case GUI_ACHIEVEMENTS:
-                    for (Method method : clazz.methods)
-                        for (InstructionNode node : method.instructions)
-                            bytes = injectBytes(method, node, bytes);
-            }
+            for (Method method : clazz.methods)
+                for (InstructionNode node : method.instructions)
+                    bytes = injectBytes(method, node, bytes);
             classMap.remove(name);
         }
-
         return bytes;
     }
     
@@ -135,7 +130,7 @@ public class MinechemTransformer implements IClassTransformer
         classReader.accept(classNode, ClassReader.EXPAND_FRAMES);
 
         MethodNode methodNode = getMethodByName(classNode, method);
-        AbstractInsnNode pos = findInstructionNode(instructionNode, methodNode);
+        AbstractInsnNode pos = findInstructionNode(instructionNode, methodNode).getNext();
         methodNode.instructions.insertBefore(pos, instructionNode.getInsnList());
         
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
@@ -146,6 +141,7 @@ public class MinechemTransformer implements IClassTransformer
     private static AbstractInsnNode findInstructionNode(InstructionNode instructionNode, MethodNode methodNode)
     {
         boolean close = false;
+        AbstractInsnNode result = null;
         for (Iterator<AbstractInsnNode> itr = methodNode.instructions.iterator(); itr.hasNext();)
         {
             AbstractInsnNode node = itr.next();
@@ -153,11 +149,15 @@ public class MinechemTransformer implements IClassTransformer
             {
                 if (close)
                 {
-                    if (((MethodInsnNode)node).name.equals(instructionNode.before)) return node;
+                    if (((MethodInsnNode)node).name.equals(instructionNode.before)) return result;
                     else close = false;
                 }
                 
-                if (((MethodInsnNode)node).name.equals(instructionNode.after)) close = true;
+                if (((MethodInsnNode)node).name.equals(instructionNode.after))
+                {
+                    close = true;
+                    result = node;
+                }
             }
         }
         return methodNode.instructions.getLast();
