@@ -98,7 +98,7 @@ public abstract class AugmentBase implements IAugment
         else if (stack.isItemStackDamageable())
         {
             while (this.getDamageDone(level) > stack.getMaxDamage() - stack.getItemDamage() && level >= 0) level--;
-            if (discharge && level >= 0) stack.attemptDamageItem(this.getDamageDone(level), AugmentedItem.rand);
+            if (discharge && level >= 0) stack.attemptDamageItem(this.getDamageDone(level), rand);
             return level;
         }
         return -1;

@@ -24,7 +24,6 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
 {
     public static final String augmentList = "augments";
     public static final String level = "level";
-    public static final Random rand = new Random(System.currentTimeMillis());
     public static final UUID itemUUID = field_111210_e;
 
     public AugmentedItem()
@@ -374,7 +373,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     {
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            if (rand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue()))
+            if (itemRand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue()))
             {
                 return;
             }
