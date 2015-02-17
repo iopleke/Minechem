@@ -40,7 +40,7 @@ public class MinechemTransformer implements IClassTransformer
     
     private enum Method
     {
-        GUI_DRAW("func_146552_b", "(IIF)V", InstructionNode.INIT, InstructionNode.DISABLE);
+        GUI_DRAW("func_146552_b", "(IIF)V", InstructionNode.RECOLOUR, InstructionNode.RESET, InstructionNode.ICON);
         
         private final String name, args;
         private InstructionNode[] instructions;
@@ -57,25 +57,30 @@ public class MinechemTransformer implements IClassTransformer
             return this.name;
         }
     }
+
     
     public enum InstructionNode
     {
-        INIT("bindTexture","glEnable"),
-        DISABLE("glDisable", "canUnlockAchievement");
+        RECOLOUR("bindTexture","glEnable", false),
+        RESET("glDisable", "canUnlockAchievement", false),
+        ICON("getTextureManager", "renderItemAndEffectIntoGUI", true);
         
         public final String after, before;
+        public final boolean replace;
         public InsnList insnList;
         
-        private InstructionNode(String after,String next)
+        private InstructionNode(String after, String next, boolean replace)
         {
             this.after = after;
             this.before = next;
+            this.replace = replace;
         }
         
         static 
         {
-            INIT.insnList = createRenderHook();
-            DISABLE.insnList = createResetHook();
+            RECOLOUR.insnList = createRenderHook();
+            RESET.insnList = createResetHook();
+            ICON.insnList = createIconHook();
         }
 
         private static InsnList createRenderHook()
@@ -95,6 +100,14 @@ public class MinechemTransformer implements IClassTransformer
             return insnList;
         }
         
+        private static InsnList createIconHook()
+        {
+            InsnList insnList = new InsnList();
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 33));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "drawIconAchievement", "(Lnet/minecraft/client/renderer/entity/RenderItem;Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILnet/minecraft/stats/Achievement;)V", false));
+            return insnList; 
+        }
+
         public InsnList getInsnList()
         {
             return insnList;
@@ -130,9 +143,16 @@ public class MinechemTransformer implements IClassTransformer
         classReader.accept(classNode, ClassReader.EXPAND_FRAMES);
 
         MethodNode methodNode = getMethodByName(classNode, method);
-        AbstractInsnNode pos = findInstructionNode(instructionNode, methodNode).getNext();
-        methodNode.instructions.insertBefore(pos, instructionNode.getInsnList());
-        
+        AbstractInsnNode pos = findInstructionNode(instructionNode, methodNode);
+        if (instructionNode.replace)
+        {
+            methodNode.instructions.insertBefore(pos, instructionNode.getInsnList());
+            methodNode.instructions.remove(pos);
+        }
+        else
+        {
+            methodNode.instructions.insertBefore(pos.getNext(), instructionNode.getInsnList());
+        }
         ClassWriter writer = new ClassWriter(ClassWriter.COMPUTE_MAXS);
         classNode.accept(writer);
         return writer.toByteArray();
@@ -149,7 +169,7 @@ public class MinechemTransformer implements IClassTransformer
             {
                 if (close)
                 {
-                    if (((MethodInsnNode)node).name.equals(instructionNode.before)) return result;
+                    if (((MethodInsnNode)node).name.equals(instructionNode.before)) return instructionNode.replace ? node : result;
                     else close = false;
                 }
                 

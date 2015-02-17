@@ -8,6 +8,8 @@ import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
@@ -104,12 +106,13 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     @Override
     public boolean hasSpecialIconRenderer()
     {
-        return false;
+        return true;
     }
 
     @Override
-    public void renderIcon(int left, int top)
+    public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top)
     {
-        Minecraft.getMinecraft().fontRenderer.drawStringWithShadow(element.shortName, left, top, Compendium.Color.TrueColor.white);
+        fontRenderer.drawStringWithShadow(element.shortName, left +6 - element.shortName.length(), top+5, Compendium.Color.TrueColor.white);
+        fontRenderer.drawStringWithShadow(String.valueOf(element.atomicNumber), left+10, top, Compendium.Color.TrueColor.white);
     }
 }
