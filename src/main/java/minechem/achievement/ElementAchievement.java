@@ -112,7 +112,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     @Override
     public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top)
     {
-        fontRenderer.drawStringWithShadow(element.shortName, left +6 - element.shortName.length(), top+5, Compendium.Color.TrueColor.white);
-        fontRenderer.drawStringWithShadow(String.valueOf(element.atomicNumber), left+10, top, Compendium.Color.TrueColor.white);
+        fontRenderer.drawStringWithShadow(element.shortName, left+10 - (element.shortName.length()-1)*5, top+8, Compendium.Color.TrueColor.white);
+        fontRenderer.drawStringWithShadow(String.valueOf(element.atomicNumber), left, top, Compendium.Color.TrueColor.white);
     }
 }
