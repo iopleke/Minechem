@@ -6,6 +6,7 @@ import minechem.Compendium;
 import minechem.chemical.Element;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
+import minechem.proxy.client.font.Font;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -28,6 +29,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     private final static Achievement nullAchievement = null;
 
     private final Element element;
+    private static Font regularFont, smallFont;
 
     public ElementAchievement(Element element, int row, int column, ItemStack displayStack)
     {
@@ -112,7 +114,9 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     @Override
     public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top)
     {
-        fontRenderer.drawStringWithShadow(element.shortName, left+10 - (element.shortName.length()-1)*5, top+8, Compendium.Color.TrueColor.white);
-        fontRenderer.drawStringWithShadow(String.valueOf(element.atomicNumber), left, top, Compendium.Color.TrueColor.white);
+        if (regularFont == null) regularFont = new Font(fontRenderer);
+        if (smallFont == null) smallFont = new Font(fontRenderer).setFontSize(8);
+        regularFont.print(element.shortName, left+10 - (element.shortName.length()-1)*5, top+8, Compendium.Color.TrueColor.white, true);
+        smallFont.print(element.atomicNumber, left, top, Compendium.Color.TrueColor.white, true);
     }
 }

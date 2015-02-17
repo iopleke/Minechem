@@ -210,6 +210,7 @@ public class Compendium
         {
             public static final ResourceLocation danielFont = new ResourceLocation(Compendium.Naming.fontBox, Compendium.Texture.Font.danielFont);
             public static final ResourceLocation danielMetrics = new ResourceLocation(Compendium.Naming.fontBox, Compendium.Texture.Font.danielMetrics);
+            public static final ResourceLocation vanilla = new ResourceLocation("textures/font/ascii.png");
         }
     }
 
