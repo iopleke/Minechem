@@ -81,17 +81,17 @@ public class MinechemTransformer implements IClassTransformer
         private static InsnList createRenderHook()
         {
             InsnList insnList = new InsnList();
-            insnList.insert(new VarInsnNode(Opcodes.ALOAD, 35));
-            insnList.insert(new VarInsnNode(Opcodes.FLOAD, 36));
-            insnList.insert(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "recolourAchievement", "(Lnet/minecraft/stats/Achievement;F)V", false));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 33));
+            insnList.add(new VarInsnNode(Opcodes.FLOAD, 36));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "recolourAchievement", "(Lnet/minecraft/stats/Achievement;F)V", false));
             return insnList;
         }
 
         private static InsnList createResetHook()
         {
             InsnList insnList = new InsnList();
-            insnList.insert(new VarInsnNode(Opcodes.FLOAD, 36));
-            insnList.insert(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "resetGreyscale", "(F)V", false));
+            insnList.add(new VarInsnNode(Opcodes.FLOAD, 36));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "resetGreyscale", "(F)V", false));
             return insnList;
         }
         
