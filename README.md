@@ -9,3 +9,9 @@ For the most up-to-date information, please visit the [official Minechem site](h
 
 **License**  
 Minechem is licensed under the [DBaJ (Don't Be a Jerk) non-commercial care-free license](https://github.com/jakimfett/DBaJ).
+
+**Development**  
+Before submitting a pull request, please review the [PR Guidelines](https://github.com/jakimfett/Minechem/wiki/Pull-Request-Guidelines) wiki page.  
+
+Please note that when running in a dev environment, you'll need to add the following to your VM options:  
+`-Dfml.coreMods.load=minechem.asm.LoadingPlugin`
