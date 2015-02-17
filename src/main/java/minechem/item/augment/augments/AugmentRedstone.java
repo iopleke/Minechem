@@ -1,22 +1,28 @@
 package minechem.item.augment.augments;
 
+import minechem.registry.BlockRegistry;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 
-public class AugmentFlint extends AugmentBase
+public class AugmentRedstone extends AugmentBase
 {
-    public AugmentFlint()
+    public AugmentRedstone()
     {
-        super("flint");
+        super("redstone");
+    }
+
+    @Override
+    public int getUsableLevel(ItemStack stack, int level)
+    {
+        return level;
     }
 
     @Override
     public int getMaxLevel()
     {
-        return 1;
+        return 15;
     }
 
     @Override
@@ -26,12 +32,15 @@ public class AugmentFlint extends AugmentBase
         x += dir.offsetX;
         y += dir.offsetY;
         z += dir.offsetZ;
-        if (!world.isRemote && player != null && player.isSneaking() && player.canPlayerEdit(x, y, z, side, null) && world.isAirBlock(x, y, z) && Blocks.fire.canPlaceBlockAt(world, x, y, z))
+        if (!world.isRemote && player != null && player.canPlayerEdit(x, y, z, side, null))
         {
-            if (consumeAugment(stack, level) > -1)
+            if (world.isAirBlock(x, y, z))
             {
-                world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
-                world.setBlock(x, y, z, Blocks.fire);
+                world.setBlock(x, y, z, BlockRegistry.blockRedstone, level + 5, 7);
+            }
+            else if (world.getBlock(x, y, z) == BlockRegistry.blockRedstone)
+            {
+                world.setBlockMetadataWithNotify(x, y, z, level + 5, 4);
             }
         }
         return false;
