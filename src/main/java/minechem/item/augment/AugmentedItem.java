@@ -1,10 +1,9 @@
 package minechem.item.augment;
 
 import com.google.common.collect.Multimap;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
+
+import java.util.*;
+
 import minechem.Compendium;
 import minechem.item.augment.augments.IAugment;
 import minechem.item.prefab.WrapperItem;
@@ -25,7 +24,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
 {
     public static final String augmentList = "augments";
     public static final String level = "level";
-    public static final Random rand = new Random(System.currentTimeMillis());
+    public static final UUID itemUUID = field_111210_e;
 
     public AugmentedItem()
     {
@@ -35,7 +34,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public boolean isWrappable(ItemStack stack)
     {
-        return stack.getItem().isItemTool(stack) && !(stack.getItem() instanceof WrapperItem);
+        return stack.getItem().isItemTool(stack) && !(stack.getItem() instanceof WrapperItem) && getWrappedItemStack(stack)==null;
     }
 
     @Override
@@ -158,10 +157,16 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     }
 
     @Override
+    public int getAugmentLevel(ItemStack item, IAugment augment)
+    {
+        return hasAugment(item, augment)? item.getTagCompound().getCompoundTag(augment.getKey()).getByte(this.level) : -1;
+    }
+
+    @Override
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
     {
         super.addInformation(stack, player, list, bool);
-        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) //TODO: Change this to display more useful data
         {
             list.add(StatCollector.translateToLocal("augment."+entry.getKey().getKey())+ ": "+ entry.getKey().getUsableLevel(stack,entry.getValue()));
         }
@@ -170,9 +175,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public String getItemStackDisplayName(ItemStack stack)
     {
-        ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped != null) return wrapped.getItem().getItemStackDisplayName(wrapped);
-        return super.getItemStackDisplayName(stack);
+        return (getWrappedItemStack(stack) != null? StatCollector.translateToLocal("augment.augmentedItem") + " " : "") + super.getItemStackDisplayName(stack);
     }
 
     //################################Augment Effect Stuff####################################
@@ -350,6 +353,17 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     }
 
     @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user)
+    {
+        boolean result = super.hitEntity(stack, target, user);
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
+        {
+            result |= entry.getKey().hitEntity(stack, target, user, entry.getValue());
+        }
+        return result;
+    }
+
+    @Override
     public Multimap getAttributeModifiers(ItemStack stack)
     {
         Multimap result = super.getAttributeModifiers(stack);
@@ -365,7 +379,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     {
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet())
         {
-            if (rand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue()))
+            if (itemRand.nextFloat() < entry.getKey().setDamageChance(stack, entry.getValue()))
             {
                 return;
             }

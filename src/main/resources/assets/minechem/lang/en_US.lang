@@ -10,6 +10,8 @@ gui.journal.index=Index
 tile.electrolysis.name=Electrolysis Apparatus
 tile.opticalMicroscope.name=Optical Microscope
 
+item.augmented.name=Item Augment
+
 config.debugMode=Turns on extra logging printouts
 config.debugMode.tooltip=Debug Mode
 config.useDefaultElements=Turns on to read the newest elements list from jar
@@ -31,3 +33,12 @@ achievement.minechem.item.journal.desc=The journal is your gate to all the Minec
 
 achievement.minechem.element=Discovered %s
 achievement.minechem.element.desc=Discover %s to unlock
+
+augment.augmentedItem=Augmented
+augment.light=Lighting
+augment.sharp=Sharp
+augment.tnt=Explosive
+augment.flint=Flint
+augment.unstable=Unstable
+augment.reinforced=Reinforced
+augment.redstone=Redstone

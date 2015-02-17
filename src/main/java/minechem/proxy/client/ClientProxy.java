@@ -9,6 +9,7 @@ import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntity;
 import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntityRenderer;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntityRenderer;
+import minechem.blocks.LightRenderer;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
 import net.minecraft.client.Minecraft;
@@ -35,6 +36,7 @@ public class ClientProxy extends CommonProxy
     public void registerRenderers()
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
+        ISBRH_ID = RenderingRegistry.getNextAvailableRenderId();
 
         OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new OpticalMicroscopeTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, opticalMicroscopeRenderer);
@@ -44,5 +46,6 @@ public class ClientProxy extends CommonProxy
         ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class, electrolysisRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
 
+        RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
     }
 }

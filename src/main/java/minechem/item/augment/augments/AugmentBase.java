@@ -16,9 +16,12 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
+import java.util.Random;
+
 public abstract class AugmentBase implements IAugment
 {
     private final String key;
+    public static final Random rand = new Random(System.currentTimeMillis());
 
     public AugmentBase(String key)
     {
@@ -45,6 +48,13 @@ public abstract class AugmentBase implements IAugment
         return dischargeAugment(augmentItem, level, false);
     }
 
+
+    @Override
+    public int getMaxLevel()
+    {
+        return 5;
+    }
+
     /**
      * @param stack
      * @param level
@@ -57,7 +67,7 @@ public abstract class AugmentBase implements IAugment
         ItemStack augmentItem = ItemStack.loadItemStackFromNBT(augment.getCompoundTag(Compendium.NBTTags.item));
         if (augmentItem == null || augmentItem.getItem() == null) return -1;
         int discharged = dischargeAugment(augmentItem, level, true);
-        augment.setTag(Compendium.NBTTags.item,augmentItem.writeToNBT(new NBTTagCompound()));
+        augment.setTag(Compendium.NBTTags.item, augmentItem.writeToNBT(new NBTTagCompound()));
         return discharged;
     }
 
@@ -73,19 +83,22 @@ public abstract class AugmentBase implements IAugment
     {
         if (stack.getItem() instanceof IFluidContainerItem)
         {
-            while (!this.drain((IFluidContainerItem)stack.getItem(), stack, this.getVolumeConsumed(level), false) && level>=0) level--;
-            if (discharge && level>=0) drain((IFluidContainerItem)stack.getItem(),stack,this.getVolumeConsumed(level),true);
+            while (!this.drain((IFluidContainerItem)stack.getItem(), stack, this.getVolumeConsumed(level), false) && level >= 0)
+                level--;
+            if (discharge && level >= 0)
+                drain((IFluidContainerItem)stack.getItem(), stack, this.getVolumeConsumed(level), true);
             return level;
         }
         else if (stack.getItem() instanceof IAugmentItem)
         {
-            if (discharge) return ((IAugmentItem)stack.getItem()).consumeLevel(stack, this, this.getVolumeConsumed(level));
+            if (discharge)
+                return ((IAugmentItem)stack.getItem()).consumeLevel(stack, this, this.getVolumeConsumed(level));
             return ((IAugmentItem)stack.getItem()).getMaxLevel(stack, this, this.getVolumeConsumed(level));
         }
         else if (stack.isItemStackDamageable())
         {
-            while (this.getDamageDone(level)>stack.getItemDamage() && level>=0) level--;
-            if (discharge && level>=0) stack.attemptDamageItem(this.getDamageDone(level), AugmentedItem.rand);
+            while (this.getDamageDone(level) > stack.getMaxDamage() - stack.getItemDamage() && level >= 0) level--;
+            if (discharge && level >= 0) stack.attemptDamageItem(this.getDamageDone(level), rand);
             return level;
         }
         return -1;
@@ -93,6 +106,7 @@ public abstract class AugmentBase implements IAugment
 
     /**
      * Attempts to drain passed ItemStack for FluidContainer augments
+     *
      * @param item
      * @param stack
      * @param volume
@@ -101,7 +115,7 @@ public abstract class AugmentBase implements IAugment
      */
     public boolean drain(IFluidContainerItem item, ItemStack stack, int volume, boolean doDrain)
     {
-        return volume == item.drain(stack,volume,doDrain).amount;
+        return volume == item.drain(stack, volume, doDrain).amount;
     }
 
     /**
@@ -110,7 +124,7 @@ public abstract class AugmentBase implements IAugment
      */
     public int getVolumeConsumed(int level)
     {
-        return level*10;
+        return level * 10 + 5;
     }
 
     /**
@@ -119,7 +133,7 @@ public abstract class AugmentBase implements IAugment
      */
     public int getDamageDone(int level)
     {
-        return level;
+        return level + 1;
     }
 
     @Override
@@ -346,5 +360,11 @@ public abstract class AugmentBase implements IAugment
     public int getEntityLifespanModifier(ItemStack stack, int level)
     {
         return 0;
+    }
+
+    @Override
+    public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level)
+    {
+        return false;
     }
 }

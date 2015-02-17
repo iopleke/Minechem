@@ -27,12 +27,21 @@ public abstract class BasicBlock extends Block
      */
     public BasicBlock(String blockName)
     {
-        super(Material.grass);
+        this(blockName,Material.grass, Block.soundTypeGrass);
+    }
+
+    public BasicBlock(String blockName, Material material)
+    {
+        this(blockName,material,material==Material.cloth?Block.soundTypeCloth:material == Material.wood?Block.soundTypeWood:material == Material.glass? Block.soundTypeGlass:material==Material.iron?Block.soundTypeMetal:Block.soundTypeGrass);
+    }
+
+    public BasicBlock(String blockName, Material material, SoundType soundType)
+    {
+        super(material);
         setBlockName(blockName);
-        setStepSound(Block.soundTypeGrass);
+        setStepSound(soundType);
         setCreativeTab(CreativeTabRegistry.TAB_PRIMARY);
         textureName = Compendium.Naming.id + ":" + blockName + "Icon";
-
     }
 
     /**
