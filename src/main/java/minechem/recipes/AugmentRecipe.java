@@ -1,5 +1,6 @@
 package minechem.recipes;
 
+import minechem.Compendium;
 import minechem.item.augment.IAugmentedItem;
 import minechem.registry.AugmentRegistry;
 import net.minecraft.inventory.IInventory;
@@ -7,15 +8,15 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 
 public class AugmentRecipe implements IRecipe
 {
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     *
-     * @param crafting
-     * @param world
-     */
+    public AugmentRecipe()
+    {
+        RecipeSorter.register(Compendium.Naming.id + ":augment", getClass(), RecipeSorter.Category.SHAPELESS, "after:" + Compendium.Naming.id + ":wrapper");
+    }
+
     @Override
     public boolean matches(InventoryCrafting crafting, World world)
     {
@@ -29,7 +30,7 @@ public class AugmentRecipe implements IRecipe
     private ItemStack getAugmentable(IInventory crafting)
     {
         ItemStack wrapper = null;
-        for (int i = 0; i< crafting.getSizeInventory(); i++)
+        for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
             if (itemStack == null) continue;
@@ -45,11 +46,11 @@ public class AugmentRecipe implements IRecipe
     private ItemStack getItem(IInventory crafting)
     {
         ItemStack item = null;
-        for (int i = 0; i< crafting.getSizeInventory(); i++)
+        for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
             if (itemStack == null) continue;
-            if (AugmentRegistry.getAugment(itemStack)!=null)
+            if (AugmentRegistry.getAugment(itemStack) != null)
             {
                 if (item == null) item = itemStack;
                 else return null;
@@ -58,11 +59,6 @@ public class AugmentRecipe implements IRecipe
         return item;
     }
 
-    /**
-     * Returns an Item that is the result of this recipe
-     *
-     * @param crafting
-     */
     @Override
     public ItemStack getCraftingResult(InventoryCrafting crafting)
     {
@@ -71,13 +67,10 @@ public class AugmentRecipe implements IRecipe
         ItemStack item = getItem(crafting);
         if (item == null) return null;
         ItemStack result = augment.copy();
-        ((IAugmentedItem)result.getItem()).setAugment(result,item);
+        ((IAugmentedItem)result.getItem()).setAugment(result, item);
         return result;
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     @Override
     public int getRecipeSize()
     {
