@@ -8,6 +8,7 @@ import java.util.Set;
 import minechem.helper.ArrayHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.item.prefab.BasicItem;
+import minechem.registry.AchievementRegistry;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -43,6 +44,7 @@ public class JournalItem extends BasicItem
         {
             Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(getKnowledgeKeys(stack), getAuthors(stack)));
         }
+        player.triggerAchievement(AchievementRegistry.getInstance().getAchievement(this.getUnlocalizedName()));
         return stack;
     }
 

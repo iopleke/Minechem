@@ -91,6 +91,10 @@ allprojects {
     }
 
     jar {
+    	manifest {
+			attributes 'FMLCorePlugin': 'dimensionguard.asm.LoadingPlugin'
+			attributes 'FMLCorePluginContainsFMLMod': 'true'
+		}
         destinationDir = file (rootProject.getRootDir().getPath() + '/output')
     }
 

@@ -1,5 +1,6 @@
 package minechem.registry;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Element;
@@ -52,11 +53,12 @@ public class ElementRegistry
      * @param fullName     the full name, eg "Gold"
      * @param shortName    the abbreviation, eg "Au"
      * @param form         solid, liquid, gas, or plasma
+     * @param type         alkaliMetal, alkalineEarth, transitionMetal, basicMetal, semiMetal, nonMetal, halogen, nobleGas, lanthanide or actinide
      * @param neutrons     the number of neutrons in the element's nucleus
      */
-    public void registerElement(int atomicNumber, String fullName, String shortName, String form, int neutrons)
+    public void registerElement(int atomicNumber, String fullName, String shortName, String form, String type, int neutrons)
     {
-        registerElement(new Element(atomicNumber, fullName, shortName, form, neutrons));
+        registerElement(new Element(atomicNumber, fullName, shortName, form, type, neutrons));
     }
 
     /**
@@ -90,5 +92,10 @@ public class ElementRegistry
     public Element getElementByName(String fullName)
     {
         return nameElementMap.get(fullName.toLowerCase());
+    }
+
+    public Collection<Element> getElements()
+    {
+        return atomicElementMap.values();
     }
 }

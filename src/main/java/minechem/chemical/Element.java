@@ -7,18 +7,24 @@ import minechem.helper.LogHelper;
 /**
  * Data object for elements
  */
-public class Element extends ChemicalBase
+public class Element extends ChemicalBase implements Comparable<Element>
 {
     private static final Matcher SHELL_ORDER = Pattern.compile("\\d+([a-z])").matcher("1s2s2p3s3p4s3d4p5s4d5p6s4f5d6p7s5f6d7p8s5g6f7d8p9s"); //Handles up to atomic number 170
     private static final int[] SUB_SHELL_ELECTRONS = new int[]
     {
         2, 6, 10, 14, 18
     };
-    private static final String SUB_SHELL_STRING = "spdfg";																					//Super Powered Dog Fights God
+    private static final String SUB_SHELL_STRING = "spdfg"; //Super Powered Dog Fights God
+
+    public static enum Type
+    {
+        alkaliMetal, alkalineEarth, transitionMetal, basicMetal, semiMetal, nonMetal, halogen, nobleGas, lanthanide, actinide
+    }
 
     public final int atomicNumber;
     public final int neutrons;
     public final String shortName;
+    public final Type type;
 
     private int valenceElectronCount;
     private String valenceSubshellIdentifier;
@@ -30,12 +36,14 @@ public class Element extends ChemicalBase
      * @param fullName     the full name, eg "Gold"
      * @param shortName    the abbreviation, eg "Au"
      * @param form         solid, liquid, gas, or plasma
+     * @param type         alkaliMetal, alkalineEarth, transitionMetal, basicMetal, semiMetal, nonMetal, halogen, nobleGas, lanthanide or actinide
      * @param neutrons     the number of neutrons in the element's nucleus
      */
-    public Element(int atomicNumber, String fullName, String shortName, String form, int neutrons)
+    public Element(int atomicNumber, String fullName, String shortName, String form, String type, int neutrons)
     {
         super(fullName, form);
         this.atomicNumber = atomicNumber;
+        this.type = Type.valueOf(type);
         this.neutrons = neutrons;
         this.shortName = shortName;
         this.calculateValenceShells();
@@ -103,5 +111,11 @@ public class Element extends ChemicalBase
     public String getFormula()
     {
         return this.shortName;
+    }
+
+    @Override
+    public int compareTo(Element other)
+    {
+        return Integer.compare(this.atomicNumber, other.atomicNumber);
     }
 }
