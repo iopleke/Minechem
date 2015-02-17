@@ -12,7 +12,7 @@ public class PeriodicTableHelper
     public static int[][] layout = new int[][]
     {
         {   1,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   2},
-        {   3,   4,   5,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   6,   7,   8,   9,  10},
+        {   3,   4,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,   5,   6,   7,   8,   9,  10},
         {  11,  12,   0,   0,   0,   0,   0,   0,   0,   0,   0,   0,  13,  14,  15,  16,  17,  18},
         {  19,  20,  21,  22,  23,  24,  25,  26,  27,  28,  29,  30,  31,  32,  33,  34,  35,  36},
         {  37,  38,  39,  40,  41,  42,  43,  44,  45,  46,  47,  48,  49,  50,  51,  52,  53,  54},
@@ -26,7 +26,7 @@ public class PeriodicTableHelper
     /**
      * Used to cache searches because it is quite heavy to search
      */
-    private static Map<Element, Integer[]> layoutCache = new TreeMap<Element, Integer[]>();
+    private static Map<Element, int[]> layoutCache = new TreeMap<Element, int[]>();
 
     /**
      * Get the position of an element in the periodic table
@@ -35,8 +35,8 @@ public class PeriodicTableHelper
      */
     public static int[] getPosition(Element element)
     {
-        Integer[] cached = layoutCache.get(element);
-        if (cached != null) return new int[] { cached[0], cached[1] };
+        int[] cached = layoutCache.get(element);
+        if (cached != null) return cached;
         
         for (int row = 0; row < layout.length; row++)
         {
@@ -51,9 +51,9 @@ public class PeriodicTableHelper
             }
             if (column != -1)
             {
-                Integer[] result =  new Integer[] { row, column };
+                int[] result =  new int[] { row, column };
                 layoutCache.put(element, result);
-                return new int[] { result[0], result[1] };
+                return result;
             }
         }
         return new int[] { -1, -1 };
