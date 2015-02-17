@@ -1,20 +1,21 @@
 package minechem.recipes;
 
+import minechem.Compendium;
 import minechem.item.prefab.WrapperItem;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 
 public class WrapperRecipe implements IRecipe
 {
-    /**
-     * Used to check if a recipe matches current crafting inventory
-     *
-     * @param crafting
-     * @param world
-     */
+    public WrapperRecipe()
+    {
+        RecipeSorter.register(Compendium.Naming.id + ":wrapper", getClass(), RecipeSorter.Category.SHAPELESS, "after:forge:shapelessore");
+    }
+
     @Override
     public boolean matches(InventoryCrafting crafting, World world)
     {
@@ -57,11 +58,6 @@ public class WrapperRecipe implements IRecipe
         return item;
     }
 
-    /**
-     * Returns an Item that is the result of this recipe
-     *
-     * @param crafting
-     */
     @Override
     public ItemStack getCraftingResult(InventoryCrafting crafting)
     {
@@ -74,9 +70,6 @@ public class WrapperRecipe implements IRecipe
         return result;
     }
 
-    /**
-     * Returns the size of the recipe area
-     */
     @Override
     public int getRecipeSize()
     {
