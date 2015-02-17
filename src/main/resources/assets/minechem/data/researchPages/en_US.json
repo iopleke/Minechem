@@ -18,5 +18,33 @@
     "beryllium": {
         "title": "Beryllium (Be)",
         "content": "I've discovered a lightweight metal with excellent strength and thermal transfer properties. I'll call it Beryllium."
+    },
+    "lighting": {
+        "title": "Lighting",
+        "content": "It appears that adding certain elements to my tools allow them to light up dark areas when I am mining."
+    },
+    "redstone": {
+        "title": "Redstone",
+        "content": "I have found a way to activate my machines without the need for a lever - Redstone augmented tools can be used indefinitely for this purpose."
+    },
+    "tnt": {
+        "title": "Explosive",
+        "content": "I attempted to add explosive chemicals to my tool today, the results are... exciting."
+    },
+    "sharp": {
+        "title": "Sharpness",
+        "content": "I coated my tool with X and found it held an excellent edge."
+    },
+    "flint": {
+        "title": "Flint",
+        "content": "Adding a flintlock to my tool allows me to activate some of the more volatile chemical augments more safely."
+    },
+    "reinforced": {
+        "title": "Reinforced",
+        "content": "Augmenting tools with tough materials seems like a sensible way to increase their lifespan."
+    },
+    "unstable": {
+        "title": "Unstable",
+        "content": "Ack! I had a small misadventure today - it seems applying highly radioactive chemicals to a hand tool is a mistake."
     }
 }
