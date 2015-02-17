@@ -14,7 +14,7 @@ public class AugmentRecipe implements IRecipe
 {
     public AugmentRecipe()
     {
-        RecipeSorter.register(Compendium.Naming.id + ":augment", getClass(), RecipeSorter.Category.SHAPELESS, "after:"+Compendium.Naming.id + ":wrapper");
+        RecipeSorter.register(Compendium.Naming.id + ":augment", getClass(), RecipeSorter.Category.SHAPELESS, "after:" + Compendium.Naming.id + ":wrapper");
     }
 
     @Override
@@ -30,7 +30,7 @@ public class AugmentRecipe implements IRecipe
     private ItemStack getAugmentable(IInventory crafting)
     {
         ItemStack wrapper = null;
-        for (int i = 0; i< crafting.getSizeInventory(); i++)
+        for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
             if (itemStack == null) continue;
@@ -46,11 +46,11 @@ public class AugmentRecipe implements IRecipe
     private ItemStack getItem(IInventory crafting)
     {
         ItemStack item = null;
-        for (int i = 0; i< crafting.getSizeInventory(); i++)
+        for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
             if (itemStack == null) continue;
-            if (AugmentRegistry.getAugment(itemStack)!=null)
+            if (AugmentRegistry.getAugment(itemStack) != null)
             {
                 if (item == null) item = itemStack;
                 else return null;
@@ -67,7 +67,7 @@ public class AugmentRecipe implements IRecipe
         ItemStack item = getItem(crafting);
         if (item == null) return null;
         ItemStack result = augment.copy();
-        ((IAugmentedItem)result.getItem()).setAugment(result,item);
+        ((IAugmentedItem)result.getItem()).setAugment(result, item);
         return result;
     }
 

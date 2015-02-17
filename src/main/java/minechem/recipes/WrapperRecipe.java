@@ -29,7 +29,7 @@ public class WrapperRecipe implements IRecipe
     private ItemStack getWrapper(IInventory crafting)
     {
         ItemStack wrapper = null;
-        for (int i = 0; i< crafting.getSizeInventory(); i++)
+        for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
             if (itemStack == null) continue;
@@ -45,7 +45,7 @@ public class WrapperRecipe implements IRecipe
     private ItemStack getItem(IInventory crafting)
     {
         ItemStack item = null;
-        for (int i = 0; i< crafting.getSizeInventory(); i++)
+        for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
             if (itemStack == null) continue;
@@ -66,7 +66,7 @@ public class WrapperRecipe implements IRecipe
         ItemStack item = getItem(crafting);
         if (item == null) return null;
         ItemStack result = wrapper.copy();
-        ((WrapperItem)result.getItem()).setWrappedItemStack(result,item);
+        ((WrapperItem)result.getItem()).setWrappedItemStack(result, item);
         return result;
     }
 
