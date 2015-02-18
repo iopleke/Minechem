@@ -734,13 +734,13 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
     @Override
     public boolean canInsertItem(int slot, ItemStack itemstack, int side)
     {
-        return Settings.AllowAutomation && slot > 0 && side > 0 && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule);
+        return Settings.AllowAutomation && itemstack!=null && ((slot > 0 && side > 0 && (itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() == MinechemItemsRegistration.molecule)) || (slot == kJournal[0] && this.inventory[slot] == null && itemstack.getItem() == MinechemItemsRegistration.journal));
     }
 
     @Override
     public boolean canExtractItem(int slot, ItemStack itemstack, int side)
     {
-        return Settings.AllowAutomation && side == 0 && slot == 0 && canTakeOutputStack(false);
+        return Settings.AllowAutomation && ((side == 0 && slot == 0 && canTakeOutputStack(false)) || (side != 0 && slot == kJournal[0]));
     }
 
     public String getState()
