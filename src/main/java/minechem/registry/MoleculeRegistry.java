@@ -1,7 +1,10 @@
 package minechem.registry;
 
+import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
+
+import minechem.chemical.Element;
 import minechem.chemical.Molecule;
 
 public class MoleculeRegistry
@@ -57,6 +60,7 @@ public class MoleculeRegistry
      */
     public Molecule getMoleculeByName(String name)
     {
+        if (name == null) return null;
         return nameMoleculeMap.get(name.toLowerCase());
     }
 
@@ -68,7 +72,12 @@ public class MoleculeRegistry
      */
     public Molecule getMoleculeByFormula(String formula)
     {
+        if (formula == null) return null;
         return formulaMoleculeMap.get(formula);
     }
 
+    public Collection<Molecule> getMolecules()
+    {
+        return nameMoleculeMap.values();
+    }
 }

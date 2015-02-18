@@ -5,6 +5,9 @@ import minechem.chemical.Element;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Loyal servant to find your elements and molecules
  */
@@ -43,5 +46,17 @@ public class Jenkins
             chemicalBase = MoleculeRegistry.getInstance().getMoleculeByName(s);
         }
         return (T) chemicalBase;
+    }
+
+    /**
+     * Gets all {@link minechem.chemical.Element}s and {@link minechem.chemical.Molecule}s that are registered
+     * @return a list of all {@link minechem.chemical.ChemicalBase}s registered
+     */
+    public static List<? extends ChemicalBase> getAll()
+    {
+        List<ChemicalBase> all = new ArrayList<ChemicalBase>();
+        all.addAll(ElementRegistry.getInstance().getElements());
+        all.addAll(MoleculeRegistry.getInstance().getMolecules());
+        return all;
     }
 }

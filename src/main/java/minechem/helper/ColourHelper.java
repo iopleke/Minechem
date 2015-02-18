@@ -90,4 +90,45 @@ public class ColourHelper
     {
         return (color >> 16 & 255) / 255.0F;
     }
+
+    /**
+     * Blends given int colours
+     * @param colours an amount of colours
+     * @return the mix int colour value or an IllegalArgumentException if colours is empty
+     */
+    public static int blend(int... colours)
+    {
+        if (colours.length < 1) throw new IllegalArgumentException();
+        
+        int[] alphas = new int[colours.length];
+        int[] reds = new int[colours.length];
+        int[] greens = new int[colours.length];
+        int[] blues = new int[colours.length];
+        
+        for (int i = 0; i < colours.length; i++)
+        {
+            alphas[i] = (colours[i] >> 24 & 0xff);
+            reds[i] = ((colours[i] & 0xff0000) >> 16);
+            greens[i] = ((colours[i] & 0xff00) >> 8);
+            blues[i] = (colours[i] & 0xff);
+        }
+        
+        float a, r, g, b;
+        a = r = g = b = 0;
+        float ratio = 1.0F / colours.length;
+        
+        for (int alpha : alphas)
+            a += alpha * ratio;
+
+        for (int red : reds)
+            r += red * ratio;
+
+        for (int green : greens)
+            g += green * ratio;
+
+        for (int blue : blues)
+            b += blue * ratio;
+
+        return ( ((int)a) << 24 | ((int)r) << 16 | ((int)g) << 8 | ((int)b) );
+    }
 }

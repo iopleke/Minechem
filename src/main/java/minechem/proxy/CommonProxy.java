@@ -34,16 +34,6 @@ public class CommonProxy
         return null;
     }
 
-    /**
-     * Get the current lang code
-     *
-     * @return eg. 'en_US'
-     */
-    public String getCurrentLanguage()
-    {
-        return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
-    }
-
     public String getItemDisplayName(ItemStack newStack)
     {
         return "";
@@ -67,5 +57,20 @@ public class CommonProxy
     public String getCurrentSaveDir()
     {
         return DimensionManager.getCurrentSaveRootDirectory().getAbsolutePath();
+    }
+
+    public void registerResourcesListener()
+    {
+
+    }
+
+    public void registerJournalPages()
+    {
+
+    }
+    
+    public String getCurrentLanguage()
+    {
+        return null;
     }
 }

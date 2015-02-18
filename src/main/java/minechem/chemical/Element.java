@@ -1,7 +1,12 @@
 package minechem.chemical;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import minechem.Compendium;
+import minechem.helper.ColourHelper;
 import minechem.helper.LogHelper;
 
 /**
@@ -102,6 +107,36 @@ public class Element extends ChemicalBase implements Comparable<Element>
     }
 
     @Override
+    public int getColour()
+    {
+        switch (this.type)
+        {
+            case alkaliMetal:
+                return ColourHelper.RGB("#F63FFF");
+            case alkalineEarth:
+                return ColourHelper.RGB("#A84DFF");
+            case transitionMetal:
+                return ColourHelper.RGB("#3DD4FF");
+            case basicMetal:
+                return ColourHelper.RGB("#FFBA50");
+            case semiMetal:
+                return ColourHelper.RGB("#0AFF76");
+            case nonMetal:
+                return ColourHelper.RGB("#329EFF");
+            case halogen:
+                return ColourHelper.RGB("#FFCB08");
+            case nobleGas:
+                return ColourHelper.RGB("#FFD148");
+            case lanthanide:
+                return ColourHelper.RGB("#C2FF00");
+            case actinide:
+                return ColourHelper.RGB("#FF0D0B");
+            default:
+                return Compendium.Color.TrueColor.white;
+        }
+    }
+
+    @Override
     public boolean isElement()
     {
         return true;
@@ -111,6 +146,15 @@ public class Element extends ChemicalBase implements Comparable<Element>
     public String getFormula()
     {
         return this.shortName;
+    }
+
+    @Override
+    public List<String> getToolTip()
+    {
+        List<String> list = new LinkedList<String>();
+        list.add("Form: " + this.form);
+        list.add("Neutrons: " + this.neutrons);
+        return list;
     }
 
     @Override
