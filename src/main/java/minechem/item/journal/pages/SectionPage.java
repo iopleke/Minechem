@@ -1,5 +1,8 @@
 package minechem.item.journal.pages;
 
+import net.afterlifelochie.fontbox.document.Element;
+import net.minecraft.entity.player.EntityPlayer;
+
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -23,7 +26,7 @@ public class SectionPage extends JournalPage
     public SectionPage(String page, String chapter,List<IJournalPage> pageList)
     {
         super(page, chapter);
-        for (IJournalPage jPage : pageList) pages.put(jPage.getPageKey(), jPage);
+        for (IJournalPage jPage : pageList) pages.put(jPage.getPageName(), jPage);
     }
 
     @Override
@@ -54,14 +57,47 @@ public class SectionPage extends JournalPage
     @Override
     public void addSubPage(IJournalPage page)
     {
-        pages.put(page.getPageKey(), page);
+        pages.put(page.getPageName(), page);
     }
 
     @Override
     public int getSubPages()
     {
         int total = pages.size();
-        for (IJournalPage page : pages.values()) total += page.getSubPages();
+        for (IJournalPage page : pages.values())
+        {
+            total += page.getSubPages();
+        }
         return total;
+    }
+
+    public List<Element> getPageElements(EntityPlayer player)
+    {
+        return new ArrayList<Element>(); //TODO: Scan pages, for every unlocked page add a link to the header.
+    }
+
+    @Override
+    public List<Element> getElements(EntityPlayer player)
+    {
+        List<Element> result = new ArrayList<Element>();
+        for (IJournalPage page : pages.values())
+        {
+            result.addAll(page.getElements(player));
+        }
+        if (!result.isEmpty())
+        {
+            result.addAll(0, getPageElements(player));
+        }
+        return result;
+    }
+
+    @Override
+    public boolean isUnlocked(EntityPlayer player)
+    {
+        for (IJournalPage page : pages.values())
+        {
+            if (page.isUnlocked(player)) return true;
+        }
+        return false;
     }
 }

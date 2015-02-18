@@ -11,7 +11,6 @@ import minechem.helper.LogHelper;
 import minechem.item.journal.pages.IJournalPage;
 import minechem.item.journal.pages.SectionPage;
 import minechem.item.journal.pages.TextPage;
-import minechem.registry.ResearchRegistry;
 import org.apache.logging.log4j.Level;
 
 import java.io.IOException;

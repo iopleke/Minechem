@@ -1,5 +1,8 @@
 package minechem.item.journal.pages;
 
+import minechem.registry.ResearchRegistry;
+import net.minecraft.entity.player.EntityPlayer;
+
 import java.util.regex.Pattern;
 
 public abstract class JournalPage implements IJournalPage
@@ -33,7 +36,7 @@ public abstract class JournalPage implements IJournalPage
     }
 
     @Override
-    public final String getPageKey()
+    public final String getPageName()
     {
         return page;
     }
@@ -59,5 +62,11 @@ public abstract class JournalPage implements IJournalPage
     public int getSubPages()
     {
         return 0;
+    }
+
+    @Override
+    public boolean isUnlocked(EntityPlayer player)
+    {
+        return ResearchRegistry.getInstance().hasUnlockedResearch(player, getUnlocalizedKey());
     }
 }
