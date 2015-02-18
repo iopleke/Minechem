@@ -103,8 +103,7 @@ public class Minechem
         LogHelper.debug("Registering ClientProxy Rendering Hooks...");
         proxy.registerRenderers();
 
-        LogHelper.debug("Registering Journal Pages...");
-        JournalHandler.init(proxy.getCurrentLanguage());
+        proxy.registerJournalPages();
 
         LogHelper.debug("Registering Achievements...");
         AchievementHandler.init();
@@ -113,8 +112,7 @@ public class Minechem
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        LogHelper.debug("Registering Resource Reload Listener...");
-        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
+        proxy.registerResourcesListener();
 
         LogHelper.info("Minechem has loaded");
     }

@@ -10,11 +10,15 @@ import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntityRenderer;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntityRenderer;
 import minechem.blocks.LightRenderer;
+import minechem.handler.JournalHandler;
+import minechem.handler.ResourceReloadListener;
+import minechem.helper.LogHelper;
 import minechem.item.chemical.ChemicalItemRenderer;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
 import minechem.registry.ItemRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.world.World;
@@ -50,5 +54,29 @@ public class ClientProxy extends CommonProxy
 
         RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem, new ChemicalItemRenderer());
+    }
+
+    @Override
+    public void registerResourcesListener()
+    {
+        LogHelper.debug("Registering Resource Reload Listener...");
+        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
+    }
+
+    @Override
+    public void registerJournalPages()
+    {
+        LogHelper.debug("Registering Journal Pages...");
+        JournalHandler.init(getCurrentLanguage());
+    }
+
+    /**
+     * Get the current lang code
+     *
+     * @return eg. 'en_US'
+     */
+    public String getCurrentLanguage()
+    {
+        return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
     }
 }

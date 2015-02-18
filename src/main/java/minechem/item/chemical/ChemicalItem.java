@@ -35,15 +35,17 @@ public class ChemicalItem extends BasicItem
     public ChemicalItem()
     {
         super("chemical");
-        liquid = new IIcon[7];
-        gas = new IIcon[7];
-        plasma = new IIcon[1];
+        
     }
 
     @Override
+    @SideOnly(Side.CLIENT)
     public void registerIcons(IIconRegister iconRegister)
     {
         super.registerIcons(iconRegister);
+        liquid = new IIcon[7];
+        gas = new IIcon[7];
+        plasma = new IIcon[1];
         tube = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_tube");
         dust = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_dust");
         moleculeSymbol = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_molecule");
