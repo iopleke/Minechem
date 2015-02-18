@@ -54,4 +54,10 @@ public abstract class JournalPage implements IJournalPage
     public void addSubPage(IJournalPage page)
     {
     }
+
+    @Override
+    public int getSubPages()
+    {
+        return 0;
+    }
 }

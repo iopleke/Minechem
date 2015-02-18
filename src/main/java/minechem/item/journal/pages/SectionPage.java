@@ -56,4 +56,12 @@ public class SectionPage extends JournalPage
     {
         pages.put(page.getPageKey(), page);
     }
+
+    @Override
+    public int getSubPages()
+    {
+        int total = pages.size();
+        for (IJournalPage page : pages.values()) total += page.getSubPages();
+        return total;
+    }
 }

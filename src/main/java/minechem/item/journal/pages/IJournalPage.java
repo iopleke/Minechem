@@ -13,4 +13,6 @@ public interface IJournalPage
     void addSubPage(IJournalPage page);
 
     void setChapter(String chapter);
+
+    int getSubPages();
 }

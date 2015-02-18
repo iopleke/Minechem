@@ -1,0 +1,14 @@
+{
+	"elements":{
+		"section":{
+			"hydrogen":{
+			},
+			"helium":{
+			}
+		}
+	},
+	"machines":{
+			"microscope":{
+			}
+	}
+}
