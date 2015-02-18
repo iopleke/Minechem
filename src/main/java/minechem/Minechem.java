@@ -82,6 +82,7 @@ public class Minechem
         LogHelper.debug("Registering Event Handlers...");
         proxy.registerEventHandlers();
 
+        JournalRegistry.init();
     }
 
     @EventHandler
