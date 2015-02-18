@@ -1,6 +1,8 @@
 package minechem.item.journal.pages;
 
+import minechem.helper.LocalizationHelper;
 import net.afterlifelochie.fontbox.document.Element;
+import net.afterlifelochie.fontbox.document.Heading;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;
@@ -73,7 +75,13 @@ public class SectionPage extends JournalPage
 
     public List<Element> getPageElements(EntityPlayer player)
     {
-        return new ArrayList<Element>(); //TODO: Scan pages, for every unlocked page add a link to the header.
+        List<Element> result = new ArrayList<Element>();
+        result.add(new Heading(getUnlocalizedKey(), LocalizationHelper.getLocalString(getUnlocalizedKey() + ".title")));
+        for (IJournalPage page : pages.values())
+        {
+            if (page.isUnlocked(player)); //TODO: for every unlocked page add a link.
+        }
+        return result; 
     }
 
     @Override
