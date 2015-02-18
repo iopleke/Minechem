@@ -1,6 +1,6 @@
 [submodule "src/main/java/fontboxsub"]
 	path = src/main/java/fontboxsub
 	url = git@github.com:jakimfett/fontbox.git
-[submodule "src/main/java/fontbox"]
-	path = src/main/java/fontbox
+[submodule "src/fontbox"]
+	path = src/fontbox
 	url = git@github.com:jakimfett/fontbox.git

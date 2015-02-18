@@ -1,12 +1,11 @@
 package minechem.item.journal;
 
 import codechicken.lib.gui.GuiDraw;
-import fontbox.PageBox;
 import minechem.Compendium;
-import minechem.helper.FontBoxHelper;
-import minechem.helper.LocalizationHelper;
 import minechem.helper.LogHelper;
 import minechem.registry.ResearchRegistry;
+import net.afterlifelochie.fontbox.layout.Page;
+import net.afterlifelochie.fontbox.layout.PageProperties;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -17,13 +16,13 @@ import org.lwjgl.opengl.GL11;
 public class JournalGUI extends GuiScreen
 {
     private String[] authorList;
-    private PageBox[] currentPages, currentTitles;
+    private Page[] currentPages, currentTitles;
     private int displayPage; // the left page
     private JournalPage[] pageIndex;
     private int top, left;
 
-    private FontBoxHelper.PageBoxMetrics pageMetrics;
-    private FontBoxHelper.PageBoxMetrics titleMetrics;
+    private PageProperties pageMetrics;
+    private PageProperties titleMetrics;
 
     private boolean pageChanged = false;
 
@@ -36,10 +35,10 @@ public class JournalGUI extends GuiScreen
     {
         pageIndex = ResearchRegistry.getInstance().getResearchPages(knowledgeKeys);
         authorList = authors;
-        currentPages = new PageBox[2];
-        currentTitles = new PageBox[2];
-        pageMetrics = new FontBoxHelper.PageBoxMetrics(220, 800, 5, 0, 5, 30);
-        titleMetrics = new FontBoxHelper.PageBoxMetrics(230, 100, 5, 0, 5, 30);
+        currentPages = new Page[2];
+        currentTitles = new Page[2];
+        pageMetrics = new PageProperties(220, 800, 5, 0, 5, 30);
+        titleMetrics = new PageProperties(230, 100, 5, 0, 5, 30);
         displayPage = 0;
         markDirty();
     }
@@ -83,10 +82,10 @@ public class JournalGUI extends GuiScreen
      */
     private void drawPages()
     {
-        FontBoxHelper.renderPageBox(currentPages[0], 10, 30, zLevel);
-        FontBoxHelper.renderPageBox(currentTitles[0], 20, 10, zLevel);
-        FontBoxHelper.renderPageBox(currentPages[1], 10 + 128, 30, zLevel);
-        FontBoxHelper.renderPageBox(currentTitles[1], 20 + 128, 10, zLevel);
+//        FontBoxHelper.renderPageBox(currentPages[0], 10, 30, zLevel);
+//        FontBoxHelper.renderPageBox(currentTitles[0], 20, 10, zLevel);
+//        FontBoxHelper.renderPageBox(currentPages[1], 10 + 128, 30, zLevel);
+//        FontBoxHelper.renderPageBox(currentTitles[1], 20 + 128, 10, zLevel);
     }
 
     @Override
@@ -102,7 +101,7 @@ public class JournalGUI extends GuiScreen
 
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glTranslatef(left = width / 2 - 128,top = height / 2 - 94, 0.0f);
+        GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
         GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
 
         drawJournalBackground();
@@ -221,35 +220,35 @@ public class JournalGUI extends GuiScreen
         {
             displayPage -= 1;
         }
-        currentPages[0] = FontBoxHelper.boxText("", pageMetrics);
-        currentTitles[0] = FontBoxHelper.boxText("", titleMetrics);
-        currentPages[1] = FontBoxHelper.boxText("", pageMetrics);
-        currentTitles[1] = FontBoxHelper.boxText("", titleMetrics);
-        if (displayPage < 2)
-        {
-            String sAuthors = "";
-            for (String author : authorList)
-            {
-                sAuthors += "- " + author + "\n";
-            }
-            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageMetrics);
-            currentTitles[0] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":", titleMetrics);
-            String sIndex = "";
-            for (JournalPage page : pageIndex)
-            {
-                sIndex += page + "\n";
-            }
-            currentPages[1] = FontBoxHelper.boxText(sIndex, pageMetrics);
-            currentTitles[1] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.index"), titleMetrics);
-        } else
-        {
-            currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].content, pageMetrics);
-            currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].title, titleMetrics);
-            if (displayPage - 1 < pageIndex.length)
-            {
-                currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].content, pageMetrics);
-                currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleMetrics);
-            }
-        }
+//        currentPages[0] = FontBoxHelper.boxText("", pageMetrics);
+//        currentTitles[0] = FontBoxHelper.boxText("", titleMetrics);
+//        currentPages[1] = FontBoxHelper.boxText("", pageMetrics);
+//        currentTitles[1] = FontBoxHelper.boxText("", titleMetrics);
+//        if (displayPage < 2)
+//        {
+//            String sAuthors = "";
+//            for (String author : authorList)
+//            {
+//                sAuthors += "- " + author + "\n";
+//            }
+//            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageMetrics);
+//            currentTitles[0] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":", titleMetrics);
+//            String sIndex = "";
+//            for (JournalPage page : pageIndex)
+//            {
+//                sIndex += page + "\n";
+//            }
+//            currentPages[1] = FontBoxHelper.boxText(sIndex, pageMetrics);
+//            currentTitles[1] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.index"), titleMetrics);
+//        } else
+//        {
+//            currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].content, pageMetrics);
+//            currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].title, titleMetrics);
+//            if (displayPage - 1 < pageIndex.length)
+//            {
+//                currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].content, pageMetrics);
+//                currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleMetrics);
+//            }
+//        }
     }
 }
