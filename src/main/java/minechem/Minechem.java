@@ -65,6 +65,13 @@ public class Minechem
         LogHelper.debug("Setting up ModMetaData");
         metadata = Compendium.MetaData.init(metadata);
 
+        // Register Elements and Molecules before constructing items
+        LogHelper.debug("Registering Elements...");
+        ElementHandler.init();
+
+        LogHelper.debug("Registering Molecules...");
+        MoleculeHandler.init();
+
         // Register items and blocks.
         LogHelper.debug("Registering Items...");
         ItemRegistry.init();
@@ -95,12 +102,6 @@ public class Minechem
 
         LogHelper.debug("Registering ClientProxy Rendering Hooks...");
         proxy.registerRenderers();
-
-        LogHelper.debug("Registering Elements...");
-        ElementHandler.init();
-
-        LogHelper.debug("Registering Molecules...");
-        MoleculeHandler.init();
 
         LogHelper.debug("Registering Journal Pages...");
         JournalHandler.init(proxy.getCurrentLanguage());

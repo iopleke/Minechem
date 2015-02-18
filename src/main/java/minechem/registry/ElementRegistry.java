@@ -80,6 +80,7 @@ public class ElementRegistry
      */
     public Element getElement(String abbr)
     {
+        if (abbr == null) return null;
         return abbrElementMap.get(abbr);
     }
 
@@ -91,6 +92,7 @@ public class ElementRegistry
      */
     public Element getElementByName(String fullName)
     {
+        if (fullName == null) return null;
         return nameElementMap.get(fullName.toLowerCase());
     }
 

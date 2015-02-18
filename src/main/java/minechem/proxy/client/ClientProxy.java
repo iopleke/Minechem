@@ -10,8 +10,10 @@ import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntityRenderer;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntityRenderer;
 import minechem.blocks.LightRenderer;
+import minechem.item.chemical.ChemicalItemRenderer;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
+import minechem.registry.ItemRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -47,5 +49,6 @@ public class ClientProxy extends CommonProxy
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
 
         RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
+        MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem, new ChemicalItemRenderer());
     }
 }

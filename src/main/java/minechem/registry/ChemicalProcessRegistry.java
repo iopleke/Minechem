@@ -13,13 +13,13 @@ import minechem.chemical.ChemicalBase;
 import minechem.chemical.process.ChemicalProcess;
 import minechem.chemical.process.ChemicalProcessComboType;
 import minechem.chemical.process.ChemicalProcessType;
+import minechem.collections.ItemStackMap;
 import net.minecraft.item.ItemStack;
 
 public class ChemicalProcessRegistry
 {
     private static ChemicalProcessRegistry instance;
-    // TODO: change this key to something that does work
-    private Map<ItemStack, Map<ChemicalProcessType, Set<ChemicalProcess>>> itemProcessMap;
+    private ItemStackMap<Map<ChemicalProcessType, Set<ChemicalProcess>>> itemProcessMap;
     private Map<ChemicalProcessType, String> processTypes;
     private Map<String, ChemicalProcessType> processNames;
 
@@ -34,7 +34,7 @@ public class ChemicalProcessRegistry
 
     private ChemicalProcessRegistry()
     {
-        itemProcessMap = new HashMap<ItemStack, Map<ChemicalProcessType, Set<ChemicalProcess>>>();
+        itemProcessMap = new ItemStackMap<Map<ChemicalProcessType, Set<ChemicalProcess>>>();
         processNames = new TreeMap<String, ChemicalProcessType>();
         processTypes = new HashMap<ChemicalProcessType, String>();
     }
