@@ -1,0 +1,21 @@
+{
+  "elements": {
+	"section": {
+	  "hydrogen": {
+		"text": null,
+		"picture": {
+		  "image": "test",
+		  "height": 50,
+		  "width": 40
+		},
+		"unlockText": "elements.helium"
+	  },
+	  "helium": {
+	  }
+	}
+  },
+  "machines": {
+	"microscope": {
+	}
+  }
+}
