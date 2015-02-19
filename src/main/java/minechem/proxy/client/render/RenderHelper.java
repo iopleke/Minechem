@@ -12,7 +12,7 @@ public class RenderHelper
     {
         GL11.glColor4f(ColourHelper.getRed(colour), ColourHelper.getGreen(colour), ColourHelper.getBlue(colour), ColourHelper.getAlpha(colour));
     }
-    
+
     public static void resetOpenGLColour()
     {
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
@@ -41,7 +41,7 @@ public class RenderHelper
         float scale = 0.7F;
         GL11.glPushMatrix();
         GL11.glScalef(scale, scale, scale);
-        GL11.glTranslatef(-scale/2, -scale/2, 0.0F);
+        GL11.glTranslatef(-scale / 2, -scale / 2, 0.0F);
         ItemRenderer.renderItemIn2D(tessellator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(), texture.getIconWidth(), texture.getIconHeight(), .0625F);
         GL11.glPopMatrix();
     }

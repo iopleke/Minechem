@@ -12,11 +12,20 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.handler.*;
+import minechem.handler.AchievementHandler;
+import minechem.handler.ElementHandler;
+import minechem.handler.GuiHandler;
+import minechem.handler.JournalHandler;
+import minechem.handler.MessageHandler;
+import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
-import minechem.registry.*;
-
+import minechem.registry.AugmentRegistry;
+import minechem.registry.BlockRegistry;
+import minechem.registry.CreativeTabRegistry;
+import minechem.registry.ItemRegistry;
+import minechem.registry.JournalRegistry;
+import minechem.registry.RecipeRegistry;
 
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem

@@ -12,14 +12,14 @@ public class AugmentReinforced extends AugmentBase
     @Override
     public int getVolumeConsumed(int level)
     {
-        return level*4 + 1;
+        return level * 4 + 1;
     }
 
     @Override
     public float setDamageChance(ItemStack stack, int level)
     {
-        consumeAugment(stack,level);
-        return (level+1)*0.08F;
+        consumeAugment(stack, level);
+        return (level + 1) * 0.08F;
     }
 
     @Override

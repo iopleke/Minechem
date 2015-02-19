@@ -29,6 +29,6 @@ public class JournalImage extends JournalElement
     @Override
     public Element getElement(EntityPlayer player)
     {
-        return isUnlocked(player,getKey())? element : null;
+        return isUnlocked(player, getKey()) ? element : null;
     }
 }

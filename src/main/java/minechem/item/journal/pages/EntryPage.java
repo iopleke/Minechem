@@ -1,13 +1,12 @@
 package minechem.item.journal.pages;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import minechem.item.journal.pages.elements.IJournalElement;
 import minechem.item.journal.pages.elements.JournalHeader;
 import net.afterlifelochie.fontbox.document.Element;
 import net.minecraft.entity.player.EntityPlayer;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class EntryPage extends JournalPage
 {
@@ -21,7 +20,10 @@ public class EntryPage extends JournalPage
     public EntryPage(String page, String chapter, List<IJournalElement> elements)
     {
         super(page, chapter);
-        if (elements.size() == 0 || !(elements.get(0) instanceof JournalHeader)) elements.add(0, new JournalHeader(getUnlocalizedKey()));
+        if (elements.size() == 0 || !(elements.get(0) instanceof JournalHeader))
+        {
+            elements.add(0, new JournalHeader(getUnlocalizedKey()));
+        }
         this.elements = elements;
     }
 
@@ -34,7 +36,10 @@ public class EntryPage extends JournalPage
             for (IJournalElement element : elements)
             {
                 Element e = element.getElement(player);
-                if (e != null) result.add(e);
+                if (e != null)
+                {
+                    result.add(e);
+                }
             }
         }
         return result;

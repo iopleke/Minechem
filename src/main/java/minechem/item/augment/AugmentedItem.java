@@ -1,9 +1,10 @@
 package minechem.item.augment;
 
 import com.google.common.collect.Multimap;
-
-import java.util.*;
-
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
 import minechem.Compendium;
 import minechem.item.augment.augments.IAugment;
 import minechem.item.prefab.WrapperItem;
@@ -34,7 +35,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public boolean isWrappable(ItemStack stack)
     {
-        return stack.getItem().isItemTool(stack) && !(stack.getItem() instanceof WrapperItem) && getWrappedItemStack(stack)==null;
+        return stack.getItem().isItemTool(stack) && !(stack.getItem() instanceof WrapperItem) && getWrappedItemStack(stack) == null;
     }
 
     @Override
@@ -58,7 +59,6 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     }
 
     //#############################Augmented Item Stuff##########################################################
-
     @Override
     public boolean hasAugment(ItemStack item, IAugment augment)
     {
@@ -68,7 +68,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public boolean canHaveAugment(ItemStack item, IAugment augment)
     {
-        return this.getWrappedItemStack(item)!=null && !this.hasAugment(item, augment);
+        return this.getWrappedItemStack(item) != null && !this.hasAugment(item, augment);
     }
 
     @Override
@@ -81,7 +81,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
             for (int i = 0; i < augments.tagCount(); i++)
             {
                 String key = augments.getStringTagAt(i);
-                result.put(AugmentRegistry.getAugment(key), (int)stack.getTagCompound().getCompoundTag(key).getByte(level));
+                result.put(AugmentRegistry.getAugment(key), (int) stack.getTagCompound().getCompoundTag(key).getByte(level));
             }
         }
         return result;
@@ -123,7 +123,10 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public boolean setAugment(ItemStack item, ItemStack augmentItem)
     {
         IAugment augment = AugmentRegistry.getAugment(augmentItem);
-        if (augment == null) return false;
+        if (augment == null)
+        {
+            return false;
+        }
         if (!item.hasTagCompound())
         {
             item.setTagCompound(new NBTTagCompound());
@@ -134,11 +137,11 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
         {
             NBTTagList augments = tagCompound.getTagList(augmentList, Compendium.NBTTags.tagString);
             augments.appendTag(new NBTTagString(augmentKey));
-            tagCompound.setTag(augmentList,augments);
+            tagCompound.setTag(augmentList, augments);
             NBTTagCompound augmentTag = new NBTTagCompound();
-            augmentTag.setTag(Compendium.NBTTags.item,augmentItem.writeToNBT(new NBTTagCompound()));
-            augmentTag.setByte(this.level, (byte)0);
-            tagCompound.setTag(augmentKey,augmentTag);
+            augmentTag.setTag(Compendium.NBTTags.item, augmentItem.writeToNBT(new NBTTagCompound()));
+            augmentTag.setByte(this.level, (byte) 0);
+            tagCompound.setTag(augmentKey, augmentTag);
             return true;
         }
         return false;
@@ -150,7 +153,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
         String augmentKey = augment.getKey();
         if (item.getTagCompound().hasKey(augmentKey, Compendium.NBTTags.tagCompound))
         {
-            item.getTagCompound().getCompoundTag(augmentKey).setByte(this.level, (byte)level);
+            item.getTagCompound().getCompoundTag(augmentKey).setByte(this.level, (byte) level);
             return true;
         }
         return false;
@@ -159,7 +162,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     @Override
     public int getAugmentLevel(ItemStack item, IAugment augment)
     {
-        return hasAugment(item, augment)? item.getTagCompound().getCompoundTag(augment.getKey()).getByte(this.level) : -1;
+        return hasAugment(item, augment) ? item.getTagCompound().getCompoundTag(augment.getKey()).getByte(this.level) : -1;
     }
 
     @Override
@@ -168,18 +171,17 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
         super.addInformation(stack, player, list, bool);
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) //TODO: Change this to display more useful data
         {
-            list.add(StatCollector.translateToLocal("augment."+entry.getKey().getKey())+ ": "+ entry.getKey().getUsableLevel(stack,entry.getValue()));
+            list.add(StatCollector.translateToLocal("augment." + entry.getKey().getKey()) + ": " + entry.getKey().getUsableLevel(stack, entry.getValue()));
         }
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack stack)
     {
-        return (getWrappedItemStack(stack) != null? StatCollector.translateToLocal("augment.augmentedItem") + " " : "") + super.getItemStackDisplayName(stack);
+        return (getWrappedItemStack(stack) != null ? StatCollector.translateToLocal("augment.augmentedItem") + " " : "") + super.getItemStackDisplayName(stack);
     }
 
     //################################Augment Effect Stuff####################################
-
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase)
     {

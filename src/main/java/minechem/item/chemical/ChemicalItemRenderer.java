@@ -1,5 +1,7 @@
 package minechem.item.chemical;
 
+import java.util.LinkedList;
+import java.util.List;
 import minechem.chemical.ChemicalBase;
 import minechem.chemical.Element;
 import minechem.helper.MathHelper;
@@ -13,13 +15,10 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
 
-import java.util.LinkedList;
-import java.util.List;
-
 public class ChemicalItemRenderer implements IItemRenderer
 {
     private final Font font = new Font(8);
-    
+
     @Override
     public boolean handleRenderType(ItemStack item, ItemRenderType type)
     {
@@ -82,8 +81,13 @@ public class ChemicalItemRenderer implements IItemRenderer
                 layers.add(new IconLayer(item.plasma[frame], true));
                 break;
         }
-        if (chemicalBase.isElement()) layers.add(new TextLayer(((Element)chemicalBase).shortName, false, font));
-        else layers.add(new IconLayer(item.moleculeSymbol, false));
+        if (chemicalBase.isElement())
+        {
+            layers.add(new TextLayer(((Element) chemicalBase).shortName, false, font));
+        } else
+        {
+            layers.add(new IconLayer(item.moleculeSymbol, false));
+        }
         switch (type)
         {
             case INVENTORY:
@@ -117,20 +121,26 @@ public class ChemicalItemRenderer implements IItemRenderer
     private void renderItemInInventory(ChemicalBase chemicalBase, ILayer... layers)
     {
         for (ILayer layer : layers)
+        {
             layer.render(5, chemicalBase.getColour());
+        }
     }
 
     private void renderItemInEquipped(ChemicalBase chemicalBase, ILayer... layers)
     {
         for (ILayer layer : layers)
+        {
             layer.render2D(chemicalBase.getColour());
+        }
     }
 
     private void renderItemAsEntity(ChemicalBase chemicalBase, ILayer... layers)
     {
         GL11.glPushMatrix();
         for (ILayer layer : layers)
+        {
             layer.render3D(chemicalBase.getColour());
+        }
         GL11.glPopMatrix();
     }
 }

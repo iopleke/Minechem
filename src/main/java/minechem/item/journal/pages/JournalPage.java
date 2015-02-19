@@ -1,9 +1,8 @@
 package minechem.item.journal.pages;
 
+import java.util.regex.Pattern;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.entity.player.EntityPlayer;
-
-import java.util.regex.Pattern;
 
 public abstract class JournalPage implements IJournalPage
 {
@@ -38,7 +37,10 @@ public abstract class JournalPage implements IJournalPage
     @Override
     public IJournalPage getPage(String key)
     {
-        if (key.equals(page)) return this;
+        if (key.equals(page))
+        {
+            return this;
+        }
         return null;
     }
 

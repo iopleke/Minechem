@@ -3,8 +3,8 @@ package minechem.helper;
 /**
  * Helper class for RGB color values
  *
- * getRed/getBlue/getGreen returns the RGB from a {@link minechem.Compendium.Color.TrueColor} value eg: getBlue(Compendium.TrueColor.green) returns 0.0F getGreen(Compendium.TrueColor.green) returns 1.0F
- * getRed(Compendium.TrueColor.green) returns 0.0F
+ * getRed/getBlue/getGreen returns the RGB from a {@link minechem.Compendium.Color.TrueColor} value eg: getBlue(Compendium.TrueColor.green) returns 0.0F getGreen(Compendium.TrueColor.green) returns
+ * 1.0F getRed(Compendium.TrueColor.green) returns 0.0F
  */
 public class ColourHelper
 {
@@ -29,7 +29,10 @@ public class ColourHelper
      */
     public static int RGB(String colour)
     {
-        if (!colour.startsWith("#") || !(colour.length() == 7)) throw new IllegalArgumentException("Use #RRGGBB format");
+        if (!colour.startsWith("#") || !(colour.length() == 7))
+        {
+            throw new IllegalArgumentException("Use #RRGGBB format");
+        }
         return RGB(Integer.parseInt(colour.substring(1, 3), 16), Integer.parseInt(colour.substring(3, 5), 16), Integer.parseInt(colour.substring(5, 7), 16));
     }
 
@@ -93,18 +96,22 @@ public class ColourHelper
 
     /**
      * Blends given int colours
+     *
      * @param colours an amount of colours
      * @return the mix int colour value or an IllegalArgumentException if colours is empty
      */
     public static int blend(int... colours)
     {
-        if (colours.length < 1) throw new IllegalArgumentException();
-        
+        if (colours.length < 1)
+        {
+            throw new IllegalArgumentException();
+        }
+
         int[] alphas = new int[colours.length];
         int[] reds = new int[colours.length];
         int[] greens = new int[colours.length];
         int[] blues = new int[colours.length];
-        
+
         for (int i = 0; i < colours.length; i++)
         {
             alphas[i] = (colours[i] >> 24 & 0xff);
@@ -112,23 +119,31 @@ public class ColourHelper
             greens[i] = ((colours[i] & 0xff00) >> 8);
             blues[i] = (colours[i] & 0xff);
         }
-        
+
         float a, r, g, b;
         a = r = g = b = 0;
         float ratio = 1.0F / colours.length;
-        
+
         for (int alpha : alphas)
+        {
             a += alpha * ratio;
+        }
 
         for (int red : reds)
+        {
             r += red * ratio;
+        }
 
         for (int green : greens)
+        {
             g += green * ratio;
+        }
 
         for (int blue : blues)
+        {
             b += blue * ratio;
+        }
 
-        return ( ((int)a) << 24 | ((int)r) << 16 | ((int)g) << 8 | ((int)b) );
+        return (((int) a) << 24 | ((int) r) << 16 | ((int) g) << 8 | ((int) b));
     }
 }

@@ -20,10 +20,16 @@ public class WrapperRecipe implements IRecipe
     public boolean matches(InventoryCrafting crafting, World world)
     {
         ItemStack wrapper = getWrapper(crafting);
-        if (wrapper == null) return false;
+        if (wrapper == null)
+        {
+            return false;
+        }
         ItemStack item = getItem(crafting);
-        if (item == null) return false;
-        return ((WrapperItem)wrapper.getItem()).isWrappable(item);
+        if (item == null)
+        {
+            return false;
+        }
+        return ((WrapperItem) wrapper.getItem()).isWrappable(item);
     }
 
     private ItemStack getWrapper(IInventory crafting)
@@ -32,11 +38,19 @@ public class WrapperRecipe implements IRecipe
         for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
-            if (itemStack == null) continue;
+            if (itemStack == null)
+            {
+                continue;
+            }
             if (itemStack.getItem() instanceof WrapperItem)
             {
-                if (wrapper == null) wrapper = itemStack;
-                else return null;
+                if (wrapper == null)
+                {
+                    wrapper = itemStack;
+                } else
+                {
+                    return null;
+                }
             }
         }
         return wrapper;
@@ -48,11 +62,19 @@ public class WrapperRecipe implements IRecipe
         for (int i = 0; i < crafting.getSizeInventory(); i++)
         {
             ItemStack itemStack = crafting.getStackInSlot(i);
-            if (itemStack == null) continue;
+            if (itemStack == null)
+            {
+                continue;
+            }
             if (!(itemStack.getItem() instanceof WrapperItem))
             {
-                if (item == null) item = itemStack;
-                else return null;
+                if (item == null)
+                {
+                    item = itemStack;
+                } else
+                {
+                    return null;
+                }
             }
         }
         return item;
@@ -62,11 +84,17 @@ public class WrapperRecipe implements IRecipe
     public ItemStack getCraftingResult(InventoryCrafting crafting)
     {
         ItemStack wrapper = getWrapper(crafting);
-        if (wrapper == null) return null;
+        if (wrapper == null)
+        {
+            return null;
+        }
         ItemStack item = getItem(crafting);
-        if (item == null) return null;
+        if (item == null)
+        {
+            return null;
+        }
         ItemStack result = wrapper.copy();
-        ((WrapperItem)result.getItem()).setWrappedItemStack(result, item);
+        ((WrapperItem) result.getItem()).setWrappedItemStack(result, item);
         return result;
     }
 

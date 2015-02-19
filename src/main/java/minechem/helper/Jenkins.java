@@ -1,13 +1,12 @@
 package minechem.helper;
 
+import java.util.ArrayList;
+import java.util.List;
 import minechem.chemical.ChemicalBase;
 import minechem.chemical.Element;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
 import net.minecraft.item.ItemStack;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Loyal servant to find your elements and molecules
@@ -56,6 +55,7 @@ public class Jenkins
 
     /**
      * Gets all {@link minechem.chemical.Element}s and {@link minechem.chemical.Molecule}s that are registered
+     *
      * @return a list of all {@link minechem.chemical.ChemicalBase}s registered
      */
     public static List<? extends ChemicalBase> getAll()

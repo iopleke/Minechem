@@ -2,10 +2,12 @@ package minechem.item.chemical;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import minechem.Compendium;
 import minechem.chemical.ChemicalBase;
 import minechem.helper.Jenkins;
 import minechem.item.prefab.BasicItem;
+import minechem.registry.CreativeTabRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -13,8 +15,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-
-import java.util.List;
 
 public class ChemicalItem extends BasicItem
 {
@@ -30,12 +30,13 @@ public class ChemicalItem extends BasicItem
     @SideOnly(Side.CLIENT)
     public IIcon[] gas;
     @SideOnly(Side.CLIENT)
-    public IIcon[] plasma; // TODO: add icons for plasma
-    
+    public IIcon[] plasma;
+
     public ChemicalItem()
     {
         super("chemical");
-        
+        setCreativeTab(CreativeTabRegistry.TAB_CHEMICALS);
+
     }
 
     @Override
@@ -46,24 +47,33 @@ public class ChemicalItem extends BasicItem
         liquid = new IIcon[7];
         gas = new IIcon[7];
         plasma = new IIcon[1];
-        tube = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_tube");
+        tube = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString);
         dust = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_dust");
         moleculeSymbol = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_molecule");
         for (int i = 0; i < liquid.length; i++)
-            liquid[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_liquid" + (i+1));
+        {
+            liquid[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_liquid" + (i + 1));
+        }
         for (int i = 0; i < gas.length; i++)
-            gas[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_gas" + (i+1));
+        {
+            gas[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_gas" + (i + 1));
+        }
         for (int i = 0; i < plasma.length; i++)
-            plasma[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_plasma" + (i+1));
+        {
+            plasma[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_plasma" + (i + 1));
+        }
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack)
     {
         if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("fullName"))
+        {
             return itemStack.getTagCompound().getString("fullName");
-        else
+        } else
+        {
             return "Generic ChemicalItem";
+        }
     }
 
     @Override
@@ -72,7 +82,9 @@ public class ChemicalItem extends BasicItem
         super.addInformation(itemStack, player, tooltip, bool);
         ChemicalBase chemicalBase = getChemicalBase(itemStack);
         if (chemicalBase != null)
+        {
             tooltip.addAll(chemicalBase.getToolTip());
+        }
     }
 
     @Override

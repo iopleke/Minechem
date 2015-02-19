@@ -19,19 +19,18 @@ public class MinechemHooks
             RenderHelper.setOpenGLColour(colour);
         }
     }
-    
+
     public static void resetGreyscale(float greyscale)
     {
         GL11.glColor4f(greyscale, greyscale, greyscale, 1.0F);
     }
-    
+
     public static void drawIconAchievement(RenderItem renderItem, FontRenderer fontRenderer, TextureManager textureManager, final ItemStack itemStack, int x, int y, Achievement achievement)
     {
         if (achievement instanceof IAchievementRenderer && ((IAchievementRenderer) achievement).hasSpecialIconRenderer())
         {
             ((IAchievementRenderer) achievement).renderIcon(fontRenderer, textureManager, itemStack, x, y);
-        }
-        else
+        } else
         {
             renderItem.renderItemAndEffectIntoGUI(fontRenderer, textureManager, itemStack, x, y);
         }
