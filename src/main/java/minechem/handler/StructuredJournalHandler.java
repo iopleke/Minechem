@@ -24,6 +24,7 @@ import minechem.item.journal.pages.elements.IJournalElement;
 import minechem.item.journal.pages.elements.JournalImage;
 import minechem.item.journal.pages.elements.JournalText;
 import minechem.registry.JournalRegistry;
+import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.property.AlignmentMode;
 import net.afterlifelochie.fontbox.document.property.FloatMode;
 import net.minecraft.block.Block;
@@ -60,27 +61,27 @@ public class StructuredJournalHandler
         JsonReader jReader = new JsonReader(new InputStreamReader(inputStream));
         JsonParser parser = new JsonParser();
 
-        IJournalPage testJournal = getPageFromJSONObject("", "", parser.parse(jReader).getAsJsonObject());
-        if (testJournal instanceof SectionPage)
-        {
+        SectionPage journal = getJournal(parser.parse(jReader).getAsJsonObject());
+        LogHelper.info("Total of " + journal.getSubPages() + " pages registered");
+        JournalRegistry.journal = journal;
+    }
 
-            SectionPage journal = (SectionPage) testJournal;
-            LogHelper.info("Total of " + journal.getSubPages() + " pages registered");
-            JournalRegistry.journal = journal;
+    public static SectionPage getJournal(JsonObject object)
+    {
+        SectionPage result  = new SectionPage("");
+        for (IJournalPage page : getPagesFromJsonObject("", object))
+        {
+            result.addSubPage(page);
         }
+        return result;
     }
 
     public static IJournalPage getPageFromJSONObject(String name, String chapter, JsonObject object)
     {
-        IJournalPage result = new SectionPage(name);
-        if ("journal".equals(name) && chapter.isEmpty())
+        IJournalPage result;
+        if (object.has("section"))
         {
-            for (IJournalPage page : getPagesFromJsonObject("", object))
-            {
-                result.addSubPage(page);
-            }
-        } else if (object.has("section"))
-        {
+            result  = new SectionPage(name, chapter,  new ArrayList<IJournalPage>());
             for (IJournalPage page : getPagesFromJsonObject((chapter.isEmpty() ? "" : chapter + ".") + name, object.getAsJsonObject("section")))
             {
                 result.addSubPage(page);
@@ -98,11 +99,18 @@ public class StructuredJournalHandler
         List<IJournalPage> pages = new ArrayList<IJournalPage>();
         for (Map.Entry<String, JsonElement> pageEntry : object.entrySet())
         {
-            if (!pageEntry.getValue().isJsonObject())
+            if (pageEntry.getValue().isJsonNull())
+            {
+                pages.add(new EntryPage(pageEntry.getKey(),chapter,new JournalText(chapter + "." + pageEntry.getKey())));
+            }
+            else if (!pageEntry.getValue().isJsonObject())
             {
                 continue;
             }
-            pages.add(getPageFromJSONObject(pageEntry.getKey(), chapter, pageEntry.getValue().getAsJsonObject()));
+            else
+            {
+                pages.add(getPageFromJSONObject(pageEntry.getKey(), chapter, pageEntry.getValue().getAsJsonObject()));
+            }
         }
         return pages;
     }

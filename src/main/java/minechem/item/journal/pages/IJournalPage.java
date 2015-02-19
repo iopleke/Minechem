@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface IJournalPage
 {
-    String getUnlocalizedKey();
+    String getPageKey();
 
     IJournalPage getPage(String key);
 

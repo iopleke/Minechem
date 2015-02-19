@@ -5,14 +5,14 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
-import minechem.helper.LocalizationHelper;
+import minechem.item.journal.pages.elements.JournalHeader;
 import net.afterlifelochie.fontbox.document.Element;
-import net.afterlifelochie.fontbox.document.Heading;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class SectionPage extends JournalPage
 {
     private final Map<String, IJournalPage> pages = new LinkedHashMap<String, IJournalPage>();
+    JournalHeader heading;
 
     public SectionPage(String page)
     {
@@ -31,6 +31,7 @@ public class SectionPage extends JournalPage
         {
             pages.put(jPage.getPageName(), jPage);
         }
+        heading = new JournalHeader(getPageKey());
     }
 
     @Override
@@ -81,7 +82,7 @@ public class SectionPage extends JournalPage
     public List<Element> getPageElements(EntityPlayer player)
     {
         List<Element> result = new ArrayList<Element>();
-        result.add(new Heading(getUnlocalizedKey(), LocalizationHelper.getLocalString(getUnlocalizedKey() + ".title")));
+        result.add(heading.getElement(player));
         for (IJournalPage page : pages.values())
         {
             if (page.isUnlocked(player))

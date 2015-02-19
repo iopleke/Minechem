@@ -1,21 +1,150 @@
 {
-    "elements": {
-        "section": {
-            "hydrogen": {
-                "text": null,
-                "picture": {
-                    "image": "test",
-                    "height": 50,
-                    "width": 40
-                },
-                "unlockText": "elements.helium"
-            },
-            "helium": {
-            }
-        }
-    },
-    "machines": {
-        "microscope": {
-        }
-    }
+  "chemicals":{
+	"section":{
+	  "elements":{
+		"section":{
+		  "hydrogen": null,
+		  "helium": null,
+		  "lithium": null,
+		  "beryllium": null,
+		  "boron": null,
+		  "carbon": null,
+		  "nitrogen": null,
+		  "oxygen": null,
+		  "fluorine": null,
+		  "neon": null,
+		  "sodium": null,
+		  "magnesium": null,
+		  "aluminium": null,
+		  "silicon": null,
+		  "phosphorus": null,
+		  "sulfur": null,
+		  "chlorine": null,
+		  "argon": null,
+		  "potassium": null,
+		  "calcium": null,
+		  "scandium": null,
+		  "titanium": null,
+		  "vanadium": null,
+		  "chromium": null,
+		  "manganese": null,
+		  "iron": null,
+		  "cobalt": null,
+		  "nickel": null,
+		  "copper": null,
+		  "zinc": null,
+		  "gallium": null,
+		  "germanium": null,
+		  "arsenic": null,
+		  "selenium": null,
+		  "bromine": null,
+		  "krypton": null,
+		  "rubidium": null,
+		  "strontium": null,
+		  "yttrium": null,
+		  "zirconium": null,
+		  "niobium": null,
+		  "molybdenum": null,
+		  "technetium": null,
+		  "ruthenium": null,
+		  "rhodium": null,
+		  "palladium": null,
+		  "silver": null,
+		  "cadmium": null,
+		  "indium": null,
+		  "tin": null,
+		  "antimony": null,
+		  "tellurium": null,
+		  "iodine": null,
+		  "xenon": null,
+		  "caesium": null,
+		  "barium": null,
+		  "lanthanum": null,
+		  "cerium": null,
+		  "praseodymium": null,
+		  "neodymium": null,
+		  "promethium": null,
+		  "samarium": null,
+		  "europium": null,
+		  "gadolinium": null,
+		  "terbium": null,
+		  "dysprosium": null,
+		  "holmium": null,
+		  "erbium": null,
+		  "thulium": null,
+		  "ytterbium": null,
+		  "lutetium": null,
+		  "hafnium": null,
+		  "tantalum": null,
+		  "tungsten": null,
+		  "rhenium": null,
+		  "osmium": null,
+		  "iridium": null,
+		  "platinum": null,
+		  "gold": null,
+		  "mercury": null,
+		  "thallium": null,
+		  "lead": null,
+		  "bismuth": null,
+		  "polonium": null,
+		  "astatine": null,
+		  "radon": null,
+		  "francium": null,
+		  "radium": null,
+		  "actinium": null,
+		  "thorium": null,
+		  "protactinium": null,
+		  "uranium": null,
+		  "neptunium": null,
+		  "plutonium": null,
+		  "americium": null,
+		  "curium": null,
+		  "berkelium": null,
+		  "californium": null,
+		  "einsteinium": null,
+		  "fermium": null,
+		  "mendelevium": null,
+		  "nobelium": null,
+		  "lawrencium": null,
+		  "rutherfordium": null,
+		  "dubnium": null,
+		  "seaborgium": null,
+		  "bohrium": null,
+		  "hassium": null,
+		  "meitnerium": null,
+		  "darmstadtium": null,
+		  "roentgenium": null,
+		  "copernicum": null,
+		  "ununtrium": null,
+		  "flerovium": null,
+		  "ununpentium": null,
+		  "livermorium": null,
+		  "ununseptium": null,
+		  "ununoctium": null
+		}
+	  },
+	  "compounds":{
+		"section":{
+
+		}
+	  }
+	}
+  },
+  "apparatus": {
+	"section":{
+	  "microscope": null,
+	  "electrolysis": null
+	}
+  },
+  "augments":{
+	"section":{
+	  "lighting":null,
+	  "redstone":null,
+	  "flint":null,
+	  "tnt":null,
+	  "reinforced":null,
+	  "sharp":null,
+	  "unstable":null
+	}
+  }
 }
