@@ -97,7 +97,7 @@ public class JournalHandler
      */
     public static void readPlayerResearch()
     {
-        String fileName = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.playerResearchData;
+        String fileName = Minechem.proxy.getCurrentSaveDir() + "/data/" + Compendium.Config.playerResearchData;
         if (FileHelper.doesFileExist(fileName))
         {
             InputStream inputStream = FileHelper.getFile(fileName);

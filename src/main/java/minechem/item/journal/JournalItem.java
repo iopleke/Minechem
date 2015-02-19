@@ -5,6 +5,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import minechem.handler.MessageHandler;
+import minechem.handler.message.AchievementMessage;
+import minechem.handler.message.JournalMessage;
+import minechem.helper.AchievementHelper;
 import minechem.helper.ArrayHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.item.prefab.BasicItem;
@@ -35,16 +40,12 @@ public class JournalItem extends BasicItem
     {
         if (player.isSneaking())
         {
-            ResearchRegistry.getInstance().addResearch(player, "hydrogen");
-            ResearchRegistry.getInstance().addResearch(player, "helium");
-            ResearchRegistry.getInstance().addResearch(player, "lithium");
-            ResearchRegistry.getInstance().addResearch(player, "beryllium");
-            writeKnowledge(stack, player);
+                writeKnowledge(stack, player, world.isRemote);
         } else
         {
             Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(getKnowledgeKeys(stack), getAuthors(stack)));
         }
-        player.triggerAchievement(AchievementRegistry.getInstance().getAchievement(this.getUnlocalizedName()));
+        AchievementHelper.giveAchievement(player, this.getUnlocalizedName(), world.isRemote);
         return stack;
     }
 
@@ -53,11 +54,19 @@ public class JournalItem extends BasicItem
      *
      * @param itemStack the journal stack
      * @param player    the player that writes the knowledge
+     * @param isRemote is the world remote on  true it will send a {@link minechem.handler.message.JournalMessage} to the server
      */
-    public void writeKnowledge(ItemStack itemStack, EntityPlayer player)
+    public void writeKnowledge(ItemStack itemStack, EntityPlayer player, boolean isRemote)
     {
+        if (isRemote)
+        {
+            MessageHandler.INSTANCE.sendToServer(new JournalMessage(player));
+            return;
+        }
+        
         NBTTagCompound tagCompound = itemStack.stackTagCompound;
         Set<String> playerKnowledge = ResearchRegistry.getInstance().getResearchFor(player);
+        if (playerKnowledge == null) return;
         Set<String> bookKnowledge = new LinkedHashSet<String>();
         if (tagCompound == null)
         {

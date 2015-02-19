@@ -33,12 +33,6 @@ public class ClientProxy extends CommonProxy
     }
 
     @Override
-    public EntityPlayer getPlayer(MessageContext context)
-    {
-        return Minecraft.getMinecraft().thePlayer;
-    }
-
-    @Override
     public void registerRenderers()
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
@@ -63,13 +57,6 @@ public class ClientProxy extends CommonProxy
         ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
     }
 
-    @Override
-    public void registerJournalPages()
-    {
-        LogHelper.debug("Registering Journal Pages...");
-        JournalHandler.init(getCurrentLanguage());
-    }
-
     /**
      * Get the current lang code
      *
@@ -78,5 +65,17 @@ public class ClientProxy extends CommonProxy
     public String getCurrentLanguage()
     {
         return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
+    }
+
+    @Override
+    public World getWorld(MessageContext context)
+    {
+        return Minecraft.getMinecraft().theWorld;
+    }
+
+    @Override
+    public EntityPlayer getPlayer(MessageContext context)
+    {
+        return Minecraft.getMinecraft().thePlayer;
     }
 }

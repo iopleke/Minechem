@@ -5,18 +5,23 @@ import codechicken.nei.api.INEIGuiHandler;
 import codechicken.nei.api.TaggedInventoryArea;
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
+import cpw.mods.fml.client.FMLClientHandler;
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Optional;
 import java.util.List;
 import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
 import minechem.helper.GuiIntersectHelper;
 import minechem.helper.LinkHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import net.minecraft.world.World;
 
 /**
  * Basic GUI container class for extending
@@ -31,7 +36,16 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     public BasicGuiContainer(Container container)
     {
         super(container);
-
+    }
+    
+    public EntityPlayer getPlayer()
+    {
+        return Minecraft.getMinecraft().thePlayer;
+    }
+    
+    public World getWorld()
+    {
+        return FMLClientHandler.instance().getWorldClient();
     }
 
     @Override

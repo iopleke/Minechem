@@ -33,6 +33,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     {
         super(achievementPrefix + element.shortName, element.shortName, column, row, displayStack, nullAchievement);
         this.element = element;
+        this.initIndependentStat();
     }
 
     public ElementAchievement(Element element, int row, int column, Item displayItem)

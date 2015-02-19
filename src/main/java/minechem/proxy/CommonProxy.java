@@ -1,5 +1,6 @@
 package minechem.proxy;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.handler.EventHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -42,6 +43,11 @@ public class CommonProxy
     {
         return context.getServerHandler().playerEntity;
     }
+    
+    public World getWorld(MessageContext context)
+    {
+        return context.getServerHandler().playerEntity.worldObj;
+    }
 
     public void registerRenderers()
     {
@@ -63,13 +69,8 @@ public class CommonProxy
 
     }
 
-    public void registerJournalPages()
-    {
-
-    }
-
     public String getCurrentLanguage()
     {
-        return null;
+        return "en_US";
     }
 }

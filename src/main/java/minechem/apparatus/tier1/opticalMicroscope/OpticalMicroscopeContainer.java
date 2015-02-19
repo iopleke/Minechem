@@ -6,6 +6,7 @@ import net.minecraft.inventory.Slot;
 
 public class OpticalMicroscopeContainer extends BasicContainer
 {
+    private OpticalMicroscopeTileEntity opticalMicroscope;
     /**
      * Container object for the opticalMicroscope
      *
@@ -16,5 +17,11 @@ public class OpticalMicroscopeContainer extends BasicContainer
     {
         bindPlayerInventory(inventoryPlayer);
         addSlotToContainer(new Slot(opticalMicroscope, 0, 32, 32));
+        this.opticalMicroscope = opticalMicroscope;
+    }
+    
+    public OpticalMicroscopeTileEntity getOpticalMicroscope()
+    {
+        return opticalMicroscope;
     }
 }
