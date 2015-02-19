@@ -1,12 +1,11 @@
 package minechem.handler;
 
+import java.util.Map;
+import java.util.TreeMap;
 import minechem.Compendium;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.event.TextureStitchEvent;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  *
@@ -36,8 +35,8 @@ public class IconHandler
         {
             if (paramPre.map.getTextureType() == 1)
             {
-                IconHandler.addIcon("default", Compendium.Naming.id + ":default", paramPre.map);
-                IconHandler.addIcon("patreon", Compendium.Naming.id + ":patreon", paramPre.map);
+                IconHandler.addIcon("default", Compendium.Naming.id + ":guitab/default", paramPre.map);
+                IconHandler.addIcon("patreon", Compendium.Naming.id + ":guitab/patreon", paramPre.map);
             }
         }
     }
