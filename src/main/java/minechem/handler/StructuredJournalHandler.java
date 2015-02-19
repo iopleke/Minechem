@@ -61,27 +61,25 @@ public class StructuredJournalHandler
         JsonReader jReader = new JsonReader(new InputStreamReader(inputStream));
         JsonParser parser = new JsonParser();
 
-        IJournalPage testJournal = getPageFromJSONObject("", "", parser.parse(jReader).getAsJsonObject());
-        if (testJournal instanceof SectionPage)
-        {
+        SectionPage journal = getJournal(parser.parse(jReader).getAsJsonObject());
+        LogHelper.info("Total of " + journal.getSubPages() + " pages registered");
+        JournalRegistry.journal = journal;
+    }
 
-            SectionPage journal = (SectionPage) testJournal;
-            LogHelper.info("Total of " + journal.getSubPages() + " pages registered");
-            JournalRegistry.journal = journal;
+    public static SectionPage getJournal(JsonObject object)
+    {
+        SectionPage result  = new SectionPage("");
+        for (IJournalPage page : getPagesFromJsonObject("", object))
+        {
+            result.addSubPage(page);
         }
+        return result;
     }
 
     public static IJournalPage getPageFromJSONObject(String name, String chapter, JsonObject object)
     {
         IJournalPage result;
-        if (name.isEmpty())
-        {
-            result  = new SectionPage(name);
-            for (IJournalPage page : getPagesFromJsonObject("", object))
-            {
-                result.addSubPage(page);
-            }
-        } else if (object.has("section"))
+        if (object.has("section"))
         {
             result  = new SectionPage(name, chapter,  new ArrayList<IJournalPage>());
             for (IJournalPage page : getPagesFromJsonObject((chapter.isEmpty() ? "" : chapter + ".") + name, object.getAsJsonObject("section")))
