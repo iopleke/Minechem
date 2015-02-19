@@ -8,6 +8,7 @@ import minechem.chemical.ChemicalBase;
 import minechem.helper.Jenkins;
 import minechem.item.prefab.BasicItem;
 import minechem.registry.CreativeTabRegistry;
+import minechem.registry.ItemRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -116,5 +117,14 @@ public class ChemicalItem extends BasicItem
     public static ChemicalBase getChemicalBase(ItemStack itemStack)
     {
         return ChemicalBase.readFromNBT(itemStack.getTagCompound());
+    }
+    
+    public static ItemStack getItemStackForChemical(ChemicalBase chemicalBase)
+    {
+        ItemStack itemStack = new ItemStack(ItemRegistry.chemicalItem);
+        NBTTagCompound tag = new NBTTagCompound();
+        chemicalBase.writeToNBT(tag);
+        itemStack.setTagCompound(tag);
+        return itemStack;
     }
 }

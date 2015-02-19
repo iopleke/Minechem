@@ -71,6 +71,5 @@ public class AchievementHelper
     public static void giveAchievement(EntityPlayer player, Achievement achievement)
     {
         player.triggerAchievement(achievement);
-        LogHelper.info(player.getDisplayName() + "granted" + achievement.statId);
     }
 }

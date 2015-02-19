@@ -22,6 +22,19 @@ public class ColourHelper
     }
 
     /**
+     * Convert an RGB value to {@link minechem.Compendium.Color.TrueColor}
+     *
+     * @param red
+     * @param green
+     * @param blue
+     * @return {@link minechem.Compendium.Color.TrueColor} value
+     */
+    public static int RGB(float red, float green, float blue)
+    {
+        return RGBA((int)red*255, (int)green*255, (int)blue*255, 255);
+    }
+
+    /**
      * Convert an #RRGGBB value to {@link minechem.Compendium.Color.TrueColor}
      *
      * @param colour the #RRGGBB value

@@ -2,6 +2,8 @@ package minechem.chemical;
 
 import java.util.List;
 import minechem.helper.Jenkins;
+import minechem.item.chemical.ChemicalItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 /**
@@ -61,6 +63,11 @@ public abstract class ChemicalBase
         tag.setString("fullName", this.fullName);
         tag.setBoolean("isElement", isElement());
         return tag;
+    }
+
+    public ItemStack getItemStack()
+    {
+        return ChemicalItem.getItemStackForChemical(this);
     }
 
     public abstract int getColour();
