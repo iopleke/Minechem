@@ -3,6 +3,7 @@ package minechem.item.augment.augments;
 import com.google.common.collect.Multimap;
 import java.util.Random;
 import minechem.Compendium;
+import minechem.helper.LocalizationHelper;
 import minechem.item.augment.IAugmentItem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -16,14 +17,16 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public abstract class AugmentBase implements IAugment
+public class AugmentBase implements IAugment
 {
     private final String key;
+    private final String localizationKey;
     public static final Random rand = new Random(System.currentTimeMillis());
 
     public AugmentBase(String key)
     {
         this.key = key;
+        this.localizationKey = "augment." + key;
     }
 
     @Override
@@ -53,6 +56,25 @@ public abstract class AugmentBase implements IAugment
     public int getMaxLevel()
     {
         return 5;
+    }
+
+    /**
+     * @return Localized String name of the augment;
+     */
+    @Override
+    public String getLocalizedName()
+    {
+        return LocalizationHelper.getLocalString(localizationKey);
+    }
+
+    /**
+     * @param level
+     * @return flavour text to display for level
+     */
+    @Override
+    public String getDisplayText(int level)
+    {
+        return String.valueOf(level);
     }
 
     /**

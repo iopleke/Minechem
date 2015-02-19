@@ -171,7 +171,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
         super.addInformation(stack, player, list, bool);
         for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) //TODO: Change this to display more useful data
         {
-            list.add(StatCollector.translateToLocal("augment." + entry.getKey().getKey()) + ": " + entry.getKey().getUsableLevel(stack, entry.getValue()));
+            list.add(entry.getKey().getLocalizedName() + ": " + entry.getKey().getDisplayText(entry.getValue()));
         }
     }
 

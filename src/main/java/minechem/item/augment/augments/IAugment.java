@@ -31,6 +31,17 @@ public interface IAugment
     int getMaxLevel();
 
     /**
+     * @return Localized String name of the augment;
+     */
+    String getLocalizedName();
+
+    /**
+     * @param level
+     * @return flavour text to display for level
+     */
+    String getDisplayText(int level);
+
+    /**
      * @return true to make the block drop
      */
     boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level);
