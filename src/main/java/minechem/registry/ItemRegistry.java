@@ -22,7 +22,7 @@ public class ItemRegistry
         GameRegistry.registerItem(augmentedItem, augmentedItem.getUnlocalizedName());
         GameRegistry.addRecipe(new AugmentRecipe());
         GameRegistry.addRecipe(new WrapperRecipe());
-        
+
         chemicalItem = new ChemicalItem();
         GameRegistry.registerItem(chemicalItem, chemicalItem.getUnlocalizedName());
     }

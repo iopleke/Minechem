@@ -1,9 +1,7 @@
 package minechem.item.prefab;
 
 import com.google.common.collect.Multimap;
-
 import java.util.Set;
-
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.Entity;
@@ -51,12 +49,14 @@ public abstract class WrapperItem extends BasicItem
      */
     public abstract void setWrappedItemStack(ItemStack wrapper, ItemStack stack);
 
-
     @Override
     public String getItemStackDisplayName(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped != null) return wrapped.getItem().getItemStackDisplayName(wrapped);
+        if (wrapped != null)
+        {
+            return wrapped.getItem().getItemStackDisplayName(wrapped);
+        }
         return super.getItemStackDisplayName(stack);
     }
 
@@ -64,7 +64,10 @@ public abstract class WrapperItem extends BasicItem
     public Multimap getAttributeModifiers(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getAttributeModifiers(stack);
+        if (wrapped == null)
+        {
+            return super.getAttributeModifiers(stack);
+        }
         return wrapped.getItem().getAttributeModifiers(wrapped);
     }
 
@@ -72,7 +75,10 @@ public abstract class WrapperItem extends BasicItem
     public int getColorFromItemStack(ItemStack stack, int colour)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getColorFromItemStack(stack, colour);
+        if (wrapped == null)
+        {
+            return super.getColorFromItemStack(stack, colour);
+        }
         return wrapped.getItem().getColorFromItemStack(wrapped, colour);
     }
 
@@ -80,7 +86,10 @@ public abstract class WrapperItem extends BasicItem
     public int getDamage(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getDamage(stack);
+        if (wrapped == null)
+        {
+            return super.getDamage(stack);
+        }
         return wrapped.getItem().getDamage(wrapped);
     }
 
@@ -88,7 +97,10 @@ public abstract class WrapperItem extends BasicItem
     public float getDigSpeed(ItemStack stack, Block block, int metadata)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getDigSpeed(stack, block, metadata);
+        if (wrapped == null)
+        {
+            return super.getDigSpeed(stack, block, metadata);
+        }
         return wrapped.getItem().getDigSpeed(wrapped, block, metadata);
     }
 
@@ -96,7 +108,10 @@ public abstract class WrapperItem extends BasicItem
     public double getDurabilityForDisplay(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getDurabilityForDisplay(stack);
+        if (wrapped == null)
+        {
+            return super.getDurabilityForDisplay(stack);
+        }
         return wrapped.getItem().getDurabilityForDisplay(wrapped);
     }
 
@@ -104,7 +119,10 @@ public abstract class WrapperItem extends BasicItem
     public int getEntityLifespan(ItemStack stack, World world)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getEntityLifespan(stack, world);
+        if (wrapped == null)
+        {
+            return super.getEntityLifespan(stack, world);
+        }
         return wrapped.getItem().getEntityLifespan(wrapped, world);
     }
 
@@ -112,7 +130,10 @@ public abstract class WrapperItem extends BasicItem
     public FontRenderer getFontRenderer(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getFontRenderer(stack);
+        if (wrapped == null)
+        {
+            return super.getFontRenderer(stack);
+        }
         return wrapped.getItem().getFontRenderer(wrapped);
     }
 
@@ -120,7 +141,10 @@ public abstract class WrapperItem extends BasicItem
     public int getHarvestLevel(ItemStack stack, String toolClass)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getHarvestLevel(stack, toolClass);
+        if (wrapped == null)
+        {
+            return super.getHarvestLevel(stack, toolClass);
+        }
         return wrapped.getItem().getHarvestLevel(wrapped, toolClass);
     }
 
@@ -128,7 +152,10 @@ public abstract class WrapperItem extends BasicItem
     public IIcon getIcon(ItemStack stack, int pass)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getIcon(stack, pass);
+        if (wrapped == null)
+        {
+            return super.getIcon(stack, pass);
+        }
         return wrapped.getItem().getIcon(wrapped, pass);
     }
 
@@ -136,7 +163,10 @@ public abstract class WrapperItem extends BasicItem
     public IIcon getIcon(ItemStack stack, int renderPass, EntityPlayer player, ItemStack usingItem, int useRemaining)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
+        if (wrapped == null)
+        {
+            return super.getIcon(stack, renderPass, player, usingItem, useRemaining);
+        }
         return wrapped.getItem().getIcon(wrapped, renderPass, player, usingItem, useRemaining);
     }
 
@@ -144,7 +174,10 @@ public abstract class WrapperItem extends BasicItem
     public IIcon getIconIndex(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getIconIndex(stack);
+        if (wrapped == null)
+        {
+            return super.getIconIndex(stack);
+        }
         return wrapped.getItem().getIconIndex(wrapped);
     }
 
@@ -152,7 +185,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean getIsRepairable(ItemStack stack, ItemStack stack2)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getIsRepairable(stack, stack2);
+        if (wrapped == null)
+        {
+            return super.getIsRepairable(stack, stack2);
+        }
         return wrapped.getItem().getIsRepairable(wrapped, stack2);
     }
 
@@ -160,7 +196,10 @@ public abstract class WrapperItem extends BasicItem
     public int getItemEnchantability(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getItemEnchantability(stack);
+        if (wrapped == null)
+        {
+            return super.getItemEnchantability(stack);
+        }
         return wrapped.getItem().getItemEnchantability(wrapped);
     }
 
@@ -168,7 +207,10 @@ public abstract class WrapperItem extends BasicItem
     public int getItemStackLimit(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getItemStackLimit(stack);
+        if (wrapped == null)
+        {
+            return super.getItemStackLimit(stack);
+        }
         return wrapped.getItem().getItemStackLimit(wrapped);
     }
 
@@ -176,7 +218,10 @@ public abstract class WrapperItem extends BasicItem
     public EnumAction getItemUseAction(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getItemUseAction(stack);
+        if (wrapped == null)
+        {
+            return super.getItemUseAction(stack);
+        }
         return wrapped.getItem().getItemUseAction(wrapped);
     }
 
@@ -184,7 +229,10 @@ public abstract class WrapperItem extends BasicItem
     public int getMaxDamage(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getMaxDamage(stack);
+        if (wrapped == null)
+        {
+            return super.getMaxDamage(stack);
+        }
         return wrapped.getItem().getMaxDamage(wrapped);
     }
 
@@ -192,7 +240,10 @@ public abstract class WrapperItem extends BasicItem
     public int getMaxItemUseDuration(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getMaxItemUseDuration(stack);
+        if (wrapped == null)
+        {
+            return super.getMaxItemUseDuration(stack);
+        }
         return wrapped.getItem().getMaxItemUseDuration(wrapped);
     }
 
@@ -200,7 +251,10 @@ public abstract class WrapperItem extends BasicItem
     public String getPotionEffect(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getPotionEffect(stack);
+        if (wrapped == null)
+        {
+            return super.getPotionEffect(stack);
+        }
         return wrapped.getItem().getPotionEffect(wrapped);
     }
 
@@ -208,7 +262,10 @@ public abstract class WrapperItem extends BasicItem
     public EnumRarity getRarity(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getRarity(stack);
+        if (wrapped == null)
+        {
+            return super.getRarity(stack);
+        }
         return wrapped.getRarity();
     }
 
@@ -216,7 +273,10 @@ public abstract class WrapperItem extends BasicItem
     public float getSmeltingExperience(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getSmeltingExperience(stack);
+        if (wrapped == null)
+        {
+            return super.getSmeltingExperience(stack);
+        }
         return wrapped.getItem().getSmeltingExperience(wrapped);
     }
 
@@ -224,7 +284,10 @@ public abstract class WrapperItem extends BasicItem
     public Set<String> getToolClasses(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getToolClasses(stack);
+        if (wrapped == null)
+        {
+            return super.getToolClasses(stack);
+        }
         return getToolClasses(wrapped);
     }
 
@@ -232,7 +295,10 @@ public abstract class WrapperItem extends BasicItem
     public String getUnlocalizedName(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.getUnlocalizedName(stack);
+        if (wrapped == null)
+        {
+            return super.getUnlocalizedName(stack);
+        }
         return wrapped.getItem().getUnlocalizedName(wrapped);
     }
 
@@ -240,10 +306,16 @@ public abstract class WrapperItem extends BasicItem
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.hitEntity(stack, target, user);
+        if (wrapped == null)
+        {
+            return super.hitEntity(stack, target, user);
+        }
         boolean result = wrapped.getItem().hitEntity(wrapped, target, user);
         setDamage(stack, wrapped.getItemDamage());
-        if (stack.stackSize < 1 && user instanceof EntityPlayer) ((EntityPlayer)user).destroyCurrentEquippedItem();
+        if (stack.stackSize < 1 && user instanceof EntityPlayer)
+        {
+            ((EntityPlayer) user).destroyCurrentEquippedItem();
+        }
         return result;
     }
 
@@ -251,7 +323,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean isBeaconPayment(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.isBeaconPayment(stack);
+        if (wrapped == null)
+        {
+            return super.isBeaconPayment(stack);
+        }
         return wrapped.getItem().isBeaconPayment(wrapped);
     }
 
@@ -259,7 +334,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean isBookEnchantable(ItemStack stack, ItemStack book)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.isBookEnchantable(stack, book);
+        if (wrapped == null)
+        {
+            return super.isBookEnchantable(stack, book);
+        }
         return wrapped.getItem().isBookEnchantable(wrapped, book);
     }
 
@@ -267,7 +345,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean isDamaged(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.isDamaged(stack);
+        if (wrapped == null)
+        {
+            return super.isDamaged(stack);
+        }
         return wrapped.getItem().isDamaged(wrapped);
     }
 
@@ -275,7 +356,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean isItemTool(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.isItemTool(stack);
+        if (wrapped == null)
+        {
+            return super.isItemTool(stack);
+        }
         return wrapped.getItem().isItemTool(wrapped);
     }
 
@@ -283,7 +367,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean isPotionIngredient(ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.isPotionIngredient(stack);
+        if (wrapped == null)
+        {
+            return super.isPotionIngredient(stack);
+        }
         return wrapped.getItem().isPotionIngredient(wrapped);
     }
 
@@ -291,7 +378,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean isValidArmor(ItemStack stack, int armorType, Entity entity)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.isValidArmor(stack, armorType, entity);
+        if (wrapped == null)
+        {
+            return super.isValidArmor(stack, armorType, entity);
+        }
         return wrapped.getItem().isValidArmor(wrapped, armorType, entity);
     }
 
@@ -299,10 +389,15 @@ public abstract class WrapperItem extends BasicItem
     public boolean itemInteractionForEntity(ItemStack stack, EntityPlayer player, EntityLivingBase entityLivingBase)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.itemInteractionForEntity(stack, player, entityLivingBase);
+        if (wrapped == null)
+        {
+            return super.itemInteractionForEntity(stack, player, entityLivingBase);
+        }
         boolean result = wrapped.getItem().itemInteractionForEntity(wrapped, player, entityLivingBase);
         if (stack.stackSize < 1 && entityLivingBase instanceof EntityPlayer)
-            ((EntityPlayer)entityLivingBase).destroyCurrentEquippedItem();
+        {
+            ((EntityPlayer) entityLivingBase).destroyCurrentEquippedItem();
+        }
         return result;
     }
 
@@ -310,19 +405,29 @@ public abstract class WrapperItem extends BasicItem
     public void onArmorTick(World world, EntityPlayer player, ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) onArmorTick(world, player, stack);
-        else wrapped.getItem().onArmorTick(world, player, wrapped);
+        if (wrapped == null)
+        {
+            onArmorTick(world, player, stack);
+        } else
+        {
+            wrapped.getItem().onArmorTick(world, player, wrapped);
+        }
     }
 
     @Override
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase);
+        if (wrapped == null)
+        {
+            return super.onBlockDestroyed(stack, world, block, x, y, z, entityLivingBase);
+        }
         boolean result = wrapped.getItem().onBlockDestroyed(wrapped, world, block, x, y, z, entityLivingBase);
         setDamage(stack, wrapped.getItemDamage());
         if (stack.stackSize < 1 && entityLivingBase instanceof EntityPlayer)
-            ((EntityPlayer)entityLivingBase).destroyCurrentEquippedItem();
+        {
+            ((EntityPlayer) entityLivingBase).destroyCurrentEquippedItem();
+        }
         return result;
     }
 
@@ -330,10 +435,16 @@ public abstract class WrapperItem extends BasicItem
     public boolean onBlockStartBreak(ItemStack stack, int X, int Y, int Z, EntityPlayer player)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onBlockStartBreak(stack, X, Y, Z, player);
+        if (wrapped == null)
+        {
+            return super.onBlockStartBreak(stack, X, Y, Z, player);
+        }
         boolean result = wrapped.getItem().onBlockStartBreak(wrapped, X, Y, Z, player);
         setDamage(stack, wrapped.getItemDamage());
-        if (stack.stackSize < 1) player.destroyCurrentEquippedItem();
+        if (stack.stackSize < 1)
+        {
+            player.destroyCurrentEquippedItem();
+        }
         return result;
     }
 
@@ -341,15 +452,23 @@ public abstract class WrapperItem extends BasicItem
     public void onCreated(ItemStack stack, World world, EntityPlayer player)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) onCreated(stack, world, player);
-        else wrapped.getItem().onCreated(wrapped, world, player);
+        if (wrapped == null)
+        {
+            onCreated(stack, world, player);
+        } else
+        {
+            wrapped.getItem().onCreated(wrapped, world, player);
+        }
     }
 
     @Override
     public boolean onDroppedByPlayer(ItemStack stack, EntityPlayer player)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onDroppedByPlayer(stack, player);
+        if (wrapped == null)
+        {
+            return super.onDroppedByPlayer(stack, player);
+        }
         return wrapped.getItem().onDroppedByPlayer(wrapped, player);
     }
 
@@ -357,7 +476,10 @@ public abstract class WrapperItem extends BasicItem
     public ItemStack onEaten(ItemStack stack, World world, EntityPlayer player)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onEaten(stack, world, player);
+        if (wrapped == null)
+        {
+            return super.onEaten(stack, world, player);
+        }
         return wrapped.getItem().onEaten(wrapped, world, player);
     }
 
@@ -365,7 +487,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean onEntitySwing(EntityLivingBase entityLiving, ItemStack stack)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onEntitySwing(entityLiving, stack);
+        if (wrapped == null)
+        {
+            return super.onEntitySwing(entityLiving, stack);
+        }
         return wrapped.getItem().onEntitySwing(entityLiving, wrapped);
     }
 
@@ -373,9 +498,15 @@ public abstract class WrapperItem extends BasicItem
     public ItemStack onItemRightClick(ItemStack stack, World world, EntityPlayer player)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onItemRightClick(stack, world, player);
+        if (wrapped == null)
+        {
+            return super.onItemRightClick(stack, world, player);
+        }
         wrapped = wrapped.getItem().onItemRightClick(wrapped, world, player);
-        if (wrapped == null || wrapped.stackSize == 0) return null;
+        if (wrapped == null || wrapped.stackSize == 0)
+        {
+            return null;
+        }
         setWrappedItemStack(stack, wrapped);
         return stack;
     }
@@ -384,10 +515,16 @@ public abstract class WrapperItem extends BasicItem
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        if (wrapped == null)
+        {
+            return super.onItemUse(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        }
         boolean result = wrapped.getItem().onItemUse(wrapped, player, world, x, y, z, side, hitX, hitY, hitZ);
         setDamage(stack, wrapped.getItemDamage());
-        if (stack.stackSize < 1) player.destroyCurrentEquippedItem();
+        if (stack.stackSize < 1)
+        {
+            player.destroyCurrentEquippedItem();
+        }
         return result;
     }
 
@@ -395,10 +532,16 @@ public abstract class WrapperItem extends BasicItem
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        if (wrapped == null)
+        {
+            return super.onItemUseFirst(stack, player, world, x, y, z, side, hitX, hitY, hitZ);
+        }
         boolean result = wrapped.getItem().onItemUse(wrapped, player, world, x, y, z, side, hitX, hitY, hitZ);
         setDamage(stack, wrapped.getItemDamage());
-        if (stack.stackSize < 1) player.destroyCurrentEquippedItem();
+        if (stack.stackSize < 1)
+        {
+            player.destroyCurrentEquippedItem();
+        }
         return result;
     }
 
@@ -406,7 +549,10 @@ public abstract class WrapperItem extends BasicItem
     public boolean onLeftClickEntity(ItemStack stack, EntityPlayer player, Entity entity)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) return super.onLeftClickEntity(stack, player, entity);
+        if (wrapped == null)
+        {
+            return super.onLeftClickEntity(stack, player, entity);
+        }
         return wrapped.getItem().onLeftClickEntity(wrapped, player, entity);
     }
 
@@ -414,35 +560,55 @@ public abstract class WrapperItem extends BasicItem
     public void onPlayerStoppedUsing(ItemStack stack, World world, EntityPlayer player, int itemInUseCount)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) super.onPlayerStoppedUsing(stack, world, player, itemInUseCount);
-        else wrapped.getItem().onPlayerStoppedUsing(wrapped, world, player, itemInUseCount);
+        if (wrapped == null)
+        {
+            super.onPlayerStoppedUsing(stack, world, player, itemInUseCount);
+        } else
+        {
+            wrapped.getItem().onPlayerStoppedUsing(wrapped, world, player, itemInUseCount);
+        }
     }
 
     @Override
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) super.onUpdate(stack, world, entity, slot, bool);
-        else wrapped.getItem().onUpdate(wrapped, world, entity, slot, bool);
+        if (wrapped == null)
+        {
+            super.onUpdate(stack, world, entity, slot, bool);
+        } else
+        {
+            wrapped.getItem().onUpdate(wrapped, world, entity, slot, bool);
+        }
     }
 
     @Override
     public void onUsingTick(ItemStack stack, EntityPlayer player, int count)
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) super.onUsingTick(stack, player, count);
-        else wrapped.getItem().onUsingTick(wrapped, player, count);
+        if (wrapped == null)
+        {
+            super.onUsingTick(stack, player, count);
+        } else
+        {
+            wrapped.getItem().onUsingTick(wrapped, player, count);
+        }
     }
 
     @Override
     public void setDamage(ItemStack stack, int damage) //TODO: Damage stuff is a little screwy at the moment
     {
         ItemStack wrapped = getWrappedItemStack(stack);
-        if (wrapped == null) super.setDamage(stack, damage);
-        else
+        if (wrapped == null)
+        {
+            super.setDamage(stack, damage);
+        } else
         {
             wrapped.getItem().setDamage(wrapped, damage);
-            if (wrapped.getMaxDamage() <= damage) stack.stackSize--;
+            if (wrapped.getMaxDamage() <= damage)
+            {
+                stack.stackSize--;
+            }
             setWrappedItemStack(stack, wrapped);
         }
     }

@@ -3,6 +3,14 @@ package minechem.proxy.client.font;
 import com.ibm.icu.text.ArabicShaping;
 import com.ibm.icu.text.ArabicShapingException;
 import com.ibm.icu.text.Bidi;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Random;
+import javax.imageio.ImageIO;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -11,15 +19,6 @@ import net.minecraft.client.resources.IResourceManagerReloadListener;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
-
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
 
 public class EnhancedFontRenderer implements IResourceManagerReloadListener
 {
@@ -40,8 +39,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
      */
     private byte[] glyphWidth = new byte[65536];
     /**
-     * Array of RGB triplets defining the 16 standard chat colors followed by 16 darker version of the same colors for
-     * drop shadows.
+     * Array of RGB triplets defining the 16 standard chat colors followed by 16 darker version of the same colors for drop shadows.
      */
     private int[] colorCode = new int[32];
     private final ResourceLocation locationFontTexture;
@@ -153,14 +151,14 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
         this.zLevel--;
         return this;
     }
-    
+
     public EnhancedFontRenderer resetFontSize()
     {
-        this.FONT_HEIGHT = (int)FONT_REFERENCE_HEIGHT;
+        this.FONT_HEIGHT = (int) FONT_REFERENCE_HEIGHT;
         this.setFontScale();
         return this;
     }
-    
+
     public EnhancedFontRenderer incFontSize()
     {
         this.FONT_HEIGHT++;
@@ -200,12 +198,12 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
     {
         return this.zLevel;
     }
-    
+
     public int getFontSize()
     {
         return this.FONT_HEIGHT;
     }
-    
+
     private float getFontScale()
     {
         return fontScale;
@@ -213,7 +211,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
 
     private void setFontScale()
     {
-        this.fontScale = FONT_HEIGHT/FONT_REFERENCE_HEIGHT;
+        this.fontScale = FONT_HEIGHT / FONT_REFERENCE_HEIGHT;
     }
 
     public void onResourceManagerReload(IResourceManager resourceManager)
@@ -240,7 +238,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
         int k = j / 16;
         int l = i / 16;
         byte b0 = 1;
-        float f = 8.0F / (float)l;
+        float f = 8.0F / (float) l;
         int i1 = 0;
 
         while (i1 < 256)
@@ -280,7 +278,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
                 }
 
                 ++l1;
-                this.charWidth[i1] = (int)(0.5D + (double)((float)l1 * f)) + b0;
+                this.charWidth[i1] = (int) (0.5D + (double) ((float) l1 * f)) + b0;
                 ++i1;
                 break;
             }
@@ -348,11 +346,11 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
      */
     private float renderDefaultChar(int charId, boolean italics)
     {
-        float textureXPos = (float)(charId % 16 * 8);
-        float textureYPos = (float)(charId / 16 * 8);
+        float textureXPos = (float) (charId % 16 * 8);
+        float textureYPos = (float) (charId / 16 * 8);
         float italicsScaleFactor = italics ? 1.0F * getFontScale() : 0.0F;
         this.renderEngine.bindTexture(this.locationFontTexture);
-        float fontTextureWidth = (float)this.charWidth[charId] - 1.01F;
+        float fontTextureWidth = (float) this.charWidth[charId] - 1.01F;
         float fontDrawWidth = fontTextureWidth * getFontScale();
         float fontTextureHeight = 7.99F;
         float fontDrawHeight = fontTextureHeight * getFontScale();
@@ -367,7 +365,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
         GL11.glTexCoord2f((textureXPos + fontTextureWidth) / fontTextureScaling, (textureYPos + fontTextureHeight) / fontTextureScaling);
         GL11.glVertex3f(this.posX + fontDrawWidth - italicsScaleFactor, this.posY + fontDrawHeight, this.zLevel);
         GL11.glEnd();
-        return (float)this.charWidth[charId] * getFontScale();
+        return (float) this.charWidth[charId] * getFontScale();
     }
 
     private ResourceLocation getUnicodePageLocation(int location)
@@ -402,11 +400,11 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
             this.loadGlyphTexture(i);
             int j = this.glyphWidth[unicodeChar] >>> 4;
             int k = this.glyphWidth[unicodeChar] & 15;
-            float f = (float)j;
-            float f1 = (float)(k + 1);
+            float f = (float) j;
+            float f1 = (float) (k + 1);
             float unicodeChatScale = 2.0F;
-            float texturePosX = (float)(unicodeChar % 16 * 16) + f;
-            float texturePosY = (float)((unicodeChar & 255) / 16 * 16);
+            float texturePosX = (float) (unicodeChar % 16 * 16) + f;
+            float texturePosY = (float) ((unicodeChar & 255) / 16 * 16);
             float fontTextureWidth = f1 - f - 0.02F;
             float fontDrawWidth = fontTextureWidth / unicodeChatScale * getFontScale();
             float italicsScaleFactor = italics ? 1.0F * getFontScale() : 0.0F;
@@ -523,7 +521,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
 
                     k = this.colorCode[j];
                     this.textColor = k;
-                    GL11.glColor4f((float)(k >> 16) / 255.0F, (float)(k >> 8 & 255) / 255.0F, (float)(k & 255) / 255.0F, this.alpha);
+                    GL11.glColor4f((float) (k >> 16) / 255.0F, (float) (k >> 8 & 255) / 255.0F, (float) (k & 255) / 255.0F, this.alpha);
                 } else if (j == 16)
                 {
                     this.randomStyle = true;
@@ -607,10 +605,10 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
                     tessellator = Tessellator.instance;
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     tessellator.startDrawingQuads();
-                    tessellator.addVertex((double)this.posX, (double)(this.posY + (float)(this.FONT_HEIGHT / 2)), 0.0D);
-                    tessellator.addVertex((double)(this.posX + f), (double)(this.posY + (float)(this.FONT_HEIGHT / 2)), 0.0D);
-                    tessellator.addVertex((double)(this.posX + f), (double)(this.posY + (float)(this.FONT_HEIGHT / 2) - 1.0F), 0.0D);
-                    tessellator.addVertex((double)this.posX, (double)(this.posY + (float)(this.FONT_HEIGHT / 2) - 1.0F), 0.0D);
+                    tessellator.addVertex((double) this.posX, (double) (this.posY + (float) (this.FONT_HEIGHT / 2)), 0.0D);
+                    tessellator.addVertex((double) (this.posX + f), (double) (this.posY + (float) (this.FONT_HEIGHT / 2)), 0.0D);
+                    tessellator.addVertex((double) (this.posX + f), (double) (this.posY + (float) (this.FONT_HEIGHT / 2) - 1.0F), 0.0D);
+                    tessellator.addVertex((double) this.posX, (double) (this.posY + (float) (this.FONT_HEIGHT / 2) - 1.0F), 0.0D);
                     tessellator.draw();
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
@@ -621,15 +619,15 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
                     GL11.glDisable(GL11.GL_TEXTURE_2D);
                     tessellator.startDrawingQuads();
                     int l = this.underlineStyle ? -1 : 0;
-                    tessellator.addVertex((double)(this.posX + (float)l), (double)(this.posY + (float)this.FONT_HEIGHT), 0.0D);
-                    tessellator.addVertex((double)(this.posX + f), (double)(this.posY + (float)this.FONT_HEIGHT), 0.0D);
-                    tessellator.addVertex((double)(this.posX + f), (double)(this.posY + (float)this.FONT_HEIGHT - 1.0F), 0.0D);
-                    tessellator.addVertex((double)(this.posX + (float)l), (double)(this.posY + (float)this.FONT_HEIGHT - 1.0F), 0.0D);
+                    tessellator.addVertex((double) (this.posX + (float) l), (double) (this.posY + (float) this.FONT_HEIGHT), 0.0D);
+                    tessellator.addVertex((double) (this.posX + f), (double) (this.posY + (float) this.FONT_HEIGHT), 0.0D);
+                    tessellator.addVertex((double) (this.posX + f), (double) (this.posY + (float) this.FONT_HEIGHT - 1.0F), 0.0D);
+                    tessellator.addVertex((double) (this.posX + (float) l), (double) (this.posY + (float) this.FONT_HEIGHT - 1.0F), 0.0D);
                     tessellator.draw();
                     GL11.glEnable(GL11.GL_TEXTURE_2D);
                 }
 
-                this.posX += (float)((int)f);
+                this.posX += (float) ((int) f);
             }
         }
     }
@@ -673,15 +671,15 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
                 color = (color & 16579836) >> 2 | color & -16777216;
             }
 
-            this.red = (float)(color >> 16 & 255) / 255.0F;
-            this.blue = (float)(color >> 8 & 255) / 255.0F;
-            this.green = (float)(color & 255) / 255.0F;
-            this.alpha = (float)(color >> 24 & 255) / 255.0F;
+            this.red = (float) (color >> 16 & 255) / 255.0F;
+            this.blue = (float) (color >> 8 & 255) / 255.0F;
+            this.green = (float) (color & 255) / 255.0F;
+            this.alpha = (float) (color >> 24 & 255) / 255.0F;
             GL11.glColor4f(this.red, this.blue, this.green, this.alpha);
-            this.posX = (float)x;
-            this.posY = (float)y;
+            this.posX = (float) x;
+            this.posY = (float) y;
             this.renderStringAtPos(string, p_78258_5_);
-            return (int)this.posX;
+            return (int) this.posX;
         }
     }
 
@@ -866,8 +864,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
     }
 
     /**
-     * Perform actual work of rendering a multi-line string with wordwrap and with darker drop shadow color if flag is
-     * set
+     * Perform actual work of rendering a multi-line string with wordwrap and with darker drop shadow color if flag is set
      */
     private void renderSplitString(String string, int x, int y, int maxWidth, boolean dropShadow)
     {
@@ -875,7 +872,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
 
         for (Iterator iterator = list.iterator(); iterator.hasNext(); y += this.FONT_HEIGHT)
         {
-            String s1 = (String)iterator.next();
+            String s1 = (String) iterator.next();
             this.renderStringAligned(s1, x, y, maxWidth, this.textColor, dropShadow);
         }
     }
@@ -889,8 +886,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
     }
 
     /**
-     * Set unicodeFlag controlling whether strings should be rendered with Unicode fonts instead of the default.png
-     * font.
+     * Set unicodeFlag controlling whether strings should be rendered with Unicode fonts instead of the default.png font.
      */
     public void setUnicodeFlag(boolean unicodeFlag)
     {
@@ -898,8 +894,7 @@ public class EnhancedFontRenderer implements IResourceManagerReloadListener
     }
 
     /**
-     * Get unicodeFlag controlling whether strings should be rendered with Unicode fonts instead of the default.png
-     * font.
+     * Get unicodeFlag controlling whether strings should be rendered with Unicode fonts instead of the default.png font.
      */
     public boolean getUnicodeFlag()
     {

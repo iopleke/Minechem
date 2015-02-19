@@ -1,9 +1,8 @@
 package minechem.chemical;
 
-import minechem.helper.ColourHelper;
-
 import java.util.Arrays;
 import java.util.LinkedList;
+import minechem.helper.ColourHelper;
 
 /**
  * This class will hold one Chemical structure
@@ -88,18 +87,23 @@ public class ChemicalStructure
         }
         return formula;
     }
-    
+
     private void calcColour()
     {
         int[] colours = new int[internalStructure.size()];
         for (int i = 0; i < internalStructure.size(); i++)
+        {
             colours[i] = internalStructure.get(i).chemical.getColour();
+        }
         colour = ColourHelper.blend(colours);
     }
-    
+
     public int getColour()
     {
-        if (colour == 0) calcColour();
+        if (colour == 0)
+        {
+            calcColour();
+        }
         return this.colour;
     }
 

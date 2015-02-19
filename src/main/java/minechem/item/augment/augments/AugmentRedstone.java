@@ -37,8 +37,7 @@ public class AugmentRedstone extends AugmentBase
             if (world.isAirBlock(x, y, z))
             {
                 world.setBlock(x, y, z, BlockRegistry.blockRedstone, level + 5, 7);
-            }
-            else if (world.getBlock(x, y, z) == BlockRegistry.blockRedstone)
+            } else if (world.getBlock(x, y, z) == BlockRegistry.blockRedstone)
             {
                 world.setBlockMetadataWithNotify(x, y, z, level + 5, 4);
             }

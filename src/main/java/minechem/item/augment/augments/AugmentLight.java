@@ -21,12 +21,12 @@ public class AugmentLight extends AugmentBase
     @SubscribeEvent
     public void onBlockHarvest(BlockEvent.HarvestDropsEvent event)
     {
-        if (event.harvester!=null)
+        if (event.harvester != null)
         {
             ItemStack stack = event.harvester.getHeldItem();
             if (stack != null && stack.getItem() instanceof IAugmentedItem)
             {
-                IAugmentedItem augmentedItem = (IAugmentedItem)stack.getItem();
+                IAugmentedItem augmentedItem = (IAugmentedItem) stack.getItem();
                 int level = augmentedItem.getAugmentLevel(stack, this);
                 if (level > -1 && event.world.getBlockLightValue(event.x, event.y, event.z) < 8)
                 {
@@ -41,13 +41,13 @@ public class AugmentLight extends AugmentBase
     public boolean onItemUse(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ, int level)
     {
         ForgeDirection dir = ForgeDirection.getOrientation(side);
-        x+=dir.offsetX;
-        y+=dir.offsetY;
-        z+=dir.offsetZ;
-        if (!world.isRemote && world.isAirBlock(x,y,z))
+        x += dir.offsetX;
+        y += dir.offsetY;
+        z += dir.offsetZ;
+        if (!world.isRemote && world.isAirBlock(x, y, z))
         {
-            consumeAugment(stack, level*2);
-            world.setBlock(x, y, z, BlockRegistry.blockLight, (int)(level*1.5F), 3);
+            consumeAugment(stack, level * 2);
+            world.setBlock(x, y, z, BlockRegistry.blockLight, (int) (level * 1.5F), 3);
         }
         return true;
     }

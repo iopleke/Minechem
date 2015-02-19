@@ -1,15 +1,14 @@
 package minechem.item.journal.pages;
 
-import minechem.helper.LocalizationHelper;
-import net.afterlifelochie.fontbox.document.Element;
-import net.afterlifelochie.fontbox.document.Heading;
-import net.minecraft.entity.player.EntityPlayer;
-
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
+import minechem.helper.LocalizationHelper;
+import net.afterlifelochie.fontbox.document.Element;
+import net.afterlifelochie.fontbox.document.Heading;
+import net.minecraft.entity.player.EntityPlayer;
 
 public class SectionPage extends JournalPage
 {
@@ -28,7 +27,10 @@ public class SectionPage extends JournalPage
     public SectionPage(String page, String chapter, List<IJournalPage> pageList)
     {
         super(page, chapter);
-        for (IJournalPage jPage : pageList) pages.put(jPage.getPageName(), jPage);
+        for (IJournalPage jPage : pageList)
+        {
+            pages.put(jPage.getPageName(), jPage);
+        }
     }
 
     @Override
@@ -37,7 +39,10 @@ public class SectionPage extends JournalPage
         IJournalPage result = super.getPage(key);
         if (result == null)
         {
-            if (pages.containsKey(key)) return pages.get(key);
+            if (pages.containsKey(key))
+            {
+                return pages.get(key);
+            }
             Matcher matcher = subPagePattern.matcher(key);
             if (matcher.find())
             {
@@ -107,7 +112,10 @@ public class SectionPage extends JournalPage
     {
         for (IJournalPage page : pages.values())
         {
-            if (page.isUnlocked(player)) return true;
+            if (page.isUnlocked(player))
+            {
+                return true;
+            }
         }
         return false;
     }

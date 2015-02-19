@@ -54,6 +54,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 
     /**
      * Returns the title
+     *
      * @return an {@link net.minecraft.util.IChatComponent}
      */
     @Override
@@ -66,6 +67,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 
     /**
      * Background colour for the achievement icon
+     *
      * @return an int representation of the colour
      */
     @Override
@@ -83,9 +85,15 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     @Override
     public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top)
     {
-        if (regularFont == null) regularFont = new Font(fontRenderer);
-        if (smallFont == null) smallFont = new Font(fontRenderer).setFontSize(8);
-        regularFont.print(element.shortName, left+10 - (element.shortName.length()-1)*5, top+8, Compendium.Color.TrueColor.white, true);
+        if (regularFont == null)
+        {
+            regularFont = new Font(fontRenderer);
+        }
+        if (smallFont == null)
+        {
+            smallFont = new Font(fontRenderer).setFontSize(8);
+        }
+        regularFont.print(element.shortName, left + 10 - (element.shortName.length() - 1) * 5, top + 8, Compendium.Color.TrueColor.white, true);
         smallFont.print(element.atomicNumber, left, top, Compendium.Color.TrueColor.white, true);
     }
 }

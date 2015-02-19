@@ -8,8 +8,8 @@ import net.minecraft.client.resources.IReloadableResourceManager;
 public class Font
 {
     private EnhancedFontRenderer fontRenderer;
-    
-    public Font (FontRenderer fontRenderer)
+
+    public Font(FontRenderer fontRenderer)
     {
         this(fontRenderer.FONT_HEIGHT, fontRenderer.getUnicodeFlag());
     }
@@ -19,14 +19,14 @@ public class Font
         Minecraft mc = Minecraft.getMinecraft();
         fontRenderer = new EnhancedFontRenderer(mc.gameSettings, Compendium.Resource.Font.vanilla, mc.getTextureManager(), unicode);
         fontRenderer.setZLevel(zLevel).setFontSize(size);
-        ((IReloadableResourceManager)mc.getResourceManager()).registerReloadListener(fontRenderer);
+        ((IReloadableResourceManager) mc.getResourceManager()).registerReloadListener(fontRenderer);
     }
 
     public Font(boolean unicode)
     {
         this(unicode, 9, 0);
     }
-    
+
     public Font(int fontSize, boolean unicode)
     {
         this(unicode, fontSize, 0);
@@ -36,12 +36,12 @@ public class Font
     {
         this(false, 9, zLevel);
     }
-    
+
     public Font(int fontSize)
     {
         this(false, fontSize, 0);
     }
-    
+
     public Font(int fontSize, float zLevel)
     {
         this(false, fontSize, zLevel);
@@ -51,7 +51,7 @@ public class Font
     {
         return this.fontRenderer.getZLevel();
     }
-    
+
     public int getCurrentFontSize()
     {
         return this.fontRenderer.getFontSize();

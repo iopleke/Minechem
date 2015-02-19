@@ -32,7 +32,7 @@ public class AugmentTnt extends AugmentBase
         if (!player.worldObj.isRemote)
         {
             consumeAugment(stack, level);
-            player.worldObj.createExplosion(null, entity.posX, entity.posY+entity.height/2, entity.posZ, (level + 1), false);
+            player.worldObj.createExplosion(null, entity.posX, entity.posY + entity.height / 2, entity.posZ, (level + 1), false);
         }
         return false;
     }

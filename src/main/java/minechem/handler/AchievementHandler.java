@@ -12,14 +12,16 @@ public class AchievementHandler
         initMinechem();
         initElements();
     }
-    
+
     private static void initElements()
     {
         for (Element element : ElementRegistry.getInstance().getElements())
+        {
             AchievementRegistry.getInstance().addAchievement(element);
+        }
         AchievementRegistry.getInstance().registerElementAchievements();
     }
-    
+
     private static void initMinechem()
     {
         AchievementRegistry.getInstance().addAchievement(ItemRegistry.journal.getUnlocalizedName(), 0, 0, ItemRegistry.journal);

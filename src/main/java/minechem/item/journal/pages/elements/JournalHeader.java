@@ -12,7 +12,7 @@ public class JournalHeader extends JournalElement
     public JournalHeader(String pageKey)
     {
         super(pageKey);
-        titleKey = "journal" + (pageKey.isEmpty()?"":"."+pageKey) + ".title";
+        titleKey = "journal" + (pageKey.isEmpty() ? "" : "." + pageKey) + ".title";
     }
 
     @Override

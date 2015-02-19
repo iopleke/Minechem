@@ -2,6 +2,7 @@ package minechem.item.chemical;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
+import java.util.List;
 import minechem.Compendium;
 import minechem.chemical.ChemicalBase;
 import minechem.helper.Jenkins;
@@ -13,8 +14,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.IIcon;
-
-import java.util.List;
 
 public class ChemicalItem extends BasicItem
 {
@@ -31,11 +30,11 @@ public class ChemicalItem extends BasicItem
     public IIcon[] gas;
     @SideOnly(Side.CLIENT)
     public IIcon[] plasma; // TODO: add icons for plasma
-    
+
     public ChemicalItem()
     {
         super("chemical");
-        
+
     }
 
     @Override
@@ -50,20 +49,29 @@ public class ChemicalItem extends BasicItem
         dust = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_dust");
         moleculeSymbol = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_molecule");
         for (int i = 0; i < liquid.length; i++)
-            liquid[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_liquid" + (i+1));
+        {
+            liquid[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_liquid" + (i + 1));
+        }
         for (int i = 0; i < gas.length; i++)
-            gas[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_gas" + (i+1));
+        {
+            gas[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_gas" + (i + 1));
+        }
         for (int i = 0; i < plasma.length; i++)
-            plasma[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_plasma" + (i+1));
+        {
+            plasma[i] = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_plasma" + (i + 1));
+        }
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack itemStack)
     {
         if (itemStack.hasTagCompound() && itemStack.getTagCompound().hasKey("fullName"))
+        {
             return itemStack.getTagCompound().getString("fullName");
-        else
+        } else
+        {
             return "Generic ChemicalItem";
+        }
     }
 
     @Override
@@ -72,7 +80,9 @@ public class ChemicalItem extends BasicItem
         super.addInformation(itemStack, player, tooltip, bool);
         ChemicalBase chemicalBase = getChemicalBase(itemStack);
         if (chemicalBase != null)
+        {
             tooltip.addAll(chemicalBase.getToolTip());
+        }
     }
 
     @Override

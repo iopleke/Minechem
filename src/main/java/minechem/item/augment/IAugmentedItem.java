@@ -35,7 +35,7 @@ public interface IAugmentedItem
     /**
      * Set {@link minechem.item.augment.augments.IAugment} on Item
      *
-     * @param item    ItemStack to add augment to
+     * @param item        ItemStack to add augment to
      * @param augmentItem Augment to add
      */
     boolean setAugment(ItemStack item, ItemStack augmentItem);

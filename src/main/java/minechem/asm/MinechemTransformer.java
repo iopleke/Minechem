@@ -1,22 +1,26 @@
 package minechem.asm;
 
-import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.ClassReader;
-import org.objectweb.asm.ClassWriter;
-import org.objectweb.asm.Opcodes;
-import org.objectweb.asm.tree.*;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import net.minecraft.launchwrapper.IClassTransformer;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.Opcodes;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.InsnList;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.MethodNode;
+import org.objectweb.asm.tree.VarInsnNode;
 
 public class MinechemTransformer implements IClassTransformer
 {
     private enum Class
     {
         GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei", Method.GUI_DRAW);
-        
+
         private final String name, obfName;
         private Method[] methods;
 
@@ -34,49 +38,48 @@ public class MinechemTransformer implements IClassTransformer
 
         public String getASMName()
         {
-            return name.replace(".","/");
+            return name.replace(".", "/");
         }
     }
-    
+
     private enum Method
     {
         GUI_DRAW("func_146552_b", "(IIF)V", InstructionNode.RECOLOUR, InstructionNode.RESET, InstructionNode.ICON);
-        
+
         private final String name, args;
         private InstructionNode[] instructions;
-        
+
         private Method(String name, String args, InstructionNode... instructions)
         {
             this.name = name;
             this.args = args;
             this.instructions = instructions;
         }
-        
+
         public String getName()
         {
             return this.name;
         }
     }
 
-    
     public enum InstructionNode
     {
-        RECOLOUR("bindTexture","glEnable", false),
+        RECOLOUR("bindTexture", "glEnable", false),
         RESET("glDisable", "canUnlockAchievement", false),
         ICON("getTextureManager", "renderItemAndEffectIntoGUI", true);
-        
+
         public final String after, before;
         public final boolean replace;
         public InsnList insnList;
-        
+
         private InstructionNode(String after, String next, boolean replace)
         {
             this.after = after;
             this.before = next;
             this.replace = replace;
         }
-        
-        static 
+
+        static
         {
             RECOLOUR.insnList = createRenderHook();
             RESET.insnList = createResetHook();
@@ -99,13 +102,13 @@ public class MinechemTransformer implements IClassTransformer
             insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "resetGreyscale", "(F)V", false));
             return insnList;
         }
-        
+
         private static InsnList createIconHook()
         {
             InsnList insnList = new InsnList();
             insnList.add(new VarInsnNode(Opcodes.ALOAD, 33));
             insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "minechem/asm/MinechemHooks", "drawIconAchievement", "(Lnet/minecraft/client/renderer/entity/RenderItem;Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILnet/minecraft/stats/Achievement;)V", false));
-            return insnList; 
+            return insnList;
         }
 
         public InsnList getInsnList()
@@ -114,14 +117,16 @@ public class MinechemTransformer implements IClassTransformer
         }
     }
 
-    private static Map<String, Class> classMap = new HashMap<String,Class>();
+    private static Map<String, Class> classMap = new HashMap<String, Class>();
 
     static
     {
         for (Class className : Class.values())
+        {
             classMap.put(className.getName(), className);
+        }
     }
-    
+
     @Override
     public byte[] transform(String name, String transformedName, byte[] bytes)
     {
@@ -129,13 +134,17 @@ public class MinechemTransformer implements IClassTransformer
         if (clazz != null)
         {
             for (Method method : clazz.methods)
+            {
                 for (InstructionNode node : method.instructions)
+                {
                     bytes = injectBytes(method, node, bytes);
+                }
+            }
             classMap.remove(name);
         }
         return bytes;
     }
-    
+
     public byte[] injectBytes(Method method, InstructionNode instructionNode, byte[] data)
     {
         ClassNode classNode = new ClassNode();
@@ -148,8 +157,7 @@ public class MinechemTransformer implements IClassTransformer
         {
             methodNode.instructions.insertBefore(pos, instructionNode.getInsnList());
             methodNode.instructions.remove(pos);
-        }
-        else
+        } else
         {
             methodNode.instructions.insertBefore(pos.getNext(), instructionNode.getInsnList());
         }
@@ -169,11 +177,16 @@ public class MinechemTransformer implements IClassTransformer
             {
                 if (close)
                 {
-                    if (((MethodInsnNode)node).name.equals(instructionNode.before)) return instructionNode.replace ? node : result;
-                    else close = false;
+                    if (((MethodInsnNode) node).name.equals(instructionNode.before))
+                    {
+                        return instructionNode.replace ? node : result;
+                    } else
+                    {
+                        close = false;
+                    }
                 }
-                
-                if (((MethodInsnNode)node).name.equals(instructionNode.after))
+
+                if (((MethodInsnNode) node).name.equals(instructionNode.after))
                 {
                     close = true;
                     result = node;
@@ -183,7 +196,8 @@ public class MinechemTransformer implements IClassTransformer
         return methodNode.instructions.getLast();
     }
 
-    public static MethodNode getMethodByName(ClassNode classNode, Method method) {
+    public static MethodNode getMethodByName(ClassNode classNode, Method method)
+    {
         List<MethodNode> methods = classNode.methods;
         for (MethodNode methodNode : methods)
         {
