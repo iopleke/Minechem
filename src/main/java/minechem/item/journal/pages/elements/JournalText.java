@@ -17,7 +17,7 @@ public class JournalText extends JournalElement
     public JournalText(String pageKey, String textKey)
     {
         super(pageKey);
-        this.textKey = textKey;
+        this.textKey = "journal." + textKey;
     }
 
     @Override
