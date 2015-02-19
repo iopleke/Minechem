@@ -7,19 +7,19 @@
         "formula": "OH",
         "form": "liquid"
     },
-    "lithiumHydroxide" :
-    {
-        "formula": "Li(OH)",
-        "form": "liquid"
-    },
-    "hydrogenChloride" :
-    {
-        "formula": "HCl",
-        "form": "liquid"
-    },
-    "salt" :
-    {
-        "formula": "NaCl",
-        "form": "solid"
-    }
+    "lithiumHydroxide":
+            {
+                "formula": "Li(OH)",
+                "form": "liquid"
+            },
+    "hydrogenChloride":
+            {
+                "formula": "HCl",
+                "form": "liquid"
+            },
+    "salt":
+            {
+                "formula": "NaCl",
+                "form": "solid"
+            }
 }

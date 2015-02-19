@@ -1,828 +1,828 @@
 {
-  "1": {
-    "longName": "Hydrogen",
-    "shortName": "H",
-    "form": "gas",
-    "type": "nonMetal",
-    "neutrons": "0"
-  },
-  "2": {
-    "longName": "Helium",
-    "shortName": "He",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "2"
-  },
-  "3": {
-    "longName": "Lithium",
-    "shortName": "Li",
-    "form": "solid",
-    "type": "alkaliMetal",
-    "neutrons": "4"
-  },
-  "4": {
-    "longName": "Beryllium",
-    "shortName": "Be",
-    "form": "solid",
-    "type": "alkalineEarth",
-    "neutrons": "5"
-  },
-  "5": {
-    "longName": "Boron",
-    "shortName": "B",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "6"
-  },
-  "6": {
-    "longName": "Carbon",
-    "shortName": "C",
-    "form": "solid",
-    "type": "nonMetal",
-    "neutrons": "6"
-  },
-  "7": {
-    "longName": "Nitrogen",
-    "shortName": "N",
-    "form": "gas",
-    "type": "nonMetal",
-    "neutrons": "7"
-  },
-  "8": {
-    "longName": "Oxygen",
-    "shortName": "O",
-    "form": "gas",
-    "type": "nonMetal",
-    "neutrons": "8"
-  },
-  "9": {
-    "longName": "Fluorine",
-    "shortName": "F",
-    "form": "gas",
-    "type": "halogen",
-    "neutrons": "10"
-  },
-  "10": {
-    "longName": "Neon",
-    "shortName": "Ne",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "10"
-  },
-  "11": {
-    "longName": "Sodium",
-    "shortName": "Na",
-    "form": "solid",
-    "type": "alkaliMetal",
-    "neutrons": "12"
-  },
-  "12": {
-    "longName": "Magnesium",
-    "shortName": "Mg",
-    "form": "solid",
-    "type": "alkalineEarth",
-    "neutrons": "12"
-  },
-  "13": {
-    "longName": "Aluminium",
-    "shortName": "Al",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "14"
-  },
-  "14": {
-    "longName": "Silicon",
-    "shortName": "Si",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "14"
-  },
-  "15": {
-    "longName": "Phosphorus",
-    "shortName": "P",
-    "form": "solid",
-    "type": "nonMetal",
-    "neutrons": "16"
-  },
-  "16": {
-    "longName": "Sulfur",
-    "shortName": "S",
-    "form": "solid",
-    "type": "nonMetal",
-    "neutrons": "16"
-  },
-  "17": {
-    "longName": "Chlorine",
-    "shortName": "Cl",
-    "form": "gas",
-    "type": "halogen",
-    "neutrons": "18"
-  },
-  "18": {
-    "longName": "Argon",
-    "shortName": "Ar",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "22"
-  },
-  "19": {
-    "longName": "Potassium",
-    "shortName": "K",
-    "form": "solid",
-    "type": "alkaliMetal",
-    "neutrons": "20"
-  },
-  "20": {
-    "longName": "Calcium",
-    "shortName": "Ca",
-    "form": "solid",
-    "type": "alkalineEarth",
-    "neutrons": "20"
-  },
-  "21": {
-    "longName": "Scandium",
-    "shortName": "Sc",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "24"
-  },
-  "22": {
-    "longName": "Titanium",
-    "shortName": "Ti",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "26"
-  },
-  "23": {
-    "longName": "Vanadium",
-    "shortName": "V",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "28"
-  },
-  "24": {
-    "longName": "Chromium",
-    "shortName": "Cr",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "28"
-  },
-  "25": {
-    "longName": "Manganese",
-    "shortName": "Mn",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "30"
-  },
-  "26": {
-    "longName": "Iron",
-    "shortName": "Fe",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "30"
-  },
-  "27": {
-    "longName": "Cobalt",
-    "shortName": "Co",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "32"
-  },
-  "28": {
-    "longName": "Nickel",
-    "shortName": "Ni",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "31"
-  },
-  "29": {
-    "longName": "Copper",
-    "shortName": "Cu",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "35"
-  },
-  "30": {
-    "longName": "Zinc",
-    "shortName": "Zn",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "35"
-  },
-  "31": {
-    "longName": "Gallium",
-    "shortName": "Ga",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "39"
-  },
-  "32": {
-    "longName": "Germanium",
-    "shortName": "Ge",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "41"
-  },
-  "33": {
-    "longName": "Arsenic",
-    "shortName": "As",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "42"
-  },
-  "34": {
-    "longName": "Selenium",
-    "shortName": "Se",
-    "form": "solid",
-    "type": "nonMetal",
-    "neutrons": "45"
-  },
-  "35": {
-    "longName": "Bromine",
-    "shortName": "Br",
-    "form": "liquid",
-    "type": "halogen",
-    "neutrons": "45"
-  },
-  "36": {
-    "longName": "Krypton",
-    "shortName": "Kr",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "48"
-  },
-  "37": {
-    "longName": "Rubidium",
-    "shortName": "Rb",
-    "form": "solid",
-    "type": "alkaliMetal",
-    "neutrons": "48"
-  },
-  "38": {
-    "longName": "Strontium",
-    "shortName": "Sr",
-    "form": "solid",
-    "type": "alkalineEarth",
-    "neutrons": "50"
-  },
-  "39": {
-    "longName": "Yttrium",
-    "shortName": "Y",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "50"
-  },
-  "40": {
-    "longName": "Zirconium",
-    "shortName": "Zr",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "51"
-  },
-  "41": {
-    "longName": "Niobium",
-    "shortName": "Nb",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "52"
-  },
-  "42": {
-    "longName": "Molybdenum",
-    "shortName": "Mo",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "54"
-  },
-  "43": {
-    "longName": "Technetium",
-    "shortName": "Tc",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "55"
-  },
-  "44": {
-    "longName": "Ruthenium",
-    "shortName": "Ru",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "57"
-  },
-  "45": {
-    "longName": "Rhodium",
-    "shortName": "Rh",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "58"
-  },
-  "46": {
-    "longName": "Palladium",
-    "shortName": "Pd",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "60"
-  },
-  "47": {
-    "longName": "Silver",
-    "shortName": "Ag",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "61"
-  },
-  "48": {
-    "longName": "Cadmium",
-    "shortName": "Cd",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "64"
-  },
-  "49": {
-    "longName": "Indium",
-    "shortName": "In",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "66"
-  },
-  "50": {
-    "longName": "Tin",
-    "shortName": "Sn",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "69"
-  },
-  "51": {
-    "longName": "Antimony",
-    "shortName": "Sb",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "71"
-  },
-  "52": {
-    "longName": "Tellurium",
-    "shortName": "Te",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "76"
-  },
-  "53": {
-    "longName": "Iodine",
-    "shortName": "I",
-    "form": "solid",
-    "type": "halogen",
-    "neutrons": "74"
-  },
-  "54": {
-    "longName": "Xenon",
-    "shortName": "Xe",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "77"
-  },
-  "55": {
-    "longName": "Caesium",
-    "shortName": "Cs",
-    "form": "solid",
-    "type": "alkaliMetal",
-    "neutrons": "78"
-  },
-  "56": {
-    "longName": "Barium",
-    "shortName": "Ba",
-    "form": "solid",
-    "type": "alkalineEarth",
-    "neutrons": "81"
-  },
-  "57": {
-    "longName": "Lanthanum",
-    "shortName": "La",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "82"
-  },
-  "58": {
-    "longName": "Cerium",
-    "shortName": "Ce",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "82"
-  },
-  "59": {
-    "longName": "Praseodymium",
-    "shortName": "Pr",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "82"
-  },
-  "60": {
-    "longName": "Neodymium",
-    "shortName": "Nd",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "84"
-  },
-  "61": {
-    "longName": "Promethium",
-    "shortName": "Pm",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "84"
-  },
-  "62": {
-    "longName": "Samarium",
-    "shortName": "Sm",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "88"
-  },
-  "63": {
-    "longName": "Europium",
-    "shortName": "Eu",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "89"
-  },
-  "64": {
-    "longName": "Gadolinium",
-    "shortName": "Gd",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "93"
-  },
-  "65": {
-    "longName": "Terbium",
-    "shortName": "Tb",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "94"
-  },
-  "66": {
-    "longName": "Dysprosium",
-    "shortName": "Dy",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "97"
-  },
-  "67": {
-    "longName": "Holmium",
-    "shortName": "Ho",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "98"
-  },
-  "68": {
-    "longName": "Erbium",
-    "shortName": "Er",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "99"
-  },
-  "69": {
-    "longName": "Thulium",
-    "shortName": "Tm",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "100"
-  },
-  "70": {
-    "longName": "Ytterbium",
-    "shortName": "Yt",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "103"
-  },
-  "71": {
-    "longName": "Lutetium",
-    "shortName": "Lu",
-    "form": "solid",
-    "type": "lanthanide",
-    "neutrons": "104"
-  },
-  "72": {
-    "longName": "Hafnium",
-    "shortName": "Hf",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "106"
-  },
-  "73": {
-    "longName": "Tantalum",
-    "shortName": "Ta",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "108"
-  },
-  "74": {
-    "longName": "Tungsten",
-    "shortName": "W",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "110"
-  },
-  "75": {
-    "longName": "Rhenium",
-    "shortName": "Re",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "111"
-  },
-  "76": {
-    "longName": "Osmium",
-    "shortName": "Os",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "114"
-  },
-  "77": {
-    "longName": "Iridium",
-    "shortName": "Ir",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "115"
-  },
-  "78": {
-    "longName": "Platinum",
-    "shortName": "Pt",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "117"
-  },
-  "79": {
-    "longName": "Gold",
-    "shortName": "Au",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "118"
-  },
-  "80": {
-    "longName": "Mercury",
-    "shortName": "Hg",
-    "form": "liquid",
-    "type": "transitionMetal",
-    "neutrons": "121"
-  },
-  "81": {
-    "longName": "Thallium",
-    "shortName": "Tl",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "123"
-  },
-  "82": {
-    "longName": "Lead",
-    "shortName": "Pb",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "125"
-  },
-  "83": {
-    "longName": "Bismuth",
-    "shortName": "Bi",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "126"
-  },
-  "84": {
-    "longName": "Polonium",
-    "shortName": "Po",
-    "form": "solid",
-    "type": "semiMetal",
-    "neutrons": "125"
-  },
-  "85": {
-    "longName": "Astatine",
-    "shortName": "At",
-    "form": "solid",
-    "type": "halogen",
-    "neutrons": "125"
-  },
-  "86": {
-    "longName": "Radon",
-    "shortName": "Rn",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "136"
-  },
-  "87": {
-    "longName": "Francium",
-    "shortName": "Fr",
-    "form": "solid",
-    "type": "alkaliMetal",
-    "neutrons": "136"
-  },
-  "88": {
-    "longName": "Radium",
-    "shortName": "Ra",
-    "form": "solid",
-    "type": "alkalineEarth",
-    "neutrons": "138"
-  },
-  "89": {
-    "longName": "Actinium",
-    "shortName": "Ac",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "138"
-  },
-  "90": {
-    "longName": "Thorium",
-    "shortName": "Th",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "142"
-  },
-  "91": {
-    "longName": "Protactinium",
-    "shortName": "Pa",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "140"
-  },
-  "92": {
-    "longName": "Uranium",
-    "shortName": "U",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "146"
-  },
-  "93": {
-    "longName": "Neptunium",
-    "shortName": "Np",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "144"
-  },
-  "94": {
-    "longName": "Plutonium",
-    "shortName": "Pu",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "150"
-  },
-  "95": {
-    "longName": "Americium",
-    "shortName": "Am",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "148"
-  },
-  "96": {
-    "longName": "Curium",
-    "shortName": "Cm",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "151"
-  },
-  "97": {
-    "longName": "Berkelium",
-    "shortName": "Bk",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "150"
-  },
-  "98": {
-    "longName": "Californium",
-    "shortName": "Cf",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "153"
-  },
-  "99": {
-    "longName": "Einsteinium",
-    "shortName": "Es",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "153"
-  },
-  "100": {
-    "longName": "Fermium",
-    "shortName": "Fm",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "157"
-  },
-  "101": {
-    "longName": "Mendelevium",
-    "shortName": "Md",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "157"
-  },
-  "102": {
-    "longName": "Nobelium",
-    "shortName": "No",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "157"
-  },
-  "103": {
-    "longName": "Lawrencium",
-    "shortName": "Lr",
-    "form": "solid",
-    "type": "actinide",
-    "neutrons": "159"
-  },
-  "104": {
-    "longName": "Rutherfordium",
-    "shortName": "Rf",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "163"
-  },
-  "105": {
-    "longName": "Dubnium",
-    "shortName": "Db",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "163"
-  },
-  "106": {
-    "longName": "Seaborgium",
-    "shortName": "Sg",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "165"
-  },
-  "107": {
-    "longName": "Bohrium",
-    "shortName": "Bh",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "165"
-  },
-  "108": {
-    "longName": "Hassium",
-    "shortName": "Hs",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "162"
-  },
-  "109": {
-    "longName": "Meitnerium",
-    "shortName": "Mt",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "167"
-  },
-  "110": {
-    "longName": "Darmstadtium",
-    "shortName": "Ds",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "171"
-  },
-  "111": {
-    "longName": "Roentgenium",
-    "shortName": "Rg",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "169"
-  },
-  "112": {
-    "longName": "Copernicum",
-    "shortName": "Cn",
-    "form": "solid",
-    "type": "transitionMetal",
-    "neutrons": "173"
-  },
-  "113": {
-    "longName": "Ununtrium",
-    "shortName": "Uut",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "171"
-  },
-  "114": {
-    "longName": "Flerovium",
-    "shortName": "Fl",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "175"
-  },
-  "115": {
-    "longName": "Ununpentium",
-    "shortName": "Uup",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "173"
-  },
-  "116": {
-    "longName": "Livermorium",
-    "shortName": "Lv",
-    "form": "solid",
-    "type": "basicMetal",
-    "neutrons": "177"
-  },
-  "117": {
-    "longName": "Ununseptium",
-    "shortName": "Uus",
-    "form": "solid",
-    "type": "halogen",
-    "neutrons": "177"
-  },
-  "118": {
-    "longName": "Ununoctium",
-    "shortName": "Uuo",
-    "form": "gas",
-    "type": "nobleGas",
-    "neutrons": "176"
-  }
+    "1": {
+        "longName": "Hydrogen",
+        "shortName": "H",
+        "form": "gas",
+        "type": "nonMetal",
+        "neutrons": "0"
+    },
+    "2": {
+        "longName": "Helium",
+        "shortName": "He",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "2"
+    },
+    "3": {
+        "longName": "Lithium",
+        "shortName": "Li",
+        "form": "solid",
+        "type": "alkaliMetal",
+        "neutrons": "4"
+    },
+    "4": {
+        "longName": "Beryllium",
+        "shortName": "Be",
+        "form": "solid",
+        "type": "alkalineEarth",
+        "neutrons": "5"
+    },
+    "5": {
+        "longName": "Boron",
+        "shortName": "B",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "6"
+    },
+    "6": {
+        "longName": "Carbon",
+        "shortName": "C",
+        "form": "solid",
+        "type": "nonMetal",
+        "neutrons": "6"
+    },
+    "7": {
+        "longName": "Nitrogen",
+        "shortName": "N",
+        "form": "gas",
+        "type": "nonMetal",
+        "neutrons": "7"
+    },
+    "8": {
+        "longName": "Oxygen",
+        "shortName": "O",
+        "form": "gas",
+        "type": "nonMetal",
+        "neutrons": "8"
+    },
+    "9": {
+        "longName": "Fluorine",
+        "shortName": "F",
+        "form": "gas",
+        "type": "halogen",
+        "neutrons": "10"
+    },
+    "10": {
+        "longName": "Neon",
+        "shortName": "Ne",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "10"
+    },
+    "11": {
+        "longName": "Sodium",
+        "shortName": "Na",
+        "form": "solid",
+        "type": "alkaliMetal",
+        "neutrons": "12"
+    },
+    "12": {
+        "longName": "Magnesium",
+        "shortName": "Mg",
+        "form": "solid",
+        "type": "alkalineEarth",
+        "neutrons": "12"
+    },
+    "13": {
+        "longName": "Aluminium",
+        "shortName": "Al",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "14"
+    },
+    "14": {
+        "longName": "Silicon",
+        "shortName": "Si",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "14"
+    },
+    "15": {
+        "longName": "Phosphorus",
+        "shortName": "P",
+        "form": "solid",
+        "type": "nonMetal",
+        "neutrons": "16"
+    },
+    "16": {
+        "longName": "Sulfur",
+        "shortName": "S",
+        "form": "solid",
+        "type": "nonMetal",
+        "neutrons": "16"
+    },
+    "17": {
+        "longName": "Chlorine",
+        "shortName": "Cl",
+        "form": "gas",
+        "type": "halogen",
+        "neutrons": "18"
+    },
+    "18": {
+        "longName": "Argon",
+        "shortName": "Ar",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "22"
+    },
+    "19": {
+        "longName": "Potassium",
+        "shortName": "K",
+        "form": "solid",
+        "type": "alkaliMetal",
+        "neutrons": "20"
+    },
+    "20": {
+        "longName": "Calcium",
+        "shortName": "Ca",
+        "form": "solid",
+        "type": "alkalineEarth",
+        "neutrons": "20"
+    },
+    "21": {
+        "longName": "Scandium",
+        "shortName": "Sc",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "24"
+    },
+    "22": {
+        "longName": "Titanium",
+        "shortName": "Ti",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "26"
+    },
+    "23": {
+        "longName": "Vanadium",
+        "shortName": "V",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "28"
+    },
+    "24": {
+        "longName": "Chromium",
+        "shortName": "Cr",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "28"
+    },
+    "25": {
+        "longName": "Manganese",
+        "shortName": "Mn",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "30"
+    },
+    "26": {
+        "longName": "Iron",
+        "shortName": "Fe",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "30"
+    },
+    "27": {
+        "longName": "Cobalt",
+        "shortName": "Co",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "32"
+    },
+    "28": {
+        "longName": "Nickel",
+        "shortName": "Ni",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "31"
+    },
+    "29": {
+        "longName": "Copper",
+        "shortName": "Cu",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "35"
+    },
+    "30": {
+        "longName": "Zinc",
+        "shortName": "Zn",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "35"
+    },
+    "31": {
+        "longName": "Gallium",
+        "shortName": "Ga",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "39"
+    },
+    "32": {
+        "longName": "Germanium",
+        "shortName": "Ge",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "41"
+    },
+    "33": {
+        "longName": "Arsenic",
+        "shortName": "As",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "42"
+    },
+    "34": {
+        "longName": "Selenium",
+        "shortName": "Se",
+        "form": "solid",
+        "type": "nonMetal",
+        "neutrons": "45"
+    },
+    "35": {
+        "longName": "Bromine",
+        "shortName": "Br",
+        "form": "liquid",
+        "type": "halogen",
+        "neutrons": "45"
+    },
+    "36": {
+        "longName": "Krypton",
+        "shortName": "Kr",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "48"
+    },
+    "37": {
+        "longName": "Rubidium",
+        "shortName": "Rb",
+        "form": "solid",
+        "type": "alkaliMetal",
+        "neutrons": "48"
+    },
+    "38": {
+        "longName": "Strontium",
+        "shortName": "Sr",
+        "form": "solid",
+        "type": "alkalineEarth",
+        "neutrons": "50"
+    },
+    "39": {
+        "longName": "Yttrium",
+        "shortName": "Y",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "50"
+    },
+    "40": {
+        "longName": "Zirconium",
+        "shortName": "Zr",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "51"
+    },
+    "41": {
+        "longName": "Niobium",
+        "shortName": "Nb",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "52"
+    },
+    "42": {
+        "longName": "Molybdenum",
+        "shortName": "Mo",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "54"
+    },
+    "43": {
+        "longName": "Technetium",
+        "shortName": "Tc",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "55"
+    },
+    "44": {
+        "longName": "Ruthenium",
+        "shortName": "Ru",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "57"
+    },
+    "45": {
+        "longName": "Rhodium",
+        "shortName": "Rh",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "58"
+    },
+    "46": {
+        "longName": "Palladium",
+        "shortName": "Pd",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "60"
+    },
+    "47": {
+        "longName": "Silver",
+        "shortName": "Ag",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "61"
+    },
+    "48": {
+        "longName": "Cadmium",
+        "shortName": "Cd",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "64"
+    },
+    "49": {
+        "longName": "Indium",
+        "shortName": "In",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "66"
+    },
+    "50": {
+        "longName": "Tin",
+        "shortName": "Sn",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "69"
+    },
+    "51": {
+        "longName": "Antimony",
+        "shortName": "Sb",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "71"
+    },
+    "52": {
+        "longName": "Tellurium",
+        "shortName": "Te",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "76"
+    },
+    "53": {
+        "longName": "Iodine",
+        "shortName": "I",
+        "form": "solid",
+        "type": "halogen",
+        "neutrons": "74"
+    },
+    "54": {
+        "longName": "Xenon",
+        "shortName": "Xe",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "77"
+    },
+    "55": {
+        "longName": "Caesium",
+        "shortName": "Cs",
+        "form": "solid",
+        "type": "alkaliMetal",
+        "neutrons": "78"
+    },
+    "56": {
+        "longName": "Barium",
+        "shortName": "Ba",
+        "form": "solid",
+        "type": "alkalineEarth",
+        "neutrons": "81"
+    },
+    "57": {
+        "longName": "Lanthanum",
+        "shortName": "La",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "82"
+    },
+    "58": {
+        "longName": "Cerium",
+        "shortName": "Ce",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "82"
+    },
+    "59": {
+        "longName": "Praseodymium",
+        "shortName": "Pr",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "82"
+    },
+    "60": {
+        "longName": "Neodymium",
+        "shortName": "Nd",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "84"
+    },
+    "61": {
+        "longName": "Promethium",
+        "shortName": "Pm",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "84"
+    },
+    "62": {
+        "longName": "Samarium",
+        "shortName": "Sm",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "88"
+    },
+    "63": {
+        "longName": "Europium",
+        "shortName": "Eu",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "89"
+    },
+    "64": {
+        "longName": "Gadolinium",
+        "shortName": "Gd",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "93"
+    },
+    "65": {
+        "longName": "Terbium",
+        "shortName": "Tb",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "94"
+    },
+    "66": {
+        "longName": "Dysprosium",
+        "shortName": "Dy",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "97"
+    },
+    "67": {
+        "longName": "Holmium",
+        "shortName": "Ho",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "98"
+    },
+    "68": {
+        "longName": "Erbium",
+        "shortName": "Er",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "99"
+    },
+    "69": {
+        "longName": "Thulium",
+        "shortName": "Tm",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "100"
+    },
+    "70": {
+        "longName": "Ytterbium",
+        "shortName": "Yt",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "103"
+    },
+    "71": {
+        "longName": "Lutetium",
+        "shortName": "Lu",
+        "form": "solid",
+        "type": "lanthanide",
+        "neutrons": "104"
+    },
+    "72": {
+        "longName": "Hafnium",
+        "shortName": "Hf",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "106"
+    },
+    "73": {
+        "longName": "Tantalum",
+        "shortName": "Ta",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "108"
+    },
+    "74": {
+        "longName": "Tungsten",
+        "shortName": "W",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "110"
+    },
+    "75": {
+        "longName": "Rhenium",
+        "shortName": "Re",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "111"
+    },
+    "76": {
+        "longName": "Osmium",
+        "shortName": "Os",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "114"
+    },
+    "77": {
+        "longName": "Iridium",
+        "shortName": "Ir",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "115"
+    },
+    "78": {
+        "longName": "Platinum",
+        "shortName": "Pt",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "117"
+    },
+    "79": {
+        "longName": "Gold",
+        "shortName": "Au",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "118"
+    },
+    "80": {
+        "longName": "Mercury",
+        "shortName": "Hg",
+        "form": "liquid",
+        "type": "transitionMetal",
+        "neutrons": "121"
+    },
+    "81": {
+        "longName": "Thallium",
+        "shortName": "Tl",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "123"
+    },
+    "82": {
+        "longName": "Lead",
+        "shortName": "Pb",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "125"
+    },
+    "83": {
+        "longName": "Bismuth",
+        "shortName": "Bi",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "126"
+    },
+    "84": {
+        "longName": "Polonium",
+        "shortName": "Po",
+        "form": "solid",
+        "type": "semiMetal",
+        "neutrons": "125"
+    },
+    "85": {
+        "longName": "Astatine",
+        "shortName": "At",
+        "form": "solid",
+        "type": "halogen",
+        "neutrons": "125"
+    },
+    "86": {
+        "longName": "Radon",
+        "shortName": "Rn",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "136"
+    },
+    "87": {
+        "longName": "Francium",
+        "shortName": "Fr",
+        "form": "solid",
+        "type": "alkaliMetal",
+        "neutrons": "136"
+    },
+    "88": {
+        "longName": "Radium",
+        "shortName": "Ra",
+        "form": "solid",
+        "type": "alkalineEarth",
+        "neutrons": "138"
+    },
+    "89": {
+        "longName": "Actinium",
+        "shortName": "Ac",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "138"
+    },
+    "90": {
+        "longName": "Thorium",
+        "shortName": "Th",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "142"
+    },
+    "91": {
+        "longName": "Protactinium",
+        "shortName": "Pa",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "140"
+    },
+    "92": {
+        "longName": "Uranium",
+        "shortName": "U",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "146"
+    },
+    "93": {
+        "longName": "Neptunium",
+        "shortName": "Np",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "144"
+    },
+    "94": {
+        "longName": "Plutonium",
+        "shortName": "Pu",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "150"
+    },
+    "95": {
+        "longName": "Americium",
+        "shortName": "Am",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "148"
+    },
+    "96": {
+        "longName": "Curium",
+        "shortName": "Cm",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "151"
+    },
+    "97": {
+        "longName": "Berkelium",
+        "shortName": "Bk",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "150"
+    },
+    "98": {
+        "longName": "Californium",
+        "shortName": "Cf",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "153"
+    },
+    "99": {
+        "longName": "Einsteinium",
+        "shortName": "Es",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "153"
+    },
+    "100": {
+        "longName": "Fermium",
+        "shortName": "Fm",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "157"
+    },
+    "101": {
+        "longName": "Mendelevium",
+        "shortName": "Md",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "157"
+    },
+    "102": {
+        "longName": "Nobelium",
+        "shortName": "No",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "157"
+    },
+    "103": {
+        "longName": "Lawrencium",
+        "shortName": "Lr",
+        "form": "solid",
+        "type": "actinide",
+        "neutrons": "159"
+    },
+    "104": {
+        "longName": "Rutherfordium",
+        "shortName": "Rf",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "163"
+    },
+    "105": {
+        "longName": "Dubnium",
+        "shortName": "Db",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "163"
+    },
+    "106": {
+        "longName": "Seaborgium",
+        "shortName": "Sg",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "165"
+    },
+    "107": {
+        "longName": "Bohrium",
+        "shortName": "Bh",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "165"
+    },
+    "108": {
+        "longName": "Hassium",
+        "shortName": "Hs",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "162"
+    },
+    "109": {
+        "longName": "Meitnerium",
+        "shortName": "Mt",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "167"
+    },
+    "110": {
+        "longName": "Darmstadtium",
+        "shortName": "Ds",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "171"
+    },
+    "111": {
+        "longName": "Roentgenium",
+        "shortName": "Rg",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "169"
+    },
+    "112": {
+        "longName": "Copernicum",
+        "shortName": "Cn",
+        "form": "solid",
+        "type": "transitionMetal",
+        "neutrons": "173"
+    },
+    "113": {
+        "longName": "Ununtrium",
+        "shortName": "Uut",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "171"
+    },
+    "114": {
+        "longName": "Flerovium",
+        "shortName": "Fl",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "175"
+    },
+    "115": {
+        "longName": "Ununpentium",
+        "shortName": "Uup",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "173"
+    },
+    "116": {
+        "longName": "Livermorium",
+        "shortName": "Lv",
+        "form": "solid",
+        "type": "basicMetal",
+        "neutrons": "177"
+    },
+    "117": {
+        "longName": "Ununseptium",
+        "shortName": "Uus",
+        "form": "solid",
+        "type": "halogen",
+        "neutrons": "177"
+    },
+    "118": {
+        "longName": "Ununoctium",
+        "shortName": "Uuo",
+        "form": "gas",
+        "type": "nobleGas",
+        "neutrons": "176"
+    }
 }
