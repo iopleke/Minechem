@@ -22,6 +22,9 @@ import net.afterlifelochie.fontbox.document.property.FloatMode;
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.JsonToNBT;
+import net.minecraft.nbt.NBTException;
+import net.minecraft.nbt.NBTTagCompound;
 import org.apache.logging.log4j.Level;
 
 import java.io.IOException;
@@ -157,9 +160,9 @@ public class StructuredJournalHandler
             int height = object.get("height").getAsInt();
             AlignmentMode align = object.has("align")? AlignmentMode.valueOf(object.get("align").getAsString()) : AlignmentMode.JUSTIFY;
             FloatMode floatMode = object.has("float")? FloatMode.valueOf(object.get("float").getAsString()) : FloatMode.NONE;
-            if (object.has("image"))
+            if (object.has("image") || key.endsWith(".png"))
             {
-                String imageDir = object.get("image").getAsString();
+                String imageDir = object.has("image")? object.get("image").getAsString(): key;
                 if (!imageDir.startsWith(prefix)) imageDir = prefix + imageDir;
                 if (!imageDir.endsWith(suffix)) imageDir += suffix;
                 return new JournalImage(unlock, imageDir, width, height, align, floatMode);
@@ -170,6 +173,14 @@ public class StructuredJournalHandler
                 String id;
                 String[] split;
                 int damage = object.has("damage")? object.get("damage").getAsInt():0;
+                NBTTagCompound tagCompound;
+                try
+                {
+                    tagCompound = object.has("nbt") ? (NBTTagCompound) JsonToNBT.func_150315_a(object.get("nbt").getAsString()) : null;
+                } catch (Exception e)
+                {
+                    tagCompound = null;
+                }
                 if (object.has("item"))
                 {
                     id = object.get("item").getAsString();
@@ -214,7 +225,11 @@ public class StructuredJournalHandler
                 {
                     stack = Jenkins.getStack(object.get("chemical").getAsString());
                 }
-                return stack != null ? new JournalImage(unlock, stack, width, height, align, floatMode) : null;
+                if (stack!=null)
+                {
+                    if (tagCompound != null) stack.setTagCompound(tagCompound);
+                    return new JournalImage(unlock, stack, width, height, align, floatMode);
+                }
             }
         }
         return null;
