@@ -101,7 +101,7 @@ public class JournalItem extends BasicItem
      * Gets a list of authors
      *
      * @param itemStack the journal Stack
-     * @return an array of authors can be either empty or null
+     * @return an array of authors can be empty
      */
     public String[] getAuthors(ItemStack itemStack)
     {
@@ -115,14 +115,14 @@ public class JournalItem extends BasicItem
             }
             return ArrayHelper.removeNulls(authors, String.class);
         }
-        return null;
+        return new String[0];
     }
 
     /**
      * Gets a list of knowledgeKeys
      *
      * @param itemStack the journal Stack
-     * @return an array of knowledgeKeys can be either empty or null
+     * @return an array of knowledgeKeys can be empty
      */
     public String[] getKnowledgeKeys(ItemStack itemStack)
     {
@@ -136,7 +136,7 @@ public class JournalItem extends BasicItem
             }
             return ArrayHelper.removeNulls(knowledgeKeys, String.class);
         }
-        return null;
+        return new String[0];
     }
 
     /**

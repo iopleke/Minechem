@@ -1,7 +1,7 @@
 package minechem.asm;
 
 import minechem.achievement.IAchievementRenderer;
-import minechem.helper.ColourHelper;
+import minechem.proxy.client.render.RenderHelper;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.client.renderer.texture.TextureManager;
@@ -16,7 +16,7 @@ public class MinechemHooks
         if (achievement instanceof IAchievementRenderer)
         {
             int colour = ((IAchievementRenderer) achievement).recolourBackground(greyscale);
-            GL11.glColor3f(ColourHelper.getRed(colour), ColourHelper.getGreen(colour), ColourHelper.getBlue(colour));
+            RenderHelper.setOpenGLColour(colour);
         }
     }
     

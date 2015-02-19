@@ -6,6 +6,9 @@ import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
 import net.minecraft.item.ItemStack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Loyal servant to find your elements and molecules
  */
@@ -49,5 +52,17 @@ public class Jenkins
     public static ItemStack getStack(String chemical)
     {
         return null; //TODO: when we have, y'know.. items
+    }
+
+    /**
+     * Gets all {@link minechem.chemical.Element}s and {@link minechem.chemical.Molecule}s that are registered
+     * @return a list of all {@link minechem.chemical.ChemicalBase}s registered
+     */
+    public static List<? extends ChemicalBase> getAll()
+    {
+        List<ChemicalBase> all = new ArrayList<ChemicalBase>();
+        all.addAll(ElementRegistry.getInstance().getElements());
+        all.addAll(MoleculeRegistry.getInstance().getMolecules());
+        return all;
     }
 }

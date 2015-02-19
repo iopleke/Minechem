@@ -1,5 +1,11 @@
 package minechem.chemical;
 
+import minechem.helper.Jenkins;
+import net.minecraft.nbt.NBTTagCompound;
+
+import java.util.Collection;
+import java.util.List;
+
 /**
  * The base for chemicals This class will hold all functions that will shared by the {@link minechem.chemical.Element} and {@link minechem.chemical.Molecule} This way they can be handled as being the
  * same
@@ -38,6 +44,25 @@ public abstract class ChemicalBase
      * @return true if it is an element
      */
     public abstract boolean isElement();
+    
+    public static ChemicalBase readFromNBT(NBTTagCompound tag)
+    {
+        if (tag != null && tag.hasKey("fullName"))
+            return Jenkins.get(tag.getString("fullName"));
+        return null;
+    }
+    
+    public NBTTagCompound writeToNBT(NBTTagCompound tag)
+    {
+        if (tag == null) tag = new NBTTagCompound();
+        tag.setString("fullName", this.fullName);
+        tag.setBoolean("isElement", isElement());
+        return tag;
+    }
+    
+    public abstract int getColour();
+
+    public abstract List<String> getToolTip();
 
     @Override
     public String toString()
