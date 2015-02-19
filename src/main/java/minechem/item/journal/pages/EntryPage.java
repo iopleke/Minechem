@@ -6,11 +6,17 @@ import net.afterlifelochie.fontbox.document.Element;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class EntryPage extends JournalPage
 {
     List<IJournalElement> elements;
+
+    public EntryPage(String page, String chapter, IJournalElement... elements)
+    {
+        this(page, chapter, new ArrayList<IJournalElement>(Arrays.asList(elements)));
+    }
 
     public EntryPage(String page, String chapter, List<IJournalElement> elements)
     {
