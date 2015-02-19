@@ -29,7 +29,7 @@ public abstract class JournalPage implements IJournalPage
     }
 
     @Override
-    public final String getUnlocalizedKey()
+    public final String getPageKey()
     {
         return key;
     }
@@ -77,6 +77,6 @@ public abstract class JournalPage implements IJournalPage
     @Override
     public boolean isUnlocked(EntityPlayer player)
     {
-        return ResearchRegistry.getInstance().hasUnlockedResearch(player, getUnlocalizedKey());
+        return ResearchRegistry.getInstance().hasUnlockedResearch(player, getPageKey());
     }
 }

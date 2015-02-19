@@ -22,7 +22,7 @@ public class EntryPage extends JournalPage
         super(page, chapter);
         if (elements.size() == 0 || !(elements.get(0) instanceof JournalHeader))
         {
-            elements.add(0, new JournalHeader(getUnlocalizedKey()));
+            elements.add(0, new JournalHeader(getPageKey()));
         }
         this.elements = elements;
     }

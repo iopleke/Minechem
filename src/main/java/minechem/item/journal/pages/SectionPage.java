@@ -31,7 +31,7 @@ public class SectionPage extends JournalPage
         {
             pages.put(jPage.getPageName(), jPage);
         }
-        heading = new JournalHeader(getUnlocalizedKey());
+        heading = new JournalHeader(getPageKey());
     }
 
     @Override
