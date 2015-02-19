@@ -49,6 +49,16 @@ public class LogHelper
     }
 
     /**
+     * Used for logging a warning
+     *
+     * @param obj
+     */
+    public static void warn(Object obj)
+    {
+        log(Level.WARN, obj);
+    }
+
+    /**
      * Used for logging in any case
      *
      * @param obj object to log

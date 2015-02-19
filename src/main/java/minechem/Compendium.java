@@ -64,6 +64,8 @@ public class Compendium
 
     public static final class MetaData
     {
+        public static final String patreon = "https://www.patreon.com/jakimfett";
+
         /**
          * Setup mod metadata
          *
