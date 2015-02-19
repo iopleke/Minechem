@@ -7,6 +7,7 @@ import minechem.Compendium;
 import minechem.chemical.ChemicalBase;
 import minechem.helper.Jenkins;
 import minechem.item.prefab.BasicItem;
+import minechem.registry.CreativeTabRegistry;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,6 +35,7 @@ public class ChemicalItem extends BasicItem
     public ChemicalItem()
     {
         super("chemical");
+        setCreativeTab(CreativeTabRegistry.TAB_CHEMICALS);
 
     }
 
