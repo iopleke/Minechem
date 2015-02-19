@@ -19,6 +19,7 @@ public class BlockRedstone extends Block
     {
         super(myAir);
         this.setBlockName(Compendium.Naming.redstone);
+        this.setBlockTextureName(Compendium.Naming.id + ":blankIcon");
     }
 
     @Override

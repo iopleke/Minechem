@@ -1,5 +1,6 @@
 package minechem.blocks;
 
+import java.util.Random;
 import minechem.Compendium;
 import minechem.apparatus.prefab.block.SpecialRenderBlock;
 import net.minecraft.block.material.Material;
@@ -11,8 +12,6 @@ import net.minecraft.world.Explosion;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class BlockLight extends SpecialRenderBlock
 {
     public BlockLight()
@@ -20,6 +19,7 @@ public class BlockLight extends SpecialRenderBlock
         super(Material.circuits);
         setBlockName(Compendium.Naming.light);
         this.setBlockBounds(0.35F, 0.35F, 0.35F, 0.65F, 0.65F, 0.65F);
+        this.setBlockTextureName(Compendium.Naming.id + ":blankIcon");
     }
 
     @Override
