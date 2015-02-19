@@ -26,7 +26,7 @@ public class PatreonGuiTab extends BasicGuiTab
         super(gui, LocalizationHelper.getLocalString("tab.patreon.text"), 0);
         this.backgroundColor = Compendium.Color.TrueColor.cyan;// I like cyan.
         this.enabled = Config.enablePatreon;
-        this.link = "http://jakimfett.com/patreon";
+        this.link = Compendium.MetaData.patreon;
         this.linkText = LocalizationHelper.getLocalString("tab.patreon.linkText");
         this.tabTitle = "tab.patreon.headerText";
         this.tabTooltip = "tab.patreon.tooltip";

@@ -52,8 +52,11 @@ public class LuaGetTankInfo extends LuaFluidMethod
     public static Map<String, Object> getTankMap(FluidTankInfo tank)
     {
         Map<String, Object> result = new HashMap<String, Object>();
-        result.put(Compendium.NBTTags.fluid, tank.fluid.getFluid().getName());
-        result.put(Compendium.NBTTags.amount, tank.fluid.amount);
+        if (tank.fluid != null)
+        {
+            result.put(Compendium.NBTTags.fluid, tank.fluid.getFluid().getName());
+            result.put(Compendium.NBTTags.amount, tank.fluid.amount);
+        }
         result.put(Compendium.NBTTags.capacity, tank.capacity);
         return result;
     }
