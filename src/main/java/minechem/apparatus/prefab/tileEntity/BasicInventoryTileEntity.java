@@ -154,7 +154,7 @@ public abstract class BasicInventoryTileEntity extends TilePeripheralBase implem
     {
         super.readFromNBT(nbttagcompound);
 
-        NBTTagList nbttaglist = nbttagcompound.getTagList("Inventory", Constants.NBT.TAG_COMPOUND);
+        NBTTagList nbttaglist = nbttagcompound.getTagList(inventory.getInventoryName(), Constants.NBT.TAG_COMPOUND);
 
         for (int i = 0; i < inventory.getInventory().length; i++)
         {

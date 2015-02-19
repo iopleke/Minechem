@@ -111,7 +111,8 @@ public class Minechem
         LogHelper.debug("Registering ClientProxy Rendering Hooks...");
         proxy.registerRenderers();
 
-        proxy.registerJournalPages();
+        LogHelper.debug("Registering Journal Pages...");
+        JournalHandler.init(proxy.getCurrentLanguage());
 
         LogHelper.debug("Registering Achievements...");
         AchievementHandler.init();

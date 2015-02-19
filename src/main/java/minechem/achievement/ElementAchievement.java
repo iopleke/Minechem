@@ -4,7 +4,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Compendium;
 import minechem.chemical.Element;
+import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
+import minechem.item.chemical.ChemicalItem;
 import minechem.proxy.client.font.Font;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
@@ -29,20 +31,11 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     private final Element element;
     private static Font regularFont, smallFont;
 
-    public ElementAchievement(Element element, int row, int column, ItemStack displayStack)
+    public ElementAchievement(Element element, int row, int column)
     {
-        super(achievementPrefix + element.shortName, element.shortName, column, row, displayStack, nullAchievement);
+        super(achievementPrefix + element.shortName, element.shortName, column, row, element.getItemStack(), nullAchievement);
         this.element = element;
-    }
-
-    public ElementAchievement(Element element, int row, int column, Item displayItem)
-    {
-        this(element, column, row, new ItemStack(displayItem));
-    }
-
-    public ElementAchievement(Element element, int row, int column, Block displayBlock)
-    {
-        this(element, column, row, new ItemStack(displayBlock));
+        this.initIndependentStat();
     }
 
     @SideOnly(Side.CLIENT)
@@ -73,6 +66,8 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     @Override
     public int recolourBackground(float greyScale)
     {
+        if (greyScale != 1.0F)
+            return ColourHelper.blend(element.getColour(), ColourHelper.RGB(greyScale, greyScale, greyScale));
         return element.getColour();
     }
 

@@ -20,7 +20,6 @@ public class OpticalMicroscopeTileEntity extends BasicInventoryTileEntity
     @Override
     public void updateEntity()
     {
-
     }
 
 }

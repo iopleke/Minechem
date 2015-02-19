@@ -17,6 +17,12 @@ public class EventHandler
         JournalHandler.saveResearch();
     }
 
+    @SubscribeEvent
+    public void onWorldUnload(WorldEvent.Unload event)
+    {
+        JournalHandler.saveResearch();
+    }
+
     @SideOnly(Side.CLIENT)
     @SubscribeEvent
     public void registerIcons(TextureStitchEvent.Pre paramPre)
