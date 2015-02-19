@@ -189,6 +189,6 @@ public class ResearchRegistry
 
     public boolean hasUnlockedResearch(EntityPlayer player, String key)
     {
-        return getResearchFor(player).contains(key);
+        return player == null || getResearchFor(player).contains(key);
     }
 }

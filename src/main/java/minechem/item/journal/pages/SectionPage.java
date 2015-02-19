@@ -25,7 +25,7 @@ public class SectionPage extends JournalPage
         this(page, "", pageList);
     }
 
-    public SectionPage(String page, String chapter,List<IJournalPage> pageList)
+    public SectionPage(String page, String chapter, List<IJournalPage> pageList)
     {
         super(page, chapter);
         for (IJournalPage jPage : pageList) pages.put(jPage.getPageName(), jPage);
@@ -79,9 +79,12 @@ public class SectionPage extends JournalPage
         result.add(new Heading(getUnlocalizedKey(), LocalizationHelper.getLocalString(getUnlocalizedKey() + ".title")));
         for (IJournalPage page : pages.values())
         {
-            if (page.isUnlocked(player)); //TODO: for every unlocked page add a link.
+            if (page.isUnlocked(player))
+            {
+                //TODO: for every unlocked page add a link.
+            }
         }
-        return result; 
+        return result;
     }
 
     @Override

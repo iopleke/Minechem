@@ -4,6 +4,7 @@ import minechem.chemical.ChemicalBase;
 import minechem.chemical.Element;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
+import net.minecraft.item.ItemStack;
 
 /**
  * Loyal servant to find your elements and molecules
@@ -43,5 +44,10 @@ public class Jenkins
             chemicalBase = MoleculeRegistry.getInstance().getMoleculeByName(s);
         }
         return (T) chemicalBase;
+    }
+
+    public static ItemStack getStack(String chemical)
+    {
+        return null; //TODO: when we have, y'know.. items
     }
 }

@@ -1,12 +1,17 @@
 package minechem.registry;
 
+import minechem.handler.StructuredJournalHandler;
 import minechem.item.journal.pages.IJournalPage;
 import minechem.item.journal.pages.SectionPage;
-import minechem.item.journal.pages.TextPage;
 
 public class JournalRegistry
 {
-    public static SectionPage journal = new SectionPage("");
+    public static SectionPage journal;
+
+    public static void init()
+    {
+        StructuredJournalHandler.init();
+    }
 
     public static IJournalPage addPage(IJournalPage page)
     {
@@ -22,17 +27,5 @@ public class JournalRegistry
             section.addSubPage(page);
         }
         return page;
-    }
-
-    public static void init()
-    {
-        addPage(new SectionPage("elements"));
-        addPage(new SectionPage("apparatus"));
-        addPage("apparatus", new TextPage("microscope"));
-        addPage("elements", new TextPage("hydrogen"));
-        addPage("elements", new TextPage("helium"));
-        addPage("elements", new SectionPage("radioactive"));
-        addPage("elements.radioactive", new TextPage("uranium"));
-        return;
     }
 }

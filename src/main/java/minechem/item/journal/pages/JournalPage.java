@@ -9,6 +9,7 @@ public abstract class JournalPage implements IJournalPage
 {
     private final String page;
     private String chapter;
+    private String key;
     protected final static Pattern subPagePattern = Pattern.compile("(.+?)\\.(.+)");
 
     protected JournalPage(String page)
@@ -20,12 +21,18 @@ public abstract class JournalPage implements IJournalPage
     {
         this.page = page;
         this.chapter = chapter;
+        setKey();
+    }
+
+    private void setKey()
+    {
+        this.key = (chapter.isEmpty() ? "" : chapter + ".") + page;
     }
 
     @Override
     public final String getUnlocalizedKey()
     {
-        return chapter + "." + page;
+        return key;
     }
 
     @Override
@@ -45,6 +52,7 @@ public abstract class JournalPage implements IJournalPage
     public void setChapter(String chapter)
     {
         this.chapter = chapter;
+        setKey();
     }
 
     @Override
