@@ -30,7 +30,7 @@ public class ChemicalItem extends BasicItem
     @SideOnly(Side.CLIENT)
     public IIcon[] gas;
     @SideOnly(Side.CLIENT)
-    public IIcon[] plasma; // TODO: add icons for plasma
+    public IIcon[] plasma;
 
     public ChemicalItem()
     {
@@ -47,7 +47,7 @@ public class ChemicalItem extends BasicItem
         liquid = new IIcon[7];
         gas = new IIcon[7];
         plasma = new IIcon[1];
-        tube = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_tube");
+        tube = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString);
         dust = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_dust");
         moleculeSymbol = iconRegister.registerIcon(Compendium.Naming.id + ":" + iconString + "_molecule");
         for (int i = 0; i < liquid.length; i++)
