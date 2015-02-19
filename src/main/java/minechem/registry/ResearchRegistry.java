@@ -186,4 +186,9 @@ public class ResearchRegistry
     {
         return getResearchFor(player.getUniqueID());
     }
+
+    public boolean hasUnlockedResearch(EntityPlayer player, String key)
+    {
+        return player == null || getResearchFor(player).contains(key);
+    }
 }

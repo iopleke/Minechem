@@ -12,13 +12,20 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.handler.*;
+import minechem.handler.AchievementHandler;
+import minechem.handler.ElementHandler;
+import minechem.handler.GuiHandler;
+import minechem.handler.JournalHandler;
+import minechem.handler.MessageHandler;
+import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
 import minechem.proxy.CommonProxy;
-import minechem.registry.*;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.resources.IReloadableResourceManager;
-
+import minechem.registry.AugmentRegistry;
+import minechem.registry.BlockRegistry;
+import minechem.registry.CreativeTabRegistry;
+import minechem.registry.ItemRegistry;
+import minechem.registry.JournalRegistry;
+import minechem.registry.RecipeRegistry;
 
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
@@ -65,6 +72,13 @@ public class Minechem
         LogHelper.debug("Setting up ModMetaData");
         metadata = Compendium.MetaData.init(metadata);
 
+        // Register Elements and Molecules before constructing items
+        LogHelper.debug("Registering Elements...");
+        ElementHandler.init();
+
+        LogHelper.debug("Registering Molecules...");
+        MoleculeHandler.init();
+
         // Register items and blocks.
         LogHelper.debug("Registering Items...");
         ItemRegistry.init();
@@ -82,6 +96,7 @@ public class Minechem
         LogHelper.debug("Registering Event Handlers...");
         proxy.registerEventHandlers();
 
+        JournalRegistry.init();
     }
 
     @EventHandler
@@ -96,14 +111,7 @@ public class Minechem
         LogHelper.debug("Registering ClientProxy Rendering Hooks...");
         proxy.registerRenderers();
 
-        LogHelper.debug("Registering Elements...");
-        ElementHandler.init();
-
-        LogHelper.debug("Registering Molecules...");
-        MoleculeHandler.init();
-
-        LogHelper.debug("Registering Journal Pages...");
-        JournalHandler.init(proxy.getCurrentLanguage());
+        proxy.registerJournalPages();
 
         LogHelper.debug("Registering Achievements...");
         AchievementHandler.init();
@@ -112,8 +120,7 @@ public class Minechem
     @EventHandler
     public void postInit(FMLPostInitializationEvent event)
     {
-        LogHelper.debug("Registering Resource Reload Listener...");
-        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
+        proxy.registerResourcesListener();
 
         LogHelper.info("Minechem has loaded");
     }

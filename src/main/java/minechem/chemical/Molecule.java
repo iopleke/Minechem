@@ -1,7 +1,11 @@
 package minechem.chemical;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import minechem.Compendium;
 import minechem.helper.LogHelper;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
@@ -47,9 +51,24 @@ public class Molecule extends ChemicalBase
     }
 
     @Override
+    public int getColour()
+    {
+        return structure.getColour();
+    }
+
+    @Override
     public String getFormula()
     {
         return structure.getFormula();
+    }
+
+    @Override
+    public List<String> getToolTip()
+    {
+        List<String> list = new LinkedList<String>();
+        list.add("Form: " + this.form);
+        list.add("Formula: " + this.getFormula());
+        return list;
     }
 
     /**

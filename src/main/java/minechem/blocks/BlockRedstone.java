@@ -1,5 +1,6 @@
 package minechem.blocks;
 
+import java.util.Random;
 import minechem.Compendium;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -10,8 +11,6 @@ import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
-import java.util.Random;
-
 public class BlockRedstone extends Block
 {
     public static final Material myAir = new MaterialTransparent(MapColor.airColor);
@@ -20,6 +19,7 @@ public class BlockRedstone extends Block
     {
         super(myAir);
         this.setBlockName(Compendium.Naming.redstone);
+        this.setBlockTextureName(Compendium.Naming.id + ":blankIcon");
     }
 
     @Override
@@ -41,7 +41,9 @@ public class BlockRedstone extends Block
     }
 
     @Override
-    public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float dropChance, int fortune) {}
+    public void dropBlockAsItemWithChance(World world, int x, int y, int z, int meta, float dropChance, int fortune)
+    {
+    }
 
     @Override
     public void onBlockAdded(World world, int x, int y, int z)
@@ -53,15 +55,14 @@ public class BlockRedstone extends Block
     @Override
     public void updateTick(World world, int x, int y, int z, Random rand)
     {
-        if (world.getBlock(x,y,z) == this)
+        if (world.getBlock(x, y, z) == this)
         {
-            int meta = world.getBlockMetadata(x,y,z);
+            int meta = world.getBlockMetadata(x, y, z);
             if (meta == 0)
             {
                 world.setBlockToAir(x, y, z);
                 world.notifyBlocksOfNeighborChange(x, y, z, this);
-            }
-            else
+            } else
             {
                 world.setBlockMetadataWithNotify(x, y, z, meta - 1, 4);
             }

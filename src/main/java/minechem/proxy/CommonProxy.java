@@ -2,7 +2,6 @@ package minechem.proxy;
 
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.handler.EventHandler;
-import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
@@ -34,16 +33,6 @@ public class CommonProxy
         return null;
     }
 
-    /**
-     * Get the current lang code
-     *
-     * @return eg. 'en_US'
-     */
-    public String getCurrentLanguage()
-    {
-        return Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage().getLanguageCode();
-    }
-
     public String getItemDisplayName(ItemStack newStack)
     {
         return "";
@@ -67,5 +56,20 @@ public class CommonProxy
     public String getCurrentSaveDir()
     {
         return DimensionManager.getCurrentSaveRootDirectory().getAbsolutePath();
+    }
+
+    public void registerResourcesListener()
+    {
+
+    }
+
+    public void registerJournalPages()
+    {
+
+    }
+
+    public String getCurrentLanguage()
+    {
+        return null;
     }
 }

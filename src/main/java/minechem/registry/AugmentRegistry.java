@@ -2,10 +2,13 @@ package minechem.registry;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import minechem.collections.ItemStackMap;
 import minechem.item.augment.IAugmentItem;
-import minechem.item.augment.augments.*;
+import minechem.item.augment.augments.AugmentFlint;
+import minechem.item.augment.augments.AugmentLight;
+import minechem.item.augment.augments.AugmentRedstone;
+import minechem.item.augment.augments.AugmentTnt;
+import minechem.item.augment.augments.IAugment;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;
@@ -32,17 +35,18 @@ public class AugmentRegistry
 
     public static IAugment getAugment(ItemStack augmentItem)
     {
-        if (augmentItem == null) return null;
+        if (augmentItem == null)
+        {
+            return null;
+        }
         Item item = augmentItem.getItem();
         if (item instanceof IFluidContainerItem)
         {
-            return fluidAugmentMap.get(((IFluidContainerItem)item).getFluid(augmentItem));
-        }
-        else if (item instanceof IAugmentItem)
+            return fluidAugmentMap.get(((IFluidContainerItem) item).getFluid(augmentItem));
+        } else if (item instanceof IAugmentItem)
         {
-            return getAugment(((IAugmentItem)item).getAugmentKey(augmentItem));
-        }
-        else
+            return getAugment(((IAugmentItem) item).getAugmentKey(augmentItem));
+        } else
         {
             return itemStackAugmentMap.get(augmentItem);
         }
@@ -71,7 +75,7 @@ public class AugmentRegistry
         if (!fluidAugmentMap.containsKey(fluid))
         {
             registerAugment(augment);
-            fluidAugmentMap.put(fluid,augment);
+            fluidAugmentMap.put(fluid, augment);
         }
     }
 
@@ -80,7 +84,7 @@ public class AugmentRegistry
         if (!itemStackAugmentMap.containsKey(stack))
         {
             registerAugment(augment);
-            itemStackAugmentMap.put(stack,augment);
+            itemStackAugmentMap.put(stack, augment);
         }
     }
 
@@ -97,9 +101,9 @@ public class AugmentRegistry
 
     public static void init()
     {
-        registerAugment(new ItemStack(Blocks.tnt),new AugmentTnt());
-        registerAugment(new ItemStack(Blocks.glowstone),new AugmentLight());
-        registerAugment(new ItemStack(Items.flint_and_steel),new AugmentFlint());
-        registerAugment(new ItemStack(Items.redstone),new AugmentRedstone());
+        registerAugment(new ItemStack(Blocks.tnt), new AugmentTnt());
+        registerAugment(new ItemStack(Blocks.glowstone), new AugmentLight());
+        registerAugment(new ItemStack(Items.flint_and_steel), new AugmentFlint());
+        registerAugment(new ItemStack(Items.redstone), new AugmentRedstone());
     }
 }

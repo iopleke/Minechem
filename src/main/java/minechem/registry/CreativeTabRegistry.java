@@ -11,6 +11,7 @@ import net.minecraft.item.ItemStack;
 public class CreativeTabRegistry
 {
     public static CreativeTab TAB_PRIMARY = new CreativeTab(Compendium.Naming.name);
+    public static CreativeTab TAB_CHEMICALS = new CreativeTab(Compendium.Naming.name + " Chemicals");
 
     /**
      * Must be inited after the Blocks and Items If you want to used modded Items or Blocks
@@ -18,6 +19,7 @@ public class CreativeTabRegistry
     public static void init()
     {
         TAB_PRIMARY.setIcon(BlockRegistry.opticalMicroscope);
+        TAB_CHEMICALS.setIcon(BlockRegistry.electrolysisBlock);
     }
 
     /**

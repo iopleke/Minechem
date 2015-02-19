@@ -18,7 +18,7 @@ public class ItemStackSet extends TCustomHashSet<ItemStack>
 
     public ItemStackSet(boolean flat)
     {
-        super(flat?FLAT_HASHING_STRATEGY:HASHING_STRATEGY);
+        super(flat ? FLAT_HASHING_STRATEGY : HASHING_STRATEGY);
     }
 
     public ItemStackSet copy()

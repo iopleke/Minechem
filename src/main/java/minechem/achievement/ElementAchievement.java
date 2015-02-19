@@ -4,11 +4,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Compendium;
 import minechem.chemical.Element;
-import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.proxy.client.font.Font;
 import net.minecraft.block.Block;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.item.Item;
@@ -56,6 +54,7 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 
     /**
      * Returns the title
+     *
      * @return an {@link net.minecraft.util.IChatComponent}
      */
     @Override
@@ -68,41 +67,13 @@ public class ElementAchievement extends Achievement implements IAchievementRende
 
     /**
      * Background colour for the achievement icon
+     *
      * @return an int representation of the colour
      */
-    public int getColour()
-    {
-        switch (element.type)
-        {
-            case alkaliMetal:
-                return ColourHelper.RGB("#F63FFF");
-            case alkalineEarth:
-                return ColourHelper.RGB("#A84DFF");
-            case transitionMetal:
-                return ColourHelper.RGB("#3DD4FF");
-            case basicMetal:
-                return ColourHelper.RGB("#FFBA50");
-            case semiMetal:
-                return ColourHelper.RGB("#0AFF76");
-            case nonMetal:
-                return ColourHelper.RGB("#329EFF");
-            case halogen:
-                return ColourHelper.RGB("#FFCB08");
-            case nobleGas:
-                return ColourHelper.RGB("#FFD148");
-            case lanthanide:
-                return ColourHelper.RGB("#C2FF00");
-            case actinide:
-                return ColourHelper.RGB("#FF0D0B");
-            default:
-                return Compendium.Color.TrueColor.white;
-        }
-    }
-
     @Override
     public int recolourBackground(float greyScale)
     {
-        return getColour();
+        return element.getColour();
     }
 
     @Override
@@ -114,9 +85,15 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     @Override
     public void renderIcon(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top)
     {
-        if (regularFont == null) regularFont = new Font(fontRenderer);
-        if (smallFont == null) smallFont = new Font(fontRenderer).setFontSize(8);
-        regularFont.print(element.shortName, left+10 - (element.shortName.length()-1)*5, top+8, Compendium.Color.TrueColor.white, true);
+        if (regularFont == null)
+        {
+            regularFont = new Font(fontRenderer);
+        }
+        if (smallFont == null)
+        {
+            smallFont = new Font(fontRenderer).setFontSize(8);
+        }
+        regularFont.print(element.shortName, left + 10 - (element.shortName.length() - 1) * 5, top + 8, Compendium.Color.TrueColor.white, true);
         smallFont.print(element.atomicNumber, left, top, Compendium.Color.TrueColor.white, true);
     }
 }

@@ -30,7 +30,7 @@ public class AugmentFlint extends AugmentBase
         {
             if (consumeAugment(stack, level) > -1)
             {
-                world.playSoundEffect((double)x + 0.5D, (double)y + 0.5D, (double)z + 0.5D, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
+                world.playSoundEffect((double) x + 0.5D, (double) y + 0.5D, (double) z + 0.5D, "fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
                 world.setBlock(x, y, z, Blocks.fire);
             }
         }

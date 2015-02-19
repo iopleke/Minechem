@@ -1,8 +1,8 @@
 package minechem.item.augment.augments;
 
 import com.google.common.collect.Multimap;
+import java.util.Random;
 import minechem.Compendium;
-import minechem.item.augment.AugmentedItem;
 import minechem.item.augment.IAugmentItem;
 import net.minecraft.block.Block;
 import net.minecraft.entity.Entity;
@@ -15,8 +15,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidContainerItem;
-
-import java.util.Random;
 
 public abstract class AugmentBase implements IAugment
 {
@@ -44,10 +42,12 @@ public abstract class AugmentBase implements IAugment
     {
         NBTTagCompound augment = stack.getTagCompound().getCompoundTag(this.getKey());
         ItemStack augmentItem = ItemStack.loadItemStackFromNBT(augment.getCompoundTag(Compendium.NBTTags.item));
-        if (augmentItem == null || augmentItem.getItem() == null) return -1;
+        if (augmentItem == null || augmentItem.getItem() == null)
+        {
+            return -1;
+        }
         return dischargeAugment(augmentItem, level, false);
     }
-
 
     @Override
     public int getMaxLevel()
@@ -65,7 +65,10 @@ public abstract class AugmentBase implements IAugment
     {
         NBTTagCompound augment = stack.getTagCompound().getCompoundTag(this.getKey());
         ItemStack augmentItem = ItemStack.loadItemStackFromNBT(augment.getCompoundTag(Compendium.NBTTags.item));
-        if (augmentItem == null || augmentItem.getItem() == null) return -1;
+        if (augmentItem == null || augmentItem.getItem() == null)
+        {
+            return -1;
+        }
         int discharged = dischargeAugment(augmentItem, level, true);
         augment.setTag(Compendium.NBTTags.item, augmentItem.writeToNBT(new NBTTagCompound()));
         return discharged;
@@ -83,22 +86,32 @@ public abstract class AugmentBase implements IAugment
     {
         if (stack.getItem() instanceof IFluidContainerItem)
         {
-            while (!this.drain((IFluidContainerItem)stack.getItem(), stack, this.getVolumeConsumed(level), false) && level >= 0)
+            while (!this.drain((IFluidContainerItem) stack.getItem(), stack, this.getVolumeConsumed(level), false) && level >= 0)
+            {
                 level--;
+            }
             if (discharge && level >= 0)
-                drain((IFluidContainerItem)stack.getItem(), stack, this.getVolumeConsumed(level), true);
+            {
+                drain((IFluidContainerItem) stack.getItem(), stack, this.getVolumeConsumed(level), true);
+            }
             return level;
-        }
-        else if (stack.getItem() instanceof IAugmentItem)
+        } else if (stack.getItem() instanceof IAugmentItem)
         {
             if (discharge)
-                return ((IAugmentItem)stack.getItem()).consumeLevel(stack, this, this.getVolumeConsumed(level));
-            return ((IAugmentItem)stack.getItem()).getMaxLevel(stack, this, this.getVolumeConsumed(level));
-        }
-        else if (stack.isItemStackDamageable())
+            {
+                return ((IAugmentItem) stack.getItem()).consumeLevel(stack, this, this.getVolumeConsumed(level));
+            }
+            return ((IAugmentItem) stack.getItem()).getMaxLevel(stack, this, this.getVolumeConsumed(level));
+        } else if (stack.isItemStackDamageable())
         {
-            while (this.getDamageDone(level) > stack.getMaxDamage() - stack.getItemDamage() && level >= 0) level--;
-            if (discharge && level >= 0) stack.attemptDamageItem(this.getDamageDone(level), rand);
+            while (this.getDamageDone(level) > stack.getMaxDamage() - stack.getItemDamage() && level >= 0)
+            {
+                level--;
+            }
+            if (discharge && level >= 0)
+            {
+                stack.attemptDamageItem(this.getDamageDone(level), rand);
+            }
             return level;
         }
         return -1;
@@ -155,8 +168,7 @@ public abstract class AugmentBase implements IAugment
     }
 
     /**
-     * Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner
-     * control over the update of the item without having to write a subclass.
+     * Called by the default implemetation of EntityItem's onUpdate method, allowing for cleaner control over the update of the item without having to write a subclass.
      *
      * @param stack
      * @param entityItem The entity Item
@@ -170,8 +182,7 @@ public abstract class AugmentBase implements IAugment
     }
 
     /**
-     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return
-     * True if something happen and false if it don't.
+     * Callback for item usage. If the item does something special on right clicking, he will have one of those. Return True if something happen and false if it don't.
      *
      * @param stack
      * @param player
