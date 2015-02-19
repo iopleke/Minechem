@@ -1,8 +1,11 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
+import minechem.asm.MinechemHooks;
 import minechem.chemical.ChemicalBase;
+import minechem.chemical.ChemicalStructure;
 import minechem.chemical.Element;
+import minechem.chemical.Molecule;
 import minechem.helper.AchievementHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.Compendium;
@@ -10,6 +13,7 @@ import minechem.helper.ResearchHelper;
 import minechem.item.chemical.ChemicalItem;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
@@ -22,34 +26,58 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
 {
     
     private ItemStack prevStack;
+    protected OpticalMicroscopeTileEntity opticalMicroscope;
+    protected static final int eyePieceX = 13;
+    protected static final int eyePieceY = 16;
+    protected static final int eyePieceW = 54;
+    protected static final int eyePieceH = 54;
+    private RenderItem renderItem;
 
     public OpticalMicroscopeGUI(InventoryPlayer inventoryPlayer, OpticalMicroscopeTileEntity opticalMicroscope)
     {
         super(new OpticalMicroscopeContainer(inventoryPlayer, opticalMicroscope));
+        this.opticalMicroscope = opticalMicroscope;
         texture = Compendium.Resource.GUI.opticalMicroscope;
         name = LocalizationHelper.getLocalString("tile.opticalMicroscope.name");
+        renderItem = new MicroscopeRenderItem(this);
+    }
+
+    public boolean isMouseInMicroscope()
+    {
+        return mouseX >= eyePieceX && mouseX <= eyePieceX + eyePieceW && mouseY >= eyePieceY && mouseY <= eyePieceY + eyePieceH;
     }
 
     private void drawMicroscopeOverlay()
     {
-        this.zLevel = 600.0F;
+        MinechemHooks.resetGreyscale(1.0F);
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-        drawTexturedModalRect(guiLeft + 13, guiTop + 16, 176, 0, 54, 54);
+        float z = this.zLevel;
+        this.zLevel = 600.0F;
+        drawTexturedModalRect(eyePieceX, eyePieceY, 176, 0, eyePieceH, eyePieceW);
+        this.zLevel -= 10.0F;
+        drawTexturedModalRect(eyePieceX, eyePieceY, 176, eyePieceH, eyePieceH, eyePieceW);
+        this.zLevel = z;
     }
     
     private void drawInfo()
     {
-        Slot slot = inventorySlots.getSlotFromInventory(((OpticalMicroscopeContainer)inventorySlots).getOpticalMicroscope(), 0);
+        Slot slot = inventorySlots.getSlotFromInventory(opticalMicroscope, 0);
         if (slot.getHasStack())
         {
             ItemStack itemStack = slot.getStack();
-            if (prevStack != itemStack && itemStack.getItem() instanceof ChemicalItem)
+            if (itemStack.getItem() instanceof ChemicalItem)
             {
-                prevStack = itemStack;
                 ChemicalBase chemicalBase = ChemicalBase.readFromNBT(itemStack.getTagCompound());
-                if (chemicalBase.isElement())
+                fontRendererObj.drawString(chemicalBase.fullName, eyePieceX + eyePieceH + 5, eyePieceY +5, 0);
+                fontRendererObj.drawString("Formula:", eyePieceX + eyePieceH + 5, eyePieceY +20, 0);
+                fontRendererObj.drawString(chemicalBase.getFormula(), eyePieceX + eyePieceH + 5, eyePieceY +30, 0);
+                if (prevStack != itemStack)
                 {
-                    AchievementHelper.giveAchievement(getPlayer(), (Element) chemicalBase, getWorld().isRemote);
+                    prevStack = itemStack;
+                    if (chemicalBase.isElement())
+                    {
+                        AchievementHelper.giveAchievement(getPlayer(), (Element) chemicalBase, getWorld().isRemote);
+                    }
                     ResearchHelper.addResearch(getPlayer(), chemicalBase.fullName, getWorld().isRemote);
                 }
             }
@@ -57,10 +85,18 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
     }
 
     @Override
-    protected void drawGuiContainerBackgroundLayer(float opacity, int mouseX, int mouseY)
+    protected void drawGuiContainerForegroundLayer(int i, int i1)
     {
-        super.drawGuiContainerBackgroundLayer(opacity, mouseX, mouseY);
+        super.drawGuiContainerForegroundLayer(i, i1);
         drawMicroscopeOverlay();
         drawInfo();
+    }
+
+    @Override
+    public void drawScreen(int x, int y, float z)
+    {
+        super.drawScreen(x, y, z);
+        renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), opticalMicroscope.getStackInSlot(0), x, y);
+        renderItem.renderItemAndEffectIntoGUI(fontRendererObj, this.mc.getTextureManager(), getContainer().getInventoryPlayer().getItemStack(), x, y);
     }
 }

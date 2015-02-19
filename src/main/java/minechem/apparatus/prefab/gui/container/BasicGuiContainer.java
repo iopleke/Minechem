@@ -32,12 +32,29 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     protected ResourceLocation backgroundTexture;
     protected IIconRegister register;
     protected IIcon tabIcon;
+    private BasicContainer container;
 
-    public BasicGuiContainer(Container container)
+    public BasicGuiContainer(BasicContainer container)
     {
         super(container);
+        this.container = container;
+    }
+
+    public BasicContainer getContainer()
+    {
+        return container;
     }
     
+    public int getXSize()
+    {
+        return xSize;
+    }
+
+    public int getYSize()
+    {
+        return ySize;
+    }
+
     public EntityPlayer getPlayer()
     {
         return Minecraft.getMinecraft().thePlayer;
