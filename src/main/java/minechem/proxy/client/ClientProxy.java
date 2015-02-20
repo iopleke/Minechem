@@ -5,12 +5,13 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.apparatus.prefab.renderer.BasicItemRenderer;
+import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntity;
+import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntityRenderer;
 import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntity;
 import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntityRenderer;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntity;
 import minechem.apparatus.tier1.opticalMicroscope.OpticalMicroscopeTileEntityRenderer;
 import minechem.blocks.LightRenderer;
-import minechem.handler.JournalHandler;
 import minechem.handler.ResourceReloadListener;
 import minechem.helper.LogHelper;
 import minechem.item.chemical.ChemicalItemRenderer;
@@ -45,6 +46,10 @@ public class ClientProxy extends CommonProxy
         ElectrolysisTileEntityRenderer electrolysisRenderer = new ElectrolysisTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class, electrolysisRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
+
+        ElectricCrucibleTileEntityRenderer electricCrucibleRenderer = new ElectricCrucibleTileEntityRenderer();
+        ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class, electricCrucibleRenderer);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), new BasicItemRenderer(electricCrucibleRenderer, new ElectricCrucibleTileEntity()));
 
         RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem, new ChemicalItemRenderer());

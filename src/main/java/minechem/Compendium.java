@@ -94,6 +94,7 @@ public class Compendium
         public static final String fontBox = "fontbox";
         public static final String opticalMicroscope = "opticalMicroscope";
         public static final String electrolysis = "electrolysis";
+        public static final String electricCrucible = "electricCrucible";
         public static final String journal = "journal";
         public static final String light = "light";
         public static final String redstone = "redstone";
@@ -202,6 +203,7 @@ public class Compendium
         {
             public static final ResourceLocation microscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.opticalMicroscope);
             public static final ResourceLocation electrolysis = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.electrolysis);
+            public static final ResourceLocation electricCrucible = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.Model.electricCrucible);
         }
 
         public static final class Tab
@@ -255,6 +257,7 @@ public class Compendium
             public static final String prefix = "textures/models/";
             public static final String opticalMicroscope = Compendium.Texture.Model.prefix + "opticalMicroscope.png";
             public static final String electrolysis = Compendium.Texture.Model.prefix + "electrolysis.png";
+            public static final String electricCrucible = Compendium.Texture.Model.prefix + "electricCrucible.png";
         }
 
         public static final class Font
