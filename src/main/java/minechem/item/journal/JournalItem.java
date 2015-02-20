@@ -5,15 +5,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
-
 import minechem.handler.MessageHandler;
-import minechem.handler.message.AchievementMessage;
 import minechem.handler.message.JournalMessage;
 import minechem.helper.AchievementHelper;
 import minechem.helper.ArrayHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.item.prefab.BasicItem;
-import minechem.registry.AchievementRegistry;
 import minechem.registry.ResearchRegistry;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.EntityPlayer;
@@ -40,7 +37,7 @@ public class JournalItem extends BasicItem
     {
         if (player.isSneaking())
         {
-                writeKnowledge(stack, player, world.isRemote);
+            writeKnowledge(stack, player, world.isRemote);
         } else
         {
             Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(getKnowledgeKeys(stack), getAuthors(stack)));
@@ -54,7 +51,7 @@ public class JournalItem extends BasicItem
      *
      * @param itemStack the journal stack
      * @param player    the player that writes the knowledge
-     * @param isRemote is the world remote on  true it will send a {@link minechem.handler.message.JournalMessage} to the server
+     * @param isRemote  is the world remote on true it will send a {@link minechem.handler.message.JournalMessage} to the server
      */
     public void writeKnowledge(ItemStack itemStack, EntityPlayer player, boolean isRemote)
     {
@@ -63,10 +60,13 @@ public class JournalItem extends BasicItem
             MessageHandler.INSTANCE.sendToServer(new JournalMessage(player));
             return;
         }
-        
+
         NBTTagCompound tagCompound = itemStack.stackTagCompound;
         Set<String> playerKnowledge = ResearchRegistry.getInstance().getResearchFor(player);
-        if (playerKnowledge == null) return;
+        if (playerKnowledge == null)
+        {
+            return;
+        }
         Set<String> bookKnowledge = new LinkedHashSet<String>();
         if (tagCompound == null)
         {
