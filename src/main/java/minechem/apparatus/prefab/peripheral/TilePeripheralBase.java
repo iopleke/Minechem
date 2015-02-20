@@ -21,11 +21,11 @@ import li.cil.oc.api.network.Message;
 import li.cil.oc.api.network.Node;
 import li.cil.oc.api.network.Visibility;
 import minechem.Compendium;
+import minechem.apparatus.prefab.tileEntity.BaseTileEntity;
 import minechem.compatibility.ModList;
 import minechem.compatibility.lua.events.checked.CheckEvent;
 import minechem.compatibility.lua.methods.LuaMethod;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
 @Optional.InterfaceList(
@@ -34,7 +34,7 @@ import net.minecraft.world.World;
         @Optional.Interface(iface = "li.cil.oc.api.network.Environment", modid = Compendium.Naming.Mods.openComputers),
         @Optional.Interface(iface = "li.cil.oc.api.network.ManagedPeripheral", modid = Compendium.Naming.Mods.openComputers)
     })
-public abstract class TilePeripheralBase extends TileEntity implements ManagedPeripheral, Environment, IPeripheral
+public abstract class TilePeripheralBase extends BaseTileEntity implements ManagedPeripheral, Environment, IPeripheral
 {
     protected final String name;
     protected final Map<Integer, String> methodIDs = new LinkedHashMap<Integer, String>();

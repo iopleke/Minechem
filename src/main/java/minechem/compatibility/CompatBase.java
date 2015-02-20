@@ -4,7 +4,7 @@ import minechem.helper.LogHelper;
 
 public abstract class CompatBase
 {
-    private ModList mod;
+    protected ModList mod;
 
     public boolean load(ModList mod)
     {
