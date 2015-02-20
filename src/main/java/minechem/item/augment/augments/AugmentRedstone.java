@@ -8,6 +8,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class AugmentRedstone extends AugmentBase
 {
+    private static final int[] levels = new int[]{5, 10, 15};
     public AugmentRedstone()
     {
         super("redstone");
@@ -22,7 +23,7 @@ public class AugmentRedstone extends AugmentBase
     @Override
     public int getMaxLevel()
     {
-        return 15;
+        return levels.length;
     }
 
     @Override
@@ -36,10 +37,7 @@ public class AugmentRedstone extends AugmentBase
         {
             if (world.isAirBlock(x, y, z))
             {
-                world.setBlock(x, y, z, BlockRegistry.blockRedstone, level + 5, 7);
-            } else if (world.getBlock(x, y, z) == BlockRegistry.blockRedstone)
-            {
-                world.setBlockMetadataWithNotify(x, y, z, level + 5, 4);
+                world.setBlock(x, y, z, BlockRegistry.blockRedstone, levels[level], 7);
             }
         }
         return false;

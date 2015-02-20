@@ -1,6 +1,7 @@
 package minechem.blocks;
 
 import java.util.Random;
+
 import minechem.Compendium;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.MapColor;
@@ -48,8 +49,8 @@ public class BlockRedstone extends Block
     @Override
     public void onBlockAdded(World world, int x, int y, int z)
     {
-        world.scheduleBlockUpdate(x, y, z, this, 1);
-        world.notifyBlocksOfNeighborChange(x, y, z, this);
+        world.scheduleBlockUpdate(x, y, z, this, 20);
+        secondOrderNotify(world, x, y, z);
     }
 
     @Override
@@ -57,16 +58,8 @@ public class BlockRedstone extends Block
     {
         if (world.getBlock(x, y, z) == this)
         {
-            int meta = world.getBlockMetadata(x, y, z);
-            if (meta == 0)
-            {
-                world.setBlockToAir(x, y, z);
-                world.notifyBlocksOfNeighborChange(x, y, z, this);
-            } else
-            {
-                world.setBlockMetadataWithNotify(x, y, z, meta - 1, 4);
-            }
-            world.scheduleBlockUpdate(x, y, z, this, 1);
+            world.setBlockToAir(x, y, z);
+            secondOrderNotify(world, x, y, z);
         }
     }
 
@@ -85,12 +78,41 @@ public class BlockRedstone extends Block
     @Override
     public int isProvidingWeakPower(IBlockAccess world, int x, int y, int z, int side)
     {
-        return 15;
+        return world.getBlockMetadata(x, y, z);
+    }
+
+    @Override
+    public int isProvidingStrongPower(IBlockAccess world, int x, int y, int z, int side)
+    {
+        return world.getBlockMetadata(x, y, z);
     }
 
     @Override
     public boolean canHarvestBlock(EntityPlayer player, int meta)
     {
         return false;
+    }
+
+    @Override
+    public boolean canProvidePower()
+    {
+        return true;
+    }
+
+    @Override
+    public boolean canConnectRedstone(IBlockAccess world, int x, int y, int z, int side)
+    {
+        return false;
+    }
+
+    public void secondOrderNotify(World world, int x, int y, int z)
+    {
+        world.notifyBlocksOfNeighborChange(x, y, z, this);
+        world.notifyBlocksOfNeighborChange(x - 1, y, z, this);
+        world.notifyBlocksOfNeighborChange(x + 1, y, z, this);
+        world.notifyBlocksOfNeighborChange(x, y, z - 1, this);
+        world.notifyBlocksOfNeighborChange(x, y, z + 1, this);
+        world.notifyBlocksOfNeighborChange(x, y - 1, z, this);
+        world.notifyBlocksOfNeighborChange(x, y + 1, z, this);
     }
 }
