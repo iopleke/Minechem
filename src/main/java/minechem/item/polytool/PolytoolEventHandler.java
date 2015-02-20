@@ -34,51 +34,6 @@ public class PolytoolEventHandler
     }
 
     @SubscribeEvent
-    public void breakSpeed(PlayerEvent.BreakSpeed event)
-    {
-        // Again, there must be a better way to do this
-        if (event.entityPlayer.inventory.getCurrentItem() != null && event.entityPlayer.inventory.getCurrentItem().getItem() instanceof PolytoolItem)
-        {
-            event.newSpeed = event.entityPlayer.inventory.getCurrentItem().getItem().func_150893_a(event.entityPlayer.inventory.getCurrentItem(), event.block);
-        }
-    }
-
-    @SubscribeEvent
-    public void onHit(LivingHurtEvent event)
-    {
-
-        if (event.source.damageType.equals("player"))
-        {
-            EntityPlayer player = (EntityPlayer) event.source.getEntity();
-            ItemStack stack = player.getCurrentEquippedItem();
-
-            if (event.entityLiving instanceof EntitySpider)
-            {
-
-                if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof PolytoolItem)
-                {
-                    double damage = .8 * PolytoolItem.getPowerOfType(stack, ElementEnum.B);
-
-                    event.ammount += damage;
-
-                }
-
-            }
-            if (event.entityLiving instanceof EntityEnderman)
-            {
-
-                if (stack != null && stack.hasTagCompound() && stack.getItem() instanceof PolytoolItem)
-                {
-                    double damage = .8 * PolytoolItem.getPowerOfType(stack, ElementEnum.Ag);
-                    event.ammount += damage;
-
-                }
-
-            }
-        }
-    }
-
-    @SubscribeEvent
     public void onDrop(LivingDropsEvent event)
     {
 
@@ -137,23 +92,6 @@ public class PolytoolEventHandler
 
                 if (stack != null && stack.getItem() instanceof PolytoolItem)
                 {
-
-                    float powerTitanium = PolytoolItem.getPowerOfType(stack, ElementEnum.Ti);
-
-                    if (powerTitanium > 0)
-                    {
-                        for (int j = 0; j < enemy.getLastActiveItems().length; ++j)
-                        {
-                            ItemStack itemstack = enemy.getEquipmentInSlot(j);
-                            if (itemstack != null)
-                            {
-
-                                enemy.entityDropItem(itemstack, 0.0F);
-                            }
-                        }
-
-                    }
-
                     // Nitrogen preservation
                     if (enemy instanceof EntityZombie)
                     {
@@ -177,7 +115,6 @@ public class PolytoolEventHandler
                     // Calcium bonus
                     if (enemy instanceof EntitySkeleton)
                     {
-
                         float power = PolytoolItem.getPowerOfType(stack, ElementEnum.Ca);
                         if (power > 0)
                         {
@@ -222,5 +159,4 @@ public class PolytoolEventHandler
             }
         }
     }
-
 }

@@ -11,18 +11,6 @@ import net.minecraft.world.World;
 public class PolytoolTypeHydrogen extends PolytoolUpgradeType
 {
 
-    public PolytoolTypeHydrogen()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
     @Override
     public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
     {
@@ -33,26 +21,14 @@ public class PolytoolTypeHydrogen extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
-    {
-    }
-
-    @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.H;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override
     public String getDescription()
     {
-
         return "Creates explosion if hit entity is on fire";
     }
 

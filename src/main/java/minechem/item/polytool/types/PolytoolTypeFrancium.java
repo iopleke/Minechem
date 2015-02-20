@@ -9,47 +9,30 @@ import net.minecraft.world.World;
 
 public class PolytoolTypeFrancium extends PolytoolUpgradeType
 {
-
-    public PolytoolTypeFrancium()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
     @Override
     public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
     {
-        if (target.worldObj.isRaining())
-        {
-            target.worldObj.createExplosion(target, target.posX, target.posY, target.posZ, power, true);
-        }
+        explode(target.worldObj, target.posX, target.posY, target.posZ);
     }
 
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase target)
     {
-        if (target.worldObj.isRaining())
+        explode(world, x + 0.5D, y + 0.5D, +0.5D);
+    }
+
+    private void explode(World world, double x, double y, double z)
+    {
+        if (world.isRaining())
         {
-            target.worldObj.createExplosion(target, target.posX, target.posY, target.posZ, power, true);
+            world.createExplosion(null, x, y, z, power, true);
         }
     }
 
     @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Fr;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override

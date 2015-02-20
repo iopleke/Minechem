@@ -46,24 +46,6 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
         return block.getUnlocalizedName() + "@" + meta;
     }
 
-    public PolytoolTypeIron()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-    {
-
-    }
-
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, Block id, int x1, int y1, int z1, EntityLivingBase entityLiving)
     {
@@ -112,19 +94,13 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
     @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Fe;
     }
 
-    @Override
-    public void onTick()
-    {
-    }
 
     @Override
     public String getDescription()
     {
-
         return "Mines deposits of ores";
     }
 

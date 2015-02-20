@@ -13,26 +13,6 @@ import net.minecraft.world.World;
 
 public class PolytoolTypeBromine extends PolytoolUpgradeType
 {
-
-    private static final Random rand = new Random();
-
-    public PolytoolTypeBromine()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-    {
-    }
-
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
@@ -50,13 +30,7 @@ public class PolytoolTypeBromine extends PolytoolUpgradeType
     @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Br;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override

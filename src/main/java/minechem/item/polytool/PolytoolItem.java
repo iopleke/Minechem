@@ -1,5 +1,6 @@
 package minechem.item.polytool;
 
+import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
@@ -15,6 +16,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
@@ -70,27 +73,27 @@ public class PolytoolItem extends ItemPickaxe
 
     public float getSwordStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.web);
+        return this.getDigSpeed(stack, Blocks.web, 0);
     }
 
     public float getPickaxeStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.coal_ore);
+        return this.getDigSpeed(stack, Blocks.coal_ore, 0);
     }
 
     public float getStoneStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.stone);
+        return this.getDigSpeed(stack, Blocks.stone, 0);
     }
 
     public float getAxeStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.planks);
+        return this.getDigSpeed(stack, Blocks.planks, 0);
     }
 
     public float getShovelStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.dirt);
+        return this.getDigSpeed(stack, Blocks.dirt, 0);
     }
 
     @Override
@@ -100,23 +103,10 @@ public class PolytoolItem extends ItemPickaxe
         itemIcon = ir.registerIcon(Textures.IIcon.POLYTOOL);
     }
 
-    @Override
-    public float func_150893_a(ItemStack par1ItemStack, Block par2Block)
-    {
-        long sum = 8;
-        ArrayList upgrades = getUpgrades(par1ItemStack);
-        Iterator iter = upgrades.iterator();
-        while (iter.hasNext())
-        {
-            sum += ((PolytoolUpgradeType) iter.next()).getStrVsBlock(par1ItemStack, par2Block);
-        }
-        return sum;
-    }
-
-    public static ArrayList getUpgrades(ItemStack stack)
+    public static ArrayList<PolytoolUpgradeType> getUpgrades(ItemStack stack)
     {
         ensureNBT(stack);
-        ArrayList toReturn = new ArrayList();
+        ArrayList<PolytoolUpgradeType> toReturn = new ArrayList<PolytoolUpgradeType>();
         NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.tagCount(); i++)
         {
@@ -214,6 +204,29 @@ public class PolytoolItem extends ItemPickaxe
             }
         }
         return 0;
+    }
+
+    @Override
+    public float getDigSpeed(ItemStack stack, Block block, int meta)
+    {
+        float result = 8F;
+        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrVsBlock(stack, block, meta));
+        return result;
+    }
+
+    @Override
+    public Multimap getAttributeModifiers(ItemStack stack)
+    {
+        Multimap result = super.getAttributeModifiers(stack);
+        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext();)
+        {
+            float modifier = itr.next().getDamageModifier();
+            if (modifier!=0F)
+            {
+                result.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),new AttributeModifier(field_111210_e, "Tool modifier", modifier, 0));
+            }
+        }
+        return result;
     }
 
     @Override

@@ -1,6 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -13,26 +12,6 @@ import net.minecraft.world.World;
 
 public class PolytoolTypeCarbon extends PolytoolUpgradeType
 {
-
-    private static final Random rand = new Random();
-
-    public PolytoolTypeCarbon()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-    {
-    }
-
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
@@ -53,13 +32,7 @@ public class PolytoolTypeCarbon extends PolytoolUpgradeType
     @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.C;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override

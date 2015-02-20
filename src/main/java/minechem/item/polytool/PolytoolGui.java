@@ -141,5 +141,6 @@ public class PolytoolGui extends GuiContainerTabbed
             elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, upgrade.getElement()));
             this.shouldUpdate = true;
         }
+        this.polytool = this.player.getCurrentItem();
     }
 }

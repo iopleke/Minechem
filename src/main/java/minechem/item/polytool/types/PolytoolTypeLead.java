@@ -12,19 +12,6 @@ import net.minecraft.world.World;
 
 public class PolytoolTypeLead extends PolytoolUpgradeType
 {
-
-    public PolytoolTypeLead()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
     @Override
     public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
     {
@@ -45,26 +32,14 @@ public class PolytoolTypeLead extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
-    {
-    }
-
-    @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Pb;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override
     public String getDescription()
     {
-
         return "Sends nearby entities flying to the ground";
     }
 

@@ -40,69 +40,61 @@ import minechem.item.polytool.types.PolytoolTypeZirconium;
 public class PolytoolHelper
 {
 
-    public static boolean loaded;
-    public static HashMap<ElementEnum, Class<PolytoolUpgradeType>> types = new HashMap();
-    public static Class[] typeClasses =
-    {
-        PolytoolTypeArgon.class, PolytoolTypeBeryllium.class, PolytoolTypeMagnesium.class, PolytoolTypeBoron.class, PolytoolTypeMercury.class, PolytoolTypeBromine.class, PolytoolTypeNeon.class, PolytoolTypeCaesium.class,
-        PolytoolTypeNickel.class, PolytoolTypeCalcium.class, PolytoolTypeNitrogen.class, PolytoolTypeCarbon.class, PolytoolTypeOxygen.class, PolytoolTypeChlorine.class, PolytoolTypePhosphorus.class, PolytoolTypeChromium.class,
-        PolytoolTypePlatnium.class, PolytoolTypeFluorine.class, PolytoolTypeRubidium.class, PolytoolTypeFrancium.class, PolytoolTypeSilicon.class, PolytoolTypeGold.class, PolytoolTypeSilver.class, PolytoolTypeHelium.class, PolytoolTypeSodium.class,
-        PolytoolTypeHydrogen.class, PolytoolTypeSulfur.class, PolytoolTypeIron.class, PolytoolTypeTitanium.class, PolytoolTypeKrypton.class, PolytoolTypeUranium.class, PolytoolTypeLead.class, PolytoolTypeZirconium.class
-    };
+    public static HashMap<ElementEnum, PolytoolUpgradeType> types = new HashMap<ElementEnum, PolytoolUpgradeType>();
 
     public static PolytoolUpgradeType getTypeFromElement(ElementEnum element, float power)
     {
-        if (!loaded)
+        if (types.containsKey(element))
         {
-            loadTypes();
+            return types.get(element).setPower(power);
         }
-        for (ElementAlloyEnum alloy : ElementAlloyEnum.values())
-        {
-            if (alloy.element == element)
-            {
-                return new PolytoolTypeAlloy(alloy, power);
-            }
-
-        }
-        PolytoolUpgradeType upgrade = null;
-        try
-        {
-            if (types.get(element) == null)
-            {
-                return null;
-            }
-            upgrade = types.get(element).newInstance();
-        } catch (InstantiationException e)
-        {
-
-            e.printStackTrace();
-        } catch (IllegalAccessException e)
-        {
-
-            e.printStackTrace();
-        }
-        upgrade.power = power;
-        return upgrade;
+        return null;
     }
 
-    private static void loadTypes()
+    static
     {
-        for (Class clazz : typeClasses)
-        {
-            try
-            {
-                clazz.newInstance();
-            } catch (InstantiationException e)
-            {
-
-                e.printStackTrace();
-            } catch (IllegalAccessException e)
-            {
-
-                e.printStackTrace();
-            }
-        }
-        loaded = true;
+        register(new PolytoolTypeArgon());
+        register(new PolytoolTypeBeryllium());
+        register(new PolytoolTypeBoron());
+        register(new PolytoolTypeBromine());
+        register(new PolytoolTypeCaesium());
+        register(new PolytoolTypeCalcium());
+        register(new PolytoolTypeCarbon());
+        register(new PolytoolTypeChlorine());
+        register(new PolytoolTypeChromium());
+        register(new PolytoolTypeFluorine());
+        register(new PolytoolTypeFrancium());
+        register(new PolytoolTypeGold());
+        register(new PolytoolTypeHelium());
+        register(new PolytoolTypeHydrogen());
+        register(new PolytoolTypeIron());
+        register(new PolytoolTypeKrypton());
+        register(new PolytoolTypeLead());
+        register(new PolytoolTypeMagnesium());
+        register(new PolytoolTypeMercury());
+        register(new PolytoolTypeNeon());
+        register(new PolytoolTypeNickel());
+        register(new PolytoolTypeNitrogen());
+        register(new PolytoolTypeOxygen());
+        register(new PolytoolTypePhosphorus());
+        register(new PolytoolTypePlatnium());
+        register(new PolytoolTypeRubidium());
+        register(new PolytoolTypeSilicon());
+        register(new PolytoolTypeSilver());
+        register(new PolytoolTypeSodium());
+        register(new PolytoolTypeSulfur());
+        register(new PolytoolTypeTitanium());
+        register(new PolytoolTypeUranium());
+        register(new PolytoolTypeZirconium());
+        for (ElementAlloyEnum alloy : ElementAlloyEnum.values())
+            register(new PolytoolTypeAlloy(alloy));
     }
 
+    private static void register(PolytoolUpgradeType upgradeType)
+    {
+        if (!types.containsKey(upgradeType.getElement()))
+        {
+            types.put(upgradeType.getElement(), upgradeType);
+        }
+    }
 }

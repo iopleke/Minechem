@@ -7,31 +7,38 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
+import java.util.Random;
+
 public abstract class PolytoolUpgradeType
 {
-
+    protected static final Random rand = new Random(System.currentTimeMillis());
     public float power = 0;
 
-    public abstract float getStrVsBlock(ItemStack itemStack, Block block);
+    public float getStrVsBlock(ItemStack itemStack, Block block, int meta)
+    {
+        return 0F;
+    }
 
-    public abstract void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player);
+    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+    {
+    }
 
-    public abstract void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving);
+    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
+    {
+    }
 
     public abstract ElementEnum getElement();
 
-    public abstract void onTick();
-
-    public PolytoolUpgradeType()
+    public void onTick()
     {
-        if (!PolytoolHelper.types.containsKey(getElement()))
-        {
-            PolytoolHelper.types.put(this.getElement(), (Class<PolytoolUpgradeType>) this.getClass());
-        }
     }
 
-    // To prevent NPE in alloys
-    public PolytoolUpgradeType(boolean b)
+    public float getDamageModifier()
+    {
+        return 0F;
+    }
+
+    public PolytoolUpgradeType()
     {
     }
 
@@ -42,4 +49,9 @@ public abstract class PolytoolUpgradeType
 
     public abstract String getDescription();
 
+    public PolytoolUpgradeType setPower(float power)
+    {
+        this.power = power;
+        return this;
+    }
 }
