@@ -1,9 +1,11 @@
 package minechem.proxy.client.render;
 
 import minechem.helper.ColourHelper;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
 public class RenderHelper
@@ -18,15 +20,61 @@ public class RenderHelper
         GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
+    public static void setGreyscaleOpenGLColour(float greyscale)
+    {
+        GL11.glColor4f(greyscale, greyscale, greyscale, 1.0F);
+    }
+
     public static void drawTexturedRectUV(float x, float y, float z, int w, int h, IIcon icon)
     {
-        Tessellator tesselator = Tessellator.instance;
-        tesselator.startDrawingQuads();
-        tesselator.addVertexWithUV(x, y + h, z, icon.getMinU(), icon.getMaxV());
-        tesselator.addVertexWithUV(x + w, y + h, z, icon.getMaxU(), icon.getMaxV());
-        tesselator.addVertexWithUV(x + w, y, z, icon.getMaxU(), icon.getMinV());
-        tesselator.addVertexWithUV(x, y, z, icon.getMinU(), icon.getMinV());
-        tesselator.draw();
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x, y + h, z, icon.getMinU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x + w, y + h, z, icon.getMaxU(), icon.getMaxV());
+        tessellator.addVertexWithUV(x + w, y, z, icon.getMaxU(), icon.getMinV());
+        tessellator.addVertexWithUV(x, y, z, icon.getMinU(), icon.getMinV());
+        tessellator.draw();
+    }
+
+    public static void drawTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, ResourceLocation resource)
+    {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
+        float textScale = 0.00390625F;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x, y + h, z, u * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + w, y + h, z, (u + w)  * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + w, y, z, (u + w) * textScale, y * textScale);
+        tessellator.addVertexWithUV(x, y, z, u * textScale, v * textScale);
+        tessellator.draw();
+    }
+
+    public static void drawScaledTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, float scale, ResourceLocation resource)
+    {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
+        float textScale = 0.00390625F;
+        float drawH = h * scale;
+        float drawW = w * scale;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x, y + drawH, z, u * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * textScale, v * textScale);
+        tessellator.addVertexWithUV(x, y, z, u * textScale, v * textScale);
+        tessellator.draw();
+    }
+
+    public static void drawTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, float drawW, float drawH, ResourceLocation resource)
+    {
+        Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
+        float textScale = 0.00390625F;
+        Tessellator tessellator = Tessellator.instance;
+        tessellator.startDrawingQuads();
+        tessellator.addVertexWithUV(x, y + drawH, z, u * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * textScale, v * textScale);
+        tessellator.addVertexWithUV(x, y, z, u * textScale, v * textScale);
+        tessellator.draw();
     }
 
     public static void drawTextureIn2D(IIcon texture)

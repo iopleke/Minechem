@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.TreeMap;
 import minechem.Compendium;
 import minechem.achievement.ElementAchievement;
+import minechem.achievement.ElementAchievementPage;
 import minechem.chemical.Element;
 import minechem.helper.PeriodicTableHelper;
 import net.minecraft.block.Block;
@@ -45,7 +46,7 @@ public class AchievementRegistry
     public void addAchievement(Element element)
     {
         int[] position = PeriodicTableHelper.getPosition(element);
-        elementsAchievementMap.put(element, new ElementAchievement(element, position[0], position[1]));
+        elementsAchievementMap.put(element, new ElementAchievement(element, position[0]-5, position[1]-8));
     }
 
     /**
@@ -162,7 +163,7 @@ public class AchievementRegistry
         {
             achievement.registerStat();
         }
-        elementsPage = new AchievementPage("Periodic Table", achievements.toArray(new Achievement[achievements.size()]));
+        elementsPage = new ElementAchievementPage("Periodic Table", achievements.toArray(new Achievement[achievements.size()]));
         AchievementPage.registerAchievementPage(elementsPage);
     }
 
