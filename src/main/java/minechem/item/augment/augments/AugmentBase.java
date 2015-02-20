@@ -17,7 +17,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.minecraftforge.fluids.IFluidContainerItem;
 
-public class AugmentBase implements IAugment
+public abstract class AugmentBase implements IAugment
 {
     private final String key;
     private final String localizationKey;
