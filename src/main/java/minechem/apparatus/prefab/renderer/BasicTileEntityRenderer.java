@@ -12,12 +12,12 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
     protected BasicModel model;
     protected float rotation;
     protected ResourceLocation texture;
-    private double xOffset;
 
-    protected float xScale;
+    protected double xOffset;
     protected double yOffset;
+    protected double zOffset;
+    protected float xScale;
     protected float yScale;
-    private double zOffset;
     protected float zScale;
 
     public BasicTileEntityRenderer()

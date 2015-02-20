@@ -8,6 +8,8 @@ import org.lwjgl.opengl.GL11;
 public class ElectrolysisModel extends BasicModel
 {
 
+    private byte tubeCount;
+
     ModelRenderer plank;
     ModelRenderer plank2;
     ModelRenderer plank3;
@@ -61,6 +63,8 @@ public class ElectrolysisModel extends BasicModel
 
     public ElectrolysisModel()
     {
+        tubeCount = 0;
+
         plank = new ModelRenderer(this, 4, 114);
         plank.setTextureSize(128, 128);
         plank.addBox(-14.5F, -1F, -2.5F, 29, 2, 5);
@@ -373,95 +377,102 @@ public class ElectrolysisModel extends BasicModel
         cable2m2.rotateAngleZ = 0F;
         cable2m2.renderWithRotation(rotation);
 
-        jar2.rotateAngleX = 0F;
-        jar2.rotateAngleY = 0F;
-        jar2.rotateAngleZ = -3.141592F;
-        jar2.renderWithRotation(rotation);
+        if (tubeCount >= 1)
+        {
+            jar2.rotateAngleX = 0F;
+            jar2.rotateAngleY = 0F;
+            jar2.rotateAngleZ = -3.141592F;
+            jar2.renderWithRotation(rotation);
 
-        jar2m1.rotateAngleX = 0F;
-        jar2m1.rotateAngleY = 0F;
-        jar2m1.rotateAngleZ = -3.141592F;
-        jar2m1.renderWithRotation(rotation);
+            jar2m1.rotateAngleX = 0F;
+            jar2m1.rotateAngleY = 0F;
+            jar2m1.rotateAngleZ = -3.141592F;
+            jar2m1.renderWithRotation(rotation);
 
-        jar2m2.rotateAngleX = 0F;
-        jar2m2.rotateAngleY = 0F;
-        jar2m2.rotateAngleZ = -3.141592F;
-        jar2m2.renderWithRotation(rotation);
+            jar2m2.rotateAngleX = 0F;
+            jar2m2.rotateAngleY = 0F;
+            jar2m2.rotateAngleZ = -3.141592F;
+            jar2m2.renderWithRotation(rotation);
 
-        jar2m3.rotateAngleX = 0F;
-        jar2m3.rotateAngleY = 0F;
-        jar2m3.rotateAngleZ = -3.141592F;
-        jar2m3.renderWithRotation(rotation);
+            jar2m3.rotateAngleX = 0F;
+            jar2m3.rotateAngleY = 0F;
+            jar2m3.rotateAngleZ = -3.141592F;
+            jar2m3.renderWithRotation(rotation);
 
-        jar2m4.rotateAngleX = 0F;
-        jar2m4.rotateAngleY = 0F;
-        jar2m4.rotateAngleZ = -3.141592F;
-        jar2m4.renderWithRotation(rotation);
+            jar2m4.rotateAngleX = 0F;
+            jar2m4.rotateAngleY = 0F;
+            jar2m4.rotateAngleZ = -3.141592F;
+            jar2m4.renderWithRotation(rotation);
 
-        jar2m5.rotateAngleX = 0F;
-        jar2m5.rotateAngleY = 0F;
-        jar2m5.rotateAngleZ = -3.141592F;
-        jar2m5.renderWithRotation(rotation);
+            jar2m5.rotateAngleX = 0F;
+            jar2m5.rotateAngleY = 0F;
+            jar2m5.rotateAngleZ = -3.141592F;
+            jar2m5.renderWithRotation(rotation);
 
-        jar2m6.rotateAngleX = 0F;
-        jar2m6.rotateAngleY = 0F;
-        jar2m6.rotateAngleZ = -3.141592F;
-        jar2m6.renderWithRotation(rotation);
+            jar2m6.rotateAngleX = 0F;
+            jar2m6.rotateAngleY = 0F;
+            jar2m6.rotateAngleZ = -3.141592F;
+            jar2m6.renderWithRotation(rotation);
 
-        jar2m7.rotateAngleX = 0F;
-        jar2m7.rotateAngleY = 0F;
-        jar2m7.rotateAngleZ = -3.141592F;
-        jar2m7.renderWithRotation(rotation);
+            jar2m7.rotateAngleX = 0F;
+            jar2m7.rotateAngleY = 0F;
+            jar2m7.rotateAngleZ = -3.141592F;
+            jar2m7.renderWithRotation(rotation);
 
-        jar2m8.rotateAngleX = 0F;
-        jar2m8.rotateAngleY = 0F;
-        jar2m8.rotateAngleZ = -3.141592F;
-        jar2m8.renderWithRotation(rotation);
+            jar2m8.rotateAngleX = 0F;
+            jar2m8.rotateAngleY = 0F;
+            jar2m8.rotateAngleZ = -3.141592F;
+            jar2m8.renderWithRotation(rotation);
+        }
 
-        jar3.rotateAngleX = 0F;
-        jar3.rotateAngleY = 0F;
-        jar3.rotateAngleZ = -3.141592F;
-        jar3.renderWithRotation(rotation);
+        if (tubeCount >= 2)
+        {
 
-        jar3m1.rotateAngleX = 0F;
-        jar3m1.rotateAngleY = 0F;
-        jar3m1.rotateAngleZ = -3.141592F;
-        jar3m1.renderWithRotation(rotation);
+            jar3.rotateAngleX = 0F;
+            jar3.rotateAngleY = 0F;
+            jar3.rotateAngleZ = -3.141592F;
+            jar3.renderWithRotation(rotation);
 
-        jar3m2.rotateAngleX = 0F;
-        jar3m2.rotateAngleY = 0F;
-        jar3m2.rotateAngleZ = -3.141592F;
-        jar3m2.renderWithRotation(rotation);
+            jar3m1.rotateAngleX = 0F;
+            jar3m1.rotateAngleY = 0F;
+            jar3m1.rotateAngleZ = -3.141592F;
+            jar3m1.renderWithRotation(rotation);
 
-        jar3m3.rotateAngleX = 0F;
-        jar3m3.rotateAngleY = 0F;
-        jar3m3.rotateAngleZ = -3.141592F;
-        jar3m3.renderWithRotation(rotation);
+            jar3m2.rotateAngleX = 0F;
+            jar3m2.rotateAngleY = 0F;
+            jar3m2.rotateAngleZ = -3.141592F;
+            jar3m2.renderWithRotation(rotation);
 
-        jar3m4.rotateAngleX = 0F;
-        jar3m4.rotateAngleY = 0F;
-        jar3m4.rotateAngleZ = -3.141592F;
-        jar3m4.renderWithRotation(rotation);
+            jar3m3.rotateAngleX = 0F;
+            jar3m3.rotateAngleY = 0F;
+            jar3m3.rotateAngleZ = -3.141592F;
+            jar3m3.renderWithRotation(rotation);
 
-        jar3m5.rotateAngleX = 0F;
-        jar3m5.rotateAngleY = 0F;
-        jar3m5.rotateAngleZ = -3.141592F;
-        jar3m5.renderWithRotation(rotation);
+            jar3m4.rotateAngleX = 0F;
+            jar3m4.rotateAngleY = 0F;
+            jar3m4.rotateAngleZ = -3.141592F;
+            jar3m4.renderWithRotation(rotation);
 
-        jar3m6.rotateAngleX = 0F;
-        jar3m6.rotateAngleY = 0F;
-        jar3m6.rotateAngleZ = -3.141592F;
-        jar3m6.renderWithRotation(rotation);
+            jar3m5.rotateAngleX = 0F;
+            jar3m5.rotateAngleY = 0F;
+            jar3m5.rotateAngleZ = -3.141592F;
+            jar3m5.renderWithRotation(rotation);
 
-        jar3m7.rotateAngleX = 0F;
-        jar3m7.rotateAngleY = 0F;
-        jar3m7.rotateAngleZ = -3.141592F;
-        jar3m7.renderWithRotation(rotation);
+            jar3m6.rotateAngleX = 0F;
+            jar3m6.rotateAngleY = 0F;
+            jar3m6.rotateAngleZ = -3.141592F;
+            jar3m6.renderWithRotation(rotation);
 
-        jar3m8.rotateAngleX = 0F;
-        jar3m8.rotateAngleY = 0F;
-        jar3m8.rotateAngleZ = -3.141592F;
-        jar3m8.renderWithRotation(rotation);
+            jar3m7.rotateAngleX = 0F;
+            jar3m7.rotateAngleY = 0F;
+            jar3m7.rotateAngleZ = -3.141592F;
+            jar3m7.renderWithRotation(rotation);
+
+            jar3m8.rotateAngleX = 0F;
+            jar3m8.rotateAngleY = 0F;
+            jar3m8.rotateAngleZ = -3.141592F;
+            jar3m8.renderWithRotation(rotation);
+        }
 
         GL11.glColor3f(0.0f, 1.0f, 0.0f);
         liquid.rotateAngleX = 0F;
@@ -532,6 +543,16 @@ public class ElectrolysisModel extends BasicModel
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e)
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
+    }
+
+    public byte getTubeCount()
+    {
+        return tubeCount;
+    }
+
+    public void setTubeCount(byte tubeCount)
+    {
+        this.tubeCount = tubeCount;
     }
 
 }
