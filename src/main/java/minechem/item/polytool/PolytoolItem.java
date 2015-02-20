@@ -1,5 +1,6 @@
 package minechem.item.polytool;
 
+import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -74,27 +75,37 @@ public class PolytoolItem extends ItemPickaxe
 
     public float getSwordStr(ItemStack stack)
     {
-        return this.getDigSpeed(stack, Blocks.web, 0);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrSword());
+        return result;
     }
 
     public float getPickaxeStr(ItemStack stack)
     {
-        return this.getDigSpeed(stack, Blocks.coal_ore, 0);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrOre());
+        return result;
     }
 
     public float getStoneStr(ItemStack stack)
     {
-        return this.getDigSpeed(stack, Blocks.stone, 0);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrStone());
+        return result;
     }
 
     public float getAxeStr(ItemStack stack)
     {
-        return this.getDigSpeed(stack, Blocks.planks, 0);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrAxe());
+        return result;
     }
 
     public float getShovelStr(ItemStack stack)
     {
-        return this.getDigSpeed(stack, Blocks.dirt, 0);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrShovel());
+        return result;
     }
 
     @Override
@@ -115,7 +126,16 @@ public class PolytoolItem extends ItemPickaxe
             toReturn.add(PolytoolHelper.getTypeFromElement(ElementEnum.getByID(nbt.getInteger("Element")), nbt.getFloat("Power")));
         }
         return toReturn;
+    }
 
+    public static ArrayList<PolytoolTypeAlloy> getAlloyUpgrades(ItemStack stack)
+    {
+        ArrayList<PolytoolTypeAlloy> result = new ArrayList<PolytoolTypeAlloy>();
+        for (PolytoolUpgradeType type : getUpgrades(stack))
+        {
+            if (type instanceof PolytoolTypeAlloy) result.add((PolytoolTypeAlloy)type);
+        }
+        return result;
     }
 
     @Override
@@ -200,7 +220,6 @@ public class PolytoolItem extends ItemPickaxe
             PolytoolUpgradeType next = (PolytoolUpgradeType)iter.next();
             if (next.getElement().atomicNumber() == element.atomicNumber())
             {
-
                 return next.power;
             }
         }
@@ -211,24 +230,16 @@ public class PolytoolItem extends ItemPickaxe
     public float getDigSpeed(ItemStack stack, Block block, int meta)
     {
         float result = 8F;
-        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrVsBlock(stack, block, meta))
-            ;
+        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrVsBlock(stack, block, meta));
         return result;
     }
 
     @Override
     public Multimap getAttributeModifiers(ItemStack stack)
     {
-        Multimap result = super.getAttributeModifiers(stack);
-        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); )
-        {
-            float modifier = itr.next().getDamageModifier();
-            if (modifier != 0F)
-            {
-                result.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", modifier, 0));
-            }
-        }
-        return result;
+        Multimap multimap = HashMultimap.create();
+        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", getSwordStr(stack), 0));
+        return multimap;
     }
 
     @Override

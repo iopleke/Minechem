@@ -36,7 +36,7 @@ public class PolytoolEventHandler
 
         // Large page of the beheading code based off TiC code
         // Thanks to mDiyo
-        if (event.source.damageType.equals("player"))
+        if ("player".equals(event.source.damageType))
         {
 
             EntityPlayer player = (EntityPlayer)event.source.getEntity();
@@ -63,7 +63,6 @@ public class PolytoolEventHandler
                                 // ArrayList items=DecomposerRecipeHandler.instance.getRecipeOutputForInput(item);
                                 if (items != null)
                                 {
-
                                     for (int i = 0; i < items.size(); i++)
                                     {
                                         trueResult.add(new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, (ItemStack)items.get(i)));
