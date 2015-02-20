@@ -46,7 +46,7 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
             GL11.glPushMatrix();
             GL11.glTranslated(x + xOffset, y + yOffset, z + zOffset);
             GL11.glRotatef(180f, 0f, 0f, 1f);
-            GL11.glRotatef((tileEntity.blockMetadata * 90.0F), 0.0F, 1.0F, 0.0F);
+            GL11.glRotatef((tileEntity.getBlockMetadata() * 90.0F), 0.0F, 1.0F, 0.0F);
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glScaled(xScale, yScale, zScale);
@@ -59,7 +59,6 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
 
     public final void setOffset(double xOffset, double yOffset, double zOffset)
     {
-        // @TODO - make this work with rotated model via metadata
         this.xOffset = xOffset;
         this.yOffset = yOffset;
         this.zOffset = zOffset;
@@ -72,7 +71,6 @@ public abstract class BasicTileEntityRenderer extends TileEntitySpecialRenderer
 
     public final void setScale(float scale)
     {
-        // @TODO - make this work with rotated model via metadata
         this.xScale = scale;
         this.yScale = scale;
         this.zScale = scale;
