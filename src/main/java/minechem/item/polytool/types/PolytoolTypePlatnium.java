@@ -2,27 +2,12 @@ package minechem.item.polytool.types;
 
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityXPOrb;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 
 public class PolytoolTypePlatnium extends PolytoolUpgradeType
 {
-
-    public PolytoolTypePlatnium()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
     @Override
     public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
     {
@@ -30,8 +15,8 @@ public class PolytoolTypePlatnium extends PolytoolUpgradeType
         {
             if (target.worldObj.rand.nextInt(50) < power + 1)
             {
-                player.worldObj.playAuxSFX(2002, (int) Math.round(player.posX), (int) Math.round(player.posY), (int) Math.round(player.posZ), 0);
-                int i = (int) (power + player.worldObj.rand.nextInt(5) + player.worldObj.rand.nextInt(5));
+                player.worldObj.playAuxSFX(2002, (int)Math.round(player.posX), (int)Math.round(player.posY), (int)Math.round(player.posZ), 0);
+                int i = (int)(power + player.worldObj.rand.nextInt(5) + player.worldObj.rand.nextInt(5));
 
                 while (i > 0)
                 {
@@ -44,26 +29,14 @@ public class PolytoolTypePlatnium extends PolytoolUpgradeType
     }
 
     @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
-    {
-    }
-
-    @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Pt;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override
     public String getDescription()
     {
-
         return "Bonus XP";
     }
 

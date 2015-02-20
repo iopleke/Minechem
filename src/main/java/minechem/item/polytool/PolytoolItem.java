@@ -1,10 +1,9 @@
 package minechem.item.polytool;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import minechem.Minechem;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
@@ -15,6 +14,8 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
+import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemPickaxe;
@@ -24,6 +25,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class PolytoolItem extends ItemPickaxe
 {
@@ -70,27 +75,37 @@ public class PolytoolItem extends ItemPickaxe
 
     public float getSwordStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.web);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrSword());
+        return result;
     }
 
     public float getPickaxeStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.coal_ore);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrOre());
+        return result;
     }
 
     public float getStoneStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.stone);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrStone());
+        return result;
     }
 
     public float getAxeStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.planks);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrAxe());
+        return result;
     }
 
     public float getShovelStr(ItemStack stack)
     {
-        return this.func_150893_a(stack, Blocks.dirt);
+        float result = 8;
+        for (Iterator<PolytoolTypeAlloy> itr = getAlloyUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrShovel());
+        return result;
     }
 
     @Override
@@ -100,23 +115,10 @@ public class PolytoolItem extends ItemPickaxe
         itemIcon = ir.registerIcon(Textures.IIcon.POLYTOOL);
     }
 
-    @Override
-    public float func_150893_a(ItemStack par1ItemStack, Block par2Block)
-    {
-        long sum = 8;
-        ArrayList upgrades = getUpgrades(par1ItemStack);
-        Iterator iter = upgrades.iterator();
-        while (iter.hasNext())
-        {
-            sum += ((PolytoolUpgradeType) iter.next()).getStrVsBlock(par1ItemStack, par2Block);
-        }
-        return sum;
-    }
-
-    public static ArrayList getUpgrades(ItemStack stack)
+    public static ArrayList<PolytoolUpgradeType> getUpgrades(ItemStack stack)
     {
         ensureNBT(stack);
-        ArrayList toReturn = new ArrayList();
+        ArrayList<PolytoolUpgradeType> toReturn = new ArrayList<PolytoolUpgradeType>();
         NBTTagList list = stack.stackTagCompound.getTagList("Upgrades", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < list.tagCount(); i++)
         {
@@ -124,19 +126,28 @@ public class PolytoolItem extends ItemPickaxe
             toReturn.add(PolytoolHelper.getTypeFromElement(ElementEnum.getByID(nbt.getInteger("Element")), nbt.getFloat("Power")));
         }
         return toReturn;
+    }
 
+    public static ArrayList<PolytoolTypeAlloy> getAlloyUpgrades(ItemStack stack)
+    {
+        ArrayList<PolytoolTypeAlloy> result = new ArrayList<PolytoolTypeAlloy>();
+        for (PolytoolUpgradeType type : getUpgrades(stack))
+        {
+            if (type instanceof PolytoolTypeAlloy) result.add((PolytoolTypeAlloy)type);
+        }
+        return result;
     }
 
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
-        par2EntityLivingBase.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLivingBase), getSwordStr(par1ItemStack));
+        par2EntityLivingBase.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLivingBase), getSwordStr(par1ItemStack));
 
         ArrayList upgrades = getUpgrades(par1ItemStack);
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            ((PolytoolUpgradeType) iter.next()).hitEntity(par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
+            ((PolytoolUpgradeType)iter.next()).hitEntity(par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
         }
         return true;
     }
@@ -148,7 +159,7 @@ public class PolytoolItem extends ItemPickaxe
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            ((PolytoolUpgradeType) iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
+            ((PolytoolUpgradeType)iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
         }
         return true;
     }
@@ -180,7 +191,7 @@ public class PolytoolItem extends ItemPickaxe
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            ((PolytoolUpgradeType) iter.next()).onTickFull(par1ItemStack, par2World, par3Entity, par4, par5);
+            ((PolytoolUpgradeType)iter.next()).onTickFull(par1ItemStack, par2World, par3Entity, par4, par5);
         }
     }
 
@@ -206,14 +217,29 @@ public class PolytoolItem extends ItemPickaxe
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            PolytoolUpgradeType next = (PolytoolUpgradeType) iter.next();
+            PolytoolUpgradeType next = (PolytoolUpgradeType)iter.next();
             if (next.getElement().atomicNumber() == element.atomicNumber())
             {
-
                 return next.power;
             }
         }
         return 0;
+    }
+
+    @Override
+    public float getDigSpeed(ItemStack stack, Block block, int meta)
+    {
+        float result = 8F;
+        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrVsBlock(stack, block, meta));
+        return result;
+    }
+
+    @Override
+    public Multimap getAttributeModifiers(ItemStack stack)
+    {
+        Multimap multimap = HashMultimap.create();
+        multimap.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", getSwordStr(stack), 0));
+        return multimap;
     }
 
     @Override

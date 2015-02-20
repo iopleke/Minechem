@@ -3,11 +3,9 @@ package minechem.item.polytool;
 import minechem.item.element.ElementAlloyEnum;
 import minechem.item.element.ElementEnum;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -16,10 +14,13 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
 
     private ElementAlloyEnum alloy;
 
+    public PolytoolTypeAlloy(ElementAlloyEnum alloy)
+    {
+        this.alloy = alloy;
+    }
+
     public PolytoolTypeAlloy(ElementAlloyEnum alloy, float power)
     {
-
-        super(true);
         this.power = power;
         this.alloy = alloy;
     }
@@ -50,54 +51,42 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
     }
 
     @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
+    public float getStrVsBlock(ItemStack itemStack, Block block, int meta)
     {
         // There must be a better way to do this
-        if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_pickaxe), block, 0))
+        if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_pickaxe), block, meta))
         {
-
-            if (block == Blocks.stone || block == Blocks.cobblestone || OreDictionary.getOreName(OreDictionary.getOreID(block.getUnlocalizedName())).contains("stone"))
+            for (int id : OreDictionary.getOreIDs(new ItemStack(block, 1, meta)))
+                if (OreDictionary.getOreName(id).contains("stone")) return this.getStrStone();
+            if (block == Blocks.stone || block == Blocks.cobblestone)
             {
-
                 return this.getStrStone();
             }
             return this.getStrOre();
-        } else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_shovel), block, 0))
+        } else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_shovel), block, meta))
         {
-
             return this.getStrShovel();
-        } else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_sword), block, 0))
+        } else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_sword), block, meta))
         {
-
             return this.getStrSword();
-        } else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_axe), block, 0))
+        } else if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_axe), block, meta))
         {
-
             return this.getStrAxe();
         }
         return 0;
     }
 
     @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
+    public float getDamageModifier()
     {
+        return getStrSword();
     }
 
-    @Override
-    public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
-    {
-    }
 
     @Override
     public ElementEnum getElement()
     {
-
         return alloy.element;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override
@@ -114,5 +103,4 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
 
         return result;
     }
-
 }

@@ -1,8 +1,5 @@
 package minechem.item.polytool;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 import minechem.MinechemItemsRegistration;
 import minechem.gui.GuiContainerTabbed;
 import minechem.gui.GuiTabHelp;
@@ -15,6 +12,10 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 public class PolytoolGui extends GuiContainerTabbed
 {
@@ -92,7 +93,7 @@ public class PolytoolGui extends GuiContainerTabbed
         Iterator renderIter = elements.iterator();
         while (renderIter.hasNext())
         {
-            ((ElementGuiHelper) renderIter.next()).draw(this, renders);
+            ((ElementGuiHelper)renderIter.next()).draw(this, renders);
         }
 
         drawItemStack(polytoolItem, 80, 42, "");
@@ -141,5 +142,6 @@ public class PolytoolGui extends GuiContainerTabbed
             elements.add(new ElementGuiHelper(1 + rand.nextInt(2), rand.nextDouble() * Math.PI * 2, upgrade.getElement()));
             this.shouldUpdate = true;
         }
+        this.polytool = this.player.getCurrentItem();
     }
 }

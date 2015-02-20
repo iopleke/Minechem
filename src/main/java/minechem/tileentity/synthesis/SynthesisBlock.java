@@ -1,17 +1,22 @@
 package minechem.tileentity.synthesis;
 
+import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import java.util.ArrayList;
 import minechem.Minechem;
+import minechem.Settings;
 import minechem.block.BlockSimpleContainer;
 import minechem.gui.CreativeTabMinechem;
+import minechem.network.MessageHandler;
+import minechem.network.message.SynthesisUpdateMessage;
 import minechem.proxy.CommonProxy;
 import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.MathHelper;
@@ -46,6 +51,17 @@ public class SynthesisBlock extends BlockSimpleContainer
         if (tileEntity == null || entityPlayer.isSneaking())
         {
             return false;
+        }
+        if (!world.isRemote)
+        {
+            SynthesisUpdateMessage message = new SynthesisUpdateMessage((SynthesisTileEntity)tileEntity);
+            if (entityPlayer instanceof EntityPlayerMP)
+            {
+                MessageHandler.INSTANCE.sendTo(message, (EntityPlayerMP) entityPlayer);
+            } else
+            {
+                MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, Settings.UpdateRadius));
+            }
         }
         entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
         return true;

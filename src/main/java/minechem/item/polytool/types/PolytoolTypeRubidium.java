@@ -10,18 +10,6 @@ import net.minecraft.world.World;
 public class PolytoolTypeRubidium extends PolytoolUpgradeType
 {
 
-    public PolytoolTypeRubidium()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
     @Override
     public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
     {
@@ -43,19 +31,12 @@ public class PolytoolTypeRubidium extends PolytoolUpgradeType
     @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Rb;
-    }
-
-    @Override
-    public void onTick()
-    {
     }
 
     @Override
     public String getDescription()
     {
-
         return "Creates explosion if in water";
     }
 

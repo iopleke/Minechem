@@ -1,8 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.Map;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolItem;
 import minechem.item.polytool.PolytoolUpgradeType;
@@ -17,6 +14,10 @@ import net.minecraft.network.play.server.S23PacketBlockChange;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.ForgeDirection;
 import net.minecraftforge.oredict.OreDictionary;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class PolytoolTypeIron extends PolytoolUpgradeType
 {
@@ -46,43 +47,25 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
         return block.getUnlocalizedName() + "@" + meta;
     }
 
-    public PolytoolTypeIron()
-    {
-        super();
-    }
-
-    @Override
-    public float getStrVsBlock(ItemStack itemStack, Block block)
-    {
-
-        return 0;
-    }
-
-    @Override
-    public void hitEntity(ItemStack itemStack, EntityLivingBase target, EntityLivingBase player)
-    {
-
-    }
-
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, Block id, int x1, int y1, int z1, EntityLivingBase entityLiving)
     {
         if (!world.isRemote && entityLiving instanceof EntityPlayer)
         {
-            EntityPlayer player = (EntityPlayer) entityLiving;
+            EntityPlayer player = (EntityPlayer)entityLiving;
             ArrayList<CoordTuple> queue = new ArrayList<CoordTuple>(100);
             float carbon = 0;
             for (Object upgrade : PolytoolItem.getUpgrades(itemStack))
             {
-                if (((PolytoolUpgradeType) upgrade).getElement() == ElementEnum.C)
+                if (((PolytoolUpgradeType)upgrade).getElement() == ElementEnum.C)
                 {
-                    carbon = ((PolytoolUpgradeType) upgrade).power;
+                    carbon = ((PolytoolUpgradeType)upgrade).power;
                 }
             }
             int meta = world.getBlockMetadata(x1, y1, z1);
             if (ores.containsKey(blockHash(id, meta)))
             {
-                int toMine = (int) power;
+                int toMine = (int)power;
                 queue.add(new CoordTuple(x1, y1, z1));
                 while (!queue.isEmpty())
                 {
@@ -112,19 +95,13 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
     @Override
     public ElementEnum getElement()
     {
-
         return ElementEnum.Fe;
     }
 
-    @Override
-    public void onTick()
-    {
-    }
 
     @Override
     public String getDescription()
     {
-
         return "Mines deposits of ores";
     }
 
@@ -136,14 +113,14 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
             world.setBlockToAir(x, y, z);
             if (!world.isRemote)
             {
-                ((EntityPlayerMP) player).playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
+                ((EntityPlayerMP)player).playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
             }
             return;
         }
 
         if (!world.isRemote)
         {
-            int bonus = (block == Blocks.diamond_ore || block == Blocks.coal_ore) ? (int) (world.rand.nextDouble() * Math.log(carbon)) + 1 : 1;
+            int bonus = (block == Blocks.diamond_ore || block == Blocks.coal_ore) ? (int)(world.rand.nextDouble() * Math.log(carbon)) + 1 : 1;
             block.onBlockHarvested(world, x, y, z, meta, player);
 
             if (block.removedByPlayer(world, player, x, y, z, true))
@@ -154,7 +131,7 @@ public class PolytoolTypeIron extends PolytoolUpgradeType
                 }
             }
 
-            EntityPlayerMP mpPlayer = (EntityPlayerMP) player;
+            EntityPlayerMP mpPlayer = (EntityPlayerMP)player;
             mpPlayer.playerNetServerHandler.sendPacket(new S23PacketBlockChange(x, y, z, world));
         }
     }
