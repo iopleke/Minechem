@@ -1,17 +1,14 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
-import minechem.asm.MinechemHooks;
 import minechem.chemical.ChemicalBase;
-import minechem.chemical.ChemicalStructure;
 import minechem.chemical.Element;
-import minechem.chemical.Molecule;
 import minechem.helper.AchievementHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.Compendium;
 import minechem.helper.ResearchHelper;
 import minechem.item.chemical.ChemicalItem;
-import minechem.registry.ResearchRegistry;
+import minechem.proxy.client.render.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -49,7 +46,7 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
 
     private void drawMicroscopeOverlay()
     {
-        MinechemHooks.resetGreyscale(1.0F);
+        RenderHelper.resetOpenGLColour();
         Minecraft.getMinecraft().renderEngine.bindTexture(texture);
         float z = this.zLevel;
         this.zLevel = 600.0F;
