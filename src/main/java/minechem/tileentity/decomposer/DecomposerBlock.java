@@ -1,14 +1,20 @@
 package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
+
+import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.Minechem;
+import minechem.Settings;
 import minechem.block.BlockSimpleContainer;
 import minechem.gui.CreativeTabMinechem;
+import minechem.network.MessageHandler;
+import minechem.network.message.DecomposerUpdateMessage;
 import minechem.proxy.CommonProxy;
 import minechem.reference.Textures;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -30,6 +36,17 @@ public class DecomposerBlock extends BlockSimpleContainer
         if (tileEntity == null || entityPlayer.isSneaking())
         {
             return false;
+        }
+        if (!world.isRemote)
+        {
+            DecomposerUpdateMessage message = new DecomposerUpdateMessage((DecomposerTileEntity)tileEntity);
+            if (entityPlayer instanceof EntityPlayerMP)
+            {
+                MessageHandler.INSTANCE.sendTo(message, (EntityPlayerMP) entityPlayer);
+            } else
+            {
+                MessageHandler.INSTANCE.sendToAllAround(message, new NetworkRegistry.TargetPoint(world.provider.dimensionId, x, y, z, Settings.UpdateRadius));
+            }
         }
         entityPlayer.openGui(Minechem.INSTANCE, 0, world, x, y, z);
         return true;
