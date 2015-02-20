@@ -17,7 +17,7 @@ public class PolytoolTypeFluorine extends PolytoolUpgradeType
     {
         if (entityLiving instanceof EntityPlayer && world.rand.nextInt(10) < this.power)
         {
-            ((EntityPlayer) entityLiving).getFoodStats().addStats(((ItemFood) Items.carrot).func_150905_g(new ItemStack(Items.carrot)), ((ItemFood) Items.carrot).func_150906_h(new ItemStack(Items.carrot)));
+            ((EntityPlayer)entityLiving).getFoodStats().addStats(((ItemFood)Items.carrot).func_150905_g(new ItemStack(Items.carrot)), ((ItemFood)Items.carrot).func_150906_h(new ItemStack(Items.carrot)));
         }
     }
 

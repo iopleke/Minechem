@@ -1,12 +1,13 @@
 package minechem.item.polytool;
 
-import java.util.ArrayList;
 import minechem.item.element.ElementEnum;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraftforge.client.IItemRenderer;
 import org.lwjgl.opengl.GL11;
+
+import java.util.ArrayList;
 
 public class PolytoolInventoryRender implements IItemRenderer
 {
@@ -95,16 +96,16 @@ public class PolytoolInventoryRender implements IItemRenderer
 
         for (int i = 0; i < upgrades.size(); i++)
         {
-            for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++)
+            for (int j = 0; j < ((PolytoolUpgradeType)upgrades.get(i)).power; j++)
             {
                 count++;
             }
         }
         for (int i = 0; i < upgrades.size(); i++)
         {
-            for (int j = 0; j < ((PolytoolUpgradeType) upgrades.get(i)).power; j++)
+            for (int j = 0; j < ((PolytoolUpgradeType)upgrades.get(i)).power; j++)
             {
-                ElementEnum element = ((PolytoolUpgradeType) upgrades.get(i)).getElement();
+                ElementEnum element = ((PolytoolUpgradeType)upgrades.get(i)).getElement();
                 red += (1 / count) * getRed(element);
                 green += (1 / count) * getGreen(element);
                 blue += (1 / count) * getBlue(element);

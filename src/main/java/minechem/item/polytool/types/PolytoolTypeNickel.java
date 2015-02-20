@@ -1,7 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.Iterator;
-import java.util.List;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -10,6 +8,9 @@ import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.World;
+
+import java.util.Iterator;
+import java.util.List;
 
 public class PolytoolTypeNickel extends PolytoolUpgradeType
 {
@@ -27,7 +28,7 @@ public class PolytoolTypeNickel extends PolytoolUpgradeType
         Iterator iter = items.iterator();
         while (iter.hasNext())
         {
-            EntityItem entity = (EntityItem) iter.next();
+            EntityItem entity = (EntityItem)iter.next();
             entity.motionX = -1 * (entity.posX - player.posX);
 
             entity.motionY = -1 * (entity.posY - player.posY);

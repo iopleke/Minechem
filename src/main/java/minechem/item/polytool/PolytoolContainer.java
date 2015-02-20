@@ -1,12 +1,13 @@
 package minechem.item.polytool;
 
-import java.util.ArrayList;
 import minechem.item.element.ElementItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import java.util.ArrayList;
 
 public class PolytoolContainer extends Container
 {
@@ -43,7 +44,7 @@ public class PolytoolContainer extends Container
     @Override
     public ItemStack transferStackInSlot(EntityPlayer entityPlayer, int slot)
     {
-        Slot slotObject = (Slot) inventorySlots.get(slot);
+        Slot slotObject = (Slot)inventorySlots.get(slot);
         ItemStack stack = null;
 
         if (slotObject != null && slotObject.getHasStack())

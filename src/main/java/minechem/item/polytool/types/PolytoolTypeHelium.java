@@ -32,7 +32,7 @@ public class PolytoolTypeHelium extends PolytoolUpgradeType
             if (target != null)
             {
                 target.motionY = Math.min(target.motionY + .1, 1);
-                if (rand.nextInt((int) (10 * power)) == 0)
+                if (rand.nextInt((int)(10 * power)) == 0)
                 {
                     itemStack.stackTagCompound.setInteger("HeliumHitEntity", 0);
                 }

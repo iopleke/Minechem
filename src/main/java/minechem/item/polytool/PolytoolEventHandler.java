@@ -1,25 +1,22 @@
 package minechem.item.polytool;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.MinechemUtil;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
-import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.monster.EntitySkeleton;
-import net.minecraft.entity.monster.EntitySpider;
 import net.minecraft.entity.monster.EntityZombie;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraftforge.event.entity.living.LivingDropsEvent;
-import net.minecraftforge.event.entity.living.LivingHurtEvent;
-import net.minecraftforge.event.entity.player.PlayerEvent;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Random;
 
 public class PolytoolEventHandler
 {
@@ -42,21 +39,21 @@ public class PolytoolEventHandler
         if (event.source.damageType.equals("player"))
         {
 
-            EntityPlayer player = (EntityPlayer) event.source.getEntity();
+            EntityPlayer player = (EntityPlayer)event.source.getEntity();
             ItemStack stack = player.getCurrentEquippedItem();
             if (stack != null && stack.getItem() instanceof PolytoolItem)
             {
                 float powerSilicon = PolytoolItem.getPowerOfType(stack, ElementEnum.Si);
                 if (powerSilicon > 0)
                 {
-                    int amount = (int) Math.ceil(random.nextDouble() * powerSilicon);
+                    int amount = (int)Math.ceil(random.nextDouble() * powerSilicon);
                     Iterator iter = event.drops.iterator();
                     if (random.nextInt(16) < 1 + powerSilicon)
                     {
                         ArrayList<EntityItem> trueResult = new ArrayList();
                         while (iter.hasNext())
                         {
-                            EntityItem entityItem = (EntityItem) iter.next();
+                            EntityItem entityItem = (EntityItem)iter.next();
                             ItemStack item = entityItem.getEntityItem();
                             while (item.stackSize > 0)
                             {
@@ -69,7 +66,7 @@ public class PolytoolEventHandler
 
                                     for (int i = 0; i < items.size(); i++)
                                     {
-                                        trueResult.add(new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, (ItemStack) items.get(i)));
+                                        trueResult.add(new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, (ItemStack)items.get(i)));
                                     }
                                 } else
                                 {
@@ -99,12 +96,12 @@ public class PolytoolEventHandler
                         float power = PolytoolItem.getPowerOfType(stack, ElementEnum.N);
                         if (power > 0)
                         {
-                            int amount = (int) Math.ceil(random.nextDouble() * power);
+                            int amount = (int)Math.ceil(random.nextDouble() * power);
                             addDrops(event, new ItemStack(Items.cooked_beef, amount, 0));
                             Iterator iter = event.drops.iterator();
                             while (iter.hasNext())
                             {
-                                EntityItem entityItem = (EntityItem) iter.next();
+                                EntityItem entityItem = (EntityItem)iter.next();
                                 if (entityItem.getEntityItem().getItem() == Items.rotten_flesh)
                                 {
                                     iter.remove();
@@ -118,11 +115,11 @@ public class PolytoolEventHandler
                         float power = PolytoolItem.getPowerOfType(stack, ElementEnum.Ca);
                         if (power > 0)
                         {
-                            int amount = (int) Math.ceil(random.nextDouble() * power);
+                            int amount = (int)Math.ceil(random.nextDouble() * power);
                             Iterator iter = event.drops.iterator();
                             while (iter.hasNext())
                             {
-                                EntityItem entityItem = (EntityItem) iter.next();
+                                EntityItem entityItem = (EntityItem)iter.next();
                                 if (entityItem.getEntityItem().getItem() == Items.bone)
                                 {
                                     entityItem.getEntityItem().stackSize += amount;
@@ -138,7 +135,7 @@ public class PolytoolEventHandler
                         {
                             if (event.entityLiving instanceof EntitySkeleton)
                             {
-                                EntitySkeleton skeleton = (EntitySkeleton) enemy;
+                                EntitySkeleton skeleton = (EntitySkeleton)enemy;
                                 addDrops(event, new ItemStack(Items.skull, 1, skeleton.getSkeletonType()));
                             } else if (event.entityLiving instanceof EntityZombie)
                             {

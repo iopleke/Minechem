@@ -16,13 +16,13 @@ public class PolytoolTypeMercury extends PolytoolUpgradeType
     @Override
     public void onBlockDestroyed(ItemStack itemStack, World world, Block block, int x, int y, int z, EntityLivingBase entityLiving)
     {
-        int search = (int) (4 * power + 1);
+        int search = (int)(4 * power + 1);
         for (int i = 0; i < search; i++)
         {
             Block found = world.getBlock(x, y - i, z);
             if (entityLiving instanceof EntityPlayer && found == Blocks.flowing_lava || found == Blocks.lava)
             {
-                ((EntityPlayer) entityLiving).addChatMessage(new ChatComponentText(EnumColour.RED + "WARNING: LAVA UNDERNEATH"));
+                ((EntityPlayer)entityLiving).addChatMessage(new ChatComponentText(EnumColour.RED + "WARNING: LAVA UNDERNEATH"));
                 break;
             }
         }

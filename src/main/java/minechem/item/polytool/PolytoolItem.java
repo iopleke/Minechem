@@ -3,9 +3,6 @@ package minechem.item.polytool;
 import com.google.common.collect.Multimap;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 import minechem.Minechem;
 import minechem.gui.CreativeTabMinechem;
 import minechem.gui.GuiHandler;
@@ -27,6 +24,10 @@ import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.util.Constants;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 public class PolytoolItem extends ItemPickaxe
 {
@@ -120,13 +121,13 @@ public class PolytoolItem extends ItemPickaxe
     @Override
     public boolean hitEntity(ItemStack par1ItemStack, EntityLivingBase par2EntityLivingBase, EntityLivingBase par3EntityLivingBase)
     {
-        par2EntityLivingBase.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer) par3EntityLivingBase), getSwordStr(par1ItemStack));
+        par2EntityLivingBase.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)par3EntityLivingBase), getSwordStr(par1ItemStack));
 
         ArrayList upgrades = getUpgrades(par1ItemStack);
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            ((PolytoolUpgradeType) iter.next()).hitEntity(par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
+            ((PolytoolUpgradeType)iter.next()).hitEntity(par1ItemStack, par2EntityLivingBase, par3EntityLivingBase);
         }
         return true;
     }
@@ -138,7 +139,7 @@ public class PolytoolItem extends ItemPickaxe
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            ((PolytoolUpgradeType) iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
+            ((PolytoolUpgradeType)iter.next()).onBlockDestroyed(p_150894_1_, p_150894_2_, p_150894_3_, p_150894_4_, p_150894_5_, p_150894_6_, p_150894_7_);
         }
         return true;
     }
@@ -170,7 +171,7 @@ public class PolytoolItem extends ItemPickaxe
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            ((PolytoolUpgradeType) iter.next()).onTickFull(par1ItemStack, par2World, par3Entity, par4, par5);
+            ((PolytoolUpgradeType)iter.next()).onTickFull(par1ItemStack, par2World, par3Entity, par4, par5);
         }
     }
 
@@ -196,7 +197,7 @@ public class PolytoolItem extends ItemPickaxe
         Iterator iter = upgrades.iterator();
         while (iter.hasNext())
         {
-            PolytoolUpgradeType next = (PolytoolUpgradeType) iter.next();
+            PolytoolUpgradeType next = (PolytoolUpgradeType)iter.next();
             if (next.getElement().atomicNumber() == element.atomicNumber())
             {
 
@@ -210,7 +211,8 @@ public class PolytoolItem extends ItemPickaxe
     public float getDigSpeed(ItemStack stack, Block block, int meta)
     {
         float result = 8F;
-        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrVsBlock(stack, block, meta));
+        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); result += itr.next().getStrVsBlock(stack, block, meta))
+            ;
         return result;
     }
 
@@ -218,12 +220,12 @@ public class PolytoolItem extends ItemPickaxe
     public Multimap getAttributeModifiers(ItemStack stack)
     {
         Multimap result = super.getAttributeModifiers(stack);
-        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext();)
+        for (Iterator<PolytoolUpgradeType> itr = getUpgrades(stack).iterator(); itr.hasNext(); )
         {
             float modifier = itr.next().getDamageModifier();
-            if (modifier!=0F)
+            if (modifier != 0F)
             {
-                result.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(),new AttributeModifier(field_111210_e, "Tool modifier", modifier, 0));
+                result.put(SharedMonsterAttributes.attackDamage.getAttributeUnlocalizedName(), new AttributeModifier(field_111210_e, "Tool modifier", modifier, 0));
             }
         }
         return result;

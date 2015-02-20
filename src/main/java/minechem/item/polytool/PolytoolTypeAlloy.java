@@ -3,11 +3,9 @@ package minechem.item.polytool;
 import minechem.item.element.ElementAlloyEnum;
 import minechem.item.element.ElementEnum;
 import net.minecraft.block.Block;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.world.World;
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -58,7 +56,8 @@ public class PolytoolTypeAlloy extends PolytoolUpgradeType
         // There must be a better way to do this
         if (ForgeHooks.isToolEffective(new ItemStack(Items.diamond_pickaxe), block, meta))
         {
-            for (int id : OreDictionary.getOreIDs(new ItemStack(block,1,meta))) if (OreDictionary.getOreName(id).contains("stone")) return this.getStrStone();
+            for (int id : OreDictionary.getOreIDs(new ItemStack(block, 1, meta)))
+                if (OreDictionary.getOreName(id).contains("stone")) return this.getStrStone();
             if (block == Blocks.stone || block == Blocks.cobblestone)
             {
                 return this.getStrStone();

@@ -18,11 +18,11 @@ public class PolytoolTypePhosphorus extends PolytoolUpgradeType
         {
             if (block.isFlammable(world, x, y, z, ForgeDirection.UP))
             {
-                for (int i = (int) (x - power); i < x + power; i++)
+                for (int i = (int)(x - power); i < x + power; i++)
                 {
-                    for (int j = (int) (y - power); j < y + power; j++)
+                    for (int j = (int)(y - power); j < y + power; j++)
                     {
-                        for (int k = (int) (z - power); k < z + power; k++)
+                        for (int k = (int)(z - power); k < z + power; k++)
                         {
                             if (world.getBlock(i, j, k) == Blocks.air)
                             {

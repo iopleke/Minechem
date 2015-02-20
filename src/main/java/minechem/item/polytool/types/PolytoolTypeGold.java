@@ -26,7 +26,7 @@ public class PolytoolTypeGold extends PolytoolUpgradeType
             world.addWeatherEffect(new EntityLightningBolt(world, entity.posX, entity.posY, entity.posZ));
             if (entity instanceof EntityPlayer)
             {
-                EntityPlayer player = (EntityPlayer) entity;
+                EntityPlayer player = (EntityPlayer)entity;
                 for (int i = 0; i < player.inventory.getSizeInventory(); i++)
                 {
                     if (Loader.isModLoaded("CoFHAPI|energy"))

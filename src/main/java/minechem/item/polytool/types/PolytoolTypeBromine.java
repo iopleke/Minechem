@@ -1,6 +1,5 @@
 package minechem.item.polytool.types;
 
-import java.util.Random;
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
 import net.minecraft.block.Block;
@@ -18,7 +17,7 @@ public class PolytoolTypeBromine extends PolytoolUpgradeType
     {
         if (!world.isRemote)
         {
-            int bonus = (int) (rand.nextDouble() * Math.log(this.power));
+            int bonus = (int)(rand.nextDouble() * Math.log(this.power));
             if (block == Blocks.gold_ore)
             {
                 world.setBlockToAir(x, y, z);

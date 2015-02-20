@@ -72,7 +72,7 @@ public class PolytoolInventory implements IInventory
             if (!player.worldObj.isRemote)
             {
                 PolytoolUpdateMessage message = new PolytoolUpdateMessage(upgrade);
-                MessageHandler.INSTANCE.sendTo(message, (EntityPlayerMP) player);
+                MessageHandler.INSTANCE.sendTo(message, (EntityPlayerMP)player);
             }
         }
 

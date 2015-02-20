@@ -16,7 +16,7 @@ public class PolytoolTypeBoron extends PolytoolUpgradeType
     {
         if ((target instanceof EntitySpider || target instanceof EntityCaveSpider) && player instanceof EntityPlayer)
         {
-            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player),0.8F * power);
+            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player), 0.8F * power);
         }
     }
 

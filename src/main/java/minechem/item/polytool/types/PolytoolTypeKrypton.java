@@ -2,12 +2,10 @@ package minechem.item.polytool.types;
 
 import minechem.item.element.ElementEnum;
 import minechem.item.polytool.PolytoolUpgradeType;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 
 public class PolytoolTypeKrypton extends PolytoolUpgradeType
 {
@@ -17,7 +15,7 @@ public class PolytoolTypeKrypton extends PolytoolUpgradeType
     {
         if (target instanceof EntityPlayer)
         {
-            EntityPlayer entityPlayer = (EntityPlayer) target;
+            EntityPlayer entityPlayer = (EntityPlayer)target;
             if (entityPlayer.getTotalArmorValue() > 23)
             {
                 entityPlayer.attackEntityFrom(DamageSource.outOfWorld, power);

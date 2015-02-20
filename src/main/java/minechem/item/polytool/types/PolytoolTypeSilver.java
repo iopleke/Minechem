@@ -1,15 +1,12 @@
 package minechem.item.polytool.types;
 
 import minechem.item.element.ElementEnum;
-import minechem.item.polytool.PolytoolItem;
 import minechem.item.polytool.PolytoolUpgradeType;
-import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.monster.EntityEnderman;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.DamageSource;
-import net.minecraft.world.World;
 
 public class PolytoolTypeSilver extends PolytoolUpgradeType
 {
@@ -18,7 +15,7 @@ public class PolytoolTypeSilver extends PolytoolUpgradeType
     {
         if (target instanceof EntityEnderman && player instanceof EntityPlayer)
         {
-            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player),0.8F * power);
+            target.attackEntityFrom(DamageSource.causePlayerDamage((EntityPlayer)player), 0.8F * power);
         }
     }
 
