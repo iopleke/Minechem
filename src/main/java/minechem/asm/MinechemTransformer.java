@@ -12,7 +12,7 @@ public class MinechemTransformer implements IClassTransformer
 {
     private static enum Class
     {
-        GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei", Method.GUI_DRAW);
+        GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei", Method.GUI_DRAW, Method.DRAW_SCREEN, Method.ACTION_PREFORMED);
 
         private final String name, obfName;
         private Method[] methods;
@@ -41,7 +41,9 @@ public class MinechemTransformer implements IClassTransformer
         RESET("minechem.asm.MinechemHooks", "resetGreyscale", "(F)V"),
         ICON("minechem.asm.MinechemHooks", "drawIconAchievement", "(Lnet/minecraft/client/renderer/entity/RenderItem;Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IILnet/minecraft/stats/Achievement;)V"),
         BACKGROUND("minechem.asm.MinechemHooks", "drawAchievementPageBackground","(Lnet/minecraft/client/Minecraft;FIII)V"),
-        SET_SCALE("minechem.asm.MinechemHooks", "setScaleOnLoad", "(I)F");
+        SET_SCALE("minechem.asm.MinechemHooks", "setScaleOnLoad", "(I)F"),
+        GET_MAX_ZOOM_OUT("minechem.asm.MinechemHooks", "getMaxZoomOut", "(I)F"),
+        GET_MAX_ZOOM_IN("minechem.asm.MinechemHooks", "getMaxZoomIn", "(I)F");
 
         private final String className, name, params;
         private Hook(String className, String name, String params)
@@ -70,7 +72,8 @@ public class MinechemTransformer implements IClassTransformer
     private enum Method
     {
         GUI_DRAW("func_146552_b", "(IIF)V", CodeBlock.BACKGROUND, InstructionNode.RECOLOUR, InstructionNode.RESET, InstructionNode.ICON),
-        ACTION_PREFORMED("actionPerformed", "(Lnet/minecraft/client/gui/GuiButton;)V", InstructionNode.SET_SCALE);
+        ACTION_PREFORMED("actionPerformed", "(Lnet/minecraft/client/gui/GuiButton;)V", InstructionNode.SET_SCALE),
+        DRAW_SCREEN("drawScreen", "(IIF)V", CodeBlock.CLAMP_ZOOM);
 
         private final String name, args;
         private IInsnList[] instructions;
@@ -148,6 +151,7 @@ public class MinechemTransformer implements IClassTransformer
         {
             InsnList insnList = new InsnList();
             insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
             insnList.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "currentPage", "I"));
             insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.SET_SCALE.getASMName(), Hook.SET_SCALE.getName(), Hook.SET_SCALE.getParams(), false));
             insnList.add(new FieldInsnNode(Opcodes.PUTFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "field_146570_r", "F"));
@@ -162,8 +166,9 @@ public class MinechemTransformer implements IClassTransformer
     
     public enum CodeBlock implements IInsnList
     {
-        BACKGROUND(306, 0, 373, 1);
-        
+        BACKGROUND(306, 0, 373, 1),
+        CLAMP_ZOOM(183, 1, 184, 0);
+
         private InsnList insnList;
         private int startLine, endLine;
         private int linesAfterStart, linesAfterEnd;
@@ -177,7 +182,8 @@ public class MinechemTransformer implements IClassTransformer
         
         static 
         {
-             BACKGROUND.insnList = createBackgroundHook();
+            BACKGROUND.insnList = createBackgroundHook();
+            CLAMP_ZOOM.insnList = createClampHook();
         }
         
         private static InsnList createBackgroundHook()
@@ -192,6 +198,23 @@ public class MinechemTransformer implements IClassTransformer
             insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
             insnList.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "currentPage", "I"));
             insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.BACKGROUND.getASMName(), Hook.BACKGROUND.getName(), Hook.BACKGROUND.getParams(), false));
+            return insnList;
+        }
+        
+        private static InsnList createClampHook()
+        {
+            InsnList insnList = new InsnList();
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            insnList.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "field_146570_r", "F"));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            insnList.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "currentPage", "I"));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.GET_MAX_ZOOM_IN.getASMName(), Hook.GET_MAX_ZOOM_IN.getName(), Hook.GET_MAX_ZOOM_IN.getParams(), false));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            insnList.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "currentPage", "I"));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.GET_MAX_ZOOM_OUT.getASMName(), Hook.GET_MAX_ZOOM_OUT.getName(), Hook.GET_MAX_ZOOM_OUT.getParams(), false));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "net/minecraft/util/MathHelper", "clamp_float", "(FFF)F", false));
+            insnList.add(new FieldInsnNode(Opcodes.PUTFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "field_146570_r", "F"));
             return insnList;
         }
 
@@ -257,9 +280,9 @@ public class MinechemTransformer implements IClassTransformer
             if (node instanceof LineNumberNode)
             {
                 LineNumberNode lineNode = (LineNumberNode) node;
-                if (codeBlock.startLine == lineNode.line)
+                if (lineNode.line >= codeBlock.startLine)
                     delete = true;
-                if (lineNode.line == codeBlock.endLine)
+                if (lineNode.line >= codeBlock.endLine)
                     done = true;
             }
             
