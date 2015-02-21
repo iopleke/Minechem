@@ -170,6 +170,8 @@ public abstract class WrapperItem extends BasicItem
         return wrapped.getItem().getIcon(wrapped, renderPass, player, usingItem, useRemaining);
     }
 
+
+
     @Override
     public IIcon getIconIndex(ItemStack stack)
     {
@@ -454,7 +456,7 @@ public abstract class WrapperItem extends BasicItem
         ItemStack wrapped = getWrappedItemStack(stack);
         if (wrapped == null)
         {
-            onCreated(stack, world, player);
+            super.onCreated(stack, world, player);
         } else
         {
             wrapped.getItem().onCreated(wrapped, world, player);
