@@ -25,6 +25,26 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
     {
         GL11.glColor4f(greyscale, greyscale, greyscale, 1.0F);
     }
+    
+    public static void enableBlend()
+    {
+        GL11.glEnable(GL11.GL_BLEND);        
+    }
+
+    public static void disableBlend()
+    {
+        GL11.glDisable(GL11.GL_BLEND);
+    }
+    
+    public static void setOpacity(float opacity)
+    {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, opacity);
+    }
+
+    public static void resetOpacity()
+    {
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
+    }
 
     public static void drawTexturedRectUV(float x, float y, float z, int w, int h, IIcon icon)
     {

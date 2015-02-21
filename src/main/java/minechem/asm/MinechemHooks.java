@@ -3,6 +3,7 @@ package minechem.asm;
 import minechem.achievement.IAchievementPageRenderer;
 import minechem.achievement.IAchievementRenderer;
 import minechem.achievement.MinecraftAchievementPage;
+import minechem.item.IOverlay;
 import minechem.proxy.client.render.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -84,5 +85,13 @@ public class MinechemHooks
                 return ((IAchievementPageRenderer) achievementPage).getMaxZoomIn();
         }
         return 1.0F;
+    }
+    
+    public static void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top, float z)
+    {
+        if (itemStack.getItem() instanceof IOverlay)
+        {
+            ((IOverlay) itemStack.getItem()).renderOverlay(fontRenderer, textureManager, itemStack, left, top, z);
+        }
     }
 }

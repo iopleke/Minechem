@@ -6,10 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 import minechem.Compendium;
+import minechem.item.IOverlay;
 import minechem.item.augment.augments.IAugment;
 import minechem.item.prefab.WrapperItem;
+import minechem.proxy.client.render.RenderHelper;
 import minechem.registry.AugmentRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.texture.TextureManager;
+import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
@@ -21,7 +26,7 @@ import net.minecraft.nbt.NBTTagString;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-public class AugmentedItem extends WrapperItem implements IAugmentedItem
+public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverlay
 {
     public static final String augmentList = "augments";
     public static final String level = "level";
@@ -30,6 +35,17 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem
     public AugmentedItem()
     {
         super("augmented");
+    }
+
+    @Override
+    public void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top, float z)
+    {
+        RenderHelper.enableBlend();
+        RenderHelper.setOpacity(0.6F);
+        textureManager.bindTexture(TextureMap.locationItemsTexture);
+        RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, itemIcon);
+        RenderHelper.resetOpacity();;
+        RenderHelper.disableBlend();
     }
 
     @Override
