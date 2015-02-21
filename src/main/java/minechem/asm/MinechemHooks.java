@@ -55,11 +55,33 @@ public class MinechemHooks
     
     public static float setScaleOnLoad(int currentPage)
     {
-        if (currentPage != 1)
+        if (currentPage != -1)
         {
             AchievementPage achievementPage = AchievementPage.getAchievementPage(currentPage);
             if (achievementPage instanceof IAchievementPageRenderer)
                 return ((IAchievementPageRenderer) achievementPage).setScaleOnLoad();
+        }
+        return 1.0F;
+    }
+    
+    public static float getMaxZoomOut(int currentPage)
+    {
+        if (currentPage != -1)
+        {
+            AchievementPage achievementPage = AchievementPage.getAchievementPage(currentPage);
+            if (achievementPage instanceof IAchievementPageRenderer)
+                return ((IAchievementPageRenderer) achievementPage).getMaxZoomOut();
+        }
+        return 2.0F;
+    }
+
+    public static float getMaxZoomIn(int currentPage)
+    {
+        if (currentPage != -1)
+        {
+            AchievementPage achievementPage = AchievementPage.getAchievementPage(currentPage);
+            if (achievementPage instanceof IAchievementPageRenderer)
+                return ((IAchievementPageRenderer) achievementPage).getMaxZoomIn();
         }
         return 1.0F;
     }

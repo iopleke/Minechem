@@ -2,13 +2,14 @@ package minechem.proxy.client.render;
 
 import minechem.helper.ColourHelper;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;
 
-public class RenderHelper
+public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 {
     public static void setOpenGLColour(int colour)
     {
@@ -67,13 +68,14 @@ public class RenderHelper
     public static void drawTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, float drawW, float drawH, ResourceLocation resource)
     {
         Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
-        float textScale = 0.00390625F;
+        float xScale = 1.0F / w;
+        float yScale = 1.0F / h;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x, y + drawH, z, u * textScale, (v + h) * textScale);
-        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * textScale, (v + h) * textScale);
-        tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * textScale, v * textScale);
-        tessellator.addVertexWithUV(x, y, z, u * textScale, v * textScale);
+        tessellator.addVertexWithUV(x, y + drawH, z, u * xScale, (v + h) * yScale);
+        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * xScale, (v + h) * yScale);
+        tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * xScale, v * yScale);
+        tessellator.addVertexWithUV(x, y, z, u * xScale, v * yScale);
         tessellator.draw();
     }
 
@@ -92,5 +94,29 @@ public class RenderHelper
         GL11.glTranslatef(-scale / 2, -scale / 2, 0.0F);
         ItemRenderer.renderItemIn2D(tessellator, texture.getMaxU(), texture.getMinV(), texture.getMinU(), texture.getMaxV(), texture.getIconWidth(), texture.getIconHeight(), .0625F);
         GL11.glPopMatrix();
+    }
+
+    public static void setScissor(int guiWidth, int guiHeight, float x, float y, int w, int h)
+    {
+        Minecraft mc = Minecraft.getMinecraft();
+        ScaledResolution scaledRes = new ScaledResolution(mc, mc.displayWidth, mc.displayHeight);
+        int scale = scaledRes.getScaleFactor();
+        x *= scale;
+        y *= scale;
+        w *= scale;
+        h *= scale;
+        float guiScaledWidth = (guiWidth * scale);
+        float guiScaledHeight = (guiHeight * scale);
+        float guiLeft = ((mc.displayWidth / 2) - guiScaledWidth / 2);
+        float guiTop = ((mc.displayHeight / 2) + guiScaledHeight / 2);
+        int scissorX = Math.round((guiLeft + x));
+        int scissorY = Math.round(((guiTop - h) - y));
+        GL11.glEnable(GL11.GL_SCISSOR_TEST);
+        GL11.glScissor(scissorX, scissorY, w, h);
+    }
+
+    public static void stopScissor()
+    {
+        GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
 }
