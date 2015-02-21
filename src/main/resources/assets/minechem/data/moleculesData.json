@@ -1,8 +1,4 @@
 {
-	"sulphate_ion":{
-	  	"formula":"SO4",
-	  	"form":"solid"
-	},
 	"phosphate_ion":{
 	  	"formula":"PO4",
 	  	"form":"solid"
@@ -1524,7 +1520,7 @@
 		"form":"solid"
 	},
 	"oxalate_ion":{
-		"formula":"C2O42",
+		"formula":"C2O4",
 		"form":"solid"
 	},
 	"malonate_ion":{
@@ -4176,7 +4172,7 @@
 		"form":"solid"
 	},
 	"hydrogen_phosphate_ion":{
-		"formula":"HPO42",
+		"formula":"HPO4",
 		"form":"solid"
 	},
 	"hydrogen_sulfite_ion":{
@@ -5836,7 +5832,7 @@
 		"form":"solid"
 	},
 	"sulfate_ion":{
-		"formula":"SO42",
+		"formula":"SO4",
 		"form":"solid"
 	},
 	"sulfur2_bromide":{
@@ -6448,7 +6444,7 @@
 		"form":"solid"
 	},
 	"tungstate_ion":{
-		"formula":"WO42",
+		"formula":"WO4",
 		"form":"solid"
 	},
 	"tungsten4_sulfide":{
@@ -6644,7 +6640,7 @@
 		"form":"solid"
 	},
 	"zincate_ion":{
-		"formula":"Zn(OH)42",
+		"formula":"Zn(OH)4",
 		"form":"solid"
 	},
 	"zinc_sulfide":{
