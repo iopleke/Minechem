@@ -115,13 +115,13 @@ public class Molecule extends ChemicalBase
      *
      * @author Hilburn
      */
-    public static Pattern molecule = Pattern.compile("(\\d*)(?:([A-Z][a-z]{0,2})|(?:\\(([^+=\\s]+)\\))|(?:@([^\\d\\s]+)))(\\d*)");
+    public static Pattern molecule = Pattern.compile("(\\d*)(?:([A-Z][a-z]{0,2})|(?:\\((\\w+)\\))|(?:@([^\\d\\s]+)))(\\d*)");
 
     private static ChemicalStructure parseStructure(String formula)
     {
         if (isNull(formula))
         {
-            throw new IllegalArgumentException("Can't parse null or empty formula");
+            throw new NullPointerException("Can't parse null or empty formula");
         }
         ChemicalStructure structure = new ChemicalStructure();
         Matcher matcher = molecule.matcher(formula);
