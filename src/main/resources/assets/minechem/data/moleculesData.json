@@ -1,4 +1,88 @@
 {
+	"sulphate_ion":{
+	  	"formula":"SO4",
+	  	"form":"solid"
+	},
+	"phosphate_ion":{
+	  	"formula":"PO4",
+	  	"form":"solid"
+	},
+	"nitrate_ion": {
+	  	"formula": "NO3",
+	  	"form": "solid"
+	},
+	"ammonium_ion":{
+	  	"formula":"NH4",
+	  	"form":"solid"
+	},
+	"metaphosphate_ion":{
+	  	"formula":"PO3",
+	  	"form":"solid"
+	},
+	"methyl":{
+	  	"formula":"CH3",
+	  	"form":"solid"
+	},
+	"arsenate":{
+	  	"formula":"AsO3",
+	  	"form":"solid"
+	},
+	"arsenite":{
+	  	"formula":"AsO4",
+	  	"form":"solid"
+	},
+	"chlorate_ion":{
+	  	"formula":"ClO3",
+	  	"form":"solid"
+	},
+	"perchlorate_ion":{
+	  	"formula":"ClO4",
+	  	"form":"solid"
+	},
+	"chlorite_ion":{
+	  	"formula":"ClO",
+	  	"form":"solid"
+	},
+	"metavanadate_ion":{
+	  	"formula":"VO3",
+	  	"form":"solid"
+	},
+	"orthovanadate_ion":{
+	  	"formula":"VO4",
+	  	"form":"solid"
+	},
+	"niobate_ion":{
+	  	"formula":"NbO3",
+	  	"form":"solid"
+	},
+	"ethyl":{
+	  	"formula":"C2H5",
+	  	"form":"solid"
+	},
+	"nitride_ion":{
+	  	"formula":"N3",
+	  	"form":"solid"
+	},
+	"silicate":{
+	  	"formula":"Si4O10",
+	  	"form":"solid"
+	},
+	"molybdate_ion":{
+	  	"formula":"MoO4",
+	  	"form":"solid"
+	},
+	"acetylacetonate":{
+	  	"formula":"C5H7O2",
+	  	"form":"solid"
+	},
+	"methine_ion":{
+	  	"formula":"CH",
+	  	"form":"solid"
+	},
+	"methyline_ion":{
+	  	"formula":"CH2",
+	  	"form":"solid"
+	},
 	"actinium3_oxide":{
 		"formula":"Ac2O3",
 		"form":"solid"
@@ -939,10 +1023,6 @@
 		"formula":"BeB2",
 		"form":"solid"
 	},
-	"beryllium_borohydride":{
-		"formula":"Be(BH4)2",
-		"form":"solid"
-	},
 	"beryllium_bromide":{
 		"formula":"BeBr2",
 		"form":"solid"
@@ -1057,10 +1137,6 @@
 	},
 	"bismuth3_oxyiodide":{
 		"formula":"BiOI",
-		"form":"solid"
-	},
-	"bismuth_oxycarbonate":{
-		"formula":"(BiO)2CO3",
 		"form":"solid"
 	},
 	"bismuth3_orthophosphate":{
@@ -1611,10 +1687,6 @@
 		"formula":"C6H5O73",
 		"form":"solid"
 	},
-	"tetraphenylgermane":{
-		"formula":"(C6H5)4Ge",
-		"form":"solid"
-	},
 	"benzene":{
 		"formula":"C6H6",
 		"form":"solid"
@@ -1877,10 +1949,6 @@
 	},
 	"calcium_hydride":{
 		"formula":"CaH2",
-		"form":"solid"
-	},
-	"calcium_hypophosphite":{
-		"formula":"Ca(H2PO2)2",
 		"form":"solid"
 	},
 	"calcium_iodide":{
@@ -2436,7 +2504,7 @@
 		"form":"solid"
 	},
 	"chromate_ion":{
-		"formula":"CrO42",
+		"formula":"CrO4",
 		"form":"solid"
 	},
 	"chromium6_oxychloride":{
@@ -4019,10 +4087,6 @@
 		"formula":"HCONH2",
 		"form":"solid"
 	},
-	"formate_ion":{
-		"formula":"HCOO",
-		"form":"solid"
-	},
 	"methanoic_acid":{
 		"formula":"HCOOH",
 		"form":"solid"
@@ -4603,10 +4667,6 @@
 		"formula":"LaPO4",
 		"form":"solid"
 	},
-	"keatite":{
-		"formula":"Li(AlSi2O6)",
-		"form":"solid"
-	},
 	"lithium_bromide":{
 		"formula":"LiBr",
 		"form":"solid"
@@ -4875,10 +4935,6 @@
 		"formula":"MgWO4",
 		"form":"solid"
 	},
-	"amesite":{
-		"formula":"Mg2Al(AlSiO5)(OH)4",
-		"form":"solid"
-	},
 	"magnesium_pyrophosphate":{
 		"formula":"Mg2P2O7",
 		"form":"solid"
@@ -4895,13 +4951,9 @@
 		"formula":"Mg3Bi2",
 		"form":"solid"
 	},
-	"magnesium_phosphide":{
-		"formula":"Mg3P2",
-		"form":"solid"
-	},
-	"chrysotile":{
-		"formula":"Mg3(Si2O5)(OH)4",
-		"form":"solid"
+	"magnesium_phosphide": {
+	  "formula": "Mg3P2",
+	  "form": "solid"
 	},
 	"talc":{
 		"formula":"Mg3(Si4O10)(OH)2",
@@ -4971,10 +5023,6 @@
 		"formula":"MnO4",
 		"form":"solid"
 	},
-	"barysilate":{
-		"formula":"MnPb8(Si2O7)3",
-		"form":"solid"
-	},
 	"manganese_sulfide":{
 		"formula":"MnS",
 		"form":"solid"
@@ -5029,10 +5077,6 @@
 	},
 	"molybdenum4_oxide":{
 		"formula":"MoO2",
-		"form":"solid"
-	},
-	"molybdate_ion":{
-		"formula":"MoO42",
 		"form":"solid"
 	},
 	"molybdenum_disulfide":{
@@ -5884,7 +5928,7 @@
 		"form":"solid"
 	},
 	"selenate_ion":{
-		"formula":"SeO42",
+		"formula":"SeO4",
 		"form":"solid"
 	},
 	"selenium4_telluride":{
@@ -6545,10 +6589,6 @@
 	},
 	"zinc_carbonate":{
 		"formula":"ZnCO3",
-		"form":"solid"
-	},
-	"zinc_caprylate":{
-		"formula":"Zn(C8H15O2)2",
 		"form":"solid"
 	},
 	"zinc_chlorate":{

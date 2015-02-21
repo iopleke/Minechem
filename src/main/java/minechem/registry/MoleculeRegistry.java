@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
 import minechem.chemical.Molecule;
+import minechem.helper.LogHelper;
 
 public class MoleculeRegistry
 {
@@ -45,9 +46,22 @@ public class MoleculeRegistry
      * @param form     solid, liquid, gas, or plasma
      * @param formula  the formula eg. 'H2O'
      */
-    public void registerMolecule(String fullName, String form, String formula)
+    public boolean registerMolecule(String fullName, String form, String formula)
     {
-        registerMolecule(Molecule.parseMolecule(fullName, form, formula));
+        try
+        {
+            registerMolecule(Molecule.parseMolecule(fullName, form, formula));
+        }
+        catch (IllegalArgumentException e)
+        {
+            //Cannot read the compound formula - not actually an error as it might just not have parsed a sub-compound - returns true to include molecule for next parsing
+            return true;
+        }
+        catch (NullPointerException e)
+        {
+            LogHelper.warn(fullName + " has a null or empty formula");
+        }
+        return false;
     }
 
     /**
