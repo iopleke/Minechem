@@ -12,7 +12,8 @@ public class MinechemTransformer implements IClassTransformer
 {
     private static enum Class
     {
-        GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei", Method.GUI_DRAW, Method.DRAW_SCREEN, Method.ACTION_PREFORMED);
+        GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei", Method.GUI_DRAW, Method.DRAW_SCREEN, Method.ACTION_PREFORMED),
+        RENDER_ITEM("net.minecraft.client.renderer.entity.RenderItem", "bny" ,Method.RENDER_ITEM_AND_EFFECT_INTO_GUI);
 
         private final String name, obfName;
         private Method[] methods;
@@ -43,7 +44,8 @@ public class MinechemTransformer implements IClassTransformer
         BACKGROUND("minechem.asm.MinechemHooks", "drawAchievementPageBackground","(Lnet/minecraft/client/Minecraft;FIII)V"),
         SET_SCALE("minechem.asm.MinechemHooks", "setScaleOnLoad", "(I)F"),
         GET_MAX_ZOOM_OUT("minechem.asm.MinechemHooks", "getMaxZoomOut", "(I)F"),
-        GET_MAX_ZOOM_IN("minechem.asm.MinechemHooks", "getMaxZoomIn", "(I)F");
+        GET_MAX_ZOOM_IN("minechem.asm.MinechemHooks", "getMaxZoomIn", "(I)F"),
+        RENDER_OVERLAY("minechem.asm.MinechemHooks", "renderOverlay", "(Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;IIF)V");
 
         private final String className, name, params;
         private Hook(String className, String name, String params)
@@ -73,7 +75,8 @@ public class MinechemTransformer implements IClassTransformer
     {
         GUI_DRAW("func_146552_b", "(IIF)V", CodeBlock.BACKGROUND, InstructionNode.RECOLOUR, InstructionNode.RESET, InstructionNode.ICON),
         ACTION_PREFORMED("actionPerformed", "(Lnet/minecraft/client/gui/GuiButton;)V", InstructionNode.SET_SCALE),
-        DRAW_SCREEN("drawScreen", "(IIF)V", CodeBlock.CLAMP_ZOOM);
+        DRAW_SCREEN("drawScreen", "(IIF)V", CodeBlock.CLAMP_ZOOM), 
+        RENDER_ITEM_AND_EFFECT_INTO_GUI("renderItemAndEffectIntoGUI", "(Lnet/minecraft/client/gui/FontRenderer;Lnet/minecraft/client/renderer/texture/TextureManager;Lnet/minecraft/item/ItemStack;II)V", CodeBlock.RENDER_OVERLAY);
 
         private final String name, args;
         private IInsnList[] instructions;
@@ -167,7 +170,8 @@ public class MinechemTransformer implements IClassTransformer
     public enum CodeBlock implements IInsnList
     {
         BACKGROUND(306, 0, 373, 1),
-        CLAMP_ZOOM(183, 1, 184, 0);
+        CLAMP_ZOOM(183, 1, 184, 0),
+        RENDER_OVERLAY(625, 1, 625, 0);
 
         private InsnList insnList;
         private int startLine, endLine;
@@ -184,6 +188,7 @@ public class MinechemTransformer implements IClassTransformer
         {
             BACKGROUND.insnList = createBackgroundHook();
             CLAMP_ZOOM.insnList = createClampHook();
+            RENDER_OVERLAY.insnList = createRenderOverlayHook();
         }
         
         private static InsnList createBackgroundHook()
@@ -215,6 +220,20 @@ public class MinechemTransformer implements IClassTransformer
             insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.GET_MAX_ZOOM_OUT.getASMName(), Hook.GET_MAX_ZOOM_OUT.getName(), Hook.GET_MAX_ZOOM_OUT.getParams(), false));
             insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, "net/minecraft/util/MathHelper", "clamp_float", "(FFF)F", false));
             insnList.add(new FieldInsnNode(Opcodes.PUTFIELD, "net/minecraft/client/gui/achievement/GuiAchievements", "field_146570_r", "F"));
+            return insnList;
+        }
+        
+        private static InsnList createRenderOverlayHook()
+        {
+            InsnList insnList = new InsnList();
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 1));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 2));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 3));
+            insnList.add(new VarInsnNode(Opcodes.ILOAD, 4));
+            insnList.add(new VarInsnNode(Opcodes.ILOAD, 5));
+            insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
+            insnList.add(new FieldInsnNode(Opcodes.GETFIELD, "net/minecraft/client/renderer/entity/RenderItem", "zLevel", "F"));
+            insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.RENDER_OVERLAY.getASMName(), Hook.RENDER_OVERLAY.getName(), Hook.RENDER_OVERLAY.getParams(), false));
             return insnList;
         }
 
