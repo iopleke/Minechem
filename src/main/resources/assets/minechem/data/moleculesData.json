@@ -319,7 +319,7 @@
 		"formula":"AlOSi",
 		"form":"solid"
 	},
-	"Aluminium4_oxide":{
+	"aluminium4_oxide":{
 		"formula":"AlO2",
 		"form":"solid"
 	},
@@ -1803,7 +1803,7 @@
 		"formula":"C20H42",
 		"form":"solid"
 	},
-	"Coenzyme_A":{
+	"coenzyme_a":{
 		"formula":"C21H36N7O16P3S",
 		"form":"solid"
 	},
@@ -1815,7 +1815,7 @@
 		"formula":"C164H256Na2O68S2",
 		"form":"solid"
 	},
-	"Chlorine_octaoxide":{
+	"chlorine_octaoxide":{
 		"formula":"Cl2O8",
 		"form":"solid"
 	},
@@ -2175,7 +2175,7 @@
 		"formula":"Ce2S3",
 		"form":"solid"
 	},
-	"Tetrafluoromethane":{
+	"tetrafluoromethane":{
 		"formula":"CF4",
 		"form":"solid"
 	},
@@ -2739,7 +2739,7 @@
 		"formula":"Cu(OH)2",
 		"form":"solid"
 	},
-	"Verdigris":{
+	"verdigris":{
 		"formula":"Cu(OH)2CO3",
 		"form":"solid"
 	},
@@ -4051,7 +4051,7 @@
 		"formula":"HC9H7O4",
 		"form":"solid"
 	},
-	"vitamin_B1_hydrochloride":{
+	"vitamin_b1_hydrochloride":{
 		"formula":"HC12H17ON4SCl2",
 		"form":"solid"
 	},
@@ -4367,7 +4367,7 @@
 		"formula":"IBr3",
 		"form":"solid"
 	},
-	"Iodine_monochloride":{
+	"iodine_monochloride":{
 		"formula":"ICl",
 		"form":"solid"
 	},
@@ -5051,7 +5051,7 @@
 		"formula":"NH2CONH2",
 		"form":"solid"
 	},
-	"sulfanilic_Acid":{
+	"sulfanilic_acid":{
 		"formula":"NH2C6H4SO3H",
 		"form":"solid"
 	},
@@ -5091,7 +5091,7 @@
 		"formula":"NH4Cl",
 		"form":"solid"
 	},
-	"Ammonium_perchlorate":{
+	"ammonium_perchlorate":{
 		"formula":"NH4ClO4",
 		"form":"solid"
 	},
