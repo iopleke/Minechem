@@ -13,7 +13,6 @@ import org.objectweb.asm.tree.*;
 
 public class MinechemTransformer implements IClassTransformer
 {
-
     private static Map<String, Class> classMap = new HashMap<String, Class>();
 
     static
@@ -46,6 +45,7 @@ public class MinechemTransformer implements IClassTransformer
             }
             classMap.remove(name);
         }
+        
         return bytes;
     }
     
@@ -131,7 +131,7 @@ public class MinechemTransformer implements IClassTransformer
             {
                 if (close)
                 {
-                    if (((MethodInsnNode) node).name.equals(instructionNode.before))
+                    if (((MethodInsnNode) node).name.equals(instructionNode.getBefore()))
                     {
                         return instructionNode.replace ? node : result;
                     } else
@@ -140,7 +140,7 @@ public class MinechemTransformer implements IClassTransformer
                     }
                 }
 
-                if (((MethodInsnNode) node).name.equals(instructionNode.after))
+                if (((MethodInsnNode) node).name.equals(instructionNode.getAfter()))
                 {
                     close = true;
                     result = node;

@@ -1,5 +1,6 @@
 package minechem.asm.data;
 
+import minechem.asm.LoadingPlugin;
 import org.objectweb.asm.Opcodes;
 import org.objectweb.asm.tree.FieldInsnNode;
 import org.objectweb.asm.tree.InsnList;
@@ -8,20 +9,33 @@ import org.objectweb.asm.tree.VarInsnNode;
 
 public enum InstructionNode implements IInsnList
 {
-    RECOLOUR("bindTexture", "glEnable", false),
-    RESET("glDisable", "canUnlockAchievement", false),
-    ICON("getTextureManager", "renderItemAndEffectIntoGUI", true),
-    SET_SCALE("", "", false);
+    RECOLOUR("bindTexture", "func_110577_a ", "glEnable", "glEnable", false),
+    RESET("glDisable", "glDisable", "canUnlockAchievement", "func_77442_b",false),
+    ICON("getTextureManager", "func_110434_K", "renderItemAndEffectIntoGUI", "func_82406_b", true),
+    SET_SCALE("", "", "", "", false);
 
-    public final String after, before;
+    private final String after, before;
+    private final String obfAfter, obfBefore;
     public final boolean replace;
     public InsnList insnList;
 
-    private InstructionNode(String after, String next, boolean replace)
+    private InstructionNode(String after, String obfAfter,  String next, String obfNext, boolean replace)
     {
         this.after = after;
+        this.obfAfter = obfAfter;
         this.before = next;
+        this.obfBefore = obfNext;
         this.replace = replace;
+    }
+
+    public String getAfter()
+    {
+        return LoadingPlugin.runtimeDeobfEnabled ? obfAfter : after;
+    }
+
+    public String getBefore()
+    {
+        return LoadingPlugin.runtimeDeobfEnabled ? obfBefore : before;
     }
 
     static
@@ -62,9 +76,9 @@ public enum InstructionNode implements IInsnList
         InsnList insnList = new InsnList();
         insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
         insnList.add(new VarInsnNode(Opcodes.ALOAD, 0));
-        insnList.add(new FieldInsnNode(Opcodes.GETFIELD, Class.GUI_ACHIEVEMENTS.getASMName(), "currentPage", "I"));
+        insnList.add(new FieldInsnNode(Opcodes.GETFIELD, Class.GUI_ACHIEVEMENTS.getASMName(), Class.GUI_ACHIEVEMENTS.getField("currentPage").getName(), Class.GUI_ACHIEVEMENTS.getField("currentPage").getDesc()));
         insnList.add(new MethodInsnNode(Opcodes.INVOKESTATIC, Hook.SET_SCALE.getClazz().getASMName(), Hook.SET_SCALE.getName(), Hook.SET_SCALE.getParams(), false));
-        insnList.add(new FieldInsnNode(Opcodes.PUTFIELD, Class.GUI_ACHIEVEMENTS.getASMName(), "field_146570_r", "F"));
+        insnList.add(new FieldInsnNode(Opcodes.PUTFIELD, Class.GUI_ACHIEVEMENTS.getASMName(), Class.GUI_ACHIEVEMENTS.getField("field_146570_r").getName(), Class.GUI_ACHIEVEMENTS.getField("field_146570_r").getDesc()));
         return insnList;
     }
 

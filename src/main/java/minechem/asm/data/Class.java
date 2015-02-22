@@ -10,6 +10,7 @@ public enum Class
 {
     GUI_ACHIEVEMENTS("net.minecraft.client.gui.achievement.GuiAchievements", "bei"),
     RENDER_ITEM("net.minecraft.client.renderer.entity.RenderItem", "bny"),
+    MATH_HELPER("net.minecraft.util.MathHelper", "qh"),
     MINECHEM_HOOKS("minechem.asm.MinechemHooks", "minechem.asm.MinechemHooks");
 
     private final String name, obfName;
@@ -25,6 +26,9 @@ public enum Class
     
     static 
     {
+        GUI_ACHIEVEMENTS.addField(new Field("field_146570_r", "F"));
+        GUI_ACHIEVEMENTS.addField(new Field("currentPage", "I"));
+        GUI_ACHIEVEMENTS.addField(new Field("mc", "field_146297_k", "Lnet/minecraft/client/Minecraft;", "Lbao;"));
         RENDER_ITEM.addField(new Field("zLevel", "field_77023_b", "F"));
         
         GUI_ACHIEVEMENTS.setMethods(Method.GUI_DRAW, Method.DRAW_SCREEN, Method.ACTION_PREFORMED);
@@ -48,7 +52,7 @@ public enum Class
     
     public Method[] getMethods()
     {
-        return methods;
+        return methods == null ? new Method[0] : methods;
     }
 
     public String getASMName()
