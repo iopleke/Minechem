@@ -1446,7 +1446,7 @@
 		"MolarMass":352.0,
 		"SMILES":"F[U](F)(F)(F)(F)F"
 	},
-	"Sulfur":{
+	"Sulfur tetrafluoride":{
 		"Formula":"SF4",
 		"Density":1.95,
 		"MolarMass":108.07,
@@ -2511,7 +2511,7 @@
 		"CSID":123101,
 		"SMILES":"F[W](F)(F)F"
 	},
-	"Uranium":{
+	"Uranium tetrafluoride":{
 		"Formula":"F4U",
 		"BoilingPt":1417.0,
 		"MeltingPt":1036.0,
@@ -3016,7 +3016,7 @@
 		"MolarMass":102.0,
 		"SMILES":"[Na+].[Br-]"
 	},
-	"Indium":{
+	"Indium selenide":{
 		"Formula":"In2Se3",
 		"Density":5.8,
 		"MolarMass":466.516,
@@ -3146,7 +3146,7 @@
 		"MolarMass":144.0,
 		"SMILES":"C(\u003dO)(C(\u003dO)[O-])[O-].[Fe+2]"
 	},
-	"Zirconium":{
+	"Zirconium tetrafluoride":{
 		"Formula":"F4Zr",
 		"MeltingPt":910.0,
 		"Density":4.43,
@@ -3508,7 +3508,7 @@
 		"Special":"OX",
 		"SMILES":"[O-]Cl(\u003dO)(\u003dO)\u003dO.[Rb+]"
 	},
-	"Copper":{
+	"Copper phosphate":{
 		"Formula":"Cu3(PO4)2",
 		"MolarMass":380.580722,
 		"CSID":77984,
@@ -3645,7 +3645,7 @@
 		"CSID":10459,
 		"SMILES":"C[N+](C)(C)CCCCCCCCCC[N+](C)(C)C.[Br-].[Br-]"
 	},
-	"Barium":{
+	"Barium phosphate":{
 		"Formula":"Ba(PO3)2",
 		"Density":3.63,
 		"MolarMass":295.27,
@@ -3820,7 +3820,7 @@
 		"MolarMass":121.0,
 		"SMILES":"C(C(C(\u003dO)O)N)S"
 	},
-	"Arsenic":{
+	"Arsenic dioxide":{
 		"Formula":"AsO2",
 		"MolarMass":106.92,
 		"CSID":139256,
@@ -3887,7 +3887,7 @@
 		"CSID":142491,
 		"SMILES":"[S-2].[K+].[K+]"
 	},
-	"Cobalt":{
+	"Cobalt sulphate":{
 		"Formula":"Co2SO4",
 		"BoilingPt":420.0,
 		"MeltingPt":735.0,
@@ -4012,7 +4012,7 @@
 		"MolarMass":98.0,
 		"SMILES":"CC(\u003dO)[O-].[K+]"
 	},
-	"Ytterbium":{
+	"Ytterbium oxide":{
 		"Formula":"Yb2O3",
 		"BoilingPt":4070.0,
 		"MeltingPt":2355.0,
@@ -4046,7 +4046,7 @@
 		"MolarMass":140.0,
 		"SMILES":"c1ccc(cc1)C(\u003dO)Cl"
 	},
-	"Actinium":{
+	"Actinium oxide":{
 		"Formula":"Ac2O3",
 		"CSID":22404,
 		"MolarMass":227.0,
@@ -4067,7 +4067,7 @@
 		"CSID":145811,
 		"SMILES":"[Li+].[Li+].[O-2]"
 	},
-	"Cadmium":{
+	"Cadmium tungstate":{
 		"Formula":"CdWO4",
 		"MeltingPt":1325.0,
 		"Density":7.9,
@@ -4075,7 +4075,7 @@
 		"MolarMass":114.0,
 		"SMILES":"[Cd]"
 	},
-	"Cerium":{
+	"Cerium oxide":{
 		"Formula":"Ce2O3",
 		"BoilingPt":3730.0,
 		"MeltingPt":2177.0,
@@ -4105,7 +4105,7 @@
 		"MolarMass":158.0,
 		"SMILES":"CC(\u003dO)[O-].CC(\u003dO)[O-].[Ca+2]"
 	},
-	"Chromium":{
+	"Chromium silicide":{
 		"Formula":"Cr3Si2",
 		"MeltingPt":1470.0,
 		"Density":4.39,
@@ -4362,7 +4362,7 @@
 		"MolarMass":46.0,
 		"SMILES":"CCO"
 	},
-	"Bismuth":{
+	"Bismuth trisulphide":{
 		"Formula":"Bi2S3",
 		"Density":6.78,
 		"MolarMass":514.16,
@@ -4452,7 +4452,7 @@
 		"MolarMass":76.0,
 		"SMILES":"C(\u003dS)\u003dS"
 	},
-	"Thallium":{
+	"Thallium hydroxide":{
 		"Formula":"TlOH",
 		"Density":7.44,
 		"MolarMass":221.39,
@@ -4653,7 +4653,7 @@
 		"CSID":21241412,
 		"SMILES":"[C-4].[C-4].[C-4].[Al+3].[Al+3].[Al+3].[Al+3]"
 	},
-	"Scandium":{
+	"Scandium oxide":{
 		"Formula":"Sc2O3",
 		"MeltingPt":2485.0,
 		"Density":3.86,
@@ -4689,7 +4689,7 @@
 		"MolarMass":204.0,
 		"SMILES":"[O-][V](\u003dO)([O-])[O-].[Y+3]"
 	},
-	"Tantalum":{
+	"Tantalum chloride":{
 		"Formula":"TaCl5",
 		"BoilingPt":239.0,
 		"MeltingPt":216.0,
@@ -4742,7 +4742,7 @@
 		"Reactivity":0,
 		"SMILES":"[Na+].[Cl-]"
 	},
-	"Ruthenium":{
+	"Ruthenium oxide":{
 		"Formula":"RuO4",
 		"BoilingPt":40.0,
 		"MeltingPt":25.0,
@@ -4808,7 +4808,7 @@
 		"Special":"W",
 		"SMILES":"B(F)(F)F"
 	},
-	"Neodymium":{
+	"Neodymium oxide":{
 		"Formula":"Nd2O3",
 		"BoilingPt":3760.0,
 		"MeltingPt":2233.0,
@@ -4845,7 +4845,7 @@
 		"CSID":10339,
 		"SMILES":"C(\u003dO)([O-])[O-].[Cs+].[Cs+]"
 	},
-	"Niobium":{
+	"Niobium chloride":{
 		"Formula":"NbCl5",
 		"BoilingPt":248.0,
 		"MeltingPt":204.0,
@@ -4854,7 +4854,7 @@
 		"CSID":22378,
 		"SMILES":"[Nb]"
 	},
-	"Manganese":{
+	"Manganese oxide":{
 		"Formula":"MnO",
 		"MeltingPt":1945.0,
 		"Density":5.43,
@@ -4862,7 +4862,7 @@
 		"CSID":22372,
 		"SMILES":"[Mn]"
 	},
-	"Molybdenum":{
+	"Molybdenum oxide":{
 		"Formula":"MoO2",
 		"MeltingPt":1100.0,
 		"Density":6.47,
@@ -5230,7 +5230,7 @@
 		"CSID":8466211,
 		"SMILES":"[S-2].[Fe+2]"
 	},
-	"Silver":{
+	"Silver phosphate":{
 		"Formula":"Ag3PO4",
 		"MeltingPt":849.0,
 		"Density":6.37,
@@ -5414,7 +5414,7 @@
 		"MolarMass":254.0,
 		"SMILES":"II"
 	},
-	"Mercury":{
+	"Mercury diiodide":{
 		"Formula":"Hg2I2",
 		"Density":7.7,
 		"MolarMass":654.99,
@@ -5573,7 +5573,7 @@
 		"MolarMass":260.0,
 		"SMILES":"O\u003d[Bi]Cl"
 	},
-	"Krypton":{
+	"Krypton difluoride":{
 		"Formula":"KrF2",
 		"Density":3.24,
 		"CSID":75543,
@@ -5680,7 +5680,7 @@
 		"MolarMass":115.0,
 		"SMILES":"[In+3]"
 	},
-	"Aluminium":{
+	"Aluminium iodide":{
 		"Formula":"AlI",
 		"MolarMass":153.886,
 		"CSID":4575742,
@@ -6112,7 +6112,7 @@
 		"Reactivity":2,
 		"SMILES":"F[Co](F)F"
 	},
-	"Dysprosium":{
+	"Dysprosium chloride":{
 		"Formula":"DyCl3",
 		"BoilingPt":1530.0,
 		"MeltingPt":647.0,
@@ -6248,7 +6248,7 @@
 		"MolarMass":96.0,
 		"SMILES":"F[Ni]F"
 	},
-	"Nickel":{
+	"Nickel oxide":{
 		"Formula":"NiO",
 		"MeltingPt":1955.0,
 		"Density":6.67,
@@ -6323,7 +6323,7 @@
 		"MolarMass":168.0,
 		"SMILES":"[Si](Cl)(Cl)(Cl)Cl"
 	},
-	"Iron":{
+	"Iron oxide":{
 		"Formula":"Fe3O4",
 		"MeltingPt":1538.0,
 		"Density":5.0,
@@ -6669,7 +6669,7 @@
 		"Special":"W",
 		"SMILES":"[F-].[F-].[F-].[F-].[Ge+4]"
 	},
-	"Tin":{
+	"Tin sulphide":{
 		"Formula":"SnS2",
 		"MeltingPt":600.0,
 		"Density":4.5,
