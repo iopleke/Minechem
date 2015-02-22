@@ -1,5 +1,7 @@
 package minechem;
 
+import com.chemspider.www.MassSpecAPIStub;
+import com.chemspider.www.SearchStub;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -12,13 +14,9 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
-import minechem.handler.AchievementHandler;
-import minechem.handler.ElementHandler;
-import minechem.handler.GuiHandler;
-import minechem.handler.JournalHandler;
-import minechem.handler.MessageHandler;
-import minechem.handler.MoleculeHandler;
+import minechem.handler.*;
 import minechem.helper.LogHelper;
+import minechem.helper.WikipediaHelper;
 import minechem.proxy.CommonProxy;
 import minechem.registry.AugmentRegistry;
 import minechem.registry.BlockRegistry;
@@ -26,6 +24,9 @@ import minechem.registry.CreativeTabRegistry;
 import minechem.registry.ItemRegistry;
 import minechem.registry.JournalRegistry;
 import minechem.registry.RecipeRegistry;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
 public class Minechem
@@ -76,6 +77,14 @@ public class Minechem
         LogHelper.debug("Registering Elements...");
         ElementHandler.init();
 
+//        String token = "adf48903-3723-48f3-9a0b-fb989594738e";
+//        int[] SimpleSearchResults =  get_Search_SimpleSearch_Results("salt", token);
+//        int[] inputCSIDs = new int[2];
+//        inputCSIDs[0] = 236;
+//        inputCSIDs[1] = 238;
+//        Map GetExtendedCompoundInfoArrayResults = get_MassSpecAPI_GetExtendedCompoundInfoArray_Results(SimpleSearchResults, token);
+        //WikipediaHelper.getObject("Aluminium trichloride");
+        CompoundHandler.init();
         LogHelper.debug("Registering Molecules...");
         MoleculeHandler.init();
 
@@ -137,4 +146,54 @@ public class Minechem
     {
         JournalHandler.saveResearch();
     }
+
+    public static int[] get_Search_SimpleSearch_Results(String query, String token) {
+        int[] Output = null;
+        try {
+            final SearchStub thisSearchStub = new SearchStub();
+            com.chemspider.www.SearchStub.SimpleSearch SimpleSearchInput = new com.chemspider.www.SearchStub.SimpleSearch();
+            SimpleSearchInput.setQuery(query);
+            SimpleSearchInput.setToken(token);
+            final SearchStub.SimpleSearchResponse thisSimpleSearchResponse = thisSearchStub.simpleSearch(SimpleSearchInput);
+            Output = thisSimpleSearchResponse.getSimpleSearchResult().get_int();
+        } catch (Exception e) {
+        }
+        return Output;
+    }
+
+    public static Map get_MassSpecAPI_GetExtendedCompoundInfoArray_Results(int[] CSIDs, String token) {
+    Map Output = new HashMap();
+    try {
+        final MassSpecAPIStub thisMassSpecAPIStub = new MassSpecAPIStub();
+        MassSpecAPIStub.ArrayOfInt inputCSIDsArrayofInt = new MassSpecAPIStub.ArrayOfInt();
+        inputCSIDsArrayofInt.set_int(CSIDs);
+        com.chemspider.www.MassSpecAPIStub.GetExtendedCompoundInfoArray getGetExtendedCompoundInfoArrayInput = new com.chemspider.www.MassSpecAPIStub.GetExtendedCompoundInfoArray();
+        getGetExtendedCompoundInfoArrayInput.setCSIDs(inputCSIDsArrayofInt);
+        getGetExtendedCompoundInfoArrayInput.setToken(token);
+        final MassSpecAPIStub.GetExtendedCompoundInfoArrayResponse thisGetExtendedCompoundInfoArrayResponse = thisMassSpecAPIStub.getExtendedCompoundInfoArray(getGetExtendedCompoundInfoArrayInput);
+        MassSpecAPIStub.ExtendedCompoundInfo[] thisExtendedCompoundInfo = thisGetExtendedCompoundInfoArrayResponse.getGetExtendedCompoundInfoArrayResult().getExtendedCompoundInfo();
+        for (int i=0; i < thisExtendedCompoundInfo.length; i++)
+        {
+            Map thisCompoundExtendedCompoundInfoArrayOutput = new HashMap();
+            thisCompoundExtendedCompoundInfoArrayOutput.put("CSID", Integer.toString(thisExtendedCompoundInfo[i].getCSID()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("MF", thisExtendedCompoundInfo[i].getMF());
+            thisCompoundExtendedCompoundInfoArrayOutput.put("SMILES", thisExtendedCompoundInfo[i].getSMILES());
+            thisCompoundExtendedCompoundInfoArrayOutput.put("InChI", thisExtendedCompoundInfo[i].getInChI());
+            thisCompoundExtendedCompoundInfoArrayOutput.put("InChIKey", thisExtendedCompoundInfo[i].getInChIKey());
+            thisCompoundExtendedCompoundInfoArrayOutput.put("AverageMass", Double.toString(thisExtendedCompoundInfo[i].getAverageMass()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("MolecularWeight", Double.toString(thisExtendedCompoundInfo[i].getMolecularWeight()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("MonoisotopicMass", Double.toString(thisExtendedCompoundInfo[i].getMonoisotopicMass()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("NominalMass", Double.toString(thisExtendedCompoundInfo[i].getNominalMass()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("ALogP", Double.toString(thisExtendedCompoundInfo[i].getALogP()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("XLogP", Double.toString(thisExtendedCompoundInfo[i].getXLogP()));
+            thisCompoundExtendedCompoundInfoArrayOutput.put("CommonName", thisExtendedCompoundInfo[i].getCommonName());
+            Output.put(thisExtendedCompoundInfo[i].getCSID(), thisCompoundExtendedCompoundInfoArrayOutput);
+        }
+        } catch (Exception e) {
+        }
+        return Output;
+    }
+
+
+
 }
