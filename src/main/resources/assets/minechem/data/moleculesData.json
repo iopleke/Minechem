@@ -224,10 +224,10 @@
 		"CSID":82622,
 		"SMILES":"[Cd]\u003d[Te]"
 	},
-	"7":{
+	"Paracetamol":{
 		"Formula":"C8H9NO2",
 		"MeltingPt":55.0,
-		"CSID":7,
+		"CSID":1906,
 		"MolarMass":148.0,
 		"SMILES":"CCC(C)(C(C(\u003dO)O)O)O"
 	},
@@ -4698,7 +4698,7 @@
 		"CSID":22395,
 		"SMILES":"[Ta]"
 	},
-	"3":{
+	"Isoamyl acetate":{
 		"Formula":"CH3COO(CH2)2CH(CH3)2",
 		"BoilingPt":142.0,
 		"Density":0.876,
@@ -5782,7 +5782,7 @@
 		"CSID":8108122,
 		"SMILES":"[Ag+].[Ag+].[O-][Cr](\u003dO)(\u003dO)O[Cr]([O-])(\u003dO)\u003dO"
 	},
-	"2":{
+	"Tartaric acid":{
 		"Formula":"H2C4H4O6",
 		"MeltingPt":171.0,
 		"Density":1.79,
@@ -6193,7 +6193,7 @@
 		"MolarMass":46.0,
 		"SMILES":"N(\u003dO)[O-]"
 	},
-	"1":{
+	"Tetrafluorohydrazine":{
 		"Formula":"F4N2",
 		"MolarMass":104.01,
 		"CSID":23228,
