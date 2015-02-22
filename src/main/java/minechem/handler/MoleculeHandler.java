@@ -67,10 +67,13 @@ public class MoleculeHandler
                     continue;
                 }
                 JsonObject elementObject = moleculeEntry.getValue().getAsJsonObject();
+                String form = "liquid";
+                if (elementObject.has("MeltingPt") && elementObject.get("MeltingPt").getAsDouble() > 25) form = "solid";
+                else if (elementObject.has("BoilingPt") && elementObject.get("BoilingPt").getAsDouble() < 25) form = "gas";
                 if (MoleculeRegistry.getInstance().registerMolecule(
                         moleculeEntry.getKey(),
-                        elementObject.get("form").getAsString(),
-                        elementObject.get("formula").getAsString()))
+                        form,
+                        elementObject.get("Formula").getAsString()))
                 {
                     unparsed.put(moleculeEntry.getKey(), moleculeEntry.getValue());
                 }
