@@ -1,76 +1,171 @@
 {
-  "Phosphate ion":{
-	"Formula":"PO4"
-  },
-  "Ammonium ion":{
-	"Formula":"NH4"
-  },
-  "Metaphosphate ion":{
-	"Formula":"PO3"
-  },
-  "Methyl":{
-	"Formula":"CH3"
-  },
-  "Arsenate":{
-	"Formula":"AsO3"
-  },
-  "Arsenite":{
-	"Formula":"AsO4"
-  },
-  "Chlorate ion":{
-	"Formula":"ClO3"
-  },
-  "Perchlorate ion":{
-	"Formula":"ClO4"
-  },
-  "Chlorite ion":{
-	"Formula":"ClO"
-  },
-  "Metavanadate ion":{
-	"Formula":"VO3"
-  },
-  "Orthovanadate ion":{
-	"Formula":"VO4"
-  },
-  "Niobate ion":{
-	"Formula":"NbO3"
-  },
-  "Ethyl":{
-	"Formula":"C2H5"
-  },
-  "Nitride ion":{
-	"Formula":"N3"
-  },
-  "Silicate":{
-	"Formula":"Si4O10"
-  },
-  "Molybdate ion":{
-	"Formula":"MoO4"
-  },
-  "Acetylacetonate":{
-	"Formula":"C5H7O2"
-  },
-  "Methine ion":{
-	"Formula":"CH"
-  },
-  "Methyline ion":{
-	"Formula":"CH2"
-  },
-  "Iodate ion":{
-	"Formula":"IO3"
-  },
-  "Acetate":{
-	"Formula":"C2H3O2"
-  },
-  "Azanide":{
-	"Formula":"NH2"
-  },
-  "Borohydride ion":{
-	"Formula":"BH4"
-  },
-  "Aluminate ion":{
-	"Formula":"AlO2"
-  },
+ 	"Phosphate ion":{
+ 	 	"Formula":"PO4",
+		"CSID":1032,
+		"MolarMass":94.96,
+		"BoilingPt":158.0,
+		"MeltingPt":90.27,
+		"SMILES":"[O-]P(=O)([O-])[O-]"
+ 	},
+ 	"Ammonium ion":{
+ 	 	"Formula":"NH4",
+		"CSID":218,
+		"MolarMass":18.03,
+		"BoilingPt":-33.4,
+		"SMILES":"[NH4+]",
+		"Special":"COR"
+ 	},
+ 	"Metaphosphate ion":{
+ 	 	"Formula":"PO3"
+ 	},
+ 	"Methanide":{
+ 	 	"Formula":"CH3",
+		"CSID":858,
+		"MolarMass":15.02,
+		"BoilingPt":-62.40,
+		"MeltingPt":-152.93,
+		"SMILES":"[CH3-]"
+ 	},
+ 	"Arsenite":{
+ 	 	"Formula":"AsO3",
+		"CSID":529,
+		"MolarMass":122.91,
+		"BoilingPt":626.14,
+		"MeltingPt":271.52,
+		"SMILES":"[O-][As]([O-])[O-]"
+ 	},
+ 	"Arsenate":{
+ 	 	"Formula":"AsO4",
+		"CSID":25498,
+		"MolarMass":138.9,
+		"BoilingPt":640.51,
+		"MeltingPt":278.23,
+		"SMILES":"[O-][As](=O)([O-])[O-]"
+ 	},
+ 	"Chloryloxidanyl":{
+ 	 	"Formula":"ClO3",
+		"CSID":123158,
+		"MolarMass":82.95,
+		"BoilingPt":441.09,
+		"MeltingPt":156.51,
+		"SMILES":"O=Cl(=O)[O]"
+ 	},
+ 	"Perchlorate ion":{
+ 	 	"Formula":"ClO4",
+		"CSID":109953,
+		"MolarMass":98.95,
+		"BoilingPt":492.01,
+		"MeltingPt":193.6,
+		"SMILES":"[O-]Cl(=O)(=O)=O"
+ 	},
+ 	"Chlorooxidanyl":{
+ 	 	"Formula":"ClO",
+		"CSID":109779,
+		"MolarMass":50.96,
+		"BoilingPt":507.1,
+		"MeltingPt":194.9,
+		"SMILES":"[O]Cl"
+ 	},
+ 	"Metavanadate ion":{
+ 	 	"Formula":"VO3"
+ 	},
+ 	"Orthovanadate ion":{
+ 	 	"Formula":"VO4",
+		"CSID":55576,
+		"MolarMass":114.92,
+		"BoilingPt":717.17,
+		"MeltingPt":314.04,
+		"SMILES":"[O-][V](=O)([O-])[O-]"
+ 	},
+ 	"Oxido(dioxo)niobium":{
+ 	 	"Formula":"NbO3",
+		"CSID":74800,
+		"MolarMass":140.89,
+		"BoilingPt":615.34,
+		"MeltingPt":266.48,
+		"SMILES":"[O-][Nb](=O)=O"
+ 	},
+ 	"Ethyl":{
+ 	 	"Formula":"C2H5",
+		"CSID":109753,
+		"MolarMass":29.03,
+		"BoilingPt":-35.99,
+		"MeltingPt":-147.77,
+		"SMILES":"C[CH2]"
+ 	},
+ 	"Azide anion":{
+ 	 	"Formula":"N3",
+		"CSID":30959,
+		"MolarMass":42.009,
+		"BoilingPt":673.08,
+		"MeltingPt":293.45,
+		"SMILES":"[N-]=[N+]=[N-]"
+ 	},
+ 	"Silicate":{
+ 	 	"Formula":"Si4O10"
+ 	},
+ 	"Dioxido(dioxo)molybdenum":{
+ 	 	"Formula":"MoO4",
+		"CSID":23023,
+		"MolarMass":161.88,
+		"BoilingPt":666.25,
+		"MeltingPt":290.26,
+		"SMILES":"[O-][Mo](=O)(=O)[O-]"
+ 	},
+ 	"Acetylacetonate":{
+ 	 	"Formula":"C5H7O2",
+		"CSID":4573998,
+		"MolarMass":99.04,
+		"BoilingPt":187.6,
+		"SMILES":"C/C(=C/C(=O)C)/[O-]"
+ 	},
+ 	"Methine ion":{
+ 	 	"Formula":"CH"
+ 	},
+ 	"Methylene":{
+ 	 	"Formula":"CH2",
+		"CSID":109779,
+		"MolarMass":14.02,
+		"BoilingPt":-62.40,
+		"MeltingPt":-152.93,
+		"SMILES":"[CH2]"
+ 	},
+ 	"Iodate ion":{
+ 	 	"Formula":"IO3",
+		"CSID":76615,
+		"MolarMass":174.89,
+		"BoilingPt":534.21,
+		"MeltingPt":212.06,
+		"SMILES":"[O-]I(=O)=O"
+ 	},
+ 	"Acetate":{
+ 	 	"Formula":"C2H3O2",
+		"CSID":170,
+		"MolarMass":59.01,
+		"BoilingPt":117.1,
+		"SMILES":"CC(=O)[O-]"
+ 	},
+ 	"Azanide":{
+ 	 	"Formula":"NH2",
+	  	"CSID":2104824,
+	  	"MolarMass":16.01,
+	  	"BoilingPt":-33.4,
+	  	"SMILES":"[NH2-]"
+ 	},
+ 	"Tetrahydroborate":{
+ 	 	"Formula":"BH4",
+		"CSID":26161,
+		"MolarMass":15.04,
+		"BoilingPt":440.34,
+	  	"MeltingPt":148.9,
+		"SMILES":"[BH4-]"
+ 	},
+ 	"Aluminium oxygen(2-) ion":{
+ 	 	"Formula":"AlO2",
+		"CSID":8466199,
+		"MolarMass":58.97,
+		"SMILES":"[O-2].[O-2].[Al+3]"
+ 	},
 	"Sodium disulfite":{
 		"Formula":"Na2S2O5",
 		"CSID":571015,
