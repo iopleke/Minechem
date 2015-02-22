@@ -5,6 +5,8 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.apparatus.prefab.renderer.BasicItemRenderer;
+import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntity;
+import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntityRenderer;
 import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntity;
 import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntityRenderer;
 import minechem.apparatus.tier1.electrolysis.ElectrolysisTileEntity;
@@ -50,6 +52,10 @@ public class ClientProxy extends CommonProxy
         ElectricCrucibleTileEntityRenderer electricCrucibleRenderer = new ElectricCrucibleTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class, electricCrucibleRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), new BasicItemRenderer(electricCrucibleRenderer, new ElectricCrucibleTileEntity()));
+
+        CentrifugeTileEntityRenderer centrifugeRenderer = new CentrifugeTileEntityRenderer();
+        ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class, centrifugeRenderer);
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), new BasicItemRenderer(centrifugeRenderer, new CentrifugeTileEntity()));
 
         RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem, new ChemicalItemRenderer());

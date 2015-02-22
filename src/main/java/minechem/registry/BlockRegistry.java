@@ -2,6 +2,8 @@ package minechem.registry;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 import minechem.Compendium;
+import minechem.apparatus.tier1.centrifuge.CentrifugeBlock;
+import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntity;
 import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleBlock;
 import minechem.apparatus.tier1.electricCrucible.ElectricCrucibleTileEntity;
 import minechem.apparatus.tier1.electrolysis.ElectrolysisBlock;
@@ -16,6 +18,7 @@ public class BlockRegistry
     public static OpticalMicroscopeBlock opticalMicroscope;
     public static ElectrolysisBlock electrolysisBlock;
     public static ElectricCrucibleBlock electricCrucibleBlock;
+    public static CentrifugeBlock centrifugeBlock;
     public static BlockLight blockLight;
     public static BlockRedstone blockRedstone;
 
@@ -28,6 +31,10 @@ public class BlockRegistry
         electricCrucibleBlock = new ElectricCrucibleBlock();
         GameRegistry.registerBlock(electricCrucibleBlock, electricCrucibleBlock.getUnlocalizedName());
         GameRegistry.registerTileEntity(ElectricCrucibleTileEntity.class, Compendium.Naming.electricCrucible + "TileEntity");
+
+        centrifugeBlock = new CentrifugeBlock();
+        GameRegistry.registerBlock(centrifugeBlock, centrifugeBlock.getUnlocalizedName());
+        GameRegistry.registerTileEntity(CentrifugeTileEntity.class, Compendium.Naming.centrifuge + "TileEntity");
 
         electrolysisBlock = new ElectrolysisBlock();
         GameRegistry.registerBlock(electrolysisBlock, electrolysisBlock.getUnlocalizedName());
