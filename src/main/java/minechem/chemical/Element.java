@@ -111,7 +111,7 @@ public class Element extends ChemicalBase implements Comparable<Element>
     @Override
     public int getColour()
     {
-        return this.setColour();
+        return this.colour;
     }
 
     @Override
