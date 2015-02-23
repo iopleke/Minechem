@@ -67,8 +67,37 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     public int recolourBackground(float greyScale)
     {
         if (greyScale != 1.0F)
-            return ColourHelper.blend(element.getColour(), ColourHelper.RGB(greyScale, greyScale, greyScale));
-        return element.getColour();
+            return ColourHelper.blend(getColour(element), ColourHelper.RGB(greyScale, greyScale, greyScale));
+        return getColour(element);
+    }
+    
+    private int getColour(Element element)
+    {
+        switch (element.type)
+        {
+            case alkaliMetal:
+                return ColourHelper.RGB("#F63FFF");
+            case alkalineEarth:
+                return ColourHelper.RGB("#A84DFF");
+            case transitionMetal:
+                return ColourHelper.RGB("#3DD4FF");
+            case basicMetal:
+                return ColourHelper.RGB("#FFBA50");
+            case semiMetal:
+                return ColourHelper.RGB("#0AFF76");
+            case nonMetal:
+                return ColourHelper.RGB("#329EFF");
+            case halogen:
+                return ColourHelper.RGB("#FFCB08");
+            case nobleGas:
+                return ColourHelper.RGB("#FFD148");
+            case lanthanide:
+                return ColourHelper.RGB("#C2FF00");
+            case actinide:
+                return ColourHelper.RGB("#FF0D0B");
+            default:
+                return Compendium.Color.TrueColor.white;
+        }
     }
 
     @Override
