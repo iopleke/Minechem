@@ -3,10 +3,12 @@ package minechem.apparatus.tier1.opticalMicroscope;
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
 import minechem.chemical.ChemicalBase;
 import minechem.chemical.Element;
+import minechem.chemical.Molecule;
 import minechem.helper.AchievementHelper;
 import minechem.helper.LocalizationHelper;
 import minechem.Compendium;
 import minechem.helper.ResearchHelper;
+import minechem.helper.StringHelper;
 import minechem.item.chemical.ChemicalItem;
 import minechem.proxy.client.render.RenderHelper;
 import net.minecraft.client.Minecraft;
@@ -65,9 +67,15 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
             if (itemStack.getItem() instanceof ChemicalItem)
             {
                 ChemicalBase chemicalBase = ChemicalBase.readFromNBT(itemStack.getTagCompound());
-                fontRendererObj.drawString(chemicalBase.fullName, eyePieceX + eyePieceH + 5, eyePieceY +5, 0);
-                fontRendererObj.drawString("Formula:", eyePieceX + eyePieceH + 5, eyePieceY +20, 0);
-                fontRendererObj.drawString(chemicalBase.getFormula(), eyePieceX + eyePieceH + 5, eyePieceY +30, 0);
+                fontRendererObj.drawString(chemicalBase.fullName, eyePieceX + eyePieceH + 5, eyePieceY, 0);
+                fontRendererObj.drawString("Formula:", eyePieceX + eyePieceH + 5, eyePieceY +10, 0);
+                fontRendererObj.drawString(chemicalBase.getFormula(), eyePieceX + eyePieceH + 5, eyePieceY +20, 0);
+
+                if (!chemicalBase.isElement())
+                {
+                    RenderHelper.drawTexturedRectUV(eyePieceX + eyePieceW + 50, eyePieceY + 5, 0, 0, 0, 200, 200, 60, 60, ((Molecule)chemicalBase).getStructureResource());
+                }
+
                 if (prevStack != itemStack)
                 {
                     prevStack = itemStack;

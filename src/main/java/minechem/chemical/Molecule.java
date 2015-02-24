@@ -9,6 +9,7 @@ import minechem.Compendium;
 import minechem.helper.LogHelper;
 import minechem.registry.ElementRegistry;
 import minechem.registry.MoleculeRegistry;
+import net.minecraft.util.ResourceLocation;
 
 /**
  * Data object for molecules
@@ -16,6 +17,7 @@ import minechem.registry.MoleculeRegistry;
 public class Molecule extends ChemicalBase
 {
     public ChemicalStructure structure;
+    private ResourceLocation structureResource;
 
     /**
      * Parses a String to a Molecule
@@ -35,6 +37,7 @@ public class Molecule extends ChemicalBase
     {
         super(fullName, form, colour);
         this.structure = structure;
+        this.structureResource = Compendium.Resource.GUI.getResourceForStructure(fullName.toLowerCase());
     }
 
     @Override
@@ -148,5 +151,10 @@ public class Molecule extends ChemicalBase
             throw new IllegalArgumentException("Error parsing " + formula);
         }
         return structure;
+    }
+
+    public ResourceLocation getStructureResource()
+    {
+        return structureResource;
     }
 }

@@ -194,6 +194,11 @@ public class Compendium
             public static final ResourceLocation journal = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.journal);
             public static final ResourceLocation opticalMicroscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.opticalMicroscope);
             public static final ResourceLocation achievements = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.achievements);
+            
+            public static ResourceLocation getResourceForStructure(String name)
+            {
+                return new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.compounds + name.replaceAll("\\s", "_") + ".png");
+            }
 
             public static final class Element
             {
@@ -242,6 +247,7 @@ public class Compendium
         public static final class GUI
         {
             private static final String prefix = "textures/gui/";
+            public static final String compounds = prefix + "compounds/";
 
             public static final String blankMachine = Compendium.Texture.GUI.prefix + "blankMachine.png";
             public static final String journal = Compendium.Texture.GUI.prefix + "journal.png";
