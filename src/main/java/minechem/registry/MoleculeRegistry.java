@@ -46,11 +46,11 @@ public class MoleculeRegistry
      * @param form     solid, liquid, gas, or plasma
      * @param formula  the formula eg. 'H2O'
      */
-    public boolean registerMolecule(String fullName, String form, String formula)
+    public boolean registerMolecule(String fullName, String form, int colour, String formula)
     {
         try
         {
-            registerMolecule(Molecule.parseMolecule(fullName, form, formula));
+            registerMolecule(Molecule.parseMolecule(fullName, form, colour, formula));
         }
         catch (IllegalArgumentException e)
         {

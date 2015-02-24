@@ -46,9 +46,10 @@ public class Element extends ChemicalBase implements Comparable<Element>
      */
     public Element(int atomicNumber, String fullName, String shortName, String form, String type, int neutrons)
     {
-        super(fullName, form);
+        super(fullName, form, Compendium.Color.TrueColor.transparent);
         this.atomicNumber = atomicNumber;
         this.type = Type.valueOf(type);
+        this.colour = setColour();
         this.neutrons = neutrons;
         this.shortName = shortName;
         this.calculateValenceShells();
@@ -106,8 +107,7 @@ public class Element extends ChemicalBase implements Comparable<Element>
         LogHelper.debug("Neutrons: " + this.neutrons);
     }
 
-    @Override
-    public int getColour()
+    public int setColour()
     {
         switch (this.type)
         {

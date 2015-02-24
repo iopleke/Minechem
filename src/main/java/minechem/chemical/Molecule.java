@@ -22,17 +22,18 @@ public class Molecule extends ChemicalBase
      *
      * @param fullName the full name eg. 'water'
      * @param form     solid, liquid, gas, or plasma
+     * @param colour   int value representing the molecule's colour - passing 0 will cause one to be automatically generated
      * @param formula  the formula eg. 'H2O'
      * @return can throw an IllegalArgumentException
      */
-    public static Molecule parseMolecule(String fullName, String form, String formula)
+    public static Molecule parseMolecule(String fullName, String form, int colour, String formula)
     {
-        return new Molecule(fullName, form, parseStructure(formula));
+        return new Molecule(fullName, form, colour, parseStructure(formula));
     }
 
-    private Molecule(String fullName, String form, ChemicalStructure structure)
+    private Molecule(String fullName, String form, int colour, ChemicalStructure structure)
     {
-        super(fullName, form);
+        super(fullName, form, colour);
         this.structure = structure;
     }
 
@@ -53,7 +54,8 @@ public class Molecule extends ChemicalBase
     @Override
     public int getColour()
     {
-        return structure.getColour();
+        int colour = super.getColour();
+        return colour == Compendium.Color.TrueColor.transparent? structure.getColour() : colour;
     }
 
     @Override
