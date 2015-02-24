@@ -1,9 +1,9 @@
 package minechem.handler;
 
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.stream.JsonReader;
+
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -43,8 +43,29 @@ public class MoleculeHandler
         JsonReader jReader = new JsonReader(new InputStreamReader(stream));
         JsonParser parser = new JsonParser();
 
-        readFromObject(parser.parse(jReader).getAsJsonObject().entrySet(), 0);
+        JsonObject object = parser.parse(jReader).getAsJsonObject();
+
+        readFromObject(object.entrySet(), 0);
+
+        //saveJson(object);
+
         LogHelper.info("Total of " + MoleculeRegistry.getInstance().getMolecules().size() + " molecules registered");
+    }
+
+    public static void saveJson(JsonObject object)
+    {
+        Gson gson = new Gson();
+        String json = gson.toJson(object);
+        json = json.replaceAll("\\{","{\n\t\t").replaceAll(",", ",\n\t\t").replaceAll("}","\n\t}");
+        try
+        {
+            FileWriter writer = new FileWriter("C:\\Users\\Charlie\\Documents\\Modding\\Minechem\\Minechem\\src\\main\\resources\\assets\\minechem\\data\\output.json");
+            writer.write(json);
+            writer.close();
+        } catch (IOException e)
+        {
+            e.printStackTrace();
+        }
     }
 
     private static void readFromObject(Set<Map.Entry<String, JsonElement>> elementSet, int run)
@@ -76,6 +97,17 @@ public class MoleculeHandler
                         elementObject.get("Formula").getAsString()))
                 {
                     unparsed.put(moleculeEntry.getKey(), moleculeEntry.getValue());
+                }
+                else{
+//                    if (elementObject.has("SMILES") && !elementObject.has("Height"))
+//                    {
+//                        int[] result = MoleculeImageParser.parser(moleculeEntry.getKey(), elementObject.get("SMILES").getAsString());
+//                        if (result!=null)
+//                        {
+//                            elementObject.add("Height",new JsonPrimitive(result[0]));
+//                            elementObject.add("Width",new JsonPrimitive(result[1]));
+//                        }
+//                    }
                 }
             }
             readFromObject(unparsed.entrySet(), run+1);
