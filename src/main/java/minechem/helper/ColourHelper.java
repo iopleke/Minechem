@@ -159,4 +159,12 @@ public class ColourHelper
 
         return (((int) a) << 24 | ((int) r) << 16 | ((int) g) << 8 | ((int) b));
     }
+
+    public static int tone(int colour, float scale)
+    {
+        float r = (colour >> 16) & 255;
+        float g = (colour >> 8) & 255;
+        float b = colour & 255;
+        return RGB(r*scale, g*scale, b*scale);
+    }
 }

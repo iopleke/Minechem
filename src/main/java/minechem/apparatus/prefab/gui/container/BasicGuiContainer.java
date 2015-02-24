@@ -8,7 +8,11 @@ import cofh.lib.gui.element.TabBase;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Optional;
+
+import java.util.ArrayList;
 import java.util.List;
+
+import minechem.apparatus.prefab.gui.tab.BasicGuiTab;
 import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
 import minechem.helper.GuiIntersectHelper;
@@ -64,6 +68,14 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     {
         return FMLClientHandler.instance().getWorldClient();
     }
+    
+    public List<BasicGuiTab> getTabs()
+    {
+        List<BasicGuiTab> basicGuiTabs = new ArrayList<BasicGuiTab>();
+        for (TabBase tabBase : tabs)
+            if (tabBase instanceof BasicGuiTab) basicGuiTabs.add((BasicGuiTab) tabBase);
+        return basicGuiTabs;
+    }
 
     @Override
     public IIcon getIcon(String paramString)
@@ -100,9 +112,9 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
         {
             GuiIntersectHelper item = new GuiIntersectHelper(x, y, w, h);
             BasicGuiContainer container = (BasicGuiContainer) gui;
-            for (TabBase tab : tabs)
+            for (BasicGuiTab tab : getTabs())
             {
-                GuiIntersectHelper tabRect = new GuiIntersectHelper(tab.currentShiftX + container.guiLeft, tab.currentShiftY + container.guiTop, tab.currentWidth, tab.currentHeight);
+                GuiIntersectHelper tabRect = new GuiIntersectHelper(tab.getCurrentShiftX() + container.guiLeft, tab.getCurrentShiftY() + container.guiTop, tab.currentWidth, tab.currentHeight);
                 if (item.intersectsWith(tabRect))
                 {
                     return true;

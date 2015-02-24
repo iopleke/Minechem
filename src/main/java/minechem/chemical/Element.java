@@ -46,9 +46,10 @@ public class Element extends ChemicalBase implements Comparable<Element>
      */
     public Element(int atomicNumber, String fullName, String shortName, String form, String type, int neutrons)
     {
-        super(fullName, form);
+        super(fullName, form, Compendium.Color.TrueColor.transparent);
         this.atomicNumber = atomicNumber;
         this.type = Type.valueOf(type);
+        this.colour = setColour();
         this.neutrons = neutrons;
         this.shortName = shortName;
         this.calculateValenceShells();
@@ -107,36 +108,6 @@ public class Element extends ChemicalBase implements Comparable<Element>
     }
 
     @Override
-    public int getColour()
-    {
-        switch (this.type)
-        {
-            case alkaliMetal:
-                return ColourHelper.RGB("#F63FFF");
-            case alkalineEarth:
-                return ColourHelper.RGB("#A84DFF");
-            case transitionMetal:
-                return ColourHelper.RGB("#3DD4FF");
-            case basicMetal:
-                return ColourHelper.RGB("#FFBA50");
-            case semiMetal:
-                return ColourHelper.RGB("#0AFF76");
-            case nonMetal:
-                return ColourHelper.RGB("#329EFF");
-            case halogen:
-                return ColourHelper.RGB("#FFCB08");
-            case nobleGas:
-                return ColourHelper.RGB("#FFD148");
-            case lanthanide:
-                return ColourHelper.RGB("#C2FF00");
-            case actinide:
-                return ColourHelper.RGB("#FF0D0B");
-            default:
-                return Compendium.Color.TrueColor.white;
-        }
-    }
-
-    @Override
     public boolean isElement()
     {
         return true;
@@ -161,5 +132,44 @@ public class Element extends ChemicalBase implements Comparable<Element>
     public int compareTo(Element other)
     {
         return Integer.compare(this.atomicNumber, other.atomicNumber);
+    }
+
+    private int setColour()
+    {
+        int tone = 0;
+        switch (this.type)
+        {
+            case alkaliMetal:
+                tone = ColourHelper.RGB("#F63FFF");
+                break;
+            case alkalineEarth:
+                tone = ColourHelper.RGB("#A84DFF");
+                break;
+            case transitionMetal:
+                tone = ColourHelper.RGB("#3DD4FF");
+                break;
+            case basicMetal:
+                tone = ColourHelper.RGB("#FFBA50");
+                break;
+            case semiMetal:
+                tone = ColourHelper.RGB("#0AFF76");
+                break;
+            case nonMetal:
+                tone = ColourHelper.RGB("#329EFF");
+                break;
+            case halogen:
+                tone = ColourHelper.RGB("#FFCB08");
+                break;
+            case nobleGas:
+                tone = ColourHelper.RGB("#FFD148");
+                break;
+            case lanthanide:
+                tone = ColourHelper.RGB("#C2FF00");
+                break;
+            case actinide:
+                tone = ColourHelper.RGB("#FF0D0B");
+                break;
+        }
+        return ColourHelper.tone(tone, atomicNumber/10F);
     }
 }
