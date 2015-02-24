@@ -30,7 +30,6 @@ public class Element extends ChemicalBase implements Comparable<Element>
     public final int neutrons;
     public final String shortName;
     public final Type type;
-    private final int colour;
 
     private int valenceElectronCount;
     private String valenceSubshellIdentifier;
@@ -53,7 +52,6 @@ public class Element extends ChemicalBase implements Comparable<Element>
         this.colour = setColour();
         this.neutrons = neutrons;
         this.shortName = shortName;
-        this.colour = setColour();
         this.calculateValenceShells();
     }
 
@@ -107,11 +105,6 @@ public class Element extends ChemicalBase implements Comparable<Element>
         LogHelper.debug("Element abbreviation: " + this.shortName);
         LogHelper.debug("Form: " + this.form);
         LogHelper.debug("Neutrons: " + this.neutrons);
-    }
-
-    public int setColour()
-    {
-        return this.colour;
     }
 
     @Override
