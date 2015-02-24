@@ -19,11 +19,13 @@ public abstract class ChemicalBase
 
     public final Form form;// TODO: this should become a temperature so that the state can be defined on that maybe?
     public final String fullName;
+    public int colour;
 
-    public ChemicalBase(String fullName, String form)
+    public ChemicalBase(String fullName, String form, int colour)
     {
         this.fullName = fullName;
         this.form = Form.valueOf(form);
+        this.colour = colour;
     }
 
     /**
@@ -70,7 +72,10 @@ public abstract class ChemicalBase
         return ChemicalItem.getItemStackForChemical(this);
     }
 
-    public abstract int getColour();
+    public int getColour()
+    {
+        return colour;
+    }
 
     public abstract List<String> getToolTip();
 
