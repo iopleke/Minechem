@@ -11,11 +11,6 @@ import org.lwjgl.opengl.GL11;
 
 public class PatreonGuiTab extends BasicGuiTab
 {
-    public static int defaultBackgroundColor = 5592405;
-    public static int defaultHeaderColor = 14797103;
-    public static int defaultSide = 0;
-    public static int defaultSubHeaderColor = 11186104;
-    public static int defaultTextColor = 16777215;
     public static boolean enable = Config.enablePatreon;
     private String link;
     private int linkColor;

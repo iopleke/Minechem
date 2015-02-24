@@ -124,5 +124,15 @@ public abstract class BasicGuiTab extends TabBase
         }
         return this.fullyOpen;
     }
+    
+    public int getCurrentShiftX()
+    {
+        return this.currentShiftX;
+    }
+
+    public int getCurrentShiftY()
+    {
+        return this.currentShiftY;
+    }
 
 }
