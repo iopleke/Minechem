@@ -77,6 +77,7 @@ public class DecomposerNEIRecipeHandler extends TemplateRecipeHandler
             for (DecomposerRecipe dr : DecomposerRecipe.recipes.values())
             {
                 ItemStack input = dr.getInput().copy();
+                if (input.getItem() == null) continue;
                 if (input.getItemDamage() == Short.MAX_VALUE)
                 {
                     input.setItemDamage(0); // Handle OreDict wildcard
