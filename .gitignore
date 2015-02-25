@@ -16,7 +16,6 @@
 *.txt
 *.xml
 .cache
-lib/
 libs/
 natives/
 
