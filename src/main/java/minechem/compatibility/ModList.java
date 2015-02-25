@@ -1,9 +1,12 @@
 package minechem.compatibility;
 
+import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.Loader;
 import minechem.Compendium;
+import minechem.compatibility.IGW.IGWCompat;
 import minechem.compatibility.computercraft.ComputerCraftCompat;
 import minechem.compatibility.openblocks.OpenBlocksCompat;
+import minechem.helper.LogHelper;
 
 /**
  * Example Enum Implementation of ModCompat to automatically register compatibility modules
@@ -12,7 +15,8 @@ public enum ModList
 {
     computercraft(Compendium.Naming.Mods.computerCraft, "ComputerCraft", new ComputerCraftCompat()),
     opencomputers(Compendium.Naming.Mods.openComputers, "OpenComputers"),
-    openblocks(Compendium.Naming.Mods.openBlocks, "OpenBlocks", new OpenBlocksCompat());
+    openblocks(Compendium.Naming.Mods.openBlocks, "OpenBlocks", new OpenBlocksCompat()),
+    igwmod(Compendium.Naming.Mods.igwmod, "IGWMod", new IGWCompat());
 
     private final String modId;
     private final String modName;
@@ -69,7 +73,11 @@ public enum ModList
 
     private void load()
     {
-        compatClass.load(this);
+    	try {
+    		compatClass.load(this);
+    	} catch(NullPointerException e) {
+    		LogHelper.info(modName+" compatability not loaded, - skipping");
+    	}
     }
 
     public static void loadCompatibility()
