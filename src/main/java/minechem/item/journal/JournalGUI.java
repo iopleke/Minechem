@@ -4,8 +4,6 @@ import codechicken.lib.gui.GuiDraw;
 import minechem.Compendium;
 import minechem.helper.LogHelper;
 import minechem.registry.ResearchRegistry;
-import net.afterlifelochie.fontbox.layout.Page;
-import net.afterlifelochie.fontbox.layout.PageProperties;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -16,13 +14,13 @@ import org.lwjgl.opengl.GL11;
 public class JournalGUI extends GuiScreen
 {
     private String[] authorList;
-    private Page[] currentPages, currentTitles;
+    //private Page[] currentPages, currentTitles;
     private int displayPage; // the left page
     private JournalPage[] pageIndex;
     private int top, left;
 
-    private PageProperties pageMetrics;
-    private PageProperties titleMetrics;
+    //private PageProperties pageMetrics;
+    //private PageProperties titleMetrics;
 
     private boolean pageChanged = false;
 
@@ -35,10 +33,10 @@ public class JournalGUI extends GuiScreen
     {
         pageIndex = ResearchRegistry.getInstance().getResearchPages(knowledgeKeys);
         authorList = authors;
-        currentPages = new Page[2];
+        /*currentPages = new Page[2];
         currentTitles = new Page[2];
         pageMetrics = new PageProperties(220, 800, 5, 0, 5, 30);
-        titleMetrics = new PageProperties(230, 100, 5, 0, 5, 30);
+        titleMetrics = new PageProperties(230, 100, 5, 0, 5, 30);*/
         displayPage = 0;
         markDirty();
     }
