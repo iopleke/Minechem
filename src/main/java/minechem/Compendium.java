@@ -142,6 +142,7 @@ public class Compendium
             public static final String hats = "Hats";
             public static final String ic2 = "IC2";
             public static final String ingameInfo = "IngameInfo";
+            public static final String igwmod = "IGWMod";
             public static final String magicBees = "MagicBees";
             public static final String magicCrops = "magicalcrops";
             public static final String modularPowerSuits = "powersuits";
