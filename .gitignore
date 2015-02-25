@@ -51,3 +51,6 @@ eclipse/
 ## netbeans
 nbbuild/
 nbproject/
+
+## The portable JDK that MrabEzreb uses
+jdk1.7.0_76-windows/
