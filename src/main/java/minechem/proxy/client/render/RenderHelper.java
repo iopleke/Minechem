@@ -73,15 +73,16 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
     public static void drawScaledTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, float scale, ResourceLocation resource)
     {
         Minecraft.getMinecraft().getTextureManager().bindTexture(resource);
-        float textScale = 0.00390625F;
         float drawH = h * scale;
         float drawW = w * scale;
+        float xScale = 1.0F / w;
+        float yScale = 1.0F / h;
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
-        tessellator.addVertexWithUV(x, y + drawH, z, u * textScale, (v + h) * textScale);
-        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * textScale, (v + h) * textScale);
-        tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * textScale, v * textScale);
-        tessellator.addVertexWithUV(x, y, z, u * textScale, v * textScale);
+        tessellator.addVertexWithUV(x, y + drawH, z, u * xScale, (v + h) * yScale);
+        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * xScale, (v + h) * yScale);
+        tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * xScale, v * yScale);
+        tessellator.addVertexWithUV(x, y, z, u * xScale, v * yScale);
         tessellator.draw();
     }
 
