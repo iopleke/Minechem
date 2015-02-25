@@ -53,8 +53,8 @@ dependencies {
     compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
     compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
-    compile fileTree(dir: 'lib', include: '*.jar')
-    compile fileTree(dir: 'lib', include: '*.zip')
+    compile fileTree(dir: 'libs', include: '*.jar')
+    compile fileTree(dir: 'libs', include: '*.zip')
 }
 
 group = "minechem"
@@ -127,13 +127,13 @@ task apiZip(type: Zip) {
 import de.undercouch.gradle.tasks.download.Download
 
 task getLibraries {
-	def libsFolder = new File('lib')
+	def libsFolder = new File('libs')
 	if (!libsFolder.isDirectory() ) {
 		libsFolder.mkdirs()
 	}
 
 	def ccSource = 'http://minecraft.curseforge.com/mc-mods/67504-computercraft/files/2216236/download'
-	def ccDest = new File('lib', 'ComputerCraft1.65.jar')
+	def ccDest = new File('libs', 'ComputerCraft-1.65.jar')
 
 
 	if(!ccDest.exists() ){
@@ -143,8 +143,8 @@ task getLibraries {
 		}
 	}
 
-	def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-1.7.10-3.0.9B.jar'
-	def mtDest = new File('lib', 'MineTweaker3-Dev-1.7.10-3.0.9.jar')
+	def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-1.7.10-3.0.9C.jar'
+	def mtDest = new File('libs', 'MineTweaker3-Dev-1.7.10-3.0.9C.jar')
 
 	if(!mtDest.exists() ){
 		download {
@@ -153,8 +153,8 @@ task getLibraries {
 		}
 	}
 
-        def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2225609/download'
-        def cofhDest = new File('lib', 'CoFHLib-1.7.10-1.0.0B9-68-dev.jar')
+    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2228470/download'
+    def cofhDest = new File('libs', 'CoFHLib-[1.7.10]1.0.0B9-118-dev.jar')
 
         if(!cofhDest.exists() ){
             download {
