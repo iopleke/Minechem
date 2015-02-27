@@ -1,6 +1,8 @@
 package minechem.item.augment;
 
 import com.google.common.collect.Multimap;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +15,7 @@ import minechem.proxy.client.render.RenderHelper;
 import minechem.registry.AugmentRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
+import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.entity.Entity;
@@ -23,6 +26,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.nbt.NBTTagString;
+import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
@@ -32,19 +36,39 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
     public static final String level = "level";
     public static final UUID itemUUID = field_111210_e;
 
+    @SideOnly(Side.CLIENT)
+    protected IIcon[] augmentIcon;
+
     public AugmentedItem()
     {
         super("augmented");
+        // augmented types are sword, shovel, pickaxe, hoe, axe
+        augmentIcon = new IIcon[5];
+
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void registerIcons(IIconRegister iconRegister)
+    {
+        // there's got to be a better way to register these...maybe a map?
+        augmentIcon[0] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedAxeIcon");
+        augmentIcon[1] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedHoeIcon");
+        augmentIcon[2] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedPickaxeIcon");
+        augmentIcon[3] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedShovelIcon");
+        augmentIcon[4] = iconRegister.registerIcon(Compendium.Naming.id + ":augment/augmentedSwordIcon");
     }
 
     @Override
     public void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top, float z)
     {
         RenderHelper.enableBlend();
-        RenderHelper.setOpacity(0.6F);
+        RenderHelper.setOpacity(1.0F);
         textureManager.bindTexture(TextureMap.locationItemsTexture);
-        RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, itemIcon);
-        RenderHelper.resetOpacity();;
+        //if (itemStack.getItem() instanceof ItemSword)
+        // just render the first icon until I figure out how to detect which item is being augmented
+        RenderHelper.drawTexturedRectUV(left, top, z + 10, 16, 16, augmentIcon[0]);
+        RenderHelper.resetOpacity();
         RenderHelper.disableBlend();
     }
 
