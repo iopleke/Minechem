@@ -101,7 +101,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
                 while (i >= 1)
                 {
                     ArrayList<PotionChemical> partialResult = current.getOutput();
-                    if (partialResult != null)
+                    if (partialResult != null && partialResult.size()>0)
                     {
                         result.addAll(partialResult);
                     }
@@ -152,7 +152,7 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
     @Override
     public boolean isNull()
     {
-        return (super.getOutput() == null || this.recipes == null);
+        return super.getOutput() == null || this.recipes == null || !hasOutput();
     }
 
     @Override
@@ -164,7 +164,14 @@ public class DecomposerRecipeSuper extends DecomposerRecipe
     @Override
     public boolean hasOutput()
     {
-        return !this.recipes.values().isEmpty() || !this.output.isEmpty();
+        if (!this.output.isEmpty()) return true;
+        if (this.recipes.isEmpty()) return false;
+        for (MapKey key : this.recipes.keySet())
+        {
+            DecomposerRecipe recipe = DecomposerRecipe.get(key);
+            if (recipe!=null && !recipe.isNull()) return true;
+        }
+        return false;
     }
 
     @Override
