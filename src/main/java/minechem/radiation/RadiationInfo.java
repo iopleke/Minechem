@@ -52,7 +52,8 @@ public class RadiationInfo implements Cloneable
         Item item = itemstack.getItem();
         if (item == MinechemItemsRegistration.element)
         {
-            return id != 0 ? ElementEnum.getByID(id).radioactivity() : RadiationEnum.stable;
+            ElementEnum element = ElementEnum.getByID(id);
+            return id != 0 && element!=null? element.radioactivity() : RadiationEnum.stable;
         } else if (item == MinechemItemsRegistration.molecule)
         {
             if (id >= MoleculeEnum.molecules.size() || MoleculeEnum.molecules.get(id) == null)

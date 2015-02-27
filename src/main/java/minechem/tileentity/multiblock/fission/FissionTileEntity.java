@@ -4,6 +4,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.item.blueprint.BlueprintFission;
+import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
 import minechem.network.MessageHandler;
 import minechem.network.message.FissionUpdateMessage;
@@ -106,7 +107,7 @@ public class FissionTileEntity extends MultiBlockTileEntity implements ISidedInv
         {
             int mass = ElementItem.getElement(inventory[kInput[0]]).atomicNumber();
             int newMass = mass / 2;
-            if (newMass > 0)
+            if (newMass > 0 && ElementEnum.getByID(newMass)!=null)
             {
                 return new ItemStack(MinechemItemsRegistration.element, 2, newMass);
             } else
