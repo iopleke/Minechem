@@ -36,6 +36,15 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
         return false;
     }
 
+    public ChemicalItem removeItem()
+    {
+        if (tubeCount > 0)
+        {
+            tubeCount--;
+        }
+        return null;
+    }
+
     /**
      * Save data to NBT
      *

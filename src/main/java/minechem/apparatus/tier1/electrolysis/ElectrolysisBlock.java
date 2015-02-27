@@ -55,6 +55,9 @@ public class ElectrolysisBlock extends BasicBlockContainer
                 {
                     electrolysis.fillWithItem((ChemicalItem) clickedItem.getItem());
                 }
+            } else
+            {
+                electrolysis.removeItem();
             }
 
         }
