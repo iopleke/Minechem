@@ -2,12 +2,13 @@ package minechem.apparatus.tier1.electrolysis;
 
 import minechem.Compendium;
 import minechem.apparatus.prefab.tileEntity.BasicFluidInventoryTileEntity;
+import minechem.chemical.ChemicalBase;
 import minechem.item.chemical.ChemicalItem;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
 {
-    public byte tubeCount;
+    private byte tubeCount;
 
     public ElectrolysisTileEntity()
     {
@@ -26,7 +27,7 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     {
     }
 
-    public boolean fillWithItem(ChemicalItem item)
+    public boolean fillWithChemicalBase(ChemicalBase chemicalBase)
     {
         tubeCount++;
         if (tubeCount > 2)
@@ -35,7 +36,7 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
         }
         return false;
     }
-
+    
     public ChemicalItem removeItem()
     {
         if (tubeCount > 0)
@@ -43,6 +44,11 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
             tubeCount--;
         }
         return null;
+    }
+    
+    public byte getTubeCount()
+    {
+        return tubeCount;
     }
 
     /**
@@ -54,9 +60,7 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
-        NBTTagCompound tubeCountNBT = new NBTTagCompound();
-        // This doesn't currently seem to be working...
-        tubeCountNBT.setByte("tubeCount", tubeCount);
+        nbttagcompound.setByte("tubeCount", tubeCount);
     }
 
     /**
@@ -68,7 +72,6 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        // This doesn't currently seem to be working...
         tubeCount = nbttagcompound.getByte("tubeCount");
     }
 }
