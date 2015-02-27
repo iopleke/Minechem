@@ -73,7 +73,7 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
 
                 if (!chemicalBase.isElement())
                 {
-                    RenderHelper.drawTexturedRectUV(eyePieceX + eyePieceW + 50, eyePieceY + 5, 0, 0, 0, 200, 200, 60, 60, ((Molecule)chemicalBase).getStructureResource());
+                    RenderHelper.drawScaledTexturedRectUV(eyePieceX + eyePieceW + 50, eyePieceY + 5, 0, 0, 0, 200, 200, 0.3F, ((Molecule)chemicalBase).getStructureResource());
                 }
 
                 if (prevStack != itemStack)
