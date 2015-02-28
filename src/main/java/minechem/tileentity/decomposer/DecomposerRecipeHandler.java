@@ -1,6 +1,9 @@
 package minechem.tileentity.decomposer;
 
 import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.Map;
+
 import minechem.utils.MapKey;
 import minechem.utils.MinechemUtil;
 import minechem.utils.Recipe;
@@ -27,11 +30,12 @@ public class DecomposerRecipeHandler
             }
         }
         //Culls null recipes (used for recursion but breaks stuff if left in)
-        for (MapKey key : DecomposerRecipe.recipes.keySet())
+        for (Iterator<Map.Entry<MapKey, DecomposerRecipe>> itr =  DecomposerRecipe.recipes.entrySet().iterator(); itr.hasNext();)
         {
-            if (DecomposerRecipe.get(key).isNull())
+            Map.Entry<MapKey, DecomposerRecipe> entry = itr.next();
+            if (entry.getValue().isNull())
             {
-                DecomposerRecipe.remove(key);
+                itr.remove();
             }
         }
     }

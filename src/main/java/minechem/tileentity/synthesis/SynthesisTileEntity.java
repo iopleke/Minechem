@@ -29,7 +29,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
      */
     public static final int[] kOutput =
     {
-        0
+        0, 28
     };
 
     /**
@@ -46,7 +46,7 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
     public static final int[] kStorage =
     {
         10, 11, 12, 13, 14, 15, 16, 17, 18,
-        19, 20, 21, 22, 23, 24, 25, 26, 27
+        19, 20, 21, 22, 23, 24, 25, 26, 27, 28
     };
 
     /**

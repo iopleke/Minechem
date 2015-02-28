@@ -215,6 +215,13 @@ public class RadiationHandler
 
     private int decayElement(ItemStack element, RadiationInfo radiationInfo, long currentTime, World world, IInventory inventory, double x, double y, double z)
     {
+        if (element.stackSize == 0)
+        {
+            radiationInfo.decayStarted += currentTime - radiationInfo.lastDecayUpdate;
+            radiationInfo.lastDecayUpdate = currentTime;
+            RadiationInfo.setRadiationInfo(radiationInfo, element);
+            return 0;
+        }
         radiationInfo.lastDecayUpdate = currentTime;
         long lifeTime = currentTime - radiationInfo.decayStarted - radiationInfo.radioactivity.getLife();
         if (lifeTime > 0)

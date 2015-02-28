@@ -115,7 +115,7 @@ public class Recipe
                     LogHelper.debug("Adding recipe for " + input.toString());
                     ItemStack[] components = null;
 
-                    if (recipe instanceof ShapelessOreRecipe && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
+                    if (recipe.getClass().equals(ShapelessOreRecipe.class) && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
                     {
                         ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
                         for (Object o : ((ShapelessOreRecipe) recipe).getInput())
@@ -126,7 +126,7 @@ public class Recipe
                             }
                         }
                         components = inputs.toArray(new ItemStack[inputs.size()]);
-                    } else if (recipe instanceof ShapedOreRecipe)
+                    } else if (recipe.getClass().equals(ShapedOreRecipe.class))
                     {
                         ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
                         for (Object o : ((ShapedOreRecipe) recipe).getInput())
@@ -145,10 +145,10 @@ public class Recipe
                         }
                         components = inputs.toArray(new ItemStack[inputs.size()]);
 
-                    } else if (recipe instanceof ShapelessRecipes && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
+                    } else if (recipe.getClass().equals(ShapelessRecipes.class) && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
                     {
                         components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
-                    } else if (recipe instanceof ShapedRecipes)
+                    } else if (recipe.getClass().equals(ShapedRecipes.class))
                     {
                         components = ((ShapedRecipes) recipe).recipeItems;
                     }
