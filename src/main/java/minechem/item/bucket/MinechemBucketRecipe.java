@@ -66,7 +66,7 @@ public class MinechemBucketRecipe implements IRecipe
             }
         }
 
-        return hasBucket && chemicals == 8;
+        return hasBucket && chemicals == 8 && MinechemBucketHandler.getInstance().getBucket(type) != null;
     }
 
     @Override
@@ -129,11 +129,13 @@ public class MinechemBucketRecipe implements IRecipe
             return new ItemStack(Items.water_bucket);
         } else if (type != null)
         {
-            return new ItemStack(MinechemBucketHandler.getInstance().getBucket(type), 1);
-        } else
-        {
-            return null;
+            MinechemBucketItem bucket = MinechemBucketHandler.getInstance().getBucket(type);
+            if (bucket != null)
+            {
+                return new ItemStack(bucket, 1);
+            }
         }
+        return null;
     }
 
 }
