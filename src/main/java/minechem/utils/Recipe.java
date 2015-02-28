@@ -4,11 +4,7 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.Optional;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 import minechem.tileentity.decomposer.DecomposerRecipe;
 import net.minecraft.item.ItemStack;
@@ -114,10 +110,10 @@ public class Recipe
                 {
                     LogHelper.debug("Adding recipe for " + input.toString());
                     ItemStack[] components = null;
+                    List<ItemStack> inputs = new ArrayList<ItemStack>();
 
                     if (recipe.getClass().equals(ShapelessOreRecipe.class) && ((ShapelessOreRecipe) recipe).getInput().size() > 0)
                     {
-                        ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
                         for (Object o : ((ShapelessOreRecipe) recipe).getInput())
                         {
                             if (o instanceof ItemStack)
@@ -125,13 +121,10 @@ public class Recipe
                                 inputs.add((ItemStack) o);
                             }
                         }
-                        components = inputs.toArray(new ItemStack[inputs.size()]);
                     } else if (recipe.getClass().equals(ShapedOreRecipe.class))
                     {
-                        ArrayList<ItemStack> inputs = new ArrayList<ItemStack>();
                         for (Object o : ((ShapedOreRecipe) recipe).getInput())
                         {
-
                             if (o instanceof ItemStack)
                             {
                                 inputs.add((ItemStack) o);
@@ -143,28 +136,25 @@ public class Recipe
                                 inputs.add((ItemStack) ((ArrayList) o).get(0));
                             }
                         }
-                        components = inputs.toArray(new ItemStack[inputs.size()]);
 
                     } else if (recipe.getClass().equals(ShapelessRecipes.class) && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
                     {
-                        components = (ItemStack[]) ((ShapelessRecipes) recipe).recipeItems.toArray();
+                        inputs = (ArrayList<ItemStack>) ((ShapelessRecipes) recipe).recipeItems;
                     } else if (recipe.getClass().equals(ShapedRecipes.class))
                     {
-                        components = ((ShapedRecipes) recipe).recipeItems;
+                        inputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems));
                     }
 
                     MapKey key = MapKey.getKey(input);
-                    if (components != null && key != null)
+                    if (inputs.size()>0 && key != null)
                     {
-                        boolean badRecipe = false;
-                        for (ItemStack component : components)
+                        for (Iterator<ItemStack> itr = inputs.iterator(); itr.hasNext();)
                         {
-                            if (component != null && (component.getItem() == null || component.isItemEqual(input) || component.stackSize < 1))
-                            {
-                                badRecipe = true;
-                            }
+                            ItemStack component = itr.next();
+                            if (invalidStack(component) || component.getItem().hasContainerItem(component)) itr.remove();
                         }
-                        if (!badRecipe)
+                        components = inputs.toArray(new ItemStack[inputs.size()]);
+                        if (components.length>0)
                         {
                             Recipe addRecipe = new Recipe(input, components);
                             addPreCullRecipe(key, addRecipe, preCullRecipes);

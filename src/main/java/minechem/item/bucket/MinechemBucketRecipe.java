@@ -1,6 +1,7 @@
 package minechem.item.bucket;
 
 import minechem.MinechemItemsRegistration;
+import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementItem;
 import minechem.item.molecule.MoleculeItem;
@@ -44,9 +45,11 @@ public class MinechemBucketRecipe implements IRecipe
             if (stack.getItem() == MinechemItemsRegistration.element)
             {
                 anotherType = ElementItem.getElement(stack);
+                if (!FluidHelper.elements.containsKey(anotherType)) return false;
             } else if (stack.getItem() == MinechemItemsRegistration.molecule)
             {
                 anotherType = MoleculeItem.getMolecule(stack);
+                if (!FluidHelper.molecules.containsKey(anotherType)) return false;
             } else
             {
                 return false;
