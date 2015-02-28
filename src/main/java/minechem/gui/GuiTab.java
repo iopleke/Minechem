@@ -50,14 +50,12 @@ public abstract class GuiTab
     {
         GL11.glDisable(GL11.GL_LIGHTING);
         GL11.glEnable(GL11.GL_ALPHA_TEST);
-        GL11.glEnable(GL11.GL_BLEND);
 
         currentX = x;
         currentY = y;
 
         draw(x, y);
 
-        GL11.glDisable(GL11.GL_BLEND);
         GL11.glDisable(GL11.GL_ALPHA_TEST);
         GL11.glEnable(GL11.GL_LIGHTING);
     }
