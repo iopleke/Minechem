@@ -1,52 +1,95 @@
 package minechem.item.journal;
 
+import java.io.IOException;
+import java.util.List;
+
 import codechicken.lib.gui.GuiDraw;
 import minechem.Compendium;
 import minechem.helper.LogHelper;
+import minechem.registry.JournalRegistry;
 import minechem.registry.ResearchRegistry;
-import net.minecraft.client.gui.GuiScreen;
+import net.afterlifelochie.fontbox.Fontbox;
+import net.afterlifelochie.fontbox.document.Document;
+import net.afterlifelochie.fontbox.document.Element;
+import net.afterlifelochie.fontbox.layout.DocumentProcessor;
+import net.afterlifelochie.fontbox.layout.LayoutException;
+import net.afterlifelochie.fontbox.layout.PageWriter;
+import net.afterlifelochie.fontbox.layout.components.PageProperties;
+import net.afterlifelochie.fontbox.render.BookGUI;
+import net.minecraft.entity.player.EntityPlayer;
+
+import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
 /**
  *
  */
-public class JournalGUI extends GuiScreen
+public class JournalGUI extends BookGUI
 {
     private String[] authorList;
-    //private Page[] currentPages, currentTitles;
-    private int displayPage; // the left page
     private JournalPage[] pageIndex;
     private int top, left;
-
-    //private PageProperties pageMetrics;
-    //private PageProperties titleMetrics;
 
     private boolean pageChanged = false;
 
     /**
-     *
-     * @param knowledgeKeys a array with all knowledgeKeys of the pages to display
-     * @param authors       a list of authors
+     * @param who
+     *            the player
+     * @param knowledgeKeys
+     *            a array with all knowledgeKeys of the pages to display
+     * @param authors
+     *            a list of authors
      */
-    public JournalGUI(String[] knowledgeKeys, String[] authors)
+    public JournalGUI(EntityPlayer who, String[] knowledgeKeys, String[] authors)
     {
+        super(UpMode.TWOUP, new Layout[] { new Layout(10, 30), new Layout(138, 30) });
+
+        /**
+         * TODO: You will need to compile the page indexes and author list data
+         * directly into the book's element stream for it to be written
+         * correctly.
+         */
         pageIndex = ResearchRegistry.getInstance().getResearchPages(knowledgeKeys);
         authorList = authors;
-        /*currentPages = new Page[2];
-        currentTitles = new Page[2];
-        pageMetrics = new PageProperties(220, 800, 5, 0, 5, 30);
-        titleMetrics = new PageProperties(230, 100, 5, 0, 5, 30);*/
-        displayPage = 0;
-        markDirty();
-    }
 
-    private void decrementPage()
-    {
-        if (displayPage > 0)
+        try
         {
-            displayPage--;
+            /* Create a document */
+            Document document = new Document();
+            try
+            {
+                /* Copy the list of elements */
+                List<Element> elements = JournalRegistry.journal.getElements(who);
+                /* Write elements => document */
+                document.pushAll(elements);
+            }
+            catch (Throwable thrown)
+            {
+                LogHelper.exception(thrown, Level.WARN);
+            }
+
+            /* Set up page formatting */
+            PageProperties properties = new PageProperties(200, 800, Fontbox.fromName("Note this"));
+            properties.headingFont(Fontbox.fromName("Ampersand"));
+            properties.bothMargin(2).lineheightSize(8).spaceSize(4).densitiy(0.66f);
+
+            /* Write elements => page stream */
+            PageWriter writer = new PageWriter(properties);
+            DocumentProcessor.generatePages(Fontbox.tracer(), document, writer);
+            writer.close();
+
+            /* Update system pages */
+            changePages(writer.pages());
             markDirty();
+        }
+        catch (LayoutException layout)
+        {
+            LogHelper.exception(layout, Level.ERROR);
+        }
+        catch (IOException ioex)
+        {
+            LogHelper.exception(ioex, Level.ERROR);
         }
     }
 
@@ -58,12 +101,12 @@ public class JournalGUI extends GuiScreen
 
     private void drawFoldedPages()
     {
-        if (displayPage > 1)
+        if (ptr > 1)
         {
             // Draw folded page on the left
             GuiDraw.drawTexturedModalRect(5, 163, 0, 188, 21, 21);
         }
-        if (displayPage < pageIndex.length)
+        if (ptr < pageIndex.length)
         {
             // Draw folded page on the right
             GuiDraw.drawTexturedModalRect(230, 160, 21, 188, 21, 21);
@@ -73,49 +116,6 @@ public class JournalGUI extends GuiScreen
     private void drawJournalBackground()
     {
         GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 256, 188);
-    }
-
-    /**
-     * Draw the actual page content
-     */
-    private void drawPages()
-    {
-//        FontBoxHelper.renderPageBox(currentPages[0], 10, 30, zLevel);
-//        FontBoxHelper.renderPageBox(currentTitles[0], 20, 10, zLevel);
-//        FontBoxHelper.renderPageBox(currentPages[1], 10 + 128, 30, zLevel);
-//        FontBoxHelper.renderPageBox(currentTitles[1], 20 + 128, 10, zLevel);
-    }
-
-    @Override
-    public void drawScreen(int mouseX, int mouseY, float unused)
-    {
-        super.drawScreen(mouseX, mouseY, unused);
-
-        if (isDirty())
-        {
-            loadPage(displayPage);
-            markClean();
-        }
-
-        GL11.glPushMatrix();
-        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
-        GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
-        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
-
-        drawJournalBackground();
-        drawFoldedPages();
-        drawPages();
-
-        GL11.glPopMatrix();
-    }
-
-    private void incrementPage()
-    {
-        if (displayPage < pageIndex.length)
-        {
-            displayPage++;
-            markDirty();
-        }
     }
 
     private boolean isDirty()
@@ -131,19 +131,16 @@ public class JournalGUI extends GuiScreen
     @Override
     protected void keyTyped(char c, int keycode)
     {
-        if (keycode == Keyboard.KEY_LEFT || keycode == Keyboard.KEY_DOWN)
-        {
-            decrementPage();
-            decrementPage();
-        }
-        if (keycode == Keyboard.KEY_RIGHT || keycode == Keyboard.KEY_UP)
-        {
-            incrementPage();
-            incrementPage();
-        }
-
-        loadPage(displayPage);
         super.keyTyped(c, keycode);
+        /* Don't listen to KEY_LEFT or KEY_RIGHT; already handled */
+        if (keycode == Keyboard.KEY_DOWN)
+        {
+            previous();
+        }
+        if (keycode == Keyboard.KEY_UP)
+        {
+            next();
+        }
     }
 
     private void markClean()
@@ -159,22 +156,20 @@ public class JournalGUI extends GuiScreen
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
     {
+        super.mouseClicked(mouseX, mouseY, mouseButton);
         mouseX -= left;
         mouseY -= top;
         if (wasRightTabClicked(mouseX, mouseY, mouseButton))
         {
-            incrementPage();
-            incrementPage();
+            next();
         }
 
         if (wasLeftTabClicked(mouseX, mouseY, mouseButton))
         {
-            decrementPage();
-            decrementPage();
+            previous();
         }
 
         LogHelper.info("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
-        super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     private boolean wasRightTabClicked(int mouseX, int mouseY, int mouseButton)
@@ -207,46 +202,26 @@ public class JournalGUI extends GuiScreen
         return false;
     }
 
-    /**
-     * Loads the given page pair Where page 0 is the author list Page 0 is the authors page, page 1 is the Index The following pages will be the actual content
-     *
-     * @param displayPage will show the pair eg. 1 -> 0, 1; 1 -> 0, 1; 2 -> 2, 3; ...
-     */
-    private void loadPage(int displayPage)
+    @Override
+    public void onPageChanged(BookGUI gui, int whatPtr)
     {
-        if (displayPage % 2 != 0)
-        {
-            displayPage -= 1;
-        }
-//        currentPages[0] = FontBoxHelper.boxText("", pageMetrics);
-//        currentTitles[0] = FontBoxHelper.boxText("", titleMetrics);
-//        currentPages[1] = FontBoxHelper.boxText("", pageMetrics);
-//        currentTitles[1] = FontBoxHelper.boxText("", titleMetrics);
-//        if (displayPage < 2)
-//        {
-//            String sAuthors = "";
-//            for (String author : authorList)
-//            {
-//                sAuthors += "- " + author + "\n";
-//            }
-//            currentPages[0] = FontBoxHelper.boxText(sAuthors, pageMetrics);
-//            currentTitles[0] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":", titleMetrics);
-//            String sIndex = "";
-//            for (JournalPage page : pageIndex)
-//            {
-//                sIndex += page + "\n";
-//            }
-//            currentPages[1] = FontBoxHelper.boxText(sIndex, pageMetrics);
-//            currentTitles[1] = FontBoxHelper.boxText(LocalizationHelper.getLocalString("gui.journal.index"), titleMetrics);
-//        } else
-//        {
-//            currentPages[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].content, pageMetrics);
-//            currentTitles[0] = FontBoxHelper.boxText(pageIndex[displayPage - 2].title, titleMetrics);
-//            if (displayPage - 1 < pageIndex.length)
-//            {
-//                currentPages[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].content, pageMetrics);
-//                currentTitles[1] = FontBoxHelper.boxText(pageIndex[displayPage - 1].title, titleMetrics);
-//            }
-//        }
+        markDirty();
+    }
+
+    @Override
+    public void drawBackground(int mx, int my, float frame)
+    {
+        GL11.glPushMatrix();
+        GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
+        GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
+        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
+        drawJournalBackground();
+        drawFoldedPages();
+    }
+
+    @Override
+    public void drawForeground(int mx, int my, float frame)
+    {
+        GL11.glPopMatrix();
     }
 }
