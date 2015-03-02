@@ -54,7 +54,9 @@ public class ChemicalBucketNEIRecipeHandler extends ShapelessRecipeHandler
             arecipes.add(new CachedChemicalBucketRecipe());
         } else if (Compare.isStackAnElement(ingredient))
         {
-            ItemStack result = new ItemStack(MinechemBucketHandler.getInstance().getBucket(ElementItem.getElement(ingredient)));
+            MinechemBucketItem bucketItem = MinechemBucketHandler.getInstance().getBucket(ElementItem.getElement(ingredient));
+            if (bucketItem == null) return;
+            ItemStack result = new ItemStack(bucketItem);
             List<ItemStack> recipe = new ArrayList<ItemStack>();
             for (int i = 0 ; i < 4 ; i++)
                 recipe.add(new ItemStack(ingredient.getItem(), 1, ingredient.getItemDamage()));
@@ -64,7 +66,9 @@ public class ChemicalBucketNEIRecipeHandler extends ShapelessRecipeHandler
             arecipes.add(new CachedShapelessRecipe(recipe,result));
         } else if (Compare.isStackAMolecule(ingredient))
         {
-            ItemStack result = new ItemStack(MinechemBucketHandler.getInstance().getBucket(MoleculeItem.getMolecule(ingredient)));
+            MinechemBucketItem bucketItem = MinechemBucketHandler.getInstance().getBucket(MoleculeItem.getMolecule(ingredient));
+            if (bucketItem == null) return;
+            ItemStack result = new ItemStack(bucketItem);
             List<ItemStack> recipe = new ArrayList<ItemStack>();
             for (int i = 0 ; i < 4 ; i++)
                 recipe.add(new ItemStack(ingredient.getItem(), 1, ingredient.getItemDamage()));
