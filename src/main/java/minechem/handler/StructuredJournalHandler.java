@@ -24,7 +24,6 @@ import minechem.item.journal.pages.elements.IJournalElement;
 import minechem.item.journal.pages.elements.JournalImage;
 import minechem.item.journal.pages.elements.JournalText;
 import minechem.registry.JournalRegistry;
-import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.property.AlignmentMode;
 import net.afterlifelochie.fontbox.document.property.FloatMode;
 import net.minecraft.block.Block;
@@ -39,10 +38,10 @@ public class StructuredJournalHandler
     public static void init()
     {
         String[] fileDestSource = new String[2];
-        fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + "pages.json";
-        fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + "pages.json";
+        fileDestSource[0] = Compendium.Config.dataJsonPrefix + "pages.json";
+        fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + "pages.json";
 
-        InputStream inputStream = FileHelper.getJsonFile(JournalHandler.class, fileDestSource, Config.useDefaultResearchPages);
+        InputStream inputStream = FileHelper.getJsonFile(ResearchHandler.class, fileDestSource, Config.useDefaultResearchPages);
         readFromStream(inputStream);
         if (inputStream != null)
         {
@@ -63,7 +62,7 @@ public class StructuredJournalHandler
 
         SectionPage journal = getJournal(parser.parse(jReader).getAsJsonObject());
         LogHelper.info("Total of " + journal.getSubPages() + " pages registered");
-        JournalRegistry.journal = journal;
+        JournalRegistry.setJournal(journal);
     }
 
     public static SectionPage getJournal(JsonObject object)

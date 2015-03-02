@@ -58,7 +58,7 @@ public class Compendium
         public static final String dataJsonPrefix = "data/";
         public static final String elementsDataJson = "elementsData.json";
         public static final String moleculesDataJson = "moleculesData.json";
-        public static final String researchPagesJsonPrefix = "researchPages/";
+        public static final String researchPagesJson = "pages.json";
         public static final String playerResearchData = "minechem/researchData.json";
     }
 

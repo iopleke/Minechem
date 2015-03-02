@@ -15,7 +15,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.handler.AchievementHandler;
 import minechem.handler.ElementHandler;
 import minechem.handler.GuiHandler;
-import minechem.handler.JournalHandler;
+import minechem.handler.ResearchHandler;
 import minechem.handler.MessageHandler;
 import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
@@ -100,6 +100,7 @@ public class Minechem
         LogHelper.debug("Registering Event Handlers...");
         proxy.registerEventHandlers();
 
+        LogHelper.debug("Registering Journal...");
         JournalRegistry.init();
     }
 
@@ -114,9 +115,6 @@ public class Minechem
 
         LogHelper.debug("Registering ClientProxy Rendering Hooks...");
         proxy.registerRenderers();
-
-        LogHelper.debug("Registering Journal Pages...");
-        JournalHandler.init(proxy.getCurrentLanguage());
 
         LogHelper.debug("Registering Achievements...");
         AchievementHandler.init();
@@ -133,12 +131,12 @@ public class Minechem
     @EventHandler
     public void onServerStarted(FMLServerStartedEvent event)
     {
-        JournalHandler.readPlayerResearch();
+        ResearchHandler.readPlayerResearch();
     }
 
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event)
     {
-        JournalHandler.saveResearch();
+        ResearchHandler.saveResearch();
     }
 }

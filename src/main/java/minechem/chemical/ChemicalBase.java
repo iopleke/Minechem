@@ -79,6 +79,8 @@ public abstract class ChemicalBase
 
     public abstract List<String> getToolTip();
 
+    public abstract String getResearchKey();
+
     @Override
     public String toString()
     {

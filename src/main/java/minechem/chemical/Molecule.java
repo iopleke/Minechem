@@ -76,6 +76,12 @@ public class Molecule extends ChemicalBase
         return list;
     }
 
+    @Override
+    public String getResearchKey()
+    {
+        return "chemicals.compounds." + fullName.toLowerCase();
+    }
+
     /**
      * Helper methods
      */

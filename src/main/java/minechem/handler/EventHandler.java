@@ -14,13 +14,13 @@ public class EventHandler
     @SubscribeEvent
     public void onWorldSave(WorldEvent.Save event)
     {
-        JournalHandler.saveResearch();
+        ResearchHandler.saveResearch();
     }
 
     @SubscribeEvent
     public void onWorldUnload(WorldEvent.Unload event)
     {
-        JournalHandler.saveResearch();
+        ResearchHandler.saveResearch();
     }
 
     @SideOnly(Side.CLIENT)

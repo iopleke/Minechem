@@ -28,10 +28,7 @@ import org.lwjgl.opengl.GL11;
 public class JournalGUI extends BookGUI
 {
     private String[] authorList;
-    private JournalPage[] pageIndex;
     private int top, left;
-
-    private boolean pageChanged = false;
 
     /**
      * @param who
@@ -43,14 +40,8 @@ public class JournalGUI extends BookGUI
      */
     public JournalGUI(EntityPlayer who, String[] knowledgeKeys, String[] authors)
     {
-        super(UpMode.TWOUP, new Layout[] { new Layout(10, 30), new Layout(138, 30) });
-
-        /**
-         * TODO: You will need to compile the page indexes and author list data
-         * directly into the book's element stream for it to be written
-         * correctly.
-         */
-        pageIndex = ResearchRegistry.getInstance().getResearchPages(knowledgeKeys);
+        super(UpMode.TWOUP, new Layout[] { new Layout(10, 10), new Layout(138, 10) });
+        
         authorList = authors;
 
         try
@@ -60,7 +51,7 @@ public class JournalGUI extends BookGUI
             try
             {
                 /* Copy the list of elements */
-                List<Element> elements = JournalRegistry.journal.getElements(who);
+                List<Element> elements = JournalRegistry.getJournalFor(who);
                 /* Write elements => document */
                 document.pushAll(elements);
             }
@@ -70,7 +61,7 @@ public class JournalGUI extends BookGUI
             }
 
             /* Set up page formatting */
-            PageProperties properties = new PageProperties(200, 800, Fontbox.fromName("Note this"));
+            PageProperties properties = new PageProperties(221, 380, Fontbox.fromName("Note this"));
             properties.headingFont(Fontbox.fromName("Ampersand"));
             properties.bothMargin(2).lineheightSize(8).spaceSize(4).densitiy(0.66f);
 
@@ -81,7 +72,6 @@ public class JournalGUI extends BookGUI
 
             /* Update system pages */
             changePages(writer.pages());
-            markDirty();
         }
         catch (LayoutException layout)
         {
@@ -106,7 +96,7 @@ public class JournalGUI extends BookGUI
             // Draw folded page on the left
             GuiDraw.drawTexturedModalRect(5, 163, 0, 188, 21, 21);
         }
-        if (ptr < pageIndex.length)
+        if (ptr+2 < pages.size())
         {
             // Draw folded page on the right
             GuiDraw.drawTexturedModalRect(230, 160, 21, 188, 21, 21);
@@ -116,11 +106,6 @@ public class JournalGUI extends BookGUI
     private void drawJournalBackground()
     {
         GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 256, 188);
-    }
-
-    private boolean isDirty()
-    {
-        return pageChanged;
     }
 
     /**
@@ -141,16 +126,6 @@ public class JournalGUI extends BookGUI
         {
             next();
         }
-    }
-
-    private void markClean()
-    {
-        pageChanged = false;
-    }
-
-    private void markDirty()
-    {
-        pageChanged = true;
     }
 
     @Override
@@ -205,7 +180,7 @@ public class JournalGUI extends BookGUI
     @Override
     public void onPageChanged(BookGUI gui, int whatPtr)
     {
-        markDirty();
+
     }
 
     @Override
@@ -216,7 +191,7 @@ public class JournalGUI extends BookGUI
         GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
         GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
         drawJournalBackground();
-        drawFoldedPages();
+        if (pages != null) drawFoldedPages();
     }
 
     @Override
