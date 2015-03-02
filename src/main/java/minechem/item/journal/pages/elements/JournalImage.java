@@ -3,7 +3,7 @@ package minechem.item.journal.pages.elements;
 import minechem.Compendium;
 import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.Image;
-import net.afterlifelochie.fontbox.document.ImageItem;
+import net.afterlifelochie.fontbox.document.ImageItemStack;
 import net.afterlifelochie.fontbox.document.property.AlignmentMode;
 import net.afterlifelochie.fontbox.document.property.FloatMode;
 import net.minecraft.entity.player.EntityPlayer;
@@ -23,7 +23,7 @@ public class JournalImage extends JournalElement
     public JournalImage(String pageKey, ItemStack stack, int width, int height, AlignmentMode alignmentMode, FloatMode floatMode)
     {
         super(pageKey);
-        element = new ImageItem(stack, width, height, alignmentMode, floatMode);
+        element = new ImageItemStack(stack, width, height, alignmentMode, floatMode);
     }
 
     @Override

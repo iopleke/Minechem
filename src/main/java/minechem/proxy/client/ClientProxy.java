@@ -1,9 +1,12 @@
 package minechem.proxy.client;
 
+import org.apache.logging.log4j.Level;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
+import minechem.Compendium;
 import minechem.apparatus.prefab.renderer.BasicItemRenderer;
 import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntity;
 import minechem.apparatus.tier1.centrifuge.CentrifugeTileEntityRenderer;
@@ -20,10 +23,14 @@ import minechem.item.chemical.ChemicalItemRenderer;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
 import minechem.registry.ItemRegistry;
+import net.afterlifelochie.fontbox.Fontbox;
+import net.afterlifelochie.fontbox.font.FontException;
+import net.afterlifelochie.fontbox.font.GLFont;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.IReloadableResourceManager;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 
@@ -41,21 +48,41 @@ public class ClientProxy extends CommonProxy
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
         ISBRH_ID = RenderingRegistry.getNextAvailableRenderId();
 
+        /**
+         * TODO: You may want to move the font initialization to it's own method
+         * or inside a journal management container. Ultimately, it seems wisest
+         * here for now as you already setup rendering here anyway.
+         */
+        try
+        {
+            GLFont.fromTTF(Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/daniel.ttf"));
+            GLFont.fromTTF(Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/notethis.ttf"));
+            GLFont.fromTTF(Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/ampersand.ttf"));
+        }
+        catch (FontException font)
+        {
+            LogHelper.exception(font, Level.ERROR);
+        }
+
         OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new OpticalMicroscopeTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, opticalMicroscopeRenderer);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope), new BasicItemRenderer(opticalMicroscopeRenderer, new OpticalMicroscopeTileEntity()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope),
+                new BasicItemRenderer(opticalMicroscopeRenderer, new OpticalMicroscopeTileEntity()));
 
         ElectrolysisTileEntityRenderer electrolysisRenderer = new ElectrolysisTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class, electrolysisRenderer);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock), new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock),
+                new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
 
         ElectricCrucibleTileEntityRenderer electricCrucibleRenderer = new ElectricCrucibleTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class, electricCrucibleRenderer);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock), new BasicItemRenderer(electricCrucibleRenderer, new ElectricCrucibleTileEntity()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock),
+                new BasicItemRenderer(electricCrucibleRenderer, new ElectricCrucibleTileEntity()));
 
         CentrifugeTileEntityRenderer centrifugeRenderer = new CentrifugeTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class, centrifugeRenderer);
-        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock), new BasicItemRenderer(centrifugeRenderer, new CentrifugeTileEntity()));
+        MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock),
+                new BasicItemRenderer(centrifugeRenderer, new CentrifugeTileEntity()));
 
         RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem, new ChemicalItemRenderer());
@@ -65,7 +92,8 @@ public class ClientProxy extends CommonProxy
     public void registerResourcesListener()
     {
         LogHelper.debug("Registering Resource Reload Listener...");
-        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager()).registerReloadListener(new ResourceReloadListener());
+        ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager())
+                .registerReloadListener(new ResourceReloadListener());
     }
 
     /**

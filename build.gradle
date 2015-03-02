@@ -119,7 +119,7 @@ sourceSets {
             exclude 'resources/assets/minechem/xcf'
         }
         java {
-            srcDir 'src/fontbox/src'
+            srcDir 'src/fontbox/src/main/java'
         }
     }
 }
