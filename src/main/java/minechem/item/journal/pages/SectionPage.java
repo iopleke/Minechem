@@ -92,6 +92,20 @@ public class SectionPage extends JournalPage
         }
         return result;
     }
+    
+    public List<Element> getPageElements(String[] keys)
+    {
+        List<Element> result = new ArrayList<Element>();
+        result.add(heading.getElement(keys));
+        for (IJournalPage page : pages.values())
+        {
+            if (page.isUnlocked(keys))
+            {
+                //TODO: for every unlocked page add a link.
+            }
+        }
+        return result;
+    }
 
     @Override
     public List<Element> getElements(EntityPlayer player)
@@ -109,11 +123,39 @@ public class SectionPage extends JournalPage
     }
 
     @Override
+    public List<Element> getElements(String[] keys)
+    {
+        List<Element> result = new ArrayList<Element>();
+        for (IJournalPage page : pages.values())
+        {
+            result.addAll(page.getElements(keys));
+        }
+        if (!result.isEmpty())
+        {
+            result.addAll(0, getPageElements(keys));
+        }
+        return result;
+    }
+
+    @Override
     public boolean isUnlocked(EntityPlayer player)
     {
         for (IJournalPage page : pages.values())
         {
             if (page.isUnlocked(player))
+            {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isUnlocked(String[] keys)
+    {
+        for (IJournalPage page : pages.values())
+        {
+            if (page.isUnlocked(keys))
             {
                 return true;
             }

@@ -20,4 +20,10 @@ public class JournalHeader extends JournalElement
     {
         return new Heading(getKey(), LocalizationHelper.getLocalString(titleKey));
     }
+
+    @Override
+    public Element getElement(String[] keys)
+    {
+        return new Heading(getKey(), LocalizationHelper.getLocalString(titleKey));
+    }
 }

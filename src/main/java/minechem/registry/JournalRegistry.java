@@ -3,10 +3,14 @@ package minechem.registry;
 import minechem.handler.StructuredJournalHandler;
 import minechem.item.journal.pages.IJournalPage;
 import minechem.item.journal.pages.SectionPage;
+import net.afterlifelochie.fontbox.document.Element;
+import net.minecraft.entity.player.EntityPlayer;
+
+import java.util.List;
 
 public class JournalRegistry
 {
-    public static SectionPage journal;
+    private static SectionPage journal;
 
     public static void init()
     {
@@ -27,5 +31,26 @@ public class JournalRegistry
             section.addSubPage(page);
         }
         return page;
+    }
+    
+    public static boolean hasPage(String key)
+    {
+        return journal.getPage(key) != null;
+    }
+    
+    public static List<Element> getJournalFor(EntityPlayer player)
+    {
+        return journal.getElements(player);
+    }
+    
+    public static List<Element> getJournalFor(String[] keys)
+    {
+        return journal.getElements(keys);
+    }
+    
+    public static SectionPage setJournal(SectionPage journal)
+    {
+        JournalRegistry.journal = journal;
+        return JournalRegistry.journal;
     }
 }

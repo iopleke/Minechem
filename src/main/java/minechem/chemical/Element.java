@@ -120,6 +120,12 @@ public class Element extends ChemicalBase implements Comparable<Element>
     }
 
     @Override
+    public String getResearchKey()
+    {
+        return "chemicals.elements." + fullName.toLowerCase();
+    }
+
+    @Override
     public List<String> getToolTip()
     {
         List<String> list = new LinkedList<String>();

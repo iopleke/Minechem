@@ -83,7 +83,7 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
                     {
                         AchievementHelper.giveAchievement(getPlayer(), (Element) chemicalBase, getWorld().isRemote);
                     }
-                    ResearchHelper.addResearch(getPlayer(), chemicalBase.fullName, getWorld().isRemote);
+                    ResearchHelper.addResearch(getPlayer(), chemicalBase.getResearchKey(), getWorld().isRemote);
                 }
             }
         }

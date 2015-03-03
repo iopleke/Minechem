@@ -31,4 +31,10 @@ public class JournalImage extends JournalElement
     {
         return isUnlocked(player, getKey()) ? element : null;
     }
+
+    @Override
+    public Element getElement(String[] keys)
+    {
+        return isUnlocked(keys, getKey()) ? element : null;
+    }
 }

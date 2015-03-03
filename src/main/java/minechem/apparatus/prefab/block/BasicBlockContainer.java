@@ -3,6 +3,7 @@ package minechem.apparatus.prefab.block;
 import java.util.ArrayList;
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
+import minechem.helper.ResearchHelper;
 import minechem.proxy.CommonProxy;
 import minechem.Compendium;
 import minechem.registry.CreativeTabRegistry;
@@ -175,6 +176,7 @@ public abstract class BasicBlockContainer extends BlockContainer
         TileEntity tileEntity = world.getTileEntity(x, y, z);
         if (tileEntity != null && !player.isSneaking())
         {
+            acquireResearch(player, world);
             if (!world.isRemote)
             {
                 player.openGui(Minechem.INSTANCE, 0, world, x, y, z);
@@ -183,6 +185,34 @@ public abstract class BasicBlockContainer extends BlockContainer
         }
 
         return false;
+    }
+
+    /**
+     * Acquire the research for the block
+     * @param player
+     * @param world
+     */
+    public void acquireResearch(EntityPlayer player, World world)
+    {
+        ResearchHelper.addResearch(player, getResearchKey(), world.isRemote);
+    }
+
+    /**
+     * Get the research key bound to the block 
+     * @return
+     */
+    public String getResearchKey()
+    {
+        return "apparatus." + getRawUnlocalizedName();
+    }
+
+    /**
+     * Get the unlocalized name without the "tile." prefix
+     * @return
+     */
+    private String getRawUnlocalizedName()
+    {
+        return getUnlocalizedName().substring(5);
     }
 
     /**

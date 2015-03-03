@@ -47,6 +47,7 @@ public class ElectrolysisBlock extends BasicBlockContainer
         if (activatedTileEntity instanceof ElectrolysisTileEntity)
         {
             ElectrolysisTileEntity electrolysis = (ElectrolysisTileEntity) activatedTileEntity;
+            acquireResearch(player, world);
             if (player.getCurrentEquippedItem() != null)
             {
                 ItemStack clickedItemStack = player.getCurrentEquippedItem();
