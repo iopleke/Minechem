@@ -22,6 +22,10 @@ public interface IJournalPage
     int getSubPages();
 
     List<Element> getElements(EntityPlayer player);
+    
+    List<Element> getElements(String[] keys);
 
     boolean isUnlocked(EntityPlayer player);
+    
+    boolean isUnlocked(String[] keys);
 }

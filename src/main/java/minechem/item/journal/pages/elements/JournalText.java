@@ -25,4 +25,10 @@ public class JournalText extends JournalElement
     {
         return isUnlocked(player, getKey()) ? new Paragraph(LocalizationHelper.getLocalString(textKey)) : null;
     }
+
+    @Override
+    public Element getElement(String[] keys)
+    {
+        return isUnlocked(keys, getKey()) ? new Paragraph(LocalizationHelper.getLocalString(textKey)) : null;
+    }
 }

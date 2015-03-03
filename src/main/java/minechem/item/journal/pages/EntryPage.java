@@ -44,4 +44,22 @@ public class EntryPage extends JournalPage
         }
         return result;
     }
+
+    @Override
+    public List<Element> getElements(String[] keys)
+    {
+        List<Element> result = new ArrayList<Element>();
+        if (isUnlocked(keys))
+        {
+            for (IJournalElement element : elements)
+            {
+                Element e = element.getElement(keys);
+                if (e != null)
+                {
+                    result.add(e);
+                }
+            }
+        }
+        return result;
+    }
 }

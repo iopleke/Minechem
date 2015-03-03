@@ -43,6 +43,11 @@ public class JournalRegistry
         return journal.getElements(player);
     }
     
+    public static List<Element> getJournalFor(String[] keys)
+    {
+        return journal.getElements(keys);
+    }
+    
     public static SectionPage setJournal(SectionPage journal)
     {
         JournalRegistry.journal = journal;

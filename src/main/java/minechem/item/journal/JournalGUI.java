@@ -51,7 +51,7 @@ public class JournalGUI extends BookGUI
             try
             {
                 /* Copy the list of elements */
-                List<Element> elements = JournalRegistry.getJournalFor(who);
+                List<Element> elements = JournalRegistry.getJournalFor(knowledgeKeys);
                 /* Write elements => document */
                 document.pushAll(elements);
             }
