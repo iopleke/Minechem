@@ -132,8 +132,10 @@
   },
   "apparatus": {
 	"section":{
-	  "microscope": null,
-	  "electrolysis": null
+	  "opticalMicroscope": null,
+	  "electrolysis": null,
+      "centrifuge": null,
+      "electricCrucible": null
 	}
   },
   "augments":{

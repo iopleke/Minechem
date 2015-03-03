@@ -5,6 +5,7 @@ import java.util.List;
 
 import codechicken.lib.gui.GuiDraw;
 import minechem.Compendium;
+import minechem.Config;
 import minechem.helper.LogHelper;
 import minechem.registry.JournalRegistry;
 import minechem.registry.ResearchRegistry;
@@ -51,7 +52,9 @@ public class JournalGUI extends BookGUI
             try
             {
                 /* Copy the list of elements */
-                List<Element> elements = JournalRegistry.getJournalFor(knowledgeKeys);
+                List<Element> elements;
+                if (Config.playerPrivateKnowledge) elements = JournalRegistry.getJournalFor(who);
+                else elements = JournalRegistry.getJournalFor(knowledgeKeys);
                 /* Write elements => document */
                 document.pushAll(elements);
             }

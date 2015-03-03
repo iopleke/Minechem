@@ -35,7 +35,7 @@ public class JournalRegistry
     
     public static boolean hasPage(String key)
     {
-        return journal.getPage(key.toLowerCase()) != null;
+        return journal.getPage(key) != null;
     }
     
     public static List<Element> getJournalFor(EntityPlayer player)

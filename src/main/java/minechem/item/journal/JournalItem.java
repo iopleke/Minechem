@@ -5,6 +5,8 @@ import cpw.mods.fml.relauncher.SideOnly;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+
+import minechem.Config;
 import minechem.handler.MessageHandler;
 import minechem.handler.message.JournalMessage;
 import minechem.helper.AchievementHelper;
@@ -37,7 +39,10 @@ public class JournalItem extends BasicItem
     {
         if (player.isSneaking())
         {
-            writeKnowledge(stack, player, world.isRemote);
+            if (!Config.playerPrivateKnowledge)
+            {
+                writeKnowledge(stack, player, world.isRemote);
+            }
         } else
         {
             Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(player, getKnowledgeKeys(stack), getAuthors(stack)));
@@ -160,15 +165,18 @@ public class JournalItem extends BasicItem
     public void addInformation(ItemStack itemStack, EntityPlayer player, List lines, boolean bool)
     {
         super.addInformation(itemStack, player, lines, bool);
-        String[] authors = getAuthors(itemStack);
-        if (authors == null || authors.length < 1)
+        if (!Config.playerPrivateKnowledge)
         {
-            return;
-        }
-        lines.add(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":");
-        for (String author : authors)
-        {
-            lines.add("- " + author);
+            String[] authors = getAuthors(itemStack);
+            if (authors == null || authors.length < 1)
+            {
+                return;
+            }
+            lines.add(LocalizationHelper.getLocalString("gui.journal.writtenBy") + ":");
+            for (String author : authors)
+            {
+                lines.add("- " + author);
+            }
         }
     }
 }
