@@ -233,4 +233,13 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
     {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
     }
+
+    /**
+     * Bind given texture
+     * @param texture
+     */
+    public static void bindTexture(ResourceLocation texture)
+    {
+        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+    }
 }

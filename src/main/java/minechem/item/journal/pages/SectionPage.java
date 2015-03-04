@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import minechem.item.journal.pages.elements.JournalHeader;
 import net.afterlifelochie.fontbox.document.Element;
+import net.afterlifelochie.fontbox.document.Heading;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class SectionPage extends JournalPage
@@ -82,7 +83,6 @@ public class SectionPage extends JournalPage
     public List<Element> getPageElements(EntityPlayer player)
     {
         List<Element> result = new ArrayList<Element>();
-        result.add(heading.getElement(player));
         for (IJournalPage page : pages.values())
         {
             if (page.isUnlocked(player))
@@ -96,7 +96,6 @@ public class SectionPage extends JournalPage
     public List<Element> getPageElements(String[] keys)
     {
         List<Element> result = new ArrayList<Element>();
-        result.add(heading.getElement(keys));
         for (IJournalPage page : pages.values())
         {
             if (page.isUnlocked(keys))
@@ -161,5 +160,53 @@ public class SectionPage extends JournalPage
             }
         }
         return false;
+    }
+
+    public List<Element> getIndexPage(String[] keys, int indent)
+    {
+        List<Element> result = new ArrayList<Element>();
+        result.add(heading.getElement(indent));
+        if (indent > 1) return result;
+        for (IJournalPage page : pages.values())
+        {
+            if (page.isUnlocked(keys))
+            {
+                if (page instanceof SectionPage)
+                {
+                    result.addAll(((SectionPage) page).getIndexPage(keys, indent + 1));
+                } else
+                {
+                    String sIndent = "";
+                    for (int i = 0; i < indent + 1; i++)
+                        sIndent += "--";
+                    result.add(new Heading(page.getPageKey(), sIndent + " " + page.getPageName()));
+                }
+            }
+        }
+        return result;
+    }
+
+    public List<Element> getIndexPage(EntityPlayer player, int indent)
+    {
+        List<Element> result = new ArrayList<Element>();
+        result.add(heading.getElement(indent));
+        if (indent > 1) return result;
+        for (IJournalPage page : pages.values())
+        {
+            if (page.isUnlocked(player))
+            {
+                if (page instanceof SectionPage)
+                {
+                    result.addAll(((SectionPage) page).getIndexPage(player, indent + 1));
+                } else
+                {
+                    String sIndent = "";
+                    for (int i = 0; i < indent + 1; i++)
+                        sIndent += "--";
+                    result.add(new Heading(page.getPageKey(), sIndent + " " + page.getPageName()));
+                }
+            }
+        }
+        return result;
     }
 }

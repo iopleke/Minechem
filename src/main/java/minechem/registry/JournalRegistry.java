@@ -3,6 +3,7 @@ package minechem.registry;
 import minechem.handler.StructuredJournalHandler;
 import minechem.item.journal.pages.IJournalPage;
 import minechem.item.journal.pages.SectionPage;
+import net.afterlifelochie.fontbox.document.CompilerHint;
 import net.afterlifelochie.fontbox.document.Element;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -40,12 +41,30 @@ public class JournalRegistry
     
     public static List<Element> getJournalFor(EntityPlayer player)
     {
-        return journal.getElements(player);
+        List<Element> result = getIndexPageFor(player);
+        result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
+        result.addAll(journal.getElements(player));
+        result.remove(result.size()-1);
+        return result;
     }
     
     public static List<Element> getJournalFor(String[] keys)
     {
-        return journal.getElements(keys);
+        List<Element> result = getIndexPageFor(keys);
+        result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
+        result.addAll(journal.getElements(keys));
+        result.remove(result.size()-1);
+        return result;
+    }
+
+    public static List<Element> getIndexPageFor(EntityPlayer player)
+    {
+        return journal.getIndexPage(player, 0);
+    }
+
+    public static List<Element> getIndexPageFor(String[] keys)
+    {
+        return journal.getIndexPage(keys, 0);
     }
     
     public static SectionPage setJournal(SectionPage journal)
