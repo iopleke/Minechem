@@ -331,7 +331,8 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
         tankUpdate = true;
 
         tank.amount -= drained;
-        return new FluidStack(tank.fluidID, drained);
+        if (tank.amount == 0) tank = null;
+        return new FluidStack(resource.fluidID, drained);
     }
 
     @Override
@@ -351,8 +352,9 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
         tankUpdate = true;
 
         tank.amount -= drained;
+        FluidStack result = new FluidStack(tank.fluidID, drained);
         if (tank.amount==0) tank=null;
-        return new FluidStack(tank.fluidID, drained);
+        return result;
     }
 
     /**
