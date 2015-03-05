@@ -10,4 +10,14 @@ public class StringHelper
         List<?> stringRows = fontRenderer.listFormattedStringToWidth(string, width);
         return stringRows.size() * fontRenderer.FONT_HEIGHT;
     }
+
+    public static String toString(String separator, Object... objects)
+    {
+        String result = "";
+        for (Object object : objects)
+        {
+            result += String.valueOf(object) + separator;
+        }
+        return result.substring(0, result.length() - separator.length());
+    }
 }

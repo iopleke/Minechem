@@ -3,12 +3,11 @@ package minechem.item.journal;
 import java.io.IOException;
 import java.util.List;
 
-import codechicken.lib.gui.GuiDraw;
 import minechem.Compendium;
 import minechem.Config;
 import minechem.helper.LogHelper;
+import minechem.proxy.client.render.RenderHelper;
 import minechem.registry.JournalRegistry;
-import minechem.registry.ResearchRegistry;
 import net.afterlifelochie.fontbox.Fontbox;
 import net.afterlifelochie.fontbox.document.Document;
 import net.afterlifelochie.fontbox.document.Element;
@@ -41,7 +40,7 @@ public class JournalGUI extends BookGUI
      */
     public JournalGUI(EntityPlayer who, String[] knowledgeKeys, String[] authors)
     {
-        super(UpMode.TWOUP, new Layout[] { new Layout(10, 10), new Layout(138, 10) });
+        super(UpMode.TWOUP, new Layout[] { new Layout(10, 5), new Layout(138, 5) });
         
         authorList = authors;
 
@@ -66,11 +65,11 @@ public class JournalGUI extends BookGUI
             /* Set up page formatting */
             PageProperties properties = new PageProperties(221, 380, Fontbox.fromName("Note this"));
             properties.headingFont(Fontbox.fromName("Ampersand"));
-            properties.bothMargin(2).lineheightSize(8).spaceSize(4).densitiy(0.66f);
+            properties.bothMargin(2).lineheightSize(4).spaceSize(4).densitiy(0.33f);
 
             /* Write elements => page stream */
             PageWriter writer = new PageWriter(properties);
-            DocumentProcessor.generatePages(Fontbox.tracer(), document, writer);
+            DocumentProcessor.generatePages(Compendium.Fontbox.tracer(), document, writer);
             writer.close();
 
             /* Update system pages */
@@ -97,18 +96,18 @@ public class JournalGUI extends BookGUI
         if (ptr > 1)
         {
             // Draw folded page on the left
-            GuiDraw.drawTexturedModalRect(5, 163, 0, 188, 21, 21);
+            drawTexturedModalRect(5, 163, 0, 188, 21, 21);
         }
         if (ptr+2 < pages.size())
         {
             // Draw folded page on the right
-            GuiDraw.drawTexturedModalRect(230, 160, 21, 188, 21, 21);
+            drawTexturedModalRect(230, 160, 21, 188, 21, 21);
         }
     }
 
     private void drawJournalBackground()
     {
-        GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 256, 188);
+        drawTexturedModalRect(0, 0, 0, 0, 256, 188);
     }
 
     /**
@@ -147,7 +146,7 @@ public class JournalGUI extends BookGUI
             previous();
         }
 
-        LogHelper.info("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
+        LogHelper.debug("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
     }
 
     private boolean wasRightTabClicked(int mouseX, int mouseY, int mouseButton)
@@ -192,7 +191,7 @@ public class JournalGUI extends BookGUI
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
-        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
+        RenderHelper.bindTexture(Compendium.Resource.GUI.journal);
         drawJournalBackground();
         if (pages != null) drawFoldedPages();
     }
