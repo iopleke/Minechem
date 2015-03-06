@@ -113,8 +113,11 @@ public class Minechem
         LogHelper.debug("Registering GUI and Container handlers...");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-        LogHelper.debug("Registering ClientProxy Rendering Hooks...");
+        LogHelper.debug("Registering Renderers...");
         proxy.registerRenderers();
+
+        LogHelper.debug("Registering Fonts...");
+        proxy.registerFonts();
 
         LogHelper.debug("Registering Achievements...");
         AchievementHandler.init();

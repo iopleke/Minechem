@@ -23,7 +23,6 @@ import minechem.item.chemical.ChemicalItemRenderer;
 import minechem.proxy.CommonProxy;
 import minechem.registry.BlockRegistry;
 import minechem.registry.ItemRegistry;
-import net.afterlifelochie.fontbox.Fontbox;
 import net.afterlifelochie.fontbox.font.FontException;
 import net.afterlifelochie.fontbox.font.GLFont;
 import net.minecraft.client.Minecraft;
@@ -47,22 +46,6 @@ public class ClientProxy extends CommonProxy
     {
         RENDER_ID = RenderingRegistry.getNextAvailableRenderId();
         ISBRH_ID = RenderingRegistry.getNextAvailableRenderId();
-
-        /**
-         * TODO: You may want to move the font initialization to it's own method
-         * or inside a journal management container. Ultimately, it seems wisest
-         * here for now as you already setup rendering here anyway.
-         */
-        try
-        {
-            GLFont.fromTTF(Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/daniel.ttf"));
-            GLFont.fromTTF(Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/notethis.ttf"));
-            GLFont.fromTTF(Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/ampersand.ttf"));
-        }
-        catch (FontException font)
-        {
-            LogHelper.exception(font, Level.ERROR);
-        }
 
         OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new OpticalMicroscopeTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, opticalMicroscopeRenderer);
@@ -116,5 +99,20 @@ public class ClientProxy extends CommonProxy
     public EntityPlayer getPlayer(MessageContext context)
     {
         return Minecraft.getMinecraft().thePlayer;
+    }
+
+    @Override
+    public void registerFonts()
+    {
+        try
+        {
+            GLFont.fromTTF(Compendium.Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/daniel.ttf"));
+            GLFont.fromTTF(Compendium.Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/notethis.ttf"));
+            GLFont.fromTTF(Compendium.Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/ampersand.ttf"));
+        }
+        catch (FontException font)
+        {
+            LogHelper.exception(font, Level.ERROR);
+        }
     }
 }
