@@ -17,26 +17,12 @@ public class CommonProxy
 
     public EntityPlayer findEntityPlayerByName(String name)
     {
-
-        EntityPlayer player;
-        player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
-
-        if (player != null)
-        {
-            return player;
-        }
-
-        return null;
+        return MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
     }
 
     public World getClientWorld()
     {
         return null;
-    }
-
-    public String getItemDisplayName(ItemStack newStack)
-    {
-        return "";
     }
 
     public EntityPlayer getPlayer(MessageContext context)
@@ -51,7 +37,7 @@ public class CommonProxy
 
     public void registerRenderers()
     {
-
+        // NOOP
     }
 
     public void registerEventHandlers()
@@ -66,11 +52,16 @@ public class CommonProxy
 
     public void registerResourcesListener()
     {
-
+        // NOOP
     }
 
     public String getCurrentLanguage()
     {
         return "en_US";
+    }
+
+    public void registerFonts()
+    {
+        // NOOP
     }
 }
