@@ -6,12 +6,9 @@ import codechicken.nei.api.TaggedInventoryArea;
 import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cpw.mods.fml.client.FMLClientHandler;
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Optional;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import minechem.apparatus.prefab.gui.tab.BasicGuiTab;
 import minechem.apparatus.prefab.gui.tab.PatreonGuiTab;
 import minechem.handler.IconHandler;
@@ -21,7 +18,6 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
@@ -48,7 +44,7 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     {
         return container;
     }
-    
+
     public int getXSize()
     {
         return xSize;
@@ -63,17 +59,22 @@ public class BasicGuiContainer extends GuiBase implements INEIGuiHandler
     {
         return Minecraft.getMinecraft().thePlayer;
     }
-    
+
     public World getWorld()
     {
         return FMLClientHandler.instance().getWorldClient();
     }
-    
+
     public List<BasicGuiTab> getTabs()
     {
         List<BasicGuiTab> basicGuiTabs = new ArrayList<BasicGuiTab>();
         for (TabBase tabBase : tabs)
-            if (tabBase instanceof BasicGuiTab) basicGuiTabs.add((BasicGuiTab) tabBase);
+        {
+            if (tabBase instanceof BasicGuiTab)
+            {
+                basicGuiTabs.add((BasicGuiTab) tabBase);
+            }
+        }
         return basicGuiTabs;
     }
 

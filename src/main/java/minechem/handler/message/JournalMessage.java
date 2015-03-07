@@ -4,11 +4,10 @@ import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import io.netty.buffer.ByteBuf;
+import java.util.UUID;
 import minechem.item.journal.JournalItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
-
-import java.util.UUID;
 
 /**
  * Message used to write knowledge in on an journal on the server side
@@ -16,17 +15,17 @@ import java.util.UUID;
 public class JournalMessage extends BaseTEMessage implements IMessageHandler<JournalMessage, IMessage>
 {
     private String uuid;
-    
+
     public JournalMessage()
     {
-                
+
     }
-    
+
     public JournalMessage(EntityPlayer player)
     {
-          this(player.getUniqueID());
+        this(player.getUniqueID());
     }
-    
+
     public JournalMessage(UUID uuid)
     {
         this.uuid = uuid.toString();

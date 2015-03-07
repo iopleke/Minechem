@@ -30,8 +30,10 @@ public class JournalHeader extends JournalElement
     public Element getElement(int indent)
     {
         String sIndent = "";
-        for (int i = 0;  i < indent; i++)
+        for (int i = 0; i < indent; i++)
+        {
             sIndent += "--";
+        }
         return new Heading(getKey(), sIndent + " " + LocalizationHelper.getLocalString(titleKey));
     }
 }

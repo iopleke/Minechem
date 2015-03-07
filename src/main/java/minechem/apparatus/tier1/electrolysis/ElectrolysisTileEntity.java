@@ -36,7 +36,7 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
         }
         return false;
     }
-    
+
     public ChemicalItem removeItem()
     {
         if (tubeCount > 0)
@@ -45,7 +45,7 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
         }
         return null;
     }
-    
+
     public byte getTubeCount()
     {
         return tubeCount;

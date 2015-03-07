@@ -47,7 +47,7 @@ public class AchievementRegistry
     public Achievement addAchievement(Element element)
     {
         int[] position = PeriodicTableHelper.getPosition(element);
-        ElementAchievement achievement = new ElementAchievement(element, position[0]-5, position[1]-8);
+        ElementAchievement achievement = new ElementAchievement(element, position[0] - 5, position[1] - 8);
         elementsAchievementMap.put(element, achievement);
         return achievement;
     }

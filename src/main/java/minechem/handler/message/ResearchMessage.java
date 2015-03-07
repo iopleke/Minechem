@@ -9,18 +9,17 @@ import minechem.registry.ResearchRegistry;
 public class ResearchMessage extends BaseMessage implements IMessageHandler<ResearchMessage, IMessage>
 {
     private String key;
-    
+
     public ResearchMessage()
     {
 
     }
-    
+
     public ResearchMessage(String key)
     {
         this.key = key;
     }
-    
-    
+
     @Override
     public void fromBytes(ByteBuf buf)
     {

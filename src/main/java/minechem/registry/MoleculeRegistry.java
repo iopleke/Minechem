@@ -51,13 +51,11 @@ public class MoleculeRegistry
         try
         {
             registerMolecule(Molecule.parseMolecule(fullName, form, colour, formula));
-        }
-        catch (IllegalArgumentException e)
+        } catch (IllegalArgumentException e)
         {
             //Cannot read the compound formula - not actually an error as it might just not have parsed a sub-compound - returns true to include molecule for next parsing
             return true;
-        }
-        catch (NullPointerException e)
+        } catch (NullPointerException e)
         {
             LogHelper.warn(fullName + " has a null or empty formula");
         }

@@ -118,7 +118,7 @@ public class ChemicalItem extends BasicItem
     {
         return ChemicalBase.readFromNBT(itemStack.getTagCompound());
     }
-    
+
     public static ItemStack getItemStackForChemical(ChemicalBase chemicalBase)
     {
         ItemStack itemStack = new ItemStack(ItemRegistry.chemicalItem);

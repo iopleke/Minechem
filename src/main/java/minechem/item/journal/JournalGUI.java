@@ -2,7 +2,6 @@ package minechem.item.journal;
 
 import java.io.IOException;
 import java.util.List;
-
 import minechem.Compendium;
 import minechem.Config;
 import minechem.helper.LogHelper;
@@ -17,7 +16,6 @@ import net.afterlifelochie.fontbox.layout.PageWriter;
 import net.afterlifelochie.fontbox.layout.components.PageProperties;
 import net.afterlifelochie.fontbox.render.BookGUI;
 import net.minecraft.entity.player.EntityPlayer;
-
 import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -31,17 +29,17 @@ public class JournalGUI extends BookGUI
     private int top, left;
 
     /**
-     * @param who
-     *            the player
-     * @param knowledgeKeys
-     *            a array with all knowledgeKeys of the pages to display
-     * @param authors
-     *            a list of authors
+     * @param who           the player
+     * @param knowledgeKeys a array with all knowledgeKeys of the pages to display
+     * @param authors       a list of authors
      */
     public JournalGUI(EntityPlayer who, String[] knowledgeKeys, String[] authors)
     {
-        super(UpMode.TWOUP, new Layout[] { new Layout(10, 5), new Layout(138, 5) });
-        
+        super(UpMode.TWOUP, new Layout[]
+        {
+            new Layout(10, 5), new Layout(138, 5)
+        });
+
         authorList = authors;
 
         try
@@ -52,12 +50,16 @@ public class JournalGUI extends BookGUI
             {
                 /* Copy the list of elements */
                 List<Element> elements;
-                if (Config.playerPrivateKnowledge) elements = JournalRegistry.getJournalFor(who);
-                else elements = JournalRegistry.getJournalFor(knowledgeKeys);
+                if (Config.playerPrivateKnowledge)
+                {
+                    elements = JournalRegistry.getJournalFor(who);
+                } else
+                {
+                    elements = JournalRegistry.getJournalFor(knowledgeKeys);
+                }
                 /* Write elements => document */
                 document.pushAll(elements);
-            }
-            catch (Throwable thrown)
+            } catch (Throwable thrown)
             {
                 LogHelper.exception(thrown, Level.WARN);
             }
@@ -74,12 +76,10 @@ public class JournalGUI extends BookGUI
 
             /* Update system pages */
             changePages(writer.pages());
-        }
-        catch (LayoutException layout)
+        } catch (LayoutException layout)
         {
             LogHelper.exception(layout, Level.ERROR);
-        }
-        catch (IOException ioex)
+        } catch (IOException ioex)
         {
             LogHelper.exception(ioex, Level.ERROR);
         }
@@ -98,7 +98,7 @@ public class JournalGUI extends BookGUI
             // Draw folded page on the left
             drawTexturedModalRect(5, 163, 0, 188, 21, 21);
         }
-        if (ptr+2 < pages.size())
+        if (ptr + 2 < pages.size())
         {
             // Draw folded page on the right
             drawTexturedModalRect(230, 160, 21, 188, 21, 21);
@@ -193,7 +193,10 @@ public class JournalGUI extends BookGUI
         GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
         RenderHelper.bindTexture(Compendium.Resource.GUI.journal);
         drawJournalBackground();
-        if (pages != null) drawFoldedPages();
+        if (pages != null)
+        {
+            drawFoldedPages();
+        }
     }
 
     @Override

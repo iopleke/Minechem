@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import minechem.Compendium;
 import minechem.helper.LogHelper;
 import minechem.registry.ElementRegistry;
@@ -58,7 +57,7 @@ public class Molecule extends ChemicalBase
     public int getColour()
     {
         int colour = super.getColour();
-        return colour == Compendium.Color.TrueColor.transparent? structure.getColour() : colour;
+        return colour == Compendium.Color.TrueColor.transparent ? structure.getColour() : colour;
     }
 
     @Override

@@ -1,11 +1,11 @@
 package minechem.apparatus.prefab.block;
 
 import java.util.ArrayList;
+import minechem.Compendium;
 import minechem.Minechem;
 import minechem.helper.ItemHelper;
 import minechem.helper.ResearchHelper;
 import minechem.proxy.CommonProxy;
-import minechem.Compendium;
 import minechem.registry.CreativeTabRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
@@ -189,6 +189,7 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     /**
      * Acquire the research for the block
+     *
      * @param player
      * @param world
      */
@@ -198,7 +199,8 @@ public abstract class BasicBlockContainer extends BlockContainer
     }
 
     /**
-     * Get the research key bound to the block 
+     * Get the research key bound to the block
+     *
      * @return
      */
     public String getResearchKey()
@@ -208,6 +210,7 @@ public abstract class BasicBlockContainer extends BlockContainer
 
     /**
      * Get the unlocalized name without the "tile." prefix
+     *
      * @return
      */
     private String getRawUnlocalizedName()

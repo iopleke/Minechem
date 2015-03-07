@@ -92,7 +92,7 @@ public class SectionPage extends JournalPage
         }
         return result;
     }
-    
+
     public List<Element> getPageElements(String[] keys)
     {
         List<Element> result = new ArrayList<Element>();
@@ -166,7 +166,10 @@ public class SectionPage extends JournalPage
     {
         List<Element> result = new ArrayList<Element>();
         result.add(heading.getElement(indent));
-        if (indent > 1) return result;
+        if (indent > 1)
+        {
+            return result;
+        }
         for (IJournalPage page : pages.values())
         {
             if (page.isUnlocked(keys))
@@ -178,7 +181,9 @@ public class SectionPage extends JournalPage
                 {
                     String sIndent = "";
                     for (int i = 0; i < indent + 1; i++)
+                    {
                         sIndent += "--";
+                    }
                     result.add(new Heading(page.getPageKey(), sIndent + " " + page.getPageName()));
                 }
             }
@@ -190,7 +195,10 @@ public class SectionPage extends JournalPage
     {
         List<Element> result = new ArrayList<Element>();
         result.add(heading.getElement(indent));
-        if (indent > 1) return result;
+        if (indent > 1)
+        {
+            return result;
+        }
         for (IJournalPage page : pages.values())
         {
             if (page.isUnlocked(player))
@@ -202,7 +210,9 @@ public class SectionPage extends JournalPage
                 {
                     String sIndent = "";
                     for (int i = 0; i < indent + 1; i++)
+                    {
                         sIndent += "--";
+                    }
                     result.add(new Heading(page.getPageKey(), sIndent + " " + page.getPageName()));
                 }
             }

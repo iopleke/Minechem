@@ -1,9 +1,8 @@
 package minechem.item.journal.pages;
 
+import java.util.List;
 import net.afterlifelochie.fontbox.document.Element;
 import net.minecraft.entity.player.EntityPlayer;
-
-import java.util.List;
 
 public interface IJournalPage
 {
@@ -22,10 +21,10 @@ public interface IJournalPage
     int getSubPages();
 
     List<Element> getElements(EntityPlayer player);
-    
+
     List<Element> getElements(String[] keys);
 
     boolean isUnlocked(EntityPlayer player);
-    
+
     boolean isUnlocked(String[] keys);
 }

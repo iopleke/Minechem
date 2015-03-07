@@ -13,6 +13,7 @@ public class StringHelper
 
     /**
      * Concat all objects with given separator
+     *
      * @param separator eg. ", "
      * @param objects
      * @return one string
@@ -24,7 +25,10 @@ public class StringHelper
         for (Object object : objects)
         {
             value = String.valueOf(object);
-            if (value.equals("%")) value = "%%"; // fixes issue wit formatter
+            if (value.equals("%"))
+            {
+                value = "%%"; // fixes issue wit formatter
+            }
             result.append(value).append(separator);
         }
         return result.substring(0, result.length() - separator.length());

@@ -1,14 +1,13 @@
 package minechem.apparatus.tier1.opticalMicroscope;
 
+import minechem.Compendium;
 import minechem.apparatus.prefab.gui.container.BasicGuiContainer;
 import minechem.chemical.ChemicalBase;
 import minechem.chemical.Element;
 import minechem.chemical.Molecule;
 import minechem.helper.AchievementHelper;
 import minechem.helper.LocalizationHelper;
-import minechem.Compendium;
 import minechem.helper.ResearchHelper;
-import minechem.helper.StringHelper;
 import minechem.item.chemical.ChemicalItem;
 import minechem.proxy.client.render.RenderHelper;
 import net.minecraft.client.Minecraft;
@@ -23,7 +22,7 @@ import net.minecraft.item.ItemStack;
  */
 public class OpticalMicroscopeGUI extends BasicGuiContainer
 {
-    
+
     private ItemStack prevStack;
     protected OpticalMicroscopeTileEntity opticalMicroscope;
     protected static final int eyePieceX = 13;
@@ -57,7 +56,7 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
         drawTexturedModalRect(eyePieceX, eyePieceY, 176, eyePieceH, eyePieceH, eyePieceW);
         this.zLevel = z;
     }
-    
+
     private void drawInfo()
     {
         Slot slot = inventorySlots.getSlotFromInventory(opticalMicroscope, 0);
@@ -68,12 +67,12 @@ public class OpticalMicroscopeGUI extends BasicGuiContainer
             {
                 ChemicalBase chemicalBase = ChemicalBase.readFromNBT(itemStack.getTagCompound());
                 fontRendererObj.drawString(chemicalBase.fullName, eyePieceX + eyePieceH + 5, eyePieceY, 0);
-                fontRendererObj.drawString("Formula:", eyePieceX + eyePieceH + 5, eyePieceY +10, 0);
-                fontRendererObj.drawString(chemicalBase.getFormula(), eyePieceX + eyePieceH + 5, eyePieceY +20, 0);
+                fontRendererObj.drawString("Formula:", eyePieceX + eyePieceH + 5, eyePieceY + 10, 0);
+                fontRendererObj.drawString(chemicalBase.getFormula(), eyePieceX + eyePieceH + 5, eyePieceY + 20, 0);
 
                 if (!chemicalBase.isElement())
                 {
-                    RenderHelper.drawScaledTexturedRectUV(eyePieceX + eyePieceW + 50, eyePieceY + 5, 0, 0, 0, 200, 200, 0.3F, ((Molecule)chemicalBase).getStructureResource());
+                    RenderHelper.drawScaledTexturedRectUV(eyePieceX + eyePieceW + 50, eyePieceY + 5, 0, 0, 0, 200, 200, 0.3F, ((Molecule) chemicalBase).getStructureResource());
                 }
 
                 if (prevStack != itemStack)

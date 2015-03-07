@@ -15,18 +15,18 @@ public class AchievementMessage extends BaseTEMessage implements IMessageHandler
 {
     private String achievement;
     private boolean isElement;
-    
+
     public AchievementMessage()
     {
-                
+
     }
-    
+
     public AchievementMessage(String achievement)
     {
         this.achievement = achievement;
         this.isElement = false;
     }
-    
+
     public AchievementMessage(Element element)
     {
         this.achievement = element.shortName;
@@ -53,9 +53,12 @@ public class AchievementMessage extends BaseTEMessage implements IMessageHandler
     public IMessage onMessage(AchievementMessage message, MessageContext ctx)
     {
         if (message.isElement)
+        {
             AchievementHelper.giveAchievement(getServerPlayer(ctx), AchievementHelper.getAchievement(ElementRegistry.getInstance().getElement(message.achievement)));
-        else
+        } else
+        {
             AchievementHelper.giveAchievement(getServerPlayer(ctx), AchievementHelper.getAchievement(message.achievement));
+        }
         return null;
     }
 }

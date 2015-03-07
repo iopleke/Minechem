@@ -67,7 +67,7 @@ public class StructuredJournalHandler
 
     public static SectionPage getJournal(JsonObject object)
     {
-        SectionPage result  = new SectionPage("");
+        SectionPage result = new SectionPage("");
         for (IJournalPage page : getPagesFromJsonObject("", object))
         {
             result.addSubPage(page);
@@ -80,7 +80,7 @@ public class StructuredJournalHandler
         IJournalPage result;
         if (object.has("section"))
         {
-            result  = new SectionPage(name, chapter,  new ArrayList<IJournalPage>());
+            result = new SectionPage(name, chapter, new ArrayList<IJournalPage>());
             for (IJournalPage page : getPagesFromJsonObject((chapter.isEmpty() ? "" : chapter + ".") + name, object.getAsJsonObject("section")))
             {
                 result.addSubPage(page);
@@ -100,13 +100,11 @@ public class StructuredJournalHandler
         {
             if (pageEntry.getValue().isJsonNull())
             {
-                pages.add(new EntryPage(pageEntry.getKey(),chapter,new JournalText(chapter + "." + pageEntry.getKey())));
-            }
-            else if (!pageEntry.getValue().isJsonObject())
+                pages.add(new EntryPage(pageEntry.getKey(), chapter, new JournalText(chapter + "." + pageEntry.getKey())));
+            } else if (!pageEntry.getValue().isJsonObject())
             {
                 continue;
-            }
-            else
+            } else
             {
                 pages.add(getPageFromJSONObject(pageEntry.getKey(), chapter, pageEntry.getValue().getAsJsonObject()));
             }

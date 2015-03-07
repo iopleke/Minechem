@@ -6,6 +6,6 @@ import net.minecraft.entity.player.EntityPlayer;
 public interface IJournalElement
 {
     Element getElement(EntityPlayer player);
-    
+
     Element getElement(String[] keys);
 }

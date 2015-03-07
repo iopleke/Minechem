@@ -1,13 +1,12 @@
 package minechem.registry;
 
+import java.util.List;
 import minechem.handler.StructuredJournalHandler;
 import minechem.item.journal.pages.IJournalPage;
 import minechem.item.journal.pages.SectionPage;
 import net.afterlifelochie.fontbox.document.CompilerHint;
 import net.afterlifelochie.fontbox.document.Element;
 import net.minecraft.entity.player.EntityPlayer;
-
-import java.util.List;
 
 public class JournalRegistry
 {
@@ -33,27 +32,27 @@ public class JournalRegistry
         }
         return page;
     }
-    
+
     public static boolean hasPage(String key)
     {
         return journal.getPage(key) != null;
     }
-    
+
     public static List<Element> getJournalFor(EntityPlayer player)
     {
         List<Element> result = getIndexPageFor(player);
         result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
         result.addAll(journal.getElements(player));
-        result.remove(result.size()-1);
+        result.remove(result.size() - 1);
         return result;
     }
-    
+
     public static List<Element> getJournalFor(String[] keys)
     {
         List<Element> result = getIndexPageFor(keys);
         result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
         result.addAll(journal.getElements(keys));
-        result.remove(result.size()-1);
+        result.remove(result.size() - 1);
         return result;
     }
 
@@ -66,7 +65,7 @@ public class JournalRegistry
     {
         return journal.getIndexPage(keys, 0);
     }
-    
+
     public static SectionPage setJournal(SectionPage journal)
     {
         JournalRegistry.journal = journal;

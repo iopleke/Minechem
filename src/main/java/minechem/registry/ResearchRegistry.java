@@ -92,7 +92,7 @@ public class ResearchRegistry
 
     public boolean hasUnlockedResearch(EntityPlayer player, String key)
     {
-        Set<String> keys =  getResearchFor(player);
+        Set<String> keys = getResearchFor(player);
         return keys != null && keys.contains(key);
     }
 }

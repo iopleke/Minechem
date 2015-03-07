@@ -12,7 +12,7 @@ import net.minecraft.item.ItemStack;
 public abstract class BasicContainer extends Container
 {
     private InventoryPlayer inventoryPlayer;
-    
+
     /**
      * Add the player's inventory slots to the GUI
      *
@@ -34,7 +34,7 @@ public abstract class BasicContainer extends Container
             addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
         }
     }
-    
+
     public InventoryPlayer getInventoryPlayer()
     {
         return inventoryPlayer;

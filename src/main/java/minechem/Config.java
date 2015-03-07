@@ -27,7 +27,7 @@ public class Config
     public static boolean useDefaultMolecules = true;
     // turns on to copy the newest researchPages list from jar
     public static boolean useDefaultResearchPages = true;
-    
+
     // makes it that the player can only see his own work in the book
     public static boolean playerPrivateKnowledge = false;
 

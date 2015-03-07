@@ -1,10 +1,8 @@
 package minechem.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.handler.EventHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -29,7 +27,7 @@ public class CommonProxy
     {
         return context.getServerHandler().playerEntity;
     }
-    
+
     public World getWorld(MessageContext context)
     {
         return context.getServerHandler().playerEntity.worldObj;

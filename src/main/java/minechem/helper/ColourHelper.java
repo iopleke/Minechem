@@ -31,7 +31,7 @@ public class ColourHelper
      */
     public static int RGB(float red, float green, float blue)
     {
-        return RGBA((int)red*255, (int)green*255, (int)blue*255, 255);
+        return RGBA((int) red * 255, (int) green * 255, (int) blue * 255, 255);
     }
 
     /**
@@ -165,6 +165,6 @@ public class ColourHelper
         float r = (colour >> 16) & 255;
         float g = (colour >> 8) & 255;
         float b = colour & 255;
-        return RGB(r*scale, g*scale, b*scale);
+        return RGB(r * scale, g * scale, b * scale);
     }
 }

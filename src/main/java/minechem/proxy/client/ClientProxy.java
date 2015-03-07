@@ -1,7 +1,5 @@
 package minechem.proxy.client;
 
-import org.apache.logging.log4j.Level;
-
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
@@ -32,6 +30,7 @@ import net.minecraft.item.Item;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
+import org.apache.logging.log4j.Level;
 
 public class ClientProxy extends CommonProxy
 {
@@ -50,22 +49,22 @@ public class ClientProxy extends CommonProxy
         OpticalMicroscopeTileEntityRenderer opticalMicroscopeRenderer = new OpticalMicroscopeTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(OpticalMicroscopeTileEntity.class, opticalMicroscopeRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.opticalMicroscope),
-                new BasicItemRenderer(opticalMicroscopeRenderer, new OpticalMicroscopeTileEntity()));
+            new BasicItemRenderer(opticalMicroscopeRenderer, new OpticalMicroscopeTileEntity()));
 
         ElectrolysisTileEntityRenderer electrolysisRenderer = new ElectrolysisTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(ElectrolysisTileEntity.class, electrolysisRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electrolysisBlock),
-                new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
+            new BasicItemRenderer(electrolysisRenderer, new ElectrolysisTileEntity()));
 
         ElectricCrucibleTileEntityRenderer electricCrucibleRenderer = new ElectricCrucibleTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(ElectricCrucibleTileEntity.class, electricCrucibleRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.electricCrucibleBlock),
-                new BasicItemRenderer(electricCrucibleRenderer, new ElectricCrucibleTileEntity()));
+            new BasicItemRenderer(electricCrucibleRenderer, new ElectricCrucibleTileEntity()));
 
         CentrifugeTileEntityRenderer centrifugeRenderer = new CentrifugeTileEntityRenderer();
         ClientRegistry.bindTileEntitySpecialRenderer(CentrifugeTileEntity.class, centrifugeRenderer);
         MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(BlockRegistry.centrifugeBlock),
-                new BasicItemRenderer(centrifugeRenderer, new CentrifugeTileEntity()));
+            new BasicItemRenderer(centrifugeRenderer, new CentrifugeTileEntity()));
 
         RenderingRegistry.registerBlockHandler(BlockRegistry.blockLight.getRenderType(), new LightRenderer());
         MinecraftForgeClient.registerItemRenderer(ItemRegistry.chemicalItem, new ChemicalItemRenderer());
@@ -76,7 +75,7 @@ public class ClientProxy extends CommonProxy
     {
         LogHelper.debug("Registering Resource Reload Listener...");
         ((IReloadableResourceManager) Minecraft.getMinecraft().getResourceManager())
-                .registerReloadListener(new ResourceReloadListener());
+            .registerReloadListener(new ResourceReloadListener());
     }
 
     /**
@@ -109,8 +108,7 @@ public class ClientProxy extends CommonProxy
             GLFont.fromTTF(Compendium.Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/daniel.ttf"));
             GLFont.fromTTF(Compendium.Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/notethis.ttf"));
             GLFont.fromTTF(Compendium.Fontbox.tracer(), 22.0f, new ResourceLocation(Compendium.Naming.id, "fonts/ampersand.ttf"));
-        }
-        catch (FontException font)
+        } catch (FontException font)
         {
             LogHelper.exception(font, Level.ERROR);
         }
