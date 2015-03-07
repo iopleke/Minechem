@@ -2,8 +2,10 @@ package minechem.handler;
 
 import minechem.chemical.Element;
 import minechem.registry.AchievementRegistry;
+import minechem.registry.BlockRegistry;
 import minechem.registry.ElementRegistry;
 import minechem.registry.ItemRegistry;
+import net.minecraft.stats.Achievement;
 
 public class AchievementHandler
 {
@@ -24,7 +26,8 @@ public class AchievementHandler
 
     private static void initMinechem()
     {
-        AchievementRegistry.getInstance().addAchievement(ItemRegistry.journal.getUnlocalizedName(), 0, 0, ItemRegistry.journal);
+        Achievement journal = AchievementRegistry.getInstance().addAchievement(ItemRegistry.journal.getUnlocalizedName(), 0, 0, ItemRegistry.journal);
+        Achievement microscope = AchievementRegistry.getInstance().addAchievement(BlockRegistry.opticalMicroscope.getUnlocalizedName(), 1, 3, BlockRegistry.electrolysisBlock, journal);
         AchievementRegistry.getInstance().registerMinechemAchievements();
     }
 }

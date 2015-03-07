@@ -20,9 +20,12 @@ public class StringHelper
     public static String toString(String separator, Object... objects)
     {
         StringBuilder result = new StringBuilder();
+        String value;
         for (Object object : objects)
         {
-            result.append(String.valueOf(object)).append(separator);
+            value = String.valueOf(object);
+            if (value.equals("%")) value = "%%"; // fixes issue wit formatter
+            result.append(value).append(separator);
         }
         return result.substring(0, result.length() - separator.length());
     }

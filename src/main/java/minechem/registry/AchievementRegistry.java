@@ -42,11 +42,14 @@ public class AchievementRegistry
      * Adds default achievement for an {@link minechem.chemical.Element}
      *
      * @param element the element to create an achievement for
+     * @return the added {@link net.minecraft.stats.Achievement}
      */
-    public void addAchievement(Element element)
+    public Achievement addAchievement(Element element)
     {
         int[] position = PeriodicTableHelper.getPosition(element);
-        elementsAchievementMap.put(element, new ElementAchievement(element, position[0]-5, position[1]-8));
+        ElementAchievement achievement = new ElementAchievement(element, position[0]-5, position[1]-8);
+        elementsAchievementMap.put(element, achievement);
+        return achievement;
     }
 
     /**
@@ -57,20 +60,21 @@ public class AchievementRegistry
      * @param column           the column display
      * @param displayItemStack the {@link net.minecraft.item.ItemStack} to display
      * @param prerequisite     the prerequisite {@link net.minecraft.stats.Achievement}
+     * @return the added {@link net.minecraft.stats.Achievement}
      */
-    public void addAchievement(String name, int row, int column, ItemStack displayItemStack, Achievement prerequisite)
+    public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack, Achievement prerequisite)
     {
-        addAchievement(name, row, column, displayItemStack, prerequisite, false);
+        return addAchievement(name, row, column, displayItemStack, prerequisite, false);
     }
 
-    public void addAchievement(String name, int row, int column, Item displayItem, Achievement prerequisite)
+    public Achievement addAchievement(String name, int row, int column, Item displayItem, Achievement prerequisite)
     {
-        addAchievement(name, row, column, new ItemStack(displayItem), prerequisite);
+        return addAchievement(name, row, column, new ItemStack(displayItem), prerequisite);
     }
 
-    public void addAchievement(String name, int row, int column, Block displayBlock, Achievement prerequisite)
+    public Achievement addAchievement(String name, int row, int column, Block displayBlock, Achievement prerequisite)
     {
-        addAchievement(name, row, column, new ItemStack(displayBlock), prerequisite);
+        return addAchievement(name, row, column, new ItemStack(displayBlock), prerequisite);
     }
 
     /**
@@ -82,8 +86,9 @@ public class AchievementRegistry
      * @param displayItemStack the {@link net.minecraft.item.ItemStack} to display
      * @param prerequisite     the prerequisite {@link net.minecraft.stats.Achievement}
      * @param isSpecial        is this a special {@link net.minecraft.stats.Achievement} ?
+     * @return the added {@link net.minecraft.stats.Achievement}
      */
-    public void addAchievement(String name, int row, int column, ItemStack displayItemStack, Achievement prerequisite, boolean isSpecial)
+    public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack, Achievement prerequisite, boolean isSpecial)
     {
         String statName = Compendium.Naming.id + "." + name;
         Achievement achievement = new Achievement("achievement." + statName, statName, column, row, displayItemStack, prerequisite);
@@ -95,7 +100,7 @@ public class AchievementRegistry
         {
             achievement.initIndependentStat();
         }
-        addAchievement(achievement);
+        return addAchievement(achievement);
     }
 
     /**
@@ -105,30 +110,33 @@ public class AchievementRegistry
      * @param row              the row to display
      * @param column           the column display
      * @param displayItemStack the {@link net.minecraft.item.ItemStack} to display
+     * @return the added {@link net.minecraft.stats.Achievement}
      */
-    public void addAchievement(String name, int row, int column, ItemStack displayItemStack)
+    public Achievement addAchievement(String name, int row, int column, ItemStack displayItemStack)
     {
-        addAchievement(name, row, column, displayItemStack, nullAchievement, false);
+        return addAchievement(name, row, column, displayItemStack, nullAchievement, false);
     }
 
-    public void addAchievement(String name, int row, int column, Item displayItem)
+    public Achievement addAchievement(String name, int row, int column, Item displayItem)
     {
-        addAchievement(name, row, column, new ItemStack(displayItem), nullAchievement, false);
+        return addAchievement(name, row, column, new ItemStack(displayItem), nullAchievement, false);
     }
 
-    public void addAchievement(String name, int row, int column, Block displayBlock)
+    public Achievement addAchievement(String name, int row, int column, Block displayBlock)
     {
-        addAchievement(name, row, column, new ItemStack(displayBlock), nullAchievement, false);
+        return addAchievement(name, row, column, new ItemStack(displayBlock), nullAchievement, false);
     }
 
     /**
      * Add an {@link net.minecraft.stats.Achievement} to the minechem {@link net.minecraftforge.common.AchievementPage}
      *
      * @param achievement the {@link net.minecraft.stats.Achievement} to add
+     * @return the added {@link net.minecraft.stats.Achievement}
      */
-    public void addAchievement(Achievement achievement)
+    public Achievement addAchievement(Achievement achievement)
     {
         minechemAchievementMap.put(achievement.statId, achievement);
+        return achievement;
     }
 
     /**
