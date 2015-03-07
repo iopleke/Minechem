@@ -87,7 +87,7 @@ public class SectionPage extends JournalPage
         {
             if (page.isUnlocked(player))
             {
-                //TODO: for every unlocked page add a link.
+                // @TODO: for every unlocked page add a link.
             }
         }
         return result;
@@ -100,7 +100,7 @@ public class SectionPage extends JournalPage
         {
             if (page.isUnlocked(keys))
             {
-                //TODO: for every unlocked page add a link.
+                // @TODO: for every unlocked page add a link.
             }
         }
         return result;

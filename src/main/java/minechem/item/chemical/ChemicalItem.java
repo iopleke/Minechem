@@ -19,7 +19,7 @@ import net.minecraft.util.IIcon;
 
 public class ChemicalItem extends BasicItem
 {
-    // TODO maybe replace the textures since I just used the old ones
+    // @TODO maybe replace the textures since I just used the old ones
     @SideOnly(Side.CLIENT)
     public IIcon dust;
     @SideOnly(Side.CLIENT)

@@ -36,7 +36,8 @@ public class MoleculeRegistry
     {
         formulaMoleculeMap.put(molecule.getFormula(), molecule);
         nameMoleculeMap.put(molecule.fullName.toLowerCase(), molecule);
-        molecule.log();// TODO: make this debug only later
+        // @TODO: make this debug only later
+        molecule.log();
     }
 
     /**

@@ -38,7 +38,8 @@ public class ResearchHandler
             for (Map.Entry<UUID, Set<String>> entry : ResearchRegistry.getInstance().getPlayerResearchMap().entrySet())
             {
                 jWriter.name(entry.getKey().toString()).beginObject();
-                //jWriter.name("displayName").value(); TODO: maybe find a way to add this for readability
+                // @TODO: maybe find a way to add this for readability
+                //jWriter.name("displayName").value();
                 jWriter.name("research").beginArray();
                 for (String research : entry.getValue())
                 {

@@ -209,7 +209,7 @@ public class AugmentedItem extends WrapperItem implements IAugmentedItem, IOverl
     public void addInformation(ItemStack stack, EntityPlayer player, List list, boolean bool)
     {
         super.addInformation(stack, player, list, bool);
-        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) //TODO: Change this to display more useful data
+        for (Map.Entry<IAugment, Integer> entry : getAugments(stack).entrySet()) // @TODO: Change this to display more useful data
         {
             list.add(entry.getKey().getLocalizedName() + ": " + entry.getKey().getDisplayText(entry.getValue()));
         }

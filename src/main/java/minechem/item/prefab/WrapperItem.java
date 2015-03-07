@@ -596,7 +596,7 @@ public abstract class WrapperItem extends BasicItem
     }
 
     @Override
-    public void setDamage(ItemStack stack, int damage) //TODO: Damage stuff is a little screwy at the moment
+    public void setDamage(ItemStack stack, int damage) // @TODO: Damage stuff is a little screwy at the moment
     {
         ItemStack wrapped = getWrappedItemStack(stack);
         if (wrapped == null)
