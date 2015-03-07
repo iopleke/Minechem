@@ -43,6 +43,7 @@ public class ElectrolysisBlock extends BasicBlockContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
     {
+        // @TODO: add "player.capabilities.isCreativeMode" checks before removing/adding items to inventory
         TileEntity activatedTileEntity = world.getTileEntity(x, y, z);
         if (activatedTileEntity instanceof ElectrolysisTileEntity)
         {
@@ -56,12 +57,31 @@ public class ElectrolysisBlock extends BasicBlockContainer
                     ChemicalBase chemicalBase = ChemicalItem.getChemicalBase(clickedItemStack);
                     if (chemicalBase != null)
                     {
-                        electrolysis.fillWithChemicalBase(chemicalBase);
+                        if (electrolysis.addItem(clickedItemStack))
+                        {
+                            player.inventory.decrStackSize(player.inventory.currentItem, 1);
+
+                            electrolysis.fillWithChemicalBase(chemicalBase);
+                        }
+
                     }
                 }
             } else
             {
-                electrolysis.removeItem();
+                ChemicalItem chemItem = electrolysis.removeItem();
+                if (chemItem != null)
+                {
+                    if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() != null)
+                    {
+                        if (player.getCurrentEquippedItem().getItem() instanceof ChemicalItem)
+                        {
+                            // @TODO: attempt to merge held items
+                        }
+                    } else
+                    {
+                        player.inventory.setInventorySlotContents(player.inventory.getFirstEmptyStack(), new ItemStack(chemItem));
+                    }
+                }
             }
         }
         return false;

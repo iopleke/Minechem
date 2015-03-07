@@ -4,6 +4,7 @@ import minechem.Compendium;
 import minechem.apparatus.prefab.tileEntity.BasicFluidInventoryTileEntity;
 import minechem.chemical.ChemicalBase;
 import minechem.item.chemical.ChemicalItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
@@ -13,7 +14,23 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     public ElectrolysisTileEntity()
     {
         super(Compendium.Naming.electrolysis, 2, 3);
-        tubeCount = 0;
+    }
+
+    public boolean addItem(ItemStack chemicalItemStack)
+    {
+        if (chemicalItemStack.getItem() != null && chemicalItemStack.getItem() instanceof ChemicalItem)
+        {
+            if (this.getStackInSlot(0) == null)
+            {
+                this.setInventorySlotContents(0, chemicalItemStack);
+                return true;
+            } else if (this.getStackInSlot(1) == null)
+            {
+                this.setInventorySlotContents(1, chemicalItemStack);
+                return true;
+            }
+        }
+        return false;
     }
 
     @Override
@@ -29,10 +46,10 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
 
     public boolean fillWithChemicalBase(ChemicalBase chemicalBase)
     {
-        tubeCount++;
-        if (tubeCount > 2)
+
+        if (tubeCount < 2)
         {
-            tubeCount = 0;
+            tubeCount++;
         }
         return false;
     }
@@ -42,6 +59,18 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
         if (tubeCount > 0)
         {
             tubeCount--;
+
+            if (this.getStackInSlot(1) != null)
+            {
+                ChemicalItem chemical = (ChemicalItem) getStackInSlot(1).getItem();
+                this.decrStackSize(1, 1);
+                return chemical;
+            } else if (this.getStackInSlot(0) != null)
+            {
+                ChemicalItem chemical = (ChemicalItem) getStackInSlot(0).getItem();
+                this.decrStackSize(0, 1);
+                return chemical;
+            }
         }
         return null;
     }
