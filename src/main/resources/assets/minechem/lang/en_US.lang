@@ -37,6 +37,10 @@ achievement.minechem.item.journal=Start learning
 achievement.minechem.item.journal.desc=The journal is your gate to all the Minechem knowledge
 achievement.minechem.tile.opticalMicroscope=Looking at Things
 achievement.minechem.tile.opticalMicroscope.desc=Use the Microscope for the first time
+achievement.minechem.tile.electrolysis=Electrolysing things
+achievement.minechem.tile.electrolysis.desc=Use the Electrolysis Machine for the first time
+achievement.minechem.tile.electricCrucible=Melting things
+achievement.minechem.tile.electricCrucible.desc=Use the Electric Crucible for the first time
 
 achievement.minechem.element=Discovered %s
 achievement.minechem.element.desc=Discover %s to unlock
