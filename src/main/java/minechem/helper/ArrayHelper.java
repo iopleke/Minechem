@@ -1,6 +1,7 @@
 package minechem.helper;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -27,5 +28,28 @@ public class ArrayHelper
             }
         }
         return list.toArray((T[]) Array.newInstance(type, list.size()));
+    }
+
+    /**
+     * Converts an {@link java.lang.Object} to an array of the type
+     * @param array the {@link java.lang.Object} representation of the array
+     * @return an {@link java.lang.Object}[]
+     */
+    public static Object[] convertToArray(Object array) {
+        Class ofArray = array.getClass().getComponentType();
+        if (ofArray.isPrimitive())
+        {
+            List arrayList = new ArrayList();
+            int length = Array.getLength(array);
+            for (int i = 0; i < length; i++)
+            {
+                arrayList.add(Array.get(array, i));
+            }
+            return arrayList.toArray();
+        }
+        else
+        {
+            return (Object[]) array;
+        }
     }
 }
