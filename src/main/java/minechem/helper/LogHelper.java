@@ -23,6 +23,10 @@ public class LogHelper
         {
             log(Level.INFO, obj);
         }
+        else
+        {
+            log(Level.DEBUG, obj);
+        }
     }
 
     /**

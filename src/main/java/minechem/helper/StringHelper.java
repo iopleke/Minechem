@@ -24,7 +24,20 @@ public class StringHelper
         String value;
         for (Object object : objects)
         {
-            value = String.valueOf(object);
+            if (object != null && object.getClass().isArray())
+            {
+                StringBuilder intermediate = new StringBuilder();
+                intermediate.append("[");
+                for (Object o : ArrayHelper.convertToArray(object))
+                {
+                    intermediate.append(toString(separator, o)).append(separator);
+                }
+                value = intermediate.substring(0, intermediate.length() - separator.length()) + "]";
+            }
+            else
+            {
+                value = String.valueOf(object);
+            }
             if (value.equals("%"))
             {
                 value = "%%"; // fixes issue wit formatter
