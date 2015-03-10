@@ -9,6 +9,8 @@ public class ElectrolysisModel extends BasicModel
 {
 
     private byte tubeCount;
+    private boolean leftTube;
+    private boolean rightTube;
 
     ModelRenderer plank;
     ModelRenderer plank2;
@@ -377,7 +379,7 @@ public class ElectrolysisModel extends BasicModel
         cable2m2.rotateAngleZ = 0F;
         cable2m2.renderWithRotation(rotation);
 
-        if (tubeCount >= 1)
+        if (leftTube)
         {
             jar2.rotateAngleX = 0F;
             jar2.rotateAngleY = 0F;
@@ -425,7 +427,7 @@ public class ElectrolysisModel extends BasicModel
             jar2m8.renderWithRotation(rotation);
         }
 
-        if (tubeCount >= 2)
+        if (rightTube)
         {
 
             jar3.rotateAngleX = 0F;
@@ -547,12 +549,28 @@ public class ElectrolysisModel extends BasicModel
 
     public byte getTubeCount()
     {
+
         return tubeCount;
     }
 
-    public void setTubeCount(byte tubeCount)
+    public boolean getLeftTube()
     {
-        this.tubeCount = tubeCount;
+        return leftTube;
+    }
+
+    public boolean getRightTube()
+    {
+        return rightTube;
+    }
+
+    public void setLeftTube(boolean enabled)
+    {
+        this.leftTube = enabled;
+    }
+
+    public void setRightTube(boolean enabled)
+    {
+        this.rightTube = enabled;
     }
 
 }

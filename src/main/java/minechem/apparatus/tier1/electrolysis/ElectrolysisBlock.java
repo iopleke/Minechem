@@ -57,18 +57,26 @@ public class ElectrolysisBlock extends BasicBlockContainer
                     ChemicalBase chemicalBase = ChemicalItem.getChemicalBase(clickedItemStack);
                     if (chemicalBase != null)
                     {
-                        if (electrolysis.addItem(clickedItemStack))
+                        byte slot = electrolysis.addItem(clickedItemStack);
+                        if (slot == 0 || slot == 1)
                         {
+                            electrolysis.fillWithChemicalBase(chemicalBase, slot);
                             player.inventory.decrStackSize(player.inventory.currentItem, 1);
-
-                            electrolysis.fillWithChemicalBase(chemicalBase);
                         }
 
                     }
                 }
             } else
             {
-                ChemicalItem chemItem = electrolysis.removeItem();
+                ChemicalItem chemItem = null;
+                if (electrolysis.getRightTube())
+                {
+                    chemItem = electrolysis.removeItem(1);
+                } else if (electrolysis.getLeftTube())
+                {
+                    chemItem = electrolysis.removeItem(0);
+                }
+
                 if (chemItem != null)
                 {
                     if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() != null)
