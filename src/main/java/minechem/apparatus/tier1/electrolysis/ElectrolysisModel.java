@@ -7,8 +7,6 @@ import org.lwjgl.opengl.GL11;
 
 public class ElectrolysisModel extends BasicModel
 {
-
-    private byte tubeCount;
     private boolean leftTube;
     private boolean rightTube;
 
@@ -65,8 +63,6 @@ public class ElectrolysisModel extends BasicModel
 
     public ElectrolysisModel()
     {
-        tubeCount = 0;
-
         plank = new ModelRenderer(this, 4, 114);
         plank.setTextureSize(128, 128);
         plank.addBox(-14.5F, -1F, -2.5F, 29, 2, 5);
@@ -545,12 +541,6 @@ public class ElectrolysisModel extends BasicModel
     public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity e)
     {
         super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
-    }
-
-    public byte getTubeCount()
-    {
-
-        return tubeCount;
     }
 
     public boolean getLeftTube()

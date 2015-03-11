@@ -69,10 +69,10 @@ public class ElectrolysisBlock extends BasicBlockContainer
             } else
             {
                 ChemicalItem chemItem = null;
-                if (electrolysis.getRightTube())
+                if (electrolysis.getRightTube() != null)
                 {
                     chemItem = electrolysis.removeItem(1);
-                } else if (electrolysis.getLeftTube())
+                } else if (electrolysis.getLeftTube() != null)
                 {
                     chemItem = electrolysis.removeItem(0);
                 }

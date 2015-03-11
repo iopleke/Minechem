@@ -98,14 +98,30 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
         return null;
     }
 
-    public boolean getLeftTube()
+    public ChemicalItem getLeftTube()
     {
-        return leftTube;
+        ItemStack itemStack = decrStackSize(LEFTSIDE, 1);
+        if (itemStack != null)
+        {
+            if (itemStack.getItem() instanceof ChemicalItem)
+            {
+                return (ChemicalItem) itemStack.getItem();
+            }
+        }
+        return null;
     }
 
-    public boolean getRightTube()
+    public ChemicalItem getRightTube()
     {
-        return rightTube;
+        ItemStack itemStack = decrStackSize(RIGHTSIDE, 1);
+        if (itemStack != null)
+        {
+            if (itemStack.getItem() instanceof ChemicalItem)
+            {
+                return (ChemicalItem) itemStack.getItem();
+            }
+        }
+        return null;
     }
 
     /**
