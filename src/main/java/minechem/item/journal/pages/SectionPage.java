@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import minechem.item.journal.pages.elements.JournalHeader;
+import net.afterlifelochie.fontbox.document.CompilerHint;
 import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.Heading;
 import net.minecraft.entity.player.EntityPlayer;
@@ -112,6 +113,13 @@ public class SectionPage extends JournalPage
         List<Element> result = new ArrayList<Element>();
         for (IJournalPage page : pages.values())
         {
+            List<Element> elements = page.getElements(player);
+            if (elements.size() > 0 && page instanceof SectionPage)
+            {
+                result.addAll(((SectionPage) page).getIndexPage(player, 0));
+                result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
+            }
+            result.addAll(elements);
             result.addAll(page.getElements(player));
         }
         if (!result.isEmpty())
@@ -127,7 +135,13 @@ public class SectionPage extends JournalPage
         List<Element> result = new ArrayList<Element>();
         for (IJournalPage page : pages.values())
         {
-            result.addAll(page.getElements(keys));
+            List<Element> elements = page.getElements(keys);
+            if (elements.size() > 0 && page instanceof SectionPage)
+            {
+                result.addAll(((SectionPage) page).getIndexPage(keys, 0));
+                result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
+            }
+            result.addAll(elements);
         }
         if (!result.isEmpty())
         {
@@ -177,7 +191,7 @@ public class SectionPage extends JournalPage
                 if (page instanceof SectionPage)
                 {
                     result.addAll(((SectionPage) page).getIndexPage(keys, indent + 1));
-                } else
+                } else if (indent < 1)
                 {
                     String sIndent = "";
                     for (int i = 0; i < indent + 1; i++)
