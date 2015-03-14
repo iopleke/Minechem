@@ -25,7 +25,7 @@ config.useDefaultResearchPages=Turns on to read the newest research pages list f
 config.useDefaultResearchPages.tootip=Use Default Research Pages
 config.enablePatreon=Turns on to show Patreon tab in GUI
 config.enablePatreon.tooltip=Enable Patreon
-config.playerPrivateKnowledge=The journal can't be written and will magically shows what you know
+config.playerPrivateKnowledge=The journal can't be written and will magically show what you know
 config.playerPrivateKnowledge.tooltip=Turns on Player private knowledge
 
 tab.patreon.text=Thanks for playing Minechem! If you like the mod, please consider supporting me on Patreon!
