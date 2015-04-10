@@ -14,7 +14,7 @@ public class FluidMolecule extends MinechemFluid
 
     public FluidMolecule(MoleculeEnum molecule)
     {
-        super(molecule.name(), molecule.roomState());
+        super("molecule." + molecule.name(), molecule.roomState());
         this.molecule = molecule;
         color = computeColor();
     }

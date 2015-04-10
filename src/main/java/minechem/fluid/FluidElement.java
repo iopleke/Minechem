@@ -15,7 +15,7 @@ public class FluidElement extends MinechemFluid
 
     public FluidElement(ElementEnum element)
     {
-        super(element.name(), element.roomState());
+        super("element." + element.name(), element.roomState());
         this.element = element;
         color = computColor();
     }

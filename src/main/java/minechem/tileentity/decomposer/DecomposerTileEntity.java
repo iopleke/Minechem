@@ -324,7 +324,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
         if (!doDrain)
         {
-            return new FluidStack(tank.fluidID, Math.min(tank.amount, resource.amount));
+            return new FluidStack(tank.getFluid(), Math.min(tank.amount, resource.amount));
         }
 
         int drained = Math.min(tank.amount, resource.amount);
@@ -332,7 +332,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
         tank.amount -= drained;
         if (tank.amount == 0) tank = null;
-        return new FluidStack(resource.fluidID, drained);
+        return new FluidStack(resource.getFluid(), drained);
     }
 
     @Override
@@ -345,14 +345,14 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
 
         if (!doDrain)
         {
-            return new FluidStack(tank.fluidID, Math.min(tank.amount, maxDrain));
+            return new FluidStack(tank.getFluid(), Math.min(tank.amount, maxDrain));
         }
 
         int drained = Math.min(tank.amount, maxDrain);
         tankUpdate = true;
 
         tank.amount -= drained;
-        FluidStack result = new FluidStack(tank.fluidID, drained);
+        FluidStack result = new FluidStack(tank.getFluid(), drained);
         if (tank.amount==0) tank=null;
         return result;
     }
@@ -390,7 +390,7 @@ public class DecomposerTileEntity extends MinechemTileEntityElectric implements 
         if (tank == null)
         {
             maxFill = Math.min(capacity, resource.amount);
-            tank = new FluidStack(resource.fluidID, maxFill);
+            tank = new FluidStack(resource.getFluid(), maxFill);
             return maxFill;
         }
 
