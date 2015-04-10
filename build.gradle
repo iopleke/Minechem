@@ -61,7 +61,7 @@ group = "minechem"
 archivesBaseName = "Minechem"
 
 minecraft {
-    version = "${config.version.minecraft}-${config.version.forge}"
+    version = "${config.version.minecraft}-${config.version.forge}-${config.version.minecraft}"
 
     replaceIn "reference/Reference.java"
     replace "@MAJOR@", config.version.mod.major
