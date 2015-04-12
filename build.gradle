@@ -61,7 +61,7 @@ group = "minechem"
 archivesBaseName = "Minechem"
 
 minecraft {
-    version = "${config.version.minecraft}-${config.version.forge}"
+    version = "${config.version.minecraft}-${config.version.forge}-${config.version.minecraft}"
 
     replaceIn "reference/Reference.java"
     replace "@MAJOR@", config.version.mod.major
@@ -153,8 +153,8 @@ task getLibraries {
 		}
 	}
 
-    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2228470/download'
-    def cofhDest = new File('libs', 'CoFHLib-1.7.10-1.0.0B9-118-dev.jar')
+    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2230208/download'
+    def cofhDest = new File('libs', 'CoFHLib-1.7.10-1.0.0RC7-127-dev.jar')
 
         if(!cofhDest.exists() ){
             download {

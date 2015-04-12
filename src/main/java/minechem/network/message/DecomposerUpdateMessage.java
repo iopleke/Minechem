@@ -9,6 +9,7 @@ import cpw.mods.fml.relauncher.Side;
 import io.netty.buffer.ByteBuf;
 import minechem.tileentity.decomposer.DecomposerTileEntity;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 
 public class DecomposerUpdateMessage implements IMessage, IMessageHandler<DecomposerUpdateMessage, IMessage>
@@ -33,7 +34,7 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
 
         if (tile.tank != null)
         {
-            this.fluidId = tile.tank.fluidID;
+            this.fluidId = tile.tank.getFluidID();
             this.fluidAmount = tile.tank.amount;
         } else
         {
@@ -88,7 +89,7 @@ public class DecomposerUpdateMessage implements IMessage, IMessageHandler<Decomp
             FluidStack tankStack = null;
             if (message.fluidId != -1)
             {
-                tankStack = new FluidStack(message.fluidId, message.fluidAmount);
+                tankStack = new FluidStack(FluidRegistry.getFluid(message.fluidId), message.fluidAmount);
             }
             ((DecomposerTileEntity) tileEntity).tank = tankStack;
         }

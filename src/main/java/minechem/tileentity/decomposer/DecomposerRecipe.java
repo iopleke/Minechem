@@ -79,7 +79,7 @@ public class DecomposerRecipe
 
     public static DecomposerRecipe get(FluidStack fluidStack)
     {
-        if (fluidStack == null || fluidStack.fluidID<0)
+        if (fluidStack == null || fluidStack.getFluid() == null)
         {
             return null;
         }
