@@ -34,7 +34,7 @@ public class BasicFluidTank implements IFluidHandler
     @Override
     public boolean canDrain(ForgeDirection from, Fluid fluid)
     {
-        if (fluid != null && fluid.getID() == tank.getFluid().fluidID)
+        if (fluid != null && fluid.getID() == tank.getFluid().getFluidID())
         {
             return tank.getFluidAmount() > 0;
         }
@@ -53,7 +53,7 @@ public class BasicFluidTank implements IFluidHandler
     {
         if (tank != null)
         {
-            if (tank.getFluid().fluidID == fluid.getID())
+            if (tank.getFluid().getFluidID() == fluid.getID())
             {
                 return tank.getFluidAmount() < tank.getCapacity();
             } else if (tank.getFluidAmount() == 0)
