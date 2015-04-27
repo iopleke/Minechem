@@ -9,10 +9,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 
 public class PotionSpikingRecipe implements IRecipe
 {
     ItemStack result = null;
+
+    static
+    {
+        RecipeSorter.register("minechem:spikingRecipe", PotionSpikingRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+    }
 
     @Override
     public boolean matches(InventoryCrafting inv, World world)

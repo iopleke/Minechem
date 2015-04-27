@@ -12,10 +12,16 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 
 public class MinechemBucketRecipe implements IRecipe
 {
     private MinechemChemicalType type;
+
+    static
+    {
+        RecipeSorter.register("minechem:bucketRecipe", MinechemBucketRecipe.class, RecipeSorter.Category.SHAPED, "after:minecraft:shaped");
+    }
 
     @Override
     public boolean matches(InventoryCrafting inv, World world)
