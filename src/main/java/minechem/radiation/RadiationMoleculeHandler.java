@@ -1,11 +1,7 @@
 package minechem.radiation;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
 import minechem.item.bucket.MinechemBucketHandler;
@@ -18,7 +14,6 @@ import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
 import minechem.utils.MinechemUtil;
-import minechem.utils.SoftHashMap;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -44,8 +39,8 @@ public class RadiationMoleculeHandler
 
     private RadiationMoleculeHandler()
     {
-        decayedMoleculesCache = new SoftHashMap<MoleculeEnum, PotionChemical[]>();
-        decayedMoleculesPre = new SoftHashMap<MoleculeEnum, PotionChemical[]>();
+        decayedMoleculesCache = new WeakHashMap<MoleculeEnum, PotionChemical[]>();
+        decayedMoleculesPre = new WeakHashMap<MoleculeEnum, PotionChemical[]>();
         initDecayedMoleculesPre();
     }
 
