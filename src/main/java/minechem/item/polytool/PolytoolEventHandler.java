@@ -2,6 +2,7 @@ package minechem.item.polytool;
 
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import minechem.item.element.ElementEnum;
+import minechem.tileentity.decomposer.DecomposerRecipe;
 import minechem.tileentity.decomposer.DecomposerRecipeHandler;
 import minechem.utils.MinechemUtil;
 import net.minecraft.entity.EntityLivingBase;
@@ -50,7 +51,7 @@ public class PolytoolEventHandler
                     Iterator iter = event.drops.iterator();
                     if (random.nextInt(16) < 1 + powerSilicon)
                     {
-                        ArrayList<EntityItem> trueResult = new ArrayList();
+                        ArrayList<EntityItem> trueResult = new ArrayList<EntityItem>();
                         while (iter.hasNext())
                         {
                             EntityItem entityItem = (EntityItem)iter.next();
@@ -58,14 +59,14 @@ public class PolytoolEventHandler
                             while (item.stackSize > 0)
                             {
                                 // Always avoid chances
-                                ArrayList items = MinechemUtil.convertChemicalsIntoItemStacks(DecomposerRecipeHandler.instance.getRecipe(item).getOutput());
+                                DecomposerRecipe recipe = DecomposerRecipeHandler.instance.getRecipe(item);
 
-                                // ArrayList items=DecomposerRecipeHandler.instance.getRecipeOutputForInput(item);
-                                if (items != null)
+                                if (recipe != null)
                                 {
-                                    for (int i = 0; i < items.size(); i++)
+                                    ArrayList<ItemStack> items = MinechemUtil.convertChemicalsIntoItemStacks(recipe.getOutput());
+                                    for (ItemStack itemStack : items)
                                     {
-                                        trueResult.add(new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, (ItemStack)items.get(i)));
+                                        trueResult.add(new EntityItem(entityItem.worldObj, entityItem.posX, entityItem.posY, entityItem.posZ, itemStack));
                                     }
                                 } else
                                 {
