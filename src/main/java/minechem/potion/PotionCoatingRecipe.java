@@ -10,9 +10,15 @@ import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 
 public class PotionCoatingRecipe implements IRecipe
 {
+
+    static
+    {
+        RecipeSorter.register("minechem:coatingRecipe", PotionCoatingRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+    }
 
     @Override
     public boolean matches(InventoryCrafting inv, World world)

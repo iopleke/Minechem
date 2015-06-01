@@ -10,11 +10,17 @@ import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.crafting.IRecipe;
 import net.minecraft.world.World;
+import net.minecraftforge.oredict.RecipeSorter;
 
 public class MinechemBucketReverseRecipe implements IRecipe
 {
     private MinechemChemicalType type;
     private ItemStack bucketStack;
+
+    static
+    {
+        RecipeSorter.register("minechem:reverseBucket", MinechemBucketReverseRecipe.class, RecipeSorter.Category.SHAPELESS, "after:minecraft:shapeless");
+    }
 
     @Override
     public boolean matches(InventoryCrafting inv, World world)
