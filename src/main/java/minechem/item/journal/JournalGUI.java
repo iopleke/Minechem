@@ -75,7 +75,7 @@ public class JournalGUI extends BookGUI
             writer.close();
 
             /* Update system pages */
-            changePages(writer.pages());
+            changePages(writer.pages(), writer.index());
         } catch (LayoutException layout)
         {
             LogHelper.exception(layout, Level.ERROR);
