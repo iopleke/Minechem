@@ -13,7 +13,7 @@ public class Field
         this.desc = desc;
         this.obfDesc = obfDesc;
     }
-    
+
     public Field(String name, String obfName, String desc)
     {
         this.name = name;
@@ -21,7 +21,7 @@ public class Field
         this.desc = desc;
         this.obfDesc = desc;
     }
-    
+
     public Field(String name, String desc)
     {
         this.name = name;
@@ -34,7 +34,7 @@ public class Field
     {
         return LoadingPlugin.runtimeDeobfEnabled ? obfName : name;
     }
-    
+
     protected String getUnObfName()
     {
         return name;

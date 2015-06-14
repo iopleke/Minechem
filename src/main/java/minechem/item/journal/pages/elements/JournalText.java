@@ -1,8 +1,12 @@
 package minechem.item.journal.pages.elements;
 
+import minechem.Compendium;
 import minechem.helper.LocalizationHelper;
 import net.afterlifelochie.fontbox.document.Element;
+import net.afterlifelochie.fontbox.document.Image;
 import net.afterlifelochie.fontbox.document.Paragraph;
+import net.afterlifelochie.fontbox.document.property.AlignmentMode;
+import net.afterlifelochie.fontbox.document.property.FloatMode;
 import net.minecraft.entity.player.EntityPlayer;
 
 public class JournalText extends JournalElement
@@ -23,6 +27,22 @@ public class JournalText extends JournalElement
     @Override
     public Element getElement(EntityPlayer player)
     {
-        return isUnlocked(player, getKey()) ? new Paragraph(LocalizationHelper.getLocalString(textKey)) : null;
+        if (isUnlocked(player, getKey()))
+        {
+            String s = LocalizationHelper.getLocalString(textKey);
+            return s.isEmpty() ? new Image(Compendium.Resource.GUI.noContent, 301, 294, AlignmentMode.JUSTIFY) : new Paragraph(s);
+        }
+        return null;
+    }
+
+    @Override
+    public Element getElement(String[] keys)
+    {
+        if (isUnlocked(keys, getKey()))
+        {
+            String s = LocalizationHelper.getLocalString(textKey);
+            return s.isEmpty() ? new Image(Compendium.Resource.GUI.noContent, 301, 294, AlignmentMode.JUSTIFY) : new Paragraph(s);
+        }
+        return null;
     }
 }

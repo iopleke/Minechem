@@ -18,7 +18,9 @@ public class AugmentLightning extends AugmentBase
     public boolean onBlockDestroyed(ItemStack stack, World world, Block block, int x, int y, int z, EntityLivingBase entityLivingBase, int level)
     {
         if (rand.nextInt(75) <= level)
+        {
             spawnLightning(world, x + rand.nextDouble(), y + rand.nextDouble(), z + rand.nextDouble(), stack, level);
+        }
         return false;
     }
 
@@ -26,7 +28,9 @@ public class AugmentLightning extends AugmentBase
     public boolean hitEntity(ItemStack stack, EntityLivingBase target, EntityLivingBase user, int level)
     {
         if (rand.nextInt(15) <= level)
+        {
             spawnLightning(user.worldObj, target.posX, target.posY, target.posZ, stack, level);
+        }
         return false;
     }
 
@@ -34,7 +38,9 @@ public class AugmentLightning extends AugmentBase
     public void onUpdate(ItemStack stack, World world, Entity entity, int slot, boolean bool, int level)
     {
         if (rand.nextInt(24000) <= level && entity instanceof EntityLivingBase)
+        {
             spawnLightning(world, entity.posX, entity.posY, entity.posZ, stack, level);
+        }
     }
 
     public void spawnLightning(World world, double x, double y, double z, ItemStack stack, int level)

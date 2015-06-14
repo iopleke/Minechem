@@ -50,7 +50,8 @@ public class Jenkins
 
     public static ItemStack getStack(String chemical)
     {
-        return null; //TODO: when we have, y'know.. items
+        // @TODO: when we have, y'know.. items
+        return null;
     }
 
     /**

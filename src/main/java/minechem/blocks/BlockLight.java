@@ -26,7 +26,7 @@ public class BlockLight extends SpecialRenderBlock
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int face, float hitX, float hitY, float hitZ)
     {
         return super.onBlockActivated(world, x, y, z, player, face, hitX, hitY, hitZ);
-        //TODO: player hits with an augmented Item to boost light
+        // @TODO: player hits with an augmented Item to boost light
     }
 
     @Override

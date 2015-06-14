@@ -4,9 +4,8 @@ import cofh.lib.gui.GuiBase;
 import cofh.lib.gui.element.TabBase;
 import cofh.lib.util.helpers.MathHelper;
 import java.util.List;
-import minechem.helper.ColourHelper;
-import minechem.helper.LocalizationHelper;
 import minechem.Compendium;
+import minechem.helper.LocalizationHelper;
 import org.lwjgl.opengl.GL11;
 
 /**
@@ -124,7 +123,7 @@ public abstract class BasicGuiTab extends TabBase
         }
         return this.fullyOpen;
     }
-    
+
     public int getCurrentShiftX()
     {
         return this.currentShiftX;

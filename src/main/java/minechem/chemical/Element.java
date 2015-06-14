@@ -4,7 +4,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import minechem.Compendium;
 import minechem.helper.ColourHelper;
 import minechem.helper.LogHelper;
@@ -120,6 +119,12 @@ public class Element extends ChemicalBase implements Comparable<Element>
     }
 
     @Override
+    public String getResearchKey()
+    {
+        return "chemicals.elements." + fullName.toLowerCase();
+    }
+
+    @Override
     public List<String> getToolTip()
     {
         List<String> list = new LinkedList<String>();
@@ -170,6 +175,6 @@ public class Element extends ChemicalBase implements Comparable<Element>
                 tone = ColourHelper.RGB("#FF0D0B");
                 break;
         }
-        return ColourHelper.tone(tone, atomicNumber/10F);
+        return ColourHelper.tone(tone, atomicNumber / 10F);
     }
 }

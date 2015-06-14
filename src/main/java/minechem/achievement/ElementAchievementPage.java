@@ -19,7 +19,7 @@ public class ElementAchievementPage extends AchievementPage implements IAchievem
         int k = (columnWidth + 288);
         int l = (rowHeight + 288);
         RenderHelper.setScissor(254, 200, 0, 0, 250, 200);
-        RenderHelper.drawTexturedRectUV(-10-k, 50-l, z, 0, 0, 640, 480, 640, 480, Compendium.Resource.GUI.achievements);
+        RenderHelper.drawTexturedRectUV(-10 - k, 50 - l, z, 0, 0, 640, 480, 640, 480, Compendium.Resource.GUI.achievements);
         RenderHelper.stopScissor();
     }
 

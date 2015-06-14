@@ -4,12 +4,19 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-
-import minechem.asm.data.*;
 import minechem.asm.data.Class;
+import minechem.asm.data.CodeBlock;
+import minechem.asm.data.IInsnList;
+import minechem.asm.data.InstructionNode;
+import minechem.asm.data.Method;
 import net.minecraft.launchwrapper.IClassTransformer;
-import org.objectweb.asm.*;
-import org.objectweb.asm.tree.*;
+import org.objectweb.asm.ClassReader;
+import org.objectweb.asm.ClassWriter;
+import org.objectweb.asm.tree.AbstractInsnNode;
+import org.objectweb.asm.tree.ClassNode;
+import org.objectweb.asm.tree.LineNumberNode;
+import org.objectweb.asm.tree.MethodInsnNode;
+import org.objectweb.asm.tree.MethodNode;
 
 public class MinechemTransformer implements IClassTransformer
 {
@@ -36,8 +43,7 @@ public class MinechemTransformer implements IClassTransformer
                     if (node instanceof InstructionNode)
                     {
                         bytes = injectBytes(method, (InstructionNode) node, bytes);
-                    }
-                    else if (node instanceof CodeBlock)
+                    } else if (node instanceof CodeBlock)
                     {
                         bytes = replaceBytes(method, (CodeBlock) node, bytes);
                     }
@@ -45,10 +51,10 @@ public class MinechemTransformer implements IClassTransformer
             }
             classMap.remove(name);
         }
-        
+
         return bytes;
     }
-    
+
     private byte[] replaceBytes(Method method, CodeBlock codeBlock, byte[] data)
     {
         ClassNode classNode = new ClassNode();
@@ -61,7 +67,7 @@ public class MinechemTransformer implements IClassTransformer
         boolean delete = false;
         boolean done = false;
         int start = codeBlock.getLinesAfterStart();
-        int end = codeBlock.getLinesAfterEnd()+1;
+        int end = codeBlock.getLinesAfterEnd() + 1;
 
         for (Iterator<AbstractInsnNode> itr = methodNode.instructions.iterator(); itr.hasNext();)
         {
@@ -70,11 +76,15 @@ public class MinechemTransformer implements IClassTransformer
             {
                 LineNumberNode lineNode = (LineNumberNode) node;
                 if (lineNode.line >= codeBlock.getStartLine())
+                {
                     delete = true;
+                }
                 if (lineNode.line >= codeBlock.getEndLine())
+                {
                     done = true;
+                }
             }
-            
+
             if (delete)
             {
                 if (done)
@@ -88,7 +98,9 @@ public class MinechemTransformer implements IClassTransformer
                     break;
                 }
                 if (--start < 0)
+                {
                     methodNode.instructions.remove(node);
+                }
             }
         }
 

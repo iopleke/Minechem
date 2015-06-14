@@ -15,7 +15,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import minechem.handler.AchievementHandler;
 import minechem.handler.ElementHandler;
 import minechem.handler.GuiHandler;
-import minechem.handler.JournalHandler;
+import minechem.handler.ResearchHandler;
 import minechem.handler.MessageHandler;
 import minechem.handler.MoleculeHandler;
 import minechem.helper.LogHelper;
@@ -27,7 +27,7 @@ import minechem.registry.ItemRegistry;
 import minechem.registry.JournalRegistry;
 import minechem.registry.RecipeRegistry;
 
-@Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.0.1180,)")
+@Mod(modid = Compendium.Naming.id, name = Compendium.Naming.name, version = Compendium.Version.full, useMetadata = false, guiFactory = "minechem.proxy.client.gui.GuiFactory", acceptedMinecraftVersions = "[1.7.10,)", dependencies = "required-after:Forge@[10.13.2.1291,)")
 public class Minechem
 {
 //    compile already
@@ -100,6 +100,7 @@ public class Minechem
         LogHelper.debug("Registering Event Handlers...");
         proxy.registerEventHandlers();
 
+        LogHelper.debug("Registering Journal...");
         JournalRegistry.init();
     }
 
@@ -112,11 +113,11 @@ public class Minechem
         LogHelper.debug("Registering GUI and Container handlers...");
         NetworkRegistry.INSTANCE.registerGuiHandler(this, new GuiHandler());
 
-        LogHelper.debug("Registering ClientProxy Rendering Hooks...");
+        LogHelper.debug("Registering Renderers...");
         proxy.registerRenderers();
 
-        LogHelper.debug("Registering Journal Pages...");
-        JournalHandler.init(proxy.getCurrentLanguage());
+        LogHelper.debug("Registering Fonts...");
+        proxy.registerFonts();
 
         LogHelper.debug("Registering Achievements...");
         AchievementHandler.init();
@@ -133,12 +134,12 @@ public class Minechem
     @EventHandler
     public void onServerStarted(FMLServerStartedEvent event)
     {
-        JournalHandler.readPlayerResearch();
+        ResearchHandler.readPlayerResearch();
     }
 
     @EventHandler
     public void onServerStopping(FMLServerStoppingEvent event)
     {
-        JournalHandler.saveResearch();
+        ResearchHandler.saveResearch();
     }
 }

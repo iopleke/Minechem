@@ -2,6 +2,10 @@ package minechem;
 
 import cpw.mods.fml.common.ModMetadata;
 import java.util.Arrays;
+
+import minechem.helper.LogHelper;
+import minechem.helper.StringHelper;
+import net.afterlifelochie.fontbox.api.ITracer;
 import net.minecraft.util.ResourceLocation;
 
 /*
@@ -58,7 +62,7 @@ public class Compendium
         public static final String dataJsonPrefix = "data/";
         public static final String elementsDataJson = "elementsData.json";
         public static final String moleculesDataJson = "moleculesData.json";
-        public static final String researchPagesJsonPrefix = "researchPages/";
+        public static final String researchPagesJson = "pages.json";
         public static final String playerResearchData = "minechem/researchData.json";
     }
 
@@ -182,6 +186,29 @@ public class Compendium
 
     }
 
+    public static final class Fontbox
+    {
+        public static ITracer tracer()
+        {
+            return new Tracer();
+        }
+
+        public static final class Tracer implements ITracer
+        {
+            @Override
+            public void trace(Object... params)
+            {
+                LogHelper.debug("Fontbox trace: " + StringHelper.toString(", ", params));
+            }
+
+            @Override
+            public void warn(Object... params)
+            {
+                LogHelper.warn("Fontbox warn: " + StringHelper.toString(", ", params));
+            }
+        }
+    }
+
     public static final class Resource
     {
         public static final class Icon
@@ -194,6 +221,7 @@ public class Compendium
             public static final ResourceLocation journal = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.journal);
             public static final ResourceLocation opticalMicroscope = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.opticalMicroscope);
             public static final ResourceLocation achievements = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.achievements);
+            public static final ResourceLocation noContent = new ResourceLocation(Compendium.Naming.id, Compendium.Texture.GUI.noContent);
 
             public static ResourceLocation getResourceForStructure(String name)
             {
@@ -255,7 +283,7 @@ public class Compendium
         public static final class GUI
         {
             private static final String prefix = "textures/gui/";
-            public static final String compounds = prefix + "compounds/";
+            public static final String compounds = Compendium.Texture.GUI.prefix + "compounds/";
 
             public static final String blankMachine = Compendium.Texture.GUI.prefix + "blankMachine.png";
             public static final String journal = Compendium.Texture.GUI.prefix + "journal.png";
@@ -263,6 +291,7 @@ public class Compendium
             public static final String tab_left = Compendium.Texture.GUI.prefix + "tabLeft.png";
             public static final String tab_right = Compendium.Texture.GUI.prefix + "tabRight.png";
             public static final String achievements = Compendium.Texture.GUI.prefix + "achievementPage.png";
+            public static final String noContent = Compendium.Texture.GUI.prefix + "noContent.png";
 
             public static final class Element
             {

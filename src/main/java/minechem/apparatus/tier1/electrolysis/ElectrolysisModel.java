@@ -7,8 +7,8 @@ import org.lwjgl.opengl.GL11;
 
 public class ElectrolysisModel extends BasicModel
 {
-
-    private byte tubeCount;
+    private boolean leftTube;
+    private boolean rightTube;
 
     ModelRenderer plank;
     ModelRenderer plank2;
@@ -63,8 +63,6 @@ public class ElectrolysisModel extends BasicModel
 
     public ElectrolysisModel()
     {
-        tubeCount = 0;
-
         plank = new ModelRenderer(this, 4, 114);
         plank.setTextureSize(128, 128);
         plank.addBox(-14.5F, -1F, -2.5F, 29, 2, 5);
@@ -377,7 +375,7 @@ public class ElectrolysisModel extends BasicModel
         cable2m2.rotateAngleZ = 0F;
         cable2m2.renderWithRotation(rotation);
 
-        if (tubeCount >= 1)
+        if (leftTube)
         {
             jar2.rotateAngleX = 0F;
             jar2.rotateAngleY = 0F;
@@ -425,7 +423,7 @@ public class ElectrolysisModel extends BasicModel
             jar2m8.renderWithRotation(rotation);
         }
 
-        if (tubeCount >= 2)
+        if (rightTube)
         {
 
             jar3.rotateAngleX = 0F;
@@ -545,14 +543,24 @@ public class ElectrolysisModel extends BasicModel
         super.setRotationAngles(f, f1, f2, f3, f4, f5, e);
     }
 
-    public byte getTubeCount()
+    public boolean getLeftTube()
     {
-        return tubeCount;
+        return leftTube;
     }
 
-    public void setTubeCount(byte tubeCount)
+    public boolean getRightTube()
     {
-        this.tubeCount = tubeCount;
+        return rightTube;
+    }
+
+    public void setLeftTube(boolean enabled)
+    {
+        this.leftTube = enabled;
+    }
+
+    public void setRightTube(boolean enabled)
+    {
+        this.rightTube = enabled;
     }
 
 }

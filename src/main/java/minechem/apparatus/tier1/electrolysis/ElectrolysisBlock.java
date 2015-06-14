@@ -2,6 +2,7 @@ package minechem.apparatus.tier1.electrolysis;
 
 import minechem.Compendium;
 import minechem.apparatus.prefab.block.BasicBlockContainer;
+import minechem.chemical.ChemicalBase;
 import minechem.item.chemical.ChemicalItem;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
@@ -42,24 +43,54 @@ public class ElectrolysisBlock extends BasicBlockContainer
     @Override
     public boolean onBlockActivated(World world, int x, int y, int z, EntityPlayer player, int side, float hitX, float hitY, float hitZ)
     {
-
+        // @TODO: add "player.capabilities.isCreativeMode" checks before removing/adding items to inventory
         TileEntity activatedTileEntity = world.getTileEntity(x, y, z);
         if (activatedTileEntity instanceof ElectrolysisTileEntity)
         {
             ElectrolysisTileEntity electrolysis = (ElectrolysisTileEntity) activatedTileEntity;
-
+            acquireResearch(player, world);
             if (player.getCurrentEquippedItem() != null)
             {
-                ItemStack clickedItem = player.getCurrentEquippedItem();
-                if (clickedItem.getItem() instanceof ChemicalItem)
+                ItemStack clickedItemStack = player.getCurrentEquippedItem();
+                if (clickedItemStack.getItem() instanceof ChemicalItem)
                 {
-                    electrolysis.fillWithItem((ChemicalItem) clickedItem.getItem());
+                    ChemicalBase chemicalBase = ChemicalItem.getChemicalBase(clickedItemStack);
+                    if (chemicalBase != null)
+                    {
+                        byte slot = electrolysis.addItem(clickedItemStack);
+                        if (slot == 0 || slot == 1)
+                        {
+                            electrolysis.fillWithChemicalBase(chemicalBase, slot);
+                            player.inventory.decrStackSize(player.inventory.currentItem, 1);
+                        }
+
+                    }
                 }
             } else
             {
-                electrolysis.removeItem();
-            }
+                ChemicalItem chemItem = null;
+                if (electrolysis.getRightTube() != null)
+                {
+                    chemItem = electrolysis.removeItem(1);
+                } else if (electrolysis.getLeftTube() != null)
+                {
+                    chemItem = electrolysis.removeItem(0);
+                }
 
+                if (chemItem != null)
+                {
+                    if (player.getCurrentEquippedItem() != null && player.getCurrentEquippedItem().getItem() != null)
+                    {
+                        if (player.getCurrentEquippedItem().getItem() instanceof ChemicalItem)
+                        {
+                            // @TODO: attempt to merge held items
+                        }
+                    } else
+                    {
+                        player.inventory.setInventorySlotContents(player.inventory.getFirstEmptyStack(), new ItemStack(chemItem));
+                    }
+                }
+            }
         }
         return false;
     }

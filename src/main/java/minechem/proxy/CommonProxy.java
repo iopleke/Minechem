@@ -1,10 +1,8 @@
 package minechem.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.handler.EventHandler;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.DimensionManager;
@@ -17,16 +15,7 @@ public class CommonProxy
 
     public EntityPlayer findEntityPlayerByName(String name)
     {
-
-        EntityPlayer player;
-        player = MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
-
-        if (player != null)
-        {
-            return player;
-        }
-
-        return null;
+        return MinecraftServer.getServer().getConfigurationManager().func_152612_a(name);
     }
 
     public World getClientWorld()
@@ -34,16 +23,11 @@ public class CommonProxy
         return null;
     }
 
-    public String getItemDisplayName(ItemStack newStack)
-    {
-        return "";
-    }
-
     public EntityPlayer getPlayer(MessageContext context)
     {
         return context.getServerHandler().playerEntity;
     }
-    
+
     public World getWorld(MessageContext context)
     {
         return context.getServerHandler().playerEntity.worldObj;
@@ -51,7 +35,7 @@ public class CommonProxy
 
     public void registerRenderers()
     {
-
+        // NOOP
     }
 
     public void registerEventHandlers()
@@ -66,11 +50,16 @@ public class CommonProxy
 
     public void registerResourcesListener()
     {
-
+        // NOOP
     }
 
     public String getCurrentLanguage()
     {
         return "en_US";
+    }
+
+    public void registerFonts()
+    {
+        // NOOP
     }
 }

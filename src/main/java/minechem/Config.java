@@ -28,6 +28,9 @@ public class Config
     // turns on to copy the newest researchPages list from jar
     public static boolean useDefaultResearchPages = true;
 
+    // makes it that the player can only see his own work in the book
+    public static boolean playerPrivateKnowledge = false;
+
     public static List<IConfigElement> getConfigElements()
     {
         List<IConfigElement> list = new ArrayList<IConfigElement>();
@@ -80,6 +83,12 @@ public class Config
         prop.comment = StatCollector.translateToLocal("config.enablePatreon");
         prop.setLanguageKey("config.enablePatreon.tooltip");
         enablePatreon = prop.getBoolean();
+        configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "playerPrivateKnowledge", Config.playerPrivateKnowledge);
+        prop.comment = StatCollector.translateToLocal("config.playerPrivateKnowledge");
+        prop.setLanguageKey("config.playerPrivateKnowledge.tooltip");
+        playerPrivateKnowledge = prop.getBoolean();
         configList.add(prop.getName());
 
         if (config.hasChanged())

@@ -32,10 +32,8 @@ public class ElectrolysisTileEntityRenderer extends BasicTileEntityRenderer
             GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
             GL11.glScaled(xScale, yScale, zScale);
             bindTexture(texture);
-            if (model.getTubeCount() != ((ElectrolysisTileEntity) tileEntity).tubeCount)
-            {
-                model.setTubeCount(((ElectrolysisTileEntity) tileEntity).tubeCount);
-            }
+            model.setLeftTube(((ElectrolysisTileEntity) tileEntity).getLeftTube() != null);
+            model.setRightTube(((ElectrolysisTileEntity) tileEntity).getRightTube() != null);
             model.render(rotation);
             GL11.glDisable(GL11.GL_BLEND);
             GL11.glPopMatrix();

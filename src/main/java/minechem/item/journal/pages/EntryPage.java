@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import minechem.item.journal.pages.elements.IJournalElement;
 import minechem.item.journal.pages.elements.JournalHeader;
+import net.afterlifelochie.fontbox.document.CompilerHint;
 import net.afterlifelochie.fontbox.document.Element;
 import net.minecraft.entity.player.EntityPlayer;
 
@@ -41,6 +42,26 @@ public class EntryPage extends JournalPage
                     result.add(e);
                 }
             }
+            result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
+        }
+        return result;
+    }
+
+    @Override
+    public List<Element> getElements(String[] keys)
+    {
+        List<Element> result = new ArrayList<Element>();
+        if (isUnlocked(keys))
+        {
+            for (IJournalElement element : elements)
+            {
+                Element e = element.getElement(keys);
+                if (e != null)
+                {
+                    result.add(e);
+                }
+            }
+            result.add(new CompilerHint(CompilerHint.HintType.PAGEBREAK));
         }
         return result;
     }

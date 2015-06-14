@@ -6,12 +6,9 @@ import minechem.Compendium;
 import minechem.chemical.Element;
 import minechem.helper.ColourHelper;
 import minechem.helper.LocalizationHelper;
-import minechem.item.chemical.ChemicalItem;
 import minechem.proxy.client.font.Font;
-import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.texture.TextureManager;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.stats.Achievement;
 import net.minecraft.util.ChatComponentTranslation;
@@ -67,10 +64,12 @@ public class ElementAchievement extends Achievement implements IAchievementRende
     public int recolourBackground(float greyScale)
     {
         if (greyScale != 1.0F)
+        {
             return ColourHelper.blend(getColour(element), ColourHelper.RGB(greyScale, greyScale, greyScale));
+        }
         return getColour(element);
     }
-    
+
     private int getColour(Element element)
     {
         switch (element.type)

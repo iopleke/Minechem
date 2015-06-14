@@ -2,17 +2,38 @@ package minechem.apparatus.tier1.electrolysis;
 
 import minechem.Compendium;
 import minechem.apparatus.prefab.tileEntity.BasicFluidInventoryTileEntity;
+import minechem.chemical.ChemicalBase;
 import minechem.item.chemical.ChemicalItem;
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
 {
-    public byte tubeCount;
+    private byte LEFTSIDE = 0;
+    private byte RIGHTSIDE = 1;
+    private boolean leftTube;
+    private boolean rightTube;
 
     public ElectrolysisTileEntity()
     {
         super(Compendium.Naming.electrolysis, 2, 3);
-        tubeCount = 0;
+    }
+
+    public byte addItem(ItemStack chemicalItemStack)
+    {
+        if (chemicalItemStack.getItem() != null && chemicalItemStack.getItem() instanceof ChemicalItem)
+        {
+            if (this.getStackInSlot(0) == null)
+            {
+                this.setInventorySlotContents(0, chemicalItemStack);
+                return 0;
+            } else if (this.getStackInSlot(1) == null)
+            {
+                this.setInventorySlotContents(1, chemicalItemStack);
+                return 1;
+            }
+        }
+        return -1;
     }
 
     @Override
@@ -26,21 +47,79 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     {
     }
 
-    public boolean fillWithItem(ChemicalItem item)
+    /**
+     * Fill a specific side of the TileEntity with a ChemicalBase
+     *
+     * @param chemicalBase
+     * @param side         0 is left, 1 is right
+     */
+    public void fillWithChemicalBase(ChemicalBase chemicalBase, byte side)
     {
-        tubeCount++;
-        if (tubeCount > 2)
+
+        if (side == LEFTSIDE)
         {
-            tubeCount = 0;
+            leftTube = true;
         }
-        return false;
+        if (side == RIGHTSIDE)
+        {
+            rightTube = true;
+        }
     }
 
-    public ChemicalItem removeItem()
+    /**
+     * Remove a ChemicalItem from a side
+     *
+     * @param side 0 is left, 1 is right
+     * @return
+     */
+    public ChemicalItem removeItem(int side)
     {
-        if (tubeCount > 0)
+        if (side == LEFTSIDE)
         {
-            tubeCount--;
+
+            if (this.getStackInSlot(1) != null)
+            {
+                ChemicalItem chemical = (ChemicalItem) getStackInSlot(1).getItem();
+                this.decrStackSize(1, 1);
+                leftTube = false;
+                return chemical;
+            }
+        }
+        if (side == RIGHTSIDE)
+        {
+            if (this.getStackInSlot(0) != null)
+            {
+                ChemicalItem chemical = (ChemicalItem) getStackInSlot(0).getItem();
+                this.decrStackSize(0, 1);
+                rightTube = false;
+                return chemical;
+            }
+        }
+        return null;
+    }
+
+    public ChemicalItem getLeftTube()
+    {
+        ItemStack itemStack = decrStackSize(LEFTSIDE, 1);
+        if (itemStack != null)
+        {
+            if (itemStack.getItem() instanceof ChemicalItem)
+            {
+                return (ChemicalItem) itemStack.getItem();
+            }
+        }
+        return null;
+    }
+
+    public ChemicalItem getRightTube()
+    {
+        ItemStack itemStack = decrStackSize(RIGHTSIDE, 1);
+        if (itemStack != null)
+        {
+            if (itemStack.getItem() instanceof ChemicalItem)
+            {
+                return (ChemicalItem) itemStack.getItem();
+            }
         }
         return null;
     }
@@ -54,9 +133,6 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     public void writeToNBT(NBTTagCompound nbttagcompound)
     {
         super.writeToNBT(nbttagcompound);
-        NBTTagCompound tubeCountNBT = new NBTTagCompound();
-        // This doesn't currently seem to be working...
-        tubeCountNBT.setByte("tubeCount", tubeCount);
     }
 
     /**
@@ -68,7 +144,5 @@ public class ElectrolysisTileEntity extends BasicFluidInventoryTileEntity
     public void readFromNBT(NBTTagCompound nbttagcompound)
     {
         super.readFromNBT(nbttagcompound);
-        // This doesn't currently seem to be working...
-        tubeCount = nbttagcompound.getByte("tubeCount");
     }
 }

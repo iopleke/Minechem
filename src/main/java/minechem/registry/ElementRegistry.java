@@ -43,7 +43,8 @@ public class ElementRegistry
         atomicElementMap.put(element.atomicNumber, element);
         abbrElementMap.put(element.shortName, element);
         nameElementMap.put(element.fullName.toLowerCase(), element);
-        element.log();// TODO: make this debug only later
+        // @TODO: make this debug only later
+        element.log();
     }
 
     /**

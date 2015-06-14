@@ -8,7 +8,6 @@ import minechem.helper.MathHelper;
 import minechem.proxy.client.font.Font;
 import minechem.proxy.client.render.ILayer;
 import minechem.proxy.client.render.IconLayer;
-import minechem.proxy.client.render.RenderHelper;
 import minechem.proxy.client.render.TextLayer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
@@ -24,7 +23,10 @@ public class ChemicalItemRenderer implements IItemRenderer
     public boolean handleRenderType(ItemStack item, ItemRenderType type)
     {
         ChemicalBase chemicalBase = ChemicalItem.getChemicalBase(item);
-        if (chemicalBase == null) return false;
+        if (chemicalBase == null)
+        {
+            return false;
+        }
         switch (type)
         {
             case ENTITY:
@@ -41,7 +43,10 @@ public class ChemicalItemRenderer implements IItemRenderer
     public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item, ItemRendererHelper helper)
     {
         ChemicalBase chemicalBase = ChemicalItem.getChemicalBase(item);
-        if (chemicalBase == null) return false;
+        if (chemicalBase == null)
+        {
+            return false;
+        }
         switch (helper)
         {
             case ENTITY_BOBBING:

@@ -15,7 +15,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 import minechem.Compendium;
-import minechem.Config;
 import minechem.Minechem;
 import minechem.helper.FileHelper;
 import minechem.helper.LogHelper;
@@ -23,7 +22,7 @@ import minechem.registry.ResearchRegistry;
 import org.apache.commons.io.FileUtils;
 import org.apache.logging.log4j.Level;
 
-public class JournalHandler
+public class ResearchHandler
 {
     /**
      * Save the current research map
@@ -39,7 +38,8 @@ public class JournalHandler
             for (Map.Entry<UUID, Set<String>> entry : ResearchRegistry.getInstance().getPlayerResearchMap().entrySet())
             {
                 jWriter.name(entry.getKey().toString()).beginObject();
-                //jWriter.name("displayName").value(); TODO: maybe find a way to add this for readability
+                // @TODO: maybe find a way to add this for readability
+                //jWriter.name("displayName").value();
                 jWriter.name("research").beginArray();
                 for (String research : entry.getValue())
                 {
@@ -60,35 +60,6 @@ public class JournalHandler
         } catch (IOException e)
         {
             throw new RuntimeException(e);
-        }
-    }
-
-    /**
-     * Read pages for given lang
-     *
-     * @param lang the lang code eg. "en_US" defaults to en_US if given lang does not exist
-     */
-    public static void init(String lang)
-    {
-        String[] fileDestSource = new String[2];
-        fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + lang + ".json";
-        fileDestSource[1] = Compendium.Config.configPrefix + Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + lang + ".json";
-
-        if (!FileHelper.doesFileExistInJar(JournalHandler.class, fileDestSource[0]))
-        {
-            fileDestSource[0] = Compendium.Config.dataJsonPrefix + Compendium.Config.researchPagesJsonPrefix + "en_US" + ".json";
-        }
-        InputStream inputStream = FileHelper.getJsonFile(JournalHandler.class, fileDestSource, Config.useDefaultResearchPages);
-        readFromStream(inputStream);
-        if (inputStream != null)
-        {
-            try
-            {
-                inputStream.close();
-            } catch (IOException e)
-            {
-                LogHelper.exception("Cannot close stream!", e, Level.WARN);
-            }
         }
     }
 
@@ -129,29 +100,5 @@ public class JournalHandler
             count++;
         }
         LogHelper.info("Total of " + count + " researchers registered");
-    }
-
-    private static void readFromStream(InputStream inputStream)
-    {
-        JsonReader jReader = new JsonReader(new InputStreamReader(inputStream));
-        JsonParser parser = new JsonParser();
-
-        Set<Map.Entry<String, JsonElement>> pagesSet = parser.parse(jReader).getAsJsonObject().entrySet();
-        int count = 0;
-        for (Map.Entry<String, JsonElement> pageEntry : pagesSet)
-        {
-            if (!pageEntry.getValue().isJsonObject())
-            {
-                continue;
-            }
-            JsonObject pageObject = pageEntry.getValue().getAsJsonObject();
-            ResearchRegistry.getInstance().addResearchPage(
-                pageEntry.getKey(),
-                pageObject.get("title").getAsString(),
-                pageObject.get("content").getAsString()
-            );
-            count++;
-        }
-        LogHelper.info("Total of " + count + " pages registered");
     }
 }

@@ -1,13 +1,12 @@
 package minechem.achievement;
 
+import java.util.Random;
 import minechem.asm.MinechemHooks;
 import minechem.proxy.client.render.RenderHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.init.Blocks;
 import net.minecraft.util.IIcon;
-
-import java.util.Random;
 
 public class MinecraftAchievementPage
 {
@@ -25,8 +24,8 @@ public class MinecraftAchievementPage
         {
             float grayScale = 0.6F - (j + row) / 25.0F * 0.3F;
             MinechemHooks.resetGreyscale(grayScale);
-            
-            for (column = 0;  column * scaled - k < 224.0F; ++column)
+
+            for (column = 0; column * scaled - k < 224.0F; ++column)
             {
                 random.setSeed(mc.getSession().getPlayerID().hashCode() + i + column + (j + row) * 16);
                 icon = random.nextInt(1 + j + row) + (j + row) / 2;

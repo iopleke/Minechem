@@ -10,7 +10,7 @@ import org.objectweb.asm.tree.VarInsnNode;
 public enum InstructionNode implements IInsnList
 {
     RECOLOUR("bindTexture", "func_110577_a ", "glEnable", "glEnable", false),
-    RESET("glDisable", "glDisable", "canUnlockAchievement", "func_77442_b",false),
+    RESET("glDisable", "glDisable", "canUnlockAchievement", "func_77442_b", false),
     ICON("getTextureManager", "func_110434_K", "renderItemAndEffectIntoGUI", "func_82406_b", true),
     SET_SCALE("", "", "", "", false);
 
@@ -19,7 +19,7 @@ public enum InstructionNode implements IInsnList
     public final boolean replace;
     public InsnList insnList;
 
-    private InstructionNode(String after, String obfAfter,  String next, String obfNext, boolean replace)
+    private InstructionNode(String after, String obfAfter, String next, String obfNext, boolean replace)
     {
         this.after = after;
         this.obfAfter = obfAfter;

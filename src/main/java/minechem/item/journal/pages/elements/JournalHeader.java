@@ -18,6 +18,22 @@ public class JournalHeader extends JournalElement
     @Override
     public Element getElement(EntityPlayer player)
     {
-        return new Heading(getKey(), LocalizationHelper.getLocalString(titleKey));
+        return getElement(0);
+    }
+
+    @Override
+    public Element getElement(String[] keys)
+    {
+        return getElement(0);
+    }
+
+    public Element getElement(int indent)
+    {
+        String sIndent = "";
+        for (int i = 0; i < indent; i++)
+        {
+            sIndent += "--";
+        }
+        return new Heading(getKey(), sIndent + " " + LocalizationHelper.getLocalString(titleKey));
     }
 }

@@ -16,6 +16,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 {
     /**
      * Executes GL11.glColor4f() for given int colour
+     *
      * @param colour in int form
      */
     public static void setOpenGLColour(int colour)
@@ -33,6 +34,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Executes GL11.glColor4f(greyscale, greyscale, greyscale, 1.0F)
+     *
      * @param greyscale the greyscale in float form where 0.0F is black and 1.0F is white
      */
     public static void setGreyscaleOpenGLColour(float greyscale)
@@ -45,7 +47,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
      */
     public static void enableBlend()
     {
-        GL11.glEnable(GL11.GL_BLEND);        
+        GL11.glEnable(GL11.GL_BLEND);
     }
 
     /**
@@ -57,8 +59,8 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
     }
 
     /**
-     * Executes GL11.glColor4f(1.0F, 1.0F, 1.0F, opacity)
-     * Used in combination with blend
+     * Executes GL11.glColor4f(1.0F, 1.0F, 1.0F, opacity) Used in combination with blend
+     *
      * @param opacity the opacity in float form where 1.0F is opaque and 0.0F is transparent
      */
     public static void setOpacity(float opacity)
@@ -75,12 +77,13 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
     }
 
     /**
-     *  Draws a {@link net.minecraft.util.IIcon} on given x, y, z
-     * @param x xPos
-     * @param y yPos
-     * @param z zPos
-     * @param w icon width
-     * @param h icon height
+     * Draws a {@link net.minecraft.util.IIcon} on given x, y, z
+     *
+     * @param x    xPos
+     * @param y    yPos
+     * @param z    zPos
+     * @param w    icon width
+     * @param h    icon height
      * @param icon the {@link net.minecraft.util.IIcon}
      */
     public static void drawTexturedRectUV(float x, float y, float z, int w, int h, IIcon icon)
@@ -96,13 +99,14 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Draw a {@link net.minecraft.util.ResourceLocation} on given coords
-     * @param x xPos
-     * @param y yPos
-     * @param z zPos
-     * @param u uPos on the {@link net.minecraft.util.ResourceLocation}
-     * @param v vPos on the {@link net.minecraft.util.ResourceLocation}
-     * @param w width
-     * @param h height
+     *
+     * @param x        xPos
+     * @param y        yPos
+     * @param z        zPos
+     * @param u        uPos on the {@link net.minecraft.util.ResourceLocation}
+     * @param v        vPos on the {@link net.minecraft.util.ResourceLocation}
+     * @param w        width
+     * @param h        height
      * @param resource the {@link net.minecraft.util.ResourceLocation}
      */
     public static void drawTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, ResourceLocation resource)
@@ -112,7 +116,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x, y + h, z, u * textScale, (v + h) * textScale);
-        tessellator.addVertexWithUV(x + w, y + h, z, (u + w)  * textScale, (v + h) * textScale);
+        tessellator.addVertexWithUV(x + w, y + h, z, (u + w) * textScale, (v + h) * textScale);
         tessellator.addVertexWithUV(x + w, y, z, (u + w) * textScale, y * textScale);
         tessellator.addVertexWithUV(x, y, z, u * textScale, v * textScale);
         tessellator.draw();
@@ -120,14 +124,15 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Draw a {@link net.minecraft.util.ResourceLocation} on given coords with given scaling
-     * @param x xPos
-     * @param y yPos
-     * @param z zPos
-     * @param u uPos on the {@link net.minecraft.util.ResourceLocation}
-     * @param v vPos on the {@link net.minecraft.util.ResourceLocation}
-     * @param w width
-     * @param h height
-     * @param scale the scale to draw 1.0F is exact, less is smaller and bigger is larger
+     *
+     * @param x        xPos
+     * @param y        yPos
+     * @param z        zPos
+     * @param u        uPos on the {@link net.minecraft.util.ResourceLocation}
+     * @param v        vPos on the {@link net.minecraft.util.ResourceLocation}
+     * @param w        width
+     * @param h        height
+     * @param scale    the scale to draw 1.0F is exact, less is smaller and bigger is larger
      * @param resource the {@link net.minecraft.util.ResourceLocation}
      */
     public static void drawScaledTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, float scale, ResourceLocation resource)
@@ -140,7 +145,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x, y + drawH, z, u * xScale, (v + h) * yScale);
-        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * xScale, (v + h) * yScale);
+        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w) * xScale, (v + h) * yScale);
         tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * xScale, v * yScale);
         tessellator.addVertexWithUV(x, y, z, u * xScale, v * yScale);
         tessellator.draw();
@@ -148,15 +153,16 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Draw a {@link net.minecraft.util.ResourceLocation} on given coords with given draw width and draw height
-     * @param x xPos
-     * @param y yPos
-     * @param z zPos
-     * @param u uPos on the {@link net.minecraft.util.ResourceLocation}
-     * @param v vPos on the {@link net.minecraft.util.ResourceLocation}
-     * @param w actual width
-     * @param h actual height
-     * @param drawW the draw width
-     * @param drawH the draw height
+     *
+     * @param x        xPos
+     * @param y        yPos
+     * @param z        zPos
+     * @param u        uPos on the {@link net.minecraft.util.ResourceLocation}
+     * @param v        vPos on the {@link net.minecraft.util.ResourceLocation}
+     * @param w        actual width
+     * @param h        actual height
+     * @param drawW    the draw width
+     * @param drawH    the draw height
      * @param resource the {@link net.minecraft.util.ResourceLocation}
      */
     public static void drawTexturedRectUV(float x, float y, float z, float u, float v, float w, float h, float drawW, float drawH, ResourceLocation resource)
@@ -167,7 +173,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
         Tessellator tessellator = Tessellator.instance;
         tessellator.startDrawingQuads();
         tessellator.addVertexWithUV(x, y + drawH, z, u * xScale, (v + h) * yScale);
-        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w)  * xScale, (v + h) * yScale);
+        tessellator.addVertexWithUV(x + drawW, y + drawH, z, (u + w) * xScale, (v + h) * yScale);
         tessellator.addVertexWithUV(x + drawW, y, z, (u + w) * xScale, v * yScale);
         tessellator.addVertexWithUV(x, y, z, u * xScale, v * yScale);
         tessellator.draw();
@@ -175,6 +181,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Draw a texture in 2D using {@link net.minecraft.client.renderer.ItemRenderer#renderItemIn2D(net.minecraft.client.renderer.Tessellator, float, float, float, float, int, int, float)}
+     *
      * @param texture the {@link net.minecraft.util.IIcon}
      */
     public static void drawTextureIn2D(IIcon texture)
@@ -185,6 +192,7 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Draws a texture in 3D using {@link net.minecraft.client.renderer.ItemRenderer#renderItemIn2D(net.minecraft.client.renderer.Tessellator, float, float, float, float, int, int, float)}
+     *
      * @param texture the {@link net.minecraft.util.IIcon}
      */
     public static void drawTextureIn3D(IIcon texture)
@@ -200,12 +208,13 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
 
     /**
      * Start a GL_SCISSOR_TEST
-     * @param guiWidth {@link net.minecraft.client.gui.GuiScreen#width}
+     *
+     * @param guiWidth  {@link net.minecraft.client.gui.GuiScreen#width}
      * @param guiHeight {@link net.minecraft.client.gui.GuiScreen#height}
-     * @param x xPos to start scissor
-     * @param y yPos to start scissor
-     * @param w width of the scissor
-     * @param h height of the scissor
+     * @param x         xPos to start scissor
+     * @param y         yPos to start scissor
+     * @param w         width of the scissor
+     * @param h         height of the scissor
      */
     public static void setScissor(int guiWidth, int guiHeight, float x, float y, int w, int h)
     {
@@ -227,10 +236,20 @@ public class RenderHelper extends net.minecraft.client.renderer.RenderHelper
     }
 
     /**
-     *  Stop a GL_SCISSOR_TEST
+     * Stop a GL_SCISSOR_TEST
      */
     public static void stopScissor()
     {
         GL11.glDisable(GL11.GL_SCISSOR_TEST);
+    }
+
+    /**
+     * Bind given texture
+     *
+     * @param texture
+     */
+    public static void bindTexture(ResourceLocation texture)
+    {
+        Minecraft.getMinecraft().renderEngine.bindTexture(texture);
     }
 }

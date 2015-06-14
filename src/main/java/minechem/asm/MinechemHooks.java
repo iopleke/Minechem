@@ -53,25 +53,29 @@ public class MinechemHooks
         }
         MinecraftAchievementPage.drawBackground(mc, 0, scale, columnWidth, rowHeight);
     }
-    
+
     public static float setScaleOnLoad(int currentPage)
     {
         if (currentPage != -1)
         {
             AchievementPage achievementPage = AchievementPage.getAchievementPage(currentPage);
             if (achievementPage instanceof IAchievementPageRenderer)
+            {
                 return ((IAchievementPageRenderer) achievementPage).setScaleOnLoad();
+            }
         }
         return 1.0F;
     }
-    
+
     public static float getMaxZoomOut(int currentPage)
     {
         if (currentPage != -1)
         {
             AchievementPage achievementPage = AchievementPage.getAchievementPage(currentPage);
             if (achievementPage instanceof IAchievementPageRenderer)
+            {
                 return ((IAchievementPageRenderer) achievementPage).getMaxZoomOut();
+            }
         }
         return 2.0F;
     }
@@ -82,11 +86,13 @@ public class MinechemHooks
         {
             AchievementPage achievementPage = AchievementPage.getAchievementPage(currentPage);
             if (achievementPage instanceof IAchievementPageRenderer)
+            {
                 return ((IAchievementPageRenderer) achievementPage).getMaxZoomIn();
+            }
         }
         return 1.0F;
     }
-    
+
     public static void renderOverlay(FontRenderer fontRenderer, TextureManager textureManager, ItemStack itemStack, int left, int top, float z)
     {
         if (itemStack.getItem() instanceof IOverlay)

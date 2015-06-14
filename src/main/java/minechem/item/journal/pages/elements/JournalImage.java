@@ -20,6 +20,12 @@ public class JournalImage extends JournalElement
         element = new Image(new ResourceLocation(Compendium.Naming.id, imageDir), width, height, alignmentMode, floatMode);
     }
 
+    public JournalImage(String pageKey, ResourceLocation image, int width, int height, AlignmentMode alignmentMode, FloatMode floatMode)
+    {
+        super(pageKey);
+        element = new Image(image, width, height, alignmentMode, floatMode);
+    }
+
     public JournalImage(String pageKey, ItemStack stack, int width, int height, AlignmentMode alignmentMode, FloatMode floatMode)
     {
         super(pageKey);
@@ -30,5 +36,11 @@ public class JournalImage extends JournalElement
     public Element getElement(EntityPlayer player)
     {
         return isUnlocked(player, getKey()) ? element : null;
+    }
+
+    @Override
+    public Element getElement(String[] keys)
+    {
+        return isUnlocked(keys, getKey()) ? element : null;
     }
 }

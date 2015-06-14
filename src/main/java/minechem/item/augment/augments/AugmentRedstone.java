@@ -8,7 +8,11 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 public class AugmentRedstone extends AugmentBase
 {
-    private static final int[] levels = new int[]{5, 10, 15};
+    private static final int[] levels = new int[]
+    {
+        5, 10, 15
+    };
+
     public AugmentRedstone()
     {
         super("redstone");

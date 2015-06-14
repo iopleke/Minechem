@@ -2,12 +2,11 @@ package minechem.item.journal;
 
 import java.io.IOException;
 import java.util.List;
-
-import codechicken.lib.gui.GuiDraw;
 import minechem.Compendium;
+import minechem.Config;
 import minechem.helper.LogHelper;
+import minechem.proxy.client.render.RenderHelper;
 import minechem.registry.JournalRegistry;
-import minechem.registry.ResearchRegistry;
 import net.afterlifelochie.fontbox.Fontbox;
 import net.afterlifelochie.fontbox.document.Document;
 import net.afterlifelochie.fontbox.document.Element;
@@ -17,7 +16,6 @@ import net.afterlifelochie.fontbox.layout.PageWriter;
 import net.afterlifelochie.fontbox.layout.components.PageProperties;
 import net.afterlifelochie.fontbox.render.BookGUI;
 import net.minecraft.entity.player.EntityPlayer;
-
 import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -28,29 +26,20 @@ import org.lwjgl.opengl.GL11;
 public class JournalGUI extends BookGUI
 {
     private String[] authorList;
-    private JournalPage[] pageIndex;
     private int top, left;
 
-    private boolean pageChanged = false;
-
     /**
-     * @param who
-     *            the player
-     * @param knowledgeKeys
-     *            a array with all knowledgeKeys of the pages to display
-     * @param authors
-     *            a list of authors
+     * @param who           the player
+     * @param knowledgeKeys a array with all knowledgeKeys of the pages to display
+     * @param authors       a list of authors
      */
     public JournalGUI(EntityPlayer who, String[] knowledgeKeys, String[] authors)
     {
-        super(UpMode.TWOUP, new Layout[] { new Layout(10, 30), new Layout(138, 30) });
+        super(UpMode.TWOUP, new Layout[]
+        {
+            new Layout(10, 5), new Layout(138, 5)
+        });
 
-        /**
-         * TODO: You will need to compile the page indexes and author list data
-         * directly into the book's element stream for it to be written
-         * correctly.
-         */
-        pageIndex = ResearchRegistry.getInstance().getResearchPages(knowledgeKeys);
         authorList = authors;
 
         try
@@ -60,34 +49,37 @@ public class JournalGUI extends BookGUI
             try
             {
                 /* Copy the list of elements */
-                List<Element> elements = JournalRegistry.journal.getElements(who);
+                List<Element> elements;
+                if (Config.playerPrivateKnowledge)
+                {
+                    elements = JournalRegistry.getJournalFor(who);
+                } else
+                {
+                    elements = JournalRegistry.getJournalFor(knowledgeKeys);
+                }
                 /* Write elements => document */
                 document.pushAll(elements);
-            }
-            catch (Throwable thrown)
+            } catch (Throwable thrown)
             {
                 LogHelper.exception(thrown, Level.WARN);
             }
 
             /* Set up page formatting */
-            PageProperties properties = new PageProperties(200, 800, Fontbox.fromName("Note this"));
+            PageProperties properties = new PageProperties(221, 380, Fontbox.fromName("Note this"));
             properties.headingFont(Fontbox.fromName("Ampersand"));
-            properties.bothMargin(2).lineheightSize(8).spaceSize(4).densitiy(0.66f);
+            properties.bothMargin(2).lineheightSize(4).spaceSize(4).densitiy(0.33f);
 
             /* Write elements => page stream */
             PageWriter writer = new PageWriter(properties);
-            DocumentProcessor.generatePages(Fontbox.tracer(), document, writer);
+            DocumentProcessor.generatePages(Compendium.Fontbox.tracer(), document, writer);
             writer.close();
 
             /* Update system pages */
             changePages(writer.pages());
-            markDirty();
-        }
-        catch (LayoutException layout)
+        } catch (LayoutException layout)
         {
             LogHelper.exception(layout, Level.ERROR);
-        }
-        catch (IOException ioex)
+        } catch (IOException ioex)
         {
             LogHelper.exception(ioex, Level.ERROR);
         }
@@ -104,23 +96,18 @@ public class JournalGUI extends BookGUI
         if (ptr > 1)
         {
             // Draw folded page on the left
-            GuiDraw.drawTexturedModalRect(5, 163, 0, 188, 21, 21);
+            drawTexturedModalRect(5, 163, 0, 188, 21, 21);
         }
-        if (ptr < pageIndex.length)
+        if (ptr + 2 < pages.size())
         {
             // Draw folded page on the right
-            GuiDraw.drawTexturedModalRect(230, 160, 21, 188, 21, 21);
+            drawTexturedModalRect(230, 160, 21, 188, 21, 21);
         }
     }
 
     private void drawJournalBackground()
     {
-        GuiDraw.drawTexturedModalRect(0, 0, 0, 0, 256, 188);
-    }
-
-    private boolean isDirty()
-    {
-        return pageChanged;
+        drawTexturedModalRect(0, 0, 0, 0, 256, 188);
     }
 
     /**
@@ -143,16 +130,6 @@ public class JournalGUI extends BookGUI
         }
     }
 
-    private void markClean()
-    {
-        pageChanged = false;
-    }
-
-    private void markDirty()
-    {
-        pageChanged = true;
-    }
-
     @Override
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton)
     {
@@ -169,7 +146,7 @@ public class JournalGUI extends BookGUI
             previous();
         }
 
-        LogHelper.info("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
+        LogHelper.debug("mouseX:" + mouseX + " mouseY:" + mouseY + " mouseButton:" + mouseButton);
     }
 
     private boolean wasRightTabClicked(int mouseX, int mouseY, int mouseButton)
@@ -205,7 +182,7 @@ public class JournalGUI extends BookGUI
     @Override
     public void onPageChanged(BookGUI gui, int whatPtr)
     {
-        markDirty();
+
     }
 
     @Override
@@ -214,9 +191,12 @@ public class JournalGUI extends BookGUI
         GL11.glPushMatrix();
         GL11.glColor4f(1.0f, 1.0f, 1.0f, 1.0f);
         GL11.glTranslatef(left = width / 2 - 128, top = height / 2 - 94, 0.0f);
-        GuiDraw.changeTexture(Compendium.Resource.GUI.journal);
+        RenderHelper.bindTexture(Compendium.Resource.GUI.journal);
         drawJournalBackground();
-        drawFoldedPages();
+        if (pages != null)
+        {
+            drawFoldedPages();
+        }
     }
 
     @Override

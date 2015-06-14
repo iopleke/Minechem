@@ -16,6 +16,7 @@ public enum CodeBlock implements IInsnList
     private InsnList insnList;
     private int startLine, endLine;
     private int linesAfterStart, linesAfterEnd;
+
     private CodeBlock(int startLine, int linesAfterStart, int endLine, int linesAfterEnd)
     {
         this.startLine = startLine;
