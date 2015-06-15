@@ -206,6 +206,12 @@ public class Compendium
             {
                 LogHelper.warn("Fontbox warn: " + StringHelper.toString(", ", params));
             }
+
+            @Override
+            public boolean enableAssertion()
+            {
+                return false;
+            }
         }
     }
 
