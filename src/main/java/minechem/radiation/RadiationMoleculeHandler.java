@@ -1,9 +1,12 @@
 package minechem.radiation;
 
-import java.util.*;
-
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 import minechem.MinechemItemsRegistration;
 import minechem.fluid.FluidHelper;
+import minechem.fluid.MinechemFluidBlock;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.Element;
@@ -34,103 +37,97 @@ public class RadiationMoleculeHandler
         return instance;
     }
 
-    private final Map<MoleculeEnum, PotionChemical[]> decayedMoleculesPre;
-    private final Map<MoleculeEnum, PotionChemical[]> decayedMoleculesCache;
-
-    private RadiationMoleculeHandler()
-    {
-        decayedMoleculesCache = new WeakHashMap<MoleculeEnum, PotionChemical[]>();
-        decayedMoleculesPre = new WeakHashMap<MoleculeEnum, PotionChemical[]>();
-        initDecayedMoleculesPre();
-    }
-
     public RadiationInfo handleRadiationMoleculeBucket(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        PotionChemical[] decayedChemicals = getDecayedMolecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical);
-        for (int i = 0; i < decayedChemicals.length; i++)
+        Set<PotionChemical> decayedChemicals = computDecayMolecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical);
+        for (PotionChemical chemical : decayedChemicals)
         {
-            decayedChemicals[i].amount *= 8 * itemStack.stackSize;
+            chemical.amount *= 8 * itemStack.stackSize;
         }
-        ItemStack[] items = toItemStacks(decayedChemicals);
-        for (int i = 1; i < items.length; i++)
+
+        List<ItemStack> items = toItemStacks(decayedChemicals);
+
+        /*
+         * select one of the items
+         * wrap it with bukkit
+         * and replace the old item with this
+         */
+        ItemStack oneItem = items.isEmpty() ? null : items.remove(0);
+
+        for (ItemStack item : items)
         {
-            ItemStack stack = MinechemUtil.addItemToInventory(inventory, items[i]);
+            ItemStack stack = MinechemUtil.addItemToInventory(inventory, item);
             if (stack != null)
             {
                 MinechemUtil.throwItemStack(world, itemStack, x, y, z);
             }
         }
 
-        Item item = items[0].getItem();
-        if (item instanceof MoleculeItem)
+        if (oneItem == null)
         {
-            itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeItem.getMolecule(items[0])))));
-        } else if (item instanceof ElementItem)
-        {
-            itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(items[0])))));
+            return null;
         }
-        itemStack.stackSize = (items[0].stackSize / 8);
-        itemStack.setTagCompound(items[0].stackTagCompound);
+
+        MinechemFluidBlock bukkitFilled;
+        if (oneItem.getItem() instanceof MoleculeItem)
+        {
+            bukkitFilled = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeItem.getMolecule(oneItem)));
+        } else if (oneItem.getItem() instanceof ElementItem)
+        {
+            bukkitFilled = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(oneItem)));
+        } else
+        {
+            throw new RuntimeException("unexpected item type: " + oneItem.getItem().getClass());
+        }
+        itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(bukkitFilled));
+        itemStack.stackSize = (oneItem.stackSize / 8);
+        itemStack.setTagCompound(oneItem.stackTagCompound);
 
         return ElementItem.initiateRadioactivity(itemStack, world);
     }
 
     public RadiationInfo handleRadiationMolecule(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        PotionChemical[] decayedChemicals = getDecayedMolecule(MoleculeItem.getMolecule(itemStack));
-        for (int i = 0; i < decayedChemicals.length; i++)
+        Set<PotionChemical> decayedChemicals = computDecayMolecule(MoleculeItem.getMolecule(itemStack));
+        for (PotionChemical chemical : decayedChemicals)
         {
-            decayedChemicals[i].amount *= itemStack.stackSize;
+            chemical.amount *= itemStack.stackSize;
         }
-        ItemStack[] items = toItemStacks(decayedChemicals);
-        for (int i = 1; i < items.length; i++)
+        List<ItemStack> items = toItemStacks(decayedChemicals);
+
+        /*
+         * select one of the items
+         * replace the undecayed item with this
+         * to let one stack stay at the old location
+         */
+        ItemStack oneItem = items.isEmpty() ? null : items.remove(0);
+
+        for (ItemStack item : items)
         {
-            ItemStack stack = MinechemUtil.addItemToInventory(inventory, items[i]);
+            ItemStack stack = MinechemUtil.addItemToInventory(inventory, item);
             if (stack != null)
             {
                 MinechemUtil.throwItemStack(world, itemStack, x, y, z);
             }
         }
 
-        itemStack.setItemDamage(items[0].getItemDamage());
-        itemStack.func_150996_a(items[0].getItem());
-        itemStack.stackSize = (items[0].stackSize);
-        itemStack.setTagCompound(items[0].stackTagCompound);
+        if (oneItem == null)
+        {
+            return null;
+        }
+
+        itemStack.setItemDamage(oneItem.getItemDamage());
+        itemStack.func_150996_a(oneItem.getItem());
+        itemStack.stackSize = (oneItem.stackSize);
+        itemStack.setTagCompound(oneItem.stackTagCompound);
 
         return ElementItem.initiateRadioactivity(itemStack, world);
     }
 
-    private void initDecayedMoleculesPre()
-    {
-
-    }
-
-    private PotionChemical[] getDecayedMolecule(MoleculeEnum molecule)
-    {
-        PotionChemical[] chemicals = decayedMoleculesPre.get(molecule);
-        if (chemicals != null)
-        {
-            return copyOf(chemicals);
-        }
-
-        chemicals = decayedMoleculesCache.get(molecule);
-        if (chemicals == null)
-        {
-            Set<PotionChemical> potionChemicalsSet = computDecayMolecule(molecule);
-            chemicals = potionChemicalsSet.toArray(new PotionChemical[potionChemicalsSet.size()]);
-            decayedMoleculesCache.put(molecule, chemicals);
-        }
-        return copyOf(chemicals);
-    }
-
-    private ItemStack[] toItemStacks(PotionChemical[] chemicalsArray)
+    private List<ItemStack> toItemStacks(Set<PotionChemical> decayedChemicals)
     {
         List<ItemStack> itemStacks = new ArrayList<ItemStack>();
-        List<PotionChemical> chemicals = new ArrayList<PotionChemical>(chemicalsArray.length);
-        for (int i = 0; i < chemicalsArray.length; i++)
-        {
-            chemicals.add(chemicalsArray[i]);
-        }
+        List<PotionChemical> chemicals = new ArrayList<PotionChemical>(decayedChemicals);
 
         while (!chemicals.isEmpty())
         {
@@ -160,7 +157,7 @@ public class RadiationMoleculeHandler
                 }
 
                 ItemStack stack = itemStacks.get(l);
-                if (stack.getItem() == thisType && stack.getItemDamage() == thisDamage)
+                if ((stack.getItem() == thisType) && (stack.getItemDamage() == thisDamage))
                 {
                     int freeSpace = 64 - stack.stackSize;
                     int append = freeSpace > chemical.amount ? chemical.amount : freeSpace;
@@ -175,7 +172,7 @@ public class RadiationMoleculeHandler
             }
         }
 
-        return itemStacks.toArray(new ItemStack[itemStacks.size()]);
+        return itemStacks;
     }
 
     private Set<PotionChemical> computDecayMolecule(MoleculeEnum molecule)
@@ -198,15 +195,14 @@ public class RadiationMoleculeHandler
                 Element element = (Element) chemical;
                 if (element.element.radioactivity() != RadiationEnum.stable)
                 {
-                    element.element = ElementEnum.getByID(element.element.atomicNumber()-1);
+                    element.element = ElementEnum.getByID(element.element.atomicNumber() - 1);
                 }
             } else if (chemical instanceof Molecule)
             {
                 Molecule molecule2 = (Molecule) chemical;
                 if (molecule2.molecule.radioactivity() != RadiationEnum.stable)
                 {
-                    PotionChemical[] chemicals2 = getDecayedMolecule(molecule2.molecule);
-                    Collections.addAll(outChemicals, chemicals2);
+                    outChemicals.addAll(computDecayMolecule(molecule2.molecule));
                     chemical = null;
                 }
             }
@@ -218,15 +214,5 @@ public class RadiationMoleculeHandler
         }
 
         return outChemicals;
-    }
-
-    private PotionChemical[] copyOf(PotionChemical[] a)
-    {
-        PotionChemical[] b = new PotionChemical[a.length];
-        for (int i = 0; i < b.length; i++)
-        {
-            b[i] = a[i].clone();
-        }
-        return b;
     }
 }
