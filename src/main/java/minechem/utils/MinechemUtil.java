@@ -1,24 +1,16 @@
 package minechem.utils;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.server.FMLServerHandler;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.fluid.FluidElement;
-import minechem.fluid.FluidHelper;
 import minechem.fluid.FluidMolecule;
 import minechem.item.MinechemChemicalType;
 import minechem.item.element.Element;
@@ -52,6 +44,11 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.GameData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.server.FMLServerHandler;
 
 public final class MinechemUtil
 {
@@ -79,7 +76,7 @@ public final class MinechemUtil
                 newStack.stackSize = append;
                 inventory.setInventorySlotContents(i, newStack);
                 itemStack.stackSize -= append;
-            } else if (stack.getItem() == itemStack.getItem() && stack.getItemDamage() == itemStack.getItemDamage())
+            } else if ((stack.getItem() == itemStack.getItem()) && (stack.getItemDamage() == itemStack.getItemDamage()))
             {
                 int free = inventory.getInventoryStackLimit() - stack.stackSize;
                 int append = itemStack.stackSize > free ? free : itemStack.stackSize;
@@ -101,14 +98,14 @@ public final class MinechemUtil
     {
         if (itemStack != null)
         {
-            float f = random.nextFloat() * 0.8F + 0.1F;
-            float f1 = random.nextFloat() * 0.8F + 0.1F;
-            float f2 = random.nextFloat() * 0.8F + 0.1F;
+            float f = (random.nextFloat() * 0.8F) + 0.1F;
+            float f1 = (random.nextFloat() * 0.8F) + 0.1F;
+            float f2 = (random.nextFloat() * 0.8F) + 0.1F;
 
             EntityItem entityitem = new EntityItem(world, (float) x + f, (float) y + f1, (float) z + f2, itemStack);
             float f3 = 0.05F;
             entityitem.motionX = (float) random.nextGaussian() * f3;
-            entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
+            entityitem.motionY = ((float) random.nextGaussian() * f3) + 0.2F;
             entityitem.motionZ = (float) random.nextGaussian() * f3;
             world.spawnEntityInWorld(entityitem);
         }
@@ -126,10 +123,10 @@ public final class MinechemUtil
         }
         return itemStack;
     }
-
+    
     public static boolean canDrain(World world, Block block, int x, int y, int z)
     {
-        if ((block == Blocks.water || block == Blocks.flowing_water) && world.getBlockMetadata(x, y, z) == 0)
+        if (((block == Blocks.water) || (block == Blocks.flowing_water)) && (world.getBlockMetadata(x, y, z) == 0))
         {
             return true;
         } else if (block instanceof IFluidBlock)
@@ -147,7 +144,7 @@ public final class MinechemUtil
         {
             Fluid fluid = ((IFluidBlock) block).getFluid();
             chemical = getChemical(fluid);
-        } else if (block == Blocks.water || block == Blocks.flowing_water)
+        } else if ((block == Blocks.water) || (block == Blocks.flowing_water))
         {
             chemical = MoleculeEnum.water;
         }
@@ -169,27 +166,20 @@ public final class MinechemUtil
         }
         return null;
     }
-
-    public static ElementEnum getElement(Fluid fluid)
-    {
-        for (Map.Entry<ElementEnum, FluidElement> entry : FluidHelper.elements.entrySet())
-        {
-            if (entry.getValue() == fluid)
-            {
-                return entry.getKey();
-            }
-        }
-        return null;
-    }
-
-    public static MoleculeEnum getMolecule(Fluid fluid)
-    {
-        for (Entry<MoleculeEnum, FluidMolecule> entry : FluidHelper.molecules.entrySet())
-        {
-            if (entry.getValue() == fluid)
-            {
-                return entry.getKey();
-            }
+    
+    /**
+     * Gets the chemical type of the given PotionChemical.
+     * <p>
+     * <b>If chemical is a PotionChemical, the method will return null.</b>
+     * 
+     * @param chemical 
+     * @return the chemical type of the given PotionChemical, null if chemical==null or the chemical is not an Element or a Molecule
+     */
+    public static MinechemChemicalType getChemical(PotionChemical chemical){
+        if (chemical instanceof Element){
+            return ((Element) chemical).element;
+        }else if (chemical instanceof Molecule){
+            return ((Molecule) chemical).molecule;
         }
         return null;
     }
@@ -204,7 +194,7 @@ public final class MinechemUtil
             {
                 for (FluidTankInfo tank : tanks)
                 {
-                    if (tank != null && tank.fluid != null)
+                    if ((tank != null) && (tank.fluid != null))
                     {
                         return tank.fluid.getFluid();
                     }
@@ -225,7 +215,7 @@ public final class MinechemUtil
             if (slot != inventory.currentItem)
             {
                 ItemStack slotStack = inventory.getStackInSlot(slot);
-                if (slotStack != null && slotStack.isItemEqual(current))
+                if ((slotStack != null) && slotStack.isItemEqual(current))
                 {
                     ItemStack addStack = inventory.decrStackSize(slot, getMore);
                     current.stackSize += addStack.stackSize;
@@ -233,8 +223,7 @@ public final class MinechemUtil
                 }
             }
             slot++;
-        }
-        while (getMore > 0 && slot < maxSlot);
+        } while ((getMore > 0) && (slot < maxSlot));
     }
 
     public static void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
@@ -244,7 +233,7 @@ public final class MinechemUtil
             current.splitStack(-inc);
         } else if (inc > 0)
         {
-            if (current.stackSize + inc <= current.getMaxStackSize())
+            if ((current.stackSize + inc) <= current.getMaxStackSize())
             {
                 current.stackSize += inc;
             } else
@@ -272,7 +261,7 @@ public final class MinechemUtil
         for (int i = 0; i < inventory.getSizeInventory(); i++)
         {
             ItemStack stack = inventory.getStackInSlot(i);
-            if (stack != null && stack.getItem() == item && stack.getItemDamage() == damage)
+            if ((stack != null) && (stack.getItem() == item) && (stack.getItemDamage() == damage))
             {
                 stacks.add(stack);
             }
@@ -286,7 +275,7 @@ public final class MinechemUtil
         for (int i = 0; i < inventory.getSizeInventory(); i++)
         {
             if (stack == inventory.getStackInSlot(i))
-            {	//don't change == to equals()
+            { // don't change == to equals()
                 inventory.setInventorySlotContents(i, null);
                 break;
             }
@@ -312,13 +301,13 @@ public final class MinechemUtil
     {
         for (String string : stringInputs)
         {
-            if (string == null || string.equals(""))
+            if ((string == null) || string.equals(""))
             {
                 continue;
             }
             String[] splitString = string.split(":");
             ArrayList<String> wildcardMatch = new ArrayList<String>();
-            if (splitString.length < 2 || splitString.length > 3)
+            if ((splitString.length < 2) || (splitString.length > 3))
             {
                 LogHelper.debug(string + " is an invalid blacklist input");
                 continue;
@@ -449,13 +438,16 @@ public final class MinechemUtil
         for (int i = 0; i < splitString.length; i++)
         {
             char[] digit = splitString[i].toCharArray();
-            if (digit.length<1) continue;
+            if (digit.length < 1)
+            {
+                continue;
+            }
             digit[0] = Character.toUpperCase(digit[0]);
             for (int j = 1; j < digit.length; j++)
             {
                 digit[j] = Character.toLowerCase(digit[j]);
             }
-            result += new String(digit) + (i < splitString.length - 1 ? " " : "");
+            result += new String(digit) + (i < (splitString.length - 1) ? " " : "");
         }
         return result;
     }
@@ -515,14 +507,14 @@ public final class MinechemUtil
     public static ArrayList<ItemStack> convertChemicalsIntoItemStacks(ArrayList<PotionChemical> potionChemicals)
     {
         ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();
-        if (potionChemicals != null && potionChemicals.size() > 0)
+        if ((potionChemicals != null) && (potionChemicals.size() > 0))
         {
             for (PotionChemical potionChemical : potionChemicals)
             {
-                if (potionChemical instanceof Element && ((Element) potionChemical).element != null)
+                if ((potionChemical instanceof Element) && (((Element) potionChemical).element != null))
                 {
                     stacks.add(new ItemStack(MinechemItemsRegistration.element, potionChemical.amount, ((Element) potionChemical).element.atomicNumber()));
-                } else if (potionChemical instanceof Molecule && ((Molecule) potionChemical).molecule != null)
+                } else if ((potionChemical instanceof Molecule) && (((Molecule) potionChemical).molecule != null))
                 {
                     stacks.add(new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.id()));
                 }
@@ -626,15 +618,15 @@ public final class MinechemUtil
 
     public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical, int factor)
     {
-        if (potionChemical instanceof Element && itemstack.getItem() == MinechemItemsRegistration.element)
+        if ((potionChemical instanceof Element) && (itemstack.getItem() == MinechemItemsRegistration.element))
         {
             Element element = (Element) potionChemical;
-            return (itemstack.getItemDamage() == element.element.atomicNumber()) && (itemstack.stackSize >= element.amount * factor);
+            return (itemstack.getItemDamage() == element.element.atomicNumber()) && (itemstack.stackSize >= (element.amount * factor));
         }
-        if (potionChemical instanceof Molecule && itemstack.getItem() == MinechemItemsRegistration.molecule)
+        if ((potionChemical instanceof Molecule) && (itemstack.getItem() == MinechemItemsRegistration.molecule))
         {
             Molecule molecule = (Molecule) potionChemical;
-            return (itemstack.getItemDamage() == molecule.molecule.id()) && (itemstack.stackSize >= molecule.amount * factor);
+            return (itemstack.getItemDamage() == molecule.molecule.id()) && (itemstack.stackSize >= (molecule.amount * factor));
         }
         return false;
     }
@@ -777,15 +769,16 @@ public final class MinechemUtil
             Class oclass = Class.forName("java.awt.Desktop");
             Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
             oclass.getMethod("browse", new Class[]
-            {
-                URI.class
-            }).invoke(object, new Object[]
-            {
-                new URI(url)
-            });
+                    {
+                    URI.class
+                    }).invoke(object, new Object[]
+                            {
+                    new URI(url)
+                            });
         } catch (Throwable throwable)
         {
             LogHelper.debug("Couldn\'t open link: " + url);
         }
     }
+    
 }

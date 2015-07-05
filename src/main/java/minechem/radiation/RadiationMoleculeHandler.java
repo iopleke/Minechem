@@ -1,12 +1,14 @@
 package minechem.radiation;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-import minechem.MinechemItemsRegistration;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
 import minechem.fluid.FluidHelper;
 import minechem.fluid.MinechemFluidBlock;
+import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.Element;
@@ -18,7 +20,6 @@ import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
 import minechem.utils.MinechemUtil;
 import net.minecraft.inventory.IInventory;
-import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -39,13 +40,7 @@ public class RadiationMoleculeHandler
 
     public RadiationInfo handleRadiationMoleculeBucket(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        Set<PotionChemical> decayedChemicals = computDecayMolecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical);
-        for (PotionChemical chemical : decayedChemicals)
-        {
-            chemical.amount *= 8 * itemStack.stackSize;
-        }
-
-        List<ItemStack> items = toItemStacks(decayedChemicals);
+        List<ItemStack> items = toItemStacks(computDecayMolecule(new Molecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical, itemStack.stackSize * 8)));
 
         /*
          * select one of the items
@@ -88,12 +83,7 @@ public class RadiationMoleculeHandler
 
     public RadiationInfo handleRadiationMolecule(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        Set<PotionChemical> decayedChemicals = computDecayMolecule(MoleculeItem.getMolecule(itemStack));
-        for (PotionChemical chemical : decayedChemicals)
-        {
-            chemical.amount *= itemStack.stackSize;
-        }
-        List<ItemStack> items = toItemStacks(decayedChemicals);
+        List<ItemStack> items = toItemStacks(computDecayMolecule(new Molecule(MoleculeItem.getMolecule(itemStack), itemStack.stackSize)));
 
         /*
          * select one of the items
@@ -124,61 +114,43 @@ public class RadiationMoleculeHandler
         return ElementItem.initiateRadioactivity(itemStack, world);
     }
 
-    private List<ItemStack> toItemStacks(Set<PotionChemical> decayedChemicals)
+    private List<ItemStack> toItemStacks(List<PotionChemical> chemicals)
     {
-        List<ItemStack> itemStacks = new ArrayList<ItemStack>();
-        List<PotionChemical> chemicals = new ArrayList<PotionChemical>(decayedChemicals);
-
-        while (!chemicals.isEmpty())
+        Map<MinechemChemicalType, AtomicInteger> amounts = new HashMap<MinechemChemicalType, AtomicInteger>();
+        for (PotionChemical chemical : chemicals)
         {
-            int index = chemicals.size() - 1;
-            PotionChemical chemical = chemicals.remove(index);
-
-            Item thisType;
-            int thisDamage;
-            if (chemical instanceof Element)
+            MinechemChemicalType type = MinechemUtil.getChemical(chemical);
+            AtomicInteger counter = amounts.get(type);
+            if (counter == null)
             {
-                thisType = MinechemItemsRegistration.element;
-                thisDamage = ((Element) chemical).element.atomicNumber();
-            } else if (chemical instanceof Molecule)
-            {
-                thisType = MinechemItemsRegistration.molecule;
-                thisDamage = ((Molecule) chemical).molecule.id();
+                amounts.put(type, new AtomicInteger(1));
             } else
             {
-                continue;
-            }
-
-            for (int l = 0; l < itemStacks.size(); l++)
-            {
-                if (chemical.amount <= 0)
-                {
-                    break;
-                }
-
-                ItemStack stack = itemStacks.get(l);
-                if ((stack.getItem() == thisType) && (stack.getItemDamage() == thisDamage))
-                {
-                    int freeSpace = 64 - stack.stackSize;
-                    int append = freeSpace > chemical.amount ? chemical.amount : freeSpace;
-                    chemical.amount -= append;
-                    stack.stackSize += append;
-                }
-            }
-
-            if (chemical.amount > 0)
-            {
-                itemStacks.add(new ItemStack(thisType, chemical.amount, thisDamage));
+                counter.set(counter.get() + 1); // faster than getAndIncrement()
             }
         }
 
-        return itemStacks;
+        List<ItemStack> output = new ArrayList<ItemStack>();
+        for (Entry<MinechemChemicalType, AtomicInteger> entry : amounts.entrySet())
+        {
+            MinechemChemicalType type = entry.getKey();
+            int amount = entry.getValue().get();
+            for (int i = amount / 64; i > 0; i--)
+            {
+                output.add(MinechemUtil.createItemStack(type, 64));
+            }
+            int remaining = amount % 64;
+            if (remaining > 0)
+            {
+                output.add(MinechemUtil.createItemStack(type, remaining));
+            }
+        }
+        return output;
     }
 
-    private Set<PotionChemical> computDecayMolecule(MoleculeEnum molecule)
+    private List<PotionChemical> computDecayMolecule(MoleculeEnum molecule)
     {
-        List<PotionChemical> chemicals = molecule.components();
-        Set<PotionChemical> outChemicals = new HashSet<PotionChemical>();
+        List<PotionChemical> outChemicals = new ArrayList<PotionChemical>();
 
         if (molecule.radioactivity() == RadiationEnum.stable)
         {
@@ -186,33 +158,39 @@ public class RadiationMoleculeHandler
             return outChemicals;
         }
 
-        for (PotionChemical chemical1 : chemicals)
+        for (PotionChemical chemical : molecule.components())
         {
-            PotionChemical chemical = chemical1.copy();
-
             if (chemical instanceof Element)
             {
-                Element element = (Element) chemical;
-                if (element.element.radioactivity() != RadiationEnum.stable)
+                if (((Element) chemical).element.radioactivity() == RadiationEnum.stable)
                 {
-                    element.element = ElementEnum.getByID(element.element.atomicNumber() - 1);
+                    outChemicals.add(chemical.clone());
+                } else
+                {
+                    outChemicals.add(new Element(ElementEnum.getByID(((Element) chemical).element.atomicNumber() - 1), chemical.amount));
                 }
             } else if (chemical instanceof Molecule)
             {
-                Molecule molecule2 = (Molecule) chemical;
-                if (molecule2.molecule.radioactivity() != RadiationEnum.stable)
+                if (((Molecule) chemical).molecule.radioactivity() == RadiationEnum.stable)
                 {
-                    outChemicals.addAll(computDecayMolecule(molecule2.molecule));
-                    chemical = null;
+                    outChemicals.add(chemical.clone());
+                } else
+                {
+                    outChemicals.addAll(computDecayMolecule(((Molecule) chemical)));
                 }
-            }
-
-            if (chemical != null)
-            {
-                outChemicals.add(chemical);
             }
         }
 
         return outChemicals;
+    }
+
+    private List<PotionChemical> computDecayMolecule(Molecule molecule)
+    {
+        List<PotionChemical> result = computDecayMolecule(molecule.molecule);
+        for (PotionChemical chemical : result)
+        {
+            chemical.amount *= molecule.amount;
+        }
+        return result;
     }
 }
