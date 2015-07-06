@@ -40,13 +40,13 @@ public class ExplosiveFluidHandler
     public void addFireSource(Block block)
     {
         fireSource.add(block);
-        LogHelper.debug("Added fire proxied block:" + block);
+        LogHelper.debug("Added fire source block:" + block);
     }
 
     public void removeFireSource(Block block)
     {
         fireSource.remove(block);
-        LogHelper.debug("Removed fire proxied block:" + block);
+        LogHelper.debug("Removed fire source block:" + block);
     }
 
     public void addExplosiveFluid(MinechemChemicalType type, float level)
