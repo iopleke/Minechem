@@ -1,10 +1,9 @@
 package minechem.proxy;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 import minechem.Minechem;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
+import minechem.fluid.WaterMobSpawnCheckHandler;
 import minechem.fluid.reaction.ChemicalFluidReactionHandler;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
@@ -14,6 +13,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.simpleimpl.MessageContext;
 
 public class CommonProxy
 {
@@ -31,6 +32,7 @@ public class CommonProxy
         FMLCommonHandler.instance().bus().register(new ChemicalFluidReactionHandler());
         FMLCommonHandler.instance().bus().register(Minechem.INSTANCE);
         MinecraftForge.EVENT_BUS.register(MinechemBucketHandler.getInstance());
+        MinecraftForge.EVENT_BUS.register(new WaterMobSpawnCheckHandler());
     }
 
     public World getClientWorld()
