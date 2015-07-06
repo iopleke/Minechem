@@ -1,8 +1,5 @@
 package minechem.nei;
 
-import codechicken.nei.NEIServerUtils;
-import codechicken.nei.PositionedStack;
-import codechicken.nei.recipe.TemplateRecipeHandler;
 import java.awt.Rectangle;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,6 +11,9 @@ import minechem.tileentity.synthesis.SynthesisRecipe;
 import minechem.utils.Compare;
 import minechem.utils.MinechemUtil;
 import net.minecraft.item.ItemStack;
+import codechicken.nei.NEIServerUtils;
+import codechicken.nei.PositionedStack;
+import codechicken.nei.recipe.TemplateRecipeHandler;
 
 public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
 {
@@ -129,7 +129,8 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
     /**
      * Registers a synthesis recipe with NEI. Anything that adds a new synthesis recipe after startup should call this to have the recipe reflected in NEI.
      *
-     * @param sr Synthesis recipe to add.
+     * @param sr
+     *            Synthesis recipe to add.
      */
     public void registerSynthesisRecipe(SynthesisRecipe sr)
     {
@@ -180,8 +181,8 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
                 {
                     if (c != null)
                     {
-                        ItemStack inputItem = MinechemUtil.chemicalToItemStack(c, c.amount);
-                        inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + xSlot * INPUT_X_SCALE, INPUT_Y_OFS + ySlot * INPUT_Y_SCALE));
+                        ItemStack inputItem = MinechemUtil.chemicalToItemStack(c);
+                        inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + (xSlot * INPUT_X_SCALE), INPUT_Y_OFS + (ySlot * INPUT_Y_SCALE)));
                     }
                     xSlot++;
                     if (xSlot > 2)
@@ -199,8 +200,8 @@ public class SynthesisNEIRecipeHandler extends TemplateRecipeHandler
                 int ySlot = 0;
                 for (PotionChemical c : inputChemicals)
                 {
-                    ItemStack inputItem = MinechemUtil.chemicalToItemStack(c, c.amount);
-                    inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + xSlot * INPUT_X_SCALE, INPUT_Y_OFS + ySlot * INPUT_Y_SCALE));
+                    ItemStack inputItem = MinechemUtil.chemicalToItemStack(c);
+                    inputs.add(new PositionedStack(inputItem, INPUT_X_OFS + (xSlot * INPUT_X_SCALE), INPUT_Y_OFS + (ySlot * INPUT_Y_SCALE)));
                     xSlot++;
                     if (xSlot > 2)
                     {

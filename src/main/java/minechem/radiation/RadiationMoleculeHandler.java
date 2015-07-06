@@ -137,12 +137,12 @@ public class RadiationMoleculeHandler
             int amount = entry.getValue().get();
             for (int i = amount / 64; i > 0; i--)
             {
-                output.add(MinechemUtil.createItemStack(type, 64));
+                output.add(MinechemUtil.chemicalToItemStack(type, 64));
             }
             int remaining = amount % 64;
             if (remaining > 0)
             {
-                output.add(MinechemUtil.createItemStack(type, remaining));
+                output.add(MinechemUtil.chemicalToItemStack(type, remaining));
             }
         }
         return output;
@@ -150,38 +150,33 @@ public class RadiationMoleculeHandler
 
     private List<PotionChemical> computDecayMolecule(MoleculeEnum molecule)
     {
-        List<PotionChemical> outChemicals = new ArrayList<PotionChemical>();
+        List<PotionChemical> outputChemicals = new ArrayList<PotionChemical>();
 
         if (molecule.radioactivity() == RadiationEnum.stable)
         {
-            outChemicals.add(new Molecule(molecule));
-            return outChemicals;
+            outputChemicals.add(new Molecule(molecule));
+            return outputChemicals;
         }
 
         for (PotionChemical chemical : molecule.components())
         {
-            if (chemical instanceof Element)
+            MinechemChemicalType type = MinechemUtil.getChemical(chemical);
+            if (type.radioactivity() == RadiationEnum.stable)
             {
-                if (((Element) chemical).element.radioactivity() == RadiationEnum.stable)
-                {
-                    outChemicals.add(chemical.clone());
-                } else
-                {
-                    outChemicals.add(new Element(ElementEnum.getByID(((Element) chemical).element.atomicNumber() - 1), chemical.amount));
-                }
-            } else if (chemical instanceof Molecule)
+                outputChemicals.add(chemical.clone());
+            } else
             {
-                if (((Molecule) chemical).molecule.radioactivity() == RadiationEnum.stable)
+                if (type instanceof ElementEnum)
                 {
-                    outChemicals.add(chemical.clone());
-                } else
+                    outputChemicals.add(new Element(ElementEnum.getByID(((Element) chemical).element.atomicNumber() - 1), chemical.amount));
+                } else if (type instanceof MoleculeEnum)
                 {
-                    outChemicals.addAll(computDecayMolecule(((Molecule) chemical)));
+                    outputChemicals.addAll(computDecayMolecule(((Molecule) chemical)));
                 }
             }
         }
 
-        return outChemicals;
+        return outputChemicals;
     }
 
     private List<PotionChemical> computDecayMolecule(Molecule molecule)

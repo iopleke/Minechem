@@ -231,7 +231,7 @@ public class ChemicalFluidReactionHandler
             {
                 if (!popFlowingFluid)
                 {
-                    ItemStack itemStack = MinechemUtil.createItemStack(chemical, 8);
+                    ItemStack itemStack = MinechemUtil.chemicalToItemStack(chemical, 8);
                     MinechemUtil.throwItemStack(world, itemStack, x, y, z);
                 }
             } else if (!(popFlowingFluid && !hasFlowingStatus))
