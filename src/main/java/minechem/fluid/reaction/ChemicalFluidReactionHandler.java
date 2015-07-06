@@ -1,7 +1,5 @@
 package minechem.fluid.reaction;
 
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.gameevent.TickEvent;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import minechem.Settings;
 import minechem.fluid.FluidHelper;
+import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.ElementEnum;
@@ -24,6 +23,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.MathHelper;
 import net.minecraft.world.World;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent;
 
 public class ChemicalFluidReactionHandler
 {
@@ -57,7 +58,7 @@ public class ChemicalFluidReactionHandler
             chemicalA = MinechemUtil.getChemical(((MinechemBucketItem) item).fluid);
         }
 
-        if (chemicalA != null && world.isMaterialInBB(entityItem.boundingBox, Material.water))
+        if ((chemicalA != null) && (world.isMaterialInBB(entityItem.boundingBox, Material.water) || world.isMaterialInBB(entityItem.boundingBox, MinechemFluidBlock.materialFluidBlock)))
         {
             int x = MathHelper.floor_double(entityItem.posX);
             int y = MathHelper.floor_double(entityItem.posY);
@@ -91,57 +92,57 @@ public class ChemicalFluidReactionHandler
         // TODO Add more reaction rules -yushijinhun
         List<MinechemChemicalType> list;
 
-        //H2O+Li==LiOH+H
+        // H2O+Li==LiOH+H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.lithiumHydroxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Li), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //H2O+Na==NaOH+H
+        // H2O+Na==NaOH+H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.sodiumHydroxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Na), new ChemicalFluidReactionOutput(list, 0.15f));
 
-        //H2O+K==KOH+H
+        // H2O+K==KOH+H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.potassiumHydroxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.K), new ChemicalFluidReactionOutput(list, 0.2f));
 
-        //H2O+Li==RbOH+H
+        // H2O+Li==RbOH+H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.rubidiumHydroxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Rb), new ChemicalFluidReactionOutput(list, 0.25f));
 
-        //H2O+Cs==CsOH+H
+        // H2O+Cs==CsOH+H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.cesiumHydroxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Cs), new ChemicalFluidReactionOutput(list, 0.3f));
 
-        //H2O+Fr==FrOH+H
+        // H2O+Fr==FrOH+H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.franciumHydroxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.water, ElementEnum.Fr), new ChemicalFluidReactionOutput(list, 0.4f));
 
-        //H2SO4+Cu==CuSO4+2H
+        // H2SO4+Cu==CuSO4+2H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.lightbluePigment);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, ElementEnum.Cu), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //H2SO4+S==2SO2+2H
+        // H2SO4+S==2SO2+2H
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.H);
         list.add(ElementEnum.H);
         list.add(MoleculeEnum.sulfurDioxide);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, ElementEnum.S), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //H2SO4+H2S==S+SO2+2H2O
+        // H2SO4+H2S==S+SO2+2H2O
         list = new ArrayList<MinechemChemicalType>();
         list.add(ElementEnum.S);
         list.add(MoleculeEnum.sulfurDioxide);
@@ -149,24 +150,24 @@ public class ChemicalFluidReactionHandler
         list.add(MoleculeEnum.water);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.sulfuricAcid, MoleculeEnum.hydrogenSulfide), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //HCl+NaOH==H2O+NaCl
+        // HCl+NaOH==H2O+NaCl
         list = new ArrayList<MinechemChemicalType>();
         list.add(MoleculeEnum.salt);
         list.add(MoleculeEnum.water);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.hcl, MoleculeEnum.sodiumHydroxide), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //H+Cl==HCl
+        // H+Cl==HCl
         list = new ArrayList<MinechemChemicalType>();
         list.add(MoleculeEnum.hcl);
         reactionRules.put(new ChemicalFluidReactionRule(ElementEnum.H, ElementEnum.Cl), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //NaCl+H2SO4==NaHSO4+HCl
+        // NaCl+H2SO4==NaHSO4+HCl
         list = new ArrayList<MinechemChemicalType>();
         list.add(MoleculeEnum.sodiumBisulfate);
         list.add(MoleculeEnum.hcl);
         reactionRules.put(new ChemicalFluidReactionRule(MoleculeEnum.salt, MoleculeEnum.sulfuricAcid), new ChemicalFluidReactionOutput(list, 0.1f));
 
-        //NaHSO4+NaCl==Na2SO4+2HCl
+        // NaHSO4+NaCl==Na2SO4+2HCl
         list = new ArrayList<MinechemChemicalType>();
         list.add(MoleculeEnum.sodiumSulfate);
         list.add(MoleculeEnum.hcl);
@@ -191,7 +192,7 @@ public class ChemicalFluidReactionHandler
         List[] availableSpaces = new List[FLUIDS_GENERATE_SPACE];
         for (int i = 0; i < availableSpaces.length; i++)
         {
-            availableSpaces[i] = findAvailableSpacesAtCrossSection(world, x, y - halfSpace + i, z, 1);
+            availableSpaces[i] = findAvailableSpacesAtCrossSection(world, x, (y - halfSpace) + i, z, 1);
         }
 
         Iterator<MinechemChemicalType> it = output.outputs.iterator();
@@ -264,7 +265,7 @@ public class ChemicalFluidReactionHandler
     {
         MinechemChemicalType chemicalA = MinechemUtil.getChemical(source);
         MinechemChemicalType chemicalB = MinechemUtil.getChemical(destination);
-        if (chemicalA != null && chemicalB != null)
+        if ((chemicalA != null) && (chemicalB != null))
         {
             ChemicalFluidReactionRule rule = new ChemicalFluidReactionRule(chemicalA, chemicalB);
 
