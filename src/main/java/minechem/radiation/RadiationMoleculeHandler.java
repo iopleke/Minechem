@@ -78,7 +78,7 @@ public class RadiationMoleculeHandler
         itemStack.stackSize = (oneItem.stackSize / 8);
         itemStack.setTagCompound(oneItem.stackTagCompound);
 
-        return ElementItem.initiateRadioactivity(itemStack, world);
+        return RadiationInfo.initiateRadioactivity(itemStack, world);
     }
 
     public RadiationInfo handleRadiationMolecule(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
@@ -111,7 +111,7 @@ public class RadiationMoleculeHandler
         itemStack.stackSize = (oneItem.stackSize);
         itemStack.setTagCompound(oneItem.stackTagCompound);
 
-        return ElementItem.initiateRadioactivity(itemStack, world);
+        return RadiationInfo.initiateRadioactivity(itemStack, world);
     }
 
     private List<ItemStack> toItemStacks(List<PotionChemical> chemicals)

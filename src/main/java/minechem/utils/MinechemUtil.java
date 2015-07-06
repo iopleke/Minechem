@@ -13,6 +13,7 @@ import minechem.Settings;
 import minechem.fluid.FluidElement;
 import minechem.fluid.FluidMolecule;
 import minechem.item.MinechemChemicalType;
+import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -75,9 +76,29 @@ public final class MinechemUtil
             return null;
         }
 
+        if (inventory == null)
+        {
+            return itemStack;
+        }
+
         int amount = itemStack.stackSize;
         int inventorySize = inventory.getSizeInventory();
-        int maxStackSize = Math.min(inventory.getInventoryStackLimit(), itemStack.getItem().getItemStackLimit(itemStack));
+        int maxStackSize = Math.min(inventory.getInventoryStackLimit(), itemStack.getMaxStackSize());
+
+        // merge stacks first
+        for (int i = 0; (i < inventorySize) && (amount > 0); i++)
+        {
+            ItemStack target = inventory.getStackInSlot(i);
+            if ((target != null) && canItemStackMerge(target, itemStack) && (target.stackSize < maxStackSize))
+            {
+                int appendAmount = Math.min(amount, maxStackSize - amount);
+                amount -= appendAmount;
+                target.stackSize += appendAmount;
+                inventory.setInventorySlotContents(i, target);
+            }
+        }
+
+        // fill empty slots then
         for (int i = 0; (i < inventorySize) && (amount > 0); i++)
         {
             ItemStack target = inventory.getStackInSlot(i);
@@ -88,18 +109,8 @@ public final class MinechemUtil
                 ItemStack append = itemStack.copy();
                 append.stackSize = appendAmount;
                 inventory.setInventorySlotContents(i, append);
-            } else
-            {
-                if (canItemStackMerge(target, itemStack) && (target.stackSize < maxStackSize))
-                {
-                    int appendAmount = Math.min(amount, maxStackSize - amount);
-                    amount -= appendAmount;
-                    target.stackSize += appendAmount;
-                    inventory.setInventorySlotContents(i, target);
-                }
             }
         }
-
         if (amount <= 0)
         {
             return null;
@@ -124,6 +135,8 @@ public final class MinechemUtil
 
     /**
      * Throws the given item stack around the given location.
+     * <p>
+     * If itemStack==null, this method will do nothing
      *
      * @param world
      * @param itemStack
@@ -310,6 +323,9 @@ public final class MinechemUtil
         } else if (itemStack.getItem() instanceof MoleculeItem)
         {
             return MoleculeItem.getMolecule(itemStack);
+        } else if (itemStack.getItem() instanceof MinechemBucketItem)
+        {
+            return ((MinechemBucketItem) itemStack.getItem()).chemical;
         }
         return null;
     }
@@ -394,6 +410,11 @@ public final class MinechemUtil
      */
     public static Set<ItemStack> removeItemStacksFromInventory(IInventory inventory, Item item, int damage, int amount)
     {
+        if (inventory == null)
+        {
+            return null;
+        }
+
         int total = 0;
         for (int i = 0; (i < inventory.getSizeInventory()) && (total < amount); i++)
         {
@@ -903,7 +924,7 @@ public final class MinechemUtil
                     URI.class
             }).invoke(object, new Object[]
             {
-                            new URI(url)
+                    new URI(url)
             });
         } catch (Throwable throwable)
         {

@@ -70,7 +70,7 @@ public class RadiationHandler
             {
                 if (itemstack != null && (itemstack.getItem() == MinechemItemsRegistration.molecule || itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() instanceof MinechemBucketItem) && RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable)
                 {
-                    RadiationInfo radiationInfo = ElementItem.getRadiationInfo(itemstack, player.worldObj);
+                    RadiationInfo radiationInfo = RadiationInfo.getRadiationInfo(itemstack, player.worldObj);
                     radiationInfo.decayStarted += player.worldObj.getTotalWorldTime() - radiationInfo.lastDecayUpdate;
                     radiationInfo.lastDecayUpdate = player.worldObj.getTotalWorldTime();
                     RadiationInfo.setRadiationInfo(radiationInfo, itemstack);
@@ -124,7 +124,7 @@ public class RadiationHandler
 
                 if (radiation != null && radiation != RadiationEnum.stable)
                 {
-                    Long time = world.getTotalWorldTime() - ElementItem.getRadiationInfo(itemstack, world).decayStarted;
+                    Long time = world.getTotalWorldTime() - RadiationInfo.getRadiationInfo(itemstack, world).decayStarted;
                     ItemStack before = itemstack.copy();
                     int damage = updateRadiation(world, itemstack, inventory, posX, posY, posZ);
                     ItemStack after = itemstack.copy();
@@ -199,7 +199,7 @@ public class RadiationHandler
 
     private int updateRadiation(World world, ItemStack element, IInventory inventory, double x, double y, double z)
     {
-        RadiationInfo radiationInfo = ElementItem.getRadiationInfo(element, world);
+        RadiationInfo radiationInfo = RadiationInfo.getRadiationInfo(element, world);
         int dimensionID = world.provider.dimensionId;
         if (dimensionID != radiationInfo.dimensionID && radiationInfo.isRadioactive())
         {
@@ -240,7 +240,7 @@ public class RadiationHandler
                 if (type instanceof ElementEnum)
                 {
                     element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementEnum.getByID(((ElementEnum) type).atomicNumber())))));
-                    radiationInfo = ElementItem.initiateRadioactivity(element, world);
+                    radiationInfo = RadiationInfo.initiateRadioactivity(element, world);
                 } else
                 {
                     radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeBucket(world, element, inventory, x, y, z);

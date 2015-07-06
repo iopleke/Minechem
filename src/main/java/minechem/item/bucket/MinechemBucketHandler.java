@@ -1,13 +1,10 @@
 package minechem.item.bucket;
 
-import cpw.mods.fml.common.eventhandler.Event;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import minechem.Minechem;
-import minechem.fluid.MinechemBucketDispenser;
+import minechem.fluid.FluidChemicalDispenser;
 import minechem.fluid.MinechemFluid;
 import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
@@ -31,6 +28,9 @@ import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
 import net.minecraftforge.event.entity.player.FillBucketEvent;
 import net.minecraftforge.fluids.FluidContainerRegistry;
+import cpw.mods.fml.common.eventhandler.Event;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class MinechemBucketHandler
 {
@@ -71,12 +71,12 @@ public class MinechemBucketHandler
 
         Item bucket = buckets.get(block);
 
-        if (bucket != null && world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0)
+        if ((bucket != null) && (world.getBlockMetadata(pos.blockX, pos.blockY, pos.blockZ) == 0))
         {
             ItemStack stack = new ItemStack(bucket);
             TileEntity tile = world.getTileEntity(pos.blockX, pos.blockY, pos.blockZ);
             RadiationEnum radiation = ((MinechemBucketItem) bucket).chemical.radioactivity();
-            if (tile != null && radiation != RadiationEnum.stable && tile instanceof RadiationFluidTileEntity && ((RadiationFluidTileEntity) tile).info != null)
+            if ((tile != null) && (radiation != RadiationEnum.stable) && (tile instanceof RadiationFluidTileEntity) && (((RadiationFluidTileEntity) tile).info != null))
             {
                 RadiationInfo.setRadiationInfo(((RadiationFluidTileEntity) tile).info, stack);
             }
@@ -119,7 +119,7 @@ public class MinechemBucketHandler
         FluidContainerRegistry.registerFluidContainer(block.getFluid(), new ItemStack(bucket), new ItemStack(Items.bucket));
         buckets.put(block, bucket);
         Minechem.PROXY.onAddBucket(bucket);
-        BlockDispenser.dispenseBehaviorRegistry.putObject(bucket, MinechemBucketDispenser.dispenser);
+        BlockDispenser.dispenseBehaviorRegistry.putObject(bucket, FluidChemicalDispenser.INSTANCE);
     }
 
     public void registerBucketRecipes()
