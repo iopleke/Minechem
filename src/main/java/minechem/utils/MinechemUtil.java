@@ -26,7 +26,6 @@ import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Blocks;
-import net.minecraft.init.Items;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
 import net.minecraft.item.Item;
@@ -327,9 +326,6 @@ public final class MinechemUtil
         } else if (itemStack.getItem() instanceof MinechemBucketItem)
         {
             return ((MinechemBucketItem) itemStack.getItem()).chemical;
-        } else if (itemStack.getItem() == Items.water_bucket)
-        {
-            return MoleculeEnum.water;
         }
         return null;
     }
@@ -924,12 +920,12 @@ public final class MinechemUtil
             Class<?> oclass = Class.forName("java.awt.Desktop");
             Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
             oclass.getMethod("browse", new Class[]
-                    {
+            {
                     URI.class
-                    }).invoke(object, new Object[]
-                            {
-                            new URI(url)
-                            });
+            }).invoke(object, new Object[]
+            {
+                    new URI(url)
+            });
         } catch (Throwable throwable)
         {
             LogHelper.debug("Couldn't open link: " + url);

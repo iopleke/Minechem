@@ -1,8 +1,11 @@
 package minechem.fluid;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import minechem.Settings;
 import minechem.potion.PharmacologyEffectRegistry;
 import minechem.reference.Textures;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -11,8 +14,6 @@ import net.minecraft.potion.PotionEffect;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
 
 public class FluidBlockMolecule extends MinechemFluidBlock
 {
@@ -21,9 +22,14 @@ public class FluidBlockMolecule extends MinechemFluidBlock
     @SideOnly(Side.CLIENT)
     protected IIcon flowingIcon;
 
+    public FluidBlockMolecule(MinechemFluid fluid, Material material)
+    {
+        super(fluid, material);
+    }
+
     public FluidBlockMolecule(MinechemFluid fluid)
     {
-        super(fluid);
+        super(fluid, materialFluidBlock);
         this.setBlockName(fluidName);
     }
 
@@ -62,7 +68,7 @@ public class FluidBlockMolecule extends MinechemFluidBlock
     @Override
     public void onEntityCollidedWithBlock(World world, int x, int y, int z, Entity entity)
     {
-        if ((entity instanceof EntityLivingBase) && Settings.fluidEffects && (getFluid() instanceof FluidMolecule))
+        if (entity instanceof EntityLivingBase && Settings.fluidEffects && getFluid() instanceof FluidMolecule)
         {
             PharmacologyEffectRegistry.applyEffect(((FluidMolecule) getFluid()).molecule, (EntityLivingBase) entity);
 
