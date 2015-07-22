@@ -24,7 +24,7 @@ public class ExplosiveFluidHandler
         return instance;
     }
 
-    private Map<MinechemChemicalType, Float> explosiveFluids = new LinkedHashMap<MinechemChemicalType, Float>();
+    private Map<MinechemChemicalType, Float> explosionLevels = new LinkedHashMap<MinechemChemicalType, Float>();
     private Set<Block> fireSource = new LinkedHashSet<Block>();
 
     public ExplosiveFluidHandler()
@@ -32,7 +32,7 @@ public class ExplosiveFluidHandler
         init();
     }
 
-    public boolean existingFireSource(Block block)
+    public boolean isFireSource(Block block)
     {
         return fireSource.contains(block);
     }
@@ -51,19 +51,19 @@ public class ExplosiveFluidHandler
 
     public void addExplosiveFluid(MinechemChemicalType type, float level)
     {
-        explosiveFluids.put(type, level);
+        explosionLevels.put(type, level);
         LogHelper.debug("Added explosive fluid:" + type);
     }
 
     public void removeExplosiveFluid(MinechemChemicalType type)
     {
-        explosiveFluids.remove(type);
+        explosionLevels.remove(type);
         LogHelper.debug("Removed explosive fluid:" + type);
     }
 
-    public float getExplosiveFluid(MinechemChemicalType type)
+    public float getExplosionLevel(MinechemChemicalType type)
     {
-        Float level = explosiveFluids.get(type);
+        Float level = explosionLevels.get(type);
         if (level == null)
         {
             return Float.NaN;
