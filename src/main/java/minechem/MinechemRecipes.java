@@ -2385,7 +2385,7 @@ public class MinechemRecipes
         ItemStack itemNetherStar = new ItemStack(Items.nether_star);
         DecomposerRecipe.add(new DecomposerRecipe(itemNetherStar, new PotionChemical[]
         {
-            this.element(ElementEnum.Cn, 16), elementHydrogen, elementHydrogen, elementHydrogen, elementHelium, elementHelium, elementHelium, elementCarbon, elementCarbon
+            elementHelium, elementHelium, elementHelium, elementCarbon, this.element(ElementEnum.Cn, 16), elementHelium, elementHydrogen, elementHydrogen, elementHydrogen
         }));
         SynthesisRecipe.add(new SynthesisRecipe(itemNetherStar, true, COST_STAR, new PotionChemical[]
         {
