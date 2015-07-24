@@ -5,6 +5,7 @@ import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
+import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
@@ -265,7 +266,7 @@ public class RadiationHandler
                 MinechemChemicalType type = ((MinechemBucketItem) item).chemical;
                 if (type instanceof ElementEnum)
                 {
-                    element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(ElementEnum.getByID(((ElementEnum) type).atomicNumber() - 1)));
+                    element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.getFluidBlock(ElementEnum.getByID(((ElementEnum) type).atomicNumber() - 1))));
                     output = new ItemStack[] { element };
                 } else
                 {

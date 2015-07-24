@@ -7,19 +7,18 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.concurrent.atomic.AtomicInteger;
 import minechem.fluid.FluidHelper;
-import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
-import minechem.item.element.ElementItem;
 import minechem.item.molecule.Molecule;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.item.molecule.MoleculeItem;
 import minechem.potion.PotionChemical;
 import minechem.utils.MinechemUtil;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.World;
 
@@ -48,17 +47,7 @@ public class RadiationMoleculeHandler
         {
             ItemStack oneItem = output.get(0);
 
-            MinechemFluidBlock bukkitFilled;
-            if (oneItem.getItem() instanceof MoleculeItem)
-            {
-                bukkitFilled = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeItem.getMolecule(oneItem)));
-            } else if (oneItem.getItem() instanceof ElementItem)
-            {
-                bukkitFilled = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(oneItem)));
-            } else
-            {
-                throw new RuntimeException("unexpected item: " + oneItem.getItem());
-            }
+            Item bukkitFilled = MinechemBucketHandler.getInstance().buckets.get(FluidHelper.getFluidBlock(MinechemUtil.getChemical(oneItem)));
 
             int filledBuckets = itemStack.stackSize;
             oneItem.stackSize -= filledBuckets * 8;
@@ -68,8 +57,9 @@ public class RadiationMoleculeHandler
                 output.remove(0);
             }
 
-            ItemStack outputBucket = new ItemStack(MinechemBucketHandler.getInstance().buckets.get(bukkitFilled), oneItem.stackSize / 8);
+            ItemStack outputBucket = new ItemStack(bukkitFilled, oneItem.stackSize / 8);
             MinechemUtil.copyItemStack(outputBucket, itemStack);
+            itemStack.stackSize = filledBuckets;
         }
 
         for (ItemStack item : output)
