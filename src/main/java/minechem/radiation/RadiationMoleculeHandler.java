@@ -40,50 +40,43 @@ public class RadiationMoleculeHandler
 
     public RadiationInfo handleRadiationMoleculeBucket(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        List<ItemStack> items = toItemStacks(computDecayMolecule(new Molecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical, itemStack.stackSize * 8)));
+        List<ItemStack> items = toItemStacks(decayMolecule(new Molecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical, itemStack.stackSize * 8)), inventory.getInventoryStackLimit());
 
-        /*
-         * select one of the items
-         * wrap it with bukkit
-         * and replace the old item with this
-         */
-        ItemStack oneItem = items.isEmpty() ? null : items.remove(0);
+        if (!items.isEmpty())
+        {
+            ItemStack oneItem = items.get(0);
+
+            MinechemFluidBlock bukkitFilled;
+            if (oneItem.getItem() instanceof MoleculeItem)
+            {
+                bukkitFilled = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeItem.getMolecule(oneItem)));
+            } else if (oneItem.getItem() instanceof ElementItem)
+            {
+                bukkitFilled = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(oneItem)));
+            } else
+            {
+                throw new RuntimeException("unexpected item type: " + oneItem.getItem().getClass());
+            }
+
+            int outputBuckets = itemStack.stackSize;
+            oneItem.stackSize -= outputBuckets * 8;
+
+            itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(bukkitFilled));
+            itemStack.stackSize = (oneItem.stackSize / 8);
+            itemStack.setTagCompound(oneItem.stackTagCompound);
+        }
 
         for (ItemStack item : items)
         {
-            ItemStack stack = MinechemUtil.addItemToInventory(inventory, item);
-            if (stack != null)
-            {
-                MinechemUtil.throwItemStack(world, itemStack, x, y, z);
-            }
+            MinechemUtil.throwItemStack(world, MinechemUtil.addItemToInventory(inventory, item), x, y, z);
         }
-
-        if (oneItem == null)
-        {
-            return null;
-        }
-
-        MinechemFluidBlock bukkitFilled;
-        if (oneItem.getItem() instanceof MoleculeItem)
-        {
-            bukkitFilled = FluidHelper.moleculeBlocks.get(FluidHelper.molecules.get(MoleculeItem.getMolecule(oneItem)));
-        } else if (oneItem.getItem() instanceof ElementItem)
-        {
-            bukkitFilled = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(oneItem)));
-        } else
-        {
-            throw new RuntimeException("unexpected item type: " + oneItem.getItem().getClass());
-        }
-        itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(bukkitFilled));
-        itemStack.stackSize = (oneItem.stackSize / 8);
-        itemStack.setTagCompound(oneItem.stackTagCompound);
 
         return RadiationInfo.initiateRadioactivity(itemStack, world);
     }
 
-    public RadiationInfo handleRadiationMolecule(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
+    public RadiationInfo handleRadiationMoleculeTube(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        List<ItemStack> items = toItemStacks(computDecayMolecule(new Molecule(MoleculeItem.getMolecule(itemStack), itemStack.stackSize)));
+        List<ItemStack> items = toItemStacks(decayMolecule(new Molecule(MoleculeItem.getMolecule(itemStack), itemStack.stackSize)), inventory.getInventoryStackLimit());
 
         /*
          * select one of the items
@@ -94,11 +87,7 @@ public class RadiationMoleculeHandler
 
         for (ItemStack item : items)
         {
-            ItemStack stack = MinechemUtil.addItemToInventory(inventory, item);
-            if (stack != null)
-            {
-                MinechemUtil.throwItemStack(world, itemStack, x, y, z);
-            }
+            MinechemUtil.throwItemStack(world, MinechemUtil.addItemToInventory(inventory, item), x, y, z);
         }
 
         if (oneItem == null)
@@ -106,15 +95,12 @@ public class RadiationMoleculeHandler
             return null;
         }
 
-        itemStack.setItemDamage(oneItem.getItemDamage());
-        itemStack.func_150996_a(oneItem.getItem());
-        itemStack.stackSize = (oneItem.stackSize);
-        itemStack.setTagCompound(oneItem.stackTagCompound);
+        MinechemUtil.copyItemStack(oneItem, itemStack);
 
         return RadiationInfo.initiateRadioactivity(itemStack, world);
     }
 
-    private List<ItemStack> toItemStacks(List<PotionChemical> chemicals)
+    private List<ItemStack> toItemStacks(List<PotionChemical> chemicals, int maxStackSize)
     {
         Map<MinechemChemicalType, AtomicInteger> amounts = new HashMap<MinechemChemicalType, AtomicInteger>();
         for (PotionChemical chemical : chemicals)
@@ -123,10 +109,10 @@ public class RadiationMoleculeHandler
             AtomicInteger counter = amounts.get(type);
             if (counter == null)
             {
-                amounts.put(type, new AtomicInteger(1));
+                amounts.put(type, new AtomicInteger(chemical.amount));
             } else
             {
-                counter.set(counter.get() + 1); // faster than getAndIncrement()
+                counter.set(counter.get() + chemical.amount);
             }
         }
 
@@ -135,11 +121,11 @@ public class RadiationMoleculeHandler
         {
             MinechemChemicalType type = entry.getKey();
             int amount = entry.getValue().get();
-            for (int i = amount / 64; i > 0; i--)
+            for (int i = amount / maxStackSize; i > 0; i--)
             {
-                output.add(MinechemUtil.chemicalToItemStack(type, 64));
+                output.add(MinechemUtil.chemicalToItemStack(type, maxStackSize));
             }
-            int remaining = amount % 64;
+            int remaining = amount % maxStackSize;
             if (remaining > 0)
             {
                 output.add(MinechemUtil.chemicalToItemStack(type, remaining));
@@ -148,7 +134,7 @@ public class RadiationMoleculeHandler
         return output;
     }
 
-    private List<PotionChemical> computDecayMolecule(MoleculeEnum molecule)
+    private List<PotionChemical> decayMolecule(MoleculeEnum molecule)
     {
         List<PotionChemical> outputChemicals = new ArrayList<PotionChemical>();
 
@@ -171,7 +157,7 @@ public class RadiationMoleculeHandler
                     outputChemicals.add(new Element(ElementEnum.getByID(((Element) chemical).element.atomicNumber() - 1), chemical.amount));
                 } else if (type instanceof MoleculeEnum)
                 {
-                    outputChemicals.addAll(computDecayMolecule(((Molecule) chemical)));
+                    outputChemicals.addAll(decayMolecule(((Molecule) chemical)));
                 }
             }
         }
@@ -179,9 +165,9 @@ public class RadiationMoleculeHandler
         return outputChemicals;
     }
 
-    private List<PotionChemical> computDecayMolecule(Molecule molecule)
+    private List<PotionChemical> decayMolecule(Molecule molecule)
     {
-        List<PotionChemical> result = computDecayMolecule(molecule.molecule);
+        List<PotionChemical> result = decayMolecule(molecule.molecule);
         for (PotionChemical chemical : result)
         {
             chemical.amount *= molecule.amount;

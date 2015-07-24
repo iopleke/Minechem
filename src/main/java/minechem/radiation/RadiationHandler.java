@@ -233,7 +233,7 @@ public class RadiationHandler
                 radiationInfo = ElementItem.decay(element, world);
             } else if (item == MinechemItemsRegistration.molecule)
             {
-                radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMolecule(world, element, inventory, x, y, z);
+                radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeTube(world, element, inventory, x, y, z);
             } else if (item instanceof MinechemBucketItem)
             {
                 MinechemChemicalType type = ((MinechemBucketItem) item).chemical;

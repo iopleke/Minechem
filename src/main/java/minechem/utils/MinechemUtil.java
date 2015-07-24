@@ -61,6 +61,20 @@ public final class MinechemUtil
     }
 
     /**
+     * Copy the data of the given item stack to another item stack
+     *
+     * @param source
+     * @param target
+     */
+    public static void copyItemStack(ItemStack source, ItemStack target)
+    {
+        target.func_150996_a(source.getItem());
+        target.stackSize = source.stackSize;
+        target.setItemDamage(source.getItemDamage());
+        target.setTagCompound(source.stackTagCompound);
+    }
+
+    /**
      * Adds an item stack to the inventory.
      * <p>
      * This method won't modify the given item stack.

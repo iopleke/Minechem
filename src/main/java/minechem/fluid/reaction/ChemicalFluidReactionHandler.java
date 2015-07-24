@@ -51,6 +51,12 @@ public class ChemicalFluidReactionHandler
     public void checkEntityItem(World world, EntityItem entityItem)
     {
         ItemStack itemStack = entityItem.getEntityItem();
+
+        if (itemStack.stackSize <= 0)
+        {
+            return;
+        }
+
         Item item = itemStack.getItem();
         MinechemChemicalType chemicalA = null;
         if (item instanceof MinechemBucketItem)
@@ -73,17 +79,14 @@ public class ChemicalFluidReactionHandler
                 {
                     chemicalReaction(world, entityItem, x, y, z, rule, !(MinechemUtil.canDrain(world, block, x, y, z)));
                     itemStack.stackSize--;
+                    entityItem.setEntityItemStack(itemStack);
                     if (itemStack.stackSize <= 0)
                     {
                         world.removeEntity(entityItem);
-                    } else
-                    {
-                        entityItem.setEntityItemStack(itemStack);
                     }
                     MinechemUtil.throwItemStack(world, new ItemStack(Items.bucket), x, y, z);
                 }
             }
-
         }
     }
 
@@ -185,11 +188,11 @@ public class ChemicalFluidReactionHandler
 
         if (!Float.isNaN(output.explosionLevel))
         {
-            world.createExplosion(null, x, y, z, output.explosionLevel, true);
+            world.createExplosion(entity, x, y, z, output.explosionLevel, true);
         }
 
         int halfSpace = FLUIDS_GENERATE_SPACE / 2;
-        List[] availableSpaces = new List[FLUIDS_GENERATE_SPACE];
+        List<CoordTuple>[] availableSpaces = new List[FLUIDS_GENERATE_SPACE];
         for (int i = 0; i < availableSpaces.length; i++)
         {
             availableSpaces[i] = findAvailableSpacesAtCrossSection(world, x, (y - halfSpace) + i, z, 1);
@@ -211,7 +214,7 @@ public class ChemicalFluidReactionHandler
                     {
                         if (!availableSpaces[i].isEmpty())
                         {
-                            coords = (CoordTuple) availableSpaces[i].remove(availableSpaces[i].size() - 1);
+                            coords = availableSpaces[i].remove(availableSpaces[i].size() - 1);
                             break;
                         }
                     }
@@ -221,7 +224,7 @@ public class ChemicalFluidReactionHandler
                     {
                         if (!availableSpaces[i].isEmpty())
                         {
-                            coords = (CoordTuple) availableSpaces[i].remove(availableSpaces[i].size() - 1);
+                            coords = availableSpaces[i].remove(availableSpaces[i].size() - 1);
                             break;
                         }
                     }
