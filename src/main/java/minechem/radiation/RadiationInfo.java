@@ -1,12 +1,10 @@
 package minechem.radiation;
 
-import minechem.MinechemItemsRegistration;
-import minechem.item.bucket.MinechemBucketItem;
-import minechem.item.element.ElementEnum;
-import minechem.item.molecule.MoleculeEnum;
-import net.minecraft.item.Item;
+import minechem.item.MinechemChemicalType;
+import minechem.utils.MinechemUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.world.World;
 
 public class RadiationInfo implements Cloneable
 {
@@ -46,30 +44,62 @@ public class RadiationInfo implements Cloneable
         return new RadiationInfo(itemstack.copy(), decayStarted, lastDecayUpdate, dimensionID, radioactivity);
     }
 
+    public long getLeftTime(long now)
+    {
+        return (radioactivity.getLife() - now) + decayStarted;
+    }
+
+    public void setLeftTime(long now, long leftTime)
+    {
+        decayStarted = (now + leftTime) - radioactivity.getLife();
+    }
+
+    public static RadiationInfo initiateRadioactivity(ItemStack chemicalItem, World world)
+    {
+        RadiationEnum radioactivity = getRadioactivity(chemicalItem);
+        int dimensionID = world.provider.dimensionId;
+        long lastUpdate = world.getTotalWorldTime();
+        RadiationInfo info = new RadiationInfo(chemicalItem, lastUpdate, lastUpdate, dimensionID, radioactivity);
+        setRadiationInfo(info, chemicalItem);
+        return info;
+    }
+
+    public static RadiationInfo getRadiationInfo(ItemStack chemicalItem, World world)
+    {
+        RadiationEnum radioactivity = getRadioactivity(chemicalItem);
+        if (radioactivity == RadiationEnum.stable)
+        {
+            return new RadiationInfo(chemicalItem, radioactivity);
+        }
+        NBTTagCompound stackTag = chemicalItem.getTagCompound();
+        if (stackTag == null)
+        {
+            return RadiationInfo.initiateRadioactivity(chemicalItem, world);
+        }
+        int dimensionID = stackTag.getInteger("dimensionID");
+        long lastUpdate = stackTag.getLong("lastUpdate");
+        long decayStart = stackTag.getLong("decayStart");
+        RadiationInfo info = new RadiationInfo(chemicalItem, decayStart, lastUpdate, dimensionID, radioactivity);
+        return info;
+    }
+
     public static RadiationEnum getRadioactivity(ItemStack itemstack)
     {
-        int id = itemstack.getItemDamage();
-        Item item = itemstack.getItem();
-        if (item == MinechemItemsRegistration.element)
+        MinechemChemicalType chemical = MinechemUtil.getChemical(itemstack);
+        if (chemical == null)
         {
-            ElementEnum element = ElementEnum.getByID(id);
-            return id != 0 && element!=null? element.radioactivity() : RadiationEnum.stable;
-        } else if (item == MinechemItemsRegistration.molecule)
-        {
-            if (id >= MoleculeEnum.molecules.size() || MoleculeEnum.molecules.get(id) == null)
-            {
-                return RadiationEnum.stable;
-            }
-            return MoleculeEnum.molecules.get(id).radioactivity();
-        } else if (item instanceof MinechemBucketItem)
-        {
-            return ((MinechemBucketItem) item).chemical.radioactivity();
+            return RadiationEnum.stable;
         }
-        return RadiationEnum.stable;
+        return chemical.radioactivity();
     }
 
     public static void setRadiationInfo(RadiationInfo radiationInfo, ItemStack itemStack)
     {
+        if (getRadioactivity(itemStack) == RadiationEnum.stable)
+        {
+            return;
+        }
+
         NBTTagCompound stackTag = itemStack.getTagCompound();
         if (stackTag == null)
         {

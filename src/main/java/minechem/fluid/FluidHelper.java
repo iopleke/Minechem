@@ -1,12 +1,13 @@
 package minechem.fluid;
 
-import cpw.mods.fml.common.registry.GameRegistry;
 import java.util.IdentityHashMap;
 import java.util.Map;
 import minechem.Minechem;
+import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class FluidHelper
 {
@@ -35,5 +36,41 @@ public class FluidHelper
         GameRegistry.registerBlock(moleculeBlocks.get(fluid), fluid.getUnlocalizedName());
         Minechem.PROXY.onAddFluid(fluid, moleculeBlocks.get(fluid));
         MinechemBucketHandler.getInstance().registerCustomMinechemBucket(moleculeBlocks.get(fluid), molecule, "molecule.");
+    }
+
+    public static MinechemFluid getFluid(MinechemChemicalType chemical)
+    {
+        if (chemical instanceof ElementEnum)
+        {
+            return elements.get(chemical);
+        } else if (chemical instanceof MoleculeEnum)
+        {
+            return molecules.get(chemical);
+        }
+        return null;
+    }
+
+    public static MinechemFluidBlock getFluidBlock(MinechemFluid fluid)
+    {
+        if (fluid instanceof FluidElement)
+        {
+            return elementsBlocks.get(fluid);
+        } else if (fluid instanceof FluidMolecule)
+        {
+            return moleculeBlocks.get(fluid);
+        }
+        return null;
+    }
+
+    public static MinechemFluidBlock getFluidBlock(MinechemChemicalType chemical)
+    {
+        if (chemical instanceof ElementEnum)
+        {
+            return elementsBlocks.get(elements.get(chemical));
+        } else if (chemical instanceof MoleculeEnum)
+        {
+            return moleculeBlocks.get(molecules.get(chemical));
+        }
+        return null;
     }
 }

@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntityProvider
 {
     private final boolean isRadioactivity;
-    protected static final Material materialFluidBlock = new MaterialLiquid(MapColor.waterColor);
+    public static final Material materialFluidBlock = new MaterialLiquid(MapColor.waterColor);
     private final boolean solid;
 
     public MinechemFluidBlock(MinechemFluid fluid, Material material)
@@ -88,7 +88,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
     private void checkToExplode(World world, int x, int y, int z)
     {
         MinechemChemicalType type = MinechemUtil.getChemical(this);
-        float level = ExplosiveFluidHandler.getInstance().getExplosiveFluid(type);
+        float level = ExplosiveFluidHandler.getInstance().getExplosionLevel(type);
         if (Float.isNaN(level))
         {
             return;
@@ -97,7 +97,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
         boolean flag = false;
         for (EnumFacing face : EnumFacing.values())
         {
-            if (ExplosiveFluidHandler.getInstance().existingFireSource(world.getBlock(x + face.getFrontOffsetX(), y + face.getFrontOffsetY(), z + face.getFrontOffsetZ())))
+            if (ExplosiveFluidHandler.getInstance().isFireSource(world.getBlock(x + face.getFrontOffsetX(), y + face.getFrontOffsetY(), z + face.getFrontOffsetZ())))
             {
                 flag = true;
                 break;
@@ -110,13 +110,13 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
 
         world.func_147480_a(x, y, z, true);
         world.setBlockToAir(x, y, z);
-        world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosiveFluid(type), true);
+        world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosionLevel(type), true);
     }
 
     @Override
     public boolean hasTileEntity(int metadata)
     {
-        return isRadioactivity && metadata == 0;
+        return isRadioactivity && (metadata == 0);
     }
 
     @Override
@@ -144,7 +144,7 @@ public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntity
         MinechemChemicalType type = MinechemUtil.getChemical(this);
         world.func_147480_a(x, y, z, true);
         world.setBlockToAir(x, y, z);
-        world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosiveFluid(type), true);
+        world.createExplosion(null, x, y, z, ExplosiveFluidHandler.getInstance().getExplosionLevel(type), true);
     }
 
     @Override

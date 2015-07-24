@@ -1,26 +1,19 @@
 package minechem.utils;
 
-import cpw.mods.fml.common.FMLCommonHandler;
-import cpw.mods.fml.common.registry.GameData;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import cpw.mods.fml.server.FMLServerHandler;
 import java.net.URI;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Random;
 import java.util.Set;
 import java.util.regex.Pattern;
 import minechem.MinechemItemsRegistration;
 import minechem.Settings;
 import minechem.fluid.FluidElement;
-import minechem.fluid.FluidHelper;
 import minechem.fluid.FluidMolecule;
 import minechem.item.MinechemChemicalType;
+import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.Element;
 import minechem.item.element.ElementEnum;
 import minechem.item.element.ElementItem;
@@ -32,7 +25,6 @@ import net.minecraft.block.Block;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.init.Blocks;
 import net.minecraft.inventory.IInventory;
 import net.minecraft.inventory.InventoryLargeChest;
@@ -52,6 +44,12 @@ import net.minecraftforge.fluids.FluidTankInfo;
 import net.minecraftforge.fluids.IFluidBlock;
 import net.minecraftforge.fluids.IFluidHandler;
 import net.minecraftforge.oredict.OreDictionary;
+import com.google.common.base.Objects;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.registry.GameData;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+import cpw.mods.fml.server.FMLServerHandler;
 
 public final class MinechemUtil
 {
@@ -62,6 +60,29 @@ public final class MinechemUtil
     {
     }
 
+    /**
+     * Copy the data of the given item stack to another item stack
+     *
+     * @param source
+     * @param target
+     */
+    public static void copyItemStack(ItemStack source, ItemStack target)
+    {
+        target.func_150996_a(source.getItem());
+        target.stackSize = source.stackSize;
+        target.setItemDamage(source.getItemDamage());
+        target.setTagCompound(source.stackTagCompound);
+    }
+
+    /**
+     * Adds an item stack to the inventory.
+     * <p>
+     * This method won't modify the given item stack.
+     *
+     * @param inventory
+     * @param itemStack
+     * @return the rest of the item stack, null if the whole item stack is added into the inventory
+     */
     public static ItemStack addItemToInventory(IInventory inventory, ItemStack itemStack)
     {
         if (itemStack == null)
@@ -69,67 +90,163 @@ public final class MinechemUtil
             return null;
         }
 
-        for (int i = 0, l = inventory.getSizeInventory(); i < l; i++)
+        if (inventory == null)
         {
-            ItemStack stack = inventory.getStackInSlot(i);
-            if (stack == null)
-            {
-                int append = itemStack.stackSize > inventory.getInventoryStackLimit() ? inventory.getInventoryStackLimit() : itemStack.stackSize;
-                ItemStack newStack = itemStack.copy();
-                newStack.stackSize = append;
-                inventory.setInventorySlotContents(i, newStack);
-                itemStack.stackSize -= append;
-            } else if (stack.getItem() == itemStack.getItem() && stack.getItemDamage() == itemStack.getItemDamage())
-            {
-                int free = inventory.getInventoryStackLimit() - stack.stackSize;
-                int append = itemStack.stackSize > free ? free : itemStack.stackSize;
-                itemStack.stackSize -= append;
-                stack.stackSize += append;
-                inventory.setInventorySlotContents(i, stack);
-            }
+            return itemStack;
+        }
 
-            if (itemStack.stackSize <= 0)
+        int amount = itemStack.stackSize;
+        int inventorySize = inventory.getSizeInventory();
+        int maxStackSize = Math.min(inventory.getInventoryStackLimit(), itemStack.getMaxStackSize());
+
+        // merge stacks first
+        for (int i = 0; (i < inventorySize) && (amount > 0); i++)
+        {
+            ItemStack target = inventory.getStackInSlot(i);
+            if ((target != null) && canItemStackMerge(target, itemStack) && (target.stackSize < maxStackSize))
             {
-                itemStack = null;
-                break;
+                int appendAmount = Math.min(amount, maxStackSize - amount);
+                amount -= appendAmount;
+                target.stackSize += appendAmount;
+                inventory.setInventorySlotContents(i, target);
             }
         }
-        return itemStack;
+
+        // fill empty slots then
+        for (int i = 0; (i < inventorySize) && (amount > 0); i++)
+        {
+            ItemStack target = inventory.getStackInSlot(i);
+            if (target == null)
+            {
+                int appendAmount = Math.min(amount, maxStackSize);
+                amount -= appendAmount;
+                ItemStack append = itemStack.copy();
+                append.stackSize = appendAmount;
+                inventory.setInventorySlotContents(i, append);
+            }
+        }
+        if (amount <= 0)
+        {
+            return null;
+        }
+
+        ItemStack remaining = itemStack.copy();
+        remaining.stackSize = amount;
+        return remaining;
     }
 
+    /**
+     * Returns true if two item stacks can be merged.
+     *
+     * @param a
+     * @param b
+     * @return true if two item stacks can be merged
+     */
+    public static boolean canItemStackMerge(ItemStack a, ItemStack b)
+    {
+        return (a.getItem() == b.getItem()) && (a.getItemDamage() == b.getItemDamage()) && Objects.equal(a.stackTagCompound, b.stackTagCompound);
+    }
+
+    /**
+     * Throws the given item stack around the given location.
+     * <p>
+     * If itemStack==null, this method will do nothing
+     *
+     * @param world
+     * @param itemStack
+     * @param x
+     * @param y
+     * @param z
+     */
     public static void throwItemStack(World world, ItemStack itemStack, double x, double y, double z)
     {
         if (itemStack != null)
         {
-            float f = random.nextFloat() * 0.8F + 0.1F;
-            float f1 = random.nextFloat() * 0.8F + 0.1F;
-            float f2 = random.nextFloat() * 0.8F + 0.1F;
+            float f = (random.nextFloat() * 0.8F) + 0.1F;
+            float f1 = (random.nextFloat() * 0.8F) + 0.1F;
+            float f2 = (random.nextFloat() * 0.8F) + 0.1F;
 
             EntityItem entityitem = new EntityItem(world, (float) x + f, (float) y + f1, (float) z + f2, itemStack);
             float f3 = 0.05F;
             entityitem.motionX = (float) random.nextGaussian() * f3;
-            entityitem.motionY = (float) random.nextGaussian() * f3 + 0.2F;
+            entityitem.motionY = ((float) random.nextGaussian() * f3) + 0.2F;
             entityitem.motionZ = (float) random.nextGaussian() * f3;
             world.spawnEntityInWorld(entityitem);
         }
     }
 
-    public static ItemStack createItemStack(MinechemChemicalType chemical, int amount)
+    /**
+     * Creates a stack of tubes filled with the given chemical.
+     *
+     * @param chemical
+     * @param amount
+     *            the amount of the item stack
+     * @return a stack of tubes filled with the given chemical, null if the stack cannot be created
+     */
+    public static ItemStack chemicalToItemStack(MinechemChemicalType chemical, int amount)
     {
-        ItemStack itemStack = null;
         if (chemical instanceof ElementEnum)
         {
-            itemStack = ElementItem.createStackOf(ElementEnum.getByID(((ElementEnum) chemical).atomicNumber()), amount);
+            return new ItemStack(MinechemItemsRegistration.element, amount, ((ElementEnum) chemical).atomicNumber());
         } else if (chemical instanceof MoleculeEnum)
         {
-            itemStack = new ItemStack(MinechemItemsRegistration.molecule, amount, ((MoleculeEnum) chemical).id());
+            return new ItemStack(MinechemItemsRegistration.molecule, amount, ((MoleculeEnum) chemical).id());
         }
-        return itemStack;
+        return null;
     }
 
+    /**
+     * Creates a stack of tubes filled with the given chemical. The amount of the stack is the amount of potionChemical.
+     *
+     * @param potionChemical
+     * @return a stack of tubes filled with the given chemical
+     */
+    public static ItemStack chemicalToItemStack(PotionChemical potionChemical)
+    {
+        if (potionChemical instanceof Element)
+        {
+            return new ItemStack(MinechemItemsRegistration.element, potionChemical.amount, ((Element) potionChemical).element.atomicNumber());
+        } else if (potionChemical instanceof Molecule)
+        {
+            return new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.id());
+        }
+        return null;
+    }
+
+    /**
+     * Creates a PotionChemical.
+     *
+     * @param chemical
+     *            the chemical type
+     * @param amount
+     *            the amount
+     * @return
+     */
+    public static PotionChemical createPotionChemical(MinechemChemicalType chemical, int amount)
+    {
+        if (chemical instanceof ElementEnum)
+        {
+            return new Element((ElementEnum) chemical, amount);
+        } else if (chemical instanceof MoleculeEnum)
+        {
+            return new Molecule((MoleculeEnum) chemical, amount);
+        }
+        return null;
+    }
+
+    /**
+     * Returns true if the fluid block at the given location can be drained.
+     *
+     * @param world
+     * @param block
+     * @param x
+     * @param y
+     * @param z
+     * @return true if the fluid block at the given location can be drained
+     */
     public static boolean canDrain(World world, Block block, int x, int y, int z)
     {
-        if ((block == Blocks.water || block == Blocks.flowing_water) && world.getBlockMetadata(x, y, z) == 0)
+        if (((block == Blocks.water) || (block == Blocks.flowing_water)) && (world.getBlockMetadata(x, y, z) == 0))
         {
             return true;
         } else if (block instanceof IFluidBlock)
@@ -140,6 +257,12 @@ public final class MinechemUtil
         return false;
     }
 
+    /**
+     * Gets the chemical of the given block.
+     *
+     * @param block
+     * @return the chemical of the given block, null if the chemical cannot be gotten
+     */
     public static MinechemChemicalType getChemical(Block block)
     {
         MinechemChemicalType chemical = null;
@@ -147,7 +270,7 @@ public final class MinechemUtil
         {
             Fluid fluid = ((IFluidBlock) block).getFluid();
             chemical = getChemical(fluid);
-        } else if (block == Blocks.water || block == Blocks.flowing_water)
+        } else if ((block == Blocks.water) || (block == Blocks.flowing_water))
         {
             chemical = MoleculeEnum.water;
         }
@@ -155,6 +278,12 @@ public final class MinechemUtil
         return chemical;
     }
 
+    /**
+     * Gets the chemical of the given fluid.
+     *
+     * @param block
+     * @return the chemical of the given fluid, null if the chemical cannot be gotten
+     */
     public static MinechemChemicalType getChemical(Fluid fluid)
     {
         if (fluid instanceof FluidElement)
@@ -170,30 +299,57 @@ public final class MinechemUtil
         return null;
     }
 
-    public static ElementEnum getElement(Fluid fluid)
+    /**
+     * Gets the chemical type of the given PotionChemical.
+     * <p>
+     * <b>If chemical is a PotionChemical, the method will return null.</b>
+     *
+     * @param chemical
+     * @return the chemical type of the given PotionChemical, null if chemical==null or the chemical is not an Element or a Molecule
+     */
+    public static MinechemChemicalType getChemical(PotionChemical chemical)
     {
-        for (Map.Entry<ElementEnum, FluidElement> entry : FluidHelper.elements.entrySet())
+        if (chemical instanceof Element)
         {
-            if (entry.getValue() == fluid)
-            {
-                return entry.getKey();
-            }
+            return ((Element) chemical).element;
+        } else if (chemical instanceof Molecule)
+        {
+            return ((Molecule) chemical).molecule;
         }
         return null;
     }
 
-    public static MoleculeEnum getMolecule(Fluid fluid)
+    /**
+     * Gets the chemical of the given item stack.
+     *
+     * @param itemStack
+     * @return the chemical of the given item stack, null if the chemical cannot be gotten
+     */
+    public static MinechemChemicalType getChemical(ItemStack itemStack)
     {
-        for (Entry<MoleculeEnum, FluidMolecule> entry : FluidHelper.molecules.entrySet())
+        if (itemStack.getItem() instanceof ElementItem)
         {
-            if (entry.getValue() == fluid)
+            if (itemStack.getItemDamage() == 0)
             {
-                return entry.getKey();
+                return null;
             }
+            return ElementItem.getElement(itemStack);
+        } else if (itemStack.getItem() instanceof MoleculeItem)
+        {
+            return MoleculeItem.getMolecule(itemStack);
+        } else if (itemStack.getItem() instanceof MinechemBucketItem)
+        {
+            return ((MinechemBucketItem) itemStack.getItem()).chemical;
         }
         return null;
     }
 
+    /**
+     * Gets the fluid in the given IFluidHandler.
+     *
+     * @param te
+     * @return the fluid in the given IFluidHandler, null if there is no fluid in it
+     */
     public static Fluid getFluid(IFluidHandler te)
     {
         FluidTankInfo[] tanks = null;
@@ -204,7 +360,7 @@ public final class MinechemUtil
             {
                 for (FluidTankInfo tank : tanks)
                 {
-                    if (tank != null && tank.fluid != null)
+                    if ((tank != null) && (tank.fluid != null))
                     {
                         return tank.fluid.getFluid();
                     }
@@ -214,29 +370,16 @@ public final class MinechemUtil
         return null;
     }
 
-    public static void scanForMoreStacks(ItemStack current, EntityPlayer player)
-    {
-        int getMore = 8 - current.stackSize;
-        InventoryPlayer inventory = player.inventory;
-        int maxSlot = player.inventory.getSizeInventory() - 4;
-        int slot = 0;
-        do
-        {
-            if (slot != inventory.currentItem)
-            {
-                ItemStack slotStack = inventory.getStackInSlot(slot);
-                if (slotStack != null && slotStack.isItemEqual(current))
-                {
-                    ItemStack addStack = inventory.decrStackSize(slot, getMore);
-                    current.stackSize += addStack.stackSize;
-                    getMore -= addStack.stackSize;
-                }
-            }
-            slot++;
-        }
-        while (getMore > 0 && slot < maxSlot);
-    }
-
+    /**
+     * Adds the given item stack into the inventory of the player.
+     * <p>
+     * If the amount of item stack is negative, the method will remove the stacks from the inventory. If the item stack is not added fully. the method will throw the rest of the item stack around the player.
+     *
+     * @param current
+     * @param inc
+     * @param player
+     * @param give
+     */
     public static void incPlayerInventory(ItemStack current, int inc, EntityPlayer player, ItemStack give)
     {
         if (inc < 0)
@@ -244,7 +387,7 @@ public final class MinechemUtil
             current.splitStack(-inc);
         } else if (inc > 0)
         {
-            if (current.stackSize + inc <= current.getMaxStackSize())
+            if ((current.stackSize + inc) <= current.getMaxStackSize())
             {
                 current.stackSize += inc;
             } else
@@ -266,31 +409,54 @@ public final class MinechemUtil
         }
     }
 
-    public static Set<ItemStack> findItemStacks(IInventory inventory, Item item, int damage)
+    /**
+     * Removes the item stacks with specify item and damage in the given inventory.
+     * And returns them as a set.
+     * <p>
+     * If there's no enough items in the inventory, this method will return null, and won't modify any slot.
+     *
+     * @param inventory
+     * @param item
+     * @param damage
+     * @param amount
+     *            how many items should be removed
+     * @return a set of the removed items, null if there's no enough items in the inventory
+     */
+    public static Set<ItemStack> removeItemStacksFromInventory(IInventory inventory, Item item, int damage, int amount)
     {
-        Set<ItemStack> stacks = new HashSet<ItemStack>();
-        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        if (inventory == null)
         {
-            ItemStack stack = inventory.getStackInSlot(i);
-            if (stack != null && stack.getItem() == item && stack.getItemDamage() == damage)
+            return null;
+        }
+
+        int total = 0;
+        for (int i = 0; (i < inventory.getSizeInventory()) && (total < amount); i++)
+        {
+            ItemStack itemStack = inventory.getStackInSlot(i);
+            if ((itemStack != null) && (itemStack.getItem() == item) && (itemStack.getItemDamage() == damage))
             {
-                stacks.add(stack);
+                total += itemStack.stackSize;
             }
         }
-
-        return stacks;
-    }
-
-    public static void removeStackInInventory(IInventory inventory, ItemStack stack)
-    {
-        for (int i = 0; i < inventory.getSizeInventory(); i++)
+        if (total < amount)
         {
-            if (stack == inventory.getStackInSlot(i))
-            {	//don't change == to equals()
-                inventory.setInventorySlotContents(i, null);
-                break;
+            return null;
+        }
+
+        Set<ItemStack> result = new LinkedHashSet<ItemStack>();
+        for (int i = 0; (i < inventory.getSizeInventory()) && (amount > 0); i++)
+        {
+            ItemStack itemStack = inventory.getStackInSlot(i);
+            if ((itemStack != null) && (itemStack.getItem() == item) && (itemStack.getItemDamage() == damage))
+            {
+                int cost = Math.min(amount, itemStack.stackSize);
+                // store how many items we still need in 'amount'
+                amount -= cost;
+                itemStack.stackSize -= cost;
+                inventory.setInventorySlotContents(i, itemStack.stackSize > 0 ? itemStack : null);
             }
         }
+        return result;
     }
 
     public static String subscriptNumbers(String string)
@@ -312,13 +478,13 @@ public final class MinechemUtil
     {
         for (String string : stringInputs)
         {
-            if (string == null || string.equals(""))
+            if ((string == null) || string.equals(""))
             {
                 continue;
             }
             String[] splitString = string.split(":");
             ArrayList<String> wildcardMatch = new ArrayList<String>();
-            if (splitString.length < 2 || splitString.length > 3)
+            if ((splitString.length < 2) || (splitString.length > 3))
             {
                 LogHelper.debug(string + " is an invalid blacklist input");
                 continue;
@@ -449,13 +615,16 @@ public final class MinechemUtil
         for (int i = 0; i < splitString.length; i++)
         {
             char[] digit = splitString[i].toCharArray();
-            if (digit.length<1) continue;
+            if (digit.length < 1)
+            {
+                continue;
+            }
             digit[0] = Character.toUpperCase(digit[0]);
             for (int j = 1; j < digit.length; j++)
             {
                 digit[j] = Character.toLowerCase(digit[j]);
             }
-            result += new String(digit) + (i < splitString.length - 1 ? " " : "");
+            result += new String(digit) + (i < (splitString.length - 1) ? " " : "");
         }
         return result;
     }
@@ -515,14 +684,14 @@ public final class MinechemUtil
     public static ArrayList<ItemStack> convertChemicalsIntoItemStacks(ArrayList<PotionChemical> potionChemicals)
     {
         ArrayList<ItemStack> stacks = new ArrayList<ItemStack>();
-        if (potionChemicals != null && potionChemicals.size() > 0)
+        if ((potionChemicals != null) && (potionChemicals.size() > 0))
         {
             for (PotionChemical potionChemical : potionChemicals)
             {
-                if (potionChemical instanceof Element && ((Element) potionChemical).element != null)
+                if ((potionChemical instanceof Element) && (((Element) potionChemical).element != null))
                 {
                     stacks.add(new ItemStack(MinechemItemsRegistration.element, potionChemical.amount, ((Element) potionChemical).element.atomicNumber()));
-                } else if (potionChemical instanceof Molecule && ((Molecule) potionChemical).molecule != null)
+                } else if ((potionChemical instanceof Molecule) && (((Molecule) potionChemical).molecule != null))
                 {
                     stacks.add(new ItemStack(MinechemItemsRegistration.molecule, potionChemical.amount, ((Molecule) potionChemical).molecule.id()));
                 }
@@ -626,15 +795,15 @@ public final class MinechemUtil
 
     public static boolean itemStackMatchesChemical(ItemStack itemstack, PotionChemical potionChemical, int factor)
     {
-        if (potionChemical instanceof Element && itemstack.getItem() == MinechemItemsRegistration.element)
+        if ((potionChemical instanceof Element) && (itemstack.getItem() == MinechemItemsRegistration.element))
         {
             Element element = (Element) potionChemical;
-            return (itemstack.getItemDamage() == element.element.atomicNumber()) && (itemstack.stackSize >= element.amount * factor);
+            return (itemstack.getItemDamage() == element.element.atomicNumber()) && (itemstack.stackSize >= (element.amount * factor));
         }
-        if (potionChemical instanceof Molecule && itemstack.getItem() == MinechemItemsRegistration.molecule)
+        if ((potionChemical instanceof Molecule) && (itemstack.getItem() == MinechemItemsRegistration.molecule))
         {
             Molecule molecule = (Molecule) potionChemical;
-            return (itemstack.getItemDamage() == molecule.molecule.id()) && (itemstack.stackSize >= molecule.amount * factor);
+            return (itemstack.getItemDamage() == molecule.molecule.id()) && (itemstack.stackSize >= (molecule.amount * factor));
         }
         return false;
     }
@@ -726,22 +895,8 @@ public final class MinechemUtil
         if (potionChemical instanceof Element)
         {
             return getLocalString(((Element) potionChemical).element.name(), true);
-        } else
-        {
-            return getLocalString(((Molecule) potionChemical).molecule.name(), true);
         }
-    }
-
-    public static ItemStack chemicalToItemStack(PotionChemical potionChemical, int amount)
-    {
-        if (potionChemical instanceof Element)
-        {
-            return new ItemStack(MinechemItemsRegistration.element, amount, ((Element) potionChemical).element.atomicNumber());
-        } else if (potionChemical instanceof Molecule)
-        {
-            return new ItemStack(MinechemItemsRegistration.molecule, amount, ((Molecule) potionChemical).molecule.id());
-        }
-        return null;
+        return getLocalString(((Molecule) potionChemical).molecule.name(), true);
     }
 
     public static PotionChemical itemStackToChemical(ItemStack itemstack)
@@ -765,27 +920,30 @@ public final class MinechemUtil
         return (int) (Math.log10(n) + 1);
     }
 
-    /*
+    /**
      * Opens passed in URL, MUST check
      * FMLClientHandler.instance().getClient(),mc.gameSettings.chatLinksPrompt
      * before using.
+     *
+     * @param url
      */
     public static void openURL(String url)
     {
         try
         {
-            Class oclass = Class.forName("java.awt.Desktop");
+            Class<?> oclass = Class.forName("java.awt.Desktop");
             Object object = oclass.getMethod("getDesktop", new Class[0]).invoke((Object) null, new Object[0]);
             oclass.getMethod("browse", new Class[]
-            {
-                URI.class
-            }).invoke(object, new Object[]
-            {
-                new URI(url)
-            });
+                    {
+                    URI.class
+                    }).invoke(object, new Object[]
+                            {
+                            new URI(url)
+                            });
         } catch (Throwable throwable)
         {
-            LogHelper.debug("Couldn\'t open link: " + url);
+            LogHelper.debug("Couldn't open link: " + url);
         }
     }
+
 }

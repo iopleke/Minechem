@@ -1,13 +1,5 @@
 package minechem.computercraft;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import cpw.mods.fml.common.registry.GameRegistry;
-import dan200.computercraft.api.lua.ILuaContext;
-import dan200.computercraft.api.lua.LuaException;
-import dan200.computercraft.api.peripheral.IComputerAccess;
-import dan200.computercraft.api.peripheral.IPeripheral;
-import dan200.computercraft.api.turtle.ITurtleAccess;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -39,6 +31,14 @@ import net.minecraft.inventory.IInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.registry.GameRegistry;
+import dan200.computercraft.api.lua.ILuaContext;
+import dan200.computercraft.api.lua.LuaException;
+import dan200.computercraft.api.peripheral.IComputerAccess;
+import dan200.computercraft.api.peripheral.IPeripheral;
+import dan200.computercraft.api.turtle.ITurtleAccess;
 
 @Optional.InterfaceList(
         {
@@ -59,7 +59,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     public ChemicalTurtlePeripheral(ITurtleAccess turtle)
     {
         this.turtle = turtle;
-        //this.known = new ArrayList<ItemStack>();
+        // this.known = new ArrayList<ItemStack>();
         this.known = new ArrayList<MapKey>();
         if (methods.isEmpty())
         {
@@ -116,7 +116,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Returns: List of Method Names and Arguments"
+                        super.getDetails()[0], "Returns: List of Method Names and Arguments"
                 };
             }
         });
@@ -158,7 +158,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Method Name - from getMethods()", "Returns: Details of arguments and results"
+                        super.getDetails()[0], "Arg: Method Name - from getMethods()", "Returns: Details of arguments and results"
                 };
             }
         });
@@ -175,7 +175,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -188,7 +188,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -226,7 +226,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Chemical name of stack in slot, or nil if not a chemical"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Chemical name of stack in slot, or nil if not a chemical"
                 };
             }
 
@@ -244,7 +244,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -257,7 +257,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -296,7 +296,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Chemical formula of stack in slot, or nil if not a chemical"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Chemical formula of stack in slot, or nil if not a chemical"
                 };
             }
         });
@@ -313,7 +313,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -326,7 +326,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -380,7 +380,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Chemical formula of stack in slot as a table, or nil if not a chemical"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Chemical formula of stack in slot as a table, or nil if not a chemical"
                 };
             }
         });
@@ -397,7 +397,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -410,7 +410,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -445,7 +445,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Atomic Mass of elements"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Atomic Mass of elements"
                 };
             }
         });
@@ -462,7 +462,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -475,7 +475,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -513,7 +513,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Radioactivity level of chemicals"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Radioactivity level of chemicals"
                 };
             }
         });
@@ -530,7 +530,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -543,7 +543,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -568,7 +568,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Time left to Radioactive Decay in Ticks - Infinite for stable chemicals, null for non-chemicals"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Time left to Radioactive Decay in Ticks - Infinite for stable chemicals, null for non-chemicals"
                 };
             }
         });
@@ -587,13 +587,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                TimeHelper.getTimeFromTicks((Long) result)
+                                    TimeHelper.getTimeFromTicks((Long) result)
                             };
                         } else if (result instanceof String)
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     }
@@ -609,13 +609,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                             {
                                 return new Object[]
                                 {
-                                    TimeHelper.getTimeFromTicks((Long) result)
+                                        TimeHelper.getTimeFromTicks((Long) result)
                                 };
                             } else if (result instanceof String)
                             {
                                 return new Object[]
                                 {
-                                    result
+                                        result
                                 };
                             }
                         }
@@ -641,7 +641,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Time left to Radioactive Decay - Infinite for stable chemicals, null for non-chemicals"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Time left to Radioactive Decay - Infinite for stable chemicals, null for non-chemicals"
                 };
             }
         });
@@ -658,7 +658,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            result
+                                result
                         };
                     }
                 } else if (args.length == 1)
@@ -671,7 +671,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         {
                             return new Object[]
                             {
-                                result
+                                    result
                             };
                         }
                     } else
@@ -756,7 +756,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             private ItemStack getBook(int slot)
             {
                 ItemStack result = turtle.getInventory().getStackInSlot(slot);
-                if (result.getItem() == Items.book && result.stackSize == 1)
+                if ((result.getItem() == Items.book) && (result.stackSize == 1))
                 {
                     return result;
                 }
@@ -774,7 +774,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Number of Journal Entries loaded and saved"
+                        super.getDetails()[0], "Arg: Optional Slot Number, defaults to current slot", "Returns: Number of Journal Entries loaded and saved"
                 };
             }
         });
@@ -808,13 +808,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                             {
                                 return new Object[]
                                 {
-                                    "Synthesis Recipe Scanned", stackToMap(thisRecipe.getOutput())
+                                        "Synthesis Recipe Scanned", stackToMap(thisRecipe.getOutput())
                                 };
                             } else
                             {
                                 return new Object[]
                                 {
-                                    "Item already known"
+                                        "Item already known"
                                 };
                             }
                         }
@@ -827,13 +827,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                             {
                                 return new Object[]
                                 {
-                                    "Decomposer Recipe Scanned", stackToMap(thisRecipe.getInput())
+                                        "Decomposer Recipe Scanned", stackToMap(thisRecipe.getInput())
                                 };
                             } else
                             {
                                 return new Object[]
                                 {
-                                    "Item already known"
+                                        "Item already known"
                                 };
                             }
 
@@ -847,13 +847,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                             {
                                 return new Object[]
                                 {
-                                    "Microscope scan complete", stackToMap(thisStack)
+                                        "Microscope scan complete", stackToMap(thisStack)
                                 };
                             } else
                             {
                                 return new Object[]
                                 {
-                                    "Item already known"
+                                        "Item already known"
                                 };
                             }
                         }
@@ -873,7 +873,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Returns: Confirmtion String, Recipe read"
+                        super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Returns: Confirmtion String, Recipe read"
                 };
             }
         });
@@ -883,37 +883,37 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             @Override
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException
             {
-                if (args.length == 1 || args.length == 2)
+                if ((args.length == 1) || (args.length == 2))
                 {
                     String UUID = (String) args[0];
                     Integer metadata = args.length == 2 ? getInt(args[1]) : 0;
-                    if (metadata == null || metadata < 0)
+                    if ((metadata == null) || (metadata < 0))
                     {
                         metadata = 0;
                     }
                     for (ItemStack current : keyListToStacks(known))
                     {
-                        if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID) && current.getItemDamage() == metadata)
+                        if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID) && (current.getItemDamage() == metadata))
                         {
                             SynthesisRecipe output = SynthesisRecipeHandler.instance.getRecipeFromOutput(current);
                             if (output != null)
                             {
                                 return new Object[]
                                 {
-                                    synthesisRecipeToMap(output)
+                                        synthesisRecipeToMap(output)
                                 };
                             } else
                             {
                                 return new Object[]
                                 {
-                                    "No Synthesiser recipe exists for " + UUID + ":" + metadata
+                                        "No Synthesiser recipe exists for " + UUID + ":" + metadata
                                 };
                             }
                         }
                     }
                     return new Object[]
                     {
-                        UUID + ":" + metadata + " is unknown."
+                            UUID + ":" + metadata + " is unknown."
                     };
                 } else
                 {
@@ -932,7 +932,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Args: Item Name and optional metadata, default 0", "Returns: Synthesiser Recipes in table form"
+                        super.getDetails()[0], "Args: Item Name and optional metadata, default 0", "Returns: Synthesiser Recipes in table form"
                 };
             }
         });
@@ -956,7 +956,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     }
                     return new Object[]
                     {
-                        result
+                            result
                     };
                 } else
                 {
@@ -975,7 +975,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Returns: All Synthesiser Recipes in table form"
+                        super.getDetails()[0], "Returns: All Synthesiser Recipes in table form"
                 };
             }
         });
@@ -986,11 +986,11 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             public Object[] call(IComputerAccess computer, ILuaContext context, Object[] args) throws LuaException, InterruptedException
             {
                 ForgeDirection dir = null;
-                if (args.length > 0 && args.length < 4)
+                if ((args.length > 0) && (args.length < 4))
                 {
                     String UUID = null;
                     dir = getDirForString((String) args[0], turtle);
-                    if (dir == null && args.length < 3)
+                    if ((dir == null) && (args.length < 3))
                     {
                         UUID = (String) args[0];
                         dir = getDirForString("front", turtle);
@@ -1003,7 +1003,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     if (te instanceof SynthesisTileEntity)
                     {
                         Integer metadata = getInt(args[args.length - 1]);
-                        if (metadata == null || metadata < 0)
+                        if ((metadata == null) || (metadata < 0))
                         {
                             metadata = 0;
                         }
@@ -1013,7 +1013,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         }
                         for (ItemStack current : keyListToStacks(known))
                         {
-                            if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID) && current.getItemDamage() == metadata)
+                            if (GameRegistry.findUniqueIdentifierFor(current.getItem()).toString().equals(UUID) && (current.getItemDamage() == metadata))
                             {
                                 SynthesisRecipe output = SynthesisRecipeHandler.instance.getRecipeFromOutput(current);
                                 if (output != null)
@@ -1021,13 +1021,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                                     ((SynthesisTileEntity) te).setRecipe(output);
                                     return new Object[]
                                     {
-                                        true
+                                            true
                                     };
                                 } else
                                 {
                                     return new Object[]
                                     {
-                                        false
+                                            false
                                     };
                                 }
                             }
@@ -1037,7 +1037,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
 
                 return new Object[]
                 {
-                    false
+                        false
                 };
             }
 
@@ -1052,7 +1052,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Arg: Item name", "Arg: Optional metadata, defaults to 0", "Returns: boolean success"
+                        super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Arg: Item name", "Arg: Optional metadata, defaults to 0", "Returns: boolean success"
                 };
             }
         });
@@ -1072,7 +1072,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         break;
                     case 1:
                         dir = getDirForString((String) args[0], turtle);
-                        if (dir == null && args.length == 1)
+                        if ((dir == null) && (args.length == 1))
                         {
                             slot = getInt(args[0]);
                             slot = validateInteger(slot, turtle.getInventory().getSizeInventory()) ? slot : null;
@@ -1085,7 +1085,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                         slot = validateInteger(slot, turtle.getInventory().getSizeInventory()) ? slot : null;
                     default:
                 }
-                if (dir == null || slot == null)
+                if ((dir == null) || (slot == null))
                 {
                     throw new LuaException("Invalid Arguments");
                 }
@@ -1094,25 +1094,25 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                 if (te instanceof MicroscopeTileEntity)
                 {
                     ItemStack microStack = ((MicroscopeTileEntity) te).getStackInSlot(0);
-                    if (microStack == null && current == null)
+                    if ((microStack == null) && (current == null))
                     {
                         return new Object[]
                         {
-                            false
+                                false
                         };
                     } else if (microStack == null)
                     {
                         ((MicroscopeTileEntity) te).setInventorySlotContents(0, turtle.getInventory().decrStackSize(slot, 1));
                         return new Object[]
                         {
-                            true
+                                true
                         };
                     } else if (current == null)
                     {
                         turtle.getInventory().setInventorySlotContents(slot, ((MicroscopeTileEntity) te).decrStackSize(0, 1));
                         return new Object[]
                         {
-                            true
+                                true
                         };
                     } else if (current.isItemEqual(microStack))
                     {
@@ -1125,7 +1125,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                 }
                 return new Object[]
                 {
-                    false
+                        false
                 };
             }
 
@@ -1140,7 +1140,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Arg: Optional slot number, defaults to current", "Returns: boolean success"
+                        super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Arg: Optional slot number, defaults to current", "Returns: boolean success"
                 };
             }
         });
@@ -1166,13 +1166,13 @@ public class ChemicalTurtlePeripheral implements IPeripheral
                     {
                         return new Object[]
                         {
-                            ((SynthesisTileEntity) te).getState()
+                                ((SynthesisTileEntity) te).getState()
                         };
                     } else if (te instanceof DecomposerTileEntity)
                     {
                         return new Object[]
                         {
-                            ((DecomposerTileEntity) te).getStateString()
+                                ((DecomposerTileEntity) te).getStateString()
                         };
                     }
                     throw new LuaException("Invalid TileEntity");
@@ -1191,7 +1191,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
             {
                 return new String[]
                 {
-                    super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Returns: Machine state"
+                        super.getDetails()[0], "Arg: Optional Direction, defaults to front", "Returns: Machine state"
                 };
             }
         });
@@ -1311,7 +1311,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
 
     private boolean validateInteger(Integer input, int max)
     {
-        return !(input == null || input >= max);
+        return !((input == null) || (input >= max));
     }
 
     private Integer getInt(Object arg)
@@ -1324,7 +1324,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
         ItemStack current = turtle.getInventory().getStackInSlot(slot);
         if (Compare.isStackAChemical(current))
         {
-            if (RadiationInfo.getRadioactivity(current) != RadiationEnum.stable && current.getTagCompound() != null && current.getTagCompound().hasKey("decayStart"))
+            if ((RadiationInfo.getRadioactivity(current) != RadiationEnum.stable) && (current.getTagCompound() != null) && current.getTagCompound().hasKey("decayStart"))
             {
                 long worldTime = turtle.getWorld().getTotalWorldTime();
                 return RadiationInfo.getRadioactivity(current).getLife() - (worldTime - current.getTagCompound().getLong("decayStart"));
@@ -1365,7 +1365,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
 
     public void update()
     {
-        if (timer.update(turtle.getWorld()) && this.computer != null)
+        if (timer.update(turtle.getWorld()) && (this.computer != null))
         {
             List<ItemStack> inventory = getTurtleInventoryList();
             RadiationHandler.getInstance().updateRadiationOnItems(turtle.getWorld(), turtle, turtle.getInventory(), inventory);
@@ -1388,7 +1388,7 @@ public class ChemicalTurtlePeripheral implements IPeripheral
         {
             Object[] data =
             {
-                before, after, damage
+                    before, after, damage
             };
             this.computer.queueEvent("onDecay", data);
         }
@@ -1399,9 +1399,9 @@ public class ChemicalTurtlePeripheral implements IPeripheral
     public void onDecayEvent(RadiationDecayEvent e)
     {
         System.out.println("getEvent");
-        if (this.computer != null && this.turtle != null && getTurtleInventory() == e.getInventory())
+        if ((this.computer != null) && (this.turtle != null) && (getTurtleInventory() == e.getInventory()))
         {
-            postDecayEvent(e.getBefore().getDisplayName(), e.getAfter().getDisplayName(), e.getDamage());
+            postDecayEvent(e.getBefore().getDisplayName(), e.getAfterAsString(), e.getDamage());
         }
 
     }
