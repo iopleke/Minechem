@@ -95,6 +95,11 @@ public class RadiationInfo implements Cloneable
 
     public static void setRadiationInfo(RadiationInfo radiationInfo, ItemStack itemStack)
     {
+        if (getRadioactivity(itemStack) == RadiationEnum.stable)
+        {
+            return;
+        }
+
         NBTTagCompound stackTag = itemStack.getTagCompound();
         if (stackTag == null)
         {

@@ -1,14 +1,10 @@
 package minechem.radiation;
 
-import cpw.mods.fml.common.Optional;
-import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import dan200.computercraft.api.turtle.ITurtleAccess;
 import java.util.ArrayList;
 import java.util.List;
 import minechem.MinechemItemsRegistration;
 import minechem.api.INoDecay;
 import minechem.api.IRadiationShield;
-import minechem.fluid.FluidHelper;
 import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketHandler;
 import minechem.item.bucket.MinechemBucketItem;
@@ -26,6 +22,9 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.DamageSource;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
+import cpw.mods.fml.common.Optional;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import dan200.computercraft.api.turtle.ITurtleAccess;
 
 public class RadiationHandler
 {
@@ -36,6 +35,8 @@ public class RadiationHandler
     {
         return instance == null ? new RadiationHandler() : instance;
     }
+
+    private RadiationMoleculeHandler moleculeHandler = new RadiationMoleculeHandler();
 
     public RadiationHandler()
     {
@@ -68,7 +69,7 @@ public class RadiationHandler
         {
             for (ItemStack itemstack : itemstacks)
             {
-                if (itemstack != null && (itemstack.getItem() == MinechemItemsRegistration.molecule || itemstack.getItem() == MinechemItemsRegistration.element || itemstack.getItem() instanceof MinechemBucketItem) && RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable)
+                if ((itemstack != null) && ((itemstack.getItem() == MinechemItemsRegistration.molecule) || (itemstack.getItem() == MinechemItemsRegistration.element) || (itemstack.getItem() instanceof MinechemBucketItem)) && (RadiationInfo.getRadioactivity(itemstack) != RadiationEnum.stable))
                 {
                     RadiationInfo radiationInfo = RadiationInfo.getRadiationInfo(itemstack, player.worldObj);
                     radiationInfo.decayStarted += player.worldObj.getTotalWorldTime() - radiationInfo.lastDecayUpdate;
@@ -122,17 +123,20 @@ public class RadiationHandler
                     radiation = ((MinechemBucketItem) item).chemical.radioactivity();
                 }
 
-                if (radiation != null && radiation != RadiationEnum.stable)
+                if ((radiation != null) && (radiation != RadiationEnum.stable))
                 {
-                    Long time = world.getTotalWorldTime() - RadiationInfo.getRadiationInfo(itemstack, world).decayStarted;
+                    long time = world.getTotalWorldTime() - RadiationInfo.getRadiationInfo(itemstack, world).decayStarted;
                     ItemStack before = itemstack.copy();
-                    int damage = updateRadiation(world, itemstack, inventory, posX, posY, posZ);
-                    ItemStack after = itemstack.copy();
-                    if (damage > 0)
+                    DecayOutput output = updateRadiation(world, itemstack, inventory, posX, posY, posZ);
+                    if (output != null)
                     {
+                        ItemStack[] after = output.outputItems;
+                        int damage = output.damage;
+
                         IInventory decayInventory = (container == null) ? inventory : container.getSlot(i).inventory;
-                        MinecraftForge.EVENT_BUS.post(new RadiationDecayEvent(decayInventory, damage, time, before, after, player));
-                        if (container != null && player != null)
+                        RadiationDecayEvent event = new RadiationDecayEvent(decayInventory, damage, time, before, after, player);
+                        MinecraftForge.EVENT_BUS.post(event);
+                        if ((container != null) && (player != null))
                         {
                             applyRadiationDamage(player, container, damage);
                         }
@@ -152,7 +156,7 @@ public class RadiationHandler
         }
         for (ItemStack armour : player.inventory.armorInventory)
         {
-            if (armour != null && armour.getItem() instanceof IRadiationShield)
+            if ((armour != null) && (armour.getItem() instanceof IRadiationShield))
             {
                 float reduction = ((IRadiationShield) armour.getItem()).getRadiationReductionFactor(damage, armour, player);
                 reductions.add(reduction);
@@ -177,14 +181,26 @@ public class RadiationHandler
         if (e.getPlayer() != null)
         {
             String nameBeforeDecay = getLongName(e.getBefore());
-            String nameAfterDecay = getLongName(e.getAfter());
+            String nameAfterDecay = e.getAfterAsString();
             String time = TimeHelper.getTimeFromTicks(e.getTime());
             String message = String.format("Radiation Warning: Element %s decayed into %s after %s.", nameBeforeDecay, nameAfterDecay, time);
             e.getPlayer().addChatMessage(new ChatComponentText(message));
         }
     }
 
-    private String getLongName(ItemStack stack)
+    /**
+     * For tubes, returns the localized name of the chemical in the tube.
+     * For chemical buckets, returns:
+     * <blockquote>
+     * the localized name of chemical bucket + "(" + the localized name of the chemical in the bucket + ")"
+     * </blockquote>
+     *
+     * @param stack
+     * @return
+     * @deprecated
+     */
+    @Deprecated
+    public static String getLongName(ItemStack stack)
     {
         Item item = stack.getItem();
         if (item == MinechemItemsRegistration.element)
@@ -193,64 +209,84 @@ public class RadiationHandler
         } else if (item == MinechemItemsRegistration.molecule)
         {
             return MinechemUtil.getLocalString(MoleculeItem.getMolecule(stack).getUnlocalizedName(), true);
+        } else if (item instanceof MinechemBucketItem)
+        {
+            return String.format("%s(%s)", MinechemUtil.getLocalString("item.minechemBucket.name"), MinechemUtil.getLocalString(((MinechemBucketItem) item).chemical.getUnlocalizedName(), true));
         }
         return "null";
     }
 
-    private int updateRadiation(World world, ItemStack element, IInventory inventory, double x, double y, double z)
+    private DecayOutput updateRadiation(World world, ItemStack element, IInventory inventory, double x, double y, double z)
     {
         RadiationInfo radiationInfo = RadiationInfo.getRadiationInfo(element, world);
         int dimensionID = world.provider.dimensionId;
-        if (dimensionID != radiationInfo.dimensionID && radiationInfo.isRadioactive())
+        if ((dimensionID != radiationInfo.dimensionID) && radiationInfo.isRadioactive())
         {
             radiationInfo.dimensionID = dimensionID;
             RadiationInfo.setRadiationInfo(radiationInfo, element);
-            return 0;
+            return null;
         } else
         {
             long currentTime = world.getTotalWorldTime();
-            return decayElement(element, radiationInfo, currentTime, world, inventory, x, y, z);
+            return decayChemical(element, radiationInfo, currentTime, world, inventory, x, y, z);
         }
     }
 
-    private int decayElement(ItemStack element, RadiationInfo radiationInfo, long currentTime, World world, IInventory inventory, double x, double y, double z)
+    private DecayOutput decayChemical(ItemStack element, RadiationInfo radiationInfo, long currentTime, World world, IInventory inventory, double x, double y, double z)
     {
         if (element.stackSize == 0)
         {
+            // won't decay
             radiationInfo.decayStarted += currentTime - radiationInfo.lastDecayUpdate;
             radiationInfo.lastDecayUpdate = currentTime;
             RadiationInfo.setRadiationInfo(radiationInfo, element);
-            return 0;
+            return null;
         }
+
         radiationInfo.lastDecayUpdate = currentTime;
-        long lifeTime = currentTime - radiationInfo.decayStarted - radiationInfo.radioactivity.getLife();
-        if (lifeTime > 0)
+        long timeToLeft = radiationInfo.getLeftTime(currentTime);
+        if (timeToLeft <= 0)
         {
             int damage = radiationInfo.radioactivity.getDamage() * element.stackSize;
+            ItemStack[] output;
+
             Item item = element.getItem();
             if (item == MinechemItemsRegistration.element)
             {
-                radiationInfo = ElementItem.decay(element, world);
+                element.setItemDamage(element.getItemDamage() - 1);
+                output = new ItemStack[] { element };
             } else if (item == MinechemItemsRegistration.molecule)
             {
-                radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeTube(world, element, inventory, x, y, z);
+                output = moleculeHandler.handleRadiationMoleculeTube(world, element, inventory, x, y, z);
             } else if (item instanceof MinechemBucketItem)
             {
+                // more damage because of more chemical
+                damage *= 8;
                 MinechemChemicalType type = ((MinechemBucketItem) item).chemical;
                 if (type instanceof ElementEnum)
                 {
-                    element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementEnum.getByID(((ElementEnum) type).atomicNumber())))));
-                    radiationInfo = RadiationInfo.initiateRadioactivity(element, world);
+                    element.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(ElementEnum.getByID(((ElementEnum) type).atomicNumber() - 1)));
+                    output = new ItemStack[] { element };
                 } else
                 {
-                    radiationInfo = RadiationMoleculeHandler.getInstance().handleRadiationMoleculeBucket(world, element, inventory, x, y, z);
+                    output = moleculeHandler.handleRadiationMoleculeBucket(world, element, inventory, x, y, z);
                 }
+            } else
+            {
+                throw new RuntimeException("unexpected item: " + item);
             }
+
+            for (ItemStack chemicalItem : output)
+            {
+                RadiationInfo.setRadiationInfo(RadiationInfo.initiateRadioactivity(chemicalItem, world), chemicalItem);
+            }
+
+            return new DecayOutput(output, damage);
+        } else
+        {
             RadiationInfo.setRadiationInfo(radiationInfo, element);
-            return damage;
+            return null;
         }
-        RadiationInfo.setRadiationInfo(radiationInfo, element);
-        return 0;
     }
 
 }

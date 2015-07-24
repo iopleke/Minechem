@@ -199,13 +199,6 @@ public class ElementItem extends ChemicalTubeItem
         }
     }
 
-    public static RadiationInfo decay(ItemStack element, World world)
-    {
-        int atomicMass = element.getItemDamage();
-        element.setItemDamage(atomicMass - 1);
-        return RadiationInfo.initiateRadioactivity(element, world);
-    }
-
     @Override
     public boolean onItemUseFirst(ItemStack stack, EntityPlayer player, World world, int x, int y, int z, int side, float hitX, float hitY, float hitZ)
     {

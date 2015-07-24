@@ -26,25 +26,27 @@ import net.minecraft.world.World;
 public class RadiationMoleculeHandler
 {
 
-    private static RadiationMoleculeHandler instance = null;
-
-    public static RadiationMoleculeHandler getInstance()
+    /**
+     *
+     * @param world
+     * @param itemStack
+     * @param inventory
+     * @param x
+     * @param y
+     * @param z
+     * @return the output of the decay
+     */
+    public ItemStack[] handleRadiationMoleculeBucket(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        if (instance == null)
+        List<ItemStack> output = toItemStacks(decayMolecule(new Molecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical, itemStack.stackSize * 8)), inventory.getInventoryStackLimit());
+
+        /*
+         * select one of the item stacks and wrap it with bucket
+         * replace the undecayed item stack with this, to let one stack stay at the old location and return buckets
+         */
+        if (!output.isEmpty())
         {
-            instance = new RadiationMoleculeHandler();
-        }
-
-        return instance;
-    }
-
-    public RadiationInfo handleRadiationMoleculeBucket(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
-    {
-        List<ItemStack> items = toItemStacks(decayMolecule(new Molecule((MoleculeEnum) ((MinechemBucketItem) itemStack.getItem()).chemical, itemStack.stackSize * 8)), inventory.getInventoryStackLimit());
-
-        if (!items.isEmpty())
-        {
-            ItemStack oneItem = items.get(0);
+            ItemStack oneItem = output.get(0);
 
             MinechemFluidBlock bukkitFilled;
             if (oneItem.getItem() instanceof MoleculeItem)
@@ -55,49 +57,60 @@ public class RadiationMoleculeHandler
                 bukkitFilled = FluidHelper.elementsBlocks.get(FluidHelper.elements.get(ElementItem.getElement(oneItem)));
             } else
             {
-                throw new RuntimeException("unexpected item type: " + oneItem.getItem().getClass());
+                throw new RuntimeException("unexpected item: " + oneItem.getItem());
             }
 
-            int outputBuckets = itemStack.stackSize;
-            oneItem.stackSize -= outputBuckets * 8;
+            int filledBuckets = itemStack.stackSize;
+            oneItem.stackSize -= filledBuckets * 8;
 
-            itemStack.func_150996_a(MinechemBucketHandler.getInstance().buckets.get(bukkitFilled));
-            itemStack.stackSize = (oneItem.stackSize / 8);
-            itemStack.setTagCompound(oneItem.stackTagCompound);
+            if (oneItem.stackSize == 0)
+            {
+                output.remove(0);
+            }
+
+            ItemStack outputBucket = new ItemStack(MinechemBucketHandler.getInstance().buckets.get(bukkitFilled), oneItem.stackSize / 8);
+            MinechemUtil.copyItemStack(outputBucket, itemStack);
         }
 
-        for (ItemStack item : items)
+        for (ItemStack item : output)
         {
             MinechemUtil.throwItemStack(world, MinechemUtil.addItemToInventory(inventory, item), x, y, z);
         }
 
-        return RadiationInfo.initiateRadioactivity(itemStack, world);
+        output.add(itemStack);
+        return output.toArray(new ItemStack[output.size()]);
     }
 
-    public RadiationInfo handleRadiationMoleculeTube(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
+    /**
+     *
+     * @param world
+     * @param itemStack
+     * @param inventory
+     * @param x
+     * @param y
+     * @param z
+     * @return the output of the decay
+     */
+    public ItemStack[] handleRadiationMoleculeTube(World world, ItemStack itemStack, IInventory inventory, double x, double y, double z)
     {
-        List<ItemStack> items = toItemStacks(decayMolecule(new Molecule(MoleculeItem.getMolecule(itemStack), itemStack.stackSize)), inventory.getInventoryStackLimit());
+        List<ItemStack> output = toItemStacks(decayMolecule(new Molecule(MoleculeItem.getMolecule(itemStack), itemStack.stackSize)), inventory.getInventoryStackLimit());
 
         /*
-         * select one of the items
-         * replace the undecayed item with this
+         * select one of the item stacks and replace the undecayed item with it,
          * to let one stack stay at the old location
          */
-        ItemStack oneItem = items.isEmpty() ? null : items.remove(0);
+        if (!output.isEmpty())
+        {
+            MinechemUtil.copyItemStack(output.remove(0), itemStack);
+        }
 
-        for (ItemStack item : items)
+        for (ItemStack item : output)
         {
             MinechemUtil.throwItemStack(world, MinechemUtil.addItemToInventory(inventory, item), x, y, z);
         }
 
-        if (oneItem == null)
-        {
-            return null;
-        }
-
-        MinechemUtil.copyItemStack(oneItem, itemStack);
-
-        return RadiationInfo.initiateRadioactivity(itemStack, world);
+        output.add(itemStack);
+        return output.toArray(new ItemStack[output.size()]);
     }
 
     private List<ItemStack> toItemStacks(List<PotionChemical> chemicals, int maxStackSize)
