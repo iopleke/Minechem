@@ -36,14 +36,14 @@ public class Jenkins
         if (chemicalBase == null)
         {
             chemicalBase = ElementRegistry.getInstance().getElementByName(s);
-        }
-        if (chemicalBase == null)
-        {
-            chemicalBase = MoleculeRegistry.getInstance().getMoleculeByFormula(s);
-        }
-        if (chemicalBase == null)
-        {
-            chemicalBase = MoleculeRegistry.getInstance().getMoleculeByName(s);
+            if (chemicalBase == null)
+            {
+                chemicalBase = MoleculeRegistry.getInstance().getMoleculeByFormula(s);
+                if (chemicalBase == null)
+                {
+                    chemicalBase = MoleculeRegistry.getInstance().getMoleculeByName(s);
+                }
+            }
         }
         return (T) chemicalBase;
     }
