@@ -12,6 +12,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import minechem.apiimpl.APIInitializer;
 import minechem.handler.AchievementHandler;
 import minechem.handler.ElementHandler;
 import minechem.handler.GuiHandler;
@@ -69,6 +70,10 @@ public class Minechem
         LogHelper.debug("Loading configuration...");
         Config.init();
         FMLCommonHandler.instance().bus().register(new Config());
+
+        // Initialize API
+        LogHelper.debug("Initializing API...");
+        APIInitializer.init();
 
         LogHelper.debug("Registering Packets...");
         MessageHandler.init();
