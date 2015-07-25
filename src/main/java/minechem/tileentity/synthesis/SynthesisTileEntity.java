@@ -658,9 +658,11 @@ public class SynthesisTileEntity extends MinechemTileEntityElectric implements I
         ItemStack initialStack = template.copy();
         initialStack.stackSize = 0;
         outputs.add(initialStack);
+        int took = 0;
 
-        while (canTakeOutputStack(false) && (amount >= template.stackSize) && takeInputStacks())
+        while (canTakeOutputStack(false) && (amount > took) && takeInputStacks())
         {
+            took++;
             ItemStack output = outputs.get(outputs.size() - 1);
             if (output.stackSize + template.stackSize > output.getMaxStackSize())
             {
