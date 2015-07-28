@@ -22,7 +22,7 @@ import net.minecraftforge.fluids.BlockFluidClassic;
 public class MinechemFluidBlock extends BlockFluidClassic implements ITileEntityProvider
 {
     private final boolean isRadioactivity;
-    protected static final Material materialFluidBlock = new MaterialLiquid(MapColor.waterColor);
+    public static final Material materialFluidBlock = new MaterialLiquid(MapColor.waterColor);
     private final boolean solid;
 
     public MinechemFluidBlock(MinechemFluid fluid, Material material)
