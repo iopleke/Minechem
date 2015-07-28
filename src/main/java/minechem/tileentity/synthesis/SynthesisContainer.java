@@ -81,7 +81,7 @@ public class SynthesisContainer extends ContainerWithFakeSlots implements IRadia
     {
         int amount = 0;
         ItemStack outputItem = synthesis.getCurrentRecipe().getOutput();
-        for (int slot = 20; slot < this.inventorySlots.size(); slot++)
+        for (int slot = 29; slot < this.inventorySlots.size(); slot++)
         {
             ItemStack stack = getSlot(slot).getStack();
             if (stack == null)
