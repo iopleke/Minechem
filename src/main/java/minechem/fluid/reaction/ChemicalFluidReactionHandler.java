@@ -50,6 +50,12 @@ public class ChemicalFluidReactionHandler
     public void checkEntityItem(World world, EntityItem entityItem)
     {
         ItemStack itemStack = entityItem.getEntityItem();
+        
+        if (itemStack.stackSize <= 0)
+        {
+            return;
+        }
+        
         Item item = itemStack.getItem();
         MinechemChemicalType chemicalA = null;
         if (item instanceof MinechemBucketItem)
@@ -72,12 +78,10 @@ public class ChemicalFluidReactionHandler
                 {
                     chemicalReaction(world, entityItem, x, y, z, rule, !(MinechemUtil.canDrain(world, block, x, y, z)));
                     itemStack.stackSize--;
+                    entityItem.setEntityItemStack(itemStack);
                     if (itemStack.stackSize <= 0)
                     {
                         world.removeEntity(entityItem);
-                    } else
-                    {
-                        entityItem.setEntityItemStack(itemStack);
                     }
                     MinechemUtil.throwItemStack(world, new ItemStack(Items.bucket), x, y, z);
                 }
