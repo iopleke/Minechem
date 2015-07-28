@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import minechem.Settings;
 import minechem.fluid.FluidHelper;
+import minechem.fluid.MinechemFluidBlock;
 import minechem.item.MinechemChemicalType;
 import minechem.item.bucket.MinechemBucketItem;
 import minechem.item.element.ElementEnum;
@@ -57,7 +58,7 @@ public class ChemicalFluidReactionHandler
             chemicalA = MinechemUtil.getChemical(((MinechemBucketItem) item).fluid);
         }
 
-        if (chemicalA != null && world.isMaterialInBB(entityItem.boundingBox, Material.water))
+        if (chemicalA != null && (world.isMaterialInBB(entityItem.boundingBox, Material.water) || world.isMaterialInBB(entityItem.boundingBox, MinechemFluidBlock.materialFluidBlock)))
         {
             int x = MathHelper.floor_double(entityItem.posX);
             int y = MathHelper.floor_double(entityItem.posY);
