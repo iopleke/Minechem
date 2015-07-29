@@ -696,6 +696,7 @@ fluid.molecule.hydrogensulfide.name=Sulfure d'hydrogène
 fluid.molecule.sodiumbisulfate.name=Bisulfate de sodium 
 fluid.molecule.sodiumsulfate.name=Sulfate de sodium 
 fluid.molecule.calcicpyroxene.name=Pyroxène calcique
+fluid.molecule.oleicAcid.name=Acide oléique
 
 fluid.element.Ac.name=Actinium
 fluid.element.Ag.name=Argent

@@ -697,6 +697,7 @@ fluid.molecule.hydrogenSulfide.name=硫化氢
 fluid.molecule.sodiumBisulfate.name=硫酸氢钠
 fluid.molecule.sodiumSulfate.name=硫酸钠
 fluid.molecule.dimethyltryptamine.name=二甲基色胺
+fluid.molecule.oleicAcid.name=油酸
 
 fluid.element.Ac.name=锕
 fluid.element.Ag.name=银

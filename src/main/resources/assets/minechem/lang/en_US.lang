@@ -697,6 +697,7 @@ fluid.molecule.sodiumBisulfate.name=Sodium Bisulfate
 fluid.molecule.sodiumSulfate.name=Sodium Sulfate
 fluid.molecule.calcicPyroxene.name=Calcic Pyroxene
 fluid.molecule.dimethyltryptamine.name=Dimethyltryptamine
+fluid.molecule.oleicAcid.name=Oleic Acid
 
 fluid.element.Ac.name=Actinium
 fluid.element.Ag.name=Silver
