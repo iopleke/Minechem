@@ -5,7 +5,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
+
 import minechem.item.journal.pages.elements.JournalHeader;
+import net.afterlifelochie.fontbox.data.FormattedString;
 import net.afterlifelochie.fontbox.document.CompilerHint;
 import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.Heading;
@@ -198,7 +200,7 @@ public class SectionPage extends JournalPage
                     {
                         sIndent += "--";
                     }
-                    result.add(new Heading(page.getPageKey(), sIndent + " " + page.getPageName()));
+                    result.add(new Heading(page.getPageKey(), new FormattedString(sIndent + " " + page.getPageName())));
                 }
             }
         }
@@ -227,7 +229,7 @@ public class SectionPage extends JournalPage
                     {
                         sIndent += "--";
                     }
-                    result.add(new Heading(page.getPageKey(), sIndent + " " + page.getPageName()));
+                    result.add(new Heading(page.getPageKey(), new FormattedString(sIndent + " " + page.getPageName())));
                 }
             }
         }

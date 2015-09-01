@@ -45,7 +45,10 @@ public class JournalItem extends BasicItem
             }
         } else
         {
-            Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(player, getKnowledgeKeys(stack), getAuthors(stack)));
+            if (world.isRemote)
+            {
+                Minecraft.getMinecraft().displayGuiScreen(new JournalGUI(player, getKnowledgeKeys(stack), getAuthors(stack)));
+            }
         }
         AchievementHelper.giveAchievement(player, this.getUnlocalizedName(), world.isRemote);
         return stack;

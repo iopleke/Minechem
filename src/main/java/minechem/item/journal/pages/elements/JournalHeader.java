@@ -1,6 +1,7 @@
 package minechem.item.journal.pages.elements;
 
 import minechem.helper.LocalizationHelper;
+import net.afterlifelochie.fontbox.data.FormattedString;
 import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.Heading;
 import net.minecraft.entity.player.EntityPlayer;
@@ -34,6 +35,6 @@ public class JournalHeader extends JournalElement
         {
             sIndent += "--";
         }
-        return new Heading(getKey(), sIndent + " " + LocalizationHelper.getLocalString(titleKey));
+        return new Heading(getKey(), new FormattedString(sIndent + " " + LocalizationHelper.getLocalString(titleKey)));
     }
 }

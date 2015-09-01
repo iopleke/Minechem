@@ -2,6 +2,7 @@ package minechem.item.journal.pages.elements;
 
 import minechem.Compendium;
 import minechem.helper.LocalizationHelper;
+import net.afterlifelochie.fontbox.data.FormattedString;
 import net.afterlifelochie.fontbox.document.Element;
 import net.afterlifelochie.fontbox.document.Image;
 import net.afterlifelochie.fontbox.document.Paragraph;
@@ -30,7 +31,7 @@ public class JournalText extends JournalElement
         if (isUnlocked(player, getKey()))
         {
             String s = LocalizationHelper.getLocalString(textKey);
-            return s.isEmpty() ? new Image(Compendium.Resource.GUI.noContent, 301, 294, AlignmentMode.JUSTIFY) : new Paragraph(s);
+            return s.isEmpty() ? new Image(Compendium.Resource.GUI.noContent, 301, 294, AlignmentMode.JUSTIFY) : new Paragraph(new FormattedString(s));
         }
         return null;
     }
@@ -41,7 +42,7 @@ public class JournalText extends JournalElement
         if (isUnlocked(keys, getKey()))
         {
             String s = LocalizationHelper.getLocalString(textKey);
-            return s.isEmpty() ? new Image(Compendium.Resource.GUI.noContent, 301, 294, AlignmentMode.JUSTIFY) : new Paragraph(s);
+            return s.isEmpty() ? new Image(Compendium.Resource.GUI.noContent, 301, 294, AlignmentMode.JUSTIFY) : new Paragraph(new FormattedString(s));
         }
         return null;
     }

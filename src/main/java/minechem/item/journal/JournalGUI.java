@@ -2,6 +2,7 @@ package minechem.item.journal;
 
 import java.io.IOException;
 import java.util.List;
+
 import minechem.Compendium;
 import minechem.Config;
 import minechem.helper.LogHelper;
@@ -10,12 +11,14 @@ import minechem.registry.JournalRegistry;
 import net.afterlifelochie.fontbox.Fontbox;
 import net.afterlifelochie.fontbox.document.Document;
 import net.afterlifelochie.fontbox.document.Element;
+import net.afterlifelochie.fontbox.document.formatting.TextFormat;
 import net.afterlifelochie.fontbox.layout.DocumentProcessor;
 import net.afterlifelochie.fontbox.layout.LayoutException;
 import net.afterlifelochie.fontbox.layout.PageWriter;
 import net.afterlifelochie.fontbox.layout.components.PageProperties;
 import net.afterlifelochie.fontbox.render.BookGUI;
 import net.minecraft.entity.player.EntityPlayer;
+
 import org.apache.logging.log4j.Level;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -65,8 +68,11 @@ public class JournalGUI extends BookGUI
             }
 
             /* Set up page formatting */
-            PageProperties properties = new PageProperties(221, 380, Fontbox.fromName("Note this"));
-            properties.headingFont(Fontbox.fromName("Ampersand"));
+            TextFormat defaultFormat = new TextFormat(Fontbox.fromName("Note this"));
+            TextFormat headingFormat = new TextFormat(Fontbox.fromName("Ampersand"));
+            
+            PageProperties properties = new PageProperties(221, 380, defaultFormat);
+            properties.headingFormat(headingFormat);
             properties.bothMargin(2).lineheightSize(4).spaceSize(4).densitiy(0.33f);
 
             /* Write elements => page stream */
