@@ -49,6 +49,7 @@ public class Settings
     public static boolean advancedTurtleAI = false;
 
     // Disabling of enchants, food spiking, etc
+    public static boolean vialPlacing = true;
     public static boolean FoodSpiking = true;
     public static boolean SwordEffects = true;
     public static boolean fluidEffects = true;
@@ -169,6 +170,12 @@ public class Settings
         AllowAutomation = prop.getBoolean();
         configList.add(prop.getName());
 
+        prop = config.get(Configuration.CATEGORY_GENERAL, "vialPlacing", Settings.vialPlacing);
+        prop.comment = StatCollector.translateToLocal("config.vialplacing.description");
+        prop.setLanguageKey("config.vialplacing");
+        vialPlacing = prop.getBoolean();
+        configList.add(prop.getName());
+        
         prop = config.get(Configuration.CATEGORY_GENERAL, "foodSpiking", Settings.FoodSpiking);
         prop.comment = StatCollector.translateToLocal("config.foodspiking.description");
         prop.setLanguageKey("config.foodspiking");
