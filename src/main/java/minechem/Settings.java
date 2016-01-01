@@ -73,6 +73,9 @@ public class Settings
     public static boolean reactionItemMeetFluid = true;
     public static boolean reactionFluidMeetFluid = true;
 
+    // Enable Water Bucket --> 8 H2O recipe in crafting grid
+    public static boolean enableWaterBucketIntoH2ORecipe = true;
+
     // NEI support
     public static boolean supportNEI = true;
 
@@ -229,6 +232,12 @@ public class Settings
         prop.comment = StatCollector.translateToLocal("config.supportNEI.description");
         prop.setLanguageKey("config.supportNEI.name");
         supportNEI = prop.getBoolean();
+        configList.add(prop.getName());
+
+        prop = config.get(Configuration.CATEGORY_GENERAL, "enableWaterBucketIntoH2ORecipe", Settings.enableWaterBucketIntoH2ORecipe);
+        prop.comment = StatCollector.translateToLocal("config.enableWaterBucketIntoH2ORecipe.description");
+        prop.setLanguageKey("config.enableWaterBucketIntoH2ORecipe.name");
+        enableWaterBucketIntoH2ORecipe = prop.getBoolean();
         configList.add(prop.getName());
 
         prop = config.get("blacklist", "decomposition", new String[]
