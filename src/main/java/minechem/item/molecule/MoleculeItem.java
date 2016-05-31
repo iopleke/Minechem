@@ -234,7 +234,8 @@ public class MoleculeItem extends Item
             return itemStack;
         }
 
-        if (movingObjectPosition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK)
+        if (movingObjectPosition.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK
+        		&& Settings.vialPlacing)
         {
             int blockX = movingObjectPosition.blockX;
             int blockY = movingObjectPosition.blockY;
