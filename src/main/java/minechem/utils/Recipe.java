@@ -139,7 +139,7 @@ public class Recipe
 
                     } else if (recipe.getClass().equals(ShapelessRecipes.class) && ((ShapelessRecipes) recipe).recipeItems.toArray() instanceof ItemStack[])
                     {
-                        inputs = (ArrayList<ItemStack>) ((ShapelessRecipes) recipe).recipeItems;
+                        inputs = (List<ItemStack>)(List<?>)(((ShapelessRecipes) recipe).recipeItems);
                     } else if (recipe.getClass().equals(ShapedRecipes.class))
                     {
                         inputs.addAll(Arrays.asList(((ShapedRecipes) recipe).recipeItems));
