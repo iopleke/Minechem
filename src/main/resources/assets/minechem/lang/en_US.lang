@@ -86,6 +86,8 @@ config.supportNEI.description=NEI Support
 config.supportNEI.name=Turn NEI support on or off
 config.decomposeFluidChemicals.description=Add Decomposer Recipes for Chemical Fluids
 config.decomposeFluidChemicals.name=Fluids Decomposition
+config.enableWaterBucketIntoH2ORecipe.description=Enable the recipe that lets the player get 8 H2O from a water bucket by putting the water bucket in a crafting grid by itself.
+config.enableWaterBucketIntoH2ORecipe.name=Enable Water Bucket to H2O Recipe
 
 gui.title.decomposer=Chemical Decomposer
 gui.title.decomposer.dump=Dump Fluid

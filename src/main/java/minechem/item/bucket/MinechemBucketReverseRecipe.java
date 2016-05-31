@@ -5,6 +5,7 @@ import minechem.item.MinechemChemicalType;
 import minechem.item.element.ElementEnum;
 import minechem.item.molecule.MoleculeEnum;
 import minechem.radiation.RadiationEnum;
+import minechem.Settings;
 import net.minecraft.init.Items;
 import net.minecraft.inventory.InventoryCrafting;
 import net.minecraft.item.ItemStack;
@@ -53,6 +54,11 @@ public class MinechemBucketReverseRecipe implements IRecipe
                 }
             } else if (itemStack.getItem() == Items.water_bucket)
             {
+                if (!Settings.enableWaterBucketIntoH2ORecipe)
+                {
+                    return false;
+                }
+
                 if (type == null)
                 {
                     type = MoleculeEnum.water;
