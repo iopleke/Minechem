@@ -147,7 +147,12 @@ public class ElementEnum extends MinechemChemicalType
     public static final ElementEnum Ds = addElement(110, "Ds", "Darmstadtium", transitionMetal, solid, extremelyRadioactive);
     public static final ElementEnum Rg = addElement(111, "Rg", "Roenthenium", transitionMetal, solid, extremelyRadioactive);
     public static final ElementEnum Cn = addElement(112, "Cn", "Copernicium", transitionMetal, solid, extremelyRadioactive);
-    public static final ElementEnum Uut = addElement(113, "Uut", "Ununtrium", transitionMetal, solid, extremelyRadioactive);
+    public static final ElementEnum Nh = addElement(113, "Nh", "Nihonium", otherMetal, solid, extremelyRadioactive);
+    public static final ElementEnum Fl = addElement(114, "Fl", "Flerovium", otherMetal, solid, extremelyRadioactive);
+    public static final ElementEnum Mc = addElement(115, "Mc", "Moscovium", otherMetal, solid, extremelyRadioactive);
+    public static final ElementEnum Lv = addElement(116, "Lv", "Livermorium", otherMetal, solid, extremelyRadioactive);
+    public static final ElementEnum Ts = addElement(117, "Ts", "Tennessine", halogen, solid, extremelyRadioactive);
+    public static final ElementEnum Og = addElement(118, "Og", "Oganesson", inertGas, solid, extremelyRadioactive);
 
     // Descriptive name, in en_US. Should not be used; instead, use a
     // localized string from a .properties file.
