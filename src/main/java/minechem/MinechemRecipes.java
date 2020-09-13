@@ -2941,7 +2941,7 @@ public class MinechemRecipes
 
             DecomposerRecipe.add(new DecomposerRecipe(singularity, new PotionChemical[]
             {
-                this.element(ElementEnum.Fm, 148), this.element(ElementEnum.Md, 142), this.element(ElementEnum.No, 133), this.element(ElementEnum.Lr, 124), this.element(ElementEnum.Rf, 107), this.element(ElementEnum.Db, 104), this.element(ElementEnum.Sg, 93), this.element(ElementEnum.Bh, 81), this.element(ElementEnum.Hs, 67), this.element(ElementEnum.Mt, 54), this.element(ElementEnum.Ds, 52), this.element(ElementEnum.Rg, 37), this.element(ElementEnum.Cn, 33), this.element(ElementEnum.Uut, 22)
+                this.element(ElementEnum.Fm, 148), this.element(ElementEnum.Md, 142), this.element(ElementEnum.No, 133), this.element(ElementEnum.Lr, 124), this.element(ElementEnum.Rf, 107), this.element(ElementEnum.Db, 104), this.element(ElementEnum.Sg, 93), this.element(ElementEnum.Bh, 81), this.element(ElementEnum.Hs, 67), this.element(ElementEnum.Mt, 54), this.element(ElementEnum.Ds, 52), this.element(ElementEnum.Rg, 37), this.element(ElementEnum.Cn, 33), this.element(ElementEnum.Nh, 22)
             }));
 
             DecomposerRecipe.add(new DecomposerRecipeSelect(skystone, 0.9F, new DecomposerRecipe[]
