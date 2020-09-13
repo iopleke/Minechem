@@ -14,7 +14,7 @@ buildscript {
     }
     dependencies {
 		classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
-		classpath 'de.undercouch:gradle-download-task:1.2'
+		classpath 'de.undercouch:gradle-download-task:4.1.1'
 		classpath "org.scala-lang:scala-library:2.11.1"
     }
 }
@@ -36,23 +36,28 @@ buildProps.withReader {
 
 repositories {
     maven {
-	name = "forge"
-	url = "http://files.minecraftforge.net/maven"
+        name = "forge"
+        url = "http://files.minecraftforge.net/maven"
     }
     maven { // the repo from which to get NEI and stuff
-	name 'CB Repo'
-	url "http://chickenbones.net/maven"
+        name 'CB Repo'
+        url "http://chickenbones.net/maven"
     }
     ivy {
-	name 'FMP'
-	artifactPattern "http://files.minecraftforge.net/[module]/[module]-dev-[revision].[ext]"
+        name 'FMP'
+        artifactPattern "http://files.minecraftforge.net/[module]/[module]-[revision].[ext]"
     }
+	maven {
+		// OpenComputers maven repo
+		url = "http://maven.cil.li/"
+	}
 }
 
 dependencies {
-    compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.nei}", ext: 'jar', classifier: "dev"
-    compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cccore}", ext: 'jar', classifier: "dev"
-    compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cclib}", ext: 'jar', classifier: "dev"
+    compile group: 'codechicken', name: 'NotEnoughItems', version: "${config.version.minecraft}-${config.version.cc.nei}", ext: 'jar', classifier: "dev"
+    compile group: 'codechicken', name: 'CodeChickenCore', version: "${config.version.minecraft}-${config.version.cc.core}", ext: 'jar', classifier: "dev"
+    compile group: 'codechicken', name: 'CodeChickenLib', version: "${config.version.minecraft}-${config.version.cc.lib}", ext: 'jar', classifier: "dev"
+    compile group: 'li.cil.oc', name: 'OpenComputers', version: "MC${config.version.minecraft}-${config.version.oc.api}", ext: 'jar', classifier: "api"
     compile fileTree(dir: 'libs', include: '*.jar')
     compile fileTree(dir: 'libs', include: '*.zip')
 }
@@ -127,13 +132,13 @@ task apiZip(type: Zip) {
 import de.undercouch.gradle.tasks.download.Download
 
 task getLibraries {
-	def libsFolder = new File('libs')
-	if (!libsFolder.isDirectory() ) {
-		libsFolder.mkdirs()
-	}
+    def libsFolder = new File('libs')
+    if (!libsFolder.isDirectory() ) {
+        libsFolder.mkdirs()
+    }
 
-	def ccSource = 'http://minecraft.curseforge.com/mc-mods/67504-computercraft/files/2216236/download'
-	def ccDest = new File('libs', 'ComputerCraft-1.65.jar')
+	def ccSource = 'https://media.forgecdn.net/files/2269/339/ComputerCraft1.75.jar'
+	def ccDest = new File('libs', 'ComputerCraft1.75.jar')
 
 
 	if(!ccDest.exists() ){
@@ -143,25 +148,25 @@ task getLibraries {
 		}
 	}
 
-	def mtSource = 'http://minetweaker3.powerofbytes.com/download/MineTweaker3-1.7.10-3.0.9C.jar'
-	def mtDest = new File('libs', 'MineTweaker3-Dev-1.7.10-3.0.9C.jar')
+    def mtSource = 'https://media.forgecdn.net/files/2338/487/CraftTweaker-1.7.10-3.0.13.jar'
+    def mtDest = new File('libs', 'CraftTweaker-1.7.10-3.0.13.jar')
 
-	if(!mtDest.exists() ){
-		download {
-			src mtSource
-			dest mtDest
-		}
-	}
-
-    def cofhSource = 'http://minecraft.curseforge.com/mc-mods/220333-cofhlib/files/2236777/download'
-    def cofhDest = new File('libs', 'CoFHLib-[1.7.10]1.0.2-160-dev.jar')
-
-        if(!cofhDest.exists() ){
-            download {
-                src cofhSource
-                dest cofhDest
-            }
+    if(!mtDest.exists() ){
+        download {
+            src mtSource
+            dest mtDest
         }
+    }
+
+    def cofhSource = 'https://media.forgecdn.net/files/2388/748/CoFHLib-%5b1.7.10%5d1.2.1-185-dev.jar'
+    def cofhDest = new File('libs', 'CoFHLib-[1.7.10]1.2.1-185-dev.jar')
+
+    if(!cofhDest.exists() ){
+        download {
+            src cofhSource
+            dest cofhDest
+        }
+    }
 }
 
 artifacts {
